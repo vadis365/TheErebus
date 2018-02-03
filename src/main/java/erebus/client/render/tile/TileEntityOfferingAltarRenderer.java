@@ -77,7 +77,7 @@ public class TileEntityOfferingAltarRenderer extends TileEntitySpecialRenderer<T
 					else
 						GlStateManager.scale(0.5, 0.5, 0.5);
 					GlStateManager.pushMatrix();
-					GlStateManager.rotate((float)120 * (i + 1) + tile.getWorld().getTotalWorldTime() * 8, 1F, 1F, 1F);
+					GlStateManager.rotate(((float)120 * (i + 1) + tile.getWorld().getTotalWorldTime()), 1F, 1F, 1F);
 					Minecraft.getMinecraft().getRenderItem().renderItem(item, Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(item, (World) null, (EntityLivingBase) null));
 					GlStateManager.popMatrix();
 					GlStateManager.popMatrix();

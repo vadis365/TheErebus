@@ -74,10 +74,9 @@ public class Erebus {
 		ErebusAPI.preservableEntityRegistry = PreservableEntityRegistry.INSTANCE;
 		ConfigHandler.INSTANCE.loadConfig(event);
 		ModFluids.init();
-		ModSounds.init();
 		ModEntities.init();
 		ComposterRegistry.init();
-		
+
 		if (event.getSide() == Side.CLIENT) {
 			if (ConfigHandler.INSTANCE.playCustomSongs)
 				MinecraftForge.EVENT_BUS.register(new ErebusMusicHandler());

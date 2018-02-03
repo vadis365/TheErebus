@@ -8,14 +8,20 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 
 public abstract class TileEntityBasicInventory extends TileEntity implements ISidedInventory {
 
-	private NonNullList<ItemStack> inventory;
+	public NonNullList<ItemStack> inventory;
+	private IItemHandler itemHandler;
 	private final String name;
 
 	public TileEntityBasicInventory(int invtSize, String name) {
@@ -140,7 +146,7 @@ public abstract class TileEntityBasicInventory extends TileEntity implements ISi
     }
 
 	public boolean canInsertItem() {
-		return false;
+		return true;
 	}
 
 	public NonNullList<ItemStack> getInventory() {
@@ -149,5 +155,24 @@ public abstract class TileEntityBasicInventory extends TileEntity implements ISi
 
 	public void setInventory(NonNullList<ItemStack> inventory) {
 		this.inventory = inventory;
+	}
+	
+	// INVENTORY CAPABILITIES STUFF
+
+	protected IItemHandler createUnSidedHandler() {
+		return new InvWrapper(this);
+	}
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+			return (T) (itemHandler == null ? (itemHandler = createUnSidedHandler()) : itemHandler);
+		return super.getCapability(capability, facing);
 	}
 }

@@ -74,6 +74,12 @@ public class GuiColossalCrate extends GuiContainer {
 	}
 
 	@Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        renderHoveredToolTip(mouseX, mouseY);
+    }
+
+	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		fontRenderer.drawString(I18n.format(new TextComponentTranslation("container.colossalCrate").getFormattedText()), 28, 6, 4210752);
 		String str = getPageNumber() + "/3";

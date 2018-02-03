@@ -1,6 +1,10 @@
 package erebus.block.bamboo;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.Random;
+
+import javax.annotation.Nullable;
 
 import erebus.Erebus;
 import erebus.ModBlocks;
@@ -9,7 +13,6 @@ import erebus.ModTabs;
 import erebus.api.IErebusEnum;
 import erebus.blocks.EnumWood;
 import erebus.core.helper.Utils;
-import erebus.items.block.ItemBlockEnum;
 import erebus.proxy.CommonProxy;
 import erebus.tileentity.TileEntityBambooCrate;
 import net.minecraft.block.Block;
@@ -20,11 +23,16 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
@@ -32,6 +40,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -99,6 +108,12 @@ public class BlockBambooCrate extends BlockContainer implements IHasCustomItem {
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.CUTOUT;
+	}
+
+	@Nullable
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return null;
 	}
 
 	@Override
@@ -211,16 +226,50 @@ public class BlockBambooCrate extends BlockContainer implements IHasCustomItem {
 	}
 
 	@Override
+	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+		if (!world.isRemote && !player.capabilities.isCreativeMode) {
+			TileEntityBambooCrate tile = Utils.getTileEntity(world, pos, TileEntityBambooCrate.class);
+			if (tile !=null) {
+				NBTTagCompound nbt = new NBTTagCompound();
+				tile.writeToNBT(nbt);
+				ItemStack stack = new ItemStack(Item.getItemFromBlock(this), 1, 0);
+				for (int i = 0; i < tile.getSizeInventory(); ++i) {
+					ItemStack itemstack = tile.getStackInSlot(i);
+					if (!itemstack.isEmpty()) {
+						stack.setTagCompound(nbt);
+						break;
+					}
+				}
+				InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+				world.removeTileEntity(pos);
+			}
+		}
+	}
+
+	@Override
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		super.onBlockPlacedBy(world, pos, state, placer, stack);
+		if(!world.isRemote && stack.hasTagCompound() && stack.getTagCompound().hasKey("Items")) {
+			TileEntityBambooCrate tile = Utils.getTileEntity(world, pos, TileEntityBambooCrate.class);
+			if (tile !=null) {
+				NBTTagList tags = stack.getTagCompound().getTagList("Items", 10);
+				tile.inventory = NonNullList.<ItemStack>withSize(tile.getSizeInventory(), ItemStack.EMPTY);
+
+				for (int i = 0; i < tags.tagCount(); i++) {
+					NBTTagCompound data = tags.getCompoundTagAt(i);
+					int j = data.getByte("Slot") & 255;
+
+					if (j >= 0 && j < tile.inventory.size())
+						tile.inventory.set(j, new ItemStack(data));
+				}
+			}
+			world.notifyBlockUpdate(pos, state, state, 3);
+		}
+	}
+
+	@Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
 		resetCrates(world, pos, state.getBlock().getMetaFromState(state));
-
-		TileEntityBambooCrate tile = Utils.getTileEntity(world, pos, TileEntityBambooCrate.class);
-		if (tile != null)
-			for (int i = 0; i < tile.getSizeInventory(); i++) {
-				ItemStack is = tile.getStackInSlot(i);
-				if (!is.isEmpty())
-					Utils.dropStack(world, pos, is);
-			}
 		world.playEvent(2001, pos, Block.getStateId(EnumWood.BAMBOO.getLog().getDefaultState()));
 		super.breakBlock(world, pos, state);
 	}
@@ -238,7 +287,24 @@ public class BlockBambooCrate extends BlockContainer implements IHasCustomItem {
 
 	@Override
 	public ItemBlock getItemBlock() {
-		return ItemBlockEnum.create(this, EnumCrateType.class);
+		ItemBlock CRATE_ITEM = new ItemBlock(this.getDefaultState().withProperty(CRATE_TYPE, EnumCrateType.DEFAULT).getBlock()) {
+			@Override
+			@SideOnly(Side.CLIENT)
+			public void addInformation(ItemStack stack, @Nullable World world, List<String> list, ITooltipFlag flag) {
+				list.add("Stores Items When Broken");
+				if (stack.hasTagCompound() && stack.getTagCompound().getTagList("Items", 10) != null) {
+					NBTTagList tags = stack.getTagCompound().getTagList("Items", 10);
+
+					for (int i = 0; i < tags.tagCount(); i++) {
+						NBTTagCompound data = tags.getCompoundTagAt(i);
+						int j = data.getByte("Slot") & 255;
+						list.add("Slot " + (j + 1) + ": " + TextFormatting.GREEN + new ItemStack(data).getDisplayName() + " x " + new ItemStack(data).getCount());
+					}
+				}
+			}
+		};
+
+		return CRATE_ITEM;
 	}
 
 	public enum EnumCrateType implements IErebusEnum {

@@ -589,6 +589,7 @@ tile.erebus.magma_crawler_spawner.name=Magma Crawler Spawner
 # Utility Blocks
 tile.erebus.petrified_crafting_table.name=Petrified Crafting Table
 tile.erebus.petrified_wood_chest.name=Petrified Wood Chest
+tile.erebus.bamboo_crate.name=BambooCrate
 tile.erebus.bamboo_crate.default.name=BambooCrate
 tile.erebus.bamboo_crate.btl.name=BambooCrate
 tile.erebus.bamboo_crate.btr.name=Colossal BambooCrate

@@ -19,16 +19,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityOfferingAltar extends TileEntityBasicInventory implements ITickable {
-	@SideOnly(Side.CLIENT)
-	protected ItemStack ghostItem;
 	public int time = 0;
 	protected ItemStack output;
-
 	private static final int MAX_TIME = 450;
 
 	public TileEntityOfferingAltar() {
 		this(4, "offeringAltar");
-		ghostItem = ItemStack.EMPTY;
 		output = ItemStack.EMPTY;
 	}
 
@@ -56,7 +52,7 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory implements
 				if (!getInventory().get(i).isEmpty()) {
 					Utils.dropStackNoRandom(getWorld(), getPos().up(), getInventory().get(i).copy());
 					getInventory().set(i, ItemStack.EMPTY);
-					updateBlock();
+					this.markDirty();
 					return;
 				}
 	}
@@ -77,7 +73,7 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory implements
 			getInventory().set(slot, stack.copy());
 			getInventory().get(slot).setCount(1);
 			stack.shrink(1);
-			updateBlock();
+			this.markDirty();
 		}
 	}
 
@@ -107,7 +103,7 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory implements
 							getInventory().set(i, ItemStack.EMPTY);
 					}
 				time = 0;
-				updateBlock();
+				this.markDirty();
 			}
 		}
 	}
@@ -128,12 +124,6 @@ public class TileEntityOfferingAltar extends TileEntityBasicInventory implements
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
 		readFromNBT(packet.getNbtCompound());
-	}
-
-	public void updateBlock() {
-		final IBlockState state = this.getWorld().getBlockState(this.getPos());
-		this.getWorld().notifyBlockUpdate(this.getPos(), state, state, 3);
-		this.markDirty();
 	}
 
 	@Override
