@@ -159,13 +159,13 @@ public class MapGenErebusCaves extends MapGenBase {
 			caveAmount = 0;
 
 		for (int iter = 0; iter < caveAmount; ++iter) {
-			double xx = localX * 16 + rand.nextInt(16);
+			double xx = chunkX * 16 + rand.nextInt(16);
 			double yy = 68 + rand.nextGaussian() * 48D;
-			double zz = localZ * 16 + rand.nextInt(16);
+			double zz = chunkZ * 16 + rand.nextInt(16);
 			int smallCaves = rand.nextBoolean() && rand.nextBoolean() ? 2 : 1;
 
 			if (rand.nextInt(8) == 0) {
-				generateLargeCaveNode(rand.nextLong(), chunkX, chunkZ, primer, xx, yy, zz);
+				generateLargeCaveNode(rand.nextLong(), localX, localZ, primer, xx, yy, zz);
 				smallCaves += rand.nextInt(3);
 			}
 
@@ -177,7 +177,7 @@ public class MapGenErebusCaves extends MapGenBase {
 				if (rand.nextInt(10) == 0)
 					innerSize *= rand.nextFloat() * rand.nextFloat() + 1F;
 
-				generateCaveNode(rand.nextLong(), chunkX, chunkZ, primer, xx, yy, zz, innerSize, xzAngle, yAngle, 0, 0, 1D);
+				generateCaveNode(rand.nextLong(), localX, localZ, primer, xx, yy, zz, innerSize, xzAngle, yAngle, 0, 0, 1D);
 			}
 		}
 	}

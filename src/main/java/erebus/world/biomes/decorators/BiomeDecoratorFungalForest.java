@@ -54,7 +54,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 			int height = rand.nextInt(11) + 6;
 			int baseRadius = rand.nextInt(4) + 3;
 			xx = x + offsetXZ();
-			yy = rand.nextInt(128);
+			yy = rand.nextInt(116);
 			zz = z + offsetXZ();
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.GRASS, pos))
@@ -63,7 +63,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 
 		for (attempt = 0; attempt < 256; attempt++) {
 			xx = x + offsetXZ();
-			yy = rand.nextInt(128);
+			yy = rand.nextInt(120);
 			zz = z + offsetXZ();
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.GRASS, pos))
@@ -95,8 +95,8 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 				break;
 		}
 		
-		genMushroomsBrown.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(128), z + offsetXZ()));
-		genMushroomsRed.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(128), z + offsetXZ()));
+		genMushroomsBrown.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(120), z + offsetXZ()));
+		genMushroomsRed.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(120), z + offsetXZ()));
 
 		for (attempt = 0; attempt < 40; attempt++) {
 			xx = x + offsetXZ();
