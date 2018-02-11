@@ -41,11 +41,13 @@ public class XPAltar extends AltarAbstract {
 					entity.setDead();
 					if (te.getUses() <= 165)
 						world.spawnEntity(new EntityXPOrb(world, pos.getX() + 0.5D, pos.getY() + 1.8D, pos.getZ() + 0.5D, stack.getCount() * 5));
-					if (te.getUses() > 165)
-						te.setSpawnTicks(0);
 					if (te.getExcess() > 0) {
-						stackLeft.setCount(te.getUses());
+						stackLeft.setCount(te.getExcess());
 						Utils.dropStackNoRandom(world, pos.up(), stackLeft);
+					}
+					if (te.getUses() > 165) {
+						te.active = false;
+						te.setSpawnTicks(0);
 					}
 				}
 			}
