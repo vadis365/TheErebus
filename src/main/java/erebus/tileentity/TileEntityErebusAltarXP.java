@@ -20,6 +20,8 @@ public class TileEntityErebusAltarXP extends TileEntityErebusAltar implements IT
 	public void update() {
 		if (!getWorld().isRemote) {
 			prevAnimationTicks = animationTicks;
+			if (spawnTicks == 0)
+				setActive(false);
 			if (active) {
 				if (animationTicks == 0)
 					getWorld().playSound(null, getPos(), ModSounds.ALTAR_CHANGE_STATE, SoundCategory.BLOCKS, 1.0F, 1.3F);
@@ -34,8 +36,6 @@ public class TileEntityErebusAltarXP extends TileEntityErebusAltar implements IT
 				if (animationTicks == 1)
 					getWorld().setBlockState(getPos(), ModBlocks.ALTAR_BASE.getDefaultState());
 			}
-			if (spawnTicks == 0)
-				setActive(false);
 			spawnTicks--;
 			if (prevAnimationTicks != animationTicks)
 				Erebus.NETWORK_WRAPPER.sendToAll(new PacketAltarAnimationTimer(getPos().getX(), getPos().getY(), getPos().getZ(), animationTicks));

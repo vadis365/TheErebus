@@ -30,20 +30,24 @@ public class XPAltar extends AltarAbstract {
 
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
-		TileEntityErebusAltarXP te = Utils.getTileEntity(world,pos, TileEntityErebusAltarXP.class);
+		TileEntityErebusAltarXP te = Utils.getTileEntity(world, pos, TileEntityErebusAltarXP.class);
 		double offsetY = 0.9D;
-		if (entity instanceof EntityItem && entity.getEntityBoundingBox().minY >= pos.getY() + offsetY && te.active) {
-			ItemStack stack = ((EntityItem) entity).getItem();
-
-			if (stack.getItem() == ModItems.MATERIALS) {
-				te.setUses(te.getUses() + stack.getCount());
-				entity.setDead();
-				if (!world.isRemote)
-					world.spawnEntity(new EntityXPOrb(world, pos.getX() + 0.5D, pos.getY() + 1.8D, pos.getZ() + 0.5D, stack.getCount() * 5));
-				if (te.getUses() > 165)
-					te.setSpawnTicks(0);
-				if (te.getExcess() > 0)
-					Utils.dropStackNoRandom(world, pos.up(), stack.copy());
+		if (!world.isRemote) {
+			if (entity instanceof EntityItem && entity.getEntityBoundingBox().minY >= pos.getY() + offsetY && te.active) {
+				ItemStack stack = ((EntityItem) entity).getItem();
+				if (stack.getItem() == ModItems.MATERIALS) {
+					te.setUses(te.getUses() + stack.getCount());
+					ItemStack stackLeft = stack.copy();
+					entity.setDead();
+					if (te.getUses() <= 165)
+						world.spawnEntity(new EntityXPOrb(world, pos.getX() + 0.5D, pos.getY() + 1.8D, pos.getZ() + 0.5D, stack.getCount() * 5));
+					if (te.getUses() > 165)
+						te.setSpawnTicks(0);
+					if (te.getExcess() > 0) {
+						stackLeft.setCount(te.getUses());
+						Utils.dropStackNoRandom(world, pos.up(), stackLeft);
+					}
+				}
 			}
 		}
 	}
