@@ -185,7 +185,7 @@ public class ModEntities {
 	}
 
 	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name, EntityDimensions dimensions) {
-		EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, name), entityClass, name, id, Erebus.INSTANCE, 256, 3, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, name), entityClass, name, id, Erebus.INSTANCE, 64, 3, true);
 		if (dimensions != null)
 			ErebusAPI.preservableEntityRegistry.registerEntity(entityClass, dimensions);
 	}
@@ -195,7 +195,7 @@ public class ModEntities {
 	}
 
 	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor, EntityDimensions dimensions) {
-		EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, name), entityClass, name, id, Erebus.INSTANCE, 256, 3, true, eggBackgroundColor, eggForegroundColor);
+		EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, name), entityClass, name, id, Erebus.INSTANCE, 64, 3, true, eggBackgroundColor, eggForegroundColor);
 		MOB_LIST.add(entityClass);
 		if (dimensions != null) {
 			ErebusAPI.preservableEntityRegistry.registerEntity(entityClass, dimensions);

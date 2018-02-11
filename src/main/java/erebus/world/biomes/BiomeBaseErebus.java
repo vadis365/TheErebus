@@ -41,6 +41,11 @@ public abstract class BiomeBaseErebus extends Biome implements IWeightProvider {
 		topBlockMeta = 0;
 		fillerBlockMeta = 0;
 	}
+	
+	@Override
+    public boolean canRain() {
+        return false;
+    }
 
 	protected final BiomeBaseErebus setColors(int grassAndFoliage) {
 		setColors(grassAndFoliage, grassAndFoliage);
