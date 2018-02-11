@@ -3,10 +3,12 @@ package erebus.block.altars;
 import erebus.ModTabs;
 import erebus.core.helper.Utils;
 import erebus.tileentity.TileEntityOfferingAltar;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -80,8 +82,14 @@ public class OfferingAltar extends BlockContainer {
 		return false;
 	}
 
+    @SideOnly(Side.CLIENT)
+    public boolean addDestroyEffects(World world, BlockPos pos, net.minecraft.client.particle.ParticleManager manager) {
+        return true;
+    }
+
 	@Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		world.playEvent(2001, pos, Block.getStateId(Blocks.OBSIDIAN.getDefaultState()));
 		Utils.dropInventoryContents(Utils.getTileEntity(world, pos, TileEntityOfferingAltar.class));
 		super.breakBlock(world, pos, state);
 	}

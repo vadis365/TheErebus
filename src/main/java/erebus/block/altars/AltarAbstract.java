@@ -1,6 +1,8 @@
 package erebus.block.altars;
 
+import erebus.ModBlocks;
 import erebus.ModTabs;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -63,6 +65,17 @@ public abstract class AltarAbstract extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.CUTOUT;
+	}
+
+    @SideOnly(Side.CLIENT)
+    public boolean addDestroyEffects(World world, BlockPos pos, net.minecraft.client.particle.ParticleManager manager) {
+        return true;
+    }
+
+	@Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		world.playEvent(2001, pos, Block.getStateId(ModBlocks.TEMPLE_BRICK.getDefaultState()));
+		super.breakBlock(world,pos, state);
 	}
 
 	@Override
