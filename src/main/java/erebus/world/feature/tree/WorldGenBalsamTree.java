@@ -116,7 +116,7 @@ public class WorldGenBalsamTree extends WorldGenTreeBase {
 
 	private void placeLeaves(World world, int x, int y, int z) {
 		if (world.isAirBlock(new BlockPos(x, y, z)))
-			world.setBlockState(new BlockPos(x, y, z), leaves.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(x, y, z), leaves, 2);
 	}
 
 }

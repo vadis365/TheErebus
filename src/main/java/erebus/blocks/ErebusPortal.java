@@ -166,7 +166,7 @@ public class ErebusPortal extends Block {
 				z = (double) pos.getZ() + 0.5D + 0.25D * (double) offSet;
 				velZ = (double) (rand.nextFloat() * 2.0F * (float) offSet);
 			}
-			Erebus.PROXY.spawnCustomParticle("portal", world, x, y, z, velX, velY, velZ);
+			Erebus.PROXY.spawnCustomParticle("erebus_portal", world, x, y, z, velX, velY, velZ);
 		}
 	}
 }

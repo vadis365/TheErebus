@@ -98,7 +98,7 @@ public class WorldGenBaobabTree extends WorldGenTreeBase {
 						if (Math.round(Math.sqrt(dSq)) == 0)
 							world.setBlockState(new BlockPos(xx, yy, zz), log.getStateFromMeta(0), 2);
 						else
-							world.setBlockState(new BlockPos(xx, yy, zz), leaves.getStateFromMeta(0), 2);
+							world.setBlockState(new BlockPos(xx, yy, zz), leaves, 2);
 				}
 	}
 

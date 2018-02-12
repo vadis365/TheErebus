@@ -447,7 +447,11 @@ public class ClientProxy extends CommonProxy {
 
 		if (particleName.equals("portal")) {
 			fx = new ParticlePortal.Factory().createParticle(EnumParticleTypes.PORTAL.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
-			//fx.setRBGColorF(0F, 1F, 0F);
+		}
+		
+		if (particleName.equals("erebus_portal")) {
+			fx = new ParticlePortal.Factory().createParticle(EnumParticleTypes.PORTAL.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
+			fx.setRBGColorF(0.1F, 0.5F, 0.1F);
 		}
 
 		if (particleName.equals("bonemeal"))

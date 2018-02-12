@@ -9,6 +9,7 @@ import erebus.ModItems;
 import erebus.block.bamboo.BlockBambooTorch;
 import erebus.block.bamboo.BlockBambooTorch.EnumBlockTorchHalf;
 import erebus.blocks.BlockDoorErebus;
+import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockLogErebus;
 import erebus.blocks.BlockStairsErebus;
 import erebus.blocks.EnumWood;
@@ -45,7 +46,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 	public int direction = -1;
 	public IBlockState STAIRS = EnumWood.BAOBAB.getStairs().getDefaultState();
 	public IBlockState LOG = EnumWood.BAOBAB.getLog().getDefaultState();
-	public IBlockState LEAVES = EnumWood.BAOBAB.getLeaves().getDefaultState();
+	public IBlockState LEAVES = EnumWood.BAOBAB.getLeaves().getDefaultState().withProperty(BlockLeavesErebus.CHECK_DECAY, false);
 	public IBlockState FENCE = EnumWood.BAOBAB.getFence().getDefaultState();
 	public IBlockState DOOR = EnumWood.BAOBAB.getDoor().getDefaultState();
 	public static IBlockState BAMBOO_TORCH_LOWER = ModBlocks.BAMBOO_TORCH.getDefaultState().withProperty(BlockBambooTorch.HALF, EnumBlockTorchHalf.LOWER);

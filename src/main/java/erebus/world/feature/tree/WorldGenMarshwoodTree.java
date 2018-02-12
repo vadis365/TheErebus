@@ -2,11 +2,11 @@ package erebus.world.feature.tree;
 
 import java.util.Random;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import erebus.ModBlocks;
 import erebus.blocks.BlockDarkFruitVine;
 import erebus.blocks.EnumWood;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 	public WorldGenMarshwoodTree() {
@@ -187,9 +187,9 @@ public class WorldGenMarshwoodTree extends WorldGenTreeBase {
 						if (Math.round(Math.sqrt(dSq)) == 0)
 							world.setBlockState(new BlockPos(xx, yy, zz), log.getStateFromMeta(0), 2);
 						else
-							world.setBlockState(new BlockPos(xx, yy, zz), leaves.getStateFromMeta(0), 2);
+							world.setBlockState(new BlockPos(xx, yy, zz), leaves, 2);
 					if (Math.round(Math.sqrt(dSq)) == 0) {
-						world.setBlockState(new BlockPos(xx, yy - 2, zz), leaves.getStateFromMeta(0), 2);
+						world.setBlockState(new BlockPos(xx, yy - 2, zz), leaves, 2);
 						addHangers(world, rand, xx, yy - 3, zz);
 					}
 				}

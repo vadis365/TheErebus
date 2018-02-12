@@ -88,15 +88,15 @@ public class WorldGenMossbarkTree extends WorldGenTreeBase {
 
 	public void generateMiddleBranch(World world, Random rand, int x, int y, int z, int height) {
 		for (int yy = 0; yy < 2; ++yy)
-			world.setBlockState(new BlockPos(x, y - 1 - yy, z), leaves.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(x, y - 1 - yy, z), leaves, 2);
 		for (int yy = 0; yy < height; ++yy)
 			world.setBlockState(new BlockPos(x, y + yy, z), log.getStateFromMeta(0), 3);
 	}
 
 	public void generateOutsideBranch(World world, Random rand, int x, int y, int z, int height) {
 		for (int yy = 0; yy < 2; ++yy) {
-			world.setBlockState(new BlockPos(x, y - 1 - yy, z), leaves.getStateFromMeta(0), 2);
-			world.setBlockState(new BlockPos(x, y + height + yy, z), leaves.getStateFromMeta(0), 2);
+			world.setBlockState(new BlockPos(x, y - 1 - yy, z), leaves, 2);
+			world.setBlockState(new BlockPos(x, y + height + yy, z), leaves, 2);
 		}
 
 		for (int yy = 0; yy < height; ++yy) {
@@ -104,7 +104,7 @@ public class WorldGenMossbarkTree extends WorldGenTreeBase {
 				world.setBlockState(new BlockPos(x, y + yy, z), log.getStateFromMeta(0), 3);
 
 			for (int a = 0; a < 4; a++)
-				world.setBlockState(new BlockPos(x + offsetX[a], y + yy, z + offsetZ[a]), leaves.getStateFromMeta(0), 2);
+				world.setBlockState(new BlockPos(x + offsetX[a], y + yy, z + offsetZ[a]), leaves, 2);
 		}
 	}
 }

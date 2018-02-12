@@ -17,7 +17,7 @@ public class WorldGenTallJungleTree extends WorldGenerator {
 	private static final int[] offsetX = new int[] { -1, 1, 0, 0 };
 	private static final int[] offsetZ = new int[] { 0, 0, -1, 1 };
 	private static final IBlockState JUMGLE_TRUNK = Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE);
-	private static final IBlockState JUNGLE_LEAF = Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE).withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false));
+	private static final IBlockState JUNGLE_LEAF = Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE).withProperty(BlockLeaves.CHECK_DECAY, false);
 	  
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos) {

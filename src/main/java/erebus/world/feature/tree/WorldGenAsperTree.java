@@ -39,7 +39,7 @@ public class WorldGenAsperTree extends WorldGenTreeBase {
 
 		// generate tree
 		for (int yy = 0; yy < height; yy++) {
-			world.setBlockState(new BlockPos(x, y + yy, z), log.getStateFromMeta(0), 3);
+			world.setBlockState(new BlockPos(x, y + yy, z), log.getStateFromMeta(0), 2);
 
 			if (yy == height - 1)
 				continue;
@@ -52,7 +52,7 @@ public class WorldGenAsperTree extends WorldGenTreeBase {
 
 				world.setBlockState(new BlockPos(x + offsetX[dir], y + yy, z + offsetZ[dir]), log.getStateFromMeta(dir < 2 ? 4 : 8), 3);
 				if (yy > 0 && rand.nextBoolean())
-					world.setBlockState(new BlockPos(x + offsetX[dir] * 2, y + yy, z + offsetZ[dir] * 2), leaves.getDefaultState(), 3);
+					world.setBlockState(new BlockPos(x + offsetX[dir] * 2, y + yy, z + offsetZ[dir] * 2), leaves, 2);
 				++extraWood;
 			}
 		}
@@ -66,12 +66,12 @@ public class WorldGenAsperTree extends WorldGenTreeBase {
 
 					double dist = Math.sqrt(xx * xx + Math.pow(centerY - yy, 2) + zz * zz);
 					if ((dist <= 1.5D || rand.nextDouble() > dist - 1.5D) && world.isAirBlock(new BlockPos(x + xx, y + yy, z + zz)))
-						world.setBlockState(new BlockPos(x + xx, y + yy, z + zz), leaves.getDefaultState(), 3);
+						world.setBlockState(new BlockPos(x + xx, y + yy, z + zz), leaves, 2);
 				}
 
 		for (int a = 0; a < 4; a++)
-			world.setBlockState(new BlockPos(x + offsetX[a], y + height, z + offsetZ[a]), leaves.getDefaultState(), 3);
-		world.setBlockState(new BlockPos(x, y + height, z), leaves.getDefaultState(), 3);
+			world.setBlockState(new BlockPos(x + offsetX[a], y + height, z + offsetZ[a]), leaves, 2);
+		world.setBlockState(new BlockPos(x, y + height, z), leaves, 2);
 
 		return true;
 	}

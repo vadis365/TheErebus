@@ -83,9 +83,11 @@ public class EntityFireAnt extends EntityMob {
 
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(Items.MAGMA_CREAM, rand.nextInt(1) + 1 + looting, 0), 0.0F);
-		if (rand.nextInt(50) == 0)
-			entityDropItem(new ItemStack(Items.FIRE_CHARGE, rand.nextInt(1) + 1 + looting, 0), 0.0F);
+		if (recentlyHit) {
+			entityDropItem(new ItemStack(Items.MAGMA_CREAM, rand.nextInt(1) + 1 + looting, 0), 0.0F);
+			if (rand.nextInt(50) == 0)
+				entityDropItem(new ItemStack(Items.FIRE_CHARGE, rand.nextInt(1) + 1 + looting, 0), 0.0F);
+		}
 	}
 
 	public boolean isClimbing() {
