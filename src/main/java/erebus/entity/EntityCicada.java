@@ -61,13 +61,13 @@ public class EntityCicada extends EntityCreature {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		AxisAlignedBB axisalignedbb = getEntityBoundingBox().grow(1D, 1D, 1D);
+		AxisAlignedBB axisalignedbb = getEntityBoundingBox().grow(5D, 5D, 5D);
 		int n = MathHelper.floor(axisalignedbb.minX);
-		int o = MathHelper.floor(axisalignedbb.maxX + 1.0D);
+		int o = MathHelper.floor(axisalignedbb.maxX);
 		int p = MathHelper.floor(axisalignedbb.minY);
-		int q = MathHelper.floor(axisalignedbb.maxY + 1.0D);
+		int q = MathHelper.floor(axisalignedbb.maxY);
 		int n1 = MathHelper.floor(axisalignedbb.minZ);
-		int o1 = MathHelper.floor(axisalignedbb.maxZ + 1.0D);
+		int o1 = MathHelper.floor(axisalignedbb.maxZ);
 		for (int p1 = n; p1 < o; p1++)
 			for (int q1 = p; q1 < q; q1++)
 				for (int n2 = n1; n2 < o1; n2++) {
