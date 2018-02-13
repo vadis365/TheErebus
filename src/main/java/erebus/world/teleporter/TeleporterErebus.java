@@ -4,21 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import erebus.ModBlocks;
+import erebus.blocks.BlockGaeanKeystone;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.tileentity.TileEntityGaeanKeystone;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
-import net.minecraft.block.BlockStoneBrick;
-import net.minecraft.block.BlockStoneSlab;
+import net.minecraft.block.material.EnumPushReaction;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.Chunk;
 
 final class TeleporterErebus extends Teleporter {
 
@@ -30,21 +35,60 @@ final class TeleporterErebus extends Teleporter {
 		super(worldServer);
 		worldServerInstance = worldServer;
 	}
-
+	
 	@Override
-	public void placeInPortal(Entity entityIn, float rotationYaw) {
-		if (!placeInExistingPortal(entityIn, rotationYaw)) {
-			makePortal(entityIn);
-			placeInExistingPortal(entityIn, rotationYaw);
+	public void placeInPortal(Entity entity, float rotationYaw) {
+		if (!placeInExistingPortal(entity, rotationYaw)) {
+			makePortal(entity);
+			if (worldServerInstance.provider.getDimension() == ConfigHandler.INSTANCE.erebusDimensionID) {
+			placeInExistingPortal(entity, rotationYaw);
+			}
+		}
+		moveToEmptyArea(entity);
+	}
+
+	private void moveToEmptyArea(Entity entity) {
+		while (!isClear(entity)) {
+			entity.setPosition(entity.posX, entity.posY + 1, entity.posZ);
 		}
 	}
 
+	private boolean isClear(Entity ent) {
+		AxisAlignedBB box = ent.getEntityBoundingBox();
+		int minX = MathHelper.floor(box.minX);
+		int maxX = MathHelper.floor(box.maxX + 1.0D);
+		int minY = MathHelper.floor(box.minY);
+		int maxY = MathHelper.floor(box.maxY + 1.0D);
+		int minZ = MathHelper.floor(box.minZ);
+		int maxZ = MathHelper.floor(box.maxZ + 1.0D);
+
+		if (minX < 0.0D)
+			--minX;
+		if (minY < 0.0D)
+			--minY;
+		if (minZ < 0.0D)
+			--minZ;
+
+		for (int x = minX; x < maxX; ++x)
+			for (int z = minZ; z < maxZ; ++z) {
+				for (int y = minY; y < maxY; ++y) {
+					IBlockState block = worldServerInstance.getBlockState(new BlockPos(x, y, z));
+
+					final Material mat = block.getMaterial();
+					if (mat.isLiquid() || mat.isSolid() || mat.getMobilityFlag() == EnumPushReaction.BLOCK)
+						return false;
+				}
+			}
+		return true;
+	}
+
 	@Override
-	public boolean placeInExistingPortal(Entity entityIn, float rotationYaw) {
+	public boolean placeInExistingPortal(Entity entity, float rotationYaw) {
 		int checkRadius = 32;
-		double distToPortal = -1.0;
-		int entityX = MathHelper.floor(entityIn.posX);
-		int entityZ = MathHelper.floor(entityIn.posZ);
+		double distToPortal = Double.POSITIVE_INFINITY;
+		int entityX = MathHelper.floor(entity.posX);
+		int entityY = MathHelper.floor(entity.posY);
+		int entityZ = MathHelper.floor(entity.posZ);
 		long coordPair = ChunkPos.asLong(entityX, entityZ);
 		boolean portalNotSaved = true;
 		BlockPos blockpos = BlockPos.ORIGIN;
@@ -55,48 +99,42 @@ final class TeleporterErebus extends Teleporter {
 			portalPosition.lastUpdateTime = this.worldServerInstance.getTotalWorldTime();
 			portalNotSaved = false;
 		} else {
-			BlockPos blockpos3 = new BlockPos(entityIn);
-			for (int i = -32; i <= 32; ++i) {
-				BlockPos blockpos2;
-
-				for (int j = -32; j <= 32; ++j) {
-					for (BlockPos blockpos1 = blockpos3.add(i, this.worldServerInstance.getActualHeight() - 1 - blockpos3.getY(), j); blockpos1 .getY() >= 0; blockpos1 = blockpos2) {
-						blockpos2 = blockpos1.down();
-
-						if (this.worldServerInstance.getBlockState(blockpos1).getBlock() == ModBlocks.GAEAN_KEYSTONE) {
-							for (blockpos2 = blockpos1.down(); this.worldServerInstance.getBlockState(blockpos2).getBlock() == Blocks.PORTAL; blockpos2 = blockpos2.down()) {
-								blockpos1 = blockpos2;
-							}
-
-							double d1 = blockpos1.distanceSq(blockpos3);
-
-							if (distToPortal < 0.0D || d1 < distToPortal) {
-								distToPortal = d1;
-								blockpos = blockpos1;
-							}
-						}
+			for (int chunkX = entityX - checkRadius; chunkX <= entityX + checkRadius; chunkX += 16)
+				for (int chunkZ = entityZ - checkRadius; chunkZ <= entityZ + checkRadius; chunkZ += 16) {
+					Chunk chunk = worldServerInstance.getChunkFromBlockCoords(new BlockPos(chunkX, entityY, chunkZ));
+					for (TileEntity te : (Iterable<TileEntity>) chunk.getTileEntityMap().values()) {
+						if (!(te instanceof TileEntityGaeanKeystone))
+							continue;
+						double dx = entity.posX - te.getPos().getX();
+						double dy = 0; //entity.posY - te.yCoord;
+						double dz = entity.posZ - te.getPos().getZ();
+						double dSq = dx * dx + dy * dy + dz * dz;
+						if (dSq > distToPortal)
+							continue;
+						distToPortal = dSq;
+						blockpos = te.getPos();
 					}
 				}
-			}
+			distToPortal = Math.sqrt(distToPortal);
 		}
 
-		if (distToPortal >= 0.0D) {
-			if (portalNotSaved)
+		if (distToPortal < checkRadius) {
+			if (portalNotSaved) {
 				this.destinationCoordinateCache.put(coordPair, new TeleporterErebus.PortalPosition(blockpos, this.worldServerInstance.getTotalWorldTime()));
-
-			entityIn.motionX = entityIn.motionY = entityIn.motionZ = 0.0;
-
-			EnumFacing entityFacing = entityIn.getHorizontalFacing();
+				destinationCoordinateKeys.add(Long.valueOf(coordPair));
+			}
+			entity.motionX = entity.motionY = entity.motionZ = 0.0;
+			EnumFacing entityFacing = entity.getHorizontalFacing();
 
 			BlockPos offsetPos = blockpos.offset(entityFacing);
 			double newPosX = (double)offsetPos.getX() + 0.5D;
-            double newPosY = (double)offsetPos.getY() + 0.5D;
+            double newPosY = (double)offsetPos.getY() + 0.125D;
             double newPosZ = (double)offsetPos.getZ() + 0.5D;
 
-            if (entityIn instanceof EntityPlayerMP)
-                ((EntityPlayerMP)entityIn).connection.setPlayerLocation(newPosX, newPosY - 2.5D, newPosZ, entityIn.rotationYaw, entityIn.rotationPitch);
+            if (entity instanceof EntityPlayerMP)
+                ((EntityPlayerMP)entity).connection.setPlayerLocation(newPosX, newPosY, newPosZ, entity.rotationYaw, entity.rotationPitch);
             else
-            	entityIn.setLocationAndAngles(newPosX, newPosY - 2.5D, newPosZ, entityIn.rotationYaw, entityIn.rotationPitch);
+            	entity.setLocationAndAngles(newPosX, newPosY, newPosZ, entity.rotationYaw, entity.rotationPitch);
             return true;
 		}
 		else
@@ -106,61 +144,14 @@ final class TeleporterErebus extends Teleporter {
 	@Override
 	public boolean makePortal(Entity entity) {
 		//attempt at constraining the portal height in the Erebus
-		double safeHeight = Math.min(Math.max(entity.posY, 12), 244);
-		if(entity.dimension == ConfigHandler.INSTANCE.erebusDimensionID)
-			safeHeight = Math.min(Math.max(entity.posY * 0.5D, 12), 116);
+		double safeHeight = Math.min(Math.max(entity.posY * 0.5D, 12), 116);
+
 		int x = MathHelper.floor(entity.posX);
-		int y = MathHelper.floor(safeHeight);
+		int y = MathHelper.floor(safeHeight) - 2;
 		int z = MathHelper.floor(entity.posZ);
-		BlockPos pos = new BlockPos(x, y, z);
-		for (int i = -2; i <= 2; i++)
-			for (int j = 0; j <= 3; j++)
-				for (int k = -2; k <= 2; k++)
-					worldServerInstance.setBlockToAir(pos.add(i, j, k));
-		
-				// Layer -1
-				for (int i = -1; i <= 1; i++)
-					for (int j = -1; j <= 1; j++)
-						if (worldServerInstance.getBlockState(pos.add(i, - 1, j)).getBlockHardness(worldServerInstance, pos.add(i, - 2, j)) >= 0)
-							worldServerInstance.setBlockState(pos.add(i, - 2, j), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.byMetadata(3)), 3);
 
-				// Layer 0
-				worldServerInstance.setBlockState(pos.add(0, - 1, 0), Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.byMetadata(3)), 3);
-				worldServerInstance.setBlockState(pos.add(- 1, - 1, 0), ModBlocks.RED_GEM.getDefaultState());
-				worldServerInstance.setBlockState(pos.add(0, - 1, - 1), ModBlocks.RED_GEM.getDefaultState());
-				worldServerInstance.setBlockState(pos.add(1, - 1, 0), ModBlocks.RED_GEM.getDefaultState());
-				worldServerInstance.setBlockState(pos.add(0, - 1, 1), ModBlocks.RED_GEM.getDefaultState());
-				worldServerInstance.setBlockState(pos.add(- 1, - 1, 1), Blocks.STONEBRICK.getDefaultState());
-				worldServerInstance.setBlockState(pos.add(1, - 1, - 1), Blocks.STONEBRICK.getDefaultState());
-				worldServerInstance.setBlockState(pos.add(- 1, - 1, - 1), Blocks.STONEBRICK.getDefaultState());
-				worldServerInstance.setBlockState(pos.add(1, - 1, 1), Blocks.STONEBRICK.getDefaultState());
+		((BlockGaeanKeystone) ModBlocks.GAEAN_KEYSTONE).buildDestinationPortal(worldServerInstance, x, y, z);
 
-				// Layer 1
-				worldServerInstance.setBlockState(pos.add(- 1, 0, 1), Blocks.STONEBRICK.getDefaultState());
-				worldServerInstance.setBlockState(pos.add(1, 0, - 1), Blocks.STONEBRICK.getDefaultState());
-				worldServerInstance.setBlockState(pos.add(- 1, 0, - 1), Blocks.STONEBRICK.getDefaultState());
-				worldServerInstance.setBlockState(pos.add(1, 0, 1), Blocks.STONEBRICK.getDefaultState());
-
-				// Layer 2
-				worldServerInstance.setBlockState(pos.add(- 1, 1, 1), Blocks.STONEBRICK.getDefaultState());
-				worldServerInstance.setBlockState(pos.add(1, 1, - 1), Blocks.STONEBRICK.getDefaultState());
-				worldServerInstance.setBlockState(pos.add(- 1, 1, - 1), Blocks.STONEBRICK.getDefaultState());
-				worldServerInstance.setBlockState(pos.add(1, 1, 1), Blocks.STONEBRICK.getDefaultState());
-
-				// Layer 3
-				for (int i = -1; i <= 1; i++)
-					for (int j = -1; j <= 1; j++)
-						if (i == 0 && j == 0)
-							worldServerInstance.setBlockState(pos.add(i, 2, j), ModBlocks.GAEAN_KEYSTONE.getDefaultState());
-						else
-							worldServerInstance.setBlockState(pos.add(i, 2, j), Blocks.STONE_SLAB.getDefaultState().withProperty(BlockStoneSlab.HALF, BlockStoneSlab.EnumBlockHalf.BOTTOM).withProperty(BlockStoneSlab.VARIANT, BlockStoneSlab.EnumType.SMOOTHBRICK), 3);
-		if (entity.dimension == ConfigHandler.INSTANCE.erebusDimensionID) {
-			int height = 3;
-			while (worldServerInstance.getBlockState(pos.add(0, height, 0)).getBlockHardness(worldServerInstance, pos.add(0, height, 0)) >= 0) {
-				worldServerInstance.setBlockToAir(pos.add(0, height, 0));
-				height++;
-			}
-		}
 		return true;
 	}
 
