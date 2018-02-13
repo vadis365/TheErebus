@@ -11,10 +11,12 @@ import erebus.core.capabilities.base.EntityCapabilityHandler;
 import erebus.core.capabilities.player.PlayerDeathLocationCapability;
 import erebus.core.handler.AntiVenomDurationHandler;
 import erebus.core.handler.AnvilEventHandlerWhetstone;
+import erebus.core.handler.BedPlaceEventHandler;
 import erebus.core.handler.DeathCompassRespawnEvent;
 import erebus.core.handler.EntityDeathInventoryHandler;
 import erebus.core.handler.EntityShieldDamageEvent;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.entity.util.RandomMobNames;
 import erebus.lib.Reference;
 import erebus.network.client.MessageSyncEntityCapabilities;
 import erebus.network.client.PacketAltarAnimationTimer;
@@ -127,12 +129,16 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(ModItems.GLIDER_CHESTPLATE);
         MinecraftForge.EVENT_BUS.register(new EntityShieldDamageEvent());
 		MinecraftForge.EVENT_BUS.register(SpawnerErebus.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(ModBlocks.QUICK_SAND);
 		MinecraftForge.EVENT_BUS.register(new AntiVenomDurationHandler());
 		MinecraftForge.EVENT_BUS.register(new AnvilEventHandlerWhetstone());
+		MinecraftForge.EVENT_BUS.register(new BedPlaceEventHandler());
 		if (ConfigHandler.INSTANCE.graveMarker) {
 			MinecraftForge.EVENT_BUS.register(new EntityDeathInventoryHandler());
 			MinecraftForge.EVENT_BUS.register(new DeathCompassRespawnEvent());
 		}
+		if (ConfigHandler.INSTANCE.randomNames)
+			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
 		PROXY.registerItemAndBlockColourRenderers();
 		RecipeHandler.registerSmelting();
 		ErebusRecipesHandler.init();

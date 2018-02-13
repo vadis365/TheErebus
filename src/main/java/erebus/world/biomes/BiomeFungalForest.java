@@ -19,6 +19,7 @@ public class BiomeFungalForest extends BiomeBaseErebus {
 		properties.setTemperature(0.9F);
 		properties.setRainDisabled();
 		setColors(0x4E8833);
+		setFog(203, 209, 218);
 		topBlock = Blocks.GRASS.getDefaultState();
 
 		spawningGradual.add(new SpawnEntry(EntityFungalWeevil.class, 10).setGroupSize(1, 1));
