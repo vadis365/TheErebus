@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  B",
+    "HBS",
+    "B  "
+  ],
+  "key": {
+    "B": {
+      "item": "erebus:materials",
+      "data": 3
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "H": {
+      "item": "erebus:materials",
+      "data": 57
+    }
+  },
+  "result": {
+    "item": "erebus:bamboo_pipe",
+    "count": 3
+  }
+}

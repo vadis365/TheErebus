@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "XYX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:planks",
+      "data": 12
+    },
+    "Y": {
+      "item": "erebus:planks_petrified_wood"
+    }
+  },
+  "result": {
+    "item": "erebus:silo_roof"
+  }
+}

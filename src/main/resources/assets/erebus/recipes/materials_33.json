@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MMM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "erebus:wall_plants",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "erebus:materials",
+    "data": 33
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:materials",
+      "data": 26
+    },
+    {
+      "item": "erebus:materials",
+      "data": 26
+    }
+  ],
+  "result": {
+    "item": "minecraft:paper",
+    "count": 4
+  }
+}

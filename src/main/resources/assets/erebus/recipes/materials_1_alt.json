@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:materials",
+      "data": 55
+    }
+  },
+  "result": {
+    "item": "erebus:materials",
+    "data": 1
+  }
+}

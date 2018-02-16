@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "XX",
+    "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:planks",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "erebus:door_baobab",
+    "count": 3
+  }
+}

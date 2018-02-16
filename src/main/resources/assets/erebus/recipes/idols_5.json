@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XXX",
+    "XUX",
+    "XXX"
+  ],
+  "key": {
+    "U": {
+      "item": "erebus:umber_golem_statue"
+    },
+    "X": {
+      "item": "#BLOCKIRON"
+    }
+  },
+  "result": {
+    "item": "erebus:idols",
+    "data": 5
+  }
+}

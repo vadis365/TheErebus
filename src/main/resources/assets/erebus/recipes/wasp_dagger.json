@@ -1,0 +1,15 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:materials",
+      "data": 10
+    },
+    {
+      "item": "#STICKWOOD"
+    }
+  ],
+  "result": {
+    "item": "erebus:wasp_dagger"
+  }
+}

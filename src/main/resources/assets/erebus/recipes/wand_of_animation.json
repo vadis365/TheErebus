@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " XY",
+    " ZX",
+    "X  "
+  ],
+  "key": {
+    "X": {
+      "item": "#INGOTGOLD"
+    },
+    "Y": {
+      "item": "erebus:materials",
+      "data": 64
+    },
+    "Z": {
+      "item": "#STICKWOOD"
+    }
+  },
+  "result": {
+    "item": "erebus:wand_of_animation"
+  }
+}

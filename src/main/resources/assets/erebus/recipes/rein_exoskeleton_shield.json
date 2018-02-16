@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XIX",
+    "XXX",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:materials",
+      "data": 15
+    },
+    "I": {
+      "item": "#INGOTIRON"
+    }
+  },
+  "result": {
+    "item": "erebus:rein_exoskeleton_shield"
+  }
+}

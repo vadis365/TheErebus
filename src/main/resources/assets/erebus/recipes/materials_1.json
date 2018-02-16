@@ -1,0 +1,13 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "#BLOCKJADE"
+    }
+  ],
+  "result": {
+    "item": "erebus:materials",
+    "data": 1,
+    "count": 9
+  }
+}

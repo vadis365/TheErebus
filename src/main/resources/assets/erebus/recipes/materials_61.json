@@ -1,0 +1,15 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:cauldron"
+    },
+    {
+      "item": "#STICKWOOD"
+    }
+  ],
+  "result": {
+    "item": "erebus:materials",
+    "data": 61
+  }
+}

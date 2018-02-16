@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:planks",
+      "data": 8
+    }
+  },
+  "result": {
+    "item": "erebus:slab_planks_bamboo",
+    "count": 6
+  }
+}

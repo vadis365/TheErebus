@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:log_mahogany"
+    }
+  ],
+  "result": {
+    "item": "erebus:planks",
+    "data": 2,
+    "count": 4
+  }
+}

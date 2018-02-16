@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "BXB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "erebus:materials",
+      "data": 8
+    },
+    "X": {
+      "item": "erebus:rein_exoskeleton_leggings"
+    }
+  },
+  "result": {
+    "item": "erebus:sprint_leggings"
+  }
+}

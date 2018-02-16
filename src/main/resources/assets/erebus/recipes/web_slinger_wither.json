@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:web_slinger"
+    },
+    {
+      "item": "minecraft:soul_sand"
+    },
+    {
+      "item": "erebus:materials",
+      "data": 21
+    },
+    {
+      "item": "erebus:wither_web"
+    },
+    {
+      "item": "erebus:wither_web"
+    },
+    {
+      "item": "erebus:wither_web"
+    }
+  ],
+  "result": {
+    "item": "erebus:web_slinger_wither"
+  }
+}

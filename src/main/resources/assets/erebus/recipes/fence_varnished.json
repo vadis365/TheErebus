@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XSX",
+    "XSX"
+  ],
+  "key": {
+    "S": {
+      "item": "#STICKWOOD"
+    },
+    "X": {
+      "item": "erebus:planks",
+      "data": 12
+    }
+  },
+  "result": {
+    "item": "erebus:fence_varnished",
+    "count": 3
+  }
+}

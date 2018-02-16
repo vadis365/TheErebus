@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:umberstone",
+      "data": 1
+    }
+  ],
+  "result": {
+    "item": "erebus:umberstone_button"
+  }
+}

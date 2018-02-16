@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F F",
+    "BXB",
+    "B B"
+  ],
+  "key": {
+    "B": {
+      "item": "erebus:materials",
+      "data": 9
+    },
+    "F": {
+      "item": "erebus:materials",
+      "data": 6
+    },
+    "X": {
+      "item": "erebus:rein_exoskeleton_boots"
+    }
+  },
+  "result": {
+    "item": "erebus:jump_boots"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "OXO"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:materials",
+      "data": 0
+    },
+    "O": {
+      "item": "erebus:materials",
+      "data": 5
+    }
+  },
+  "result": {
+    "item": "erebus:compound_goggles"
+  }
+}

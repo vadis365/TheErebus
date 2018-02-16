@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "FFF",
+    "FFF"
+  ],
+  "key": {
+    "F": {
+      "item": "erebus:small_plant",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "minecraft:blaze_powder"
+  }
+}

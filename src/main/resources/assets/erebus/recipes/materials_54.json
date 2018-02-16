@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "SSS",
+    "S S",
+    "R R"
+  ],
+  "key": {
+    "R": {
+      "item": "erebus:materials",
+      "data": 15
+    },
+    "S": {
+      "item": "#STONE"
+    }
+  },
+  "result": {
+    "item": "erebus:materials",
+    "data": 54
+  }
+}

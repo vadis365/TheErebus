@@ -1,0 +1,26 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "VSE",
+    "VSS",
+    "GVV"
+  ],
+  "key": {
+    "S": {
+      "item": "#STICKWOOD"
+    },
+    "E": {
+      "item": "erebus:materials",
+      "data": 38
+    },
+    "V": {
+      "item": "minecraft:vine"
+    },
+    "G": {
+      "item": "#INGOTGOLD"
+    }
+  },
+  "result": {
+    "item": "erebus:portal_activator"
+  }
+}

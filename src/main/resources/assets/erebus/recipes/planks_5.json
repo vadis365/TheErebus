@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:log_cypress"
+    }
+  ],
+  "result": {
+    "item": "erebus:planks",
+    "data": 5,
+    "count": 4
+  }
+}

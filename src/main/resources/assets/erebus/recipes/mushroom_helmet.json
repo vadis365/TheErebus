@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MPM"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:pumpkin"
+    },
+    "M": {
+      "item": "erebus:materials",
+      "data": 48
+    }
+  },
+  "result": {
+    "item": "erebus:mushroom_helmet"
+  }
+}

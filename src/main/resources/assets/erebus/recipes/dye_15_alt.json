@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:death_compass"
+    }
+  ],
+  "result": {
+    "item": "minecraft:dye",
+    "data": 15
+  }
+}

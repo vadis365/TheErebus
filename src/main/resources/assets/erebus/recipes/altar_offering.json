@@ -1,0 +1,26 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XWX",
+    "YZY",
+    "XYX"
+  ],
+  "key": {
+    "W": {
+      "item": "#INGOTGOLD"
+    },
+    "X": {
+      "item": "#STONE"
+    },
+    "Y": {
+      "item": "minecraft:stonebrick",
+      "data": 0
+    },
+    "Z": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "erebus:altar_offering"
+  }
+}

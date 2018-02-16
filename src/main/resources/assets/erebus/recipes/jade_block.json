@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "#GEMJADE"
+    }
+  },
+  "result": {
+    "item": "erebus:jade_block"
+  }
+}

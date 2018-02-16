@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "B B",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "erebus:materials",
+      "data": 3
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "erebus:bambucket"
+  }
+}

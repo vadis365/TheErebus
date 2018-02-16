@@ -1,0 +1,15 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "#PLANKWOOD"
+    },
+    {
+      "item": "#DYEWHITE"
+    }
+  ],
+  "result": {
+    "item": "erebus:planks",
+    "data": 7
+  }
+}

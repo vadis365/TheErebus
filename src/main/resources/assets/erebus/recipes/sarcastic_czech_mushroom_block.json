@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MMM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "erebus:sarcastic_czech_mushroom"
+    }
+  },
+  "result": {
+    "item": "erebus:sarcastic_czech_mushroom_block"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " B ",
+    "RRR",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:bread"
+    },
+    "R": {
+      "item": "#DROPHONEY"
+    }
+  },
+  "result": {
+    "item": "erebus:erebus_food",
+    "data": 10,
+    "count": 2
+  }
+}

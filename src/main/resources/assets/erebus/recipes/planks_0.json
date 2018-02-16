@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:log_baobab"
+    }
+  ],
+  "result": {
+    "item": "erebus:planks",
+    "data": 0,
+    "count": 4
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "XX",
+    "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:planks_petrified_wood"
+    }
+  },
+  "result": {
+    "item": "erebus:door_petrified_wood",
+    "count": 3
+  }
+}

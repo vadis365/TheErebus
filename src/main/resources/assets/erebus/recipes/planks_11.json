@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:log_scorched"
+    }
+  ],
+  "result": {
+    "item": "erebus:planks",
+    "data": 11,
+    "count": 4
+  }
+}

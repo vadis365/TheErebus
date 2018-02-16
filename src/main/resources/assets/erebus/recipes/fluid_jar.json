@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "JJJ",
+    "$0$",
+    "$$$"
+  ],
+  "key": {
+    "0": {
+      "item": "erebus:materials",
+      "data": 19
+    },
+    "$": {
+      "item": "erebus:amber_glass"
+    },
+    "J": {
+      "item": "#GEMJADE"
+    }
+  },
+  "result": {
+    "item": "erebus:fluid_jar"
+  }
+}

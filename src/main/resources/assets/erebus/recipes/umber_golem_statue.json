@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " H ",
+    "LCL",
+    " X "
+  ],
+  "key": {
+    "C": {
+      "item": "erebus:materials",
+      "data": 51
+    },
+    "H": {
+      "item": "erebus:materials",
+      "data": 52
+    },
+    "X": {
+      "item": "erebus:materials",
+      "data": 54
+    },
+    "L": {
+      "item": "erebus:materials",
+      "data": 53
+    }
+  },
+  "result": {
+    "item": "erebus:umber_golem_statue"
+  }
+}

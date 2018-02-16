@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XRX",
+    "XXX",
+    "SSS"
+  ],
+  "key": {
+    "R": {
+      "item": "erebus:red_gem",
+      "data": 0
+    },
+    "S": {
+      "item": "erebus:umberstone",
+      "data": 0
+    },
+    "X": {
+      "item": "erebus:materials",
+      "data": 59
+    }
+  },
+  "result": {
+    "item": "erebus:smoothie_maker"
+  }
+}

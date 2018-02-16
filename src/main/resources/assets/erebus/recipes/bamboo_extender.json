@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "BSB",
+    "PDP",
+    "BRB"
+  ],
+  "key": {
+    "P": {
+      "item": "erebus:planks",
+      "data": 8
+    },
+    "R": {
+      "item": "#DUSTREDSTONE"
+    },
+    "B": {
+      "item": "erebus:materials",
+      "data": 3
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "D": {
+      "item": "minecraft:dispenser"
+    }
+  },
+  "result": {
+    "item": "erebus:bamboo_extender"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:silk"
+    }
+  ],
+  "result": {
+    "item": "minecraft:string",
+    "count": 9
+  }
+}

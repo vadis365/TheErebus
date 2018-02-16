@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "#STONEUMBER"
+    }
+  },
+  "result": {
+    "item": "erebus:wall_umberstone",
+    "count": 6
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " N ",
+    "NJN",
+    " N "
+  ],
+  "key": {
+    "J": {
+      "item": "#GEMJADE"
+    },
+    "N": {
+      "item": "erebus:materials",
+      "data": 19
+    }
+  },
+  "result": {
+    "item": "erebus:bee_taming_amulet"
+  }
+}

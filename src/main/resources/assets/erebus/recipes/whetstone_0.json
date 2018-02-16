@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "PPP",
+    "UUU"
+  ],
+  "key": {
+    "P": {
+      "item": "erebus:materials",
+      "data": 7
+    },
+    "S": {
+      "item": "minecraft:sand",
+      "data": 0
+    },
+    "U": {
+      "item": "erebus:umberstone",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "erebus:whetstone",
+    "data": 0
+  }
+}

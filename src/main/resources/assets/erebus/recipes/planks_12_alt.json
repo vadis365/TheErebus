@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "#PLANKWOOD"
+    },
+    {
+      "item": "#SLIMEBALL"
+    },
+    {
+      "item": "erebus:materials",
+      "data": 28
+    },
+    {
+      "item": "erebus:materials",
+      "data": 18
+    }
+  ],
+  "result": {
+    "item": "erebus:planks",
+    "data": 12
+  }
+}

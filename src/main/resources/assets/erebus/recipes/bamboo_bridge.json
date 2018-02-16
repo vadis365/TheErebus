@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "B B",
+    "LLL"
+  ],
+  "key": {
+    "B": {
+      "item": "erebus:materials",
+      "data": 3
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "L": {
+      "item": "erebus:bamboo_ladder"
+    }
+  },
+  "result": {
+    "item": "erebus:bamboo_bridge",
+    "count": 3
+  }
+}

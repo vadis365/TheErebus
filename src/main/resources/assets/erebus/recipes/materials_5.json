@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GEG",
+    "GGG"
+  ],
+  "key": {
+    "E": {
+      "item": "erebus:amber_glass"
+    },
+    "G": {
+      "item": "erebus:materials",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "erebus:materials",
+    "data": 5
+  }
+}

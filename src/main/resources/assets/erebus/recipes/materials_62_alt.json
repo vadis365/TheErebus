@@ -1,0 +1,35 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:materials",
+      "data": 61
+    },
+    {
+      "item": "minecraft:beef"
+    },
+    {
+      "item": "minecraft:beef"
+    },
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "erebus:erebus_food",
+      "data": 15
+    },
+    {
+      "item": "#FOODMUSHROOM"
+    },
+    {
+      "item": "#FOODMUSHROOM"
+    }
+  ],
+  "result": {
+    "item": "erebus:materials",
+    "data": 62
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "erebus:umberpaver",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "erebus:wall_umberpaver_mossy",
+    "count": 6
+  }
+}

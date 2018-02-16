@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "T",
+    "S",
+    "F"
+  ],
+  "key": {
+    "S": {
+      "item": "#STICKWOOD"
+    },
+    "T": {
+      "item": "erebus:materials",
+      "data": 2
+    },
+    "F": {
+      "item": "erebus:materials",
+      "data": 6
+    }
+  },
+  "result": {
+    "item": "minecraft:arrow",
+    "count": 4
+  }
+}

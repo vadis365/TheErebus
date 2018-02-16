@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:materials",
+      "data": 8
+    }
+  },
+  "result": {
+    "item": "erebus:velocity_block"
+  }
+}

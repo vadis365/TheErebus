@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "SSS",
+    "SHS",
+    "SMS"
+  ],
+  "key": {
+    "S": {
+      "item": "#STONE"
+    },
+    "H": {
+      "item": "erebus:rein_compound_goggles"
+    },
+    "M": {
+      "item": "erebus:materials",
+      "data": 66
+    }
+  },
+  "result": {
+    "item": "erebus:materials",
+    "data": 52
+  }
+}

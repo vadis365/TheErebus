@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "GNG",
+    "NCN",
+    "GNG"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:compass"
+    },
+    "G": {
+      "item": "#INGOTGOLD"
+    },
+    "N": {
+      "item": "erebus:materials",
+      "data": 19
+    }
+  },
+  "result": {
+    "item": "erebus:homing_beecon"
+  }
+}

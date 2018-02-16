@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "H H",
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "erebus:materials",
+      "data": 35
+    },
+    "H": {
+      "item": "erebus:materials",
+      "data": 36
+    }
+  },
+  "result": {
+    "item": "erebus:rhino_exoskeleton_helmet"
+  }
+}

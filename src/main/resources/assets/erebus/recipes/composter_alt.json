@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XYX",
+    "XZX",
+    "XYX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:planks",
+      "data": 12
+    },
+    "Y": {
+      "item": "#DYELIME"
+    },
+    "Z": {
+      "item": "#GEMEMERALD"
+    }
+  },
+  "result": {
+    "item": "erebus:composter"
+  }
+}

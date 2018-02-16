@@ -1,0 +1,43 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:velocity_block"
+    },
+    {
+      "item": "erebus:materials",
+      "data": 13
+    },
+    {
+      "item": "erebus:materials",
+      "data": 13
+    },
+    {
+      "item": "erebus:materials",
+      "data": 13
+    },
+    {
+      "item": "erebus:materials",
+      "data": 13
+    },
+    {
+      "item": "erebus:materials",
+      "data": 13
+    },
+    {
+      "item": "erebus:materials",
+      "data": 13
+    },
+    {
+      "item": "erebus:materials",
+      "data": 13
+    },
+    {
+      "item": "erebus:materials",
+      "data": 13
+    }
+  ],
+  "result": {
+    "item": "erebus:lightning_speed_block"
+  }
+}

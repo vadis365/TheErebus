@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "RBR",
+    "SGS",
+    "RJR"
+  ],
+  "key": {
+    "B": {
+      "item": "#PLANKBAMBOO"
+    },
+    "R": {
+      "item": "#DUSTREDSTONE"
+    },
+    "S": {
+      "item": "#STICKWOOD"
+    },
+    "G": {
+      "item": "erebus:amber_glass"
+    },
+    "J": {
+      "item": "erebus:fluid_jar"
+    }
+  },
+  "result": {
+    "item": "erebus:liquifier"
+  }
+}

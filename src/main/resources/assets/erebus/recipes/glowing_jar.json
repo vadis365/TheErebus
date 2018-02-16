@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XXX",
+    "GBG",
+    "GGG"
+  ],
+  "key": {
+    "B": {
+      "item": "erebus:materials",
+      "data": 12
+    },
+    "G": {
+      "item": "erebus:amber_glass"
+    },
+    "X": {
+      "item": "#INGOTIRON"
+    }
+  },
+  "result": {
+    "item": "erebus:glowing_jar"
+  }
+}
