@@ -97,7 +97,7 @@ public class WorldProviderErebus extends WorldProvider {
     protected void init() {
 		setDimension(ConfigHandler.INSTANCE.erebusDimensionID);
 		biomeProvider = new BiomeProviderErebus(world);
-		hasSkyLight = true;
+		hasSkyLight = false;
     }
 
 	@Override
