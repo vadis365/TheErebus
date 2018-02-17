@@ -14,6 +14,7 @@ import erebus.blocks.BlockLogErebus;
 import erebus.blocks.BlockStairsErebus;
 import erebus.blocks.EnumWood;
 import erebus.entity.EntityTarantulaMiniboss;
+import erebus.items.ItemErebusFood;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
@@ -62,6 +63,7 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 			new LootItemStack(Items.BOOK).setAmount(1, 4).setWeight(18),
 			new LootItemStack(Items.PAPER).setAmount(2, 6).setWeight(16),
 			new LootItemStack(Blocks.WEB).setAmount(2, 7).setWeight(13),
+			new LootItemStack(ModItems.EREBUS_FOOD).setAmount(1, 2).setDamage(ItemErebusFood.EnumFoodType.DARK_FRUIT_PIE.ordinal()).setWeight(13),
 			new LootItemStack(ModItems.MATERIALS).setAmount(1, 3).setDamage(EnumErebusMaterialsType.JADE.ordinal()).setWeight(10),
 			new LootItemStack(ModItems.MATERIALS).setAmount(4, 8).setDamage(EnumErebusMaterialsType.PLATE_EXO.ordinal()).setWeight(9),
 			new LootItemStack(Items.ENCHANTED_BOOK).setWeight(8),

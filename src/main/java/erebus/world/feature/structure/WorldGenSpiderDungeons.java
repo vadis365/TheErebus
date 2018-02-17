@@ -6,6 +6,7 @@ import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.blocks.BlockUmberstone;
 import erebus.blocks.BlockUmberstone.EnumType;
+import erebus.items.ItemErebusFood;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
@@ -25,6 +26,7 @@ public class WorldGenSpiderDungeons extends WorldGenerator {
 
 	public static final WeightedLootList chestLoot = new WeightedLootList(new LootItemStack[] {
 			new LootItemStack(Items.STRING).setAmount(5, 10).setWeight(13),
+			new LootItemStack(ModItems.EREBUS_FOOD).setAmount(1, 2).setDamage(ItemErebusFood.EnumFoodType.DARK_FRUIT_PIE.ordinal()).setWeight(13),
 			new LootItemStack(Blocks.WEB).setAmount(3, 8).setWeight(13),
 			new LootItemStack(Items.STICK).setAmount(1, 8).setWeight(12),
 			new LootItemStack(Items.GOLD_NUGGET).setAmount(3, 11).setWeight(12),
