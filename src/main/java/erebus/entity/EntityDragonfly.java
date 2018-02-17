@@ -207,7 +207,7 @@ public class EntityDragonfly extends EntityMob {
 
 		if (getEntityWorld().isRemote)
 			if (getSkin() == 0) {
-				spawnParticles(getEntityWorld(), posX - 0.5D, posY, posZ - 0.5D, rand);
+				spawnParticles(getEntityWorld(), posX, posY, posZ, rand);
 				if (!hasCustomName())
 					setCustomNameTag("Ender Dragonfly");
 			}
