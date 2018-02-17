@@ -39,7 +39,6 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer<
 			zOff = dimensions.getZ();
 			scale = dimensions.getScale();
 		}
-
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x + 0.5F, y, z + 0.5F);
 		GlStateManager.rotate(180F, 0.0F, 1.0F, 0.0F);
@@ -47,8 +46,11 @@ public class TileEntityPreservedBlockRenderer extends TileEntitySpecialRenderer<
 		GlStateManager.translate(xOff, yOff, zOff);
 		GlStateManager.scale(scale, scale, scale);
 		Render renderer = Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(entity);
-		if (entity instanceof EntityItem)
+		if (entity instanceof EntityItem) {
+			GlStateManager.translate(0.25F, -0.25F, -0.125F);
+			GlStateManager.scale(scale * 0.5F, scale* 0.5F, scale* 0.5F);
 			((EntityItem) entity).hoverStart = 0;
+		}
 		renderer.doRender(entity, 0, 0, 0, 0, 0);
 		GlStateManager.popMatrix();
 	}

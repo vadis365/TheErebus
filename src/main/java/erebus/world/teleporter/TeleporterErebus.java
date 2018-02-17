@@ -16,7 +16,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -84,7 +83,7 @@ final class TeleporterErebus extends Teleporter {
 
 	@Override
 	public boolean placeInExistingPortal(Entity entity, float rotationYaw) {
-		int checkRadius = 32;
+		int checkRadius = 128;
 		double distToPortal = Double.POSITIVE_INFINITY;
 		int entityX = MathHelper.floor(entity.posX);
 		int entityY = MathHelper.floor(entity.posY);
@@ -124,12 +123,10 @@ final class TeleporterErebus extends Teleporter {
 				destinationCoordinateKeys.add(Long.valueOf(coordPair));
 			}
 			entity.motionX = entity.motionY = entity.motionZ = 0.0;
-			EnumFacing entityFacing = entity.getHorizontalFacing();
 
-			BlockPos offsetPos = blockpos.offset(entityFacing);
-			double newPosX = (double)offsetPos.getX() + 0.5D;
-            double newPosY = (double)offsetPos.getY() + 0.125D;
-            double newPosZ = (double)offsetPos.getZ() + 0.5D;
+			double newPosX = (double)blockpos.getX() + 0.5D;
+            double newPosY = (double)blockpos.getY() + 1D;
+            double newPosZ = (double)blockpos.getZ() + 0.5D;
 
             if (entity instanceof EntityPlayerMP)
                 ((EntityPlayerMP)entity).connection.setPlayerLocation(newPosX, newPosY, newPosZ, entity.rotationYaw, entity.rotationPitch);
@@ -144,7 +141,7 @@ final class TeleporterErebus extends Teleporter {
 	@Override
 	public boolean makePortal(Entity entity) {
 		//attempt at constraining the portal height in the Erebus
-		double safeHeight = Math.min(Math.max(entity.posY * 0.5D, 12), 116);
+		double safeHeight = Math.min(Math.max(entity.posY, 12), 116);
 
 		int x = MathHelper.floor(entity.posX);
 		int y = MathHelper.floor(safeHeight) - 2;

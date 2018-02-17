@@ -111,7 +111,7 @@ public class ModEntities {
 		registerEntity(10, EntityGrasshopper.class, "grasshopper", 0x06B900, 0x5FFF5F);
 		registerEntity(11, EntityLocust.class, "locust", 0x5FFF5F, 0x06B900);
 		registerEntity(12, EntityMoth.class, "moth", 0x00FFDD, 0xFBFFA8);
-		registerEntity(13, EntityRhinoBeetle.class, "rhinoBeetle", 0x222222, 0x747474);
+		registerEntity(13, EntityRhinoBeetle.class, "rhino_beetle", 0x222222, 0x747474);
 		registerEntity(14, EntityAntlion.class, "antlion", 0x000000, 0xFFFFFF);
 		registerEntity(15, EntityBlackWidow.class, "black_widow", 0x000000, 0xFF0000);
 		registerEntity(16, EntityGlowWorm.class, "glow_worm", 0xFFFF00, 0xFFFFFF);
