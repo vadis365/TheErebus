@@ -37,7 +37,8 @@ public abstract class BiomeBaseErebus extends Biome implements IWeightProvider {
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
 		spawnableCaveCreatureList.clear();
-
+		spawningPopulate.clear();
+		spawningGradual.clear();
 		topBlockMeta = 0;
 		fillerBlockMeta = 0;
 	}

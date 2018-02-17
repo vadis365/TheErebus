@@ -136,7 +136,7 @@ public final class SpawnerErebus {
 
 				if (entry.isHostile && !canSpawnHostiles || !entry.isHostile && !canSpawnAnimals)
 					continue;
-				if (rand.nextFloat() > biome.getSpawningChance() || entry.worldLimit != -1 && entityCount.get(entry.mobClass) >= entry.worldLimit)
+				if (rand.nextFloat() < biome.getSpawningChance() || entry.worldLimit != -1 && entityCount.get(entry.mobClass) >= entry.worldLimit)
 					continue;
 
 				EntityLiving entity = null;
@@ -172,7 +172,7 @@ public final class SpawnerErebus {
 							entity.setLocationAndAngles(fx, fy, fz, yaw, 0F);
 
 							if (entity.getCanSpawnHere()) {
-								//System.out.println("Spawned Mob: "+ entity);
+								System.out.println("Spawned Mob: "+ entity);
 								world.spawnEntity(entity);
 								entity = null;
 
