@@ -134,17 +134,22 @@ public class EntityPunchroom extends EntityMob {
 	}
 
 	@Override
+	protected float getSoundPitch() {
+		return super.getSoundPitch() * 3.95F;
+	}
+
+	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_SMALL_SLIME_HURT;
+		return SoundEvents.ENTITY_SLIME_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_SMALL_SLIME_DEATH;
+		return SoundEvents.ENTITY_SLIME_DEATH;
 	}
 
 	protected SoundEvent getSquishSound() {
-		return SoundEvents.ENTITY_SMALL_SLIME_SQUISH;
+		return SoundEvents.ENTITY_SLIME_SQUISH;
 	}
 
 	@Override
@@ -154,7 +159,7 @@ public class EntityPunchroom extends EntityMob {
 	}
 
 	protected SoundEvent getJumpSound() {
-		return SoundEvents.ENTITY_SMALL_SLIME_JUMP;
+		return SoundEvents.ENTITY_SLIME_JUMP;
 	}
 
 	static class AIPunchroomAttack extends EntityAIBase {
@@ -312,7 +317,7 @@ public class EntityPunchroom extends EntityMob {
 						}
 
 						punchroom.getJumpHelper().setJumping();
-						punchroom.playSound(punchroom.getJumpSound(), punchroom.getSoundVolume(), ((punchroom.getRNG().nextFloat() - punchroom.getRNG().nextFloat()) * 0.2F + 1.0F) * 0.8F);
+						punchroom.playSound(punchroom.getJumpSound(), punchroom.getSoundVolume(), ((punchroom.getRNG().nextFloat() - punchroom.getRNG().nextFloat()) * 0.2F + 1.0F) * 2.8F);
 
 					} else {
 						punchroom.moveStrafing = 0.0F;

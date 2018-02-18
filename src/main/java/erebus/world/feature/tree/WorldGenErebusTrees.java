@@ -2,6 +2,8 @@ package erebus.world.feature.tree;
 
 import java.util.Random;
 
+import erebus.blocks.BlockLeavesErebus;
+import erebus.blocks.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCocoa;
 import net.minecraft.block.BlockVine;
@@ -13,14 +15,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.blocks.EnumWood;
 
 public class WorldGenErebusTrees extends WorldGenerator { // TODO
 	private final int minTreeHeight;
 	private final boolean vinesGrow;
 	private final int metaLeaves;
 	private final Block woodBlock;
-	private final Block leafBlock;
+	private final IBlockState leafBlock;
 	private final Block vineBlock;
 
 	public WorldGenErebusTrees(boolean notify, int minHeight, boolean growVines, EnumWood wood, Block vineBlock) {
@@ -29,7 +30,7 @@ public class WorldGenErebusTrees extends WorldGenerator { // TODO
 		metaLeaves = 0;
 		vinesGrow = growVines;
 		woodBlock = wood.getLog();
-		leafBlock = wood.getLeaves();
+		leafBlock = wood.getLeaves().getDefaultState().withProperty(BlockLeavesErebus.CHECK_DECAY, false);
 		this.vineBlock = vineBlock;
 	}
 
@@ -87,7 +88,7 @@ public class WorldGenErebusTrees extends WorldGenerator { // TODO
                                     state = worldIn.getBlockState(blockpos);
 
                                     if (state.getBlock().isAir(state, worldIn, blockpos) || state.getBlock().isLeaves(state, worldIn, blockpos) || state.getMaterial() == Material.VINE)
-                                        setBlockAndNotifyAdequately(worldIn, blockpos, leafBlock.getDefaultState());
+                                        setBlockAndNotifyAdequately(worldIn, blockpos, leafBlock);
                                 }
                             }
                         }

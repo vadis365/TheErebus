@@ -26,9 +26,12 @@ public class WorldProviderErebus extends WorldProvider {
 	private short[] targetFogColor;
 
 	private boolean allowHostiles, allowAnimals;
-	
 
-	
+	public WorldProviderErebus() {
+		allowHostiles = true;
+		allowAnimals = true;
+	}
+
 	@Override
 	public boolean canRespawnHere() {
 		if(ConfigHandler.INSTANCE.allowRespawning)
