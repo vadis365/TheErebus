@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import erebus.ModTabs;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -23,13 +24,14 @@ public class BlockAlgae extends BlockBush {
 	public BlockAlgae() {
 		super(Material.PLANTS);
 		setTickRandomly(false);
+		setSoundType(SoundType.PLANT);
 		setCreativeTab(ModTabs.PLANTS);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
-		return BlockRenderLayer.CUTOUT_MIPPED;
+		return BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override

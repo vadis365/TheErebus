@@ -109,6 +109,9 @@ public class EntityMosquito extends EntityMob {
 				dismountRidingEntity();
 				entityToAttack = null;
 			}
+			
+			if(isInWater())
+				motionY += 0.08D;
 		}
 		super.onUpdate();
 	}
@@ -155,7 +158,7 @@ public class EntityMosquito extends EntityMob {
 				getRidingEntity().attackEntityFrom(DamageSource.causeMobDamage(this), getDamage());
 				drainage = 0;
 				setBloodConsumed(getBloodConsumed() + 1);
-				System.out.println("Blood Consumed: " + getBloodConsumed());
+				//System.out.println("Blood Consumed: " + getBloodConsumed());
 			}
 		}
 
@@ -360,8 +363,8 @@ public class EntityMosquito extends EntityMob {
 			for (int q1 = p; q1 < q; q1++)
 				for (int n2 = n1; n2 < o1; n2++) {
 					IBlockState o2 = getEntityWorld().getBlockState(new BlockPos(p1, q1, n2));
-					if (!this.getEntityWorld().isAirBlock(new BlockPos(p1, q1, n2)))
-						if (o2.getMaterial() == Material.WATER)
+					if (o2.getMaterial() == Material.AIR)
+						if (getEntityWorld().getBlockState(new BlockPos(p1, q1, n2).down()).getMaterial() == Material.WATER)
 							return true;
 				}
 		return false;

@@ -1,6 +1,8 @@
 package erebus.entity;
 
 import erebus.Erebus;
+import erebus.network.client.PacketParticle;
+import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -17,6 +19,7 @@ public class EntityWaspDagger extends EntityThrowable {
 
 	public EntityWaspDagger(World world, EntityLivingBase thrower) {
 		super(world, thrower);
+		this.thrower = thrower;
 	}
 
 	public EntityWaspDagger(World world, double x, double y, double z) {
@@ -25,8 +28,9 @@ public class EntityWaspDagger extends EntityThrowable {
 
 	@Override
 	protected void onImpact(RayTraceResult mop) {
-		if (mop.entityHit != null && mop.entityHit != thrower) {
-			if (!getEntityWorld().isRemote) {
+
+		if (!getEntityWorld().isRemote) {
+			if (mop.entityHit != null && mop.entityHit != thrower) {
 				byte byte0 = 6;
 				if (mop.entityHit instanceof EntityWasp)
 					byte0 = 0;
@@ -34,12 +38,10 @@ public class EntityWaspDagger extends EntityThrowable {
 					;
 				if (isBurning() && !(mop.entityHit instanceof EntityEnderman))
 					mop.entityHit.setFire(5);
+				setDead();
 			}
+			Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.WASP_DAGGER, (float) posX, (float) posY, (float) posZ));
 		}
-		if (getEntityWorld().isRemote)
-			for (int i = 0; i < 8; i++)
-				Erebus.PROXY.spawnCustomParticle("reddust", getEntityWorld(), posX, posY, posZ, 0.0D, 0.0D, 0.0D);
-		setDead();
 	}
 
 	@Override

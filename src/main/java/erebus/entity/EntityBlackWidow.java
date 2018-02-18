@@ -55,7 +55,7 @@ public class EntityBlackWidow extends EntityMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataManager.register(SIZE, Integer.valueOf(1));
+		dataManager.register(SIZE, Integer.valueOf(1 << rand.nextInt(3)));
 		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
 	}
 

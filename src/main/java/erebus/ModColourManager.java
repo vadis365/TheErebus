@@ -58,7 +58,7 @@ public class ModColourManager {
 		};
 
 		blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.SMALL_PLANT);
-		blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.ALGAE);
+		//blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.ALGAE);
 		blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.SWAMP_VENT);
 		blockColors.registerBlockColorHandler(witheWebColourHandler, ModBlocks.WITHER_WEB);
 	}
@@ -87,7 +87,7 @@ public class ModColourManager {
 		};
 
 		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.SMALL_PLANT);
-		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.ALGAE);
+		//itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.ALGAE);
 		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.SWAMP_VENT);
 		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.WITHER_WEB);
 	}

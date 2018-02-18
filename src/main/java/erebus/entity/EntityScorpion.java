@@ -26,6 +26,7 @@ import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
@@ -217,6 +218,7 @@ public class EntityScorpion extends EntityMob {
 		if (duration > 0 && rand.nextInt(50) == 0) {
 			player.addPotionEffect(new PotionEffect(MobEffects.POISON, duration * 20, 0));
 			setisStinging(true);
+			getEntityWorld().playSound(null, getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.HOSTILE, 0.5F, 2F);
 		}
 		if (!player.capabilities.isCreativeMode && !getEntityWorld().isRemote && !captured())
 			if(getEntitySenses().canSee(player))

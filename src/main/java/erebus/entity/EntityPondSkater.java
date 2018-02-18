@@ -8,6 +8,8 @@ import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.ai.EntityAIErebusAttackMelee;
 import erebus.entity.ai.PathNavigateAboveWater;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
+import erebus.world.ChunkProviderErebus;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,6 +24,7 @@ import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNodeType;
@@ -48,7 +51,7 @@ public class EntityPondSkater extends EntityMob {
 	@Override
 	protected void initEntityAI() {
 		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.5D, true));
-		tasks.addTask(2, new EntityPondSkater.AIWaterWander(this, 0.5D, 50));
+		tasks.addTask(2, new EntityPondSkater.AIWaterWander(this, 0.5D, 10));
 		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(4, new EntityAILookIdle(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
@@ -76,16 +79,21 @@ public class EntityPondSkater extends EntityMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		int x = MathHelper.floor(posX);
 		int y = MathHelper.floor(getEntityBoundingBox().minY);
-		int z = MathHelper.floor(posZ);
-		return getEntityWorld().getBlockState(new BlockPos(x, y, z).down()).getMaterial() == Material.WATER && isNotColliding();
+		if(y <= ChunkProviderErebus.swampWaterHeight)
+			return getEntityWorld().checkNoEntityCollision(getEntityBoundingBox()) && getEntityWorld().getCollisionBoxes(this, getEntityBoundingBox()).isEmpty() && getEntityWorld().isMaterialInBB(getEntityBoundingBox(), Material.WATER);
+		return false;
 	}
 
 	@Override
 	public int getMaxSpawnedInChunk() {
 		return 6;
 	}
+
+	@Override
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+		playSound(SoundEvents.ENTITY_GENERIC_SWIM, 0.125F, 0.125F);
+    }
 
 	/*
 	 * To stop console spam
@@ -160,7 +168,7 @@ public class EntityPondSkater extends EntityMob {
 
 		public AIWaterWander(EntityPondSkater skaterIn, double speedIn, int chance) {
 			super(skaterIn, speedIn, chance);
-			setMutexBits(3);
+			setMutexBits(1);
 			this.skater = skaterIn;
 		}
 

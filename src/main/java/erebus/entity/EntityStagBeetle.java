@@ -56,10 +56,10 @@ public class EntityStagBeetle extends EntityTameable {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataManager.register(HEAD_POSITION, (byte) 1);//28
-		dataManager.register(ACTION, (byte) 0);//29
-		dataManager.register(JAW_MOTION, 0);//30
-		dataManager.register(BEETLE_TYPE, (byte) 0);//31
+		dataManager.register(HEAD_POSITION, (byte) 1);
+		dataManager.register(ACTION, (byte) 0);
+		dataManager.register(JAW_MOTION, 0);
+		dataManager.register(BEETLE_TYPE, (byte) 0);
 	}
 
 	@Override

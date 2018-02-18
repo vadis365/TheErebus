@@ -26,7 +26,7 @@ public class ItemWaspDagger extends ItemSword {
 
 	public ItemWaspDagger() {
 		super(ModMaterials.WEAPON_WASP_DAGGER);
-		setMaxStackSize(16);
+		setMaxStackSize(64);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class ItemWaspDagger extends ItemSword {
 			EntityWaspDagger dagger = new EntityWaspDagger(world, player);
 			double direction = Math.toRadians(player.rotationYaw);
 			dagger.shoot(player, player.rotationPitch, player.rotationYaw, 0F, 1F, 0F);
-			dagger.setPosition(player.posX + -Math.sin(direction) * 1.5D, player.posY + player.eyeHeight, player.posZ + Math.cos(direction) * 1.5D);
+			dagger.setPosition(player.posX + -Math.sin(direction) * 0.5D, player.posY + player.eyeHeight, player.posZ + Math.cos(direction) * 0.5D);
 			world.spawnEntity(dagger);
 		}
 		player.swingArm(hand);

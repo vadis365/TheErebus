@@ -24,7 +24,7 @@ public class PacketParticle implements IMessage, IMessageHandler<PacketParticle,
 		HAMMER_BLAM,
 		GAS_VENT_SWAMP,
 		GAS_VENT_VOLCANIC,
-		SPORE_JET;
+		WASP_DAGGER;
 
 		static final ParticleType[] values = values();
 	}
@@ -154,22 +154,9 @@ public class PacketParticle implements IMessage, IMessageHandler<PacketParticle,
 						Erebus.PROXY.spawnCustomParticle("flame", world, d5, d6, d7, 0.0D, 0.05D, 0.0D);
 					}
 					break;
-				case SPORE_JET:
-					for (double yy = message.posY; yy < message.posY + 2D; yy += 0.5D) {
-						double d0 = message.posX - 0.075F;
-						double d1 = yy;
-						double d2 = message.posZ - 0.075F;
-						double d3 = message.posX + 0.075F;
-						double d4 = message.posZ + 0.075F;
-						double d5 = message.posX;
-						double d6 = yy + 0.25F;
-						double d7 = message.posZ;
-						Erebus.PROXY.spawnCustomParticle("spell", world, d0, d1, d2, 0.0D, 0.05D, 0.0D);
-						Erebus.PROXY.spawnCustomParticle("spell", world, d0, d1, d4, 0.0D, 0.05D, 0.0D);
-						Erebus.PROXY.spawnCustomParticle("spell", world, d3, d1, d2, 0.0D, 0.05D, 0.0D);
-						Erebus.PROXY.spawnCustomParticle("spell", world, d3, d1, d4, 0.0D, 0.05D, 0.0D);
-						Erebus.PROXY.spawnCustomParticle("spell", world, d5, d6, d7, 0.0D, 0.05D, 0.0D);
-					}
+				case WASP_DAGGER:
+					for (int i = 0; i < 8; i++)
+						Erebus.PROXY.spawnCustomParticle("reddust", world, message.posX, message.posY, message.posZ, 0.0D, 0.0D, 0.0D);
 					break;
 				default:
 			}
