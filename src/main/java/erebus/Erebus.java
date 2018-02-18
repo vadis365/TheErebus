@@ -15,6 +15,7 @@ import erebus.core.handler.BedPlaceEventHandler;
 import erebus.core.handler.DeathCompassRespawnEvent;
 import erebus.core.handler.EntityDeathInventoryHandler;
 import erebus.core.handler.EntityShieldDamageEvent;
+import erebus.core.handler.PlayerInWallDamageHandler;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.util.RandomMobNames;
 import erebus.lib.Reference;
@@ -133,6 +134,7 @@ public class Erebus {
 		MinecraftForge.EVENT_BUS.register(new AntiVenomDurationHandler());
 		MinecraftForge.EVENT_BUS.register(new AnvilEventHandlerWhetstone());
 		MinecraftForge.EVENT_BUS.register(new BedPlaceEventHandler());
+		MinecraftForge.EVENT_BUS.register(new PlayerInWallDamageHandler());
 		if (ConfigHandler.INSTANCE.graveMarker) {
 			MinecraftForge.EVENT_BUS.register(new EntityDeathInventoryHandler());
 			MinecraftForge.EVENT_BUS.register(new DeathCompassRespawnEvent());
