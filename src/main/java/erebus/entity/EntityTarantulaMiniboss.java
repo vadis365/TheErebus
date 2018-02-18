@@ -114,6 +114,11 @@ public class EntityTarantulaMiniboss extends EntityMob {
     }
 
 	@Override
+	public boolean isNonBoss() {
+		return false;
+	}
+
+	@Override
 	protected SoundEvent getAmbientSound() {
 		return SoundEvents.ENTITY_SPIDER_AMBIENT;
 	}
