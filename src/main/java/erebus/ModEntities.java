@@ -181,7 +181,7 @@ public class ModEntities {
 	}
 
 	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name) {
-		registerEntity(id, entityClass, name, null);
+		registerEntity(id, entityClass, "erebus."+ name, null);
 	}
 
 	private static final void registerEntity(int id, Class<? extends Entity> entityClass, String name, EntityDimensions dimensions) {
@@ -191,7 +191,7 @@ public class ModEntities {
 	}
 
 	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor) {
-		registerEntity(id, entityClass, name, eggBackgroundColor, eggForegroundColor, null);
+		registerEntity(id, entityClass, "erebus."+ name, eggBackgroundColor, eggForegroundColor, null);
 	}
 
 	private static final void registerEntity(int id, Class<? extends EntityLiving> entityClass, String name, int eggBackgroundColor, int eggForegroundColor, EntityDimensions dimensions) {
