@@ -6,6 +6,7 @@ import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.core.helper.FluidHandlerUniversalBucket;
 import erebus.entity.EntityBeetle;
+import erebus.entity.EntityBotFlyLarva;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -52,7 +53,8 @@ public class ItemBambucket extends UniversalBucket {
 		FluidStack fluidStack = getFluid(stack);
 		if(fluidStack != null)
 			return false;
-		ItemStack newStack = stack.splitStack(1);
+		ItemStack newStack = player.getHeldItem(hand).splitStack(1);
+
 		IFluidHandlerItem cap = newStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (target instanceof EntityCow && !target.isChild()) {
 			cap.fill(new FluidStack(FluidRegistry.getFluid("milk"), Fluid.BUCKET_VOLUME), true);
@@ -64,8 +66,12 @@ public class ItemBambucket extends UniversalBucket {
 		if (target instanceof EntityBeetle) {
 			cap.fill(new FluidStack(FluidRegistry.getFluid("beetle_juice"), Fluid.BUCKET_VOLUME), true);
 			player.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
-            if (!player.inventory.addItemStackToInventory(newStack))
+            if (!player.inventory.addItemStackToInventory(newStack)) {
                 player.dropItem(newStack, false);
+                System.out.println("Dropped Stack is: " + newStack.getItem());
+            }
+            else
+            	 System.out.println("Inventory Stack is: " + newStack.getItem());
 			return true;
 		}
 		return false;
@@ -135,14 +141,17 @@ public class ItemBambucket extends UniversalBucket {
 		}
 		
 		final RayTraceResult target = this.rayTrace(world, player, true);
-		final BlockPos pos = target.getBlockPos();
-		
+		if (target.typeOfHit == RayTraceResult.Type.MISS)
+			return new ActionResult<>(EnumActionResult.PASS, heldItem);
+
+		final BlockPos pos = target.getBlockPos();	
+
 		if (fluidStack != null) {
 			world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			return super.onItemRightClick(world, player, hand);
 		}
 
-		if (target == null || target.typeOfHit != RayTraceResult.Type.BLOCK)
+		if (target.typeOfHit != RayTraceResult.Type.MISS || target == null || target.typeOfHit != RayTraceResult.Type.BLOCK)
 			return new ActionResult<>(EnumActionResult.PASS, heldItem);
 		
 
@@ -176,6 +185,10 @@ public class ItemBambucket extends UniversalBucket {
 		if (fluidStack.getFluid() == FluidRegistry.getFluid("beetle_juice") || fluidStack.getFluid() == FluidRegistry.getFluid("milk")) {
 			if (!world.isRemote)
 				entityLiving.curePotionEffects(stack);
+
+			if (entityLiving.isBeingRidden() && entityLiving.getLowestRidingEntity() instanceof EntityBotFlyLarva)
+				if (((EntityBotFlyLarva) entityLiving.getLowestRidingEntity()).getParasiteCount() > 0)
+					((EntityBotFlyLarva) entityLiving.getLowestRidingEntity()).setABitDead();
 		}
 
 		if (fluidStack.getFluid() == FluidRegistry.getFluid("anti_venom")) {
@@ -199,7 +212,7 @@ public class ItemBambucket extends UniversalBucket {
 		  if (!player.inventory.addItemStackToInventory(newStack))
               player.dropItem(newStack, false);
 		}
-		return stack;
+		return stack.getCount() == 0 && hasContainerItem(stack) ? getContainerItem(stack) : stack;
     }
 
 	@Nullable

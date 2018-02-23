@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import javax.annotation.Nullable;
+
 import erebus.ModItems;
 import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
@@ -18,6 +20,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -31,6 +34,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 
 public class EntityBeetle extends EntityAnimal {
 	private static final DataParameter<Integer> SKIN_TYPE = EntityDataManager.<Integer>createKey(EntityBeetle.class, DataSerializers.VARINT);
@@ -121,22 +128,39 @@ public class EntityBeetle extends EntityAnimal {
 
 	@Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
-		ItemStack is = player.inventory.getCurrentItem();
-
-		if (!is.isEmpty() && is.getItem() == ModItems.TURNIP && !shagging()) {
-			is.shrink(1);
+		ItemStack stack = player.getHeldItem(hand);
+		if (FluidUtil.getFluidHandler(stack) != null) {
+			FluidStack fluidStack = getFluid(stack);
+			if (fluidStack != null)
+				return false;
+			if (!stack.isEmpty() && stack.getItem() == Items.BUCKET && !player.capabilities.isCreativeMode) {
+				stack.shrink(1);
+				ItemStack newStack = FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid("beetle_juice"), Fluid.BUCKET_VOLUME));
+				player.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
+				if (!player.inventory.addItemStackToInventory(newStack))
+					player.dropItem(newStack, false);
+				return true;
+			}
+		}
+		if (!stack.isEmpty() && stack.getItem() == ModItems.TURNIP && !shagging()) {
+			stack.shrink(1);
 			setTame(true);
 			shagCount = 600;
 			getEntityWorld().playSound((EntityPlayer)null, getPosition(), ModSounds.BEETLE_LARVA_MUNCH, SoundCategory.NEUTRAL, 1.0F, 0.75F);
 			return true;
 		}
-		if (!is.isEmpty() && is.getItem() == ModItems.MATERIALS && is.getItemDamage() == ItemMaterials.EnumErebusMaterialsType.BEETLE_TAMING_AMULET.ordinal()) {
-			is.shrink(1);
+		if (!stack.isEmpty() && stack.getItem() == ModItems.MATERIALS && stack.getItemDamage() == ItemMaterials.EnumErebusMaterialsType.BEETLE_TAMING_AMULET.ordinal()) {
+			stack.shrink(1);
 			setTame(true);
 			return true;
 		}
 
 		return super.processInteract(player, hand);
+	}
+
+	@Nullable
+	public FluidStack getFluid(final ItemStack container) {
+		return FluidUtil.getFluidContained(container);
 	}
 
 	public boolean shagging() {
@@ -154,8 +178,8 @@ public class EntityBeetle extends EntityAnimal {
 	}
 
 	@Override
-	public boolean isBreedingItem(ItemStack is) {
-		return !is.isEmpty() && is.getItem() == ModItems.TURNIP;
+	public boolean isBreedingItem(ItemStack stack) {
+		return !stack.isEmpty() && stack.getItem() == ModItems.TURNIP;
 	}
 
 	public EntityBeetleLarva spawnBabyAnimal(EntityAgeable entityageable) {

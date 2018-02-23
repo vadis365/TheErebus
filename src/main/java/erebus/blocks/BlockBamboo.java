@@ -9,6 +9,7 @@ import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
@@ -37,6 +38,9 @@ public class BlockBamboo extends Block implements IPlantable {
 		setDefaultState(blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)));
 		setTickRandomly(true);
 		setCreativeTab(ModTabs.PLANTS);
+		setHardness(2.0F);
+        setSoundType(SoundType.WOOD);
+        Blocks.FIRE.setFireInfo(this, 5, 5);
 	}
 
 	@Override

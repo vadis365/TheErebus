@@ -6,6 +6,7 @@ import erebus.ModBlocks.IHasCustomItem;
 import erebus.ModTabs;
 import erebus.items.block.ItemDoorErebus;
 import net.minecraft.block.BlockDoor;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -23,11 +24,15 @@ public class BlockDoorErebus extends BlockDoor implements IHasCustomItem {
 		super(state.getMaterial());
 		setHarvestLevel(harvestType, harvestLevel);
 		setCreativeTab(ModTabs.BLOCKS);
+		setHardness(3.0F);
+		setSoundType(SoundType.WOOD);
 	}
 	
 	public BlockDoorErebus(IBlockState state) {
 		super(state.getMaterial());
 		setCreativeTab(ModTabs.BLOCKS);
+		setHardness(3.0F);
+		setSoundType(SoundType.WOOD);
 	}
 	
 	@Override
