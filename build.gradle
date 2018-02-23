@@ -23,7 +23,7 @@ plugins {
 version = "1.0.18"
 group= "erebus"
 archivesBaseName = "Erebus"
-sourceCompatibility = targetCompatibility = "1.8"
+sourceCompatibility = targetCompatibility = "1.9"
 minecraft {
     version = "1.12.2-14.23.2.2611"
     runDir = "run"
