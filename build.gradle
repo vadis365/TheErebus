@@ -20,10 +20,10 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 */
-version = "1.0.18"
+version = "1.0.19"
 group= "erebus"
 archivesBaseName = "Erebus"
-sourceCompatibility = targetCompatibility = "1.9"
+sourceCompatibility = targetCompatibility = "1.8"
 minecraft {
     version = "1.12.2-14.23.2.2611"
     runDir = "run"
