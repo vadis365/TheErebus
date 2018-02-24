@@ -280,15 +280,15 @@ public class ModBlocks {
 	public static final Block ALTAR_OFFERING = new OfferingAltar();
 
 	// DUNGEONS
-	public static final Block SPIDER_SPAWNER = new BlockSpiderSpawner(new ResourceLocation("erebus:scytodes"));
-	public static final Block JUMPING_SPIDER_SPAWNER  = new BlockSpiderSpawner(new ResourceLocation("erebus:jumping_spider"));
-	public static final Block TARANTULA_SPAWNER = new BlockSpiderSpawner(new ResourceLocation("erebus:tarantula"));
-	public static final Block WASP_SPAWNER = new BlockWaspSpawner(new ResourceLocation("erebus:wasp"));
-	public static final Block ANTLION_SPAWNER = new BlockAntlionSpawner(new ResourceLocation("erebus:antlion"));
-	public static final Block DRAGON_FLY_SPAWNER = new BlockDragonflySpawner(new ResourceLocation("erebus:dragon_fly"));
+	public static final Block SPIDER_SPAWNER = new BlockSpiderSpawner(new ResourceLocation("erebus:erebus.scytodes"));
+	public static final Block JUMPING_SPIDER_SPAWNER  = new BlockSpiderSpawner(new ResourceLocation("erebus:erebus.jumping_spider"));
+	public static final Block TARANTULA_SPAWNER = new BlockSpiderSpawner(new ResourceLocation("erebus:erebus.tarantula"));
+	public static final Block WASP_SPAWNER = new BlockWaspSpawner(new ResourceLocation("erebus:erebus.wasp"));
+	public static final Block ANTLION_SPAWNER = new BlockAntlionSpawner(new ResourceLocation("erebus:erebus.antlion"));
+	public static final Block DRAGON_FLY_SPAWNER = new BlockDragonflySpawner(new ResourceLocation("erebus:erebus.dragon_fly"));
 	public static final Block GIANT_LILY_PAD = new BlockGiantLilyPad(Material.WOOD, "axe", 1);
-	public static final Block ZOMBIE_ANT_SPAWNER = new BlockZombieAntSpawner(new ResourceLocation("erebus:zombie_ant"));
-	public static final Block ZOMBIE_ANT_SOLDIER_SPAWNER = new BlockZombieAntSpawner(new ResourceLocation("erebus:zombie_ant_soldier"));
+	public static final Block ZOMBIE_ANT_SPAWNER = new BlockZombieAntSpawner(new ResourceLocation("erebus:erebus.zombie_ant"));
+	public static final Block ZOMBIE_ANT_SOLDIER_SPAWNER = new BlockZombieAntSpawner(new ResourceLocation("erebus:erebus.zombie_ant_soldier"));
 	public static final Block WASP_NEST = new BlockWaspNest();
 	public static final Block STAIRS_WASP_NEST = BlockStairsErebus.createWaspStairs(WASP_NEST.getDefaultState());
 	public static final Block ANTLION_EGG = new BlockBossEgg();
@@ -300,7 +300,7 @@ public class ModBlocks {
 	public static final Block TEMPLE_BRICK_UNBREAKING = new BlockTempleBrickUnbreaking();
 	public static final Block TEMPLE_TELEPORTER = new BlockTempleTeleporter();
 	public static final Block BLOCK_OF_BONES = new BlockBones();
-	public static final Block MAGMA_CRAWLER_SPAWNER = new BlockMagmaCrawlerSpawner(new ResourceLocation("erebus:magma_crawler"));
+	public static final Block MAGMA_CRAWLER_SPAWNER = new BlockMagmaCrawlerSpawner(new ResourceLocation("erebus:erebus.magma_crawler"));
 
 	// WALLS
 	public static final Block WALL_UMBERSTONE = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE));

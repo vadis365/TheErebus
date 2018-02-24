@@ -3,6 +3,7 @@ package erebus.world.feature.tree;
 import java.util.Random;
 
 import erebus.ModBlocks;
+import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.EnumWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -19,13 +20,13 @@ public class WorldGenErebusHugeTree extends WorldGenerator {
 	private int baseHeight;
 	private final boolean thorns;
 	private final Block woodBlock;
-	private final Block leafBlock;
+	private final IBlockState leafBlock;
 
 	public WorldGenErebusHugeTree(boolean notify, boolean genThorns, EnumWood wood) {
 		super(notify);
 		thorns = genThorns;
 		woodBlock = wood.getLog();
-		leafBlock = wood.getLeaves();
+		leafBlock = wood.getLeaves().getDefaultState().withProperty(BlockLeavesErebus.CHECK_DECAY, false);
 	}
 
 	public void prepare(int baseHeight) {
@@ -160,7 +161,7 @@ public class WorldGenErebusHugeTree extends WorldGenerator {
 					int var14 = var13 - par3;
 					IBlockState block = world.getBlockState(new BlockPos(var11, var8, var13));
 					if ((var12 >= 0 || var14 >= 0 || var12 * var12 + var14 * var14 <= var10 * var10) && (var12 <= 0 && var14 <= 0 || var12 * var12 + var14 * var14 <= (var10 + 1) * (var10 + 1)) && (par6Random.nextInt(4) != 0 || var12 * var12 + var14 * var14 <= (var10 - 1) * (var10 - 1)) && (block == null || block.getBlock().canBeReplacedByLeaves(block, world, new BlockPos(var11, var8, var13))))
-					setBlockAndNotifyAdequately(world, new BlockPos(var11, var8, var13), leafBlock.getDefaultState());
+					setBlockAndNotifyAdequately(world, new BlockPos(var11, var8, var13), leafBlock);
 				}
 			}
 		}

@@ -53,25 +53,22 @@ public class ItemBambucket extends UniversalBucket {
 		FluidStack fluidStack = getFluid(stack);
 		if(fluidStack != null)
 			return false;
-		ItemStack newStack = player.getHeldItem(hand).splitStack(1);
-
+		ItemStack newStack = new ItemStack(this, 1);
 		IFluidHandlerItem cap = newStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (target instanceof EntityCow && !target.isChild()) {
 			cap.fill(new FluidStack(FluidRegistry.getFluid("milk"), Fluid.BUCKET_VOLUME), true);
 			player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
             if (!player.inventory.addItemStackToInventory(newStack))
                 player.dropItem(newStack, false);
+            stack.shrink(1);
 			return true;
 		}
 		if (target instanceof EntityBeetle) {
 			cap.fill(new FluidStack(FluidRegistry.getFluid("beetle_juice"), Fluid.BUCKET_VOLUME), true);
 			player.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
-            if (!player.inventory.addItemStackToInventory(newStack)) {
+            if (!player.inventory.addItemStackToInventory(newStack))
                 player.dropItem(newStack, false);
-                System.out.println("Dropped Stack is: " + newStack.getItem());
-            }
-            else
-            	 System.out.println("Inventory Stack is: " + newStack.getItem());
+            stack.shrink(1);
 			return true;
 		}
 		return false;
@@ -141,8 +138,8 @@ public class ItemBambucket extends UniversalBucket {
 		}
 		
 		final RayTraceResult target = this.rayTrace(world, player, true);
-		if (target.typeOfHit == RayTraceResult.Type.MISS)
-			return new ActionResult<>(EnumActionResult.PASS, heldItem);
+		if (target == null || target.typeOfHit == RayTraceResult.Type.MISS)
+			return new ActionResult<>(EnumActionResult.FAIL, heldItem);
 
 		final BlockPos pos = target.getBlockPos();	
 
@@ -151,12 +148,7 @@ public class ItemBambucket extends UniversalBucket {
 			return super.onItemRightClick(world, player, hand);
 		}
 
-		if (target.typeOfHit != RayTraceResult.Type.MISS || target == null || target.typeOfHit != RayTraceResult.Type.BLOCK)
-			return new ActionResult<>(EnumActionResult.PASS, heldItem);
-		
-
-		final ItemStack singleBucket = heldItem.copy();
-		singleBucket.setCount(1);
+		final ItemStack singleBucket = new ItemStack(this, 1);
 
 		final FluidActionResult filledResult = FluidUtil.tryPickUpFluid(singleBucket, player, world, pos, target.sideHit);
 		if (filledResult.isSuccess()) {
@@ -181,7 +173,7 @@ public class ItemBambucket extends UniversalBucket {
 	@Override
     public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entityLiving) {
 		FluidStack fluidStack = getFluid(stack);
-		ItemStack newStack = stack.splitStack(1);
+		ItemStack newStack = new ItemStack(this, 1);
 		if (fluidStack.getFluid() == FluidRegistry.getFluid("beetle_juice") || fluidStack.getFluid() == FluidRegistry.getFluid("milk")) {
 			if (!world.isRemote)
 				entityLiving.curePotionEffects(stack);
@@ -204,15 +196,14 @@ public class ItemBambucket extends UniversalBucket {
 			CriteriaTriggers.CONSUME_ITEM.trigger(player, stack);
 			player.addStat(StatList.getObjectUseStats(this));
 		}
-
-		IFluidHandlerItem cap = newStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-		cap.drain(new FluidStack(getFluid(newStack), Fluid.BUCKET_VOLUME), true);
+		ItemStack emptyBucket = new ItemStack(this, 1);
 		if (entityLiving instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entityLiving;
-		  if (!player.inventory.addItemStackToInventory(newStack))
-              player.dropItem(newStack, false);
+		  if (!player.inventory.addItemStackToInventory(emptyBucket))
+              player.dropItem(emptyBucket, false);
 		}
-		return stack.getCount() == 0 && hasContainerItem(stack) ? getContainerItem(stack) : stack;
+		stack.shrink(1);
+		return stack;
     }
 
 	@Nullable
