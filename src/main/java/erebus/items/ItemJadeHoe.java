@@ -18,5 +18,14 @@ public class ItemJadeHoe extends ItemHoe {
 	public boolean getIsRepairable(ItemStack stack, ItemStack material) {
 		return material.getItem() == ModItems.MATERIALS && material.getItemDamage() == EnumErebusMaterialsType.JADE.ordinal();
 	}
-
+/*
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (!worldIn.isRemote) {
+			WorldGenSwampHut gen = new WorldGenSwampHut();
+			gen.generateStructure(worldIn, itemRand, pos.up());
+		}
+		return EnumActionResult.SUCCESS;
+	}
+*/
 }

@@ -77,7 +77,7 @@ public class BlockLogErebus extends BlockLog {
 			Random rand = world instanceof World ? ((World) world).rand : RANDOM;
 			drops.add(new ItemStack(ModBlocks.LOG_BALSAM_RESINLESS));
 			for (int i = 0; i < 1 + rand.nextInt(2 + fortune); i++)
-				drops.add(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.AMBER_STAR.ordinal()));
+				drops.add(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.RESIN.ordinal()));
 			return;
 		}
 		super.getDrops(drops, world, pos, state, fortune);

@@ -191,13 +191,15 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 
 		for (attempt = 0; attempt < 50; attempt++) {
 			xx = x + offsetXZ();
-			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
-			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (checkSurface(SurfaceType.GRASS, pos))
-				if (world.isAirBlock(pos.up())) {
-					world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FIDDLE_HEAD), 2);
-				}
+			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos))
+					if (world.isAirBlock(pos.up())) {
+						world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FIDDLE_HEAD), 2);
+						break;
+					}
+			}
 		}
 
 		for (attempt = 0; attempt < 30; attempt++) {

@@ -20,6 +20,7 @@ import erebus.world.feature.plant.WorldGenSwampBush;
 import erebus.world.feature.plant.WorldGenVinesErebus;
 import erebus.world.feature.structure.WorldGenDragonflyDungeon;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
+import erebus.world.feature.tree.WorldGenMossbarkTree;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockVine;
 import net.minecraft.init.Blocks;
@@ -31,6 +32,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 	private final WorldGenDragonflyDungeon genGiantLilyPad = new WorldGenDragonflyDungeon();
 	private final WorldGenerator genTreeMarshwood = new WorldGenMarshwoodTree();
+	private final WorldGenerator genTreeMossbark = new WorldGenMossbarkTree();
 	protected final WorldGenSwampBush genSwampBush = new WorldGenSwampBush();
 	private final WorldGenVinesErebus genVines = new WorldGenVinesErebus(35, 5);
 	private final WorldGenPonds genPonds = new WorldGenPonds();
@@ -100,6 +102,20 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 		}
 
 		// Ground
+		for (attempt = 0; attempt < 240; attempt++) {
+			xx = x + offsetXZ();
+			zz = z + offsetXZ();
+
+			for (yy = 20; yy < 100; yy += rand.nextInt(2) + 1) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (world.getBlockState(pos) == Blocks.GRASS.getDefaultState() && world.isAirBlock(pos.up())) {
+					if (rand.nextInt(3) == 0)
+						world.setBlockState(pos, ModBlocks.MUD.getDefaultState(), 2);
+					break;
+				}
+			}
+		}
+
 		for (attempt = 0; attempt < 600; attempt++) {
 			xx = x + rand.nextInt(5) + 12;
 			yy = 15 + rand.nextInt(90);
@@ -108,6 +124,18 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, pos.east(2)) && checkSurface(SurfaceType.GRASS, pos.west(2)) && checkSurface(SurfaceType.GRASS, pos.north(2)) && checkSurface(SurfaceType.GRASS, pos.south(2)))
 				genTreeMarshwood.generate(world, rand, pos.up());
 		}
+		
+		if (rand.nextBoolean())
+			for (attempt = 0; attempt < 50; attempt++) {
+				xx = x + offsetXZ();
+				yy = 20 + rand.nextInt(80);
+				zz = z + offsetXZ();
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos)) {
+					genTreeMossbark.generate(world, rand, pos.up());
+					break;
+				}
+			}
 
 		for (attempt = 0; attempt < 10; attempt++) {
 			xx = x + offsetXZ();
@@ -217,24 +245,28 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 
 		for (attempt = 0; attempt < 16; attempt++) {
 			xx = x + offsetXZ();
-			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
-			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (checkSurface(SurfaceType.GRASS, pos))
-				if (world.isAirBlock(pos.up())) {
-					world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FIDDLE_HEAD), 2);
-				}
+			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos))
+					if (world.isAirBlock(pos.up())) {
+						world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FIDDLE_HEAD), 2);
+						break;
+					}
+			}
 		}
 
-		for (attempt = 0; attempt < 400; attempt++) {
+		for (attempt = 0; attempt < 40; attempt++) {
 			xx = x + offsetXZ();
-			yy = 20 + rand.nextInt(80);
 			zz = z + offsetXZ();
-			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (checkSurface(SurfaceType.GRASS, pos))
-				if (world.isAirBlock(pos.up())) {
-					world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.SWAMP_PLANT), 2);
-				}
+			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos))
+					if (world.isAirBlock(pos.up())) {
+						world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.SWAMP_PLANT), 2);
+						break;
+					}
+			}
 		}
 
 		for (attempt = 0; attempt < 10; attempt++) {

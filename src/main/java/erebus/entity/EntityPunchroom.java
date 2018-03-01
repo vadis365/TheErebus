@@ -3,6 +3,7 @@ package erebus.entity;
 import erebus.Erebus;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.items.ItemMaterials;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -17,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -156,6 +158,14 @@ public class EntityPunchroom extends EntityMob {
 	protected void jump() {
 		motionY = 0.5D;
 		isAirBorne = true;
+	}
+
+	@Override
+	public void fall(float distance, float damageMultiplier) {
+	}
+
+	@Override
+	protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
 	}
 
 	protected SoundEvent getJumpSound() {

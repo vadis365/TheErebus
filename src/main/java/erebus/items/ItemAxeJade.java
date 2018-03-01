@@ -27,10 +27,11 @@ public class ItemAxeJade extends ItemTool {
 		attackSpeed = ATTACK_SPEED;
 	}
 
-	public float getStrVsBlock(ItemStack stack, IBlockState state) {
-		Material material = state.getMaterial();
-		return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE ? super.getDestroySpeed(stack, state) : this.efficiency;
-	}
+	@Override
+    public float getDestroySpeed(ItemStack stack, IBlockState state) {
+        Material material = state.getMaterial();
+        return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE ? super.getDestroySpeed(stack, state) : this.efficiency;
+    }
 
 	@Override
 	public boolean getIsRepairable(ItemStack stack, ItemStack material) {
