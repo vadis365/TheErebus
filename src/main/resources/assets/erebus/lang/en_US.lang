@@ -242,6 +242,9 @@ tile.erebus.umberpaver.umberpaver_mossy.name=Mossy Umberpaver
 tile.erebus.umberpaver.umberpaver_webbed.name=Webbed Umberpaver
 tile.erebus.umberstone_pillar.name=Umberstone Pillar
 tile.erebus.volcanic_rock.name=Volcanic Rock
+tile.erebus.dust.name=Dust
+tile.erebus.dust_layer.name=Dust Layer
+tile.erebus.petrified_wood_rock.name=Petrified Wood Rock
 
 # Amber
 tile.erebus.amber.name=Amber

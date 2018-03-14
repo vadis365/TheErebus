@@ -28,8 +28,13 @@ public class RenderWaspDaggerItem extends TileEntityItemStackRenderer {
         if ((!stack.isEmpty()) && (stack.getItem() instanceof ItemWaspDagger)) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
             GlStateManager.pushMatrix();
+            GlStateManager.color(1, 1, 1, 1);
+            GlStateManager.enableBlend();
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            GlStateManager.enableTexture2D();
             GlStateManager.scale(1, 1, 1);
             MODEL_DAGGER.render();
+            GlStateManager.disableBlend();
             GlStateManager.popMatrix();
         }
         else

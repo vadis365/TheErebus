@@ -42,6 +42,7 @@ import erebus.blocks.BlockDarkFruitVine;
 import erebus.blocks.BlockDoorErebus;
 import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockDragonflySpawner;
+import erebus.blocks.BlockDustLayer;
 import erebus.blocks.BlockErebusHoney;
 import erebus.blocks.BlockErebusMushroomHuge;
 import erebus.blocks.BlockFluidJar;
@@ -122,12 +123,16 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
@@ -151,7 +156,14 @@ public class ModBlocks {
 	public static final Block UMBERGRAVEL = new BlockUmberGravel();
 	public static final Block UMBERPAVER = new BlockUmberPaver();
 	public static final Block UMBERSTONE_PILLAR = new BlockUmberstonePillar();
-
+	public static final Block PETRIFIED_WOOD_ROCK = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(5.0F).setResistance(10.0F).setCreativeTab(ModTabs.BLOCKS);
+	public static final Block DUST_LAYER = new BlockDustLayer();
+	public static final Block DUST = new BlockSimple(Material.GROUND, SoundType.SNOW, ModTabs.BLOCKS) {
+		@Override
+		   public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable) {
+			return true;
+		}
+	};
 	public static final Block ORE_IRON = new BlockOreErebus(1);
 	public static final Block ORE_GOLD = new BlockOreErebus(2);
 	public static final Block ORE_COAL = new BlockOreErebus2(0, Items.COAL, 0, 1, 1, 0, 2);
@@ -229,7 +241,7 @@ public class ModBlocks {
 	public static final Block TEMPLE_BRICK = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(2.0F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block TEMPLE_PILLAR = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(2.0F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block TEMPLE_TILE = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(2.0F).setCreativeTab(ModTabs.BLOCKS);
-	public static final Block VOLCANIC_ROCK = new BlockSimple(Material.ROCK, SoundType.STONE).setResistance(20.0F).setCreativeTab(ModTabs.BLOCKS);
+	public static final Block VOLCANIC_ROCK = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(2.0F).setResistance(20.0F).setCreativeTab(ModTabs.BLOCKS);
 
 	public static final Block GNEISS = new BlockGneiss();
 	public static final Block GNEISS_VENT = new BlockGneissVent();

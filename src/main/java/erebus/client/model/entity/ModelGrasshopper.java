@@ -58,11 +58,11 @@ public class ModelGrasshopper extends ModelBase {
 		textureWidth = 64;
 		textureHeight = 64;
 		LAnt = new ModelRenderer(this, 0, 0);
-		LAnt.addBox(1.5F, -10.5F, -4F, 1, 7, 1);
+		LAnt.addBox(1F, -10.5F, -4F, 1, 7, 1);
 		LAnt.setRotationPoint(0F, 16F, -9F);
 		setRotation(LAnt, 0.1745329F, 0F, 0F);
 		RAnt = new ModelRenderer(this, 0, 0);
-		RAnt.addBox(-1.5F, -10.5F, -4F, 1, 7, 1);
+		RAnt.addBox(-2F, -10.5F, -4F, 1, 7, 1);
 		RAnt.setRotationPoint(0F, 16F, -9F);
 		setRotation(RAnt, 0.1745329F, 0F, 0F);
 		LEye = new ModelRenderer(this, 5, 0);

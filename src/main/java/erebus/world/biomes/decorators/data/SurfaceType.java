@@ -1,9 +1,9 @@
 package erebus.world.biomes.decorators.data;
 
+import erebus.ModBlocks;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import erebus.ModBlocks;
 
 public enum SurfaceType {
 
@@ -11,7 +11,8 @@ public enum SurfaceType {
 	DIRT,
 	SAND,
 	MIXED,
-	UMBERSTONE;
+	UMBERSTONE,
+	VOLCANIC_ROCK;
 
 	public boolean matchBlock(IBlockState block) {
 		switch (this) {
@@ -25,6 +26,8 @@ public enum SurfaceType {
 				return block == Blocks.GRASS.getDefaultState() || block == Blocks.DIRT.getDefaultState() || block == Blocks.SAND.getDefaultState() || block == Blocks.SAND.getDefaultState().withProperty(BlockSand.VARIANT, BlockSand.EnumType.RED_SAND);
 			case UMBERSTONE:
 				return block == ModBlocks.UMBERSTONE.getDefaultState();
+			case VOLCANIC_ROCK:
+				return block == ModBlocks.VOLCANIC_ROCK.getDefaultState();
 				default:
 				return false;
 		}

@@ -20,6 +20,7 @@ public class BlockFormicAcid extends BlockFluidClassic {
 
 	public BlockFormicAcid() {
 		super(ModFluids.FORMIC_ACID, ModMaterials.FORMIC_ACID);
+		setLightLevel(0.7F);
 	}
 
 	@Override

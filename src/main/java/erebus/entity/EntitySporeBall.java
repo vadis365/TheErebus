@@ -68,7 +68,7 @@ public class EntitySporeBall extends EntityThrowable {
 
 			if (mop.entityHit instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) mop.entityHit;
-				ItemStack helm = player.inventory.armorItemInSlot(3);
+				ItemStack helm = player.inventory.armorInventory.get(3);
 
 				if (!helm.isEmpty() && helm.getItem() == ModItems.MUSHROOM_HELMET)
 					setDead();

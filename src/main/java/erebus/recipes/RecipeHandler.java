@@ -104,7 +104,7 @@ public class RecipeHandler {
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_FOSSIL), EnumErebusMaterialsType.SHARD_BONE.createStack(), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_GNEISS), EnumErebusMaterialsType.GNEISS_ROCK.createStack(), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_PETRIFIED_WOOD), EnumErebusMaterialsType.PETRIFIED_WOOD.createStack(), 0.1F);
-		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_ENCRUSTED_DIAMOND), new ItemStack(Items.DIAMOND), 1.0F); //should be encrusted diamond? O.o
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_ENCRUSTED_DIAMOND), new ItemStack(Items.DIAMOND, 2), 1.0F); //should be encrusted diamond? O.o
 		GameRegistry.addSmelting(EnumErebusMaterialsType.TITAN_STEW.createStack(), EnumFoodType.TITAN_STEW_COOKED.createStack(), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModItems.STAG_HEART_RAW), new ItemStack(ModItems.STAG_HEART_COOKED), 1.0F);
 

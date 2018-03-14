@@ -6,6 +6,7 @@ import erebus.lib.Reference;
 import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.biomes.BiomeElysianFields;
 import erebus.world.biomes.BiomeFungalForest;
+import erebus.world.biomes.BiomePetrifiedForest;
 import erebus.world.biomes.BiomeSubmergedSwamp;
 import erebus.world.biomes.BiomeSubterraneanSavannah;
 import erebus.world.biomes.BiomeUlteriorOutback;
@@ -34,6 +35,7 @@ public class ModBiomes {
 	public static BiomeBaseErebus FUNGAL_FOREST;
 	public static BiomeBaseErebus SUBMERGED_SWAMP;
 	public static BiomeBaseErebus FIELDS_SUB_FOREST;
+	public static BiomeBaseErebus PETRIFIED_FOREST;
 	
 	public static void init() {
 		
@@ -45,6 +47,7 @@ public class ModBiomes {
 		FUNGAL_FOREST = new BiomeFungalForest(new BiomeProperties("Fungal Forest"));
 		SUBMERGED_SWAMP = new BiomeSubmergedSwamp(new BiomeProperties("Submerged Swamp"));
 		FIELDS_SUB_FOREST = new BiomeElysianFields.BiomeElysianForest(new BiomeProperties("Elysian Forest"));
+		PETRIFIED_FOREST = new BiomePetrifiedForest(new BiomeProperties("Petrified Forest"));
 		
 		// MUTATIONS
 		UNDERGROUND_JUNGLE.getMutationForBiome(UNDERGROUND_JUNGLE);
@@ -55,6 +58,7 @@ public class ModBiomes {
 		FUNGAL_FOREST.getMutationForBiome(FUNGAL_FOREST);
 		SUBMERGED_SWAMP.getMutationForBiome(SUBMERGED_SWAMP);
 		FIELDS_SUB_FOREST.getMutationForBiome(FIELDS_SUB_FOREST);
+		PETRIFIED_FOREST.getMutationForBiome(FIELDS_SUB_FOREST);
 	}
 
 	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
@@ -73,6 +77,7 @@ public class ModBiomes {
 			registerBiome(registry, FUNGAL_FOREST, "fungal_forest", BiomeManager.BiomeType.WARM, 12, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.MUSHROOM, BiomeDictionary.Type.SPOOKY);
 			registerBiome(registry, SUBMERGED_SWAMP, "submerged_swamp", BiomeManager.BiomeType.WARM, 20, BiomeDictionary.Type.HOT, BiomeDictionary.Type.WET, BiomeDictionary.Type.WATER, BiomeDictionary.Type.SWAMP);
 			registerBiome(registry, FIELDS_SUB_FOREST, "fields_sub_forest", BiomeManager.BiomeType.WARM, 0, BiomeDictionary.Type.LUSH, BiomeDictionary.Type.FOREST, BiomeDictionary.Type.MAGICAL);
+			registerBiome(registry, PETRIFIED_FOREST, "petrified_forest", BiomeManager.BiomeType.WARM, 15, BiomeDictionary.Type.HOT, BiomeDictionary.Type.DRY, BiomeDictionary.Type.DEAD);
 		}
 
 		private static <T extends Biome> void registerBiome(final IForgeRegistry<Biome> registry, final T biome, final String biomeName, final BiomeManager.BiomeType biomeType, final int weight, final BiomeDictionary.Type... types) {

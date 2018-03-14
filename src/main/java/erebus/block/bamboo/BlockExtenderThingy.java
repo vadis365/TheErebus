@@ -132,13 +132,14 @@ public class BlockExtenderThingy extends BlockDirectional implements ITileEntity
 	@Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
 		IInventory tile = Utils.getTileEntity(world, pos, IInventory.class);
-		if (tile != null)
+		if (tile != null) {
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
 				ItemStack stack = tile.getStackInSlot(i);
 				if (stack != null)
 					Utils.dropStack(world, pos, stack);
 			}
-		world.playEvent(2001, pos, Block.getStateId(EnumWood.BAMBOO.getLog().getDefaultState()));
+			world.playEvent(2001, pos, Block.getStateId(EnumWood.BAMBOO.getLog().getDefaultState()));
+		}
 		super.breakBlock(world,pos, state);
 	}
 }

@@ -1,5 +1,7 @@
 package erebus.client.render.item;
 
+import org.lwjgl.opengl.GL11;
+
 import erebus.client.model.item.ModelErebusShieldParts;
 import erebus.items.ItemErebusShield;
 import erebus.lib.Reference;
@@ -27,18 +29,29 @@ public class RenderErebusShield extends TileEntityItemStackRenderer {
     @Override
     public void renderByItem(ItemStack stack) {
         if ((!stack.isEmpty()) && (stack.getItem() instanceof ItemErebusShield)) {
+        	//System.out.println("THIS IS BEING CALLED!");
             ItemErebusShield item = (ItemErebusShield) stack.getItem();
             Minecraft.getMinecraft().getTextureManager().bindTexture(SHIELD_PARTS_TEXTURE);
             GlStateManager.pushMatrix();
+            GlStateManager.color(1, 1, 1, 1);
+            GlStateManager.enableBlend();
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            GlStateManager.enableTexture2D();
             GlStateManager.scale(1.0, -1.0, -1.0);
             MODEL_SHIELD.render();
+            GlStateManager.disableBlend();
             GlStateManager.popMatrix();
 
             GlStateManager.pushMatrix();
+            GlStateManager.color(1, 1, 1, 1);
+            GlStateManager.enableBlend();
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            GlStateManager.enableTexture2D();
             GlStateManager.scale(1.25, 1.25, 1.25);
             GlStateManager.translate(0, 0, 0.08125);
             Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
             renderItem(item.getShieldType().getShieldItem());
+            GlStateManager.disableBlend();
             GlStateManager.popMatrix();
         }
         else
