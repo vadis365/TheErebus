@@ -23,6 +23,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 final class TeleporterErebus extends Teleporter {
 
@@ -40,7 +41,9 @@ final class TeleporterErebus extends Teleporter {
 		if (!placeInExistingPortal(entity, rotationYaw)) {
 			makePortal(entity);
 			if (worldServerInstance.provider.getDimension() == ConfigHandler.INSTANCE.erebusDimensionID) {
-			placeInExistingPortal(entity, rotationYaw);
+				if (entity instanceof EntityPlayerMP && !((EntityPlayerMP)entity).capabilities.isCreativeMode)
+					ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, true, "invulnerableDimensionChange", "field_184851_cj");
+				placeInExistingPortal(entity, rotationYaw);
 			}
 		}
 		moveToEmptyArea(entity);

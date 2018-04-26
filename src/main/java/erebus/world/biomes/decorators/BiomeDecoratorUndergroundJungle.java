@@ -153,8 +153,8 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 			}
 		}
 
-		genMushroomsBrown.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(128), z + offsetXZ()));
-		genMushroomsRed.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(128), z + offsetXZ()));
+		genMushroomsBrown.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(120), z + offsetXZ()));
+		genMushroomsRed.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(120), z + offsetXZ()));
 
 		for (attempt = 0; attempt < 12; attempt++) {
 			xx = x + offsetXZ();

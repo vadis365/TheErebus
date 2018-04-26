@@ -19,6 +19,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
@@ -77,13 +78,14 @@ public class ItemErebusFood extends ItemFood implements ISubItemsItem {
 		if (entityLiving instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entityLiving;
 			EnumFoodType type = EnumFoodType.values()[stack.getItemDamage()];
-			stack.shrink(1);
 			player.getFoodStats().addStats(this, stack);
 			SoundEvent sound = type == EnumFoodType.CABBAGE ? ModSounds.CABBAGE_FART : SoundEvents.ENTITY_PLAYER_BURP;
 			float volume = type == EnumFoodType.CABBAGE ? 1 : 0.5F;
 			world.playSound(null, player.getPosition(), sound, SoundCategory.PLAYERS, volume, world.rand.nextFloat() * 0.1F + 0.9F);
 			onFoodEaten(stack, world, player);
+			player.addStat(StatList.getObjectUseStats(this));
 		}
+		stack.shrink(1);
 		return hasContainerItem(stack) ? getContainerItem(stack) : stack;
 	}
 

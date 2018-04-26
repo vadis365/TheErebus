@@ -22,23 +22,23 @@ public class RenderWebSlinger extends TileEntityItemStackRenderer {
 		PARENT = previous;
 	}
 
-	@Override
-	public void renderByItem(ItemStack stack) {
+    @Override
+    public void renderByItem(ItemStack stack) {
+    	this.renderByItem(stack, 1.0F);
+    }
+
+    @Override
+	public void renderByItem(ItemStack stack, float partialTicks) {
 		if ((!stack.isEmpty()) && (stack.getItem() instanceof ItemWebSlinger)) {
 			ResourceLocation texture = stack.getItem() == ModItems.WEB_SLINGER ? TEXTURE_WEB_SLINGER : TEXTURE_WEB_SLINGER_WITHER;
 			Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 			GlStateManager.pushMatrix();
-            GlStateManager.color(1, 1, 1, 1);
-            GlStateManager.enableBlend();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            GlStateManager.enableTexture2D();			
 			GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
 			GlStateManager.rotate(-45.0F, 0.0F, 1.0F, 0.0F);
 			GlStateManager.rotate(80.0F, 1.0F, 0.0F, 0.0F);
 			GlStateManager.translate(0F, 0.0625F, - 0.25F);
 			GlStateManager.scale(1.5F, 1.5F, 1.5F);
 			MODEL.render();
-            GlStateManager.disableBlend();
 			GlStateManager.popMatrix();
 		} else
 			PARENT.renderByItem(stack);

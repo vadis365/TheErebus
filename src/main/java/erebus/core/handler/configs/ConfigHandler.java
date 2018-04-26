@@ -26,6 +26,7 @@ public class ConfigHandler {
 	public int portalCooldown, antlionMazeFrequency, mobAttackDamageMultiplier, mobHealthMultipier;
 	public byte beetleLarvaEating = 0;
 	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, alternativePlanks, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows, biomeFogColours;
+	public static boolean smoothBedrock;
 
 	public boolean disableThaumcraft = false, disableFMP = false;
 
@@ -59,7 +60,8 @@ public class ConfigHandler {
 		glowshrooms = config.get(Configuration.CATEGORY_GENERAL, "Add Glowshrooms to World generation", true).getBoolean(true);
 		generateVents = config.get(Configuration.CATEGORY_GENERAL, "Generate natural swap vents", true).getBoolean(true);
 		netherWidows = config.get(Configuration.CATEGORY_GENERAL, "Spawn Black Widows in Nether", true).getBoolean(true);
-		
+		smoothBedrock = config.get(Configuration.CATEGORY_GENERAL, "Erebus Generates with Flat Bedrock Layers", false).getBoolean(false);
+
 		mobAttackDamageMultiplier = config.get("Mob Modifiers", "Mob Attack Damage Multipier", 1).getInt(1);
 		mobHealthMultipier = config.get("Mob Modifiers", "Mob Health Multiplier", 1).getInt(1);
 		

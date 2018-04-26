@@ -76,7 +76,6 @@ public class RecipeHandler {
 
 	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 	public static class RegistrationHandlerRecipes {
-		@SideOnly(Side.CLIENT)
 		@SubscribeEvent
 		public static void registerRecipes(final RegistryEvent.Register<IRecipe> event) {
 			RecipeHandler.init();
@@ -195,9 +194,11 @@ public class RecipeHandler {
 
 			//Honey
 			OreDictionary.registerOre("dropHoney", EnumErebusMaterialsType.HONEY_DRIP.createStack());
+			
+			/* Temporary disabled as this looks like it's borked for people
 			OreDictionary.registerOre("bucketHoney", FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid("honey"), Fluid.BUCKET_VOLUME)));
 			OreDictionary.registerOre("bucketHoney", ModFluids.getFilledBambucket(new FluidStack(FluidRegistry.getFluid("honey"), Fluid.BUCKET_VOLUME)));
-
+			 */
 			if (OreType.LEAD.isEnabled()) {
 				OreDictionary.registerOre("ingotLead", EnumErebusMaterialsType.INGOT_LEAD.createStack());
 				OreDictionary.registerOre("oreLead", new ItemStack(ModBlocks.ORE_LEAD));

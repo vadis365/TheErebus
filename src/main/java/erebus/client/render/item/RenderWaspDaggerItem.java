@@ -13,9 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderWaspDaggerItem extends TileEntityItemStackRenderer {
-
     public final TileEntityItemStackRenderer PARENT;
-
     private final ModelWaspDagger MODEL_DAGGER = new ModelWaspDagger();
     private final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/special/items/wasp_sword.png");
 
@@ -25,16 +23,16 @@ public class RenderWaspDaggerItem extends TileEntityItemStackRenderer {
 
     @Override
     public void renderByItem(ItemStack stack) {
+    	this.renderByItem(stack, 1.0F);
+    }
+
+    @Override
+	public void renderByItem(ItemStack stack, float partialTicks) {
         if ((!stack.isEmpty()) && (stack.getItem() instanceof ItemWaspDagger)) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
             GlStateManager.pushMatrix();
-            GlStateManager.color(1, 1, 1, 1);
-            GlStateManager.enableBlend();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            GlStateManager.enableTexture2D();
             GlStateManager.scale(1, 1, 1);
             MODEL_DAGGER.render();
-            GlStateManager.disableBlend();
             GlStateManager.popMatrix();
         }
         else

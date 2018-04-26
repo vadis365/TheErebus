@@ -12,7 +12,8 @@ public enum SurfaceType {
 	SAND,
 	MIXED,
 	UMBERSTONE,
-	VOLCANIC_ROCK;
+	VOLCANIC_ROCK,
+	DUST;
 
 	public boolean matchBlock(IBlockState block) {
 		switch (this) {
@@ -28,6 +29,8 @@ public enum SurfaceType {
 				return block == ModBlocks.UMBERSTONE.getDefaultState();
 			case VOLCANIC_ROCK:
 				return block == ModBlocks.VOLCANIC_ROCK.getDefaultState();
+			case DUST:
+				return block == ModBlocks.DUST.getDefaultState();
 				default:
 				return false;
 		}

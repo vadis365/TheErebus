@@ -69,6 +69,7 @@ import erebus.blocks.BlockLightningSpeed;
 import erebus.blocks.BlockLiquifier;
 import erebus.blocks.BlockLogErebus;
 import erebus.blocks.BlockMagmaCrawlerSpawner;
+import erebus.blocks.BlockMandrake;
 import erebus.blocks.BlockMucusBomb;
 import erebus.blocks.BlockMud;
 import erebus.blocks.BlockMushroomSmall;
@@ -197,6 +198,7 @@ public class ModBlocks {
 
 	public static final Block CROP_TURNIP = new BlockTurnip();
 	public static final Block CROP_CABBAGE = new BlockCabbage().setCreativeTab(ModTabs.PLANTS);
+	public static final Block CROP_MANDRAKE = new BlockMandrake();
 	public static final Block JADE_BERRY_BUSH = new BlockBerryBush("JADE");
 	public static final Block HEART_BERRY_BUSH = new BlockBerryBush("HEART");
 	public static final Block SWAMP_BERRY_BUSH = new BlockBerryBush("SWAMP");

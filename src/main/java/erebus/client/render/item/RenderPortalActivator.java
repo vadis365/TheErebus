@@ -8,11 +8,12 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class RenderPortalActivator extends TileEntityItemStackRenderer {
-
     public final TileEntityItemStackRenderer PARENT;
-
     private final ModelPortalActivator MODEL_PORTAL_ACTIVATOR = new ModelPortalActivator();
     private final ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/special/items/portal_activator.png");
 
@@ -22,16 +23,16 @@ public class RenderPortalActivator extends TileEntityItemStackRenderer {
 
     @Override
     public void renderByItem(ItemStack stack) {
+    	this.renderByItem(stack, 1.0F);
+    }
+
+    @Override
+	public void renderByItem(ItemStack stack, float partialTicks) {
         if ((!stack.isEmpty()) && (stack.getItem() instanceof ItemPortalActivator)) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
             GlStateManager.pushMatrix();
-            GlStateManager.color(1, 1, 1, 1);
-            GlStateManager.enableBlend();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            GlStateManager.enableTexture2D();
             GlStateManager.scale(1F, 1F, 1F);
             MODEL_PORTAL_ACTIVATOR.render();
-            GlStateManager.disableBlend();
             GlStateManager.popMatrix();
         }
         else

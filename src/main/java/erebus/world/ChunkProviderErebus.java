@@ -359,7 +359,9 @@ public class ChunkProviderErebus implements IChunkGenerator, IChunkProvider {
 				for (int yInChunk = 127; yInChunk >= 0; --yInChunk) {
 					int index = (xInChunk * 16 + zInChunk) * 128 + yInChunk;
 
-					if (yInChunk <= 5 && yInChunk <= 0 + rand.nextInt(5) || yInChunk >= 122 && yInChunk >= 127 - rand.nextInt(5))
+					if (yInChunk == 0 || yInChunk == 127)
+						primer.setBlockState(xInChunk, yInChunk, zInChunk, Blocks.BEDROCK.getDefaultState());
+					else if (!ConfigHandler.smoothBedrock && (yInChunk <= 5 && yInChunk <= 1 + rand.nextInt(5) || yInChunk >= 122 && yInChunk >= 126 - rand.nextInt(5)))
 						primer.setBlockState(xInChunk, yInChunk, zInChunk, Blocks.BEDROCK.getDefaultState());
 					else {
 							if (biome == ModBiomes.SUBMERGED_SWAMP && yInChunk < swampWaterHeight && primer.getBlockState(xInChunk, yInChunk, zInChunk) == Blocks.AIR)
