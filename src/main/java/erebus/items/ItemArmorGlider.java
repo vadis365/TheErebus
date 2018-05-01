@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import org.lwjgl.input.Keyboard;
 
 import erebus.Erebus;
@@ -230,7 +231,7 @@ public class ItemArmorGlider extends ItemArmor {
 
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	@SideOnly(Side.CLIENT)
 	public void onPlayerRenderPre(RenderPlayerEvent.Pre event) {
 		GlStateManager.pushMatrix();
