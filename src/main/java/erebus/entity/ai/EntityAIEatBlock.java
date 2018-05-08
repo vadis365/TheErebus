@@ -5,6 +5,7 @@ import java.util.List;
 
 import erebus.core.helper.Spiral;
 import erebus.core.helper.Utils;
+import erebus.entity.EntityGrasshopper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
@@ -92,7 +93,7 @@ public abstract class EntityAIEatBlock extends EntityAIBase {
 					}
 					else if (EAT_SPEED <= eatTicks) {
 						entity.getEntityWorld().playEvent(null, 2001, new BlockPos(cropX, cropY, cropZ), Block.getIdFromBlock(getTargetBlock().getBlock()) + (maxGrowthMetadata << 12));
-						if (getTargetBlock() != Blocks.TALLGRASS)
+						if (!(entity instanceof EntityGrasshopper))
 							Utils.dropStack(entity.getEntityWorld(), new BlockPos(cropX, cropY, cropZ), new ItemStack(getTargetBlock().getBlock().getItemDropped(getTargetBlock(), entity.getEntityWorld().rand, 0), 1, getTargetBlock().getBlock().damageDropped(getTargetBlock())));
 						hasTarget = false;
 						eatTicks = 0;

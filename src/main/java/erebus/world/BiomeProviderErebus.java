@@ -25,7 +25,7 @@ import net.minecraftforge.event.terraingen.WorldTypeEvent;
 public class BiomeProviderErebus extends BiomeProvider {
 
 	private static final float rainfall = 0F;
-	private static final List<BiomeBaseErebus> allowedBiomes = Arrays.asList(ModBiomes.UNDERGROUND_JUNGLE, ModBiomes.SUBTERRANEAN_SAVANNAH);
+	private static final List<BiomeBaseErebus> allowedBiomes = Arrays.asList(ModBiomes.ELYSIAN_FIELDS);
 
 	private final List<Biome> biomesToSpawnIn;
 	private final BiomeCache biomeCache;
