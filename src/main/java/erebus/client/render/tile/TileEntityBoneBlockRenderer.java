@@ -33,6 +33,8 @@ public class TileEntityBoneBlockRenderer extends TileEntitySpecialRenderer<TileE
 
 		bindTexture(TEXTURE);
 		EnumFacing facing = state.getValue(BlockBones.FACING);
+		if(facing == null)
+			return;
 
 		switch (facing) {
 			case DOWN:

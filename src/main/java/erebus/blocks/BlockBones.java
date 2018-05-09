@@ -53,7 +53,7 @@ public class BlockBones extends BlockDirectional implements ITileEntityProvider 
 
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
-		return EnumBlockRenderType.MODEL;
+		return EnumBlockRenderType.INVISIBLE;
 	}
 
 	@Override
@@ -64,6 +64,11 @@ public class BlockBones extends BlockDirectional implements ITileEntityProvider 
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
+    public boolean causesSuffocation(IBlockState state) {
 		return false;
 	}
 
