@@ -23,7 +23,9 @@ import erebus.items.ItemCompost;
 import erebus.items.ItemCompoundGoggles;
 import erebus.items.ItemDeathCompass;
 import erebus.items.ItemDungeonIdols;
+import erebus.items.ItemEmptyErebusMap;
 import erebus.items.ItemErebusFood;
+import erebus.items.ItemErebusMap;
 import erebus.items.ItemErebusShield;
 import erebus.items.ItemFlowerSeeds;
 import erebus.items.ItemFoodHeartBerries;
@@ -174,6 +176,8 @@ public class ModItems {
 	public static final Item PLANTICIDE = new ItemPlanticide();
 	public static final Item SMOOTHIE_BOOK = new ItemSmoothieBook();
 	public static final Item HORN_OF_SUMMONING = new ItemHornOfSummoning();
+	public static final Item EREBUS_MAP = new ItemEmptyErebusMap();
+	public static final Item EREBUS_MAP_FILLED = new ItemErebusMap();
 
 	public static void init() {
 		try {

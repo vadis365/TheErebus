@@ -12,7 +12,7 @@ import erebus.entity.ai.EntityAIAntlionBossAttack;
 import erebus.items.ItemMaterials;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
-import erebus.world.feature.structure.AntlionMazeDungeon;
+import erebus.world.feature.structure.WorldGenAntlionDungeon;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -96,7 +96,7 @@ public class EntityAntlionBoss extends EntityMob {
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 6D : 6D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(48.0D);
-		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.75D);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
 	}
 
 	@Override
@@ -282,10 +282,10 @@ public class EntityAntlionBoss extends EntityMob {
 				getEntityWorld().spawnEntity(new EntityXPOrb(getEntityWorld(), posX, posY, posZ, j));
 			}
 			if (getInPyramid() == 1) {
-				AntlionMazeDungeon.setTeleporter(getEntityWorld(), getSpawnPointX(), getSpawnPointY(), getSpawnPointZ(), 7, getSpawnPointX(), getSpawnPointY() + 12, getSpawnPointZ());
-				AntlionMazeDungeon.setTeleporter(getEntityWorld(), getSpawnPointX() + 1, getSpawnPointY(), getSpawnPointZ(), 6, getSpawnPointX() + 1, getSpawnPointY() + 12, getSpawnPointZ());
-				AntlionMazeDungeon.setTeleporter(getEntityWorld(), getSpawnPointX(), getSpawnPointY(), getSpawnPointZ() + 1, 9, getSpawnPointX(), getSpawnPointY() + 12, getSpawnPointZ() + 1);
-				AntlionMazeDungeon.setTeleporter(getEntityWorld(), getSpawnPointX() + 1, getSpawnPointY(), getSpawnPointZ() + 1, 8, getSpawnPointX() + 1, getSpawnPointY() + 12, getSpawnPointZ() + 1);
+				WorldGenAntlionDungeon.setTeleporter(getEntityWorld(), new BlockPos(getSpawnPointX(), getSpawnPointY(), getSpawnPointZ()), 7, new BlockPos(getSpawnPointX(), getSpawnPointY() + 12, getSpawnPointZ()));
+				WorldGenAntlionDungeon.setTeleporter(getEntityWorld(), new BlockPos(getSpawnPointX() + 1, getSpawnPointY(), getSpawnPointZ()), 6, new BlockPos(getSpawnPointX() + 1, getSpawnPointY() + 12, getSpawnPointZ()));
+				WorldGenAntlionDungeon.setTeleporter(getEntityWorld(), new BlockPos(getSpawnPointX(), getSpawnPointY(), getSpawnPointZ() + 1), 9, new BlockPos(getSpawnPointX(), getSpawnPointY() + 12, getSpawnPointZ() + 1));
+				WorldGenAntlionDungeon.setTeleporter(getEntityWorld(), new BlockPos(getSpawnPointX() + 1, getSpawnPointY(), getSpawnPointZ() + 1), 8, new BlockPos(getSpawnPointX() + 1, getSpawnPointY() + 12, getSpawnPointZ() + 1));
 			}
 			getEntityWorld().setBlockState(getPosition(), ModBlocks.ANTLION_EGG.getDefaultState());
 			Utils.dropStackNoRandom(getEntityWorld(), getPosition().up(), ItemMaterials.EnumErebusMaterialsType.SOUL_CRYSTAL.createStack());

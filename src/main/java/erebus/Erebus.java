@@ -92,7 +92,7 @@ public class Erebus {
 			MinecraftForge.EVENT_BUS.register(ModFluids.INSTANCE);
 		}
 
-		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, true);
+		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, false);
 		DimensionManager.registerDimension(ConfigHandler.INSTANCE.erebusDimensionID, dimensionType);
 		ConfigHandler.INSTANCE.initOreConfigs();
 

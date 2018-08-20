@@ -21,7 +21,7 @@ public abstract class BiomeBaseErebus extends Biome implements IWeightProvider {
 
 	private final BiomeDecoratorBaseErebus decorator;
 	public static short biomeWeight;
-	private int grassColor, foliageColor;
+	public int grassColor, foliageColor;
 	private short[] fogColorRGB = new short[] { 255, 255, 255 };
 
 	public byte topBlockMeta;

@@ -126,13 +126,13 @@ public class ItemErebusFood extends ItemFood implements ISubItemsItem {
 			case TITAN_STEW_COOKED:
 				return ItemMaterials.EnumErebusMaterialsType.STEW_POT.createStack();
 			default:
-				return null;
+				return ItemStack.EMPTY;
 		}
 	}
 
 	@Override
 	public boolean hasContainerItem(ItemStack stack) {
-		return getContainerItem(stack) != null;
+		return getContainerItem(stack) != ItemStack.EMPTY;
 	}
 
 	@Override

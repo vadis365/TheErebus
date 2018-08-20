@@ -22,7 +22,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@SuppressWarnings("WeakerAccess")
 @ObjectHolder(Reference.MOD_ID)
 public class ModBiomes {
 	public static ArrayList<BiomeBaseErebus> BIOME_LIST = new ArrayList<BiomeBaseErebus>();
@@ -58,7 +57,7 @@ public class ModBiomes {
 		FUNGAL_FOREST.getMutationForBiome(FUNGAL_FOREST);
 		SUBMERGED_SWAMP.getMutationForBiome(SUBMERGED_SWAMP);
 		FIELDS_SUB_FOREST.getMutationForBiome(FIELDS_SUB_FOREST);
-		PETRIFIED_FOREST.getMutationForBiome(FIELDS_SUB_FOREST);
+		PETRIFIED_FOREST.getMutationForBiome(PETRIFIED_FOREST);
 	}
 
 	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)

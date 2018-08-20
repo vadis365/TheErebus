@@ -16,6 +16,7 @@ import erebus.blocks.EnumWood;
 import erebus.entity.EntityTarantulaMiniboss;
 import erebus.items.ItemErebusFood;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
+import erebus.world.feature.structure.worlddata.WorldDataGiantEucalyptus;
 import erebus.world.loot.IPostProcess;
 import erebus.world.loot.LootItemStack;
 import erebus.world.loot.LootUtil;
@@ -40,20 +41,20 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public class WorldGenGiantBaobab extends WorldGenerator {
+public class WorldGenGiantEucalyptus extends WorldGenerator {
 
 	public int height = -1;
 	public int baseRadius = -1;
 	public int direction = -1;
-	public IBlockState STAIRS = EnumWood.BAOBAB.getStairs().getDefaultState();
-	public IBlockState LOG = EnumWood.BAOBAB.getLog().getDefaultState();
-	public IBlockState LEAVES = EnumWood.BAOBAB.getLeaves().getDefaultState().withProperty(BlockLeavesErebus.CHECK_DECAY, false);
-	public IBlockState FENCE = EnumWood.BAOBAB.getFence().getDefaultState();
-	public IBlockState DOOR = EnumWood.BAOBAB.getDoor().getDefaultState();
+	public IBlockState STAIRS = EnumWood.EUCALYPTUS.getStairs().getDefaultState();
+	public IBlockState LOG = EnumWood.EUCALYPTUS.getLog().getDefaultState();
+	public IBlockState LEAVES = EnumWood.EUCALYPTUS.getLeaves().getDefaultState().withProperty(BlockLeavesErebus.CHECK_DECAY, false);
+	public IBlockState FENCE = EnumWood.EUCALYPTUS.getFence().getDefaultState();
+	public IBlockState DOOR = EnumWood.EUCALYPTUS.getDoor().getDefaultState();
 	public static IBlockState BAMBOO_TORCH_LOWER = ModBlocks.BAMBOO_TORCH.getDefaultState().withProperty(BlockBambooTorch.HALF, EnumBlockTorchHalf.LOWER);
 	public static IBlockState BAMBOO_TORCH_UPPER = ModBlocks.BAMBOO_TORCH.getDefaultState().withProperty(BlockBambooTorch.HALF, EnumBlockTorchHalf.UPPER);
 	
-	public WorldGenGiantBaobab() {
+	public WorldGenGiantEucalyptus() {
 		height = 28;
 		baseRadius = 14;
 	}
@@ -124,17 +125,56 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos) {
-		
+		if (checkWorldLocation(world, pos)) {
+			generateStructure(world, rand, pos);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean checkWorldLocation(World world, BlockPos pos) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
 
 		for (int xx = x - baseRadius; xx <= x + baseRadius; xx++)
 			for (int zz = z - baseRadius; zz <= z + baseRadius; zz++)
-				for (int yy = y + 1; yy < y + height; yy++)
-					if (!world.isAirBlock(new BlockPos(xx, yy, zz)))
+				for (int yy = y + 1; yy < y + height; yy++) {
+					IBlockState block = world.getBlockState(new BlockPos(xx, yy, zz));
+					if (!block.getBlock().isReplaceable(world, new BlockPos(xx, yy, zz)))
 						return false;
+				}
 
+		WorldDataGiantEucalyptus data = WorldDataGiantEucalyptus.forWorld(world);
+		if (data.getData().isEmpty()) {
+			data.addStructurePosition(pos);
+			data.markDirty(); //Save the data to the disc.
+			return true;
+		}
+		if (!data.getData().isEmpty()) {
+			for (int i = 0; i < data.getData().size(); i++) {
+				int x_origin = data.getData().get(i).getX();
+				int z_origin = data.getData().get(i).getZ();
+				if ((pos.getX() >= x_origin - 100 && pos.getX() <= x_origin + 100) && (pos.getZ() >= z_origin - 100 && pos.getZ() <= z_origin + 100)) {
+					//System.out.println("Tree Clashes with already generated Tree");
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+
+	public void generateStructure(World world, Random rand, BlockPos pos) {
+
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+		
+		WorldDataGiantEucalyptus data = WorldDataGiantEucalyptus.forWorld(world);
+		data.addStructurePosition(pos);
+		data.markDirty(); //Save the data to the disc.
+		
 		int radius = baseRadius - 1;
 		int layer1 = 4;
 		int layer2 = 7;
@@ -264,7 +304,6 @@ public class WorldGenGiantBaobab extends WorldGenerator {
 
 		//System.out.println("Added Dungeon at: " + x + " " + z);
 		addEntranceDecoration(world, rand, pos);
-		return true;
 	}
 
 	public void addEntranceDecoration(World world, Random rand, BlockPos pos) {
