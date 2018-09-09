@@ -71,6 +71,7 @@ import erebus.blocks.BlockInsectRepellent;
 import erebus.blocks.BlockLeavesErebus;
 import erebus.blocks.BlockLightningSpeed;
 import erebus.blocks.BlockLiquifier;
+import erebus.blocks.BlockLocustSpawner;
 import erebus.blocks.BlockLogErebus;
 import erebus.blocks.BlockMagmaCrawlerSpawner;
 import erebus.blocks.BlockMandrake;
@@ -325,6 +326,7 @@ public class ModBlocks {
 	public static final Block MAGMA_CRAWLER_SPAWNER = new BlockMagmaCrawlerSpawner(new ResourceLocation("erebus:erebus.magma_crawler"));
 	public static final Block DUNG_SPAWNER_BOT_FLY = new BlockBotFlySpawner(new ResourceLocation("erebus:erebus.bot_fly"));
 	public static final Block DUNG_SPAWNER_FLY = new BlockFlySpawner(new ResourceLocation("erebus:erebus.fly"));
+	public static final Block LOCUST_SPAWNER = new BlockLocustSpawner(new ResourceLocation("erebus:erebus.locust"));
 	
 	// WALLS
 	public static final Block WALL_UMBERSTONE = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE));

@@ -597,6 +597,7 @@ tile.erebus.zombie_ant_soldier_spawner.name=Zombie Ant Soldier Spawner
 tile.erebus.magma_crawler_spawner.name=Magma Crawler Spawner
 tile.erebus.dung_spawner_bot_fly.name=Bot Fly Spawner
 tile.erebus.dung_spawner_fly.name=Fly Spawner
+tile.erebus.locust_spawner.name=Locust Spawner
 
 # Utility Blocks
 tile.erebus.petrified_crafting_table.name=Petrified Crafting Table

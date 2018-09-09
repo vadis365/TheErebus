@@ -9,6 +9,7 @@ import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.decoration.WorldGenSavannahRock;
 import erebus.world.feature.plant.WorldGenBamboo;
+import erebus.world.feature.structure.WorldGenLocustShrine;
 import erebus.world.feature.tree.WorldGenAsperTree;
 import erebus.world.feature.tree.WorldGenBaobabTree;
 import net.minecraft.block.BlockDoublePlant;
@@ -28,6 +29,7 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 	private final WorldGenRottenAcacia genRottenAcacia = new WorldGenRottenAcacia();
 	private final WorldGenAmberGround genAmberGround = new WorldGenAmberGround();
 	private final WorldGenAmberUmberstone genAmberUmberstone = new WorldGenAmberUmberstone();
+	private final WorldGenLocustShrine genLocustShrine = new WorldGenLocustShrine();
 
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
 	private final WorldGenerator genTreeAsper = new WorldGenAsperTree();
@@ -115,6 +117,19 @@ public class BiomeDecoratorSubterraneanSavannah extends BiomeDecoratorBaseErebus
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.GRASS, pos) && checkSurface(SurfaceType.GRASS, pos.east(2)) && checkSurface(SurfaceType.GRASS, pos.west(2)) && checkSurface(SurfaceType.GRASS, pos.north(2)) && checkSurface(SurfaceType.GRASS, pos.south(2)))
 				genTreeBaobab.generate(world, rand, pos.up());
+		}
+
+		if (rand.nextBoolean() && rand.nextBoolean()) {
+			xx = x + offsetXZ();
+			zz = z + offsetXZ();
+
+			for (yy = 100; yy > 20; yy--) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.GRASS, pos)) {
+					if(genLocustShrine.generate(world, rand, pos.up()))
+						break;
+				}
+			}
 		}
 
 		for (attempt = 0; attempt < 28; attempt++) {
