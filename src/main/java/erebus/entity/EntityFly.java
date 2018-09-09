@@ -199,7 +199,7 @@ public class EntityFly extends EntityAmbientCreature {
 			int lightValue = world.getLightFromNeighbors(blockpos);
 			if (rand.nextBoolean())
 				return false;
-			return lightValue > rand.nextInt(4) ? false : isNotColliding() && super.getCanSpawnHere();
+			return lightValue > rand.nextInt(7) ? false : isNotColliding() && super.getCanSpawnHere();
 		}
 	}
 

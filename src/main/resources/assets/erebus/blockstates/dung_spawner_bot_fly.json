@@ -1,0 +1,16 @@
+{
+  "variants": {
+      "type=down_north": { "model": "erebus:dung_spawner_bot_fly" },
+      "type=down_east": { "model": "erebus:dung_spawner_bot_fly", "y": 270 },
+      "type=down_south": { "model": "erebus:dung_spawner_bot_fly", "y": 180 },
+      "type=down_west": { "model": "erebus:dung_spawner_bot_fly", "y": 90 },
+      "type=up_north": { "model": "erebus:dung_spawner_bot_fly", "x": 180 },
+      "type=up_east": { "model": "erebus:dung_spawner_bot_fly", "x": 180, "y": 270  },
+      "type=up_south": { "model": "erebus:dung_spawner_bot_fly", "x": 180, "y": 180 },
+      "type=up_west": { "model": "erebus:dung_spawner_bot_fly", "x": 180, "y": 90 },
+      "type=north": { "model": "erebus:dung_spawner_bot_fly", "x": 270 },
+      "type=east": { "model": "erebus:dung_spawner_bot_fly", "x": 270, "y": 90 },
+      "type=south": { "model": "erebus:dung_spawner_bot_fly", "x": 270, "y": 180 },
+      "type=west": { "model": "erebus:dung_spawner_bot_fly", "x": 270, "y": 270 }
+  }
+}

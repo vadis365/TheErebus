@@ -2,8 +2,8 @@ package erebus.world.biomes.decorators;
 
 import erebus.ModBlocks;
 import erebus.blocks.BlockDustLayer;
+import erebus.blocks.BlockHangingWeb;
 import erebus.blocks.BlockMandrake;
-import erebus.blocks.BlockThorns;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
@@ -114,13 +114,13 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 				for (int vineY = rand.nextInt(30); vineY > 0; vineY--)
 					if (world.isAirBlock(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]))) {
 						if (offset == 3)
-							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.THORNS.getDefaultState().withProperty(BlockThorns.SOUTH, true), 2);
+							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.HANGING_WEB.getDefaultState().withProperty(BlockHangingWeb.SOUTH, true), 2);
 						if (offset == 2)
-							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.THORNS.getDefaultState().withProperty(BlockThorns.NORTH, true), 2);
+							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.HANGING_WEB.getDefaultState().withProperty(BlockHangingWeb.NORTH, true), 2);
 						if (offset == 1)
-							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.THORNS.getDefaultState().withProperty(BlockThorns.EAST, true), 2);
+							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.HANGING_WEB.getDefaultState().withProperty(BlockHangingWeb.EAST, true), 2);
 						if (offset == 0)
-							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.THORNS.getDefaultState().withProperty(BlockThorns.WEST, true), 2);
+							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.HANGING_WEB.getDefaultState().withProperty(BlockHangingWeb.WEST, true), 2);
 					}
 			}
 		}

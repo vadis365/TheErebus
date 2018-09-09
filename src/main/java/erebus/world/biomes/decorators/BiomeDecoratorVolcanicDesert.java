@@ -77,7 +77,6 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 			for (int attempt = 0; attempt < 300; attempt++)
 				if (genAntlionLair.generate(world, rand, new BlockPos(x + 5 + rand.nextInt(6) + 8, 15 + rand.nextInt(35), z + 5 + rand.nextInt(6) + 8)))
 					break;
-					
 	}
 
 	@Override

@@ -18,9 +18,7 @@ public class ItemEmptyErebusMap extends ItemEmptyMap
         this.setCreativeTab(CreativeTabs.MISC);
     }
 
-    /**
-     * Called when the equipped item is right clicked.
-     */
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         ItemStack itemstack = ItemErebusMap.setupNewMap(worldIn, playerIn.posX, playerIn.posZ, (byte)4, true, false);

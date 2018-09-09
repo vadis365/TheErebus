@@ -34,6 +34,7 @@ import erebus.blocks.BlockAntlionSpawner;
 import erebus.blocks.BlockBerryBush;
 import erebus.blocks.BlockBones;
 import erebus.blocks.BlockBossEgg;
+import erebus.blocks.BlockBotFlySpawner;
 import erebus.blocks.BlockButtonUmberstone;
 import erebus.blocks.BlockCabbage;
 import erebus.blocks.BlockCapstone;
@@ -42,10 +43,12 @@ import erebus.blocks.BlockDarkFruitVine;
 import erebus.blocks.BlockDoorErebus;
 import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockDragonflySpawner;
+import erebus.blocks.BlockDung;
 import erebus.blocks.BlockDustLayer;
 import erebus.blocks.BlockErebusHoney;
 import erebus.blocks.BlockErebusMushroomHuge;
 import erebus.blocks.BlockFluidJar;
+import erebus.blocks.BlockFlySpawner;
 import erebus.blocks.BlockForceField;
 import erebus.blocks.BlockForceLock;
 import erebus.blocks.BlockFormicAcid;
@@ -60,6 +63,7 @@ import erebus.blocks.BlockGlowshroom;
 import erebus.blocks.BlockGlowshroomStalkMain;
 import erebus.blocks.BlockGneiss;
 import erebus.blocks.BlockGneissVent;
+import erebus.blocks.BlockHangingWeb;
 import erebus.blocks.BlockHollowLog;
 import erebus.blocks.BlockHoneyComb;
 import erebus.blocks.BlockHoneyTreat;
@@ -165,6 +169,9 @@ public class ModBlocks {
 			return true;
 		}
 	};
+
+	public static final Block DUNG = new BlockDung();
+
 	public static final Block ORE_IRON = new BlockOreErebus(1);
 	public static final Block ORE_GOLD = new BlockOreErebus(2);
 	public static final Block ORE_COAL = new BlockOreErebus2(0, Items.COAL, 0, 1, 1, 0, 2);
@@ -209,6 +216,7 @@ public class ModBlocks {
 	public static final Block PLANTED_FLOWER = new BlockPlantedGiantFlower();
 	public static final Block SMALL_PLANT = new BlockSmallPlant();
 	public static final Block THORNS = new BlockThorns();
+	public static final Block HANGING_WEB = new BlockHangingWeb();
 	public static final BlockDoubleHeightPlant DOUBLE_PLANT = new BlockDoubleHeightPlant();
 	public static final Block WALL_PLANTS = new BlockWallPlants();
 	public static final Block WALL_PLANTS_CULTIVATED = new BlockWallPlantsCultivated();
@@ -315,7 +323,9 @@ public class ModBlocks {
 	public static final Block TEMPLE_TELEPORTER = new BlockTempleTeleporter();
 	public static final Block BLOCK_OF_BONES = new BlockBones();
 	public static final Block MAGMA_CRAWLER_SPAWNER = new BlockMagmaCrawlerSpawner(new ResourceLocation("erebus:erebus.magma_crawler"));
-
+	public static final Block DUNG_SPAWNER_BOT_FLY = new BlockBotFlySpawner(new ResourceLocation("erebus:erebus.bot_fly"));
+	public static final Block DUNG_SPAWNER_FLY = new BlockFlySpawner(new ResourceLocation("erebus:erebus.fly"));
+	
 	// WALLS
 	public static final Block WALL_UMBERSTONE = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERSTONE));
 	public static final Block WALL_UMBERCOBBLE = new BlockWallErebus(UMBERSTONE.getDefaultState().withProperty(BlockUmberstone.TYPE, EnumType.UMBERCOBBLE));

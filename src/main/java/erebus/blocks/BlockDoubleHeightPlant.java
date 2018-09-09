@@ -160,7 +160,7 @@ public class BlockDoubleHeightPlant extends BlockBush implements IGrowable, IShe
 				ret.add(new ItemStack(this, 1, getMetaFromState(state)));
 			else {
 				ItemStack seed = ForgeHooks.getGrassSeed(RANDOM, fortune);
-				if (seed != null)
+				if (!seed.isEmpty())
 					ret.add(seed);
 				else
 					ret.add(new ItemStack(this, 1, getMetaFromState(state)));

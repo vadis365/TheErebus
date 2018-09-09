@@ -53,6 +53,7 @@ public class PlayerDeathLocationCapability extends EntityCapability<PlayerDeathL
 	private String graveDimensionName = "Over world?";
 	private int graveLocationX;
 	private int graveLocationZ;
+	private String deathTime = "";
 
 	@Override
 	public void setGraveDimension(int dimension) {
@@ -79,6 +80,12 @@ public class PlayerDeathLocationCapability extends EntityCapability<PlayerDeathL
 	}
 
 	@Override
+	public void setDeathTime(String deathTime) {
+		this.deathTime = deathTime;
+		this.setDirty(true);
+	}
+
+	@Override
 	public int getGraveDimension() {
 		return this.graveDimension;
 	}
@@ -99,6 +106,11 @@ public class PlayerDeathLocationCapability extends EntityCapability<PlayerDeathL
 	}
 
 	@Override
+	public String getDeathTime() {
+		return this.deathTime;
+	}
+
+	@Override
 	public void writeTrackingDataToNBT(NBTTagCompound nbt) {
 		this.writeToNBT(nbt);
 	}
@@ -114,6 +126,7 @@ public class PlayerDeathLocationCapability extends EntityCapability<PlayerDeathL
 		nbt.setString("graveDimensionName", this.graveDimensionName);
 		nbt.setInteger("graveLocationX", this.graveLocationX);
 		nbt.setInteger("graveLocationZ", this.graveLocationZ);
+		nbt.setString("deathTime", this.deathTime);
 	}
 
 	@Override
@@ -122,6 +135,7 @@ public class PlayerDeathLocationCapability extends EntityCapability<PlayerDeathL
 		this.graveDimensionName = nbt.getString("graveDimensionName");
 		this.graveLocationX = nbt.getInteger("graveLocationX");
 		this.graveLocationZ = nbt.getInteger("graveLocationZ");
+		this.deathTime = nbt.getString("deathTime");
 		this.setDirty(true);
 	}
 }

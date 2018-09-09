@@ -27,7 +27,7 @@ public class RenderWarHammerChargeBar extends Gui {
 				mc.renderEngine.bindTexture(new ResourceLocation("erebus:textures/gui/overlay/rhino_charge_bar.png"));
 				ScaledResolution res = new ScaledResolution(mc);
 
-				if (stack.getTagCompound().hasKey("charge"))
+				if (stack.hasTagCompound() && stack.getTagCompound().hasKey("charge"))
 					renderChargeBar(stack.getTagCompound().getInteger("charge") * 2, res.getScaledWidth() / 2 + 84, res.getScaledHeight() - 30);
 			}
 		}

@@ -171,7 +171,7 @@ public static final PropertyInteger DARK_VINE_AGE = PropertyInteger.create("age"
 	@Override
 	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
 		int age = getAge(state);
-		ItemStack item = null;
+		ItemStack item = ItemStack.EMPTY;
 		if (age == 5) {
 			item = new ItemStack(ModItems.EREBUS_FOOD, 2, ItemErebusFood.EnumFoodType.DARK_FRUIT.ordinal());
 			Utils.dropStack(world, pos, item);
@@ -197,7 +197,7 @@ public static final PropertyInteger DARK_VINE_AGE = PropertyInteger.create("age"
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		int age = getAge(state);
-		ItemStack item = null;
+		ItemStack item = ItemStack.EMPTY;
 		if (world.isAirBlock(pos.up())) {
 			if (age == 5) {
 				item = new ItemStack(ModItems.EREBUS_FOOD, 1, ItemErebusFood.EnumFoodType.DARK_FRUIT.ordinal());

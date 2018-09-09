@@ -4,7 +4,6 @@ import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
-import erebus.world.feature.structure.WorldGenAntlionDungeon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
@@ -32,7 +31,7 @@ public class ItemJadeHoe extends ItemHoe {
 		//	WorldGenSwampHut gen = new WorldGenSwampHut();
 		//	gen.generateStructure(worldIn, itemRand, pos.up());
 		}
-		
+
 		return EnumActionResult.SUCCESS;
 	}
 

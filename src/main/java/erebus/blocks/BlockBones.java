@@ -141,7 +141,7 @@ public class BlockBones extends BlockDirectional implements ITileEntityProvider 
 		if (tile != null)
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
 				ItemStack stack = tile.getStackInSlot(i);
-				if (stack != null)
+				if (!stack.isEmpty())
 					Utils.dropStack(world, pos, stack);
 			}
 		world.playEvent(2001, pos, Block.getStateId(Blocks.BONE_BLOCK.getDefaultState()));

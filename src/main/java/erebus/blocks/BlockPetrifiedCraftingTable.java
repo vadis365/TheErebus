@@ -27,7 +27,6 @@ public class BlockPetrifiedCraftingTable extends Block {
 		if (world.isRemote)
 			return true;
 		else {
-			System.out.println("Block Activated");
 			player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.PETRIFIED_CRAFT.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Locale;
 
 import erebus.lib.Reference;
+import net.minecraft.block.SoundType;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -76,6 +78,9 @@ public class ModSounds {
 	
 	//Music
 	public static final SoundEvent MUSIC_EREBUS_DIMENSION = registerSoundResource("music_erebus_dimension");
+	
+	//Blocks
+	public static final SoundType DUNG = new SoundType(1.0F, 1.0F, SoundEvents.BLOCK_GRAVEL_BREAK, CABBAGE_FART, CABBAGE_FART, SoundEvents.BLOCK_GRAVEL_HIT, CABBAGE_FART);
 
 	public static SoundEvent registerSoundResource(String name) {
 		return new SoundEvent(new ResourceLocation(Reference.MOD_ID, name));
