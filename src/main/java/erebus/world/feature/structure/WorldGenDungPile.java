@@ -55,7 +55,7 @@ public class WorldGenDungPile extends WorldGenerator {
 			new LootItemStack(Items.IRON_BOOTS).setWeight(2),
 			new LootItemStack(ModItems.JADE_BOOTS).setWeight(1),
 			new LootItemStack(ModItems.EXOSKELETON_SHIELD).setAmount(1).setWeight(3),
-			new LootItemStack(ModItems.JADE_SHIELD).setAmount(1).setWeight(1),
+			new LootItemStack(ModItems.BAMBOO_SHIELD).setAmount(1).setWeight(3),
 			new LootItemStack(ModItems.ANTI_VENOM_BOTTLE).setAmount(1, 3).setWeight(8),
 			new LootItemStack(ModItems.SPRAY_CAN).setAmount(3, 6).setWeight(5),
 			new LootItemStack(ModItems.MATERIALS).setAmount(1).setDamage(EnumErebusMaterialsType.SCORPION_PINCER.ordinal()).setWeight(1),
@@ -63,8 +63,11 @@ public class WorldGenDungPile extends WorldGenerator {
 			new LootItemStack(ModItems.MATERIALS).setAmount(3, 9).setDamage(EnumErebusMaterialsType.AMBER_STAR.ordinal()).setWeight(6),
 			new LootItemStack(ModItems.MATERIALS).setAmount(1).setDamage(EnumErebusMaterialsType.BEETLE_RIDING_KIT.ordinal()).setWeight(1),
 			new LootItemStack(ModItems.EREBUS_FOOD).setAmount(1, 3).setDamage(EnumFoodType.TITAN_CHOP_RAW.ordinal()).setWeight(6),
+			new LootItemStack(ModItems.EREBUS_FOOD).setAmount(1, 2).setDamage(EnumFoodType.TITAN_CHOP_COOKED.ordinal()).setWeight(4),
 			new LootItemStack(ModItems.STAG_HEART_RAW).setAmount(1).setWeight(1),
-			new LootItemStack(ModItems.BAMBUCKET).setAmount(1).setWeight(3)
+			new LootItemStack(ModItems.BAMBUCKET).setAmount(1).setWeight(3),
+			new LootItemStack(ModItems.CABBAGE_SEEDS).setAmount(3).setWeight(5),
+			new LootItemStack(ModItems.EREBUS_FOOD).setAmount(1, 3).setDamage(EnumFoodType.CABBAGE.ordinal()).setWeight(10)
 		}).setPostProcessor(new IPostProcess() {
 			@SuppressWarnings("rawtypes")
 			@Override
