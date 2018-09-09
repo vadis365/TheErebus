@@ -31,11 +31,11 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class WorldGenDungPile extends WorldGenerator {
-	
+
 	public int height = 5;
 	public int radius = 5;
 	public IBlockState DUNG = ModBlocks.DUNG.getDefaultState();
-	
+
 	public static final WeightedLootList CHEST_LOOT = new WeightedLootList(new LootItemStack[] {
 			new LootItemStack(ModItems.MATERIALS).setAmount(1, 3).setDamage(EnumErebusMaterialsType.JADE.ordinal()).setWeight(10),
 			new LootItemStack(ModItems.MATERIALS).setAmount(4, 8).setDamage(EnumErebusMaterialsType.PLATE_EXO.ordinal()).setWeight(9),
@@ -124,7 +124,7 @@ public class WorldGenDungPile extends WorldGenerator {
 		TileEntityChest chest = (TileEntityChest) world.getTileEntity(pos);
 		if (chest != null)
 			LootUtil.generateLoot(chest, rand, CHEST_LOOT, 8, 14);
-		
+
 		world.setBlockState(pos.add(-1, 1, 1), ModBlocks.DUNG_SPAWNER_BOT_FLY.getDefaultState(), 2);
 		world.setBlockState(pos.add(1, 1, 1), ModBlocks.DUNG_SPAWNER_FLY.getDefaultState(), 2);
 		world.setBlockState(pos.add(1, 1, -1), ModBlocks.DUNG_SPAWNER_BOT_FLY.getDefaultState(), 2);
