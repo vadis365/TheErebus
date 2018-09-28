@@ -157,7 +157,7 @@ public class ItemErebusMap extends ItemMap
 
 	private static void setupBiomeColors() {
 		BIOME_COLORS.put(ModBiomes.ELYSIAN_FIELDS, new MapColorBrightness(MapColor.LIME, 1));
-		BIOME_COLORS.put(ModBiomes.FIELDS_SUB_FOREST, new MapColorBrightness(MapColor.LIME, 0));
+		BIOME_COLORS.put(ModBiomes.FIELDS_SUB_FOREST, new MapColorBrightness(MapColor.PINK, 1));
 		BIOME_COLORS.put(ModBiomes.FUNGAL_FOREST, new MapColorBrightness(MapColor.GREEN, 0));
 		BIOME_COLORS.put(ModBiomes.PETRIFIED_FOREST, new MapColorBrightness(MapColor.GRAY, 2));
 		BIOME_COLORS.put(ModBiomes.SUBMERGED_SWAMP, new MapColorBrightness(MapColor.GREEN, 3));

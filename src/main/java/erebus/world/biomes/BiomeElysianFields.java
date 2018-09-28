@@ -49,11 +49,6 @@ public class BiomeElysianFields extends BiomeBaseErebus {
 		spawningGradual.add(new SpawnEntry(EntityTitanBeetle.class, 8).setGroupSize(1, 1));
 	}
 
-	@Override
-	public BiomeBaseErebus getRandomSubBiome(int randomValue) {
-		return randomValue < 40 ? ModBiomes.FIELDS_SUB_FOREST : null;
-	}
-
 	public static class BiomeElysianForest extends BiomeElysianFields {
 		public BiomeElysianForest(BiomeProperties properties) {
 			super(properties, new BiomeDecoratorElysianFields.BiomeDecoratorElysianForest());
