@@ -59,7 +59,7 @@ public class TileEntitySiloTank extends TileEntityBasicInventory {
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
-		return null;
+		return getItems().get(index);
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Locale;
 
 import erebus.ModBlocks;
-import erebus.ModFluids;
 import erebus.ModItems;
 import erebus.blocks.BlockGiantFlower.EnumType;
 import erebus.blocks.EnumWood;
@@ -22,16 +21,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -183,6 +176,8 @@ public class RecipeHandler {
 			OreDictionary.registerOre("dyeMagenta", new ItemStack(ModBlocks.GIANT_FLOWER, 1, EnumType.PETAL_MAGENTA.ordinal()));
 			OreDictionary.registerOre("dyeOrange", new ItemStack(ModBlocks.GIANT_FLOWER, 1, EnumType.PETAL_ORANGE.ordinal()));
 			OreDictionary.registerOre("dyeWhite", new ItemStack(ModBlocks.GIANT_FLOWER, 1, EnumType.PETAL_WHITE.ordinal()));
+			OreDictionary.registerOre("dyeGreen", new ItemStack(ModBlocks.GIANT_FLOWER, 1, EnumType.STEM.ordinal()));
+			OreDictionary.registerOre("dyeGreen", new ItemStack(ModBlocks.GIANT_LILY_PAD, 1, 0));
 
 			OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.DARK_CAPPED_MUSHROOM));
 			OreDictionary.registerOre("foodMushroom", new ItemStack(ModBlocks.KAIZERS_FINGERS_MUSHROOM));
