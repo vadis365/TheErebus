@@ -97,10 +97,12 @@ public class BlockSmoothieMaker extends BlockContainer {
 			if (player.inventory.getCurrentItem().getItem() instanceof ItemBook && player.inventory.getCurrentItem().getCount() == 1) {
 				player.setHeldItem(hand, new ItemStack(ModItems.SMOOTHIE_BOOK));
 			} else {
-				final IFluidHandler fluidHandler = getFluidHandler(world, pos, facing);
-				if (fluidHandler != null) {
+				ItemStack heldItem = player.getHeldItem(hand);
+				final IFluidHandler fluidHandler = getFluidHandler(world, pos);
+
+				if (fluidHandler != null && FluidUtil.getFluidHandler(heldItem) != null) {
 					FluidUtil.interactWithFluidHandler(player, hand, world, pos, facing);
-					return FluidUtil.getFluidHandler(player.getHeldItem(hand)) != null;
+					return FluidUtil.getFluidHandler(heldItem).getContainer() != null;
 				}
 			}
 			return false;
@@ -110,7 +112,7 @@ public class BlockSmoothieMaker extends BlockContainer {
 	}
 
 	@Nullable
-	private IFluidHandler getFluidHandler(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+	private IFluidHandler getFluidHandler(IBlockAccess world, BlockPos pos) {
 		TileEntitySmoothieMaker tileentity = (TileEntitySmoothieMaker) world.getTileEntity(pos);
 		return tileentity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 	}

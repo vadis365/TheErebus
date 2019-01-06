@@ -12,6 +12,7 @@ import erebus.items.ItemSmoothie.SmoothieType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -41,7 +42,10 @@ public class ErebusRecipesHandler {
 
 		SmoothieMakerRecipe.addRecipe(EnumFoodType.MELONADE.createStack(), ItemMaterials.EnumErebusMaterialsType.SMOOTHIE_GLASS.createStack(), FluidRegistry.WATER, new ItemStack(Items.MELON));
 		SmoothieMakerRecipe.addRecipe(EnumFoodType.MELONADE_SPARKLY.createStack(), ItemMaterials.EnumErebusMaterialsType.SMOOTHIE_GLASS.createStack(), FluidRegistry.WATER, new ItemStack(Items.SPECKLED_MELON));
-		SmoothieMakerRecipe.addRecipe(ModFluids.getFilledBambucket(new FluidStack(FluidRegistry.getFluid("anti_venom"), Fluid.BUCKET_VOLUME)), new ItemStack(ModItems.BAMBUCKET), ModFluids.BEETLE_JUICE, ItemMaterials.EnumErebusMaterialsType.POISON_GLAND.createStack(), ItemMaterials.EnumErebusMaterialsType.POISON_GLAND.createStack(), ItemMaterials.EnumErebusMaterialsType.NETTLE_LEAVES.createStack(), ItemMaterials.EnumErebusMaterialsType.NETTLE_LEAVES.createStack());
+		ItemStack bamBucket = new ItemStack(ModItems.BAMBUCKET);
+		if (!bamBucket.hasTagCompound())
+			bamBucket.setTagCompound(new NBTTagCompound());
+		SmoothieMakerRecipe.addRecipe(ModFluids.getFilledBambucket(new FluidStack(FluidRegistry.getFluid("anti_venom"), Fluid.BUCKET_VOLUME)), bamBucket, ModFluids.BEETLE_JUICE, ItemMaterials.EnumErebusMaterialsType.POISON_GLAND.createStack(), ItemMaterials.EnumErebusMaterialsType.POISON_GLAND.createStack(), ItemMaterials.EnumErebusMaterialsType.NETTLE_LEAVES.createStack(), ItemMaterials.EnumErebusMaterialsType.NETTLE_LEAVES.createStack());
 		SmoothieMakerRecipe.addRecipe(FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid("anti_venom"), Fluid.BUCKET_VOLUME)), new ItemStack(Items.BUCKET), ModFluids.BEETLE_JUICE, ItemMaterials.EnumErebusMaterialsType.POISON_GLAND.createStack(), ItemMaterials.EnumErebusMaterialsType.POISON_GLAND.createStack(), ItemMaterials.EnumErebusMaterialsType.NETTLE_LEAVES.createStack(), ItemMaterials.EnumErebusMaterialsType.NETTLE_LEAVES.createStack());
 		SmoothieMakerRecipe.addRecipe(new ItemStack(ModItems.ANTI_VENOM_BOTTLE, 1), new ItemStack(Items.GLASS_BOTTLE, 1), ModFluids.BEETLE_JUICE, ItemMaterials.EnumErebusMaterialsType.POISON_GLAND.createStack(), ItemMaterials.EnumErebusMaterialsType.NETTLE_LEAVES.createStack());
 	}

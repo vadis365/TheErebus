@@ -50,11 +50,25 @@ public class ItemBambucket extends UniversalBucket {
 	}
 
 	@Override
+    public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
+		if (!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
+    }
+
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		if (!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
+	    }
+
+	@Override
 	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase target, EnumHand hand) {
 		FluidStack fluidStack = getFluid(stack);
 		if(fluidStack != null)
 			return false;
 		ItemStack newStack = new ItemStack(this, 1);
+		if (!newStack.hasTagCompound())
+			newStack.setTagCompound(new NBTTagCompound());
 		IFluidHandlerItem cap = newStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (target instanceof EntityCow && !target.isChild()) {
 			cap.fill(new FluidStack(FluidRegistry.getFluid("milk"), Fluid.BUCKET_VOLUME), true);
@@ -85,6 +99,8 @@ public class ItemBambucket extends UniversalBucket {
 			// Add all fluids that the bucket can be filled with
 			final FluidStack fs = new FluidStack(fluid, getCapacity());
 			final ItemStack stack = new ItemStack(this);
+			if (!stack.hasTagCompound())
+				stack.setTagCompound(new NBTTagCompound());
 			final IFluidHandlerItem fluidHandler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 			if (fluidHandler != null && fluidHandler.fill(fs, true) == fs.amount) {
 				final ItemStack filled = fluidHandler.getContainer();
@@ -150,6 +166,8 @@ public class ItemBambucket extends UniversalBucket {
 		}
 
 		final ItemStack singleBucket = new ItemStack(this, 1);
+		if (!singleBucket.hasTagCompound())
+			singleBucket.setTagCompound(new NBTTagCompound());
 
 		final FluidActionResult filledResult = FluidUtil.tryPickUpFluid(singleBucket, player, world, pos, target.sideHit);
 		if (filledResult.isSuccess()) {
@@ -168,6 +186,8 @@ public class ItemBambucket extends UniversalBucket {
 
 	@Override
 	public ItemStack getEmpty() {
+		if (!empty.hasTagCompound())
+			empty.setTagCompound(new NBTTagCompound());
 		return empty;
 	}
 
@@ -182,6 +202,8 @@ public class ItemBambucket extends UniversalBucket {
     public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entityLiving) {
 		FluidStack fluidStack = getFluid(stack);
 		ItemStack newStack = new ItemStack(this, 1);
+		if (!newStack.hasTagCompound())
+			newStack.setTagCompound(new NBTTagCompound());
 		if (fluidStack.getFluid() == FluidRegistry.getFluid("beetle_juice") || fluidStack.getFluid() == FluidRegistry.getFluid("milk")) {
 			if (!world.isRemote) {
 				entityLiving.curePotionEffects(stack);
@@ -206,6 +228,8 @@ public class ItemBambucket extends UniversalBucket {
 			player.addStat(StatList.getObjectUseStats(this));
 		}
 		ItemStack emptyBucket = new ItemStack(this, 1);
+		if (!emptyBucket.hasTagCompound())
+			emptyBucket.setTagCompound(new NBTTagCompound());
 		if (entityLiving instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entityLiving;
 		  if (!player.inventory.addItemStackToInventory(emptyBucket))
