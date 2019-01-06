@@ -12,6 +12,7 @@ import erebus.core.capabilities.player.PlayerDeathLocationCapability;
 import erebus.core.handler.AntiVenomDurationHandler;
 import erebus.core.handler.AnvilEventHandlerWhetstone;
 import erebus.core.handler.BedPlaceEventHandler;
+import erebus.core.handler.BlockLookedAtName;
 import erebus.core.handler.DeathCompassRespawnEvent;
 import erebus.core.handler.EntityDeathInventoryHandler;
 import erebus.core.handler.EntityShieldDamageEvent;
@@ -90,6 +91,7 @@ public class Erebus {
 			MinecraftForge.EVENT_BUS.register(new MobGrabbingHealthBarRemoval());
 			MinecraftForge.EVENT_BUS.register(new GuiAntiVenomBar());
 			MinecraftForge.EVENT_BUS.register(ModFluids.INSTANCE);
+			//MinecraftForge.EVENT_BUS.register(new BlockLookedAtName());
 		}
 
 		dimensionType = DimensionType.register("EREBUS", "", ConfigHandler.INSTANCE.erebusDimensionID, WorldProviderErebus.class, false);

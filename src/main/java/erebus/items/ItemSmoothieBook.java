@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemSmoothieBook extends ItemWritableBook {
 
-	public int pageAmount = 12;
+	public int pageAmount = 17;
 
 	public ItemSmoothieBook() {
 		setCreativeTab(ModTabs.ITEMS);

@@ -130,7 +130,7 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 			if (progress >= MAX_TIME) {
 				for (int i = 0; i < 5; i++)
 					if (!getInventory().get(i).isEmpty())
-						getInventory().get(i).shrink(1);
+						getInventory().get(i).shrink(1); // takes too many items TODO FIX!
 
 				extractFluids(recipe);
 				getInventory().set(4, recipe.getOutput().copy());

@@ -115,7 +115,7 @@ public class ItemErebusFood extends ItemFood implements ISubItemsItem {
 
 	@Override
 	public ItemStack getContainerItem(ItemStack stack) {
-		if(stack.getItemDamage() > EnumFoodType.values().length)
+		if(stack.getItemDamage() >= EnumFoodType.values().length)
 			return ItemStack.EMPTY;
 		switch (EnumFoodType.values()[stack.getItemDamage()]) {
 			case LARVAE_ON_STICK:

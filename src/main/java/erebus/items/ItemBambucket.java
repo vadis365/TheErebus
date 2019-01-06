@@ -9,6 +9,7 @@ import erebus.entity.EntityBeetle;
 import erebus.entity.EntityBotFlyLarva;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -170,19 +171,27 @@ public class ItemBambucket extends UniversalBucket {
 		return empty;
 	}
 
+	public Entity getParasite(Entity entityIn) {
+		for (Entity entity : entityIn.getPassengers())
+			if (entity instanceof EntityBotFlyLarva)
+				return entity;
+		return null;
+	}
+
 	@Override
     public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entityLiving) {
 		FluidStack fluidStack = getFluid(stack);
 		ItemStack newStack = new ItemStack(this, 1);
 		if (fluidStack.getFluid() == FluidRegistry.getFluid("beetle_juice") || fluidStack.getFluid() == FluidRegistry.getFluid("milk")) {
-			if (!world.isRemote)
+			if (!world.isRemote) {
 				entityLiving.curePotionEffects(stack);
 
-			if (entityLiving.isBeingRidden() && entityLiving.getLowestRidingEntity() instanceof EntityBotFlyLarva)
-				if (((EntityBotFlyLarva) entityLiving.getLowestRidingEntity()).getParasiteCount() > 0)
-					((EntityBotFlyLarva) entityLiving.getLowestRidingEntity()).setABitDead();
+			if (entityLiving.isBeingRidden() && getParasite(entityLiving) != null)
+				if (((EntityBotFlyLarva) getParasite(entityLiving)).getParasiteCount() > 0) {
+					((EntityBotFlyLarva) getParasite(entityLiving)).setABitDead();
+				}
+			}
 		}
-
 		if (fluidStack.getFluid() == FluidRegistry.getFluid("anti_venom")) {
 			if (entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) entityLiving;
