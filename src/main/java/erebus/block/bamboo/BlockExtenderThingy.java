@@ -1,9 +1,11 @@
 package erebus.block.bamboo;
 
 import erebus.Erebus;
+import erebus.ModItems;
 import erebus.ModTabs;
 import erebus.blocks.EnumWood;
 import erebus.core.helper.Utils;
+import erebus.items.ItemMaterials;
 import erebus.proxy.CommonProxy;
 import erebus.tileentity.TileEntityExtenderThingy;
 import net.minecraft.block.Block;
@@ -60,13 +62,26 @@ public class BlockExtenderThingy extends BlockDirectional implements ITileEntity
 
 	@Override
 	 public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (world.isRemote)
+		if (world.isRemote) {
 			return true;
-
-		if (world.getTileEntity(pos) != null)
-			player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.EXTENDER_THINGY.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
-
-		return true;
+		} else  {
+			ItemStack stack = player.getHeldItem(hand);
+			if (!stack.isEmpty() && stack.getItem() == ModItems.MATERIALS && stack.getItemDamage() == ItemMaterials.EnumErebusMaterialsType.BAMBOO_PIPE_WRENCH.ordinal()) {
+				if (!player.isSneaking()) {
+					state = state.cycleProperty(FACING);
+					//state.cycleProperty(FACING);
+					TileEntityExtenderThingy tile = Utils.getTileEntity(world, pos, TileEntityExtenderThingy.class);
+					tile.direction = state.getValue(FACING);
+					world.setBlockState(pos, state, 3);
+					return true;
+				}
+			}
+			else if (world.getTileEntity(pos) != null) {
+				player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.EXTENDER_THINGY.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

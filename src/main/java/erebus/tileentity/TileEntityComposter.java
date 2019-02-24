@@ -3,6 +3,7 @@ package erebus.tileentity;
 import erebus.ModBlocks;
 import erebus.recipes.ComposterRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -10,17 +11,32 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class TileEntityComposter extends TileEntityBasicInventory implements ITickable {
 
 	public int composterBurnTime;
 	public int currentItemBurnTime;
 	public int composterCookTime;
+	private final int SMELT_SLOT = 0;
+	private final int FUEL_SLOT = 1;
+	private final int RESULT_SLOT = 2;
 
 	public TileEntityComposter() {
 		super(3, "container.composter");
+	}
+
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		return oldState.getBlock() != newState.getBlock();
 	}
 
 	@Override
@@ -171,31 +187,52 @@ public class TileEntityComposter extends TileEntityBasicInventory implements ITi
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack is) {
-		return slot == 2 ? false : slot == 1 ? isItemFuel(is) : true;
+		return slot == RESULT_SLOT ? false : slot == FUEL_SLOT ? isItemFuel(is) : true;
+	}
+
+    @Override
+    public int[] getSlotsForFace(EnumFacing side) {
+		return side == EnumFacing.DOWN ? new int[] { RESULT_SLOT} : new int[] {FUEL_SLOT, SMELT_SLOT };
+	}
+
+    @Override
+    public boolean canExtractItem(int slot, ItemStack is, EnumFacing direction) {
+		return slot == RESULT_SLOT;
+	}
+
+    @Override
+    public boolean canInsertItem(int slot, ItemStack itemstack, EnumFacing direction) {
+        return isItemValidForSlot(slot, itemstack);
+    }
+
+    @Override
+    public ItemStack removeStackFromSlot(int index) {
+        return  ItemStack.EMPTY;
+    }
+    
+	protected IItemHandler createUnSidedHandler() {
+		return new InvWrapper(this);
 	}
 
 	@Override
-	public int[] getSlotsForFace(EnumFacing side) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
 	}
 
-	@Override
-	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	IItemHandler handlerTop = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.UP);
+	IItemHandler handlerBottom = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.DOWN);
+	IItemHandler handlerSide = new SidedInvWrapper(this, net.minecraft.util.EnumFacing.WEST);
 
 	@Override
-	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public ItemStack removeStackFromSlot(int index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		  if (facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+	            if (facing == EnumFacing.DOWN)
+	                return (T) handlerBottom;
+	            else if (facing == EnumFacing.UP)
+	                return (T) handlerTop;
+	            else
+	                return (T) handlerSide;
+        return super.getCapability(capability, facing);
+    }
 
 }

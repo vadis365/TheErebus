@@ -2,6 +2,7 @@ package erebus.tileentity;
 
 import erebus.blocks.BlockUmberFurnace;
 import erebus.inventory.ContainerUmberFurnace;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -9,6 +10,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -43,6 +46,11 @@ public class TileEntityUmberFurnace extends TileEntityBasicInventory implements 
 	public TileEntityUmberFurnace() {
 		super(4, "container.umberFurnace");
 		tank.setFluid(new FluidStack(FluidRegistry.LAVA, 0));
+	}
+
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		return oldState.getBlock() != newState.getBlock();
 	}
 
 	public ItemStack fillTankWithBucket(ItemStack bucket) {

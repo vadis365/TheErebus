@@ -1,6 +1,7 @@
 package erebus.tileentity;
 
 import erebus.recipes.SmoothieMakerRecipe;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -8,6 +9,8 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -33,6 +36,11 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 		super(5, "container.kitchenCounter");
 		for (int i = 0; i < tanks.length; i++)
 			tanks[i] = new FluidTank(Fluid.BUCKET_VOLUME * 16);
+	}
+
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		return oldState.getBlock() != newState.getBlock();
 	}
 
 	public FluidTank[] getTanks() {
@@ -231,23 +239,28 @@ public class TileEntitySmoothieMaker extends TileEntityBasicInventory implements
 	}
 
 	@Override
-	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-		return index == 4;
+	public boolean canExtractItem(int slot, ItemStack stack, EnumFacing direction) {
+		return slot == 4;
 	}
 
 	@Override
-	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
-		return true;
+    public boolean canInsertItem(int slot, ItemStack itemstack, EnumFacing direction) {
+		return isItemValidForSlot(slot, itemstack);
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		return true;
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+		return slot != 4 && getStackInSlot(slot).getCount() < getInventoryStackLimit();
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		return 1;
 	}
 
 }

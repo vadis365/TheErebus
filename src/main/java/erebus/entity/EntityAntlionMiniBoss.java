@@ -41,9 +41,9 @@ public class EntityAntlionMiniBoss extends EntityMob {
 	@Override
 	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.7D, false));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.5D, false));
 		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(3, new EntityAIWander(this, 0.7D));
+		tasks.addTask(3, new EntityAIWander(this, 0.5D));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}

@@ -16,7 +16,7 @@ item.erebus.materials.petrified_wood.name=Petrified Wood
 item.erebus.materials.bio_velocity.name=Bio-Velocity
 item.erebus.materials.elastic_fibre.name=Elastic Fibre
 item.erebus.materials.wasp_sting.name=Wasp Sting
-item.erebus.materials.bamboo_shoot.name=Bamboo Shoot
+item.erebus.materials.bamboo_shoot.name=Colossal Bamboo Shoot
 item.erebus.materials.red_gem.name=Redgem
 item.erebus.materials.bio_luminescence.name=Bioluminescence
 item.erebus.materials.supernatural_velocity.name=Supernatural Velocity
@@ -294,7 +294,7 @@ tile.erebus.log_balsam_resinless.name=Balsam Wood Resinless
 tile.erebus.log_rotten.name=Rotten Wood
 tile.erebus.log_marshwood.name=Marshwood Wood
 tile.erebus.log_scorched.name=Scorched Wood
-tile.erebus.log_bamboo.name=Bamboo
+tile.erebus.log_bamboo.name=Colossal Bamboo
 tile.erebus.hollow_log.name=Hollow Acacia Log
 
 # Saplings
@@ -306,7 +306,7 @@ tile.erebus.sapling_balsam.name=Balsam Sapling
 tile.erebus.sapling_baobab.name=Baobab Sapling
 tile.erebus.sapling_marshwood.name=Marshwood Sapling
 tile.erebus.sapling_cypress.name=Cypress Sapling
-tile.erebus.sapling_bamboo.name=Bamboo Shoot
+tile.erebus.sapling_bamboo.name=Colossal Bamboo Shoot
 
 # Leaves
 tile.erebus.leaves_mossbark.name=Mossbark Leaves

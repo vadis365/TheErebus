@@ -8,6 +8,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class TileEntityBones extends TileEntityBasicInventory {
 
@@ -17,6 +19,11 @@ public class TileEntityBones extends TileEntityBasicInventory {
 
 	public TileEntityBones() {
 		super(86, "container.bones");
+	}
+
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		return oldState.getBlock() != newState.getBlock();
 	}
 
 	public void setOwner(String name) {

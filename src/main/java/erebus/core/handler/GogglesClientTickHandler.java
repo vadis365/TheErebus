@@ -20,19 +20,25 @@ public class GogglesClientTickHandler {
 
 	@SubscribeEvent
 	public void onRenderTick(RenderTickEvent e) {
-		if (e.phase == Phase.START) {
-			EntityPlayer player = Minecraft.getMinecraft().player;
-			if (player != null && !player.inventory.armorItemInSlot(3).isEmpty() && player.inventory.armorItemInSlot(3).getItem() == ModItems.COMPOUND_GOGGLES)
+		EntityPlayer player = Minecraft.getMinecraft().player;
+		if (isWearingGoggles(player)) {
+			if (e.phase == Phase.START) {
 				player.addPotionEffect(nightVisionEffect);
-			if (player != null && !player.inventory.armorItemInSlot(3).isEmpty() && player.inventory.armorItemInSlot(3).getItem() == ModItems.REIN_COMPOUND_GOGGLES)
-				player.addPotionEffect(nightVisionEffect);
-		} else if (e.phase == Phase.END) {
-			EntityPlayer player = Minecraft.getMinecraft().player;
-			if (player != null) {
-				PotionEffect eff = player.getActivePotionEffect(MobEffects.NIGHT_VISION);
-				if (eff != null && eff.getAmplifier() == 1)
-					player.removePotionEffect(MobEffects.NIGHT_VISION);
+			} else if (e.phase == Phase.END) {
+				if (player != null) {
+					PotionEffect eff = player.getActivePotionEffect(MobEffects.NIGHT_VISION);
+					if (eff != null && eff.getAmplifier() == 1)
+						player.removePotionEffect(MobEffects.NIGHT_VISION);
+				}
 			}
 		}
+	}
+
+	public boolean isWearingGoggles(EntityPlayer player) {
+		if (player != null && !player.inventory.armorItemInSlot(3).isEmpty() && player.inventory.armorItemInSlot(3).getItem() == ModItems.COMPOUND_GOGGLES)
+			return true;
+		if (player != null && !player.inventory.armorItemInSlot(3).isEmpty() && player.inventory.armorItemInSlot(3).getItem() == ModItems.REIN_COMPOUND_GOGGLES)
+			return true;
+		return false;
 	}
 }

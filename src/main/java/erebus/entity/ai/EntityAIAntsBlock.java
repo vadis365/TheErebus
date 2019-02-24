@@ -52,7 +52,7 @@ public abstract class EntityAIAntsBlock extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		return entity.getEntityWorld().getGameRules().getBoolean("mobGriefing");
+		return true;
 	}
 
 	@Override
