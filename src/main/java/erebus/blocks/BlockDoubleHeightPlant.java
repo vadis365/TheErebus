@@ -105,7 +105,7 @@ public class BlockDoubleHeightPlant extends BlockBush implements IGrowable, IShe
             return world.getBlockState(pos.down()).getBlock() == this;
         else {
             IBlockState iblockstate = world.getBlockState(pos.up());
-            return iblockstate.getBlock() == this && iblockstateDown.getBlock() == Blocks.SAND ? true : iblockstateDown.getBlock() == ModBlocks.MUD ? true : iblockstate.getBlock() == this && super.canBlockStay(world, pos, iblockstate);
+            return iblockstate.getBlock() == this && iblockstateDown.getBlock() == Blocks.SAND ? true : iblockstate.getBlock() == this && iblockstateDown.getBlock() == ModBlocks.MUD ? true : iblockstate.getBlock() == this && super.canBlockStay(world, pos, iblockstate);
         }
     }
 
@@ -160,7 +160,7 @@ public class BlockDoubleHeightPlant extends BlockBush implements IGrowable, IShe
 				ret.add(new ItemStack(this, 1, getMetaFromState(state)));
 			else {
 				ItemStack seed = ForgeHooks.getGrassSeed(RANDOM, fortune);
-				if (seed != null)
+				if (!seed.isEmpty())
 					ret.add(seed);
 				else
 					ret.add(new ItemStack(this, 1, getMetaFromState(state)));

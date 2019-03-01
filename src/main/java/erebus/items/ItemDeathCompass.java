@@ -112,8 +112,10 @@ public class ItemDeathCompass extends Item {
 			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.dimension", stack.getTagCompound().getInteger("dimID") + " " + stack.getTagCompound().getString("dimName")).getFormattedText());
 			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.targetx", stack.getTagCompound().getInteger("homeX")).getFormattedText());
 			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.targetz", stack.getTagCompound().getInteger("homeZ")).getFormattedText());
+			if(stack.getTagCompound().hasKey("deathTime"))
+				list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.time_of_death", stack.getTagCompound().getString("deathTime")).getFormattedText());
 		} else
-			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.deathcompass").getFormattedText());
+			list.add(TextFormatting.YELLOW + new TextComponentTranslation("tooltip.erebus.erebus").getFormattedText());
 	}
 	
 	private boolean hasTag(ItemStack stack) {

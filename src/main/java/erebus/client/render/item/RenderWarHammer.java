@@ -12,9 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderWarHammer extends TileEntityItemStackRenderer {
-
 	public final TileEntityItemStackRenderer PARENT;
-
 	private final ModelWarHammer MODEL_HAMMER = new ModelWarHammer();
 	public static ResourceLocation TEXTURE = new ResourceLocation("erebus:textures/special/items/war_hammer.png");
 
@@ -22,15 +20,16 @@ public class RenderWarHammer extends TileEntityItemStackRenderer {
 		PARENT = previous;
 	}
 
-	@Override
-	public void renderByItem(ItemStack stack) {
+    @Override
+    public void renderByItem(ItemStack stack) {
+    	this.renderByItem(stack, 1.0F);
+    }
+
+    @Override
+	public void renderByItem(ItemStack stack, float partialTicks) {
 		if ((!stack.isEmpty()) && (stack.getItem() instanceof ItemWarHammer)) {
 			Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
 			GlStateManager.pushMatrix();
-            GlStateManager.color(1, 1, 1, 1);
-            GlStateManager.enableBlend();
-            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            GlStateManager.enableTexture2D();
 			GlStateManager.rotate(-90F, 0F, 1F, 0F);
 			float scale = 1.75F;
 			if (stack.hasTagCompound() && stack.getTagCompound().hasKey("charge"))
@@ -38,7 +37,6 @@ public class RenderWarHammer extends TileEntityItemStackRenderer {
 			GlStateManager.translate(0F, 0.25F - scale, 0F);
 			GlStateManager.scale(scale, scale, scale);
 			MODEL_HAMMER.render();
-            GlStateManager.disableBlend();
 			GlStateManager.popMatrix();
 		} else
 			PARENT.renderByItem(stack);

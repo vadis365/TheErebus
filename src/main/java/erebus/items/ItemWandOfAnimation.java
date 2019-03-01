@@ -1,5 +1,6 @@
 package erebus.items;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -9,7 +10,9 @@ import erebus.ModSounds;
 import erebus.ModTabs;
 import erebus.block.altars.AltarBase;
 import erebus.blocks.BlockDoubleHeightPlant;
+import erebus.blocks.BlockGaeanKeystone;
 import erebus.blocks.BlockPreservedBlock;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
@@ -28,6 +31,7 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -88,7 +92,21 @@ public class ItemWandOfAnimation extends Item {
 		return EnumActionResult.FAIL;
 	}
 
+	//CBA with meta as this is changing in 1.13 anyway 
+	private Boolean isBlacklisted(Block block) {
+		List<Block> blockList = new ArrayList<Block>();
+		for (int blocks = 0; blocks < ConfigHandler.WOA_BLACKLISTED_BLOCKS.length; blocks++) {
+			String entry = ConfigHandler.WOA_BLACKLISTED_BLOCKS[blocks].trim();
+			Block outBlock = Block.REGISTRY.getObject(new ResourceLocation(entry));
+			blockList.add(outBlock);
+		}
+		if(blockList.contains(block))
+			return true;
+		return false;
+	}
+
+	//TODO Make this more sane one day...
 	private boolean canAnimate(IBlockState state, World world, BlockPos pos) {
-		return !(state.getBlock() instanceof AltarBase) && !(state.getBlock() instanceof BlockDoublePlant) && !(state.getBlock() instanceof BlockDoubleHeightPlant) && !(state.getBlock() instanceof BlockPreservedBlock) && !(state.getBlock() instanceof BlockContainer) && state.getBlockHardness(world, pos) >= 0 && state.getBoundingBox(world, pos).maxX - state.getBoundingBox(world, pos).minX >= 0.7F && state.getBoundingBox(world, pos).maxZ - state.getBoundingBox(world, pos).minZ >= 0.7F && state.getBoundingBox(world, pos).maxY - state.getBoundingBox(world, pos).minY >= 0.7F || state.getBlock() == Blocks.CHEST || state.getBlock() == ModBlocks.BAMBOO_CRATE;
+		return !isBlacklisted(state.getBlock()) && !(state.getBlock() instanceof BlockGaeanKeystone) && !(state.getBlock() instanceof AltarBase) && !(state.getBlock() instanceof BlockDoublePlant) && !(state.getBlock() instanceof BlockDoubleHeightPlant) && !(state.getBlock() instanceof BlockPreservedBlock) && !(state.getBlock() instanceof BlockContainer) && state.getBlockHardness(world, pos) >= 0 && state.getBoundingBox(world, pos).maxX - state.getBoundingBox(world, pos).minX >= 0.7F && state.getBoundingBox(world, pos).maxZ - state.getBoundingBox(world, pos).minZ >= 0.7F && state.getBoundingBox(world, pos).maxY - state.getBoundingBox(world, pos).minY >= 0.7F || state.getBlock() == Blocks.CHEST || state.getBlock() == ModBlocks.BAMBOO_CRATE;
 	}
 }

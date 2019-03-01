@@ -53,7 +53,7 @@ public class BlockBones extends BlockDirectional implements ITileEntityProvider 
 
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
-		return EnumBlockRenderType.MODEL;
+		return EnumBlockRenderType.INVISIBLE;
 	}
 
 	@Override
@@ -64,6 +64,11 @@ public class BlockBones extends BlockDirectional implements ITileEntityProvider 
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
+    public boolean causesSuffocation(IBlockState state) {
 		return false;
 	}
 
@@ -136,7 +141,7 @@ public class BlockBones extends BlockDirectional implements ITileEntityProvider 
 		if (tile != null)
 			for (int i = 0; i < tile.getSizeInventory(); i++) {
 				ItemStack stack = tile.getStackInSlot(i);
-				if (stack != null)
+				if (!stack.isEmpty())
 					Utils.dropStack(world, pos, stack);
 			}
 		world.playEvent(2001, pos, Block.getStateId(Blocks.BONE_BLOCK.getDefaultState()));

@@ -2,9 +2,11 @@ package erebus.entity.ai;
 
 import erebus.ModBlocks;
 import erebus.ModSounds;
+import erebus.blocks.BlockSmallPlant;
 import erebus.entity.EntityGrasshopper;
 import erebus.entity.EntityLocust;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -19,7 +21,7 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 	private int reproCap = 0;
 
 	public EntityAIEatCrops(EntityLiving entity, double moveSpeed, int eatSpeed) {
-		super(entity, Blocks.WHEAT.getDefaultState(), 7, moveSpeed, eatSpeed);
+		super(entity, null, 0, moveSpeed, eatSpeed);
 		setMutexBits(1);
 		this.moveSpeed = moveSpeed;
 	}
@@ -29,10 +31,7 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 		Block block = state.getBlock();
 		if (block == null)
 			return false;
-		else if (block == Blocks.TALLGRASS
-				|| block == ModBlocks.CROP_TURNIP && block.getMetaFromState(state) == 7
-				|| block == Blocks.WHEAT && block.getMetaFromState(state) == 7)
-			// TODO for time being Magic Numbers... I know, and it feelsBadMan
+		else if (block == Blocks.TALLGRASS || state == ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FERN) || block instanceof BlockCrops && ((BlockCrops) block).isMaxAge(state))
 			return true;
 		return false;
 	}
@@ -49,7 +48,8 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 	
 	@Override
 	public boolean shouldExecute() {
-		return !entity.getMoveHelper().isUpdating() && super.shouldExecute();
+		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
+		return !grasshopper.getMoveHelper().isUpdating() && super.shouldExecute();
 		//return !entity.getNavigator().noPath() && super.shouldExecute();
 	}
 
@@ -57,7 +57,7 @@ public class EntityAIEatCrops extends EntityAIEatBlock {
 	protected void moveToLocation() {
 		EntityGrasshopper grasshopper = (EntityGrasshopper) entity;
 		if (!grasshopper.isEating)
-			grasshopper.getNavigator().tryMoveToXYZ(cropX + 0.5D, cropY, cropZ + 0.5D, moveSpeed);
+			grasshopper.getNavigator().tryMoveToXYZ(cropX + 0.5D, cropY + 0.5D, cropZ + 0.5D, moveSpeed);
 	}
 
 	@Override

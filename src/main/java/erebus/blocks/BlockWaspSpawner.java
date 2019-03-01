@@ -15,7 +15,7 @@ public class BlockWaspSpawner extends BlockSpawner {
 
 	@Override
 	  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ModItems.ANTI_VENOM_BOTTLE;//ModItems.waspSword; Temp for testing
+		return ModItems.WASP_SWORD;
 	}
 
 	@Override

@@ -29,6 +29,12 @@ public interface IPlayerDeathLocationCapability extends ISerializableCapability 
 	public void setGraveLocationZ(int locationZ);
 
 	/**
+	 * Sets Time ofDeath
+	 * @param locationZ
+	 */
+	public void setDeathTime(String deathTime);
+
+	/**
 	 * Returns Death Dimension
 	 * @return
 	 */
@@ -51,4 +57,10 @@ public interface IPlayerDeathLocationCapability extends ISerializableCapability 
 	 * @return
 	 */
 	public int getGraveLocationZ();
+
+	/**
+	 * Returns Death Time String Name
+	 * @return
+	 */
+	public String getDeathTime();
 }

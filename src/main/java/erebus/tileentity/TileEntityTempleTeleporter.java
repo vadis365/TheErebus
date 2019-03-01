@@ -8,7 +8,7 @@ import erebus.blocks.BlockTempleBrickUnbreaking;
 import erebus.blocks.BlockTempleTeleporter;
 import erebus.blocks.BlockTempleTeleporter.EnumTeleporterType;
 import erebus.core.helper.Utils;
-import erebus.world.feature.structure.AntlionMazeDungeon;
+import erebus.world.feature.structure.WorldGenAntlionDungeon;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -94,7 +94,7 @@ public class TileEntityTempleTeleporter extends TileEntity implements ITickable 
 		if (getWorld().getWorldTime() % 5 == 0 && meta < 4)
 			getWorld().setBlockState(getPos(), ModBlocks.TEMPLE_TELEPORTER.getDefaultState().withProperty(BlockTempleTeleporter.TYPE, EnumTeleporterType.values()[meta + 1]), 3);
 		if (meta == 3 && bossSpawn) {
-			AntlionMazeDungeon.breakForceField(getWorld(), getPos().getX() - 16, getPos().getY() + 1, getPos().getZ() - 27);
+			WorldGenAntlionDungeon.breakForceField(getWorld(), getPos().getX() - 16, getPos().getY() + 1, getPos().getZ() - 27);
 			ItemStack nightVisionPotion = new ItemStack(Items.POTIONITEM, 1, 0);
 			PotionUtils.addPotionToItemStack(nightVisionPotion, PotionTypes.NIGHT_VISION);
 			ItemStack fireResitancePotion = new ItemStack(Items.POTIONITEM, 1, 0);
@@ -129,6 +129,11 @@ public class TileEntityTempleTeleporter extends TileEntity implements ITickable 
 			markDirty();
     	}
     }
+
+    //Temp until better things are made
+	public void setTargetDestination(BlockPos pos) {
+		setTargetDestination(pos.getX(), pos.getY(), pos.getZ());
+	}
 
 	public void setTargetDestination(int x, int y, int z) {
 		targetX = x;

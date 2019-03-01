@@ -38,7 +38,7 @@ public class ItemDoorErebus extends ItemBlock {
 				int j = enumfacing.getFrontOffsetZ();
 				boolean flag = i < 0 && hitZ < 0.5F || i > 0 && hitZ > 0.5F || j < 0 && hitX > 0.5F || j > 0 && hitX < 0.5F;
 				ItemDoor.placeDoor(world, pos, enumfacing, this.block, flag);
-				SoundType soundtype = this.block.getSoundType();
+				SoundType soundtype = world.getBlockState(pos).getBlock().getSoundType(world.getBlockState(pos), world, pos, player);
 				world.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 				stack.shrink(1);
 				return EnumActionResult.SUCCESS;

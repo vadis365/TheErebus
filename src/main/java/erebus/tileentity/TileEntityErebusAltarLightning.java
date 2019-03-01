@@ -8,6 +8,7 @@ import erebus.ModSounds;
 import erebus.entity.EntityAnimatedBlock;
 import erebus.entity.EntityUmberGolem;
 import erebus.network.client.PacketAltarAnimationTimer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -24,6 +25,11 @@ public class TileEntityErebusAltarLightning extends TileEntityErebusAltar implem
 	public boolean active;
 	public int fuzz;
 	private int spawnTicks;
+
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		return oldState.getBlock() != newState.getBlock();
+	}
 
 	@Override
 	public void update() {

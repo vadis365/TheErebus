@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "erebus:blocks/crop_mandrake_3"
+    }
+}

@@ -65,7 +65,7 @@ public class ComposterRegistry {
 
 	public static ItemStack isCompostable(ItemStack stack) {
 		if (stack.isEmpty())
-			return null;
+			return ItemStack.EMPTY;
 		for (ItemStack s : blacklist)
 			if (Utils.areStacksTheSame(s, stack, false))
 				return ItemStack.EMPTY;

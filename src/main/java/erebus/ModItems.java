@@ -23,7 +23,9 @@ import erebus.items.ItemCompost;
 import erebus.items.ItemCompoundGoggles;
 import erebus.items.ItemDeathCompass;
 import erebus.items.ItemDungeonIdols;
+import erebus.items.ItemEmptyErebusMap;
 import erebus.items.ItemErebusFood;
+import erebus.items.ItemErebusMap;
 import erebus.items.ItemErebusShield;
 import erebus.items.ItemFlowerSeeds;
 import erebus.items.ItemFoodHeartBerries;
@@ -85,11 +87,12 @@ public class ModItems {
 	public static final Item LIFE_BLOOD = new ItemFoodHeartBerries(0, 0F, false);
 	public static final Item TURNIP = new ItemSeedFood(4, 0.6F, ModBlocks.CROP_TURNIP, Blocks.FARMLAND).setCreativeTab(ModTabs.PLANTS);
 	public static final Item CABBAGE_SEEDS = new ItemSeedFood(4, 0.1F, ModBlocks.CROP_CABBAGE, Blocks.FARMLAND).setCreativeTab(ModTabs.PLANTS);
+	public static final Item MANDRAKE_ROOT = new ItemSeedFood(2, 0.2F, ModBlocks.CROP_MANDRAKE, Blocks.FARMLAND).setCreativeTab(ModTabs.PLANTS);
 	public static final Item STAG_HEART_RAW = new ItemFoodStagHeart(0, 0F, false, "raw");
 	public static final Item STAG_HEART_COOKED = new ItemFoodStagHeart(20, 0.5F, false, "cooked");
 	public static final Item SMOOTHIE = new ItemSmoothie();
 	public static final Item IDOLS = new ItemDungeonIdols();
-	
+
 	// JADE STUFF
 	public static final Item JADE_HELMET = new ItemArmorJade(EntityEquipmentSlot.HEAD);
 	public static final Item JADE_CHESTPLATE = new ItemArmorJade(EntityEquipmentSlot.CHEST);
@@ -173,6 +176,8 @@ public class ModItems {
 	public static final Item PLANTICIDE = new ItemPlanticide();
 	public static final Item SMOOTHIE_BOOK = new ItemSmoothieBook();
 	public static final Item HORN_OF_SUMMONING = new ItemHornOfSummoning();
+	public static final Item EREBUS_MAP = new ItemEmptyErebusMap();
+	public static final Item EREBUS_MAP_FILLED = new ItemErebusMap();
 
 	public static void init() {
 		try {

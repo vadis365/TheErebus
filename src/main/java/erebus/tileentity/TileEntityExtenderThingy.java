@@ -22,7 +22,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 public class TileEntityExtenderThingy extends TileEntityBasicInventory implements ITickable {
 
 	private boolean extending;
-	private EnumFacing direction;
+	public EnumFacing direction;
 	private IItemHandler itemHandler;
 
 	public TileEntityExtenderThingy() {

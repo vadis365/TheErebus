@@ -1,4 +1,4 @@
-package erebus.world.structure;
+package erebus.world.mapgen;
 
 import java.util.Random;
 

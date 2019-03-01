@@ -8,6 +8,7 @@ import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
+import erebus.world.feature.structure.WorldGenDungPile;
 import erebus.world.feature.tree.WorldGenBalsamTree;
 import erebus.world.feature.tree.WorldGenEucalyptusTree;
 import net.minecraft.block.BlockDoublePlant;
@@ -25,6 +26,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 	private final WorldGenerator genTreeAcacia = new WorldGenSavannaTree(true);
 	private final WorldGenerator genTreeEucalyptus = new WorldGenEucalyptusTree();
 	private final WorldGenerator genTreeBalsam = new WorldGenBalsamTree();
+	private final WorldGenDungPile genDungPile = new WorldGenDungPile();
 
 	@Override
 	public void decorate() {
@@ -79,6 +81,19 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 						break;
 				}
 			}
+
+		if (rand.nextBoolean() && rand.nextBoolean()) {
+			xx = x + offsetXZ();
+			zz = z + offsetXZ();
+
+			for (yy = 100; yy > 20; yy--) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.MIXED, pos)) {
+					if(genDungPile.generate(world, rand, pos.up()))
+						break;
+				}
+			}
+		}
 
 		for (attempt = 0; attempt < 420; attempt++) {
 			xx = x + offsetXZ();

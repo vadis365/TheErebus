@@ -32,13 +32,13 @@ public class RecipeGliderDye extends RecipesArmorDyes {
 					list.add(stack2);
 				}
 		}
-		return stack != null && !list.isEmpty();
+		return !stack.isEmpty() && !list.isEmpty();
 	}
 
 	// Messy and stolen from vanilla
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inventory) {
-		ItemStack result = null;
+		ItemStack result = ItemStack.EMPTY;
 		int[] rgb = new int[3];
 		int i = 0;
 		int j = 0;

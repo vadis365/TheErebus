@@ -176,7 +176,7 @@ public class BlockBerryBush extends Block {
 	}
 
 	public ItemStack getBerry() {
-		ItemStack item = null;
+		ItemStack item = ItemStack.EMPTY;
 		if (type == "JADE")
 			item = new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.JADE_BERRIES.ordinal());
 		if (type == "HEART")

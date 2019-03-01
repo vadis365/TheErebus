@@ -21,7 +21,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 public abstract class TileEntityBasicInventory extends TileEntity implements ISidedInventory {
 
 	public NonNullList<ItemStack> inventory;
-	private IItemHandler itemHandler;
+	public IItemHandler itemHandler;
 	private final String name;
 
 	public TileEntityBasicInventory(int invtSize, String name) {

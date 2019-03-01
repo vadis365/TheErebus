@@ -1,5 +1,6 @@
 package erebus.world.genlayer;
 
+import erebus.ModBiomes;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerFuzzyZoom;
@@ -22,7 +23,8 @@ public abstract class GenLayerErebus extends GenLayer {
 		genLayer = new GenLayerBiomes(100L, genLayer);
 		genLayer = GenLayerZoom.magnify(2000L, genLayer, 1);
 
-		genLayer = new GenLayerSubBiomes(101L, genLayer);
+		// Sub Biomes here
+		genLayer = new GenLayerSubBiomes(101L, genLayer, ModBiomes.ELYSIAN_FIELDS, ModBiomes.FIELDS_SUB_FOREST);
 		genLayer = GenLayerZoom.magnify(2100L, genLayer, biomeSize);
 
 		genLayer = new GenLayerVoronoiZoom(10L, genLayer);

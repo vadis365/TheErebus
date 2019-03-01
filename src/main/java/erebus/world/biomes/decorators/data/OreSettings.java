@@ -151,7 +151,6 @@ public final class OreSettings {
 			isEnabled = flag;
 		}
 
-		@SuppressWarnings("incomplete-switch")
 		public void setupDefault(OreSettings settings, boolean extraOres) {
 			settings.reset();
 			settings.setType(this);

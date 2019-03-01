@@ -16,7 +16,7 @@ item.erebus.materials.petrified_wood.name=Petrified Wood
 item.erebus.materials.bio_velocity.name=Acceleration Gland
 item.erebus.materials.elastic_fibre.name=Elastic Sinew
 item.erebus.materials.wasp_sting.name=Wasp Sting
-item.erebus.materials.bamboo_shoot.name=Bamboo Shoot
+item.erebus.materials.bamboo_shoot.name=Colossal Bamboo Shoot
 item.erebus.materials.red_gem.name=Redgem
 item.erebus.materials.bio_luminescence.name=Luminescent Secretion
 item.erebus.materials.supernatural_velocity.name=Hyperacceleration Gland
@@ -200,9 +200,13 @@ item.erebus.idols.idol_iron_umbergolem.name=Spawn Iron Umbergolem
 item.erebus.idols.idol_gold_umbergolem.name=Spawn Gold Umbergolem
 item.erebus.idols.idol_jade_umbergolem.name=Spawn Jade Umbergolem
 
+item.erebus.erebus_map.name=Empty Papyrus Map (N.Y.I)
+item.erebus.erebus_map_filled.name=Papyrus Map (N.Y.I)
+
 # Plants
 item.erebus.turnip.name=Turnips
 item.erebus.cabbage_seeds.name=Cabbage Seeds
+item.erebus.mandrake_root.name=Mandrake Root
 item.erebus.flower_seed_black.name=Black Flower Seeds
 item.erebus.flower_seed_red.name=Red Flower Seeds
 item.erebus.flower_seed_brown.name=Brown Flower Seeds
@@ -245,6 +249,7 @@ tile.erebus.volcanic_rock.name=Volcanic Rock
 tile.erebus.dust.name=Dust
 tile.erebus.dust_layer.name=Dust Layer
 tile.erebus.petrified_wood_rock.name=Petrified Wood Rock
+tile.erebus.dung.name=Dung
 
 # Amber
 tile.erebus.amber.name=Amber
@@ -289,8 +294,8 @@ tile.erebus.log_balsam_resinless.name=Depleted Balsam Wood
 tile.erebus.log_rotten.name=Rotten Wood
 tile.erebus.log_marshwood.name=Marshwood Wood
 tile.erebus.log_scorched.name=Scorched Wood
-tile.erebus.log_bamboo.name=Bamboo
-tile.erebus.hollow_log.name=Hollow Log
+tile.erebus.log_bamboo.name=Colossal Bamboo
+tile.erebus.hollow_log.name=Hollow Acacia Log
 
 # Saplings
 tile.erebus.sapling_mossbark.name=Mossbark Sapling
@@ -301,7 +306,7 @@ tile.erebus.sapling_balsam.name=Balsam Sapling
 tile.erebus.sapling_baobab.name=Baobab Sapling
 tile.erebus.sapling_marshwood.name=Marshwood Sapling
 tile.erebus.sapling_cypress.name=Cypress Sapling
-tile.erebus.sapling_bamboo.name=Bamboo Shoot
+tile.erebus.sapling_bamboo.name=Colossal Bamboo Shoot
 
 # Leaves
 tile.erebus.leaves_mossbark.name=Mossbark Leaves
@@ -452,6 +457,7 @@ tile.erebus.wall_umberpaver_webbed.name=Webbed Umberpaver Wall
 # Plants
 tile.erebus.crop_turnip.name=Turnips
 tile.erebus.crop_cabbage.name=Cabbage
+tile.erebus.crop_mandrake.name=Mandrake
 tile.erebus.heart_berry_bush.name=Heartberry Bush
 tile.erebus.jade_berry_bush.name=Jadeberry Bush
 tile.erebus.swamp_berry_bush.name=Swampberry Bush
@@ -483,6 +489,7 @@ tile.erebus.wall_plants_cultivated.mould_down_cultivated.name=Cultivated Mould
 tile.erebus.algae.name=Swamp Algae
 tile.erebus.glowshroom.name=Glowshroom
 tile.erebus.glowshroom_stalk_main.name=Glowshroom Stalk
+tile.erebus.hanging_web.name=Hanging Webs
 
 # Flowers
 tile.erebus.giant_flower.petal_black.name=Black Petal Block
@@ -507,8 +514,8 @@ tile.erebus.giant_flower_stigma.stigma_brown.name=Brown Stigma
 tile.erebus.giant_flower_stigma.stigma_blue.name=Blue Stigma
 tile.erebus.giant_flower_stigma.stigma_purple.name=Purple Stigma
 tile.erebus.giant_flower_stigma.stigma_cyan.name=Cyan Stigma
-tile.erebus.giant_flower_stigma.stigma_light_grey.name=Light Gray Stigma
-tile.erebus.giant_flower_stigma.stigma_grey.name=Gray Stigma
+tile.erebus.giant_flower_stigma.stigma_light_gray.name=Light Gray Stigma
+tile.erebus.giant_flower_stigma.stigma_gray.name=Gray Stigma
 tile.erebus.giant_flower_stigma.stigma_pink.name=Pink Stigma
 tile.erebus.giant_flower_stigma.stigma_yellow.name=Yellow Stigma
 tile.erebus.giant_flower_stigma.stigma_light_blue.name=Light Blue Stigma
@@ -588,6 +595,9 @@ tile.erebus.wasp_spawner.name=Wasp Spawner
 tile.erebus.zombie_ant_spawner.name=Zombie Ant Spawner
 tile.erebus.zombie_ant_soldier_spawner.name=Zombie Ant Soldier Spawner
 tile.erebus.magma_crawler_spawner.name=Magma Crawler Spawner
+tile.erebus.dung_spawner_bot_fly.name=Bot Fly Spawner
+tile.erebus.dung_spawner_fly.name=Fly Spawner
+tile.erebus.locust_spawner.name=Locust Spawner
 
 # Utility Blocks
 tile.erebus.petrified_crafting_table.name=Petrified Crafting Table
@@ -667,6 +677,10 @@ tile.erebus.temple_teleporter.temple_teleport_ne.name=Temple Teleporter
 tile.erebus.temple_teleporter.temple_teleport_nw.name=Temple Teleporter
 tile.erebus.temple_teleporter.temple_teleport_se.name=Temple Teleporter
 tile.erebus.temple_teleporter.temple_teleport_sw.name=Temple Teleporter
+tile.erebus.force_field.name=Force Field
+tile.erebus.force_lock.name=Force Lock (N.Y.I.)
+
+tile.erebus.ant_hill_block.name=Ant Hill (N.Y.I.)
 
 ##############
 # Containers #
@@ -827,8 +841,11 @@ tooltip.erebus.waterstriders=Enables you to walk on Water.
 tooltip.erebus.compost=Works just like bonemeal, Mr.
 tooltip.erebus.hornsummon=Summons some bees.
 tooltip.erebus.spraycan=Use on the top of blocks to keep those pesky critters away.
+
 tooltip.erebus.wandofpreservation=Shoots Amber stars and captures mobs. Silk touch the block to collect it or break it to free the mob.
 tooltip.erebus.webslinger=Can shoot Webs if available in your Inventory.
+tooltip.erebus.force_key= N.Y.I.
+
 
 ##########
 # Others #
@@ -859,4 +876,8 @@ erebus.book.smoothie.8=\u00A79Hot Hot Baby\n\n\u00A70Fire Bloom x2\nWasp Sting\n
 erebus.book.smoothie.9=\u00A79Don't Meddle With The Nettle\n\n\u00A70Nettle Leaf\nNettle Flower\nJade Berries\nExo Skeleton\n\n\u00A7dHoney\n\n\u00A74Effects:\nResistance
 erebus.book.smoothie.10=\u00A79Liquid Gold\n\n\u00A70Life Blood x2\nBamboo Shoot\nGlistering Melon\n\n\u00A7dMilk\n\n\u00A74Effects:\nSaturation
 erebus.book.smoothie.11=\u00A79Bryuf's Brew\n\n\u00A70Terpsishroom\nTurnip\nCompound Eyes\nHeart Berries\n\n\u00A7dHoney\n\u00A7dBeetle Juice\n\u00A7dAnti-Venom\n\u00A7dMilk\n\n\u00A74Effects:\nMighty Buffs
-
+erebus.book.smoothie.12=\u00A79Melonade\n\n\u00A70Melon Slice\n\n\u00A7dWater\n\n\u00A74Effects:\nRefreshing
+erebus.book.smoothie.13=\u00A79Sparkling Melonade\n\n\u00A70Glistening Melon Slice\n\n\u00A7dWater\n\n\u00A74Effects:\nSmall Regen
+erebus.book.smoothie.14=\u00A79Antivenom Bambucket\n\n\u00A70Bambucket\n\n\u00A70Nettle Leaves x2\n\n\u00A70Poison Glands x2\n\n\u00A7dBeetle Juice\n\n\u00A74Effects:\nImmunity to Poison
+erebus.book.smoothie.15=\u00A79Antivenom Bottle\n\n\u00A70Glass Bottle\n\n\u00A70Nettle Leaf\n\n\u00A70Poison Gland\n\n\u00A7dBeetle Juice\n\n\u00A74Effects:\nImmunity to Poison
+erebus.book.smoothie.16=\u00A79Antivenom Bucket\n\n\u00A70Bucket\n\n\u00A70Nettle Leaves x2\n\n\u00A70Poison Glands x2\n\n\u00A7dBeetle Juice\n\n\u00A74Effects:\nFilled Bucket

@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PacketBones implements IMessage, IMessageHandler<PacketBones, IMessage> {
 	
-	private int x, y, z;;
+	private int x, y, z;
 	private String name;
 
 	public PacketBones() {

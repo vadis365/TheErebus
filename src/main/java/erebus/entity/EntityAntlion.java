@@ -42,9 +42,9 @@ public class EntityAntlion extends EntityMob {
 	@Override
 	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.7D, false));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.5D, false));
 		tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-		tasks.addTask(3, new EntityAntlion.AIWander(this, 0.7D));
+		tasks.addTask(3, new EntityAntlion.AIWander(this, 0.5D));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityFireAnt.class, false));
@@ -57,7 +57,7 @@ public class EntityAntlion extends EntityMob {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 35D : 35D * ConfigHandler.INSTANCE.mobHealthMultipier);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 4D : 4D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.7D);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.6D);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
 	}

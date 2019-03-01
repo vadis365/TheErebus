@@ -4,6 +4,7 @@ import erebus.Erebus;
 import erebus.ModBlocks;
 import erebus.ModSounds;
 import erebus.network.client.PacketAltarAnimationTimer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
@@ -18,6 +19,11 @@ public class TileEntityErebusAltarRepair extends TileEntityErebusAltar implement
 	private int spawnTicks;
 	public boolean notUsed = true;
 	private int collisions;
+
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		return oldState.getBlock() != newState.getBlock();
+	}
 
 	@Override
 	public void update() {

@@ -28,20 +28,20 @@ public class TileEntityBambooCrate extends TileEntityBasicInventory {
 
 	@Override
 	public int[] getSlotsForFace(EnumFacing side) {
-		// TODO Auto-generated method stub
-		return null;
+		int[] SLOTS = new int[getSizeInventory()];
+		for (int index = 0; index < SLOTS.length; index++)
+			SLOTS[index] = index;
+		return SLOTS;
 	}
 
 	@Override
 	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

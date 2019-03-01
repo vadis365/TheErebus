@@ -9,10 +9,12 @@ import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockDoubleHeightPlant.EnumBlockHalf;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
-import erebus.world.feature.structure.WorldGenAntlionMaze;
+import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.structure.WorldGenAntlionDungeon;
 import erebus.world.feature.structure.WorldGenSpiderDungeons;
-import erebus.world.structure.MapGenErebusCaves;
-import erebus.world.structure.MapGenErebusRavine;
+import erebus.world.feature.tree.WorldGenGiantEucalyptus;
+import erebus.world.mapgen.MapGenErebusCaves;
+import erebus.world.mapgen.MapGenErebusRavine;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -359,7 +361,9 @@ public class ChunkProviderErebus implements IChunkGenerator, IChunkProvider {
 				for (int yInChunk = 127; yInChunk >= 0; --yInChunk) {
 					int index = (xInChunk * 16 + zInChunk) * 128 + yInChunk;
 
-					if (yInChunk <= 5 && yInChunk <= 0 + rand.nextInt(5) || yInChunk >= 122 && yInChunk >= 127 - rand.nextInt(5))
+					if (yInChunk == 0 || yInChunk == 127)
+						primer.setBlockState(xInChunk, yInChunk, zInChunk, Blocks.BEDROCK.getDefaultState());
+					else if (!ConfigHandler.smoothBedrock && (yInChunk <= 5 && yInChunk <= 1 + rand.nextInt(5) || yInChunk >= 122 && yInChunk >= 126 - rand.nextInt(5)))
 						primer.setBlockState(xInChunk, yInChunk, zInChunk, Blocks.BEDROCK.getDefaultState());
 					else {
 							if (biome == ModBiomes.SUBMERGED_SWAMP && yInChunk < swampWaterHeight && primer.getBlockState(xInChunk, yInChunk, zInChunk) == Blocks.AIR)
@@ -420,10 +424,30 @@ public class ChunkProviderErebus implements IChunkGenerator, IChunkProvider {
 			SpawnerErebus.onChunkPopulate(worldObj, rand, biome, blockCoord.getX() + 8, blockCoord.getZ() + 8);
 		}
 
+		WorldGenAntlionDungeon maze = new WorldGenAntlionDungeon();
+		if (biomeBase == ModBiomes.VOLCANIC_DESERT) 
+			maze.generate(worldObj, rand, new BlockPos(blockCoord.getX() + 16, 18, blockCoord.getZ() + 16));
+
+		WorldGenGiantEucalyptus giant_baobab = new WorldGenGiantEucalyptus();
+		if (biomeBase == ModBiomes.ULTERIOR_OUTBACK) {
+			for (int yUp = 16; yUp <= 80 ; yUp++) {
+				BlockPos pos = new BlockPos(blockCoord.getX() + 16, yUp, blockCoord.getZ() + 16);
+				if (checkSurface(SurfaceType.MIXED, pos)) {
+					giant_baobab.generate(worldObj, rand, pos);
+					break;
+				}
+			}
+		}
+
 		for (int attempt = 0; attempt < 14; ++attempt)
 			new WorldGenSpiderDungeons().generate(worldObj, rand, new BlockPos(blockCoord.getX() + rand.nextInt(16) + 8, rand.nextInt(128), blockCoord.getZ() + rand.nextInt(16) + 8));
-		new WorldGenAntlionMaze().generate(rand, x, z, worldObj, this, this);
+
 		BlockFalling.fallInstantly = false;
+	}
+
+	protected boolean checkSurface(SurfaceType surfaceType, BlockPos pos) {
+		//System.out.println("Surface Checked at "+ pos);
+		return surfaceType.matchBlock(worldObj.getBlockState(pos));
 	}
 
 	@Override

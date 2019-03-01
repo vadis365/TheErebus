@@ -98,7 +98,7 @@ public class EntityBotFlyLarva extends EntityMob implements IEntityAdditionalSpa
 		else if (getRidingEntity() != null)
 			return getRidingEntity().height * 0.75D - 1.0D;
 		else
-			return getYOffset();
+			return super.getYOffset();
 	}
 
 	@Override

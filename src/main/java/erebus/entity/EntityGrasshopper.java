@@ -37,7 +37,7 @@ public class EntityGrasshopper extends EntityCreature {
 
 	public EntityGrasshopper(World world) {
 		super(world);
-		setSize(1.3F, 0.5F);
+		setSize(1.3F, 0.75F);
 		stepHeight = 1.0F;
 		setPathPriority(PathNodeType.WATER, -8F);
 		jumpHelper = new EntityGrasshopper.GrasshopperJumpHelper(this);
@@ -163,6 +163,8 @@ public class EntityGrasshopper extends EntityCreature {
 	}
 
 	public void startJumping() {
+		if(isEating)
+			return;
 		setJumping(true);
 		jumpDuration = 10;
 		jumpTicks = 0;

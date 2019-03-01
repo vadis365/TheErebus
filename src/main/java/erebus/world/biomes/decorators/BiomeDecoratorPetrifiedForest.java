@@ -2,14 +2,14 @@ package erebus.world.biomes.decorators;
 
 import erebus.ModBlocks;
 import erebus.blocks.BlockDustLayer;
-import erebus.blocks.BlockThorns;
+import erebus.blocks.BlockHangingWeb;
+import erebus.blocks.BlockMandrake;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenRockSpike;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 
@@ -36,7 +36,7 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 
 	@Override
 	public void decorate() {
-		
+
 		for (attempt = 0; attempt < 240; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
@@ -73,7 +73,20 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 				}
 			}
 		}
-	
+
+		for (attempt = 0; attempt < 5; attempt++) {
+			xx = x + offsetXZ();
+			zz = z + offsetXZ();
+			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.DUST, pos))
+					if (world.isAirBlock(pos.up())) {
+						world.setBlockState(pos.up(), ModBlocks.CROP_MANDRAKE.getDefaultState().withProperty(BlockMandrake.AGE, Integer.valueOf(rand.nextInt(8))), 2);
+						break;
+					}
+			}
+		}
+
 		for (attempt = 0; attempt < 22; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(120);
@@ -85,7 +98,7 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 					break;
 			}
 		}
-		
+
 		int offset;
 		for (attempt = 0; attempt < 800; attempt++) {
 			xx = x + offsetXZ();
@@ -101,13 +114,13 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 				for (int vineY = rand.nextInt(30); vineY > 0; vineY--)
 					if (world.isAirBlock(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]))) {
 						if (offset == 3)
-							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.THORNS.getDefaultState().withProperty(BlockThorns.SOUTH, true), 2);
+							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.HANGING_WEB.getDefaultState().withProperty(BlockHangingWeb.SOUTH, true), 2);
 						if (offset == 2)
-							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.THORNS.getDefaultState().withProperty(BlockThorns.NORTH, true), 2);
+							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.HANGING_WEB.getDefaultState().withProperty(BlockHangingWeb.NORTH, true), 2);
 						if (offset == 1)
-							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.THORNS.getDefaultState().withProperty(BlockThorns.EAST, true), 2);
+							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.HANGING_WEB.getDefaultState().withProperty(BlockHangingWeb.EAST, true), 2);
 						if (offset == 0)
-							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.THORNS.getDefaultState().withProperty(BlockThorns.WEST, true), 2);
+							world.setBlockState(new BlockPos(xx + offsetX[offset], yy - vineY, zz + offsetZ[offset]), ModBlocks.HANGING_WEB.getDefaultState().withProperty(BlockHangingWeb.WEST, true), 2);
 					}
 			}
 		}

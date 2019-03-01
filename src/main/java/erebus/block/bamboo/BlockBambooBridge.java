@@ -65,6 +65,16 @@ public class BlockBambooBridge extends Block implements ITileEntityProvider {
 	}
 
 	@Override
+    public boolean causesSuffocation(IBlockState state) {
+    	return false;
+    }
+
+	@Override
+    public boolean isFullCube(IBlockState state){
+        return false;
+    }
+
+	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityBambooBridge();
 	}
