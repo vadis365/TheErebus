@@ -5,7 +5,7 @@
 #########
 
 # Materials
-item.erebus.materials.plate_exo.name=Chitin Plate
+item.erebus.materials.plate_exo.name=Exoskeleton Plate
 item.erebus.materials.jade.name=Jade
 item.erebus.materials.shard_bone.name=Bone Shard
 item.erebus.materials.bamboo.name=Bamboo
@@ -21,7 +21,7 @@ item.erebus.materials.red_gem.name=Redgem
 item.erebus.materials.bio_luminescence.name=Luminescent Secretion
 item.erebus.materials.supernatural_velocity.name=Hyperacceleration Gland
 item.erebus.materials.altar_fragment.name=Altar Fragment
-item.erebus.materials.reinforced_plate_exo.name=Reinforced Chitin Plate
+item.erebus.materials.reinforced_plate_exo.name=Reinforced Exoskeleton Plate
 item.erebus.materials.glider_wing.name=Glider Wing
 item.erebus.materials.scorpion_pincer.name=Scorpion Pincer
 item.erebus.materials.camo_powder.name=Camouflage Powder
@@ -117,15 +117,15 @@ item.erebus.bamboo_chestplate.name=Bamboo Chestplate
 item.erebus.bamboo_leggings.name=Bamboo Leggings
 item.erebus.bamboo_boots.name=Bamboo Boots
 
-item.erebus.exoskeleton_helmet.name=Chitin Helmet
-item.erebus.exoskeleton_chestplate.name=Chitin Chestplate
-item.erebus.exoskeleton_leggings.name=Chitin Leggings
-item.erebus.exoskeleton_boots.name=Chitin Boots
+item.erebus.exoskeleton_helmet.name=Exoskeleton Helmet
+item.erebus.exoskeleton_chestplate.name=Exoskeleton Chestplate
+item.erebus.exoskeleton_leggings.name=Exoskeleton Leggings
+item.erebus.exoskeleton_boots.name=Exoskeleton Boots
 
-item.erebus.rein_exoskeleton_helmet.name=Reinforced Chitin Helmet
-item.erebus.rein_exoskeleton_chestplate.name=Reinforced Chitin Chestplate
-item.erebus.rein_exoskeleton_leggings.name=Reinforced Chitin Leggings
-item.erebus.rein_exoskeleton_boots.name=Reinforced Chitin Boots
+item.erebus.rein_exoskeleton_helmet.name=Reinforced Exoskeleton Helmet
+item.erebus.rein_exoskeleton_chestplate.name=Reinforced Exoskeleton Chestplate
+item.erebus.rein_exoskeleton_leggings.name=Reinforced Exoskeleton Leggings
+item.erebus.rein_exoskeleton_boots.name=Reinforced Exoskeleton Boots
 
 item.erebus.rhino_exoskeleton_helmet.name=Rhino Plate Helmet
 item.erebus.rhino_exoskeleton_chestplate.name=Rhino Plate Chestplate
@@ -161,9 +161,9 @@ item.erebus.max_speed_bow.name=Maximum Speed Bow
 
 # Shields
 item.erebus.bamboo_shield.name=Bamboo Shield
-item.erebus.exoskeleton_shield.name=Chitin Shield
+item.erebus.exoskeleton_shield.name=Exoskeleton Shield
 item.erebus.jade_shield.name=Jade Shield
-item.erebus.rein_exoskeleton_shield.name=Reinforced Chitin Shield
+item.erebus.rein_exoskeleton_shield.name=Reinforced Exoskeleton Shield
 item.erebus.rhino_exoskeleton_shield.name=Rhino Plate Shield
 
 # Misc
@@ -656,13 +656,13 @@ tile.erebus.capstone.capstone_jade_active.name=Active Jade Capstone
 
 tile.erebus.temple_brick_unbreaking.temple_brick.name=Temple Brick
 tile.erebus.temple_brick_unbreaking.temple_brick_jade.name=Temple Slot (Jade)
-tile.erebus.temple_brick_unbreaking.temple_brick_exo.name=Temple Slot (Chitin)
+tile.erebus.temple_brick_unbreaking.temple_brick_exo.name=Temple Slot (Exoskeleton)
 tile.erebus.temple_brick_unbreaking.temple_brick_cream.name=Temple Slot (Magma Cream)
 tile.erebus.temple_brick_unbreaking.temple_brick_eye.name=Temple Slot (Magma Crawler Eye)
 tile.erebus.temple_brick_unbreaking.temple_brick_string.name=Temple Slot (String)
 
 tile.erebus.temple_brick_unbreaking.temple_brick_jade_active.name=Active Temple Slot (Jade)
-tile.erebus.temple_brick_unbreaking.temple_brick_exo_active.name=Active Temple Slot (Chitin)
+tile.erebus.temple_brick_unbreaking.temple_brick_exo_active.name=Active Temple Slot (Exoskeleton)
 tile.erebus.temple_brick_unbreaking.temple_brick_cream_active.name=Active Temple Slot (Magma Cream)
 tile.erebus.temple_brick_unbreaking.temple_brick_eye_active.name=Active Temple Slot (Magma Crawler Eye)
 tile.erebus.temple_brick_unbreaking.temple_brick_string_active.name=Active Temple Slot (String)
