@@ -295,7 +295,7 @@ tile.erebus.log_rotten.name=Rotten Wood
 tile.erebus.log_marshwood.name=Marshwood Wood
 tile.erebus.log_scorched.name=Scorched Wood
 tile.erebus.log_bamboo.name=Colossal Bamboo
-tile.erebus.hollow_log.name=Hollow Acacia Log
+tile.erebus.hollow_log.name=Hollow Log
 
 # Saplings
 tile.erebus.sapling_mossbark.name=Mossbark Sapling
