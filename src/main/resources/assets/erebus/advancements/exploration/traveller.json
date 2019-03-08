@@ -1,0 +1,72 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:filled_map",
+			"data": 0
+        },
+        "title": "A True Traveller Never Arrives",
+		"description": "Travel to all the biomes the Erebus has to offer.",
+		"frame": "challenge"
+	},
+	"parent": "erebus:exploration/root",
+	"criteria": {
+		"jungle": {
+			"trigger": "minecraft:location",
+			"conditions": {
+				"biome": "erebus:UNDERGROUND_JUNGLE"
+			}
+		},
+		"desert": {
+			"trigger": "minecraft:location",
+			"conditions": {
+				"biome": "erebus:VOLCANIC_DESERT"
+			}
+		},
+		"savannah": {
+			"trigger": "minecraft:location",
+			"conditions": {
+				"biome": "erebus:SUBTERRANEAN_SAVANNAH"
+			}
+		},
+		"elysian": {
+			"trigger": "minecraft:location",
+			"conditions": {
+				"biome": "erebus:ELYSIAN_FIELDS"
+			}
+		},
+		"outback": {
+			"trigger": "minecraft:location",
+			"conditions": {
+				"biome": "erebus:ULTERIOR_OUTBACK"
+			}
+		},
+		"fungal": {
+			"trigger": "minecraft:location",
+			"conditions": {
+				"biome": "erebus:FUNGAL_FOREST"
+			}
+		},
+		"swamp": {
+			"trigger": "minecraft:location",
+			"conditions": {
+				"biome": "erebus:SUBMERGED_SWAMP"
+			}
+		},
+		"petrified": {
+			"trigger": "minecraft:location",
+			"conditions": {
+				"biome": "erebus:PETRIFIED_FOREST"
+			}
+		}
+	},
+	"requirements": [
+		["jungle"],
+		["desert"],
+		["savannah"],
+		["elysian"],
+		["outback"],
+		["fungal"],
+		["swamp"],
+		["petrified"]
+	]	
+}

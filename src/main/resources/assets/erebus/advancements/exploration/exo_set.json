@@ -1,0 +1,58 @@
+{
+   "display": {
+      "icon": {
+         "item": "erebus:exoskeleton_chestplate"
+      },
+      "title": "Feelin' Invertebrate",
+      "description": "Obtain all four pieces of the Exoskeleton armour set."
+   },
+   "parent": "erebus:exploration/entomology",
+   "criteria": {
+      "helmet": {
+         "trigger": "minecraft:inventory_changed",
+         "conditions": {
+			"items": [
+				{
+					"item": "erebus:exoskeleton_helmet"
+				}
+			]
+         }
+      },
+      "chest": {
+         "trigger": "minecraft:inventory_changed",
+         "conditions": {
+			"items": [
+				{		 
+				"item": "erebus:exoskeleton_chestplate"
+				}
+			]
+         }
+      },
+      "leg": {
+         "trigger": "minecraft:inventory_changed",
+         "conditions": {
+			"items": [
+				{	
+				"item": "erebus:exoskeleton_leggings"
+				}
+			]
+         }
+      },
+      "boot": {
+         "trigger": "minecraft:inventory_changed",
+         "conditions": {
+			"items": [
+				{	
+				"item": "erebus:exoskeleton_boots"
+				}
+			]
+         }
+      }
+   },
+   "requirements":[
+      [ "helmet" ],
+      [ "chest" ],
+      [ "leg" ],
+      [ "boot" ]
+   ]
+}

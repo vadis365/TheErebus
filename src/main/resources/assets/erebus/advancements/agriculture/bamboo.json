@@ -1,0 +1,43 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:materials",
+			"data": 3
+        },
+        "title": "Colossally Bamboozled",
+		"description": "Get your hands on some Colossal Bamboo and Colossal Bamboo Shoots.",
+		"hidden": true
+	},
+	"parent": "erebus:agriculture/root",
+	"criteria": {
+		"collect_bamboo": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:materials",
+						"data": 3
+					}
+				]
+			}
+		},
+		"collect_shoot": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:sapling_bamboo"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ "collect_bamboo" ],
+	[ "collect_shoot" ]
+	]
+}
+		
+		
+				
+	

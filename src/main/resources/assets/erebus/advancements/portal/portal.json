@@ -1,0 +1,20 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:leaves",
+			"data": 0
+        },
+        "title": "Constructing the Gate",
+		"description": "Construct and activate the Erebus portal by placing any type of leaf blocks in a frame and inserting the Staff of Gaea into the Gaean Keystone near it.",
+		"frame": "goal"
+	},
+	"parent":"erebus:portal/portal_activator",
+	"criteria": {
+		"portal_activate": {
+			"trigger": "minecraft:placed_block",
+			"conditions": {
+				"block": "erebus:gaean_keystone"
+			}
+		}
+	}
+}

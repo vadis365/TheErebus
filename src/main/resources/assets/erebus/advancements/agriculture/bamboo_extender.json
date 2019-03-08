@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:bamboo_extender"
+        },
+        "title": "Fully Extended UwU",
+		"description": "Craft the Bamboo Extender."
+	},
+	"parent": "erebus:agriculture/bamboo",
+	"criteria": {
+		"craft_extender": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:bamboo_extender"
+					}
+				]
+			}
+		}
+	}
+}
+		
+		
+				
+	

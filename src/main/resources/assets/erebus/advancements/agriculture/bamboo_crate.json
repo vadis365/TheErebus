@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:bamboo_crate"
+        },
+        "title": "Make Erebus Crate Again",
+		"description": "Craft yourself a Bamboo Crate."
+	},
+	"parent": "erebus:agriculture/bamboo",
+	"criteria": {
+		"craft_crate": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:bamboo_crate"
+					}
+				]
+			}
+		}
+	}
+}
+		
+		
+				
+	

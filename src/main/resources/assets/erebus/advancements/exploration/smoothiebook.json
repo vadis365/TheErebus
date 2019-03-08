@@ -1,0 +1,23 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:smoothie_book"
+        },
+        "title": "The Menu",
+		"description": "Get the smoothie guide book by right-clicking the Smoothie-matic 2000 with a blank book.",
+		"hidden": false
+	},
+	"parent": "erebus:exploration/smoothiemaker",
+	"criteria": {
+		"guidebook": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:smoothie_book"
+					}
+				]
+			}
+		}
+	}
+}

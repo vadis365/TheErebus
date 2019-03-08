@@ -1,0 +1,25 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:materials",
+			"data": 0
+        },
+        "title": "Aggressive Entomology",
+		"description": "Slay a creature native to the Erebus (WIP: In the meantime, obtain some Exoskeleton to trigger).",
+		"hidden": false
+	},
+	"parent": "erebus:exploration/root",
+	"criteria": {
+		"slay": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:materials",
+					"data": 0
+					}
+				]
+			}
+		}	
+	}
+}

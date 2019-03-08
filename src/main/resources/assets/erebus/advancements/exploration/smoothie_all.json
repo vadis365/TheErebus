@@ -1,0 +1,136 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:materials",
+			"data": 59
+        },
+        "title": "Smoothie Enthusiast",
+		"description": "Brew all 10 smoothies.",
+		"frame": "challenge"
+	},
+	"parent": "erebus:exploration/smoothiebook",
+	"criteria": {
+		"smoothie_0": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:smoothie",
+					"data": 0
+					}
+				]
+			}
+		},
+		"smoothie_1": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:smoothie",
+					"data": 1
+					}
+				]
+			}
+		},
+		"smoothie_2": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:smoothie",
+					"data": 2
+					}
+				]
+			}
+		},
+		"smoothie_3": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:smoothie",
+					"data": 3
+					}
+				]
+			}
+		},
+		"smoothie_4": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:smoothie",
+					"data": 4
+					}
+				]
+			}
+		},
+		"smoothie_5": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:smoothie",
+					"data": 5
+					}
+				]
+			}
+		},
+		"smoothie_6": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:smoothie",
+					"data": 6
+					}
+				]
+			}
+		},
+		"smoothie_7": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:smoothie",
+					"data": 7
+					}
+				]
+			}
+		},
+		"smoothie_8": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:smoothie",
+					"data": 8
+					}
+				]
+			}
+		},
+		"smoothie_9": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:smoothie",
+					"data": 9
+					}
+				]
+			}
+		}		
+	},
+	"requirements": [
+	[ "smoothie_0" ],
+	[ "smoothie_1" ],
+	[ "smoothie_2" ],
+	[ "smoothie_3" ],
+	[ "smoothie_4" ],
+	[ "smoothie_5" ],
+	[ "smoothie_6" ],
+	[ "smoothie_7" ],
+	[ "smoothie_8" ],
+	[ "smoothie_9" ]
+	]
+}

@@ -1,0 +1,22 @@
+{
+    "display": {
+        "icon": {
+				"item": "erebus:ant_taming_amulet"
+        },
+        "title": "Gettin' Antsy",
+		"description": "Craft the Ant Taming Amulet and tame an Ant."
+	},
+	"parent": "erebus:agriculture/silo",
+	"criteria": {
+		"amulet_get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:ant_taming_amulet"
+					}
+				]
+			}
+		}
+	}
+}

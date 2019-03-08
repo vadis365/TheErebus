@@ -1,0 +1,24 @@
+{
+    "display": {
+        "icon": {
+				"item": "erebus:planks",
+				"data": 12
+        },
+        "title": "Resist Those Pesky Larvae",
+		"description": "Craft some Varnished Planks."
+	},
+	"parent": "erebus:agriculture/root",
+	"criteria": {
+		"varnished_planks": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:planks",
+						"data": 12
+					}
+				]
+			}
+		}
+	}
+}

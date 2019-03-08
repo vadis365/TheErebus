@@ -1,0 +1,58 @@
+{
+   "display": {
+      "icon": {
+         "item": "erebus:rein_exoskeleton_chestplate"
+      },
+      "title": "Truth Is... I Am Exo Man",
+      "description": "Obtain all four pieces of the Reinforced Exoskeleton armour set."
+   },
+   "parent": "erebus:exploration/exo_set",
+   "criteria": {
+      "helmet": {
+         "trigger": "minecraft:inventory_changed",
+         "conditions": {
+			"items": [
+				{
+					"item": "erebus:rein_exoskeleton_helmet"
+				}
+			]
+         }
+      },
+      "chest": {
+         "trigger": "minecraft:inventory_changed",
+         "conditions": {
+			"items": [
+				{		 
+				"item": "erebus:rein_exoskeleton_chestplate"
+				}
+			]
+         }
+      },
+      "leg": {
+         "trigger": "minecraft:inventory_changed",
+         "conditions": {
+			"items": [
+				{	
+				"item": "erebus:rein_exoskeleton_leggings"
+				}
+			]
+         }
+      },
+      "boot": {
+         "trigger": "minecraft:inventory_changed",
+         "conditions": {
+			"items": [
+				{	
+				"item": "erebus:rein_exoskeleton_boots"
+				}
+			]
+         }
+      }
+   },
+   "requirements":[
+      [ "helmet" ],
+      [ "chest" ],
+      [ "leg" ],
+      [ "boot" ]
+   ]
+}

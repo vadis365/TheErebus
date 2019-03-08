@@ -1,0 +1,69 @@
+{
+   "display": {
+      "icon": {
+         "item": "erebus:jade_paxel"
+		},
+		"title": "Extremely Jaded",
+		"description": "Obtain all four pieces of the Jade armour set and the Jade Paxel."
+   },
+   "parent": "erebus:exploration/jade_ore",
+   "criteria": {
+      "helmet": {
+         "trigger": "minecraft:inventory_changed",
+         "conditions": {
+			"items": [
+				{
+					"item": "erebus:jade_helmet"
+				}
+			]
+         }
+      },
+      "chest": {
+         "trigger": "minecraft:inventory_changed",
+         "conditions": {
+			"items": [
+				{		 
+				"item": "erebus:jade_chestplate"
+				}
+			]
+         }
+      },
+      "leg": {
+         "trigger": "minecraft:inventory_changed",
+         "conditions": {
+			"items": [
+				{	
+				"item": "erebus:jade_leggings"
+				}
+			]
+         }
+      },
+      "boot": {
+         "trigger": "minecraft:inventory_changed",
+         "conditions": {
+			"items": [
+				{	
+				"item": "erebus:jade_boots"
+				}
+			]
+         }
+      },
+      "paxel": {
+         "trigger": "minecraft:inventory_changed",
+         "conditions": {
+			"items": [
+				{	
+				"item": "erebus:jade_paxel"
+				}
+			]
+         }
+      }
+   },
+   "requirements":[
+      [ "helmet" ],
+      [ "chest" ],
+      [ "leg" ],
+      [ "boot" ],
+      [ "paxel" ]
+   ]
+}

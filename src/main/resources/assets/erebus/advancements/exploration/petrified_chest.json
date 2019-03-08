@@ -1,0 +1,22 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:petrified_wood_chest"
+        },
+        "title": "I Love Big Chests",
+		"description": "Craft a Petrified Wood Chest, an expensive but more spaceous chest."
+	},
+	"parent": "erebus:exploration/petrified_wood",
+	"criteria": {
+		"get_chest": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:petrified_wood_chest"
+					}
+				]
+			}
+		}
+	}
+}

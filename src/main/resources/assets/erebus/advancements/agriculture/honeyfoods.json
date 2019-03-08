@@ -1,0 +1,37 @@
+{
+    "display": {
+        "icon": {
+				"item": "erebus:honey_treat"
+        },
+        "title": "What's For Dinner, Honey?",
+		"description": "Prepare yourself a wonderful meal by crafting all Honey-related foods."
+	},
+	"parent": "erebus:agriculture/honey",
+	"criteria": {
+		"treat": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:honey_treat"
+					}
+				]
+			}
+		},
+		"sandwich": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:erebus_food",
+						"data": 10
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ "treat" ],
+	[ "sandwich" ]
+	]
+}

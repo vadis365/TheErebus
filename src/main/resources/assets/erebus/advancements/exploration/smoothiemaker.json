@@ -1,0 +1,23 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:smoothie_maker"
+        },
+        "title": "For The Juiceheads",
+		"description": "Craft an ErebusCo. Smoothie-matic 2000, all rights reserved.",
+		"hidden": false
+	},
+	"parent": "erebus:exploration/root",
+	"criteria": {
+		"maker": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:smoothie_maker"
+					}
+				]
+			}
+		}
+	}
+}

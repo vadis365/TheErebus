@@ -1,0 +1,25 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:planticide"
+        },
+        "title": "More Effective Than Herbicide",
+		"description": "Mix together some Planticide to destroy some flora."
+	},
+	"parent": "erebus:exploration/poison_sac",
+	"criteria": {
+		"planticide": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:planticide"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ "planticide" ]
+	]
+}

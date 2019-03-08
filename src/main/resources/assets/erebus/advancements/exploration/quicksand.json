@@ -1,0 +1,20 @@
+{
+	"display": {
+		"icon": {
+			"item": "erebus:quick_sand"
+		},
+        "title": "Let That Sink In",
+		"description": "Get yourself stuck in some Quicksand.",
+		"hidden": true
+	},
+	"parent": "erebus:exploration/root",
+	"criteria": {
+		"louse": {
+            "trigger": "minecraft:enter_block",
+			"conditions": {
+				"block": "erebus:quick_sand"
+            }
+        }
+	}
+}
+		

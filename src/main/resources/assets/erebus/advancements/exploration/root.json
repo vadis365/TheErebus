@@ -1,0 +1,20 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:portal"
+        },
+        "title": "The Erebus",
+		"description": "Travel to a long lost world, overrun by gargantuan arthropods: The Erebus.",
+		"background": "erebus:textures/blocks/umberstone.png",
+		"show_toast": true,
+		"announce_to_chat": true
+	},
+	"criteria": {
+		"in_ere": {
+			"trigger": "minecraft:location",
+			"conditions": {
+				"dimension": "EREBUS"
+			}
+		}
+	}
+}
