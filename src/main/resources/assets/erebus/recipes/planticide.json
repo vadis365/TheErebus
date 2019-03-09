@@ -6,10 +6,12 @@
       "data": 21
     },
     {
-      "item": "#SLIMEBALL"
+      "item": "erebus:materials",
+	  "data": 28
     },
     {
-      "item": "#DYEWHITE"
+      "item": "minecraft:dye"
+	  "data": 15
     }
   ],
   "result": {

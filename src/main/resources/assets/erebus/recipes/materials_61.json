@@ -1,13 +1,18 @@
 {
-  "type": "forge:ore_shapeless",
-  "ingredients": [
-    {
-      "item": "minecraft:cauldron"
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " N ",
+    "N N",
+    " B "  
+	],
+  "key": {
+    "B": {
+      "item": "minecraft:bucket"
     },
-    {
-      "item": "#STICKWOOD"
+    "N": {
+      "item": "minecraft:iron_nugget"
     }
-  ],
+  },
   "result": {
     "item": "erebus:materials",
     "data": 61
