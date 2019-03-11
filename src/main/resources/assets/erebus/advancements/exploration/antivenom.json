@@ -13,8 +13,7 @@
 			"conditions": {
 				"items": [
 					{
-					"item": "erebus:materials",
-					"data": 21
+					"item": "erebus:anti_venom_bottle"
 					}
 				]
 			}
