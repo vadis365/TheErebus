@@ -1,0 +1,25 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:materials",
+			"data": 28
+        },
+        "title": "Utterly Repulsive",
+		"description": "Get your hands on some Repellent.",
+		"hidden": true
+	},
+	"parent": "erebus:exploration/entomology",
+	"criteria": {
+		"repellent": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:materials",
+					"data": 28
+					}
+				]
+			}
+		}
+	}
+}

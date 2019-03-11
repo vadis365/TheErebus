@@ -1,0 +1,31 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:erebus_food",
+			"data": 6
+        },
+        "title": "When eating bamboo sprouts...",
+		"description": "Craft yourself some Bamboo Soup."
+	},
+	"parent": "erebus:agriculture/bamboo",
+	"criteria": {
+		"craft_bamboo_soup": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:erebus_food",
+					"data": 6
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ "craft_bamboo_soup" ]
+	]
+}
+		
+		
+				
+	

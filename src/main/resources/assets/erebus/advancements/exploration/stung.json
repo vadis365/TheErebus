@@ -1,0 +1,33 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:materials",
+			"data": 10
+        },
+        "title": "The Boy with the Thorn in His Side",
+		"description": "Get stung by a Wasp or a Scorpion.",
+		"hidden": true
+	},
+	"parent": "erebus:exploration/entomology",
+	"criteria": {
+		"wasp": {
+			"trigger": "minecraft:entity_hurt_player",
+			"conditions": {
+				"source_entity": {
+					"type": "erebus:wasp"
+				}
+			}
+		},
+		"scorpion": {
+			"trigger": "minecraft:entity_hurt_player",
+			"conditions": {
+				"source_entity": {
+					"type": "erebus:scorpion"
+				}
+			}
+		}	
+	},
+	"requirements": [
+		["wasp", "scorpion"]
+	]
+}

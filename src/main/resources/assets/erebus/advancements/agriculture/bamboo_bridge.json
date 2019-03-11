@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:bamboo_bridge"
+        },
+        "title": "Seven Bridges Road",
+		"description": "Craft the Bamboo Bridge."
+	},
+	"parent": "erebus:agriculture/bamboo_extender",
+	"criteria": {
+		"craft_bridge": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:bamboo_bridge"
+					}
+				]
+			}
+		}
+	}
+}
+		
+		
+				
+	

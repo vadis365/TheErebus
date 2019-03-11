@@ -1,0 +1,22 @@
+{
+    "display": {
+        "icon": {
+				"item": "erebus:honey_comb"
+        },
+        "title": "Beauty Is...",
+		"description": "Construct a Honeycomb."
+	},
+	"parent": "erebus:agriculture/nectar",
+	"criteria": {
+		"get_comb": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:honey_comb"
+					}
+				]
+			}
+		}
+	}
+}

@@ -1,0 +1,25 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:materials",
+			"data": 21
+        },
+        "title": "Your Cruel Device",
+		"description": "Snag a Poison Sac from the innards of one of the many venomous critters that inhabit the Erebus.",
+		"hidden": true
+	},
+	"parent": "erebus:exploration/entomology",
+	"criteria": {
+		"sac_get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:materials",
+					"data": 21
+					}
+				]
+			}
+		}
+	}
+}

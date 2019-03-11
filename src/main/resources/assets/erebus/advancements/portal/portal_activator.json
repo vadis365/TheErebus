@@ -1,0 +1,36 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:portal_activator"
+        },
+        "title": "The Key and the Lock",
+		"description": "Obtain the Staff of Gaea and the Gaean Keystone."
+	},
+	"parent":"erebus:portal/gaean_gem",
+	"criteria": {
+		"get_activator": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:portal_activator"
+					}
+				]
+			}
+		},
+		"get_keystone": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:gaean_keystone"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		["get_activator"], 
+		["get_keystone"]
+	]
+}

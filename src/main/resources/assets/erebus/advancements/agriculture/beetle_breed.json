@@ -1,0 +1,29 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:erebus_food",
+			"data": 0
+        },
+        "title": "Turnip to Make 'Em Turn Up",
+		"description": "Get two Beetles in the mood by feeding them the most erotic of vegetables - to them at least, we don't judge."
+	},
+	"parent": "erebus:agriculture/turnip",
+	"criteria": {
+		"beetlebred": {
+			"trigger": "minecraft:bred_animals",
+			"conditions": {
+				"parent": {
+					"type": "erebus:erebus.beetle"
+				}
+			}
+		},
+		"beetlebred2": {
+			"trigger": "minecraft:bred_animals",
+			"conditions": {
+				"partner": {
+					"type": "erebus:erebus.beetle"
+				}
+			}
+		}	
+	}
+}

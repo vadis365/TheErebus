@@ -2,13 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "XRX",
-    "XXX",
+    "XSX",
     "SSS"
   ],
   "key": {
     "R": {
-      "item": "erebus:red_gem",
-      "data": 0
+      "item": "minecraft:bucket"
     },
     "S": {
       "item": "erebus:umberstone",

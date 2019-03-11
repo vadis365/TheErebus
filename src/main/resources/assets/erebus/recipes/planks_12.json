@@ -5,6 +5,19 @@
       "item": "#PLANKWOOD"
     },
     {
+      "item": "#PLANKWOOD"
+    },
+    {
+      "item": "#PLANKWOOD"
+    },
+    {
+      "item": "#PLANKWOOD"
+    },
+    {
+      "item": "erebus:materials",
+      "data": 40
+    },
+    {
       "item": "erebus:materials",
       "data": 40
     },
@@ -19,6 +32,7 @@
   ],
   "result": {
     "item": "erebus:planks",
-    "data": 12
+    "data": 12,
+    "count": 4
   }
 }

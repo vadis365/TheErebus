@@ -1,0 +1,22 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:woodlouse_ball"
+        },
+        "title": "Killer Ball",
+		"description": "Catch a Woodlouse by right-clicking it with an empty hand."
+	},
+	"parent": "erebus:exploration/woodlouse",
+	"criteria": {
+		"ball": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:woodlouse_ball"
+					}
+				]
+			}
+		}
+	}
+}

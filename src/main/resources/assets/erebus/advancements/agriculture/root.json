@@ -1,0 +1,201 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:jade_hoe"
+        },
+        "title": "Subterranean Agriculture",
+		"description": "Even though the sun does not shine down here, there are still many plants and other growables to be found. Dive into the wonderful world of subterranean agriculture!",
+		"background": "erebus:textures/blocks/planks_varnished.png",
+		"show_toast": true,
+		"announce_to_chat": true
+	},
+	"criteria": {
+		"turnip": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:turnip"
+					}
+				]
+			}
+		},
+		"cabbage": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:cabbage_seeds"
+					}
+				]
+			}
+		},
+		"shoot": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:sapling_bamboo"
+					}
+				]
+			}
+		},
+		"flowers": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:flower_seed"
+					}
+				]
+			}
+		},
+		"dark_fruit": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:materials",
+						"data": 32
+					}
+				]
+			}
+		},
+		"mould": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:wall_plants",
+						"data": 7
+					}
+				]
+			}
+		},
+		"moss": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:wall_plants",
+						"data": 1
+					}
+				]
+			}
+		},
+		"mandrake": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:mandrake_root"
+					}
+				]
+			}
+		},
+		"swampberry": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:swamp_berry_bush"
+					}
+				]
+			}
+		},
+		"heartberry": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:heart_berry_bush"
+					}
+				]
+			}
+		},
+		"jadeberry": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:jade_berry_bush"
+					}
+				]
+			}
+		},
+		"jadeberries": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:materials",
+						"data": 55
+					}
+				]
+			}
+		},
+		"heartberries": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:heart_berries"
+					}
+				]
+			}
+		},
+		"swampberries": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:erebus_food",
+						"data": 14
+					}
+				]
+			}
+		},
+		"prickly": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:prickly_pear"
+					}
+				]
+			}
+		},
+		"bamboo": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:materials",
+						"data": 3
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ 
+	"turnip", 
+	"cabbage", 
+	"shoot", 
+	"flowers", 
+	"dark_fruit", 
+	"mould", 
+	"moss", 
+	"mandrake", 
+	"swampberry", 
+	"heartberry", 
+	"jadeberry", 
+	"jadeberries", 
+	"heartberries", 
+	"swampberries",
+	"prickly",
+	"bamboo"
+	]
+	]
+	
+}

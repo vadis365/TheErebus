@@ -7,14 +7,14 @@
   ],
   "key": {
     "0": {
-      "item": "erebus:materials",
-      "data": 19
+      "item": "minecraft:bucket"
     },
     "$": {
       "item": "erebus:amber_glass"
     },
     "J": {
-      "item": "#GEMJADE"
+      "item": "erebus:planks",
+      "data": 12
     }
   },
   "result": {

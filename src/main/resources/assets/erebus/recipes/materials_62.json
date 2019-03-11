@@ -10,10 +10,11 @@
       "data": 12
     },
     {
-      "item": "minecraft:potato"
+      "item": "erebus:erebus_food",
+      "data": 17
     },
     {
-      "item": "minecraft:carrot"
+      "item": "erebus:turnip"
     },
     {
       "item": "erebus:erebus_food",

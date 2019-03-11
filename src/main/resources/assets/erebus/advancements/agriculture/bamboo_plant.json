@@ -1,0 +1,22 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:sapling_bamboo"
+        },
+        "title": "... remember who planted them.",
+		"description": "Plant a Colossal Bamboo Shoot."
+	},
+	"parent": "erebus:agriculture/bamboo_soup",
+	"criteria": {
+		"plant_shoot": {
+			"trigger": "minecraft:placed_block",
+			"conditions": {
+				"block": "erebus:sapling_bamboo"
+			}
+		}
+	}
+}
+		
+		
+				
+	

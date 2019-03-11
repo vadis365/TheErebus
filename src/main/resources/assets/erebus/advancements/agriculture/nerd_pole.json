@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:bamboo_nerd_pole"
+        },
+        "title": "Piercing the Heavens",
+		"description": "Craft the Bamboo Nerd Pole."
+	},
+	"parent": "erebus:agriculture/bamboo_extender",
+	"criteria": {
+		"craft_pole": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:bamboo_nerd_pole"
+					}
+				]
+			}
+		}
+	}
+}
+		
+		
+				
+	

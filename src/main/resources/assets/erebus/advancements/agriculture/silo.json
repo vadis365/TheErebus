@@ -1,0 +1,47 @@
+{
+    "display": {
+        "icon": {
+				"item": "erebus:silo_supports"
+        },
+        "title": "Every Farm Needs One",
+		"description": "Craft the three parts of the Silo multiblock."
+	},
+	"parent": "erebus:agriculture/varnished_planks",
+	"criteria": {
+		"roof": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:silo_roof"
+					}
+				]
+			}
+		},
+		"tank": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:silo_tank"
+					}
+				]
+			}
+		},
+		"supports": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:silo_supports"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ "roof" ],
+	[ "tank" ],
+	[ "supports" ]
+	]
+}

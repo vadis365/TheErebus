@@ -1,0 +1,22 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:altar_offering"
+        },
+        "title": "Contacting the Gods",
+		"description": "Create an Offering Altar."		
+	},
+	"parent": "erebus:portal/root",
+	"criteria": {
+		"collect_jade": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:altar_offering"
+					}
+				]
+			}
+		}
+	}
+}

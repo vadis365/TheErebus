@@ -1,0 +1,53 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:anti_venom_bottle"
+        },
+        "title": "A Vaccine and a Cure",
+		"description": "Brew some Anti-venom in the Smoothie Maker."
+	},
+	"parent": "erebus:exploration/smoothiemaker",
+	"criteria": {
+		"bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:materials",
+					"data": 21
+					}
+				]
+			}
+		},
+		"bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:bambucket",
+					"nbt": "{Fluid:{FluidName:\"anti_venom\",Amount:1000}}"
+					}
+				]
+			}
+		},
+		"bambucket": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "forge:bucketfilled",
+					"nbt": "{FluidName:\"anti_venom\",Amount:1000}"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ 
+	"bottle", 
+	"bucket",
+	"bambucket"
+	]
+	]
+
+}

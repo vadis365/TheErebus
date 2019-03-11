@@ -1,0 +1,39 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:whetstone",
+			"data": 1
+        },
+        "title": "Keen Mind, Sharper Sword",
+		"description": "Get your hands on some Whetstone Powder and apply it to an unenchanted Whetstone."
+	},
+	"parent": "erebus:exploration/woodlouse",
+	"criteria": {
+		"powder": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:materials",
+					"data": 23
+					}
+				]
+			}
+		},
+		"whetstone": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:whetstone",
+					"data": 1
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ "powder" ],
+	[ "whetstone" ]
+	]
+}

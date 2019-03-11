@@ -1,0 +1,23 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:turnip"
+        },
+        "title": "SuperRutabaga",
+		"description": "Obtain some Turnips somewhere.",
+		"hidden": true
+	},
+	"parent": "erebus:agriculture/root",
+	"criteria": {
+		"repellent": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:turnip"
+					}
+				]
+			}
+		}
+	}
+}

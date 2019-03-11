@@ -1,0 +1,39 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:materials",
+			"data": 58
+        },
+        "title": "Why So Hydrophobic, Bigot?",
+		"description": "Acquire some Hydrofuge to craft Water Repellent."
+	},
+	"parent": "erebus:exploration/repellent",
+	"criteria": {
+		"hydrofuge": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:materials",
+					"data": 57
+					}
+				]
+			}
+		},
+		"water_repellent": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:materials",
+					"data": 58
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ "hydrofuge" ],
+	[ "water_repellent" ]
+	]
+}

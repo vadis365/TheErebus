@@ -1,0 +1,22 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:spray_can"
+        },
+        "title": "Begone Arthrothot",
+		"description": "Craft some Insect Repellent."
+	},
+	"parent": "erebus:exploration/repellent",
+	"criteria": {
+		"repellent": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:spray_can"
+					}
+				]
+			}
+		}
+	}
+}

@@ -1,0 +1,150 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:diamond_hoe"
+        },
+        "title": "Accomplished Agronomist",
+		"description": "Collect all the farmables the Erebus has to offer.",
+		"frame": "challenge"
+	},
+	"parent": "erebus:agriculture/root",
+	"criteria": {
+		"turnip": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:turnip"
+					}
+				]
+			}
+		},
+		"cabbage": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:cabbage_seeds"
+					}
+				]
+			}
+		},
+		"shoot": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:sapling_bamboo"
+					}
+				]
+			}
+		},
+		"flowers": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:flower_seed"
+					}
+				]
+			}
+		},
+		"dark_fruit": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:materials",
+						"data": 32
+					}
+				]
+			}
+		},
+		"mould": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:wall_plants",
+						"data": 7
+					}
+				]
+			}
+		},
+		"moss": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:wall_plants",
+						"data": 1
+					}
+				]
+			}
+		},
+		"mandrake": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:mandrake_root"
+					}
+				]
+			}
+		},
+		"swampberry": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:swamp_berry_bush"
+					}
+				]
+			}
+		},
+		"heartberry": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:heart_berry_bush"
+					}
+				]
+			}
+		},
+		"jadeberry": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:jade_berry_bush"
+					}
+				]
+			}
+		},
+		"prickly": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:prickly_pear"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ "turnip" ], 
+	[ "cabbage" ], 
+	[ "shoot" ], 
+	[ "flowers" ], 
+	[ "dark_fruit" ], 
+	[ "mould" ], 
+	[ "moss" ], 
+	[ "mandrake" ], 
+	[ "swampberry" ], 
+	[ "heartberry" ], 
+	[ "jadeberry" ], 
+	[ "prickly" ]
+	]	
+}

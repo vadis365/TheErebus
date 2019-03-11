@@ -1,0 +1,24 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:ore_jade"
+        },
+        "title": "What Shade of Green Is This?",
+		"description": "Obtain Jade.",
+		"hidden": true
+	},
+	"parent": "erebus:exploration/root",
+	"criteria": {
+		"collect_jade": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:materials",
+						"data": 1
+					}
+				]
+			}
+		}
+	}
+}

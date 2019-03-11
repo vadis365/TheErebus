@@ -1,0 +1,22 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:water_striders"
+        },
+        "title": "Personal Jesus",
+		"description": "Craft some Water Striders."
+	},
+	"parent": "erebus:exploration/water_repellent",
+	"criteria": {
+		"repellent": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:water_striders"
+					}
+				]
+			}
+		}
+	}
+}

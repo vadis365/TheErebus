@@ -1,0 +1,103 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:sapling_mahogany"
+        },
+        "title": "Obsessive Arborist",
+		"description": "Gather all the different saplings of trees native to the Erebus.",
+		"frame": "challenge"
+	},
+	"parent": "erebus:exploration/root",
+	"criteria": {
+		"baobab": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:sapling_baobab"
+					}
+				]
+			}
+		},
+		"euca": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:sapling_eucalyptus"
+					}
+				]
+			}
+		},
+		"mahog": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:sapling_mahogany"
+					}
+				]
+			}
+		},
+		"mossbark": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:sapling_mossbark"
+					}
+				]
+			}
+		},
+		"asper": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:sapling_asper"
+					}
+				]
+			}
+		},
+		"cypress": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:sapling_cypress"
+					}
+				]
+			}
+		},
+		"balsam": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:sapling_balsam"
+					}
+				]
+			}
+		},
+		"marshwood": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:sapling_marshwood"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ "baobab" ], 
+	[ "euca" ], 
+	[ "mahog" ], 
+	[ "mossbark" ], 
+	[ "asper" ], 
+	[ "cypress" ], 
+	[ "balsam" ], 
+	[ "marshwood" ]
+	]	
+}

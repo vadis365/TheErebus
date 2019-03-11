@@ -1,0 +1,22 @@
+{
+    "display": {
+        "icon": {
+				"item": "erebus:nectar_collector"
+        },
+        "title": "The Big Spoon",
+		"description": "Craft a Nectar Collector, a simple yet ingenious tool to easily collect Nectar from Bees."
+	},
+	"parent": "erebus:agriculture/bee_amulet",
+	"criteria": {
+		"get_spoon": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:nectar_collector"
+					}
+				]
+			}
+		}
+	}
+}

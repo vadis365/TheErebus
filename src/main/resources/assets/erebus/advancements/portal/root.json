@@ -1,0 +1,21 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:stonebrick",
+			"data": 1
+        },
+        "title": "The Portal",
+		"description": "A world below our own, ready to be accessed...",
+		"background": "minecraft:textures/blocks/stonebrick_mossy.png",
+		"show_toast": true,
+		"announce_to_chat": true
+	},
+	"criteria": {
+		"enter_minecraft": {
+			"trigger": "minecraft:location",
+			"conditions": {
+				"dimension": "overworld"
+			}
+		}
+	}
+}

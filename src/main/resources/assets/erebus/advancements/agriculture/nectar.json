@@ -1,0 +1,25 @@
+{
+    "display": {
+        "icon": {
+				"item": "erebus:materials",
+				"data": 19
+        },
+        "title": "Sweet Victory",
+		"description": "Obtain some Nectar by asking some Bees with the blade of your weapon.",
+		"hidden": true
+	},
+	"parent": "erebus:agriculture/root",
+	"criteria": {
+		"get_nectar": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:materials",
+						"data": 19
+					}
+				]
+			}
+		}
+	}
+}

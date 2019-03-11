@@ -1,0 +1,22 @@
+{
+	"display": {
+		"icon": {
+			"item": "erebus:hollow_log"
+		},
+        "title": "A Surprise to be Sure",
+		"description": "Encounter and kill a Woodlouse.",
+		"hidden": true
+	},
+	"parent": "erebus:exploration/entomology",
+	"criteria": {
+		"kill_louse": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+                "entity": {
+                    "type": "erebus:erebus.woodlouse"
+				}
+            }
+        }
+	}
+}
+		

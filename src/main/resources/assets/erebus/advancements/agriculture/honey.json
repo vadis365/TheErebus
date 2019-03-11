@@ -1,0 +1,24 @@
+{
+    "display": {
+        "icon": {
+				"item": "erebus:materials",
+				"data": 20
+        },
+        "title": "I Love You, Honeybear",
+		"description": "Use the Nectar you obtained to create Honey."
+	},
+	"parent": "erebus:agriculture/nectar",
+	"criteria": {
+		"get_honey": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:materials",
+						"data": 20
+					}
+				]
+			}
+		}
+	}
+}
