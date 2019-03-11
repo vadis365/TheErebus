@@ -3,6 +3,7 @@ package erebus.blocks;
 import net.minecraft.block.BlockMobSpawner;
 import net.minecraft.block.SoundType;
 import net.minecraft.entity.EntityList;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.ResourceLocation;
@@ -20,7 +21,7 @@ public class BlockSpawner extends BlockMobSpawner {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		TileEntityMobSpawner tile = new TileEntityMobSpawner();
+		TileEntityMobSpawner tile = (TileEntityMobSpawner) Blocks.MOB_SPAWNER.createTileEntity(world, getDefaultState());
 		tile.getSpawnerBaseLogic().setEntityId(EntityList.getKey(EntityList.getClass(mobName)));
 		return tile;
 	}
