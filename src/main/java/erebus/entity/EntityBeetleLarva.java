@@ -105,18 +105,16 @@ public class EntityBeetleLarva extends EntityAnimal {
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
 		byte duration = 0;
-		if(player.getEntityBoundingBox().maxY >= getEntityBoundingBox().minY && player.getEntityBoundingBox().minY <= getEntityBoundingBox().maxY && player.getEntityBoundingBox().maxX >= getEntityBoundingBox().minX && player.getEntityBoundingBox().minX <= getEntityBoundingBox().maxX && player.getEntityBoundingBox().maxZ >= getEntityBoundingBox().minZ && player.getEntityBoundingBox().minZ <= getEntityBoundingBox().maxZ) {
-			if (!getEntityWorld().isRemote && player.lastTickPosY > player.posY) {
-				if (getEntityWorld().getDifficulty() == EnumDifficulty.NORMAL)
-					duration = 7;
-				else if (getEntityWorld().getDifficulty() == EnumDifficulty.HARD)
-					duration = 15;
-				if (duration > 0)
-					player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, duration * 20, 0));
-				setisSquashed(true);
-				setDead();
-				onDeathUpdate();
-			}
+		if(!getEntityWorld().isRemote && player.getEntityBoundingBox().maxY >= getEntityBoundingBox().minY && player.getEntityBoundingBox().minY <= getEntityBoundingBox().maxY && player.getEntityBoundingBox().maxX >= getEntityBoundingBox().minX && player.getEntityBoundingBox().minX <= getEntityBoundingBox().maxX && player.getEntityBoundingBox().maxZ >= getEntityBoundingBox().minZ && player.getEntityBoundingBox().minZ <= getEntityBoundingBox().maxZ && player.lastTickPosY > player.posY) {
+			if (getEntityWorld().getDifficulty() == EnumDifficulty.NORMAL)
+				duration = 7;
+			else if (getEntityWorld().getDifficulty() == EnumDifficulty.HARD)
+				duration = 15;
+			if (duration > 0)
+				player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, duration * 20, 0));
+			setisSquashed(true);
+			setDead();
+			onDeathUpdate();
 		}
 	}
 
