@@ -39,9 +39,8 @@ import net.minecraftforge.oredict.OreDictionary;
 public class EntityBeetleLarva extends EntityAnimal {
 	private static final DataParameter<Byte> LARVA_TYPE = EntityDataManager.<Byte>createKey(EntityBeetleLarva.class, DataSerializers.BYTE);
 	private static final DataParameter<Float> LARVA_SIZE = EntityDataManager.<Float>createKey(EntityBeetleLarva.class, DataSerializers.FLOAT);
-
+	private static final DataParameter<Boolean> IS_SQUASHED = EntityDataManager.<Boolean>createKey(EntityBeetleLarva.class, DataSerializers.BOOLEAN);
 	public boolean isEating;
-	public boolean isSquashed;
 
 	public EntityBeetleLarva(World world) {
 		super(world);
@@ -55,8 +54,9 @@ public class EntityBeetleLarva extends EntityAnimal {
 		super.entityInit();
 		dataManager.register(LARVA_SIZE, 1F);
 		dataManager.register(LARVA_TYPE, new Byte((byte) 0));
+		dataManager.register(IS_SQUASHED, false);
 	}
-	
+
 	@Override
 	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -203,7 +203,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 	@Override
 	public void onDeathUpdate() {
 		super.onDeathUpdate();
-		if (isSquashed) {
+		if (getIsSquashed()) {
 			if (!getEntityWorld().isRemote)
 				Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.BEETLE_LARVA_SQUISH, (float) posX, (float)posY, (float)posZ));
 			getEntityWorld().playSound((EntityPlayer)null, getPosition(), getJumpedOnSound(), SoundCategory.NEUTRAL, 1.0F, 0.5F);
@@ -249,10 +249,6 @@ public class EntityBeetleLarva extends EntityAnimal {
 		isEating = eating;
 	}
 
-	public void setisSquashed(boolean squashed) {
-		isSquashed = squashed;
-	}
-
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
@@ -296,6 +292,14 @@ public class EntityBeetleLarva extends EntityAnimal {
 
 	public void setLarvaType(byte isTamed) {
 		dataManager.set(LARVA_TYPE, isTamed);
+	}
+
+	public void setisSquashed(boolean squashed) {
+		dataManager.set(IS_SQUASHED, squashed);
+	}
+
+	private boolean getIsSquashed() {
+		return dataManager.get(IS_SQUASHED);
 	}
 
 	public float getLarvaSize() {
