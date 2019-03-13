@@ -25,7 +25,7 @@
 			"conditions": {
 				"damage": {
 					"source_entity": {
-					"type": "erebus:erebus.scorpion"
+						"type": "erebus:erebus.scorpion"
 					}
 				}
 			}
