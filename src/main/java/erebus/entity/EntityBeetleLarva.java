@@ -103,16 +103,15 @@ public class EntityBeetleLarva extends EntityAnimal {
 
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player) {
-		super.onCollideWithPlayer(player);
 		byte duration = 0;
-		if(!getEntityWorld().isRemote && player.getEntityBoundingBox().maxY >= getEntityBoundingBox().minY && player.getEntityBoundingBox().minY <= getEntityBoundingBox().maxY && player.getEntityBoundingBox().maxX >= getEntityBoundingBox().minX && player.getEntityBoundingBox().minX <= getEntityBoundingBox().maxX && player.getEntityBoundingBox().maxZ >= getEntityBoundingBox().minZ && player.getEntityBoundingBox().minZ <= getEntityBoundingBox().maxZ && player.lastTickPosY > player.posY) {
+		if(!getEntityWorld().isRemote && player.getEntityBoundingBox().maxY >= getEntityBoundingBox().minY && player.getEntityBoundingBox().minY <= getEntityBoundingBox().maxY && player.getEntityBoundingBox().maxX >= getEntityBoundingBox().minX && player.getEntityBoundingBox().minX <= getEntityBoundingBox().maxX && player.getEntityBoundingBox().maxZ >= getEntityBoundingBox().minZ && player.getEntityBoundingBox().minZ <= getEntityBoundingBox().maxZ && player.prevPosY > player.posY) {
 			if (getEntityWorld().getDifficulty() == EnumDifficulty.NORMAL)
 				duration = 7;
 			else if (getEntityWorld().getDifficulty() == EnumDifficulty.HARD)
 				duration = 15;
 			if (duration > 0)
 				player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, duration * 20, 0));
-			setisSquashed(true);
+			setIsSquashed(true);
 			setDead();
 			onDeathUpdate();
 		}
@@ -120,8 +119,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		SoundEvent actionSound = ModSounds.BEETLE_LARVA_SOUND;
-		return actionSound;
+		return ModSounds.BEETLE_LARVA_SOUND;
 	}
 
 	@Override
@@ -140,11 +138,6 @@ public class EntityBeetleLarva extends EntityAnimal {
 
 	protected SoundEvent getHasMunched() {
 		return ModSounds.BEETLE_LARVA_MUNCH;
-	}
-	
-	@Override
-	public void updateAITasks() {
-		super.updateAITasks();
 	}
 
 	@Override
@@ -269,6 +262,9 @@ public class EntityBeetleLarva extends EntityAnimal {
 			float size = getLarvaSize();
 			setNewSize( 0.9F * size, 0.5F * size);
 		}
+		if (IS_SQUASHED.equals(key)) {
+			setIsSquashed(getIsSquashed());
+		}
 		super.notifyDataManagerChange(key);
 	}
 
@@ -294,7 +290,7 @@ public class EntityBeetleLarva extends EntityAnimal {
 		dataManager.set(LARVA_TYPE, isTamed);
 	}
 
-	public void setisSquashed(boolean squashed) {
+	public void setIsSquashed(boolean squashed) {
 		dataManager.set(IS_SQUASHED, squashed);
 	}
 
