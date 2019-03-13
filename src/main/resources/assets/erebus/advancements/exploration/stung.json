@@ -13,16 +13,20 @@
 		"wasp": {
 			"trigger": "minecraft:entity_hurt_player",
 			"conditions": {
-				"source_entity": {
-					"type": "erebus:wasp"
+				"damage": {
+					"source_entity": {
+						"type": "erebus:erebus.wasp"
+					}	
 				}
 			}
 		},
 		"scorpion": {
 			"trigger": "minecraft:entity_hurt_player",
 			"conditions": {
-				"source_entity": {
-					"type": "erebus:scorpion"
+				"damage": {
+					"source_entity": {
+					"type": "erebus:erebus.scorpion"
+					}
 				}
 			}
 		}	
