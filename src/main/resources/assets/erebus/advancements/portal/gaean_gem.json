@@ -4,8 +4,12 @@
             "item": "erebus:materials",
 			"data": 38
         },
-        "title": "A Gift from our Mother",
-		"description": "Offer a Diamond, an Emerald and a piece of Obsidian on the Offering Altar and obtain the Gaean Gem."
+		"title": {
+			"translate": "advancement.erebus.portal.gaean_gem"
+		},
+		"description": {
+			"translate": "advancement.erebus.portal.gaean_gem.desc"
+		}
 	},
 	"parent":"erebus:portal/altar",
 	"criteria": {

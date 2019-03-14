@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:portal_activator"
         },
-        "title": "The Key and the Lock",
-		"description": "Obtain the Staff of Gaea and the Gaean Keystone."
+		"title": {
+			"translate": "advancement.erebus.portal.portal_activator"
+		},
+		"description": {
+			"translate": "advancement.erebus.portal.portal_activator.desc"
+		}
 	},
 	"parent":"erebus:portal/gaean_gem",
 	"criteria": {

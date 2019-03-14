@@ -4,8 +4,12 @@
             "item": "minecraft:stonebrick",
 			"data": 1
         },
-        "title": "The Portal",
-		"description": "A world below our own, ready to be accessed...",
+		"title": {
+			"translate": "advancement.erebus.portal.root"
+		},
+		"description": {
+			"translate": "advancement.erebus.portal.root.desc"
+		},
 		"background": "minecraft:textures/blocks/stonebrick_mossy.png",
 		"show_toast": true,
 		"announce_to_chat": true

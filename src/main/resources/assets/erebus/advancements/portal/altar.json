@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:altar_offering"
         },
-        "title": "Contacting the Gods",
-		"description": "Create an Offering Altar."		
+		"title": {
+			"translate": "advancement.erebus.portal.altar"
+		},
+		"description": {
+			"translate": "advancement.erebus.portal.altar.desc"
+		}	
 	},
 	"parent": "erebus:portal/root",
 	"criteria": {

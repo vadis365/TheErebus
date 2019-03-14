@@ -956,3 +956,13 @@ advancement.erebus.exploration.newspaper.desc=Enhance some Papyrus with Ink and 
 # Agriculture
 
 # Portal Guide
+advancement.erebus.portal.root=The Portal
+advancement.erebus.portal.root.desc=A world below our own, ready to be accessed...
+advancement.erebus.portal.altar=Contacting the Gods
+advancement.erebus.portal.altar.desc=Create an Offering Altar.
+advancement.erebus.portal.gaean_gem=A Gift from our Mother
+advancement.erebus.portal.gaean_gem.desc=Offer a Diamond, an Emerald and a piece of Obsidian on the Offering Altar and obtain the Gaean Gem.
+advancement.erebus.portal.portal_activator=The Key and the Lock
+advancement.erebus.portal.portal_activator.desc=Obtain the Staff of Gaea and the Gaean Keystone.
+advancement.erebus.portal.portal=Constructing the Gate
+advancement.erebus.portal.portal.desc=Construct the Erebus portal by placing any type of leaf blocks in a frame and activate it by inserting the Staff of Gaea into the Gaean Keystone near it.
