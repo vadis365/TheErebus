@@ -3,8 +3,12 @@
 		"icon": {
 			"item": "erebus:quick_sand"
 		},
-        "title": "Let That Sink In",
-		"description": "Get yourself stuck in some Quicksand.",
+		"title": {
+			"translate": "advancement.erebus.exploration.quicksand"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.quicksand.desc"
+		},
 		"hidden": true
 	},
 	"parent": "erebus:exploration/root",

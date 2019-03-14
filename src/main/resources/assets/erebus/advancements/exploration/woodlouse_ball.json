@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:woodlouse_ball"
         },
-        "title": "Killer Ball",
-		"description": "Catch a Woodlouse by right-clicking it with an empty hand."
+		"title": {
+			"translate": "advancement.erebus.exploration.woodlouse_ball"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.woodlouse_ball.desc"
+		}
 	},
 	"parent": "erebus:exploration/woodlouse",
 	"criteria": {

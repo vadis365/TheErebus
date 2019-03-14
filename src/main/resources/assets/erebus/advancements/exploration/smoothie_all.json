@@ -4,8 +4,12 @@
             "item": "erebus:materials",
 			"data": 59
         },
-        "title": "Smoothie Enthusiast",
-		"description": "Brew all 10 smoothies.",
+		"title": {
+			"translate": "advancement.erebus.exploration.smoothie_all"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.smoothie_all.desc"
+		},
 		"frame": "challenge"
 	},
 	"parent": "erebus:exploration/smoothiebook",

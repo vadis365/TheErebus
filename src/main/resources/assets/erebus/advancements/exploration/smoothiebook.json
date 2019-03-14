@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:smoothie_book"
         },
-        "title": "The Menu",
-		"description": "Get the smoothie guide book by right-clicking the Smoothie-matic 2000 with a blank book.",
+		"title": {
+			"translate": "advancement.erebus.exploration.smoothiebook"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.smoothiebook.desc"
+		},
 		"hidden": false
 	},
 	"parent": "erebus:exploration/smoothiemaker",

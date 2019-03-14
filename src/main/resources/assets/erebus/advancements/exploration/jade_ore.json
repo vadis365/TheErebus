@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:ore_jade"
         },
-        "title": "What Shade of Green Is This?",
-		"description": "Obtain Jade.",
+		"title": {
+			"translate": "advancement.erebus.exploration.jade_ore"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.jade_ore.desc"
+		},
 		"hidden": true
 	},
 	"parent": "erebus:exploration/root",

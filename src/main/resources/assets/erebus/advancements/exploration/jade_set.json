@@ -3,8 +3,12 @@
       "icon": {
          "item": "erebus:jade_paxel"
 		},
-		"title": "Extremely Jaded",
-		"description": "Obtain all four pieces of the Jade armour set and the Jade Paxel."
+		"title": {
+			"translate": "advancement.erebus.exploration.jade_set"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.jade_set.desc"
+		}
    },
    "parent": "erebus:exploration/jade_ore",
    "criteria": {

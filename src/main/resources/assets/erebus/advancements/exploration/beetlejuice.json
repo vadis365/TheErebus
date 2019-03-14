@@ -4,8 +4,12 @@
 				"item": "erebus:bambucket",
 				"nbt": "{Fluid:{FluidName:\"beetle_juice\",Amount:1000}}"
         },
-        "title": "Alpha Orionis",
-		"description": "Milk a Beetle to obtain Beetle Juice, the Erebus counterpart to milk."
+		"title": {
+			"translate": "advancement.erebus.exploration.beetlejuice"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.beetlejuice.desc"
+		}
 	},
 	"parent": "erebus:exploration/entomology",
 	"criteria": {

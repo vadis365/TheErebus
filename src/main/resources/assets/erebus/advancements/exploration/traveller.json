@@ -4,8 +4,12 @@
             "item": "minecraft:filled_map",
 			"data": 0
         },
-        "title": "A True Traveller Never Arrives",
-		"description": "Travel to all the biomes the Erebus has to offer.",
+		"title": {
+			"translate": "advancement.erebus.exploration.traveller"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.traveller.desc"
+		},
 		"frame": "challenge"
 	},
 	"parent": "erebus:exploration/root",

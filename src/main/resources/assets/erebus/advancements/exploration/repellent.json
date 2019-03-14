@@ -4,8 +4,12 @@
             "item": "erebus:materials",
 			"data": 28
         },
-        "title": "Utterly Repulsive",
-		"description": "Get your hands on some Repellent.",
+		"title": {
+			"translate": "advancement.erebus.exploration.repellent"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.repellent.desc"
+		},
 		"hidden": true
 	},
 	"parent": "erebus:exploration/entomology",

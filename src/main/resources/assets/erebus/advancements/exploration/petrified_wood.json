@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:ore_petrified_wood"
         },
-        "title": "Very Hard Wood",
-		"description": "Acquire Petrified Wood.",
+		"title": {
+			"translate": "advancement.erebus.exploration.petrified_wood"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.petrified_wood.desc"
+		},
 		"hidden": true
 	},
 	"parent": "erebus:exploration/root",

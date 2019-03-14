@@ -3,8 +3,12 @@
       "icon": {
          "item": "erebus:exoskeleton_chestplate"
       },
-      "title": "Feelin' Invertebrate",
-      "description": "Obtain all four pieces of the Exoskeleton armour set."
+		"title": {
+			"translate": "advancement.erebus.exploration.exo_set"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.exo_set.desc"
+		}
    },
    "parent": "erebus:exploration/entomology",
    "criteria": {

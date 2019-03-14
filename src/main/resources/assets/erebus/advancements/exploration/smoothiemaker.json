@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:smoothie_maker"
         },
-        "title": "For The Juiceheads",
-		"description": "Craft an ErebusCo. Smoothie-matic 2000, all rights reserved.",
+		"title": {
+			"translate": "advancement.erebus.exploration.smoothiemaker"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.smoothiemaker.desc"
+		},
 		"hidden": false
 	},
 	"parent": "erebus:exploration/root",

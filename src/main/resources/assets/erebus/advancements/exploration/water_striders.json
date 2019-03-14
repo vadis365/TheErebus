@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:water_striders"
         },
-        "title": "Personal Jesus",
-		"description": "Craft some Water Striders."
+		"title": {
+			"translate": "advancement.erebus.exploration.water_striders"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.water_striders.desc"
+		}
 	},
 	"parent": "erebus:exploration/water_repellent",
 	"criteria": {

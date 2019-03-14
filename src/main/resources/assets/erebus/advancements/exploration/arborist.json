@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:sapling_mahogany"
         },
-        "title": "Obsessive Arborist",
-		"description": "Gather all the different saplings of trees native to the Erebus.",
+		"title": {
+			"translate": "advancement.erebus.exploration.arborist"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.arborist.desc"
+		},
 		"frame": "challenge"
 	},
 	"parent": "erebus:exploration/root",

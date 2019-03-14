@@ -3,8 +3,12 @@
       "icon": {
          "item": "erebus:rein_exoskeleton_chestplate"
       },
-      "title": "Truth Is... I Am Exo Man",
-      "description": "Obtain all four pieces of the Reinforced Exoskeleton armour set."
+		"title": {
+			"translate": "advancement.erebus.exploration.reinexo_set"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.reinexo_set.desc"
+		}
    },
    "parent": "erebus:exploration/exo_set",
    "criteria": {

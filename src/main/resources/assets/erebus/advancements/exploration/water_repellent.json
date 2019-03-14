@@ -4,8 +4,12 @@
             "item": "erebus:materials",
 			"data": 58
         },
-        "title": "Why So Hydrophobic, Bigot?",
-		"description": "Acquire some Hydrofuge to craft Water Repellent."
+		"title": {
+			"translate": "advancement.erebus.exploration.water_repellent"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.water_repellent.desc"
+		}
 	},
 	"parent": "erebus:exploration/repellent",
 	"criteria": {

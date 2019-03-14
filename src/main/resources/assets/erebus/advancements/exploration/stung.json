@@ -4,8 +4,12 @@
             "item": "erebus:materials",
 			"data": 10
         },
-        "title": "The Boy with the Thorn in His Side",
-		"description": "Get stung by a Wasp or a Scorpion.",
+		"title": {
+			"translate": "advancement.erebus.exploration.stung"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.stung.desc"
+		},
 		"hidden": true
 	},
 	"parent": "erebus:exploration/entomology",

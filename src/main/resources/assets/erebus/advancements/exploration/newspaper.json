@@ -4,8 +4,12 @@
             "item": "erebus:rolled_newspaper",
 			"nbt": "{ench:[{id:18,lvl:5}]}"
         },
-        "title": "News of the World",
-		"description": "Enhance some Papyrus with Ink and Whetstone Powder to roll a newspaper with extreme swatting capabilities."
+		"title": {
+			"translate": "advancement.erebus.exploration.newspaper"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.newspaper.desc"
+		}
 	},
 	"parent": "erebus:exploration/whetstone",
 	"criteria": {

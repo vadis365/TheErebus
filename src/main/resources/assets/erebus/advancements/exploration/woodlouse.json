@@ -3,8 +3,12 @@
 		"icon": {
 			"item": "erebus:hollow_log"
 		},
-        "title": "A Surprise to be Sure",
-		"description": "Encounter and kill a Woodlouse.",
+		"title": {
+			"translate": "advancement.erebus.exploration.woodlouse"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.woodlouse.desc"
+		},
 		"hidden": true
 	},
 	"parent": "erebus:exploration/entomology",

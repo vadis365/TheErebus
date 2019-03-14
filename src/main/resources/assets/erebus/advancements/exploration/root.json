@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:portal"
         },
-        "title": "The Erebus",
-		"description": "Travel to a long lost world, overrun by gargantuan arthropods: The Erebus.",
+        "title": {
+			"translate": "advancement.erebus.exploration.root"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.root.desc"
+		},
 		"background": "erebus:textures/blocks/umberstone.png",
 		"show_toast": true,
 		"announce_to_chat": true

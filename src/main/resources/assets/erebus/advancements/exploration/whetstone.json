@@ -4,8 +4,12 @@
             "item": "erebus:whetstone",
 			"data": 1
         },
-        "title": "Keen Mind, Sharper Sword",
-		"description": "Get your hands on some Whetstone Powder and apply it to an unenchanted Whetstone."
+		"title": {
+			"translate": "advancement.erebus.exploration.whetstone"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.whetstone.desc"
+		}
 	},
 	"parent": "erebus:exploration/woodlouse",
 	"criteria": {

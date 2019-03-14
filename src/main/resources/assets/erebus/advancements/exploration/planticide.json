@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:planticide"
         },
-        "title": "More Effective Than Herbicide",
-		"description": "Mix together some Planticide to destroy some flora."
+		"title": {
+			"translate": "advancement.erebus.exploration.planticide"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.planticide.desc"
+		}
 	},
 	"parent": "erebus:exploration/poison_sac",
 	"criteria": {

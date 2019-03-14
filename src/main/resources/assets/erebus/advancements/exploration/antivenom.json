@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:anti_venom_bottle"
         },
-        "title": "A Vaccine and a Cure",
-		"description": "Brew some Anti-venom in the Smoothie Maker."
+		"title": {
+			"translate": "advancement.erebus.exploration.antivenom"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.antivenom.desc"
+		}
 	},
 	"parent": "erebus:exploration/smoothiemaker",
 	"criteria": {

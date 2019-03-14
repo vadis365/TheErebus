@@ -4,8 +4,12 @@
             "item": "erebus:materials",
 			"data": 0
         },
-        "title": "Aggressive Entomology",
-		"description": "Slay a creature native to the Erebus (WIP: In the meantime, obtain some Exoskeleton to trigger).",
+		"title": {
+			"translate": "advancement.erebus.exploration.entomology"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.entomology.desc"
+		},
 		"hidden": false
 	},
 	"parent": "erebus:exploration/root",

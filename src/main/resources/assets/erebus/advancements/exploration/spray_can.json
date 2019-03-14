@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:spray_can"
         },
-        "title": "Begone Arthrothot",
-		"description": "Craft some Insect Repellent."
+		"title": {
+			"translate": "advancement.erebus.exploration.spray_can"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.spray_can.desc"
+		}
 	},
 	"parent": "erebus:exploration/repellent",
 	"criteria": {
