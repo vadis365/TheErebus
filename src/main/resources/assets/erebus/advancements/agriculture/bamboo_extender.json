@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:bamboo_extender"
         },
-        "title": "Fully Extended UwU",
-		"description": "Craft the Bamboo Extender."
+		"title": {
+			"translate": "advancement.erebus.agriculture.bamboo_extender"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.bamboo_extender.desc"
+		}
 	},
 	"parent": "erebus:agriculture/bamboo",
 	"criteria": {

@@ -3,8 +3,12 @@
         "icon": {
 				"item": "erebus:homing_beecon"
         },
-        "title": "Right Where I Bee-long",
-		"description": "Use the Nectar you procured to craft a Homing Beecon, a device that allows you to always find your way back."
+		"title": {
+			"translate": "advancement.erebus.agriculture.beecon"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.beecon.desc"
+		}
 	},
 	"parent": "erebus:agriculture/nectar",
 	"criteria": {

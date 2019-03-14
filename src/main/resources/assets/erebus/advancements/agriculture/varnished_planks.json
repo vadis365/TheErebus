@@ -4,8 +4,12 @@
 				"item": "erebus:planks",
 				"data": 12
         },
-        "title": "Resist Those Pesky Larvae",
-		"description": "Craft some Varnished Planks."
+		"title": {
+			"translate": "advancement.erebus.agriculture.varnished_planks"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.varnished_planks.desc"
+		}
 	},
 	"parent": "erebus:agriculture/root",
 	"criteria": {

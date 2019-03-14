@@ -4,8 +4,12 @@
 				"item": "erebus:materials",
 				"data": 19
         },
-        "title": "Sweet Victory",
-		"description": "Obtain some Nectar by asking some Bees with the blade of your weapon.",
+		"title": {
+			"translate": "advancement.erebus.agriculture.nectar"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.nectar.desc"
+		},
 		"hidden": true
 	},
 	"parent": "erebus:agriculture/root",

@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:bamboo_nerd_pole"
         },
-        "title": "Piercing the Heavens",
-		"description": "Craft the Bamboo Nerd Pole."
+		"title": {
+			"translate": "advancement.erebus.agriculture.nerd_pole"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.nerd_pole.desc"
+		}
 	},
 	"parent": "erebus:agriculture/bamboo_extender",
 	"criteria": {

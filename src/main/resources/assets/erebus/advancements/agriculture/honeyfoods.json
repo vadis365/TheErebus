@@ -3,8 +3,12 @@
         "icon": {
 				"item": "erebus:honey_treat"
         },
-        "title": "What's For Dinner, Honey?",
-		"description": "Prepare yourself a wonderful meal by crafting all Honey-related foods."
+		"title": {
+			"translate": "advancement.erebus.agriculture.honeyfoods"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.honeyfoods.desc"
+		}
 	},
 	"parent": "erebus:agriculture/honey",
 	"criteria": {

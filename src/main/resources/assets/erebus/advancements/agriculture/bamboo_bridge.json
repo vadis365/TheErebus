@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:bamboo_bridge"
         },
-        "title": "Seven Bridges Road",
-		"description": "Craft the Bamboo Bridge."
+		"title": {
+			"translate": "advancement.erebus.agriculture.bamboo_bridge"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.bamboo_bridge.desc"
+		}
 	},
 	"parent": "erebus:agriculture/bamboo_extender",
 	"criteria": {

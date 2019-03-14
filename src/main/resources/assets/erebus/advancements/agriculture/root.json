@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:jade_hoe"
         },
-        "title": "Subterranean Agriculture",
-		"description": "Even though the sun does not shine down here, there are still many plants and other growables to be found. Dive into the wonderful world of subterranean agriculture!",
+		"title": {
+			"translate": "advancement.erebus.agriculture.root"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.root.desc"
+		},
 		"background": "erebus:textures/blocks/planks_varnished.png",
 		"show_toast": true,
 		"announce_to_chat": true

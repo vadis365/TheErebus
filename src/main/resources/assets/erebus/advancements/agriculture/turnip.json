@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:turnip"
         },
-        "title": "SuperRutabaga",
-		"description": "Obtain some Turnips somewhere.",
+		"title": {
+			"translate": "advancement.erebus.agriculture.turnip"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.turnip.desc"
+		},
 		"hidden": true
 	},
 	"parent": "erebus:agriculture/root",

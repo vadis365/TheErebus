@@ -3,8 +3,12 @@
         "icon": {
 				"item": "erebus:ant_taming_amulet"
         },
-        "title": "Gettin' Antsy",
-		"description": "Craft the Ant Taming Amulet and tame an Ant."
+		"title": {
+			"translate": "advancement.erebus.agriculture.ant_amulet"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.ant_amulet.desc"
+		}
 	},
 	"parent": "erebus:agriculture/silo",
 	"criteria": {

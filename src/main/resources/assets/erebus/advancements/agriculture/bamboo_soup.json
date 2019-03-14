@@ -4,8 +4,12 @@
             "item": "erebus:erebus_food",
 			"data": 6
         },
-        "title": "When eating bamboo sprouts...",
-		"description": "Craft yourself some Bamboo Soup."
+		"title": {
+			"translate": "advancement.erebus.agriculture.bamboo_soup"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.bamboo_soup.desc"
+		}
 	},
 	"parent": "erebus:agriculture/bamboo",
 	"criteria": {

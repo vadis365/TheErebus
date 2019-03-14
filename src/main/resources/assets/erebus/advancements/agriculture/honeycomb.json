@@ -3,8 +3,12 @@
         "icon": {
 				"item": "erebus:honey_comb"
         },
-        "title": "Beauty Is...",
-		"description": "Construct a Honeycomb."
+		"title": {
+			"translate": "advancement.erebus.agriculture.honeycomb"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.honeycomb.desc"
+		}
 	},
 	"parent": "erebus:agriculture/nectar",
 	"criteria": {

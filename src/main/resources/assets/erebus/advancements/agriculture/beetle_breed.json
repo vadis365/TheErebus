@@ -4,8 +4,12 @@
             "item": "erebus:erebus_food",
 			"data": 0
         },
-        "title": "Turnip to Make 'Em Turn Up",
-		"description": "Get two Beetles in the mood by feeding them the most erotic of vegetables - to them at least, we don't judge."
+		"title": {
+			"translate": "advancement.erebus.agriculture.beetle_breed"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.beetle_breed.desc"
+		}
 	},
 	"parent": "erebus:agriculture/turnip",
 	"criteria": {

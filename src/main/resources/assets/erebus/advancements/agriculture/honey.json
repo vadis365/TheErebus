@@ -4,8 +4,12 @@
 				"item": "erebus:materials",
 				"data": 20
         },
-        "title": "I Love You, Honeybear",
-		"description": "Use the Nectar you obtained to create Honey."
+		"title": {
+			"translate": "advancement.erebus.agriculture.honey"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.honey.desc"
+		}
 	},
 	"parent": "erebus:agriculture/nectar",
 	"criteria": {

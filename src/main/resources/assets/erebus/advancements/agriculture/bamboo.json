@@ -4,8 +4,12 @@
             "item": "erebus:materials",
 			"data": 3
         },
-        "title": "Colossally Bamboozled",
-		"description": "Get your hands on some Colossal Bamboo and Colossal Bamboo Shoots.",
+		"title": {
+			"translate": "advancement.erebus.agriculture.bamboo"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.bamboo.desc"
+		},
 		"hidden": true
 	},
 	"parent": "erebus:agriculture/root",

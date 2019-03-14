@@ -3,8 +3,12 @@
         "icon": {
 				"item": "erebus:bee_taming_amulet"
         },
-        "title": "...In The Eye of the Bee-holder",
-		"description": "Fashion a Bee Taming Amulet from some Jade and Nectar."
+		"title": {
+			"translate": "advancement.erebus.agriculture.bee_amulet"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.bee_amulet.desc"
+		}
 	},
 	"parent": "erebus:agriculture/honeycomb",
 	"criteria": {

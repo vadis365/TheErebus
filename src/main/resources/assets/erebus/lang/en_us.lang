@@ -954,6 +954,56 @@ advancement.erebus.exploration.newspaper=News of the World
 advancement.erebus.exploration.newspaper.desc=Enhance some Papyrus with Ink and Whetstone Powder to roll a newspaper with extreme swatting capabilities.
 
 # Agriculture
+advancement.erebus.agriculture.root=Subterranean Agriculture
+advancement.erebus.agriculture.root.desc=Even though the sun does not shine down here, there are still many plants and other growables to be found. Dive into the wonderful world of subterranean agriculture!
+
+advancement.erebus.agriculture.varnished_planks=Resist Those Pesky Larvae
+advancement.erebus.agriculture.varnished_planks.desc=Craft some Varnished Planks.
+advancement.erebus.agriculture.silo=Every Farm Needs One
+advancement.erebus.agriculture.silo.desc=Craft the three parts of the Silo multiblock.
+advancement.erebus.agriculture.ant_amulet=Getting Antsy
+advancement.erebus.agriculture.ant_amulet.desc=Craft the Ant Taming Amulet and tame an Ant.
+
+advancement.erebus.agriculture.nectar=Sweet Victory
+advancement.erebus.agriculture.nectar.desc=Obtain some Nectar by asking some Bees with the blade of your weapon.
+
+advancement.erebus.agriculture.honey=I Love You, Honeybear
+advancement.erebus.agriculture.honey.desc=Use the Nectar you obtained to create Honey.
+advancement.erebus.agriculture.honeyfoods=What's For Dinner, Honey?
+advancement.erebus.agriculture.honeyfoods.desc=Prepare yourself a wonderful meal by crafting all Honey-related foods.
+
+advancement.erebus.agriculture.honeycomb=Beauty Is...
+advancement.erebus.agriculture.honeycomb.desc=Construct a Honeycomb.
+advancement.erebus.agriculture.bee_amulet=...In The Eye of the Bee-holder
+advancement.erebus.agriculture.bee_amulet.desc=Fashion a Bee Taming Amulet from some Jade and Nectar.
+advancement.erebus.agriculture.spoon=The Big Spoon
+advancement.erebus.agriculture.spoon.desc=Craft a Nectar Collector, a simple yet ingenious tool to easily collect Nectar from Bees.
+
+advancement.erebus.agriculture.beecon=Right Where I Bee-long
+advancement.erebus.agriculture.beecon.desc=Use the Nectar you procured to craft a Homing Beecon, a device that allows you to always find your way back.
+
+advancement.erebus.agriculture.turnip=SuperRutabaga
+//This advancement is named after the person who designed the Erebus Turnips. I'd truly appreciate it if whomever localises this leaves this advancement name unchanged. Thank you in advance!
+advancement.erebus.agriculture.turnip.desc=Obtain some Turnips somewhere.
+advancement.erebus.agriculture.beetle_breed=Turnip to Make 'Em Turn Up
+advancement.erebus.agriculture.beetle_breed.desc=Get two Beetles in the mood by feeding them the most erotic of vegetables - to them at least, we don't judge.
+
+advancement.erebus.agriculture.bamboo=Colossally Bamboozled
+advancement.erebus.agriculture.bamboo.desc=Get your hands on some Colossal Bamboo and Colossal Bamboo Shoots.
+
+advancement.erebus.agriculture.bamboo_extender=Fully Extended UwU
+advancement.erebus.agriculture.bamboo_extender.desc=Craft the Bamboo Extender.
+advancement.erebus.agriculture.bamboo_bridge=Seven Bridges Road
+advancement.erebus.agriculture.bamboo_bridge.desc=Craft the Bamboo Bridge.
+advancement.erebus.agriculture.nerd_pole=Piercing the Heavens
+advancement.erebus.agriculture.nerd_pole.desc=Craft the Bamboo Nerd Pole.
+
+advancement.erebus.agriculture.bamboo_crate=Make Erebus Crate Again
+advancement.erebus.agriculture.bamboo_crate.desc=Craft yourself a Bamboo Crate.
+advancement.erebus.agriculture.bamboo_soup=When eating bamboo sprouts...
+advancement.erebus.agriculture.bamboo_soup.desc=Craft yourself some Bamboo Soup.
+advancement.erebus.agriculture.bamboo_plant=... remember who planted them.
+advancement.erebus.agriculture.bamboo_plant.desc=Plant a Colossal Bamboo Shoot.
 
 # Portal Guide
 advancement.erebus.portal.root=The Portal

@@ -3,8 +3,12 @@
         "icon": {
 				"item": "erebus:silo_supports"
         },
-        "title": "Every Farm Needs One",
-		"description": "Craft the three parts of the Silo multiblock."
+		"title": {
+			"translate": "advancement.erebus.agriculture.silo"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.silo.desc"
+		}
 	},
 	"parent": "erebus:agriculture/varnished_planks",
 	"criteria": {

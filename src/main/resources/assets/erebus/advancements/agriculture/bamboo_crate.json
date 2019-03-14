@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:bamboo_crate"
         },
-        "title": "Make Erebus Crate Again",
-		"description": "Craft yourself a Bamboo Crate."
+		"title": {
+			"translate": "advancement.erebus.agriculture.bamboo_crate"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.bamboo_crate.desc"
+		}
 	},
 	"parent": "erebus:agriculture/bamboo",
 	"criteria": {

@@ -3,8 +3,12 @@
         "icon": {
             "item": "erebus:sapling_bamboo"
         },
-        "title": "... remember who planted them.",
-		"description": "Plant a Colossal Bamboo Shoot."
+		"title": {
+			"translate": "advancement.erebus.agriculture.bamboo_plant"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.bamboo_plant.desc"
+		}
 	},
 	"parent": "erebus:agriculture/bamboo_soup",
 	"criteria": {
