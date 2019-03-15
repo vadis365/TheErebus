@@ -1,0 +1,53 @@
+{
+	"display": {
+		"icon": {
+			"item": "erebus:materials",
+			"data": 35
+		},
+		"title": {
+			"translate": "advancement.erebus.exploration.rhino_beetle"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.rhino_beetle.desc"
+		},
+		"hidden": true
+	},
+	"parent": "erebus:exploration/find_beetles",
+	"criteria": {
+		"kill_rhino": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.rhino_beetle"
+				}
+			}
+		},
+		"get_plate": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:materials",
+					"data": 35
+					}
+				]
+			}
+		},
+		"get_horn": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:materials",
+					"data": 36
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ "kill_rhino" ],
+	[ "get_plate" ],
+	[ "get_horn" ]
+	]
+}

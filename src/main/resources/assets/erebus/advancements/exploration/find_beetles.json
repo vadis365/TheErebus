@@ -1,0 +1,93 @@
+{
+	"display": {
+		"icon": {
+			"item": "erebus:erebus_food",
+			"data": 0
+		},
+		"title": {
+			"translate": "advancement.erebus.exploration.find_beetles"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.find_beetles.desc"
+		},
+		"hidden": true
+	},
+	"parent": "erebus:exploration/entomology",
+	"criteria": {
+		"rhino_dmg": {
+			"trigger": "minecraft:entity_hurt_player",
+			"conditions": {
+				"source_entity": {
+					"type": "erebus:erebus.rhino_beetle"
+				}
+			}
+		},
+		"dmg_rhino": {
+			"trigger": "minecraft:player_hurt_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.rhino_beetle"
+				}
+			}
+		},
+		"titan_dmg": {
+			"trigger": "minecraft:entity_hurt_player",
+			"conditions": {
+				"source_entity": {
+					"type": "erebus:erebus.titan_beetle"
+				}
+			}
+		},
+		"dmg_titan": {
+			"trigger": "minecraft:player_hurt_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.titan_beetle"
+				}
+			}
+		},
+		"stag_dmg": {
+			"trigger": "minecraft:entity_hurt_player",
+			"conditions": {
+				"source_entity": {
+					"type": "erebus:erebus.stag_beetle"
+				}
+			}
+		},
+		"dmg_stag": {
+			"trigger": "minecraft:player_hurt_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.stag_beetle"
+				}
+			}
+		},
+		"dmg_beetle": {
+			"trigger": "minecraft:player_hurt_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.beetle"
+				}
+			}
+		},
+		"dmg_larva": {
+			"trigger": "minecraft:player_hurt_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.beetle_larva"
+				}
+			}
+		},
+		"kill_larva": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.beetle_larva"
+				}
+			}
+		}
+	},
+	"requirements": [
+	[ "dmg_beetle", "dmg_larva", "dmg_rhino", "dmg_stag", "dmg_titan", "rhino_dmg", "stag_dmg", "titan_dmg", "kill_larva" ]
+	]
+}

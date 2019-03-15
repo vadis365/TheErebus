@@ -1,0 +1,425 @@
+{
+	"display": {
+		"icon": {
+			"item": "erebus:jade_sword"
+		},
+		"title": {
+			"translate": "advancement.erebus.exploration.kill_all"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.kill_all.desc"
+		},
+		"frame": "challenge"
+	},
+	"parent": "erebus:exploration/entomology",
+	"criteria": {
+		"kill_beetle_larva": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.beetle_larva"
+				}
+			}	
+		},
+		"kill_wasp": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.wasp"
+				}
+			}	
+		},
+		"kill_centipede": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.centipede"
+				}
+			}	
+		},
+		"kill_beetle": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.beetle"
+				}
+			}	
+		},
+		"kill_fly": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.fly"
+				}
+			}	
+		},
+		"kill_mosquito": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.mosquito"
+				}
+			}	
+		},
+		"kill_tarantula": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.tarantula"
+				}
+			}	
+		},
+		"kill_bot_fly": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.bot_fly"
+				}
+			}	
+		},
+		"kill_scorpion": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.scorpion"
+				}
+			}	
+		},
+		"kill_solifuge": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.solifuge"
+				}
+			}	
+		},
+		"kill_grasshopper": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.grasshopper"
+				}
+			}	
+		},
+		"kill_locust": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.locust"
+				}
+			}	
+		},
+		"kill_moth": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.moth"
+				}
+			}	
+		},
+		"kill_rhino": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.rhino_beetle"
+				}
+			}	
+		},
+		"kill_antlion": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.antlion"
+				}
+			}	
+		},
+		"kill_black_widow": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.black_widow"
+				}
+			}	
+		},
+		"kill_glow_worm": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.glow_worm"
+				}
+			}	
+		},
+		"kill_bombardier_beetle": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.bombardier_beetle"
+				}
+			}	
+		},
+		"kill_scytodes": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.scytodes"
+				}
+			}	
+		},
+		"kill_money_spider": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.money_spider"
+				}
+			}	
+		},
+		"kill_praying_mantis": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.praying_mantis"
+				}
+			}	
+		},
+		"kill_jumping_spider": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.jumping_spider"
+				}
+			}	
+		},
+		"kill_fire_ant": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.fire_ant"
+				}
+			}	
+		},
+		"kill_worker_bee": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.worker_bee"
+				}
+			}	
+		},
+		"kill_velvet_worm": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.velvet_worm"
+				}
+			}	
+		},
+		"kill_dragonfly": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.dragon_fly"
+				}
+			}	
+		},
+		"kill_titan": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.titan_beetle"
+				}
+			}	
+		},
+		"kill_fungal_weevil": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.fungal_weevil"
+				}
+			}	
+		},
+		"kill_crop_weevil": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.crop_weevil"
+				}
+			}	
+		},
+		"kill_woodlouse": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.woodlouse"
+				}
+			}	
+		},
+		"kill_cicada": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.cicada"
+				}
+			}	
+		},
+		"kill_fire_ant_soldier": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.fire_ant_soldier"
+				}
+			}	
+		},
+		"kill_lava_web_spider": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.lava_web_spider"
+				}
+			}	
+		},
+		"kill_chameleon_tick": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.chameleon_tick"
+				}
+			}	
+		},
+		"kill_solifuge_small": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.solifuge_small"
+				}
+			}	
+		},
+		"kill_midge_swarm": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.midge_swarm"
+				}
+			}	
+		},
+		"kill_punchroom": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.punchroom"
+				}
+			}	
+		},
+		"kill_black_ant": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.black_ant"
+				}
+			}	
+		},
+		"kill_zombie_ant": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.zombie_ant"
+				}
+			}	
+		},
+		"kill_pond_skater": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.pond_skater"
+				}
+			}	
+		},
+		"kill_bog_maw": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.bog_maw"
+				}
+			}	
+		},
+		"kill_magma_crawler": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.magma_crawler"
+				}
+			}	
+		},
+		"kill_honey_pot_ant": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.honey_pot_ant"
+				}
+			}	
+		},
+		"kill_zombie_ant_soldier": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.zombie_ant_soldier"
+				}
+			}	
+		},
+		"kill_stag": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.stag_beetle"
+				}
+			}	
+		}
+	},
+	"requirements": [
+	[ "kill_beetle_larva" ],
+	[ "kill_beetle" ],
+	[ "kill_titan" ],
+	[ "kill_rhino" ],
+	[ "kill_stag" ],
+	[ "kill_fly" ],
+	[ "kill_bot_fly" ],
+	[ "kill_mosquito" ],
+	[ "kill_centipede" ],
+	[ "kill_wasp" ],
+	[ "kill_scorpion" ],
+	[ "kill_tarantula" ],
+	[ "kill_solifuge" ],
+	[ "kill_solifuge_small" ],
+	[ "kill_grasshopper" ],
+	[ "kill_locust" ],
+	[ "kill_moth" ],
+	[ "kill_antlion" ],
+	[ "kill_black_widow" ],
+	[ "kill_glow_worm" ],
+	[ "kill_bombardier_beetle" ],
+	[ "kill_scytodes" ],
+	[ "kill_money_spider" ],
+	[ "kill_praying_mantis" ],
+	[ "kill_jumping_spider" ],
+	[ "kill_fire_ant" ],
+	[ "kill_fire_ant_soldier" ],
+	[ "kill_worker_bee" ],
+	[ "kill_velvet_worm" ],
+	[ "kill_dragonfly" ],
+	[ "kill_fungal_weevil" ],
+	[ "kill_crop_weevil" ],
+	[ "kill_woodlouse" ],
+	[ "kill_cicada" ],
+	[ "kill_lava_web_spider" ],
+	[ "kill_chameleon_tick" ],
+	[ "kill_midge_swarm" ],
+	[ "kill_punchroom" ],
+	[ "kill_black_ant" ],
+	[ "kill_zombie_ant" ],
+	[ "kill_zombie_ant_soldier" ],
+	[ "kill_pond_skater" ],
+	[ "kill_magma_crawler" ],
+	[ "kill_bog_maw" ],
+	[ "kill_honey_pot_ant" ]
+	]
+}
+	

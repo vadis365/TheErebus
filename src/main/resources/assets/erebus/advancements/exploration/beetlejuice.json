@@ -11,7 +11,7 @@
 			"translate": "advancement.erebus.exploration.beetlejuice.desc"
 		}
 	},
-	"parent": "erebus:exploration/entomology",
+	"parent": "erebus:exploration/find_beetles",
 	"criteria": {
 		"bambucket": {
 			"trigger": "minecraft:inventory_changed",

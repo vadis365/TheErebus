@@ -1,0 +1,41 @@
+{
+	"display": {
+		"icon": {
+			"item": "erebus:erebus_food",
+			"data": 12
+		},
+		"title": {
+			"translate": "advancement.erebus.exploration.titan_beetle"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.titan_beetle.desc"
+		},
+		"hidden": true
+	},
+	"parent": "erebus:exploration/find_beetles",
+	"criteria": {
+		"kill_titan": {
+			"trigger": "minecraft:player_killed_entity",
+			"conditions": {
+				"entity": {
+					"type": "erebus:erebus.titan_beetle"
+				}
+			}
+		},
+		"get_chop": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:erebus_food",
+					"data": 12
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ "kill_titan" ],
+	[ "get_chop" ]
+	]
+}

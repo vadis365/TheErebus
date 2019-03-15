@@ -917,14 +917,31 @@ advancement.erebus.exploration.petrified_wood.desc=Acquire Petrified Wood.
 
 advancement.erebus.exploration.entomology=Aggressive Entomology
 advancement.erebus.exploration.entomology.desc=Slay a creature native to the Erebus (WIP: In the meantime, obtain some Exoskeleton to trigger).
+advancement.erebus.exploration.kill_all=Pest Control
+advancement.erebus.exploration.kill_all.desc=Kill all regular mobs the Erebus has to offer.
+
+advancement.erebus.exploration.find_beetles=Meet the Beetles!
+advancement.erebus.exploration.find_beetles.desc=Have a somewhat unkind encounter with any of the Beetles or their Larvae.
 
 advancement.erebus.exploration.beetlejuice=Alpha Orionis
 advancement.erebus.exploration.beetlejuice.desc=Milk a Beetle to obtain Beetle Juice, the Erebus counterpart to milk.
+advancement.erebus.exploration.beetledrink=Pour Up, Drank
+advancement.erebus.exploration.beetledrink.desc=Down an entire Bambucket of Beetle Juice. Yes, you heard that right.
+
+advancement.erebus.exploration.titan_beetle=Titanomachy
+advancement.erebus.exploration.titan_beetle.desc=Slay a Titan Beetle and obtain its flesh.
+advancement.erebus.exploration.titan_stew=Itadakimasu
+advancement.erebus.exploration.titan_stew.desc=Cook yourself some Titan Stew, the most nourishing meal you'll ever eat.
+
+advancement.erebus.exploration.rhino_beetle=That's Poaching
+advancement.erebus.exploration.rhino_beetle.desc=Kill the Rhinoceros Beetle and obtain its exoskeleton and horn.
+advancement.erebus.exploration.rhino_exo_set=Heavy-handed
+advancement.erebus.exploration.rhino_exo_set.desc=Craft the entire Rhino Plate set, including the shield.
 
 advancement.erebus.exploration.exo_set=Feelin' Invertebrate
-advancement.erebus.exploration.exo_set.desc=Obtain all four pieces of the Exoskeleton armour set.
+advancement.erebus.exploration.exo_set.desc=Obtain all four pieces of the Exoskeleton armour set and the Exoskeleton Shield.
 advancement.erebus.exploration.reinexo_set=Truth Is... I Am Exo Man
-advancement.erebus.exploration.reinexo_set.desc=Obtain all four pieces of the Reinforced Exoskeleton armour set.
+advancement.erebus.exploration.reinexo_set.desc=Obtain all four pieces of the Reinforced Exoskeleton armour set and the Reinforced Exoskeleton Shield.
 
 advancement.erebus.exploration.planticide=More Effective Than Herbicide
 advancement.erebus.exploration.planticide.desc=Mix together some Planticide to destroy some flora.

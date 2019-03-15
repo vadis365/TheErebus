@@ -2,61 +2,72 @@
    "display": {
       "icon": {
          "item": "erebus:rein_exoskeleton_chestplate"
-      },
+		},
 		"title": {
 			"translate": "advancement.erebus.exploration.reinexo_set"
 		},
 		"description": {
 			"translate": "advancement.erebus.exploration.reinexo_set.desc"
 		}
-   },
+	},
    "parent": "erebus:exploration/exo_set",
    "criteria": {
-      "helmet": {
-         "trigger": "minecraft:inventory_changed",
-         "conditions": {
-			"items": [
-				{
+		"helmet": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
 					"item": "erebus:rein_exoskeleton_helmet"
-				}
-			]
-         }
-      },
-      "chest": {
-         "trigger": "minecraft:inventory_changed",
-         "conditions": {
-			"items": [
-				{		 
-				"item": "erebus:rein_exoskeleton_chestplate"
-				}
-			]
-         }
-      },
-      "leg": {
-         "trigger": "minecraft:inventory_changed",
-         "conditions": {
-			"items": [
-				{	
-				"item": "erebus:rein_exoskeleton_leggings"
-				}
-			]
-         }
-      },
-      "boot": {
-         "trigger": "minecraft:inventory_changed",
-         "conditions": {
-			"items": [
-				{	
-				"item": "erebus:rein_exoskeleton_boots"
-				}
-			]
-         }
-      }
-   },
-   "requirements":[
-      [ "helmet" ],
-      [ "chest" ],
-      [ "leg" ],
-      [ "boot" ]
+					}
+				]
+			}
+		},
+		"chest": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{		 
+					"item": "erebus:rein_exoskeleton_chestplate"
+					}
+				]
+			}
+		},
+		"leg": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{	
+					"item": "erebus:rein_exoskeleton_leggings"
+					}
+				]
+			}
+		},
+		"boot": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{	
+					"item": "erebus:rein_exoskeleton_boots"
+					}
+				]
+			}
+		},
+		"shield": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{	
+					"item": "erebus:rein_exoskeleton_shield"
+					}
+				]
+			}
+		}
+	},
+	"requirements":[
+	[ "helmet" ],
+	[ "chest" ],
+	[ "leg" ],
+	[ "boot" ],
+	[ "shield" ]
    ]
 }

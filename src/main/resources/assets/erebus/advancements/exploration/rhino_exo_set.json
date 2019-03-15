@@ -1,23 +1,23 @@
 {
    "display": {
-      "icon": {
-         "item": "erebus:exoskeleton_chestplate"
+		"icon": {
+			"item": "erebus:rhino_exoskeleton_chestplate"
 		},
 		"title": {
-			"translate": "advancement.erebus.exploration.exo_set"
+			"translate": "advancement.erebus.exploration.rhino_exo_set"
 		},
 		"description": {
-			"translate": "advancement.erebus.exploration.exo_set.desc"
+			"translate": "advancement.erebus.exploration.rhino_exo_set.desc"
 		}
    },
-   "parent": "erebus:exploration/entomology",
+   "parent": "erebus:exploration/rhino_beetle",
    "criteria": {
 		"helmet": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions": {
 				"items": [
 					{
-					"item": "erebus:exoskeleton_helmet"
+					"item": "erebus:rhino_exoskeleton_helmet"
 					}
 				]
 			}
@@ -27,7 +27,7 @@
 			"conditions": {
 				"items": [
 					{		 
-					"item": "erebus:exoskeleton_chestplate"
+					"item": "erebus:rhino_exoskeleton_chestplate"
 					}
 				]
 			}
@@ -37,37 +37,37 @@
 			"conditions": {
 				"items": [
 					{	
-					"item": "erebus:exoskeleton_leggings"
+					"item": "erebus:rhino_exoskeleton_leggings"
 					}
 				]
 			}
 		},
-			"boot": {
+		"boot": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions": {
 				"items": [
 					{	
-					"item": "erebus:exoskeleton_boots"
+					"item": "erebus:rhino_exoskeleton_boots"
 					}
 				]
 			}
-		},
+		},	
 		"shield": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions": {
 				"items": [
 					{	
-					"item": "erebus:exoskeleton_shield"
+					"item": "erebus:rhino_exoskeleton_shield"
 					}
 				]
 			}
 		}
 	},
 	"requirements":[
-      [ "helmet" ],
-      [ "chest" ],
-      [ "leg" ],
-      [ "boot" ],
-	  [ "shield" ]
+	[ "helmet" ],
+	[ "chest" ],
+	[ "leg" ],
+	[ "boot" ],
+	[ "shield" ]
    ]
 }
