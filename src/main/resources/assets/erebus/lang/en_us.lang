@@ -916,7 +916,7 @@ advancement.erebus.exploration.petrified_wood=Very Hard Wood
 advancement.erebus.exploration.petrified_wood.desc=Acquire Petrified Wood.
 
 advancement.erebus.exploration.entomology=Aggressive Entomology
-advancement.erebus.exploration.entomology.desc=Slay a creature native to the Erebus (WIP: In the meantime, obtain some Exoskeleton to trigger).
+advancement.erebus.exploration.entomology.desc=Slay a creature native to the Erebus.
 advancement.erebus.exploration.kill_all=Pest Control
 advancement.erebus.exploration.kill_all.desc=Kill all regular mobs the Erebus has to offer.
 
