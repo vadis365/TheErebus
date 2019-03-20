@@ -15,11 +15,40 @@
 		"announce_to_chat": true
 	},
 	"criteria": {
-		"enter_minecraft": {
-			"trigger": "minecraft:location",
+		"diamond": {
+			"trigger": "minecraft:inventory_changed",
 			"conditions": {
-				"dimension": "overworld"
+				"items": [
+					{
+					"item": "minecraft:diamond"
+					}
+				]
+			}
+		},
+		"emerald": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "minecraft:emerald"
+					}
+				]
+			}
+		},
+		"obsidian": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "minecraft:obsidian"
+					}
+				]
 			}
 		}
-	}
+	},
+	"requirements": [
+	[ "diamond" ],
+	[ "emerald" ],
+	[ "obsidian" ]
+	]
 }
