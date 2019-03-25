@@ -26,23 +26,22 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 final class TeleporterErebus extends Teleporter {
-
 	private final WorldServer worldServerInstance;
-	private final Long2ObjectMap<Teleporter.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap<Teleporter.PortalPosition>(4096);
+	private final Long2ObjectMap<TeleporterErebus.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap<TeleporterErebus.PortalPosition>(4096);
 	private final List<Long> destinationCoordinateKeys = new ArrayList<Long>();
 
 	TeleporterErebus(WorldServer worldServer) {
 		super(worldServer);
 		worldServerInstance = worldServer;
 	}
-	
+
 	@Override
 	public void placeInPortal(Entity entity, float rotationYaw) {
+		if (entity instanceof EntityPlayerMP && !((EntityPlayerMP) entity).capabilities.isCreativeMode)
+			ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP) entity, true, "invulnerableDimensionChange", "field_184851_cj");
 		if (!placeInExistingPortal(entity, rotationYaw)) {
-			makePortal(entity);
 			if (worldServerInstance.provider.getDimension() == ConfigHandler.INSTANCE.erebusDimensionID) {
-				if (entity instanceof EntityPlayerMP && !((EntityPlayerMP)entity).capabilities.isCreativeMode)
-					ReflectionHelper.setPrivateValue(EntityPlayerMP.class, (EntityPlayerMP)entity, true, "invulnerableDimensionChange", "field_184851_cj");
+				makePortal(entity);
 				placeInExistingPortal(entity, rotationYaw);
 			}
 		}
@@ -97,7 +96,7 @@ final class TeleporterErebus extends Teleporter {
 		if (destinationCoordinateCache.containsKey(coordPair)) {
 			TeleporterErebus.PortalPosition portalPosition = (TeleporterErebus.PortalPosition)this.destinationCoordinateCache.get(coordPair);
 			distToPortal = 0.0;
-			blockpos = portalPosition;
+			blockpos = portalPosition.up(1);
 			portalPosition.lastUpdateTime = this.worldServerInstance.getTotalWorldTime();
 			portalNotSaved = false;
 		} else {
@@ -108,7 +107,7 @@ final class TeleporterErebus extends Teleporter {
 						if (!(te instanceof TileEntityGaeanKeystone))
 							continue;
 						double dx = entity.posX - te.getPos().getX();
-						double dy = 0; //entity.posY - te.yCoord;
+						double dy = entity.posY - te.getPos().getY();
 						double dz = entity.posZ - te.getPos().getZ();
 						double dSq = dx * dx + dy * dy + dz * dz;
 						if (dSq > distToPortal)
@@ -145,7 +144,6 @@ final class TeleporterErebus extends Teleporter {
 	public boolean makePortal(Entity entity) {
 		//attempt at constraining the portal height in the Erebus
 		double safeHeight = Math.min(Math.max(entity.posY, 12), 116);
-
 		int x = MathHelper.floor(entity.posX);
 		int y = MathHelper.floor(safeHeight) - 2;
 		int z = MathHelper.floor(entity.posZ);

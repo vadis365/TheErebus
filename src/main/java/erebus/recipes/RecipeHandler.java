@@ -92,6 +92,7 @@ public class RecipeHandler {
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_LAPIS), new ItemStack(Items.DYE, 1, 4), 0.2F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_DIAMOND), new ItemStack(Items.DIAMOND), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_EMERALD), new ItemStack(Items.EMERALD), 1.0F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_QUARTZ), new ItemStack(Items.QUARTZ), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_JADE), EnumErebusMaterialsType.JADE.createStack(), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_FOSSIL), EnumErebusMaterialsType.SHARD_BONE.createStack(), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_GNEISS), EnumErebusMaterialsType.GNEISS_ROCK.createStack(), 0.1F);

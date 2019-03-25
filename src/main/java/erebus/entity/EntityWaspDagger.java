@@ -6,6 +6,8 @@ import erebus.network.client.PacketParticle.ParticleType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -38,6 +40,8 @@ public class EntityWaspDagger extends EntityThrowable {
 					;
 				if (isBurning() && !(mop.entityHit instanceof EntityEnderman))
 					mop.entityHit.setFire(5);
+				if (!(mop.entityHit instanceof EntityWasp) && mop.entityHit instanceof EntityLivingBase)
+					((EntityLivingBase) mop.entityHit).addPotionEffect(new PotionEffect(new PotionEffect(MobEffects.POISON, 60, 0)));
 				setDead();
 			}
 			Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.WASP_DAGGER, (float) posX, (float) posY, (float) posZ));

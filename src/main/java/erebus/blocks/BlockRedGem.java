@@ -59,13 +59,11 @@ public class BlockRedGem extends Block implements IHasCustomItem, ISubBlocksBloc
 	}
 
 	@Override
-	  public NonNullList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		if (state.getValue(TYPE) == EnumType.RED_LAMP_ON || state.getValue(TYPE) == EnumType.RED_LAMP_OFF)
-			return NonNullList.withSize(1, new ItemStack(this, 1, EnumType.RED_LAMP_ON.ordinal()));
-		else if (state.getValue(TYPE) == EnumType.RED_GEM)
-			return NonNullList.withSize(1 + RANDOM.nextInt(2 + fortune), EnumErebusMaterialsType.RED_GEM.createStack());
-		else
-	        return NonNullList.create();
+			drops.add(new ItemStack(this, 1, EnumType.RED_LAMP_ON.ordinal()));
+		if (state.getValue(TYPE) == EnumType.RED_GEM)
+			drops.add(EnumErebusMaterialsType.RED_GEM.createStack(1 + RANDOM.nextInt(2 + fortune)));
 	}
 
 	@Override
@@ -81,7 +79,7 @@ public class BlockRedGem extends Block implements IHasCustomItem, ISubBlocksBloc
 
 	@Override
     public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-		if (state.getValue(TYPE) == EnumType.RED_LAMP_ON)
+		if (state.getValue(TYPE) == EnumType.RED_LAMP_OFF)
 			return false;
 		return true;
     }

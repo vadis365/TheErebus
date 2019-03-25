@@ -26,12 +26,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 public class EntityJumpingSpider extends EntitySpider {
+	private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityScytodes.class, DataSerializers.BYTE);
 	private static final DataParameter<Integer> TYPE = EntityDataManager.<Integer>createKey(EntityJumpingSpider.class, DataSerializers.VARINT);
 
 	public EntityJumpingSpider(World world) {
@@ -55,6 +58,7 @@ public class EntityJumpingSpider extends EntitySpider {
 	protected void entityInit() {
 		super.entityInit();
 		dataManager.register(TYPE, new Integer(rand.nextInt(3)));
+		dataManager.register(CLIMBING, Byte.valueOf((byte)0));
 	}
 
 	@Override
@@ -63,6 +67,45 @@ public class EntityJumpingSpider extends EntitySpider {
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 25D : 25D * ConfigHandler.INSTANCE.mobHealthMultipier);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 	}
+
+	@Override
+    protected PathNavigate createNavigator(World world) {
+        return new PathNavigateClimber(this, world);
+    }
+
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
+        if (!this.world.isRemote) {
+            this.setBesideClimbableBlock(this.collidedHorizontally);
+        }
+	}
+
+	@Override
+	public void fall(float distance, float damageMultiplier) {
+	}
+
+	@Override
+	public void setInWeb() {
+	}
+
+	@Override
+    public boolean isOnLadder() {
+        return isBesideClimbableBlock();
+    }
+
+    public boolean isBesideClimbableBlock() {
+        return ((dataManager.get(CLIMBING)).byteValue() & 1) != 0;
+    }
+
+    public void setBesideClimbableBlock(boolean climbing) {
+        byte b0 = (dataManager.get(CLIMBING)).byteValue();
+        if (climbing)
+            b0 = (byte)(b0 | 1);
+        else
+            b0 = (byte)(b0 & -2);
+        dataManager.set(CLIMBING, Byte.valueOf(b0));
+    }
 
 	@Override
 	public boolean attackEntityAsMob(Entity entity) {

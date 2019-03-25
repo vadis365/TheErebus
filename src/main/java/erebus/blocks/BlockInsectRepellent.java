@@ -124,7 +124,7 @@ public class BlockInsectRepellent extends Block {
 			if (entity.getEntityWorld().getBlockState(pos).getBlock() == ModBlocks.INSECT_REPELLENT && ((EntityLiving) entity).getCreatureAttribute().equals(EnumCreatureAttribute.ARTHROPOD)) {
 				int Knockback = 1;
 				entity.addVelocity(MathHelper.sin(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F, 0.1D, MathHelper.cos(entity.rotationYaw * 3.141593F / 180.0F) * Knockback * 0.1F);
-				entity.getEntityWorld().playSound(null, pos, SoundEvents.ENTITY_PLAYER_SMALL_FALL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				//entity.getEntityWorld().playSound(null, pos, SoundEvents.ENTITY_PLAYER_SMALL_FALL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
 	}
 }

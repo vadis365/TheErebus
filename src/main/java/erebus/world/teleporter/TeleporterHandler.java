@@ -9,6 +9,7 @@ import gnu.trove.map.hash.TObjectByteHashMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -74,31 +75,26 @@ public final class TeleporterHandler {
 	private void transferEntity(Entity entity, int dimensionId) {
 		if (dimensionId != 0 && dimensionId != ConfigHandler.INSTANCE.erebusDimensionID)
 			throw new IllegalArgumentException("Supplied invalid dimension ID into Erebus teleporter: " + dimensionId);
-
-		World world = entity.getEntityWorld();
-
-		if (!world.isRemote && !entity.isDead)
+		World world = entity.world;
+		if (!world.isRemote && !entity.isDead && !(entity instanceof FakePlayer) && world instanceof WorldServer) {
+			if (!net.minecraftforge.common.ForgeHooks.onTravelToDimension(entity, dimensionId))
+				return;
+			MinecraftServer server = world.getMinecraftServer();
+			WorldServer toWorld = server.getWorld(dimensionId);
+			AxisAlignedBB aabb = entity.getEntityBoundingBox();
+			aabb = new AxisAlignedBB(aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.maxY, aabb.maxZ);
 			if (entity instanceof EntityPlayerMP) {
-				if (entity instanceof FakePlayer)
-					return;
-
 				EntityPlayerMP player = (EntityPlayerMP) entity;
+				// player.invulnerableDimensionChange = true;
 				if (waitingPlayers.containsKey(player.getUniqueID())) {
 					waitingPlayers.put(player.getUniqueID(), (byte) 20);
 					return;
 				}
-
-				waitingPlayers.put(player.getUniqueID(), (byte) 40); // if there are any issues, we can either increase the number or rewrite the "is player in portal?" checking part
+				waitingPlayers.put(player.getUniqueID(), (byte) 40);
 				checkWaitingPlayers = true;
-
 				player.mcServer.getPlayerList().transferPlayerToDimension(player, dimensionId, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
 				player.timeUntilPortal = 0;
-
-				 // player.lastExperience = -1; player.lastHealth = -1.0F; player.lastFoodLevel = -1;
-
-			} else  { // TODO
-				MinecraftServer server = world.getMinecraftServer();
-				WorldServer toWorld = server.getWorld(dimensionId);
+			} else {
 				entity.setDropItemsWhenDead(false);
 				world.removeEntityDangerously(entity);
 				entity.dimension = dimensionId;
@@ -107,5 +103,6 @@ public final class TeleporterHandler {
 				server.getPlayerList().transferEntityToWorld(entity, dimensionId, oldWorld, toWorld, new TeleporterErebus(toWorld));
 				toWorld.updateEntity(entity);
 			}
+		}
 	}
 }

@@ -5,13 +5,16 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import erebus.ModMaterials;
+import erebus.entity.EntityWasp;
 import erebus.entity.EntityWaspDagger;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -55,6 +58,8 @@ public class ItemWaspDagger extends ItemSword {
 
 	@Override
 	public boolean hitEntity(ItemStack is, EntityLivingBase entity, EntityLivingBase player) {
+		if (!(entity instanceof EntityWasp))
+			entity.addPotionEffect(new PotionEffect(new PotionEffect(MobEffects.POISON, 60, 0)));
 		is.damageItem(2, player);
 		return true;
 	}
