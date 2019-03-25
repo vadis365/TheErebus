@@ -101,10 +101,10 @@ public class WorldGenAntlionLair extends WorldGenerator {
 				for (int yy = y - 1, layer = 0; yy >= y - 7; yy--, layer++) {
 					if (Math.sqrt(Math.pow(xx - x, 2) + Math.pow(zz - z, 2)) < 4.9D && yy != y - 7)
 						if (yy >= y - 3 || Math.abs(xx - x) <= 1 + 6 - layer && Math.abs(zz - z) <= 1 + 6 - layer)
-							world.setBlockState(new BlockPos(xx, yy, zz), yy == y - 1 ? ModBlocks.GHOST_SAND.getDefaultState() : Blocks.AIR.getDefaultState());
+							world.setBlockState(new BlockPos(xx, yy, zz), yy == y - 1 ? ModBlocks.GHOST_SAND.getDefaultState() : Blocks.AIR.getDefaultState(), 16);
 
 					if (layer > 0 && !world.isAirBlock(new BlockPos(xx, yy, zz)))
-						world.setBlockState(new BlockPos(xx, yy, zz), Blocks.SAND.getDefaultState());
+						world.setBlockState(new BlockPos(xx, yy, zz), Blocks.SAND.getDefaultState(), 16);
 				}
 
 		world.setBlockState(pos.down(7), Blocks.CHEST.getDefaultState(), 2);
