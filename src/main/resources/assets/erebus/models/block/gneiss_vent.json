@@ -1,6 +1,20 @@
 {
-    "parent": "block/cube_all",
     "textures": {
-        "all": "erebus:blocks/gneiss_tiles_cracked"
-    }
+        "particle": "erebus:blocks/gneiss",
+        "texture1": "erebus:blocks/gneiss_vent_top",
+		"texture2": "erebus:blocks/gneiss"
+    },
+    "elements": [
+        {   "from": [ 0, 0, 0 ],
+            "to": [ 16, 16, 16 ],
+            "faces": {
+                "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#texture2", "cullface": "down" },
+                "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#texture1" },
+                "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture2" },
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture2" },
+                "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#texture2" },
+                "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#texture2" }
+            }
+        }
+    ]
 }

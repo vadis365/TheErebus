@@ -1,4 +1,5 @@
 {
+    "ambientocclusion": false,
     "textures": {
         "0": "erebus:blocks/desert_shrub",
         "particle": "erebus:blocks/desert_shrub"

@@ -1,4 +1,5 @@
 {
+    "ambientocclusion": false,
     "textures": {
         "0": "erebus:blocks/swamp_plant",
         "particle": "erebus:blocks/swamp_plant"

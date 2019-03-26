@@ -102,6 +102,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.GRASS, pos) && world.isAirBlock(pos.up()) && world.isAirBlock(pos.up(2))) {
 				ModBlocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoubleHeightPlant.EnumPlantType.DROUGHTED_SHRUB, 2);
+				break;
 			}
 		}
 		
@@ -113,6 +114,7 @@ public class BiomeDecoratorUlteriorOutback extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.GRASS, pos))
 				if (world.isAirBlock(pos.up())) {
 					world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.DESERT_SHRUB), 2);
+					break;
 				}
 		}
 

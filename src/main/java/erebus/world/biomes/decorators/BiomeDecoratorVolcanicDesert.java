@@ -5,12 +5,13 @@ import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenDesertRockGneiss;
+import erebus.world.feature.decoration.WorldGenErebusLakesWithEdge;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
 import erebus.world.feature.plant.WorldGenPricklyPairPatch;
 import erebus.world.feature.structure.WorldGenAntlionLair;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.feature.WorldGenLakes;
 
 
 public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
@@ -18,7 +19,8 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 	private final WorldGenScorchedWood genScorchedWood = new WorldGenScorchedWood();
 	protected final WorldGenPricklyPairPatch genPricklyPair = new WorldGenPricklyPairPatch();
 	private final WorldGenAntlionLair genAntlionLair = new WorldGenAntlionLair();
-	private final WorldGenLakes genLavaLakes = new WorldGenLakes(Blocks.FLOWING_LAVA);
+	private final WorldGenErebusLakesWithEdge genLavaLakes = new WorldGenErebusLakesWithEdge(Blocks.FLOWING_LAVA, ModBlocks.VOLCANIC_ROCK);
+	private final WorldGenDesertRockGneiss genRocks = new WorldGenDesertRockGneiss();
 	
 
 	@Override
@@ -77,6 +79,19 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 			for (int attempt = 0; attempt < 300; attempt++)
 				if (genAntlionLair.generate(world, rand, new BlockPos(x + 5 + rand.nextInt(6) + 8, 15 + rand.nextInt(35), z + 5 + rand.nextInt(6) + 8)))
 					break;
+
+		if (rand.nextBoolean() && rand.nextBoolean()) {
+			xx = x + offsetXZ();
+			zz = z + offsetXZ();
+
+			for (yy = 100; yy > 20; yy--) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (checkSurface(SurfaceType.SAND, pos)) {
+					if(genRocks.generate(world, rand, pos))
+						break;
+				}
+			}
+		}
 	}
 
 	@Override
