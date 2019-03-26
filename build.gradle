@@ -20,7 +20,7 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 */
-version = "1.0.28"
+version = "1.0.29"
 group= "erebus"
 archivesBaseName = "Erebus"
 sourceCompatibility = targetCompatibility = "1.8"
