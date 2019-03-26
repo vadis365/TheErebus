@@ -13,6 +13,7 @@ import erebus.ModTabs;
 import erebus.api.IErebusEnum;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
 import erebus.items.block.ItemBlockEnum;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -29,6 +30,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
@@ -46,6 +48,16 @@ public class BlockSmallPlant extends BlockBush implements IGrowable, IShearable,
 		setSoundType(SoundType.PLANT);
 		setCreativeTab(ModTabs.PLANTS);
 		setDefaultState(blockState.getBaseState().withProperty(PLANT_TYPE, EnumSmallPlantType.NETTLE));
+	}
+
+	@Override
+    public Block.EnumOffsetType getOffsetType() {
+        return Block.EnumOffsetType.XZ;
+    }
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return BUSH_AABB.offset(state.getOffset(source, pos));
 	}
 
 	@Override
