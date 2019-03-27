@@ -17,8 +17,10 @@
 		"rhino_dmg": {
 			"trigger": "minecraft:entity_hurt_player",
 			"conditions": {
-				"source_entity": {
-					"type": "erebus:erebus.rhino_beetle"
+				"damage": {
+					"source_entity": {
+						"type": "erebus:erebus.rhino_beetle"
+					}
 				}
 			}
 		},
@@ -33,8 +35,10 @@
 		"titan_dmg": {
 			"trigger": "minecraft:entity_hurt_player",
 			"conditions": {
-				"source_entity": {
-					"type": "erebus:erebus.titan_beetle"
+				"damage": {
+					"source_entity": {
+						"type": "erebus:erebus.titan_beetle"
+					}
 				}
 			}
 		},
@@ -49,8 +53,10 @@
 		"stag_dmg": {
 			"trigger": "minecraft:entity_hurt_player",
 			"conditions": {
-				"source_entity": {
-					"type": "erebus:erebus.stag_beetle"
+				"damage": {
+					"source_entity": {
+						"type": "erebus:erebus.stag_beetle"
+					}
 				}
 			}
 		},
