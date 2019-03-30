@@ -80,6 +80,7 @@ import erebus.blocks.BlockMud;
 import erebus.blocks.BlockMushroomSmall;
 import erebus.blocks.BlockOreErebus;
 import erebus.blocks.BlockOreErebus2;
+import erebus.blocks.BlockPertifiedWoodRock;
 import erebus.blocks.BlockPetrifiedChest;
 import erebus.blocks.BlockPetrifiedCraftingTable;
 import erebus.blocks.BlockPlanksErebus;
@@ -162,7 +163,12 @@ public class ModBlocks {
 	public static final Block UMBERGRAVEL = new BlockUmberGravel();
 	public static final Block UMBERPAVER = new BlockUmberPaver();
 	public static final Block UMBERSTONE_PILLAR = new BlockUmberstonePillar();
-	public static final Block PETRIFIED_WOOD_ROCK = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(5.0F).setResistance(10.0F).setCreativeTab(ModTabs.BLOCKS);
+	public static final Block PETRIFIED_WOOD_ROCK = new BlockPertifiedWoodRock();
+	public static final Block PETRIFIED_WOOD_ROCK_2 = new BlockPertifiedWoodRock();
+	public static final Block PETRIFIED_WOOD_ROCK_3 = new BlockPertifiedWoodRock();
+	public static final Block PETRIFIED_WOOD_ROCK_4 = new BlockPertifiedWoodRock();
+	public static final Block PETRIFIED_WOOD_ROCK_5 = new BlockPertifiedWoodRock();
+	public static final Block PETRIFIED_WOOD_ROCK_6 = new BlockPertifiedWoodRock();
 	public static final Block DUST_LAYER = new BlockDustLayer();
 	public static final Block DUST = new BlockSimple(Material.GROUND, SoundType.SNOW, ModTabs.BLOCKS) {
 		@Override

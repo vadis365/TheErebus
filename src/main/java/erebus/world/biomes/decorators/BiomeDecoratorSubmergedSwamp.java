@@ -2,7 +2,9 @@ package erebus.world.biomes.decorators;
 
 import erebus.ModBlocks;
 import erebus.blocks.BlockDoubleHeightPlant;
+import erebus.blocks.BlockLogErebus;
 import erebus.blocks.BlockSmallPlant;
+import erebus.blocks.EnumWood;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.ChunkProviderErebus;
 import erebus.world.biomes.decorators.data.FeatureType;
@@ -14,8 +16,8 @@ import erebus.world.feature.decoration.WorldGenPonds;
 import erebus.world.feature.decoration.WorldGenQuickSand;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
 import erebus.world.feature.plant.WorldGenAlgae;
+import erebus.world.feature.plant.WorldGenBigLogs;
 import erebus.world.feature.plant.WorldGenMossPatch;
-import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenSwampBush;
 import erebus.world.feature.plant.WorldGenVinesErebus;
 import erebus.world.feature.structure.WorldGenDragonflyDungeon;
@@ -24,6 +26,7 @@ import erebus.world.feature.tree.WorldGenMossbarkTree;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockVine;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenReed;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -282,13 +285,13 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 		for (attempt = 0; attempt < 40; attempt++) {
 			int length = rand.nextInt(5) + 4;
 			int baseRadius = rand.nextInt(3) + 2;
-			byte direction = (byte) rand.nextInt(2);
+			EnumFacing facing = rand.nextBoolean() ? EnumFacing.NORTH : EnumFacing.WEST;
 			xx = x + 16;
 			yy = rand.nextInt(118);
 			zz = z + 16;
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.GRASS, pos))
-				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, pos.up());
+				new WorldGenBigLogs(length, baseRadius, facing, EnumWood.ROTTEN.getLog().getDefaultState().withProperty(BlockLogErebus.LOG_AXIS, facing == EnumFacing.NORTH ? BlockLogErebus.EnumAxis.Z : BlockLogErebus.EnumAxis.X), Blocks.AIR.getDefaultState(), false).generate(world, rand, pos.up());
 		}
 	}
 

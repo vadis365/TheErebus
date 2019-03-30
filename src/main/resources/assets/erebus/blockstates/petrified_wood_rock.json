@@ -1,5 +1,18 @@
 {
-    "variants": {
-        "normal": { "model": "erebus:petrified_wood_rock" }
+  "forge_marker":1,
+  "defaults": {
+    "textures":{
+      "all":"erebus:blocks/petrified_wood_rock_1"
     }
+  },
+  "variants":{
+    "axis": {
+        "y": { "model":"minecraft:block/cube_all" },
+        "z": { "model":"minecraft:block/cube_all", "x": 90 },
+        "x": { "model":"minecraft:block/cube_all", "x": 90, "y": 90 }
+      },
+    "inventory": {
+      "model": "minecraft:cube_all"
+    }
+  }
 }

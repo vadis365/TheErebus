@@ -2,20 +2,23 @@ package erebus.world.biomes.decorators;
 
 import erebus.ModBlocks;
 import erebus.blocks.BlockDoubleHeightPlant;
+import erebus.blocks.BlockLogErebus;
 import erebus.blocks.BlockSmallPlant;
+import erebus.blocks.EnumWood;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenRottenAcacia;
+import erebus.world.feature.plant.WorldGenBigLogs;
 import erebus.world.feature.plant.WorldGenGiantMushrooms;
 import erebus.world.feature.plant.WorldGenGiantMushrooms.MushroomType;
 import erebus.world.feature.plant.WorldGenMossPatch;
-import erebus.world.feature.plant.WorldGenRottenLogs;
 import erebus.world.feature.plant.WorldGenRottenTreeStump;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenBush;
@@ -41,13 +44,13 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 		for (attempt = 0; attempt < 10; attempt++) {
 			int length = rand.nextInt(5) + 4;
 			int baseRadius = rand.nextInt(3) + 2;
-			byte direction = (byte) rand.nextInt(2);
+			EnumFacing facing = rand.nextBoolean() ? EnumFacing.NORTH : EnumFacing.WEST;
 			xx = x + 16;
 			yy = rand.nextInt(118);
 			zz = z + 16;
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.GRASS, pos))
-				new WorldGenRottenLogs(length, baseRadius, direction).generate(world, rand, pos.up());
+				new WorldGenBigLogs(length, baseRadius, facing, EnumWood.ROTTEN.getLog().getDefaultState().withProperty(BlockLogErebus.LOG_AXIS, facing == EnumFacing.NORTH ? BlockLogErebus.EnumAxis.Z : BlockLogErebus.EnumAxis.X), Blocks.AIR.getDefaultState(), false).generate(world, rand, pos.up());
 		}
 
 		for (attempt = 0; attempt < 10; attempt++) {

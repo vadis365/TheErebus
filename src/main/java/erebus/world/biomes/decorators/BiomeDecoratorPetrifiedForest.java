@@ -10,6 +10,8 @@ import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
 import erebus.world.feature.decoration.WorldGenRockSpike;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
+import erebus.world.feature.plant.WorldGenBigLogs;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 
@@ -51,6 +53,18 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 					break;
 				}
 			}
+		}
+		
+		for (attempt = 0; attempt < 10; attempt++) {
+			int length = rand.nextInt(5) + 4;
+			int baseRadius = rand.nextInt(3) + 2;
+			EnumFacing facing = rand.nextBoolean() ? EnumFacing.NORTH : EnumFacing.WEST;
+			xx = x + 16;
+			yy = rand.nextInt(118);
+			zz = z + 16;
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.VOLCANIC_ROCK, pos))
+				new WorldGenBigLogs(length, baseRadius, facing, ModBlocks.PETRIFIED_WOOD_ROCK.getDefaultState(), ModBlocks.UMBERSTONE.getDefaultState(), true).generate(world, rand, pos.up());
 		}
 
         for (attempt = 0; attempt < 3; attempt++) {

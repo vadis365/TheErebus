@@ -2,25 +2,28 @@ package erebus.world.feature.plant;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import erebus.blocks.BlockLogErebus;
-import erebus.blocks.EnumWood;
 
-public class WorldGenRottenLogs extends WorldGenerator {
+public class WorldGenBigLogs extends WorldGenerator {
 
 	private int length = -1;
 	private int baseRadius = -1;
-	private byte direction;
-	protected Block log;
-
-	public WorldGenRottenLogs(int length, int baseRadius, byte direction) {
+	private EnumFacing facing;
+	protected IBlockState log;
+	protected IBlockState core;
+	private boolean genOres;
+	
+	public WorldGenBigLogs(int length, int baseRadius, EnumFacing facing, IBlockState outerLayer, IBlockState innerLayer, boolean generateOres) {
 		this.length = length;
 		this.baseRadius = baseRadius;
-		this.direction = direction;
-		log = EnumWood.ROTTEN.getLog();
+		this.facing = facing;
+		this.log = outerLayer;
+		this.core = innerLayer;
+		this.genOres = generateOres;
 	}
 
 	@Override
@@ -30,7 +33,7 @@ public class WorldGenRottenLogs extends WorldGenerator {
 		int z = pos.getZ();
 
 		// Trunk N/S
-		if (direction == 1) {
+		if (facing == EnumFacing.NORTH || facing == EnumFacing.SOUTH) {
 			for (int xx = x - baseRadius; baseRadius + x >= xx; xx++)
 				for (int zz = z - length; length + z - 1 >= zz; zz++)
 					for (int yy = y + 1; yy <= y + baseRadius * 2; yy++)
@@ -42,12 +45,15 @@ public class WorldGenRottenLogs extends WorldGenerator {
 					for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 						double dSq = i * i + j * j;
 						if (Math.round(Math.sqrt(dSq)) == baseRadius) {
-							world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), log.getDefaultState().withProperty(BlockLogErebus.LOG_AXIS, BlockLogErebus.EnumAxis.Z), 2);
+							world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), log);
 							if (rand.nextInt(12) == 0)
 								world.setBlockToAir(new BlockPos(x + i, y + j + baseRadius, zz));
 							if (zz == z - length && rand.nextInt(2) == 0 || zz == z + length - 1 && rand.nextInt(2) == 0)
 								world.setBlockToAir(new BlockPos(x + i, y + j + baseRadius, zz));
-						} else
+						} 
+						else if(Math.round(Math.sqrt(dSq)) < baseRadius && genOres)
+							world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), core);
+						else
 							world.setBlockToAir(new BlockPos(x + i, y + j + baseRadius, zz));
 					}
 
@@ -65,12 +71,15 @@ public class WorldGenRottenLogs extends WorldGenerator {
 					for (int j = baseRadius * -1; j <= baseRadius; ++j) {
 						double dSq = i * i + j * j;
 						if (Math.round(Math.sqrt(dSq)) == baseRadius) {
-							world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), log.getDefaultState().withProperty(BlockLogErebus.LOG_AXIS, BlockLogErebus.EnumAxis.X), 2);
+							world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), log);
 							if (rand.nextInt(12) == 0)
 								world.setBlockToAir(new BlockPos(xx, y + j + baseRadius, z + i));
 							if (xx == x - length && rand.nextInt(2) == 0 || xx == x + length - 1 && rand.nextInt(2) == 0)
 								world.setBlockToAir(new BlockPos(xx, y + j + baseRadius, z + i));
-						} else
+						}
+						else if(Math.round(Math.sqrt(dSq)) < baseRadius && genOres)
+							world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), core);
+						else
 							world.setBlockToAir(new BlockPos(xx, y + j + baseRadius, z + i));
 					}
 		}
