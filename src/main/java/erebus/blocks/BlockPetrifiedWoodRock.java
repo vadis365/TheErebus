@@ -5,9 +5,9 @@ import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-public class BlockPertifiedWoodRock extends BlockRotatedPillar {
+public class BlockPetrifiedWoodRock extends BlockRotatedPillar {
 
-	public BlockPertifiedWoodRock() {
+	public BlockPetrifiedWoodRock() {
 		super(Material.ROCK);
 		setHardness(5F);
 		setResistance(10.0F);
