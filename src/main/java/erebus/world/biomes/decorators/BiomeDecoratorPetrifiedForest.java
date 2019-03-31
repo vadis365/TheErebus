@@ -4,6 +4,7 @@ import erebus.ModBlocks;
 import erebus.blocks.BlockDustLayer;
 import erebus.blocks.BlockHangingWeb;
 import erebus.blocks.BlockMandrake;
+import erebus.blocks.BlockPetrifiedWoodRock;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
@@ -64,7 +65,7 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 			zz = z + 16;
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.VOLCANIC_ROCK, pos))
-				new WorldGenBigLogs(length, baseRadius, facing, ModBlocks.PETRIFIED_WOOD_ROCK.getDefaultState(), ModBlocks.UMBERSTONE.getDefaultState(), true).generate(world, rand, pos.up());
+				new WorldGenBigLogs(length, baseRadius, facing, ModBlocks.PETRIFIED_WOOD_ROCK.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, facing == EnumFacing.NORTH ? EnumFacing.Axis.Z : EnumFacing.Axis.X), ModBlocks.UMBERSTONE.getDefaultState(), true).generate(world, rand, pos.up());
 		}
 
         for (attempt = 0; attempt < 3; attempt++) {

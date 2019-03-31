@@ -78,17 +78,17 @@ public class WorldGenRockSpike extends WorldGenerator
 
                                 if (iblockstate.getBlock().isAir(iblockstate, worldIn, position.add(i1, -k, j1)) || block == ModBlocks.VOLCANIC_ROCK)
                                 {
-                                	if(k >= -3)
+                                	if(k <= 3)
                                 		this.setBlockAndNotifyAdequately(worldIn, position.add(i1, -k, j1), ModBlocks.PETRIFIED_WOOD_ROCK.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y));
-                                	if(k < -3 && k >= -6)
+                                	if(k > 3 && k <= 6)
                                 		this.setBlockAndNotifyAdequately(worldIn, position.add(i1, -k, j1), ModBlocks.PETRIFIED_WOOD_ROCK_2.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y));
-                                	if(k < -6 && k >= -9)
+                                	if(k > 6 && k <= 9)
                                 		this.setBlockAndNotifyAdequately(worldIn, position.add(i1, -k, j1), ModBlocks.PETRIFIED_WOOD_ROCK_3.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y));
-                                	if(k < -9 && k >= -12)
+                                	if(k > 9 && k <= 12)
                                 		this.setBlockAndNotifyAdequately(worldIn, position.add(i1, -k, j1), ModBlocks.PETRIFIED_WOOD_ROCK_4.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y));
-                                	if(k < -12 && k >= -15)
+                                	if(k > 12 && k <= 15)
                                 		this.setBlockAndNotifyAdequately(worldIn, position.add(i1, -k, j1), ModBlocks.PETRIFIED_WOOD_ROCK_5.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y));
-                                	if(k < -15)
+                                	if(k > 15)
                                 		this.setBlockAndNotifyAdequately(worldIn, position.add(i1, -k, j1), ModBlocks.PETRIFIED_WOOD_ROCK_6.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y));
                                 }
                             }
