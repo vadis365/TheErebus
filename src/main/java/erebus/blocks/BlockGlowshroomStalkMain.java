@@ -362,7 +362,7 @@ public class BlockGlowshroomStalkMain extends Block {
 
 	@Override
 	public int tickRate(World world) {
-		return 5;
+		return 10;
 	}
 
 	@Override
