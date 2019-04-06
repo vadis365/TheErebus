@@ -291,7 +291,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			zz = z + 16;
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.GRASS, pos))
-				new WorldGenBigLogs(length, baseRadius, facing, EnumWood.ROTTEN.getLog().getDefaultState().withProperty(BlockLogErebus.LOG_AXIS, facing == EnumFacing.NORTH ? BlockLogErebus.EnumAxis.Z : BlockLogErebus.EnumAxis.X), Blocks.AIR.getDefaultState(), false).generate(world, rand, pos.up());
+				new WorldGenBigLogs(length, baseRadius, facing, EnumWood.ROTTEN.getLog().getDefaultState().withProperty(BlockLogErebus.LOG_AXIS, facing == EnumFacing.NORTH ? BlockLogErebus.EnumAxis.Z : BlockLogErebus.EnumAxis.X)).generate(world, rand, pos.up());
 		}
 	}
 

@@ -15,15 +15,25 @@ public class WorldGenBigLogs extends WorldGenerator {
 	private EnumFacing facing;
 	protected IBlockState log;
 	protected IBlockState core;
+	protected IBlockState ore;
 	private boolean genOres;
 	
-	public WorldGenBigLogs(int length, int baseRadius, EnumFacing facing, IBlockState outerLayer, IBlockState innerLayer, boolean generateOres) {
+	public WorldGenBigLogs(int length, int baseRadius, EnumFacing facing, IBlockState outerLayer, IBlockState innerLayer, boolean generateOres, IBlockState innerOre) {
 		this.length = length;
 		this.baseRadius = baseRadius;
 		this.facing = facing;
 		this.log = outerLayer;
 		this.core = innerLayer;
+		this.ore = innerOre;
 		this.genOres = generateOres;
+	}
+
+	public WorldGenBigLogs(int length, int baseRadius, EnumFacing facing, IBlockState outerLayer) {
+		this.length = length;
+		this.baseRadius = baseRadius;
+		this.facing = facing;
+		this.log = core = ore = outerLayer; // safety 
+		this.genOres = false;
 	}
 
 	@Override
@@ -51,8 +61,11 @@ public class WorldGenBigLogs extends WorldGenerator {
 							if (zz == z - length && rand.nextInt(2) == 0 || zz == z + length - 1 && rand.nextInt(2) == 0)
 								world.setBlockToAir(new BlockPos(x + i, y + j + baseRadius, zz));
 						} 
-						else if(Math.round(Math.sqrt(dSq)) < baseRadius && genOres)
-							world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), core);
+						else if(Math.round(Math.sqrt(dSq)) < baseRadius && genOres) {
+							world.setBlockState(new BlockPos(x + i, y + j + baseRadius, zz), rand.nextInt(6) == 0 ? ore : core);
+							if (zz == z - length && rand.nextInt(2) == 0 || zz == z + length - 1 && rand.nextInt(2) == 0)
+								world.setBlockToAir(new BlockPos(x + i, y + j + baseRadius, zz));
+						}
 						else
 							world.setBlockToAir(new BlockPos(x + i, y + j + baseRadius, zz));
 					}
@@ -77,8 +90,11 @@ public class WorldGenBigLogs extends WorldGenerator {
 							if (xx == x - length && rand.nextInt(2) == 0 || xx == x + length - 1 && rand.nextInt(2) == 0)
 								world.setBlockToAir(new BlockPos(xx, y + j + baseRadius, z + i));
 						}
-						else if(Math.round(Math.sqrt(dSq)) < baseRadius && genOres)
-							world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), core);
+						else if(Math.round(Math.sqrt(dSq)) < baseRadius && genOres) {
+							world.setBlockState(new BlockPos(xx, y + j + baseRadius, z + i), rand.nextInt(6) == 0 ? ore : core);
+							if (xx == x - length && rand.nextInt(2) == 0 || xx == x + length - 1 && rand.nextInt(2) == 0)
+								world.setBlockToAir(new BlockPos(xx, y + j + baseRadius, z + i));
+						}
 						else
 							world.setBlockToAir(new BlockPos(xx, y + j + baseRadius, z + i));
 					}
