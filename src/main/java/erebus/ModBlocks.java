@@ -80,9 +80,9 @@ import erebus.blocks.BlockMud;
 import erebus.blocks.BlockMushroomSmall;
 import erebus.blocks.BlockOreErebus;
 import erebus.blocks.BlockOreErebus2;
-import erebus.blocks.BlockPetrifiedWoodRock;
 import erebus.blocks.BlockPetrifiedChest;
 import erebus.blocks.BlockPetrifiedCraftingTable;
+import erebus.blocks.BlockPetrifiedWoodRock;
 import erebus.blocks.BlockPlanksErebus;
 import erebus.blocks.BlockPlantedGiantFlower;
 import erebus.blocks.BlockPreservedBlock;
@@ -169,6 +169,9 @@ public class ModBlocks {
 	public static final Block PETRIFIED_WOOD_ROCK_4 = new BlockPetrifiedWoodRock();
 	public static final Block PETRIFIED_WOOD_ROCK_5 = new BlockPetrifiedWoodRock();
 	public static final Block PETRIFIED_WOOD_ROCK_6 = new BlockPetrifiedWoodRock();
+	public static final Block PETRIFIED_BARK_RED = new BlockPetrifiedWoodRock();
+	public static final Block PETRIFIED_BARK_BROWN = new BlockPetrifiedWoodRock();
+	public static final Block PETRIFIED_LOG_INNER = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(5F).setResistance(10.0F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block DUST_LAYER = new BlockDustLayer();
 	public static final Block DUST = new BlockSimple(Material.GROUND, SoundType.SNOW, ModTabs.BLOCKS) {
 		@Override
@@ -186,6 +189,7 @@ public class ModBlocks {
 	public static final Block ORE_EMERALD = new BlockOreErebus2(2, Items.EMERALD, 0, 1, 1, 3, 7);
 	public static final Block ORE_LAPIS = new BlockOreErebus2(1, Items.DYE, 4, 4, 9, 2, 5);
 	public static final Block ORE_QUARTZ = new BlockOreErebus2(0, Items.QUARTZ, 0, 1, 1, 2, 5);
+	public static final Block ORE_PETRIFIED_QUARTZ = new BlockOreErebus2(0, Items.QUARTZ, 0, 1, 1, 2, 5);
 	public static final Block ORE_COPPER = new BlockOreErebus(1);
 	public static final Block ORE_SILVER = new BlockOreErebus(2);
 	public static final Block ORE_TIN = new BlockOreErebus(1);
