@@ -1,5 +1,10 @@
 {
     "variants": {
-        "normal": { "model": "erebus:kaizers_fingers_mushroom" }
+        "normal": [
+            { "model": "erebus:kaizers_fingers_mushroom" },
+            { "model": "erebus:kaizers_fingers_mushroom" , "y": 90 },
+            { "model": "erebus:kaizers_fingers_mushroom" , "y": 180 },
+            { "model": "erebus:kaizers_fingers_mushroom" , "y": 270 }
+        ]
     }
 }

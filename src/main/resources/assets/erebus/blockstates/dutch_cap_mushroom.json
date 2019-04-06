@@ -1,5 +1,10 @@
 {
     "variants": {
-        "normal": { "model": "erebus:dutch_cap_mushroom" }
+        "normal": [
+            { "model": "erebus:dutch_cap_mushroom" },
+            { "model": "erebus:dutch_cap_mushroom" , "y": 90 },
+            { "model": "erebus:dutch_cap_mushroom" , "y": 180 },
+            { "model": "erebus:dutch_cap_mushroom" , "y": 270 }
+        ]
     }
 }
