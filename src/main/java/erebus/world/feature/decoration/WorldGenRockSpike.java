@@ -29,7 +29,7 @@ public class WorldGenRockSpike extends WorldGenerator
         else
         {
             position = position.up(rand.nextInt(4));
-            int i = rand.nextInt(10) + 10;
+            int i = rand.nextInt(15) + 5;
             int j = i / 4 + rand.nextInt(2);
 
            // if (j > 1 && rand.nextInt(3) == 0)
