@@ -359,7 +359,7 @@ public class ChunkProviderErebus implements IChunkGenerator, IChunkProvider {
 				}
 
 				if ((biome == ModBiomes.PETRIFIED_FOREST) && Math.abs(additionalNoise1[horIndex]) < 1) {
-					int h = getLowestAirBlock(primer, xInChunk, zInChunk, preHeightIndex, 25, 26);
+					int h = getLowestAirBlock(primer, xInChunk, zInChunk, preHeightIndex, 25, 25);
 					if (h > 0) {
 						primer.setBlockState(xInChunk, preHeightIndex + h, zInChunk, Blocks.AIR.getDefaultState());
 						for (int h2 = h - 1; h2 > h - 1 - 3 * (1 - Math.abs(additionalNoise1[horIndex])); h2--)
