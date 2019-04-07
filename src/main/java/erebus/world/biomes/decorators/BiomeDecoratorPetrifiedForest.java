@@ -9,6 +9,7 @@ import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
 import erebus.world.biomes.decorators.data.SurfaceType;
+import erebus.world.feature.decoration.WorldGenPetrifiedTrees;
 import erebus.world.feature.decoration.WorldGenRockSpike;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
 import erebus.world.feature.plant.WorldGenBigLogs;
@@ -155,6 +156,39 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 				genScorchedWood.generate(world, rand, pos);
 				if (rand.nextInt(4) != 0)
 					break;
+			}
+		}
+
+		for (attempt = 0; attempt < 400; attempt++) {
+			xx = x + offsetXZ();
+			yy = rand.nextInt(120);
+			zz = z + offsetXZ();
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if ((checkSurface(SurfaceType.DUST, pos) || checkSurface(SurfaceType.VOLCANIC_ROCK, pos))  && !world.isAirBlock(pos.down(2))) {
+				new WorldGenPetrifiedTrees(6 + rand.nextInt(5), 1, ModBlocks.PETRIFIED_BARK_BROWN.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y)).generate(world, rand, pos.up());
+				break;
+			}
+		}
+
+		for (attempt = 0; attempt < 22; attempt++) {
+			xx = x + offsetXZ();
+			yy = rand.nextInt(120);
+			zz = z + offsetXZ();
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.VOLCANIC_ROCK, pos) && !world.isAirBlock(pos.down(2))) {
+				new WorldGenPetrifiedTrees(11 + rand.nextInt(4), 2, ModBlocks.PETRIFIED_BARK_BROWN.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y)).generate(world, rand, pos.up());
+				break;
+			}
+		}
+
+		for (attempt = 0; attempt < 22; attempt++) {
+			xx = x + offsetXZ();
+			yy = rand.nextInt(120);
+			zz = z + offsetXZ();
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.VOLCANIC_ROCK, pos) && !world.isAirBlock(pos.down(2))) {
+				new WorldGenPetrifiedTrees(16 + rand.nextInt(10), 3, ModBlocks.PETRIFIED_BARK_BROWN.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y)).generate(world, rand, pos.up());
+				break;
 			}
 		}
 
