@@ -56,50 +56,96 @@ public class WorldGenPetrifiedTrees extends WorldGenerator {
 				for (int j = -baseRadius; j <= baseRadius; ++j) {
 					double dSq = i * i + j * j;
 					if (Math.round(Math.sqrt(dSq)) == baseRadius) {
-						if (rand.nextInt(4) == 0 && height > 10) {
+						if (yy <= y + height/10 && height > 10) {
 							world.setBlockState(new BlockPos(x + i, yy, z + j), bark);
 						}
-					} //else
-						//world.setBlockState(new BlockPos(x + i, yy, z + j), Blocks.AIR.getDefaultState());
-					if (Math.round(Math.sqrt(dSq)) == baseRadius -1)
-						world.setBlockState(new BlockPos(x + i, yy, z + j), bark);
+						if (yy > y + height/10 && yy <= y + height - 1 && height > 14) {
+							if (rand.nextInt(15) == 0)
+								world.setBlockState(new BlockPos(x, yy, z + baseRadius), bark);
+							if (rand.nextInt(15) == 0)
+								world.setBlockState(new BlockPos(x + baseRadius, yy, z), bark);
+							if (rand.nextInt(15) == 0)
+								world.setBlockState(new BlockPos(x, yy, z - baseRadius), bark);
+							if (rand.nextInt(15) == 0)
+								world.setBlockState(new BlockPos(x - baseRadius, yy, z), bark);
+
+							if (rand.nextInt(25) == 0)
+								world.setBlockState(new BlockPos(x + 1 - rand.nextInt(3), yy, z + baseRadius), bark);
+							if (rand.nextInt(25) == 0)
+								world.setBlockState(new BlockPos(x + baseRadius, yy, z + 1 - rand.nextInt(3)), bark);
+							if (rand.nextInt(25) == 0)
+								world.setBlockState(new BlockPos(x - 1 + rand.nextInt(3), yy, z - baseRadius), bark);
+							if (rand.nextInt(25) == 0)
+								world.setBlockState(new BlockPos(x - baseRadius, yy, z - 1 + rand.nextInt(3)), bark);
+						}
+						if (yy == y + 1 + height/10 && rand.nextInt(4) == 0) {
+							world.setBlockState(new BlockPos(x + i, yy, z + j), bark);
+						}
+					} 
+
+					if (Math.round(Math.sqrt(dSq)) == baseRadius - 1)
+						if (yy == y + height && rand.nextInt(3) == 0)
+							world.setBlockState(new BlockPos(x + i, yy, z + j), Blocks.AIR.getDefaultState());
+						else
+							world.setBlockState(new BlockPos(x + i, yy, z + j), bark);
 				}
-		
-			if (yy == y + height - height / 3 || yy == y + height - height / 4) {
+
+			if (yy == y + height - 1) {
 				if (alternate) {
-					createBranch(world, rand, x + baseRadius, yy - rand.nextInt(2), z, EnumFacing.NORTH, height / 6);
-					createBranch(world, rand, x - baseRadius, yy - rand.nextInt(2), z, EnumFacing.SOUTH, height / 6);
+					createBranch(world, rand, x + baseRadius, yy - rand.nextInt(2), z, EnumFacing.NORTH, height / 8, false);
+					createBranch(world, rand, x - baseRadius, yy - rand.nextInt(2), z, EnumFacing.SOUTH, height / 8, false);
 					alternate = false;
 				} else {
-					createBranch(world, rand, x, yy - rand.nextInt(2), z + baseRadius, EnumFacing.EAST, height / 6);
-					createBranch(world, rand, x, yy - rand.nextInt(2), z - baseRadius, EnumFacing.WEST, height / 6);
+					createBranch(world, rand, x, yy - rand.nextInt(2), z + baseRadius, EnumFacing.EAST, height / 8, false);
+					createBranch(world, rand, x, yy - rand.nextInt(2), z - baseRadius, EnumFacing.WEST, height / 8, false);
+					alternate = true;
+				}
+			}
+
+			if (yy == y + height - height / 3 || yy == y + height - height / 4) {
+				if (alternate) {
+					createBranch(world, rand, x + baseRadius, yy - rand.nextInt(2), z, EnumFacing.NORTH, height / 8, false);
+					createBranch(world, rand, x - baseRadius, yy - rand.nextInt(2), z, EnumFacing.SOUTH, height / 8, false);
+					alternate = false;
+				} else {
+					createBranch(world, rand, x, yy - rand.nextInt(2), z + baseRadius, EnumFacing.EAST, height / 8, false);
+					createBranch(world, rand, x, yy - rand.nextInt(2), z - baseRadius, EnumFacing.WEST, height / 8, false);
 					alternate = true;
 				}
 			}
 
 			if (yy == y + height - height / 2) {
 				if (alternate) {
-					createBranch(world, rand, x + baseRadius, yy - rand.nextInt(2), z, EnumFacing.NORTH, height / 8);
-					createBranch(world, rand, x - baseRadius, yy - rand.nextInt(2), z, EnumFacing.SOUTH, height / 8);
+					createBranch(world, rand, x + baseRadius, yy - rand.nextInt(2), z, EnumFacing.NORTH, height / 6, false);
+					createBranch(world, rand, x - baseRadius, yy - rand.nextInt(2), z, EnumFacing.SOUTH, height / 6, false);
 					alternate = false;
 
 				} else {
-					createBranch(world, rand, x, yy - rand.nextInt(2), z + baseRadius, EnumFacing.EAST, height / 8);
-					createBranch(world, rand, x, yy - rand.nextInt(2), z - baseRadius, EnumFacing.WEST, height / 8);
+					createBranch(world, rand, x, yy - rand.nextInt(2), z + baseRadius, EnumFacing.EAST, height / 6, false);
+					createBranch(world, rand, x, yy - rand.nextInt(2), z - baseRadius, EnumFacing.WEST, height / 6, false);
 					alternate = true;
 				}
+			}
+
+			if (yy == y + 1) {
+					createBranch(world, rand, x + baseRadius, yy - rand.nextInt(2), z, EnumFacing.NORTH, height / 8, true);
+					createBranch(world, rand, x - baseRadius, yy - rand.nextInt(2), z, EnumFacing.SOUTH, height / 8, true);
+					createBranch(world, rand, x, yy - rand.nextInt(2), z + baseRadius, EnumFacing.EAST, height / 8, true);
+					createBranch(world, rand, x, yy - rand.nextInt(2), z - baseRadius, EnumFacing.WEST, height / 8, true);
 			}
 		}
 		return true;
 	}
 	
 	
-	private void createBranch(World world, Random rand, int x, int y, int z, EnumFacing dir, int branchLength) {
+	private void createBranch(World world, Random rand, int x, int y, int z, EnumFacing dir, int branchLength, boolean down) {
 
 		for (int i = 0; i <= branchLength; ++i) {
 
-			if (i >= height / 8)
+			if (i >= height / 8 && !down)
 				y++;
+			if (i >= height / 8 && down)
+				y--;
 
 			if (dir == EnumFacing.NORTH)
 				world.setBlockState(new BlockPos(x + i, y, z), bark.withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.X));

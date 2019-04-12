@@ -57,6 +57,14 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 			}
 		}
 
+        for (attempt = 0; attempt < 3; attempt++) {
+        	xx = x + offsetXZ();
+        	yy = rand.nextInt(100);
+        	zz = z + offsetXZ();
+        	BlockPos pos = new BlockPos(xx, yy, zz);
+            rockSpike.generate(world, rand, pos.up());
+        }
+
 		for (attempt = 0; attempt < 5; attempt++) {
 			int length = rand.nextInt(5) + 4;
 			int baseRadius = rand.nextInt(3) + 2;
@@ -113,27 +121,6 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 			}
 		}
 
-        for (attempt = 0; attempt < 3; attempt++) {
-        	xx = x + offsetXZ();
-        	yy = rand.nextInt(100);
-        	zz = z + offsetXZ();
-        	BlockPos pos = new BlockPos(xx, yy, zz);
-            rockSpike.generate(world, rand, pos.up());
-        }
-
-		for (attempt = 0; attempt < 240; attempt++) {
-			xx = x + offsetXZ();
-			zz = z + offsetXZ();
-
-			for (yy = 20; yy < 100; yy += rand.nextInt(2) + 1) {
-				BlockPos pos = new BlockPos(xx, yy, zz);
-				if ((world.getBlockState(pos) == ModBlocks.VOLCANIC_ROCK.getDefaultState() || world.getBlockState(pos).getBlock() instanceof BlockPetrifiedWoodRock)  && world.isAirBlock(pos.up())) {
-					world.setBlockState(pos.up(), ModBlocks.DUST_LAYER.getDefaultState().withProperty(BlockDustLayer.LAYERS, rand.nextInt(3) + 1), 2);
-					break;
-				}
-			}
-		}
-
 		for (attempt = 0; attempt < 5; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
@@ -159,7 +146,7 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 			}
 		}
 
-		for (attempt = 0; attempt < 400; attempt++) {
+		for (attempt = 0; attempt < 30; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(120);
 			zz = z + offsetXZ();
@@ -170,7 +157,7 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 			}
 		}
 
-		for (attempt = 0; attempt < 22; attempt++) {
+		for (attempt = 0; attempt < 5; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(120);
 			zz = z + offsetXZ();
@@ -181,7 +168,7 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 			}
 		}
 
-		for (attempt = 0; attempt < 22; attempt++) {
+		for (attempt = 0; attempt < 5; attempt++) {
 			xx = x + offsetXZ();
 			yy = rand.nextInt(120);
 			zz = z + offsetXZ();
@@ -189,6 +176,52 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.VOLCANIC_ROCK, pos) && !world.isAirBlock(pos.down(2))) {
 				new WorldGenPetrifiedTrees(16 + rand.nextInt(10), 3, ModBlocks.PETRIFIED_BARK_BROWN.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y)).generate(world, rand, pos.up());
 				break;
+			}
+		}
+		
+		for (attempt = 0; attempt < 30; attempt++) {
+			xx = x + offsetXZ();
+			yy = rand.nextInt(120);
+			zz = z + offsetXZ();
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if ((checkSurface(SurfaceType.DUST, pos) || checkSurface(SurfaceType.VOLCANIC_ROCK, pos))  && !world.isAirBlock(pos.down(2))) {
+				new WorldGenPetrifiedTrees(6 + rand.nextInt(5), 1, ModBlocks.PETRIFIED_BARK_RED.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y)).generate(world, rand, pos.up());
+				break;
+			}
+		}
+
+		for (attempt = 0; attempt < 5; attempt++) {
+			xx = x + offsetXZ();
+			yy = rand.nextInt(120);
+			zz = z + offsetXZ();
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.VOLCANIC_ROCK, pos) && !world.isAirBlock(pos.down(2))) {
+				new WorldGenPetrifiedTrees(11 + rand.nextInt(4), 2, ModBlocks.PETRIFIED_BARK_RED.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y)).generate(world, rand, pos.up());
+				break;
+			}
+		}
+
+		for (attempt = 0; attempt < 5; attempt++) {
+			xx = x + offsetXZ();
+			yy = rand.nextInt(120);
+			zz = z + offsetXZ();
+			BlockPos pos = new BlockPos(xx, yy, zz);
+			if (checkSurface(SurfaceType.VOLCANIC_ROCK, pos) && !world.isAirBlock(pos.down(2))) {
+				new WorldGenPetrifiedTrees(16 + rand.nextInt(10), 3, ModBlocks.PETRIFIED_BARK_RED.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y)).generate(world, rand, pos.up());
+				break;
+			}
+		}
+
+		for (attempt = 0; attempt < 240; attempt++) {
+			xx = x + offsetXZ();
+			zz = z + offsetXZ();
+
+			for (yy = 20; yy < 100; yy += rand.nextInt(2) + 1) {
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if ((world.getBlockState(pos) == ModBlocks.VOLCANIC_ROCK.getDefaultState() || world.getBlockState(pos).getBlock() instanceof BlockPetrifiedWoodRock)  && world.isAirBlock(pos.up())) {
+					world.setBlockState(pos.up(), ModBlocks.DUST_LAYER.getDefaultState().withProperty(BlockDustLayer.LAYERS, rand.nextInt(3) + 1), 2);
+					break;
+				}
 			}
 		}
 
