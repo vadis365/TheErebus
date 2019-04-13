@@ -88,6 +88,8 @@ public class WorldGenPetrifiedTrees extends WorldGenerator {
 							world.setBlockState(new BlockPos(x + i, yy, z + j), Blocks.AIR.getDefaultState());
 						else
 							world.setBlockState(new BlockPos(x + i, yy, z + j), bark);
+					if (Math.round(Math.sqrt(dSq)) < baseRadius - 1)
+						world.setBlockState(new BlockPos(x + i, yy, z + j), rand.nextInt(8) == 0 ? ore : core);
 				}
 
 			if (yy == y + height - 1) {

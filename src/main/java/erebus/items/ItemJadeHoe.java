@@ -1,9 +1,12 @@
 package erebus.items;
 
+import erebus.ModBlocks;
 import erebus.ModItems;
 import erebus.ModMaterials;
 import erebus.ModTabs;
+import erebus.blocks.BlockPetrifiedWoodRock;
 import erebus.items.ItemMaterials.EnumErebusMaterialsType;
+import erebus.world.feature.decoration.WorldGenPetrifiedTrees;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
@@ -31,7 +34,7 @@ public class ItemJadeHoe extends ItemHoe {
 		//	WorldGenSwampHut gen = new WorldGenSwampHut();
 		//	gen.generateStructure(worldIn, itemRand, pos.up());
 
-		//WorldGenPetrifiedTrees gen = new WorldGenPetrifiedTrees(16 + itemRand.nextInt(10), 3, ModBlocks.PETRIFIED_BARK_BROWN.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y));
+		//WorldGenPetrifiedTrees gen = new WorldGenPetrifiedTrees(16 + itemRand.nextInt(10), 3, ModBlocks.PETRIFIED_BARK_BROWN.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y), ModBlocks.PETRIFIED_LOG_INNER.getDefaultState(), true, ModBlocks.ORE_PETRIFIED_QUARTZ.getDefaultState());
 		
 		//WorldGenPetrifiedTrees gen = new WorldGenPetrifiedTrees(6 + itemRand.nextInt(5), 1, ModBlocks.PETRIFIED_BARK_BROWN.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y));
 		
