@@ -2,6 +2,7 @@ package erebus.world.biomes.decorators;
 
 import erebus.ModBlocks;
 import erebus.blocks.BlockDarkFruitVine;
+import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockSmallPlant;
 import erebus.blocks.EnumWood;
 import erebus.world.biomes.decorators.data.OreSettings;
@@ -210,7 +211,7 @@ public class BiomeDecoratorUndergroundJungle extends BiomeDecoratorBaseErebus {
 				BlockPos pos = new BlockPos(xx, yy, zz);
 				if (checkSurface(SurfaceType.GRASS, pos)) {
 					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up(2))) {
-						Blocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.FERN, 2);
+						ModBlocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoubleHeightPlant.EnumPlantType.TALL_FERN, 2);
 						break;
 					} else
 						if (world.isAirBlock(pos.up()))

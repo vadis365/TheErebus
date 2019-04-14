@@ -13,6 +13,8 @@
         "half=upper,variant=tangled_stalk_mushroom": { "model": "erebus:tangled_stalk_mushroom_upper" },
         "half=lower,variant=tangled_stalk_mushroom": { "model": "erebus:tangled_stalk_mushroom_lower" },
         "half=upper,variant=high_capped_mushroom": { "model": "erebus:high_capped_mushroom_upper" },
-        "half=lower,variant=high_capped_mushroom": { "model": "erebus:high_capped_mushroom_lower" }
+        "half=lower,variant=high_capped_mushroom": { "model": "erebus:high_capped_mushroom_lower" },
+        "half=upper,variant=tall_fern": { "model": "erebus:tall_fern_upper" },
+        "half=lower,variant=tall_fern": { "model": "erebus:tall_fern_lower" }
 	}
 }

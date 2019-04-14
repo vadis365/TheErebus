@@ -305,7 +305,8 @@ public class BlockDoubleHeightPlant extends BlockBush implements IGrowable, IShe
 		DROUGHTED_SHRUB,
 		TALL_BLOOM,
 		TANGLED_STALK_MUSHROOM,
-		HIGH_CAPPED_MUSHROOM;
+		HIGH_CAPPED_MUSHROOM,
+    	TALL_FERN;
 
 		@Override
 		public String getName() {

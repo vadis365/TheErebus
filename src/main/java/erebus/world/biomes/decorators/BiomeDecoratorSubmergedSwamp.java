@@ -23,7 +23,6 @@ import erebus.world.feature.plant.WorldGenVinesErebus;
 import erebus.world.feature.structure.WorldGenDragonflyDungeon;
 import erebus.world.feature.tree.WorldGenMarshwoodTree;
 import erebus.world.feature.tree.WorldGenMossbarkTree;
-import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockVine;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -237,7 +236,7 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 				BlockPos pos = new BlockPos(xx, yy, zz);
 				if (checkSurface(SurfaceType.GRASS, pos)) {
 					if (rand.nextInt(10) == 0 && world.isAirBlock(pos.up(2))) {
-						Blocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoublePlant.EnumPlantType.FERN, 2);
+						ModBlocks.DOUBLE_PLANT.placeAt(world, pos.up(), BlockDoubleHeightPlant.EnumPlantType.TALL_FERN, 2);
 					} else
 						if (world.isAirBlock(pos.up()))
 							world.setBlockState(pos.up(), ModBlocks.SMALL_PLANT.getDefaultState().withProperty(BlockSmallPlant.PLANT_TYPE, BlockSmallPlant.EnumSmallPlantType.FERN), 2);
