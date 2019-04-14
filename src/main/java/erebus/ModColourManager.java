@@ -2,6 +2,8 @@ package erebus;
 
 import java.awt.Color;
 
+import erebus.blocks.BlockDoubleHeightPlant;
+import erebus.blocks.BlockDoubleHeightPlant.EnumPlantType;
 import erebus.blocks.BlockSmallPlant;
 import erebus.blocks.BlockSmallPlant.EnumSmallPlantType;
 import erebus.blocks.BlockSwampVent;
@@ -57,10 +59,22 @@ public class ModColourManager {
 			return new Color(0, 0, 0).getRGB() & 0x00ffffff;
 		};
 
+		final IBlockColor tallFernColourHandler = (state, blockAccess, pos, tintIndex) -> {
+			if (blockAccess != null && pos != null) {
+				if(state.getBlock() instanceof BlockDoubleHeightPlant && (state.getValue(BlockDoubleHeightPlant.VARIANT) == EnumPlantType.TALL_FERN)) //meh
+					return BiomeColorHelper.getGrassColorAtPos(blockAccess, pos);
+			}
+			if(state.getBlock() instanceof BlockDoubleHeightPlant && (state.getValue(BlockDoubleHeightPlant.VARIANT) == EnumPlantType.TALL_FERN))
+				return ColorizerGrass.getGrassColor(0.5D, 1.0D);
+			else
+				return -1;
+		};
+
 		blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.SMALL_PLANT);
 		//blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.ALGAE);
 		blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.SWAMP_VENT);
 		blockColors.registerBlockColorHandler(witheWebColourHandler, ModBlocks.WITHER_WEB);
+		blockColors.registerBlockColorHandler(tallFernColourHandler, ModBlocks.DOUBLE_PLANT);
 	}
 
 	/**
@@ -83,6 +97,9 @@ public class ModColourManager {
 			if(state.getBlock() instanceof BlockWitherWeb)
 				return blockColors.colorMultiplier(state, null, null, tintIndex);
 			
+			if(state.getBlock() instanceof BlockDoubleHeightPlant && (state.getValue(BlockDoubleHeightPlant.VARIANT) == EnumPlantType.TALL_FERN))
+				return blockColors.colorMultiplier(state, null, null, tintIndex);
+
 			return -1;
 		};
 
@@ -90,6 +107,7 @@ public class ModColourManager {
 		//itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.ALGAE);
 		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.SWAMP_VENT);
 		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.WITHER_WEB);
+		itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.DOUBLE_PLANT);
 	}
 }
 

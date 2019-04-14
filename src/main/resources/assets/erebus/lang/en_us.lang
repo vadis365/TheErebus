@@ -548,6 +548,7 @@ tile.erebus.double_plant.droughted_shrub.name=Droughted Shrub
 tile.erebus.double_plant.tall_bloom.name=Tall Bloom
 tile.erebus.double_plant.tangled_stalk_mushroom.name=Tangled Stalk Mushroom
 tile.erebus.double_plant.high_capped_mushroom.name=High Capped Mushroom
+tile.erebus.double_plant.tall_fern.name=Tall Fern
 
 # Other
 tile.erebus.portal.name=Erebus Portal Block
