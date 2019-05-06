@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import erebus.ModBlocks;
 import erebus.ModColourManager;
+import erebus.ModSounds;
 import erebus.block.silo.TileEntitySiloTank;
 import erebus.blocks.BlockPetrifiedChest;
 import erebus.client.fx.ParticleBubbleGas;
@@ -116,6 +117,7 @@ import erebus.client.render.tile.TileEntitySmoothieMakerRenderer;
 import erebus.client.render.tile.TileEntityUmberGolemStatueRenderer;
 import erebus.core.handler.GogglesClientTickHandler;
 import erebus.core.handler.KeyBindingHandler;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.entity.EntityAnimatedBambooCrate;
 import erebus.entity.EntityAnimatedBlock;
 import erebus.entity.EntityAnimatedChest;
@@ -214,6 +216,7 @@ import erebus.tileentity.TileEntityUmberGolemStatue;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleBreaking;
@@ -245,6 +248,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
+import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -252,6 +256,7 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy {
+	public static MusicTicker.MusicType EREBUSMUSIC;
 
 	@Override
 	public void registerKeyHandlers() {
@@ -371,6 +376,12 @@ public class ClientProxy extends CommonProxy {
 		TileEntityItemStackRenderer.instance = new RenderScorpionPincer(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderWarHammer(TileEntityItemStackRenderer.instance);
 		TileEntityItemStackRenderer.instance = new RenderWebSlinger(TileEntityItemStackRenderer.instance);
+	}
+	
+	@Override
+	public void init() {
+		super.init();
+		if (ConfigHandler.INSTANCE.playCustomSongs) EREBUSMUSIC = EnumHelperClient.addMusicType("EREBUSMUSIC", ModSounds.MUSIC_EREBUS_DIMENSION, 6000, 12000);
 	}
 
 	@Override

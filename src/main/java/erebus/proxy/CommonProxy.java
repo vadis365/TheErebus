@@ -93,6 +93,10 @@ public class CommonProxy implements IGuiHandler {
 	public void setCustomStateMap(Block block, StateMap stateMap) {
 	}
 
+	public void init() {
+		registerItemAndBlockColourRenderers();
+	}
+
 	public void postInit() {		
 	}
 
