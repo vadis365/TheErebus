@@ -8,7 +8,6 @@ import erebus.ModItems;
 import erebus.ModSounds;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.core.helper.Utils;
-import erebus.entity.ai.EntityAIAntlionBossAttack;
 import erebus.items.ItemMaterials;
 import erebus.network.client.PacketParticle;
 import erebus.network.client.PacketParticle.ParticleType;
@@ -19,6 +18,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -27,11 +27,13 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.SoundCategory;
@@ -48,6 +50,8 @@ public class EntityAntlionBoss extends EntityMob {
 	private static final DataParameter<BlockPos> SPAWN_ORIGIN = EntityDataManager.<BlockPos>createKey(EntityAntlionBoss.class, DataSerializers.BLOCK_POS);
 	private static final DataParameter<Byte> IN_PYRAMID = EntityDataManager.<Byte>createKey(EntityAntlionBoss.class, DataSerializers.BYTE);
 	private static final DataParameter<Byte> BLAM = EntityDataManager.<Byte>createKey(EntityAntlionBoss.class, DataSerializers.BYTE);
+
+	protected EntityAntlionBoss.AISandThrowAttack aiSandThrowAttack;
 	private int blamCount;
 	public int deathTicks;
 
@@ -58,10 +62,11 @@ public class EntityAntlionBoss extends EntityMob {
 		stepHeight = 1.0F;
 		experienceValue = 100;
 	}
-	
+
 	@Override
 	protected void initEntityAI() {
-		tasks.addTask(0, new EntityAIAntlionBossAttack<EntityPlayer>(this, EntityPlayer.class, 0.6D, true));
+		aiSandThrowAttack = new EntityAntlionBoss.AISandThrowAttack(this);
+		tasks.addTask(0, aiSandThrowAttack);
 		tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 16.0F));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false));
@@ -95,7 +100,7 @@ public class EntityAntlionBoss extends EntityMob {
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 400D : 400D * ConfigHandler.INSTANCE.mobHealthMultipier);
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 6D : 6D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(48.0D);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(36.0D);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
 	}
 
@@ -315,6 +320,113 @@ public class EntityAntlionBoss extends EntityMob {
 						getEntityWorld().playEvent(null, 2001, pos, Block.getIdFromBlock(block));
 					}
 				}
+	}
+
+	static class AISandThrowAttack extends EntityAIBase {
+		private final EntityAntlionBoss antlion_boss;
+		private int attackStep;
+		private int attackTime;
+		private boolean jumpAttack;
+		public AISandThrowAttack(EntityAntlionBoss antlion_bossIn) {
+			antlion_boss = antlion_bossIn;
+			setMutexBits(3);
+		}
+
+		@Override
+		public boolean shouldExecute() {
+			EntityLivingBase entitylivingbase = antlion_boss.getAttackTarget();
+			return entitylivingbase != null && entitylivingbase.isEntityAlive();
+		}
+
+		@Override
+		public void startExecuting() {
+			attackStep = 0;
+		}
+
+		@Override
+		public void updateTask() {
+			--attackTime;
+			EntityLivingBase entitylivingbase = antlion_boss.getAttackTarget();
+			double d0 = antlion_boss.getDistanceSq(entitylivingbase);
+			if (d0 <= 25D) {
+				if (attackTime <= 0) {
+					attackTime = 20;
+					antlion_boss.getEntityWorld().playSound(null, antlion_boss.getPosition(), ModSounds.ANTLION_GROWL, SoundCategory.HOSTILE, 1.0F, 1.0F);
+					antlion_boss.attackEntityAsMob(entitylivingbase);
+					entitylivingbase.attackEntityFrom(DamageSource.causeMobDamage(antlion_boss), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 8D : 8D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
+					entitylivingbase.addVelocity(-MathHelper.sin(antlion_boss.rotationYaw * 3.141593F / 180.0F) * 0.3F, 0.1D, MathHelper.cos(antlion_boss.rotationYaw * 3.141593F / 180.0F) * 0.3F);
+				}
+				antlion_boss.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, antlion_boss.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+			} else if (d0 > 36D && d0 < 256.0D) {
+				double d1 = entitylivingbase.posX - antlion_boss.posX;
+				double d2 = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F) - (antlion_boss.posY + (double) (antlion_boss.height / 2.0F));
+				double d3 = entitylivingbase.posZ - antlion_boss.posZ;
+				if (attackTime <= 0) {
+					++attackStep;
+					if (attackStep == 1)
+						attackTime = 60;
+					else if (attackStep <= 2) 
+						attackTime = 5;
+					else {
+						attackTime = 0;
+						attackStep = 0;
+					}
+					if (attackStep == 1) {
+						double direction = Math.toRadians(antlion_boss.renderYawOffset);
+						double targetX = entitylivingbase.posX - antlion_boss.posX;
+						double targetY = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height) - (antlion_boss.posY + (double) (antlion_boss.height));
+						double targetZ = entitylivingbase.posZ - antlion_boss.posZ;
+						EntityThrownSand thrownsand = new EntityThrownSand(antlion_boss.getEntityWorld(), antlion_boss);
+						thrownsand.setPosition(antlion_boss.posX - Math.sin(direction) * 3.5, antlion_boss.posY + antlion_boss.height, antlion_boss.posZ + Math.cos(direction) * 3.5);
+						thrownsand.shoot(targetX, targetY, targetZ, 0.7F, 0.0F);
+						antlion_boss.getEntityWorld().spawnEntity(thrownsand);
+					}
+				}
+				antlion_boss.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
+				antlion_boss.getNavigator().clearPath();
+				antlion_boss.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, antlion_boss.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+			}
+			else if (d0 > 16D && d0 <= 1024.0D) {
+					if (attackTime <= 0) {
+						int x = antlion_boss.getEntityWorld().rand.nextInt(4);
+						if (x == 0) {
+							attackTime = 60;
+							antlion_boss.motionY = 0.61999998688697815D;
+							jumpAttack = true;
+						} else if (x == 1 && !jumpAttack && antlion_boss.onGround) {
+							attackTime = 60;
+							antlion_boss.motionY = 0D;
+							antlion_boss.setBlam(10, (byte) 1);
+						}
+					}
+				if (jumpAttack && antlion_boss.collidedVertically && !(antlion_boss.motionY > 0D)) {
+					areaOfEffect();
+					antlion_boss.spawnBlamParticles();
+					jumpAttack = false;
+				}
+				antlion_boss.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
+				antlion_boss.getNavigator().clearPath();
+				antlion_boss.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, antlion_boss.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+			}
+			super.updateTask();
+		}
+
+		protected Entity areaOfEffect() {
+			List<?> list = antlion_boss.getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, antlion_boss.getEntityBoundingBox().grow(8D, 1D, 8D));
+			for (int i = 0; i < list.size(); i++) {
+				Entity entity = (Entity) list.get(i);
+				if (entity != null)
+					if (entity instanceof EntityLivingBase && !(entity instanceof EntityAntlionBoss)) {
+						entity.attackEntityFrom(DamageSource.causeMobDamage(antlion_boss), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 8D : 8D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
+						entity.addVelocity(-MathHelper.sin(antlion_boss.rotationYaw * 3.141593F / 180.0F) * 1D, 0.4D, MathHelper.cos(antlion_boss.rotationYaw * 3.141593F / 180.0F) * 1D);
+						antlion_boss.getEntityWorld().playSound(null, entity.getPosition(), ModSounds.ANTLION_SLAM, SoundCategory.HOSTILE, 1.0F, 1.0F);
+						antlion_boss.getEntityWorld().playSound(null, entity.getPosition(), ModSounds.ANTLION_EXPLODE, SoundCategory.HOSTILE, 1.0F, 1.0F);;
+						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 8 * 20, 0));
+						((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 8 * 20, 0));
+					}
+			}
+			return null;
+		}
 	}
 
 }
