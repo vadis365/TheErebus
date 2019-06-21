@@ -25,7 +25,7 @@ public class ConfigHandler {
 	public int erebusDimensionID;
 	public int portalCooldown, mobAttackDamageMultiplier, mobHealthMultipier;
 	public byte beetleLarvaEating = 0;
-	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, alternativePlanks, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows, biomeFogColours;
+	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows, biomeFogColours;
 	public static boolean smoothBedrock;
 	public static String[] WOA_BLACKLISTED_BLOCKS;
 
@@ -47,13 +47,12 @@ public class ConfigHandler {
 
 		erebusDimensionID = config.get(Configuration.CATEGORY_GENERAL, "Dimension ID of The Erebus", 66, "There doesn't appear to be a limit on dimension IDs, but try to keep it low").getInt(66);
 		portalCooldown = config.get(Configuration.CATEGORY_GENERAL, "Number of seconds before the portal is usable again.", 5).getInt(5);
-	//	allowRespawning = config.get(Configuration.CATEGORY_GENERAL, "Should player re-spawn in dimension", false).getBoolean(false);
+		allowRespawning = config.get(Configuration.CATEGORY_GENERAL, "Should player re-spawn in dimension", false).getBoolean(false);
 	//	spawnPortalMobs = config.get(Configuration.CATEGORY_GENERAL, "Should spawn beetles and larvae in the portal", true).getBoolean(true);
 		beetleLarvaEating = (byte) config.get(Configuration.CATEGORY_GENERAL, "Beetle larva eating settings", 0, "0 = only wooden blocks except tile entities & logs, 1 = only wooden blocks except logs, 2 = anything", 0, 2).getInt(0);
 		bombardierBlockDestroy = config.get(Configuration.CATEGORY_GENERAL, "Bombardier Beetle Block destruction", true, "This will not stop block destruction for player attacks only collided with blocks!").getBoolean(true);
 		randomNames = config.get(Configuration.CATEGORY_GENERAL, "Random mob names", true).getBoolean(true);
 		playCustomSongs = config.get(Configuration.CATEGORY_GENERAL, "Play erebus songs", true).getBoolean(true);
-		//alternativePlanks = config.get(Configuration.CATEGORY_GENERAL, "Alternative Planks Textures", false).getBoolean(false);
 		graveMarker = config.get(Configuration.CATEGORY_GENERAL, "Block O' Bones Inventory Save", true).getBoolean(true);
 		biomeFogColours = config.get(Configuration.CATEGORY_GENERAL, "Coloured Biome Fogs", true).getBoolean(true);
 		bioluminescence = config.get(Configuration.CATEGORY_GENERAL, "Glowing bugs emit light", true).getBoolean(true);

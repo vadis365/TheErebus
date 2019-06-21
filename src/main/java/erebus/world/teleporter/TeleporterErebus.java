@@ -14,7 +14,9 @@ import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -29,6 +31,7 @@ final class TeleporterErebus extends Teleporter {
 	private final WorldServer worldServerInstance;
 	private final Long2ObjectMap<TeleporterErebus.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap<TeleporterErebus.PortalPosition>(4096);
 	private final List<Long> destinationCoordinateKeys = new ArrayList<Long>();
+	public static final String LAST_PORTAL_POS_NBT = "erebus.last_portal_location";
 
 	TeleporterErebus(WorldServer worldServer) {
 		super(worldServer);
@@ -130,8 +133,11 @@ final class TeleporterErebus extends Teleporter {
             double newPosY = (double)blockpos.getY() + 1D;
             double newPosZ = (double)blockpos.getZ() + 0.5D;
 
-            if (entity instanceof EntityPlayerMP)
+            if (entity instanceof EntityPlayerMP) {
                 ((EntityPlayerMP)entity).connection.setPlayerLocation(newPosX, newPosY, newPosZ, entity.rotationYaw, entity.rotationPitch);
+                if(ConfigHandler.INSTANCE.allowRespawning)
+                	setDefaultPlayerSpawnLocation(blockpos.up(1), entity);
+            }
             else
             	entity.setLocationAndAngles(newPosX, newPosY, newPosZ, entity.rotationYaw, entity.rotationPitch);
             return true;
@@ -164,5 +170,29 @@ final class TeleporterErebus extends Teleporter {
 				}
 			}
 		}
+	}
+	
+	public BlockPos setDefaultPlayerSpawnLocation(BlockPos portalPos, Entity entity) {
+		if (entity instanceof EntityPlayerMP == false) {
+			return portalPos;
+		}
+
+		EntityPlayerMP player = (EntityPlayerMP) entity;
+		BlockPos coords = player.getBedLocation(ConfigHandler.INSTANCE.erebusDimensionID);
+
+		if (coords == null) {
+			coords = portalPos;
+			player.setSpawnChunk(coords, true, ConfigHandler.INSTANCE.erebusDimensionID);
+		}
+
+		if(worldServerInstance.provider.getDimension() == ConfigHandler.INSTANCE.erebusDimensionID) {
+			NBTTagCompound dataNbt = player.getEntityData();
+			NBTTagCompound persistentNbt = dataNbt.getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
+
+			persistentNbt.setLong(LAST_PORTAL_POS_NBT, portalPos.toLong());
+			dataNbt.setTag(EntityPlayer.PERSISTED_NBT_TAG, persistentNbt);
+		}
+
+		return coords;
 	}
 }

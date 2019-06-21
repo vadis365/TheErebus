@@ -11,9 +11,9 @@ import erebus.core.capabilities.player.PlayerDeathLocationCapability;
 import erebus.core.handler.AntiVenomDurationHandler;
 import erebus.core.handler.AnvilEventHandlerWhetstone;
 import erebus.core.handler.BedPlaceEventHandler;
-import erebus.core.handler.BlockLookedAtName;
 import erebus.core.handler.DeathCompassRespawnEvent;
 import erebus.core.handler.EntityDeathInventoryHandler;
+import erebus.core.handler.EntityPlayerSpawnHandler;
 import erebus.core.handler.EntityShieldDamageEvent;
 import erebus.core.handler.PlayerInWallDamageHandler;
 import erebus.core.handler.configs.ConfigHandler;
@@ -123,6 +123,7 @@ public class Erebus {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		TeleporterHandler.init();
+		MinecraftForge.EVENT_BUS.register(EntityPlayerSpawnHandler.class);
 		MinecraftForge.EVENT_BUS.register(ConfigHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(ModItems.JUMP_BOOTS);
 		MinecraftForge.EVENT_BUS.register(ModItems.GLIDER_CHESTPLATE);
