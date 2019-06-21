@@ -6,7 +6,6 @@ import erebus.client.gui.GuiAntiVenomBar;
 import erebus.client.gui.RenderWarHammerChargeBar;
 import erebus.client.render.entity.MobGrabbingHealthBarRemoval;
 import erebus.client.render.entity.RenderRhinoBeetleChargeBar;
-import erebus.client.sound.ErebusMusicHandler;
 import erebus.core.capabilities.base.EntityCapabilityHandler;
 import erebus.core.capabilities.player.PlayerDeathLocationCapability;
 import erebus.core.handler.AntiVenomDurationHandler;
@@ -82,9 +81,6 @@ public class Erebus {
 		ComposterRegistry.init();
 
 		if (event.getSide() == Side.CLIENT) {
-			if (ConfigHandler.INSTANCE.playCustomSongs)
-				MinecraftForge.EVENT_BUS.register(new ErebusMusicHandler());
-			
 			MinecraftForge.EVENT_BUS.register(new ParticleTextureStitchEvent());
 			MinecraftForge.EVENT_BUS.register(new RenderRhinoBeetleChargeBar());
 			MinecraftForge.EVENT_BUS.register(new RenderWarHammerChargeBar());
@@ -143,7 +139,7 @@ public class Erebus {
 		}
 		if (ConfigHandler.INSTANCE.randomNames)
 			MinecraftForge.EVENT_BUS.register(RandomMobNames.instance);
-		PROXY.registerItemAndBlockColourRenderers();
+		PROXY.init();
 		RecipeHandler.registerSmelting();
 		ErebusRecipesHandler.init();
 	}

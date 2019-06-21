@@ -1,10 +1,14 @@
 package erebus.world;
 
+import javax.annotation.Nullable;
+
 import erebus.Erebus;
 import erebus.core.handler.configs.ConfigHandler;
+import erebus.proxy.ClientProxy;
 import erebus.world.biomes.BiomeBaseErebus;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -127,6 +131,13 @@ public class WorldProviderErebus extends WorldProvider {
 	@SideOnly(Side.CLIENT)
 	public boolean doesXZShowFog(int x, int z) {
 		return false;
+	}
+
+	@Nullable
+	@Override
+	@SideOnly(Side.CLIENT)
+	public MusicTicker.MusicType getMusicType() {
+		return ClientProxy.EREBUSMUSIC;
 	}
 
 	@Override
