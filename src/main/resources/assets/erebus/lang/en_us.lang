@@ -288,7 +288,7 @@ tile.erebus.ore_fossil.name=Fossil Ore
 tile.erebus.ore_gneiss.name=Gneiss Ore
 tile.erebus.ore_petrified_wood.name=Petrified Wood Ore
 tile.erebus.ore_temple.name=Temple Ore
-tile.erebus.jade_block.name=Block of Jade
+tile.erebus.ore_petrified_quartz.name=Petrified Quartz Ore
 
 # Logs
 tile.erebus.log_baobab.name=Baobab Wood
@@ -561,6 +561,7 @@ tile.erebus.double_plant.tall_fern.name=Tall Fern
 # Other
 tile.erebus.portal.name=Erebus Portal Block
 tile.erebus.gaean_keystone.name=Gaean Keystone
+tile.erebus.jade_block.name=Block of Jade
 tile.erebus.mud.name=Mud
 tile.erebus.quick_sand.name=Quicksand
 tile.erebus.ghost_sand.name=Ghost sand

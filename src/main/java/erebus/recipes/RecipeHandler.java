@@ -93,6 +93,7 @@ public class RecipeHandler {
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_DIAMOND), new ItemStack(Items.DIAMOND), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_EMERALD), new ItemStack(Items.EMERALD), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_QUARTZ), new ItemStack(Items.QUARTZ), 1.0F);
+		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_PETRIFIED_QUARTZ), new ItemStack(Items.QUARTZ), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_JADE), EnumErebusMaterialsType.JADE.createStack(), 1.0F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_FOSSIL), EnumErebusMaterialsType.SHARD_BONE.createStack(), 0.1F);
 		GameRegistry.addSmelting(new ItemStack(ModBlocks.ORE_GNEISS), EnumErebusMaterialsType.GNEISS_ROCK.createStack(), 0.1F);
@@ -142,8 +143,19 @@ public class RecipeHandler {
 			OreDictionary.registerOre("oreFossil", new ItemStack(ModBlocks.ORE_FOSSIL));
 			OreDictionary.registerOre("oreGneiss", new ItemStack(ModBlocks.ORE_GNEISS));
 			OreDictionary.registerOre("oreQuartz", new ItemStack(ModBlocks.ORE_QUARTZ));
-
+			OreDictionary.registerOre("oreQuartz", new ItemStack(ModBlocks.ORE_PETRIFIED_QUARTZ));
 			OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.UMBERSTONE, 1, 1));
+			// temp until we make uses
+			OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.PETRIFIED_WOOD_ROCK));
+			OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.PETRIFIED_WOOD_ROCK_2));
+			OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.PETRIFIED_WOOD_ROCK_2));
+			OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.PETRIFIED_WOOD_ROCK_4));
+			OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.PETRIFIED_WOOD_ROCK_5));
+			OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.PETRIFIED_WOOD_ROCK_6));
+			OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.PETRIFIED_LOG_INNER));
+			OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.PETRIFIED_BARK_BROWN));
+			OreDictionary.registerOre("cobblestone", new ItemStack(ModBlocks.PETRIFIED_BARK_RED));
+
 			OreDictionary.registerOre("stone", new ItemStack(ModBlocks.UMBERSTONE));
 			OreDictionary.registerOre("stoneUmber", new ItemStack(ModBlocks.UMBERSTONE));
 			OreDictionary.registerOre("gemJade", EnumErebusMaterialsType.JADE.createStack());
