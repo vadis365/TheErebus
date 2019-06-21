@@ -3,7 +3,6 @@ package erebus.network.server;
 import erebus.core.helper.Utils;
 import erebus.entity.EntityStagBeetle;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EnumFacing;
@@ -96,7 +95,7 @@ public class PacketBeetleDig implements IMessage, IMessageHandler<PacketBeetleDi
 								for (int i2 = k; i2 <= j1; ++i2) {
 									BlockPos pos = new BlockPos(k1, l1, i2);
 									IBlockState state = player.getEntityWorld().getBlockState(pos);
-									if (state.getBlock() != null && state.getBlockHardness(player.getEntityWorld(), pos) <= 10F) {
+									if (state.getBlock() != null && state.getBlockHardness(player.getEntityWorld(), pos) >= 0F && state.getBlockHardness(player.getEntityWorld(), pos) <= 10F) {
 										Utils.breakBlockWithParticles(player.getEntityWorld(), pos);
 										state.getBlock().dropBlockAsItem(player.getEntityWorld(), pos, state, 0);
 									}

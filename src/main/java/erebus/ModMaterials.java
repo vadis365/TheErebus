@@ -10,11 +10,11 @@ import net.minecraftforge.common.util.EnumHelper;
 
 public class ModMaterials {
 
-	public static ArmorMaterial ARMOR_EXOSKELETON = EnumHelper.addArmorMaterial("EXOSKELETON", "plate_exo", 11, new int[] { 2, 3, 2, 2 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 1.0F);
-	public static ArmorMaterial ARMOR_REIN_EXOSKELETON = EnumHelper.addArmorMaterial("REIN_EXOSKELETON", "reinforced_plate_exo", 33, new int[] { 3, 8, 6, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.0F);
-	public static ArmorMaterial ARMOR_RHINO = EnumHelper.addArmorMaterial("RHINO", "plate_exo_rhino", 33, new int[] { 3, 8, 6, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 1.0F);
-	public static ArmorMaterial ARMOR_JADE = EnumHelper.addArmorMaterial("JADE", "jade", 24, new int[] { 3, 7, 5, 2 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F);
-	public static ArmorMaterial ARMOR_BAMBOO = EnumHelper.addArmorMaterial("BAMBOO", "bamboo", 8, new int[] { 2, 4, 3, 2 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1.0F);
+	public static ArmorMaterial ARMOR_EXOSKELETON = EnumHelper.addArmorMaterial("EXOSKELETON", "plate_exo", 11, new int[] { 2, 2, 3, 2 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 1.0F);
+	public static ArmorMaterial ARMOR_REIN_EXOSKELETON = EnumHelper.addArmorMaterial("REIN_EXOSKELETON", "reinforced_plate_exo", 33, new int[] { 3, 6, 8, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 3.0F);
+	public static ArmorMaterial ARMOR_RHINO = EnumHelper.addArmorMaterial("RHINO", "plate_exo_rhino", 33, new int[] { 3, 6, 8, 3 }, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4.0F);
+	public static ArmorMaterial ARMOR_JADE = EnumHelper.addArmorMaterial("JADE", "jade", 24, new int[] { 3, 5, 7, 2 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F);
+	public static ArmorMaterial ARMOR_BAMBOO = EnumHelper.addArmorMaterial("BAMBOO", "bamboo", 8, new int[] { 2, 3, 4, 2 }, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1.0F);
 	
 	public static ToolMaterial TOOL_JADE = EnumHelper.addToolMaterial("JADE", 2, 863, 10.0F, 2.0F, 18);
 	public static ToolMaterial TOOL_JADE_PAXEL = EnumHelper.addToolMaterial("JADE_PAXEL", 2, 1079, 8.0F, 4.0F, 14);

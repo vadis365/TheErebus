@@ -102,6 +102,8 @@ public class EntityBlackWidow extends EntityMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
+		if(dimension == -1 && !ConfigHandler.INSTANCE.netherWidows)
+			return false;
 		float light = getBrightness();
 		if (light >= 0F)
 			return isNotColliding();
