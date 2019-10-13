@@ -17,13 +17,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderErebusShield extends TileEntityItemStackRenderer {
-    public final TileEntityItemStackRenderer PARENT;
     private final ModelShield MODEL_SHIELD = new ModelErebusShieldParts();
     private final ResourceLocation SHIELD_PARTS_TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/items/shield_boss_and_handle.png");
-
-    public RenderErebusShield(TileEntityItemStackRenderer previous) {
-    	PARENT = previous;
-    }
 
     @Override
     public void renderByItem(ItemStack stack) {
@@ -32,23 +27,19 @@ public class RenderErebusShield extends TileEntityItemStackRenderer {
 
     @Override
 	public void renderByItem(ItemStack stack, float partialTicks) {
-        if ((!stack.isEmpty()) && (stack.getItem() instanceof ItemErebusShield)) {
-            ItemErebusShield item = (ItemErebusShield) stack.getItem();
-            Minecraft.getMinecraft().getTextureManager().bindTexture(SHIELD_PARTS_TEXTURE);
-            GlStateManager.pushMatrix();
-            GlStateManager.scale(1.0, -1.0, -1.0);
-            MODEL_SHIELD.render();
-            GlStateManager.popMatrix();
+        ItemErebusShield item = (ItemErebusShield) stack.getItem();
+        Minecraft.getMinecraft().getTextureManager().bindTexture(SHIELD_PARTS_TEXTURE);
+        GlStateManager.pushMatrix();
+        GlStateManager.scale(1.0, -1.0, -1.0);
+        MODEL_SHIELD.render();
+        GlStateManager.popMatrix();
 
-            GlStateManager.pushMatrix();
-            GlStateManager.scale(1.25, 1.25, 1.25);
-            GlStateManager.translate(0, 0, 0.08125);
-            Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-            renderItem(item.getShieldType().getShieldItem());
-            GlStateManager.popMatrix();
-        }
-        else
-            PARENT.renderByItem(stack);
+        GlStateManager.pushMatrix();
+        GlStateManager.scale(1.25, 1.25, 1.25);
+        GlStateManager.translate(0, 0, 0.08125);
+        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        renderItem(item.getShieldType().getShieldItem());
+        GlStateManager.popMatrix();
     }
 
     private void renderItem(ItemStack stack){

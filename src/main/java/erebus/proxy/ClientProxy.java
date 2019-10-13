@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import erebus.ModBlocks;
 import erebus.ModColourManager;
+import erebus.ModItems;
 import erebus.ModSounds;
 import erebus.block.silo.TileEntitySiloTank;
 import erebus.blocks.BlockPetrifiedChest;
@@ -234,7 +235,6 @@ import net.minecraft.client.particle.ParticleSmokeNormal;
 import net.minecraft.client.particle.ParticleSpell;
 import net.minecraft.client.particle.ParticleSuspendedTown;
 import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -367,15 +367,22 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMucusBombPrimed.class, RenderMucusBombPrimed::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWaspDagger.class, RenderWaspDaggerEntity::new);
 
-		TileEntityItemStackRenderer.instance = new RenderErebusShield(TileEntityItemStackRenderer.instance);
-		TileEntityItemStackRenderer.instance = new RenderWaspSword(TileEntityItemStackRenderer.instance);
-		TileEntityItemStackRenderer.instance = new RenderWaspDaggerItem(TileEntityItemStackRenderer.instance);
-		TileEntityItemStackRenderer.instance = new RenderWandOfAnimation(TileEntityItemStackRenderer.instance);
-		TileEntityItemStackRenderer.instance = new RenderPortalActivator(TileEntityItemStackRenderer.instance);
-		TileEntityItemStackRenderer.instance = new RenderWandOfPreservation(TileEntityItemStackRenderer.instance);
-		TileEntityItemStackRenderer.instance = new RenderScorpionPincer(TileEntityItemStackRenderer.instance);
-		TileEntityItemStackRenderer.instance = new RenderWarHammer(TileEntityItemStackRenderer.instance);
-		TileEntityItemStackRenderer.instance = new RenderWebSlinger(TileEntityItemStackRenderer.instance);
+		ModItems.BAMBOO_SHIELD.setTileEntityItemStackRenderer(new RenderErebusShield());
+		ModItems.EXOSKELETON_SHIELD.setTileEntityItemStackRenderer(new RenderErebusShield());
+		ModItems.JADE_SHIELD.setTileEntityItemStackRenderer(new RenderErebusShield());
+		ModItems.REIN_EXOSKELETON_SHIELD.setTileEntityItemStackRenderer(new RenderErebusShield());
+		ModItems.RHINO_EXOSKELETON_SHIELD.setTileEntityItemStackRenderer(new RenderErebusShield());
+
+		ModItems.WASP_SWORD.setTileEntityItemStackRenderer(new RenderWaspSword());
+		ModItems.WASP_DAGGER.setTileEntityItemStackRenderer(new RenderWaspDaggerItem());
+		ModItems.WAND_OF_ANIMATION.setTileEntityItemStackRenderer(new RenderWandOfAnimation());
+		ModItems.PORTAL_ACTIVATOR.setTileEntityItemStackRenderer(new RenderPortalActivator());
+		ModItems.WAND_OF_PRESERVATION.setTileEntityItemStackRenderer(new RenderWandOfPreservation());
+		ModItems.ENHANCED_SCORPION_PINCER.setTileEntityItemStackRenderer(new RenderScorpionPincer());
+		ModItems.WAR_HAMMER.setTileEntityItemStackRenderer(new RenderWarHammer());
+
+		ModItems.WEB_SLINGER.setTileEntityItemStackRenderer(new RenderWebSlinger());
+		ModItems.WEB_SLINGER_WITHER.setTileEntityItemStackRenderer(new RenderWebSlinger());
 	}
 	
 	@Override
