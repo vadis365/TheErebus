@@ -409,7 +409,7 @@ public class ModBlocks {
 
 	public static void registerBlock(String name, Block block) {
 		BLOCKS.add(block);
-		block.setRegistryName(Reference.MOD_ID, name).setUnlocalizedName(Reference.MOD_ID + "." + name);
+		block.setRegistryName(Reference.MOD_ID, name).setTranslationKey(Reference.MOD_ID + "." + name);
 
 		ItemBlock item;
 		if (block instanceof IHasCustomItem)
@@ -417,7 +417,7 @@ public class ModBlocks {
 		else
 			item = new ItemBlock(block);
 		ITEM_BLOCKS.add(item);
-		item.setRegistryName(Reference.MOD_ID, name).setUnlocalizedName(Reference.MOD_ID + "." + name);
+		item.setRegistryName(Reference.MOD_ID, name).setTranslationKey(Reference.MOD_ID + "." + name);
 	}
 	
 	@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
@@ -450,7 +450,7 @@ public class ModBlocks {
 						ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), i, new ModelResourceLocation(Reference.MOD_ID + ":blocks/" + models.get(i), "inventory"));
 				} else {
 					ResourceLocation name = block.getRegistryName();
-					ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MOD_ID + ":blocks/" + name.getResourcePath(), "inventory"));
+					ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MOD_ID + ":blocks/" + name.getPath(), "inventory"));
 					if (block instanceof BlockLeavesErebus)
 						ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(new IProperty[] { BlockLeaves.CHECK_DECAY, BlockLeaves.DECAYABLE }).build());
 					if (block instanceof BlockSaplingErebus)

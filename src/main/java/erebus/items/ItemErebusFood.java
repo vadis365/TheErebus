@@ -107,10 +107,10 @@ public class ItemErebusFood extends ItemFood implements ISubItemsItem {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
+	public String getTranslationKey(ItemStack stack) {
 		int meta = stack.getItemDamage();
 		meta = Math.min(Math.max(meta, 0), EnumFoodType.values().length - 1);
-		return super.getUnlocalizedName() + "." + EnumFoodType.values()[meta].name().toLowerCase();
+		return super.getTranslationKey() + "." + EnumFoodType.values()[meta].name().toLowerCase();
 	}
 
 	@Override

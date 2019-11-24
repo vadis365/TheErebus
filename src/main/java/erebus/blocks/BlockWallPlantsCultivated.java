@@ -73,7 +73,7 @@ public class BlockWallPlantsCultivated extends Block implements IShearable, IHas
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 

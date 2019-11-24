@@ -87,7 +87,7 @@ public class BlockSiloTank extends BlockContainer implements IHasCustomItem, ISu
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 

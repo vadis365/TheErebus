@@ -31,7 +31,7 @@ public class BlockErebusHoney extends BlockFluidClassic {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
+	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity) {
 		if (entity instanceof EntityLivingBase) {
 			entity.motionX *= 0.005D;
 			entity.motionZ *= 0.005D;

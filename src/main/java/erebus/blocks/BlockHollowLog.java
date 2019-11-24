@@ -17,6 +17,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
@@ -66,7 +67,7 @@ public class BlockHollowLog extends Block {
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing facing = EnumFacing.getFront(meta);
+		EnumFacing facing = EnumFacing.byIndex(meta);
 		if (facing.getAxis() == EnumFacing.Axis.Y)
 			facing = EnumFacing.NORTH;
 		return getDefaultState().withProperty(FACING, facing);
@@ -90,14 +91,14 @@ public class BlockHollowLog extends Block {
 	}
 	
 	@Override
-	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
+	public void onPlayerDestroy(World world, BlockPos pos, IBlockState state) {
 		if (!world.isRemote)
 			if (world.rand.nextInt(5) == 0) {
 				EntityWoodlouse entity = new EntityWoodlouse(world);
 				entity.setLocationAndAngles(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.0F, 0.0F);
 				world.spawnEntity(entity);
 			}
-		super.onBlockDestroyedByPlayer(world, pos, state);
+		super.onPlayerDestroy(world, pos, state);
 	}
 
 	@Override
@@ -122,7 +123,7 @@ public class BlockHollowLog extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 }

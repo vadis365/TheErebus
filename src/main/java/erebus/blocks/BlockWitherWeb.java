@@ -22,8 +22,8 @@ public class BlockWitherWeb extends BlockWeb {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
-		super.onEntityCollidedWithBlock(worldIn, pos, state, entity);
+	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
+		super.onEntityCollision(worldIn, pos, state, entity);
 		if (entity instanceof EntityLivingBase && !(entity instanceof EntityBlackWidow))
 			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WITHER, 5 * 20, 0));
 	}

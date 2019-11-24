@@ -55,7 +55,7 @@ public class BlockQuickSand extends Block {
 	}
 
 	@Override
-    public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
+    public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity) {
 		if (!canEntityWalkOnBlock(entity)) {
 			entity.motionX *= 0.08D;
 			if(!entity.isInWater() && entity.motionY < 0 && entity.onGround) entity.motionY = -0.1D;

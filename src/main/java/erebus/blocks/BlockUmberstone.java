@@ -76,7 +76,7 @@ public class BlockUmberstone extends Block implements IHasCustomItem, ISubBlocks
 	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
+	public void onPlayerDestroy(World world, BlockPos pos, IBlockState state) {
 		EntityPlayer player = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 40, false);
 		if (player != null) {
 			// TODO player.triggerAchievement(ModAchievements.umberstone);

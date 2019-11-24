@@ -53,7 +53,7 @@ public class WorldDataAntlionMaze extends WorldSavedData {
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		NBTTagList tagList = (NBTTagList)nbt.getTag("antlion_maze");
-		if(tagList.hasNoTags())
+		if(tagList.isEmpty())
 			return;
 		for (int i = 0; i < tagList.tagCount(); ++i)
 			addStructurePosition(NBTUtil.getPosFromTag(tagList.getCompoundTagAt(i)));

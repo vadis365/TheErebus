@@ -58,7 +58,7 @@ public class BlockBones extends BlockDirectional implements ITileEntityProvider 
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 
@@ -89,7 +89,7 @@ public class BlockBones extends BlockDirectional implements ITileEntityProvider 
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+		return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
 	}
 
 	@Override

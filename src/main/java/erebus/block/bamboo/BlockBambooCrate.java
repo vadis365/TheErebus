@@ -106,7 +106,7 @@ public class BlockBambooCrate extends BlockContainer implements IHasCustomItem {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 
@@ -188,12 +188,12 @@ public class BlockBambooCrate extends BlockContainer implements IHasCustomItem {
 	@Override
     public boolean canPlaceBlockAt(World world, BlockPos pos) {
 		for (EnumFacing dir : EnumFacing.VALUES) {
-			IBlockState state = world.getBlockState(pos.add(dir.getFrontOffsetX(), dir.getFrontOffsetY(), dir.getFrontOffsetZ()));
+			IBlockState state = world.getBlockState(pos.add(dir.getXOffset(), dir.getYOffset(), dir.getZOffset()));
 			if (state.getBlock() == this) {
 				int meta = state.getBlock().getMetaFromState(state);
 				if (meta != 0)
 					return false;
-				if (world.getBlockState(pos.add(dir.getOpposite().getFrontOffsetX(), dir.getOpposite().getFrontOffsetY(), dir.getOpposite().getFrontOffsetZ())).getBlock() == this)
+				if (world.getBlockState(pos.add(dir.getOpposite().getXOffset(), dir.getOpposite().getYOffset(), dir.getOpposite().getZOffset())).getBlock() == this)
 					return false;
 			}
 		}

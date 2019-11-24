@@ -21,7 +21,7 @@ public class BlockThorns extends BlockVine implements IShearable {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
+	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
 		if (!worldIn.isRemote && entity instanceof EntityLivingBase)
 			entity.attackEntityFrom(DamageSource.CACTUS, 1);
 	}

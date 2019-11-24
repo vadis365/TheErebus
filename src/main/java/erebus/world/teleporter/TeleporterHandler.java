@@ -92,7 +92,7 @@ public final class TeleporterHandler {
 				}
 				waitingPlayers.put(player.getUniqueID(), (byte) 40);
 				checkWaitingPlayers = true;
-				player.mcServer.getPlayerList().transferPlayerToDimension(player, dimensionId, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
+				player.server.getPlayerList().transferPlayerToDimension(player, dimensionId, dimensionId == 0 ? teleportToOverworld : teleportToErebus);
 				player.timeUntilPortal = 0;
 			} else {
 				entity.setDropItemsWhenDead(false);

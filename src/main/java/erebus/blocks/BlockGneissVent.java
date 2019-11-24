@@ -55,7 +55,7 @@ public class BlockGneissVent extends Block {
     }
 
 	@Override
-	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
+	public void onPlayerDestroy(World world, BlockPos pos, IBlockState state) {
 		if (!world.isRemote)
 			world.setBlockState(pos, Blocks.FLOWING_LAVA.getDefaultState(), 11);
 	}

@@ -29,7 +29,7 @@ public class XPAltar extends AltarAbstract {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
+	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity) {
 		TileEntityErebusAltarXP te = Utils.getTileEntity(world, pos, TileEntityErebusAltarXP.class);
 		double offsetY = 0.9D;
 		if (!world.isRemote) {

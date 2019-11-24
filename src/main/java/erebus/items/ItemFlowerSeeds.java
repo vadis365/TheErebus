@@ -66,7 +66,7 @@ public class ItemFlowerSeeds extends Item implements IPlantable, ISubItemsItem {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
+	public String getTranslationKey(ItemStack stack) {
 		return "item.erebus.flower_seed_" + EnumSeedType.values()[stack.getItemDamage()].getName();
 	}
 

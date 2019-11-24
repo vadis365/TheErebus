@@ -79,7 +79,7 @@ public class BlockLiquifier extends BlockDirectional implements ITileEntityProvi
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 
@@ -96,7 +96,7 @@ public class BlockLiquifier extends BlockDirectional implements ITileEntityProvi
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing facing = EnumFacing.getFront(meta);
+		EnumFacing facing = EnumFacing.byIndex(meta);
 		if (facing.getAxis() == EnumFacing.Axis.Y)
 			facing = EnumFacing.NORTH;
 		return getDefaultState().withProperty(FACING, facing).withProperty(POWERED, Boolean.valueOf((meta & 8) > 0));

@@ -40,10 +40,10 @@ public class ItemDungeonIdols extends Item implements ISubItemsItem {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
+	public String getTranslationKey(ItemStack stack) {
 		int meta = stack.getItemDamage();
 		meta = Math.min(Math.max(meta, 0), EnumIdolType.values().length - 1);
-		return super.getUnlocalizedName() + "." + EnumIdolType.values()[meta].name().toLowerCase();
+		return super.getTranslationKey() + "." + EnumIdolType.values()[meta].name().toLowerCase();
 	}
 
 	@Override

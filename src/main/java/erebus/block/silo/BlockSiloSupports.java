@@ -42,11 +42,11 @@ public class BlockSiloSupports extends BlockSimple {
 	}
 
 	@Override
-    public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
+    public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity) {
 		if (entity != null && entity instanceof EntityBlackAnt) {
 			// this may get used - dunno yet
 		}
-		super.onEntityCollidedWithBlock(world, pos, state, entity);
+		super.onEntityCollision(world, pos, state, entity);
 	}
 	
 	@Override
@@ -82,7 +82,7 @@ public class BlockSiloSupports extends BlockSimple {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 }

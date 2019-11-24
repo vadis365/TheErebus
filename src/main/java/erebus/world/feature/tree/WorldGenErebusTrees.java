@@ -155,7 +155,7 @@ public class WorldGenErebusTrees extends WorldGenerator { // TODO
                                 for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
                                     if (rand.nextInt(4 - l3) == 0) {
                                         EnumFacing enumfacing1 = enumfacing.getOpposite();
-                                        placeCocoa(worldIn, rand.nextInt(3), position.add(enumfacing1.getFrontOffsetX(), i - 5 + l3, enumfacing1.getFrontOffsetZ()), enumfacing);
+                                        placeCocoa(worldIn, rand.nextInt(3), position.add(enumfacing1.getXOffset(), i - 5 + l3, enumfacing1.getZOffset()), enumfacing);
                                     }
                                 }
                             }

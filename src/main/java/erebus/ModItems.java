@@ -187,7 +187,7 @@ public class ModItems {
 					Item item = (Item) obj;
 					ITEMS.add(item);
 					String name = field.getName().toLowerCase(Locale.ENGLISH);
-					item.setRegistryName(Reference.MOD_ID, name).setUnlocalizedName(Reference.MOD_ID + "." + name);
+					item.setRegistryName(Reference.MOD_ID, name).setTranslationKey(Reference.MOD_ID + "." + name);
 				}
 			}
 		} catch (IllegalAccessException e) {

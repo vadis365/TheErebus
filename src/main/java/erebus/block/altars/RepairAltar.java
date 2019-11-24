@@ -31,7 +31,7 @@ public class RepairAltar extends AltarAbstract {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
+	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity) {
 		TileEntityErebusAltarRepair te = Utils.getTileEntity(world, pos, TileEntityErebusAltarRepair.class);
 		double offsetY = 0.9D;
 		if (entity instanceof EntityItem && entity.getEntityBoundingBox().minY >= pos.getY() + offsetY && te.active) {

@@ -53,9 +53,9 @@ public class TileEntityExtenderThingy extends TileEntityBasicInventory implement
 			index--;
 		}
 
-		int x = getPos().getX() + index * direction.getFrontOffsetX();
-		int y = getPos().getY() + index * direction.getFrontOffsetY();
-		int z = getPos().getZ() + index * direction.getFrontOffsetZ();
+		int x = getPos().getX() + index * direction.getXOffset();
+		int y = getPos().getY() + index * direction.getYOffset();
+		int z = getPos().getZ() + index * direction.getZOffset();
 		if (x == getPos().getX() && y == getPos().getY() && z == getPos().getZ())
 			return;
 
@@ -75,15 +75,15 @@ public class TileEntityExtenderThingy extends TileEntityBasicInventory implement
 	private int getIndex(Block extension) {
 		int index = 1;
 
-		int x = getPos().getX() + index * direction.getFrontOffsetX();
-		int y = getPos().getY() + index * direction.getFrontOffsetY();
-		int z = getPos().getZ() + index * direction.getFrontOffsetZ();
+		int x = getPos().getX() + index * direction.getXOffset();
+		int y = getPos().getY() + index * direction.getYOffset();
+		int z = getPos().getZ() + index * direction.getZOffset();
 
 		while (getWorld().getBlockState(new BlockPos (x, y, z)).getBlock() == extension) {
 			index++;
-			x = getPos().getX() + index * direction.getFrontOffsetX();
-			y = getPos().getY() + index * direction.getFrontOffsetY();
-			z = getPos().getZ() + index * direction.getFrontOffsetZ();
+			x = getPos().getX() + index * direction.getXOffset();
+			y = getPos().getY() + index * direction.getYOffset();
+			z = getPos().getZ() + index * direction.getZOffset();
 		}
 		IBlockState state = getWorld().getBlockState(new BlockPos(x, y, z));
 		if (state.getBlock() == null || state.getBlock().isReplaceable(getWorld(), new BlockPos(x, y, z)) || !extending)

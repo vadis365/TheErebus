@@ -137,7 +137,7 @@ public class BlockWoodFence extends Block {
         IBlockState iblockstate = world.getBlockState(pos);
         BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(world, pos, facing);
         Block block = iblockstate.getBlock();
-        boolean flag = blockfaceshape == BlockFaceShape.MIDDLE_POLE && (iblockstate.getMaterial() == this.blockMaterial || block instanceof BlockFenceGate || block instanceof BlockWoodFenceGate || block instanceof BlockWall || block instanceof BlockWallErebus);
+        boolean flag = blockfaceshape == BlockFaceShape.MIDDLE_POLE && (iblockstate.getMaterial() == this.material || block instanceof BlockFenceGate || block instanceof BlockWoodFenceGate || block instanceof BlockWall || block instanceof BlockWallErebus);
         return !isExcepBlockForAttachWithPiston(block) && blockfaceshape == BlockFaceShape.SOLID || flag;
     }
 

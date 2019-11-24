@@ -41,7 +41,7 @@ public class BlockUmberGolemStatue extends Block implements ITileEntityProvider 
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 
@@ -67,7 +67,7 @@ public class BlockUmberGolemStatue extends Block implements ITileEntityProvider 
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing facing = EnumFacing.getFront(meta);
+		EnumFacing facing = EnumFacing.byIndex(meta);
 		if (facing.getAxis() == EnumFacing.Axis.Y)
 			facing = EnumFacing.NORTH;
 		return getDefaultState().withProperty(FACING, facing);

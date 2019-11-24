@@ -89,7 +89,7 @@ public class BlockLogErebus extends BlockLog {
 	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
+	public void onPlayerDestroy(World world, BlockPos pos, IBlockState state) {
 		if (!world.isRemote && state.getBlock() == EnumWood.ROTTEN.getLog())
 			if (world.rand.nextInt(30) == 0) {
 				EntityWoodlouse entity = new EntityWoodlouse(world);
@@ -104,6 +104,6 @@ public class BlockLogErebus extends BlockLog {
 				entity.setLocationAndAngles(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.0F, 0.0F);
 				world.spawnEntity(entity);
 			}
-		super.onBlockDestroyedByPlayer(world, pos, state);
+		super.onPlayerDestroy(world, pos, state);
 	}
 }

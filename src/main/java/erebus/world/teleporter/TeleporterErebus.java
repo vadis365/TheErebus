@@ -79,7 +79,7 @@ final class TeleporterErebus extends Teleporter {
 					IBlockState block = worldServerInstance.getBlockState(new BlockPos(x, y, z));
 
 					final Material mat = block.getMaterial();
-					if (mat.isLiquid() || mat.isSolid() || mat.getMobilityFlag() == EnumPushReaction.BLOCK)
+					if (mat.isLiquid() || mat.isSolid() || mat.getPushReaction() == EnumPushReaction.BLOCK)
 						return false;
 				}
 			}
@@ -105,7 +105,7 @@ final class TeleporterErebus extends Teleporter {
 		} else {
 			for (int chunkX = entityX - checkRadius; chunkX <= entityX + checkRadius; chunkX += 16)
 				for (int chunkZ = entityZ - checkRadius; chunkZ <= entityZ + checkRadius; chunkZ += 16) {
-					Chunk chunk = worldServerInstance.getChunkFromBlockCoords(new BlockPos(chunkX, entityY, chunkZ));
+					Chunk chunk = worldServerInstance.getChunk(new BlockPos(chunkX, entityY, chunkZ));
 					for (TileEntity te : (Iterable<TileEntity>) chunk.getTileEntityMap().values()) {
 						if (!(te instanceof TileEntityGaeanKeystone))
 							continue;

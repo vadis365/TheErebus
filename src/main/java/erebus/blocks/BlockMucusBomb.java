@@ -37,7 +37,7 @@ public class BlockMucusBomb extends Block {
         super.onBlockAdded(world, pos, state);
 
         if (world.isBlockPowered(pos)) {
-            onBlockDestroyedByPlayer(world, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)));
+            onPlayerDestroy(world, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)));
             world.setBlockToAir(pos);
         }
     }
@@ -45,13 +45,13 @@ public class BlockMucusBomb extends Block {
 	@Override
     public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (world.isBlockPowered(pos)) {
-            onBlockDestroyedByPlayer(world, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)));
+            onPlayerDestroy(world, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)));
             world.setBlockToAir(pos);
         }
     }
 
 	@Override
-    public void onBlockDestroyedByExplosion(World world, BlockPos pos, Explosion explosionIn) {
+    public void onExplosionDestroy(World world, BlockPos pos, Explosion explosionIn) {
         if (!world.isRemote) {
         	EntityMucusBombPrimed primed = new EntityMucusBombPrimed(world, (double)((float)pos.getX() + 0.5F), (double)pos.getY(), (double)((float)pos.getZ() + 0.5F));
         	primed.setFuse((short)(world.rand.nextInt(primed.getFuse() / 4) + primed.getFuse() / 8));
@@ -60,7 +60,7 @@ public class BlockMucusBomb extends Block {
     }
 
 	@Override
-    public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
+    public void onPlayerDestroy(World world, BlockPos pos, IBlockState state) {
 		primeTnt(world, pos, state);
     }
 
@@ -90,7 +90,7 @@ public class BlockMucusBomb extends Block {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
+	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity) {
 		if (!world.isRemote && entity instanceof EntityArrow) {
 			EntityArrow entityarrow = (EntityArrow) entity;
 

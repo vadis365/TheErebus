@@ -196,7 +196,7 @@ public class BlockGaeanKeystone extends Block implements ITileEntityProvider {
 			PCoord[] ret = new PCoord[6];
 			int i = 0;
 			for (EnumFacing dir : EnumFacing.VALUES)
-				ret[i++] = add(dir.getFrontOffsetX(), dir.getFrontOffsetY(), dir.getFrontOffsetZ());
+				ret[i++] = add(dir.getXOffset(), dir.getYOffset(), dir.getZOffset());
 			return ret;
 		}
 

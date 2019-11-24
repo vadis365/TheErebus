@@ -36,15 +36,15 @@ public class ErebusPortal extends Block {
 		int neighborPortals = 0;
 		int axisFlag = 0;
 		for (EnumFacing dir : EnumFacing.VALUES) {
-			final int atX = x + dir.getFrontOffsetX();
-			final int atY = y + dir.getFrontOffsetY();
-			final int atZ = z + dir.getFrontOffsetZ();
+			final int atX = x + dir.getXOffset();
+			final int atY = y + dir.getYOffset();
+			final int atZ = z + dir.getZOffset();
 			Block at = world.getBlockState(new BlockPos(atX, atY, atZ)).getBlock();
 			if (!isSubstrate(at, actualPortal))
 				continue;
-			final int opX = x - dir.getFrontOffsetX();
-			final int opY = y - dir.getFrontOffsetY();
-			final int opZ = z - dir.getFrontOffsetZ();
+			final int opX = x - dir.getXOffset();
+			final int opY = y - dir.getYOffset();
+			final int opZ = z - dir.getZOffset();
 			IBlockState op = world.getBlockState(new BlockPos(opX, opY, opZ));
 			if (!op.isNormalCube() && !isSubstrate(op.getBlock(), actualPortal))
 				return false;
@@ -70,7 +70,7 @@ public class ErebusPortal extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
 
@@ -90,7 +90,7 @@ public class ErebusPortal extends Block {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		if (!entityIn.isRiding() && !entityIn.isBeingRidden() && entityIn.timeUntilPortal <= 0) {
 			if (entityIn.dimension == 0)
 				TeleporterHandler.transferToErebus(entityIn);

@@ -110,7 +110,7 @@ public final class SpawnerErebus {
 				chunksToTest.add(entry.getKey());
 
 		Random rand = world.rand;
-		int x, y, z, spawned, spawnGroup, attempts, posAttempts, maxPosAttempts, testedChunks = 3 + rand.nextInt(1 + 2 * world.getDifficulty().getDifficultyId());
+		int x, y, z, spawned, spawnGroup, attempts, posAttempts, maxPosAttempts, testedChunks = 3 + rand.nextInt(1 + 2 * world.getDifficulty().getId());
 		float fx, fy, fz, yaw = 0F;
 		boolean continueSpawning, coordsFinal;
 

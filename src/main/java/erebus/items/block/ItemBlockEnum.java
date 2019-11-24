@@ -25,9 +25,9 @@ public class ItemBlockEnum<T extends Enum<T> & IStringSerializable> extends Item
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
+	public String getTranslationKey(ItemStack stack) {
 		if(stack.getMetadata() >= values.length)
-			throw new RuntimeException(super.getUnlocalizedName() +" Meta: " + stack.getMetadata());
-		return super.getUnlocalizedName() + separator + values[stack.getMetadata()].getName();
+			throw new RuntimeException(super.getTranslationKey() +" Meta: " + stack.getMetadata());
+		return super.getTranslationKey() + separator + values[stack.getMetadata()].getName();
 	}
 }
