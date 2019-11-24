@@ -205,7 +205,7 @@ public class TileEntityUmberFurnace extends TileEntityBasicInventory implements 
             return (T) new IFluidHandler() {
                 @Override
                 public IFluidTankProperties[] getTankProperties() {
-                    return null; //don't think that's needed
+                    return tank.getTankProperties();
                 }
  
                 @Override
