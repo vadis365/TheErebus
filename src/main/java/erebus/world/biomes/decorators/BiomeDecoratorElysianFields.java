@@ -80,17 +80,15 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 				}
 			}
 
-		if (rand.nextInt(6) == 0)
 			for (attempt = 0; attempt < rand.nextInt(4); attempt++) {
 				xx = x + offsetXZ();
 				yy = 25 + rand.nextInt(75);
 				zz = z + offsetXZ();
 				BlockPos pos = new BlockPos(xx, yy, zz);
-				for (; yy > 20; yy--)
-					if (checkSurface(SurfaceType.GRASS, pos.up(yy))) {
-						genNettle.generate(world, rand, pos.up(yy + 1));
-						break;
-					}
+				if (checkSurface(SurfaceType.GRASS, pos)) {
+					genNettle.generate(world, rand, pos.up());
+					break;
+				}
 			}
 
 		IBlockState tallGrassState = Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS);
