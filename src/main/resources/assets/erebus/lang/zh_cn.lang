@@ -933,7 +933,7 @@ advancement.erebus.exploration.kill_all.desc=杀死混沌之地提供的所有�
 advancement.erebus.exploration.find_beetles=“遭遇甲虫！”
 advancement.erebus.exploration.find_beetles.desc=与任意甲虫或其幼虫经历一次不太愉快的相遇。\n§2Meet the Beetles!
 
-advancement.erebus.exploration.beetlejuice=“参宿四”
+advancement.erebus.exploration.beetlejuice=“猎户座α星”
 advancement.erebus.exploration.beetlejuice.desc=从甲虫身上取得甲虫汁，混沌之地版的牛奶。\n§2Alpha Orionis
 advancement.erebus.exploration.beetledrink=举杯，饮尽
 advancement.erebus.exploration.beetledrink.desc=喝下一满竹桶的甲虫汁。是的，你没有听错。
@@ -1015,7 +1015,7 @@ advancement.erebus.agriculture.turnip.desc=获得一些芜菁。
 advancement.erebus.agriculture.beetle_breed=芜菁使之动情
 advancement.erebus.agriculture.beetle_breed.desc=使用芜菁这种最具催情效果的蔬菜来使两只甲虫进入状态——至少对它们来说如此，我们不做评判。\n§2Turnip to Make 'Em Turn Up
 
-advancement.erebus.agriculture.bamboo=巨大迷竹
+advancement.erebus.agriculture.bamboo=巨大“骗局”
 advancement.erebus.agriculture.bamboo.desc=获得一些竹和竹笋。\n§2Colossally Bamboozled
 //Bamboo-zled
 
