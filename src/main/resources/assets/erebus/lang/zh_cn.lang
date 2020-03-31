@@ -170,7 +170,7 @@ item.erebus.rhino_exoskeleton_shield.name=犀甲盾
 item.erebus.wand_of_animation.name=活化权杖
 item.erebus.wand_of_preservation.name=封存权杖
 item.erebus.portal_activator.name=盖亚权杖
-item.erebus.woodlouse_ball.name=鼠妇球
+item.erebus.woodlouse_ball.name=绻缩的鼠妇
 item.erebus.nectar_collector.name=花蜜采集勺
 item.erebus.ant_taming_amulet.name=驯蚁护符
 item.erebus.bee_taming_amulet.name=驯蜂护符
@@ -688,7 +688,7 @@ tile.erebus.temple_teleporter.temple_teleport_nw.name=神庙传送石
 tile.erebus.temple_teleporter.temple_teleport_se.name=神庙传送石
 tile.erebus.temple_teleporter.temple_teleport_sw.name=神庙传送石
 tile.erebus.force_field.name=力场
-tile.erebus.force_lock.name=力场钥匙（未实现）
+tile.erebus.force_lock.name=力场锁（未实现）
 
 tile.erebus.ant_hill_block.name=蚁丘（未实现）
 
@@ -963,7 +963,7 @@ advancement.erebus.exploration.repellent.desc=获得一些驱虫素。
 advancement.erebus.exploration.spray_can=滚开，节肢生物
 advancement.erebus.exploration.spray_can.desc=合成一些驱虫剂。
 
-advancement.erebus.exploration.stung=《头上长刺的男孩》
+advancement.erebus.exploration.stung=《身边有刺的男孩》
 advancement.erebus.exploration.stung.desc=被黄蜂或蝎子蛰到。\n§2The Boy with the Thorn in His Side
 
 advancement.erebus.exploration.water_repellent=为什么这么怕水，偏执狂？
