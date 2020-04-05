@@ -665,17 +665,17 @@ tile.erebus.capstone.capstone_gold_active.name=激活的金质拱顶石
 tile.erebus.capstone.capstone_jade_active.name=激活的玉质拱顶石
 
 tile.erebus.temple_brick_unbreaking.temple_brick.name=神庙砖
-tile.erebus.temple_brick_unbreaking.temple_brick_jade.name=玉槽
-tile.erebus.temple_brick_unbreaking.temple_brick_exo.name=外骨骼槽
-tile.erebus.temple_brick_unbreaking.temple_brick_cream.name=岩浆膏槽
-tile.erebus.temple_brick_unbreaking.temple_brick_eye.name=岩浆爬虫眼槽
-tile.erebus.temple_brick_unbreaking.temple_brick_string.name=线槽
+tile.erebus.temple_brick_unbreaking.temple_brick_jade.name=神庙砖孔位：玉
+tile.erebus.temple_brick_unbreaking.temple_brick_exo.name=神庙砖孔位：外骨骼
+tile.erebus.temple_brick_unbreaking.temple_brick_cream.name=神庙砖孔位：岩浆膏
+tile.erebus.temple_brick_unbreaking.temple_brick_eye.name=神庙砖孔位：岩浆爬虫眼
+tile.erebus.temple_brick_unbreaking.temple_brick_string.name=神庙砖孔位：线
 
-tile.erebus.temple_brick_unbreaking.temple_brick_jade_active.name=激活的玉槽
-tile.erebus.temple_brick_unbreaking.temple_brick_exo_active.name=激活的外骨骼槽
-tile.erebus.temple_brick_unbreaking.temple_brick_cream_active.name=激活的岩浆膏槽
-tile.erebus.temple_brick_unbreaking.temple_brick_eye_active.name=激活的岩浆爬虫槽
-tile.erebus.temple_brick_unbreaking.temple_brick_string_active.name=激活的线槽
+tile.erebus.temple_brick_unbreaking.temple_brick_jade_active.name=激活的神庙砖孔位：玉
+tile.erebus.temple_brick_unbreaking.temple_brick_exo_active.name=激活的神庙砖孔位：外骨骼
+tile.erebus.temple_brick_unbreaking.temple_brick_cream_active.name=激活的神庙砖孔位：岩浆膏
+tile.erebus.temple_brick_unbreaking.temple_brick_eye_active.name=激活的神庙砖孔位：岩浆爬虫
+tile.erebus.temple_brick_unbreaking.temple_brick_string_active.name=激活的神庙砖孔位：线
 
 tile.erebus.temple_teleporter.temple_teleport_0.name=神庙传送石
 tile.erebus.temple_teleporter.temple_teleport_1.name=神庙传送石
