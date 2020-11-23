@@ -60,8 +60,8 @@ public final class SpawnerErebus {
 			canSpawnHostiles = ((WorldProviderErebus)world.provider).getCanSpawnHostiles();
 			canSpawnAnimals = ((WorldProviderErebus)world.provider).getCanSpawnAnimals();
 		}else{
-			canSpawnHostiles=ConfigHandler.INSTANCE.forceAllowHostiles;
-			canSpawnAnimals=ConfigHandler.INSTANCE.forceAllowPassives;
+			canSpawnHostiles=ConfigHandler.INSTANCE.fallbackAllowHostiles;
+			canSpawnAnimals=ConfigHandler.INSTANCE.fallbackAllowPassives;
 		}
 	}
 
