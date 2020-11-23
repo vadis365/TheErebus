@@ -25,7 +25,7 @@ public class ConfigHandler {
 	public int erebusDimensionID;
 	public int portalCooldown, mobAttackDamageMultiplier, mobHealthMultipier;
 	public byte beetleLarvaEating = 0;
-	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows, biomeFogColours;
+	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows, biomeFogColours, forceAllowHostiles, forceAllowPassives;
 	public static boolean smoothBedrock;
 	public static String[] WOA_BLACKLISTED_BLOCKS;
 
@@ -66,6 +66,11 @@ public class ConfigHandler {
 
 		WOA_BLACKLISTED_BLOCKS = config.getStringList("Blocks ignored by Wand", "Wand of Animation", new String[] { "minecraft:obsidian"}, "For Sanity");
 		
+		 forceAllowHostiles = config.get(Configuration.CATEGORY_GENERAL, "Force allow hostile spawning in Erebus dimension", false).getBoolean(false);
+		forceAllowPassives = config.get(Configuration.CATEGORY_GENERAL, "Force allow passive spawning in Erebus dimension", false).getBoolean(false);
+
+
+
 	//	disableThaumcraft = config.get("Integration", "Disable Thaumcraft integration", false).getBoolean(false);
 	//	disableFMP = config.get("Integration", "Disable Forge Multipart integration", false).getBoolean(false);
 

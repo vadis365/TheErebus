@@ -12,6 +12,7 @@ import java.util.Random;
 import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.BiomeBaseErebus;
 import erebus.world.loot.IWeightProvider;
+import erebus.core.handler.configs.ConfigHandler;
 import gnu.trove.map.hash.TObjectIntHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -54,9 +55,14 @@ public final class SpawnerErebus {
 	private Map<ChunkPos, Boolean> spawnChunks = new HashMap<ChunkPos, Boolean>(64);
 
 	private void prepare(WorldServer world) {
-		WorldProviderErebus provider = (WorldProviderErebus) world.provider;
-		canSpawnHostiles = provider.getCanSpawnHostiles();
-		canSpawnAnimals = provider.getCanSpawnAnimals();
+		// AdvancedRocketry fix. Planet of the same id breaks casting due to different provider subclass
+		if (world.provider instanceof WorldProviderErebus) {
+			canSpawnHostiles = ((WorldProviderErebus)world.provider).getCanSpawnHostiles();
+			canSpawnAnimals = ((WorldProviderErebus)world.provider).getCanSpawnAnimals();
+		}else{
+			canSpawnHostiles=ConfigHandler.INSTANCE.forceAllowHostiles;
+			canSpawnAnimals=ConfigHandler.INSTANCE.forceAllowPassives;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
