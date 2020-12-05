@@ -20,7 +20,6 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityDeathInventoryHandler {
-	@SuppressWarnings("unchecked")
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onPlayerDrops(PlayerDropsEvent event) {
 
@@ -34,16 +33,17 @@ public class EntityDeathInventoryHandler {
 		if (event.getEntityLiving() instanceof EntityPlayer && !world.getGameRules().getBoolean("keepInventory")) {
 			final EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 			IPlayerDeathLocationCapability cap = player.getCapability(PlayerDeathLocationCapability.CAPABILITY_PLAYER_DEATH_LOCATION, null);
-			BlockPos pos = player.getPosition().up();
-			BlockPos posBones = player.getPosition();
+			BlockPos deathPos=player.getPosition();
+			//Prevent void issue (Y<0)
+			BlockPos posBones=new BlockPos(deathPos.getX(),Math.max(2,deathPos.getY()+1),deathPos.getZ());
 			EnumFacing playerFacing = player.getHorizontalFacing();
-
-			for (EnumFacing offset : EnumFacing.VALUES)
-				if (world.getBlockState(pos.offset(offset)).getBlock().isReplaceable(world, pos.offset(offset))) {
-					posBones = pos.offset(offset);
-					break;
-				}
-
+			for (EnumFacing offset : EnumFacing.HORIZONTALS) {
+					BlockPos offeredPos=posBones.offset(offset);
+					if (world.getBlockState(offeredPos).getMaterial().isReplaceable()) {
+						posBones = offeredPos;
+						break;
+					}
+			}
 			world.setBlockState(posBones, ModBlocks.BLOCK_OF_BONES.getDefaultState().withProperty(BlockBones.FACING, playerFacing), 3);
 			cap.setGraveDimension(player.world.provider.getDimension());
 			cap.setGraveDimensionName(player.world.provider.getDimensionType().getName());
