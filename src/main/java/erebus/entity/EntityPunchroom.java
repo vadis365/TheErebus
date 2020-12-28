@@ -80,6 +80,7 @@ public class EntityPunchroom extends EntityMob {
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound) {
+		super.readEntityFromNBT(compound);
 		wasOnGround = compound.getBoolean("wasOnGround");
 	}
 
