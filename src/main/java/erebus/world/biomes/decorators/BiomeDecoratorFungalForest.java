@@ -96,7 +96,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 			if (checkSurface(SurfaceType.GRASS, pos) && genGiantMushrooms.generate(world, rand, pos.up()))
 				break;
 		}
-		
+
 		genMushroomsBrown.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(120), z + offsetXZ()));
 		genMushroomsRed.generate(world, rand, new BlockPos(x + offsetXZ(), rand.nextInt(120), z + offsetXZ()));
 
@@ -121,7 +121,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 		for (attempt = 0; attempt < 100; attempt++) {
 			xx = x + offsetXZ();
 			zz = z + offsetXZ();
-			
+
 			for (yy = 20; yy < 100; yy += rand.nextBoolean() ? 2 : 1) {
 				BlockPos pos = new BlockPos(xx, yy, zz);
 				if (checkSurface(SurfaceType.GRASS, pos)) {
@@ -135,7 +135,7 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 			}
 		}
 
-		
+
 		for (attempt = 0; attempt < 20; attempt++) {
 			xx = x + offsetXZ();
 			yy = 20 + rand.nextInt(80);
@@ -156,22 +156,26 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 			}
 		}
 
-		for (attempt = 0; attempt < 10; attempt++) {
-			xx = x + offsetXZ();
-			yy = 30 + rand.nextInt(80);
-			zz = z + offsetXZ();
-			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (world.isAirBlock(pos))
-				genMossPatch.generate(world, rand, pos);
+		if (ConfigHandler.INSTANCE.moss) {
+			for (attempt = 0; attempt < 10; attempt++) {
+				xx = x + offsetXZ();
+				yy = 30 + rand.nextInt(80);
+				zz = z + offsetXZ();
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (world.isAirBlock(pos))
+					genMossPatch.generate(world, rand, pos);
+			}
 		}
 
-		for (attempt = 0; attempt < 10; attempt++) {
-			xx = x + offsetXZ();
-			yy = 30 + rand.nextInt(80);
-			zz = z + offsetXZ();
-			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (world.isAirBlock(pos))
-				genLichenPatch.generate(world, rand,pos);
+		if (ConfigHandler.INSTANCE.lichen) {
+			for (attempt = 0; attempt < 10; attempt++) {
+				xx = x + offsetXZ();
+				yy = 30 + rand.nextInt(80);
+				zz = z + offsetXZ();
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (world.isAirBlock(pos))
+					genLichenPatch.generate(world, rand, pos);
+			}
 		}
 
 		for (attempt = 0; attempt < 28; attempt++) {

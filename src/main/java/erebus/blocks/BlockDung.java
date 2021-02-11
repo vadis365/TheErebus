@@ -23,6 +23,7 @@ public class BlockDung extends BlockFalling {
 		setHardness(0.4F);
 		setSoundType(ModSounds.DUNG);
 		setCreativeTab(ModTabs.BLOCKS);
+		setHarvestLevel("shovel", 0);
 	}
 
 	@Override
@@ -63,7 +64,7 @@ public class BlockDung extends BlockFalling {
 			}
 		}
 	}
-	
+
 	@Override
 	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return MapColor.DIRT;

@@ -54,7 +54,7 @@ public class EntityDragonfly extends EntityMob {
 
 	public EntityDragonfly(World world) {
 		super(world);
-		setSize(2.5F, 1.0F);
+		setSize(ConfigHandler.INSTANCE.dragonfly_width, ConfigHandler.INSTANCE.dragonfly_height);
 		moveHelper = new FlyingMoveHelper(this);
 		setPathPriority(PathNodeType.BLOCKED, -8.0F);
 		setPathPriority(PathNodeType.OPEN, 8.0F);
@@ -69,21 +69,33 @@ public class EntityDragonfly extends EntityMob {
 	@Override
 	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
-		tasks.addTask(1, new EntityAIErebusAttackMelee(this, 0.5D, true));
+		tasks.addTask(1, new EntityAIErebusAttackMelee(this, ConfigHandler.INSTANCE.dragonfly_attackMovementSpeed, true));
 		tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		tasks.addTask(4, new EntityAILookIdle(this));
-		tasks.addTask(5, new EntityAIFlyingWander(this, 1D, 1));
-		targetTasks.addTask(0, new EntityAIHurtByTarget(this, true));
+		tasks.addTask(5, new EntityAIFlyingWander(this, ConfigHandler.INSTANCE.dragonfly_wanderingSpeed, 1));
+		targetTasks.addTask(0, new EntityAIHurtByTarget(this, ConfigHandler.INSTANCE.dragonfly_attackTogether));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? 15D : 15D * ConfigHandler.INSTANCE.mobHealthMultipier);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1D);
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigHandler.INSTANCE.mobHealthMultipier < 2 ? ConfigHandler.INSTANCE.dragonfly_baseHealth : ConfigHandler.INSTANCE.dragonfly_baseHealth * ConfigHandler.INSTANCE.mobHealthMultipier);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? ConfigHandler.INSTANCE.dragonfly_baseDamage : ConfigHandler.INSTANCE.dragonfly_baseDamage * ConfigHandler.INSTANCE.mobAttackDamageMultiplier);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(ConfigHandler.INSTANCE.dragonfly_movementSpeed);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(ConfigHandler.INSTANCE.dragonfly_followRange);
+		if (ConfigHandler.INSTANCE.dragonfly_armor > -1) {
+			getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(ConfigHandler.INSTANCE.dragonfly_armor);
+		}
+		if (ConfigHandler.INSTANCE.dragonfly_armorToughness > -1) {
+			getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(ConfigHandler.INSTANCE.dragonfly_armorToughness);
+		}
+		if (ConfigHandler.INSTANCE.dragonfly_knockbackResistance > -1) {
+			getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(ConfigHandler.INSTANCE.dragonfly_knockbackResistance);
+		}
+		if (ConfigHandler.INSTANCE.dragonfly_luck > -1) {
+			getEntityAttribute(SharedMonsterAttributes.LUCK).setBaseValue(ConfigHandler.INSTANCE.dragonfly_luck);
+		}
 	}
 
 	@Override
@@ -151,12 +163,12 @@ public class EntityDragonfly extends EntityMob {
 
 	@Override
 	protected float getSoundVolume() {
-		return 0.3F;
+		return ConfigHandler.INSTANCE.dragonfly_soundVolume;
 	}
 
 	@Override
 	protected float getSoundPitch() {
-		return super.getSoundPitch() * 0.5F;
+		return super.getSoundPitch() * ConfigHandler.INSTANCE.dragonfly_soundPitch;
 	}
 
 	@Override
@@ -180,14 +192,14 @@ public class EntityDragonfly extends EntityMob {
 
 		if (motionY < 0.0D)
 			motionY *= 0.3D;
-		
+
 		if (isBeingRidden()){
 			if (getAttackTarget() != null && !getEntityWorld().isAirBlock(getPosition().down(3)) || !getDropped() && getPosition().getY() < pickupHeight + 10D) {
 				getNavigator().clearPath();
 				getNavigator().tryMoveToXYZ(this.posX, this.posY + 10D, this.posZ, 1D);
 				motionY += 0.08D;
 			}
-			
+
 			if (!getEntityWorld().isRemote && captured() && (posY > pickupHeight + 10D || countDown <= 0 || !getEntityWorld().isRemote && captured() && getEntityWorld().isSideSolid(new BlockPos (MathHelper.floor(posX), MathHelper.floor(posY + 1D), MathHelper.floor(posZ)), EnumFacing.DOWN))) {
 				setDropped(true);
 				removePassengers();
@@ -196,7 +208,7 @@ public class EntityDragonfly extends EntityMob {
 
 		if (dropped) {
 			droptime++;
-			if (droptime >= 20) {
+			if (droptime >= ConfigHandler.INSTANCE.dragonfly_dropTime) {
 				setDropped(false);
 				droptime = 0;
 			}
@@ -213,12 +225,12 @@ public class EntityDragonfly extends EntityMob {
 			}
 
 		if(isInWater())
-			getMoveHelper().setMoveTo(this.posX, this.posY + 1, this.posZ, 0.32D);
+			getMoveHelper().setMoveTo(this.posX, this.posY + 1, this.posZ, ConfigHandler.INSTANCE.dragonfly_speedWater);
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void spawnParticles(World world, double x, double y, double z, Random rand) {
-		for (int count = 0; count < 20; ++count) {
+		for (int count = 0; count < ConfigHandler.INSTANCE.dragonfly_particleCount; ++count) {
 			double velX = 0.0D;
 			double velY = 0.0D;
 			double velZ = 0.0D;
@@ -236,7 +248,7 @@ public class EntityDragonfly extends EntityMob {
 		super.onCollideWithPlayer(player);
 		if (player.isSneaking())
 			player.setSneaking(false);
-		if (!getEntityWorld().isRemote && !player.capabilities.isCreativeMode && !captured() && rand.nextInt(20) == 0 && !getDropped()) {
+		if (ConfigHandler.INSTANCE.dragonfly_pickupPlayer && !getEntityWorld().isRemote && !player.capabilities.isCreativeMode && !captured() && rand.nextInt(20) == 0 && !getDropped()) {
 			player.startRiding(this, true);
 			pickupHeight = posY;
 			setPosition(posX, player.posY + getYOffset(), posZ);
@@ -292,17 +304,17 @@ public class EntityDragonfly extends EntityMob {
 	@Override
 	public boolean getCanSpawnHere() {
 		BlockPos blockpos = new BlockPos(posX, getEntityBoundingBox().minY, posZ);
-		if (blockpos.getY() > 100)
+		if (blockpos.getY() > ConfigHandler.INSTANCE.getDragonfly_spawnMaxHeight || blockpos.getY() < ConfigHandler.INSTANCE.dragonfly_spawnMinHeight)
 			return false;
 		else {
 			int lightValue = world.getLightFromNeighbors(blockpos);
-			return lightValue > rand.nextInt(7) ? false : isNotColliding() && super.getCanSpawnHere();
+			return lightValue > rand.nextInt(ConfigHandler.INSTANCE.dragonfly_spawnMinLightLevel) ? false : isNotColliding() && super.getCanSpawnHere();
 		}
 	}
 
 	@Override
 	public int getMaxSpawnedInChunk() {
-		return 6;
+		return ConfigHandler.INSTANCE.dragonfly_maxInChunk;
 	}
 
 	@Override
@@ -319,7 +331,7 @@ public class EntityDragonfly extends EntityMob {
 		return super.attackEntityAsMob(entity);
 		// I know this does nothing! - But it may soon!
 	}
-	
+
 	@Override
     @Nullable
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {

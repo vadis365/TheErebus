@@ -166,7 +166,7 @@ public class EntityScorpion extends EntityMob {
     public boolean isOnLadder() {
         return isBesideClimbableBlock();
     }
-	
+
     public boolean isBesideClimbableBlock() {
         return (((Byte)dataManager.get(CLIMBING)).byteValue() & 1) != 0;
     }
@@ -208,23 +208,35 @@ public class EntityScorpion extends EntityMob {
 		super.onCollideWithPlayer(player);
 		if (player.isSneaking())
 			player.setSneaking(false);
-		byte duration = 0;
+		int poisonDuration = 0;
+		int slownessDuration = 0;
 		if (!getEntityWorld().isRemote && player.getEntityBoundingBox().maxY >= getEntityBoundingBox().minY && player.getEntityBoundingBox().minY <= getEntityBoundingBox().maxY && captured())
 			if (getEntityWorld().getDifficulty().ordinal() > 1)
 				if (getEntityWorld().getDifficulty() == EnumDifficulty.NORMAL)
-					duration = 5;
+					if (ConfigHandler.INSTANCE.scorpion_normalPoison)
+						poisonDuration = ConfigHandler.INSTANCE.scorpion_normalPoisonDuration;
+					if (ConfigHandler.INSTANCE.scorpion_normalSlowness)
+						slownessDuration = ConfigHandler.INSTANCE.scorpion_normalSlownessDuration;
 				else if (getEntityWorld().getDifficulty() == EnumDifficulty.HARD)
-					duration = 10;
-		if (duration > 0 && rand.nextInt(50) == 0) {
-			player.addPotionEffect(new PotionEffect(MobEffects.POISON, duration * 20, 0));
+					if (ConfigHandler.INSTANCE.scorpion_hardPoison)
+						poisonDuration = ConfigHandler.INSTANCE.scorpion_hardPoisonDuration;
+					if (ConfigHandler.INSTANCE.scorpion_hardSlowness)
+						slownessDuration = ConfigHandler.INSTANCE.scorpion_hardSlownessDuration;
+		if ((poisonDuration > 0 || slownessDuration > 0) && rand.nextInt(50) == 0) {
+			if (poisonDuration > 0) {
+				player.addPotionEffect(new PotionEffect(MobEffects.POISON, poisonDuration , 0));
+			}
+			if (slownessDuration > 0) {
+				player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slownessDuration , 0));
+			}
 			setisStinging(true);
 			getEntityWorld().playSound(null, getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.HOSTILE, 0.5F, 2F);
 		}
-		if (!player.capabilities.isCreativeMode && !getEntityWorld().isRemote && !captured())
+		if (ConfigHandler.INSTANCE.scorpion_pickupPlayer && !player.capabilities.isCreativeMode && !getEntityWorld().isRemote && !captured())
 			if(getEntitySenses().canSee(player))
 				player.startRiding(this, true);
 	}
-	
+
 	@Override
 	public void updatePassenger(Entity entity) {
 		super.updatePassenger(entity);

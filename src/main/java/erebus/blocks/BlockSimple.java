@@ -16,18 +16,19 @@ public class BlockSimple extends Block {
 		super(material);
 		setSoundType(soundType);
 	}
-	
+
 	public BlockSimple(Material material, SoundType soundType, CreativeTabs tab) {
 		super(material);
 		setSoundType(soundType);
 		setCreativeTab(tab);
+		setHarvestLevel("shovel", 0);
 	}
 
 	public BlockSimple(Material material, String harvestType, int harvestLevel) {
 		super(material);
 		setHarvestLevel(harvestType, harvestLevel);
 	}
-	
+
 	public BlockSimple(Material material, String harvestType, int harvestLevel, SoundType soundType) {
 		super(material);
 		setHarvestLevel(harvestType, harvestLevel);

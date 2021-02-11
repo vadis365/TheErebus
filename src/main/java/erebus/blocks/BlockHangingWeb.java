@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import erebus.ModTabs;
+import erebus.core.handler.configs.ConfigHandler;
 import net.minecraft.block.BlockVine;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,7 +21,7 @@ public class BlockHangingWeb extends BlockVine implements IShearable {
 
 	public BlockHangingWeb() {
 		super();
-		setHardness(4.0F);
+		setHardness(ConfigHandler.INSTANCE.webHardness);
 		setCreativeTab(ModTabs.BLOCKS);
 		setSoundType(SoundType.CLOTH);
 	}
@@ -46,7 +47,7 @@ public class BlockHangingWeb extends BlockVine implements IShearable {
         ret.add(new ItemStack(Items.STRING, 1));
         return ret;
     }
-    
+
     @Override
     public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
         return false;
