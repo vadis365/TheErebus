@@ -3,11 +3,11 @@
   "modid": "erebus",
   "name": "Erebus",
   "description": "Discover a world ruled by insects, the Erebus is a place to explore, mine and build",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "url": "http://minecraft.curseforge.com/projects/the-erebus",
   "updateUrl": "",
   "authorList": [
-    "vadis365", "ganymedes01"
+    "vadis365", "ganymedes01, DylanKaizer"
   ],
   "credits": "Thanks to people and stuff.",
   "logoFile": "",
