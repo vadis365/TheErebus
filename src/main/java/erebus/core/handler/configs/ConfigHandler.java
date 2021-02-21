@@ -26,12 +26,15 @@ public class ConfigHandler {
 	public int portalCooldown, mobAttackDamageMultiplier, mobHealthMultipier;
 	public byte beetleLarvaEating = 0;
 	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows, biomeFogColours;
+	public boolean mossGen, mouldGen, mossSpread, mouldSpread, dragonflyGrab, scorpionGrab, petrifiedQuartzGen;
 	public static boolean smoothBedrock;
 	public static String[] WOA_BLACKLISTED_BLOCKS;
-
+	public float hangingWebHardness;
 	public boolean disableThaumcraft = false, disableFMP = false;
+	public float hammer_renderSize, getHammer_renderSizeChargedMultiplier, hammer_efficiency, hammer_damage;
+	public int hammer_harvestLevel, hammer_maxUses, hammer_enchantability;
 
-	public final String[] usedCategories = { Configuration.CATEGORY_GENERAL, "Biomes", "Ores", "Integration", "Mob Modifiers", "Wand of Animation" };
+	public final String[] usedCategories = { Configuration.CATEGORY_GENERAL, "Biomes", "Ores", "Integration", "Mob Modifiers", "Wand of Animation", "Quake Hammer"  };
 
 	public void loadConfig(FMLPreInitializationEvent event) {
 		File configFile = event.getSuggestedConfigurationFile();
@@ -60,12 +63,29 @@ public class ConfigHandler {
 		generateVents = config.get(Configuration.CATEGORY_GENERAL, "Generate natural swap vents", true).getBoolean(true);
 		netherWidows = config.get(Configuration.CATEGORY_GENERAL, "Spawn Black Widows in Nether", true).getBoolean(true);
 		smoothBedrock = config.get(Configuration.CATEGORY_GENERAL, "Erebus Generates with Flat Bedrock Layers", false).getBoolean(false);
+		mossGen = config.get(Configuration.CATEGORY_GENERAL, "Add Moss to World generation", true).getBoolean(true);
+		mouldGen = config.get(Configuration.CATEGORY_GENERAL, "Add Mould to World generation", true).getBoolean(true);
+		mossSpread = config.get(Configuration.CATEGORY_GENERAL, "Moss will naturally Spread over time", true).getBoolean(true);
+		mouldSpread = config.get(Configuration.CATEGORY_GENERAL, "Mould will naturally Spread over time", true).getBoolean(true);
+		petrifiedQuartzGen  = config.get(Configuration.CATEGORY_GENERAL, "Add Petrified Quartz to World generation", true).getBoolean(true);
+		hangingWebHardness = config.getFloat("Hanging Web hardness", Configuration.CATEGORY_GENERAL, 4.0F, 0F, Float.MAX_VALUE, "");
 
 		mobAttackDamageMultiplier = config.get("Mob Modifiers", "Mob Attack Damage Multipier", 1).getInt(1);
 		mobHealthMultipier = config.get("Mob Modifiers", "Mob Health Multiplier", 1).getInt(1);
+		dragonflyGrab = config.get("Mob Modifiers", "Dragonflies Grab Players", true).getBoolean(true);
+		scorpionGrab = config.get("Mob Modifiers", "Scorpions Grab Players", true).getBoolean(true);
 
 		WOA_BLACKLISTED_BLOCKS = config.getStringList("Blocks ignored by Wand", "Wand of Animation", new String[] { "minecraft:obsidian"}, "For Sanity");
-		
+
+		//QUAKE HAMMER
+		hammer_renderSize = config.getFloat("Quake Hammer render size", "Quake Hammer", 1.75F, 0F, Float.MAX_VALUE, "");
+		hammer_renderSize = config.getFloat("Quake Hammer charged render size", "Quake Hammer", 0.03F, 0F, Float.MAX_VALUE, "");
+		hammer_harvestLevel = config.get("Quake Hammer", "Quake Hammer harvest level", 0,"", 0, 3).getInt();
+		hammer_maxUses = config.get("Quake Hammer", "Quake Hammer max uses", 863,"", 0, Integer.MAX_VALUE).getInt();
+		hammer_efficiency = config.getFloat("Quake Hammer efficiency", "Quake Hammer", 1.0F, 0F, Float.MAX_VALUE, "");
+		hammer_damage = config.getFloat("Quake Hammer damage", "Quake Hammer", 10F, 0F, Float.MAX_VALUE, "");
+		hammer_enchantability = config.get("Quake Hammer", "Quake Hammer enchantability", 18,"", 0, Integer.MAX_VALUE).getInt();
+
 	//	disableThaumcraft = config.get("Integration", "Disable Thaumcraft integration", false).getBoolean(false);
 	//	disableFMP = config.get("Integration", "Disable Forge Multipart integration", false).getBoolean(false);
 

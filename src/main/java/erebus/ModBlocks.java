@@ -173,7 +173,7 @@ public class ModBlocks {
 	public static final Block PETRIFIED_BARK_BROWN = new BlockPetrifiedWoodRock();
 	public static final Block PETRIFIED_LOG_INNER = new BlockSimple(Material.ROCK, SoundType.STONE).setHardness(5F).setResistance(10.0F).setCreativeTab(ModTabs.BLOCKS);
 	public static final Block DUST_LAYER = new BlockDustLayer();
-	public static final Block DUST = new BlockSimple(Material.GROUND, SoundType.SNOW, ModTabs.BLOCKS) {
+	public static final Block DUST = new BlockSimple(Material.GROUND, "shovel", 0, SoundType.SNOW, ModTabs.BLOCKS) {
 		@Override
 		   public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable) {
 			return true;

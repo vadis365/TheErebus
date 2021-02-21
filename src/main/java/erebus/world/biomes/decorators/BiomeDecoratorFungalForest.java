@@ -156,22 +156,26 @@ public class BiomeDecoratorFungalForest extends BiomeDecoratorBaseErebus {
 			}
 		}
 
-		for (attempt = 0; attempt < 10; attempt++) {
-			xx = x + offsetXZ();
-			yy = 30 + rand.nextInt(80);
-			zz = z + offsetXZ();
-			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (world.isAirBlock(pos))
-				genMossPatch.generate(world, rand, pos);
+		if(ConfigHandler.INSTANCE.mossGen) {
+			for (attempt = 0; attempt < 10; attempt++) {
+				xx = x + offsetXZ();
+				yy = 30 + rand.nextInt(80);
+				zz = z + offsetXZ();
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (world.isAirBlock(pos))
+					genMossPatch.generate(world, rand, pos);
+			}
 		}
-
-		for (attempt = 0; attempt < 10; attempt++) {
-			xx = x + offsetXZ();
-			yy = 30 + rand.nextInt(80);
-			zz = z + offsetXZ();
-			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (world.isAirBlock(pos))
-				genLichenPatch.generate(world, rand,pos);
+		
+		if(ConfigHandler.INSTANCE.mouldGen) {
+			for (attempt = 0; attempt < 10; attempt++) {
+				xx = x + offsetXZ();
+				yy = 30 + rand.nextInt(80);
+				zz = z + offsetXZ();
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (world.isAirBlock(pos))
+					genLichenPatch.generate(world, rand,pos);
+			}
 		}
 
 		for (attempt = 0; attempt < 28; attempt++) {

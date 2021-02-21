@@ -21,6 +21,7 @@ public class BlockDung extends BlockFalling {
 	public BlockDung() {
 		super(Material.GROUND);
 		setHardness(0.4F);
+		setHarvestLevel("shovel", 0);
 		setSoundType(ModSounds.DUNG);
 		setCreativeTab(ModTabs.BLOCKS);
 	}

@@ -18,6 +18,7 @@ public class BlockUmberGravel extends BlockFalling {
 
 	public BlockUmberGravel() {
 		setHardness(0.6F);
+		setHarvestLevel("shovel", 0);
 		setSoundType(SoundType.GROUND);
 		setCreativeTab(ModTabs.BLOCKS);
 	}

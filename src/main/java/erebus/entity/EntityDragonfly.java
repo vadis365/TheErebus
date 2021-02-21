@@ -234,13 +234,15 @@ public class EntityDragonfly extends EntityMob {
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
-		if (player.isSneaking())
-			player.setSneaking(false);
-		if (!getEntityWorld().isRemote && !player.capabilities.isCreativeMode && !captured() && rand.nextInt(20) == 0 && !getDropped()) {
-			player.startRiding(this, true);
-			pickupHeight = posY;
-			setPosition(posX, player.posY + getYOffset(), posZ);
-			setCountdown(60);
+		if (ConfigHandler.INSTANCE.dragonflyGrab) {
+			if (player.isSneaking())
+				player.setSneaking(false);
+			if (!getEntityWorld().isRemote && !player.capabilities.isCreativeMode && !captured() && rand.nextInt(20) == 0 && !getDropped()) {
+				player.startRiding(this, true);
+				pickupHeight = posY;
+				setPosition(posX, player.posY + getYOffset(), posZ);
+				setCountdown(60);
+			}
 		}
 	}
 
