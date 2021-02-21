@@ -35,7 +35,7 @@ public class RenderBeetleLarva extends RenderLiving<EntityBeetleLarva> {
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntityBeetleLarva larva) {
-		if (larva.getLarvaType() == 4)
+		if (larva.getLarvaType() == 4 || larva instanceof EntityBombardierBeetleLarva)
 			return TEXTURES[1];
 		else if (larva.getLarvaType() == 5)
 			return TEXTURES[2];
