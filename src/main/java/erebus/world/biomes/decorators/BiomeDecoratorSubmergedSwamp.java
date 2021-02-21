@@ -94,13 +94,15 @@ public class BiomeDecoratorSubmergedSwamp extends BiomeDecoratorBaseErebus {
 			genVines.generate(world, rand, pos);
 		}
 
-		for (attempt = 0; attempt < 10; attempt++) {
-			xx = x + offsetXZ();
-			yy = ChunkProviderErebus.swampWaterHeight + rand.nextInt(36 - ChunkProviderErebus.swampWaterHeight);
-			zz = z + offsetXZ();
-			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (world.isAirBlock(pos))
-				genMossPatch.generate(world, rand, pos);
+		if(ConfigHandler.INSTANCE.mossGen) {
+			for (attempt = 0; attempt < 10; attempt++) {
+				xx = x + offsetXZ();
+				yy = ChunkProviderErebus.swampWaterHeight + rand.nextInt(36 - ChunkProviderErebus.swampWaterHeight);
+				zz = z + offsetXZ();
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (world.isAirBlock(pos))
+					genMossPatch.generate(world, rand, pos);
+			}
 		}
 
 		// Ground

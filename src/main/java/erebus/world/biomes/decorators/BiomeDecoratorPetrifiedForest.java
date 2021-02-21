@@ -5,6 +5,7 @@ import erebus.blocks.BlockDustLayer;
 import erebus.blocks.BlockHangingWeb;
 import erebus.blocks.BlockMandrake;
 import erebus.blocks.BlockPetrifiedWoodRock;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
@@ -13,6 +14,7 @@ import erebus.world.feature.decoration.WorldGenPetrifiedTrees;
 import erebus.world.feature.decoration.WorldGenRockSpike;
 import erebus.world.feature.decoration.WorldGenScorchedWood;
 import erebus.world.feature.plant.WorldGenBigLogs;
+import net.minecraft.block.Block;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenLakes;
@@ -40,6 +42,10 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 
 	@Override
 	public void decorate() {
+		Block treeFiller = ModBlocks.ORE_PETRIFIED_QUARTZ;
+	
+		if (!ConfigHandler.INSTANCE.petrifiedQuartzGen)
+			treeFiller = ModBlocks.PETRIFIED_WOOD_ROCK;
 
 		for (attempt = 0; attempt < 240; attempt++) {
 			xx = x + offsetXZ();
@@ -74,7 +80,7 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 			zz = z + 16;
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.VOLCANIC_ROCK, pos)) {
-				new WorldGenBigLogs(length, baseRadius, facing, ModBlocks.PETRIFIED_BARK_BROWN.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, facing == EnumFacing.NORTH ? EnumFacing.Axis.Z : EnumFacing.Axis.X), ModBlocks.PETRIFIED_LOG_INNER.getDefaultState(), true, ModBlocks.ORE_PETRIFIED_QUARTZ.getDefaultState()).generate(world, rand, pos.up());
+				new WorldGenBigLogs(length, baseRadius, facing, ModBlocks.PETRIFIED_BARK_BROWN.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, facing == EnumFacing.NORTH ? EnumFacing.Axis.Z : EnumFacing.Axis.X), ModBlocks.PETRIFIED_LOG_INNER.getDefaultState(), true, treeFiller.getDefaultState()).generate(world, rand, pos.up());
 				break;
 			}
 		}
@@ -88,7 +94,7 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 			zz = z + 16;
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.VOLCANIC_ROCK, pos)) {
-				new WorldGenBigLogs(length, baseRadius, facing, ModBlocks.PETRIFIED_BARK_RED.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, facing == EnumFacing.NORTH ? EnumFacing.Axis.Z : EnumFacing.Axis.X), ModBlocks.PETRIFIED_LOG_INNER.getDefaultState(), true, ModBlocks.ORE_PETRIFIED_QUARTZ.getDefaultState()).generate(world, rand, pos.up());
+				new WorldGenBigLogs(length, baseRadius, facing, ModBlocks.PETRIFIED_BARK_RED.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, facing == EnumFacing.NORTH ? EnumFacing.Axis.Z : EnumFacing.Axis.X), ModBlocks.PETRIFIED_LOG_INNER.getDefaultState(), true, treeFiller.getDefaultState()).generate(world, rand, pos.up());
 				break;
 			}
 		}
@@ -163,7 +169,7 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 			zz = z + offsetXZ();
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.VOLCANIC_ROCK, pos) && !world.isAirBlock(pos.down(2))) {
-				new WorldGenPetrifiedTrees(11 + rand.nextInt(4), 2, ModBlocks.PETRIFIED_BARK_BROWN.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y), ModBlocks.PETRIFIED_LOG_INNER.getDefaultState(), true, ModBlocks.ORE_PETRIFIED_QUARTZ.getDefaultState()).generate(world, rand, pos.up());
+				new WorldGenPetrifiedTrees(11 + rand.nextInt(4), 2, ModBlocks.PETRIFIED_BARK_BROWN.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y), ModBlocks.PETRIFIED_LOG_INNER.getDefaultState(), true, treeFiller.getDefaultState()).generate(world, rand, pos.up());
 				break;
 			}
 		}
@@ -174,7 +180,7 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 			zz = z + offsetXZ();
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.VOLCANIC_ROCK, pos) && !world.isAirBlock(pos.down(2))) {
-				new WorldGenPetrifiedTrees(16 + rand.nextInt(10), 3, ModBlocks.PETRIFIED_BARK_BROWN.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y), ModBlocks.PETRIFIED_LOG_INNER.getDefaultState(), true, ModBlocks.ORE_PETRIFIED_QUARTZ.getDefaultState()).generate(world, rand, pos.up());
+				new WorldGenPetrifiedTrees(16 + rand.nextInt(10), 3, ModBlocks.PETRIFIED_BARK_BROWN.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y), ModBlocks.PETRIFIED_LOG_INNER.getDefaultState(), true, treeFiller.getDefaultState()).generate(world, rand, pos.up());
 				break;
 			}
 		}
@@ -196,7 +202,7 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 			zz = z + offsetXZ();
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.VOLCANIC_ROCK, pos) && !world.isAirBlock(pos.down(2))) {
-				new WorldGenPetrifiedTrees(11 + rand.nextInt(4), 2, ModBlocks.PETRIFIED_BARK_RED.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y), ModBlocks.PETRIFIED_LOG_INNER.getDefaultState(), true, ModBlocks.ORE_PETRIFIED_QUARTZ.getDefaultState()).generate(world, rand, pos.up());
+				new WorldGenPetrifiedTrees(11 + rand.nextInt(4), 2, ModBlocks.PETRIFIED_BARK_RED.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y), ModBlocks.PETRIFIED_LOG_INNER.getDefaultState(), true, treeFiller.getDefaultState()).generate(world, rand, pos.up());
 				break;
 			}
 		}
@@ -207,7 +213,7 @@ public class BiomeDecoratorPetrifiedForest extends BiomeDecoratorBaseErebus {
 			zz = z + offsetXZ();
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (checkSurface(SurfaceType.VOLCANIC_ROCK, pos) && !world.isAirBlock(pos.down(2))) {
-				new WorldGenPetrifiedTrees(16 + rand.nextInt(10), 3, ModBlocks.PETRIFIED_BARK_RED.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y), ModBlocks.PETRIFIED_LOG_INNER.getDefaultState(), true, ModBlocks.ORE_PETRIFIED_QUARTZ.getDefaultState()).generate(world, rand, pos.up());
+				new WorldGenPetrifiedTrees(16 + rand.nextInt(10), 3, ModBlocks.PETRIFIED_BARK_RED.getDefaultState().withProperty(BlockPetrifiedWoodRock.AXIS, EnumFacing.Axis.Y), ModBlocks.PETRIFIED_LOG_INNER.getDefaultState(), true, treeFiller.getDefaultState()).generate(world, rand, pos.up());
 				break;
 			}
 		}

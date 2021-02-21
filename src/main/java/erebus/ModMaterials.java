@@ -1,5 +1,6 @@
 package erebus;
 
+import erebus.core.handler.configs.ConfigHandler;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
@@ -23,7 +24,7 @@ public class ModMaterials {
 	public static ToolMaterial WEAPON_WASP_SWORD = EnumHelper.addToolMaterial("WASP_SWORD", 0, 863, 1.0F, 6.0F, 18);
 	public static ToolMaterial WEAPON_SCOPION_PINCER = EnumHelper.addToolMaterial("SCORPION_PINCER", 0, 863, 1.0F, 4.0F, 12);
 	public static ToolMaterial WEAPON_ROLLED_NEWSPAPER = EnumHelper.addToolMaterial("ROLLED_NEWSPAPER", 0, 64, 1.0F, 0.0F, 0);
-	public static ToolMaterial WEAPON_WAR_HAMMER = EnumHelper.addToolMaterial("WAR_HAMMER", 0, 863, 1.0F, 10.0F, 18);
+	public static ToolMaterial WEAPON_WAR_HAMMER = EnumHelper.addToolMaterial("WAR_HAMMER", ConfigHandler.INSTANCE.hammer_harvestLevel, ConfigHandler.INSTANCE.hammer_maxUses, ConfigHandler.INSTANCE.hammer_efficiency, ConfigHandler.INSTANCE.hammer_damage, ConfigHandler.INSTANCE.hammer_enchantability);
 
 	public static Material HONEY = new MaterialLiquid(MapColor.COLORS[14]);
 	public static Material FORMIC_ACID = new MaterialLiquid(MapColor.COLORS[3]);

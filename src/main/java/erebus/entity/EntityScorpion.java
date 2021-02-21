@@ -206,23 +206,25 @@ public class EntityScorpion extends EntityMob {
 	@Override
 	public void onCollideWithPlayer(EntityPlayer player) {
 		super.onCollideWithPlayer(player);
-		if (player.isSneaking())
-			player.setSneaking(false);
-		byte duration = 0;
-		if (!getEntityWorld().isRemote && player.getEntityBoundingBox().maxY >= getEntityBoundingBox().minY && player.getEntityBoundingBox().minY <= getEntityBoundingBox().maxY && captured())
-			if (getEntityWorld().getDifficulty().ordinal() > 1)
-				if (getEntityWorld().getDifficulty() == EnumDifficulty.NORMAL)
-					duration = 5;
-				else if (getEntityWorld().getDifficulty() == EnumDifficulty.HARD)
-					duration = 10;
-		if (duration > 0 && rand.nextInt(50) == 0) {
-			player.addPotionEffect(new PotionEffect(MobEffects.POISON, duration * 20, 0));
-			setisStinging(true);
-			getEntityWorld().playSound(null, getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.HOSTILE, 0.5F, 2F);
+		if (ConfigHandler.INSTANCE.scorpionGrab) {
+			if (player.isSneaking())
+				player.setSneaking(false);
+			byte duration = 0;
+			if (!getEntityWorld().isRemote && player.getEntityBoundingBox().maxY >= getEntityBoundingBox().minY && player.getEntityBoundingBox().minY <= getEntityBoundingBox().maxY && captured())
+				if (getEntityWorld().getDifficulty().ordinal() > 1)
+					if (getEntityWorld().getDifficulty() == EnumDifficulty.NORMAL)
+						duration = 5;
+					else if (getEntityWorld().getDifficulty() == EnumDifficulty.HARD)
+						duration = 10;
+			if (duration > 0 && rand.nextInt(50) == 0) {
+				player.addPotionEffect(new PotionEffect(MobEffects.POISON, duration * 20, 0));
+				setisStinging(true);
+				getEntityWorld().playSound(null, getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.HOSTILE, 0.5F, 2F);
+			}
+			if (!player.capabilities.isCreativeMode && !getEntityWorld().isRemote && !captured())
+				if(getEntitySenses().canSee(player))
+					player.startRiding(this, true);
 		}
-		if (!player.capabilities.isCreativeMode && !getEntityWorld().isRemote && !captured())
-			if(getEntitySenses().canSee(player))
-				player.startRiding(this, true);
 	}
 	
 	@Override

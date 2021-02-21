@@ -1,6 +1,5 @@
 package erebus.blocks;
 
-import erebus.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -32,5 +31,12 @@ public class BlockSimple extends Block {
 		super(material);
 		setHarvestLevel(harvestType, harvestLevel);
 		setSoundType(soundType);
+	}
+	
+	public BlockSimple(Material material, String harvestType, int harvestLevel, SoundType soundType, CreativeTabs tab) {
+		super(material);
+		setHarvestLevel(harvestType, harvestLevel);
+		setSoundType(soundType);
+		setCreativeTab(tab);
 	}
 }

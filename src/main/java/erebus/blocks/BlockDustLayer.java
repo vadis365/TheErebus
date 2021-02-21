@@ -41,6 +41,7 @@ public class BlockDustLayer extends Block {
 
 	public BlockDustLayer() {
 		super(Material.GROUND);
+		setHarvestLevel("shovel", 0);
 		setSoundType(SoundType.SNOW);
 		setDefaultState(blockState.getBaseState().withProperty(LAYERS, Integer.valueOf(1)));
 		setCreativeTab(ModTabs.BLOCKS);

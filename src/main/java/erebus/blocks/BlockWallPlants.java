@@ -12,6 +12,7 @@ import erebus.ModBlocks.IHasCustomItem;
 import erebus.ModBlocks.ISubBlocksBlock;
 import erebus.ModTabs;
 import erebus.api.IErebusEnum;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.items.block.ItemBlockEnum;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -289,6 +290,13 @@ public class BlockWallPlants extends Block implements IShearable, IHasCustomItem
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		if (world.isRemote)
 			return;
+		
+		if(getMetaFromState(state) <= 5 && !ConfigHandler.INSTANCE.mossSpread)
+			return;
+
+		if(getMetaFromState(state) > 5 && getMetaFromState(state) <= 11 && !ConfigHandler.INSTANCE.mouldSpread)
+			return;
+
 		EnumWallPlantType type = world.getBlockState(pos).getValue(TYPE);
 		int attempt = 0;
 		int x = pos.getX();

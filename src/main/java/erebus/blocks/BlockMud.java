@@ -28,6 +28,7 @@ public class BlockMud extends Block {
 	public BlockMud() {
 		super(Material.GROUND);
 		setHardness(2.0F);
+		setHarvestLevel("shovel", 0);
 		setSoundType(SoundType.GROUND);
 		setCreativeTab(ModTabs.BLOCKS);
 	}

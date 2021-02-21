@@ -4,6 +4,7 @@ import erebus.ModBlocks;
 import erebus.blocks.BlockDarkFruitVine;
 import erebus.blocks.BlockDoubleHeightPlant;
 import erebus.blocks.BlockSmallPlant;
+import erebus.core.handler.configs.ConfigHandler;
 import erebus.world.biomes.decorators.data.FeatureType;
 import erebus.world.biomes.decorators.data.OreSettings;
 import erebus.world.biomes.decorators.data.OreSettings.OreType;
@@ -150,13 +151,15 @@ public class BiomeDecoratorElysianFields extends BiomeDecoratorBaseErebus {
 					world.setBlockState(pos.down(hangerY), ModBlocks.DARK_FRUIT_VINE.getDefaultState().withProperty(BlockDarkFruitVine.DARK_VINE_AGE, Integer.valueOf(4)), 2);
 		}
 
-		for (attempt = 0; attempt < 15; attempt++) {
-			xx = x + offsetXZ();
-			yy = 30 + rand.nextInt(80);
-			zz = z + offsetXZ();
-			BlockPos pos = new BlockPos(xx, yy, zz);
-			if (world.isAirBlock(pos))
-				genMossPatch.generate(world, rand, pos);
+		if(ConfigHandler.INSTANCE.mossGen) {
+			for (attempt = 0; attempt < 15; attempt++) {
+				xx = x + offsetXZ();
+				yy = 30 + rand.nextInt(80);
+				zz = z + offsetXZ();
+				BlockPos pos = new BlockPos(xx, yy, zz);
+				if (world.isAirBlock(pos))
+					genMossPatch.generate(world, rand, pos);
+			}
 		}
 
 		for (attempt = 0; attempt < 15; attempt++) {
