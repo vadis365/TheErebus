@@ -25,7 +25,7 @@ public class ConfigHandler {
 	public int erebusDimensionID;
 	public int portalCooldown, mobAttackDamageMultiplier, mobHealthMultipier;
 	public byte beetleLarvaEating = 0;
-	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows, biomeFogColours, falbackAllowHostiles, fallbackAllowPassives;
+	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows, biomeFogColours, fallbackAllowHostiles, fallbackAllowPassives;
 	public boolean mossGen, mouldGen, mossSpread, mouldSpread, dragonflyGrab, scorpionGrab, petrifiedQuartzGen;
 	public static boolean smoothBedrock;
 	public static String[] WOA_BLACKLISTED_BLOCKS;
