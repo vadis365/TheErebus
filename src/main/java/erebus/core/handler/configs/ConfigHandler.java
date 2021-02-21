@@ -25,7 +25,7 @@ public class ConfigHandler {
 	public int erebusDimensionID;
 	public int portalCooldown, mobAttackDamageMultiplier, mobHealthMultipier;
 	public byte beetleLarvaEating = 0;
-	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows, biomeFogColours;
+	public boolean spawnPortalMobs, bombardierBlockDestroy, randomNames, playCustomSongs, graveMarker, bioluminescence, glowshrooms, generateVents, allowRespawning, netherWidows, biomeFogColours, falbackAllowHostiles, fallbackAllowPassives;
 	public boolean mossGen, mouldGen, mossSpread, mouldSpread, dragonflyGrab, scorpionGrab, petrifiedQuartzGen;
 	public static boolean smoothBedrock;
 	public static String[] WOA_BLACKLISTED_BLOCKS;
@@ -76,6 +76,9 @@ public class ConfigHandler {
 		scorpionGrab = config.get("Mob Modifiers", "Scorpions Grab Players", true).getBoolean(true);
 
 		WOA_BLACKLISTED_BLOCKS = config.getStringList("Blocks ignored by Wand", "Wand of Animation", new String[] { "minecraft:obsidian"}, "For Sanity");
+		
+		fallbackAllowHostiles = config.get(Configuration.CATEGORY_GENERAL, "Allow hostile spawning in Erebus dimension when world provider fails", false).getBoolean(false);
+		fallbackAllowPassives = config.get(Configuration.CATEGORY_GENERAL, "Allow passive spawning in Erebus dimension when world provider fails", false).getBoolean(false);
 
 		//QUAKE HAMMER
 		hammer_renderSize = config.getFloat("Quake Hammer render size", "Quake Hammer", 1.75F, 0F, Float.MAX_VALUE, "");
@@ -85,6 +88,7 @@ public class ConfigHandler {
 		hammer_efficiency = config.getFloat("Quake Hammer efficiency", "Quake Hammer", 1.0F, 0F, Float.MAX_VALUE, "");
 		hammer_damage = config.getFloat("Quake Hammer damage", "Quake Hammer", 10F, 0F, Float.MAX_VALUE, "");
 		hammer_enchantability = config.get("Quake Hammer", "Quake Hammer enchantability", 18,"", 0, Integer.MAX_VALUE).getInt();
+
 
 	//	disableThaumcraft = config.get("Integration", "Disable Thaumcraft integration", false).getBoolean(false);
 	//	disableFMP = config.get("Integration", "Disable Forge Multipart integration", false).getBoolean(false);
