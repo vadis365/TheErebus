@@ -1,9 +1,23 @@
 package erebus;
 
+import java.util.Locale;
+
+import org.slf4j.Logger;
+
 import com.mojang.logging.LogUtils;
-import erebus.registries.*;
+
+import erebus.registries.ModArmorMaterials;
+import erebus.registries.ModBlocks;
+import erebus.registries.ModEntities;
+import erebus.registries.ModEntityRendering;
+import erebus.registries.ModItems;
+import erebus.registries.ModTabs;
+import erebus.registries.ModTags;
+import erebus.registries.ModToolMaterials;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -12,7 +26,6 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import org.slf4j.Logger;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -20,7 +33,7 @@ public class Erebus {
     public static final String MODID = "erebus";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public Erebus(IEventBus bus, ModContainer container) {
+    public Erebus(IEventBus bus, ModContainer container, Dist dist) {
         bus.addListener(this::commonSetup);
 
         ModArmorMaterials.register(bus);
@@ -29,11 +42,18 @@ public class Erebus {
         ModToolMaterials.init();
         ModItems.register(bus);
         ModTabs.register(bus);
-        ModEntities.register(bus);
+        ModEntities.getEntityTypes().register(bus);
+        bus.addListener(ModEntities::registerSpawnPlacements);
+        bus.addListener(ModEntities::initializeAttributes);
 
         NeoForge.EVENT_BUS.register(this);
 
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        
+		if (dist.isClient()) {
+			bus.addListener(ModEntityRendering::registerEntityLayers);
+			bus.addListener(ModEntityRendering::registerEntityRender);
+		}
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -54,4 +74,8 @@ public class Erebus {
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
     }
+
+	public static ResourceLocation prefix(String name) {
+		return ResourceLocation.fromNamespaceAndPath(MODID, name.toLowerCase(Locale.ROOT));
+	}
 }

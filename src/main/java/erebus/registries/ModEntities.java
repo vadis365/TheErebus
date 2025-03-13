@@ -3,7 +3,8 @@ package erebus.registries;
 import erebus.Erebus;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
-import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModEntities {
@@ -16,9 +17,21 @@ public class ModEntities {
                             GrassHopperEntity::new,
                             MobCategory.CREATURE)
                     .sized(1.3F, 0.75F)
-                    .build("grasshopper"));*/
+                    .build(prefix("grasshopper")));*/
+    
+    // just calls a helper in the main mod because it'll be used all over probably
+	private static String prefix(String name) {
+		return Erebus.prefix(name).toString();
+	}
+	
+	public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
 
-    public static void register(IEventBus bus) {
-        ENTITY_TYPES.register(bus);
-    }
+	}
+	
+	public static void initializeAttributes(EntityAttributeCreationEvent event) {
+	}
+
+	public static DeferredRegister<EntityType<?>> getEntityTypes() {
+		return ENTITY_TYPES;
+	}
 }
