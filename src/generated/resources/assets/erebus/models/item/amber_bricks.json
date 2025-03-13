@@ -1,4 +1,3 @@
 {
-  "parent": "erebus:block/amber_bricks",
-  "render_type": "minecraft:translucent"
+  "parent": "erebus:block/amber_bricks"
 }

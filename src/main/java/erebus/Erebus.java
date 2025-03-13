@@ -25,7 +25,6 @@ public class Erebus {
 
         ModArmorMaterials.register(bus);
         ModBlocks.register(bus);
-        ModBlockItems.init();
         ModTags.init();
         ModToolMaterials.init();
         ModItems.register(bus);

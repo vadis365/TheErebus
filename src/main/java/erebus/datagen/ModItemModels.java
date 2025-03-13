@@ -1,6 +1,5 @@
 package erebus.datagen;
 
-import erebus.registries.ModBlockItems;
 import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
 import net.minecraft.data.PackOutput;

@@ -41,3 +41,4 @@ libs
 /server.properties
 *.dat
 *.psd
+/src/generated/resources/.cache/
