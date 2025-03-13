@@ -1,7 +1,0 @@
-{
-    "parent": "block/door_bottom",
-    "textures": {
-        "bottom": "erebus:blocks/door_eucalyptus_lower",
-        "top": "erebus:blocks/door_eucalyptus_upper"
-    }
-}

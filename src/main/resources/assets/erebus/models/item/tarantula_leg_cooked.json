@@ -1,6 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer0":"erebus:items/food_tarantula_leg_cooked"
-    }
-}

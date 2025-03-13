@@ -1,6 +1,0 @@
-{
-	"parent": "block/cross",
-	"textures": {
-		"cross": "erebus:blocks/sapling_bamboo"
-	}
-}
