@@ -1,0 +1,26 @@
+{
+	"display": {
+		"icon": {
+			"item": "erebus:hollow_log"
+		},
+		"title": {
+			"translate": "advancement.erebus.exploration.woodlouse"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.woodlouse.desc"
+		},
+		"hidden": true
+	},
+	"parent": "erebus:exploration/entomology",
+	"criteria": {
+		"kill_louse": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+                "entity": {
+                    "type": "erebus:erebus.woodlouse"
+				}
+            }
+        }
+	}
+}
+		

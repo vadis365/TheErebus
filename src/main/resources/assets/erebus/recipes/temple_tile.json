@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:temple_brick"
+    }
+  },
+  "result": {
+    "item": "erebus:temple_tile",
+    "count": 4
+  }
+}

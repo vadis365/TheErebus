@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "I I",
+    "XIX",
+    "XPX"
+  ],
+  "key": {
+    "P": {
+      "item": "erebus:materials",
+      "data": 17
+    },
+    "X": {
+      "item": "erebus:materials",
+      "data": 15
+    },
+    "I": {
+      "item": "#INGOTIRON"
+    }
+  },
+  "result": {
+    "item": "erebus:enhanced_scorpion_pincer"
+  }
+}

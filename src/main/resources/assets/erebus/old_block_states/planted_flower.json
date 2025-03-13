@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"type=flower_black": { "model": "erebus:flower_black" },
+        "type=flower_red": { "model": "erebus:flower_red" },
+        "type=flower_brown": { "model": "erebus:flower_brown" },
+        "type=flower_blue": { "model": "erebus:flower_blue" },
+        "type=flower_purple": { "model": "erebus:flower_purple" },
+        "type=flower_cyan": { "model": "erebus:flower_cyan" },
+        "type=flower_light_gray": { "model": "erebus:flower_light_gray" },
+        "type=flower_gray": { "model": "erebus:flower_gray" },
+        "type=flower_pink": { "model": "erebus:flower_pink" },
+        "type=flower_yellow": { "model": "erebus:flower_yellow" },
+        "type=flower_light_blue": { "model": "erebus:flower_light_blue" },
+        "type=flower_magenta": { "model": "erebus:flower_magenta" },
+        "type=flower_orange": { "model": "erebus:flower_orange" },
+        "type=flower_white": { "model": "erebus:flower_white" },
+        "type=flower_rainbow": { "model": "erebus:flower_rainbow" }
+	}
+}

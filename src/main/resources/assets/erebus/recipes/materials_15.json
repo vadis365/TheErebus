@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "erebus:materials",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "erebus:materials",
+    "data": 15
+  }
+}

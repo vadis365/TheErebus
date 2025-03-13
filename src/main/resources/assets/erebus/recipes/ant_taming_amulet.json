@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PGP",
+    "GOG",
+    "PGP"
+  ],
+  "key": {
+    "P": {
+      "item": "erebus:materials",
+      "data": 37
+    },
+    "G": {
+      "item": "#INGOTGOLD"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "erebus:ant_taming_amulet"
+  }
+}

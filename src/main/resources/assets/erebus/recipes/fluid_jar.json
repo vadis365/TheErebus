@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "JJJ",
+    "$0$",
+    "$$$"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:bucket"
+    },
+    "$": {
+      "item": "erebus:amber_glass"
+    },
+    "J": {
+      "item": "erebus:planks",
+      "data": 12
+    }
+  },
+  "result": {
+    "item": "erebus:fluid_jar"
+  }
+}

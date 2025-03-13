@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:log_mossbark"
+    }
+  ],
+  "result": {
+    "item": "erebus:planks",
+    "data": 3,
+    "count": 4
+  }
+}

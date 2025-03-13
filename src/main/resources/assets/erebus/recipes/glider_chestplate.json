@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GXG"
+  ],
+  "key": {
+    "G": {
+      "item": "erebus:materials",
+      "data": 16
+    },
+    "X": {
+      "item": "erebus:rein_exoskeleton_chestplate"
+    }
+  },
+  "result": {
+    "item": "erebus:glider_chestplate"
+  }
+}

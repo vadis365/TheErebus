@@ -1,0 +1,21 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "0": "erebus:blocks/glowshroom_stalk",
+        "particle": "erebus:blocks/glowshroom_stalk"
+    },
+    "elements": [
+        {
+            "name": "stalk",
+            "from": [ 3.0, 0.0, 3.0 ], 
+            "to": [ 13.0, 16.0, 13.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "cullface": "south" },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+                "down": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "rotation": 180 }
+            }
+        }
+    ]
+}

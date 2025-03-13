@@ -1,0 +1,27 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:turnip"
+        },
+		"title": {
+			"translate": "advancement.erebus.agriculture.turnip"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.turnip.desc"
+		},
+		"hidden": true
+	},
+	"parent": "erebus:agriculture/root",
+	"criteria": {
+		"repellent": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:turnip"
+					}
+				]
+			}
+		}
+	}
+}

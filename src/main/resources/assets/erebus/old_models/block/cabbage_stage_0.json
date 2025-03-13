@@ -1,0 +1,6 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "crop": "erebus:blocks/crop_cabbage_0"
+    }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PWP",
+    "PIP",
+    "PWP"
+  ],
+  "key": {
+    "P": {
+      "item": "erebus:materials",
+      "data": 26
+    },
+    "W": {
+      "item": "erebus:materials",
+      "data": 23
+    },
+    "I": {
+      "item": "#DYEBLACK"
+    }
+  },
+  "result": {
+    "item": "erebus:rolled_newspaper"
+  }
+}

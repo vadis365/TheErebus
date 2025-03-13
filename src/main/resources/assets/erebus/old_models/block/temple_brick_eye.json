@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "erebus:blocks/temple_brick",
+        "down": "erebus:blocks/temple_brick",
+        "up": "erebus:blocks/temple_brick_eye",
+        "north": "erebus:blocks/temple_brick",
+        "east": "erebus:blocks/temple_brick",
+        "south": "erebus:blocks/temple_brick",
+        "west": "erebus:blocks/temple_brick"
+    }
+}

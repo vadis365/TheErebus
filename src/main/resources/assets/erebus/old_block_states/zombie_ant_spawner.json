@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "erebus:zombie_ant_spawner" }
+    }
+}

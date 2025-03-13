@@ -1,0 +1,177 @@
+[
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "blockGold"
+    },
+    "name": "BLOCKGOLD"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "blockIron"
+    },
+    "name": "BLOCKIRON"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "blockJade"
+    },
+    "name": "BLOCKJADE"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "buttonWood"
+    },
+    "name": "BUTTONWOOD"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "chestWood"
+    },
+    "name": "CHESTWOOD"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dropHoney"
+    },
+    "name": "DROPHONEY"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
+    },
+    "name": "DUSTREDSTONE"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dyeBlack"
+    },
+    "name": "DYEBLACK"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dyeGreen"
+    },
+    "name": "DYEGREEN"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dyeLime"
+    },
+    "name": "DYELIME"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dyeWhite"
+    },
+    "name": "DYEWHITE"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "fenceWood"
+    },
+    "name": "FENCEWOOD"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "foodMushroom"
+    },
+    "name": "FOODMUSHROOM"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "gemEmerald"
+    },
+    "name": "GEMEMERALD"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "gemJade"
+    },
+    "name": "GEMJADE"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "name": "INGOTGOLD"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "name": "INGOTIRON"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "nuggetGold"
+    },
+    "name": "NUGGETGOLD"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "plankBamboo"
+    },
+    "name": "PLANKBAMBOO"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
+    },
+    "name": "PLANKWOOD"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "slabWood"
+    },
+    "name": "SLABWOOD"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "slimeball"
+    },
+    "name": "SLIMEBALL"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    "name": "STICKWOOD"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "stone"
+    },
+    "name": "STONE"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "stoneUmber"
+    },
+    "name": "STONEUMBER"
+  }
+]

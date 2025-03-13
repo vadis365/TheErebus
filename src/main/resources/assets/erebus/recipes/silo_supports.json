@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XXX",
+    "Y Y",
+    "Y Y"
+  ],
+  "key": {
+    "X": {
+      "item": "#SLABWOOD"
+    },
+    "Y": {
+      "item": "#FENCEWOOD"
+    }
+  },
+  "result": {
+    "item": "erebus:silo_supports"
+  }
+}

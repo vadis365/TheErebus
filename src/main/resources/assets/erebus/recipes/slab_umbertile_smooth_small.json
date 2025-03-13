@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:umberstone",
+      "data": 6
+    }
+  },
+  "result": {
+    "item": "erebus:slab_umbertile_smooth_small",
+    "count": 6
+  }
+}

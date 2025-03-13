@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "  B",
+    " S ",
+    "S  "
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:bowl"
+    },
+    "S": {
+      "item": "#STICKWOOD"
+    }
+  },
+  "result": {
+    "item": "erebus:nectar_collector"
+  }
+}

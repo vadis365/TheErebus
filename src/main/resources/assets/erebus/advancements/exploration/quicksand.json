@@ -1,0 +1,24 @@
+{
+	"display": {
+		"icon": {
+			"item": "erebus:quick_sand"
+		},
+		"title": {
+			"translate": "advancement.erebus.exploration.quicksand"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.quicksand.desc"
+		},
+		"hidden": true
+	},
+	"parent": "erebus:exploration/root",
+	"criteria": {
+		"louse": {
+            "trigger": "minecraft:enter_block",
+			"conditions": {
+				"block": "erebus:quick_sand"
+            }
+        }
+	}
+}
+		

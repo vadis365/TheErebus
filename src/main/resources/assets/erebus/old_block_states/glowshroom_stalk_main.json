@@ -1,0 +1,20 @@
+{
+    "variants": {
+        "part=main": { "model": "erebus:glowshroom_stalk_main" },
+        "part=down_1": { "model": "erebus:glowshroom_down_1" },
+        "part=down_2": { "model": "erebus:glowshroom_down_2" },
+        "part=down_3": { "model": "erebus:glowshroom_down_3" },
+        "part=north_1": { "model": "erebus:glowshroom_side_1", "y": 180 },
+        "part=north_2": { "model": "erebus:glowshroom_side_2", "y": 180 },
+        "part=north_3": { "model": "erebus:glowshroom_side_3", "y": 180 },
+        "part=south_1": { "model": "erebus:glowshroom_side_1" },
+        "part=south_2": { "model": "erebus:glowshroom_side_2" },
+        "part=south_3": { "model": "erebus:glowshroom_side_3" },
+        "part=east_1": { "model": "erebus:glowshroom_side_1", "y": 270 },
+        "part=east_2": { "model": "erebus:glowshroom_side_2", "y": 270 },
+        "part=east_3": { "model": "erebus:glowshroom_side_3", "y": 270 },
+        "part=west_1": { "model": "erebus:glowshroom_side_1", "y": 90 },
+        "part=west_2": { "model": "erebus:glowshroom_side_2", "y": 90 },
+        "part=west_3": { "model": "erebus:glowshroom_side_3", "y": 90 }
+    }
+}

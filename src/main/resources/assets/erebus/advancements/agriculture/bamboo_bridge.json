@@ -1,0 +1,30 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:bamboo_bridge"
+        },
+		"title": {
+			"translate": "advancement.erebus.agriculture.bamboo_bridge"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.bamboo_bridge.desc"
+		}
+	},
+	"parent": "erebus:agriculture/bamboo_extender",
+	"criteria": {
+		"craft_bridge": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:bamboo_bridge"
+					}
+				]
+			}
+		}
+	}
+}
+		
+		
+				
+	

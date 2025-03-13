@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C",
+    "B",
+    "B"
+  ],
+  "key": {
+    "B": {
+      "item": "erebus:materials",
+      "data": 3
+    },
+    "C": {
+      "item": "minecraft:coal",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "erebus:bamboo_torch",
+    "count": 4
+  }
+}

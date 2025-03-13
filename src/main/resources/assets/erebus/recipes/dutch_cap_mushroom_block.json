@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MMM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "erebus:dutch_cap_mushroom"
+    }
+  },
+  "result": {
+    "item": "erebus:dutch_cap_mushroom_block"
+  }
+}

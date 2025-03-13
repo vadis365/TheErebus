@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0":"erebus:items/smoothie_dont_meddle_with_the_nettle"
+    }
+}

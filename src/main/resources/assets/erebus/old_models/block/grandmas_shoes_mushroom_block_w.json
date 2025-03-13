@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "erebus:blocks/mushroom_block_inside_grandmas_shoes",
+        "down": "erebus:blocks/mushroom_block_inside_grandmas_shoes",
+        "up": "erebus:blocks/mushroom_block_skin_grandmas_shoes",
+        "north": "erebus:blocks/mushroom_block_inside_grandmas_shoes",
+        "east": "erebus:blocks/mushroom_block_inside_grandmas_shoes",
+        "south": "erebus:blocks/mushroom_block_inside_grandmas_shoes",
+        "west": "erebus:blocks/mushroom_block_skin_grandmas_shoes"
+    }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " N ",
+    "NJN",
+    " F "
+  ],
+  "key": {
+    "F": {
+      "item": "erebus:materials",
+      "data": 14
+    },
+    "J": {
+      "item": "#GEMJADE"
+    },
+    "N": {
+      "item": "#NUGGETGOLD"
+    }
+  },
+  "result": {
+    "item": "erebus:materials",
+    "data": 50
+  }
+}

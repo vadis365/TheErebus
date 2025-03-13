@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "erebus:petrified_wood_chest"},
+        "facing=south": { "model": "erebus:petrified_wood_chest"},
+        "facing=west":  { "model": "erebus:petrified_wood_chest"},
+        "facing=east":  { "model": "erebus:petrified_wood_chest"}
+    }
+}

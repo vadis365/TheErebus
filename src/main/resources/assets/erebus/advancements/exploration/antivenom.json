@@ -1,0 +1,56 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:anti_venom_bottle"
+        },
+		"title": {
+			"translate": "advancement.erebus.exploration.antivenom"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.antivenom.desc"
+		}
+	},
+	"parent": "erebus:exploration/smoothiemaker",
+	"criteria": {
+		"bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:anti_venom_bottle"
+					}
+				]
+			}
+		},
+		"bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:bambucket",
+					"nbt": "{Fluid:{FluidName:\"anti_venom\",Amount:1000}}"
+					}
+				]
+			}
+		},
+		"bambucket": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "forge:bucketfilled",
+					"nbt": "{FluidName:\"anti_venom\",Amount:1000}"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ 
+	"bottle", 
+	"bucket",
+	"bambucket"
+	]
+	]
+
+}

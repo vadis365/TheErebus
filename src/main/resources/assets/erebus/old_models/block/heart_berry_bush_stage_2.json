@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "erebus:blocks/heart_berry_bush"
+    }
+}

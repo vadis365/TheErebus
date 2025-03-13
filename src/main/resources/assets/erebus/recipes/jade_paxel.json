@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XXX",
+    "XSX",
+    "XSX"
+  ],
+  "key": {
+    "S": {
+      "item": "#STICKWOOD"
+    },
+    "X": {
+      "item": "#GEMJADE"
+    }
+  },
+  "result": {
+    "item": "erebus:jade_paxel"
+  }
+}

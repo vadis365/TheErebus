@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "render_type": "translucent",
+  "textures": {
+    "all": "erebus:block/amber_glass_island"
+  }
+}

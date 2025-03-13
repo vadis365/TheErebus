@@ -1,0 +1,17 @@
+{
+	"variants": {
+		"type=baobab": { "model": "erebus:planks_baobab" },
+		"type=eucalyptus": { "model": "erebus:planks_eucalyptus" },
+		"type=mahogany": { "model": "erebus:planks_mahogany" },
+		"type=mossbark": { "model": "erebus:planks_mossbark" },
+		"type=asper": { "model": "erebus:planks_asper" },
+		"type=white": { "model": "erebus:planks_white" },
+		"type=bamboo": { "model": "erebus:planks_bamboo" },
+        "type=rotten": { "model": "erebus:planks_rotten" },
+        "type=marshwood": { "model": "erebus:planks_marshwood" },
+        "type=cypress": { "model": "erebus:planks_cypress" },
+        "type=balsam": { "model": "erebus:planks_balsam" },
+        "type=scorched": { "model": "erebus:planks_scorched" },
+        "type=varnished": { "model": "erebus:planks_varnished" }
+	}
+}

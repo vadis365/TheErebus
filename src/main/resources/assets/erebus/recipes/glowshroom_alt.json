@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:materials",
+      "data": 34
+    },
+    {
+      "item": "erebus:materials",
+      "data": 12
+    }
+  ],
+  "result": {
+    "item": "erebus:glowshroom"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "V V",
+    "SOS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stonebrick",
+      "data": 0
+    },
+    "V": {
+      "item": "minecraft:vine"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "erebus:gaean_keystone"
+  }
+}

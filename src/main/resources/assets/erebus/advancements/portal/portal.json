@@ -1,0 +1,24 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:leaves",
+			"data": 0
+        },
+		"title": {
+			"translate": "advancement.erebus.portal.portal"
+		},
+		"description": {
+			"translate": "advancement.erebus.portal.portal.desc"
+		},        
+		"frame": "goal"
+	},
+	"parent":"erebus:portal/portal_activator",
+	"criteria": {
+		"portal_activate": {
+			"trigger": "minecraft:placed_block",
+			"conditions": {
+				"block": "erebus:gaean_keystone"
+			}
+		}
+	}
+}

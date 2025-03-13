@@ -1,0 +1,29 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:planticide"
+        },
+		"title": {
+			"translate": "advancement.erebus.exploration.planticide"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.planticide.desc"
+		}
+	},
+	"parent": "erebus:exploration/poison_sac",
+	"criteria": {
+		"planticide": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:planticide"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+	[ "planticide" ]
+	]
+}

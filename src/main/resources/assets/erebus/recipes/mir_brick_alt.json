@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XY",
+    "YX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:materials",
+      "data": 22
+    },
+    "Y": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "result": {
+    "item": "erebus:mir_brick"
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom",
+    "textures": {
+        "bottom": "erebus:blocks/door_mossbark_lower",
+        "top": "erebus:blocks/door_mossbark_upper"
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:smoothie_book"
+        },
+		"title": {
+			"translate": "advancement.erebus.exploration.smoothiebook"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.smoothiebook.desc"
+		},
+		"hidden": false
+	},
+	"parent": "erebus:exploration/smoothiemaker",
+	"criteria": {
+		"guidebook": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:smoothie_book"
+					}
+				]
+			}
+		}
+	}
+}

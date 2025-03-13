@@ -1,0 +1,15 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "#PLANKBAMBOO"
+    }
+  },
+  "result": {
+    "item": "erebus:bamboo_boots"
+  }
+}

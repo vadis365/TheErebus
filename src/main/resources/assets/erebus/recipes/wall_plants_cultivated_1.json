@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DVD",
+    "VPV",
+    "DVD"
+  ],
+  "key": {
+    "P": {
+      "item": "erebus:wall_plants",
+      "data": 1
+    },
+    "D": {
+      "item": "minecraft:dye",
+      "data": 2
+    },
+    "V": {
+      "item": "erebus:materials",
+      "data": 13
+    }
+  },
+  "result": {
+    "item": "erebus:wall_plants_cultivated",
+    "data": 1
+  }
+}

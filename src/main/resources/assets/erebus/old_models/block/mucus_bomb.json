@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "erebus:blocks/mucus_bomb_top_off",
+        "down": "erebus:blocks/mucus_bomb_bottom",
+        "up": "erebus:blocks/mucus_bomb_top_off",
+        "north": "erebus:blocks/mucus_bomb_sides",
+        "east": "erebus:blocks/mucus_bomb_sides",
+        "south": "erebus:blocks/mucus_bomb_sides",
+        "west": "erebus:blocks/mucus_bomb_sides"
+    }
+}

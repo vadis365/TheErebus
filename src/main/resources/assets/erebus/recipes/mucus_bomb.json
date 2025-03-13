@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MTM",
+    "MMM"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:tnt"
+    },
+    "M": {
+      "item": "erebus:materials",
+      "data": 29
+    }
+  },
+  "result": {
+    "item": "erebus:mucus_bomb"
+  }
+}

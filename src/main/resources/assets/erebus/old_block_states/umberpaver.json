@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"type=umberpaver": { "model": "erebus:umberpaver" },
+		"type=umberpaver_mossy": { "model": "erebus:umberpaver_mossy" },
+		"type=umberpaver_webbed": { "model": "erebus:umberpaver_webbed" }
+	}
+}

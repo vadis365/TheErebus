@@ -1,0 +1,27 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:rolled_newspaper",
+			"nbt": "{ench:[{id:18,lvl:5}]}"
+        },
+		"title": {
+			"translate": "advancement.erebus.exploration.newspaper"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.newspaper.desc"
+		}
+	},
+	"parent": "erebus:exploration/whetstone",
+	"criteria": {
+		"craft_paper": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:rolled_newspaper"
+					}
+				]
+			}
+		}
+	}
+}

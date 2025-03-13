@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "erebus:jumping_spider_spawner" }
+    }
+}

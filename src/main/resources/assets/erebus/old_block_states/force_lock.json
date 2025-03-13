@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "erebus:force_lock" },
+        "facing=south": { "model": "erebus:force_lock", "y": 180 },
+        "facing=west":  { "model": "erebus:force_lock", "y": 270 },
+        "facing=east":  { "model": "erebus:force_lock" , "y": 90 }
+    }
+}

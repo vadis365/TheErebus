@@ -1,0 +1,33 @@
+{
+    "display": {
+        "icon": {
+            "item": "erebus:erebus_food",
+			"data": 0
+        },
+		"title": {
+			"translate": "advancement.erebus.agriculture.beetle_breed"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.beetle_breed.desc"
+		}
+	},
+	"parent": "erebus:agriculture/turnip",
+	"criteria": {
+		"beetlebred": {
+			"trigger": "minecraft:bred_animals",
+			"conditions": {
+				"parent": {
+					"type": "erebus:erebus.beetle"
+				}
+			}
+		},
+		"beetlebred2": {
+			"trigger": "minecraft:bred_animals",
+			"conditions": {
+				"partner": {
+					"type": "erebus:erebus.beetle"
+				}
+			}
+		}	
+	}
+}

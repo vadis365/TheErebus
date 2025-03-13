@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "WXW",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "item": "erebus:materials",
+      "data": 58
+    },
+    "X": {
+      "item": "erebus:rein_exoskeleton_boots"
+    }
+  },
+  "result": {
+    "item": "erebus:water_striders"
+  }
+}

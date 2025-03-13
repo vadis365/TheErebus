@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"active=silo_inactive": { "model": "erebus:silo_tank_inactive" },
+		"active=silo_active": { "model": "erebus:silo_tank_active" }
+	}
+}

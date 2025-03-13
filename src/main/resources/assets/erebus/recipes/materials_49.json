@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " SX",
+    "CCC",
+    "LLL"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:string"
+    },
+    "C": {
+      "item": "minecraft:carpet",
+      "data": 0
+    },
+    "X": {
+      "item": "erebus:materials",
+      "data": 0
+    },
+    "L": {
+      "item": "minecraft:dye",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "erebus:materials",
+    "data": 49
+  }
+}

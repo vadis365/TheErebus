@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:amber_bricks"
+    }
+  },
+  "result": {
+    "item": "erebus:stairs_amber_bricks",
+    "count": 4
+  }
+}

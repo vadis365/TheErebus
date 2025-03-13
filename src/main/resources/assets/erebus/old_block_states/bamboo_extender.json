@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=north": { "model": "erebus:bamboo_extender"},
+        "facing=south": { "model": "erebus:bamboo_extender"},
+        "facing=west":  { "model": "erebus:bamboo_extender"},
+        "facing=east":  { "model": "erebus:bamboo_extender"},
+        "facing=up":  { "model": "erebus:bamboo_extender"},
+        "facing=down":  { "model": "erebus:bamboo_extender"}
+    }
+}

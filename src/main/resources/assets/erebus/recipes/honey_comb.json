@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "NPN",
+    "PCP",
+    "NPN"
+  ],
+  "key": {
+    "P": {
+      "item": "erebus:materials",
+      "data": 26
+    },
+    "C": {
+      "item": "#CHESTWOOD"
+    },
+    "N": {
+      "item": "erebus:materials",
+      "data": 19
+    }
+  },
+  "result": {
+    "item": "erebus:honey_comb"
+  }
+}

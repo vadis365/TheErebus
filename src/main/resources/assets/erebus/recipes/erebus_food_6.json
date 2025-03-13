@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "erebus:materials",
+      "data": 3
+    },
+    {
+      "item": "erebus:sapling_bamboo"
+    }
+  ],
+  "result": {
+    "item": "erebus:erebus_food",
+    "data": 6
+  }
+}

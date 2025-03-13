@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:log_balsam_resinless"
+    }
+  ],
+  "result": {
+    "item": "erebus:planks",
+    "data": 6,
+    "count": 4
+  }
+}

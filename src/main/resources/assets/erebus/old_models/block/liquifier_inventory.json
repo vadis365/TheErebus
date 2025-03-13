@@ -1,0 +1,86 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "0": "erebus:blocks/liquifier_side_no_tank",
+        "1": "erebus:blocks/liquifier_tank_top_bottom",
+        "2": "erebus:blocks/liquifier_top",
+        "3": "erebus:blocks/liquifier_tank_side",
+        "particle": "erebus:blocks/amber_glass_island"
+    },
+    "elements": [
+        {
+            "name": "tank",
+            "from": [ 0.0, 0.0, 0.0 ], 
+            "to": [ 16.0, 11.0, 16.0 ], 
+            "faces": {
+                "north": { "texture": "#3", "uv": [ 0.0, 5.0, 16.0, 16.0 ] },
+                "east": { "texture": "#3", "uv": [ 0.0, 5.0, 16.0, 16.0 ] },
+                "south": { "texture": "#3", "uv": [ 0.0, 5.0, 16.0, 16.0 ] },
+                "west": { "texture": "#3", "uv": [ 0.0, 5.0, 16.0, 16.0 ] },
+                "up": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+                "down": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 16.0 ] }
+            }
+        },
+        {
+            "name": "top",
+            "from": [ 0.0, 14.0, 0.0 ], 
+            "to": [ 16.0, 16.0, 16.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
+                "east": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
+                "west": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
+                "up": { "texture": "#2", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+                "down": { "texture": "#2", "uv": [ 0.0, 0.0, 16.0, 16.0 ] }
+            }
+        },
+        {
+            "name": "nw_strut",
+            "from": [ 1.0, 11.0, 1.0 ], 
+            "to": [ 3.0, 14.0, 3.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 13.0, 2.0, 15.0, 5.0 ] },
+                "east": { "texture": "#0", "uv": [ 13.0, 2.0, 15.0, 5.0 ] },
+                "south": { "texture": "#0", "uv": [ 1.0, 2.0, 3.0, 5.0 ] },
+                "west": { "texture": "#0", "uv": [ 1.0, 2.0, 3.0, 5.0 ] },
+                "down": { "texture": "#0", "uv": [ 1.0, 2.0, 3.0, 4.0 ] }
+            }
+        },
+        {
+            "name": "ne_strut",
+            "from": [ 13.0, 11.0, 1.0 ], 
+            "to": [ 15.0, 14.0, 3.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 1.0, 2.0, 3.0, 5.0 ] },
+                "east": { "texture": "#0", "uv": [ 13.0, 2.0, 15.0, 5.0 ] },
+                "south": { "texture": "#0", "uv": [ 13.0, 2.0, 15.0, 5.0 ] },
+                "west": { "texture": "#0", "uv": [ 1.0, 2.0, 3.0, 5.0 ] },
+                "down": { "texture": "#0", "uv": [ 1.0, 2.0, 3.0, 4.0 ] }
+            }
+        },
+        {
+            "name": "se_strut",
+            "from": [ 13.0, 11.0, 13.0 ], 
+            "to": [ 15.0, 14.0, 15.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 1.0, 2.0, 3.0, 5.0 ] },
+                "east": { "texture": "#0", "uv": [ 1.0, 2.0, 3.0, 5.0 ] },
+                "south": { "texture": "#0", "uv": [ 13.0, 2.0, 15.0, 5.0 ] },
+                "west": { "texture": "#0", "uv": [ 13.0, 2.0, 15.0, 5.0 ] },
+                "down": { "texture": "#0", "uv": [ 1.0, 2.0, 3.0, 4.0 ] }
+            }
+        },
+        {
+            "name": "sw_strut",
+            "from": [ 1.0, 11.0, 13.0 ], 
+            "to": [ 3.0, 14.0, 15.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 13.0, 2.0, 15.0, 5.0 ] },
+                "east": { "texture": "#0", "uv": [ 1.0, 2.0, 3.0, 5.0 ] },
+                "south": { "texture": "#0", "uv": [ 1.0, 2.0, 3.0, 5.0 ] },
+                "west": { "texture": "#0", "uv": [ 13.0, 2.0, 15.0, 5.0 ] },
+                "down": { "texture": "#0", "uv": [ 1.0, 2.0, 3.0, 4.0 ] }
+            }
+        }
+    ]
+}

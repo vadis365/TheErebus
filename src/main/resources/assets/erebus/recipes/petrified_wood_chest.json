@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:planks_petrified_wood"
+    },
+    "Y": {
+      "item": "#INGOTGOLD"
+    }
+  },
+  "result": {
+    "item": "erebus:petrified_wood_chest"
+  }
+}

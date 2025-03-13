@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S S",
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "erebus:materials",
+      "data": 15
+    }
+  },
+  "result": {
+    "item": "erebus:rein_exoskeleton_chestplate"
+  }
+}

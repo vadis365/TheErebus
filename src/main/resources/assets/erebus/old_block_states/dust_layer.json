@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "layers=1":  { "model": "erebus:dust_height2" },
+        "layers=2":  { "model": "erebus:dust_height4" },
+        "layers=3":  { "model": "erebus:dust_height6" },
+        "layers=4":  { "model": "erebus:dust_height8" },
+        "layers=5":  { "model": "erebus:dust_height10" },
+        "layers=6":  { "model": "erebus:dust_height12" },
+        "layers=7":  { "model": "erebus:dust_height14" },
+        "layers=8":  { "model": "erebus:dust" }
+    }
+}

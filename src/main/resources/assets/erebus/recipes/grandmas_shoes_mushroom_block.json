@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MMM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "erebus:grandmas_shoes_mushroom"
+    }
+  },
+  "result": {
+    "item": "erebus:grandmas_shoes_mushroom_block"
+  }
+}

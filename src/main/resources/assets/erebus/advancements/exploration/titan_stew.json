@@ -1,0 +1,28 @@
+{
+	"display": {
+		"icon": {
+			"item": "erebus:erebus_food",
+			"data": 16
+		},
+		"title": {
+			"translate": "advancement.erebus.exploration.titan_stew"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.titan_stew.desc"
+		}
+	},
+	"parent": "erebus:exploration/titan_beetle",
+	"criteria": {
+		"get_titan_stew": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:erebus_food",
+					"data": 16
+					}
+				]
+			}
+		}
+	}
+}

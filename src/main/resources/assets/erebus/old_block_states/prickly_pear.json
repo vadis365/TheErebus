@@ -1,0 +1,16 @@
+{
+	"variants": {
+        "age=0": { "model": "erebus:prickly_pear" },
+		"age=1": { "model": "erebus:prickly_pear" },
+		"age=2": { "model": "erebus:prickly_pear" },
+		"age=3": { "model": "erebus:prickly_pear" },
+		"age=4": { "model": "erebus:prickly_pear" },
+		"age=5": { "model": "erebus:prickly_pear" },
+		"age=6": { "model": "erebus:prickly_pear" },
+		"age=7": { "model": "erebus:prickly_pear" },
+		"age=8": { "model": "erebus:prickly_pear" },
+		"age=9": { "model": "erebus:prickly_pear" },
+		"age=10": { "model": "erebus:prickly_pear" },
+		"age=11": { "model": "erebus:prickly_pear_fruited" }
+	}
+}

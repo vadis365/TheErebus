@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "BGB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "erebus:materials",
+      "data": 12
+    },
+    "G": {
+      "item": "erebus:materials",
+      "data": 11
+    }
+  },
+  "result": {
+    "item": "erebus:glow_gem_active",
+    "count": 3
+  }
+}

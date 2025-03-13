@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "#STICKWOOD"
+    },
+    {
+      "item": "erebus:erebus_food",
+      "data": 1
+    },
+    {
+      "item": "erebus:erebus_food",
+      "data": 1
+    },
+    {
+      "item": "erebus:erebus_food",
+      "data": 1
+    }
+  ],
+  "result": {
+    "item": "erebus:erebus_food",
+    "data": 9
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:planks",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "erebus:stairs_asper",
+    "count": 4
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XUX",
+    "XXX"
+  ],
+  "key": {
+    "U": {
+      "item": "erebus:umber_golem_statue"
+    },
+    "X": {
+      "item": "erebus:mud_brick"
+    }
+  },
+  "result": {
+    "item": "erebus:idols",
+    "data": 4
+  }
+}

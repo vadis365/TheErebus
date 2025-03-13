@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "SRS",
+    "RBR",
+    "SRS"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:bread"
+    },
+    "R": {
+      "item": "#DROPHONEY"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "result": {
+    "item": "erebus:honey_treat"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " N ",
+    "N N",
+    " B "  
+	],
+  "key": {
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "erebus:materials",
+    "data": 61
+  }
+}

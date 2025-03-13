@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#$#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "erebus:umberstone",
+      "data": 1
+    },
+    "$": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "result": {
+    "item": "erebus:umber_furnace"
+  }
+}

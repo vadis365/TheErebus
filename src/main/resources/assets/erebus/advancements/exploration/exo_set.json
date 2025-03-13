@@ -1,0 +1,73 @@
+{
+   "display": {
+      "icon": {
+         "item": "erebus:exoskeleton_chestplate"
+		},
+		"title": {
+			"translate": "advancement.erebus.exploration.exo_set"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.exo_set.desc"
+		}
+   },
+   "parent": "erebus:exploration/entomology",
+   "criteria": {
+		"helmet": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+					"item": "erebus:exoskeleton_helmet"
+					}
+				]
+			}
+		},
+		"chest": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{		 
+					"item": "erebus:exoskeleton_chestplate"
+					}
+				]
+			}
+		},
+		"leg": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{	
+					"item": "erebus:exoskeleton_leggings"
+					}
+				]
+			}
+		},
+			"boot": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{	
+					"item": "erebus:exoskeleton_boots"
+					}
+				]
+			}
+		},
+		"shield": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{	
+					"item": "erebus:exoskeleton_shield"
+					}
+				]
+			}
+		}
+	},
+	"requirements":[
+      [ "helmet" ],
+      [ "chest" ],
+      [ "leg" ],
+      [ "boot" ],
+	  [ "shield" ]
+   ]
+}

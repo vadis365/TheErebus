@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MMM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "erebus:kaizers_fingers_mushroom"
+    }
+  },
+  "result": {
+    "item": "erebus:kaizers_fingers_mushroom_block"
+  }
+}

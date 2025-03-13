@@ -1,0 +1,11 @@
+{
+	"variants": {
+		"type=gneiss": { "model": "erebus:gneiss" },
+		"type=gneiss_carved": { "model": "erebus:gneiss_carved" },
+		"type=gneiss_relief": { "model": "erebus:gneiss_relief" },
+		"type=gneiss_bricks": { "model": "erebus:gneiss_bricks" },
+		"type=gneiss_smooth": { "model": "erebus:gneiss_smooth" },
+		"type=gneiss_tiles": { "model": "erebus:gneiss_tiles" },
+		"type=gneiss_tiles_cracked": { "model": "erebus:gneiss_tiles_cracked" }
+	}
+}

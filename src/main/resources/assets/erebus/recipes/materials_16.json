@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "SSS",
+    "FFF",
+    "FFF"
+  ],
+  "key": {
+    "S": {
+      "item": "#STICKWOOD"
+    },
+    "F": {
+      "item": "erebus:materials",
+      "data": 6
+    }
+  },
+  "result": {
+    "item": "erebus:materials",
+    "data": 16
+  }
+}

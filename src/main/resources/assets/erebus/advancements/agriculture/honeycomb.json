@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+				"item": "erebus:honey_comb"
+        },
+		"title": {
+			"translate": "advancement.erebus.agriculture.honeycomb"
+		},
+		"description": {
+			"translate": "advancement.erebus.agriculture.honeycomb.desc"
+		}
+	},
+	"parent": "erebus:agriculture/nectar",
+	"criteria": {
+		"get_comb": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "erebus:honey_comb"
+					}
+				]
+			}
+		}
+	}
+}

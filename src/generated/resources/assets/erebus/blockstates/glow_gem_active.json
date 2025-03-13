@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "erebus:block/glow_gem_active"
+    }
+  }
+}

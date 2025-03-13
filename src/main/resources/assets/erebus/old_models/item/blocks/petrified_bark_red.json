@@ -1,0 +1,7 @@
+{
+  "forge_marker": 1,
+  "parent":"minecraft:block/cube_all",
+  "textures": {
+    "all": "erebus:blocks/petrified_bark_red"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XIX",
+    "XXX",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "#GEMJADE"
+    },
+    "I": {
+      "item": "#INGOTIRON"
+    }
+  },
+  "result": {
+    "item": "erebus:jade_shield"
+  }
+}

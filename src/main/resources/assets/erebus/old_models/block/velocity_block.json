@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "erebus:blocks/velocity_block_top",
+        "down": "erebus:blocks/velocity_block",
+        "up": "erebus:blocks/velocity_block_top",
+        "north": "erebus:blocks/velocity_block",
+        "east": "erebus:blocks/velocity_block",
+        "south": "erebus:blocks/velocity_block",
+        "west": "erebus:blocks/velocity_block"
+    }
+}

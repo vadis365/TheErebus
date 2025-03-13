@@ -1,0 +1,4 @@
+{
+  "parent": "erebus:block/amber",
+  "render_type": "minecraft:translucent"
+}

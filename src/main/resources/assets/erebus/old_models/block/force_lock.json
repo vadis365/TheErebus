@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "erebus:blocks/force_field",
+        "down": "erebus:blocks/force_field",
+        "up": "erebus:blocks/force_field",
+        "north": "erebus:blocks/force_lock",
+        "east": "erebus:blocks/force_field",
+        "south": "erebus:blocks/force_field",
+        "west": "erebus:blocks/force_field"
+    }
+}

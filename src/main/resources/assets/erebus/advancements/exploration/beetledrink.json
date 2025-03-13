@@ -1,0 +1,25 @@
+{
+	"display": {
+		"icon": {
+			"item": "erebus:bambucket"
+		},
+		"title": {
+			"translate": "advancement.erebus.exploration.beetledrink"
+		},
+		"description": {
+			"translate": "advancement.erebus.exploration.beetledrink.desc"
+		}
+	},
+	"parent": "erebus:exploration/beetlejuice",
+	"criteria": {
+		"drink_juice": {
+			"trigger": "minecraft:consume_item",
+			"conditions": {
+				"item": {
+					"item": "erebus:bambucket",
+					"nbt": "{Fluid:{FluidName:\"beetle_juice\",Amount:1000}}"
+				}
+			}
+		}
+	}
+}

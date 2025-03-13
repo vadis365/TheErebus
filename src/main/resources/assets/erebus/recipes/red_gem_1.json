@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " S ",
+    "S#S",
+    " S "
+  ],
+  "key": {
+    "#": {
+      "item": "erebus:red_gem",
+      "data": 0
+    },
+    "S": {
+      "item": "#STICKWOOD"
+    }
+  },
+  "result": {
+    "item": "erebus:red_gem",
+    "data": 1
+  }
+}

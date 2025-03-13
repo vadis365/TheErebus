@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W W",
+    "ECE",
+    " V "
+  ],
+  "key": {
+    "C": {
+      "item": "erebus:glider_chestplate"
+    },
+    "E": {
+      "item": "erebus:materials",
+      "data": 9
+    },
+    "V": {
+      "item": "erebus:velocity_block"
+    },
+    "W": {
+      "item": "erebus:materials",
+      "data": 27
+    }
+  },
+  "result": {
+    "item": "erebus:glider_chestplate_powered"
+  }
+}

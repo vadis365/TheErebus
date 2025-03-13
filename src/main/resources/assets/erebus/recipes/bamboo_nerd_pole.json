@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "S",
+    "B",
+    "B"
+  ],
+  "key": {
+    "B": {
+      "item": "erebus:materials",
+      "data": 3
+    },
+    "S": {
+      "item": "#SLIMEBALL"
+    }
+  },
+  "result": {
+    "item": "erebus:bamboo_nerd_pole",
+    "count": 4
+  }
+}

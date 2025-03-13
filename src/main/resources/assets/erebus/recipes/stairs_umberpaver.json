@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "erebus:umberpaver",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "erebus:stairs_umberpaver",
+    "count": 4
+  }
+}

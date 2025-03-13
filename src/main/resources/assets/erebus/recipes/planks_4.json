@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:log_asper"
+    }
+  ],
+  "result": {
+    "item": "erebus:planks",
+    "data": 4,
+    "count": 4
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "parent": "minecraft:block/cube",
+  "render_type": "translucent",
+  "textures": {
+    "particle": "erebus:block/amber_glass_island",
+    "down": "erebus:block/amber_glass_island",
+    "up": "erebus:block/amber_glass_news",
+    "north": "erebus:block/amber_glass_n",
+    "south": "erebus:block/amber_glass_n",
+    "west": "erebus:block/amber_glass_n",
+    "east": "erebus:block/amber_glass_n"
+  }
+}

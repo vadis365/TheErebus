@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_column",
+	"textures": {
+		"side": "erebus:blocks/log_balsam",
+        "end": "erebus:blocks/log_balsam_top"
+	}
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:log_rotten"
+    }
+  ],
+  "result": {
+    "item": "erebus:planks",
+    "data": 9,
+    "count": 4
+  }
+}

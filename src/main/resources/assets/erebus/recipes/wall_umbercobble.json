@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "erebus:umberstone",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "erebus:wall_umbercobble",
+    "count": 6
+  }
+}

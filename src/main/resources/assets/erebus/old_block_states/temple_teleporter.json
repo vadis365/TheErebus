@@ -1,0 +1,14 @@
+{
+	"variants": {
+		"type=temple_teleport_0": { "model": "erebus:temple_teleport_0" },
+        "type=temple_teleport_1": { "model": "erebus:temple_teleport_1" },
+        "type=temple_teleport_2": { "model": "erebus:temple_teleport_2" },
+        "type=temple_teleport_3": { "model": "erebus:temple_teleport_3" },
+        "type=temple_teleport_4": { "model": "erebus:temple_teleport_4" },
+        "type=temple_teleport_5": { "model": "erebus:temple_teleport_5" },
+        "type=temple_teleport_ne": { "model": "erebus:temple_teleport_ne" },
+        "type=temple_teleport_nw": { "model": "erebus:temple_teleport_nw" },
+        "type=temple_teleport_se": { "model": "erebus:temple_teleport_se" },
+        "type=temple_teleport_sw": { "model": "erebus:temple_teleport_sw" }
+	}
+}

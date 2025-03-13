@@ -1,0 +1,8 @@
+{
+  "parent": "bucketlib:item/universal_bucket",
+  "textures": {
+    "base": "erebus:item/bambucket_base",
+    "lowerBase": "erebus:item/bambucket_base",
+    "fluidMask": "erebus:item/bambucket_fluid"
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "erebus:blocks/umberstone_pillar_top",
+        "side": "erebus:blocks/umberstone_pillar"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "variants": {
+            "axis=y":    { "model": "erebus:log_balsam_resinless" },
+            "axis=z":    { "model": "erebus:log_balsam_resinless", "x": 90 },
+            "axis=x":    { "model": "erebus:log_balsam_resinless", "x": 90, "y": 90 },
+            "axis=none": { "model": "erebus:log_balsam_resinless_bark" }
+    }
+}

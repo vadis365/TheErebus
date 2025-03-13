@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XZX",
+    "YWY",
+    "XZX"
+  ],
+  "key": {
+    "W": {
+      "item": "erebus:petrified_wood_chest"
+    },
+    "X": {
+      "item": "#INGOTIRON"
+    },
+    "Y": {
+      "item": "#BLOCKIRON"
+    },
+    "Z": {
+      "item": "erebus:planks",
+      "data": 12
+    }
+  },
+  "result": {
+    "item": "erebus:silo_tank",
+    "data": 0
+  }
+}

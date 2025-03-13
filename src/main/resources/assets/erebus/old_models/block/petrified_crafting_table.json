@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "erebus:blocks/petrified_craft_side",
+        "down": "erebus:blocks/petrified_craft_bottom",
+        "up": "erebus:blocks/petrified_craft_top",
+        "north": "erebus:blocks/petrified_craft_side",
+        "east": "erebus:blocks/petrified_craft_side",
+        "south": "erebus:blocks/petrified_craft_side",
+        "west": "erebus:blocks/petrified_craft_side"
+    }
+}

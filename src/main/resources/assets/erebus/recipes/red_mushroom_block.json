@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MMM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:red_mushroom"
+    }
+  },
+  "result": {
+    "item": "minecraft:red_mushroom_block"
+  }
+}

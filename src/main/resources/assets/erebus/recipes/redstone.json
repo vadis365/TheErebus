@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "erebus:materials",
+      "data": 11
+    }
+  ],
+  "result": {
+    "item": "minecraft:redstone",
+    "count": 2
+  }
+}
