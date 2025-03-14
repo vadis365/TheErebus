@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_post",
   "textures": {
-    "wall": "erebus:block/umberstone"
+    "wall": "erebus:block/umbertile_smooth_small"
   }
 }

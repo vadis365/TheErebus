@@ -4,7 +4,7 @@
       "model": "erebus:block/slab_umberpaver_webbed"
     },
     "type=double": {
-      "model": "erebus:block/umberstone"
+      "model": "erebus:block/umberpaver_webbed"
     },
     "type=top": {
       "model": "erebus:block/slab_umberpaver_webbed_top"

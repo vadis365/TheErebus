@@ -69,8 +69,28 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         stairsBlock(stairs.get(), texture(name(fullBlock)));
     }
 
+    public void stairsTranslucent(Supplier<? extends StairBlock> stairs, Supplier<? extends Block> fullBlock) {
+        String baseName = name(stairs);
+        ResourceLocation texture = texture(name(fullBlock));
+
+        ModelFile stairsBase = this.models().stairs(baseName, texture, texture, texture).renderType("translucent");
+        ModelFile stairsInner = this.models().stairsInner("%s_inner".formatted(baseName), texture, texture, texture).renderType("translucent");
+        ModelFile stairsOuter = this.models().stairsOuter("%s_outer".formatted(baseName), texture, texture, texture).renderType("translucent");
+        this.stairsBlock(stairs.get(), stairsBase, stairsInner, stairsOuter);
+    }
+
     public void slab(Supplier<? extends SlabBlock> slab, Supplier<? extends Block> fullBlock) {
         slabBlock(slab.get(), texture(name(fullBlock)), texture(name(fullBlock)));
+    }
+
+    public void slabTranslucent(Supplier<? extends SlabBlock> slab, Supplier<? extends Block> fullBlock) {
+        ResourceLocation texture = texture(name(fullBlock));
+        slabBlock(
+                slab.get(),
+                this.models().slab(this.name(slab), texture, texture, texture).renderType("translucent"),
+                this.models().slabTop("%s_top".formatted(this.name(slab)), texture, texture, texture).renderType("translucent"),
+                this.models().getExistingFile(texture(name(fullBlock)))
+        );
     }
 
     public void wall(Supplier<? extends WallBlock> wall, Supplier<? extends Block> fullBlock) {
@@ -82,9 +102,9 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         ResourceLocation texture = texture(baseName);
         wallBlock(
                 wall.get(),
-                this.models().wallPost(baseName + "_post", texture).renderType("translucent"),
-                this.models().wallSide(baseName + "_side", texture).renderType("translucent"),
-                this.models().wallSideTall(baseName + "_side_tall", texture).renderType("translucent")
+                this.models().wallPost("%s_post".formatted(baseName), texture).renderType("translucent"),
+                this.models().wallSide("%s_side".formatted(baseName), texture).renderType("translucent"),
+                this.models().wallSideTall("%s_side_tall".formatted(baseName), texture).renderType("translucent")
         );
     }
 

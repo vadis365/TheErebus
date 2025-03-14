@@ -23,6 +23,14 @@ public class ModTabs {
                         // WIP
 
                         output.accept(ModBlocks.UMBERSTONE.get());
+                        output.accept(ModBlocks.UMBERSTONE_BRICKS.get());
+                        output.accept(ModBlocks.UMBERCOBBLE.get());
+                        output.accept(ModBlocks.UMBERCOBBLE_MOSSY.get());
+                        output.accept(ModBlocks.UMBERCOBBLE_WEBBED.get());
+                        output.accept(ModBlocks.UMBERTILE_SMOOTH.get());
+                        output.accept(ModBlocks.UMBERTILE_SMOOTH_SMALL.get());
+                        output.accept(ModBlocks.UMBERPAVER_MOSSY.get());
+                        output.accept(ModBlocks.UMBERPAVER_WEBBED.get());
                         output.accept(ModBlocks.STAIRS_UMBERSTONE.get());
                         output.accept(ModBlocks.PORTAL.get());
                         output.accept(ModBlocks.GAEAN_KEYSTONE.get());

@@ -4,7 +4,7 @@
       "model": "erebus:block/slab_petrified_wood"
     },
     "type=double": {
-      "model": "erebus:block/umberstone"
+      "model": "erebus:block/planks_petrified_wood"
     },
     "type=top": {
       "model": "erebus:block/slab_petrified_wood_top"

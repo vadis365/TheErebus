@@ -4,7 +4,7 @@
       "model": "erebus:block/slab_umberpaver_mossy"
     },
     "type=double": {
-      "model": "erebus:block/umberstone"
+      "model": "erebus:block/umberpaver_mossy"
     },
     "type=top": {
       "model": "erebus:block/slab_umberpaver_mossy_top"

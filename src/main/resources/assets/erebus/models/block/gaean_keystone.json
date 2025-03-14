@@ -1,10 +1,10 @@
 {
-    "parent": "block/cube_all",
+    "parent": "minecraft:block/cube_all",
     "textures": {
-        "0": "erebus:blocks/keystone_sides",
-        "1": "erebus:blocks/keystone_top",
-        "2": "blocks/stonebrick",
-        "particle": "erebus:blocks/keystone_top"
+        "0": "erebus:block/keystone_sides",
+        "1": "erebus:block/keystone_top",
+        "2": "minecraft:block/stonebrick",
+        "particle": "erebus:block/keystone_top"
     },
     "elements": [
         {
