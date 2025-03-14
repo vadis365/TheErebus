@@ -27,25 +27,59 @@ public class ModBlockStates extends ModBlockStateProvider {
         block(UMBERPAVER);
         log(UMBERSTONE_PILLAR, "umberstone_pillar");
 
-        // MARK: TODO
+        // MARK: Walls
 
-        //simpleBlock(AMBER_DOOR);
-        //simpleBlock(PLANKS);
-        block(PORTAL);
-        //simpleBlock(GAEAN_KEYSTONE);
-        //simpleBlock(SLAB_UMBERPAVER_MOSSY);
-        //simpleBlock(SLAB_UMBERPAVER_WEBBED);
-        block(PETRIFIED_WOOD_ROCK);
-        block(PETRIFIED_WOOD_ROCK_2);
-        block(PETRIFIED_WOOD_ROCK_3);
-        block(PETRIFIED_WOOD_ROCK_4);
-        block(PETRIFIED_WOOD_ROCK_5);
-        block(PETRIFIED_WOOD_ROCK_6);
-        block(PETRIFIED_BARK_RED);
-        block(PETRIFIED_BARK_BROWN);
-        //block(DUST_LAYER);
-        block(DUST);
-        block(DUNG);
+        wall(WALL_UMBERSTONE, UMBERSTONE);
+        wall(WALL_UMBERCOBBLE, UMBERSTONE);
+        wall(WALL_UMBERCOBBLE_MOSSY, UMBERSTONE);
+        wall(WALL_UMBERCOBBLE_WEBBED, UMBERSTONE);
+        wall(WALL_UMBERSTONE_BRICKS, UMBERSTONE);
+        wall(WALL_UMBERTILE_SMOOTH, UMBERSTONE);
+        wall(WALL_UMBERTILE_SMOOTH_SMALL, UMBERSTONE);
+        wall(WALL_UMBERPAVER, UMBERPAVER);
+        wall(WALL_UMBERPAVER_MOSSY, UMBERPAVER);
+        wall(WALL_UMBERPAVER_WEBBED, UMBERSTONE);
+        wallTranslucent(WALL_AMBER, AMBER);
+        wallTranslucent(WALL_AMBER_BRICKS, AMBER_BRICKS);
+
+        // MARK: Slabs
+
+        slab(SLAB_UMBERSTONE, UMBERSTONE);
+        slab(SLAB_UMBERCOBBLE, UMBERSTONE);
+        slab(SLAB_UMBERCOBBLE_MOSSY, UMBERSTONE);
+        slab(SLAB_UMBERCOBBLE_WEBBED, UMBERSTONE);
+        slab(SLAB_UMBERSTONE_BRICKS, UMBERSTONE);
+        slab(SLAB_UMBERTILE_SMOOTH, UMBERSTONE);
+        slab(SLAB_UMBERTILE_SMOOTH_SMALL, UMBERSTONE);
+        slab(SLAB_UMBERPAVER, UMBERSTONE);
+        slab(SLAB_AMBER, UMBERSTONE);
+        slab(SLAB_AMBER_BRICKS, UMBERSTONE);
+        slab(SLAB_UMBERPAVER_MOSSY, UMBERSTONE);
+        slab(SLAB_UMBERPAVER_WEBBED, UMBERSTONE);
+        slab(SLAB_MIR_BRICKS, UMBERSTONE);
+        slab(SLAB_PLANKS_PETRIFIED_WOOD, UMBERSTONE);
+        slab(SLAB_MUD_BRICKS, UMBERSTONE);
+
+        // MARK: Stairs
+
+        stairs(STAIRS_UMBERSTONE, UMBERSTONE);
+        stairs(STAIRS_UMBERCOBBLE, UMBERSTONE);
+        stairs(STAIRS_UMBERCOBBLE_MOSSY, UMBERSTONE);
+        stairs(STAIRS_UMBERCOBBLE_WEBBED, UMBERSTONE);
+        stairs(STAIRS_UMBERSTONE_BRICKS, UMBERSTONE);
+        stairs(STAIRS_UMBERTILE_SMOOTH, UMBERSTONE);
+        stairs(STAIRS_UMBERTILE_SMOOTH_SMALL, UMBERSTONE);
+        stairs(STAIRS_UMBERPAVER, UMBERSTONE);
+        stairs(STAIRS_UMBERPAVER_MOSSY, UMBERSTONE);
+        stairs(STAIRS_UMBERPAVER_WEBBED, UMBERSTONE);
+        stairs(STAIRS_AMBER, UMBERSTONE);
+        stairs(STAIRS_AMBER_BRICKS, UMBERSTONE);
+        stairs(STAIRS_PETRIFIED_WOOD, UMBERSTONE);
+        stairs(STAIRS_MUD_BRICKS, UMBERSTONE);
+        stairs(STAIRS_MIR_BRICKS, UMBERSTONE);
+
+        // MARK: Ores
+
         block(ORE_IRON);
         block(ORE_GOLD);
         block(ORE_COAL);
@@ -65,6 +99,24 @@ public class ModBlockStates extends ModBlockStateProvider {
         block(ORE_GNEISS);
         block(ORE_PETRIFIED_WOOD);
         block(ORE_TEMPLE);
+
+        // MARK: TODO
+
+        //simpleBlock(AMBER_DOOR);
+        //simpleBlock(PLANKS);
+        blockTranslucent(PORTAL);
+        //simpleBlock(GAEAN_KEYSTONE);
+        block(PETRIFIED_WOOD_ROCK);
+        block(PETRIFIED_WOOD_ROCK_2);
+        block(PETRIFIED_WOOD_ROCK_3);
+        block(PETRIFIED_WOOD_ROCK_4);
+        block(PETRIFIED_WOOD_ROCK_5);
+        block(PETRIFIED_WOOD_ROCK_6);
+        block(PETRIFIED_BARK_RED);
+        block(PETRIFIED_BARK_BROWN);
+        //block(DUST_LAYER);
+        block(DUST);
+        block(DUNG);
         block(JADE_BLOCK);
         //block(PRESERVED_BLOCK);
         block(MUD);
@@ -105,13 +157,10 @@ public class ModBlockStates extends ModBlockStateProvider {
         //block(WITHER_WEB);
         block(SILK);
         block(MIR_BRICK);
-        //block(SLAB_MIR_BRICKS);
         block(PLANKS_PETRIFIED_WOOD);
-        //block(SLAB_PLANKS_PETRIFIED_WOOD);
         //block(DOOR_PETRIFIED_WOOD);
         block(REIN_EXO);
         block(MUD_BRICK);
-        //block(SLAB_MUD_BRICKS);
         block(TEMPLE_BRICK);
         block(TEMPLE_PILLAR);
         block(TEMPLE_TILE);
@@ -172,41 +221,5 @@ public class ModBlockStates extends ModBlockStateProvider {
         //block(BLOCK_OF_BONES);
         //block(DUNG_SPAWNER_BOT_FLY);
         //block(DUNG_SPAWNER_FLY);
-        //block(WALL_UMBERSTONE);
-        //block(WALL_UMBERCOBBLE);
-        //block(WALL_UMBERCOBBLE_MOSSY);
-        //block(WALL_UMBERCOBBLE_WEBBED);
-        //block(WALL_UMBERSTONE_BRICKS);
-        //block(WALL_UMBERTILE_SMOOTH);
-        //block(WALL_UMBERTILE_SMOOTH_SMALL);
-        //block(WALL_UMBERPAVER);
-        //block(WALL_UMBERPAVER_MOSSY);
-        //block(WALL_UMBERPAVER_WEBBED);
-        //block(WALL_AMBER);
-        //block(WALL_AMBER_BRICKS);
-        //block(SLAB_UMBERSTONE);
-        //block(SLAB_UMBERCOBBLE);
-        //block(SLAB_UMBERCOBBLE_MOSSY);
-        //block(SLAB_UMBERCOBBLE_WEBBED);
-        //block(SLAB_UMBERSTONE_BRICKS);
-        //block(SLAB_UMBERTILE_SMOOTH);
-        //block(SLAB_UMBERTILE_SMOOTH_SMALL);
-        //block(SLAB_UMBERPAVER);
-        //block(SLAB_AMBER);
-        //block(SLAB_AMBER_BRICKS);
-        //block(STAIRS_UMBERCOBBLE);
-        //block(STAIRS_UMBERCOBBLE_MOSSY);
-        //block(STAIRS_UMBERCOBBLE_WEBBED);
-        //block(STAIRS_UMBERSTONE_BRICKS);
-        //block(STAIRS_UMBERTILE_SMOOTH);
-        //block(STAIRS_UMBERTILE_SMOOTH_SMALL);
-        //block(STAIRS_UMBERPAVER);
-        //block(STAIRS_UMBERPAVER_MOSSY);
-        //block(STAIRS_UMBERPAVER_WEBBED);
-        //block(STAIRS_AMBER);
-        //block(STAIRS_AMBER_BRICKS);
-        //block(STAIRS_PETRIFIED_WOOD);
-        //block(STAIRS_MUD_BRICKS);
-        //block(STAIRS_MIR_BRICKS);
     }
 }

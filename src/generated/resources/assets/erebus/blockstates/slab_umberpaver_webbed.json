@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "erebus:block/slab_umberpaver_webbed"
+    },
+    "type=double": {
+      "model": "erebus:block/umberstone"
+    },
+    "type=top": {
+      "model": "erebus:block/slab_umberpaver_webbed_top"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "erebus:block/umberstone",
+    "side": "erebus:block/umberstone",
+    "top": "erebus:block/umberstone"
+  }
+}

@@ -1,6 +1,7 @@
 package erebus.datagen.tags;
 
 import erebus.Erebus;
+import erebus.registries.ModBlocks;
 import erebus.registries.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -22,8 +23,10 @@ public class ModBlockTagsProvider extends IntrinsicHolderTagsProvider<Block> {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+
+        // MARK: Paxel
         //noinspection unchecked
-        this.tag(ModTags.MINEABLE_WITH_PAXEL).add(
+        tag(ModTags.MINEABLE_WITH_PAXEL).add(
                 Blocks.NOTE_BLOCK, Blocks.ATTACHED_MELON_STEM, Blocks.ATTACHED_PUMPKIN_STEM, Blocks.AZALEA, Blocks.BAMBOO, Blocks.BARREL, Blocks.BEE_NEST,
                 Blocks.BEEHIVE, Blocks.BEETROOTS, Blocks.BIG_DRIPLEAF_STEM, Blocks.BIG_DRIPLEAF, Blocks.BOOKSHELF, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.BROWN_MUSHROOM, Blocks.CAMPFIRE,
                 Blocks.CARROTS, Blocks.CARTOGRAPHY_TABLE, Blocks.CARVED_PUMPKIN, Blocks.CAVE_VINES_PLANT, Blocks.CAVE_VINES, Blocks.CHEST, Blocks.CHORUS_FLOWER, Blocks.CHORUS_PLANT, Blocks.COCOA, Blocks.COMPOSTER, Blocks.CRAFTING_TABLE,
@@ -110,5 +113,22 @@ public class ModBlockTagsProvider extends IntrinsicHolderTagsProvider<Block> {
                 BlockTags.WOODEN_TRAPDOORS, BlockTags.STONE_BUTTONS, BlockTags.ALL_HANGING_SIGNS, BlockTags.BAMBOO_BLOCKS, BlockTags.WALLS,
                 BlockTags.SHULKER_BOXES, BlockTags.ANVIL, BlockTags.CAULDRONS, BlockTags.RAILS, BlockTags.CONCRETE_POWDER
         );
+
+        // MARK: Walls
+        tag(BlockTags.WALLS)
+                .add(
+                        ModBlocks.WALL_UMBERSTONE.get(),
+                        ModBlocks.WALL_UMBERCOBBLE.get(),
+                        ModBlocks.WALL_UMBERCOBBLE_MOSSY.get(),
+                        ModBlocks.WALL_UMBERCOBBLE_WEBBED.get(),
+                        ModBlocks.WALL_UMBERSTONE_BRICKS.get(),
+                        ModBlocks.WALL_UMBERTILE_SMOOTH.get(),
+                        ModBlocks.WALL_UMBERTILE_SMOOTH_SMALL.get(),
+                        ModBlocks.WALL_UMBERPAVER.get(),
+                        ModBlocks.WALL_UMBERPAVER_MOSSY.get(),
+                        ModBlocks.WALL_UMBERPAVER_WEBBED.get(),
+                        ModBlocks.WALL_AMBER.get(),
+                        ModBlocks.WALL_AMBER_BRICKS.get()
+                );
     }
 }

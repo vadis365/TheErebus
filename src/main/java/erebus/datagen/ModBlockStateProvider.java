@@ -65,16 +65,27 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         crossBlock(block, models().withExistingParent(name(block), mcLoc("block/tinted_cross")).texture("cross", texture(name(block))).renderType("cutout"));
     }
 
-    public void stairs(Supplier<? extends StairBlock> block, Supplier<? extends Block> fullBlock) {
-        stairsBlock(block.get(), texture(name(fullBlock)));
+    public void stairs(Supplier<? extends StairBlock> stairs, Supplier<? extends Block> fullBlock) {
+        stairsBlock(stairs.get(), texture(name(fullBlock)));
     }
 
-    public void slab(Supplier<? extends SlabBlock> block, Supplier<? extends Block> fullBlock) {
-        slabBlock(block.get(), texture(name(fullBlock)), texture(name(fullBlock)));
+    public void slab(Supplier<? extends SlabBlock> slab, Supplier<? extends Block> fullBlock) {
+        slabBlock(slab.get(), texture(name(fullBlock)), texture(name(fullBlock)));
     }
 
     public void wall(Supplier<? extends WallBlock> wall, Supplier<? extends Block> fullBlock) {
         wallBlock(wall.get(), texture(name(fullBlock)));
+    }
+
+    public void wallTranslucent(Supplier<? extends WallBlock> wall, Supplier<? extends Block> fullBlock) {
+        String baseName = name(fullBlock);
+        ResourceLocation texture = texture(baseName);
+        wallBlock(
+                wall.get(),
+                this.models().wallPost(baseName + "_post", texture).renderType("translucent"),
+                this.models().wallSide(baseName + "_side", texture).renderType("translucent"),
+                this.models().wallSideTall(baseName + "_side_tall", texture).renderType("translucent")
+        );
     }
 
     public void fence(Supplier<? extends FenceBlock> block, Supplier<? extends Block> fullBlock) {

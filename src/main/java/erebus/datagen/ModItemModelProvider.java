@@ -91,6 +91,16 @@ public abstract class ModItemModelProvider extends ItemModelProvider {
         return wallInventory(BuiltInRegistries.BLOCK.getKey(wall.get()).getPath(), texture(blockName(fullBlock)));
     }
 
+    public ItemModelBuilder slab(Supplier<? extends SlabBlock> slab, Supplier<? extends Block> fullBlock) {
+        ResourceLocation texture = texture(blockName(fullBlock));
+        return slab(BuiltInRegistries.BLOCK.getKey(slab.get()).getPath(), texture, texture, texture);
+    }
+
+    public ItemModelBuilder stairs(Supplier<? extends StairBlock> stairs, Supplier<? extends Block> fullBlock) {
+        ResourceLocation texture = texture(blockName(fullBlock));
+        return stairs(BuiltInRegistries.BLOCK.getKey(stairs.get()).getPath(), texture, texture, texture);
+    }
+
     public ItemModelBuilder button(Supplier<? extends ButtonBlock> button, Supplier<? extends Block> fullBlock) {
         return buttonInventory(BuiltInRegistries.BLOCK.getKey(button.get()).getPath(), texture(blockName(fullBlock)));
     }

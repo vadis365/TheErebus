@@ -3,7 +3,11 @@ package erebus.datagen;
 import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.level.block.WallBlock;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+
+import static erebus.registries.ModBlocks.*;
+import static erebus.registries.ModBlocks.UMBERSTONE;
 
 public class ModItemModels extends ModItemModelProvider {
 
@@ -103,22 +107,61 @@ public class ModItemModels extends ModItemModelProvider {
         block(ModBlocks.UMBERPAVER);
         block(ModBlocks.UMBERGRAVEL);
         block(ModBlocks.UMBERSTONE_PILLAR);
-        block(ModBlocks.UMBER_FURNACE);
+        //block(ModBlocks.UMBER_FURNACE);
 
-        block(ModBlocks.PORTAL);
-        block(ModBlocks.GAEAN_KEYSTONE);
+        // MARK: Walls
 
-        block(ModBlocks.PETRIFIED_WOOD_ROCK);
-        block(ModBlocks.PETRIFIED_WOOD_ROCK_2);
-        block(ModBlocks.PETRIFIED_WOOD_ROCK_3);
-        block(ModBlocks.PETRIFIED_WOOD_ROCK_4);
-        block(ModBlocks.PETRIFIED_WOOD_ROCK_5);
-        block(ModBlocks.PETRIFIED_WOOD_ROCK_6);
-        block(ModBlocks.PETRIFIED_BARK_RED);
-        block(ModBlocks.PETRIFIED_BARK_BROWN);
-        //block(ModBlocks.DUST_LAYER.getId().toString(), modLoc("block/dust_layer"));
-        block(ModBlocks.DUST);
-        block(ModBlocks.DUNG);
+        wall(WALL_UMBERSTONE, UMBERSTONE);
+        wall(WALL_UMBERCOBBLE, UMBERSTONE);
+        wall(WALL_UMBERCOBBLE_MOSSY, UMBERSTONE);
+        wall(WALL_UMBERCOBBLE_WEBBED, UMBERSTONE);
+        wall(WALL_UMBERSTONE_BRICKS, UMBERSTONE);
+        wall(WALL_UMBERTILE_SMOOTH, UMBERSTONE);
+        wall(WALL_UMBERTILE_SMOOTH_SMALL, UMBERSTONE);
+        wall(WALL_UMBERPAVER, UMBERPAVER);
+        wall(WALL_UMBERPAVER_MOSSY, UMBERPAVER);
+        wall(WALL_UMBERPAVER_WEBBED, UMBERSTONE);
+        wall(WALL_AMBER, AMBER);
+        wall(WALL_AMBER_BRICKS, AMBER_BRICKS);
+
+        // MARK: Slabs
+
+        slab(SLAB_UMBERSTONE, UMBERSTONE);
+        slab(SLAB_UMBERCOBBLE, UMBERSTONE);
+        slab(SLAB_UMBERCOBBLE_MOSSY, UMBERSTONE);
+        slab(SLAB_UMBERCOBBLE_WEBBED, UMBERSTONE);
+        slab(SLAB_UMBERSTONE_BRICKS, UMBERSTONE);
+        slab(SLAB_UMBERTILE_SMOOTH, UMBERSTONE);
+        slab(SLAB_UMBERTILE_SMOOTH_SMALL, UMBERSTONE);
+        slab(SLAB_UMBERPAVER, UMBERSTONE);
+        slab(SLAB_AMBER, UMBERSTONE);
+        slab(SLAB_AMBER_BRICKS, UMBERSTONE);
+        slab(SLAB_UMBERPAVER_MOSSY, UMBERSTONE);
+        slab(SLAB_UMBERPAVER_WEBBED, UMBERSTONE);
+        slab(SLAB_MIR_BRICKS, UMBERSTONE);
+        slab(SLAB_PLANKS_PETRIFIED_WOOD, UMBERSTONE);
+        slab(SLAB_MUD_BRICKS, UMBERSTONE);
+
+        // MARK: Stairs
+
+        stairs(STAIRS_UMBERSTONE, UMBERSTONE);
+        stairs(STAIRS_UMBERCOBBLE, UMBERSTONE);
+        stairs(STAIRS_UMBERCOBBLE_MOSSY, UMBERSTONE);
+        stairs(STAIRS_UMBERCOBBLE_WEBBED, UMBERSTONE);
+        stairs(STAIRS_UMBERSTONE_BRICKS, UMBERSTONE);
+        stairs(STAIRS_UMBERTILE_SMOOTH, UMBERSTONE);
+        stairs(STAIRS_UMBERTILE_SMOOTH_SMALL, UMBERSTONE);
+        stairs(STAIRS_UMBERPAVER, UMBERSTONE);
+        stairs(STAIRS_UMBERPAVER_MOSSY, UMBERSTONE);
+        stairs(STAIRS_UMBERPAVER_WEBBED, UMBERSTONE);
+        stairs(STAIRS_AMBER, UMBERSTONE);
+        stairs(STAIRS_AMBER_BRICKS, UMBERSTONE);
+        stairs(STAIRS_PETRIFIED_WOOD, UMBERSTONE);
+        stairs(STAIRS_MUD_BRICKS, UMBERSTONE);
+        stairs(STAIRS_MIR_BRICKS, UMBERSTONE);
+
+        // MARK: Ores
+
         block(ModBlocks.ORE_IRON);
         block(ModBlocks.ORE_GOLD);
         block(ModBlocks.ORE_COAL);
@@ -138,6 +181,22 @@ public class ModItemModels extends ModItemModelProvider {
         block(ModBlocks.ORE_GNEISS);
         block(ModBlocks.ORE_PETRIFIED_WOOD);
         block(ModBlocks.ORE_TEMPLE);
+
+
+        block(ModBlocks.PORTAL);
+        //block(ModBlocks.GAEAN_KEYSTONE);
+
+        block(ModBlocks.PETRIFIED_WOOD_ROCK);
+        block(ModBlocks.PETRIFIED_WOOD_ROCK_2);
+        block(ModBlocks.PETRIFIED_WOOD_ROCK_3);
+        block(ModBlocks.PETRIFIED_WOOD_ROCK_4);
+        block(ModBlocks.PETRIFIED_WOOD_ROCK_5);
+        block(ModBlocks.PETRIFIED_WOOD_ROCK_6);
+        block(ModBlocks.PETRIFIED_BARK_RED);
+        block(ModBlocks.PETRIFIED_BARK_BROWN);
+        //block(ModBlocks.DUST_LAYER.getId().toString(), modLoc("block/dust_layer"));
+        block(ModBlocks.DUST);
+        block(ModBlocks.DUNG);
         block(ModBlocks.JADE_BLOCK);
         block(ModBlocks.MUD);
         block(ModBlocks.QUICK_SAND);
