@@ -1,0 +1,34 @@
+package erebus.client.entity.render;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+
+import erebus.Erebus;
+import erebus.client.entity.model.WaspModel;
+import erebus.entity.WaspEntity;
+import erebus.registries.ModEntityRendering;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+
+@OnlyIn(Dist.CLIENT)
+public class WaspRenderer extends MobRenderer<WaspEntity, WaspModel<WaspEntity>> {
+	public static final ResourceLocation TEXTURE = Erebus.prefix("textures/entity/wasp.png");
+
+	public WaspRenderer(EntityRendererProvider.Context context) {
+        super(context, new WaspModel<>(context.bakeLayer(ModEntityRendering.WASP)), 0.5F);
+        addLayer(new WaspLayer(this, context.getModelSet()));
+    }
+
+	@Override
+	protected void scale(WaspEntity entity, PoseStack matrix, float partialTickTime) {
+		matrix.translate(0F, 0F, -0.25F);
+		matrix.scale(0.5F, 0.5F, 0.5F);
+	}
+
+	@Override
+	public  ResourceLocation getTextureLocation(WaspEntity entity) {
+		return TEXTURE;
+	}
+}

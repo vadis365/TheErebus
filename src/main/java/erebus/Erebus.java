@@ -11,6 +11,7 @@ import erebus.registries.ModBlocks;
 import erebus.registries.ModEntities;
 import erebus.registries.ModEntityRendering;
 import erebus.registries.ModItems;
+import erebus.registries.ModSounds;
 import erebus.registries.ModTabs;
 import erebus.registries.ModTags;
 import erebus.registries.ModToolMaterials;
@@ -45,6 +46,8 @@ public class Erebus {
         ModEntities.getEntityTypes().register(bus);
         bus.addListener(ModEntities::registerSpawnPlacements);
         bus.addListener(ModEntities::initializeAttributes);
+        ModEntities.SPAWN_EGGS.register(bus);
+        ModSounds.SOUNDS.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 

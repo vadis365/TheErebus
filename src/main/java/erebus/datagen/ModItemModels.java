@@ -1,13 +1,61 @@
 package erebus.datagen;
 
+import static erebus.registries.ModBlocks.AMBER;
+import static erebus.registries.ModBlocks.AMBER_BRICKS;
+import static erebus.registries.ModBlocks.SLAB_AMBER;
+import static erebus.registries.ModBlocks.SLAB_AMBER_BRICKS;
+import static erebus.registries.ModBlocks.SLAB_MIR_BRICKS;
+import static erebus.registries.ModBlocks.SLAB_MUD_BRICKS;
+import static erebus.registries.ModBlocks.SLAB_PLANKS_PETRIFIED_WOOD;
+import static erebus.registries.ModBlocks.SLAB_UMBERCOBBLE;
+import static erebus.registries.ModBlocks.SLAB_UMBERCOBBLE_MOSSY;
+import static erebus.registries.ModBlocks.SLAB_UMBERCOBBLE_WEBBED;
+import static erebus.registries.ModBlocks.SLAB_UMBERPAVER;
+import static erebus.registries.ModBlocks.SLAB_UMBERPAVER_MOSSY;
+import static erebus.registries.ModBlocks.SLAB_UMBERPAVER_WEBBED;
+import static erebus.registries.ModBlocks.SLAB_UMBERSTONE;
+import static erebus.registries.ModBlocks.SLAB_UMBERSTONE_BRICKS;
+import static erebus.registries.ModBlocks.SLAB_UMBERTILE_SMOOTH;
+import static erebus.registries.ModBlocks.SLAB_UMBERTILE_SMOOTH_SMALL;
+import static erebus.registries.ModBlocks.STAIRS_AMBER;
+import static erebus.registries.ModBlocks.STAIRS_AMBER_BRICKS;
+import static erebus.registries.ModBlocks.STAIRS_MIR_BRICKS;
+import static erebus.registries.ModBlocks.STAIRS_MUD_BRICKS;
+import static erebus.registries.ModBlocks.STAIRS_PETRIFIED_WOOD;
+import static erebus.registries.ModBlocks.STAIRS_UMBERCOBBLE;
+import static erebus.registries.ModBlocks.STAIRS_UMBERCOBBLE_MOSSY;
+import static erebus.registries.ModBlocks.STAIRS_UMBERCOBBLE_WEBBED;
+import static erebus.registries.ModBlocks.STAIRS_UMBERPAVER;
+import static erebus.registries.ModBlocks.STAIRS_UMBERPAVER_MOSSY;
+import static erebus.registries.ModBlocks.STAIRS_UMBERPAVER_WEBBED;
+import static erebus.registries.ModBlocks.STAIRS_UMBERSTONE;
+import static erebus.registries.ModBlocks.STAIRS_UMBERSTONE_BRICKS;
+import static erebus.registries.ModBlocks.STAIRS_UMBERTILE_SMOOTH;
+import static erebus.registries.ModBlocks.STAIRS_UMBERTILE_SMOOTH_SMALL;
+import static erebus.registries.ModBlocks.UMBERPAVER;
+import static erebus.registries.ModBlocks.UMBERSTONE;
+import static erebus.registries.ModBlocks.WALL_AMBER;
+import static erebus.registries.ModBlocks.WALL_AMBER_BRICKS;
+import static erebus.registries.ModBlocks.WALL_UMBERCOBBLE;
+import static erebus.registries.ModBlocks.WALL_UMBERCOBBLE_MOSSY;
+import static erebus.registries.ModBlocks.WALL_UMBERCOBBLE_WEBBED;
+import static erebus.registries.ModBlocks.WALL_UMBERPAVER;
+import static erebus.registries.ModBlocks.WALL_UMBERPAVER_MOSSY;
+import static erebus.registries.ModBlocks.WALL_UMBERPAVER_WEBBED;
+import static erebus.registries.ModBlocks.WALL_UMBERSTONE;
+import static erebus.registries.ModBlocks.WALL_UMBERSTONE_BRICKS;
+import static erebus.registries.ModBlocks.WALL_UMBERTILE_SMOOTH;
+import static erebus.registries.ModBlocks.WALL_UMBERTILE_SMOOTH_SMALL;
+
 import erebus.registries.ModBlocks;
+import erebus.registries.ModEntities;
 import erebus.registries.ModItems;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-
-import static erebus.registries.ModBlocks.*;
-import static erebus.registries.ModBlocks.UMBERSTONE;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class ModItemModels extends ModItemModelProvider {
 
@@ -22,6 +70,14 @@ public class ModItemModels extends ModItemModelProvider {
     }
 
     private void registerItemModels() {
+
+    	// Mob Spawn Eggs
+		for (DeferredHolder<Item, ?> item : ModEntities.SPAWN_EGGS.getEntries()) {
+			if (item.get() instanceof SpawnEggItem) {
+				this.getBuilder(item.getId().getPath()).parent(this.getExistingFile(ResourceLocation.withDefaultNamespace("item/template_spawn_egg")));
+			}
+		}
+
         // MARK: Jade Tools
 
         toolItem(ModItems.JADE_SWORD);
