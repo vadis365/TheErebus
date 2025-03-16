@@ -32,7 +32,7 @@ public class ModEntities {
                     .build(prefix("grasshopper")));*/
 
 	public static final Supplier<EntityType<WaspEntity>> WASP = registerWithEgg("wasp", EntityType.Builder.of(WaspEntity::new, MobCategory.MONSTER).sized(0.5F, 0.4F), 0xFECD09, 0x141414);
-	public static final Supplier<EntityType<AnimatedBlock>> ANIMATED_BLOCK = registerNoEgg("animated_block", EntityType.Builder.of(AnimatedBlock::new, MobCategory.MISC).fireImmune().sized(0.5F, 1.5F).clientTrackingRange(4).updateInterval(10));
+	public static final Supplier<EntityType<AnimatedBlock>> ANIMATED_BLOCK = registerNoEgg("animated_block", EntityType.Builder.of(AnimatedBlock::new, MobCategory.MISC).fireImmune().sized(1F, 1.5F).clientTrackingRange(4).updateInterval(10));
     
 	// just calls a helper in the main mod because it'll be used all over probably
 	private static String prefix(String name) {
