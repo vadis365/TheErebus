@@ -3,6 +3,7 @@ package erebus.registries;
 import java.util.function.Supplier;
 
 import erebus.Erebus;
+import erebus.entity.AnimatedBlock;
 import erebus.entity.WaspEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
@@ -31,8 +32,9 @@ public class ModEntities {
                     .build(prefix("grasshopper")));*/
 
 	public static final Supplier<EntityType<WaspEntity>> WASP = registerWithEgg("wasp", EntityType.Builder.of(WaspEntity::new, MobCategory.MONSTER).sized(0.5F, 0.4F), 0xFECD09, 0x141414);
+	public static final Supplier<EntityType<AnimatedBlock>> ANIMATED_BLOCK = registerNoEgg("animated_block", EntityType.Builder.of(AnimatedBlock::new, MobCategory.MISC).fireImmune().sized(0.5F, 1.5F).clientTrackingRange(4).updateInterval(10));
     
-    // just calls a helper in the main mod because it'll be used all over probably
+	// just calls a helper in the main mod because it'll be used all over probably
 	private static String prefix(String name) {
 		return Erebus.prefix(name).toString();
 	}
@@ -50,8 +52,13 @@ public class ModEntities {
 	}
 
 	public static <E extends Mob> DeferredHolder<EntityType<?>, EntityType<E>> registerWithEgg(String name, EntityType.Builder<E> builder, int primaryColor, int secondaryColor) {
-		DeferredHolder<EntityType<?>, EntityType<E>> ret = ENTITY_TYPES.register(name, () -> builder.build(Erebus.prefix(name).toString()));
+		DeferredHolder<EntityType<?>, EntityType<E>> ret = ENTITY_TYPES.register(name, () -> builder.build(prefix(name)));
 		SPAWN_EGGS.register(name + "_spawn_egg", () -> new DeferredSpawnEggItem(ret, primaryColor, secondaryColor, new Item.Properties()));
+		return ret;
+	}
+	
+	public static <E extends Mob> DeferredHolder<EntityType<?>, EntityType<E>> registerNoEgg(String name, EntityType.Builder<E> builder) {
+		DeferredHolder<EntityType<?>, EntityType<E>> ret = ENTITY_TYPES.register(name, () -> builder.build(prefix(name)));
 		return ret;
 	}
 }
