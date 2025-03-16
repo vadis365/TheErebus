@@ -58,7 +58,7 @@ public class RenderAnimatedBlock extends MobRenderer<AnimatedBlock, ModelAnimate
 	@SuppressWarnings("deprecation")
 	@Override
 	public ResourceLocation getTextureLocation(AnimatedBlock animatedblock) {
-		String blockPath = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getParticleIcon(animatedblock.getBlockType()).atlasLocation().toString();
+		String blockPath = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getParticleIcon(animatedblock.getBlockType()).contents().name().toString();
 		String modName = "minecraft";
 		if (blockPath.contains(":")) {
 			modName = blockPath.split(":")[0];
