@@ -23,6 +23,6 @@ public class ModEntityRendering {
     public static void registerEntityRender(EntityRenderersEvent.RegisterRenderers event) {
      //   event.registerEntityRenderer(ModEntities.GRASHOPPER.get(), RenderGrasshopper::new);
     	event.registerEntityRenderer(ModEntities.WASP.get(), WaspRenderer::new);
-    	event.registerEntityRenderer(ModEntities.ANIMATED_BLOCK, RenderAnimatedBlock::new);
+    	event.registerEntityRenderer(ModEntities.ANIMATED_BLOCK.get(), RenderAnimatedBlock::new);
     }
 }

@@ -45,6 +45,7 @@ public class ModEntities {
 	
 	public static void initializeAttributes(EntityAttributeCreationEvent event) {
 		event.put(WASP.get(), WaspEntity.createAttributes().build());
+		event.put(ANIMATED_BLOCK.get(), AnimatedBlock.createAttributes().build());
 	}
 
 	public static DeferredRegister<EntityType<?>> getEntityTypes() {
