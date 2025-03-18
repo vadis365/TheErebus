@@ -120,8 +120,9 @@ public class AnimatedBlock extends PathfinderMob {
 	public void kill() {
 		super.kill();
 		spawnAtLocation(Item.byBlock(getBlockType().getBlock()), 1);
-		if (level().isClientSide() && isGlowingBlock(getBlockType()))
+	/*	if (level().isClientSide() && isGlowingBlock(getBlockType()))
 			switchOff();
+	*/
 	}
 
 	@Nullable
