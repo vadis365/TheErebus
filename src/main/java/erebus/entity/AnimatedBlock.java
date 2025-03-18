@@ -136,7 +136,7 @@ public class AnimatedBlock extends PathfinderMob {
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack is = player.getItemInHand(hand);
 		if (!level().isClientSide && !is.isEmpty() && is.getItem() == ModItems.WAND_OF_ANIMATION.get()) {
-			kill();
+			remove(RemovalReason.DISCARDED);
 			level().setBlock(blockPosition(), getBlockType(), 3);
 			level().playSound(null, blockPosition(), ModSounds.ALTAR_OFFERING.get(), SoundSource.NEUTRAL, 0.2F, 1.0F);
 			return InteractionResult.SUCCESS;
