@@ -75,11 +75,12 @@ public class AnimatedBlock extends PathfinderMob {
 	@Override
 	public void tick() {
 		super.tick();
-		if (level().isClientSide() && isGlowingBlock(getBlockType()))
+	/*	if (level().isClientSide() && isGlowingBlock(getBlockType()))
 			if (getLightLevelDependentMagicValue() < 0.5F)
 				lightUp(level(), blockPosition());
 			else
 				switchOff();
+	*/
 	}
 
 	@SuppressWarnings("deprecation")
