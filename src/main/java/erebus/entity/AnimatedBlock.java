@@ -2,6 +2,9 @@ package erebus.entity;
 
 import javax.annotation.Nullable;
 
+import erebus.registries.ModBlocks;
+import erebus.registries.ModItems;
+import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -10,7 +13,10 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.PathfinderMob;
@@ -23,7 +29,8 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
@@ -119,10 +126,26 @@ public class AnimatedBlock extends PathfinderMob {
 	@Override
 	public void kill() {
 		super.kill();
-		spawnAtLocation(Item.byBlock(getBlockType().getBlock()), 1);
+	//	spawnAtLocation(Item.byBlock(getBlockType().getBlock()), 1);
 	/*	if (level().isClientSide() && isGlowingBlock(getBlockType()))
 			switchOff();
 	*/
+	}
+	
+	@Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+		ItemStack is = player.getItemInHand(hand);
+		if (!level().isClientSide && !is.isEmpty() && is.getItem() == ModItems.WAND_OF_ANIMATION.get()) {
+			kill();
+			level().setBlock(blockPosition(), getBlockType(), 3);
+			level().playSound(null, blockPosition(), ModSounds.ALTAR_OFFERING.get(), SoundSource.NEUTRAL, 0.2F, 1.0F);
+			return InteractionResult.SUCCESS;
+		} else if (getBlockType() == ModBlocks.PETRIFIED_CRAFTING_TABLE.get().defaultBlockState() && is.isEmpty()) {
+			System.out.println("Open Petrified crafting table Gui Here");
+			//player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.PETRIFIED_CRAFT.ordinal(), player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ);
+			return InteractionResult.SUCCESS;
+		} else
+			return super.mobInteract(player, hand);
 	}
 
 	@Nullable

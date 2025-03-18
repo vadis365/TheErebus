@@ -3,7 +3,15 @@ package erebus.registries;
 import de.cech12.bucketlib.api.item.UniversalBucketItem;
 import erebus.Erebus;
 import erebus.item.PaxelItem;
-import net.minecraft.world.item.*;
+import erebus.item.WandOfAnimationItem;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SwordItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -482,7 +490,8 @@ public class ModItems {
     public static final DeferredItem<ShieldItem> RHINO_EXOSKELETON_SHIELD = ITEMS.register("rhino_exoskeleton_shield", () -> new ShieldItem(new Item.Properties().durability(336)));
 
     // MARK: Misc
-    public static final DeferredItem<Item> WAND_OF_ANIMATION = ITEMS.registerSimpleItem("wand_of_animation");
+    public static final DeferredItem<Item> WAND_OF_ANIMATION = ITEMS.register("wand_of_animation", () -> new WandOfAnimationItem(new Item.Properties().stacksTo(1).durability(64).setNoRepair()));
+
     public static final DeferredItem<Item> WAND_OF_PRESERVATION = ITEMS.registerSimpleItem("wand_of_preservation");
     public static final DeferredItem<Item> PORTAL_ACTIVATOR = ITEMS.registerSimpleItem("portal_activator");
     public static final DeferredItem<Item> WOODLOUSE_BALL = ITEMS.registerSimpleItem("woodlouse_ball");
