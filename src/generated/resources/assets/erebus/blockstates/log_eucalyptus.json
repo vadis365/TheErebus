@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "erebus:block/log_eucalyptus_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "erebus:block/log_eucalyptus"
+    },
+    "axis=z": {
+      "model": "erebus:block/log_eucalyptus_horizontal",
+      "x": 90
+    }
+  }
+}

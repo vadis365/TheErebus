@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "erebus:block/log_scorched_end",
+    "side": "erebus:block/log_scorched_side"
+  }
+}

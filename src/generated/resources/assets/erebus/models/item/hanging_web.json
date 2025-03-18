@@ -1,3 +1,6 @@
 {
-  "parent": "erebus:block/hanging_web"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "erebus:block/hanging_web"
+  }
 }

@@ -1,10 +1,8 @@
 package erebus.events;
 
 import erebus.Erebus;
-import erebus.datagen.ModBlockStates;
-import erebus.datagen.ModItemModels;
-import erebus.datagen.ModRegistries;
-import erebus.datagen.tags.ModBlockTagsProvider;
+import erebus.datagen.*;
+import erebus.datagen.providers.ModLootTableProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -29,6 +27,8 @@ public class GatherDataEventHandler {
 
         generator.addProvider(event.includeClient(), new ModBlockStates(output, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModItemModels(output, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ModBlockTagsProvider(output, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModBlockTags(output, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModLootTableProvider(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new ModLang(output));
     }
 }

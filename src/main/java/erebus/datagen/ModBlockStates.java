@@ -1,5 +1,6 @@
 package erebus.datagen;
 
+import erebus.datagen.providers.ModBlockStateProvider;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -13,15 +14,7 @@ public class ModBlockStates extends ModBlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        simpleBlock(ALGAE.get(), models().getExistingFile(modLoc("block/algae")));
-
-        // MARK: Amber
-
-        blockTranslucent(AMBER);
-        blockTranslucent(AMBER_BRICKS);
-
         // MARK: Umberstone
-
         block(UMBERSTONE);
         block(UMBERSTONE_BRICKS);
         block(UMBERCOBBLE);
@@ -33,66 +26,32 @@ public class ModBlockStates extends ModBlockStateProvider {
         block(UMBERPAVER);
         block(UMBERPAVER_MOSSY);
         block(UMBERPAVER_WEBBED);
-        log(UMBERSTONE_PILLAR, "umberstone_pillar");
+        log(UMBERSTONE_PILLAR);
+        block(VOLCANIC_ROCK);
+        block(DUST);
+        block(DUST_LAYER, "dust");
+        block(PETRIFIED_WOOD_ROCK);
+        block(PETRIFIED_WOOD_ROCK_2);
+        block(PETRIFIED_WOOD_ROCK_3);
+        block(PETRIFIED_WOOD_ROCK_4);
+        block(PETRIFIED_WOOD_ROCK_5);
+        block(PETRIFIED_WOOD_ROCK_6);
+        block(PETRIFIED_BARK_RED);
+        block(PETRIFIED_BARK_BROWN);
+        block(PETRIFIED_LOG_INNER);
+        block(DUNG);
 
+        block(MIR_BRICKS);
+        block(MUD_BRICKS);
 
-        block(MIR_BRICK);
-        block(PLANKS_PETRIFIED_WOOD);
-        block(MUD_BRICK);
-
-        // MARK: Walls
-
-        wall(WALL_UMBERSTONE, UMBERSTONE);
-        wall(WALL_UMBERCOBBLE, UMBERCOBBLE);
-        wall(WALL_UMBERCOBBLE_MOSSY, UMBERCOBBLE_MOSSY);
-        wall(WALL_UMBERCOBBLE_WEBBED, UMBERCOBBLE_WEBBED);
-        wall(WALL_UMBERSTONE_BRICKS, UMBERSTONE_BRICKS);
-        wall(WALL_UMBERTILE_SMOOTH, UMBERTILE_SMOOTH);
-        wall(WALL_UMBERTILE_SMOOTH_SMALL, UMBERTILE_SMOOTH_SMALL);
-        wall(WALL_UMBERPAVER, UMBERPAVER);
-        wall(WALL_UMBERPAVER_MOSSY, UMBERPAVER_MOSSY);
-        wall(WALL_UMBERPAVER_WEBBED, UMBERPAVER_WEBBED);
-        wallTranslucent(WALL_AMBER, AMBER);
-        wallTranslucent(WALL_AMBER_BRICKS, AMBER_BRICKS);
-
-        // MARK: Slabs
-
-        slab(SLAB_UMBERSTONE, UMBERSTONE);
-        slab(SLAB_UMBERCOBBLE, UMBERCOBBLE);
-        slab(SLAB_UMBERCOBBLE_MOSSY, UMBERCOBBLE_MOSSY);
-        slab(SLAB_UMBERCOBBLE_WEBBED, UMBERCOBBLE_WEBBED);
-        slab(SLAB_UMBERSTONE_BRICKS, UMBERSTONE_BRICKS);
-        slab(SLAB_UMBERTILE_SMOOTH, UMBERTILE_SMOOTH);
-        slab(SLAB_UMBERTILE_SMOOTH_SMALL, UMBERTILE_SMOOTH_SMALL);
-        slab(SLAB_UMBERPAVER, UMBERPAVER);
-        slabTranslucent(SLAB_AMBER, AMBER);
-        slabTranslucent(SLAB_AMBER_BRICKS, AMBER_BRICKS);
-        slab(SLAB_UMBERPAVER_MOSSY, UMBERPAVER_MOSSY);
-        slab(SLAB_UMBERPAVER_WEBBED, UMBERPAVER_WEBBED);
-        slab(SLAB_MIR_BRICKS, MIR_BRICK);
-        slab(SLAB_PLANKS_PETRIFIED_WOOD, PLANKS_PETRIFIED_WOOD);
-        slab(SLAB_MUD_BRICKS, MUD_BRICK);
-
-        // MARK: Stairs
-
-        stairs(STAIRS_UMBERSTONE, UMBERSTONE);
-        stairs(STAIRS_UMBERCOBBLE, UMBERCOBBLE);
-        stairs(STAIRS_UMBERCOBBLE_MOSSY, UMBERCOBBLE_MOSSY);
-        stairs(STAIRS_UMBERCOBBLE_WEBBED, UMBERCOBBLE_WEBBED);
-        stairs(STAIRS_UMBERSTONE_BRICKS, UMBERSTONE_BRICKS);
-        stairs(STAIRS_UMBERTILE_SMOOTH, UMBERTILE_SMOOTH);
-        stairs(STAIRS_UMBERTILE_SMOOTH_SMALL, UMBERTILE_SMOOTH_SMALL);
-        stairs(STAIRS_UMBERPAVER, UMBERPAVER);
-        stairs(STAIRS_UMBERPAVER_MOSSY, UMBERPAVER_MOSSY);
-        stairs(STAIRS_UMBERPAVER_WEBBED, UMBERPAVER_WEBBED);
-        stairsTranslucent(STAIRS_AMBER, AMBER);
-        stairsTranslucent(STAIRS_AMBER_BRICKS, AMBER_BRICKS);
-        stairs(STAIRS_PETRIFIED_WOOD, PLANKS_PETRIFIED_WOOD);
-        stairs(STAIRS_MUD_BRICKS, MUD_BRICK);
-        stairs(STAIRS_MIR_BRICKS, MIR_BRICK);
+        // MARK: Amber
+        blockTranslucent(AMBER);
+        blockTranslucent(AMBER_BRICKS);
+        //blockTranslucent(PRESERVED_AMBER); // TODO: Figure out Preserved Blocks
+        //blockTranslucent(PRESERVED_AMBER_GLASS);
+        doorBlockWithRenderType(AMBER_DOOR.get(), modLoc("block/amber_door_lower"), modLoc("block/amber_door_upper"), "translucent");
 
         // MARK: Ores
-
         block(ORE_IRON);
         block(ORE_GOLD);
         block(ORE_COAL);
@@ -113,123 +72,333 @@ public class ModBlockStates extends ModBlockStateProvider {
         block(ORE_PETRIFIED_WOOD);
         block(ORE_TEMPLE);
 
-        // MARK: TODO
+        // MARK: Logs
+        log(LOG_BAOBAB);
+        log(LOG_EUCALYPTUS);
+        log(LOG_MAHOGANY);
+        log(LOG_MOSSBARK);
+        log(LOG_ASPER);
+        log(LOG_CYPRESS);
+        log(LOG_BALSAM);
+        log(LOG_BALSAM_RESINLESS);
+        log(LOG_ROTTEN);
+        log(LOG_MARSHWOOD);
+        log(LOG_SCORCHED);
+        log(LOG_BAMBOO);
+        log(LOG_HOLLOW);
 
-        //simpleBlock(AMBER_DOOR);
-        //simpleBlock(PLANKS);
-        blockTranslucent(PORTAL);
-        //simpleBlock(GAEAN_KEYSTONE);
-        block(PETRIFIED_WOOD_ROCK);
-        block(PETRIFIED_WOOD_ROCK_2);
-        block(PETRIFIED_WOOD_ROCK_3);
-        block(PETRIFIED_WOOD_ROCK_4);
-        block(PETRIFIED_WOOD_ROCK_5);
-        block(PETRIFIED_WOOD_ROCK_6);
-        block(PETRIFIED_BARK_RED);
-        block(PETRIFIED_BARK_BROWN);
-        //block(DUST_LAYER);
-        block(DUST);
-        block(DUNG);
+        // MARK: Saplings
+        crossBlock(SAPLING_BAOBAB);
+        crossBlock(SAPLING_EUCALYPTUS);
+        crossBlock(SAPLING_MAHOGANY);
+        crossBlock(SAPLING_MOSSBARK);
+        crossBlock(SAPLING_ASPER);
+        crossBlock(SAPLING_CYPRESS);
+        crossBlock(SAPLING_BALSAM);
+        crossBlock(SAPLING_MARSHWOOD);
+        crossBlock(SAPLING_BAMBOO);
+
+        // MARK: Leaves
+        block(LEAVES_BAOBAB);
+        block(LEAVES_EUCALYPTUS);
+        block(LEAVES_MAHOGANY);
+        block(LEAVES_MOSSBARK);
+        block(LEAVES_ASPER);
+        block(LEAVES_CYPRESS);
+        block(LEAVES_BALSAM);
+        block(LEAVES_MARSHWOOD);
+
+        // MARK: Planks
+        block(PLANKS_BAOBAB);
+        block(PLANKS_EUCALYPTUS);
+        block(PLANKS_MAHOGANY);
+        block(PLANKS_MOSSBARK);
+        block(PLANKS_ASPER);
+        block(PLANKS_CYPRESS);
+        block(PLANKS_BALSAM);
+        block(PLANKS_WHITE);
+        block(PLANKS_BAMBOO);
+        block(PLANKS_ROTTEN);
+        block(PLANKS_MARSHWOOD);
+        block(PLANKS_SCORCHED);
+        block(PLANKS_VARNISHED);
+        block(PLANKS_PETRIFIED);
+
+        // MARK: Slabs Wood
+        slab(SLAB_PLANKS_BAOBAB, PLANKS_BAOBAB);
+        slab(SLAB_PLANKS_EUCALYPTUS, PLANKS_EUCALYPTUS);
+        slab(SLAB_PLANKS_MAHOGANY, PLANKS_MAHOGANY);
+        slab(SLAB_PLANKS_MOSSBARK, PLANKS_MOSSBARK);
+        slab(SLAB_PLANKS_ASPER, PLANKS_ASPER);
+        slab(SLAB_PLANKS_CYPRESS, PLANKS_CYPRESS);
+        slab(SLAB_PLANKS_BALSAM, PLANKS_BALSAM);
+        slab(SLAB_PLANKS_WHITE, PLANKS_WHITE);
+        slab(SLAB_PLANKS_BAMBOO, PLANKS_BAMBOO);
+        slab(SLAB_PLANKS_ROTTEN, PLANKS_ROTTEN);
+        slab(SLAB_PLANKS_MARSHWOOD, PLANKS_MARSHWOOD);
+        slab(SLAB_PLANKS_SCORCHED, PLANKS_SCORCHED);
+        slab(SLAB_PLANKS_VARNISHED, PLANKS_VARNISHED);
+        slab(SLAB_PLANKS_PETRIFIED, PLANKS_PETRIFIED);
+
+        // MARK: Slabs Stone
+        slab(SLAB_UMBERSTONE, UMBERSTONE);
+        slab(SLAB_UMBERCOBBLE, UMBERCOBBLE);
+        slab(SLAB_UMBERCOBBLE_MOSSY, UMBERCOBBLE_MOSSY);
+        slab(SLAB_UMBERCOBBLE_WEBBED, UMBERCOBBLE_WEBBED);
+        slab(SLAB_UMBERSTONE_BRICKS, UMBERSTONE_BRICKS);
+        slab(SLAB_UMBERTILE_SMOOTH, UMBERTILE_SMOOTH);
+        slab(SLAB_UMBERTILE_SMOOTH_SMALL, UMBERTILE_SMOOTH_SMALL);
+        slab(SLAB_UMBERPAVER, UMBERPAVER);
+        slab(SLAB_UMBERPAVER_MOSSY, UMBERPAVER_MOSSY);
+        slab(SLAB_UMBERPAVER_WEBBED, UMBERPAVER_WEBBED);
+        slab(SLAB_AMBER, AMBER);
+        slab(SLAB_AMBER_BRICKS, AMBER_BRICKS);
+        slab(SLAB_MIR_BRICKS, MIR_BRICKS);
+        slab(SLAB_MUD_BRICKS, MUD_BRICKS);
+
+        // MARK: Stairs Wood
+        stairs(STAIRS_BAOBAB, PLANKS_BAOBAB);
+        stairs(STAIRS_EUCALYPTUS, PLANKS_EUCALYPTUS);
+        stairs(STAIRS_MAHOGANY, PLANKS_MAHOGANY);
+        stairs(STAIRS_MOSSBARK, PLANKS_MOSSBARK);
+        stairs(STAIRS_ASPER, PLANKS_ASPER);
+        stairs(STAIRS_CYPRESS, PLANKS_CYPRESS);
+        stairs(STAIRS_BALSAM, PLANKS_BALSAM);
+        stairs(STAIRS_WHITE, PLANKS_WHITE);
+        stairs(STAIRS_BAMBOO, PLANKS_BAMBOO);
+        stairs(STAIRS_ROTTEN, PLANKS_ROTTEN);
+        stairs(STAIRS_MARSHWOOD, PLANKS_MARSHWOOD);
+        stairs(STAIRS_SCORCHED, PLANKS_SCORCHED);
+        stairs(STAIRS_VARNISHED, PLANKS_VARNISHED);
+        stairs(STAIRS_PETRIFIED, PLANKS_PETRIFIED);
+
+        // MARK: Stairs
+        stairs(STAIRS_UMBERSTONE, UMBERSTONE);
+        stairs(STAIRS_UMBERCOBBLE, UMBERCOBBLE);
+        stairs(STAIRS_UMBERCOBBLE_MOSSY, UMBERCOBBLE_MOSSY);
+        stairs(STAIRS_UMBERCOBBLE_WEBBED, UMBERCOBBLE_WEBBED);
+        stairs(STAIRS_UMBERSTONE_BRICKS, UMBERSTONE_BRICKS);
+        stairs(STAIRS_UMBERTILE_SMOOTH, UMBERTILE_SMOOTH);
+        stairs(STAIRS_UMBERTILE_SMOOTH_SMALL, UMBERTILE_SMOOTH_SMALL);
+        stairs(STAIRS_UMBERPAVER, UMBERPAVER);
+        stairs(STAIRS_UMBERPAVER_MOSSY, UMBERPAVER_MOSSY);
+        stairs(STAIRS_UMBERPAVER_WEBBED, UMBERPAVER_WEBBED);
+        stairs(STAIRS_AMBER, AMBER);
+        stairs(STAIRS_AMBER_BRICKS, AMBER_BRICKS);
+        stairs(STAIRS_MUD_BRICKS, MUD_BRICKS);
+        stairs(STAIRS_MIR_BRICKS, MIR_BRICKS);
+
+        // MARK: Doors
+        doorBlock(DOOR_BAOBAB.get(), modLoc("block/door_baobab_lower"), modLoc("block/door_baobab_upper"));
+        doorBlock(DOOR_EUCALYPTUS.get(), modLoc("block/door_eucalyptus_lower"), modLoc("block/door_eucalyptus_upper"));
+        doorBlock(DOOR_MAHOGANY.get(), modLoc("block/door_mahogany_lower"), modLoc("block/door_mahogany_upper"));
+        doorBlock(DOOR_MOSSBARK.get(), modLoc("block/door_mossbark_lower"), modLoc("block/door_mossbark_upper"));
+        doorBlock(DOOR_ASPER.get(), modLoc("block/door_asper_lower"), modLoc("block/door_asper_upper"));
+        doorBlock(DOOR_CYPRESS.get(), modLoc("block/door_cypress_lower"), modLoc("block/door_cypress_upper"));
+        doorBlock(DOOR_BALSAM.get(), modLoc("block/door_balsam_lower"), modLoc("block/door_balsam_upper"));
+        doorBlock(DOOR_WHITE.get(), modLoc("block/door_white_lower"), modLoc("block/door_white_upper"));
+        doorBlock(DOOR_ROTTEN.get(), modLoc("block/door_rotten_lower"), modLoc("block/door_rotten_upper"));
+        doorBlock(DOOR_MARSHWOOD.get(), modLoc("block/door_marshwood_lower"), modLoc("block/door_marshwood_upper"));
+        doorBlock(DOOR_SCORCHED.get(), modLoc("block/door_scorched_lower"), modLoc("block/door_scorched_upper"));
+
+        // MARK: Fences
+        fence(FENCE_BAOBAB, PLANKS_BAOBAB);
+        fence(FENCE_EUCALYPTUS, PLANKS_EUCALYPTUS);
+        fence(FENCE_MAHOGANY, PLANKS_MAHOGANY);
+        fence(FENCE_MOSSBARK, PLANKS_MOSSBARK);
+        fence(FENCE_ASPER, PLANKS_ASPER);
+        fence(FENCE_CYPRESS, PLANKS_CYPRESS);
+        fence(FENCE_BALSAM, PLANKS_BALSAM);
+        fence(FENCE_WHITE, PLANKS_WHITE);
+        fence(FENCE_BAMBOO, PLANKS_BAMBOO);
+        fence(FENCE_ROTTEN, PLANKS_ROTTEN);
+        fence(FENCE_MARSHWOOD, PLANKS_MARSHWOOD);
+        fence(FENCE_SCORCHED, PLANKS_SCORCHED);
+        fence(FENCE_VARNISHED, PLANKS_VARNISHED);
+
+        // MARK: Fence Gates
+        fenceGate(FENCE_GATE_BAOBAB, PLANKS_BAOBAB);
+        fenceGate(FENCE_GATE_EUCALYPTUS, PLANKS_EUCALYPTUS);
+        fenceGate(FENCE_GATE_MAHOGANY, PLANKS_MAHOGANY);
+        fenceGate(FENCE_GATE_MOSSBARK, PLANKS_MOSSBARK);
+        fenceGate(FENCE_GATE_ASPER, PLANKS_ASPER);
+        fenceGate(FENCE_GATE_CYPRESS, PLANKS_CYPRESS);
+        fenceGate(FENCE_GATE_BALSAM, PLANKS_BALSAM);
+        fenceGate(FENCE_GATE_WHITE, PLANKS_WHITE);
+        fenceGate(FENCE_GATE_BAMBOO, PLANKS_BAMBOO);
+        fenceGate(FENCE_GATE_ROTTEN, PLANKS_ROTTEN);
+        fenceGate(FENCE_GATE_MARSHWOOD, PLANKS_MARSHWOOD);
+        fenceGate(FENCE_GATE_SCORCHED, PLANKS_SCORCHED);
+        fenceGate(FENCE_GATE_VARNISHED, PLANKS_VARNISHED);
+
+        // MARK: Walls
+        wall(WALL_UMBERSTONE, UMBERSTONE);
+        wall(WALL_UMBERCOBBLE, UMBERCOBBLE);
+        wall(WALL_UMBERCOBBLE_MOSSY, UMBERCOBBLE_MOSSY);
+        wall(WALL_UMBERCOBBLE_WEBBED, UMBERCOBBLE_WEBBED);
+        wall(WALL_UMBERSTONE_BRICKS, UMBERSTONE_BRICKS);
+        wall(WALL_UMBERTILE_SMOOTH, UMBERTILE_SMOOTH);
+        wall(WALL_UMBERTILE_SMOOTH_SMALL, UMBERTILE_SMOOTH_SMALL);
+        wall(WALL_UMBERPAVER, UMBERPAVER);
+        wall(WALL_UMBERPAVER_MOSSY, UMBERPAVER_MOSSY);
+        wall(WALL_UMBERPAVER_WEBBED, UMBERPAVER_WEBBED);
+        wall(WALL_AMBER, AMBER);
+        wall(WALL_AMBER_BRICKS, AMBER_BRICKS);
+
+        // MARK: Plants
+        crossBlock(DESERT_SHRUB);
+        //crossBlock(MIRE_CORAL); // TODO: I don't think this is implemented
+        crossBlock(NETTLE);
+        crossBlock(NETTLE_FLOWERED);
+        crossBlock(SWAMP_PLANT);
+        crossBlock(FIRE_BLOOM);
+        crossBlock(FERN);
+        crossBlock(FIDDLE_HEAD);
+        crossBlock(THORNS);
+        crossBlock(MOSS_DOWN);
+        crossBlock(MOULD_DOWN);
+        crossBlock(CULTIVATED_MOSS_DOWN);
+        crossBlock(CULTIVATED_MOULD_DOWN);
+        simpleBlock(ALGAE.get(), models().getExistingFile(modLoc("block/algae")));
+        crossBlock(HANGING_WEB);
+
+        block(PETAL_BLACK);
+        block(PETAL_RED);
+        block(PETAL_BROWN);
+        block(PETAL_BLUE);
+        block(PETAL_PURPLE);
+        block(PETAL_CYAN);
+        block(PETAL_LIGHT_GRAY);
+        block(PETAL_GRAY);
+        block(PETAL_PINK);
+        block(PETAL_YELLOW);
+        block(PETAL_LIGHT_BLUE);
+        block(PETAL_MAGENTA);
+        block(PETAL_ORANGE);
+        block(PETAL_WHITE);
+
+
+        block(EXPLODING_STIGMA, "stigma");
+        block(STEM);
+        block(STIGMA_BLACK, "stigma");
+        block(STIGMA_RED, "stigma");
+        block(STIGMA_BROWN, "stigma");
+        block(STIGMA_BLUE, "stigma");
+        block(STIGMA_PURPLE, "stigma");
+        block(STIGMA_CYAN, "stigma");
+        block(STIGMA_LIGHT_GRAY, "stigma");
+        block(STIGMA_GRAY, "stigma");
+        block(STIGMA_PINK, "stigma");
+        block(STIGMA_YELLOW, "stigma");
+        block(STIGMA_LIGHT_BLUE, "stigma");
+        block(STIGMA_MAGENTA, "stigma");
+        block(STIGMA_ORANGE, "stigma");
+        block(STIGMA_WHITE, "stigma");
+
+        // TODO: I think these were changed to seeds at some point
+//        block(FLOWER_BLACK);
+//        block(FLOWER_RED);
+//        block(FLOWER_BROWN);
+//        block(FLOWER_BLUE);
+//        block(FLOWER_PURPLE);
+//        block(FLOWER_CYAN);
+//        block(FLOWER_LIGHT_GRAY);
+//        block(FLOWER_GRAY);
+//        block(FLOWER_PINK);
+//        block(FLOWER_YELLOW);
+//        block(FLOWER_LIGHT_BLUE);
+//        block(FLOWER_MAGENTA);
+//        block(FLOWER_ORANGE);
+//        block(FLOWER_WHITE);
+//        block(FLOWER_RAINBOW);
+
+        //crossBlock(BULLRUSH); TODO: Double plant
+//        crossBlock(WEEPING_BLUEBELL);
+//        crossBlock(SUNDEW);
+//        crossBlock(DROUGHTED_SHRUB);
+//        crossBlock(TALL_BLOOM);
+//        crossBlock(TANGLED_STALK);
+//        crossBlock(HIGH_CAPPED_MUSHROOM);
+//        crossBlock(TALL_FERN);
+
+        // MARK: Other
         block(JADE_BLOCK);
-        //block(PRESERVED_BLOCK);
         block(MUD);
         block(QUICK_SAND);
-        block(RED_GEM);
-        //block(SWAMP_VENT);
         block(GHOST_SAND);
-        //block(CROP_TURNIP);
-        //block(CROP_CABBAGE);
-        //block(CROP_MANDRAKE);
-        block(JADE_BERRY_BUSH);
-        block(HEART_BERRY_BUSH);
-        //block(SWAMP_BERRY_BUSH);
-        //block(DARK_FRUIT_VINE);
-        block(PRICKLY_PEAR);
-        //block(GIANT_FLOWER);
-        //block(GIANT_FLOWER_STIGMA);
-        //block(PLANTED_FLOWER);
-        //block(SMALL_PLANT);
-        block(THORNS);
-        block(HANGING_WEB);
-        //block(DOUBLE_PLANT);
-        //block(WALL_PLANTS);
-        //block(WALL_PLANTS_CULTIVATED);
-        //block(HONEY_TREAT);
-        //block(DARK_CAPPED_MUSHROOM);
-        //block(SARCASTIC_CZECH_MUSHROOM);
-        //block(GRANDMAS_SHOES_MUSHROOM);
-        //block(DUTCH_CAP_MUSHROOM);
-        //block(KAIZERS_FINGERS_MUSHROOM);
-        //block(DARK_CAPPED_MUSHROOM_BLOCK);
-        //block(SARCASTIC_CZECH_MUSHROOM_BLOCK);
-        //block(GRANDMAS_SHOES_MUSHROOM_BLOCK);
-        //block(DUTCH_CAP_MUSHROOM_BLOCK);
-        //block(KAIZERS_FINGERS_MUSHROOM_BLOCK);
-        //block(GLOWSHROOM);
-        //block(GLOWSHROOM_STALK_MAIN);
-        //block(WITHER_WEB);
-        block(SILK);
-        //block(DOOR_PETRIFIED_WOOD);
-        block(REIN_EXO);
+        block(RED_GEM_BLOCK);
+        //block(RED_GEM_LAMP); TODO: Implement Redstone Lamp
+        //block(WITHER_WEB); TODO: Implement Web
+        block(GNEISS);
+        block(GNEISS_CARVED);
+        block(GNEISS_RELIEF);
+        block(GNEISS_BRICKS);
+        block(GNEISS_SMOOTH);
+        block(GNEISS_TILES);
+        block(GNEISS_TILES_CRACKED);
         block(TEMPLE_BRICK);
         block(TEMPLE_PILLAR);
         block(TEMPLE_TILE);
-        block(VOLCANIC_ROCK);
-        block(GNEISS);
-        //block(GNEISS_VENT);
-        //block(HOLLOW_LOG);
-        block(LOG_BALSAM_RESINLESS);
-        //block(UMBER_FURNACE);
-        //block(UMBER_FURNACE_ACTIVE);
-        //block(PETRIFIED_CRAFTING_TABLE);
-        block(BAMBOO_CRATE);
-        //block(BAMBOO_BRIDGE);
-        block(BAMBOO_LADDER);
-        //block(BAMBOO_NERD_POLE);
-        //block(BAMBOO_EXTENDER);
-        block(BAMBOO_TORCH);
-        //block(BAMBOO_PIPE);
-        //block(BAMBOO_PIPE_EXTRACT);
-        //block(BAMBOO_PIPE_EXTRACT_ACTIVE);
-        //block(LIQUIFIER);
-        block(SILO_ROOF);
-        //block(SILO_TANK);
-        block(SILO_SUPPORTS);
-        //block(HONEY_COMB);
-        //block(UMBER_GOLEM_STATUE);
-        //block(INSECT_REPELLENT);
-        //block(PETRIFIED_WOOD_CHEST);
-        //block(GLOWING_JAR);
-        //block(FLUID_JAR);
-        //block(COMPOSTER);
-        //block(SMOOTHIE_MAKER);
-        //block(UMBERSTONE_BUTTON);
-        block(GLOW_GEM_ACTIVE);
-        block(GLOW_GEM_INACTIVE);
-        //block(MUCUS_BOMB);
-        block(SPIDER_SPAWNER);
-        //block(JUMPING_SPIDER_SPAWNER);
-        //block(TARANTULA_SPAWNER);
-        block(WASP_SPAWNER);
-        block(ANTLION_SPAWNER);
-        block(DRAGON_FLY_SPAWNER);
-        block(ZOMBIE_ANT_SPAWNER);
-        //block(ZOMBIE_ANT_SOLDIER_SPAWNER);
-        block(MAGMA_CRAWLER_SPAWNER);
-        block(LOCUST_SPAWNER);
-        block(GIANT_LILY_PAD);
-        block(WASP_NEST);
-        //block(STAIRS_WASP_NEST);
+        block(SILK);
+        block(REIN_EXO);
+        log(VELOCITY);
+        log(LIGHTNING_SPEED);
         block(ANTLION_EGG);
         block(TARANTULA_EGG);
+        //block(HONEY_TREAT); TODO: Implement this
+        block(WASP_NEST);
+        stairs(STAIRS_WASP_NEST, WASP_NEST);
+        //block(INSECT_REPELLENT); TODO: I'm pretty sure we don't need this
+
+        // MARK: Spawners
+        block(ANTLION_SPAWNER);
+        block(DRAGON_FLY_SPAWNER);
+        block(JUMPING_SPIDER_SPAWNER, "spider_spawner");
+        block(SPIDER_SPAWNER);
+        block(TARANTULA_SPAWNER, "spider_spawner");
+        block(WASP_SPAWNER);
+        block(ZOMBIE_ANT_SPAWNER);
+        block(ZOMBIE_ANT_SOLDIER_SPAWNER, "zombie_ant_spawner");
+        block(MAGMA_CRAWLER_SPAWNER);
+        block(LOCUST_SPAWNER);
+
+        // MARK: Utility Blocks
+        //block(PETRIFIED_CRAFTING_TABLE); TODO: Add in crafting table method
+        //block(PETRIFIED_WOOD_CHEST); TODO: Add in chest
+        block(SILO_ROOF);
+        block(SILO_TANK, "silo_tank_inactive");
+        block(SILO_SUPPORTS);
+        //horizontalBlock(HONEY_COMB.get(), modLoc("block/%s_sides".formatted(name(HONEY_COMB))), modLoc("block/%s_front".formatted(name(HONEY_COMB))), modLoc("block/%s_top".formatted(name(HONEY_COMB))));
+        //block(UMBER_FURNACE); TODO: Implement
+        button(UMBERSTONE_BUTTON, UMBERSTONE);
+//        block(LIQUIFIER);
+//        block(GLOW_GEM); TODO Implement these
+//        block(MUCUS_BOMB);
+//        block(UMBER_GOLEM_STATUE);
+
+        // TODO: Implement Altars
+//        block(ALTAR_BASE);
+//        block(ALTAR_LIGHTNING);
+//        block(ALTAR_HEALING);
+//        block(ALTAR_XP);
+//        block(ALTAR_REPAIR);
+//        block(ALTAR_OFFERING);
+
+        // MARK: Antlion Dungeon
         block(CAPSTONE);
-        block(ANT_HILL_BLOCK);
+        block(CAPSTONE_MUD);
+        block(CAPSTONE_IRON);
+        block(CAPSTONE_GOLD);
+        block(CAPSTONE_JADE);
+        block(TEMPLE_BRICK_UNBREAKING, "temple_brick");
+        block(TEMPLE_BRICK_UNBREAKING_JADE, "temple_brick_jade");
+        block(TEMPLE_BRICK_UNBREAKING_EXO, "temple_brick_exo");
+        block(TEMPLE_BRICK_UNBREAKING_CREAM, "temple_brick_cream");
+        block(TEMPLE_BRICK_UNBREAKING_EYE, "temple_brick_eye");
+        block(TEMPLE_BRICK_UNBREAKING_STRING, "temple_brick_string");
+        block(TEMPLE_TELEPORTER, "temple_teleport_0");
         block(FORCE_FIELD);
         block(FORCE_LOCK);
-        //block(TEMPLE_BRICK_UNBREAKING);
-        //block(TEMPLE_TELEPORTER);
-        //block(BLOCK_OF_BONES);
-        //block(DUNG_SPAWNER_BOT_FLY);
-        //block(DUNG_SPAWNER_FLY);
+        block(ANT_HILL_BLOCK);
     }
 }

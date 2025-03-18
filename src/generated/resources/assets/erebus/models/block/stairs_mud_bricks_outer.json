@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/outer_stairs",
   "textures": {
-    "bottom": "erebus:block/mud_brick",
-    "side": "erebus:block/mud_brick",
-    "top": "erebus:block/mud_brick"
+    "bottom": "erebus:block/mud_bricks",
+    "side": "erebus:block/mud_bricks",
+    "top": "erebus:block/mud_bricks"
   }
 }

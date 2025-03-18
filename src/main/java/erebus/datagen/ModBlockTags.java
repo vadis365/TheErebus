@@ -1,0 +1,69 @@
+package erebus.datagen;
+
+import erebus.Erebus;
+import static erebus.registries.ModBlocks.*;
+import erebus.registries.ModTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.concurrent.CompletableFuture;
+
+public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
+
+    public ModBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, Registries.BLOCK, lookupProvider, block -> block.builtInRegistryHolder().key(), Erebus.MODID, existingFileHelper);
+    }
+
+    @Override
+    protected void addTags(HolderLookup.Provider provider) {
+
+        // MARK: Paxel
+        tag(ModTags.MINEABLE_WITH_PAXEL).addTags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_SHOVEL);
+
+        // MARK: Walls
+        tag(BlockTags.WALLS)
+                .add(
+                        WALL_UMBERSTONE.get(),
+                        WALL_UMBERCOBBLE.get(),
+                        WALL_UMBERCOBBLE_MOSSY.get(),
+                        WALL_UMBERCOBBLE_WEBBED.get(),
+                        WALL_UMBERSTONE_BRICKS.get(),
+                        WALL_UMBERTILE_SMOOTH.get(),
+                        WALL_UMBERTILE_SMOOTH_SMALL.get(),
+                        WALL_UMBERPAVER.get(),
+                        WALL_UMBERPAVER_MOSSY.get(),
+                        WALL_UMBERPAVER_WEBBED.get(),
+                        WALL_AMBER.get(),
+                        WALL_AMBER_BRICKS.get()
+                );
+
+        // MARK: Stone
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(
+                        UMBERSTONE.get(), UMBERSTONE_BRICKS.get(), UMBERCOBBLE.get(),
+                        UMBERCOBBLE_MOSSY.get(), UMBERCOBBLE_WEBBED.get(), UMBERTILE_SMOOTH.get(),
+                        UMBERTILE_SMOOTH_SMALL.get(), UMBERPAVER.get(), UMBERPAVER_MOSSY.get(),
+                        UMBERPAVER_WEBBED.get(), UMBERSTONE_PILLAR.get(), ORE_IRON.get(),
+                        ORE_GOLD.get(), ORE_COAL.get(), ORE_DIAMOND.get(), ORE_EMERALD.get(),
+                        ORE_LAPIS.get(), ORE_QUARTZ.get(), ORE_PETRIFIED_QUARTZ.get(), ORE_COPPER.get(),
+                        ORE_SILVER.get(), ORE_TIN.get(), ORE_LEAD.get(), ORE_ALUMINUM.get(), ORE_JADE.get(),
+                        ORE_FOSSIL.get(), ORE_GNEISS.get(), ORE_PETRIFIED_WOOD.get(), ORE_TEMPLE.get(),
+                        ORE_ENCRUSTED_DIAMOND.get()
+                );
+
+        // MARK: Ores
+        tag(BlockTags.COAL_ORES).add(ORE_COAL.get());
+        tag(BlockTags.IRON_ORES).add(ORE_IRON.get());
+        tag(BlockTags.GOLD_ORES).add(ORE_GOLD.get());
+        tag(BlockTags.DIAMOND_ORES).add(ORE_DIAMOND.get(), ORE_ENCRUSTED_DIAMOND.get());
+        tag(BlockTags.EMERALD_ORES).add(ORE_EMERALD.get());
+        tag(BlockTags.COPPER_ORES).add(ORE_COPPER.get());
+        tag(BlockTags.LAPIS_ORES).add(ORE_LAPIS.get());
+    }
+}

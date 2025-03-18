@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "erebus:block/planks_baobab",
+    "side": "erebus:block/planks_baobab",
+    "top": "erebus:block/planks_baobab"
+  }
+}

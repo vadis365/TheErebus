@@ -4,7 +4,7 @@
       "model": "erebus:block/slab_mud_bricks"
     },
     "type=double": {
-      "model": "erebus:block/mud_brick"
+      "model": "erebus:block/mud_bricks"
     },
     "type=top": {
       "model": "erebus:block/slab_mud_bricks_top"

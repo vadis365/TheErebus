@@ -1,0 +1,24 @@
+package erebus.datagen.providers;
+
+import erebus.datagen.loot.ModBlockLootTables;
+import erebus.datagen.loot.ModChestLootTables;
+import erebus.datagen.loot.ModEntityLootTables;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+
+public class ModLootTableProvider extends LootTableProvider {
+
+    public ModLootTableProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, Set.of(), List.of(
+                new SubProviderEntry(ModBlockLootTables::new, LootContextParamSets.BLOCK),
+                new SubProviderEntry(ModChestLootTables::new, LootContextParamSets.CHEST)
+                // new SubProviderEntry(ModEntityLootTables::new, LootContextParamSets.ENTITY)
+        ), registries);
+    }
+}

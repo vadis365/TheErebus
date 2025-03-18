@@ -4,7 +4,7 @@
       "model": "erebus:block/slab_mir_bricks"
     },
     "type=double": {
-      "model": "erebus:block/mir_brick"
+      "model": "erebus:block/mir_bricks"
     },
     "type=top": {
       "model": "erebus:block/slab_mir_bricks_top"

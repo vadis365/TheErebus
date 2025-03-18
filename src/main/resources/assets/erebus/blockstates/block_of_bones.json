@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=north": { "model": "erebus:block/block_of_bones"},
+        "facing=south": { "model": "erebus:block/block_of_bones"},
+        "facing=west":  { "model": "erebus:block/block_of_bones"},
+        "facing=east":  { "model": "erebus:block/block_of_bones"},
+        "facing=up":  { "model": "erebus:block/block_of_bones"},
+        "facing=down":  { "model": "erebus:block/block_of_bones"}
+    }
+}

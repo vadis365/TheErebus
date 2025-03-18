@@ -3,34 +3,59 @@ package erebus.registries;
 import erebus.Erebus;
 import erebus.block.ConnectedTextureBlock;
 import erebus.block.GaeanKeystoneBlock;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.awt.*;
 import java.util.function.Supplier;
 
 public class ModBlocks {
 
-    // Deferred Register to hold all our Blocks
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Erebus.MODID);
 
-    public static final DeferredBlock<WaterlilyBlock> ALGAE = registerBlock(
-            "algae",
-            () -> new WaterlilyBlock(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.PLANT)
-                    .instabreak()
-                    .sound(SoundType.LILY_PAD)
-                    .noOcclusion()
-                    .pushReaction(PushReaction.DESTROY)
-            )
+    // MARK: Umberstone
+    public static final DeferredBlock<Block> UMBERSTONE = registerSimpleBlock(
+            "umberstone",
+            BlockBehaviour.Properties.of()
+                    .strength(1.5F, 10.0F)
+                    .requiresCorrectToolForDrops()
     );
+    public static final DeferredBlock<Block> UMBERSTONE_BRICKS = registerSimpleBlock("umberstone_bricks", BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS));
+    public static final DeferredBlock<Block> UMBERCOBBLE = registerSimpleBlock("umbercobble", BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLESTONE));
+    public static final DeferredBlock<Block> UMBERCOBBLE_MOSSY = registerSimpleBlock("umbercobble_mossy", BlockBehaviour.Properties.ofFullCopy(Blocks.MOSSY_COBBLESTONE));
+    public static final DeferredBlock<Block> UMBERCOBBLE_WEBBED = registerSimpleBlock("umbercobble_webbed", BlockBehaviour.Properties.ofFullCopy(Blocks.MOSSY_COBBLESTONE));
+    public static final DeferredBlock<Block> UMBERTILE_SMOOTH = registerSimpleBlock("umbertile_smooth", BlockBehaviour.Properties.ofFullCopy(Blocks.SMOOTH_STONE));
+    public static final DeferredBlock<Block> UMBERTILE_SMOOTH_SMALL = registerSimpleBlock("umbertile_smooth_small", BlockBehaviour.Properties.ofFullCopy(Blocks.SMOOTH_STONE));
+    public static final DeferredBlock<Block> UMBERGRAVEL = registerSimpleBlock("umbergravel", BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL));
+    public static final DeferredBlock<Block> UMBERPAVER = registerSimpleBlock("umberpaver", BlockBehaviour.Properties.ofFullCopy(Blocks.STONE));
+    public static final DeferredBlock<Block> UMBERPAVER_MOSSY = registerSimpleBlock("umberpaver_mossy", BlockBehaviour.Properties.ofFullCopy(Blocks.STONE));
+    public static final DeferredBlock<Block> UMBERPAVER_WEBBED = registerSimpleBlock("umberpaver_webbed", BlockBehaviour.Properties.ofFullCopy(Blocks.STONE));
+    public static final DeferredBlock<RotatedPillarBlock> UMBERSTONE_PILLAR = registerBlock("umberstone_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)));
+    public static final DeferredBlock<Block> VOLCANIC_ROCK = registerSimpleBlock("volcanic_rock", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> DUST = registerSimpleBlock("dust", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> DUST_LAYER = registerSimpleBlock("dust_layer", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK = registerSimpleBlock("petrified_wood_rock", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_2 = registerSimpleBlock("petrified_wood_rock_2", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_3 = registerSimpleBlock("petrified_wood_rock_3", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_4 = registerSimpleBlock("petrified_wood_rock_4", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_5 = registerSimpleBlock("petrified_wood_rock_5", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_6 = registerSimpleBlock("petrified_wood_rock_6", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETRIFIED_BARK_RED = registerSimpleBlock("petrified_bark_red", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETRIFIED_BARK_BROWN = registerSimpleBlock("petrified_bark_brown", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETRIFIED_LOG_INNER = registerSimpleBlock("petrified_log_inner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> DUNG = registerSimpleBlock("dung", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
+    // MARK: Amber
     public static final DeferredBlock<TransparentBlock> AMBER = registerBlock(
             "amber",
             () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)
@@ -41,28 +66,56 @@ public class ModBlocks {
                     .mapColor(MapColor.GOLD)
             )
     );
+
     public static final DeferredBlock<TransparentBlock> AMBER_BRICKS = registerBlock(
             "amber_bricks",
             () -> new TransparentBlock(
                     BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)
-                    .strength(2.5F)
-                    .noOcclusion()
-                    .isViewBlocking((blockState, blockGetter, blockPos) -> false)
-                    .sound(SoundType.GLASS)
-                    .mapColor(MapColor.GOLD)
+                            .strength(2.5F)
+                            .noOcclusion()
+                            .isViewBlocking((blockState, blockGetter, blockPos) -> false)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
             )
     );
+
     public static final DeferredBlock<ConnectedTextureBlock> AMBER_GLASS = registerBlock(
             "amber_glass",
             () -> new ConnectedTextureBlock(
                     BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)
-                    .strength(2.5F)
-                    .sound(SoundType.GLASS)
-                    .mapColor(MapColor.GOLD)
+                            .strength(2.5F)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
             )
     );
+
+    public static final DeferredBlock<TransparentBlock> PRESERVED_AMBER = registerBlock(
+            "preserved_amber",
+            () -> new TransparentBlock(
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)
+                            .strength(2.5F)
+                            .noOcclusion()
+                            .isViewBlocking((blockState, blockGetter, blockPos) -> false)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
+            )
+    );
+
+    public static final DeferredBlock<ConnectedTextureBlock> PRESERVED_AMBER_GLASS = registerBlock(
+            "preserved_amber_glass",
+            () -> new ConnectedTextureBlock(
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)
+                            .strength(2.5F)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
+            )
+    );
+
+    public static final DeferredBlock<Block> GLOWING_JAR = registerSimpleBlock("glowing_jar", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLUID_JAR = registerSimpleBlock("fluid_jar", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
     public static final DeferredBlock<DoorBlock> AMBER_DOOR = registerBlock(
-            "door_amber",
+            "amber_door",
             () -> new DoorBlock(
                     BlockSetType.STONE,
                     BlockBehaviour.Properties.of()
@@ -72,228 +125,244 @@ public class ModBlocks {
             )
     );
 
-    // MARK: Umberstone
+    // MARK: Ores
+    public static final DeferredBlock<Block> ORE_IRON = registerBlock("ore_iron", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
+    public static final DeferredBlock<Block> ORE_GOLD = registerBlock("ore_gold", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.GOLD_ORE)));
+    public static final DeferredBlock<Block> ORE_COAL = registerBlock("ore_coal", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_ORE)));
+    public static final DeferredBlock<Block> ORE_DIAMOND = registerBlock("ore_diamond", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_ORE)));
+    public static final DeferredBlock<Block> ORE_EMERALD = registerBlock("ore_emerald", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.EMERALD_ORE)));
+    public static final DeferredBlock<Block> ORE_LAPIS = registerBlock("ore_lapis", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.LAPIS_ORE)));
+    public static final DeferredBlock<Block> ORE_QUARTZ = registerBlock("ore_quartz", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_QUARTZ_ORE)));
+    public static final DeferredBlock<Block> ORE_PETRIFIED_QUARTZ = registerBlock("ore_petrified_quartz", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_QUARTZ_ORE)));
+    public static final DeferredBlock<Block> ORE_COPPER = registerBlock("ore_copper", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_ORE)));
+    public static final DeferredBlock<Block> ORE_SILVER = registerBlock("ore_silver", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
+    public static final DeferredBlock<Block> ORE_TIN = registerBlock("ore_tin", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
+    public static final DeferredBlock<Block> ORE_LEAD = registerBlock("ore_lead", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
+    public static final DeferredBlock<Block> ORE_ALUMINUM = registerBlock("ore_aluminum", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
+    public static final DeferredBlock<Block> ORE_JADE = registerBlock("ore_jade", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
+    public static final DeferredBlock<Block> ORE_ENCRUSTED_DIAMOND = registerBlock("ore_encrusted_diamond", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
+    public static final DeferredBlock<Block> ORE_FOSSIL = registerBlock("ore_fossil", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
+    public static final DeferredBlock<Block> ORE_GNEISS = registerBlock("ore_gneiss", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
+    public static final DeferredBlock<Block> ORE_PETRIFIED_WOOD = registerBlock("ore_petrified_wood", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
+    public static final DeferredBlock<Block> ORE_TEMPLE = registerBlock("ore_temple", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
 
-    public static final DeferredBlock<Block> UMBERSTONE = registerSimpleBlock("umberstone", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBERSTONE_BRICKS = registerSimpleBlock("umberstone_bricks", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBERCOBBLE = registerSimpleBlock("umbercobble", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBERCOBBLE_MOSSY = registerSimpleBlock("umbercobble_mossy", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBERCOBBLE_WEBBED = registerSimpleBlock("umbercobble_webbed", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBERTILE_SMOOTH = registerSimpleBlock("umbertile_smooth", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBERTILE_SMOOTH_SMALL = registerSimpleBlock("umbertile_smooth_small", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBERGRAVEL = registerSimpleBlock("umbergravel", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBERPAVER = registerSimpleBlock("umberpaver", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBERPAVER_MOSSY = registerSimpleBlock("umberpaver_mossy", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBERPAVER_WEBBED = registerSimpleBlock("umberpaver_webbed", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<RotatedPillarBlock> UMBERSTONE_PILLAR = registerBlock(
-            "umberstone_pillar",
-            () -> new RotatedPillarBlock(
-                    BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.STONE)
+    // MARK: Logs
+    public static final DeferredBlock<RotatedPillarBlock> LOG_BAOBAB = registerBlock("log_baobab", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> LOG_EUCALYPTUS = registerBlock("log_eucalyptus", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> LOG_MAHOGANY = registerBlock("log_mahogany", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> LOG_MOSSBARK = registerBlock("log_mossbark", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> LOG_ASPER = registerBlock("log_asper", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> LOG_CYPRESS = registerBlock("log_cypress", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> LOG_BALSAM = registerBlock("log_balsam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> LOG_BALSAM_RESINLESS = registerBlock("log_balsam_resinless", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> LOG_ROTTEN = registerBlock("log_rotten", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> LOG_MARSHWOOD = registerBlock("log_marshwood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> LOG_SCORCHED = registerBlock("log_scorched", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> LOG_BAMBOO = registerBlock("log_bamboo", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> LOG_HOLLOW = registerBlock("log_hollow", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+
+    // MARK: Saplings
+    public static final DeferredBlock<Block> SAPLING_MOSSBARK = registerSimpleBlock("sapling_mossbark", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> SAPLING_ASPER = registerSimpleBlock("sapling_asper", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> SAPLING_EUCALYPTUS = registerSimpleBlock("sapling_eucalyptus", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> SAPLING_MAHOGANY = registerSimpleBlock("sapling_mahogany", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> SAPLING_BALSAM = registerSimpleBlock("sapling_balsam", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> SAPLING_BAOBAB = registerSimpleBlock("sapling_baobab", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> SAPLING_MARSHWOOD = registerSimpleBlock("sapling_marshwood", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> SAPLING_CYPRESS = registerSimpleBlock("sapling_cypress", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> SAPLING_BAMBOO = registerSimpleBlock("sapling_bamboo", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+
+    // MARK: Leaves
+    public static final DeferredBlock<Block> LEAVES_MOSSBARK = registerSimpleBlock("leaves_mossbark", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> LEAVES_ASPER = registerSimpleBlock("leaves_asper", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> LEAVES_EUCALYPTUS = registerSimpleBlock("leaves_eucalyptus", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> LEAVES_MAHOGANY = registerSimpleBlock("leaves_mahogany", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> LEAVES_BALSAM = registerSimpleBlock("leaves_balsam", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> LEAVES_BAOBAB = registerSimpleBlock("leaves_baobab", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> LEAVES_MARSHWOOD = registerSimpleBlock("leaves_marshwood", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> LEAVES_CYPRESS = registerSimpleBlock("leaves_cypress", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+
+    // MARK: Planks
+    public static final DeferredBlock<Block> PLANKS_BAOBAB = registerSimpleBlock("planks_baobab", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<Block> PLANKS_EUCALYPTUS = registerSimpleBlock("planks_eucalyptus", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<Block> PLANKS_MAHOGANY = registerSimpleBlock("planks_mahogany", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<Block> PLANKS_MOSSBARK = registerSimpleBlock("planks_mossbark", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<Block> PLANKS_ASPER = registerSimpleBlock("planks_asper", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<Block> PLANKS_CYPRESS = registerSimpleBlock("planks_cypress", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<Block> PLANKS_BALSAM = registerSimpleBlock("planks_balsam", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<Block> PLANKS_WHITE = registerSimpleBlock("planks_white", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<Block> PLANKS_BAMBOO = registerSimpleBlock("planks_bamboo", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<Block> PLANKS_ROTTEN = registerSimpleBlock("planks_rotten", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<Block> PLANKS_MARSHWOOD = registerSimpleBlock("planks_marshwood", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<Block> PLANKS_SCORCHED = registerSimpleBlock("planks_scorched", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<Block> PLANKS_VARNISHED = registerSimpleBlock("planks_varnished", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+    public static final DeferredBlock<Block> PLANKS_PETRIFIED = registerSimpleBlock("planks_petrified", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));
+
+    // MARK: Slabs Wood
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_BAOBAB = registerBlock("slab_planks_baobab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_EUCALYPTUS = registerBlock("slab_planks_eucalyptus", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_MAHOGANY = registerBlock("slab_planks_mahogany", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_MOSSBARK = registerBlock("slab_planks_mossbark", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_ASPER = registerBlock("slab_planks_asper", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_CYPRESS = registerBlock("slab_planks_cypress", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_BALSAM = registerBlock("slab_planks_balsam", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_WHITE = registerBlock("slab_planks_white", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_BAMBOO = registerBlock("slab_planks_bamboo", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_ROTTEN = registerBlock("slab_planks_rotten", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_MARSHWOOD = registerBlock("slab_planks_marshwood", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_SCORCHED = registerBlock("slab_planks_scorched", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_VARNISHED = registerBlock("slab_planks_varnished", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_PETRIFIED = registerBlock("slab_planks_petrified", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+
+    // MARK: Slabs Stone
+    public static final DeferredBlock<SlabBlock> SLAB_UMBERSTONE = registerBlock("slab_umberstone", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_UMBERCOBBLE = registerBlock("slab_umbercobble", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_UMBERCOBBLE_MOSSY = registerBlock("slab_umbercobble_mossy", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_UMBERCOBBLE_WEBBED = registerBlock("slab_umbercobble_webbed", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_UMBERSTONE_BRICKS = registerBlock("slab_umberstone_bricks", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_UMBERTILE_SMOOTH = registerBlock("slab_umberstone_smooth", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_UMBERTILE_SMOOTH_SMALL = registerBlock("slab_umberstone_smooth_small", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_UMBERPAVER = registerBlock("slab_umberpaver", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_UMBERPAVER_MOSSY = registerBlock("slab_umberpaver_mossy", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_UMBERPAVER_WEBBED = registerBlock("slab_umberpaver_webbed", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_AMBER = registerBlock("slab_amber", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(AMBER.get())));
+    public static final DeferredBlock<SlabBlock> SLAB_AMBER_BRICKS = registerBlock("slab_amber_bricks", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(AMBER.get())));
+    public static final DeferredBlock<SlabBlock> SLAB_MUD_BRICKS = registerBlock("slab_mud_bricks", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+    public static final DeferredBlock<SlabBlock> SLAB_MIR_BRICKS = registerBlock("slab_mir_bricks", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
+
+    // MARK: Stairs Wood
+    public static final DeferredBlock<StairBlock> STAIRS_BAOBAB = registerBlock(
+            "stairs_baobab",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    // MARK: Walls
-
-    public static final DeferredBlock<WallBlock> WALL_UMBERSTONE = registerBlock(
-            "wall_umberstone",
-            () -> new WallBlock(
-                    BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_EUCALYPTUS = registerBlock(
+            "stairs_eucalyptus",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    public static final DeferredBlock<WallBlock> WALL_UMBERCOBBLE = registerBlock(
-            "wall_umbercobble",
-            () -> new WallBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_MAHOGANY = registerBlock(
+            "stairs_mahogany",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    public static final DeferredBlock<WallBlock> WALL_UMBERCOBBLE_MOSSY = registerBlock(
-            "wall_umbercobble_mossy",
-            () -> new WallBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_MOSSBARK = registerBlock(
+            "stairs_mossbark",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    public static final DeferredBlock<WallBlock> WALL_UMBERCOBBLE_WEBBED = registerBlock(
-            "wall_umbercobble_webbed",
-            () -> new WallBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_ASPER = registerBlock(
+            "stairs_asper",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    public static final DeferredBlock<WallBlock> WALL_UMBERSTONE_BRICKS = registerBlock(
-            "wall_umberstone_bricks",
-            () -> new WallBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_CYPRESS = registerBlock(
+            "stairs_cypress",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    public static final DeferredBlock<WallBlock> WALL_UMBERTILE_SMOOTH = registerBlock(
-            "wall_umbertile_smooth",
-            () -> new WallBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_BALSAM = registerBlock(
+            "stairs_balsam",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    public static final DeferredBlock<WallBlock> WALL_UMBERTILE_SMOOTH_SMALL = registerBlock(
-            "wall_umbertile_smooth_small",
-            () -> new WallBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_WHITE = registerBlock(
+            "stairs_white",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    public static final DeferredBlock<WallBlock> WALL_UMBERPAVER = registerBlock(
-            "wall_umberpaver",
-            () -> new WallBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_BAMBOO = registerBlock(
+            "stairs_bamboo",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    public static final DeferredBlock<WallBlock> WALL_UMBERPAVER_MOSSY = registerBlock(
-            "wall_umberpaver_mossy",
-            () -> new WallBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_ROTTEN = registerBlock(
+            "stairs_rotten",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    public static final DeferredBlock<WallBlock> WALL_UMBERPAVER_WEBBED = registerBlock(
-            "wall_umberpaver_webbed",
-            () -> new WallBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_MARSHWOOD = registerBlock(
+            "stairs_marshwood",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    public static final DeferredBlock<WallBlock> WALL_AMBER = registerBlock(
-            "wall_amber",
-            () -> new WallBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_SCORCHED = registerBlock(
+            "stairs_scorched",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    public static final DeferredBlock<WallBlock> WALL_AMBER_BRICKS = registerBlock(
-            "wall_amber_bricks",
-            () -> new WallBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_VARNISHED = registerBlock(
+            "stairs_varnished",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    // MARK: Slabs
-
-    public static final DeferredBlock<SlabBlock> SLAB_UMBERSTONE = registerBlock(
-            "slab_umberstone",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_PETRIFIED = registerBlock(
+            "stairs_petrified",
+            () -> new StairBlock(
+                    PLANKS_BAOBAB.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    public static final DeferredBlock<SlabBlock> SLAB_UMBERCOBBLE = registerBlock(
-            "slab_umbercobble",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    // MARK: Stairs Stone
+    public static final DeferredBlock<StairBlock> STAIRS_UMBERSTONE = registerBlock(
+            "stairs_umberstone",
+            () -> new StairBlock(
+                    UMBERSTONE.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
 
-    public static final DeferredBlock<SlabBlock> SLAB_UMBERCOBBLE_MOSSY = registerBlock(
-            "slab_umbercobble_mossy",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
+    public static final DeferredBlock<StairBlock> STAIRS_UMBERCOBBLE = registerBlock(
+            "stairs_umbercobble",
+            () -> new StairBlock(
+                    UMBERCOBBLE.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
-
-    public static final DeferredBlock<SlabBlock> SLAB_UMBERCOBBLE_WEBBED = registerBlock(
-            "slab_umbercobble_webbed",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
-            )
-    );
-
-    public static final DeferredBlock<SlabBlock> SLAB_UMBERSTONE_BRICKS = registerBlock(
-            "slab_umberstone_bricks",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
-            )
-    );
-
-    public static final DeferredBlock<SlabBlock> SLAB_UMBERTILE_SMOOTH = registerBlock(
-            "slab_umberstone_smooth",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
-            )
-    );
-
-    public static final DeferredBlock<SlabBlock> SLAB_UMBERTILE_SMOOTH_SMALL = registerBlock(
-            "slab_umberstone_smooth_small",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
-            )
-    );
-
-    public static final DeferredBlock<SlabBlock> SLAB_UMBERPAVER = registerBlock(
-            "slab_umberpaver",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
-            )
-    );
-
-    public static final DeferredBlock<SlabBlock> SLAB_AMBER = registerBlock(
-            "slab_amber",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
-            )
-    );
-
-    public static final DeferredBlock<SlabBlock> SLAB_AMBER_BRICKS = registerBlock(
-            "slab_amber_bricks",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
-            )
-    );
-
-    public static final DeferredBlock<SlabBlock> SLAB_UMBERPAVER_MOSSY = registerBlock(
-            "slab_umberpaver_mossy",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
-            )
-    );
-
-    public static final DeferredBlock<SlabBlock> SLAB_UMBERPAVER_WEBBED = registerBlock(
-            "slab_umberpaver_webbed",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
-            )
-    );
-
-    public static final DeferredBlock<SlabBlock> SLAB_PLANKS_PETRIFIED_WOOD = registerBlock(
-            "slab_petrified_wood",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
-            )
-    );
-
-    public static final DeferredBlock<SlabBlock> SLAB_MIR_BRICKS = registerBlock(
-            "slab_mir_bricks",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.STONE))
-    );
-
-    public static final DeferredBlock<SlabBlock> SLAB_MUD_BRICKS = registerBlock(
-            "slab_mud_bricks",
-            () -> new SlabBlock(
-                    BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.STONE)
-            )
-    );
-
-    // MARK: Stairs
-
     public static final DeferredBlock<StairBlock> STAIRS_UMBERCOBBLE_MOSSY = registerBlock(
             "stairs_umbercobble_mossy",
             () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
+                    UMBERCOBBLE_MOSSY.get().defaultBlockState(),
                     BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
@@ -301,7 +370,7 @@ public class ModBlocks {
     public static final DeferredBlock<StairBlock> STAIRS_UMBERCOBBLE_WEBBED = registerBlock(
             "stairs_umbercobble_webbed",
             () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
+                    UMBERCOBBLE_WEBBED.get().defaultBlockState(),
                     BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
@@ -309,7 +378,7 @@ public class ModBlocks {
     public static final DeferredBlock<StairBlock> STAIRS_UMBERSTONE_BRICKS = registerBlock(
             "stairs_umberstone_bricks",
             () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
+                    UMBERSTONE_BRICKS.get().defaultBlockState(),
                     BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
@@ -317,7 +386,7 @@ public class ModBlocks {
     public static final DeferredBlock<StairBlock> STAIRS_UMBERTILE_SMOOTH = registerBlock(
             "stairs_umberstone_smooth",
             () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
+                    UMBERTILE_SMOOTH.get().defaultBlockState(),
                     BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
@@ -325,7 +394,7 @@ public class ModBlocks {
     public static final DeferredBlock<StairBlock> STAIRS_UMBERTILE_SMOOTH_SMALL = registerBlock(
             "stairs_umberstone_smooth_small",
             () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
+                    UMBERTILE_SMOOTH_SMALL.get().defaultBlockState(),
                     BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
@@ -333,7 +402,7 @@ public class ModBlocks {
     public static final DeferredBlock<StairBlock> STAIRS_UMBERPAVER = registerBlock(
             "stairs_umberpaver",
             () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
+                    UMBERPAVER.get().defaultBlockState(),
                     BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
@@ -341,7 +410,7 @@ public class ModBlocks {
     public static final DeferredBlock<StairBlock> STAIRS_UMBERPAVER_MOSSY = registerBlock(
             "stairs_umberpaver_mossy",
             () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
+                    UMBERPAVER_MOSSY.get().defaultBlockState(),
                     BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
@@ -349,7 +418,7 @@ public class ModBlocks {
     public static final DeferredBlock<StairBlock> STAIRS_UMBERPAVER_WEBBED = registerBlock(
             "stairs_umberpaver_webbed",
             () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
+                    UMBERPAVER_WEBBED.get().defaultBlockState(),
                     BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
@@ -357,7 +426,7 @@ public class ModBlocks {
     public static final DeferredBlock<StairBlock> STAIRS_AMBER = registerBlock(
             "stairs_amber",
             () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
+                    AMBER.get().defaultBlockState(),
                     BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
@@ -365,15 +434,7 @@ public class ModBlocks {
     public static final DeferredBlock<StairBlock> STAIRS_AMBER_BRICKS = registerBlock(
             "stairs_amber_bricks",
             () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_PETRIFIED_WOOD = registerBlock(
-            "stairs_petrified_wood",
-            () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
+                    AMBER_BRICKS.get().defaultBlockState(),
                     BlockBehaviour.Properties.of().strength(2.0F)
             )
     );
@@ -394,98 +455,173 @@ public class ModBlocks {
             )
     );
 
-    public static final DeferredBlock<StairBlock> STAIRS_UMBERSTONE = registerBlock(
-            "stairs_umberstone",
-            () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
+    // MARK: Doors
+    public static final DeferredBlock<DoorBlock> DOOR_BAOBAB = registerBlock(
+            "door_baobab",
+            () -> new DoorBlock(
+                    BlockSetType.OAK,
+                    BlockBehaviour.Properties.of()
+                            .strength(2.5F)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
             )
     );
 
-    public static final DeferredBlock<StairBlock> STAIRS_UMBERCOBBLE = registerBlock(
-            "stairs_umbercobble",
-            () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
+    public static final DeferredBlock<DoorBlock> DOOR_EUCALYPTUS = registerBlock(
+            "door_eucalyptus",
+            () -> new DoorBlock(
+                    BlockSetType.OAK,
+                    BlockBehaviour.Properties.of()
+                            .strength(2.5F)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
             )
     );
 
-    // MARK: Portal
-
-    public static final DeferredBlock<TransparentBlock> PORTAL = registerBlock(
-            "portal",
-            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_PORTAL))
+    public static final DeferredBlock<DoorBlock> DOOR_MAHOGANY = registerBlock(
+            "door_mahogany",
+            () -> new DoorBlock(
+                    BlockSetType.OAK,
+                    BlockBehaviour.Properties.of()
+                            .strength(2.5F)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
+            )
     );
 
-    public static final DeferredBlock<GaeanKeystoneBlock> GAEAN_KEYSTONE = registerBlock("gaean_keystone", GaeanKeystoneBlock::new);
+    public static final DeferredBlock<DoorBlock> DOOR_MOSSBARK = registerBlock(
+            "door_mossbark",
+            () -> new DoorBlock(
+                    BlockSetType.OAK,
+                    BlockBehaviour.Properties.of()
+                            .strength(2.5F)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
+            )
+    );
 
-    // MARK: Ores
+    public static final DeferredBlock<DoorBlock> DOOR_ASPER = registerBlock(
+            "door_asper",
+            () -> new DoorBlock(
+                    BlockSetType.OAK,
+                    BlockBehaviour.Properties.of()
+                            .strength(2.5F)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
+            )
+    );
 
-    public static final DeferredBlock<Block> ORE_IRON = registerSimpleBlock("ore_iron", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_GOLD = registerSimpleBlock("ore_gold", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_COAL = registerSimpleBlock("ore_coal", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_DIAMOND = registerSimpleBlock("ore_diamond", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_EMERALD = registerSimpleBlock("ore_emerald", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_LAPIS = registerSimpleBlock("ore_lapis", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_QUARTZ = registerSimpleBlock("ore_quartz", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_PETRIFIED_QUARTZ = registerSimpleBlock("ore_petrified_quartz", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_COPPER = registerSimpleBlock("ore_copper", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_SILVER = registerSimpleBlock("ore_silver", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_TIN = registerSimpleBlock("ore_tin", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_LEAD = registerSimpleBlock("ore_lead", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_ALUMINUM = registerSimpleBlock("ore_aluminum", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_JADE = registerSimpleBlock("ore_jade", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_ENCRUSTED_DIAMOND = registerSimpleBlock("ore_encrusted_diamond", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_FOSSIL = registerSimpleBlock("ore_fossil", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_GNEISS = registerSimpleBlock("ore_gneiss", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_PETRIFIED_WOOD = registerSimpleBlock("ore_petrified_wood", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ORE_TEMPLE = registerSimpleBlock("ore_temple", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<DoorBlock> DOOR_CYPRESS = registerBlock(
+            "door_cypress",
+            () -> new DoorBlock(
+                    BlockSetType.OAK,
+                    BlockBehaviour.Properties.of()
+                            .strength(2.5F)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
+            )
+    );
 
-    // MARK: Spawner
+    public static final DeferredBlock<DoorBlock> DOOR_BALSAM = registerBlock(
+            "door_balsam",
+            () -> new DoorBlock(
+                    BlockSetType.OAK,
+                    BlockBehaviour.Properties.of()
+                            .strength(2.5F)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
+            )
+    );
 
-    public static final DeferredBlock<Block> SPIDER_SPAWNER = registerSimpleBlock("spider_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> JUMPING_SPIDER_SPAWNER = registerSimpleBlock("jumping_spider_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> TARANTULA_SPAWNER = registerSimpleBlock("tarantula_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> WASP_SPAWNER = registerSimpleBlock("wasp_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ANTLION_SPAWNER = registerSimpleBlock("antlion_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> DRAGON_FLY_SPAWNER = registerSimpleBlock("dragon_fly_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ZOMBIE_ANT_SPAWNER = registerSimpleBlock("zombie_ant_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ZOMBIE_ANT_SOLDIER_SPAWNER = registerSimpleBlock("zombie_ant_soldier_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> MAGMA_CRAWLER_SPAWNER = registerSimpleBlock("magma_crawler_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> LOCUST_SPAWNER = registerSimpleBlock("locust_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> GIANT_LILY_PAD = registerSimpleBlock("giant_lily_pad", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> WASP_NEST = registerSimpleBlock("wasp_nest", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> STAIRS_WASP_NEST = registerSimpleBlock("stairs_wasp_nest", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ANTLION_EGG = registerSimpleBlock("antlion_egg", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> TARANTULA_EGG = registerSimpleBlock("tarantula_egg", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> CAPSTONE = registerSimpleBlock("capstone", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ANT_HILL_BLOCK = registerSimpleBlock("ant_hill_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> FORCE_FIELD = registerSimpleBlock("force_field", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> FORCE_LOCK = registerSimpleBlock("force_lock", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING = registerSimpleBlock("temple_brick_unbreaking", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> TEMPLE_TELEPORTER = registerSimpleBlock("temple_teleporter", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> BLOCK_OF_BONES = registerSimpleBlock("block_of_bones", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> DUNG_SPAWNER_BOT_FLY = registerSimpleBlock("dung_spawner_bot_fly", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> DUNG_SPAWNER_FLY = registerSimpleBlock("dung_spawner_fly", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<DoorBlock> DOOR_WHITE = registerBlock(
+            "door_white",
+            () -> new DoorBlock(
+                    BlockSetType.OAK,
+                    BlockBehaviour.Properties.of()
+                            .strength(2.5F)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
+            )
+    );
 
-    public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK = registerSimpleBlock("petrified_wood_rock", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_2 = registerSimpleBlock("petrified_wood_rock_2", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_3 = registerSimpleBlock("petrified_wood_rock_3", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_4 = registerSimpleBlock("petrified_wood_rock_4", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_5 = registerSimpleBlock("petrified_wood_rock_5", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_6 = registerSimpleBlock("petrified_wood_rock_6", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> PETRIFIED_BARK_RED = registerSimpleBlock("petrified_bark_red", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> PETRIFIED_BARK_BROWN = registerSimpleBlock("petrified_bark_brown", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> DUST_LAYER = registerSimpleBlock("dust_layer", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> DUST = registerSimpleBlock("dust", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> DUNG = registerSimpleBlock("dung", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> JADE_BLOCK = registerSimpleBlock("jade_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> PRESERVED_BLOCK = registerSimpleBlock("preserved_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> MUD = registerSimpleBlock("mud", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> QUICK_SAND = registerSimpleBlock("quick_sand", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> RED_GEM = registerSimpleBlock("red_gem", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> SWAMP_VENT = registerSimpleBlock("swamp_vent", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> GHOST_SAND = registerSimpleBlock("ghost_sand", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<DoorBlock> DOOR_ROTTEN = registerBlock(
+            "door_rotten",
+            () -> new DoorBlock(
+                    BlockSetType.OAK,
+                    BlockBehaviour.Properties.of()
+                            .strength(2.5F)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
+            )
+    );
+
+    public static final DeferredBlock<DoorBlock> DOOR_MARSHWOOD = registerBlock(
+            "door_marshwood",
+            () -> new DoorBlock(
+                    BlockSetType.OAK,
+                    BlockBehaviour.Properties.of()
+                            .strength(2.5F)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
+            )
+    );
+
+    public static final DeferredBlock<DoorBlock> DOOR_SCORCHED = registerBlock(
+            "door_scorched",
+            () -> new DoorBlock(
+                    BlockSetType.OAK,
+                    BlockBehaviour.Properties.of()
+                            .strength(2.5F)
+                            .sound(SoundType.GLASS)
+                            .mapColor(MapColor.GOLD)
+            )
+    );
+
+    // MARK: Fences
+    public static final DeferredBlock<FenceBlock> FENCE_BAOBAB = registerBlock("fence_baobab", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceBlock> FENCE_EUCALYPTUS = registerBlock("fence_eucalyptus", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceBlock> FENCE_MAHOGANY = registerBlock("fence_mahogany", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceBlock> FENCE_MOSSBARK = registerBlock("fence_mossbark", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceBlock> FENCE_ASPER = registerBlock("fence_asper", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceBlock> FENCE_CYPRESS = registerBlock("fence_cypress", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceBlock> FENCE_BALSAM = registerBlock("fence_balsam", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceBlock> FENCE_WHITE = registerBlock("fence_white", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceBlock> FENCE_BAMBOO = registerBlock("fence_bamboo", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceBlock> FENCE_ROTTEN = registerBlock("fence_rotten", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceBlock> FENCE_MARSHWOOD = registerBlock("fence_marshwood", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceBlock> FENCE_SCORCHED = registerBlock("fence_scorched", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceBlock> FENCE_VARNISHED = registerBlock("fence_varnished", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+
+    // MARK: Fence Gates
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_BAOBAB = registerBlock("fence_gate_baobab", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_EUCALYPTUS = registerBlock("fence_gate_eucalyptus", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_MAHOGANY = registerBlock("fence_gate_mahogany", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_MOSSBARK = registerBlock("fence_gate_mossbark", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_ASPER = registerBlock("fence_gate_asper", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_CYPRESS = registerBlock("fence_gate_cypress", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_BALSAM = registerBlock("fence_gate_balsam", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_WHITE = registerBlock("fence_gate_white", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_BAMBOO = registerBlock("fence_gate_bamboo", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_ROTTEN = registerBlock("fence_gate_rotten", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_MARSHWOOD = registerBlock("fence_gate_marshwood", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_SCORCHED = registerBlock("fence_gate_scorched", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_VARNISHED = registerBlock("fence_gate_varnished", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+
+    // MARK: Walls
+    public static final DeferredBlock<WallBlock> WALL_UMBERSTONE = registerBlock("wall_umberstone", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
+    public static final DeferredBlock<WallBlock> WALL_UMBERCOBBLE = registerBlock("wall_umbercobble", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
+    public static final DeferredBlock<WallBlock> WALL_UMBERCOBBLE_MOSSY = registerBlock("wall_umbercobble_mossy", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
+    public static final DeferredBlock<WallBlock> WALL_UMBERCOBBLE_WEBBED = registerBlock("wall_umbercobble_webbed", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
+    public static final DeferredBlock<WallBlock> WALL_UMBERSTONE_BRICKS = registerBlock("wall_umberstone_bricks", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
+    public static final DeferredBlock<WallBlock> WALL_UMBERTILE_SMOOTH = registerBlock("wall_umbertile_smooth", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
+    public static final DeferredBlock<WallBlock> WALL_UMBERTILE_SMOOTH_SMALL = registerBlock("wall_umbertile_smooth_small", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
+    public static final DeferredBlock<WallBlock> WALL_AMBER = registerBlock("wall_amber", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(AMBER.get())));
+    public static final DeferredBlock<WallBlock> WALL_AMBER_BRICKS = registerBlock("wall_amber_bricks", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(AMBER.get())));
+    public static final DeferredBlock<WallBlock> WALL_UMBERPAVER = registerBlock("wall_umberpaver", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
+    public static final DeferredBlock<WallBlock> WALL_UMBERPAVER_MOSSY = registerBlock("wall_umberpaver_mossy", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
+    public static final DeferredBlock<WallBlock> WALL_UMBERPAVER_WEBBED = registerBlock("wall_umberpaver_webbed", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
+
+    // MARK: Plants
     public static final DeferredBlock<Block> CROP_TURNIP = registerSimpleBlock("crop_turnip", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> CROP_CABBAGE = registerSimpleBlock("crop_cabbage", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> CROP_MANDRAKE = registerSimpleBlock("crop_mandrake", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
@@ -494,49 +630,164 @@ public class ModBlocks {
     public static final DeferredBlock<Block> SWAMP_BERRY_BUSH = registerSimpleBlock("swap_berry_bush", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DARK_FRUIT_VINE = registerSimpleBlock("dark_fruit_vine", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> PRICKLY_PEAR = registerSimpleBlock("prickly_pear", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> GIANT_FLOWER = registerSimpleBlock("giant_flower", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> GIANT_FLOWER_STIGMA = registerSimpleBlock("giant_flower_stigma", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> PLANTED_FLOWER = registerSimpleBlock("planted_flower", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> SMALL_PLANT = registerSimpleBlock("small_plant", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> THORNS = registerSimpleBlock("thorns", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> HANGING_WEB = registerSimpleBlock("hanging_web", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> DOUBLE_PLANT = registerSimpleBlock("double_plant", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> WALL_PLANTS = registerSimpleBlock("wall_plants", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> WALL_PLANTS_CULTIVATED = registerSimpleBlock("wall_plants_cultivated", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> HONEY_TREAT = registerSimpleBlock("honey_treat", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DARK_CAPPED_MUSHROOM = registerSimpleBlock("dark_capped_mushroom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> SARCASTIC_CZECH_MUSHROOM = registerSimpleBlock("sarcastic_czech_mushroom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> GRANDMAS_SHOES_MUSHROOM = registerSimpleBlock("grandmas_shoes_mushroom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DUTCH_CAP_MUSHROOM = registerSimpleBlock("dutch_cap_mushroom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> GRANDMAS_SHOES_MUSHROOM = registerSimpleBlock("grandmas_shoes_mushroom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> KAIZERS_FINGERS_MUSHROOM = registerSimpleBlock("kaizers_fingers_mushroom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> SARCASTIC_CZECH_MUSHROOM = registerSimpleBlock("sarcastic_czech_mushroom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DARK_CAPPED_MUSHROOM_BLOCK = registerSimpleBlock("dark_capped_mushroom_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> SARCASTIC_CZECH_MUSHROOM_BLOCK = registerSimpleBlock("sarcastic_czech_mushroom_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> GRANDMAS_SHOES_MUSHROOM_BLOCK = registerSimpleBlock("grandmas_shoes_mushroom_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DUTCH_CAP_MUSHROOM_BLOCK = registerSimpleBlock("dutch_cap_mushroom_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> GRANDMAS_SHOES_MUSHROOM_BLOCK = registerSimpleBlock("grandmas_shoes_mushroom_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> KAIZERS_FINGERS_MUSHROOM_BLOCK = registerSimpleBlock("kaizers_fingers_mushroom_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> GLOWSHROOM = registerSimpleBlock("glowshroom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> GLOWSHROOM_STALK_MAIN = registerSimpleBlock("glowshroom_stalk_main", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> SARCASTIC_CZECH_MUSHROOM_BLOCK = registerSimpleBlock("sarcastic_czech_mushroom_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> DESERT_SHRUB = registerSimpleBlock("desert_shrub", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> MIRE_CORAL = registerSimpleBlock("mire_coral", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> NETTLE = registerSimpleBlock("nettle", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> NETTLE_FLOWERED = registerSimpleBlock("nettle_flowered", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> SWAMP_PLANT = registerSimpleBlock("swamp_plant", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FIRE_BLOOM = registerSimpleBlock("fire_bloom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FERN = registerSimpleBlock("fern", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FIDDLE_HEAD = registerSimpleBlock("fiddle_head", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> THORNS = registerSimpleBlock("thorns", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> MOSS_DOWN = registerSimpleBlock("moss_down", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> MOULD_DOWN = registerSimpleBlock("mould_down", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> CULTIVATED_MOSS_DOWN = registerSimpleBlock("cultivated_moss_down", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> CULTIVATED_MOULD_DOWN = registerSimpleBlock("cultivated_mould_down", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<WaterlilyBlock> ALGAE = registerBlock(
+            "algae",
+            () -> new WaterlilyBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.PLANT)
+                    .instabreak()
+                    .sound(SoundType.LILY_PAD)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)
+            )
+    );
+    public static final DeferredBlock<Block> GLOWSHROOM_BLOCK = registerSimpleBlock("glowshroom_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> GLOWSHROOM_STALK = registerSimpleBlock("glowshroom_stalk", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> HANGING_WEB = registerSimpleBlock("hanging_web", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
+    // MARK: Flowers
+    public static final DeferredBlock<Block> PETAL_BLACK = registerSimpleBlock("petal_black", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETAL_RED = registerSimpleBlock("petal_red", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETAL_BROWN = registerSimpleBlock("petal_brown", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETAL_BLUE = registerSimpleBlock("petal_blue", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETAL_PURPLE = registerSimpleBlock("petal_purple", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETAL_CYAN = registerSimpleBlock("petal_cyan", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETAL_LIGHT_GRAY = registerSimpleBlock("petal_light_gray", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETAL_GRAY = registerSimpleBlock("petal_gray", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETAL_PINK = registerSimpleBlock("petal_pink", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETAL_YELLOW = registerSimpleBlock("petal_yellow", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETAL_LIGHT_BLUE = registerSimpleBlock("petal_light_blue", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETAL_MAGENTA = registerSimpleBlock("petal_magenta", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETAL_ORANGE = registerSimpleBlock("petal_orange", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETAL_WHITE = registerSimpleBlock("petal_white", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
+    public static final DeferredBlock<Block> EXPLODING_STIGMA = registerSimpleBlock("exploding_stigma", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STEM = registerSimpleBlock("stem", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_BLACK = registerSimpleBlock("stigma_black", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_RED = registerSimpleBlock("stigma_red", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_BROWN = registerSimpleBlock("stigma_brown", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_BLUE = registerSimpleBlock("stigma_blue", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_PURPLE = registerSimpleBlock("stigma_purple", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_CYAN = registerSimpleBlock("stigma_cyan", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_LIGHT_GRAY = registerSimpleBlock("stigma_light_gray", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_GRAY = registerSimpleBlock("stigma_gray", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_PINK = registerSimpleBlock("stigma_pink", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_YELLOW = registerSimpleBlock("stigma_yellow", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_LIGHT_BLUE = registerSimpleBlock("stigma_light_blue", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_MAGENTA = registerSimpleBlock("stigma_magenta", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_ORANGE = registerSimpleBlock("stigma_orange", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> STIGMA_WHITE = registerSimpleBlock("stigma_white", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
+    public static final DeferredBlock<Block> FLOWER_BLACK = registerSimpleBlock("flower_black", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_RED = registerSimpleBlock("flower_red", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_BROWN = registerSimpleBlock("flower_brown", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_BLUE = registerSimpleBlock("flower_blue", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_PURPLE = registerSimpleBlock("flower_purple", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_CYAN = registerSimpleBlock("flower_cyan", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_LIGHT_GRAY = registerSimpleBlock("flower_light_gray", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_GRAY = registerSimpleBlock("flower_gray", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_PINK = registerSimpleBlock("flower_pink", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_YELLOW = registerSimpleBlock("flower_yellow", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_LIGHT_BLUE = registerSimpleBlock("flower_light_blue", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_MAGENTA = registerSimpleBlock("flower_magenta", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_ORANGE = registerSimpleBlock("flower_orange", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_WHITE = registerSimpleBlock("flower_white", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FLOWER_RAINBOW = registerSimpleBlock("flower_rainbow", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
+    // MARK: Flowers Double Height
+    public static final DeferredBlock<Block> BULLRUSH = registerSimpleBlock("bullrush", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> WEEPING_BLUEBELL = registerSimpleBlock("weeping_bluebell", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> SUNDEW = registerSimpleBlock("sundew", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> DROUGHTED_SHRUB = registerSimpleBlock("droughted_shrub", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> TALL_BLOOM = registerSimpleBlock("tall_bloom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> TANGLED_STALK = registerSimpleBlock("tangled_stalk", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> HIGH_CAPPED_MUSHROOM = registerSimpleBlock("high_capped_mushroom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> TALL_FERN = registerSimpleBlock("tall_fern", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
+    // MARK: Other
+    public static final DeferredBlock<TransparentBlock> PORTAL = registerBlock(
+            "portal",
+            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_PORTAL))
+    );
+    public static final DeferredBlock<GaeanKeystoneBlock> GAEAN_KEYSTONE = registerBlock("gaean_keystone", GaeanKeystoneBlock::new);
+    public static final DeferredBlock<Block> JADE_BLOCK = registerSimpleBlock("jade_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> MUD = registerSimpleBlock("mud", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> QUICK_SAND = registerSimpleBlock("quick_sand", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> GHOST_SAND = registerSimpleBlock("ghost_sand", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> SWAMP_VENT = registerSimpleBlock("swamp_vent", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> GNEISS_VENT = registerSimpleBlock("gneiss_vent", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> RED_GEM_BLOCK = registerSimpleBlock("red_gem_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> RED_GEM_LAMP = registerSimpleBlock("red_gem_lamp", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> WITHER_WEB = registerSimpleBlock("wither_web", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> SILK = registerSimpleBlock("silk", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> MIR_BRICK = registerSimpleBlock("mir_brick", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> PLANKS_PETRIFIED_WOOD = registerSimpleBlock("planks_petrified_wood", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> DOOR_PETRIFIED_WOOD = registerSimpleBlock("door_petrified_wood", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> REIN_EXO = registerSimpleBlock("rein_exo", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> MUD_BRICK = registerSimpleBlock("mud_brick", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> GNEISS = registerSimpleBlock("gneiss", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> GNEISS_CARVED = registerSimpleBlock("gneiss_carved", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> GNEISS_RELIEF = registerSimpleBlock("gneiss_relief", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> GNEISS_BRICKS = registerSimpleBlock("gneiss_bricks", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> GNEISS_SMOOTH = registerSimpleBlock("gneiss_smooth", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> GNEISS_TILES = registerSimpleBlock("gneiss_tiles", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> GNEISS_TILES_CRACKED = registerSimpleBlock("gneiss_tiles_cracked", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> TEMPLE_BRICK = registerSimpleBlock("temple_brick", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> TEMPLE_PILLAR = registerSimpleBlock("temple_pillar", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> TEMPLE_TILE = registerSimpleBlock("temple_tile", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> VOLCANIC_ROCK = registerSimpleBlock("volcanic_rock", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> GNEISS = registerSimpleBlock("gneiss", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> GNEISS_VENT = registerSimpleBlock("gneiss_vent", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> HOLLOW_LOG = registerSimpleBlock("hollow_log", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> LOG_BALSAM_RESINLESS = registerSimpleBlock("log_balsam_resinless", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    /**
-     * Utility
-     */
-    public static final DeferredBlock<Block> UMBER_FURNACE = registerSimpleBlock("umber_furnace", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBER_FURNACE_ACTIVE = registerSimpleBlock("umber_furnace_active", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> SILK = registerSimpleBlock("silk", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> MIR_BRICKS = registerSimpleBlock("mir_bricks", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> MUD_BRICKS = registerSimpleBlock("mud_bricks", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> REIN_EXO = registerSimpleBlock("rein_exo", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<RotatedPillarBlock> VELOCITY = registerBlock("velocity", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
+    public static final DeferredBlock<RotatedPillarBlock> LIGHTNING_SPEED = registerBlock("lightning_speed", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
+    public static final DeferredBlock<Block> BLOCK_OF_BONES = registerSimpleBlock("block_of_bones", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> ANTLION_EGG = registerSimpleBlock("antlion_egg", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> TARANTULA_EGG = registerSimpleBlock("tarantula_egg", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> HONEY_TREAT = registerSimpleBlock("honey_treat", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> WASP_NEST = registerSimpleBlock("wasp_nest", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<StairBlock> STAIRS_WASP_NEST = registerBlock(
+            "stairs_wasp_nest",
+            () -> new StairBlock(
+                    WASP_NEST.get().defaultBlockState(),
+                    BlockBehaviour.Properties.of().strength(2.0F)
+            )
+    );
+    public static final DeferredBlock<Block> INSECT_REPELLENT = registerSimpleBlock("insect_repellent", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
+    // MARK: Spawners
+    public static final DeferredBlock<Block> ANTLION_SPAWNER = registerSimpleBlock("antlion_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> DRAGON_FLY_SPAWNER = registerSimpleBlock("dragon_fly_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> JUMPING_SPIDER_SPAWNER = registerSimpleBlock("jumping_spider_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> SPIDER_SPAWNER = registerSimpleBlock("spider_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> TARANTULA_SPAWNER = registerSimpleBlock("tarantula_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> WASP_SPAWNER = registerSimpleBlock("wasp_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> ZOMBIE_ANT_SPAWNER = registerSimpleBlock("zombie_ant_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> ZOMBIE_ANT_SOLDIER_SPAWNER = registerSimpleBlock("zombie_ant_soldier_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> MAGMA_CRAWLER_SPAWNER = registerSimpleBlock("magma_crawler_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> DUNG_SPAWNER_FLY = registerSimpleBlock("dung_spawner_fly", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> DUNG_SPAWNER_BOT_FLY = registerSimpleBlock("dung_spawner_bot_fly", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> LOCUST_SPAWNER = registerSimpleBlock("locust_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
+    // MARK: Utility Blocks
     public static final DeferredBlock<Block> PETRIFIED_CRAFTING_TABLE = registerSimpleBlock("petrified_crafting_table", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> PETRIFIED_WOOD_CHEST = registerSimpleBlock("petrified_wood_chest", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> BAMBOO_CRATE = registerSimpleBlock("bamboo_crate", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> BAMBOO_BRIDGE = registerSimpleBlock("bamboo_bridge", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> BAMBOO_LADDER = registerSimpleBlock("bamboo_ladder", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
@@ -546,22 +797,43 @@ public class ModBlocks {
     public static final DeferredBlock<Block> BAMBOO_PIPE = registerSimpleBlock("bamboo_pipe", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> BAMBOO_PIPE_EXTRACT = registerSimpleBlock("bamboo_pipe_extract", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> BAMBOO_PIPE_EXTRACT_ACTIVE = registerSimpleBlock("bamboo_pipe_extract_active", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> LIQUIFIER = registerSimpleBlock("liquifier", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> SILO_ROOF = registerSimpleBlock("silo_roof", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> SILO_TANK = registerSimpleBlock("silo_tank", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> SILO_SUPPORTS = registerSimpleBlock("silo_supports", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> HONEY_COMB = registerSimpleBlock("honey_comb", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBER_GOLEM_STATUE = registerSimpleBlock("umber_golem_statue", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> INSECT_REPELLENT = registerSimpleBlock("insect_repellent", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> PETRIFIED_WOOD_CHEST = registerSimpleBlock("petrified_wood_chest", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> GLOWING_JAR = registerSimpleBlock("glowing_jar", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> FLUID_JAR = registerSimpleBlock("fluid_jar", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> COMPOSTER = registerSimpleBlock("composter", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> SMOOTHIE_MAKER = registerSimpleBlock("smoothie_maker", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBERSTONE_BUTTON = registerSimpleBlock("umberstone_button", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> GLOW_GEM_ACTIVE = registerSimpleBlock("glow_gem_active", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> GLOW_GEM_INACTIVE = registerSimpleBlock("glow_gem_inactive", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> BLENDER = registerSimpleBlock("blender", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> UMBER_FURNACE = registerSimpleBlock("umber_furnace", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<ButtonBlock> UMBERSTONE_BUTTON = registerBlock("umberstone_button", () -> new ButtonBlock(BlockSetType.STONE, 10, BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
+    public static final DeferredBlock<Block> LIQUIFIER = registerSimpleBlock("liquifier", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> GLOW_GEM = registerSimpleBlock("glow_gem", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> MUCUS_BOMB = registerSimpleBlock("mucus_bomb", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> UMBER_GOLEM_STATUE = registerSimpleBlock("umber_golem_statue", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
+    public static final DeferredBlock<Block> ALTAR_BASE = registerSimpleBlock("altar_base", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> ALTAR_LIGHTNING = registerSimpleBlock("altar_lightning", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> ALTAR_HEALING = registerSimpleBlock("altar_healing", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> ALTAR_XP = registerSimpleBlock("altar_xp", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> ALTAR_REPAIR = registerSimpleBlock("altar_repair", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> ALTAR_OFFERING = registerSimpleBlock("altar_offering", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
+    // MARK: Antlion Dungeon
+    public static final DeferredBlock<Block> CAPSTONE = registerSimpleBlock("capstone", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> CAPSTONE_MUD = registerSimpleBlock("capstone_mud", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> CAPSTONE_IRON = registerSimpleBlock("capstone_iron", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> CAPSTONE_GOLD = registerSimpleBlock("capstone_gold", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> CAPSTONE_JADE = registerSimpleBlock("capstone_jade", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING = registerSimpleBlock("temple_brick_unbreaking", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_JADE = registerSimpleBlock("temple_brick_unbreaking_jade", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_EXO = registerSimpleBlock("temple_brick_unbreaking_exo", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_CREAM = registerSimpleBlock("temple_brick_unbreaking_cream", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_EYE = registerSimpleBlock("temple_brick_unbreaking_eye", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_STRING = registerSimpleBlock("temple_brick_unbreaking_string", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> TEMPLE_TELEPORTER = registerSimpleBlock("temple_teleporter", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FORCE_FIELD = registerSimpleBlock("force_field", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> FORCE_LOCK = registerSimpleBlock("force_lock", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
+    public static final DeferredBlock<Block> ANT_HILL_BLOCK = registerSimpleBlock("ant_hill_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
 
     private static DeferredBlock<Block> registerSimpleBlock(String name, BlockBehaviour.Properties properties) {
         DeferredBlock<Block> deferredBlock = BLOCKS.registerSimpleBlock(name, properties);

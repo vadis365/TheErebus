@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "erebus:block/slab_planks_baobab"
+    },
+    "type=double": {
+      "model": "erebus:block/planks_baobab"
+    },
+    "type=top": {
+      "model": "erebus:block/slab_planks_baobab_top"
+    }
+  }
+}

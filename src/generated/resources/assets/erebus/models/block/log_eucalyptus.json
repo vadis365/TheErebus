@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "erebus:block/log_eucalyptus_end",
+    "side": "erebus:block/log_eucalyptus_side"
+  }
+}

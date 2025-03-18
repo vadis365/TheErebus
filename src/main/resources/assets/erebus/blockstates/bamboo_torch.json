@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"half=upper": { "model": "erebus:block/bamboo_torch_upper" },
+        "half=lower": { "model": "erebus:block/bamboo_torch_lower" }
+	}
+}

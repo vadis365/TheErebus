@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "erebus:block/planks_petrified_wood",
-    "side": "erebus:block/planks_petrified_wood",
-    "top": "erebus:block/planks_petrified_wood"
-  }
-}

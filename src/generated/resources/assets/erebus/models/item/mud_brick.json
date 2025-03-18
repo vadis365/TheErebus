@@ -1,3 +1,6 @@
 {
-  "parent": "erebus:block/mud_brick"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "erebus:item/mud_brick"
+  }
 }

@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "erebus:block/blender"},
+        "facing=south": { "model": "erebus:block/blender"},
+        "facing=west":  { "model": "erebus:block/blender"},
+        "facing=east":  { "model": "erebus:block/blender"}
+    }
+}

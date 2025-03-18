@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "erebus:block/slab_planks_petrified"
+    },
+    "type=double": {
+      "model": "erebus:block/planks_petrified"
+    },
+    "type=top": {
+      "model": "erebus:block/slab_planks_petrified_top"
+    }
+  }
+}

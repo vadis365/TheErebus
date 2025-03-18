@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "all": "erebus:block/log_balsam_resinless"
+    "end": "erebus:block/log_balsam_resinless_end",
+    "side": "erebus:block/log_balsam_resinless_side"
   }
 }

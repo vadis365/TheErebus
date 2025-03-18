@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "erebus:block/slab_planks_white"
+    },
+    "type=double": {
+      "model": "erebus:block/planks_white"
+    },
+    "type=top": {
+      "model": "erebus:block/slab_planks_white_top"
+    }
+  }
+}

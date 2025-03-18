@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "erebus:smoothie_maker"},
-        "facing=south": { "model": "erebus:smoothie_maker"},
-        "facing=west":  { "model": "erebus:smoothie_maker"},
-        "facing=east":  { "model": "erebus:smoothie_maker"}
-    }
-}

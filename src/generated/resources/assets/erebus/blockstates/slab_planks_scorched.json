@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "erebus:block/slab_planks_scorched"
+    },
+    "type=double": {
+      "model": "erebus:block/planks_scorched"
+    },
+    "type=top": {
+      "model": "erebus:block/slab_planks_scorched_top"
+    }
+  }
+}

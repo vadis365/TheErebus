@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab_top",
   "textures": {
-    "bottom": "erebus:block/mir_brick",
-    "side": "erebus:block/mir_brick",
-    "top": "erebus:block/mir_brick"
+    "bottom": "erebus:block/mir_bricks",
+    "side": "erebus:block/mir_bricks",
+    "top": "erebus:block/mir_bricks"
   }
 }

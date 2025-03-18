@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "erebus:dung_spawner_bot_fly"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "erebus:blocks/dung_spawner_bot_fly"
+}

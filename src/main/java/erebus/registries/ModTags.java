@@ -15,7 +15,5 @@ public class ModTags {
     public static final TagKey<Block> MINEABLE_WITH_PAXEL = TagKey.create(BuiltInRegistries.BLOCK.key(), ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "mineable/paxel"));
 
 
-    public static void init() {
-
-    }
+    public static void init() {}
 }
