@@ -151,8 +151,8 @@ public class ModBlockStates extends ModBlockStateProvider {
         slab(SLAB_UMBERPAVER, UMBERPAVER);
         slab(SLAB_UMBERPAVER_MOSSY, UMBERPAVER_MOSSY);
         slab(SLAB_UMBERPAVER_WEBBED, UMBERPAVER_WEBBED);
-        slab(SLAB_AMBER, AMBER);
-        slab(SLAB_AMBER_BRICKS, AMBER_BRICKS);
+        slabTranslucent(SLAB_AMBER, AMBER);
+        slabTranslucent(SLAB_AMBER_BRICKS, AMBER_BRICKS);
         slab(SLAB_MIR_BRICKS, MIR_BRICKS);
         slab(SLAB_MUD_BRICKS, MUD_BRICKS);
 
@@ -183,8 +183,8 @@ public class ModBlockStates extends ModBlockStateProvider {
         stairs(STAIRS_UMBERPAVER, UMBERPAVER);
         stairs(STAIRS_UMBERPAVER_MOSSY, UMBERPAVER_MOSSY);
         stairs(STAIRS_UMBERPAVER_WEBBED, UMBERPAVER_WEBBED);
-        stairs(STAIRS_AMBER, AMBER);
-        stairs(STAIRS_AMBER_BRICKS, AMBER_BRICKS);
+        stairsTranslucent(STAIRS_AMBER, AMBER);
+        stairsTranslucent(STAIRS_AMBER_BRICKS, AMBER_BRICKS);
         stairs(STAIRS_MUD_BRICKS, MUD_BRICKS);
         stairs(STAIRS_MIR_BRICKS, MIR_BRICKS);
 
@@ -242,8 +242,8 @@ public class ModBlockStates extends ModBlockStateProvider {
         wall(WALL_UMBERPAVER, UMBERPAVER);
         wall(WALL_UMBERPAVER_MOSSY, UMBERPAVER_MOSSY);
         wall(WALL_UMBERPAVER_WEBBED, UMBERPAVER_WEBBED);
-        wall(WALL_AMBER, AMBER);
-        wall(WALL_AMBER_BRICKS, AMBER_BRICKS);
+        wallTranslucent(WALL_AMBER, AMBER);
+        wallTranslucent(WALL_AMBER_BRICKS, AMBER_BRICKS);
 
         // MARK: Plants
         crossBlock(DESERT_SHRUB);
@@ -322,6 +322,7 @@ public class ModBlockStates extends ModBlockStateProvider {
 //        crossBlock(TALL_FERN);
 
         // MARK: Other
+        blockTranslucent(PORTAL);
         block(JADE_BLOCK);
         block(MUD);
         block(QUICK_SAND);

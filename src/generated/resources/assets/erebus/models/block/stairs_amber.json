@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/stairs",
+  "render_type": "minecraft:translucent",
   "textures": {
     "bottom": "erebus:block/amber",
     "side": "erebus:block/amber",

@@ -39,9 +39,9 @@ public class Erebus {
 
         ModArmorMaterials.register(bus);
         ModBlocks.register(bus);
+        ModItems.register(bus);
         ModTags.init();
         ModToolMaterials.init();
-        ModItems.register(bus);
         ModTabs.register(bus);
         ModEntities.getEntityTypes().register(bus);
         bus.addListener(ModEntities::registerSpawnPlacements);

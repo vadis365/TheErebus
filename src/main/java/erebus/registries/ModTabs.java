@@ -351,7 +351,7 @@ public class ModTabs {
                         output.accept(ModItems.TITAN_STEW);
                         output.accept(ModItems.FORCE_KEY);
                         output.accept(ModItems.SOUL_CRYSTAL);
-                        output.accept(ModItems.PLATE_ZOMBIE_MANDIBLES);
+                        output.accept(ModItems.PLATE_ZOMBIE_ANT);
                         output.accept(ModItems.STAG_BEETLE_MANDIBLES);
                         output.accept(ModItems.TERPSISHROOM);
                         output.accept(ModItems.BAMBOO_PIPE_WRENCH);

@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:block/template_wall_side_tall",
+  "render_type": "minecraft:translucent",
   "textures": {
-    "wall": "erebus:block/amber_bricks"
+    "wall": "erebus:block/amber"
   }
 }

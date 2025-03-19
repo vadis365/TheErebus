@@ -627,7 +627,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> CROP_MANDRAKE = registerSimpleBlock("crop_mandrake", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> JADE_BERRY_BUSH = registerSimpleBlock("jade_berry_bush", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> HEART_BERRY_BUSH = registerSimpleBlock("heart_berry_bush", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> SWAMP_BERRY_BUSH = registerSimpleBlock("swap_berry_bush", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> SWAMP_BERRY_BUSH = registerSimpleBlock("swamp_berry_bush", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DARK_FRUIT_VINE = registerSimpleBlock("dark_fruit_vine", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> PRICKLY_PEAR = registerSimpleBlock("prickly_pear", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DARK_CAPPED_MUSHROOM = registerSimpleBlock("dark_capped_mushroom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));

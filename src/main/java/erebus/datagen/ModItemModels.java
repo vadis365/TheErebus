@@ -99,7 +99,7 @@ public class ModItemModels extends ModItemModelProvider {
         normalItem(ModItems.TITAN_STEW);
         normalItem(ModItems.FORCE_KEY);
         normalItem(ModItems.SOUL_CRYSTAL);
-        normalItem(ModItems.PLATE_ZOMBIE_MANDIBLES);
+        normalItem(ModItems.PLATE_ZOMBIE_ANT);
         normalItem(ModItems.STAG_BEETLE_MANDIBLES);
         normalItem(ModItems.TERPSISHROOM);
         normalItem(ModItems.BAMBOO_PIPE_WRENCH);
@@ -201,8 +201,6 @@ public class ModItemModels extends ModItemModelProvider {
         normalItem(ModItems.RHINO_EXOSKELETON_SHIELD);
 
         // MARK: Misc
-        //normalItem(ModItems.WAND_OF_ANIMATION);
-        //normalItem(ModItems.WAND_OF_PRESERVATION);
         //normalItem(ModItems.PORTAL_ACTIVATOR);
         //normalItem(ModItems.WOODLOUSE_BALL);
         normalItem(ModItems.NECTAR_COLLECTOR);
@@ -570,6 +568,7 @@ public class ModItemModels extends ModItemModelProvider {
 //        blockFlat(TALL_FERN);
 
         // MARK: Other
+        block(PORTAL);
         block(GAEAN_KEYSTONE);
         block(JADE_BLOCK);
         block(MUD);

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "erebus:swap_berry_bush"
+          "name": "erebus:swamp_berry_bush"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "erebus:blocks/swap_berry_bush"
+  "random_sequence": "erebus:blocks/swamp_berry_bush"
 }
