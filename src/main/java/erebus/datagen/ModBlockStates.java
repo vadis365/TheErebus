@@ -246,6 +246,9 @@ public class ModBlockStates extends ModBlockStateProvider {
         wallTranslucent(WALL_AMBER_BRICKS, AMBER_BRICKS);
 
         // MARK: Plants
+        crop(CROP_TURNIP);
+        crop(CROP_CABBAGE);
+        crop(CROP_MANDRAKE);
         crossBlock(DESERT_SHRUB);
         //crossBlock(MIRE_CORAL); // TODO: I don't think this is implemented
         crossBlock(NETTLE);

@@ -1,8 +1,7 @@
 package erebus.registries;
 
 import erebus.Erebus;
-import erebus.block.ConnectedTextureBlock;
-import erebus.block.GaeanKeystoneBlock;
+import erebus.block.*;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -16,7 +15,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.awt.*;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -622,9 +620,9 @@ public class ModBlocks {
     public static final DeferredBlock<WallBlock> WALL_UMBERPAVER_WEBBED = registerBlock("wall_umberpaver_webbed", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
 
     // MARK: Plants
-    public static final DeferredBlock<Block> CROP_TURNIP = registerSimpleBlock("crop_turnip", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> CROP_CABBAGE = registerSimpleBlock("crop_cabbage", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> CROP_MANDRAKE = registerSimpleBlock("crop_mandrake", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<ModCropBlock> CROP_TURNIP = BLOCKS.register("crop_turnip", () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), ModItems.TURNIP));
+    public static final DeferredBlock<ModCropBlock> CROP_CABBAGE = BLOCKS.register("crop_cabbage", () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), ModItems.CABBAGE_SEEDS));
+    public static final DeferredBlock<ModCropBlock> CROP_MANDRAKE = BLOCKS.register("crop_mandrake", () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), ModItems.MANDRAKE_ROOT));
     public static final DeferredBlock<Block> JADE_BERRY_BUSH = registerSimpleBlock("jade_berry_bush", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> HEART_BERRY_BUSH = registerSimpleBlock("heart_berry_bush", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> SWAMP_BERRY_BUSH = registerSimpleBlock("swamp_berry_bush", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));

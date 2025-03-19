@@ -1,5 +1,6 @@
 package erebus.datagen.loot;
 
+import erebus.block.ModCropBlock;
 import erebus.datagen.providers.ModBlockLootTableProvider;
 import static erebus.registries.ModBlocks.*;
 
@@ -259,9 +260,10 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(WALL_AMBER);
         dropSelf(WALL_AMBER_BRICKS);
 
-        dropSelf(CROP_TURNIP);
-        dropSelf(CROP_CABBAGE);
-        dropSelf(CROP_MANDRAKE);
+        // MARK: Plants
+        dropCropBasedOffCondition(CROP_TURNIP, ModItems.TURNIP, ModItems.TURNIP);
+        dropCropBasedOffCondition(CROP_CABBAGE, ModItems.CABBAGE, ModItems.CABBAGE_SEEDS);
+        dropCropBasedOffCondition(CROP_MANDRAKE, ModItems.MANDRAKE_ROOT, ModItems.MANDRAKE_ROOT);
         dropSelf(JADE_BERRY_BUSH);
         dropSelf(HEART_BERRY_BUSH);
         dropSelf(SWAMP_BERRY_BUSH);

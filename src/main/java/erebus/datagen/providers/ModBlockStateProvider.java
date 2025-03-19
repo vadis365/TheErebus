@@ -1,16 +1,20 @@
 package erebus.datagen.providers;
 
+import erebus.Config;
 import erebus.Erebus;
+import erebus.block.ModCropBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public abstract class ModBlockStateProvider extends BlockStateProvider {
@@ -156,5 +160,22 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         ModelFile model = models().getBuilder(name(standingBlock)).texture("particle", modLoc("block/%s".formatted(name)));
         simpleBlock(standingBlock.get(), model);
         simpleBlock(wallBlock.get(), model);
+    }
+
+    public void crop(Supplier<? extends ModCropBlock> crop) {
+        Function<BlockState, ConfiguredModel[]> function = state -> states(state, crop.get(), name(crop));
+        getVariantBuilder(crop.get()).forAllStates(function);
+    }
+
+    private ConfiguredModel[] states(BlockState state, ModCropBlock crop, String modelName) {
+        ConfiguredModel[] models = new ConfiguredModel[1];
+        models[0] = new ConfiguredModel(
+                models().crop(
+                        modelName + state.getValue(crop.getAgeProperty()),
+                        ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_%d".formatted(modelName, state.getValue(crop.getAgeProperty())))
+                ).renderType("cutout")
+        );
+
+        return models;
     }
 }

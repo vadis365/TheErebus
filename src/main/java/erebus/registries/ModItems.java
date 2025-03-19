@@ -4,6 +4,7 @@ import erebus.Erebus;
 import erebus.item.PaxelItem;
 import erebus.item.WandOfAnimationItem;
 import erebus.registries.helpers.ModItemHelpers;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
@@ -220,9 +221,9 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> EREBUS_MAP_FILLED = registerItem("erebus_map_filled");
 
     // MARK: Plants
-    public static final DeferredItem<Item> TURNIP = registerItem("turnip");
-    public static final DeferredItem<Item> CABBAGE_SEEDS = registerItem("cabbage_seeds");
-    public static final DeferredItem<Item> MANDRAKE_ROOT = registerItem("mandrake_root");
+    public static final DeferredItem<Item> TURNIP = ITEMS.register("turnip", () -> new ItemNameBlockItem(ModBlocks.CROP_TURNIP.get(), new Item.Properties()));
+    public static final DeferredItem<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds", () -> new ItemNameBlockItem(ModBlocks.CROP_CABBAGE.get(), new Item.Properties()));
+    public static final DeferredItem<Item> MANDRAKE_ROOT = ITEMS.register("mandrake_root", () -> new ItemNameBlockItem(ModBlocks.CROP_MANDRAKE.get(), new Item.Properties()));
     public static final DeferredItem<Item> SEED_BLACK = registerItem("seed_black");
     public static final DeferredItem<Item> SEED_RED = registerItem("seed_red");
     public static final DeferredItem<Item> SEED_BROWN = registerItem("seed_brown");
