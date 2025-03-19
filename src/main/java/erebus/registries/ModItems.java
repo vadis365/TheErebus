@@ -1,17 +1,25 @@
 package erebus.registries;
 
+import java.util.Map;
+
 import erebus.Erebus;
 import erebus.item.PaxelItem;
 import erebus.item.WandOfAnimationItem;
 import erebus.registries.helpers.ModItemHelpers;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SwordItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.Map;
 
 public class ModItems extends ModItemHelpers {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Erebus.MODID);

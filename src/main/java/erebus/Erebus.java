@@ -10,6 +10,7 @@ import erebus.registries.ModArmorMaterials;
 import erebus.registries.ModBlocks;
 import erebus.registries.ModEntities;
 import erebus.registries.ModEntityRendering;
+import erebus.registries.ModItemRendering;
 import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
 import erebus.registries.ModTabs;
@@ -56,6 +57,8 @@ public class Erebus {
 		if (dist.isClient()) {
 			bus.addListener(ModEntityRendering::registerEntityLayers);
 			bus.addListener(ModEntityRendering::registerEntityRender);
+			bus.addListener(ModItemRendering::registerItemLayerDefinitions);
+			bus.addListener(ModItemRendering::registerItemRender);
 		}
     }
 
