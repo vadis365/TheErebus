@@ -1,9 +1,9 @@
-package erebus.client.entity.render;
+package erebus.client.render.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import erebus.Erebus;
-import erebus.client.entity.model.WaspModel;
+import erebus.client.render.entity.model.WaspModel;
 import erebus.entity.WaspEntity;
 import erebus.registries.ModEntityRendering;
 import net.minecraft.client.model.geom.EntityModelSet;

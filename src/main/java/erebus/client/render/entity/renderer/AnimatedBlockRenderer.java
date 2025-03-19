@@ -1,11 +1,11 @@
-package erebus.client.entity.render;
+package erebus.client.render.entity.renderer;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 
-import erebus.client.entity.model.ModelAnimatedBlock;
+import erebus.client.render.entity.model.AnimatedBlockModel;
 import erebus.entity.AnimatedBlock;
 import erebus.registries.ModEntityRendering;
 import net.minecraft.client.Minecraft;
@@ -24,14 +24,14 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderAnimatedBlock extends MobRenderer<AnimatedBlock, ModelAnimatedBlock<AnimatedBlock>> {
+public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBlockModel<AnimatedBlock>> {
 
 	private final ItemRenderer itemRenderer;
 	public ItemStack stackRenderer = new ItemStack(Blocks.STONE.defaultBlockState().getBlock());
 
 	
-	public RenderAnimatedBlock(EntityRendererProvider.Context renderContext) {
-        super(renderContext, new ModelAnimatedBlock<>(renderContext.bakeLayer(ModEntityRendering.ANIMATED_BLOCK)), 0.75F);
+	public AnimatedBlockRenderer(EntityRendererProvider.Context renderContext) {
+        super(renderContext, new AnimatedBlockModel<>(renderContext.bakeLayer(ModEntityRendering.ANIMATED_BLOCK)), 0.75F);
 		this.itemRenderer = renderContext.getItemRenderer();
 	}
 

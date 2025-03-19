@@ -1,4 +1,4 @@
-package erebus.client.entity.model;
+package erebus.client.render.entity.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -16,7 +16,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ModelAnimatedBlock<T extends AnimatedBlock> extends HierarchicalModel<T> {
+public class AnimatedBlockModel<T extends AnimatedBlock> extends HierarchicalModel<T> {
 	public ModelPart root;
 	public ModelPart LBL1;
 	public ModelPart LBL2;
@@ -43,7 +43,7 @@ public class ModelAnimatedBlock<T extends AnimatedBlock> extends HierarchicalMod
 	public ModelPart RFL3;
 	public ModelPart RFL4;
 
-	public ModelAnimatedBlock(ModelPart root) {
+	public AnimatedBlockModel(ModelPart root) {
 		this.root = root;
 		LBL1 = root.getChild("root").getChild("LBL1");
 		LBL2 = root.getChild("root").getChild("LBL2");

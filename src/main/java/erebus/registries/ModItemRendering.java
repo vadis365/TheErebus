@@ -3,8 +3,8 @@ package erebus.registries;
 import javax.annotation.Nonnull;
 
 import erebus.Erebus;
-import erebus.client.item.model.WandOfAnimationItemModel;
-import erebus.client.item.render.WandOfAnimationItemRenderer;
+import erebus.client.render.item.model.WandOfAnimationItemModel;
+import erebus.client.render.item.renderer.WandOfAnimationItemRenderer;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;

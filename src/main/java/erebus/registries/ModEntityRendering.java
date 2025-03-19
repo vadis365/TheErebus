@@ -1,10 +1,10 @@
 package erebus.registries;
 
 import erebus.Erebus;
-import erebus.client.entity.model.ModelAnimatedBlock;
-import erebus.client.entity.model.WaspModel;
-import erebus.client.entity.render.RenderAnimatedBlock;
-import erebus.client.entity.render.WaspRenderer;
+import erebus.client.render.entity.model.AnimatedBlockModel;
+import erebus.client.render.entity.model.WaspModel;
+import erebus.client.render.entity.renderer.AnimatedBlockRenderer;
+import erebus.client.render.entity.renderer.WaspRenderer;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
@@ -17,12 +17,12 @@ public class ModEntityRendering {
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
       //  event.registerLayerDefinition(GRASHOPPER, ModelGrasshopper::createBodyLayer);
     	event.registerLayerDefinition(WASP, WaspModel::createBodyLayer);
-    	 event.registerLayerDefinition(ANIMATED_BLOCK, ModelAnimatedBlock::createBodyLayer);
+    	 event.registerLayerDefinition(ANIMATED_BLOCK, AnimatedBlockModel::createBodyLayer);
     }
 
     public static void registerEntityRender(EntityRenderersEvent.RegisterRenderers event) {
      //   event.registerEntityRenderer(ModEntities.GRASHOPPER.get(), RenderGrasshopper::new);
     	event.registerEntityRenderer(ModEntities.WASP.get(), WaspRenderer::new);
-    	event.registerEntityRenderer(ModEntities.ANIMATED_BLOCK.get(), RenderAnimatedBlock::new);
+    	event.registerEntityRenderer(ModEntities.ANIMATED_BLOCK.get(), AnimatedBlockRenderer::new);
     }
 }

@@ -1,11 +1,11 @@
-package erebus.client.item.render;
+package erebus.client.render.item.renderer;
 
 import javax.annotation.Nonnull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import erebus.Erebus;
-import erebus.client.item.model.WandOfAnimationItemModel;
+import erebus.client.render.item.model.WandOfAnimationItemModel;
 import erebus.registries.ModItemRendering;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;

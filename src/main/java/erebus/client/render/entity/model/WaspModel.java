@@ -1,4 +1,4 @@
-package erebus.client.entity.model;
+package erebus.client.render.entity.model;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
