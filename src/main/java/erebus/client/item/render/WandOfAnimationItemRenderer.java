@@ -24,7 +24,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class WandOfAnimationItemRenderer extends BlockEntityWithoutLevelRenderer {
 
 	private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/items/wand_of_animation.png");
-
 	private final WandOfAnimationItemModel wand_model;
 
 	public WandOfAnimationItemRenderer(BlockEntityRenderDispatcher renderer, EntityModelSet modelSet) {
@@ -36,7 +35,6 @@ public class WandOfAnimationItemRenderer extends BlockEntityWithoutLevelRenderer
 	@Override
 	public void renderByItem(ItemStack stack, @Nonnull ItemDisplayContext transformType, PoseStack matrixStack, MultiBufferSource bufferIn, int combinedLight, int combinedOverlayIn) {
 		matrixStack.pushPose();
-		//matrixStack.translate(0.5D, 1.5D, 0.5D);
 		matrixStack.scale(0.9999F, 0.9999F, 0.9999F);
 		wand_model.renderToBuffer(matrixStack, bufferIn.getBuffer(RenderType.entitySmoothCutout(TEXTURE)), combinedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
 		matrixStack.popPose();

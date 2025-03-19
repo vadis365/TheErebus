@@ -26,7 +26,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class WandOfAnimationItem extends Item {
 	public WandOfAnimationItem(Properties properties) {
 		super(properties);
-//		setFull3D();
 	}
 	
 	@Override
