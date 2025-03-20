@@ -2,6 +2,7 @@ package erebus.registries;
 
 import erebus.Erebus;
 import erebus.block.*;
+import erebus.registries.helpers.ModBlockHelpers;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -17,7 +18,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-public class ModBlocks {
+public class ModBlocks extends ModBlockHelpers {
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Erebus.MODID);
 
@@ -52,76 +53,20 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PETRIFIED_BARK_BROWN = registerSimpleBlock("petrified_bark_brown", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> PETRIFIED_LOG_INNER = registerSimpleBlock("petrified_log_inner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DUNG = registerSimpleBlock("dung", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> MIR_BRICKS = registerSimpleBlock("mir_bricks", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> MUD_BRICKS = registerSimpleBlock("mud_bricks", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
 
     // MARK: Amber
-    public static final DeferredBlock<TransparentBlock> AMBER = registerBlock(
-            "amber",
-            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)
-                    .strength(1.5F)
-                    .noOcclusion()
-                    .isViewBlocking((blockState, blockGetter, blockPos) -> false)
-                    .sound(SoundType.GLASS)
-                    .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<TransparentBlock> AMBER_BRICKS = registerBlock(
-            "amber_bricks",
-            () -> new TransparentBlock(
-                    BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)
-                            .strength(2.5F)
-                            .noOcclusion()
-                            .isViewBlocking((blockState, blockGetter, blockPos) -> false)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<ConnectedTextureBlock> AMBER_GLASS = registerBlock(
-            "amber_glass",
-            () -> new ConnectedTextureBlock(
-                    BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<TransparentBlock> PRESERVED_AMBER = registerBlock(
-            "preserved_amber",
-            () -> new TransparentBlock(
-                    BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)
-                            .strength(2.5F)
-                            .noOcclusion()
-                            .isViewBlocking((blockState, blockGetter, blockPos) -> false)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<ConnectedTextureBlock> PRESERVED_AMBER_GLASS = registerBlock(
-            "preserved_amber_glass",
-            () -> new ConnectedTextureBlock(
-                    BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
+    public static final DeferredBlock<TransparentBlock> AMBER = registerTransparentBlock("amber", BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).strength(1.5F).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false).sound(SoundType.GLASS).mapColor(MapColor.GOLD));
+    public static final DeferredBlock<TransparentBlock> AMBER_BRICKS = registerTransparentBlock("amber_bricks", BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).strength(2.5F).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false).sound(SoundType.GLASS).mapColor(MapColor.GOLD));
+    public static final DeferredBlock<ConnectedTextureBlock> AMBER_GLASS = registerConnectedTextureBlock("amber_glass", BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).strength(2.5F).sound(SoundType.GLASS).mapColor(MapColor.GOLD));
+    public static final DeferredBlock<TransparentBlock> PRESERVED_AMBER = registerTransparentBlock("preserved_amber", BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).strength(2.5F).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false).sound(SoundType.GLASS).mapColor(MapColor.GOLD));
+    public static final DeferredBlock<ConnectedTextureBlock> PRESERVED_AMBER_GLASS = registerConnectedTextureBlock("preserved_amber_glass", BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).strength(2.5F).sound(SoundType.GLASS).mapColor(MapColor.GOLD));
 
     public static final DeferredBlock<Block> GLOWING_JAR = registerSimpleBlock("glowing_jar", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> FLUID_JAR = registerSimpleBlock("fluid_jar", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
 
-    public static final DeferredBlock<DoorBlock> AMBER_DOOR = registerBlock(
-            "amber_door",
-            () -> new DoorBlock(
-                    BlockSetType.STONE,
-                    BlockBehaviour.Properties.of()
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
+    public static final DeferredBlock<DoorBlock> AMBER_DOOR = registerDoor("amber_door", BlockSetType.STONE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
 
     // MARK: Ores
     public static final DeferredBlock<Block> ORE_IRON = registerBlock("ore_iron", () -> new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_ORE)));
@@ -229,351 +174,49 @@ public class ModBlocks {
     public static final DeferredBlock<SlabBlock> SLAB_MIR_BRICKS = registerBlock("slab_mir_bricks", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_SLAB)));
 
     // MARK: Stairs Wood
-    public static final DeferredBlock<StairBlock> STAIRS_BAOBAB = registerBlock(
-            "stairs_baobab",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_EUCALYPTUS = registerBlock(
-            "stairs_eucalyptus",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_MAHOGANY = registerBlock(
-            "stairs_mahogany",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_MOSSBARK = registerBlock(
-            "stairs_mossbark",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_ASPER = registerBlock(
-            "stairs_asper",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_CYPRESS = registerBlock(
-            "stairs_cypress",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_BALSAM = registerBlock(
-            "stairs_balsam",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_WHITE = registerBlock(
-            "stairs_white",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_BAMBOO = registerBlock(
-            "stairs_bamboo",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_ROTTEN = registerBlock(
-            "stairs_rotten",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_MARSHWOOD = registerBlock(
-            "stairs_marshwood",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_SCORCHED = registerBlock(
-            "stairs_scorched",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_VARNISHED = registerBlock(
-            "stairs_varnished",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_PETRIFIED = registerBlock(
-            "stairs_petrified",
-            () -> new StairBlock(
-                    PLANKS_BAOBAB.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
+    public static final DeferredBlock<StairBlock> STAIRS_BAOBAB = registerStairs("stairs_baobab", PLANKS_BAOBAB, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_EUCALYPTUS = registerStairs("stairs_eucalyptus", PLANKS_EUCALYPTUS, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_MAHOGANY = registerStairs("stairs_mahogany", PLANKS_MAHOGANY, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_MOSSBARK = registerStairs("stairs_mossbark", PLANKS_MOSSBARK, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_ASPER = registerStairs("stairs_asper", PLANKS_ASPER,  BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_CYPRESS = registerStairs("stairs_cypress", PLANKS_CYPRESS, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_BALSAM = registerStairs("stairs_balsam", PLANKS_BALSAM, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_WHITE = registerStairs("stairs_white", PLANKS_WHITE, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_BAMBOO = registerStairs("stairs_bamboo", PLANKS_BAMBOO, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_ROTTEN = registerStairs("stairs_rotten", PLANKS_ROTTEN, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_MARSHWOOD = registerStairs("stairs_marshwood", PLANKS_MARSHWOOD, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_SCORCHED = registerStairs("stairs_scorched", PLANKS_SCORCHED, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_VARNISHED = registerStairs("stairs_varnished", PLANKS_VARNISHED, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_PETRIFIED = registerStairs("stairs_petrified", PLANKS_PETRIFIED, BlockBehaviour.Properties.of().strength(2.0F));
 
     // MARK: Stairs Stone
-    public static final DeferredBlock<StairBlock> STAIRS_UMBERSTONE = registerBlock(
-            "stairs_umberstone",
-            () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_UMBERCOBBLE = registerBlock(
-            "stairs_umbercobble",
-            () -> new StairBlock(
-                    UMBERCOBBLE.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-    public static final DeferredBlock<StairBlock> STAIRS_UMBERCOBBLE_MOSSY = registerBlock(
-            "stairs_umbercobble_mossy",
-            () -> new StairBlock(
-                    UMBERCOBBLE_MOSSY.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_UMBERCOBBLE_WEBBED = registerBlock(
-            "stairs_umbercobble_webbed",
-            () -> new StairBlock(
-                    UMBERCOBBLE_WEBBED.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_UMBERSTONE_BRICKS = registerBlock(
-            "stairs_umberstone_bricks",
-            () -> new StairBlock(
-                    UMBERSTONE_BRICKS.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_UMBERTILE_SMOOTH = registerBlock(
-            "stairs_umberstone_smooth",
-            () -> new StairBlock(
-                    UMBERTILE_SMOOTH.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_UMBERTILE_SMOOTH_SMALL = registerBlock(
-            "stairs_umberstone_smooth_small",
-            () -> new StairBlock(
-                    UMBERTILE_SMOOTH_SMALL.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_UMBERPAVER = registerBlock(
-            "stairs_umberpaver",
-            () -> new StairBlock(
-                    UMBERPAVER.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_UMBERPAVER_MOSSY = registerBlock(
-            "stairs_umberpaver_mossy",
-            () -> new StairBlock(
-                    UMBERPAVER_MOSSY.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_UMBERPAVER_WEBBED = registerBlock(
-            "stairs_umberpaver_webbed",
-            () -> new StairBlock(
-                    UMBERPAVER_WEBBED.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_AMBER = registerBlock(
-            "stairs_amber",
-            () -> new StairBlock(
-                    AMBER.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_AMBER_BRICKS = registerBlock(
-            "stairs_amber_bricks",
-            () -> new StairBlock(
-                    AMBER_BRICKS.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_MUD_BRICKS = registerBlock(
-            "stairs_mud_bricks",
-            () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
-
-    public static final DeferredBlock<StairBlock> STAIRS_MIR_BRICKS = registerBlock(
-            "stairs_mir_bricks",
-            () -> new StairBlock(
-                    UMBERSTONE.get().defaultBlockState(),
-                    BlockBehaviour.Properties.of().strength(2.0F)
-            )
-    );
+    public static final DeferredBlock<StairBlock> STAIRS_UMBERSTONE = registerStairs("stairs_umberstone", UMBERSTONE, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_UMBERCOBBLE = registerStairs("stairs_umbercobble", UMBERCOBBLE, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_UMBERCOBBLE_MOSSY = registerStairs("stairs_umbercobble_mossy", UMBERCOBBLE_MOSSY, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_UMBERCOBBLE_WEBBED = registerStairs("stairs_umbercobble_webbed", UMBERCOBBLE_WEBBED, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_UMBERSTONE_BRICKS = registerStairs("stairs_umberstone_bricks", UMBERSTONE_BRICKS, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_UMBERTILE_SMOOTH = registerStairs("stairs_umberstone_smooth", UMBERTILE_SMOOTH, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_UMBERTILE_SMOOTH_SMALL = registerStairs("stairs_umberstone_smooth_small", UMBERTILE_SMOOTH_SMALL, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_UMBERPAVER = registerStairs("stairs_umberpaver", UMBERPAVER, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_UMBERPAVER_MOSSY = registerStairs("stairs_umberpaver_mossy", UMBERPAVER_MOSSY, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_UMBERPAVER_WEBBED = registerStairs("stairs_umberpaver_webbed", UMBERPAVER_WEBBED, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_AMBER = registerStairs("stairs_amber", AMBER, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_AMBER_BRICKS = registerStairs("stairs_amber_bricks", AMBER_BRICKS, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_MUD_BRICKS = registerStairs("stairs_mud_bricks", MUD_BRICKS, BlockBehaviour.Properties.of().strength(2.0F));
+    public static final DeferredBlock<StairBlock> STAIRS_MIR_BRICKS = registerStairs("stairs_mir_bricks", MIR_BRICKS, BlockBehaviour.Properties.of().strength(2.0F));
 
     // MARK: Doors
-    public static final DeferredBlock<DoorBlock> DOOR_BAOBAB = registerBlock(
-            "door_baobab",
-            () -> new DoorBlock(
-                    BlockSetType.OAK,
-                    BlockBehaviour.Properties.of()
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<DoorBlock> DOOR_EUCALYPTUS = registerBlock(
-            "door_eucalyptus",
-            () -> new DoorBlock(
-                    BlockSetType.OAK,
-                    BlockBehaviour.Properties.of()
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<DoorBlock> DOOR_MAHOGANY = registerBlock(
-            "door_mahogany",
-            () -> new DoorBlock(
-                    BlockSetType.OAK,
-                    BlockBehaviour.Properties.of()
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<DoorBlock> DOOR_MOSSBARK = registerBlock(
-            "door_mossbark",
-            () -> new DoorBlock(
-                    BlockSetType.OAK,
-                    BlockBehaviour.Properties.of()
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<DoorBlock> DOOR_ASPER = registerBlock(
-            "door_asper",
-            () -> new DoorBlock(
-                    BlockSetType.OAK,
-                    BlockBehaviour.Properties.of()
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<DoorBlock> DOOR_CYPRESS = registerBlock(
-            "door_cypress",
-            () -> new DoorBlock(
-                    BlockSetType.OAK,
-                    BlockBehaviour.Properties.of()
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<DoorBlock> DOOR_BALSAM = registerBlock(
-            "door_balsam",
-            () -> new DoorBlock(
-                    BlockSetType.OAK,
-                    BlockBehaviour.Properties.of()
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<DoorBlock> DOOR_WHITE = registerBlock(
-            "door_white",
-            () -> new DoorBlock(
-                    BlockSetType.OAK,
-                    BlockBehaviour.Properties.of()
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<DoorBlock> DOOR_ROTTEN = registerBlock(
-            "door_rotten",
-            () -> new DoorBlock(
-                    BlockSetType.OAK,
-                    BlockBehaviour.Properties.of()
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<DoorBlock> DOOR_MARSHWOOD = registerBlock(
-            "door_marshwood",
-            () -> new DoorBlock(
-                    BlockSetType.OAK,
-                    BlockBehaviour.Properties.of()
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
-
-    public static final DeferredBlock<DoorBlock> DOOR_SCORCHED = registerBlock(
-            "door_scorched",
-            () -> new DoorBlock(
-                    BlockSetType.OAK,
-                    BlockBehaviour.Properties.of()
-                            .strength(2.5F)
-                            .sound(SoundType.GLASS)
-                            .mapColor(MapColor.GOLD)
-            )
-    );
+    public static final DeferredBlock<DoorBlock> DOOR_BAOBAB = registerDoor("door_baobab", BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
+    public static final DeferredBlock<DoorBlock> DOOR_EUCALYPTUS = registerDoor("door_eucalyptus", BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
+    public static final DeferredBlock<DoorBlock> DOOR_MAHOGANY = registerDoor("door_mahogany", BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
+    public static final DeferredBlock<DoorBlock> DOOR_MOSSBARK = registerDoor("door_mossbark", BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
+    public static final DeferredBlock<DoorBlock> DOOR_ASPER = registerDoor("door_asper", BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
+    public static final DeferredBlock<DoorBlock> DOOR_CYPRESS = registerDoor("door_cypress", BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
+    public static final DeferredBlock<DoorBlock> DOOR_BALSAM = registerDoor("door_balsam", BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
+    public static final DeferredBlock<DoorBlock> DOOR_WHITE = registerDoor("door_white", BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
+    public static final DeferredBlock<DoorBlock> DOOR_ROTTEN = registerDoor("door_rotten", BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
+    public static final DeferredBlock<DoorBlock> DOOR_MARSHWOOD = registerDoor("door_marshwood", BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
+    public static final DeferredBlock<DoorBlock> DOOR_SCORCHED = registerDoor("door_scorched", BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
 
     // MARK: Fences
     public static final DeferredBlock<FenceBlock> FENCE_BAOBAB = registerBlock("fence_baobab", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
@@ -750,8 +393,6 @@ public class ModBlocks {
     public static final DeferredBlock<Block> TEMPLE_PILLAR = registerSimpleBlock("temple_pillar", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> TEMPLE_TILE = registerSimpleBlock("temple_tile", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> SILK = registerSimpleBlock("silk", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> MIR_BRICKS = registerSimpleBlock("mir_bricks", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> MUD_BRICKS = registerSimpleBlock("mud_bricks", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> REIN_EXO = registerSimpleBlock("rein_exo", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<RotatedPillarBlock> VELOCITY = registerBlock("velocity", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
     public static final DeferredBlock<RotatedPillarBlock> LIGHTNING_SPEED = registerBlock("lightning_speed", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
@@ -832,22 +473,6 @@ public class ModBlocks {
     public static final DeferredBlock<Block> FORCE_LOCK = registerSimpleBlock("force_lock", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
 
     public static final DeferredBlock<Block> ANT_HILL_BLOCK = registerSimpleBlock("ant_hill_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-
-    private static DeferredBlock<Block> registerSimpleBlock(String name, BlockBehaviour.Properties properties) {
-        DeferredBlock<Block> deferredBlock = BLOCKS.registerSimpleBlock(name, properties);
-        registerBlockItem(name, deferredBlock);
-        return deferredBlock;
-    }
-
-    private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
-        DeferredBlock<T> deferredBlock = BLOCKS.register(name, block);
-        registerBlockItem(name, deferredBlock);
-        return deferredBlock;
-    }
-
-    private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block) {
-        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
-    }
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
