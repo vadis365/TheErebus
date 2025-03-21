@@ -38,10 +38,10 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class WaspEntity extends Monster {
+public class Wasp extends Monster {
 	public int animationTicks, prevAnimationTicks;
 
-	public WaspEntity(EntityType<? extends WaspEntity> type, Level level) {
+	public Wasp(EntityType<? extends Wasp> type, Level level) {
 		super(type, level);
 		this.moveControl = new FlyingMoveControl(this, 10, false);
 	}
@@ -51,11 +51,11 @@ public class WaspEntity extends Monster {
 		goalSelector.addGoal(1, new MeleeAttackGoal(this, 1D, true));
 		goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		goalSelector.addGoal(3,  new RandomLookAroundGoal(this));
-		goalSelector.addGoal(4, new WaspEntity.EntityAIFlyingWander(this, 0.75D, 0.01F));
+		goalSelector.addGoal(4, new Wasp.EntityAIFlyingWander(this, 0.75D, 0.01F));
 		targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
 //		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Monster>(this, Monster.class, 0, true, false, p -> Config.HORNET_ATTACK_MOBS.get()));
 //		targetSelector.addGoal(2, new NearestAttackableTargetGoal<LivingEntity>(this, LivingEntity.class, 0, true, false, p -> Config.HORNET_ATTACK_CREATURES.get()));
-		targetSelector.addGoal(3, new HurtByTargetGoal(this).setAlertOthers(WaspEntity.class));
+		targetSelector.addGoal(3, new HurtByTargetGoal(this).setAlertOthers(Wasp.class));
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class WaspEntity extends Monster {
 				.add(Attributes.ATTACK_DAMAGE, 4D); //attack damage
 	}
 
-	public static boolean canSpawnHere(EntityType<WaspEntity> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<Wasp> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
 		return level.getDifficulty() != Difficulty.PEACEFUL;
 	}
 
@@ -184,7 +184,7 @@ public class WaspEntity extends Monster {
 	}
 
 	class EntityAIFlyingWander extends WaterAvoidingRandomStrollGoal {
-		public EntityAIFlyingWander(WaspEntity creatureIn, double speedIn, float chance) {
+		public EntityAIFlyingWander(Wasp creatureIn, double speedIn, float chance) {
 			super(creatureIn, speedIn, chance);
 		}
 

@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import erebus.Erebus;
 import erebus.client.render.entity.model.WaspModel;
-import erebus.entity.WaspEntity;
+import erebus.entity.Wasp;
 import erebus.registries.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -13,7 +13,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class WaspRenderer extends MobRenderer<WaspEntity, WaspModel<WaspEntity>> {
+public class WaspRenderer extends MobRenderer<Wasp, WaspModel<Wasp>> {
 	public static final ResourceLocation TEXTURE = Erebus.prefix("textures/entity/wasp.png");
 
 	public WaspRenderer(EntityRendererProvider.Context context) {
@@ -22,13 +22,13 @@ public class WaspRenderer extends MobRenderer<WaspEntity, WaspModel<WaspEntity>>
     }
 
 	@Override
-	protected void scale(WaspEntity entity, PoseStack matrix, float partialTickTime) {
+	protected void scale(Wasp entity, PoseStack matrix, float partialTickTime) {
 		matrix.translate(0F, 0F, -0.25F);
 		matrix.scale(0.5F, 0.5F, 0.5F);
 	}
 
 	@Override
-	public  ResourceLocation getTextureLocation(WaspEntity entity) {
+	public  ResourceLocation getTextureLocation(Wasp entity) {
 		return TEXTURE;
 	}
 }

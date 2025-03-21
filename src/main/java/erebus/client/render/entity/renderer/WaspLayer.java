@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import erebus.Erebus;
 import erebus.client.render.entity.model.WaspModel;
-import erebus.entity.WaspEntity;
+import erebus.entity.Wasp;
 import erebus.registries.ModEntityRendering;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -17,17 +17,17 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class WaspLayer extends RenderLayer<WaspEntity, WaspModel<WaspEntity>> {
+public class WaspLayer extends RenderLayer<Wasp, WaspModel<Wasp>> {
     private static final ResourceLocation LIGHTING_TEXTURE = Erebus.prefix("textures/entity/wasp.png");
-    private final WaspModel<WaspEntity> waspModel;
+    private final WaspModel<Wasp> waspModel;
 
-    public WaspLayer(RenderLayerParent<WaspEntity, WaspModel<WaspEntity>> entity, EntityModelSet modelSet) {
+    public WaspLayer(RenderLayerParent<Wasp, WaspModel<Wasp>> entity, EntityModelSet modelSet) {
     	super(entity);
     	this.waspModel = new WaspModel<>(modelSet.bakeLayer(ModEntityRendering.WASP));
     }
 
     @Override
-   	public void render(PoseStack matrix, MultiBufferSource buffer, int packedLight, WaspEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+   	public void render(PoseStack matrix, MultiBufferSource buffer, int packedLight, Wasp entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		int colour =  654311423;
     	waspModel.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
 		waspModel.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);

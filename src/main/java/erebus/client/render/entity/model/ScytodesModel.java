@@ -4,7 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 
-import net.minecraft.client.model.EntityModel;
+import erebus.entity.Scytodes;
+import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -12,9 +13,12 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.world.entity.Entity;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
-public class ScytodesModel<T extends Entity> extends EntityModel<T> {
+@OnlyIn(Dist.CLIENT)
+public class ScytodesModel<T extends Scytodes> extends HierarchicalModel<T> {
+	public ModelPart root;
 	private final ModelPart Lmand1;
 	private final ModelPart Lmand2;
 	private final ModelPart Rmand1;
@@ -43,6 +47,7 @@ public class ScytodesModel<T extends Entity> extends EntityModel<T> {
 	private final ModelPart RBL1;
 
 	public ScytodesModel(ModelPart root) {
+		this.root = root;
 		this.Lmand1 = root.getChild("Lmand1");
 		this.Lmand2 = root.getChild("Lmand2");
 		this.Rmand1 = root.getChild("Rmand1");
@@ -74,6 +79,7 @@ public class ScytodesModel<T extends Entity> extends EntityModel<T> {
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
+		partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
 		PartDefinition Lmand1 = partdefinition.addOrReplaceChild("Lmand1", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -1.5F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 17.0F, -13.0F, 0.6981F, 0.0F, 0.0F));
 
@@ -308,5 +314,10 @@ public class ScytodesModel<T extends Entity> extends EntityModel<T> {
 		RBL1.render(stack, consumer, light, overlay, colour);
 		stack.popPose();
 
+	}
+
+	@Override
+	public ModelPart root() {
+		return root;
 	}
 }
