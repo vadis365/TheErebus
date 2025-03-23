@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
-import erebus.entity.WaspEntity;
+import erebus.entity.Wasp;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -19,7 +19,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 
 @OnlyIn(Dist.CLIENT)
-public class WaspModel<T extends WaspEntity> extends HierarchicalModel<T> {
+public class WaspModel<T extends Wasp> extends HierarchicalModel<T> {
 	public ModelPart root;
 	public ModelPart Thx;
 	public ModelPart ThxS;
@@ -234,7 +234,7 @@ public class WaspModel<T extends WaspEntity> extends HierarchicalModel<T> {
 
 	@Override
 	public void prepareMobModel(T entity, float limbSwing, float limbSwingAngle, float partialRenderTicks) {
-		WaspEntity wasp = (WaspEntity) entity;
+		Wasp wasp = (Wasp) entity;
 		float smoothedTicks = entity.animationTicks + (entity.animationTicks - entity.prevAnimationTicks)  * partialRenderTicks;
 		float flap = Mth.sin((smoothedTicks) * 1.2F) * 0.5F;
 		float flap2 = Mth.sin((smoothedTicks) * 0.5F) * 0.25F;
