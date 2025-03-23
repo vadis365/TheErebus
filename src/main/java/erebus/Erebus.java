@@ -2,20 +2,11 @@ package erebus;
 
 import java.util.Locale;
 
+import erebus.registries.*;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
-import erebus.registries.ModArmorMaterials;
-import erebus.registries.ModBlocks;
-import erebus.registries.ModEntities;
-import erebus.registries.ModEntityRendering;
-import erebus.registries.ModItemRendering;
-import erebus.registries.ModItems;
-import erebus.registries.ModSounds;
-import erebus.registries.ModTabs;
-import erebus.registries.ModTags;
-import erebus.registries.ModToolMaterials;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
