@@ -22,6 +22,7 @@ public class ModLang extends ModLangProvider {
         addBookTranslations();
         addAdvancementTranslations();
         addBiomeTranslations();
+        addContainerTranslations();
     }
 
     private void addItemTranslations() {
@@ -686,5 +687,9 @@ public class ModLang extends ModLangProvider {
 
     private void addBiomeTranslations() {
 
+    }
+
+    private void addContainerTranslations() {
+        addContainer("petrified_crafting_table", "Petrified Crafting Table");
     }
 }

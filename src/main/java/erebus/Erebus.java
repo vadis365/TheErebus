@@ -40,6 +40,7 @@ public class Erebus {
         bus.addListener(ModEntities::initializeAttributes);
         ModEntities.SPAWN_EGGS.register(bus);
         ModSounds.SOUNDS.register(bus);
+        ModMenuTypes.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 

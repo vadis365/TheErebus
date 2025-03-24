@@ -443,7 +443,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> LOCUST_SPAWNER = registerSimpleBlock("locust_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
 
     // MARK: Utility Blocks
-    public static final DeferredBlock<Block> PETRIFIED_CRAFTING_TABLE = registerSimpleBlock("petrified_crafting_table", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<PetrifiedCraftingTableBlock> PETRIFIED_CRAFTING_TABLE = registerBlock("petrified_crafting_table", () -> new PetrifiedCraftingTableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)));
     public static final DeferredBlock<Block> PETRIFIED_WOOD_CHEST = registerSimpleBlock("petrified_wood_chest", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> BAMBOO_CRATE = registerSimpleBlock("bamboo_crate", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> BAMBOO_BRIDGE = registerSimpleBlock("bamboo_bridge", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));

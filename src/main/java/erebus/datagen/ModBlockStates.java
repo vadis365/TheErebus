@@ -367,7 +367,7 @@ public class ModBlockStates extends ModBlockStateProvider {
         block(LOCUST_SPAWNER);
 
         // MARK: Utility Blocks
-        //block(PETRIFIED_CRAFTING_TABLE); TODO: Add in crafting table method
+        craftingTable(PETRIFIED_CRAFTING_TABLE);
         //block(PETRIFIED_WOOD_CHEST); TODO: Add in chest
         block(SILO_ROOF);
         block(SILO_TANK, "silo_tank_inactive");

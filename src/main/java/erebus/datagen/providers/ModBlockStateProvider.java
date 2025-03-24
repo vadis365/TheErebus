@@ -262,6 +262,20 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
                 );
     }
 
+    public void craftingTable(Supplier<? extends CraftingTableBlock> craftingTable, Supplier<? extends Block> bottom) {
+        ResourceLocation down = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s".formatted(name(bottom)));
+        ResourceLocation up = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_top".formatted(name(craftingTable)));
+        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_side".formatted(name(craftingTable)));
+        simpleBlock(craftingTable.get(), models().cube(name(craftingTable), down, up, side, side, side, side));
+    }
+
+    public void craftingTable(Supplier<? extends CraftingTableBlock> craftingTable) {
+        ResourceLocation down = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_bottom".formatted(name(craftingTable)));
+        ResourceLocation up = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_top".formatted(name(craftingTable)));
+        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_side".formatted(name(craftingTable)));
+        simpleBlock(craftingTable.get(), models().cube(name(craftingTable), down, up, side, side, side, side).texture("particle", side));
+    }
+
     public void sign(Supplier<? extends StandingSignBlock> standingBlock, Supplier<? extends WallSignBlock> wallBlock, String name) {
         signBlock(standingBlock.get(), wallBlock.get(), modLoc("block/%s".formatted(name)));
     }

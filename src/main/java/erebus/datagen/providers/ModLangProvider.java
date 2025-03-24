@@ -84,6 +84,10 @@ public abstract class ModLangProvider extends LanguageProvider {
         add("jukebox_song.%s.%s".formatted(Erebus.MODID, song.location().getPath()), name);
     }
 
+    protected void addContainer(String containerName, String name) {
+        add("container.%s".formatted(containerName), name);
+    }
+
     @Override
     public CompletableFuture<?> run(CachedOutput cache) {
         //generate normal lang file

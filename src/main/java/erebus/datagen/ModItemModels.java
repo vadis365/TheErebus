@@ -635,7 +635,7 @@ public class ModItemModels extends ModItemModelProvider {
         block(LOCUST_SPAWNER);
 
         // MARK: Utility Blocks
-        //block(PETRIFIED_CRAFTING_TABLE);
+        block(PETRIFIED_CRAFTING_TABLE);
         //block(PETRIFIED_WOOD_CHEST);
         //block(BAMBOO_CRATE);
         //block(BAMBOO_BRIDGE);
