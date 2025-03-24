@@ -5,6 +5,7 @@ import java.util.EnumSet;
 import javax.annotation.Nullable;
 
 import erebus.entity.projectile.WebSling;
+import erebus.registries.ModEntities;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -180,14 +181,14 @@ public class Scytodes  extends Monster {
 		 spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
 	        RandomSource randomsource = level.getRandom();
 
-	/*	if (randomsource.nextInt(100) == 0) {
-			MoneySpider moneyspider = ModEntites.MONEY_SPIDER.get().create(this.level();
-			moneyspider.setLocationAndAngles(getX(), getY(), getZ(), getYRot(), 0.0F);
-			moneyspider.finalizeSpawn(level, difficulty, spawnType, null);
-			level.spawnEntity(moneyspider);
+		if (randomsource.nextInt(1) == 0) {
+			MoneySpider moneyspider = ModEntities.MONEY_SPIDER.get().create(this.level());
+			moneyspider.setPos(getX(), getY(), getZ());
+			moneyspider.setYRot(getYRot());
+			//moneyspider.finalizeSpawn(level, difficulty, spawnType, null);
 			moneyspider.startRiding(this);
 		}
-	*/
+	
         if (spawnGroupData == null) {
             spawnGroupData = new Spider.SpiderEffectsGroupData();
             if (level.getDifficulty() == Difficulty.HARD && randomsource.nextFloat() < 0.1F * difficulty.getSpecialMultiplier()) {
