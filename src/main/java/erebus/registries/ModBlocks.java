@@ -358,14 +358,14 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> FLOWER_RAINBOW = registerSimpleBlock("flower_rainbow", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
 
     // MARK: Flowers Double Height
-    public static final DeferredBlock<Block> BULLRUSH = registerSimpleBlock("bullrush", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> WEEPING_BLUEBELL = registerSimpleBlock("weeping_bluebell", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> SUNDEW = registerSimpleBlock("sundew", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> DROUGHTED_SHRUB = registerSimpleBlock("droughted_shrub", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> TALL_BLOOM = registerSimpleBlock("tall_bloom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> TANGLED_STALK = registerSimpleBlock("tangled_stalk", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> HIGH_CAPPED_MUSHROOM = registerSimpleBlock("high_capped_mushroom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> TALL_FERN = registerSimpleBlock("tall_fern", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<DoublePlantBlock> BULLRUSH = registerDoublePlant("bullrush", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+    public static final DeferredBlock<DoublePlantBlock> WEEPING_BLUEBELL = registerDoublePlant("weeping_bluebell", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+    public static final DeferredBlock<DoublePlantBlock> SUNDEW = registerDoublePlant("sundew", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+    public static final DeferredBlock<DoublePlantBlock> DROUGHTED_SHRUB = registerDoublePlant("droughted_shrub", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+    public static final DeferredBlock<DoublePlantBlock> TALL_BLOOM = registerDoublePlant("tall_bloom", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+    public static final DeferredBlock<DoublePlantBlock> TANGLED_STALK = registerDoublePlant("tangled_stalk", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+    public static final DeferredBlock<DoublePlantBlock> HIGH_CAPPED_MUSHROOM = registerDoublePlant("high_capped_mushroom", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+    public static final DeferredBlock<DoublePlantBlock> TALL_FERN = registerDoublePlant("tall_fern", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
 
     // MARK: Other
     public static final DeferredBlock<TransparentBlock> PORTAL = registerBlock(

@@ -558,14 +558,14 @@ public class ModItemModels extends ModItemModelProvider {
         block(FLOWER_WHITE);
         block(FLOWER_RAINBOW);
 
-//        blockFlat(BULLRUSH);
-//        blockFlat(WEEPING_BLUEBELL);
-//        blockFlat(SUNDEW);
-//        blockFlat(DROUGHTED_SHRUB);
-//        blockFlat(TALL_BLOOM);
-//        blockFlat(TANGLED_STALK);
-//        blockFlat(HIGH_CAPPED_MUSHROOM);
-//        blockFlat(TALL_FERN);
+        blockFlatWithBlockTexture(BULLRUSH, "bullrush_upper");
+        blockFlatWithBlockTexture(WEEPING_BLUEBELL, "weeping_bluebell_upper");
+        blockFlatWithBlockTexture(SUNDEW, "sundew_upper");
+        blockFlatWithBlockTexture(DROUGHTED_SHRUB, "droughted_shrub_upper");
+        blockFlatWithBlockTexture(TALL_BLOOM, "tall_bloom_upper");
+        blockFlatWithBlockTexture(TANGLED_STALK, "tangled_stalk_upper");
+        blockFlatWithBlockTexture(HIGH_CAPPED_MUSHROOM, "high_capped_mushroom_upper");
+        blockFlatWithBlockTexture(TALL_FERN, "tall_fern_upper");
 
         // MARK: Other
         block(PORTAL);

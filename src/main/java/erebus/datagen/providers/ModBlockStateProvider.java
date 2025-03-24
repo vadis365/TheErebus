@@ -75,6 +75,29 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         crossBlock(block, models().withExistingParent(name(block), mcLoc("block/tinted_cross")).texture("cross", texture(name(block))).renderType("cutout"));
     }
 
+    public void doubleCrossBlock(Supplier<? extends DoublePlantBlock> block) {
+        getVariantBuilder(block.get())
+                .forAllStates(
+                        state -> {
+                            block.get();
+                            return ConfiguredModel.builder()
+                                    .modelFile(
+                                            models().cross(
+                                                    "%s_%s".formatted(
+                                                            name(block),
+                                                            state.getValue(DoublePlantBlock.HALF)
+                                                    ),
+                                                    texture(
+                                                            "%s_%s".formatted(
+                                                                    name(block),
+                                                                    state.getValue(DoublePlantBlock.HALF)
+                                                            ))
+                                            ).renderType("cutout")
+                                    ).build();
+                        }
+                );
+    }
+
     public void stairs(Supplier<? extends StairBlock> stairs, Supplier<? extends Block> fullBlock) {
         stairsBlock(stairs.get(), texture(name(fullBlock)));
     }

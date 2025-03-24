@@ -299,31 +299,13 @@ public class ModBlockStates extends ModBlockStateProvider {
         block(STIGMA_ORANGE, "stigma");
         block(STIGMA_WHITE, "stigma");
 
-        // TODO: I think these were changed to seeds at some point
-//        block(FLOWER_BLACK);
-//        block(FLOWER_RED);
-//        block(FLOWER_BROWN);
-//        block(FLOWER_BLUE);
-//        block(FLOWER_PURPLE);
-//        block(FLOWER_CYAN);
-//        block(FLOWER_LIGHT_GRAY);
-//        block(FLOWER_GRAY);
-//        block(FLOWER_PINK);
-//        block(FLOWER_YELLOW);
-//        block(FLOWER_LIGHT_BLUE);
-//        block(FLOWER_MAGENTA);
-//        block(FLOWER_ORANGE);
-//        block(FLOWER_WHITE);
-//        block(FLOWER_RAINBOW);
-
-        //crossBlock(BULLRUSH); TODO: Double plant
-//        crossBlock(WEEPING_BLUEBELL);
-//        crossBlock(SUNDEW);
-//        crossBlock(DROUGHTED_SHRUB);
-//        crossBlock(TALL_BLOOM);
-//        crossBlock(TANGLED_STALK);
-//        crossBlock(HIGH_CAPPED_MUSHROOM);
-//        crossBlock(TALL_FERN);
+        doubleCrossBlock(BULLRUSH);
+        doubleCrossBlock(WEEPING_BLUEBELL);
+        doubleCrossBlock(SUNDEW);
+        doubleCrossBlock(DROUGHTED_SHRUB);
+        doubleCrossBlock(TALL_BLOOM);
+        doubleCrossBlock(TANGLED_STALK);
+        doubleCrossBlock(HIGH_CAPPED_MUSHROOM);
 
         // MARK: Other
         blockTranslucent(PORTAL);

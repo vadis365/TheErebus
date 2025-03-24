@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "erebus:block/droughted_shrub_lower"
+    },
+    "half=upper": {
+      "model": "erebus:block/droughted_shrub_upper"
+    }
+  }
+}

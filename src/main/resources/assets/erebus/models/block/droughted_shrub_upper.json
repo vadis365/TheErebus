@@ -1,8 +1,9 @@
 {
     "ambientocclusion": false,
+    "render_type": "cutout",
     "textures": {
-        "0": "erebus:blocks/droughted_shrub_upper",
-        "particle": "erebus:blocks/droughted_shrub_upper"
+        "0": "erebus:block/droughted_shrub_upper",
+        "particle": "erebus:block/droughted_shrub_upper"
     },
     "elements": [
         {

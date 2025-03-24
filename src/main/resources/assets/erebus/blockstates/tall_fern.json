@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "erebus:block/tall_fern_lower"
+    },
+    "half=upper": {
+      "model": "erebus:block/tall_fern_upper"
+    }
+  }
+}

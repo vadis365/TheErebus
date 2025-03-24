@@ -35,6 +35,10 @@ public class ModBlockHelpers {
         return registerBlock(name, () -> new ModBushBlock(properties));
     }
 
+    protected static DeferredBlock<DoublePlantBlock> registerDoublePlant(String name, BlockBehaviour.Properties properties) {
+        return registerBlock(name, () -> new DoublePlantBlock(properties));
+    }
+
     protected static DeferredBlock<Block> registerSimpleBlock(String name, BlockBehaviour.Properties properties) {
         DeferredBlock<Block> deferredBlock = BLOCKS.registerSimpleBlock(name, properties);
         registerBlockItem(name, deferredBlock);

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "erebus:block/tangled_stalk_lower"
+    },
+    "half=upper": {
+      "model": "erebus:block/tangled_stalk_upper"
+    }
+  }
+}
