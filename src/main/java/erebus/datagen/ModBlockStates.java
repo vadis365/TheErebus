@@ -249,6 +249,9 @@ public class ModBlockStates extends ModBlockStateProvider {
         crop(CROP_TURNIP);
         crop(CROP_CABBAGE);
         crop(CROP_MANDRAKE);
+        bush(JADE_BERRY_BUSH, JADE_BERRY_BUSH.get().getAgeProperty());
+        bush(HEART_BERRY_BUSH, HEART_BERRY_BUSH.get().getAgeProperty());
+        bush(SWAMP_BERRY_BUSH, SWAMP_BERRY_BUSH.get().getAgeProperty());
         crossBlock(DESERT_SHRUB);
         //crossBlock(MIRE_CORAL); // TODO: I don't think this is implemented
         crossBlock(NETTLE);

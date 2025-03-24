@@ -1,16 +1,16 @@
 {
   "variants": {
     "age=0": {
-      "model": "erebus:block/crop_cabbage0"
+      "model": "erebus:block/crop_cabbage_0"
     },
     "age=1": {
-      "model": "erebus:block/crop_cabbage1"
+      "model": "erebus:block/crop_cabbage_1"
     },
     "age=2": {
-      "model": "erebus:block/crop_cabbage2"
+      "model": "erebus:block/crop_cabbage_2"
     },
     "age=3": {
-      "model": "erebus:block/crop_cabbage3"
+      "model": "erebus:block/crop_cabbage_3"
     }
   }
 }

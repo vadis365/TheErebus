@@ -7,6 +7,7 @@ import erebus.item.PaxelItem;
 import erebus.item.WandOfAnimationItem;
 import erebus.registries.helpers.ModItemHelpers;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.HoeItem;
@@ -80,7 +81,11 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> UMBERGOLEM_HEAD = registerItem("umbergolem_head");
     public static final DeferredItem<Item> UMBERGOLEM_CLAW = registerItem("umbergolem_claw");
     public static final DeferredItem<Item> UMBERGOLEM_LEGS = registerItem("umbergolem_legs");
-    public static final DeferredItem<Item> JADE_BERRIES = registerItem("jade_berries");
+    public static final DeferredItem<Item> JADE_BERRIES = ITEMS.register("jade_berries", () -> new ItemNameBlockItem(ModBlocks.JADE_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
+            .nutrition(1)
+            .saturationModifier(0.1F)
+            .build()
+    )));
     public static final DeferredItem<Item> BOGMAW_ROOT = registerItem("bogmaw_root");
     public static final DeferredItem<Item> HYDROFUGE = registerItem("hydrofuge");
     public static final DeferredItem<Item> WATER_REPELLENT = registerItem("water_repellent");
@@ -111,7 +116,11 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> DARK_FRUIT = registerFoodItem("dark_fruit", 2, 0.3F);
     public static final DeferredItem<Item> TITAN_CHOP_RAW = registerFoodItem("titan_chop_raw", 4, 0.3F);
     public static final DeferredItem<Item> TITAN_CHOP_COOKED = registerFoodItem("titan_chop_cooked", 8, 0.8F, MobEffects.DAMAGE_BOOST, 600, 1);
-    public static final DeferredItem<Item> SWAMP_BERRIES = registerFoodItem("swamp_berries", 1, 0.1F);
+    public static final DeferredItem<Item> SWAMP_BERRIES = ITEMS.register("swamp_berries", () -> new ItemNameBlockItem(ModBlocks.SWAMP_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
+            .nutrition(1)
+            .saturationModifier(0.1F)
+            .build()
+    )));
     public static final DeferredItem<Item> CABBAGE = registerFoodItem("cabbage", 1, 0.3F);
     public static final DeferredItem<Item> TITAN_STEW_COOKED = registerFoodItem("titan_stew_cooked", 20, 4.0F, STEW_POT);
     public static final DeferredItem<Item> PRICKLY_PEAR_RAW = registerFoodItem("prickly_pear_raw", 3, 0.3F, MobEffects.HARM, 1, 1);
@@ -249,7 +258,11 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> SEED_RAINBOW = registerItem("seed_rainbow");
 
     public static final DeferredItem<Item> LIFE_BLOOD = registerItem("life_blood");
-    public static final DeferredItem<Item> HEART_BERRIES = registerItem("heart_berries");
+    public static final DeferredItem<Item> HEART_BERRIES = ITEMS.register("heart_berries", () -> new ItemNameBlockItem(ModBlocks.HEART_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
+            .nutrition(1)
+            .saturationModifier(0.1F)
+            .build()
+    )));
     public static final DeferredItem<Item> STAG_HEART_RAW = registerItem("stag_heart_raw");
     public static final DeferredItem<Item> STAG_HEART_COOKED = registerItem("stag_heart_cooked");
 

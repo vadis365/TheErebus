@@ -484,9 +484,6 @@ public class ModTabs {
                     .icon(() -> ModItems.CABBAGE_SEEDS.get().getDefaultInstance())
                     .displayItems((parameters, output) -> {
                         output.accept(ModItems.CABBAGE);
-                        output.accept(ModBlocks.JADE_BERRY_BUSH);
-                        output.accept(ModBlocks.HEART_BERRY_BUSH);
-                        output.accept(ModBlocks.SWAMP_BERRY_BUSH);
                         output.accept(ModBlocks.DARK_FRUIT_VINE);
                         output.accept(ModBlocks.PRICKLY_PEAR);
                         output.accept(ModBlocks.PETAL_BLACK);

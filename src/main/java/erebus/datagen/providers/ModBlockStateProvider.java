@@ -2,6 +2,7 @@ package erebus.datagen.providers;
 
 import erebus.Config;
 import erebus.Erebus;
+import erebus.block.IModBush;
 import erebus.block.ModCropBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -9,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -167,15 +169,31 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         getVariantBuilder(crop.get()).forAllStates(function);
     }
 
+    public void bush(Supplier<? extends Block> bush, IntegerProperty age) {
+        Function<BlockState, ConfiguredModel[]> function = state -> states(state, name(bush), age);
+        getVariantBuilder(bush.get()).forAllStates(function);
+    }
+
     private ConfiguredModel[] states(BlockState state, ModCropBlock crop, String modelName) {
         ConfiguredModel[] models = new ConfiguredModel[1];
         models[0] = new ConfiguredModel(
                 models().crop(
-                        modelName + state.getValue(crop.getAgeProperty()),
+                        "%s_%d".formatted(modelName, state.getValue(crop.getAgeProperty())),
                         ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_%d".formatted(modelName, state.getValue(crop.getAgeProperty())))
                 ).renderType("cutout")
         );
 
+        return models;
+    }
+
+    private ConfiguredModel[] states(BlockState state, String modelName, IntegerProperty property) {
+        ConfiguredModel[] models = new ConfiguredModel[1];
+        models[0] = new ConfiguredModel(
+                models().cross(
+                        "%s_%d".formatted(modelName, state.getValue(property)),
+                        ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_%d".formatted(modelName, state.getValue(property)))
+                ).renderType("cutout")
+        );
         return models;
     }
 }

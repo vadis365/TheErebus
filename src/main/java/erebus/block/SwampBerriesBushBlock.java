@@ -28,14 +28,14 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
 
-public class JadeBerriesBushBlock extends BushBlock implements BonemealableBlock, IModBush {
-    public static final MapCodec<JadeBerriesBushBlock> CODEC = simpleCodec(JadeBerriesBushBlock::new);
+public class SwampBerriesBushBlock extends BushBlock implements BonemealableBlock, IModBush {
+    public static final MapCodec<SwampBerriesBushBlock> CODEC = simpleCodec(SwampBerriesBushBlock::new);
     public static final int MAX_AGE = 3;
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 3);
     private static final VoxelShape SAPLING_SHAPE = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 8.0F, 13.0F);
     private static final VoxelShape MID_GROWTH_SHAPE = Block.box(1.0F, 0.0F, 1.0F, 15.0F, 16.0F, 15.0F);
 
-    public JadeBerriesBushBlock(Properties properties) {
+    public SwampBerriesBushBlock(Properties properties) {
         super(properties);
         registerDefaultState(getStateDefinition().any().setValue(AGE, 0));
     }
@@ -47,7 +47,7 @@ public class JadeBerriesBushBlock extends BushBlock implements BonemealableBlock
 
     @Override
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
-        return new ItemStack(ModItems.JADE_BERRIES.get());
+        return new ItemStack(ModItems.SWAMP_BERRIES.get());
     }
 
     @Override
@@ -70,7 +70,7 @@ public class JadeBerriesBushBlock extends BushBlock implements BonemealableBlock
         boolean flag = i == 3;
         if (i > 1) {
             int j = 1 + level.random.nextInt(2);
-            popResource(level, pos, new ItemStack(ModItems.JADE_BERRIES.get(), j + (flag ? 1 : 0)));
+            popResource(level, pos, new ItemStack(ModItems.SWAMP_BERRIES.get(), j + (flag ? 1 : 0)));
             level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
             BlockState blockstate = state.setValue(AGE, 1);
             level.setBlock(pos, blockstate, 2);

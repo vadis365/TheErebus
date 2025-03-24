@@ -263,12 +263,12 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<WallBlock> WALL_UMBERPAVER_WEBBED = registerBlock("wall_umberpaver_webbed", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
 
     // MARK: Plants
-    public static final DeferredBlock<ModCropBlock> CROP_TURNIP = BLOCKS.register("crop_turnip", () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), ModItems.TURNIP));
-    public static final DeferredBlock<ModCropBlock> CROP_CABBAGE = BLOCKS.register("crop_cabbage", () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), ModItems.CABBAGE_SEEDS));
-    public static final DeferredBlock<ModCropBlock> CROP_MANDRAKE = BLOCKS.register("crop_mandrake", () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), ModItems.MANDRAKE_ROOT));
-    public static final DeferredBlock<Block> JADE_BERRY_BUSH = registerSimpleBlock("jade_berry_bush", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> HEART_BERRY_BUSH = registerSimpleBlock("heart_berry_bush", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> SWAMP_BERRY_BUSH = registerSimpleBlock("swamp_berry_bush", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<ModCropBlock> CROP_TURNIP = registerBlock("crop_turnip", () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), ModItems.TURNIP));
+    public static final DeferredBlock<ModCropBlock> CROP_CABBAGE = registerBlock("crop_cabbage", () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), ModItems.CABBAGE_SEEDS));
+    public static final DeferredBlock<ModCropBlock> CROP_MANDRAKE = registerBlock("crop_mandrake", () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), ModItems.MANDRAKE_ROOT));
+    public static final DeferredBlock<JadeBerriesBushBlock> JADE_BERRY_BUSH = registerBlock("jade_berry_bush", () -> new JadeBerriesBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH)));
+    public static final DeferredBlock<HeartBerriesBushBlock> HEART_BERRY_BUSH = registerBlock("heart_berry_bush", () -> new HeartBerriesBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH)));
+    public static final DeferredBlock<SwampBerriesBushBlock> SWAMP_BERRY_BUSH = registerBlock("swamp_berry_bush", () -> new SwampBerriesBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH)));
     public static final DeferredBlock<Block> DARK_FRUIT_VINE = registerSimpleBlock("dark_fruit_vine", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> PRICKLY_PEAR = registerSimpleBlock("prickly_pear", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DARK_CAPPED_MUSHROOM = registerSimpleBlock("dark_capped_mushroom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
