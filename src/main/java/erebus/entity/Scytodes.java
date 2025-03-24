@@ -1,5 +1,8 @@
 package erebus.entity;
 
+import java.util.EnumSet;
+
+import erebus.entity.projectile.WebSling;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -8,15 +11,18 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
@@ -27,6 +33,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -54,7 +61,7 @@ public class Scytodes  extends Monster {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		//tasks.addTask(1, new Scytodes.AIWebSlingAttack(this));
+		goalSelector.addGoal(1, new Scytodes.AIWebSlingAttack(this));
 		goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0.4F));
 		goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.5D, true));
 		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.5D));
@@ -62,6 +69,7 @@ public class Scytodes  extends Monster {
 		goalSelector.addGoal(6,  new RandomLookAroundGoal(this));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this));
 		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true, true));
+		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Villager>(this, Villager.class, true, true));
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -164,7 +172,7 @@ public class Scytodes  extends Monster {
 
 		if (getEntityWorld().rand.nextInt(100) == 0) {
 			EntityMoneySpider moneyspider = new EntityMoneySpider(getEntityWorld());
-			moneyspider.setLocationAndAngles(posX, posY, posZ, rotationYaw, 0.0F);
+			moneyspider.setLocationAndAngles(getX(), getY(), getZ(), rotationYaw, 0.0F);
 			moneyspider.onInitialSpawn(difficulty, (IEntityLivingData) null);
 			getEntityWorld().spawnEntity(moneyspider);
 			moneyspider.startRiding(this);
@@ -205,46 +213,46 @@ public class Scytodes  extends Monster {
 		else
 			setSkin(random.nextInt(4));
 	}
-/*
-	static class AIWebSlingAttack extends EntityAIBase {
+
+	static class AIWebSlingAttack extends Goal {
 		private final Scytodes scytodes;
 		private int attackStep;
 		private int attackTime;
 
 		public AIWebSlingAttack(Scytodes scytodesIn) {
 			scytodes = scytodesIn;
-			setMutexBits(3);
+			setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
 		}
 
 		@Override
-		public boolean shouldExecute() {
-			EntityLivingBase entitylivingbase = scytodes.getAttackTarget();
-			return entitylivingbase != null && entitylivingbase.isEntityAlive();
+		public boolean canUse() {
+			LivingEntity livingentity = scytodes.getTarget();
+			return livingentity != null && livingentity.isAlive();
 		}
 
 		@Override
-		public void startExecuting() {
+		public void start() {
 			attackStep = 0;
 		}
 
 		@Override
-		public void updateTask() {
+		 public void tick() {
 			--attackTime;
-			EntityLivingBase entitylivingbase = scytodes.getAttackTarget();
-			double distance = scytodes.getDistanceSq(entitylivingbase);
+			LivingEntity livingentity = scytodes.getTarget();
+			double distance = scytodes.distanceToSqr(livingentity);
 
 			if (distance < 4.0D) {
 				if (attackTime <= 0) {
 					attackTime = 20;
-					scytodes.attackEntityAsMob(entitylivingbase);
+					scytodes.doHurtTarget(livingentity);
 				}
 
-				scytodes.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, scytodes.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+				scytodes.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), scytodes.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
 
 			} else if (distance < 256.0D) {
-				double targetX = entitylivingbase.posX - scytodes.posX;
-				double targetY = entitylivingbase.getEntityBoundingBox().minY + (double) (entitylivingbase.height / 2.0F) - (scytodes.posY + (double) (scytodes.height / 2.0F));
-				double targetZ = entitylivingbase.posZ - scytodes.posZ;
+				double targetX = livingentity.getX() - scytodes.getX();
+				double targetY = livingentity.getBoundingBox().minY + (double) (livingentity.getBbHeight() / 2.0F) - (scytodes.getY() + (double) (scytodes.getBbHeight() / 2.0F));
+				double targetZ = livingentity.getZ() - scytodes.getZ();
 
 				if (attackTime <= 0) {
 					++attackStep;
@@ -257,23 +265,22 @@ public class Scytodes  extends Monster {
 						attackStep = 0;
 					}
 
-					if (attackStep > 1 && entitylivingbase instanceof EntityPlayer) {
-						scytodes.getEntityWorld().playSound((EntityPlayer) null, scytodes.getPosition(), scytodes.getWebSlingThrowSound(), SoundCategory.HOSTILE, 1.0F, 1.0F);
+					if (attackStep > 1 && livingentity instanceof Player) {
+						scytodes.level().playSound( null, scytodes.blockPosition(), scytodes.getWebSlingThrowSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
 						for (int count = 0; count < 1; ++count) {
-							EntityWebSling webSling = new EntityWebSling(scytodes.getEntityWorld(), scytodes);
-							webSling.posY = scytodes.posY + (double) (scytodes.height / 2.0F) + 0.5D;
-							webSling.setType((byte) 0);
+							WebSling webSling = new WebSling(scytodes.level(), scytodes, 0);
+							webSling.setPos(scytodes.getX(), scytodes.getY() + (double) (scytodes.getBbHeight() / 2.0F) + 0.5D, scytodes.getZ());
+							webSling.setWebType((byte) 0);
 							webSling.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
-							scytodes.getEntityWorld().spawnEntity(webSling);
+							scytodes.level().addFreshEntity(webSling);
 						}
 					}
 				}
-				scytodes.getLookHelper().setLookPositionWithEntity(entitylivingbase, 10.0F, 10.0F);
-				scytodes.getNavigator().clearPath();
-				scytodes.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, scytodes.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+				scytodes.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
+				scytodes.getNavigation().isDone();
+				scytodes.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), scytodes.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
 			}
-			super.updateTask();
+			super.tick();
 		}
 	}
-	*/
 }

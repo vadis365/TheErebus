@@ -7,6 +7,7 @@ import erebus.client.render.entity.model.WaspModel;
 import erebus.client.render.entity.renderer.AnimatedBlockRenderer;
 import erebus.client.render.entity.renderer.ScytodesRenderer;
 import erebus.client.render.entity.renderer.WaspRenderer;
+import erebus.client.render.entity.renderer.WebSlingRenderer;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
@@ -29,5 +30,6 @@ public class ModEntityRendering {
     	event.registerEntityRenderer(ModEntities.WASP.get(), WaspRenderer::new);
     	event.registerEntityRenderer(ModEntities.ANIMATED_BLOCK.get(), AnimatedBlockRenderer::new);
     	event.registerEntityRenderer(ModEntities.SCYTODES.get(), ScytodesRenderer::new);
+    	event.registerEntityRenderer(ModEntities.WEB_SLING.get(), WebSlingRenderer::new);
     }
 }

@@ -6,7 +6,9 @@ import erebus.Erebus;
 import erebus.entity.AnimatedBlock;
 import erebus.entity.Scytodes;
 import erebus.entity.Wasp;
+import erebus.entity.projectile.WebSling;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
@@ -35,12 +37,12 @@ public class ModEntities {
 	public static final Supplier<EntityType<Wasp>> WASP = registerWithEgg("wasp", EntityType.Builder.of(Wasp::new, MobCategory.MONSTER).sized(0.5F, 0.4F), 0xFECD09, 0x141414);
 	public static final Supplier<EntityType<AnimatedBlock>> ANIMATED_BLOCK = registerNoEgg("animated_block", EntityType.Builder.of(AnimatedBlock::new, MobCategory.MISC).fireImmune().sized(1F, 1.25F).clientTrackingRange(4).updateInterval(10));
 	public static final Supplier<EntityType<Scytodes>> SCYTODES = registerWithEgg("scytodes", EntityType.Builder.of(Scytodes::new, MobCategory.MONSTER).sized(2F, 1F).fireImmune(), 0xC2833C, 0x520D06);
-
+	public static final Supplier<EntityType<WebSling>> WEB_SLING = registerNonMobEntity("web_sling", EntityType.Builder.<WebSling>of(WebSling::new, MobCategory.MISC).sized(0.5F, 0.5F));
 	// just calls a helper in the main mod because it'll be used all over probably
 	private static String prefix(String name) {
 		return Erebus.prefix(name).toString();
 	}
-	
+
 	public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
 		event.register(WASP.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Wasp::canSpawnHere, null);
 		event.register(SCYTODES.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Scytodes::canSpawnHere, null);
@@ -66,4 +68,10 @@ public class ModEntities {
 		DeferredHolder<EntityType<?>, EntityType<E>> ret = ENTITY_TYPES.register(name, () -> builder.build(prefix(name)));
 		return ret;
 	}
+
+	private static <E extends Entity> DeferredHolder<EntityType<?>, EntityType<E>> registerNonMobEntity(String name, EntityType.Builder<E> builder) {
+		DeferredHolder<EntityType<?>, EntityType<E>> ret = ENTITY_TYPES.register(name, () -> builder.build(prefix(name)));
+		return ret;
+	}
+
 }
