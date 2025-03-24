@@ -252,14 +252,12 @@ public class ModBlockStates extends ModBlockStateProvider {
         bush(JADE_BERRY_BUSH, JADE_BERRY_BUSH.get().getAgeProperty());
         bush(HEART_BERRY_BUSH, HEART_BERRY_BUSH.get().getAgeProperty());
         bush(SWAMP_BERRY_BUSH, SWAMP_BERRY_BUSH.get().getAgeProperty());
-        crossBlock(DESERT_SHRUB);
         //crossBlock(MIRE_CORAL); // TODO: I don't think this is implemented
         crossBlock(NETTLE);
         crossBlock(NETTLE_FLOWERED);
         crossBlock(SWAMP_PLANT);
         crossBlock(FIRE_BLOOM);
-        crossBlock(FERN);
-        crossBlock(FIDDLE_HEAD);
+        tintedCrossBlock(FIDDLE_HEAD);
         crossBlock(THORNS);
         crossBlock(MOSS_DOWN);
         crossBlock(MOULD_DOWN);

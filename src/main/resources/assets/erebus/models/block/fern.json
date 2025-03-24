@@ -1,8 +1,9 @@
 {
     "ambientocclusion": false,
+    "render_type": "cutout",
     "textures": {
-        "0": "erebus:blocks/fern",
-        "particle": "erebus:blocks/fern"
+        "0": "erebus:block/fern",
+        "particle": "erebus:block/fern"
     },
     "elements": [
         {

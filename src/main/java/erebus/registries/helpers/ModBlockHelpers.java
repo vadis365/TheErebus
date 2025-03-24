@@ -1,13 +1,11 @@
 package erebus.registries.helpers;
 
 import erebus.block.ConnectedTextureBlock;
+import erebus.block.ModBushBlock;
 import erebus.registries.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.TransparentBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -31,6 +29,10 @@ public class ModBlockHelpers {
 
     protected static DeferredBlock<DoorBlock> registerDoor(String name, BlockSetType type, BlockBehaviour.Properties props) {
         return registerBlock(name, () -> new DoorBlock(type, props));
+    }
+
+    protected static DeferredBlock<BushBlock> registerBush(String name, BlockBehaviour.Properties properties) {
+        return registerBlock(name, () -> new ModBushBlock(properties));
     }
 
     protected static DeferredBlock<Block> registerSimpleBlock(String name, BlockBehaviour.Properties properties) {

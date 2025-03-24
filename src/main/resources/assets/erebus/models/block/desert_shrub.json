@@ -1,8 +1,9 @@
 {
     "ambientocclusion": false,
+    "render_type": "cutout",
     "textures": {
-        "0": "erebus:blocks/desert_shrub",
-        "particle": "erebus:blocks/desert_shrub"
+        "0": "erebus:block/desert_shrub",
+        "particle": "erebus:block/desert_shrub"
     },
     "elements": [
         {
