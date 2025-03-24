@@ -2,6 +2,7 @@ package erebus.datagen;
 
 import erebus.datagen.providers.ModBlockStateProvider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import static erebus.registries.ModBlocks.*;
@@ -302,7 +303,6 @@ public class ModBlockStates extends ModBlockStateProvider {
         doubleCrossBlock(BULLRUSH);
         doubleCrossBlock(WEEPING_BLUEBELL);
         doubleCrossBlock(SUNDEW);
-        doubleCrossBlock(DROUGHTED_SHRUB);
         doubleCrossBlock(TALL_BLOOM);
         doubleCrossBlock(TANGLED_STALK);
         doubleCrossBlock(HIGH_CAPPED_MUSHROOM);
@@ -332,7 +332,24 @@ public class ModBlockStates extends ModBlockStateProvider {
         log(LIGHTNING_SPEED);
         block(ANTLION_EGG);
         block(TARANTULA_EGG);
-        //block(HONEY_TREAT); TODO: Implement this
+        cake(HONEY_TREAT);
+        cakeWithCandle(CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.CANDLE);
+        cakeWithCandle(WHITE_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.WHITE_CANDLE);
+        cakeWithCandle(ORANGE_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.ORANGE_CANDLE);
+        cakeWithCandle(MAGENTA_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.MAGENTA_CANDLE);
+        cakeWithCandle(LIGHT_BLUE_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.LIGHT_BLUE_CANDLE);
+        cakeWithCandle(YELLOW_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.YELLOW_CANDLE);
+        cakeWithCandle(LIME_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.LIME_CANDLE);
+        cakeWithCandle(PINK_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.PINK_CANDLE);
+        cakeWithCandle(GRAY_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.GRAY_CANDLE);
+        cakeWithCandle(LIGHT_GRAY_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.LIGHT_GRAY_CANDLE);
+        cakeWithCandle(CYAN_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.CYAN_CANDLE);
+        cakeWithCandle(PURPLE_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.PURPLE_CANDLE);
+        cakeWithCandle(BLUE_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.BLUE_CANDLE);
+        cakeWithCandle(BROWN_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.BROWN_CANDLE);
+        cakeWithCandle(GREEN_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.GREEN_CANDLE);
+        cakeWithCandle(RED_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.RED_CANDLE);
+        cakeWithCandle(BLACK_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.BLACK_CANDLE);
         block(WASP_NEST);
         stairs(STAIRS_WASP_NEST, WASP_NEST);
         //block(INSECT_REPELLENT); TODO: I'm pretty sure we don't need this

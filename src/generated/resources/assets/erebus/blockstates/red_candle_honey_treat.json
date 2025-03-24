@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "erebus:block/red_candle_honey_treat"
+    },
+    "lit=true": {
+      "model": "erebus:block/red_candle_honey_treat_lit"
+    }
+  }
+}

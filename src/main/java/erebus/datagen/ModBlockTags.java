@@ -65,5 +65,26 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
         tag(BlockTags.EMERALD_ORES).add(ORE_EMERALD.get());
         tag(BlockTags.COPPER_ORES).add(ORE_COPPER.get());
         tag(BlockTags.LAPIS_ORES).add(ORE_LAPIS.get());
+
+        tag(BlockTags.CANDLE_CAKES)
+                .add(
+                        CANDLE_HONEY_TREAT.get(),
+                        WHITE_CANDLE_HONEY_TREAT.get(),
+                        ORANGE_CANDLE_HONEY_TREAT.get(),
+                        MAGENTA_CANDLE_HONEY_TREAT.get(),
+                        LIGHT_BLUE_CANDLE_HONEY_TREAT.get(),
+                        YELLOW_CANDLE_HONEY_TREAT.get(),
+                        LIME_CANDLE_HONEY_TREAT.get(),
+                        PINK_CANDLE_HONEY_TREAT.get(),
+                        GRAY_CANDLE_HONEY_TREAT.get(),
+                        LIGHT_GRAY_CANDLE_HONEY_TREAT.get(),
+                        CYAN_CANDLE_HONEY_TREAT.get(),
+                        PURPLE_CANDLE_HONEY_TREAT.get(),
+                        BLUE_CANDLE_HONEY_TREAT.get(),
+                        BROWN_CANDLE_HONEY_TREAT.get(),
+                        GREEN_CANDLE_HONEY_TREAT.get(),
+                        RED_CANDLE_HONEY_TREAT.get(),
+                        BLACK_CANDLE_HONEY_TREAT.get()
+                );
     }
 }

@@ -2,6 +2,8 @@ package erebus.datagen.providers;
 
 import erebus.Config;
 import erebus.Erebus;
+import erebus.block.CandleHoneyTreatBlock;
+import erebus.block.HoneyTreatBlock;
 import erebus.block.IModBush;
 import erebus.block.ModCropBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -175,6 +177,89 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
 
     public void pressurePlate(Supplier<? extends PressurePlateBlock> block, Supplier<? extends Block> fullBlock) {
         pressurePlateBlock(block.get(), texture(name(fullBlock)));
+    }
+
+    public void cake(Supplier<? extends HoneyTreatBlock> treat) {
+        String name = name(treat);
+        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_side".formatted(name));
+        ResourceLocation bottom = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_bottom".formatted(name));
+        ResourceLocation top = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_top".formatted(name));
+        ResourceLocation inside = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_inner".formatted(name));
+
+        getVariantBuilder(treat.get())
+                .forAllStates(
+                        state -> {
+                            treat.get();
+                            if (state.getValue(HoneyTreatBlock.BITES) == 0) {
+                                return ConfiguredModel.builder()
+                                        .modelFile(models()
+                                                .withExistingParent(name, mcLoc("block/cake"))
+                                                .texture("particle", side)
+                                                .texture("side", side)
+                                                .texture("bottom", bottom)
+                                                .texture("top", top))
+                                        .build();
+                            } else {
+                                return ConfiguredModel.builder()
+                                        .modelFile(models()
+                                                .withExistingParent(
+                                                        "%s_slice_%d".formatted(name, state.getValue(HoneyTreatBlock.BITES)),
+                                                        mcLoc("block/cake_slice%d".formatted(state.getValue(HoneyTreatBlock.BITES)))
+                                                )
+                                                .texture("particle", side)
+                                                .texture("bottom", bottom)
+                                                .texture("top", top)
+                                                .texture("side", side)
+                                                .texture("inside", inside))
+                                        .build();
+                            }
+                        }
+                );
+    }
+
+    public void cakeWithCandle(Supplier<? extends CandleHoneyTreatBlock> candleTreat, Supplier<? extends HoneyTreatBlock> treat, Block candle) {
+        String name = name(treat);
+        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_side".formatted(name));
+        ResourceLocation bottom = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_bottom".formatted(name));
+        ResourceLocation top = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_top".formatted(name));
+        ResourceLocation inside = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_inner".formatted(name));
+        ResourceLocation candleRL = ResourceLocation.fromNamespaceAndPath("minecraft", "block/%s".formatted(candle.getDescriptionId().replaceFirst("block.minecraft.", "")));
+        ResourceLocation candleLit = ResourceLocation.fromNamespaceAndPath("minecraft", "block/%s_lit".formatted(candle.getDescriptionId().replaceFirst("block.minecraft.", "")));
+        getVariantBuilder(candleTreat.get())
+                .forAllStates(
+                        state -> {
+                            candleTreat.get();
+                            if (state.getValue(CandleHoneyTreatBlock.LIT)) {
+                                return ConfiguredModel.builder()
+                                        .modelFile(models()
+                                                .withExistingParent(
+                                                        "%s_lit".formatted(name(candleTreat)),
+                                                        mcLoc("block/template_cake_with_candle")
+                                                )
+                                                .texture("particle", side)
+                                                .texture("bottom", bottom)
+                                                .texture("top", top)
+                                                .texture("candle_lit", candleLit)
+                                                .texture("side", side)
+                                                .texture("inside", inside))
+                                        .build();
+                            } else {
+                                return ConfiguredModel.builder()
+                                        .modelFile(models()
+                                                .withExistingParent(
+                                                        name(candleTreat),
+                                                        mcLoc("block/template_cake_with_candle")
+                                                )
+                                                .texture("particle", side)
+                                                .texture("bottom", bottom)
+                                                .texture("top", top)
+                                                .texture("candle", candleRL)
+                                                .texture("side", side)
+                                                .texture("inside", inside))
+                                        .build();
+                            }
+                        }
+                );
     }
 
     public void sign(Supplier<? extends StandingSignBlock> standingBlock, Supplier<? extends WallSignBlock> wallBlock, String name) {
