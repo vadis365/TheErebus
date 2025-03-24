@@ -13,14 +13,18 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
-public class WebSling extends ThrowableProjectile {
+public class WebSling  extends ThrowableProjectile implements ItemSupplier {
 	private static final EntityDataAccessor<Byte> TYPE = SynchedEntityData.defineId(WebSling.class, EntityDataSerializers.BYTE);
 	private float damage; // not needed but will leave for now - just in case...
 
@@ -56,34 +60,42 @@ public class WebSling extends ThrowableProjectile {
 	@Override
 	protected void onHit(HitResult result) {
 		HitResult.Type typeOfHit = result.getType();
-		byte type = getWebType();
-
 		if (!level().isClientSide()) {
 			if (typeOfHit == HitResult.Type.ENTITY) {
 				EntityHitResult entityhitresult = (EntityHitResult) result;
 				BlockPos entityPos = entityhitresult.getEntity().blockPosition();
-				if (level().getBlockState(entityPos).isAir())
-					if (type == 0)
-						level().setBlockAndUpdate(entityPos, Blocks.COBWEB.defaultBlockState());
-					else if (type == 1)
-						level().setBlockAndUpdate(entityPos, ModBlocks.WITHER_WEB.get().defaultBlockState());
-					else if (type == 2)
+				if (level().getBlockState(entityPos).isAir()) {
+					if (getWebType() == 0)
+						level().setBlockAndUpdate(entityPos, webState(getWebType()));
+					else if (getWebType() == 1)
+						level().setBlockAndUpdate(entityPos, webState(getWebType()));
+					else if (getWebType() == 2)
 						if (BaseFireBlock.canBePlacedAt(level(), entityPos, Direction.DOWN))
 							entityhitresult.getEntity().setRemainingFireTicks(10);
+				}
+				else
+					level().levelEvent(null, 2001, blockPosition(), Block.getId(webState(getWebType())));
 			} else {
-				if (level().getBlockState(blockPosition()).isAir())
-					if (type == 0)
-						level().setBlockAndUpdate(blockPosition(), Blocks.COBWEB.defaultBlockState());
-					else if (type == 1)
-						level().setBlockAndUpdate(blockPosition(), ModBlocks.WITHER_WEB.get().defaultBlockState());
-					else if (type == 2)
+				if (level().getBlockState(blockPosition()).isAir()) {
+					if (getWebType() == 0)
+						level().setBlockAndUpdate(blockPosition(), webState(getWebType()));
+					else if (getWebType() == 1)
+						level().setBlockAndUpdate(blockPosition(), webState(getWebType()));
+					else if (getWebType() == 2)
 						if (BaseFireBlock.canBePlacedAt(level(), blockPosition(), Direction.DOWN))
-							level().setBlockAndUpdate(blockPosition(), Blocks.FIRE.defaultBlockState());
+							level().setBlockAndUpdate(blockPosition(), webState(getWebType()));
+				}
+				else
+					level().levelEvent(null, 2001, blockPosition(), Block.getId(webState(getWebType())));
 			}
 			kill();
 		}
-		if (type != 2)
+		if (getWebType() != 2)
 			level().playSound(null, blockPosition(), getWebSlingSplatSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
+	}
+	
+	public BlockState webState (byte type) {
+		return type == 0 ? Blocks.COBWEB.defaultBlockState() : type == 1 ? ModBlocks.WITHER_WEB.get().defaultBlockState() : Blocks.FIRE.defaultBlockState();
 	}
 
 	@Override
@@ -101,5 +113,10 @@ public class WebSling extends ThrowableProjectile {
 
 	public byte getWebType() {
 		return entityData.get(TYPE);
+	}
+
+	@Override
+	public ItemStack getItem() {
+		return new ItemStack(webState(getWebType()).getBlock());
 	}
 }
