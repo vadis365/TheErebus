@@ -2,9 +2,13 @@ package erebus.entity;
 
 import java.util.EnumSet;
 
+import javax.annotation.Nullable;
+
 import erebus.entity.projectile.WebSling;
+import erebus.registries.ModEntities;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -13,12 +17,16 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -33,11 +41,13 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -164,33 +174,38 @@ public class Scytodes  extends Monster {
 	protected SoundEvent getWebSlingThrowSound() {
 		return ModSounds.WEBSLING_THROW.get();
 	}
-/*
-	@Override
-    @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
-        livingdata = super.onInitialSpawn(difficulty, livingdata);
 
-		if (getEntityWorld().rand.nextInt(100) == 0) {
-			EntityMoneySpider moneyspider = new EntityMoneySpider(getEntityWorld());
-			moneyspider.setLocationAndAngles(getX(), getY(), getZ(), rotationYaw, 0.0F);
-			moneyspider.onInitialSpawn(difficulty, (IEntityLivingData) null);
-			getEntityWorld().spawnEntity(moneyspider);
+	 @Nullable
+	    @Override
+	    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
+		 spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
+	        RandomSource randomsource = level.getRandom();
+
+		if (randomsource.nextInt(1) == 0) {
+			MoneySpider moneyspider = ModEntities.MONEY_SPIDER.get().create(this.level());
+			moneyspider.setPos(getX(), getY(), getZ());
+			moneyspider.setYRot(getYRot());
+			//moneyspider.finalizeSpawn(level, difficulty, spawnType, null);
 			moneyspider.startRiding(this);
 		}
-		if (livingdata == null) {
-			livingdata = new EntitySpider.GroupData();
-            if (this.world.getDifficulty() == EnumDifficulty.HARD && this.world.rand.nextFloat() < 0.1F * difficulty.getClampedAdditionalDifficulty())
-                ((EntitySpider.GroupData)livingdata).setRandomEffect(this.world.rand);
-
-            if (livingdata instanceof EntitySpider.GroupData) {
-                Potion potion = ((EntitySpider.GroupData)livingdata).effect;
-                if (potion != null)
-                    this.addPotionEffect(new PotionEffect(potion, Integer.MAX_VALUE));
+	
+        if (spawnGroupData == null) {
+            spawnGroupData = new Spider.SpiderEffectsGroupData();
+            if (level.getDifficulty() == Difficulty.HARD && randomsource.nextFloat() < 0.1F * difficulty.getSpecialMultiplier()) {
+                ((Spider.SpiderEffectsGroupData)spawnGroupData).setRandomEffect(randomsource);
             }
-		}
-		return livingdata;
+        }
+
+        if (spawnGroupData instanceof Spider.SpiderEffectsGroupData spider$spidereffectsgroupdata) {
+            Holder<MobEffect> holder = spider$spidereffectsgroupdata.effect;
+            if (holder != null) {
+                this.addEffect(new MobEffectInstance(holder, -1));
+            }
+        }
+
+        return spawnGroupData;
 	}
-*/
+
 	public void setSkin(int skinType) {
 		entityData.set(SKIN_TYPE, skinType);
 	}
