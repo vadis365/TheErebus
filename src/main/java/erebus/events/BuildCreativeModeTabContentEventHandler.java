@@ -14,7 +14,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 public class BuildCreativeModeTabContentEventHandler {
 
     @SubscribeEvent
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+    private static void addCreative(BuildCreativeModeTabContentsEvent event) {
         if(event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
             for (DeferredHolder<Item, ?> item : ModEntities.SPAWN_EGGS.getEntries()) {
                 if (item.get() instanceof SpawnEggItem) {

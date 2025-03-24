@@ -656,8 +656,9 @@ public class ModLang extends ModLangProvider {
     }
 
     private void addEntityTranslations() {
-        addEntityType(ModEntities.WASP, "Wasp");
-        addEntityType(ModEntities.ANIMATED_BLOCK, "Animated Block");
+        addEntity(ModEntities.WASP, "Wasp");
+        addEntity(ModEntities.ANIMATED_BLOCK, "Animated Block");
+        addEntity(ModEntities.SCYTODES, "Scytode");
     }
 
     private void addFluidTranslations() {

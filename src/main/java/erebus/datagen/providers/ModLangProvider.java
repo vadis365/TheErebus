@@ -10,6 +10,7 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -37,6 +38,11 @@ public abstract class ModLangProvider extends LanguageProvider {
         super.add(key, value);
         List<LangFormatSplitter.Component> splitEnglish = LangFormatSplitter.split(value);
         upsideDownEntries.put(key, LangConversionHelper.convertComponents(splitEnglish));
+    }
+
+    protected void addEntity(Supplier<? extends EntityType> entity, String name) {
+        add(entity.get().getDescriptionId(), name);
+        add("item.erebus.%s_spawn_egg".formatted(entity.get().getDescriptionId()), "%s Spawn Egg".formatted(name));
     }
 
     protected void addAdvTitle(String advancementTitle, String name) {
