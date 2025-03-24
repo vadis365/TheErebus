@@ -2,7 +2,6 @@ package erebus.client.render.entity.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 
 import erebus.entity.Scytodes;
 import net.minecraft.client.model.HierarchicalModel;
@@ -19,17 +18,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ScytodesModel<T extends Scytodes> extends HierarchicalModel<T> {
 	public ModelPart root;
-	private final ModelPart Lmand1;
-	private final ModelPart Lmand2;
-	private final ModelPart Rmand1;
-	private final ModelPart Rmand2;
-	private final ModelPart Head1;
 	private final ModelPart HeadMain;
-	private final ModelPart HeadFront;
-	private final ModelPart HeadBack;
-	private final ModelPart HeadBotB;
-	private final ModelPart HeadBot;
-	private final ModelPart HeadCore;
 	private final ModelPart AbTop1;
 	private final ModelPart AbTop2;
 	private final ModelPart ABot1;
@@ -37,28 +26,42 @@ public class ScytodesModel<T extends Scytodes> extends HierarchicalModel<T> {
 	private final ModelPart AbCore1;
 	private final ModelPart AbCore2;
 	private final ModelPart AbCore3;
+	private final ModelPart FrontLegLeft;
+	private final ModelPart FrontLegRight;
+	private final ModelPart FrontMidLegLeft;
+	private final ModelPart FrontMidLegRight;
+	private final ModelPart BackMidLegLeft;
+	private final ModelPart BackMidLegRight;
+	private final ModelPart BackLegLeft;
+	private final ModelPart BackLegRight;
 	private final ModelPart LFL1;
-	private final ModelPart LMFL1;
-	private final ModelPart LMBL1;
-	private final ModelPart LBL1;
+	private final ModelPart LFL4;
+	private final ModelPart LFL5;
 	private final ModelPart RFL1;
+	private final ModelPart RFL4;
+	private final ModelPart RFL5;
+	private final ModelPart LMFL1;
+	private final ModelPart LMFL4;
+	private final ModelPart LMFL5;
 	private final ModelPart RMFL1;
+	private final ModelPart RMFL4;
+	private final ModelPart RMFL5;
+	private final ModelPart LMBL1;
+	private final ModelPart LMBL4;
+	private final ModelPart LMBL5;
 	private final ModelPart RMBL1;
+	private final ModelPart RMBL4;
+	private final ModelPart RMBL5;
+	private final ModelPart LBL1;
+	private final ModelPart LBL4;
+	private final ModelPart LBL5;
 	private final ModelPart RBL1;
+	private final ModelPart RBL4;
+	private final ModelPart RBL5;
 
 	public ScytodesModel(ModelPart root) {
 		this.root = root;
-		this.Lmand1 = root.getChild("Lmand1");
-		this.Lmand2 = root.getChild("Lmand2");
-		this.Rmand1 = root.getChild("Rmand1");
-		this.Rmand2 = root.getChild("Rmand2");
-		this.Head1 = root.getChild("Head1");
 		this.HeadMain = root.getChild("HeadMain");
-		this.HeadFront = root.getChild("HeadFront");
-		this.HeadBack = root.getChild("HeadBack");
-		this.HeadBotB = root.getChild("HeadBotB");
-		this.HeadBot = root.getChild("HeadBot");
-		this.HeadCore = root.getChild("HeadCore");
 		this.AbTop1 = root.getChild("AbTop1");
 		this.AbTop2 = root.getChild("AbTop2");
 		this.ABot1 = root.getChild("ABot1");
@@ -66,14 +69,38 @@ public class ScytodesModel<T extends Scytodes> extends HierarchicalModel<T> {
 		this.AbCore1 = root.getChild("AbCore1");
 		this.AbCore2 = root.getChild("AbCore2");
 		this.AbCore3 = root.getChild("AbCore3");
-		this.LFL1 = root.getChild("LFL1");
-		this.LMFL1 = root.getChild("LMFL1");
-		this.LMBL1 = root.getChild("LMBL1");
-		this.LBL1 = root.getChild("LBL1");
-		this.RFL1 = root.getChild("RFL1");
-		this.RMFL1 = root.getChild("RMFL1");
-		this.RMBL1 = root.getChild("RMBL1");
-		this.RBL1 = root.getChild("RBL1");
+		this.FrontLegLeft = root.getChild("FrontLegLeft");
+		this.LFL1 = FrontLegLeft.getChild("LFL1");
+		this.LFL4 = LFL1.getChild("LFL4");
+		this.LFL5 = LFL1.getChild("LFL5");
+		this.FrontMidLegLeft = root.getChild("FrontMidLegLeft");
+		this.LMFL1 = FrontMidLegLeft.getChild("LMFL1");
+		this.LMFL4 = LMFL1.getChild("LMFL4");
+		this.LMFL5 = LMFL1.getChild("LMFL5");
+		this.BackMidLegLeft = root.getChild("BackMidLegLeft");
+		this.LMBL1 = BackMidLegLeft.getChild("LMBL1");
+		this.LMBL4 = LMBL1.getChild("LMBL4");
+		this.LMBL5 = LMBL1.getChild("LMBL5");
+		this.BackLegLeft = root.getChild("BackLegLeft");
+		this.LBL1 = BackLegLeft.getChild("LBL1");
+		this.LBL4 = LBL1.getChild("LBL4");
+		this.LBL5 = LBL1.getChild("LBL5");
+		this.FrontLegRight = root.getChild("FrontLegRight");
+		this.RFL1 = FrontLegRight.getChild("RFL1");
+		this.RFL4 = RFL1.getChild("RFL4");
+		this.RFL5 = RFL1.getChild("RFL5");
+		this.FrontMidLegRight = root.getChild("FrontMidLegRight");
+		this.RMFL1 = FrontMidLegRight.getChild("RMFL1");
+		this.RMFL4 = RMFL1.getChild("RMFL4");
+		this.RMFL5 = RMFL1.getChild("RMFL5");
+		this.BackMidLegRight = root.getChild("BackMidLegRight");
+		this.RMBL1 = BackMidLegRight.getChild("RMBL1");
+		this.RMBL4 = RMBL1.getChild("RMBL4");
+		this.RMBL5 = RMBL1.getChild("RMBL5");
+		this.BackLegRight = root.getChild("BackLegRight");
+		this.RBL1 = BackLegRight.getChild("RBL1");
+		this.RBL4 = RBL1.getChild("RBL4");
+		this.RBL5 = RBL1.getChild("RBL5");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -81,27 +108,27 @@ public class ScytodesModel<T extends Scytodes> extends HierarchicalModel<T> {
 		PartDefinition partdefinition = meshdefinition.getRoot();
 		partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition Lmand1 = partdefinition.addOrReplaceChild("Lmand1", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -1.5F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 17.0F, -13.0F, 0.6981F, 0.0F, 0.0F));
-
-		PartDefinition Lmand2 = partdefinition.addOrReplaceChild("Lmand2", CubeListBuilder.create().texOffs(5, 0).addBox(0.0F, 0.5F, -1.5F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 17.0F, -13.0F, -0.8727F, 0.0F, 0.0F));
-
-		PartDefinition Rmand1 = partdefinition.addOrReplaceChild("Rmand1", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -1.5F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 17.0F, -13.0F, 0.6981F, 0.0F, 0.0F));
-
-		PartDefinition Rmand2 = partdefinition.addOrReplaceChild("Rmand2", CubeListBuilder.create().texOffs(5, 0).addBox(-1.0F, 0.5F, -1.5F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 17.0F, -13.0F, -0.8727F, 0.0F, 0.0F));
-
-		PartDefinition Head1 = partdefinition.addOrReplaceChild("Head1", CubeListBuilder.create().texOffs(10, 0).addBox(-2.5F, 0.5F, -4.5F, 5.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 15.0F, -7.0F));
-
 		PartDefinition HeadMain = partdefinition.addOrReplaceChild("HeadMain", CubeListBuilder.create().texOffs(0, 21).addBox(-6.0F, -1.7F, -2.8F, 12.0F, 4.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 17.0F, -7.0F));
 
-		PartDefinition HeadFront = partdefinition.addOrReplaceChild("HeadFront", CubeListBuilder.create().texOffs(26, 0).addBox(-4.0F, -3.8667F, -1.9F, 8.0F, 6.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 17.0F, -7.0F, 0.6981F, 0.0F, 0.0F));
+		PartDefinition Head1 = HeadMain.addOrReplaceChild("Head1", CubeListBuilder.create().texOffs(10, 0).addBox(-2.5F, 0.5F, -4.5F, 5.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, 0.0F));
 
-		PartDefinition HeadBack = partdefinition.addOrReplaceChild("HeadBack", CubeListBuilder.create().texOffs(0, 7).addBox(-4.0F, -8.0F, -1.1F, 8.0F, 4.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 17.0F, -7.0F, -0.5236F, 0.0F, 0.0F));
+		PartDefinition HeadFront = HeadMain.addOrReplaceChild("HeadFront", CubeListBuilder.create().texOffs(26, 0).addBox(-4.0F, -3.8667F, -1.9F, 8.0F, 6.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.6981F, 0.0F, 0.0F));
 
-		PartDefinition HeadBotB = partdefinition.addOrReplaceChild("HeadBotB", CubeListBuilder.create().texOffs(36, 16).addBox(-4.0F, 1.0F, 4.2F, 8.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 17.0F, -7.0F, 0.3491F, 0.0F, 0.0F));
+		PartDefinition HeadBack = HeadMain.addOrReplaceChild("HeadBack", CubeListBuilder.create().texOffs(0, 7).addBox(-4.0F, -8.0F, -1.1F, 8.0F, 4.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.5236F, 0.0F, 0.0F));
 
-		PartDefinition HeadBot = partdefinition.addOrReplaceChild("HeadBot", CubeListBuilder.create().texOffs(0, 37).addBox(-4.0F, 2.3F, -0.8F, 8.0F, 1.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 17.0F, -8.0F));
+		PartDefinition HeadBotB = HeadMain.addOrReplaceChild("HeadBotB", CubeListBuilder.create().texOffs(36, 16).addBox(-4.0F, 1.0F, 4.2F, 8.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.3491F, 0.0F, 0.0F));
 
-		PartDefinition HeadCore = partdefinition.addOrReplaceChild("HeadCore", CubeListBuilder.create().texOffs(27, 113).addBox(-5.0F, -2.5F, 0.0F, 10.0F, 6.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 17.0F, -7.0F, 0.7854F, 0.0F, 0.0F));
+		PartDefinition HeadBot = HeadMain.addOrReplaceChild("HeadBot", CubeListBuilder.create().texOffs(0, 37).addBox(-4.0F, 2.3F, -0.8F, 8.0F, 1.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -1.0F));
+
+		PartDefinition HeadCore = HeadMain.addOrReplaceChild("HeadCore", CubeListBuilder.create().texOffs(27, 113).addBox(-5.0F, -2.5F, 0.0F, 10.0F, 6.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.7854F, 0.0F, 0.0F));
+
+		PartDefinition Lmand1 = HeadMain.addOrReplaceChild("Lmand1", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -3.6749F, 0.0195F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.5F, 2.0F, -5.0F, 0.6981F, 0.0F, 0.0F));
+
+		PartDefinition Lmand2 = Lmand1.addOrReplaceChild("Lmand2", CubeListBuilder.create().texOffs(5, 0).addBox(-0.5F, -0.5F, -0.5F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -3.1749F, -0.4805F, -1.5708F, 0.0F, 0.0F));
+
+		PartDefinition Rmand1 = HeadMain.addOrReplaceChild("Rmand1", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -4.3177F, -0.7465F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 2.0F, -4.0F, 0.6981F, 0.0F, 0.0F));
+
+		PartDefinition Rmand2 = Rmand1.addOrReplaceChild("Rmand2", CubeListBuilder.create().texOffs(5, 0).addBox(-0.5F, -0.5F, -0.5F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -3.8177F, -1.2465F, -1.5708F, 0.0F, 0.0F));
 
 		PartDefinition AbTop1 = partdefinition.addOrReplaceChild("AbTop1", CubeListBuilder.create().texOffs(0, 47).addBox(-4.0F, 2.9F, 6.1F, 8.0F, 6.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 17.0F, -7.0F, 0.6981F, 0.0F, 0.0F));
 
@@ -117,147 +144,172 @@ public class ScytodesModel<T extends Scytodes> extends HierarchicalModel<T> {
 
 		PartDefinition AbCore3 = partdefinition.addOrReplaceChild("AbCore3", CubeListBuilder.create().texOffs(27, 102).addBox(-6.0F, 1.7F, 14.6F, 12.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 18.0F, -7.0F, 0.2618F, 0.0F, 0.0F));
 
-		PartDefinition LFL1 = partdefinition.addOrReplaceChild("LFL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.0F, 17.0F, -9.0F, 0.0F, 0.0F, -0.6109F));
+		PartDefinition FrontLegLeft = partdefinition.addOrReplaceChild("FrontLegLeft", CubeListBuilder.create(), PartPose.offsetAndRotation(5.0F, 17.0F, -9.0F, 0.0F, 0.7854F, 0.0F));
 
-		PartDefinition LFL2 = LFL1.addOrReplaceChild("LFL2", CubeListBuilder.create().texOffs(0, 99).addBox(2.5F, -7.7F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
+		PartDefinition LFL1 = FrontLegLeft.addOrReplaceChild("LFL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.6109F));
 
-		PartDefinition LFL3 = LFL1.addOrReplaceChild("LFL3", CubeListBuilder.create().texOffs(0, 103).addBox(3.7F, -6.0F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
+		PartDefinition LFL2 = LFL1.addOrReplaceChild("LFL2", CubeListBuilder.create().texOffs(0, 99).addBox(-0.4583F, -1.3558F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
 
-		PartDefinition LFL4 = LFL1.addOrReplaceChild("LFL4", CubeListBuilder.create().texOffs(0, 107).addBox(10.0F, 3.0F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
+		PartDefinition LFL3 = LFL1.addOrReplaceChild("LFL3", CubeListBuilder.create().texOffs(0, 103).addBox(-0.315F, -0.2659F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
 
-		PartDefinition LFL5 = LFL1.addOrReplaceChild("LFL5", CubeListBuilder.create().texOffs(0, 115).addBox(9.0F, 3.5F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
+		PartDefinition LFL4 = LFL1.addOrReplaceChild("LFL4", CubeListBuilder.create().texOffs(0, 107).addBox(-0.5985F, -0.5596F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
 
-		PartDefinition LFL6 = LFL1.addOrReplaceChild("LFL6", CubeListBuilder.create().texOffs(0, 123).addBox(11.0F, 7.5F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
+		PartDefinition LFL5 = LFL1.addOrReplaceChild("LFL5", CubeListBuilder.create().texOffs(0, 115).addBox(-1.1684F, -1.148F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
 
-		PartDefinition LMFL1 = partdefinition.addOrReplaceChild("LMFL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.0F, 17.0F, -6.0F, 0.0F, 0.0F, -0.6109F));
+		PartDefinition LFL6 = LFL5.addOrReplaceChild("LFL6", CubeListBuilder.create().texOffs(0, 123).addBox(-0.1F, 0.1701F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
 
-		PartDefinition LMFL2 = LMFL1.addOrReplaceChild("LMFL2", CubeListBuilder.create().texOffs(0, 99).addBox(2.5F, -7.7F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
+		PartDefinition FrontLegRight = partdefinition.addOrReplaceChild("FrontLegRight", CubeListBuilder.create(), PartPose.offsetAndRotation(-5.0F, 17.0F, -9.0F, 0.0F, -0.7854F, 0.0F));
 
-		PartDefinition LMFL3 = LMFL1.addOrReplaceChild("LMFL3", CubeListBuilder.create().texOffs(0, 103).addBox(3.7F, -6.0F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
+		PartDefinition RFL1 = FrontLegRight.addOrReplaceChild("RFL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -3.1416F, 0.6109F));
 
-		PartDefinition LMFL4 = LMFL1.addOrReplaceChild("LMFL4", CubeListBuilder.create().texOffs(0, 107).addBox(10.0F, 3.0F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
+		PartDefinition RFL2 = RFL1.addOrReplaceChild("RFL2", CubeListBuilder.create().texOffs(0, 99).addBox(-0.4583F, -1.3558F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
 
-		PartDefinition LMFL5 = LMFL1.addOrReplaceChild("LMFL5", CubeListBuilder.create().texOffs(0, 115).addBox(9.0F, 3.5F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
+		PartDefinition RFL3 = RFL1.addOrReplaceChild("RFL3", CubeListBuilder.create().texOffs(0, 99).addBox(-0.315F, -0.2659F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
 
-		PartDefinition LMFL6 = LMFL1.addOrReplaceChild("LMFL6", CubeListBuilder.create().texOffs(0, 123).addBox(11.0F, 7.5F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
+		PartDefinition RFL4 = RFL1.addOrReplaceChild("RFL4", CubeListBuilder.create().texOffs(0, 107).addBox(-0.5985F, -0.5596F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
 
-		PartDefinition LMBL1 = partdefinition.addOrReplaceChild("LMBL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.0F, 17.0F, -3.0F, 0.0F, 0.0F, -0.6109F));
+		PartDefinition RFL5 = RFL1.addOrReplaceChild("RFL5", CubeListBuilder.create().texOffs(0, 115).addBox(-1.1684F, -1.148F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
 
-		PartDefinition LMBL2 = LMBL1.addOrReplaceChild("LMBL2", CubeListBuilder.create().texOffs(0, 99).addBox(2.5F, -7.7F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
+		PartDefinition RFL6 = RFL5.addOrReplaceChild("RFL6", CubeListBuilder.create().texOffs(0, 123).addBox(-0.1F, 0.1701F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
 
-		PartDefinition LMBL3 = LMBL1.addOrReplaceChild("LMBL3", CubeListBuilder.create().texOffs(0, 103).addBox(3.7F, -6.0F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
+		PartDefinition FrontMidLegLeft = partdefinition.addOrReplaceChild("FrontMidLegLeft", CubeListBuilder.create(), PartPose.offsetAndRotation(5.0F, 17.0F, -6.0F, 0.0F, 0.2182F, 0.0F));
 
-		PartDefinition LMBL4 = LMBL1.addOrReplaceChild("LMBL4", CubeListBuilder.create().texOffs(0, 107).addBox(10.0F, 3.0F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
+		PartDefinition LMFL1 = FrontMidLegLeft.addOrReplaceChild("LMFL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.6109F));
 
-		PartDefinition LMBL5 = LMBL1.addOrReplaceChild("LMBL5", CubeListBuilder.create().texOffs(0, 115).addBox(9.0F, 3.5F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition LMFL2 = LMFL1.addOrReplaceChild("LMFL2", CubeListBuilder.create().texOffs(0, 99).addBox(-0.4583F, -1.3558F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
 
-		PartDefinition LMBL6 = LMBL1.addOrReplaceChild("LMBL6", CubeListBuilder.create().texOffs(0, 123).addBox(11.0F, 7.5F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
+		PartDefinition LMFL3 = LMFL1.addOrReplaceChild("LMFL3", CubeListBuilder.create().texOffs(0, 103).addBox(-0.315F, -0.2659F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
 
-		PartDefinition LBL1 = partdefinition.addOrReplaceChild("LBL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.0F, 17.0F, 0.0F, 0.0F, 0.0F, -0.6109F));
+		PartDefinition LMFL4 = LMFL1.addOrReplaceChild("LMFL4", CubeListBuilder.create().texOffs(0, 107).addBox(-0.5985F, -0.5596F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
 
-		PartDefinition LBL2 = LBL1.addOrReplaceChild("LBL2", CubeListBuilder.create().texOffs(0, 99).addBox(2.5F, -7.7F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
+		PartDefinition LMFL5 = LMFL1.addOrReplaceChild("LMFL5", CubeListBuilder.create().texOffs(0, 115).addBox(-1.1684F, -1.148F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
 
-		PartDefinition LBL3 = LBL1.addOrReplaceChild("LBL3", CubeListBuilder.create().texOffs(0, 103).addBox(3.7F, -6.0F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
+		PartDefinition LMFL6 = LMFL5.addOrReplaceChild("LMFL6", CubeListBuilder.create().texOffs(0, 123).addBox(-0.1F, 0.1701F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
 
-		PartDefinition LBL4 = LBL1.addOrReplaceChild("LBL4", CubeListBuilder.create().texOffs(0, 107).addBox(10.0F, 3.0F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
+		PartDefinition FrontMidLegRight = partdefinition.addOrReplaceChild("FrontMidLegRight", CubeListBuilder.create(), PartPose.offsetAndRotation(-5.0F, 17.0F, -6.0F, 0.0F, -0.2618F, 0.0F));
 
-		PartDefinition LBL5 = LBL1.addOrReplaceChild("LBL5", CubeListBuilder.create().texOffs(0, 115).addBox(9.0F, 3.5F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
+		PartDefinition RMFL1 = FrontMidLegRight.addOrReplaceChild("RMFL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, 0.6109F));
 
-		PartDefinition LBL6 = LBL1.addOrReplaceChild("LBL6", CubeListBuilder.create().texOffs(0, 123).addBox(11.0F, 7.5F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
+		PartDefinition RMFL2 = RMFL1.addOrReplaceChild("RMFL2", CubeListBuilder.create().texOffs(0, 99).addBox(-0.4583F, -1.3558F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
 
-		PartDefinition RFL1 = partdefinition.addOrReplaceChild("RFL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-5.0F, 17.0F, -9.0F, 0.0F, -3.1416F, 0.6109F));
+		PartDefinition RMFL3 = RMFL1.addOrReplaceChild("RMFL3", CubeListBuilder.create().texOffs(0, 103).addBox(-0.315F, -0.2659F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
 
-		PartDefinition RFL2 = RFL1.addOrReplaceChild("RFL2", CubeListBuilder.create().texOffs(0, 99).addBox(2.5F, -7.7F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
+		PartDefinition RMFL4 = RMFL1.addOrReplaceChild("RMFL4", CubeListBuilder.create().texOffs(0, 107).addBox(-0.5985F, -0.5596F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
 
-		PartDefinition RFL3 = RFL1.addOrReplaceChild("RFL3", CubeListBuilder.create().texOffs(0, 99).addBox(3.7F, -6.0F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
+		PartDefinition RMFL5 = RMFL1.addOrReplaceChild("RMFL5", CubeListBuilder.create().texOffs(0, 115).addBox(-1.1684F, -1.148F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
 
-		PartDefinition RFL4 = RFL1.addOrReplaceChild("RFL4", CubeListBuilder.create().texOffs(0, 107).addBox(10.0F, 3.0F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
+		PartDefinition RMFL6 = RMFL5.addOrReplaceChild("RMFL6", CubeListBuilder.create().texOffs(0, 123).addBox(-0.1F, 0.1701F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
 
-		PartDefinition RFL5 = RFL1.addOrReplaceChild("RFL5", CubeListBuilder.create().texOffs(0, 115).addBox(9.0F, 3.5F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
+		PartDefinition BackMidLegLeft = partdefinition.addOrReplaceChild("BackMidLegLeft", CubeListBuilder.create(), PartPose.offsetAndRotation(5.0F, 17.0F, -3.0F, 0.0F, -0.2618F, 0.0F));
 
-		PartDefinition RFL6 = RFL1.addOrReplaceChild("RFL6", CubeListBuilder.create().texOffs(0, 123).addBox(11.0F, 7.5F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
+		PartDefinition LMBL1 = BackMidLegLeft.addOrReplaceChild("LMBL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.6109F));
 
-		PartDefinition RMFL1 = partdefinition.addOrReplaceChild("RMFL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-5.0F, 17.0F, -6.0F, 0.0F, 3.1416F, 0.6109F));
+		PartDefinition LMBL2 = LMBL1.addOrReplaceChild("LMBL2", CubeListBuilder.create().texOffs(0, 99).addBox(-0.4583F, -1.3558F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
 
-		PartDefinition RMFL2 = RMFL1.addOrReplaceChild("RMFL2", CubeListBuilder.create().texOffs(0, 99).addBox(2.5F, -7.7F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
+		PartDefinition LMBL3 = LMBL1.addOrReplaceChild("LMBL3", CubeListBuilder.create().texOffs(0, 103).addBox(-0.315F, -0.2659F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
 
-		PartDefinition RMFL3 = RMFL1.addOrReplaceChild("RMFL3", CubeListBuilder.create().texOffs(0, 103).addBox(3.7F, -6.0F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
+		PartDefinition LMBL4 = LMBL1.addOrReplaceChild("LMBL4", CubeListBuilder.create().texOffs(0, 107).addBox(-0.5985F, -0.5596F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
 
-		PartDefinition RMFL4 = RMFL1.addOrReplaceChild("RMFL4", CubeListBuilder.create().texOffs(0, 107).addBox(10.0F, 3.0F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
+		PartDefinition LMBL5 = LMBL1.addOrReplaceChild("LMBL5", CubeListBuilder.create().texOffs(0, 115).addBox(-1.25F, -1.5F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(10.0F, 5.0F, 0.0F));
 
-		PartDefinition RMFL5 = RMFL1.addOrReplaceChild("RMFL5", CubeListBuilder.create().texOffs(0, 115).addBox(9.0F, 3.5F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
+		PartDefinition LMBL6 = LMBL5.addOrReplaceChild("LMBL6", CubeListBuilder.create().texOffs(0, 123).addBox(-0.3F, 0.1701F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
 
-		PartDefinition RMFL6 = RMFL1.addOrReplaceChild("RMFL6", CubeListBuilder.create().texOffs(0, 123).addBox(11.0F, 7.5F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
+		PartDefinition BackMidLegRight = partdefinition.addOrReplaceChild("BackMidLegRight", CubeListBuilder.create(), PartPose.offsetAndRotation(-5.0F, 17.0F, -3.0F, 0.0F, 0.2618F, 0.0F));
 
-		PartDefinition RMBL1 = partdefinition.addOrReplaceChild("RMBL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-5.0F, 17.0F, -3.0F, 0.0F, 3.1416F, 0.6109F));
+		PartDefinition RMBL1 = BackMidLegRight.addOrReplaceChild("RMBL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, 0.6109F));
 
-		PartDefinition RMBL2 = RMBL1.addOrReplaceChild("RMBL2", CubeListBuilder.create().texOffs(0, 99).addBox(2.5F, -7.7F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
+		PartDefinition RMBL2 = RMBL1.addOrReplaceChild("RMBL2", CubeListBuilder.create().texOffs(0, 99).addBox(-0.4583F, -1.3558F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
 
-		PartDefinition RMBL3 = RMBL1.addOrReplaceChild("RMBL3", CubeListBuilder.create().texOffs(0, 103).addBox(3.7F, -6.0F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
+		PartDefinition RMBL3 = RMBL1.addOrReplaceChild("RMBL3", CubeListBuilder.create().texOffs(0, 103).addBox(-0.315F, -0.2659F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
 
-		PartDefinition RMBL4 = RMBL1.addOrReplaceChild("RMBL4", CubeListBuilder.create().texOffs(0, 107).addBox(10.0F, 3.0F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
+		PartDefinition RMBL4 = RMBL1.addOrReplaceChild("RMBL4", CubeListBuilder.create().texOffs(0, 107).addBox(-0.5985F, -0.5596F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
 
-		PartDefinition RMBL5 = RMBL1.addOrReplaceChild("RMBL5", CubeListBuilder.create().texOffs(0, 115).addBox(9.0F, 3.5F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
+		PartDefinition RMBL5 = RMBL1.addOrReplaceChild("RMBL5", CubeListBuilder.create().texOffs(0, 115).addBox(-1.1684F, -1.148F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
 
-		PartDefinition RMBL6 = RMBL1.addOrReplaceChild("RMBL6", CubeListBuilder.create().texOffs(0, 123).addBox(11.0F, 7.5F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
+		PartDefinition RMBL6 = RMBL5.addOrReplaceChild("RMBL6", CubeListBuilder.create().texOffs(0, 123).addBox(-0.1F, 0.1701F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
 
-		PartDefinition RBL1 = partdefinition.addOrReplaceChild("RBL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-5.0F, 17.0F, 0.0F, 0.0F, 3.1416F, 0.6109F));
+		PartDefinition BackLegLeft = partdefinition.addOrReplaceChild("BackLegLeft", CubeListBuilder.create(), PartPose.offsetAndRotation(5.0F, 17.0F, 0.0F, 0.0F, -0.7418F, 0.0F));
 
-		PartDefinition RBL2 = RBL1.addOrReplaceChild("RBL2", CubeListBuilder.create().texOffs(0, 99).addBox(2.5F, -7.7F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
+		PartDefinition LBL1 = BackLegLeft.addOrReplaceChild("LBL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.6109F));
 
-		PartDefinition RBL3 = RBL1.addOrReplaceChild("RBL3", CubeListBuilder.create().texOffs(0, 103).addBox(3.7F, -6.0F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
+		PartDefinition LBL2 = LBL1.addOrReplaceChild("LBL2", CubeListBuilder.create().texOffs(0, 99).addBox(-0.4583F, -1.3558F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
 
-		PartDefinition RBL4 = RBL1.addOrReplaceChild("RBL4", CubeListBuilder.create().texOffs(0, 107).addBox(10.0F, 3.0F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
+		PartDefinition LBL3 = LBL1.addOrReplaceChild("LBL3", CubeListBuilder.create().texOffs(0, 103).addBox(-0.315F, -0.2659F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
 
-		PartDefinition RBL5 = RBL1.addOrReplaceChild("RBL5", CubeListBuilder.create().texOffs(0, 115).addBox(9.0F, 3.5F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
+		PartDefinition LBL4 = LBL1.addOrReplaceChild("LBL4", CubeListBuilder.create().texOffs(0, 107).addBox(-0.5985F, -0.5596F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
 
-		PartDefinition RBL6 = RBL1.addOrReplaceChild("RBL6", CubeListBuilder.create().texOffs(0, 123).addBox(11.0F, 7.5F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
+		PartDefinition LBL5 = LBL1.addOrReplaceChild("LBL5", CubeListBuilder.create().texOffs(0, 115).addBox(-1.1684F, -1.148F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
+
+		PartDefinition LBL6 = LBL5.addOrReplaceChild("LBL6", CubeListBuilder.create().texOffs(0, 123).addBox(-0.1F, 0.1701F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
+
+		PartDefinition BackLegRight = partdefinition.addOrReplaceChild("BackLegRight", CubeListBuilder.create(), PartPose.offsetAndRotation(-5.0F, 17.0F, 0.0F, 0.0F, 0.7854F, 0.0F));
+
+		PartDefinition RBL1 = BackLegRight.addOrReplaceChild("RBL1", CubeListBuilder.create().texOffs(0, 94).addBox(0.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, 0.6109F));
+
+		PartDefinition RBL2 = RBL1.addOrReplaceChild("RBL2", CubeListBuilder.create().texOffs(0, 99).addBox(-0.4583F, -1.3558F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.1345F));
+
+		PartDefinition RBL3 = RBL1.addOrReplaceChild("RBL3", CubeListBuilder.create().texOffs(0, 103).addBox(-0.315F, -0.2659F, -1.0F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(7.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.9599F));
+
+		PartDefinition RBL4 = RBL1.addOrReplaceChild("RBL4", CubeListBuilder.create().texOffs(0, 107).addBox(-0.5985F, -0.5596F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.1396F));
+
+		PartDefinition RBL5 = RBL1.addOrReplaceChild("RBL5", CubeListBuilder.create().texOffs(0, 115).addBox(-1.1684F, -1.148F, -0.5F, 1.0F, 6.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(10.0F, 5.0F, 0.0F, 0.0F, 0.0F, 0.0349F));
+
+		PartDefinition RBL6 = RBL5.addOrReplaceChild("RBL6", CubeListBuilder.create().texOffs(0, 123).addBox(-0.35F, -0.7958F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 6.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
 
 		return LayerDefinition.create(meshdefinition, 64, 128);
 	}
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float cosZ = (float) (Math.cos(limbSwing * 1.0F) * 0.3F * limbSwingAmount);
-		float cosY = (float) (Math.cos(limbSwing * 1.0F) * 0.4F * limbSwingAmount);
-		float fixZ = 0.611F;
-		float PI = 3.141593F;
-		LBL1.zRot = cosZ - fixZ;
-		LMBL1.zRot = -cosZ - fixZ;
-		LMFL1.zRot = cosZ - fixZ;
-		LFL1.zRot = cosZ - fixZ;
+		float sin = (float) (Math.sin(limbSwing * 0.75F) * 0.5F * limbSwingAmount);
+		float cos = (float) (Math.cos(limbSwing * 0.75F) * 0.5F * limbSwingAmount);
 
-		RBL1.zRot = -cosZ + fixZ;
-		RMBL1.zRot = cosZ + fixZ;
-		RMFL1.zRot = -cosZ + fixZ;
-		RFL1.zRot = cosZ + fixZ;
+		BackLegLeft.zRot = 0F + cos;
+		LBL4.zRot = 0.1396F + cos;
+		LBL5.zRot = 0.0349F + cos;
 
-		LBL1.yRot = -cosY;
-		LMBL1.yRot = cosY;
-		LMFL1.yRot = -cosY;
-		LFL1.yRot = cosY;
+		BackMidLegLeft.zRot = 0F + sin;
+		LMBL4.zRot = 0.1396F + sin;
+		LMBL5.zRot = 0.0349F + sin;
 
-		RBL1.yRot = -cosY + PI;
-		RMBL1.yRot = cosY + PI;
-		RMFL1.yRot = -cosY + PI;
-		RFL1.yRot = cosY + PI;
+		FrontMidLegLeft.zRot = 0F + cos;
+		LMFL4.zRot = 0.1396F + cos;
+		LMFL5.zRot = 0.0349F + cos;
 
+		FrontLegLeft.zRot = 0F + sin;
+		LFL4.zRot = 0.1396F + sin;
+		LFL5.zRot = 0.0349F + sin;
 
+		BackLegRight.zRot = 0F + sin;
+		RBL4.zRot = 0.1396F + cos;
+		RBL5.zRot = 0.0349F + cos;
+
+		BackMidLegRight.zRot = 0F + cos;
+		RMBL4.zRot = 0.1396F + cos;
+		RMBL5.zRot = 0.0349F + cos;
+
+		FrontMidLegRight.zRot = 0F + sin;
+		RMFL4.zRot = 0.1396F + cos;
+		RMFL5.zRot = 0.0349F + cos;
+
+		FrontLegRight.zRot = 0F + cos;
+		RFL4.zRot = 0.1396F + cos;
+		RFL5.zRot = 0.0349F + cos;
+
+		BackLegLeft.yRot = -0.7418F - sin;
+		BackMidLegLeft.yRot = -0.2618F + cos;
+		FrontMidLegLeft.yRot = 0.2182F - sin;
+		FrontLegLeft.yRot = 0.7854F + cos;
+
+		BackLegRight.yRot = 0.7418F + cos;
+		BackMidLegRight.yRot = 0.2618F - sin;
+		FrontMidLegRight.yRot = -0.2182F + cos;
+		FrontLegRight.yRot = -0.7854F - sin;
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		Lmand1.render(stack, consumer, light, overlay, colour);
-		Lmand2.render(stack, consumer, light, overlay, colour);
-		Rmand1.render(stack, consumer, light, overlay, colour);
-		Rmand2.render(stack, consumer, light, overlay, colour);
-		Head1.render(stack, consumer, light, overlay, colour);
 		HeadMain.render(stack, consumer, light, overlay, colour);
-		HeadFront.render(stack, consumer, light, overlay, colour);
-		HeadBack.render(stack, consumer, light, overlay, colour);
-		HeadBotB.render(stack, consumer, light, overlay, colour);
-		HeadBot.render(stack, consumer, light, overlay, colour);
-		HeadCore.render(stack, consumer, light, overlay, colour);
 		AbTop1.render(stack, consumer, light, overlay, colour);
 		AbTop2.render(stack, consumer, light, overlay, colour);
 		ABot1.render(stack, consumer, light, overlay, colour);
@@ -265,55 +317,14 @@ public class ScytodesModel<T extends Scytodes> extends HierarchicalModel<T> {
 		AbCore1.render(stack, consumer, light, overlay, colour);
 		AbCore2.render(stack, consumer, light, overlay, colour);
 		AbCore3.render(stack, consumer, light, overlay, colour);
-
-		stack.pushPose();
-		stack.translate(0.625F, 0F, 0F);
-		stack.mulPose(Axis.YP.rotationDegrees(60F));
-		LFL1.render(stack, consumer, light, overlay, colour);
-		stack.popPose();
-
-		stack.pushPose();
-		stack.translate(0.1875, -0.0625F, 0.0625F);
-		stack.mulPose(Axis.YP.rotationDegrees(20F));
-		LMFL1.render(stack, consumer, light, overlay, colour);
-		stack.popPose();
-
-		stack.pushPose();
-		stack.translate(0F, -0.0625F, -0.125F);
-		stack.mulPose(Axis.YN.rotationDegrees(20F));
-		LMBL1.render(stack, consumer, light, overlay, colour);
-		stack.popPose();
-
-		stack.pushPose();
-		stack.translate(0.1875F, -0.0625F, -0.25F);
-		stack.mulPose(Axis.YN.rotationDegrees(60F));
-		LBL1.render(stack, consumer, light, overlay, colour);
-		stack.popPose();
-
-		stack.pushPose();
-		stack.translate(-0.625F, 0F, 0F);
-		stack.mulPose(Axis.YN.rotationDegrees(60F));
-		RFL1.render(stack, consumer, light, overlay, colour);
-		stack.popPose();
-
-		stack.pushPose();
-		stack.translate(-0.1875, -0.0625F, 0.0625F);
-		stack.mulPose(Axis.YN.rotationDegrees(20F));
-		RMFL1.render(stack, consumer, light, overlay, colour);
-		stack.popPose();
-
-		stack.pushPose();
-		stack.translate(0F, -0.0625F, -0.125F);
-		stack.mulPose(Axis.YP.rotationDegrees(20F));
-		RMBL1.render(stack, consumer, light, overlay, colour);
-		stack.popPose();
-
-		stack.pushPose();
-		stack.translate(-0.1875F, -0.0625F, -0.25F);
-		stack.mulPose(Axis.YP.rotationDegrees(60F));
-		RBL1.render(stack, consumer, light, overlay, colour);
-		stack.popPose();
-
+		FrontLegLeft.render(stack, consumer, light, overlay, colour);
+		FrontLegRight.render(stack, consumer, light, overlay, colour);
+		FrontMidLegLeft.render(stack, consumer, light, overlay, colour);
+		FrontMidLegRight.render(stack, consumer, light, overlay, colour);
+		BackMidLegLeft.render(stack, consumer, light, overlay, colour);
+		BackMidLegRight.render(stack, consumer, light, overlay, colour);
+		BackLegLeft.render(stack, consumer, light, overlay, colour);
+		BackLegRight.render(stack, consumer, light, overlay, colour);
 	}
 
 	@Override
