@@ -107,25 +107,25 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<RotatedPillarBlock> LOG_HOLLOW = registerBlock("log_hollow", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
 
     // MARK: Saplings
-    public static final DeferredBlock<Block> SAPLING_MOSSBARK = registerSimpleBlock("sapling_mossbark", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> SAPLING_ASPER = registerSimpleBlock("sapling_asper", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> SAPLING_EUCALYPTUS = registerSimpleBlock("sapling_eucalyptus", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> SAPLING_MAHOGANY = registerSimpleBlock("sapling_mahogany", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> SAPLING_BALSAM = registerSimpleBlock("sapling_balsam", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> SAPLING_MOSSBARK = registerSapling("sapling_mossbark", ModTreeGrowers.MOSSBARK);
+    public static final DeferredBlock<SaplingBlock> SAPLING_ASPER = registerSapling("sapling_asper", ModTreeGrowers.ASPER);
+    public static final DeferredBlock<SaplingBlock> SAPLING_EUCALYPTUS = registerSapling("sapling_eucalyptus", ModTreeGrowers.EUCALYPTUS);
+    public static final DeferredBlock<SaplingBlock> SAPLING_MAHOGANY = registerSapling("sapling_mahogany", ModTreeGrowers.MAHOGANY);
+    public static final DeferredBlock<SaplingBlock> SAPLING_BALSAM = registerSapling("sapling_balsam", ModTreeGrowers.BALSAM);
     public static final DeferredBlock<SaplingBlock> SAPLING_BAOBAB = registerSapling("sapling_baobab", ModTreeGrowers.BAOBAB);
-    public static final DeferredBlock<Block> SAPLING_MARSHWOOD = registerSimpleBlock("sapling_marshwood", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> SAPLING_CYPRESS = registerSimpleBlock("sapling_cypress", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> SAPLING_BAMBOO = registerSimpleBlock("sapling_bamboo", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> SAPLING_MARSHWOOD = registerSapling("sapling_marshwood", ModTreeGrowers.MARSHWOOD);
+    public static final DeferredBlock<SaplingBlock> SAPLING_CYPRESS = registerSapling("sapling_cypress", ModTreeGrowers.CYPRESS);
+    public static final DeferredBlock<SaplingBlock> SAPLING_BAMBOO = registerSapling("sapling_bamboo", ModTreeGrowers.BAMBOO);
 
     // MARK: Leaves
-    public static final DeferredBlock<Block> LEAVES_MOSSBARK = registerSimpleBlock("leaves_mossbark", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> LEAVES_ASPER = registerSimpleBlock("leaves_asper", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> LEAVES_EUCALYPTUS = registerSimpleBlock("leaves_eucalyptus", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> LEAVES_MAHOGANY = registerSimpleBlock("leaves_mahogany", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> LEAVES_BALSAM = registerSimpleBlock("leaves_balsam", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> LEAVES_BAOBAB = registerSimpleBlock("leaves_baobab", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> LEAVES_MARSHWOOD = registerSimpleBlock("leaves_marshwood", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> LEAVES_CYPRESS = registerSimpleBlock("leaves_cypress", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<Block> LEAVES_MOSSBARK = registerSimpleBlock("leaves_mossbark", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES));
+    public static final DeferredBlock<Block> LEAVES_ASPER = registerSimpleBlock("leaves_asper", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES));
+    public static final DeferredBlock<Block> LEAVES_EUCALYPTUS = registerSimpleBlock("leaves_eucalyptus", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES));
+    public static final DeferredBlock<Block> LEAVES_MAHOGANY = registerSimpleBlock("leaves_mahogany", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES));
+    public static final DeferredBlock<Block> LEAVES_BALSAM = registerSimpleBlock("leaves_balsam", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES));
+    public static final DeferredBlock<Block> LEAVES_BAOBAB = registerSimpleBlock("leaves_baobab", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES));
+    public static final DeferredBlock<Block> LEAVES_MARSHWOOD = registerSimpleBlock("leaves_marshwood", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES));
+    public static final DeferredBlock<Block> LEAVES_CYPRESS = registerSimpleBlock("leaves_cypress", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES));
 
     // MARK: Planks
     public static final DeferredBlock<Block> PLANKS_BAOBAB = registerSimpleBlock("planks_baobab", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS));

@@ -179,6 +179,10 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         pressurePlateBlock(block.get(), texture(name(fullBlock)));
     }
 
+    public void cutout(Supplier<? extends Block> block) {
+        simpleBlock(block.get(), models().cubeAll(name(block), texture(name(block))).renderType("cutout"));
+    }
+
     public void cake(Supplier<? extends HoneyTreatBlock> treat) {
         String name = name(treat);
         ResourceLocation side = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_side".formatted(name));

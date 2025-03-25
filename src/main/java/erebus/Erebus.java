@@ -8,6 +8,7 @@ import erebus.registries.data.ModTags;
 import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
+import erebus.registries.world.ModTrunkPlacers;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -46,6 +47,7 @@ public class Erebus {
         ModEntities.SPAWN_EGGS.register(bus);
         ModSounds.SOUNDS.register(bus);
         ModMenuTypes.register(bus);
+        ModTrunkPlacers.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 
