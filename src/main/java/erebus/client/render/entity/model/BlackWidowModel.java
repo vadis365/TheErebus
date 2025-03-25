@@ -4,9 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import erebus.entity.BlackWidow;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HierarchicalModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -14,8 +12,6 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -45,6 +41,14 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 	private final ModelPart FrontMidLegRight;
 	private final ModelPart BackMidLegRight;
 	private final ModelPart BackLegRight;
+	private final ModelPart LegFL1Child_3;
+	private final ModelPart LegMFL1Child_3;
+	private final ModelPart LegMBL1Child_3;
+	private final ModelPart LegBL1Child_3;
+	private final ModelPart LegFR1Child_3;
+	private final ModelPart LegMFR1Child_3;
+	private final ModelPart LegMBR1Child_3;
+	private final ModelPart LegBR1Child_3;
 
 	public BlackWidowModel(ModelPart root) {
 		this.root = root;
@@ -63,14 +67,30 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 		this.Thorax1 = root.getChild("Thorax1");
 		this.MandibleR = root.getChild("MandibleR");
 		this.MandibleL = root.getChild("MandibleL");
+		
 		this.FrontLegLeft = root.getChild("FrontLegLeft");
+		this.LegFL1Child_3 = FrontLegLeft.getChild("LegFL1").getChild("LegFL1Child_3");
+		
 		this.FrontMidLegLeft = root.getChild("FrontMidLegLeft");
+		this.LegMFL1Child_3 = FrontMidLegLeft.getChild("LegMFL1").getChild("LegMFL1Child_3");
+		
 		this.BackMidLegLeft = root.getChild("BackMidLegLeft");
+		this.LegMBL1Child_3 = BackMidLegLeft.getChild("LegMBL1").getChild("LegMBL1Child_3");
+		
 		this.BackLegLeft = root.getChild("BackLegLeft");
+		this.LegBL1Child_3 = BackLegLeft.getChild("LegBL1").getChild("LegBL1Child_3");
+		
 		this.FrontLegRight = root.getChild("FrontLegRight");
+		this.LegFR1Child_3 = FrontLegRight.getChild("LegFR1").getChild("LegFR1Child_3");
+		
 		this.FrontMidLegRight = root.getChild("FrontMidLegRight");
+		this.LegMFR1Child_3 = FrontMidLegRight.getChild("LegMFR1").getChild("LegMFR1Child_3");
+		
 		this.BackMidLegRight = root.getChild("BackMidLegRight");
+		this.LegMBR1Child_3 = BackMidLegRight.getChild("LegMBR1").getChild("LegMBR1Child_3");
+		
 		this.BackLegRight = root.getChild("BackLegRight");
+		this.LegBR1Child_3 = BackLegRight.getChild("LegBR1").getChild("LegBR1Child_3");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -111,9 +131,9 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 
 		PartDefinition LegFL1 = FrontLegLeft.addOrReplaceChild("LegFL1", CubeListBuilder.create().texOffs(0, 0).addBox(-6.5F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.7854F));
 
-		PartDefinition LegFL1Child_4 = LegFL1.addOrReplaceChild("LegFL1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-16.0F, -15.0F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.9722F));
+		PartDefinition LegFL1Child_3 = LegFL1.addOrReplaceChild("LegFL1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-9.0F, -1.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-10.0F, 6.0F, 0.0F, 0.0F, 0.0F, -1.5708F));
 
-		PartDefinition LegFL1Child_3 = LegFL1.addOrReplaceChild("LegFL1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-15.0F, -11.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.5708F));
+		PartDefinition LegFL1Child_4 = LegFL1Child_3.addOrReplaceChild("LegFL1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-6.9F, -0.3F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-8.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.2618F));
 
 		PartDefinition LegFL1Child = LegFL1.addOrReplaceChild("LegFL1Child", CubeListBuilder.create().texOffs(0, 8).addBox(-5.95F, -5.5F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.7854F));
 
@@ -125,13 +145,13 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 
 		PartDefinition LegMFL1 = FrontMidLegLeft.addOrReplaceChild("LegMFL1", CubeListBuilder.create().texOffs(0, 0).addBox(-6.5F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.7854F));
 
-		PartDefinition LegMFL1Child_3 = LegMFL1.addOrReplaceChild("LegMFL1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-15.0F, -11.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.5708F));
+		PartDefinition LegMFL1Child_3 = LegMFL1.addOrReplaceChild("LegMFL1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-9.0F, -1.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-10.0F, 6.0F, 0.0F, 0.0F, 0.0F, -1.5708F));
+
+		PartDefinition LegMFL1Child_4 = LegMFL1Child_3.addOrReplaceChild("LegMFL1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-6.9F, -0.3F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-8.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.2618F));
 
 		PartDefinition LegMFL1Child_1 = LegMFL1.addOrReplaceChild("LegMFL1Child_1", CubeListBuilder.create().texOffs(0, 0).addBox(-9.5F, -6.5F, -1.0F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.0472F));
 
 		PartDefinition LegMFL1Child_2 = LegMFL1.addOrReplaceChild("LegMFL1Child_2", CubeListBuilder.create().texOffs(0, 8).addBox(-11.0F, -7.0F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.0472F));
-
-		PartDefinition LegMFL1Child_4 = LegMFL1.addOrReplaceChild("LegMFL1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-16.0F, -15.0F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.9722F));
 
 		PartDefinition LegMFL1Child = LegMFL1.addOrReplaceChild("LegMFL1Child", CubeListBuilder.create().texOffs(0, 8).addBox(-5.95F, -5.5F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.7854F));
 
@@ -141,11 +161,11 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 
 		PartDefinition LegMBL1Child_2 = LegMBL1.addOrReplaceChild("LegMBL1Child_2", CubeListBuilder.create().texOffs(0, 8).addBox(-11.0F, -7.0F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.0472F));
 
-		PartDefinition LegMBL1Child_3 = LegMBL1.addOrReplaceChild("LegMBL1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-15.0F, -11.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.5708F));
+		PartDefinition LegMBL1Child_3 = LegMBL1.addOrReplaceChild("LegMBL1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-9.0F, -1.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-10.0F, 6.0F, 0.0F, 0.0F, 0.0F, -1.5708F));
+
+		PartDefinition LegMBL1Child_4 = LegMBL1Child_3.addOrReplaceChild("LegMBL1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-6.9604F, -0.1368F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-8.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.2618F));
 
 		PartDefinition LegMBL1Child = LegMBL1.addOrReplaceChild("LegMBL1Child", CubeListBuilder.create().texOffs(0, 8).addBox(-5.95F, -5.5F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.7854F));
-
-		PartDefinition LegMBL1Child_4 = LegMBL1.addOrReplaceChild("LegMBL1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-16.0F, -15.0F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.9722F));
 
 		PartDefinition LegMBL1Child_1 = LegMBL1.addOrReplaceChild("LegMBL1Child_1", CubeListBuilder.create().texOffs(0, 0).addBox(-9.5F, -6.5F, -1.0F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.0472F));
 
@@ -153,27 +173,27 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 
 		PartDefinition LegBL1 = BackLegLeft.addOrReplaceChild("LegBL1", CubeListBuilder.create().texOffs(0, 0).addBox(-6.5F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.7854F));
 
-		PartDefinition LegBL1Child_4 = LegBL1.addOrReplaceChild("LegBL1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-16.0F, -15.0F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.9722F));
-
 		PartDefinition LegBL1Child = LegBL1.addOrReplaceChild("LegBL1Child", CubeListBuilder.create().texOffs(0, 8).addBox(-5.95F, -5.5F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.7854F));
 
 		PartDefinition LegBL1Child_2 = LegBL1.addOrReplaceChild("LegBL1Child_2", CubeListBuilder.create().texOffs(0, 8).addBox(-11.0F, -7.0F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.0472F));
 
 		PartDefinition LegBL1Child_1 = LegBL1.addOrReplaceChild("LegBL1Child_1", CubeListBuilder.create().texOffs(0, 0).addBox(-9.5F, -6.5F, -1.0F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.0472F));
 
-		PartDefinition LegBL1Child_3 = LegBL1.addOrReplaceChild("LegBL1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-15.0F, -11.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.5708F));
+		PartDefinition LegBL1Child_3 = LegBL1.addOrReplaceChild("LegBL1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-9.0F, -1.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-10.0F, 6.0F, 0.0F, 0.0F, 0.0F, -1.5708F));
+
+		PartDefinition LegBL1Child_4 = LegBL1Child_3.addOrReplaceChild("LegBL1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-6.9F, -0.3F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-8.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.2618F));
 
 		PartDefinition FrontLegRight = partdefinition.addOrReplaceChild("FrontLegRight", CubeListBuilder.create(), PartPose.offsetAndRotation(4.0F, 15.0F, -7.0F, 0.0F, 0.7854F, 0.0F));
 
 		PartDefinition LegFR1 = FrontLegRight.addOrReplaceChild("LegFR1", CubeListBuilder.create().texOffs(0, 0).addBox(-6.5F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 2.3562F));
 
-		PartDefinition LegFR1Child_4 = LegFR1.addOrReplaceChild("LegFR1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-16.0F, -15.0F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -1.1694F));
-
 		PartDefinition LegFR1Child_2 = LegFR1.addOrReplaceChild("LegFR1Child_2", CubeListBuilder.create().texOffs(0, 8).addBox(-11.0F, -7.0F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -2.0944F));
 
 		PartDefinition LegFR1Child = LegFR1.addOrReplaceChild("LegFR1Child", CubeListBuilder.create().texOffs(0, 8).addBox(-5.95F, -5.5F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -2.3562F));
 
-		PartDefinition LegFR1Child_3 = LegFR1.addOrReplaceChild("LegFR1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-15.0F, -11.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -1.5708F));
+		PartDefinition LegFR1Child_3 = LegFR1.addOrReplaceChild("LegFR1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-9.0F, -1.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-10.0F, -6.0F, 0.0F, 0.0F, 3.1416F, -1.5708F));
+
+		PartDefinition LegFR1Child_4 = LegFR1Child_3.addOrReplaceChild("LegFR1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-6.0F, 0.0F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-9.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.2618F));
 
 		PartDefinition LegFR1Child_1 = LegFR1.addOrReplaceChild("LegFR1Child_1", CubeListBuilder.create().texOffs(0, 0).addBox(-9.5F, -6.5F, -1.0F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -2.0944F));
 
@@ -185,9 +205,9 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 
 		PartDefinition LegMFR1Child = LegMFR1.addOrReplaceChild("LegMFR1Child", CubeListBuilder.create().texOffs(0, 8).addBox(-5.95F, -5.5F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -2.3562F));
 
-		PartDefinition LegMFR1Child_3 = LegMFR1.addOrReplaceChild("LegMFR1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-15.0F, -11.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -1.5708F));
+		PartDefinition LegMFR1Child_3 = LegMFR1.addOrReplaceChild("LegMFR1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-9.0F, -1.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-10.0F, -6.0F, 0.0F, 0.0F, 3.1416F, -1.5708F));
 
-		PartDefinition LegMFR1Child_4 = LegMFR1.addOrReplaceChild("LegMFR1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-16.0F, -15.0F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -1.1694F));
+		PartDefinition LegMFR1Child_4 = LegMFR1Child_3.addOrReplaceChild("LegMFR1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-6.9F, -0.3F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-8.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.2618F));
 
 		PartDefinition LegMFR1Child_2 = LegMFR1.addOrReplaceChild("LegMFR1Child_2", CubeListBuilder.create().texOffs(0, 8).addBox(-11.0F, -7.0F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -2.0944F));
 
@@ -195,9 +215,9 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 
 		PartDefinition LegMBR1 = BackMidLegRight.addOrReplaceChild("LegMBR1", CubeListBuilder.create().texOffs(0, 0).addBox(-6.5F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 2.3562F));
 
-		PartDefinition LegMBR1Child_4 = LegMBR1.addOrReplaceChild("LegMBR1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-16.0F, -15.0F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -1.1694F));
+		PartDefinition LegMBR1Child_3 = LegMBR1.addOrReplaceChild("LegMBR1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-10.0F, -1.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-10.0F, -5.0F, 0.0F, 0.0F, 3.1416F, -1.5708F));
 
-		PartDefinition LegMBR1Child_3 = LegMBR1.addOrReplaceChild("LegMBR1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-15.0F, -11.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -1.5708F));
+		PartDefinition LegMBR1Child_4 = LegMBR1Child_3.addOrReplaceChild("LegMBR1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-7.2F, 0.7F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-9.0F, -1.0F, 0.0F, 0.0F, 0.0F, -0.2618F));
 
 		PartDefinition LegMBR1Child = LegMBR1.addOrReplaceChild("LegMBR1Child", CubeListBuilder.create().texOffs(0, 8).addBox(-5.95F, -5.5F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -2.3562F));
 
@@ -213,9 +233,9 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 
 		PartDefinition LegBR1Child = LegBR1.addOrReplaceChild("LegBR1Child", CubeListBuilder.create().texOffs(0, 8).addBox(-5.95F, -5.5F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -2.3562F));
 
-		PartDefinition LegBR1Child_4 = LegBR1.addOrReplaceChild("LegBR1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-16.0F, -15.0F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -1.1694F));
+		PartDefinition LegBR1Child_3 = LegBR1.addOrReplaceChild("LegBR1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-9.0F, -1.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-10.0F, -6.0F, 0.0F, 0.0F, 3.1416F, -1.5708F));
 
-		PartDefinition LegBR1Child_3 = LegBR1.addOrReplaceChild("LegBR1Child_3", CubeListBuilder.create().texOffs(0, 0).addBox(-15.0F, -11.0F, -1.0F, 9.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -1.5708F));
+		PartDefinition LegBR1Child_4 = LegBR1Child_3.addOrReplaceChild("LegBR1Child_4", CubeListBuilder.create().texOffs(0, 5).addBox(-6.9F, -0.3F, -0.5F, 7.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-8.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.2618F));
 
 		PartDefinition LegBR1Child_2 = LegBR1.addOrReplaceChild("LegBR1Child_2", CubeListBuilder.create().texOffs(0, 8).addBox(-11.0F, -7.0F, -1.5F, 2.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -2.0944F));
 
@@ -224,11 +244,9 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float sin = (float) (Math.sin(limbSwing * 0.7F) * 0.4F * limbSwingAmount);
-		float cos = (float) (Math.cos(limbSwing * 0.7F) * 0.4F * limbSwingAmount);
-		
-	//	float sin = (float) (Math.sin(ageInTicks) * 0.4F);
-	//	float cos = (float) (Math.cos(ageInTicks) * 0.4F);
+		float sizeModifier = 1F / entity.getWidowSize() * 1F;
+		float sin = (float) (Math.sin(limbSwing * (0.3F + sizeModifier)) * 0.4F * limbSwingAmount);
+		float cos = (float) (Math.cos(limbSwing * (0.3F + sizeModifier)) * 0.4F * limbSwingAmount);
 		
 		Head.yRot = netHeadYaw / (180F / (float) Math.PI);
 		MandibleR.yRot = netHeadYaw / (180F / (float) Math.PI);
@@ -247,13 +265,28 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 		Lant2.xRot = headPitch / (180F / (float) Math.PI);
 		
 		BackLegLeft.zRot = 0F + cos;
+		LegBL1Child_3.zRot = -1.5708F - cos;
+		
 		BackMidLegLeft.zRot = 0F + sin;
+		LegMBL1Child_3.zRot = -1.5708F - sin;
+		
 		FrontMidLegLeft.zRot = 0F + cos;
+		LegMFL1Child_3.zRot = -1.5708F - cos;
+		
 		FrontLegLeft.zRot = 0F + sin;
+		LegFL1Child_3.zRot = -1.5708F - sin;
+		
 		BackLegRight.zRot = 0F + sin;
+		LegBR1Child_3.zRot = -1.5708F - sin;
+		
 		BackMidLegRight.zRot = 0F + cos;
+		LegMBR1Child_3.zRot = -1.5708F - cos;
+		
 		FrontMidLegRight.zRot = 0F + sin;
+		LegMFR1Child_3.zRot = -1.5708F - sin;
+		
 		FrontLegRight.zRot = 0F + cos;
+		LegFR1Child_3.zRot = -1.5708F - cos;
 
 		BackLegLeft.yRot = 0.7854F - sin;
 		BackMidLegLeft.yRot = 0.2618F + cos;
@@ -264,88 +297,6 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 		BackMidLegRight.yRot = -0.2618F - sin;
 		FrontMidLegRight.yRot = 0.2618F + cos;
 		FrontLegRight.yRot = 0.7854F - sin;
-/*
-		float x = 0.7853982F;
-		float b = 1.2F;
-		float x2 = -2.3561946F;
-
-		float movcos1 = MathHelper.cos(limbSwing * 0.7F) * 0.4F * prevLimbSwing;
-		float movsin1 = MathHelper.sin(limbSwing * 0.7F) * 0.4F * prevLimbSwing;
-		float movcos2 = MathHelper.cos(limbSwing * 0.7F) * 0.5F * prevLimbSwing;
-		float movcos3 = MathHelper.cos(limbSwing * 0.0F) * 0.0F * prevLimbSwing;
-
-		LegFL1.yRot = -0.698F + movcos1;
-		LegFL1.xRot = -0.698F - movsin1;
-		LegFL1.rotateAngleZ = b + movcos2;
-		LegFL2.rotateAngleZ = -x + movcos3;
-		LegFL3.rotateAngleZ = -0.2617994F - x + movcos3;
-		LegFL4.rotateAngleZ = -0.2617994F - x + movcos3;
-		LegFL5.rotateAngleZ = -0.7853982F - x + movcos3;
-		LegFL6.rotateAngleZ = -1.186824F - x + movcos3;
-
-		LegMFL1.yRot = -0.175F - movcos1;
-		LegMFL1.xRot = -0.175F + movsin1;
-		LegMFL1.rotateAngleZ = x - movcos2;
-		LegMFL2.rotateAngleZ = -x - movcos3;
-		LegMFL3.rotateAngleZ = -0.2617994F - x - movcos3;
-		LegMFL4.rotateAngleZ = -0.2617994F - x - movcos3;
-		LegMFL5.rotateAngleZ = -0.7853982F - x - movcos3;
-		LegMFL6.rotateAngleZ = -1.186824F - x - movcos3;
-
-		LegMBL1.yRot = 0.175F + movcos1;
-		LegMBL1.xRot = 0.175F - movsin1;
-		LegMBL1.rotateAngleZ = x + movcos2;
-		LegMBL2.rotateAngleZ = -x + movcos3;
-		LegMBL3.rotateAngleZ = -0.2617994F - x + movcos3;
-		LegMBL4.rotateAngleZ = -0.2617994F - x + movcos3;
-		LegMBL5.rotateAngleZ = -0.7853982F - x + movcos3;
-		LegMBL6.rotateAngleZ = -1.186824F - x + movcos3;
-
-		LegBL1.yRot = 0.698F - movcos1;
-		LegBL1.xRot = 0.698F + movsin1;
-		LegBL1.rotateAngleZ = b - movcos2;
-		LegBL2.rotateAngleZ = -x - movcos3;
-		LegBL3.rotateAngleZ = -0.2617994F - x - movcos3;
-		LegBL4.rotateAngleZ = -0.2617994F - x - movcos3;
-		LegBL5.rotateAngleZ = -0.7853982F - x - movcos3;
-		LegBL6.rotateAngleZ = -1.186824F - x - movcos3;
-
-		LegFR1.yRot = 3.84F + movcos1;
-		LegFR1.xRot = 3.84F - movsin1;
-		LegFR1.rotateAngleZ = -b + movcos2;
-		LegFR2.rotateAngleZ = x2 + movcos3;
-		LegFR3.rotateAngleZ = 0.2617994F + x2 + movcos3;
-		LegFR4.rotateAngleZ = 0.2617994F + x2 + movcos3;
-		LegFR5.rotateAngleZ = 0.7853982F + x2 + movcos3;
-		LegFR6.rotateAngleZ = 1.186824F + x2 + movcos3;
-
-		LegMFR1.yRot = 3.317F - movcos1;
-		LegMFR1.xRot = 3.317F + movsin1;
-		LegMFR1.rotateAngleZ = -x - movcos2;
-		LegMFR2.rotateAngleZ = x2 - movcos3;
-		LegMFR3.rotateAngleZ = 0.2617994F + x2 - movcos3;
-		LegMFR4.rotateAngleZ = 0.2617994F + x2 - movcos3;
-		LegMFR5.rotateAngleZ = 0.7853982F + x2 - movcos3;
-		LegMFR6.rotateAngleZ = 1.186824F + x2 - movcos3;
-
-		LegMBR1.yRot = 2.967F + movcos1;
-		LegMBR1.xRot = 2.967F - movsin1;
-		LegMBR1.rotateAngleZ = -x + movcos2;
-		LegMBR2.rotateAngleZ = x2 + movcos3;
-		LegMBR3.rotateAngleZ = 0.2617994F + x2 + movcos3;
-		LegMBR4.rotateAngleZ = 0.2617994F + x2 + movcos3;
-		LegMBR5.rotateAngleZ = 0.7853982F + x2 + movcos3;
-		LegMBR6.rotateAngleZ = 1.186824F + x2 + movcos3;
-
-		LegBR1.yRot = 2.443F - movcos1;
-		LegBR1.xRot = 2.443F + movsin1;
-		LegBR1.rotateAngleZ = -b - movcos2;
-		LegBR2.rotateAngleZ = x2 - movcos3;
-		LegBR3.rotateAngleZ = 0.2617994F + x2 - movcos3;
-		LegBR4.rotateAngleZ = 0.2617994F + x2 - movcos3;
-		LegBR5.rotateAngleZ = 0.7853982F + x2 - movcos3;
-		LegBR6.rotateAngleZ = 1.186824F + x2 - movcos3;
-*/
 	}
 
 	@Override
