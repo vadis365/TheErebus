@@ -1,7 +1,7 @@
 package erebus.events;
 
 import erebus.Erebus;
-import erebus.registries.ModEntities;
+import erebus.registries.entity.ModEntities;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;

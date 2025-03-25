@@ -7,7 +7,7 @@ import com.mojang.math.Axis;
 
 import erebus.client.render.entity.model.AnimatedBlockModel;
 import erebus.entity.AnimatedBlock;
-import erebus.registries.ModEntityRendering;
+import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;

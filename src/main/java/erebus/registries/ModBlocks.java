@@ -3,6 +3,7 @@ package erebus.registries;
 import erebus.Erebus;
 import erebus.block.*;
 import erebus.registries.helpers.ModBlockHelpers;
+import erebus.registries.world.ModTreeGrowers;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -111,7 +112,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> SAPLING_EUCALYPTUS = registerSimpleBlock("sapling_eucalyptus", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
     public static final DeferredBlock<Block> SAPLING_MAHOGANY = registerSimpleBlock("sapling_mahogany", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
     public static final DeferredBlock<Block> SAPLING_BALSAM = registerSimpleBlock("sapling_balsam", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<Block> SAPLING_BAOBAB = registerSimpleBlock("sapling_baobab", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> SAPLING_BAOBAB = registerSapling("sapling_baobab", ModTreeGrowers.BAOBAB);
     public static final DeferredBlock<Block> SAPLING_MARSHWOOD = registerSimpleBlock("sapling_marshwood", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
     public static final DeferredBlock<Block> SAPLING_CYPRESS = registerSimpleBlock("sapling_cypress", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));
     public static final DeferredBlock<Block> SAPLING_BAMBOO = registerSimpleBlock("sapling_bamboo", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING));

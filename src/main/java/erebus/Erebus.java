@@ -3,6 +3,11 @@ package erebus;
 import java.util.Locale;
 
 import erebus.registries.*;
+import erebus.registries.data.ModArmorMaterials;
+import erebus.registries.data.ModTags;
+import erebus.registries.data.ModToolMaterials;
+import erebus.registries.entity.ModEntities;
+import erebus.registries.entity.ModEntityRendering;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;

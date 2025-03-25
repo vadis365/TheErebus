@@ -4,7 +4,7 @@ import java.util.List;
 
 import erebus.entity.AnimatedBlock;
 import erebus.registries.ModBlocks;
-import erebus.registries.ModEntities;
+import erebus.registries.entity.ModEntities;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

@@ -2,7 +2,7 @@ package erebus.entity;
 
 import javax.annotation.Nullable;
 
-import erebus.registries.ModEntities;
+import erebus.registries.entity.ModEntities;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.SynchedEntityData;

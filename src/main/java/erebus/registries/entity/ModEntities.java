@@ -1,4 +1,4 @@
-package erebus.registries;
+package erebus.registries.entity;
 
 import java.util.function.Supplier;
 

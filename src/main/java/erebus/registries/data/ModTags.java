@@ -1,4 +1,4 @@
-package erebus.registries;
+package erebus.registries.data;
 
 import erebus.Erebus;
 import net.minecraft.core.registries.BuiltInRegistries;

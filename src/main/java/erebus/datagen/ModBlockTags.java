@@ -2,7 +2,7 @@ package erebus.datagen;
 
 import erebus.Erebus;
 import static erebus.registries.ModBlocks.*;
-import erebus.registries.ModTags;
+import erebus.registries.data.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;

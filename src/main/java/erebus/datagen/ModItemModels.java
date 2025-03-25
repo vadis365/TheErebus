@@ -3,7 +3,7 @@ package erebus.datagen;
 import static erebus.registries.ModBlocks.*;
 
 import erebus.datagen.providers.ModItemModelProvider;
-import erebus.registries.ModEntities;
+import erebus.registries.entity.ModEntities;
 import erebus.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;

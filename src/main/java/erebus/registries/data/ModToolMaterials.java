@@ -1,5 +1,6 @@
-package erebus.registries;
+package erebus.registries.data;
 
+import erebus.registries.ModItems;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;

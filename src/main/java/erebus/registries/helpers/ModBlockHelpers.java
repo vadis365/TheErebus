@@ -6,6 +6,7 @@ import erebus.registries.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -33,6 +34,10 @@ public class ModBlockHelpers {
 
     protected static DeferredBlock<BushBlock> registerBush(String name, BlockBehaviour.Properties properties) {
         return registerBlock(name, () -> new ModBushBlock(properties));
+    }
+
+    protected static DeferredBlock<SaplingBlock> registerSapling(String name, TreeGrower grower) {
+        return registerBlock(name, () -> new SaplingBlock(grower, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
     }
 
     protected static DeferredBlock<DoublePlantBlock> registerDoublePlant(String name, BlockBehaviour.Properties properties) {

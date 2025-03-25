@@ -1,4 +1,4 @@
-package erebus.registries;
+package erebus.registries.world;
 
 import com.mojang.datafixers.util.Pair;
 import erebus.Erebus;
