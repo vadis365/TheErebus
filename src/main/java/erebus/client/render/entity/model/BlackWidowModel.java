@@ -245,8 +245,8 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float sizeModifier = 1F / entity.getWidowSize() * 1F;
-		float sin = (float) (Math.sin(limbSwing * (0.3F + sizeModifier)) * 0.4F * limbSwingAmount);
-		float cos = (float) (Math.cos(limbSwing * (0.3F + sizeModifier)) * 0.4F * limbSwingAmount);
+		float sin = (float) (Math.sin(limbSwing * (0.4F + sizeModifier)) * 0.4F * limbSwingAmount);
+		float cos = (float) (Math.cos(limbSwing * (0.4F + sizeModifier)) * 0.4F * limbSwingAmount);
 		
 		Head.yRot = netHeadYaw / (180F / (float) Math.PI);
 		MandibleR.yRot = netHeadYaw / (180F / (float) Math.PI);
@@ -265,28 +265,28 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 		Lant2.xRot = headPitch / (180F / (float) Math.PI);
 		
 		BackLegLeft.zRot = 0F + cos;
-		LegBL1Child_3.zRot = -1.5708F - cos;
+		LegBL1Child_3.zRot = -1.5708F - cos * 1.25F;
 		
 		BackMidLegLeft.zRot = 0F + sin;
-		LegMBL1Child_3.zRot = -1.5708F - sin;
+		LegMBL1Child_3.zRot = -1.5708F - sin * 1.25F;
 		
 		FrontMidLegLeft.zRot = 0F + cos;
-		LegMFL1Child_3.zRot = -1.5708F - cos;
+		LegMFL1Child_3.zRot = -1.5708F - cos * 1.25F;
 		
 		FrontLegLeft.zRot = 0F + sin;
-		LegFL1Child_3.zRot = -1.5708F - sin;
+		LegFL1Child_3.zRot = -1.5708F - sin * 1.25F;
 		
 		BackLegRight.zRot = 0F + sin;
-		LegBR1Child_3.zRot = -1.5708F - sin;
+		LegBR1Child_3.zRot = -1.5708F - sin * 1.25F;
 		
 		BackMidLegRight.zRot = 0F + cos;
-		LegMBR1Child_3.zRot = -1.5708F - cos;
+		LegMBR1Child_3.zRot = -1.5708F - cos * 1.25F;
 		
 		FrontMidLegRight.zRot = 0F + sin;
-		LegMFR1Child_3.zRot = -1.5708F - sin;
+		LegMFR1Child_3.zRot = -1.5708F - sin * 1.25F;
 		
 		FrontLegRight.zRot = 0F + cos;
-		LegFR1Child_3.zRot = -1.5708F - cos;
+		LegFR1Child_3.zRot = -1.5708F - cos * 1.25F;
 
 		BackLegLeft.yRot = 0.7854F - sin;
 		BackMidLegLeft.yRot = 0.2618F + cos;

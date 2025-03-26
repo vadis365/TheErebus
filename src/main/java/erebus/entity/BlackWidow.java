@@ -120,7 +120,7 @@ public class BlackWidow extends Monster {
 
 	@Override
 	public void makeStuckInBlock(BlockState state, Vec3 motionMultiplier) {
-		if (!state.is(Blocks.COBWEB) || state != ModBlocks.WITHER_WEB.get().defaultBlockState())
+		if (!state.is(Blocks.COBWEB))
 			super.makeStuckInBlock(state, motionMultiplier);
 	}
 
