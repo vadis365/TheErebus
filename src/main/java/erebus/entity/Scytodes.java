@@ -5,8 +5,8 @@ import java.util.EnumSet;
 import javax.annotation.Nullable;
 
 import erebus.entity.projectile.WebSling;
-import erebus.registries.ModEntities;
 import erebus.registries.ModSounds;
+import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;

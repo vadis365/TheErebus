@@ -30,5 +30,6 @@ public class GatherDataEventHandler {
         generator.addProvider(event.includeServer(), new ModBlockTags(output, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModLootTableProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new ModLang(output));
+        generator.addProvider(event.includeServer(), datapackProvider);
     }
 }

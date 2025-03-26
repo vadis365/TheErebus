@@ -3,7 +3,7 @@ package erebus.datagen;
 import static erebus.registries.ModBlocks.*;
 
 import erebus.datagen.providers.ModItemModelProvider;
-import erebus.registries.ModEntities;
+import erebus.registries.entity.ModEntities;
 import erebus.registries.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -336,15 +336,15 @@ public class ModItemModels extends ModItemModelProvider {
         block(LOG_HOLLOW);
 
         // MARK: Saplings
-        block(SAPLING_BAOBAB);
-        block(SAPLING_EUCALYPTUS);
-        block(SAPLING_MAHOGANY);
-        block(SAPLING_MOSSBARK);
-        block(SAPLING_ASPER);
-        block(SAPLING_CYPRESS);
-        block(SAPLING_BALSAM);
-        block(SAPLING_MARSHWOOD);
-        block(SAPLING_BAMBOO);
+        blockFlat(SAPLING_BAOBAB);
+        blockFlat(SAPLING_EUCALYPTUS);
+        blockFlat(SAPLING_MAHOGANY);
+        blockFlat(SAPLING_MOSSBARK);
+        blockFlat(SAPLING_ASPER);
+        blockFlat(SAPLING_CYPRESS);
+        blockFlat(SAPLING_BALSAM);
+        blockFlat(SAPLING_MARSHWOOD);
+        blockFlat(SAPLING_BAMBOO);
 
         // MARK: Leaves
         block(LEAVES_BAOBAB);

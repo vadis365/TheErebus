@@ -100,14 +100,14 @@ public class ModBlockStates extends ModBlockStateProvider {
         crossBlock(SAPLING_BAMBOO);
 
         // MARK: Leaves
-        block(LEAVES_BAOBAB);
-        block(LEAVES_EUCALYPTUS);
-        block(LEAVES_MAHOGANY);
-        block(LEAVES_MOSSBARK);
-        block(LEAVES_ASPER);
-        block(LEAVES_CYPRESS);
-        block(LEAVES_BALSAM);
-        block(LEAVES_MARSHWOOD);
+        cutout(LEAVES_BAOBAB);
+        cutout(LEAVES_EUCALYPTUS);
+        cutout(LEAVES_MAHOGANY);
+        cutout(LEAVES_MOSSBARK);
+        cutout(LEAVES_ASPER);
+        cutout(LEAVES_CYPRESS);
+        cutout(LEAVES_BALSAM);
+        cutout(LEAVES_MARSHWOOD);
 
         // MARK: Planks
         block(PLANKS_BAOBAB);
@@ -259,7 +259,7 @@ public class ModBlockStates extends ModBlockStateProvider {
         crossBlock(SWAMP_PLANT);
         crossBlock(FIRE_BLOOM);
         tintedCrossBlock(FIDDLE_HEAD);
-        crossBlock(THORNS);
+        vines(THORNS);
         crossBlock(MOSS_DOWN);
         crossBlock(MOULD_DOWN);
         crossBlock(CULTIVATED_MOSS_DOWN);

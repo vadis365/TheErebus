@@ -1,4 +1,4 @@
-package erebus.registries;
+package erebus.registries.entity;
 
 import erebus.Erebus;
 import erebus.client.render.entity.model.AnimatedBlockModel;

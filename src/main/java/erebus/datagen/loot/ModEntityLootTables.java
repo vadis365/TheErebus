@@ -1,6 +1,6 @@
 package erebus.datagen.loot;
 
-import erebus.registries.ModEntities;
+import erebus.registries.entity.ModEntities;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.world.entity.EntityType;

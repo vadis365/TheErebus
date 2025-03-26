@@ -1,3 +1,6 @@
 {
-  "parent": "erebus:block/sapling_marshwood"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "erebus:block/sapling_marshwood"
+  }
 }

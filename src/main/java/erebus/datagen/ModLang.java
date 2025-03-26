@@ -2,7 +2,7 @@ package erebus.datagen;
 
 import erebus.datagen.providers.ModLangProvider;
 import erebus.registries.ModBlocks;
-import erebus.registries.ModEntities;
+import erebus.registries.entity.ModEntities;
 import erebus.registries.ModItems;
 import net.minecraft.data.PackOutput;
 

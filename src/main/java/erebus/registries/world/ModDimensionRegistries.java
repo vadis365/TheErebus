@@ -1,6 +1,7 @@
-package erebus.registries;
+package erebus.registries.world;
 
 import erebus.Erebus;
+import erebus.registries.ModBlocks;
 import erebus.world.ErebusSurfaceRuleData;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;

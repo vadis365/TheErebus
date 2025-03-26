@@ -1,8 +1,8 @@
 package erebus.entity.projectile;
 
 import erebus.registries.ModBlocks;
-import erebus.registries.ModEntities;
 import erebus.registries.ModSounds;
+import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.syncher.EntityDataAccessor;

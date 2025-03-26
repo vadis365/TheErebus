@@ -1,12 +1,14 @@
 package erebus;
 
-import java.util.Locale;
-
-import erebus.registries.*;
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
+import erebus.registries.*;
+import erebus.registries.data.ModArmorMaterials;
+import erebus.registries.data.ModTags;
+import erebus.registries.data.ModToolMaterials;
+import erebus.registries.entity.ModEntities;
+import erebus.registries.entity.ModEntityRendering;
+import erebus.registries.world.ModTreeDecorators;
+import erebus.registries.world.ModTrunkPlacers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -19,6 +21,9 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import org.slf4j.Logger;
+
+import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -41,6 +46,8 @@ public class Erebus {
         ModEntities.SPAWN_EGGS.register(bus);
         ModSounds.SOUNDS.register(bus);
         ModMenuTypes.register(bus);
+        ModTrunkPlacers.register(bus);
+        ModTreeDecorators.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 

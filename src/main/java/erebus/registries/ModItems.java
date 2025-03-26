@@ -5,6 +5,8 @@ import java.util.Map;
 import erebus.Erebus;
 import erebus.item.PaxelItem;
 import erebus.item.WandOfAnimationItem;
+import erebus.registries.data.ModArmorMaterials;
+import erebus.registries.data.ModToolMaterials;
 import erebus.registries.helpers.ModItemHelpers;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
