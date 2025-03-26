@@ -3,6 +3,7 @@ package erebus.registries.world;
 import com.google.common.collect.ImmutableList;
 import erebus.Erebus;
 import erebus.registries.ModBlocks;
+import erebus.world.gen.trunkplacer.AsperTrunkPlacer;
 import erebus.world.gen.trunkplacer.BaobabTrunkPlacer;
 import erebus.world.gen.trunkplacer.EucalyptusTrunkPlacer;
 import net.minecraft.core.registries.Registries;
@@ -45,10 +46,10 @@ public class ModConfiguredFeatures {
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?,?>> context) {
         register(context, ASPER_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.LOG_ASPER.get()),
-                new ForkingTrunkPlacer(4, 4, 3),
+                new AsperTrunkPlacer(4, 2, 0, 1),
                 BlockStateProvider.simple(ModBlocks.LEAVES_ASPER.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), 3),
-                new TwoLayersFeatureSize(1, 0, 2)
+                new TwoLayersFeatureSize(1, 0, 1)
         ).build());
 
         register(context, BALSAM_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(

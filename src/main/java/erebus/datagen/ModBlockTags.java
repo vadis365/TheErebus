@@ -86,5 +86,35 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
                         RED_CANDLE_HONEY_TREAT.get(),
                         BLACK_CANDLE_HONEY_TREAT.get()
                 );
+
+        tag(BlockTags.LOGS_THAT_BURN)
+                .add(
+                        LOG_ASPER.get(),
+                        LOG_BALSAM.get(),
+                        LOG_BAOBAB.get(),
+                        LOG_CYPRESS.get(),
+                        LOG_EUCALYPTUS.get(),
+                        LOG_BALSAM_RESINLESS.get(),
+                        LOG_BAMBOO.get(),
+                        LOG_HOLLOW.get(),
+                        LOG_MAHOGANY.get(),
+                        LOG_MARSHWOOD.get(),
+                        LOG_MOSSBARK.get(),
+                        LOG_ROTTEN.get(),
+                        LOG_SCORCHED.get()
+                );
+
+        tag(BlockTags.LEAVES)
+                .add(
+
+                        LEAVES_ASPER.get(),
+                        LEAVES_BALSAM.get(),
+                        LEAVES_BAOBAB.get(),
+                        LEAVES_CYPRESS.get(),
+                        LEAVES_EUCALYPTUS.get(),
+                        LEAVES_MAHOGANY.get(),
+                        LEAVES_MARSHWOOD.get(),
+                        LEAVES_MOSSBARK.get()
+                );
     }
 }
