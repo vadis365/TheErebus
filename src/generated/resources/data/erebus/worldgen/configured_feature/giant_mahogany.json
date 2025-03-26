@@ -3,10 +3,10 @@
   "config": {
     "decorators": [
       {
-        "type": "minecraft:trunk_vine"
+        "type": "erebus:trunk_thorn_decorator"
       },
       {
-        "type": "minecraft:leave_vine",
+        "type": "erebus:leave_thorn_decorator",
         "probability": 0.25
       }
     ],

@@ -1,4 +1,4 @@
-package erebus.world.gen.trunkplacer;
+package erebus.world.tree.trunkplacer;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -16,23 +16,23 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public class MossbarkTrunkPlacer extends TrunkPlacer {
+public class MarshwoodTrunkPlacer extends TrunkPlacer {
 
-    public static final MapCodec<MossbarkTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
+    public static final MapCodec<MarshwoodTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     Codec.intRange(0, 32).fieldOf("base_height").forGetter(placer -> placer.baseHeight),
                     Codec.intRange(0, 32).fieldOf("height_rand_a").forGetter(placer -> placer.heightRandA),
                     Codec.intRange(0, 32).fieldOf("height_rand_b").forGetter(placer -> placer.heightRandB)
-            ).apply(instance, MossbarkTrunkPlacer::new)
+            ).apply(instance, MarshwoodTrunkPlacer::new)
     );
 
-    public MossbarkTrunkPlacer(int baseHeight, int heightRandA, int heightRandB) {
+    public MarshwoodTrunkPlacer(int baseHeight, int heightRandA, int heightRandB) {
         super(baseHeight, heightRandA, heightRandB);
     }
 
     @Override
     protected TrunkPlacerType<?> type() {
-        return ModTrunkPlacers.MOSSBARK_TRUNK_PLACER.get();
+        return ModTrunkPlacers.MARSHWOOD_TRUNK_PLACER.get();
     }
 
     @Override

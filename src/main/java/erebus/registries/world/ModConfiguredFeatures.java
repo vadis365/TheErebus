@@ -3,16 +3,15 @@ package erebus.registries.world;
 import com.google.common.collect.ImmutableList;
 import erebus.Erebus;
 import erebus.registries.ModBlocks;
-import erebus.world.gen.trunkplacer.AsperTrunkPlacer;
-import erebus.world.gen.trunkplacer.BaobabTrunkPlacer;
-import erebus.world.gen.trunkplacer.EucalyptusTrunkPlacer;
+import erebus.world.tree.decorator.LeaveThornDecorator;
+import erebus.world.tree.decorator.TrunkThornDecorator;
+import erebus.world.tree.trunkplacer.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
@@ -21,8 +20,6 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaJungleFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
-import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.MegaJungleTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
@@ -54,7 +51,7 @@ public class ModConfiguredFeatures {
 
         register(context, BALSAM_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.LOG_BALSAM.get()),
-                new ForkingTrunkPlacer(4, 4, 3),
+                new BalsamTrunkPlacer(4, 4, 3),
                 BlockStateProvider.simple(ModBlocks.LEAVES_BALSAM.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), 3),
                 new TwoLayersFeatureSize(1, 0, 2)
@@ -70,7 +67,7 @@ public class ModConfiguredFeatures {
 
         register(context, CYPRESS_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.LOG_CYPRESS.get()),
-                new ForkingTrunkPlacer(4, 4, 3),
+                new CypressTrunkPlacer(4, 4, 3),
                 BlockStateProvider.simple(ModBlocks.LEAVES_CYPRESS.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), 3),
                 new TwoLayersFeatureSize(1, 0, 2)
@@ -86,7 +83,7 @@ public class ModConfiguredFeatures {
 
         register(context, GIANT_EUCALYPTUS_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.LOG_EUCALYPTUS.get()),
-                new EucalyptusTrunkPlacer(4, 4, 3),
+                new GiantEucalyptusTrunkPlacer(4, 4, 3),
                 BlockStateProvider.simple(ModBlocks.LEAVES_EUCALYPTUS.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), 3),
                 new TwoLayersFeatureSize(1, 0, 2)
@@ -101,7 +98,7 @@ public class ModConfiguredFeatures {
                         new MegaJungleFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 2),
                         new TwoLayersFeatureSize(1, 1, 2)
                 )
-                        .decorators(ImmutableList.of(TrunkVineDecorator.INSTANCE, new LeaveVineDecorator(0.25F)))
+                .decorators(ImmutableList.of(TrunkThornDecorator.INSTANCE, new LeaveThornDecorator(0.25F)))
                         .build()
         );
 

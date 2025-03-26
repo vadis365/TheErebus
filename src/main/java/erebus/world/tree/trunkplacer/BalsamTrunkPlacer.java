@@ -1,4 +1,4 @@
-package erebus.world.gen.trunkplacer;
+package erebus.world.tree.trunkplacer;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

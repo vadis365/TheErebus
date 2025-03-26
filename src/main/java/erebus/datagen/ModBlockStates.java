@@ -259,7 +259,7 @@ public class ModBlockStates extends ModBlockStateProvider {
         crossBlock(SWAMP_PLANT);
         crossBlock(FIRE_BLOOM);
         tintedCrossBlock(FIDDLE_HEAD);
-        crossBlock(THORNS);
+        vines(THORNS);
         crossBlock(MOSS_DOWN);
         crossBlock(MOULD_DOWN);
         crossBlock(CULTIVATED_MOSS_DOWN);

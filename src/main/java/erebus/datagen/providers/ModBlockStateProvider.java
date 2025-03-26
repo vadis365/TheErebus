@@ -1,10 +1,8 @@
 package erebus.datagen.providers;
 
-import erebus.Config;
 import erebus.Erebus;
 import erebus.block.CandleHoneyTreatBlock;
 import erebus.block.HoneyTreatBlock;
-import erebus.block.IModBush;
 import erebus.block.ModCropBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -288,6 +286,10 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         ModelFile model = models().getBuilder(name(standingBlock)).texture("particle", modLoc("block/%s".formatted(name)));
         simpleBlock(standingBlock.get(), model);
         simpleBlock(wallBlock.get(), model);
+    }
+
+    public void vines(Supplier<? extends VineBlock> vine) {
+        simpleBlock(vine.get(), models().withExistingParent(name(vine), mcLoc("block/vine")).texture("vine", texture(name(vine))).texture("particle", texture(name(vine))).renderType("cutout"));
     }
 
     public void crop(Supplier<? extends ModCropBlock> crop) {

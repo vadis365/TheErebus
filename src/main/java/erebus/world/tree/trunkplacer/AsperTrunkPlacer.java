@@ -1,4 +1,4 @@
-package erebus.world.gen.trunkplacer;
+package erebus.world.tree.trunkplacer;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -8,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
@@ -24,7 +23,7 @@ public class AsperTrunkPlacer extends TrunkPlacer {
 
     protected final int width;
 
-    private Direction[] directions = new Direction[4];
+    private final Direction[] directions = new Direction[4];
 
     public static final MapCodec<AsperTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(

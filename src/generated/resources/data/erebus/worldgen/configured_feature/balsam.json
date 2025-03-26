@@ -29,7 +29,7 @@
       "upper_size": 2
     },
     "trunk_placer": {
-      "type": "minecraft:forking_trunk_placer",
+      "type": "erebus:balsam_trunk_placer",
       "base_height": 4,
       "height_rand_a": 4,
       "height_rand_b": 3

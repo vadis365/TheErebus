@@ -1,7 +1,7 @@
 package erebus.registries.world;
 
 import erebus.Erebus;
-import erebus.world.gen.trunkplacer.*;
+import erebus.world.tree.trunkplacer.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.neoforged.bus.api.IEventBus;

@@ -5,8 +5,6 @@ import erebus.block.*;
 import erebus.registries.helpers.ModBlockHelpers;
 import erebus.registries.world.ModTreeGrowers;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -16,9 +14,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.Properties;
-import java.util.function.Supplier;
 
 public class ModBlocks extends ModBlockHelpers {
 
@@ -291,7 +286,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<BushBlock> FIRE_BLOOM = registerBush("fire_bloom", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
     public static final DeferredBlock<BushBlock> FERN = registerBush("fern", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
     public static final DeferredBlock<BushBlock> FIDDLE_HEAD = registerBush("fiddle_head", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
-    public static final DeferredBlock<BushBlock> THORNS = registerBush("thorns", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
+    public static final DeferredBlock<VineBlock> THORNS = registerBlock("thorns", () -> new VineBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.VINE)));
     public static final DeferredBlock<Block> MOSS_DOWN = registerSimpleBlock("moss_down", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> MOULD_DOWN = registerSimpleBlock("mould_down", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> CULTIVATED_MOSS_DOWN = registerSimpleBlock("cultivated_moss_down", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
