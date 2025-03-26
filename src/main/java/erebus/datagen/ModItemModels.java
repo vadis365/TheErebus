@@ -578,7 +578,8 @@ public class ModItemModels extends ModItemModelProvider {
         block(GNEISS_VENT);
         block(RED_GEM_BLOCK);
         //block(RED_GEM_LAMP);
-        //block(WITHER_WEB);
+        blockFlatWithBlockTexture(WITHER_WEB, "wither_web");
+        blockFlatWithBlockTexture(LAVA_WEB, "lava_web");
         block(GNEISS);
         block(GNEISS_CARVED);
         block(GNEISS_RELIEF);

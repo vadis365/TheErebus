@@ -40,7 +40,7 @@ public class ModEntities {
 	public static final Supplier<EntityType<AnimatedBlock>> ANIMATED_BLOCK = registerNoEgg("animated_block", EntityType.Builder.of(AnimatedBlock::new, MobCategory.MISC).fireImmune().sized(1F, 1.25F).clientTrackingRange(4).updateInterval(10));
 	public static final Supplier<EntityType<Scytodes>> SCYTODES = registerWithEgg("scytodes", EntityType.Builder.of(Scytodes::new, MobCategory.MONSTER).sized(2F, 1F).fireImmune(), 0xC2833C, 0x520D06);
 	public static final Supplier<EntityType<MoneySpider>> MONEY_SPIDER = registerWithEgg("money_spider", EntityType.Builder.of(MoneySpider::new, MobCategory.MONSTER).sized(0.6F, 0.4F), 0xC2872F, 0xF9FF00);
-	public static final Supplier<EntityType<BlackWidow>> BLACK_WIDOW = registerWithEgg("black_widow", EntityType.Builder.of(BlackWidow::new, MobCategory.MONSTER).sized(0.9F, 0.4F), 0x101010, 0xFF0000);
+	public static final Supplier<EntityType<BlackWidow>> BLACK_WIDOW = registerWithEgg("black_widow", EntityType.Builder.of(BlackWidow::new, MobCategory.MONSTER).sized(0.9F, 0.4F).fireImmune(), 0x101010, 0xFF0000);
 	
 	public static final Supplier<EntityType<WebSling>> WEB_SLING = registerNonMobEntity("web_sling", EntityType.Builder.<WebSling>of(WebSling::new, MobCategory.MISC).sized(0.5F, 0.5F));
 	// just calls a helper in the main mod because it'll be used all over probably

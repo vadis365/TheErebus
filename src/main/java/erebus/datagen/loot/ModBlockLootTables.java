@@ -1,18 +1,18 @@
 package erebus.datagen.loot;
 
-import erebus.block.ModCropBlock;
-import erebus.datagen.providers.ModBlockLootTableProvider;
 import static erebus.registries.ModBlocks.*;
 
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+
+import erebus.datagen.providers.ModBlockLootTableProvider;
+import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
-
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class ModBlockLootTables extends ModBlockLootTableProvider {
 
@@ -469,6 +469,10 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(FORCE_FIELD);
         dropSelf(FORCE_LOCK);
         dropSelf(ANT_HILL_BLOCK);
+        
+        //Webs
+        dropOther(WITHER_WEB, Items.STRING);
+        dropOther(LAVA_WEB, Items.STRING);
     }
 
     @Override
