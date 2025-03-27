@@ -3,10 +3,12 @@ package erebus.registries.entity;
 import erebus.Erebus;
 import erebus.client.render.entity.model.AnimatedBlockModel;
 import erebus.client.render.entity.model.BlackWidowModel;
+import erebus.client.render.entity.model.LavaWebSpiderModel;
 import erebus.client.render.entity.model.ScytodesModel;
 import erebus.client.render.entity.model.WaspModel;
 import erebus.client.render.entity.renderer.AnimatedBlockRenderer;
 import erebus.client.render.entity.renderer.BlackWidowRenderer;
+import erebus.client.render.entity.renderer.LavaWebSpiderRenderer;
 import erebus.client.render.entity.renderer.MoneySpiderRenderer;
 import erebus.client.render.entity.renderer.ScytodesRenderer;
 import erebus.client.render.entity.renderer.WaspRenderer;
@@ -23,6 +25,8 @@ public class ModEntityRendering {
 	public static ModelLayerLocation SCYTODES = new ModelLayerLocation(Erebus.prefix("scytodes"), "main");
 	public static ModelLayerLocation MONEY_SPIDER = new ModelLayerLocation(Erebus.prefix("money_spider"), "main");
 	public static ModelLayerLocation BLACK_WIDOW = new ModelLayerLocation(Erebus.prefix("black_widow"), "main");
+	public static ModelLayerLocation LAVA_WEB_SPIDER = new ModelLayerLocation(Erebus.prefix("lava_web_spider"), "main");
+	public static ModelLayerLocation LAVA_WEB_SPIDER_FLOW = new ModelLayerLocation(Erebus.prefix("lava_web_spider_flow"), "main");
 
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
     	//  event.registerLayerDefinition(GRASHOPPER, ModelGrasshopper::createBodyLayer);
@@ -31,6 +35,8 @@ public class ModEntityRendering {
     	event.registerLayerDefinition(SCYTODES, ScytodesModel::createBodyLayer);
     	event.registerLayerDefinition(MONEY_SPIDER, ScytodesModel::createBodyLayer);
     	event.registerLayerDefinition(BLACK_WIDOW, BlackWidowModel::createBodyLayer);
+    	event.registerLayerDefinition(LAVA_WEB_SPIDER, LavaWebSpiderModel::createBodyLayer);
+    	event.registerLayerDefinition(LAVA_WEB_SPIDER_FLOW, LavaWebSpiderModel::createBodyLayer);
     }
 
     public static void registerEntityRender(EntityRenderersEvent.RegisterRenderers event) {
@@ -40,6 +46,7 @@ public class ModEntityRendering {
     	event.registerEntityRenderer(ModEntities.SCYTODES.get(), ScytodesRenderer::new);
     	event.registerEntityRenderer(ModEntities.MONEY_SPIDER.get(), MoneySpiderRenderer::new);
     	event.registerEntityRenderer(ModEntities.BLACK_WIDOW.get(), BlackWidowRenderer::new);
+    	event.registerEntityRenderer(ModEntities.LAVA_WEB_SPIDER.get(), LavaWebSpiderRenderer::new);
     	event.registerEntityRenderer(ModEntities.WEB_SLING.get(), context -> new ThrownItemRenderer<WebSling>(context, 3.0F, true));
     }
 }

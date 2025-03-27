@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import erebus.Erebus;
 import erebus.entity.AnimatedBlock;
 import erebus.entity.BlackWidow;
+import erebus.entity.LavaWebSpider;
 import erebus.entity.MoneySpider;
 import erebus.entity.Scytodes;
 import erebus.entity.Wasp;
@@ -41,6 +42,7 @@ public class ModEntities {
 	public static final Supplier<EntityType<Scytodes>> SCYTODES = registerWithEgg("scytodes", EntityType.Builder.of(Scytodes::new, MobCategory.MONSTER).sized(2F, 1F).fireImmune(), 0xC2833C, 0x520D06);
 	public static final Supplier<EntityType<MoneySpider>> MONEY_SPIDER = registerWithEgg("money_spider", EntityType.Builder.of(MoneySpider::new, MobCategory.MONSTER).sized(0.6F, 0.4F), 0xC2872F, 0xF9FF00);
 	public static final Supplier<EntityType<BlackWidow>> BLACK_WIDOW = registerWithEgg("black_widow", EntityType.Builder.of(BlackWidow::new, MobCategory.MONSTER).sized(0.9F, 0.4F).fireImmune(), 0x101010, 0xFF0000);
+	public static final Supplier<EntityType<LavaWebSpider>> LAVA_WEB_SPIDER = registerWithEgg("lava_web_spider", EntityType.Builder.of(LavaWebSpider::new, MobCategory.MONSTER).sized(3F, 1.5F).fireImmune(), 0xD36617, 0x342522);
 	
 	public static final Supplier<EntityType<WebSling>> WEB_SLING = registerNonMobEntity("web_sling", EntityType.Builder.<WebSling>of(WebSling::new, MobCategory.MISC).sized(0.5F, 0.5F));
 	// just calls a helper in the main mod because it'll be used all over probably
