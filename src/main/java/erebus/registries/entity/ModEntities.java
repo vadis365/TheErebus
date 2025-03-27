@@ -54,6 +54,7 @@ public class ModEntities {
 		event.register(WASP.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Wasp::canSpawnHere, null);
 		event.register(SCYTODES.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Scytodes::canSpawnHere, null);
 		event.register(BLACK_WIDOW.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlackWidow::canSpawnHere, null);
+		event.register(LAVA_WEB_SPIDER.get(), SpawnPlacementTypes.IN_LAVA, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LavaWebSpider::canSpawnHere, null);
 	}
 	
 	public static void initializeAttributes(EntityAttributeCreationEvent event) {
@@ -62,6 +63,7 @@ public class ModEntities {
 		event.put(SCYTODES.get(), Scytodes.createAttributes().build());
 		event.put(MONEY_SPIDER.get(), MoneySpider.createAttributes().build());
 		event.put(BLACK_WIDOW.get(), MoneySpider.createAttributes().build());
+		event.put(LAVA_WEB_SPIDER.get(), MoneySpider.createAttributes().build());
 	}
 
 	public static DeferredRegister<EntityType<?>> getEntityTypes() {
