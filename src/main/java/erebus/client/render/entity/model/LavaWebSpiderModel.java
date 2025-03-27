@@ -329,7 +329,6 @@ public class LavaWebSpiderModel<T extends LavaWebSpider> extends HierarchicalMod
 	}
 
 	public void renderBody(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		ThxTop.render(stack, consumer, light, overlay, colour);
 		ThxS.render(stack, consumer, light, overlay, colour);
 		AbTop1.render(stack, consumer, light, overlay, colour);
 		AbTop2.render(stack, consumer, light, overlay, colour);
@@ -338,7 +337,11 @@ public class LavaWebSpiderModel<T extends LavaWebSpider> extends HierarchicalMod
 		AbCore1.render(stack, consumer, light, overlay, colour);
 		AbCore2.render(stack, consumer, light, overlay, colour);
 		AbCore3.render(stack, consumer, light, overlay, colour);
+		stack.pushPose();
+		stack.translate(0F, 0.001F, 0F);
 		HeadMain.render(stack, consumer, light, overlay, colour);
+		ThxTop.render(stack, consumer, light, overlay, colour);
+		stack.popPose();
 		HeadBotB.render(stack, consumer, light, overlay, colour);
 	}
 }

@@ -38,22 +38,22 @@ public class LavaWebSpiderLayer extends RenderLayer<LavaWebSpider, LavaWebSpider
 
     @Override
    	public void render(PoseStack matrix, MultiBufferSource buffer, int packedLight, LavaWebSpider entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		int colour =  654311423;
+    	int colour =  654311423;
 		float f = (float) entity.tickCount + partialTicks;
     	lava_web_spiderModel.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
 		lava_web_spiderModel.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		lava_web_spiderModel.renderBody(matrix, buffer.getBuffer(getLavaOverlay(LIGHTING_TEXTURE, 0, -f * 0.004F)), packedLight, OverlayTexture.NO_OVERLAY, colour);
+		lava_web_spiderModel.renderBody(matrix, buffer.getBuffer(getLavaOverlay(LIGHTING_TEXTURE, 0, f * 0.004F)), packedLight, OverlayTexture.NO_OVERLAY, colour);
 	}
     
 	public static RenderType getLavaOverlay(ResourceLocation locationIn, float uIn, float vIn) {
-		RenderType.CompositeState renderTypeState = RenderType.CompositeState.builder().setShaderState(new RenderStateShard.ShaderStateShard(GameRenderer::getRendertypeEnergySwirlShader)).setTextureState(new RenderStateShard.TextureStateShard(locationIn, false, false)).setTexturingState(new RenderStateShard.OffsetTexturingStateShard(uIn, vIn)).setTransparencyState(new TransparencyStateShard("translucent_transparency", () -> {
-		      RenderSystem.enableBlend();
-		      RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-		   }, () -> {
-		      RenderSystem.disableBlend();
-		      RenderSystem.defaultBlendFunc();
-		   })).setLightmapState(new LightmapStateShard(true)).setCullState(new CullStateShard(false)).setLightmapState(new LightmapStateShard(false)).setOverlayState(new OverlayStateShard(true)).createCompositeState(false);
-		
+		RenderType.CompositeState renderTypeState = RenderType.CompositeState.builder()
+				.setShaderState(new RenderStateShard.ShaderStateShard(GameRenderer::getRendertypeEnergySwirlShader))
+				.setTextureState(new RenderStateShard.TextureStateShard(locationIn, false, false))
+				.setTexturingState(new RenderStateShard.OffsetTexturingStateShard(uIn, vIn))
+				.setLightmapState(new LightmapStateShard(true)).setCullState(new CullStateShard(false))
+				.setLightmapState(new LightmapStateShard(false)).setOverlayState(new OverlayStateShard(true))
+				.createCompositeState(false);
+
 		return RenderType.create("lava_overlay", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true, renderTypeState);
 	}
 }
