@@ -228,7 +228,7 @@ public class LavaWebSpider extends Monster {
 		 spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
 	        RandomSource randomsource = level.getRandom();
 
-		if (randomsource.nextInt(1) == 0) {
+		if (randomsource.nextInt(100) == 0) {
 			MoneySpider moneyspider = ModEntities.MONEY_SPIDER.get().create(this.level());
 			moneyspider.setPos(getX(), getY(), getZ());
 			moneyspider.setYRot(getYRot());
