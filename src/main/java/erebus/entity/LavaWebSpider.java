@@ -4,7 +4,7 @@ import java.util.EnumSet;
 
 import javax.annotation.Nullable;
 
-import erebus.entity.projectile.WebSling;
+import erebus.entity.projectile.ThrownBlockAsItem;
 import erebus.registries.ModBlocks;
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
@@ -82,8 +82,8 @@ public class LavaWebSpider extends Monster {
 		goalSelector.addGoal(0, new FloatGoal(this));
 		goalSelector.addGoal(1, new LavaWebSpider.AIWebSlingAttack(this));
 		goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0.4F));
-		goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.5D, true));
-		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.5D));
+		goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.6D, true));
+		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.6D));
 		goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		goalSelector.addGoal(6,  new RandomLookAroundGoal(this));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this));
@@ -308,9 +308,8 @@ public class LavaWebSpider extends Monster {
 					if (attackStep > 1 && livingentity instanceof Player) {
 						lava_web_spider.level().playSound( null, lava_web_spider.blockPosition(), lava_web_spider.getWebSlingThrowSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
 						for (int count = 0; count < 1; ++count) {
-							WebSling webSling = new WebSling(lava_web_spider.level(), lava_web_spider, 0);
+							ThrownBlockAsItem webSling = new ThrownBlockAsItem(lava_web_spider.level(), lava_web_spider, ModBlocks.LAVA_WEB.get().defaultBlockState(), 0);
 							webSling.setPos(lava_web_spider.getX(), lava_web_spider.getY() + (double) (lava_web_spider.getBbHeight() / 2.0F) + 0.5D, lava_web_spider.getZ());
-							webSling.setWebType((byte) 2);
 							webSling.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
 							lava_web_spider.level().addFreshEntity(webSling);
 						}

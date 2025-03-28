@@ -24,33 +24,34 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
-public class WebSling  extends ThrowableProjectile implements ItemSupplier {
-	private static final EntityDataAccessor<Byte> TYPE = SynchedEntityData.defineId(WebSling.class, EntityDataSerializers.BYTE);
+public class ThrownBlockAsItem  extends ThrowableProjectile implements ItemSupplier {
+	private static final EntityDataAccessor<BlockState> TYPE = SynchedEntityData.defineId(ThrownBlockAsItem.class, EntityDataSerializers.BLOCK_STATE);
 	private float damage; // not needed but will leave for now - just in case...
 
-	public WebSling(Level level) {
+	public ThrownBlockAsItem(Level level) {
 		super(ModEntities.WEB_SLING.get(), level);
 	}
 
-	public WebSling(EntityType<WebSling> type, Level level) {
+	public ThrownBlockAsItem(EntityType<ThrownBlockAsItem> type, Level level) {
 		super(type, level);
 	}
 	
-	public WebSling(Level level, Entity owner, float damageCaused) {
+	public ThrownBlockAsItem(Level level, Entity owner, BlockState state, float damageCaused) {
 		super(ModEntities.WEB_SLING.get(), level);
 		this.setOwner(owner);
 		setXRot(owner.getXRot());
 		setYRot(owner.getYRot());
+		setBlockType(state);
 		damage = damageCaused;
 	}
 	
-	public WebSling(double x, double y, double z, Level level) {
+	public ThrownBlockAsItem(double x, double y, double z, Level level) {
 		super(ModEntities.WEB_SLING.get(), x, y, z, level);
 	}
 
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
-		builder.define(TYPE, (byte) 0);
+		builder.define(TYPE, Blocks.STONE.defaultBlockState());
 	}
 
 	protected SoundEvent getWebSlingSplatSound() {
@@ -64,38 +65,19 @@ public class WebSling  extends ThrowableProjectile implements ItemSupplier {
 			if (typeOfHit == HitResult.Type.ENTITY) {
 				EntityHitResult entityhitresult = (EntityHitResult) result;
 				BlockPos entityPos = entityhitresult.getEntity().blockPosition();
-				if (level().getBlockState(entityPos).isAir()) {
-					if (getWebType() == 0)
-						level().setBlockAndUpdate(entityPos, webState(getWebType()));
-					else if (getWebType() == 1)
-						level().setBlockAndUpdate(entityPos, webState(getWebType()));
-					else if (getWebType() == 2)
-						if (BaseFireBlock.canBePlacedAt(level(), entityPos, Direction.DOWN))
-							entityhitresult.getEntity().setRemainingFireTicks(10);
-				}
+				if (level().getBlockState(entityPos).isAir())
+					level().setBlockAndUpdate(entityPos, getBlockType());
 				else
-					level().levelEvent(null, 2001, blockPosition(), Block.getId(webState(getWebType())));
+					level().levelEvent(null, 2001, blockPosition(), Block.getId(getBlockType()));
 			} else {
-				if (level().getBlockState(blockPosition()).isAir()) {
-					if (getWebType() == 0)
-						level().setBlockAndUpdate(blockPosition(), webState(getWebType()));
-					else if (getWebType() == 1)
-						level().setBlockAndUpdate(blockPosition(), webState(getWebType()));
-					else if (getWebType() == 2)
-						if (BaseFireBlock.canBePlacedAt(level(), blockPosition(), Direction.DOWN))
-							level().setBlockAndUpdate(blockPosition(), webState(getWebType()));
-				}
+				if (level().getBlockState(blockPosition()).isAir())
+					level().setBlockAndUpdate(blockPosition(), getBlockType());
 				else
-					level().levelEvent(null, 2001, blockPosition(), Block.getId(webState(getWebType())));
+					level().levelEvent(null, 2001, blockPosition(), Block.getId(getBlockType()));
 			}
 			kill();
-		}
-		if (getWebType() != 2)
 			level().playSound(null, blockPosition(), getWebSlingSplatSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
-	}
-	
-	public BlockState webState (byte type) {
-		return type == 0 ? Blocks.COBWEB.defaultBlockState() : type == 1 ? ModBlocks.WITHER_WEB.get().defaultBlockState() : Blocks.FIRE.defaultBlockState();
+		}
 	}
 
 	@Override
@@ -107,16 +89,16 @@ public class WebSling  extends ThrowableProjectile implements ItemSupplier {
 		return false;
 	}
 
-	public void setWebType(byte webType) {
-		entityData.set(TYPE, webType);
+	public void setBlockType(BlockState state ) {
+		entityData.set(TYPE, state);
 	}
 
-	public byte getWebType() {
+	public BlockState getBlockType() {
 		return entityData.get(TYPE);
 	}
 
 	@Override
 	public ItemStack getItem() {
-		return new ItemStack(webState(getWebType()).getBlock());
+		return new ItemStack(getBlockType().getBlock());
 	}
 }

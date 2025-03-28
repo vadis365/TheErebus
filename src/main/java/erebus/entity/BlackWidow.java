@@ -4,7 +4,7 @@ import java.util.EnumSet;
 
 import javax.annotation.Nullable;
 
-import erebus.entity.projectile.WebSling;
+import erebus.entity.projectile.ThrownBlockAsItem;
 import erebus.registries.ModBlocks;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
@@ -51,10 +51,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public class BlackWidow extends Monster {
-	private static final EntityDataAccessor<Integer> SIZE = SynchedEntityData.defineId(BlackWidow.class,
-			EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Byte> CLIMBING = SynchedEntityData.defineId(BlackWidow.class,
-			EntityDataSerializers.BYTE);
+	private static final EntityDataAccessor<Integer> SIZE = SynchedEntityData.defineId(BlackWidow.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Byte> CLIMBING = SynchedEntityData.defineId(BlackWidow.class, EntityDataSerializers.BYTE);
 
 	public BlackWidow(EntityType<? extends BlackWidow> type, Level level) {
 		super(type, level);
@@ -72,8 +70,8 @@ public class BlackWidow extends Monster {
 		goalSelector.addGoal(0, new FloatGoal(this));
 		goalSelector.addGoal(1, new BlackWidow.AIWebSlingAttack(this));
 		goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0.4F));
-		goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.5D, true));
-		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.5D));
+		goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.6D, true));
+		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.6D));
 		goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		goalSelector.addGoal(6, new RandomLookAroundGoal(this));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this));
@@ -87,7 +85,7 @@ public class BlackWidow extends Monster {
 		return Monster.createMonsterAttributes()
 				.add(Attributes.MAX_HEALTH, 15D)
 				.add(Attributes.FOLLOW_RANGE, 16D)
-				.add(Attributes.MOVEMENT_SPEED, 0.5D)
+				.add(Attributes.MOVEMENT_SPEED, 0.6D)
 				.add(Attributes.ATTACK_DAMAGE, 2D);
 	}
 
@@ -335,9 +333,8 @@ public class BlackWidow extends Monster {
 
 						widow.level().playSound(null, widow.blockPosition(), widow.getWebSlingThrowSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
 						for (int count = 0; count < 1; ++count) {
-							WebSling webSling = new WebSling(widow.level(), widow, 0);
+							ThrownBlockAsItem webSling = new ThrownBlockAsItem(widow.level(), widow, ModBlocks.WITHER_WEB.get().defaultBlockState(), 0);
 							webSling.setPos(widow.getX(), widow.getY() + (double) (widow.getBbHeight() / 2.0F) + 0.5D, widow.getZ());
-							webSling.setWebType((byte) 1);
 							webSling.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
 							widow.level().addFreshEntity(webSling);
 						}

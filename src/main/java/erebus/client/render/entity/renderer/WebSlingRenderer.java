@@ -5,7 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 
-import erebus.entity.projectile.WebSling;
+import erebus.entity.projectile.ThrownBlockAsItem;
 import erebus.registries.ModBlocks;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -20,7 +20,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.model.data.ModelData;
 
 @OnlyIn(Dist.CLIENT)
-public class WebSlingRenderer extends EntityRenderer<WebSling> {
+public class WebSlingRenderer extends EntityRenderer<ThrownBlockAsItem> {
 
 	private final BlockRenderDispatcher blockRenderer;
 	private BlockState blockState;
@@ -31,7 +31,7 @@ public class WebSlingRenderer extends EntityRenderer<WebSling> {
 	}
 
 	@Override
-	public void render(WebSling entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+	public void render(ThrownBlockAsItem entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
 		poseStack.pushPose();
 		RenderSystem.enableBlend();
 		RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
@@ -39,19 +39,14 @@ public class WebSlingRenderer extends EntityRenderer<WebSling> {
 		poseStack.mulPose(Axis.XP.rotationDegrees(180F));
 		poseStack.mulPose(Axis.YN.rotationDegrees(90F));
 		poseStack.scale(1F, 1F, 1F);
-		if (entity.getWebType() == 1)
-			blockState = ModBlocks.WITHER_WEB.get().defaultBlockState();
-		else if (entity.getWebType() == 0)
-			blockState = Blocks.COBWEB.defaultBlockState();
-		else
-			blockState = Blocks.FIRE.defaultBlockState();
+		blockState = entity.getBlockType();
 		blockRenderer.renderSingleBlock(blockState, poseStack, buffer, packedLight, packedLight, ModelData.EMPTY, RenderType.CUTOUT);
 		RenderSystem.disableBlend();
 		poseStack.popPose();
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(WebSling entity) {
+	public ResourceLocation getTextureLocation(ThrownBlockAsItem entity) {
 		return null;
 	}
 }

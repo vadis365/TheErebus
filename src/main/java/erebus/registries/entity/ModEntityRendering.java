@@ -12,7 +12,7 @@ import erebus.client.render.entity.renderer.LavaWebSpiderRenderer;
 import erebus.client.render.entity.renderer.MoneySpiderRenderer;
 import erebus.client.render.entity.renderer.ScytodesRenderer;
 import erebus.client.render.entity.renderer.WaspRenderer;
-import erebus.entity.projectile.WebSling;
+import erebus.entity.projectile.ThrownBlockAsItem;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -47,6 +47,6 @@ public class ModEntityRendering {
     	event.registerEntityRenderer(ModEntities.MONEY_SPIDER.get(), MoneySpiderRenderer::new);
     	event.registerEntityRenderer(ModEntities.BLACK_WIDOW.get(), BlackWidowRenderer::new);
     	event.registerEntityRenderer(ModEntities.LAVA_WEB_SPIDER.get(), LavaWebSpiderRenderer::new);
-    	event.registerEntityRenderer(ModEntities.WEB_SLING.get(), context -> new ThrownItemRenderer<WebSling>(context, 3.0F, true));
+    	event.registerEntityRenderer(ModEntities.WEB_SLING.get(), context -> new ThrownItemRenderer<ThrownBlockAsItem>(context, 3.0F, true));
     }
 }

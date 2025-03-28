@@ -4,7 +4,7 @@ import java.util.EnumSet;
 
 import javax.annotation.Nullable;
 
-import erebus.entity.projectile.WebSling;
+import erebus.entity.projectile.ThrownBlockAsItem;
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
@@ -73,8 +73,8 @@ public class Scytodes extends Monster {
 		goalSelector.addGoal(0, new FloatGoal(this));
 		goalSelector.addGoal(1, new Scytodes.AIWebSlingAttack(this));
 		goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0.4F));
-		goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.5D, true));
-		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.5D));
+		goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.6D, true));
+		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.6D));
 		goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		goalSelector.addGoal(6,  new RandomLookAroundGoal(this));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this));
@@ -283,9 +283,8 @@ public class Scytodes extends Monster {
 					if (attackStep > 1 && livingentity instanceof Player) {
 						scytodes.level().playSound( null, scytodes.blockPosition(), scytodes.getWebSlingThrowSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
 						for (int count = 0; count < 1; ++count) {
-							WebSling webSling = new WebSling(scytodes.level(), scytodes, 0);
+							ThrownBlockAsItem webSling = new ThrownBlockAsItem(scytodes.level(), scytodes, Blocks.COBWEB.defaultBlockState(), 0);
 							webSling.setPos(scytodes.getX(), scytodes.getY() + (double) (scytodes.getBbHeight() / 2.0F) + 0.5D, scytodes.getZ());
-							webSling.setWebType((byte) 0);
 							webSling.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
 							scytodes.level().addFreshEntity(webSling);
 						}
