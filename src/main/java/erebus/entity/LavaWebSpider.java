@@ -135,16 +135,16 @@ public class LavaWebSpider extends Monster {
         super.tick();
         if (!level().isClientSide())
             setClimbing(horizontalCollision);
-        
+
 		if (level().isClientSide() && level().getGameTime() % 40 == 0)
 			lavaParticles(level(), getX(), getY() + 1.3D, getZ(), random);
     }
-    
+
 	@OnlyIn(Dist.CLIENT)
 	public void lavaParticles(Level level, double x, double y, double z, RandomSource random) {
 		level.addParticle(ParticleTypes.LAVA, false, x, y, z, 0F, 0F, 0F);
 	}
-	
+
 	@Override
 	  public void aiStep() {
 		super.aiStep();
@@ -179,7 +179,7 @@ public class LavaWebSpider extends Monster {
     public boolean onClimbable() {
         return isClimbing();
     }
-	
+
     public boolean isClimbing() {
         return (entityData.get(CLIMBING) & 1) != 0;
     }
@@ -222,35 +222,36 @@ public class LavaWebSpider extends Monster {
 		return ModSounds.WEBSLING_THROW.get();
 	}
 
-	 @Nullable
-	    @Override
-	    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
-		 spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
-	        RandomSource randomsource = level.getRandom();
+	@Nullable
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
+		spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
+		RandomSource randomsource = level.getRandom();
 
 		if (randomsource.nextInt(100) == 0) {
 			MoneySpider moneyspider = ModEntities.MONEY_SPIDER.get().create(this.level());
 			moneyspider.setPos(getX(), getY(), getZ());
 			moneyspider.setYRot(getYRot());
-			//moneyspider.finalizeSpawn(level, difficulty, spawnType, null);
+			// moneyspider.finalizeSpawn(level, difficulty, spawnType, null);
 			moneyspider.startRiding(this);
 		}
-	
-        if (spawnGroupData == null) {
-            spawnGroupData = new Spider.SpiderEffectsGroupData();
-            if (level.getDifficulty() == Difficulty.HARD && randomsource.nextFloat() < 0.1F * difficulty.getSpecialMultiplier()) {
-                ((Spider.SpiderEffectsGroupData)spawnGroupData).setRandomEffect(randomsource);
-            }
-        }
 
-        if (spawnGroupData instanceof Spider.SpiderEffectsGroupData spider$spidereffectsgroupdata) {
-            Holder<MobEffect> holder = spider$spidereffectsgroupdata.effect;
-            if (holder != null) {
-                this.addEffect(new MobEffectInstance(holder, -1));
-            }
-        }
+		if (spawnGroupData == null) {
+			spawnGroupData = new Spider.SpiderEffectsGroupData();
+			if (level.getDifficulty() == Difficulty.HARD
+					&& randomsource.nextFloat() < 0.1F * difficulty.getSpecialMultiplier()) {
+				((Spider.SpiderEffectsGroupData) spawnGroupData).setRandomEffect(randomsource);
+			}
+		}
 
-        return spawnGroupData;
+		if (spawnGroupData instanceof Spider.SpiderEffectsGroupData spider$spidereffectsgroupdata) {
+			Holder<MobEffect> holder = spider$spidereffectsgroupdata.effect;
+			if (holder != null) {
+				this.addEffect(new MobEffectInstance(holder, -1));
+			}
+		}
+
+		return spawnGroupData;
 	}
 
 	static class AIWebSlingAttack extends Goal {

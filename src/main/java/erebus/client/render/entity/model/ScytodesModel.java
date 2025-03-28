@@ -265,36 +265,36 @@ public class ScytodesModel<T extends Scytodes> extends HierarchicalModel<T> {
 		float cos = (float) (Math.cos(limbSwing * 0.75F) * 0.5F * limbSwingAmount);
 
 		BackLegLeft.zRot = 0F + cos;
-		LBL4.zRot = 0.1396F + cos;
-		LBL5.zRot = 0.0349F + cos;
+		LBL4.zRot = 0.1396F + cos * 0.75F;
+		LBL5.zRot = 0.0349F + cos * 0.75F;
 
 		BackMidLegLeft.zRot = 0F + sin;
-		LMBL4.zRot = 0.1396F + sin;
-		LMBL5.zRot = 0.0349F + sin;
+		LMBL4.zRot = 0.1396F + sin * 0.75F;
+		LMBL5.zRot = 0.0349F + sin * 0.75F;
 
 		FrontMidLegLeft.zRot = 0F + cos;
-		LMFL4.zRot = 0.1396F + cos;
-		LMFL5.zRot = 0.0349F + cos;
+		LMFL4.zRot = 0.1396F + cos * 0.75F;
+		LMFL5.zRot = 0.0349F + cos * 0.75F;
 
 		FrontLegLeft.zRot = 0F + sin;
-		LFL4.zRot = 0.1396F + sin;
-		LFL5.zRot = 0.0349F + sin;
+		LFL4.zRot = 0.1396F + sin * 0.75F;
+		LFL5.zRot = 0.0349F + sin * 0.75F;
 
 		BackLegRight.zRot = 0F + sin;
-		RBL4.zRot = 0.1396F + cos;
-		RBL5.zRot = 0.0349F + cos;
+		RBL4.zRot = 0.1396F - sin * 0.75F;
+		RBL5.zRot = 0.0349F - sin * 0.75F;
 
 		BackMidLegRight.zRot = 0F + cos;
-		RMBL4.zRot = 0.1396F + cos;
-		RMBL5.zRot = 0.0349F + cos;
+		RMBL4.zRot = 0.1396F - cos * 0.75F;
+		RMBL5.zRot = 0.0349F - cos * 0.75F;
 
 		FrontMidLegRight.zRot = 0F + sin;
-		RMFL4.zRot = 0.1396F + cos;
-		RMFL5.zRot = 0.0349F + cos;
+		RMFL4.zRot = 0.1396F - sin * 0.75F;
+		RMFL5.zRot = 0.0349F - sin * 0.75F;
 
 		FrontLegRight.zRot = 0F + cos;
-		RFL4.zRot = 0.1396F + cos;
-		RFL5.zRot = 0.0349F + cos;
+		RFL4.zRot = 0.1396F - cos * 0.75F;
+		RFL5.zRot = 0.0349F - cos * 0.75F;
 
 		BackLegLeft.yRot = -0.7418F - sin;
 		BackMidLegLeft.yRot = -0.2618F + cos;

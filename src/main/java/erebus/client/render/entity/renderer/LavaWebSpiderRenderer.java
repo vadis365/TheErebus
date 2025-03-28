@@ -17,7 +17,7 @@ public class LavaWebSpiderRenderer extends MobRenderer<LavaWebSpider, LavaWebSpi
 	public static final ResourceLocation TEXTURE = Erebus.prefix("textures/entity/lava_web_spider.png");
 
 	public LavaWebSpiderRenderer(EntityRendererProvider.Context context) {
-        super(context, new LavaWebSpiderModel<>(context.bakeLayer(ModEntityRendering.LAVA_WEB_SPIDER)), 0.5F);
+        super(context, new LavaWebSpiderModel<>(context.bakeLayer(ModEntityRendering.LAVA_WEB_SPIDER)), 1.8F);
         addLayer(new LavaWebSpiderLayer(this, context.getModelSet()));
     }
 

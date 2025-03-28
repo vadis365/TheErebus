@@ -261,36 +261,36 @@ public class LavaWebSpiderModel<T extends LavaWebSpider> extends HierarchicalMod
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float sin = (float) (Math.sin(limbSwing * 0.75F) * 0.5F * limbSwingAmount);
-		float cos = (float) (Math.cos(limbSwing * 0.75F) * 0.5F * limbSwingAmount);
+		float sin = (float) (Math.sin(limbSwing * 0.6F) * 0.4F * limbSwingAmount);
+		float cos = (float) (Math.cos(limbSwing * 0.6F) * 0.4F * limbSwingAmount);
 
 		BackLegLeft.zRot = 0F + cos;
-		LBL4.zRot = 0.1396F + cos;
-		LBL5.zRot = 0.0349F + cos;
+		LBL4.zRot = 0.1396F - cos;
+		LBL5.zRot = 0.0349F - cos;
 
 		BackMidLegLeft.zRot = 0F + sin;
-		LMBL4.zRot = 0.1396F + sin;
-		LMBL5.zRot = 0.0349F + sin;
+		LMBL4.zRot = 0.1396F - sin;
+		LMBL5.zRot = 0.0349F - sin;
 
 		FrontMidLegLeft.zRot = 0F + cos;
-		LMFL4.zRot = 0.1396F + cos;
-		LMFL5.zRot = 0.0349F + cos;
+		LMFL4.zRot = 0.1396F - cos;
+		LMFL5.zRot = 0.0349F - cos;
 
 		FrontLegLeft.zRot = 0F + sin;
-		LFL4.zRot = 0.1396F + sin;
-		LFL5.zRot = 0.0349F + sin;
+		LFL4.zRot = 0.1396F - sin;
+		LFL5.zRot = 0.0349F - sin;
 
 		BackLegRight.zRot = 0F + sin;
-		RBL4.zRot = 0.1396F + cos;
-		RBL5.zRot = 0.0349F + cos;
+		RBL4.zRot = 0.1396F + sin;
+		RBL5.zRot = 0.0349F + sin;
 
 		BackMidLegRight.zRot = 0F + cos;
 		RMBL4.zRot = 0.1396F + cos;
 		RMBL5.zRot = 0.0349F + cos;
 
 		FrontMidLegRight.zRot = 0F + sin;
-		RMFL4.zRot = 0.1396F + cos;
-		RMFL5.zRot = 0.0349F + cos;
+		RMFL4.zRot = 0.1396F + sin;
+		RMFL5.zRot = 0.0349F + sin;
 
 		FrontLegRight.zRot = 0F + cos;
 		RFL4.zRot = 0.1396F + cos;
