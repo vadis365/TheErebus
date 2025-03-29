@@ -1,10 +1,8 @@
 package erebus.entity;
 
-import java.util.EnumSet;
-
 import javax.annotation.Nullable;
 
-import erebus.entity.projectile.ThrownBlockAsItem;
+import erebus.entity.ai.ThrowWebAttackGoal;
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
@@ -15,7 +13,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
@@ -24,13 +21,11 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
@@ -71,7 +66,7 @@ public class Scytodes extends Monster {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new Scytodes.AIWebSlingAttack(this));
+		goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.9D, Blocks.COBWEB.defaultBlockState()));
 		goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0.4F));
 		goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.6D, true));
 		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.6D));
@@ -227,74 +222,5 @@ public class Scytodes extends Monster {
 			setSkin(nbt.getInt("skin"));
 		else
 			setSkin(random.nextInt(4));
-	}
-
-	static class AIWebSlingAttack extends Goal {
-		private final Scytodes scytodes;
-		private int attackStep;
-		private int attackTime;
-
-		public AIWebSlingAttack(Scytodes scytodesIn) {
-			scytodes = scytodesIn;
-			setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
-		}
-
-		@Override
-		public boolean canUse() {
-			LivingEntity livingentity = scytodes.getTarget();
-			return livingentity != null && livingentity.isAlive();
-		}
-
-		@Override
-		public void start() {
-			attackStep = 0;
-		}
-
-		@Override
-		 public void tick() {
-			--attackTime;
-			LivingEntity livingentity = scytodes.getTarget();
-			double distance = scytodes.distanceToSqr(livingentity);
-
-			if (distance < 4.0D) {
-				if (attackTime <= 0) {
-					attackTime = 20;
-					scytodes.doHurtTarget(livingentity);
-				}
-
-				scytodes.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), scytodes.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
-
-			} else if (distance < 256.0D) {
-				double targetX = livingentity.getX() - scytodes.getX();
-				double targetY = livingentity.getBoundingBox().minY + (double) (livingentity.getBbHeight() / 2.0F) - (scytodes.getY() + (double) (scytodes.getBbHeight() / 2.0F));
-				double targetZ = livingentity.getZ() - scytodes.getZ();
-
-				if (attackTime <= 0) {
-					++attackStep;
-					if (attackStep == 1)
-						attackTime = 60;
-					else if (attackStep <= 4)
-						attackTime = 6;
-					else {
-						attackTime = 100;
-						attackStep = 0;
-					}
-
-					if (attackStep > 1 && livingentity instanceof Player) {
-						scytodes.level().playSound( null, scytodes.blockPosition(), scytodes.getWebSlingThrowSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
-						for (int count = 0; count < 1; ++count) {
-							ThrownBlockAsItem webSling = new ThrownBlockAsItem(scytodes.level(), scytodes, Blocks.COBWEB.defaultBlockState(), 0);
-							webSling.setPos(scytodes.getX(), scytodes.getY() + (double) (scytodes.getBbHeight() / 2.0F) + 0.5D, scytodes.getZ());
-							webSling.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
-							scytodes.level().addFreshEntity(webSling);
-						}
-					}
-				}
-				scytodes.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
-				scytodes.getNavigation().isDone();
-				scytodes.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), scytodes.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
-			}
-			super.tick();
-		}
 	}
 }

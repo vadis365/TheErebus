@@ -1,10 +1,8 @@
 package erebus.entity;
 
-import java.util.EnumSet;
-
 import javax.annotation.Nullable;
 
-import erebus.entity.projectile.ThrownBlockAsItem;
+import erebus.entity.ai.ThrowWebAttackGoal;
 import erebus.registries.ModBlocks;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
@@ -14,7 +12,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
@@ -31,7 +28,6 @@ import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
@@ -68,7 +64,6 @@ public class BlackWidow extends Monster {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new BlackWidow.AIWebSlingAttack(this));
 		goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0.4F));
 		goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.6D, true));
 		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.6D));
@@ -165,10 +160,6 @@ public class BlackWidow extends Monster {
 		playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
 	}
 
-	protected SoundEvent getWebSlingThrowSound() {
-		return ModSounds.WEBSLING_THROW.get();
-	}
-
 	/*
 	 * @Override protected Item getDropItem() { return Items.STRING; }
 	 * 
@@ -234,14 +225,17 @@ public class BlackWidow extends Monster {
 		if (size == 2) {
 			getAttribute(Attributes.MAX_HEALTH).setBaseValue(20D);
 			getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1.5D);
+			goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.9D, ModBlocks.WITHER_WEB.get().defaultBlockState()));
 		}
 		if (size == 4) {
 			getAttribute(Attributes.MAX_HEALTH).setBaseValue(25D);
 			getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(2D);
+			goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.9D, ModBlocks.WITHER_WEB.get().defaultBlockState()));
 		}
 
 		if (resetHealth)
 			setHealth(getMaxHealth());
+		
 	}
 
 	public int getWidowSize() {
@@ -275,76 +269,5 @@ public class BlackWidow extends Monster {
 		if (size < 0)
 			size = 0;
 		setWidowSize(size + 1, false);
-	}
-
-	static class AIWebSlingAttack extends Goal {
-		private final BlackWidow widow;
-		private int attackStep;
-		private int attackTime;
-
-		public AIWebSlingAttack(BlackWidow widowIn) {
-			widow = widowIn;
-			setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
-		}
-
-		@Override
-		public boolean canUse() {
-			LivingEntity livingentity = widow.getTarget();
-			return livingentity != null && livingentity.isAlive() && widow.getWidowSize() > 1;
-		}
-
-		@Override
-		public void start() {
-			attackStep = 0;
-		}
-
-		@Override
-		public void tick() {
-			--attackTime;
-			LivingEntity livingentity = widow.getTarget();
-			double distance = widow.distanceToSqr(livingentity);
-
-			if (distance < 4.0D) {
-				if (attackTime <= 0) {
-					attackTime = 20;
-					widow.doHurtTarget(livingentity);
-				}
-
-				widow.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), widow.getAttributeValue(Attributes.MOVEMENT_SPEED));
-
-			} else if (distance < 256.0D) {
-				double targetX = livingentity.getX() - widow.getX();
-				double targetY = livingentity.getBoundingBox().minY + (double) (livingentity.getBbHeight() / 2.0F) - (widow.getY() + (double) (widow.getBbHeight() / 2.0F));
-				double targetZ = livingentity.getZ() - widow.getZ();
-
-				if (attackTime <= 0) {
-					++attackStep;
-
-					if (attackStep == 1) {
-						attackTime = 60;
-					} else if (attackStep <= 4) {
-						attackTime = 6;
-					} else {
-						attackTime = 100;
-						attackStep = 0;
-					}
-
-					if (attackStep > 1 && livingentity instanceof Player) {
-
-						widow.level().playSound(null, widow.blockPosition(), widow.getWebSlingThrowSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
-						for (int count = 0; count < 1; ++count) {
-							ThrownBlockAsItem webSling = new ThrownBlockAsItem(widow.level(), widow, ModBlocks.WITHER_WEB.get().defaultBlockState(), 0);
-							webSling.setPos(widow.getX(), widow.getY() + (double) (widow.getBbHeight() / 2.0F) + 0.5D, widow.getZ());
-							webSling.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
-							widow.level().addFreshEntity(webSling);
-						}
-					}
-				}
-				widow.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
-				widow.getNavigation().isDone();
-				widow.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), widow.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
-			}
-			super.tick();
-		}
 	}
 }
