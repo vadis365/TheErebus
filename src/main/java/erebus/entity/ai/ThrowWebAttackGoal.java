@@ -72,7 +72,7 @@ public class ThrowWebAttackGoal extends Goal {
 
 					mob.level().playSound(null, mob.blockPosition(), ModSounds.WEBSLING_THROW.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
 					for (int count = 0; count < 1; ++count) {
-						ThrownBlockAsItem webSling = new ThrownBlockAsItem(mob.level(), mob, blockstate, 0);
+						ThrownBlockAsItem webSling = new ThrownBlockAsItem(mob.level(), mob, blockstate, 0, ModSounds.WEBSLING_SPLAT.get());
 						webSling.setPos(mob.getX(), mob.getY() + (double) (mob.getBbHeight() / 2.0F) + 0.5D, mob.getZ());
 						webSling.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
 						mob.level().addFreshEntity(webSling);

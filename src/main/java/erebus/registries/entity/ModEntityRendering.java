@@ -47,6 +47,6 @@ public class ModEntityRendering {
     	event.registerEntityRenderer(ModEntities.MONEY_SPIDER.get(), MoneySpiderRenderer::new);
     	event.registerEntityRenderer(ModEntities.BLACK_WIDOW.get(), BlackWidowRenderer::new);
     	event.registerEntityRenderer(ModEntities.LAVA_WEB_SPIDER.get(), LavaWebSpiderRenderer::new);
-    	event.registerEntityRenderer(ModEntities.WEB_SLING.get(), context -> new ThrownItemRenderer<ThrownBlockAsItem>(context, 3.0F, true));
+    	event.registerEntityRenderer(ModEntities.THROWN_BLOCK_AS_ITEM.get(), context -> new ThrownItemRenderer<ThrownBlockAsItem>(context, 3.0F, true));
     }
 }

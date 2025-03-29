@@ -1,10 +1,7 @@
 package erebus.entity.projectile;
 
-import erebus.registries.ModBlocks;
-import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -17,7 +14,6 @@ import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,26 +23,27 @@ import net.minecraft.world.phys.HitResult;
 public class ThrownBlockAsItem  extends ThrowableProjectile implements ItemSupplier {
 	private static final EntityDataAccessor<BlockState> TYPE = SynchedEntityData.defineId(ThrownBlockAsItem.class, EntityDataSerializers.BLOCK_STATE);
 	private float damage; // not needed but will leave for now - just in case...
-
+	private SoundEvent placedSound;
 	public ThrownBlockAsItem(Level level) {
-		super(ModEntities.WEB_SLING.get(), level);
+		super(ModEntities.THROWN_BLOCK_AS_ITEM.get(), level);
 	}
 
 	public ThrownBlockAsItem(EntityType<ThrownBlockAsItem> type, Level level) {
 		super(type, level);
 	}
 	
-	public ThrownBlockAsItem(Level level, Entity owner, BlockState state, float damageCaused) {
-		super(ModEntities.WEB_SLING.get(), level);
+	public ThrownBlockAsItem(Level level, Entity owner, BlockState state, float damageCaused, SoundEvent placedSoundIn) {
+		super(ModEntities.THROWN_BLOCK_AS_ITEM.get(), level);
 		this.setOwner(owner);
 		setXRot(owner.getXRot());
 		setYRot(owner.getYRot());
 		setBlockType(state);
 		damage = damageCaused;
+		placedSound = placedSoundIn;
 	}
 	
 	public ThrownBlockAsItem(double x, double y, double z, Level level) {
-		super(ModEntities.WEB_SLING.get(), x, y, z, level);
+		super(ModEntities.THROWN_BLOCK_AS_ITEM.get(), x, y, z, level);
 	}
 
 	@Override
@@ -54,8 +51,8 @@ public class ThrownBlockAsItem  extends ThrowableProjectile implements ItemSuppl
 		builder.define(TYPE, Blocks.STONE.defaultBlockState());
 	}
 
-	protected SoundEvent getWebSlingSplatSound() {
-		return ModSounds.WEBSLING_SPLAT.get();
+	protected SoundEvent getPlacedSound() {
+		return placedSound != null ? placedSound : getBlockType().getSoundType(level(), blockPosition(), null).getPlaceSound();
 	}
 
 	@Override
@@ -76,7 +73,8 @@ public class ThrownBlockAsItem  extends ThrowableProjectile implements ItemSuppl
 					level().levelEvent(null, 2001, blockPosition(), Block.getId(getBlockType()));
 			}
 			kill();
-			level().playSound(null, blockPosition(), getWebSlingSplatSound(), SoundSource.HOSTILE, 1.0F, 1.0F);
+			
+			level().playSound(null, blockPosition(), getPlacedSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
 		}
 	}
 

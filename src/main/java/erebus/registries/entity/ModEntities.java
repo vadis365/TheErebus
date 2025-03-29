@@ -44,7 +44,7 @@ public class ModEntities {
 	public static final Supplier<EntityType<BlackWidow>> BLACK_WIDOW = registerWithEgg("black_widow", EntityType.Builder.of(BlackWidow::new, MobCategory.MONSTER).sized(0.7F, 0.325F).fireImmune(), 0x101010, 0xFF0000);
 	public static final Supplier<EntityType<LavaWebSpider>> LAVA_WEB_SPIDER = registerWithEgg("lava_web_spider", EntityType.Builder.of(LavaWebSpider::new, MobCategory.MONSTER).sized(3F, 1.5F).fireImmune(), 0xD36617, 0x342522);
 	
-	public static final Supplier<EntityType<ThrownBlockAsItem>> WEB_SLING = registerNonMobEntity("web_sling", EntityType.Builder.<ThrownBlockAsItem>of(ThrownBlockAsItem::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
+	public static final Supplier<EntityType<ThrownBlockAsItem>> THROWN_BLOCK_AS_ITEM = registerNonMobEntity("thrown_block_as_item", EntityType.Builder.<ThrownBlockAsItem>of(ThrownBlockAsItem::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
 	// just calls a helper in the main mod because it'll be used all over probably
 	private static String prefix(String name) {
 		return Erebus.prefix(name).toString();
