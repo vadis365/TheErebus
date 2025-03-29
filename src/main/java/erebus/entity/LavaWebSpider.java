@@ -4,7 +4,6 @@ import javax.annotation.Nullable;
 
 import erebus.entity.ai.ThrowWebAttackGoal;
 import erebus.registries.ModBlocks;
-import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,9 +20,11 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
@@ -193,6 +194,14 @@ public class LavaWebSpider extends Monster {
 		 return (potioneffect.is(MobEffects.POISON) || potioneffect.is(MobEffects.WITHER) ? false : super.canBeAffected(potioneffect));
 	}
 
+	@Override
+	public boolean hurt(DamageSource source, float damage) {
+		if (source.type().equals(DamageTypes.IN_WALL)) {
+			return false;
+		}
+		return super.hurt(source, damage);
+	}
+
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.SPIDER_AMBIENT;
@@ -213,10 +222,6 @@ public class LavaWebSpider extends Monster {
         playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
 
-	protected SoundEvent getWebSlingThrowSound() {
-		return ModSounds.WEBSLING_THROW.get();
-	}
-
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
@@ -225,27 +230,35 @@ public class LavaWebSpider extends Monster {
 
 		if (randomsource.nextInt(100) == 0) {
 			MoneySpider moneyspider = ModEntities.MONEY_SPIDER.get().create(this.level());
-			moneyspider.setPos(getX(), getY(), getZ());
-			moneyspider.setYRot(getYRot());
-			// moneyspider.finalizeSpawn(level, difficulty, spawnType, null);
-			moneyspider.startRiding(this);
-		}
-
-		if (spawnGroupData == null) {
-			spawnGroupData = new Spider.SpiderEffectsGroupData();
-			if (level.getDifficulty() == Difficulty.HARD
-					&& randomsource.nextFloat() < 0.1F * difficulty.getSpecialMultiplier()) {
-				((Spider.SpiderEffectsGroupData) spawnGroupData).setRandomEffect(randomsource);
+			if (moneyspider != null) {
+				moneyspider.moveTo(getX(), getY(), getZ(), getYRot(), 0.0F);
+				moneyspider.finalizeSpawn(level, difficulty, spawnType, null);
+				moneyspider.startRiding(this);
 			}
 		}
+
+		if (spawnGroupData == null)
+			spawnGroupData = new Spider.SpiderEffectsGroupData();
+			if (level.getDifficulty() == Difficulty.HARD && randomsource.nextFloat() < 0.1F * difficulty.getSpecialMultiplier())
+				((Spider.SpiderEffectsGroupData) spawnGroupData).setRandomEffect(randomsource);
 
 		if (spawnGroupData instanceof Spider.SpiderEffectsGroupData spider$spidereffectsgroupdata) {
 			Holder<MobEffect> holder = spider$spidereffectsgroupdata.effect;
-			if (holder != null) {
+			if (holder != null)
 				this.addEffect(new MobEffectInstance(holder, -1));
-			}
 		}
 
 		return spawnGroupData;
+	}
+	
+	@Override
+	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
+		super.positionRider(entity, moveFunction);
+		if (entity instanceof MoneySpider) {
+			double a = Math.toRadians(yBodyRot);
+			double offSetX = -Math.sin(a) * 1D;
+			double offSetZ = Math.cos(a) * 1D;
+			entity.setPos(getX() - offSetX, getY() + getBbHeight() + 0.0625F, getZ() - offSetZ);
+		}
 	}
 }

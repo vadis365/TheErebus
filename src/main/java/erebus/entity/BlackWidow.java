@@ -16,6 +16,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -138,6 +139,14 @@ public class BlackWidow extends Monster {
 	@Override
 	public boolean canBeAffected(MobEffectInstance potioneffect) {
 		return (potioneffect.is(MobEffects.POISON) || potioneffect.is(MobEffects.WITHER) ? false : super.canBeAffected(potioneffect));
+	}
+
+	@Override
+	public boolean hurt(DamageSource source, float damage) {
+		if (source.type().equals(DamageTypes.IN_WALL)) {
+			return false;
+		}
+		return super.hurt(source, damage);
 	}
 
 	@Override

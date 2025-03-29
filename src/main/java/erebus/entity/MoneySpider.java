@@ -41,7 +41,7 @@ public class MoneySpider extends Scytodes {
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
-		builder.define(SKIN_TYPE, random.nextInt(3));
+		builder.define(SKIN_TYPE, 0);
 	}
 
 	@Override
@@ -58,7 +58,8 @@ public class MoneySpider extends Scytodes {
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Monster.createMonsterAttributes()
-				.add(Attributes.MAX_HEALTH, 8D).add(Attributes.FOLLOW_RANGE, 32D)
+				.add(Attributes.MAX_HEALTH, 8D)
+				.add(Attributes.FOLLOW_RANGE, 32D)
 				.add(Attributes.MOVEMENT_SPEED, 0.6D)
 				.add(Attributes.ATTACK_DAMAGE, 1D);
 	}
@@ -101,7 +102,7 @@ public class MoneySpider extends Scytodes {
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
-		spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
+		setSkin(level.getRandom().nextInt(3));
 		return spawnGroupData;
 	}
 
@@ -112,13 +113,16 @@ public class MoneySpider extends Scytodes {
 	public int getSkin() {
 		return entityData.get(SKIN_TYPE);
 	}
+	
+	@Override
+	public void addAdditionalSaveData(CompoundTag nbt) {
+		super.addAdditionalSaveData(nbt);
+		nbt.putInt("skin", getSkin());
+	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		if (nbt.contains("skin"))
-			setSkin(nbt.getInt("skin"));
-		else
-			setSkin(random.nextInt(3));
+		setSkin(nbt.getInt("skin"));
 	}
 }
