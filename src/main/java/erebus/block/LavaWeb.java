@@ -1,6 +1,8 @@
 package erebus.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,10 +23,22 @@ public class LavaWeb extends WebBlock {
 		if (entity instanceof LivingEntity livingentity && livingentity.hasEffect(MobEffects.WEAVING))
 			vec3 = new Vec3(0.5, 0.25, 0.5);
 
-		if (entity instanceof LivingEntity livingentity)// && !(livingentity instanceof LavaWebSpider))
+		if (entity instanceof LivingEntity livingentity)
 			((LivingEntity) entity).setRemainingFireTicks(100);
 
 		entity.makeStuckInBlock(state, vec3);
 	}
 
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        BlockPos blockpos = pos.above();
+        if (level.getBlockState(blockpos).isAir() && !level.getBlockState(blockpos).isSolidRender(level, blockpos)) {
+            if (random.nextInt(50) == 0 && level.isClientSide()) {
+                double x = (double)pos.getX() + random.nextDouble();
+                double y = (double)pos.getY() + 1.0;
+                double z = (double)pos.getZ() + random.nextDouble();
+                level.addParticle(ParticleTypes.LAVA, x, y, z, 0.0, 0.0, 0.0);
+            }
+        }
+    }
 }
