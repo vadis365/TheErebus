@@ -658,8 +658,13 @@ public class ModLang extends ModLangProvider {
 
     private void addEntityTranslations() {
         addEntity(ModEntities.WASP, "Wasp");
-        addEntity(ModEntities.ANIMATED_BLOCK, "Animated Block");
-        addEntity(ModEntities.SCYTODES, "Scytode");
+        addEntityNoEgg(ModEntities.ANIMATED_BLOCK, "Animated Block");
+        addEntity(ModEntities.SCYTODES, "Scytodes");
+        addEntity(ModEntities.BLACK_WIDOW, "Black Widow");
+        addEntity(ModEntities.MONEY_SPIDER, "Money Spider");
+        addEntity(ModEntities.LAVA_WEB_SPIDER, "Lava Web Spider");
+        
+        addEntityNoEgg(ModEntities.THROWN_BLOCK_AS_ITEM, "Mob Projectile"); // needs a better name
     }
 
     private void addFluidTranslations() {

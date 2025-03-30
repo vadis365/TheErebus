@@ -44,6 +44,10 @@ public abstract class ModLangProvider extends LanguageProvider {
         add(entity.get().getDescriptionId(), name);
         add("item.erebus.%s_spawn_egg".formatted(entity.get().getDescriptionId().replaceFirst("entity.erebus.", "")), "%s Spawn Egg".formatted(name));
     }
+    
+    protected void addEntityNoEgg(Supplier<? extends EntityType> entity, String name) {
+        add(entity.get().getDescriptionId(), name);
+    }
 
     protected void addAdvTitle(String advancementTitle, String name) {
         add("advancement.%s.%s.title".formatted(Erebus.MODID, advancementTitle), name);
