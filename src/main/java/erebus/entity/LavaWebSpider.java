@@ -55,9 +55,11 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-public class LavaWebSpider extends Monster {
+public class LavaWebSpider extends Monster implements IErebusAnimationExtras {
 
 	private static final EntityDataAccessor<Byte> CLIMBING = SynchedEntityData.defineId(LavaWebSpider.class, EntityDataSerializers.BYTE);
+	public int animationTicks = 0, animationTicksPrev = 0;
+	public boolean performAnimation;
 
 	public LavaWebSpider(EntityType<? extends LavaWebSpider> type, Level level) { 
 		super(type, level);
@@ -144,6 +146,10 @@ public class LavaWebSpider extends Monster {
 	@Override
 	  public void aiStep() {
 		super.aiStep();
+		if(level().isClientSide())
+			if(hasAnimation())
+				setAnimationTickPrev(getAnimationTick());
+		
 		if (random.nextInt(50) == 0) {
 			int i = Mth.floor(getX());
 			int j = Mth.floor(getY());
@@ -158,11 +164,54 @@ public class LavaWebSpider extends Monster {
 					level().setBlock(blockpos, blockstate, 11);
 			}
 		}
+
+		if(level().isClientSide()) {
+			if(hasAnimation() && getShouldTickAnimation())
+				setAnimationTick(getAnimationTick() + 1);
+			else
+				resetAllAnimationTicks();
+		}
 	}
 
 	@Override
-	public boolean causeFallDamage(float distance, float damageMultiplier, DamageSource damageSource) {
-		return false;
+	public boolean hasAnimation() {
+		return true;
+	}
+
+	@Override
+	public boolean setShouldTickAnimation(boolean performAnimationIn) {
+		performAnimation = performAnimationIn;
+		return performAnimation;
+	}
+	
+	@Override
+	public boolean getShouldTickAnimation() {
+		return performAnimation;
+	}
+
+	@Override
+	public void setAnimationTick(int animationTickIn) {
+		animationTicks = animationTickIn;
+	}
+
+	@Override
+	public int getAnimationTick() {
+		return animationTicks;
+	}
+
+	@Override
+	public void setAnimationTickPrev(int animationTickPrevIn) {
+		animationTicksPrev = animationTickPrevIn;
+	}
+
+	@Override
+	public int getAnimationTickPrev() {
+		return animationTicksPrev;
+	}
+	
+	@Override
+	public void resetAllAnimationTicks() {
+		animationTicks = animationTicksPrev = 0;
 	}
 
     @Override
@@ -261,4 +310,5 @@ public class LavaWebSpider extends Monster {
 			entity.setPos(getX() - offSetX, getY() + getBbHeight() + 0.0625F, getZ() - offSetZ);
 		}
 	}
+
 }

@@ -2,6 +2,7 @@ package erebus.entity.ai;
 
 import java.util.EnumSet;
 
+import erebus.entity.IErebusAnimationExtras;
 import erebus.entity.projectile.ThrownBlockAsItem;
 import erebus.registries.ModSounds;
 import net.minecraft.sounds.SoundSource;
@@ -61,11 +62,15 @@ public class ThrowWebAttackGoal extends Goal {
 
 				if (attackStep == 1) {
 					attackTime = 60;
+					if(mob instanceof IErebusAnimationExtras && ((IErebusAnimationExtras) mob).hasAnimation())
+						((IErebusAnimationExtras) mob).setShouldTickAnimation(true);
 				} else if (attackStep <= 4) {
 					attackTime = 6;
 				} else {
 					attackTime = 100;
 					attackStep = 0;
+					if(mob instanceof IErebusAnimationExtras && ((IErebusAnimationExtras) mob).hasAnimation())
+						((IErebusAnimationExtras) mob).setShouldTickAnimation(false);
 				}
 
 				if (attackStep > 1 && livingentity instanceof Player) {
