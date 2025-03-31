@@ -696,5 +696,6 @@ public class ModLang extends ModLangProvider {
 
     private void addContainerTranslations() {
         addContainer("petrified_crafting_table", "Petrified Crafting Table");
+        addContainer("umberfurnace", "Umber Furnace");
     }
 }
