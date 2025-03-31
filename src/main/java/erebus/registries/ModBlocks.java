@@ -216,34 +216,34 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<DoorBlock> DOOR_SCORCHED = registerDoor("door_scorched", BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
 
     // MARK: Fences
-    public static final DeferredBlock<FenceBlock> FENCE_BAOBAB = registerBlock("fence_baobab", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceBlock> FENCE_EUCALYPTUS = registerBlock("fence_eucalyptus", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceBlock> FENCE_MAHOGANY = registerBlock("fence_mahogany", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceBlock> FENCE_MOSSBARK = registerBlock("fence_mossbark", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceBlock> FENCE_ASPER = registerBlock("fence_asper", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceBlock> FENCE_CYPRESS = registerBlock("fence_cypress", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceBlock> FENCE_BALSAM = registerBlock("fence_balsam", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceBlock> FENCE_WHITE = registerBlock("fence_white", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceBlock> FENCE_BAMBOO = registerBlock("fence_bamboo", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceBlock> FENCE_ROTTEN = registerBlock("fence_rotten", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceBlock> FENCE_MARSHWOOD = registerBlock("fence_marshwood", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceBlock> FENCE_SCORCHED = registerBlock("fence_scorched", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceBlock> FENCE_VARNISHED = registerBlock("fence_varnished", () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceBlock> FENCE_BAOBAB = registerFence("fence_baobab", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceBlock> FENCE_EUCALYPTUS = registerFence("fence_eucalyptus", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceBlock> FENCE_MAHOGANY = registerFence("fence_mahogany", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceBlock> FENCE_MOSSBARK = registerFence("fence_mossbark", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceBlock> FENCE_ASPER = registerFence("fence_asper", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceBlock> FENCE_CYPRESS = registerFence("fence_cypress", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceBlock> FENCE_BALSAM = registerFence("fence_balsam", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceBlock> FENCE_WHITE = registerFence("fence_white", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceBlock> FENCE_BAMBOO = registerFence("fence_bamboo", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceBlock> FENCE_ROTTEN = registerFence("fence_rotten", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceBlock> FENCE_MARSHWOOD = registerFence("fence_marshwood", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceBlock> FENCE_SCORCHED = registerFence("fence_scorched", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<FenceBlock> FENCE_VARNISHED = registerFence("fence_varnished", BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE));
 
     // MARK: Fence Gates
-    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_BAOBAB = registerBlock("fence_gate_baobab", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_EUCALYPTUS = registerBlock("fence_gate_eucalyptus", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_MAHOGANY = registerBlock("fence_gate_mahogany", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_MOSSBARK = registerBlock("fence_gate_mossbark", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_ASPER = registerBlock("fence_gate_asper", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_CYPRESS = registerBlock("fence_gate_cypress", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_BALSAM = registerBlock("fence_gate_balsam", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_WHITE = registerBlock("fence_gate_white", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_BAMBOO = registerBlock("fence_gate_bamboo", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_ROTTEN = registerBlock("fence_gate_rotten", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_MARSHWOOD = registerBlock("fence_gate_marshwood", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_SCORCHED = registerBlock("fence_gate_scorched", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
-    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_VARNISHED = registerBlock("fence_gate_varnished", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE)));
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_BAOBAB = registerSimpleFenceGate("fence_gate_baobab");
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_EUCALYPTUS = registerSimpleFenceGate("fence_gate_eucalyptus");
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_MAHOGANY = registerSimpleFenceGate("fence_gate_mahogany");
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_MOSSBARK = registerSimpleFenceGate("fence_gate_mossbark");
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_ASPER = registerSimpleFenceGate("fence_gate_asper");
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_CYPRESS = registerSimpleFenceGate("fence_gate_cypress");
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_BALSAM = registerSimpleFenceGate("fence_gate_balsam");
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_WHITE = registerSimpleFenceGate("fence_gate_white");
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_BAMBOO = registerSimpleFenceGate("fence_gate_bamboo");
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_ROTTEN = registerSimpleFenceGate("fence_gate_rotten");
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_MARSHWOOD = registerSimpleFenceGate("fence_gate_marshwood");
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_SCORCHED = registerSimpleFenceGate("fence_gate_scorched");
+    public static final DeferredBlock<FenceGateBlock> FENCE_GATE_VARNISHED = registerSimpleFenceGate("fence_gate_varnished");
 
     // MARK: Walls
     public static final DeferredBlock<WallBlock> WALL_UMBERSTONE = registerBlock("wall_umberstone", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
@@ -260,12 +260,12 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<WallBlock> WALL_UMBERPAVER_WEBBED = registerBlock("wall_umberpaver_webbed", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_WALL)));
 
     // MARK: Plants
-    public static final DeferredBlock<ModCropBlock> CROP_TURNIP = registerBlock("crop_turnip", () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), ModItems.TURNIP));
-    public static final DeferredBlock<ModCropBlock> CROP_CABBAGE = registerBlock("crop_cabbage", () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), ModItems.CABBAGE_SEEDS));
-    public static final DeferredBlock<ModCropBlock> CROP_MANDRAKE = registerBlock("crop_mandrake", () -> new ModCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS), ModItems.MANDRAKE_ROOT));
-    public static final DeferredBlock<JadeBerriesBushBlock> JADE_BERRY_BUSH = registerBlock("jade_berry_bush", () -> new JadeBerriesBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH)));
-    public static final DeferredBlock<HeartBerriesBushBlock> HEART_BERRY_BUSH = registerBlock("heart_berry_bush", () -> new HeartBerriesBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH)));
-    public static final DeferredBlock<SwampBerriesBushBlock> SWAMP_BERRY_BUSH = registerBlock("swamp_berry_bush", () -> new SwampBerriesBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH)));
+    public static final DeferredBlock<ModCropBlock> CROP_TURNIP = registerCrop("crop_turnip", ModItems.TURNIP, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS));
+    public static final DeferredBlock<ModCropBlock> CROP_CABBAGE = registerCrop("crop_cabbage", ModItems.CABBAGE_SEEDS, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS));
+    public static final DeferredBlock<ModCropBlock> CROP_MANDRAKE = registerCrop("crop_mandrake", ModItems.MANDRAKE_ROOT, BlockBehaviour.Properties.ofFullCopy(Blocks.BEETROOTS));
+    public static final DeferredBlock<ModBerryBushBlock> JADE_BERRY_BUSH = registerBush("jade_berry_bush", ModItems.JADE_BERRIES, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
+    public static final DeferredBlock<ModBerryBushBlock> HEART_BERRY_BUSH = registerBush("heart_berry_bush", ModItems.HEART_BERRIES, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
+    public static final DeferredBlock<ModBerryBushBlock> SWAMP_BERRY_BUSH = registerBush("swamp_berry_bush", ModItems.SWAMP_BERRIES, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
     public static final DeferredBlock<Block> DARK_FRUIT_VINE = registerSimpleBlock("dark_fruit_vine", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> PRICKLY_PEAR = registerSimpleBlock("prickly_pear", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DARK_CAPPED_MUSHROOM = registerSimpleBlock("dark_capped_mushroom", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
@@ -278,14 +278,14 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> GRANDMAS_SHOES_MUSHROOM_BLOCK = registerSimpleBlock("grandmas_shoes_mushroom_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> KAIZERS_FINGERS_MUSHROOM_BLOCK = registerSimpleBlock("kaizers_fingers_mushroom_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> SARCASTIC_CZECH_MUSHROOM_BLOCK = registerSimpleBlock("sarcastic_czech_mushroom_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<BushBlock> DESERT_SHRUB = registerBush("desert_shrub", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
+    public static final DeferredBlock<Block> DESERT_SHRUB = registerSimpleBlock("desert_shrub", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
     public static final DeferredBlock<Block> MIRE_CORAL = registerSimpleBlock("mire_coral", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<BushBlock> NETTLE = registerBush("nettle", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
-    public static final DeferredBlock<BushBlock> NETTLE_FLOWERED = registerBush("nettle_flowered", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
-    public static final DeferredBlock<BushBlock> SWAMP_PLANT = registerBush("swamp_plant", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
-    public static final DeferredBlock<BushBlock> FIRE_BLOOM = registerBush("fire_bloom", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
-    public static final DeferredBlock<BushBlock> FERN = registerBush("fern", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
-    public static final DeferredBlock<BushBlock> FIDDLE_HEAD = registerBush("fiddle_head", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
+    public static final DeferredBlock<Block> NETTLE = registerSimpleBlock("nettle", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
+    public static final DeferredBlock<Block> NETTLE_FLOWERED = registerSimpleBlock("nettle_flowered", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
+    public static final DeferredBlock<Block> SWAMP_PLANT = registerSimpleBlock("swamp_plant", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
+    public static final DeferredBlock<Block> FIRE_BLOOM = registerSimpleBlock("fire_bloom", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
+    public static final DeferredBlock<Block> FERN = registerSimpleBlock("fern", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
+    public static final DeferredBlock<Block> FIDDLE_HEAD = registerSimpleBlock("fiddle_head", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
     public static final DeferredBlock<VineBlock> THORNS = registerBlock("thorns", () -> new VineBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.VINE)));
     public static final DeferredBlock<Block> MOSS_DOWN = registerSimpleBlock("moss_down", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> MOULD_DOWN = registerSimpleBlock("mould_down", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
