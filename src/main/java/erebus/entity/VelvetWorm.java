@@ -44,7 +44,6 @@ public class VelvetWorm extends Monster {
 		super(type, level);
 		setPathfindingMalus(PathType.WATER, -8F);
 		xpReward = 15;
-		//stepHeight = 1;
 	}
 
 	@Override
