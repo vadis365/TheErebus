@@ -112,7 +112,63 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		float ba = (float) (Math.sin(limbSwing) * limbSwingAmount);
+		float bb = (float) (Math.sin(limbSwing + 1.0F) * 2.0F * limbSwingAmount);
+		float bc = (float) (Math.sin(limbSwing + 2.0F) * 2.6F * limbSwingAmount);
+		float bd = (float) (Math.sin(limbSwing + 3.0F) * 2.0F * limbSwingAmount);
+		float be = (float) (Math.sin(limbSwing + 4.0F) * limbSwingAmount);
+		float bf = (float) (Math.sin(limbSwing + 5.0F) * 0.35F * limbSwingAmount);
 
+		Head1.x = bf;
+
+		BodA1.y = 21F + ba;
+
+		BodB1.y = 21F + bb;
+
+		BodC1.y = 21F + bc;
+
+		BodD1.y = 21F + bd;
+
+		BodE1.y = 21F + be;
+
+		BodF1.y = 21F + bf;
+		BodF2.y = 21F + bf;
+
+		RLA1.y = 21.5F + ba;
+		LLA1.y = 21.5F + ba;
+
+		RLB1.y = 21.5F + bb;
+		LLB1.y = 21.5F + bb;
+
+		RLC1.y = 21.5F + bc;
+		LLC1.y = 21.5F + bc;
+
+		RLD1.y = 21.5F + bd;
+		LLD1.y = 21.5F + bd;
+
+		RLE1.y = 21.5F + be;
+		LLE1.y = 21.5F + be;
+
+		RLA1.yRot = -ba;
+		LLA1.yRot = ba;
+
+		RLB1.yRot = ba;
+		LLB1.yRot = -ba;
+
+		RLC1.yRot = -ba;
+		LLC1.yRot = ba;
+
+		RLD1.yRot = ba;
+		LLD1.yRot = -ba;
+
+		RLE1.yRot = -ba;
+		LLE1.yRot = ba;
+
+		Head1.yRot = netHeadYaw / (180F / (float) Math.PI);
+		Head1.xRot = headPitch / (180F / (float) Math.PI);
+
+		BodF1.xRot = headPitch / (180F / (float) Math.PI);
+		BodF2.xRot = headPitch / (180F / (float) Math.PI);
 	}
 
 	@Override
