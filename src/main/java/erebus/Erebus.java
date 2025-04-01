@@ -48,6 +48,7 @@ public class Erebus {
         ModMenuTypes.register(bus);
         ModTrunkPlacers.register(bus);
         ModTreeDecorators.register(bus);
+        ModBlockEntities.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 

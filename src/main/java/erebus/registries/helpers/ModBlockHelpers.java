@@ -47,7 +47,7 @@ public class ModBlockHelpers {
     }
 
     protected static DeferredBlock<ModBerryBushBlock> registerBush(String name, Supplier<? extends Item> berry, BlockBehaviour.Properties properties) {
-        return registerBlock(name, () -> new ModBerryBushBlock(berry.get(), properties));
+        return registerBlock(name, () -> new ModBerryBushBlock(berry, properties));
     }
 
     protected static DeferredBlock<ModCropBlock> registerCrop(String name, Supplier<? extends Item> seed, BlockBehaviour.Properties properties) {

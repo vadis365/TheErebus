@@ -4,6 +4,7 @@ import erebus.Erebus;
 import erebus.block.CandleHoneyTreatBlock;
 import erebus.block.HoneyTreatBlock;
 import erebus.block.ModCropBlock;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -268,7 +269,7 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         ResourceLocation down = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s".formatted(name(bottom)));
         ResourceLocation up = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_top".formatted(name(craftingTable)));
         ResourceLocation side = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_side".formatted(name(craftingTable)));
-        simpleBlock(craftingTable.get(), models().cube(name(craftingTable), down, up, side, side, side, side));
+        simpleBlock(craftingTable.get(), models().cube(name(craftingTable), down, up, side, side, side, side).texture("particle", side));
     }
 
     public void craftingTable(Supplier<? extends CraftingTableBlock> craftingTable) {
@@ -276,6 +277,28 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         ResourceLocation up = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_top".formatted(name(craftingTable)));
         ResourceLocation side = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_side".formatted(name(craftingTable)));
         simpleBlock(craftingTable.get(), models().cube(name(craftingTable), down, up, side, side, side, side).texture("particle", side));
+    }
+
+    public void furnace(Supplier<? extends AbstractFurnaceBlock> furnace) {
+        ResourceLocation front = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_front".formatted(name(furnace)));
+        ResourceLocation front_on = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_front_on".formatted(name(furnace)));
+        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_side".formatted(name(furnace)));
+        ResourceLocation top = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_top".formatted(name(furnace)));
+        getVariantBuilder(furnace.get()).forAllStates(
+                state -> {
+                    if (state.getValue(AbstractFurnaceBlock.LIT)) {
+                        return ConfiguredModel.builder()
+                                .rotationY(state.getValue(AbstractFurnaceBlock.FACING) == Direction.EAST ? 90 : state.getValue(AbstractFurnaceBlock.FACING) == Direction.SOUTH ? 180 : state.getValue(AbstractFurnaceBlock.FACING) == Direction.WEST ? 270 : 0)
+                                .modelFile(models().orientable(name(furnace), side, front_on, top))
+                                .build();
+                    } else {
+                        return ConfiguredModel.builder()
+                                .rotationY(state.getValue(AbstractFurnaceBlock.FACING) == Direction.EAST ? 90 : state.getValue(AbstractFurnaceBlock.FACING) == Direction.SOUTH ? 180 : state.getValue(AbstractFurnaceBlock.FACING) == Direction.WEST ? 270 : 0)
+                                .modelFile(models().orientable(name(furnace), side, front, top))
+                                .build();
+                    }
+                }
+        );
     }
 
     public void sign(Supplier<? extends StandingSignBlock> standingBlock, Supplier<? extends WallSignBlock> wallBlock, String name) {

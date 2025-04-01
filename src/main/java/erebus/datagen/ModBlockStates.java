@@ -374,7 +374,7 @@ public class ModBlockStates extends ModBlockStateProvider {
         block(SILO_TANK, "silo_tank_inactive");
         block(SILO_SUPPORTS);
         //horizontalBlock(HONEY_COMB.get(), modLoc("block/%s_sides".formatted(name(HONEY_COMB))), modLoc("block/%s_front".formatted(name(HONEY_COMB))), modLoc("block/%s_top".formatted(name(HONEY_COMB))));
-        //block(UMBER_FURNACE); TODO: Implement
+        furnace(UMBER_FURNACE);
         button(UMBERSTONE_BUTTON, UMBERSTONE);
 //        block(LIQUIFIER);
 //        block(GLOW_GEM); TODO Implement these

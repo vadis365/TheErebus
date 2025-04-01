@@ -1,9 +1,7 @@
 package erebus.block;
 
 import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
@@ -19,22 +17,22 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
 
-public class ModBerryBushBlock extends BushBlock implements BonemealableBlock {
-    public static final MapCodec<ModBerryBushBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
-            instance.group(
-                    BuiltInRegistries.ITEM.byNameCodec().fieldOf("name").forGetter(bush -> bush.berry),
-                    propertiesCodec()
-            ).apply(instance, ModBerryBushBlock::new));
+import java.util.function.Supplier;
 
-    private final Item berry;
+public class ModBerryBushBlock extends BushBlock implements BonemealableBlock {
+    public static final MapCodec<ModBerryBushBlock> CODEC = simpleCodec(ModBerryBushBlock::new);
+
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 3);
     private static final VoxelShape SAPLING_SHAPE = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 8.0F, 13.0F);
     private static final VoxelShape MID_GROWTH_SHAPE = Block.box(1.0F, 0.0F, 1.0F, 15.0F, 16.0F, 15.0F);
 
-    public ModBerryBushBlock(Item berry, Properties properties) {
+    public ModBerryBushBlock(Properties properties) {
         super(properties);
-        this.berry = berry;
         registerDefaultState(getStateDefinition().any().setValue(AGE, 0));
+    }
+
+    public ModBerryBushBlock(Supplier<? extends Item> berry, Properties properties) {
+        super(properties);
     }
 
     @Override

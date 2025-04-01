@@ -8,7 +8,6 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
@@ -457,7 +456,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> HONEY_COMB = registerSimpleBlock("honey_comb", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> COMPOSTER = registerSimpleBlock("composter", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> BLENDER = registerSimpleBlock("blender", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> UMBER_FURNACE = registerSimpleBlock("umber_furnace", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<UmberFurnaceBlock> UMBER_FURNACE = registerBlock("umber_furnace", () -> new UmberFurnaceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE)));
     public static final DeferredBlock<ButtonBlock> UMBERSTONE_BUTTON = registerBlock("umberstone_button", () -> new ButtonBlock(BlockSetType.STONE, 10, BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
     public static final DeferredBlock<Block> LIQUIFIER = registerSimpleBlock("liquifier", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> GLOW_GEM = registerSimpleBlock("glow_gem", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));

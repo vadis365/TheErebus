@@ -1,16 +1,16 @@
 package erebus.datagen;
 
-import static erebus.registries.ModBlocks.*;
-
 import erebus.datagen.providers.ModItemModelProvider;
-import erebus.registries.entity.ModEntities;
 import erebus.registries.ModItems;
+import erebus.registries.entity.ModEntities;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
+
+import static erebus.registries.ModBlocks.*;
 
 public class ModItemModels extends ModItemModelProvider {
 
@@ -653,7 +653,7 @@ public class ModItemModels extends ModItemModelProvider {
         //block(HONEY_COMB);
         block(COMPOSTER);
         block(BLENDER);
-        //block(UMBER_FURNACE);
+        block(UMBER_FURNACE);
         block(UMBERSTONE_BUTTON);
         //block(LIQUIFIER);
         //block(GLOW_GEM);
