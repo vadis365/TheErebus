@@ -1,14 +1,15 @@
 package erebus.registries.entity;
 
-import java.util.function.Supplier;
-
 import erebus.Erebus;
 import erebus.entity.AnimatedBlock;
 import erebus.entity.BlackWidow;
 import erebus.entity.LavaWebSpider;
 import erebus.entity.MoneySpider;
+import erebus.entity.Moth;
 import erebus.entity.Scytodes;
+import erebus.entity.VelvetWorm;
 import erebus.entity.Wasp;
+import erebus.entity.projectile.GooBall;
 import erebus.entity.projectile.ThrownBlockAsItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
@@ -43,8 +44,12 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<MoneySpider>> MONEY_SPIDER = registerWithEgg("money_spider", EntityType.Builder.of(MoneySpider::new, MobCategory.MONSTER).sized(0.6F, 0.4F).fireImmune(), 0xC2872F, 0xF9FF00);
     public static final DeferredHolder<EntityType<?>, EntityType<BlackWidow>> BLACK_WIDOW = registerWithEgg("black_widow", EntityType.Builder.of(BlackWidow::new, MobCategory.MONSTER).sized(0.7F, 0.325F).fireImmune(), 0x101010, 0xFF0000);
     public static final DeferredHolder<EntityType<?>, EntityType<LavaWebSpider>> LAVA_WEB_SPIDER = registerWithEgg("lava_web_spider", EntityType.Builder.of(LavaWebSpider::new, MobCategory.MONSTER).sized(3F, 1.5F).fireImmune(), 0xD36617, 0x342522);
-	
+    public static final DeferredHolder<EntityType<?>, EntityType<Moth>> MOTH = registerWithEgg("moth", EntityType.Builder.of(Moth::new, MobCategory.MONSTER).sized(1.8F, 0.5F), 0x83DB99, 0xACF4E0);
+    public static final DeferredHolder<EntityType<?>, EntityType<VelvetWorm>> VELVET_WORM = registerWithEgg("velvet_worm", EntityType.Builder.of(VelvetWorm::new, MobCategory.MONSTER).sized(2F, 0.7F), 0x88444B, 0xFFDAC0);
+
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownBlockAsItem>> THROWN_BLOCK_AS_ITEM = registerNonMobEntity("thrown_block_as_item", EntityType.Builder.<ThrownBlockAsItem>of(ThrownBlockAsItem::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
+    public static final DeferredHolder<EntityType<?>, EntityType<GooBall>> GOO_BALL = registerNonMobEntity("goo_ball", EntityType.Builder.<GooBall>of(GooBall::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
+
 	// just calls a helper in the main mod because it'll be used all over probably
 	private static String prefix(String name) {
 		return Erebus.prefix(name).toString();
@@ -55,6 +60,8 @@ public class ModEntities {
 		event.register(SCYTODES.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Scytodes::canSpawnHere, null);
 		event.register(BLACK_WIDOW.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlackWidow::canSpawnHere, null);
 		event.register(LAVA_WEB_SPIDER.get(), SpawnPlacementTypes.IN_LAVA, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LavaWebSpider::canSpawnHere, null);
+		event.register(MOTH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Moth::canSpawnHere, null);
+		event.register(VELVET_WORM.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, VelvetWorm::canSpawnHere, null);
 	}
 	
 	public static void initializeAttributes(EntityAttributeCreationEvent event) {
@@ -64,6 +71,8 @@ public class ModEntities {
 		event.put(MONEY_SPIDER.get(), MoneySpider.createAttributes().build());
 		event.put(BLACK_WIDOW.get(), BlackWidow.createAttributes().build());
 		event.put(LAVA_WEB_SPIDER.get(), LavaWebSpider.createAttributes().build());
+		event.put(MOTH.get(), Moth.createAttributes().build());
+		event.put(VELVET_WORM.get(), VelvetWorm.createAttributes().build());
 	}
 
 	public static DeferredRegister<EntityType<?>> getEntityTypes() {

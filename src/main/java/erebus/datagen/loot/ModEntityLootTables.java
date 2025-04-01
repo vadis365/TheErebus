@@ -28,19 +28,23 @@ public class ModEntityLootTables extends EntityLootSubProvider {
     public void generate() {
     	//TODO work out how TF this all works now
     	//this.noLoot(ModEntities.ANIMATED_BLOCK);
-    	
+
 		this.add(ModEntities.BLACK_WIDOW.get(), LootTable.lootTable()
 				.withPool(LootPool.lootPool()
 					.add(LootItem.lootTableItem(ModItems.POISON_GLAND).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
 							.apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0, 1))))));
 
 		this.noLoot(ModEntities.LAVA_WEB_SPIDER);
-		
+
 		this.noLoot(ModEntities.SCYTODES);
-		
+
 		this.noLoot(ModEntities.MONEY_SPIDER);
 
 		this.noLoot(ModEntities.WASP);
+
+		this.noLoot(ModEntities.MOTH);
+
+		this.noLoot(ModEntities.VELVET_WORM);
     }
     
 	public <T extends Entity> void noLoot(DeferredHolder<EntityType<?>, EntityType<T>> type) {

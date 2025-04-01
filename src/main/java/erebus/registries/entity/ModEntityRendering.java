@@ -4,14 +4,19 @@ import erebus.Erebus;
 import erebus.client.render.entity.model.AnimatedBlockModel;
 import erebus.client.render.entity.model.BlackWidowModel;
 import erebus.client.render.entity.model.LavaWebSpiderModel;
+import erebus.client.render.entity.model.MothModel;
 import erebus.client.render.entity.model.ScytodesModel;
+import erebus.client.render.entity.model.VelvetWormModel;
 import erebus.client.render.entity.model.WaspModel;
 import erebus.client.render.entity.renderer.AnimatedBlockRenderer;
 import erebus.client.render.entity.renderer.BlackWidowRenderer;
 import erebus.client.render.entity.renderer.LavaWebSpiderRenderer;
 import erebus.client.render.entity.renderer.MoneySpiderRenderer;
+import erebus.client.render.entity.renderer.MothRenderer;
 import erebus.client.render.entity.renderer.ScytodesRenderer;
+import erebus.client.render.entity.renderer.VelvetWormRenderer;
 import erebus.client.render.entity.renderer.WaspRenderer;
+import erebus.entity.projectile.GooBall;
 import erebus.entity.projectile.ThrownBlockAsItem;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -27,6 +32,8 @@ public class ModEntityRendering {
 	public static ModelLayerLocation BLACK_WIDOW = new ModelLayerLocation(Erebus.prefix("black_widow"), "main");
 	public static ModelLayerLocation LAVA_WEB_SPIDER = new ModelLayerLocation(Erebus.prefix("lava_web_spider"), "main");
 	public static ModelLayerLocation LAVA_WEB_SPIDER_FLOW = new ModelLayerLocation(Erebus.prefix("lava_web_spider_flow"), "main");
+	public static ModelLayerLocation MOTH = new ModelLayerLocation(Erebus.prefix("moth"), "main");
+	public static ModelLayerLocation VELVET_WORM = new ModelLayerLocation(Erebus.prefix("velvet_worm"), "main");
 
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
     	//  event.registerLayerDefinition(GRASHOPPER, ModelGrasshopper::createBodyLayer);
@@ -37,6 +44,8 @@ public class ModEntityRendering {
     	event.registerLayerDefinition(BLACK_WIDOW, BlackWidowModel::createBodyLayer);
     	event.registerLayerDefinition(LAVA_WEB_SPIDER, LavaWebSpiderModel::createBodyLayer);
     	event.registerLayerDefinition(LAVA_WEB_SPIDER_FLOW, LavaWebSpiderModel::createBodyLayer);
+    	event.registerLayerDefinition(MOTH, MothModel::createBodyLayer);
+    	event.registerLayerDefinition(VELVET_WORM, VelvetWormModel::createBodyLayer);
     }
 
     public static void registerEntityRender(EntityRenderersEvent.RegisterRenderers event) {
@@ -47,6 +56,9 @@ public class ModEntityRendering {
     	event.registerEntityRenderer(ModEntities.MONEY_SPIDER.get(), MoneySpiderRenderer::new);
     	event.registerEntityRenderer(ModEntities.BLACK_WIDOW.get(), BlackWidowRenderer::new);
     	event.registerEntityRenderer(ModEntities.LAVA_WEB_SPIDER.get(), LavaWebSpiderRenderer::new);
+    	event.registerEntityRenderer(ModEntities.MOTH.get(), MothRenderer::new);
+    	event.registerEntityRenderer(ModEntities.VELVET_WORM.get(), VelvetWormRenderer::new);
     	event.registerEntityRenderer(ModEntities.THROWN_BLOCK_AS_ITEM.get(), context -> new ThrownItemRenderer<ThrownBlockAsItem>(context, 3.0F, true));
+    	event.registerEntityRenderer(ModEntities.GOO_BALL.get(), context -> new ThrownItemRenderer<GooBall>(context, 3.0F, true));
     }
 }
