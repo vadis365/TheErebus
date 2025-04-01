@@ -2,6 +2,7 @@ package erebus.events;
 
 import erebus.Erebus;
 import erebus.client.screen.PetrifiedCraftingTableScreen;
+import erebus.client.screen.UmberFurnaceScreen;
 import erebus.registries.ModMenuTypes;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -13,7 +14,6 @@ public class RegisterMenuScreensEventHandler {
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(ModMenuTypes.PETRIFIED_CRAFTING_MENU.get(), PetrifiedCraftingTableScreen::new);
-        // TODO: Redo this
-        // event.register(ModMenuTypes.UMBER_FURNACE_MENU.get(), UmberFurnaceScreen::new);
+        event.register(ModMenuTypes.UMBER_FURNACE_MENU.get(), UmberFurnaceScreen::new);
     }
 }
