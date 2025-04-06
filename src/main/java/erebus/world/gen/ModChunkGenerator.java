@@ -3,6 +3,7 @@ package erebus.world.gen;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import erebus.Erebus;
 import erebus.registries.ModBlocks;
 import erebus.world.gen.warp.ModNoiseInterpolator;
 import erebus.world.gen.warp.NoiseModifier;
@@ -10,6 +11,9 @@ import erebus.world.gen.warp.NoiseSlider;
 import erebus.world.gen.warp.TerrainWarper;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
@@ -33,6 +37,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 
 public class ModChunkGenerator extends NoiseBasedChunkGenerator {
+
+    public static final ResourceKey<MapCodec<? extends ChunkGenerator>> CHUNK_GENERATOR_KEY = ResourceKey.create(Registries.CHUNK_GENERATOR, Erebus.prefix("chunk_generator"));
 
     public static final MapCodec<ModChunkGenerator> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BiomeSource.CODEC.fieldOf("biome_source").forGetter(o -> o.biomeSource),
@@ -79,6 +85,10 @@ public class ModChunkGenerator extends NoiseBasedChunkGenerator {
                 DensityFunctions.zero(),
                 List.of()
         );
+    }
+
+    public static void bootstrap(BootstrapContext<MapCodec<? extends ChunkGenerator>> context) {
+        context.register(CHUNK_GENERATOR_KEY, CODEC);
     }
 
     @Override
@@ -188,7 +198,6 @@ public class ModChunkGenerator extends NoiseBasedChunkGenerator {
                     this.makeAndFillNoiseColumn(xDiv + 1, zDiv, min, max),
                     this.makeAndFillNoiseColumn(xDiv + 1, zDiv + 1, min, max)
             };
-            //Aquifers?
 
             for (int cell = max - 1; cell >= 0; cell--) {
                 double d10 = columns[0][cell];

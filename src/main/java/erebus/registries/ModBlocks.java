@@ -364,9 +364,9 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<DoublePlantBlock> TALL_FERN = registerDoublePlant("tall_fern", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
 
     // MARK: Other
-    public static final DeferredBlock<TransparentBlock> PORTAL = registerBlock(
+    public static final DeferredBlock<ErebusPortalBlock> PORTAL = registerBlock(
             "portal",
-            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_PORTAL))
+            () -> new ErebusPortalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_PORTAL))
     );
     public static final DeferredBlock<GaeanKeystoneBlock> GAEAN_KEYSTONE = registerBlock("gaean_keystone", GaeanKeystoneBlock::new);
     public static final DeferredBlock<Block> JADE_BLOCK = registerSimpleBlock("jade_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));

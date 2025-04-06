@@ -37,14 +37,14 @@ public class ErebusSurfaceRules {
             return CODEC;
         }
 
-        public SurfaceRules.Condition apply(final SurfaceRules.Context p_189841_) {
-            final int i = this.trueAtAndBelow().resolveY(p_189841_.context);
-            final int j = this.falseAtAndAbove().resolveY(p_189841_.context);
+        public SurfaceRules.Condition apply(final SurfaceRules.Context rules) {
+            final int i = this.trueAtAndBelow().resolveY(rules.context);
+            final int j = this.falseAtAndAbove().resolveY(rules.context);
             final double scale = this.noiseScale();
 
             class SimplexGradientCondition extends SurfaceRules.LazyYCondition {
                 SimplexGradientCondition() {
-                    super(p_189841_);
+                    super(rules);
                 }
 
                 protected boolean compute() {

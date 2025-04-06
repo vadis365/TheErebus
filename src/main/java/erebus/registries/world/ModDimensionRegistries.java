@@ -1,8 +1,11 @@
 package erebus.registries.world;
 
+import com.mojang.serialization.MapCodec;
 import erebus.Erebus;
 import erebus.registries.ModBlocks;
 import erebus.world.ErebusSurfaceRuleData;
+import erebus.world.gen.ModChunkGenerator;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -11,9 +14,13 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
-import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.level.levelgen.DensityFunctions;
+import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
+import net.minecraft.world.level.levelgen.NoiseRouter;
+import net.minecraft.world.level.levelgen.NoiseSettings;
 
 import java.util.List;
 import java.util.OptionalLong;
@@ -75,5 +82,12 @@ public class ModDimensionRegistries {
                 false,
                 false
         ));
+    }
+
+    public static void bootstrapStem(BootstrapContext<LevelStem> context) {
+        Holder<DimensionType> type = context.lookup(Registries.DIMENSION_TYPE).getOrThrow(DIMENSION_TYPE_KEY);
+        Holder<MapCodec<? extends ChunkGenerator>> generator = context.lookup(Registries.CHUNK_GENERATOR).getOrThrow(ModChunkGenerator.CHUNK_GENERATOR_KEY);
+
+        context.register(LEVEL_STEM_KEY, new LevelStem(type, (ChunkGenerator) generator));
     }
 }

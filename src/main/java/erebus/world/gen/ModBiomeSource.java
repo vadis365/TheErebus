@@ -26,7 +26,6 @@ import java.util.function.LongFunction;
 import java.util.stream.Stream;
 
 public class ModBiomeSource extends BiomeSource {
-
     public static final MapCodec<ModBiomeSource> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             RecordCodecBuilder.<Pair<TerrainPoint, Holder<Biome>>>create(pair -> pair.group(
                     TerrainPoint.CODEC.fieldOf("parameters").forGetter(Pair::getFirst),
