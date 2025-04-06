@@ -5,7 +5,6 @@ import erebus.inventory.UmberFurnaceMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.AbstractFurnaceScreen;
 import net.minecraft.client.gui.screens.recipebook.AbstractFurnaceRecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
@@ -21,14 +20,14 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class UmberFurnaceScreen extends AbstractContainerScreen<UmberFurnaceMenu> implements RecipeUpdateListener {
-
     public final AbstractFurnaceRecipeBookComponent recipeBookComponent = new SmeltingRecipeBookComponent();
     private boolean widthTooNarrow;
     private final UmberFurnaceMenu menu;
 
-    private static final ResourceLocation LIT_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "textures/gui/container/sprites/umberfurnace/lit_progress.png");
-    private static final ResourceLocation BURN_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "textures/gui/container/sprites/umberfurnace/burn_progress.png");
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "textures/gui/container/umber_furnace.png");
+    private static final ResourceLocation LIT_PROGRESS_SPRITE = Erebus.prefix("umberfurnace/lit_progress");
+    private static final ResourceLocation BURN_PROGRESS_SPRITE = Erebus.prefix("umberfurnace/burn_progress");
+    private static final ResourceLocation TANK_LEVEL_SPRITE = Erebus.prefix("umberfurnace/tank");
+    private static final ResourceLocation TEXTURE = Erebus.prefix("textures/gui/container/umber_furnace.png");
 
     public UmberFurnaceScreen(UmberFurnaceMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -79,7 +78,7 @@ public class UmberFurnaceScreen extends AbstractContainerScreen<UmberFurnaceMenu
         }
 
         int offset = Mth.ceil(menu.getBurnProgress() * 24.0F);
-        gui.blitSprite(BURN_PROGRESS_SPRITE, 24, 16, 0, 0, leftPos + 79, topPos + 34, offset, 16);
+        gui.blitSprite(BURN_PROGRESS_SPRITE, 22, 15, 0, 0, leftPos + 80, topPos + 35, offset, 15);
     }
 
     @Override
@@ -118,5 +117,11 @@ public class UmberFurnaceScreen extends AbstractContainerScreen<UmberFurnaceMenu
     @Override
     public RecipeBookComponent getRecipeBookComponent() {
         return recipeBookComponent;
+    }
+
+
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xFFFFFF, false);
+        guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 0xFFFFFF, false);
     }
 }

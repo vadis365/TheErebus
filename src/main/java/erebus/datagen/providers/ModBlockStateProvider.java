@@ -289,7 +289,7 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
                     if (state.getValue(AbstractFurnaceBlock.LIT)) {
                         return ConfiguredModel.builder()
                                 .rotationY(state.getValue(AbstractFurnaceBlock.FACING) == Direction.EAST ? 90 : state.getValue(AbstractFurnaceBlock.FACING) == Direction.SOUTH ? 180 : state.getValue(AbstractFurnaceBlock.FACING) == Direction.WEST ? 270 : 0)
-                                .modelFile(models().orientable(name(furnace), side, front_on, top))
+                                .modelFile(models().orientable("%s_lit".formatted(name(furnace)), side, front_on, top))
                                 .build();
                     } else {
                         return ConfiguredModel.builder()
