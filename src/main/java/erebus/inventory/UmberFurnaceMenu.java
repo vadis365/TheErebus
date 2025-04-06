@@ -1,6 +1,7 @@
 package erebus.inventory;
 
-import erebus.client.screen.slot.UmberFurnaceFuelSlot;
+import erebus.inventory.slot.FluidContainerSlot;
+import erebus.inventory.slot.UmberFurnaceFuelSlot;
 import erebus.registries.ModMenuTypes;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
@@ -18,15 +19,21 @@ import net.minecraft.world.level.Level;
 
 public class UmberFurnaceMenu extends RecipeBookMenu<SingleRecipeInput, AbstractCookingRecipe> {
 
-    public static final int INGREDIENT_SLOT = 0;
-    public static final int FUEL_SLOT = 1;
-    public static final int RESULT_SLOT = 2;
-    public static final int SLOT_COUNT = 3;
-    public static final int DATA_COUNT = 4;
-    private static final int INV_SLOT_START = 3;
-    private static final int INV_SLOT_END = 30;
-    private static final int HOTBAR_SLOT_START = 30;
-    private static final int HOTBAR_SLOT_END = 39;
+    public static final int BUCKET_SLOT = 0;
+    public static final int INGREDIENT_SLOT = 1;
+    public static final int FUEL_SLOT = 2;
+    public static final int RESULT_SLOT = 3;
+    public static final int SLOT_COUNT = 4;
+    public static final int DATA_COUNT = 5;
+    public static final int DATA_LIT_TIME = 0;
+    public static final int DATA_LIT_DURATION = 1;
+    public static final int DATA_COOKING_PROGRESS = 2;
+    public static final int DATA_COOKING_TOTAL_TIME = 3;
+    public static final int DATA_TANK_AMOUNT = 4;
+    private static final int INV_SLOT_START = 4;
+    private static final int INV_SLOT_END = 31;
+    private static final int HOTBAR_SLOT_START = 31;
+    private static final int HOTBAR_SLOT_END = 40;
     private final Container container;
     private final ContainerData data;
     protected final Level level;
@@ -46,9 +53,10 @@ public class UmberFurnaceMenu extends RecipeBookMenu<SingleRecipeInput, Abstract
         this.container = container;
         this.data = data;
         this.level = inv.player.level();
-        addSlot(new Slot(container, 0, 56, 17));
-        addSlot(new UmberFurnaceFuelSlot(this, container, 1, 56, 53));
-        addSlot(new FurnaceResultSlot(inv.player, container, 2, 116, 35));
+        addSlot(new Slot(container, INGREDIENT_SLOT, 56, 17));
+        addSlot(new UmberFurnaceFuelSlot(this, container, FUEL_SLOT, 56, 53));
+        addSlot(new FurnaceResultSlot(inv.player, container, RESULT_SLOT, 116, 35));
+        addSlot(new FluidContainerSlot(container, BUCKET_SLOT, 31, 35));
         addInventorySlots(inv);
         addHotbarSlots(inv);
         addDataSlots(data);
@@ -170,17 +178,17 @@ public class UmberFurnaceMenu extends RecipeBookMenu<SingleRecipeInput, Abstract
     }
 
     public boolean isLit() {
-        return data.get(0) > 0;
+        return data.get(DATA_LIT_TIME) > 0;
     }
 
     public float getLitProgress() {
-        return data.get(1) == 0 ? 200 : Mth.clamp((float) data.get(0) / data.get(1), 0.0F, 1.0F);
+        return data.get(DATA_LIT_DURATION) == 0 ? 200 : Mth.clamp((float) data.get(DATA_LIT_TIME) / data.get(DATA_LIT_DURATION), 0.0F, 1.0F);
     }
 
     public float getBurnProgress() {
-        int c = data.get(2);
-        int d = data.get(3);
-        return d != 0 && c != 0 ? Mth.clamp((float) c / d, 0.0F, 1.0F) : 0.0F;
+        int progress = data.get(DATA_COOKING_PROGRESS);
+        int totalTime = data.get(DATA_COOKING_TOTAL_TIME);
+        return totalTime != 0 && progress != 0 ? Mth.clamp((float) progress / totalTime, 0.0F, 1.0F) : 0.0F;
     }
 
     protected boolean canSmelt(ItemStack stack) {
@@ -189,5 +197,9 @@ public class UmberFurnaceMenu extends RecipeBookMenu<SingleRecipeInput, Abstract
 
     public boolean isFuel(ItemStack stack) {
         return stack.getBurnTime(recipeType) > 0;
+    }
+
+    public int getScaledFluidAmount() {
+        return data.get(DATA_TANK_AMOUNT);
     }
 }

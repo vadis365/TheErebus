@@ -45,19 +45,29 @@ public class PetrifiedCraftingMenu extends RecipeBookMenu<CraftingInput, Craftin
         player = inv.player;
         addSlot(new ResultSlot(player, craftSlots, resultSlots, 0, 124, 35));
 
+        addCraftingGridSlots(inv);
+        addInventorySlots(inv);
+        addHotbarSlots(inv);
+    }
+
+    private void addCraftingGridSlots(Inventory inv) {
         for(int c = 0; c < 3; ++c) {
             for(int d = 0; d < 3; ++d) {
                 addSlot(new Slot(craftSlots, d + c * 3, 30 + d * 18, 17 + c * 18));
             }
         }
+    }
 
-        for(int c = 0; c < 3; ++c) {
-            for(int d = 0; d < 9; ++d) {
+    private void addInventorySlots(Inventory inv) {
+        for (int c = 0; c < 3; c++) {
+            for (int d = 0; d < 9; d++) {
                 addSlot(new Slot(inv, d + c * 9 + 9, 8 + d * 18, 84 + c * 18));
             }
         }
+    }
 
-        for(int c = 0; c < 9; ++c) {
+    private void addHotbarSlots(Inventory inv) {
+        for (int c = 0; c < 9; c++) {
             addSlot(new Slot(inv, c, 8 + c * 18, 142));
         }
     }

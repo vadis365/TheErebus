@@ -79,6 +79,16 @@ public class UmberFurnaceScreen extends AbstractContainerScreen<UmberFurnaceMenu
 
         int offset = Mth.ceil(menu.getBurnProgress() * 24.0F);
         gui.blitSprite(BURN_PROGRESS_SPRITE, 22, 15, 0, 0, leftPos + 80, topPos + 35, offset, 15);
+
+        int tankSize = menu.getScaledFluidAmount();
+        gui.blitSprite(TANK_LEVEL_SPRITE, 18, 65, 0, 0, leftPos + 10, topPos + 75 - tankSize, 18, tankSize);
+
+        /*tankXMin = (width - getXSize()) / 2 + 11;
+        tankYMin = (height - getYSize()) / 2 + 11;
+        tankXMax = tankXMin + 16;
+        tankYMax = tankYMin + 65;
+
+        if()*/
     }
 
     @Override
@@ -122,6 +132,6 @@ public class UmberFurnaceScreen extends AbstractContainerScreen<UmberFurnaceMenu
 
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0xFFFFFF, false);
-        guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 0xFFFFFF, false);
+        guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY + 3, 0xFFFFFF, false);
     }
 }

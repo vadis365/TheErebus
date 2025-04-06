@@ -1,4 +1,4 @@
-package erebus.client.screen.slot;
+package erebus.inventory.slot;
 
 import erebus.inventory.UmberFurnaceMenu;
 import net.minecraft.world.Container;

@@ -279,7 +279,7 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(craftingTable.get(), models().cube(name(craftingTable), down, up, side, side, side, side).texture("particle", side));
     }
 
-    public void furnace(Supplier<? extends AbstractFurnaceBlock> furnace) {
+    public void furnace(Supplier<? extends Block> furnace) {
         ResourceLocation front = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_front".formatted(name(furnace)));
         ResourceLocation front_on = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_front_on".formatted(name(furnace)));
         ResourceLocation side = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_side".formatted(name(furnace)));
