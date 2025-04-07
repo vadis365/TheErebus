@@ -2,7 +2,7 @@
   "ambient_light": 0.0,
   "bed_works": true,
   "coordinate_scale": 1.0,
-  "effects": "erebus:renderer",
+  "effects": "minecraft:overworld",
   "has_ceiling": true,
   "has_raids": false,
   "has_skylight": false,

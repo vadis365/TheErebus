@@ -1,9 +1,6 @@
 package erebus.registries.world;
 
-import com.mojang.datafixers.util.Pair;
 import erebus.Erebus;
-import erebus.world.gen.TerrainPoint;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -14,8 +11,6 @@ import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-
-import java.util.List;
 
 public class ModBiomes {
     public static final ResourceKey<Biome> ELYSIAN_FIELDS = makeKey("elysian_fields");
@@ -178,22 +173,5 @@ public class ModBiomes {
                 .generationSettings(BiomeGenerationSettings.EMPTY)
                 .build()
         );
-    }
-
-    public static List<Pair<TerrainPoint, Holder<Biome>>> biomeParameters(HolderGetter<Biome> registry) {
-        return List.of(
-               pairBiome(registry, 20, -0.125F, 0.475F, ELYSIAN_FIELDS),
-               pairBiome(registry, 12, -0.125F, 0.475F, FUNGAL_FOREST),
-               pairBiome(registry, 15, -0.125F, 0.475F, PETRIFIED_FOREST),
-               pairBiome(registry, 20, -0.125F, 0.475F, SUBMERGED_SWAMP),
-               pairBiome(registry, 20, -0.125F, 0.475F, SUBTERRANEAN_SAVANNAH),
-               pairBiome(registry, 15, -0.125F, 0.475F, ULTERIOR_OUTBACK),
-               pairBiome(registry, 22, -0.125F, 0.475F, UNDERGROUND_JUNGLE),
-               pairBiome(registry, 16, -0.125F, 0.475F, VOLCANIC_DESERT)
-        );
-    }
-
-    private static Pair<TerrainPoint, Holder<Biome>> pairBiome(HolderGetter<Biome> registry, int weight, float depth, float scale, ResourceKey<Biome> biome) {
-        return Pair.of(new TerrainPoint((short) weight, depth, scale), registry.getOrThrow(biome));
     }
 }

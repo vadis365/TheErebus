@@ -9,7 +9,6 @@ import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.world.ModTreeDecorators;
 import erebus.registries.world.ModTrunkPlacers;
-import erebus.world.ErebusSurfaceRules;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -50,7 +49,6 @@ public class Erebus {
         ModTrunkPlacers.register(bus);
         ModTreeDecorators.register(bus);
         ModBlockEntities.register(bus);
-        ErebusSurfaceRules.SOURCES.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 
