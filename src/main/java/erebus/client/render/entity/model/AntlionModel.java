@@ -25,10 +25,22 @@ public class AntlionModel<T extends Antlion> extends HierarchicalModel<T> {
 	private final ModelPart RightFrontLeg;
 	private final ModelPart RightMidLeg;
 	private final ModelPart RightBackLeg;
+	private final ModelPart MandR1;
+	private final ModelPart MandR2;
+	private final ModelPart MandR3;
+	private final ModelPart MandL1;
+	private final ModelPart MandL2;
+	private final ModelPart MandL3;
 
 	public AntlionModel(ModelPart root) {
 		this.root = root;
 		this.Head = root.getChild("Head");
+		this.MandR1 = Head.getChild("MandR1");
+		this.MandR2 = Head.getChild("MandR2");
+		this.MandR3 = Head.getChild("MandR3");
+		this.MandL1 = Head.getChild("MandL1");
+		this.MandL2 = Head.getChild("MandL2");
+		this.MandL3 = Head.getChild("MandL3");
 		this.Neck1 = root.getChild("Neck1");
 		this.Neck2 = root.getChild("Neck2");
 		this.Thorax = root.getChild("Thorax");
@@ -159,26 +171,34 @@ public class AntlionModel<T extends Antlion> extends HierarchicalModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float sin = (float) (Math.sin(limbSwing * 0.75F) * 0.5F * limbSwingAmount);
+		float sinJaw = (float) (Math.sin(limbSwing * 0.75F) * 0.2F * limbSwingAmount);
 		float heady = netHeadYaw / (180F / (float) Math.PI);
 		float headx = headPitch / (180F / (float) Math.PI);
 		Head.yRot = heady;
 		Neck1.yRot = heady;
 		Head.xRot = headx;
 		Neck1.xRot = 0.6981F + headx;
-		
-		LeftFrontLeg.yRot = 0.6109F + sin;
-		LeftMidLeg.yRot = 0F - sin;
-		LeftBackLeg.yRot = -0.5236F + sin;
+
+		LeftFrontLeg.yRot = 0.6109F - sin;
+		LeftMidLeg.yRot = 0F + sin;
+		LeftBackLeg.yRot = -0.5236F - sin;
 		RightFrontLeg.yRot = 2.5307F -sin;
 		RightMidLeg.yRot = 3.1416F + sin;
 		RightBackLeg.yRot = -2.618F - sin;
-		
-		LeftFrontLeg.zRot = 0F + sin;
-		LeftMidLeg.zRot = 0F - sin;
-		LeftBackLeg.zRot = 0F + sin;
-		RightFrontLeg.zRot = 0F + sin;
-		RightMidLeg.zRot = 0F - sin;
-		RightBackLeg.zRot = 0F + sin;;
+
+		LeftFrontLeg.zRot = 0F + sin * 0.75F;
+		LeftMidLeg.zRot = 0F - sin * 0.75F;
+		LeftBackLeg.zRot = 0F + sin * 0.75F;
+		RightFrontLeg.zRot = 0F + sin * 0.75F;
+		RightMidLeg.zRot = 0F - sin * 0.75F;
+		RightBackLeg.zRot = 0F + sin * 0.75F;
+
+		MandR1.yRot = -sinJaw + 0.3491F;
+		MandR2.yRot = -sinJaw + 0.3491F;
+		MandR3.yRot = -sinJaw - 0.3491F;
+		MandL1.yRot = sinJaw - 0.3491F;
+		MandL2.yRot = sinJaw - 0.3491F;
+		MandL3.yRot = sinJaw + 0.3491F;
 	}
 
 	@Override

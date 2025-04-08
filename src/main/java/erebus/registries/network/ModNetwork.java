@@ -1,13 +1,15 @@
 package erebus.registries.network;
 
 import erebus.Erebus;
+import erebus.network.client.AntlionParticlePacket;
 import erebus.network.client.ParticlePacket;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 public class ModNetwork {
 	 public static void register(final RegisterPayloadHandlersEvent event) {
 		 event.registrar(Erebus.MODID)
-		 .playToClient(ParticlePacket.TYPE, ParticlePacket.STREAM_CODEC, ParticlePacket::handle);
+		 .playToClient(ParticlePacket.TYPE, ParticlePacket.STREAM_CODEC, ParticlePacket::handle)
+		 .playToClient(AntlionParticlePacket.TYPE, AntlionParticlePacket.STREAM_CODEC, AntlionParticlePacket::handle);
 		// .playToServer(ColossalCratePage.class, ColossalCratePage.class, 1, Side.SERVER)
 		// .playToServer(PacketBeetleDig.class, PacketBeetleDig.class, 2, Side.SERVER)
 		// .playToServer(PacketBeetleRamAttack.class, PacketBeetleRamAttack.class, 3, Side.SERVER)

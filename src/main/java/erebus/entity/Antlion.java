@@ -1,11 +1,8 @@
 package erebus.entity;
 
-import java.util.List;
-
 import javax.annotation.Nullable;
 
-import erebus.network.client.ClientParticlePackets.ParticleType;
-import erebus.network.client.ParticlePacket;
+import erebus.network.client.AntlionParticlePacket;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -19,7 +16,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -37,13 +33,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class Antlion extends Monster {
 	public static final EntityDataAccessor<Boolean> IS_ACTIVE = SynchedEntityData.defineId(Antlion.class, EntityDataSerializers.BOOLEAN);
+
 	public Antlion(EntityType<? extends Antlion> type, Level level) {
 		super(type, level);
 		xpReward = 17;
@@ -52,7 +50,7 @@ public class Antlion extends Monster {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, false));
+		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.6D, false));
 		goalSelector.addGoal(2, new AIWander(this, 0.5D));
 		goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this));
@@ -88,7 +86,7 @@ public class Antlion extends Monster {
 
 	@Override
 	public double getEyeY() {
-		return this.position().y + getBbHeight() * 0.3F;
+		return isActive() ? this.position().y + getBbHeight() * 0.3F : this.position().y + 1F;
     }
 
 	@Override
@@ -129,20 +127,53 @@ public class Antlion extends Monster {
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
-		if (spawnType == MobSpawnType.COMMAND || spawnType== MobSpawnType.SPAWN_EGG || spawnType== MobSpawnType.SPAWNER || spawnType == MobSpawnType.DISPENSER)
+		if (spawnType == MobSpawnType.COMMAND || spawnType== MobSpawnType.SPAWN_EGG || spawnType == MobSpawnType.SPAWNER || spawnType == MobSpawnType.DISPENSER)
 			//setActive(!canHideIn(level.getBlockState(blockPosition().below())));
 			setActive(true);
 		return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
 	}
-	
 
 	@Override
 	public boolean checkSpawnObstruction(LevelReader world) {
 		return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
 	}
 
-	/*public boolean isOnSand() {
+	public void tick() {
+		super.tick();
 		if (!level().isClientSide()) {
+			if (getTarget() != null) {
+				if (!isActive()) {
+					setActive(true);
+					if (isHiding()) {
+				      Vec3 vec3 = getDeltaMovement();
+				      setDeltaMovement(vec3.x, (double)getJumpPower(), vec3.z);
+				      hasImpulse = true;
+				      PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(), getY() + 1D, getZ(), 30, new AntlionParticlePacket(Block.getId(level().getBlockState(blockPosition())), getX(), getY() + 1D, getZ(), 1.25D, 0D));
+					}
+				}
+			}
+
+			if (isActive()) {
+				if (getTarget() == null && !isInWater() && !isHiding() && canHideIn(level(), blockPosition().below())) {
+					setActive(false);
+				    setPos(getX(), getY() -1D, getZ());
+				    hasImpulse = false;
+				    level().levelEvent(null, 2001, new BlockPos(getOnPos().getX(), getOnPos().getY(), getOnPos().getZ()), Block.getId(level().getBlockState(getOnPos())));
+				}
+			}
+		}
+	}
+
+	private boolean isHiding() {
+		return getInBlockState().is(Tags.Blocks.SANDS);
+	}
+
+	public void setActive(boolean active) {
+		entityData.set(IS_ACTIVE, active);
+	}
+
+	protected boolean canHideIn(Level level, BlockPos blockPos) {
+		if (!level.isClientSide()) {
 			int minX = (int) Math.floor(getBoundingBox().minX);
 			int minY = (int) Math.floor(getBoundingBox().minY);
 			int minZ = (int) Math.floor(getBoundingBox().minZ);
@@ -153,80 +184,14 @@ public class Antlion extends Monster {
 			for (int k1 = minX; k1 <= maxX; ++k1)
 				for (int l1 = minY; l1 <= maxY; ++l1)
 					for (int i2 = minZ; i2 <= maxZ; ++i2) {
-						Block blockBelow = level().getBlockState(new BlockPos(k1, l1, i2).below()).getBlock();
-						if (blockBelow != Blocks.SAND)
+						BlockState blockStateBelow = level().getBlockState(new BlockPos(k1, l1, i2).below());
+						if (!blockStateBelow.is(Tags.Blocks.SANDS))
 							return false;
 					}
 		}
 		return true;
 	}
-*/
-	/*
-	 * public boolean isOnSpawner() { return isNotColliding() &&
-	 * getEntityWorld().getBlockState(getPosition().down()).getBlock() ==
-	 * ModBlocks.antlionSpawner; }
-	 * 
-	 * public boolean isOnGneiss() { return isNotColliding() &&
-	 * getEntityWorld().getBlockState(getPosition().down()).getBlock() ==
-	 * ModBlocks.gneiss; }
-	 */
-	public void tick() {
-		super.tick();
-		if (!level().isClientSide()) {
-			if (getTarget() != null && getIsTargetNearby(5, 3, 5, 5)) {
-				if (!isActive()) {
-					setActive(true);
-				      Vec3 vec3 = getDeltaMovement();
-				      setDeltaMovement(vec3.x, (double)getJumpPower(), vec3.z);
-				      hasImpulse = true;
-				}
-			}
 
-			if (isActive()) {
-				if (getTarget() == null && !isInWater() && canHideIn(level().getBlockState(blockPosition().below()))) {
-					setActive(false);
-				    setPos(getX(), getY() -1D, getZ());
-				    hasImpulse = false;
-				}
-			}
-		}
-	}
-
-	protected boolean getIsTargetNearby(double distanceX, double distanceY, double distanceZ, double radius) {
-		List<LivingEntity> entities = level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(distanceX, distanceY, distanceZ));
-		for (LivingEntity entityNeighbor : entities)
-			if (!entities.isEmpty() && distanceTo(entityNeighbor) <= radius && entityNeighbor == getTarget())
-				return true;
-		return false;
-	}
-
-	public void setActive(boolean active) {
-		entityData.set(IS_ACTIVE, active);
-		if(level() != null && !level().isClientSide()) {
-			if (active) 
-				PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(), getY() + 1D, getZ(), 30, new ParticlePacket((byte) ParticleType.ANTLION_DIG.ordinal(), getX(), getY() + 1D, getZ()));
-		}
-	}
-	
-	protected static boolean canHideIn(BlockState state) {
-		return state == Blocks.SAND.defaultBlockState();
-	}
-/*	@Override
-	public void tick() {
-		super.tick();
-		if (!level().isClientSide() && getTarget() == null && isOnSand() && getInBlockState() != Blocks.SAND.defaultBlockState()) {
-			setDeltaMovement(0D, - 0.1D, 0D);
-		      hasImpulse = false;
-		}
-
-		if (!level().isClientSide() && getTarget() != null && getInBlockState() == Blocks.SAND.defaultBlockState()) {
-			PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(), getY() + 1D, getZ(), 30, new ParticlePacket((byte) ParticleType.ANTLION_DIG.ordinal(), getX(), getY() + 1D, getZ()));
-			 Vec3 vec3 = getDeltaMovement();
-		      setDeltaMovement(vec3.x, (double)getJumpPower(), vec3.z);
-		      hasImpulse = true;
-		}
-	}
-*/
 	@Override
 	public boolean hurt(DamageSource source, float damage) {
 		if (source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.DROWN)) {
@@ -234,8 +199,6 @@ public class Antlion extends Monster {
 		}
 		return super.hurt(source, damage);
 	}
-
-// AI
 
 	public class AIWander extends WaterAvoidingRandomStrollGoal {
 
@@ -248,12 +211,12 @@ public class Antlion extends Monster {
 
 		@Override
 		public boolean canUse() {
-			return getInBlockState() != Blocks.SAND.defaultBlockState() && super.canUse();
+			return !antlion.getInBlockState().is(Tags.Blocks.SANDS) && super.canUse();
 		}
 
 		@Override
 		public boolean canContinueToUse() {
-			return antlion.getInBlockState() != Blocks.SAND.defaultBlockState() && !antlion.getNavigation().isDone();
+			return !antlion.getInBlockState().is(Tags.Blocks.SANDS) && !antlion.getNavigation().isDone();
 		}
 
 	}

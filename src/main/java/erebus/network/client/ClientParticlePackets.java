@@ -1,9 +1,12 @@
 package erebus.network.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class ClientParticlePackets {
 	public static enum ParticleType {
@@ -13,8 +16,6 @@ public class ClientParticlePackets {
 		TARANTULA_BLAM,
 		BOSS_DEATH,
 		ANTLION_BLAM,
-		ANTLION_RUMBLE,
-		ANTLION_DIG,
 		HAMMER_BLAM,
 		GAS_VENT_SWAMP,
 		GAS_VENT_VOLCANIC,
@@ -46,7 +47,7 @@ public class ClientParticlePackets {
 			for (int a = 0; a < 360; a += 4) {
 				double ang = a * Math.PI / 180D;
 				for (int count = 0; count <= 20; ++count)
-					level.addParticle(ParticleTypes.DUST_PLUME, false, xPos + -Math.sin((float) ang) * 3.5D, yPos + 0.5D, zPos + Math.cos((float) ang) * 3.5D, -Math.sin((float) ang) * 0.8, 0.0D, Math.cos((float) ang) * 0.8);
+					level.addParticle(new BlockParticleOption (ParticleTypes.BLOCK, Blocks.SAND.defaultBlockState()), false, xPos + -Math.sin((float) ang) * 3.5D, yPos + 0.5D, zPos + Math.cos((float) ang) * 3.5D, -Math.sin((float) ang) * 0.8, 0.0D, Math.cos((float) ang) * 0.8);
 				level.addParticle(ParticleTypes.CLOUD, false, xPos + -Math.sin((float) ang) * 4.5D, yPos, zPos + Math.cos((float) ang) * 4.5D, -Math.sin((float) ang) * 1D, 0.1D, Math.cos((float) ang) * 1D);
 			}
 			break;
@@ -56,18 +57,13 @@ public class ClientParticlePackets {
 			float f2 = (level.random.nextFloat() - 0.5F) * 8.0F;
 			level.addParticle(ParticleTypes.EXPLOSION, false, xPos + f, yPos + 2.0D + f1, zPos + f2, 0.0D, 0.0D, 0.0D);
 			break;
-		case ANTLION_RUMBLE:
+	/*	case ANTLION_RUMBLE:
 			for (int a = 0; a < 360; a += 4) {
 				double ang = a * Math.PI / 180D;
-				level.addParticle(ParticleTypes.DUST_PLUME, false, xPos + -Math.sin((float) ang) * 3.5D, yPos + 0.125D, zPos + Math.cos((float) ang) * 3.5D, -Math.sin((float) ang) * 0.8, 0.3D, Math.cos((float) ang) * 0.8);
+				level.addParticle(new BlockParticleOption (ParticleTypes.BLOCK, Blocks.SAND.defaultBlockState()), false, xPos + -Math.sin((float) ang) * 3.5D, yPos + 0.125D, zPos + Math.cos((float) ang) * 3.5D, -Math.sin((float) ang) * 0.8, 0.3D, Math.cos((float) ang) * 0.8);
 			}
 			break;
-		case ANTLION_DIG:
-			for (int a = 0; a < 360; a += 4) {
-				double ang = a * Math.PI / 180D;
-				level.addParticle(ParticleTypes.DUST_PLUME, false, xPos + -Math.sin((float) ang) * 1.5D, yPos, zPos + Math.cos((float) ang) * 1.5D, -Math.sin((float) ang) * 0.8, 0.3D, Math.cos((float) ang) * 0.8);
-			}
-			break;
+	*/
 		case HAMMER_BLAM:
 			for (int a = 0; a < 360; a += 4) {
 				double ang = a * Math.PI / 180D;
@@ -116,6 +112,15 @@ public class ClientParticlePackets {
 			break;
 		default:
         }
+	}
+
+	public static void spawnAntlionParticles(int blockType, double xPos, double yPos, double zPos, double offSetRadius, double offsetHeight, double velX, double velY, double velZ) {
+		Level level = Minecraft.getInstance().level;
+		for (int a = 0; a < 360; a += 4) {
+			double ang = a * Math.PI / 180D;
+			level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Block.stateById(blockType)), false, xPos + -Math.sin((float) ang) * offSetRadius, yPos + offsetHeight, zPos + Math.cos((float) ang) * offSetRadius, -Math.sin((float) ang) * 0.8, 0.3D, Math.cos((float) ang) * 0.8);
+		}
+		
 	}
 
 }
