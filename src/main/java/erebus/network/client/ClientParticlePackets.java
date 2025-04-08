@@ -114,11 +114,14 @@ public class ClientParticlePackets {
         }
 	}
 
-	public static void spawnAntlionParticles(int blockType, double xPos, double yPos, double zPos, double offSetRadius, double offsetHeight, double velX, double velY, double velZ) {
+	public static void spawnAntlionParticles(int blockType, double xPos, double yPos, double zPos, double offSetRadius, boolean reverse, double velX, double velY, double velZ) {
 		Level level = Minecraft.getInstance().level;
 		for (int a = 0; a < 360; a += 4) {
 			double ang = a * Math.PI / 180D;
-			level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Block.stateById(blockType)), false, xPos + -Math.sin((float) ang) * offSetRadius, yPos + offsetHeight, zPos + Math.cos((float) ang) * offSetRadius, -Math.sin((float) ang) * 0.8, 0.3D, Math.cos((float) ang) * 0.8);
+			if(reverse)
+				level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Block.stateById(blockType)), false, xPos + -Math.sin((float) ang) * offSetRadius, yPos, zPos + Math.cos((float) ang) * offSetRadius, -Math.sin((float) ang) * -1D, 1D, Math.cos((float) ang) * -1D);
+			else
+				level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Block.stateById(blockType)), false, xPos + -Math.sin((float) ang) * offSetRadius, yPos, zPos + Math.cos((float) ang) * offSetRadius, -Math.sin((float) ang) * 0.8D, 0.3D, Math.cos((float) ang) * 0.8D);
 		}
 		
 	}

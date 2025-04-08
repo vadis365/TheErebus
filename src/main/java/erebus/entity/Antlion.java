@@ -148,7 +148,7 @@ public class Antlion extends Monster {
 				      Vec3 vec3 = getDeltaMovement();
 				      setDeltaMovement(vec3.x, (double)getJumpPower(), vec3.z);
 				      hasImpulse = true;
-				      PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(), getY() + 1D, getZ(), 30, new AntlionParticlePacket(Block.getId(level().getBlockState(blockPosition())), getX(), getY() + 1D, getZ(), 1.25D, 0D));
+				      PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(), getY() + 1D, getZ(), 30, new AntlionParticlePacket(Block.getId(level().getBlockState(blockPosition())), getX(), getY() + 1D, getZ(), 0.75D, false));
 					}
 				}
 			}
@@ -158,7 +158,7 @@ public class Antlion extends Monster {
 					setActive(false);
 				    setPos(getX(), getY() -1D, getZ());
 				    hasImpulse = false;
-				    level().levelEvent(null, 2001, new BlockPos(getOnPos().getX(), getOnPos().getY(), getOnPos().getZ()), Block.getId(level().getBlockState(getOnPos())));
+				    PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(), getY(), getZ(), 30, new AntlionParticlePacket(Block.getId(level().getBlockState(getOnPos())), getX(), getY() + 1D, getZ(), 1.25D, true));
 				}
 			}
 		}
