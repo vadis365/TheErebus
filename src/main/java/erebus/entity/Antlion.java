@@ -56,12 +56,9 @@ public class Antlion extends Monster {
 		targetSelector.addGoal(0, new HurtByTargetGoal(this));
 		targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, false));
 		targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Villager.class, false));
-		// targetTasks.addTask(2, new EntityAINearestAttackableTarget(this,
-		// EntityFireAnt.class, false));
-		// targetTasks.addTask(3, new EntityAINearestAttackableTarget(this,
-		// EntityFireAntSoldier.class, false));
-		// targetTasks.addTask(4, new EntityAINearestAttackableTarget(this,
-		// EntityBlackAnt.class, true));
+		// targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityFireAnt.class, false));
+		// targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityFireAntSoldier.class, false));
+		// targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityBlackAnt.class, true));
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -73,7 +70,7 @@ public class Antlion extends Monster {
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
 				.add(Attributes.ARMOR, 8D);
 	}
-	
+
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
@@ -109,6 +106,7 @@ public class Antlion extends Monster {
 		this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
 	}
 
+	//TODO Loot tables
 	/*
 	 * @Override protected Item getDropItem() { return
 	 * Item.getItemFromBlock(Blocks.SAND); }
@@ -119,16 +117,16 @@ public class Antlion extends Monster {
 	 * ItemStack(ModItems.MATERIALS, 1,
 	 * EnumErebusMaterialsType.PLATE_EXO.ordinal()), 0.0F); } }
 	 */
+
 	public static boolean canSpawnHere(EntityType<Antlion> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
 		float light = level.getLightLevelDependentMagicValue(pos);
 		return light >= 0F;
 	}
-	
+
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		if (spawnType == MobSpawnType.COMMAND || spawnType== MobSpawnType.SPAWN_EGG || spawnType == MobSpawnType.SPAWNER || spawnType == MobSpawnType.DISPENSER)
-			//setActive(!canHideIn(level.getBlockState(blockPosition().below())));
 			setActive(true);
 		return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
 	}
