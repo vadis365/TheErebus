@@ -48,7 +48,10 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<Moth>> MOTH = registerWithEgg("moth", EntityType.Builder.of(Moth::new, MobCategory.MONSTER).sized(1.8F, 0.5F), 0x83DB99, 0xACF4E0);
     public static final DeferredHolder<EntityType<?>, EntityType<VelvetWorm>> VELVET_WORM = registerWithEgg("velvet_worm", EntityType.Builder.of(VelvetWorm::new, MobCategory.MONSTER).sized(2F, 0.7F), 0x88444B, 0xFFDAC0);
     public static final DeferredHolder<EntityType<?>, EntityType<Antlion>> ANTLION = registerWithEgg("antlion", EntityType.Builder.of(Antlion::new, MobCategory.MONSTER).sized(1.9F, 0.9F).fireImmune(), 0x958A54, 0xBB4602);
-
+    public static final DeferredHolder<EntityType<?>, EntityType<BotFly>> BOT_FLY = registerWithEgg("bot_fly", EntityType.Builder.of(BotFly::new, MobCategory.MONSTER).sized(0.9F, 0.75F), 0xEFE2B9, 0x858B95);
+    public static final DeferredHolder<EntityType<?>, EntityType<Fly>> FLY = registerWithEgg("fly", EntityType.Builder.of(Fly::new, MobCategory.MONSTER).sized(0.5F, 0.45F), 0x381C22, 0x990000);
+    public static final DeferredHolder<EntityType<?>, EntityType<Dragonfly>> DRAGON_FLY = registerWithEgg("dragon_fly", EntityType.Builder.of(Dragonfly::new, MobCategory.MONSTER).sized(2.5F, 1.0F).fireImmune(), 0x37A87C, 0xE9E9E9);
+    
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownBlockAsItem>> THROWN_BLOCK_AS_ITEM = registerNonMobEntity("thrown_block_as_item", EntityType.Builder.<ThrownBlockAsItem>of(ThrownBlockAsItem::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
     public static final DeferredHolder<EntityType<?>, EntityType<GooBall>> GOO_BALL = registerNonMobEntity("goo_ball", EntityType.Builder.<GooBall>of(GooBall::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
 
@@ -65,6 +68,9 @@ public class ModEntities {
 		event.register(MOTH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Moth::canSpawnHere, null);
 		event.register(VELVET_WORM.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, VelvetWorm::canSpawnHere, null);
 		event.register(ANTLION.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Antlion::canSpawnHere, null);
+		event.register(BOT_FLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BotFly::canSpawnHere, null);
+		event.register(FLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Fly::canSpawnHere, null);
+		event.register(DRAGON_FLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Dragonfly::canSpawnHere, null);
 	}
 	
 	public static void initializeAttributes(EntityAttributeCreationEvent event) {
@@ -77,6 +83,9 @@ public class ModEntities {
 		event.put(MOTH.get(), Moth.createAttributes().build());
 		event.put(VELVET_WORM.get(), VelvetWorm.createAttributes().build());
 		event.put(ANTLION.get(), Antlion.createAttributes().build());
+		event.put(BOT_FLY.get(), BotFly.createAttributes().build());
+		event.put(FLY.get(), Fly.createAttributes().build());
+		event.put(DRAGON_FLY.get(), Dragonfly.createAttributes().build());
 	}
 
 	public static DeferredRegister<EntityType<?>> getEntityTypes() {

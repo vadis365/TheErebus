@@ -37,6 +37,9 @@ public class ModEntityRendering {
 	public static ModelLayerLocation MOTH = new ModelLayerLocation(Erebus.prefix("moth"), "main");
 	public static ModelLayerLocation VELVET_WORM = new ModelLayerLocation(Erebus.prefix("velvet_worm"), "main");
 	public static ModelLayerLocation ANTLION = new ModelLayerLocation(Erebus.prefix("antlion"), "main");
+	public static ModelLayerLocation BOT_FLY = new ModelLayerLocation(Erebus.prefix("bot_fly"), "main");
+	public static ModelLayerLocation FLY = new ModelLayerLocation(Erebus.prefix("fly"), "main");
+	public static ModelLayerLocation DRAGON_FLY = new ModelLayerLocation(Erebus.prefix("dragon_fly"), "main");
 
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
     	//  event.registerLayerDefinition(GRASHOPPER, ModelGrasshopper::createBodyLayer);
@@ -50,6 +53,9 @@ public class ModEntityRendering {
     	event.registerLayerDefinition(MOTH, MothModel::createBodyLayer);
     	event.registerLayerDefinition(VELVET_WORM, VelvetWormModel::createBodyLayer);
     	event.registerLayerDefinition(ANTLION, AntlionModel::createBodyLayer);
+    	event.registerLayerDefinition(BOT_FLY, BotFlyModel::createBodyLayer);
+    	event.registerLayerDefinition(FLY, FlyModel::createBodyLayer);
+    	event.registerLayerDefinition(DRAGON_FLY, DragonflyModel::createBodyLayer);
     }
 
     public static void registerEntityRender(EntityRenderersEvent.RegisterRenderers event) {
@@ -63,6 +69,9 @@ public class ModEntityRendering {
     	event.registerEntityRenderer(ModEntities.MOTH.get(), MothRenderer::new);
     	event.registerEntityRenderer(ModEntities.VELVET_WORM.get(), VelvetWormRenderer::new);
     	event.registerEntityRenderer(ModEntities.ANTLION.get(), AntlionRenderer::new);
+    	event.registerEntityRenderer(ModEntities.BOT_FLY.get(), BotFlyRenderer::new);
+    	event.registerEntityRenderer(ModEntities.FLY.get(), FlyRenderer::new);
+    	event.registerEntityRenderer(ModEntities.DRAGON_FLY.get(), DragonflyRenderer::new);
     	event.registerEntityRenderer(ModEntities.THROWN_BLOCK_AS_ITEM.get(), context -> new ThrownItemRenderer<ThrownBlockAsItem>(context, 3.0F, true));
     	event.registerEntityRenderer(ModEntities.GOO_BALL.get(), context -> new ThrownItemRenderer<GooBall>(context, 3.0F, true));
     }
