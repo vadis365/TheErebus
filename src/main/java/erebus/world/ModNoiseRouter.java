@@ -8,20 +8,25 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise;
 public class ModNoiseRouter {
 
     protected static NoiseRouter erebus(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noiseParams) {
-        return noNewCaves(densityFunctions, noiseParams, slideNetherLike(densityFunctions, -64, 384));
+        return createErebusRouter(densityFunctions, noiseParams, slideNetherLike(densityFunctions, -64, 384));
     }
 
-    private static NoiseRouter noNewCaves(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noiseParameters, DensityFunction slide) {
+    private static NoiseRouter createErebusRouter(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noiseParameters, DensityFunction slide) {
         DensityFunction shiftX = getFunction(densityFunctions, NoiseRouterData.SHIFT_X);
         DensityFunction shiftZ = getFunction(densityFunctions, NoiseRouterData.SHIFT_Z);
+
+        DensityFunction aquafierBarrier = DensityFunctions.noise(noiseParameters.getOrThrow(Noises.AQUIFER_BARRIER), 0.5);
+        DensityFunction aquafierFlooding = DensityFunctions.noise(noiseParameters.getOrThrow(Noises.AQUIFER_FLUID_LEVEL_FLOODEDNESS), 0.67);
+        DensityFunction aquafierSpread = DensityFunctions.noise(noiseParameters.getOrThrow(Noises.AQUIFER_FLUID_LEVEL_SPREAD), 0.7142857142857143);
+        DensityFunction lavaPool = DensityFunctions.noise(noiseParameters.getOrThrow(Noises.AQUIFER_LAVA));
         DensityFunction temperature = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25F, noiseParameters.getOrThrow(Noises.TEMPERATURE));
         DensityFunction vegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25F, noiseParameters.getOrThrow(Noises.VEGETATION));
-        DensityFunction processedSlide = postProcess(slide);
+        DensityFunction slideErebus = postProcess(slide);
         return new NoiseRouter(
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
+                aquafierBarrier,
+                aquafierFlooding,
+                aquafierSpread,
+                lavaPool,
                 temperature,
                 vegetation,
                 DensityFunctions.zero(),
@@ -29,7 +34,7 @@ public class ModNoiseRouter {
                 DensityFunctions.zero(),
                 DensityFunctions.zero(),
                 DensityFunctions.zero(),
-                processedSlide,
+                slideErebus,
                 DensityFunctions.zero(),
                 DensityFunctions.zero(),
                 DensityFunctions.zero()

@@ -1,5 +1,5 @@
 {
-  "aquifers_enabled": false,
+  "aquifers_enabled": true,
   "default_block": {
     "Name": "erebus:umberstone"
   },
@@ -18,7 +18,12 @@
     "size_vertical": 2
   },
   "noise_router": {
-    "barrier": 0.0,
+    "barrier": {
+      "type": "minecraft:noise",
+      "noise": "minecraft:aquifer_barrier",
+      "xz_scale": 1.0,
+      "y_scale": 0.5
+    },
     "continents": 0.0,
     "depth": 0.0,
     "erosion": 0.0,
@@ -72,10 +77,25 @@
         }
       }
     },
-    "fluid_level_floodedness": 0.0,
-    "fluid_level_spread": 0.0,
+    "fluid_level_floodedness": {
+      "type": "minecraft:noise",
+      "noise": "minecraft:aquifer_fluid_level_floodedness",
+      "xz_scale": 1.0,
+      "y_scale": 0.67
+    },
+    "fluid_level_spread": {
+      "type": "minecraft:noise",
+      "noise": "minecraft:aquifer_fluid_level_spread",
+      "xz_scale": 1.0,
+      "y_scale": 0.7142857142857143
+    },
     "initial_density_without_jaggedness": 0.0,
-    "lava": 0.0,
+    "lava": {
+      "type": "minecraft:noise",
+      "noise": "minecraft:aquifer_lava",
+      "xz_scale": 1.0,
+      "y_scale": 1.0
+    },
     "ridges": 0.0,
     "temperature": {
       "type": "minecraft:shifted_noise",
@@ -157,6 +177,28 @@
       {
         "type": "minecraft:condition",
         "if_true": {
+          "type": "minecraft:not",
+          "invert": {
+            "type": "minecraft:vertical_gradient",
+            "false_at_and_above": {
+              "below_top": 0
+            },
+            "random_name": "minecraft:bedrock_roof",
+            "true_at_and_below": {
+              "below_top": 5
+            }
+          }
+        },
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": {
+            "Name": "minecraft:bedrock"
+          }
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
           "type": "minecraft:vertical_gradient",
           "false_at_and_above": {
             "above_bottom": 5
@@ -171,6 +213,55 @@
           "result_state": {
             "Name": "minecraft:bedrock"
           }
+        }
+      },
+      {
+        "type": "minecraft:block",
+        "result_state": {
+          "Name": "erebus:umberstone"
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "erebus:elysian_fields"
+          ]
+        },
+        "then_run": {
+          "type": "minecraft:sequence",
+          "sequence": [
+            {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:water",
+                    "add_stone_depth": false,
+                    "offset": 0,
+                    "surface_depth_multiplier": 0
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "Name": "minecraft:grass_block",
+                      "Properties": {
+                        "snowy": "false"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "minecraft:dirt"
+                  }
+                }
+              ]
+            }
+          ]
         }
       },
       {
@@ -273,17 +364,26 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "erebus:umberstone"
+                                    "Name": "minecraft:grass_block",
+                                    "Properties": {
+                                      "snowy": "false"
+                                    }
                                   }
                                 }
                               },
                               {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "erebus:umberstone"
+                                  "Name": "minecraft:dirt"
                                 }
                               }
                             ]
+                          },
+                          {
+                            "type": "minecraft:block",
+                            "result_state": {
+                              "Name": "erebus:mud"
+                            }
                           }
                         ]
                       }
@@ -369,17 +469,26 @@
                                 "then_run": {
                                   "type": "minecraft:block",
                                   "result_state": {
-                                    "Name": "erebus:umberstone"
+                                    "Name": "minecraft:grass_block",
+                                    "Properties": {
+                                      "snowy": "false"
+                                    }
                                   }
                                 }
                               },
                               {
                                 "type": "minecraft:block",
                                 "result_state": {
-                                  "Name": "erebus:umberstone"
+                                  "Name": "minecraft:dirt"
                                 }
                               }
                             ]
+                          },
+                          {
+                            "type": "minecraft:block",
+                            "result_state": {
+                              "Name": "erebus:mud"
+                            }
                           }
                         ]
                       }

@@ -28,7 +28,7 @@ public class ModNoiseGenerator {
                 (new OverworldBiomeBuilder()).spawnTarget(),
                 32,
                 false,
-                false,
+                true,
                 false,
                 true
         );
