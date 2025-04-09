@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
 import java.util.function.Supplier;
 
@@ -29,8 +30,8 @@ public class ModSurfaceRules {
     private static final RuleSource DEEPSLATE = makeStateRule(Blocks.DEEPSLATE);
     private static final RuleSource GRASS = makeStateRule(Blocks.GRASS_BLOCK);
     private static final RuleSource DIRT = makeStateRule(Blocks.DIRT);
+    private static final RuleSource WATER = makeStateRule(Blocks.WATER);
 
-    private static final ConditionSource groundLevel = yBlockCheck(VerticalAnchor.absolute(97), 2);
     private static final ConditionSource generatedHeightLimit = yBlockCheck(VerticalAnchor.absolute(256), 0);
     private static final ConditionSource infestedStoneHeight = yBlockCheck(VerticalAnchor.absolute(63), -1);
     private static final ConditionSource conditionSource = yBlockCheck(VerticalAnchor.absolute(74), 1);
@@ -56,10 +57,32 @@ public class ModSurfaceRules {
         builder.add(
                 addBedrock(true),
                 addBedrock(false),
-                UMBERSTONE,
-                decorateElysianFields(),
-                ifTrue(abovePreliminarySurface(), decorateSwamp()),
-                ifTrue(verticalGradient("deepslate", VerticalAnchor.absolute(0), VerticalAnchor.absolute(8)), DEEPSLATE)
+                ifTrue(abovePreliminarySurface(), sequence(
+                        ifTrue(stoneDepthCheck(0, false, 0, CaveSurface.FLOOR), sequence(
+                                decorateSubmergedSwamp()
+                        ))
+                )),
+                ifTrue(
+                        stoneDepthCheck(0, false, CaveSurface.FLOOR),
+                        ifTrue(
+                                waterBlockCheck(-1, 0),
+                                sequence(
+                                        decorateElysianFields(),
+                                        decorateElysianForest(),
+                                        decorateFungalForest(),
+                                        decoratePetrifiedForest(),
+                                        decorateSubmergedSwamp(),
+                                        decorateSubterraneanSavannah(),
+                                        decorateUlteriorOutback(),
+                                        decorateUndergroundJungle(),
+                                        decorateVolcanicDesert()
+                                )
+                        )
+                ),
+                ifTrue(
+                        verticalGradient("deepslate", VerticalAnchor.absolute(0), VerticalAnchor.absolute(8)),
+                        DEEPSLATE
+                )
         );
 
         return sequence(builder.build().toArray(RuleSource[]::new));
@@ -72,50 +95,133 @@ public class ModSurfaceRules {
             return ifTrue(verticalGradient("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)), BEDROCK);
     }
 
+    // MARK: Elysian Fields
     private static RuleSource decorateElysianFields() {
         return ifTrue(
                 isBiome(ModBiomes.ELYSIAN_FIELDS.getResourceKey()),
-                sequence(placeGrassOnDirt)
+                sequence(
+                        ifTrue(
+                                stoneDepthCheck(0, false, CaveSurface.CEILING),
+                                DIRT
+                        ),
+                        GRASS
+                )
         );
     }
 
-    private static RuleSource decorate() {
-        return null;
+    // MARK: Elysian Forest
+    private static RuleSource decorateElysianForest() {
+        return ifTrue(
+                isBiome(ModBiomes.ELYSIAN_FOREST.getResourceKey()),
+                sequence(
+                        ifTrue(
+                                stoneDepthCheck(0, false, CaveSurface.CEILING),
+                                DIRT
+                        ),
+                        GRASS
+                )
+        );
     }
 
-    private static RuleSource decorateSwamp() {
-        return sequence(
-                ifTrue(
-                        ON_FLOOR,
-                        sequence(
-                                ifTrue(
-                                        isBiome(ModBiomes.SUBMERGED_SWAMP.getResourceKey()),
-                                        ifTrue(
-                                                groundLevel,
-                                                sequence(
-                                                        ifTrue(noise, COARSE_DIRT),
-                                                        ifTrue(noise1, COARSE_DIRT),
-                                                        ifTrue(noise2, COARSE_DIRT),
-                                                        placeGrassOnDirt,
-                                                        MUD
-                                                )
-                                        )
+    // MARK: Fungal Forest
+    private static RuleSource decorateFungalForest() {
+        return ifTrue(
+                isBiome(ModBiomes.FUNGAL_FOREST.getResourceKey()),
+                sequence(
+                        ifTrue(
+                                stoneDepthCheck(0, false, CaveSurface.CEILING),
+                                DIRT
+                        ),
+                        GRASS
+                )
+        );
+    }
+
+    // MARK: Petrified Forest
+    private static RuleSource decoratePetrifiedForest() {
+        return ifTrue(
+                isBiome(ModBiomes.PETRIFIED_FOREST.getResourceKey()),
+                sequence(
+                        ifTrue(
+                                stoneDepthCheck(0, false, CaveSurface.CEILING),
+                                DIRT
+                        ),
+                        GRASS
+                )
+        );
+    }
+
+    // MARK: Submerged Swamp
+    private static RuleSource decorateSubmergedSwamp() {
+        return ifTrue(
+                isBiome(ModBiomes.SUBMERGED_SWAMP.getResourceKey()),
+                sequence(
+                        ifTrue(
+                                not(
+                                        yBlockCheck(VerticalAnchor.absolute(63), 0)
                                 ),
                                 ifTrue(
-                                        isBiome(ModBiomes.FUNGAL_FOREST.getResourceKey()),
-
-                                        ifTrue(
-                                                groundLevel,
-                                                sequence(
-                                                        ifTrue(noise, COARSE_DIRT),
-                                                        ifTrue(noise1, COARSE_DIRT),
-                                                        ifTrue(noise2, COARSE_DIRT),
-                                                        placeGrassOnDirt,
-                                                        MUD
-                                                )
-                                        )
+                                        noiseCondition(Noises.SWAMP, 0, 1.7976931348623157e+308),
+                                        WATER
                                 )
-                        )
+                        ),
+                        MUD
+                )
+        );
+    }
+
+    // MARK: Subterranean Savannah
+    private static RuleSource decorateSubterraneanSavannah() {
+        return ifTrue(
+                isBiome(ModBiomes.SUBTERRANEAN_SAVANNAH.getResourceKey()),
+                sequence(
+                        ifTrue(
+                                stoneDepthCheck(0, false, CaveSurface.CEILING),
+                                DIRT
+                        ),
+                        GRASS
+                )
+        );
+    }
+
+    // MARK: Ulterior Outback
+    private static RuleSource decorateUlteriorOutback() {
+        return ifTrue(
+                isBiome(ModBiomes.SUBTERRANEAN_SAVANNAH.getResourceKey()),
+                sequence(
+                        ifTrue(
+                                stoneDepthCheck(0, false, CaveSurface.CEILING),
+                                DIRT
+                        ),
+                        GRASS
+                )
+        );
+    }
+
+    // MARK: Underground Jungle
+    private static RuleSource decorateUndergroundJungle() {
+        return ifTrue(
+                isBiome(ModBiomes.UNDERGROUND_JUNGLE.getResourceKey()),
+                sequence(
+                        ifTrue(
+                                stoneDepthCheck(0, false, CaveSurface.CEILING),
+                                DIRT
+                        ),
+                        GRASS
+                )
+        );
+    }
+
+    // MARK: Volcanic Dessert
+    private static RuleSource decorateVolcanicDesert() {
+        return ifTrue(
+                isBiome(ModBiomes.VOLCANIC_DESERT.getResourceKey()),
+                sequence(
+                        ifTrue(
+                                stoneDepthCheck(0, false, CaveSurface.CEILING),
+                                SANDSTONE
+                        ),
+                        SAND
                 )
         );
     }
