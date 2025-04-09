@@ -120,7 +120,7 @@ public class BotFly extends Monster {
 		super.tick();
 	}
 
-	public static boolean canSpawnHere(EntityType<Moth> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<BotFly> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
 		if (pos.getY() > 100)
 			return false;
 		else {

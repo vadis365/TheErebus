@@ -285,7 +285,7 @@ public class Dragonfly extends Monster {
 			return false;
 	}
 
-	public static boolean canSpawnHere(EntityType<Moth> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<Dragonfly> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
 		if (pos.getY() > 100)
 			return false;
 		else {

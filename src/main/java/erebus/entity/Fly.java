@@ -194,7 +194,7 @@ public class Fly extends AmbientCreature {
 		compound.putByte("fly_hanging", (entityData.get(HANGING)));
 	}
 
-	public static boolean canSpawnHere(EntityType<Moth> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<Fly> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
 		if (pos.getY() >= 120 || pos.getY() <= 0)
 			return false;
 		else {
