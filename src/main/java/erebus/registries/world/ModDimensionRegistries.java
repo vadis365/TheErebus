@@ -63,7 +63,7 @@ public class ModDimensionRegistries {
                                                 0.0F,
                                                 0.0F,
                                                 0.0F
-                                        ), biomeRegistry.getOrThrow(ModBiomes.ELYSIAN_FIELDS)),
+                                        ), biomeRegistry.getOrThrow(ModBiomes.ELYSIAN_FIELDS.getResourceKey())),
                                 Pair.of(
                                         Climate.parameters(
                                                 0.1F,
@@ -73,7 +73,7 @@ public class ModDimensionRegistries {
                                                 0.0F,
                                                 0.0F,
                                                 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.FUNGAL_FOREST)),
+                                        biomeRegistry.getOrThrow(ModBiomes.FUNGAL_FOREST.getResourceKey())),
                                 Pair.of(
                                         Climate.parameters(
                                                 0.3F,
@@ -83,7 +83,7 @@ public class ModDimensionRegistries {
                                                 0.0F,
                                                 0.0F,
                                                 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.PETRIFIED_FOREST)),
+                                        biomeRegistry.getOrThrow(ModBiomes.PETRIFIED_FOREST.getResourceKey())),
                                 Pair.of(
                                         Climate.parameters(
                                                 0.4F,
@@ -93,7 +93,7 @@ public class ModDimensionRegistries {
                                                 0.0F,
                                                 0.0F,
                                                 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.SUBMERGED_SWAMP)),
+                                        biomeRegistry.getOrThrow(ModBiomes.SUBMERGED_SWAMP.getResourceKey())),
                                 Pair.of(
                                         Climate.parameters(
                                                 0.4F,
@@ -103,7 +103,7 @@ public class ModDimensionRegistries {
                                                 0.0F,
                                                 0.0F,
                                                 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.SUBTERRANEAN_SAVANNAH)),
+                                        biomeRegistry.getOrThrow(ModBiomes.SUBTERRANEAN_SAVANNAH.getResourceKey())),
                                 Pair.of(
                                         Climate.parameters(
                                                 0.4F,
@@ -113,7 +113,7 @@ public class ModDimensionRegistries {
                                                 0.0F,
                                                 0.0F,
                                                 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.ULTERIOR_OUTBACK)),
+                                        biomeRegistry.getOrThrow(ModBiomes.ULTERIOR_OUTBACK.getResourceKey())),
                                 Pair.of(
                                         Climate.parameters(
                                                 0.4F,
@@ -123,7 +123,7 @@ public class ModDimensionRegistries {
                                                 0.0F,
                                                 0.0F,
                                                 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.UNDERGROUND_JUNGLE)),
+                                        biomeRegistry.getOrThrow(ModBiomes.UNDERGROUND_JUNGLE.getResourceKey())),
                                 Pair.of(
                                         Climate.parameters(
                                                 0.4F,
@@ -133,7 +133,7 @@ public class ModDimensionRegistries {
                                                 0.0F,
                                                 0.0F,
                                                 0.0F),
-                                        biomeRegistry.getOrThrow(ModBiomes.VOLCANIC_DESERT))
+                                        biomeRegistry.getOrThrow(ModBiomes.VOLCANIC_DESERT.getResourceKey()))
 
                         ))),
                 noiseGenSettings.getOrThrow(ModNoiseGenerator.NOISE_GENERATOR));

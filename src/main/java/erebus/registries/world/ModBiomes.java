@@ -1,177 +1,38 @@
 package erebus.registries.world;
 
-import erebus.Erebus;
+import erebus.world.biome.*;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeGenerationSettings;
-import net.minecraft.world.level.biome.BiomeSpecialEffects;
-import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class ModBiomes {
-    public static final ResourceKey<Biome> ELYSIAN_FIELDS = makeKey("elysian_fields");
-    public static final ResourceKey<Biome> FUNGAL_FOREST = makeKey("fungal_forest");
-    public static final ResourceKey<Biome> PETRIFIED_FOREST = makeKey("petrified_forest");
-    public static final ResourceKey<Biome> SUBMERGED_SWAMP = makeKey("submerged_swamp");
-    public static final ResourceKey<Biome> SUBTERRANEAN_SAVANNAH = makeKey("subterranean_savannah");
-    public static final ResourceKey<Biome> ULTERIOR_OUTBACK = makeKey("ulterior_outback");
-    public static final ResourceKey<Biome> UNDERGROUND_JUNGLE = makeKey("underground_jungle");
-    public static final ResourceKey<Biome> VOLCANIC_DESERT = makeKey("volcanic_desert");
 
-    private static ResourceKey<Biome> makeKey(String name) {
-        return ResourceKey.create(Registries.BIOME, Erebus.prefix(name));
-    }
+    // Biomes
+    public static final ElysianFieldsBiome ELYSIAN_FIELDS = new ElysianFieldsBiome(0xC6FF54, 0xD5E47F);
+    public static final ElysianForestBiome ELYSIAN_FOREST = new ElysianForestBiome(0x74BF26, 0xD5E47F);
+    public static final FungalForestBiome FUNGAL_FOREST = new FungalForestBiome(0x4E8833, 0xCBD1DA);
+    public static final PetrifiedForestBiome PETRIFIED_FOREST = new PetrifiedForestBiome(0xC1B668, 0xEAC272);
+    public static final SubmergedSwampBiome SUBMERGED_SWAMP = new SubmergedSwampBiome(0x314D31, 0x088008);
+    public static final SubterraneanSavannahBiome SUBTERRANEAN_SAVANNAH = new SubterraneanSavannahBiome(0xB6B957, 0x8C7409);
+    public static final UlteriorOutbackBiome ULTERIOR_OUTBACK = new UlteriorOutbackBiome(0xC1B668, 0xEAC272);
+    public static final UndergroundJungleBiome UNDERGROUND_JUNGLE = new UndergroundJungleBiome(0x53CA37, 0x088008);
+    public static final VolcanicDessertBiome VOLCANIC_DESERT = new VolcanicDessertBiome(0xA6BB4E, 0xFFE70A);
 
     public static void bootstrap(BootstrapContext<Biome> context) {
         HolderGetter<PlacedFeature> featureGetter = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver> carverGetter = context.lookup(Registries.CONFIGURED_CARVER);
 
-        context.register(ELYSIAN_FIELDS, new Biome.BiomeBuilder()
-                .temperature(0.85F)
-                .hasPrecipitation(false)
-                .downfall(0)
-                .specialEffects(new BiomeSpecialEffects.Builder()
-                        .waterColor(0xC6FF54)
-                        .foliageColorOverride(0xC6FF54)
-                        .skyColor(0xC6FF54)
-                        .grassColorOverride(0xC6FF54)
-                        .fogColor(0xD5E47F)
-                        .waterFogColor(0xD5E47F)
-                        .build()
-                )
-                .mobSpawnSettings(MobSpawnSettings.EMPTY)
-                .generationSettings(BiomeGenerationSettings.EMPTY)
-                .build()
-        );
-
-        context.register(FUNGAL_FOREST, new Biome.BiomeBuilder()
-                .temperature(0.85F)
-                .hasPrecipitation(false)
-                .downfall(0)
-                .specialEffects(new BiomeSpecialEffects.Builder()
-                        .waterColor(0xC6FF54)
-                        .foliageColorOverride(0xC6FF54)
-                        .skyColor(0xC6FF54)
-                        .grassColorOverride(0xC6FF54)
-                        .fogColor(0xD5E47F)
-                        .waterFogColor(0xD5E47F)
-                        .build()
-                )
-                .mobSpawnSettings(MobSpawnSettings.EMPTY)
-                .generationSettings(BiomeGenerationSettings.EMPTY)
-                .build()
-        );
-
-        context.register(PETRIFIED_FOREST, new Biome.BiomeBuilder()
-                .temperature(0.85F)
-                .hasPrecipitation(false)
-                .downfall(0)
-                .specialEffects(new BiomeSpecialEffects.Builder()
-                        .waterColor(0xC6FF54)
-                        .foliageColorOverride(0xC6FF54)
-                        .skyColor(0xC6FF54)
-                        .grassColorOverride(0xC6FF54)
-                        .fogColor(0xD5E47F)
-                        .waterFogColor(0xD5E47F)
-                        .build()
-                )
-                .mobSpawnSettings(MobSpawnSettings.EMPTY)
-                .generationSettings(BiomeGenerationSettings.EMPTY)
-                .build()
-        );
-
-        context.register(SUBMERGED_SWAMP, new Biome.BiomeBuilder()
-                .temperature(0.85F)
-                .hasPrecipitation(false)
-                .downfall(0)
-                .specialEffects(new BiomeSpecialEffects.Builder()
-                        .waterColor(0xC6FF54)
-                        .foliageColorOverride(0xC6FF54)
-                        .skyColor(0xC6FF54)
-                        .grassColorOverride(0xC6FF54)
-                        .fogColor(0xD5E47F)
-                        .waterFogColor(0xD5E47F)
-                        .build()
-                )
-                .mobSpawnSettings(MobSpawnSettings.EMPTY)
-                .generationSettings(BiomeGenerationSettings.EMPTY)
-                .build()
-        );
-
-        context.register(SUBTERRANEAN_SAVANNAH, new Biome.BiomeBuilder()
-                .temperature(0.85F)
-                .hasPrecipitation(false)
-                .downfall(0)
-                .specialEffects(new BiomeSpecialEffects.Builder()
-                        .waterColor(0xC6FF54)
-                        .foliageColorOverride(0xC6FF54)
-                        .skyColor(0xC6FF54)
-                        .grassColorOverride(0xC6FF54)
-                        .fogColor(0xD5E47F)
-                        .waterFogColor(0xD5E47F)
-                        .build()
-                )
-                .mobSpawnSettings(MobSpawnSettings.EMPTY)
-                .generationSettings(BiomeGenerationSettings.EMPTY)
-                .build()
-        );
-
-        context.register(ULTERIOR_OUTBACK, new Biome.BiomeBuilder()
-                .temperature(0.85F)
-                .hasPrecipitation(false)
-                .downfall(0)
-                .specialEffects(new BiomeSpecialEffects.Builder()
-                        .waterColor(0xC6FF54)
-                        .foliageColorOverride(0xC6FF54)
-                        .skyColor(0xC6FF54)
-                        .grassColorOverride(0xC6FF54)
-                        .fogColor(0xD5E47F)
-                        .waterFogColor(0xD5E47F)
-                        .build()
-                )
-                .mobSpawnSettings(MobSpawnSettings.EMPTY)
-                .generationSettings(BiomeGenerationSettings.EMPTY)
-                .build()
-        );
-
-        context.register(UNDERGROUND_JUNGLE, new Biome.BiomeBuilder()
-                .temperature(0.85F)
-                .hasPrecipitation(false)
-                .downfall(0)
-                .specialEffects(new BiomeSpecialEffects.Builder()
-                        .waterColor(0xC6FF54)
-                        .foliageColorOverride(0xC6FF54)
-                        .skyColor(0xC6FF54)
-                        .grassColorOverride(0xC6FF54)
-                        .fogColor(0xD5E47F)
-                        .waterFogColor(0xD5E47F)
-                        .build()
-                )
-                .mobSpawnSettings(MobSpawnSettings.EMPTY)
-                .generationSettings(BiomeGenerationSettings.EMPTY)
-                .build()
-        );
-
-        context.register(VOLCANIC_DESERT, new Biome.BiomeBuilder()
-                .temperature(0.85F)
-                .hasPrecipitation(false)
-                .downfall(0)
-                .specialEffects(new BiomeSpecialEffects.Builder()
-                        .waterColor(0xC6FF54)
-                        .foliageColorOverride(0xC6FF54)
-                        .skyColor(0xC6FF54)
-                        .grassColorOverride(0xC6FF54)
-                        .fogColor(0xD5E47F)
-                        .waterFogColor(0xD5E47F)
-                        .build()
-                )
-                .mobSpawnSettings(MobSpawnSettings.EMPTY)
-                .generationSettings(BiomeGenerationSettings.EMPTY)
-                .build()
-        );
+        context.register(ELYSIAN_FIELDS.getResourceKey(), ELYSIAN_FIELDS.getBiome());
+        context.register(ELYSIAN_FOREST.getResourceKey(), ELYSIAN_FOREST.getBiome());
+        context.register(FUNGAL_FOREST.getResourceKey(), FUNGAL_FOREST.getBiome());
+        context.register(PETRIFIED_FOREST.getResourceKey(), PETRIFIED_FOREST.getBiome());
+        context.register(SUBMERGED_SWAMP.getResourceKey(), SUBMERGED_SWAMP.getBiome());
+        context.register(SUBTERRANEAN_SAVANNAH.getResourceKey(), SUBTERRANEAN_SAVANNAH.getBiome());
+        context.register(ULTERIOR_OUTBACK.getResourceKey(), ULTERIOR_OUTBACK.getBiome());
+        context.register(UNDERGROUND_JUNGLE.getResourceKey(), UNDERGROUND_JUNGLE.getBiome());
+        context.register(VOLCANIC_DESERT.getResourceKey(), VOLCANIC_DESERT.getBiome());
     }
 }
