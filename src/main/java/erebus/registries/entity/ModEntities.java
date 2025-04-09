@@ -2,6 +2,7 @@ package erebus.registries.entity;
 
 import erebus.Erebus;
 import erebus.entity.AnimatedBlock;
+import erebus.entity.Antlion;
 import erebus.entity.BlackWidow;
 import erebus.entity.LavaWebSpider;
 import erebus.entity.MoneySpider;
@@ -46,6 +47,7 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<LavaWebSpider>> LAVA_WEB_SPIDER = registerWithEgg("lava_web_spider", EntityType.Builder.of(LavaWebSpider::new, MobCategory.MONSTER).sized(3F, 1.5F).fireImmune(), 0xD36617, 0x342522);
     public static final DeferredHolder<EntityType<?>, EntityType<Moth>> MOTH = registerWithEgg("moth", EntityType.Builder.of(Moth::new, MobCategory.MONSTER).sized(1.8F, 0.5F), 0x83DB99, 0xACF4E0);
     public static final DeferredHolder<EntityType<?>, EntityType<VelvetWorm>> VELVET_WORM = registerWithEgg("velvet_worm", EntityType.Builder.of(VelvetWorm::new, MobCategory.MONSTER).sized(2F, 0.7F), 0x88444B, 0xFFDAC0);
+    public static final DeferredHolder<EntityType<?>, EntityType<Antlion>> ANTLION = registerWithEgg("antlion", EntityType.Builder.of(Antlion::new, MobCategory.MONSTER).sized(1.9F, 0.9F).fireImmune(), 0x958A54, 0xBB4602);
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownBlockAsItem>> THROWN_BLOCK_AS_ITEM = registerNonMobEntity("thrown_block_as_item", EntityType.Builder.<ThrownBlockAsItem>of(ThrownBlockAsItem::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
     public static final DeferredHolder<EntityType<?>, EntityType<GooBall>> GOO_BALL = registerNonMobEntity("goo_ball", EntityType.Builder.<GooBall>of(GooBall::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
@@ -62,6 +64,7 @@ public class ModEntities {
 		event.register(LAVA_WEB_SPIDER.get(), SpawnPlacementTypes.IN_LAVA, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LavaWebSpider::canSpawnHere, null);
 		event.register(MOTH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Moth::canSpawnHere, null);
 		event.register(VELVET_WORM.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, VelvetWorm::canSpawnHere, null);
+		event.register(ANTLION.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Antlion::canSpawnHere, null);
 	}
 	
 	public static void initializeAttributes(EntityAttributeCreationEvent event) {
@@ -73,6 +76,7 @@ public class ModEntities {
 		event.put(LAVA_WEB_SPIDER.get(), LavaWebSpider.createAttributes().build());
 		event.put(MOTH.get(), Moth.createAttributes().build());
 		event.put(VELVET_WORM.get(), VelvetWorm.createAttributes().build());
+		event.put(ANTLION.get(), Antlion.createAttributes().build());
 	}
 
 	public static DeferredRegister<EntityType<?>> getEntityTypes() {

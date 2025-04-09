@@ -1,12 +1,24 @@
 package erebus;
 
+import java.util.Locale;
+
+import org.slf4j.Logger;
+
 import com.mojang.logging.LogUtils;
-import erebus.registries.*;
+
+import erebus.registries.ModBlockEntities;
+import erebus.registries.ModBlocks;
+import erebus.registries.ModItemRendering;
+import erebus.registries.ModItems;
+import erebus.registries.ModMenuTypes;
+import erebus.registries.ModSounds;
+import erebus.registries.ModTabs;
 import erebus.registries.data.ModArmorMaterials;
 import erebus.registries.data.ModTags;
 import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
+import erebus.registries.network.ModNetwork;
 import erebus.registries.world.ModTreeDecorators;
 import erebus.registries.world.ModTrunkPlacers;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -21,9 +33,6 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import org.slf4j.Logger;
-
-import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -53,6 +62,8 @@ public class Erebus {
         NeoForge.EVENT_BUS.register(this);
 
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        
+        bus.addListener(ModNetwork::register);
         
 		if (dist.isClient()) {
 			bus.addListener(ModEntityRendering::registerEntityLayers);
