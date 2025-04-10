@@ -176,6 +176,18 @@ public class BotFlyModel<T extends BotFly> extends HierarchicalModel<T> {
 	}
 
 	@Override
+	public void prepareMobModel(T botfly, float limbSwing, float limbSwingAmount, float partialRenderTicks) {
+		float smoothedTicks = botfly.animationTicks + (botfly.animationTicks - botfly.prevAnimationTicks)  * partialRenderTicks;
+		float flap = (float) (Math.sin((smoothedTicks) * 1.2F) * 0.5F);
+		if (botfly.onGround())
+			flap = 0;
+		RWing1.xRot = flap;
+		RWing2.xRot = flap;
+		LWing1.xRot = flap;
+		LWing2.xRot = flap;
+	}
+
+	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
 		Head.render(stack, consumer, light, overlay, colour);
 		HeadFront.render(stack, consumer, light, overlay, colour);
@@ -190,10 +202,6 @@ public class BotFlyModel<T extends BotFly> extends HierarchicalModel<T> {
 		Ab2.render(stack, consumer, light, overlay, colour);
 		Ab3.render(stack, consumer, light, overlay, colour);
 		Ab4.render(stack, consumer, light, overlay, colour);
-		RWing1.render(stack, consumer, light, overlay, colour);
-		RWing2.render(stack, consumer, light, overlay, colour);
-		LWing1.render(stack, consumer, light, overlay, colour);
-		LWing2.render(stack, consumer, light, overlay, colour);
 		LegRF1.render(stack, consumer, light, overlay, colour);
 		LegRF2.render(stack, consumer, light, overlay, colour);
 		LegRF3.render(stack, consumer, light, overlay, colour);
@@ -217,5 +225,13 @@ public class BotFlyModel<T extends BotFly> extends HierarchicalModel<T> {
 	@Override
 	public ModelPart root() {
 		return root;
+	}
+
+	public void renderWings(PoseStack stack, VertexConsumer buffer, int light, int overlay, int colour) {
+		RWing1.render(stack, buffer, light, overlay, colour);
+		RWing2.render(stack, buffer, light, overlay, colour);
+		LWing1.render(stack, buffer, light, overlay, colour);
+		LWing2.render(stack, buffer, light, overlay, colour);
+		
 	}
 }

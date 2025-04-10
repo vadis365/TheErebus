@@ -20,6 +20,7 @@ public class FlyRenderer extends MobRenderer<Fly, FlyModel<Fly>> {
 
 	public FlyRenderer(EntityRendererProvider.Context context) {
 		super(context, new FlyModel<>(context.bakeLayer(ModEntityRendering.FLY)), 0.25F);
+		addLayer(new FlyLayer(this, context.getModelSet()));
 	}
 
 	@Override

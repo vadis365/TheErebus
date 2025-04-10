@@ -88,6 +88,28 @@ public class FlyModel<T extends Fly> extends HierarchicalModel<T> {
 	}
 
 	@Override
+	public void prepareMobModel(T fly, float limbSwing, float limbSwingAmount, float partialRenderTicks) {
+		float smoothedTicks = fly.animationTicks + (fly.animationTicks - (fly.prevAnimationTicks)) * partialRenderTicks;
+		float flap = (float) (Math.sin((smoothedTicks) * 0.95F) * 1F);
+		if (!fly.getIsFlyHanging()) {
+			wing_left.xRot = 0.5235988F + flap * 0.2F;
+			wing_right.xRot = 0.5235988F + flap * 0.2F;
+			wing_left.zRot = 0F + flap * 0.5F;
+			wing_right.zRot = 0F - flap * 0.5F;
+			wing_left.yRot = 0.5235988F;
+			wing_right.yRot = -0.5235988F;
+		} else {
+			wing_left.xRot = 0.25235988F;
+			wing_right.xRot = 0.25235988F;
+			wing_left.zRot = 0F;
+			wing_right.zRot = 0F;
+			wing_left.yRot = -0.1745329F;
+			wing_right.yRot = 0.1745329F;
+		}
+
+	}
+
+	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
 		thorax.render(stack, consumer, light, overlay, colour);
 		abdomen.render(stack, consumer, light, overlay, colour);
@@ -100,12 +122,16 @@ public class FlyModel<T extends Fly> extends HierarchicalModel<T> {
 		leg_right_back.render(stack, consumer, light, overlay, colour);
 		leg_right_front.render(stack, consumer, light, overlay, colour);
 		leg_right_mid.render(stack, consumer, light, overlay, colour);
-		wing_right.render(stack, consumer, light, overlay, colour);
-		wing_left.render(stack, consumer, light, overlay, colour);
+		
 	}
 
 	@Override
 	public ModelPart root() {
 		return root;
+	}
+
+	public void renderWings(PoseStack stack, VertexConsumer buffer, int light, int overlay, int colour) {
+		wing_right.render(stack, buffer, light, overlay, colour);
+		wing_left.render(stack, buffer, light, overlay, colour);
 	}
 }

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import erebus.entity.ai.FlyingMoveControlLessSpin;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -22,11 +23,8 @@ import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -41,7 +39,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -52,13 +49,14 @@ public class Dragonfly extends Monster {
 	private boolean dropped;
 	private int droptime = 0;// cool-down for picking up
 	private int countDown;// makes sure player is always dropped
+	public int animationTicks, prevAnimationTicks;
 	private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(Dragonfly.class, EntityDataSerializers.INT);
 
 	public Dragonfly(EntityType<? extends Dragonfly> type, Level level) {
 		super(type, level);
-		this.moveControl = new FlyingMoveControl(this, 10, false);
-		setPathfindingMalus(PathType.BLOCKED, -8.0F);
-		setPathfindingMalus(PathType.OPEN, 8.0F);
+		this.moveControl = new FlyingMoveControlLessSpin(this, 10, false);
+		//setPathfindingMalus(PathType.BLOCKED, -8.0F);
+		//setPathfindingMalus(PathType.OPEN, 8.0F);
 	}
 
 	@Override
@@ -70,12 +68,12 @@ public class Dragonfly extends Monster {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.5D, true));
-		goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		goalSelector.addGoal(6,  new RandomLookAroundGoal(this));
+		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.75D, true));
+		//goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		//goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 		goalSelector.addGoal(4, new AIFlyingWander(this, 1D, 0.01F));
-		targetSelector.addGoal(3, new HurtByTargetGoal(this).setAlertOthers(Dragonfly.class));
-		targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
+		targetSelector.addGoal(0, new HurtByTargetGoal(this).setAlertOthers(Dragonfly.class));
+		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
 	}
 
 	@Override
@@ -170,9 +168,24 @@ public class Dragonfly extends Monster {
 	public void tick() {
 		super.tick();
 
+		if (level().isClientSide()) {
+			prevAnimationTicks = animationTicks;
+			if (animationTicks < 720)
+				animationTicks += 1;
+			if (animationTicks >= 720) {
+				animationTicks -= 720;
+				prevAnimationTicks -= 720;
+			}
+		}
+
 		Vec3 vec3 = this.getDeltaMovement();
-		if (!this.onGround() && vec3.y < 0.0D)
-			this.setDeltaMovement(vec3.multiply(1.0D, 0.3D, 1.0D));
+		if (!this.onGround() && vec3.y < 0.0D) {
+			if (getTarget() == null)
+				this.setDeltaMovement(vec3.multiply(1.0D, 0.3D, 1.0D));
+			else
+				this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
+			this.yBodyRot = yBodyRotO;
+		}
 		
 		if (isBeingRidden()){
 			if (getTarget() != null && !level().isEmptyBlock(blockPosition().below(3)) || !getDropped() && getY() < pickupHeight + 10D) {
@@ -233,15 +246,14 @@ public class Dragonfly extends Monster {
 	@Override
 	public void playerTouch(Player player) {
 		super.playerTouch(player);
-
+		if (!level().isClientSide() && !player.isCreative() && !captured() && random.nextInt(20) == 0 && !getDropped()) {
+			pickupHeight = getY();
+			setPos(getX(), player.getY() + player.getBbHeight() + getBbHeight() * 0.5F, getZ());
+			player.startRiding(this, true);
+			setCountdown(60);
+		}
 		if (player.isCrouching())
 			player.setPose(Pose.STANDING);
-			if (!level().isClientSide() && !player.isCreative() && !captured() && random.nextInt(20) == 0 && !getDropped()) {
-				player.startRiding(this, true);
-				pickupHeight = getY();
-				setPos(getX(), player.getY() + player.getBbHeight(), getZ());
-				setCountdown(60);
-			}
 	}
 
 	public double getCapturedOffset() {
@@ -344,8 +356,8 @@ public class Dragonfly extends Monster {
 		@Nullable
 		protected Vec3 getPosition() {
 			Vec3 vec3 = this.mob.getViewVector(0.0F);
-			Vec3 vec31 = HoverRandomPos.getPos(this.mob, 8, 7, vec3.x, vec3.z, ((float) Math.PI / 2F), 2, 1);
-			return vec31 != null ? vec31 : AirAndWaterRandomPos.getPos(this.mob, 8, 4, -2, vec3.x, vec3.z, (double) ((float) Math.PI / 2F));
+			Vec3 vec31 = HoverRandomPos.getPos(this.mob, 16, 2, vec3.x, vec3.z, ((float) Math.PI / 2F), 2, 1);
+			return vec31 != null ? vec31 : AirAndWaterRandomPos.getPos(this.mob, 16, 2, -2, vec3.x, vec3.z, (double) ((float) Math.PI / 2F));
 		}
 	}
 }

@@ -24,6 +24,7 @@ public class DragonflyRenderer extends MobRenderer<Dragonfly, DragonflyModel <Dr
 
 	public DragonflyRenderer(EntityRendererProvider.Context context) {
 		super(context, new DragonflyModel<>(context.bakeLayer(ModEntityRendering.DRAGON_FLY)), 0.3F);
+		addLayer(new DragonflyLayer(this, context.getModelSet()));
 	}
 
 	@Override

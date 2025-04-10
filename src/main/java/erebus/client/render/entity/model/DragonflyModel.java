@@ -1,5 +1,7 @@
 package erebus.client.render.entity.model;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
@@ -172,7 +174,17 @@ public class DragonflyModel<T extends Dragonfly> extends HierarchicalModel<T> {
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	}
 
+	@Override
+	public void prepareMobModel(T dragonfly, float limbSwing, float limbSwingAngle, float partialRenderTicks) {
+		float smoothedTicks = dragonfly.animationTicks + (dragonfly.animationTicks - dragonfly.prevAnimationTicks)  * partialRenderTicks;
+		float flapFront = (float) (Math.sin((smoothedTicks) * 1.8F) * 0.35F);
+		float flapBack = (float) (Math.cos((smoothedTicks) * 1.8F) * 0.35F);
+		RFWing.zRot = flapFront;
+		LFWing.zRot = -flapFront;
+		RBWing.zRot = flapBack;
+		LBWing.zRot = -flapBack;
 	}
 
 	@Override
@@ -186,10 +198,6 @@ public class DragonflyModel<T extends Dragonfly> extends HierarchicalModel<T> {
 		ThoraxFront.render(stack, consumer, light, overlay, colour);
 		ThoraxBottom.render(stack, consumer, light, overlay, colour);
 		ThoraxBack.render(stack, consumer, light, overlay, colour);
-		RFWing.render(stack, consumer, light, overlay, colour);
-		RBWing.render(stack, consumer, light, overlay, colour);
-		LFWing.render(stack, consumer, light, overlay, colour);
-		LBWing.render(stack, consumer, light, overlay, colour);
 		Tail1.render(stack, consumer, light, overlay, colour);
 		Tail2.render(stack, consumer, light, overlay, colour);
 		Tail3.render(stack, consumer, light, overlay, colour);
@@ -217,5 +225,12 @@ public class DragonflyModel<T extends Dragonfly> extends HierarchicalModel<T> {
 	@Override
 	public ModelPart root() {
 		return root;
+	}
+
+	public void renderWings(PoseStack stack, VertexConsumer buffer, int light, int overlay, int colour) {
+		RFWing.render(stack, buffer, light, overlay, colour);
+		RBWing.render(stack, buffer, light, overlay, colour);
+		LFWing.render(stack, buffer, light, overlay, colour);
+		LBWing.render(stack, buffer, light, overlay, colour);
 	}
 }

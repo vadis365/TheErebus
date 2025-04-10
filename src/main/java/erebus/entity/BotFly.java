@@ -30,29 +30,29 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 
 public class BotFly extends Monster {
 	// AKA ButtFly
+	public int animationTicks, prevAnimationTicks;
 
 	public BotFly(EntityType<? extends BotFly> type, Level level) {
 		super(type, level);
-		this.moveControl = new FlyingMoveControl(this, 10, true);
-		setPathfindingMalus(PathType.WATER, -8F);
-		setPathfindingMalus(PathType.BLOCKED, -8.0F);
-		setPathfindingMalus(PathType.OPEN, 8.0F);
+		this.moveControl = new FlyingMoveControl(this, 10, false);
+		//setPathfindingMalus(PathType.WATER, -8F);
+		//setPathfindingMalus(PathType.BLOCKED, -8.0F);
+		//setPathfindingMalus(PathType.OPEN, 8.0F);
 	}
 
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
 		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, false));
-		goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		goalSelector.addGoal(3,  new RandomLookAroundGoal(this));
-		goalSelector.addGoal(4, new AIFlyingWander(this, 0.5D, 0.01F));
-		targetSelector.addGoal(3, new HurtByTargetGoal(this).setAlertOthers(BotFly.class));
-		targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
+		goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		goalSelector.addGoal(3, new RandomLookAroundGoal(this));
+		goalSelector.addGoal(4, new AIFlyingWander(this, 0.75D, 0.01F));
+		targetSelector.addGoal(0, new HurtByTargetGoal(this).setAlertOthers(BotFly.class));
+		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -60,7 +60,7 @@ public class BotFly extends Monster {
 				.add(Attributes.MAX_HEALTH, 15D)
 				.add(Attributes.FOLLOW_RANGE, 16D)
 				.add(Attributes.MOVEMENT_SPEED, 0.3D)
-				.add(Attributes.FLYING_SPEED, 0.6D)
+				.add(Attributes.FLYING_SPEED, 1D)
 				.add(Attributes.ATTACK_DAMAGE, 1D);
 	}
 
@@ -111,14 +111,23 @@ public class BotFly extends Monster {
 	@Override
 	public void tick() {
 		super.tick();
+
+		if (level().isClientSide()) {
+			prevAnimationTicks = animationTicks;
+			if (animationTicks < 360)
+				animationTicks += 1;
+			if (animationTicks >= 360) {
+				animationTicks -= 360;
+				prevAnimationTicks -= 360;
+			}
+		}
+
 		Vec3 vec3 = this.getDeltaMovement();
-		if (!this.onGround() && vec3.y < 0.0D)
-			this.setDeltaMovement(vec3.multiply(1.0D, 0.4D, 1.0D));
+		if (!this.onGround() && getTarget() == null && vec3.y < 0.0D)
+			this.setDeltaMovement(vec3.multiply(1.0D, 0.35D, 1.0D));
 
 		if(isInWater())
 			getNavigation().moveTo(getX(), getY() + 1D, getZ(), 0.32D);
-
-		super.tick();
 	}
 
 	public static boolean canSpawnHere(EntityType<BotFly> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {

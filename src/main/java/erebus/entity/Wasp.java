@@ -50,7 +50,7 @@ public class Wasp extends Monster {
 	protected void registerGoals() {
 		goalSelector.addGoal(1, new MeleeAttackGoal(this, 1D, true));
 		goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
-		goalSelector.addGoal(3,  new RandomLookAroundGoal(this));
+		goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 		goalSelector.addGoal(4, new Wasp.EntityAIFlyingWander(this, 0.75D, 0.01F));
 		targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
 //		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Monster>(this, Monster.class, 0, true, false, p -> Config.HORNET_ATTACK_MOBS.get()));
@@ -69,11 +69,11 @@ public class Wasp extends Monster {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 15D) //health
-				.add(Attributes.FOLLOW_RANGE, 32D) //follow range
+		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 15D)
+				.add(Attributes.FOLLOW_RANGE, 32D)
 				.add(Attributes.MOVEMENT_SPEED, 0.75D)
-				.add(Attributes.FLYING_SPEED, 1D)//move speed
-				.add(Attributes.ATTACK_DAMAGE, 4D); //attack damage
+				.add(Attributes.FLYING_SPEED, 1D)
+				.add(Attributes.ATTACK_DAMAGE, 4D);
 	}
 
 	public static boolean canSpawnHere(EntityType<Wasp> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
@@ -126,7 +126,9 @@ public class Wasp extends Monster {
 
 	@Override
 	public void tick() {
-		if (level().isClientSide) {
+		super.tick();
+
+		if (level().isClientSide()) {
 			prevAnimationTicks = animationTicks;
 			if (animationTicks < 720)
 				animationTicks += 1;
@@ -137,13 +139,11 @@ public class Wasp extends Monster {
 		}
 
 		Vec3 vec3 = this.getDeltaMovement();
-		if (!this.onGround() && vec3.y < 0.0D)
+		if (!this.onGround() && getTarget() == null && vec3.y < 0.0D)
 			this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
 
 		if(isInWater())
 			getNavigation().moveTo(getX(), getY() + 1D, getZ(), 0.5D);
-
-		super.tick();
 	}
 
 	@Override

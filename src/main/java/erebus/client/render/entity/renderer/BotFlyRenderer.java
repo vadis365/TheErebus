@@ -16,6 +16,7 @@ public class BotFlyRenderer extends MobRenderer<BotFly, BotFlyModel<BotFly>> {
 
 	public BotFlyRenderer(EntityRendererProvider.Context context) {
         super(context, new BotFlyModel<>(context.bakeLayer(ModEntityRendering.BOT_FLY)), 0.3F);
+        addLayer(new BotFlyLayer(this, context.getModelSet()));
 	}
 
 	@Override

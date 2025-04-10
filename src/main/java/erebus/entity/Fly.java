@@ -30,6 +30,7 @@ public class Fly extends AmbientCreature {
     private BlockPos targetPosition;
 	private static final EntityDataAccessor<Byte> HANGING = SynchedEntityData.defineId(Fly.class, EntityDataSerializers.BYTE);
 	private static final TargetingConditions FLY_RESTING_TARGETING = TargetingConditions.forNonCombat().range(4.0);
+	public int animationTicks, prevAnimationTicks;
 
 	public Fly(EntityType<? extends Fly> type, Level level) { 
 		super(type, level);
@@ -101,6 +102,16 @@ public class Fly extends AmbientCreature {
 	@Override
 	public void tick() {
 		super.tick();
+
+		if (level().isClientSide()) {
+			prevAnimationTicks = animationTicks;
+			if (animationTicks < 360)
+				animationTicks += 1;
+			if (animationTicks >= 360) {
+				animationTicks -= 360;
+				prevAnimationTicks -= 360;
+			}
+		}
 
 		if (getIsFlyHanging()) {
             this.setDeltaMovement(Vec3.ZERO);
