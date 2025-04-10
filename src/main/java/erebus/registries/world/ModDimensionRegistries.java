@@ -42,7 +42,7 @@ public class ModDimensionRegistries {
                 384,
                 BlockTags.INFINIBURN_OVERWORLD,
                 BuiltinDimensionTypes.OVERWORLD_EFFECTS,
-                0.0F,
+                1.0F,
                 new DimensionType.MonsterSettings(false, false, UniformInt.of(0, 7), 7)
         ));
     }

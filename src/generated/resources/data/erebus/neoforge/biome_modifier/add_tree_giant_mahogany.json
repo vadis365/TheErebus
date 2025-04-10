@@ -1,6 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "#c:is_overworld",
-  "features": "erebus:giant_mahogany",
-  "step": "vegetal_decoration"
-}

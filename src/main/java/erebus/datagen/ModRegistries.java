@@ -1,7 +1,6 @@
 package erebus.datagen;
 
 import erebus.Erebus;
-import erebus.registries.world.ModBiomeModifiers;
 import erebus.registries.world.ModBiomes;
 import erebus.registries.world.ModDimensionRegistries;
 import erebus.registries.world.ModFeatures;
@@ -11,7 +10,6 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -22,7 +20,7 @@ public class ModRegistries extends DatapackBuiltinEntriesProvider {
             .add(Registries.BIOME, ModBiomes::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, ModFeatures::bootstrapConfiguredFeatures)
             .add(Registries.PLACED_FEATURE, ModFeatures::bootstrapPlacedFeatures)
-            .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
+            //.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
             .add(Registries.DIMENSION_TYPE, ModDimensionRegistries::bootstrapType)
             .add(Registries.NOISE_SETTINGS, ModNoiseGenerator::bootstrap)
             .add(Registries.LEVEL_STEM, ModDimensionRegistries::bootstrapStem);

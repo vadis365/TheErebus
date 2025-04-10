@@ -1,6 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "#c:is_overworld",
-  "features": "erebus:bullrush",
-  "step": "vegetal_decoration"
-}
