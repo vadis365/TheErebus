@@ -20,7 +20,7 @@ public class DragonflyRenderer extends MobRenderer<Dragonfly, DragonflyModel <Dr
 	public static final ResourceLocation TEXTURE_3 = Erebus.prefix("textures/entity/dragonfly_red.png");
 	public static final ResourceLocation TEXTURE_4 = Erebus.prefix("textures/entity/dragonfly_purple.png");
 	public static final ResourceLocation TEXTURE_5 = Erebus.prefix("textures/entity/dragonfly_blue.png");
-	public static final ResourceLocation TEXTURE_6 = Erebus.prefix("erebus:textures/entity/dragonfly_tan.png");
+	public static final ResourceLocation TEXTURE_6 = Erebus.prefix("textures/entity/dragonfly_tan.png");
 
 	public DragonflyRenderer(EntityRendererProvider.Context context) {
 		super(context, new DragonflyModel<>(context.bakeLayer(ModEntityRendering.DRAGON_FLY)), 0.3F);
