@@ -60,6 +60,7 @@ public class BotFly extends Monster {
 				.add(Attributes.MAX_HEALTH, 15D)
 				.add(Attributes.FOLLOW_RANGE, 16D)
 				.add(Attributes.MOVEMENT_SPEED, 0.3D)
+				.add(Attributes.FLYING_SPEED, 0.6D)
 				.add(Attributes.ATTACK_DAMAGE, 1D);
 	}
 
