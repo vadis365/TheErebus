@@ -123,9 +123,12 @@ public class BotFly extends Monster {
 		}
 
 		Vec3 vec3 = this.getDeltaMovement();
-		if (!this.onGround() && getTarget() == null && vec3.y < 0.0D)
-			this.setDeltaMovement(vec3.multiply(1.0D, 0.35D, 1.0D));
-
+		if (!this.onGround() && vec3.y < 0.0D) {
+			if (getTarget() == null)
+				this.setDeltaMovement(vec3.multiply(1.0D, 0.35D, 1.0D));
+			else
+				this.setDeltaMovement(vec3.multiply(1.0D, 1.0D, 1.0D));
+		}
 		if(isInWater())
 			getNavigation().moveTo(getX(), getY() + 1D, getZ(), 0.32D);
 	}
