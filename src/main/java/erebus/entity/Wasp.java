@@ -143,7 +143,7 @@ public class Wasp extends Monster {
 			if (getTarget() == null)
 				this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
 			else
-				this.setDeltaMovement(vec3.multiply(1.0D, 1.0D, 1.0D));
+				this.setDeltaMovement(vec3.multiply(1.0D, 0.75D, 1.0D));
 		}
 
 		if(isInWater())

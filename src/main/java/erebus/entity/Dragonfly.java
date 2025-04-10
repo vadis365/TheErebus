@@ -183,15 +183,15 @@ public class Dragonfly extends Monster {
 			if (getTarget() == null)
 				this.setDeltaMovement(vec3.multiply(1.0D, 0.3D, 1.0D));
 			else
-				this.setDeltaMovement(vec3.multiply(1.0D, 1.0D, 1.0D));
+				this.setDeltaMovement(vec3.multiply(1.0D, 0.75D, 1.0D));
 			this.yBodyRot = yBodyRotO;
 		}
 		
-		if (isBeingRidden()){
+		if (isBeingRidden()) {
 			if (getTarget() != null && !level().isEmptyBlock(blockPosition().below(3)) || !getDropped() && getY() < pickupHeight + 10D) {
 				getNavigation().stop();
 				getNavigation().moveTo(getX(), getY() + 10D, getZ(), 1D);
-				this.setDeltaMovement(vec3.multiply(1.0D, 1D, 1.0D));
+				this.setDeltaMovement(vec3.multiply(1.0D, 1.0D, 1.0D));
 			}
 			
 			if (!level().isClientSide() && captured() && (getY() > pickupHeight + 10D || countDown <= 0 || !level().isClientSide() && captured() && level().getBlockState(blockPosition().above()).isRedstoneConductor(level(), blockPosition()))) {
@@ -247,6 +247,8 @@ public class Dragonfly extends Monster {
 	public void playerTouch(Player player) {
 		super.playerTouch(player);
 		if (!level().isClientSide() && !player.isCreative() && !captured() && random.nextInt(20) == 0 && !getDropped()) {
+			Vec3 vec3 = this.getDeltaMovement();
+			setDeltaMovement(vec3.multiply(0D, 0D, 0D));
 			pickupHeight = getY();
 			setPos(getX(), player.getY() + player.getBbHeight() + getBbHeight() * 0.5F, getZ());
 			player.startRiding(this, true);
