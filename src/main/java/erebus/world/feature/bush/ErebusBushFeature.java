@@ -1,0 +1,34 @@
+package erebus.world.feature.bush;
+
+import erebus.block.ModBerryBushBlock;
+import erebus.world.feature.ErebusFeature;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+
+import java.util.List;
+import java.util.function.Supplier;
+
+public class ErebusBushFeature extends ErebusFeature {
+
+    private final Supplier<? extends ModBerryBushBlock> BUSH;
+
+    public ErebusBushFeature(String key, Supplier<? extends ModBerryBushBlock> bush) {
+        super(key);
+        this.BUSH = bush;
+    }
+
+    public SimpleBlockConfiguration getConfiguration() {
+        return new SimpleBlockConfiguration(
+                BlockStateProvider.simple(
+                        this.BUSH.get()
+                                .defaultBlockState()
+                                .setValue(ModBerryBushBlock.AGE, 3)
+                )
+        );
+    }
+
+    public List<Block> plantedOn() {
+        return List.of();
+    }
+}

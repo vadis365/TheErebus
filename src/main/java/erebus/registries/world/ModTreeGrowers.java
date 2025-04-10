@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.grower.TreeGrower;
 
 import java.util.Optional;
 
-import static erebus.registries.world.ModConfiguredFeatures.*;
+import static erebus.registries.world.ModFeatures.*;
 
 public class ModTreeGrowers {
 
@@ -20,14 +20,14 @@ public class ModTreeGrowers {
     public static final TreeGrower BAMBOO;
 
     static {
-        ASPER = new TreeGrower("%s:asper".formatted(Erebus.MODID), Optional.empty(), Optional.of(ASPER_TREE.getResourceKey()), Optional.empty());
-        BALSAM = new TreeGrower("%s:balsam".formatted(Erebus.MODID), Optional.empty(), Optional.of(BALSAM_TREE.getResourceKey()), Optional.empty());
-        BAOBAB = new TreeGrower("%s:baobab".formatted(Erebus.MODID), Optional.empty(), Optional.of(BAOBAB_TREE.getResourceKey()), Optional.empty());
-        CYPRESS = new TreeGrower("%s:cypress".formatted(Erebus.MODID), Optional.empty(), Optional.of(CYPRESS_TREE.getResourceKey()), Optional.empty());
-        EUCALYPTUS = new TreeGrower("%s:eucalyptus".formatted(Erebus.MODID), Optional.of(GIANT_EUCALYPTUS_TREE.getResourceKey()), Optional.of(EUCALYPTUS_TREE.getResourceKey()), Optional.empty());
-        MAHOGANY = new TreeGrower("%s:mahogany".formatted(Erebus.MODID), Optional.of(GIANT_MAHOGANY_TREE.getResourceKey()), Optional.of(MAHOGANY_TREE.getResourceKey()), Optional.empty());
-        MARSHWOOD = new TreeGrower("%s:marshwood".formatted(Erebus.MODID), Optional.empty(), Optional.of(MARSHWOOD_TREE.getResourceKey()), Optional.empty());
-        MOSSBARK = new TreeGrower("%s:mossbark".formatted(Erebus.MODID), Optional.empty(), Optional.of(MOSSBARK_TREE.getResourceKey()), Optional.empty());
-        BAMBOO = new TreeGrower("%s:bamboo".formatted(Erebus.MODID), Optional.empty(), Optional.of(BAMBOO_TREE.getResourceKey()), Optional.empty());
+        ASPER = new TreeGrower("%s:asper".formatted(Erebus.MODID), Optional.empty(), Optional.of(ASPER_TREE.getConfiguredResourceKey()), Optional.empty());
+        BALSAM = new TreeGrower("%s:balsam".formatted(Erebus.MODID), Optional.empty(), Optional.of(BALSAM_TREE.getConfiguredResourceKey()), Optional.empty());
+        BAOBAB = new TreeGrower("%s:baobab".formatted(Erebus.MODID), Optional.empty(), Optional.of(BAOBAB_TREE.getConfiguredResourceKey()), Optional.empty());
+        CYPRESS = new TreeGrower("%s:cypress".formatted(Erebus.MODID), Optional.empty(), Optional.of(CYPRESS_TREE.getConfiguredResourceKey()), Optional.empty());
+        EUCALYPTUS = new TreeGrower("%s:eucalyptus".formatted(Erebus.MODID), Optional.of(GIANT_EUCALYPTUS_TREE.getConfiguredResourceKey()), Optional.of(EUCALYPTUS_TREE.getConfiguredResourceKey()), Optional.empty());
+        MAHOGANY = new TreeGrower("%s:mahogany".formatted(Erebus.MODID), Optional.of(GIANT_MAHOGANY_TREE.getConfiguredResourceKey()), Optional.of(MAHOGANY_TREE.getConfiguredResourceKey()), Optional.empty());
+        MARSHWOOD = new TreeGrower("%s:marshwood".formatted(Erebus.MODID), Optional.empty(), Optional.of(MARSHWOOD_TREE.getConfiguredResourceKey()), Optional.empty());
+        MOSSBARK = new TreeGrower("%s:mossbark".formatted(Erebus.MODID), Optional.empty(), Optional.of(MOSSBARK_TREE.getConfiguredResourceKey()), Optional.empty());
+        BAMBOO = new TreeGrower("%s:bamboo".formatted(Erebus.MODID), Optional.empty(), Optional.of(BAMBOO_TREE.getConfiguredResourceKey()), Optional.empty());
     }
 }

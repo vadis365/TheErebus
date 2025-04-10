@@ -2,7 +2,7 @@ package erebus.datagen;
 
 import erebus.Erebus;
 import erebus.registries.world.ModBiomes;
-import erebus.registries.world.ModConfiguredFeatures;
+import erebus.registries.world.ModFeatures;
 import erebus.registries.world.ModDimensionRegistries;
 import erebus.world.ModNoiseGenerator;
 import net.minecraft.core.HolderLookup;
@@ -15,9 +15,11 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 public class ModRegistries extends DatapackBuiltinEntriesProvider {
+
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.BIOME, ModBiomes::bootstrap)
-            .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
+            .add(Registries.CONFIGURED_FEATURE, ModFeatures::bootstrapConfiguredFeatures)
+            .add(Registries.PLACED_FEATURE, ModFeatures::bootstrapPlacedFeatures)
             .add(Registries.DIMENSION_TYPE, ModDimensionRegistries::bootstrapType)
             .add(Registries.NOISE_SETTINGS, ModNoiseGenerator::bootstrap)
             .add(Registries.LEVEL_STEM, ModDimensionRegistries::bootstrapStem);

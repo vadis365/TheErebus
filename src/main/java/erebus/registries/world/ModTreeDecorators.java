@@ -1,8 +1,8 @@
 package erebus.registries.world;
 
 import erebus.Erebus;
-import erebus.world.tree.decorator.LeaveThornDecorator;
-import erebus.world.tree.decorator.TrunkThornDecorator;
+import erebus.world.feature.tree.decorator.LeaveThornDecorator;
+import erebus.world.feature.tree.decorator.TrunkThornDecorator;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.neoforged.bus.api.IEventBus;
