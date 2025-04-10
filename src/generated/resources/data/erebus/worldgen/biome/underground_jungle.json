@@ -9,7 +9,43 @@
     "water_color": 5491255,
     "water_fog_color": 557064
   },
-  "features": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "erebus:ore_iron",
+      "erebus:ore_gold",
+      "erebus:ore_coal",
+      "erebus:ore_diamond",
+      "erebus:ore_emerald",
+      "erebus:ore_lapis",
+      "erebus:ore_quartz",
+      "erebus:ore_copper",
+      "erebus:ore_silver",
+      "erebus:ore_tin",
+      "erebus:ore_lead",
+      "erebus:ore_aluminum",
+      "erebus:ore_jade",
+      "erebus:ore_fossil",
+      "erebus:ore_gneiss",
+      "erebus:ore_temple"
+    ],
+    [],
+    [],
+    [
+      "erebus:cypress",
+      "minecraft:trees_birch",
+      "erebus:nettle",
+      "erebus:tall_bloom",
+      "erebus:weeping_bluebell",
+      "erebus:fern",
+      "erebus:tall_fern"
+    ]
+  ],
   "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {

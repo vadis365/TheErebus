@@ -2,18 +2,20 @@ package erebus.registries.data;
 
 import erebus.Erebus;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
 public class ModTags {
 
     // MARK: Tool Tags
-    public static final TagKey<Block> NEEDS_JADE_TOOL = TagKey.create(BuiltInRegistries.BLOCK.key(), ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "needs_jade_tool"));
-    public static final TagKey<Block> INCORRECT_FOR_JADE_TOOL = TagKey.create(BuiltInRegistries.BLOCK.key(), ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "incorrect_for_jade_tool"));
+    public static final TagKey<Block> NEEDS_JADE_TOOL = TagKey.create(BuiltInRegistries.BLOCK.key(), Erebus.prefix("needs_jade_tool"));
+    public static final TagKey<Block> INCORRECT_FOR_JADE_TOOL = TagKey.create(BuiltInRegistries.BLOCK.key(), Erebus.prefix("incorrect_for_jade_tool"));
 
-    public static final TagKey<Block> MINEABLE_WITH_PAXEL = TagKey.create(BuiltInRegistries.BLOCK.key(), ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "mineable/paxel"));
+    public static final TagKey<Block> MINEABLE_WITH_PAXEL = TagKey.create(BuiltInRegistries.BLOCK.key(), Erebus.prefix("mineable/paxel"));
 
-
-    public static void init() {}
+    // MARK: World Tags
+    public static final TagKey<Biome> IS_EREBUS = TagKey.create(Registries.BIOME, Erebus.prefix("is_erebus"));
+    public static final TagKey<Block> UMBERSTONE_ORE_REPLACEABLES = TagKey.create(Registries.BLOCK, Erebus.prefix("umberstone_ore_replaceables"));
 }

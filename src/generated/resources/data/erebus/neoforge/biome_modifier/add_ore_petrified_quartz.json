@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#c:is_overworld",
+  "features": "erebus:ore_petrified_quartz",
+  "step": "underground_ores"
+}

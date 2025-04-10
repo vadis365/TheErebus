@@ -23,16 +23,16 @@ public class ModBiomes {
 
     public static void bootstrap(BootstrapContext<Biome> context) {
         HolderGetter<PlacedFeature> featureGetter = context.lookup(Registries.PLACED_FEATURE);
-        HolderGetter<ConfiguredWorldCarver> carverGetter = context.lookup(Registries.CONFIGURED_CARVER);
+        HolderGetter<ConfiguredWorldCarver<?>> carverGetter = context.lookup(Registries.CONFIGURED_CARVER);
 
-        context.register(ELYSIAN_FIELDS.getResourceKey(), ELYSIAN_FIELDS.getBiome());
-        context.register(ELYSIAN_FOREST.getResourceKey(), ELYSIAN_FOREST.getBiome());
-        context.register(FUNGAL_FOREST.getResourceKey(), FUNGAL_FOREST.getBiome());
-        context.register(PETRIFIED_FOREST.getResourceKey(), PETRIFIED_FOREST.getBiome());
-        context.register(SUBMERGED_SWAMP.getResourceKey(), SUBMERGED_SWAMP.getBiome());
-        context.register(SUBTERRANEAN_SAVANNAH.getResourceKey(), SUBTERRANEAN_SAVANNAH.getBiome());
-        context.register(ULTERIOR_OUTBACK.getResourceKey(), ULTERIOR_OUTBACK.getBiome());
-        context.register(UNDERGROUND_JUNGLE.getResourceKey(), UNDERGROUND_JUNGLE.getBiome());
-        context.register(VOLCANIC_DESERT.getResourceKey(), VOLCANIC_DESERT.getBiome());
+        context.register(ELYSIAN_FIELDS.getResourceKey(), ELYSIAN_FIELDS.getBiome(featureGetter, carverGetter));
+        context.register(ELYSIAN_FOREST.getResourceKey(), ELYSIAN_FOREST.getBiome(featureGetter, carverGetter));
+        context.register(FUNGAL_FOREST.getResourceKey(), FUNGAL_FOREST.getBiome(featureGetter, carverGetter));
+        context.register(PETRIFIED_FOREST.getResourceKey(), PETRIFIED_FOREST.getBiome(featureGetter, carverGetter));
+        context.register(SUBMERGED_SWAMP.getResourceKey(), SUBMERGED_SWAMP.getBiome(featureGetter, carverGetter));
+        context.register(SUBTERRANEAN_SAVANNAH.getResourceKey(), SUBTERRANEAN_SAVANNAH.getBiome(featureGetter, carverGetter));
+        context.register(ULTERIOR_OUTBACK.getResourceKey(), ULTERIOR_OUTBACK.getBiome(featureGetter, carverGetter));
+        context.register(UNDERGROUND_JUNGLE.getResourceKey(), UNDERGROUND_JUNGLE.getBiome(featureGetter, carverGetter));
+        context.register(VOLCANIC_DESERT.getResourceKey(), VOLCANIC_DESERT.getBiome(featureGetter, carverGetter));
     }
 }

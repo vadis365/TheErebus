@@ -2,6 +2,7 @@ package erebus.events;
 
 import erebus.Erebus;
 import erebus.datagen.*;
+import erebus.datagen.providers.ModBiomeTagsProvider;
 import erebus.datagen.providers.ModLootTableProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -30,6 +31,7 @@ public class GatherDataEventHandler {
         generator.addProvider(event.includeServer(), new ModBlockTags(output, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModLootTableProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new ModLang(output));
+        generator.addProvider(event.includeServer(), new ModBiomeTagsProvider(output, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), datapackProvider);
     }
 }

@@ -1,20 +1,8 @@
 package erebus;
 
-import java.util.Locale;
-
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
-import erebus.registries.ModBlockEntities;
-import erebus.registries.ModBlocks;
-import erebus.registries.ModItemRendering;
-import erebus.registries.ModItems;
-import erebus.registries.ModMenuTypes;
-import erebus.registries.ModSounds;
-import erebus.registries.ModTabs;
+import erebus.registries.*;
 import erebus.registries.data.ModArmorMaterials;
-import erebus.registries.data.ModTags;
 import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
@@ -33,6 +21,9 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import org.slf4j.Logger;
+
+import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -46,7 +37,6 @@ public class Erebus {
         ModArmorMaterials.register(bus);
         ModBlocks.register(bus);
         ModItems.register(bus);
-        ModTags.init();
         ModToolMaterials.init();
         ModTabs.register(bus);
         ModEntities.getEntityTypes().register(bus);

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#c:is_overworld",
+  "features": "erebus:weeping_bluebell",
+  "step": "vegetal_decoration"
+}

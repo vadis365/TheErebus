@@ -325,6 +325,10 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         getVariantBuilder(bush.get()).forAllStates(function);
     }
 
+    public void stigma(Supplier<? extends Block> stigma) {
+        block(stigma, "stigma");
+    }
+
     private ConfiguredModel[] states(BlockState state, ModCropBlock crop, String modelName) {
         ConfiguredModel[] models = new ConfiguredModel[1];
         models[0] = new ConfiguredModel(

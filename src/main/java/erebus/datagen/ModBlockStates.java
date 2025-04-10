@@ -283,22 +283,22 @@ public class ModBlockStates extends ModBlockStateProvider {
         block(PETAL_WHITE);
 
 
-        block(EXPLODING_STIGMA, "stigma");
+        stigma(EXPLODING_STIGMA);
         block(STEM);
-        block(STIGMA_BLACK, "stigma");
-        block(STIGMA_RED, "stigma");
-        block(STIGMA_BROWN, "stigma");
-        block(STIGMA_BLUE, "stigma");
-        block(STIGMA_PURPLE, "stigma");
-        block(STIGMA_CYAN, "stigma");
-        block(STIGMA_LIGHT_GRAY, "stigma");
-        block(STIGMA_GRAY, "stigma");
-        block(STIGMA_PINK, "stigma");
-        block(STIGMA_YELLOW, "stigma");
-        block(STIGMA_LIGHT_BLUE, "stigma");
-        block(STIGMA_MAGENTA, "stigma");
-        block(STIGMA_ORANGE, "stigma");
-        block(STIGMA_WHITE, "stigma");
+        stigma(STIGMA_BLACK);
+        stigma(STIGMA_RED);
+        stigma(STIGMA_BROWN);
+        stigma(STIGMA_BLUE);
+        stigma(STIGMA_PURPLE);
+        stigma(STIGMA_CYAN);
+        stigma(STIGMA_LIGHT_GRAY);
+        stigma(STIGMA_GRAY);
+        stigma(STIGMA_PINK);
+        stigma(STIGMA_YELLOW);
+        stigma(STIGMA_LIGHT_BLUE);
+        stigma(STIGMA_MAGENTA);
+        stigma(STIGMA_ORANGE);
+        stigma(STIGMA_WHITE);
 
         doubleCrossBlock(BULLRUSH);
         doubleCrossBlock(WEEPING_BLUEBELL);

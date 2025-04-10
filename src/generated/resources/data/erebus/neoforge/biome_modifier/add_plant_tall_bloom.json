@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#c:is_overworld",
+  "features": "erebus:tall_bloom",
+  "step": "vegetal_decoration"
+}
