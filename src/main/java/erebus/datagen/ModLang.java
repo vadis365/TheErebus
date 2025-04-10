@@ -666,6 +666,9 @@ public class ModLang extends ModLangProvider {
         addEntity(ModEntities.MOTH, "Moth");
         addEntity(ModEntities.VELVET_WORM, "Velvet Worm");
         addEntity(ModEntities.ANTLION, "Antlion");
+        addEntity(ModEntities.FLY, "Fly");
+        addEntity(ModEntities.BOT_FLY, "Botfly");
+        addEntity(ModEntities.DRAGON_FLY, "Dragonfly");
         
         addEntityNoEgg(ModEntities.THROWN_BLOCK_AS_ITEM, "Mob Projectile"); // needs a better name
         addEntityNoEgg(ModEntities.GOO_BALL, "Goo Ball");
