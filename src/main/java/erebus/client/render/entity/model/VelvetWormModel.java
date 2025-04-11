@@ -11,6 +11,7 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -63,7 +64,7 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 		PartDefinition partdefinition = meshdefinition.getRoot();
 		partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition Head1 = partdefinition.addOrReplaceChild("Head1", CubeListBuilder.create().texOffs(21, 19).addBox(-2.5F, -1.5F, -5.0F, 5.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, -10.0F));
+		PartDefinition Head1 = partdefinition.addOrReplaceChild("Head1", CubeListBuilder.create().texOffs(21, 19).addBox(-2.5F, -1.5F, -5.0F, 5.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 0F));
 
 		PartDefinition Head2 = Head1.addOrReplaceChild("Head2", CubeListBuilder.create().texOffs(26, 12).addBox(-0.5F, -0.5F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 2.0F, -5.0F));
 
@@ -73,11 +74,11 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 
 		PartDefinition RAnt = Head1.addOrReplaceChild("RAnt", CubeListBuilder.create().texOffs(23, 0).addBox(-0.3986F, 0.0F, -6.7287F, 1.0F, 1.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.0F, -1.0F, -5.0F, 0.0F, 0.1745F, 0.0F));
 
-		PartDefinition BodA1 = partdefinition.addOrReplaceChild("BodA1", CubeListBuilder.create().texOffs(40, 0).addBox(-3.0F, -2.5F, -3.0F, 6.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, -7.0F));
+		PartDefinition BodA1 = partdefinition.addOrReplaceChild("BodA1", CubeListBuilder.create().texOffs(40, 0).addBox(-3.0F, -2.5F, -3.0F, 6.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 0.0F));
 
-		PartDefinition RLA1 = partdefinition.addOrReplaceChild("RLA1", CubeListBuilder.create().texOffs(13, 0).addBox(-3.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 21.5F, -7.0F, 0.0F, 0.0F, -0.4363F));
+		PartDefinition RLA1 = partdefinition.addOrReplaceChild("RLA1", CubeListBuilder.create().texOffs(13, 0).addBox(-3.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 21.5F, 0.0F, 0.0F, 0.0F, -0.4363F));
 
-		PartDefinition LLA1 = partdefinition.addOrReplaceChild("LLA1", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 21.5F, -7.0F, 0.0F, 0.0F, 0.4363F));
+		PartDefinition LLA1 = partdefinition.addOrReplaceChild("LLA1", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 21.5F, 0F, 0.0F, 0.0F, 0.4363F));
 
 		PartDefinition BodB1 = partdefinition.addOrReplaceChild("BodB1", CubeListBuilder.create().texOffs(0, 7).addBox(-3.0F, -3.5F, -3.0F, 6.0F, 6.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, -2.0F));
 
@@ -103,9 +104,9 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 
 		PartDefinition LLE1 = partdefinition.addOrReplaceChild("LLE1", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 21.5F, 13.0F, 0.0F, 0.0F, 0.4363F));
 
-		PartDefinition BodF1 = partdefinition.addOrReplaceChild("BodF1", CubeListBuilder.create().texOffs(0, 20).addBox(-2.0F, -0.5F, -3.0F, 4.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 18.0F));
+		PartDefinition BodF1 = partdefinition.addOrReplaceChild("BodF1", CubeListBuilder.create().texOffs(0, 20).addBox(-2.0F, -0.5F, -3.0F, 4.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 0.0F));
 
-		PartDefinition BodF2 = partdefinition.addOrReplaceChild("BodF2", CubeListBuilder.create().texOffs(38, 21).addBox(-3.0F, 1.5F, -3.0F, 6.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 18.0F));
+		PartDefinition BodF2 = partdefinition.addOrReplaceChild("BodF2", CubeListBuilder.create().texOffs(38, 21).addBox(-3.0F, 1.5F, -3.0F, 6.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 64, 32);
 	}
@@ -113,6 +114,9 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float ba = (float) (Math.sin(limbSwing) * limbSwingAmount);
+		RLA1.yRot = -ba;
+		LLA1.yRot = ba;
+	/*	float ba = (float) (Math.sin(limbSwing) * limbSwingAmount);
 		float bb = (float) (Math.sin(limbSwing + 1.0F) * 2.0F * limbSwingAmount);
 		float bc = (float) (Math.sin(limbSwing + 2.0F) * 2.6F * limbSwingAmount);
 		float bd = (float) (Math.sin(limbSwing + 3.0F) * 2.0F * limbSwingAmount);
@@ -149,8 +153,7 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 		RLE1.y = 21.5F + be;
 		LLE1.y = 21.5F + be;
 
-		RLA1.yRot = -ba;
-		LLA1.yRot = ba;
+
 
 		RLB1.yRot = ba;
 		LLB1.yRot = -ba;
@@ -169,8 +172,9 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 
 		BodF1.xRot = headPitch / (180F / (float) Math.PI);
 		BodF2.xRot = headPitch / (180F / (float) Math.PI);
+		*/
 	}
-
+/*
 	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
 		Head1.render(stack, consumer, light, overlay, colour);
@@ -192,9 +196,38 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 		BodF1.render(stack, consumer, light, overlay, colour);
 		BodF2.render(stack, consumer, light, overlay, colour);
 	}
-
+*/
 	@Override
 	public ModelPart root() {
 		return root;
+	}
+
+	public void renderHead(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm worm, int frame, float wibbleStrength, float partialTicks) {
+		float smoothedTicks = worm.tickCount + frame + (worm.tickCount + frame - (worm.tickCount + frame - 1)) * partialTicks;
+		float wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.125F * wibbleStrength);
+		float jaw_wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.5F) * 0.5F);
+		stack.translate(0F, - 0.0625F - wibble * 0.5F, + 0.0625 + wibble * 2F);  ///This needs a tweak
+		Head1.xRot = worm.getXRot() / Mth.RAD_TO_DEG;
+		Head1.render(stack, consumer, light, overlay, colour);
+		
+	}
+
+	public void renderBody(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm worm, int frame, float wibbleStrength, float partialTicks) {
+		float smoothedTicks = worm.tickCount + frame + (worm.tickCount + frame - (worm.tickCount + frame - 1)) * partialTicks;
+		float wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.125F * wibbleStrength);
+		stack.translate(0F, 0F - wibble, 0F - wibble * 2F);
+		stack.scale(1F + wibble * 2F, 1F + wibble, 1.25F - wibble * 1.5F);
+		BodA1.render(stack, consumer, light, overlay, colour);
+		RLA1.render(stack, consumer, light, overlay, colour);
+		LLA1.render(stack, consumer, light, overlay, colour);
+		
+	}
+
+	public void renderTail(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm worm, int frame, float wibbleStrength, float partialTicks) {
+		float smoothedTicks = worm.tickCount + frame + (worm.tickCount + frame - (worm.tickCount + frame - 1)) * partialTicks;
+		float wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.125F * wibbleStrength);
+		stack.translate(0F, - 0.0625F - wibble * 0.5F, 0F + wibble * 2F);
+		BodF1.render(stack, consumer, light, overlay, colour);
+		BodF2.render(stack, consumer, light, overlay, colour);
 	}
 }
