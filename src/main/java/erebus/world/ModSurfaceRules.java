@@ -78,10 +78,6 @@ public class ModSurfaceRules {
                                         decorateVolcanicDesert()
                                 )
                         )
-                ),
-                ifTrue(
-                        verticalGradient("deepslate", VerticalAnchor.absolute(0), VerticalAnchor.absolute(8)),
-                        DEEPSLATE
                 )
         );
 

@@ -2,6 +2,7 @@ package erebus.world.biome;
 
 import erebus.registries.world.ModFeatures;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -42,6 +43,7 @@ public class ElysianFieldsBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_PLAIN)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.CYPRESS_TREE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.NETTLE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.TALL_BLOOM.getPlacedResourceKey())

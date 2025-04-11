@@ -37,6 +37,7 @@
     [],
     [],
     [
+      "minecraft:patch_grass_plain",
       "erebus:cypress",
       "erebus:nettle",
       "erebus:tall_bloom",

@@ -1,7 +1,6 @@
 package erebus.datagen;
 
 import erebus.Erebus;
-import static erebus.registries.ModBlocks.*;
 import erebus.registries.data.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -13,6 +12,8 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
+
+import static erebus.registries.ModBlocks.*;
 
 public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
 
@@ -116,5 +117,8 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
                         LEAVES_MARSHWOOD.get(),
                         LEAVES_MOSSBARK.get()
                 );
+
+        tag(ModTags.UMBERSTONE_ORE_REPLACEABLES)
+                .add(UMBERSTONE.get());
     }
 }

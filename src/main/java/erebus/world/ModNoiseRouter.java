@@ -2,13 +2,16 @@ package erebus.world;
 
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
+
+import java.util.stream.Stream;
 
 public class ModNoiseRouter {
 
     protected static NoiseRouter erebus(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noiseParams) {
-        return createErebusRouter(densityFunctions, noiseParams, slideNetherLike(densityFunctions, -64, 384));
+        return createErebusRouter(densityFunctions, noiseParams, slideNetherLike(densityFunctions));
     }
 
     private static NoiseRouter createErebusRouter(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noiseParameters, DensityFunction slide) {
@@ -21,7 +24,38 @@ public class ModNoiseRouter {
         DensityFunction lavaPool = DensityFunctions.noise(noiseParameters.getOrThrow(Noises.AQUIFER_LAVA));
         DensityFunction temperature = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25F, noiseParameters.getOrThrow(Noises.TEMPERATURE));
         DensityFunction vegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25F, noiseParameters.getOrThrow(Noises.VEGETATION));
+        DensityFunction factor = getFunction(densityFunctions, NoiseRouterData.FACTOR);
+        DensityFunction depth = getFunction(densityFunctions, NoiseRouterData.DEPTH);
+        DensityFunction depthFactorGradient = noiseGradientDensity(DensityFunctions.cache2d(factor), depth);
         DensityFunction slideErebus = postProcess(slide);
+        DensityFunction y = getFunction(densityFunctions, NoiseRouterData.Y);
+        int minY = Stream.of(ModOreVeinifier.VeinType.values()).mapToInt(type -> type.minY).min().orElse(-DimensionType.MIN_Y * 2);
+        int maxY = Stream.of(ModOreVeinifier.VeinType.values()).mapToInt(type -> type.maxY).min().orElse(-DimensionType.MIN_Y * 2);
+
+        DensityFunction oreVeininess = NoiseRouterData.yLimitedInterpolatable(
+                y,
+                DensityFunctions.noise(noiseParameters.getOrThrow(Noises.ORE_VEIN_A), 1.5, 1.5),
+                minY,
+                maxY,
+                0
+        );
+
+        DensityFunction oreVeinA = NoiseRouterData.yLimitedInterpolatable(
+                y,
+                DensityFunctions.noise(noiseParameters.getOrThrow(Noises.ORE_VEIN_A), 4.0F, 4.0F),
+                minY,
+                maxY,
+                0
+        ).abs();
+
+        DensityFunction oreVeinB = NoiseRouterData.yLimitedInterpolatable(
+                y,
+                DensityFunctions.noise(noiseParameters.getOrThrow(Noises.ORE_VEIN_B), 4.0F, 4.0F),
+                minY,
+                maxY,
+                0
+        ).abs();
+
         return new NoiseRouter(
                 aquafierBarrier,
                 aquafierFlooding,
@@ -29,20 +63,24 @@ public class ModNoiseRouter {
                 lavaPool,
                 temperature,
                 vegetation,
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
+                getFunction(densityFunctions, NoiseRouterData.CONTINENTS),
+                getFunction(densityFunctions, NoiseRouterData.EROSION),
+                depth,
+                getFunction(densityFunctions, NoiseRouterData.RIDGES),
+                slideOverworld(DensityFunctions.add(depthFactorGradient, DensityFunctions.constant(-0.703125))).clamp(-64, 384),
                 slideErebus,
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
-                DensityFunctions.zero()
+                oreVeininess,
+                oreVeinA,
+                oreVeinB
         );
     }
 
-    private static DensityFunction slideNetherLike(HolderGetter<DensityFunction> densityFunctions, int minY, int maxY) {
-        return slide(getFunction(densityFunctions, NoiseRouterData.BASE_3D_NOISE_NETHER), minY, maxY, 24, 0, 0.9375F, -8, 24, 2.5F);
+    private static DensityFunction slideOverworld(DensityFunction densityFunction) {
+        return slide(densityFunction, -64, 384, 80, 64, -0.078125, 0, 24, 0.1171875);
+    }
+
+    private static DensityFunction slideNetherLike(HolderGetter<DensityFunction> densityFunctions) {
+        return slide(getFunction(densityFunctions, NoiseRouterData.BASE_3D_NOISE_OVERWORLD), -64, 384, 80, 64, -0.078125F, 0, 24, 0.1171875F);
     }
 
     private static DensityFunction getFunction(HolderGetter<DensityFunction> densityFunctions, ResourceKey<DensityFunction> key) {
@@ -59,5 +97,10 @@ public class ModNoiseRouter {
         DensityFunction $$9 = DensityFunctions.lerp(densityfunction1, p_224449_, input);
         DensityFunction densityfunction2 = DensityFunctions.yClampedGradient(minY + p_224450_, minY + p_224451_, 0.0F, 1.0F);
         return DensityFunctions.lerp(densityfunction2, p_224452_, $$9);
+    }
+
+    private static DensityFunction noiseGradientDensity(DensityFunction minFunction, DensityFunction maxFunction) {
+        DensityFunction densityfunction = DensityFunctions.mul(maxFunction, minFunction);
+        return DensityFunctions.mul(DensityFunctions.constant(4.0), densityfunction.quarterNegative());
     }
 }

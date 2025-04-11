@@ -15,6 +15,6 @@ public class AluminumOre extends ErebusFeature {
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return ModOrePlacement.commonOrePlacement(12, HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(80)));
+        return ModOrePlacement.commonOrePlacement(12, HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(384)));
     }
 }
