@@ -1,30 +1,35 @@
 package erebus.entity;
 
-import java.util.Random;
+import java.util.EnumSet;
 
 import javax.annotation.Nullable;
 
 import erebus.entity.ai.FlyingMoveControlLessSpin;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -39,6 +44,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -68,9 +74,7 @@ public class Dragonfly extends Monster {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.75D, true));
-		//goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		//goalSelector.addGoal(3, new RandomLookAroundGoal(this));
+		goalSelector.addGoal(1, new MeleeAttackGoalMoveToHead(this, 1D, true));
 		goalSelector.addGoal(4, new AIFlyingWander(this, 1D, 0.01F));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this).setAlertOthers(Dragonfly.class));
 		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
@@ -181,18 +185,14 @@ public class Dragonfly extends Monster {
 		Vec3 vec3 = this.getDeltaMovement();
 		if (!this.onGround() && vec3.y < 0.0D) {
 			if (getTarget() == null)
-				this.setDeltaMovement(vec3.multiply(1.0D, 0.3D, 1.0D));
+				this.setDeltaMovement(vec3.multiply(1.0D, 0.35D, 1.0D));
 			else
-				this.setDeltaMovement(vec3.multiply(1.0D, 1.0D, 1.0D));
-			this.yBodyRot = yBodyRotO;
+				this.setDeltaMovement(vec3.multiply(1.0D, 0.99D, 1.0D));
 		}
-		
+
 		if (isBeingRidden()) {
-			if (getTarget() != null && !level().isEmptyBlock(blockPosition().below(3)) || !getDropped() && getY() < pickupHeight + 10D) {
-				getNavigation().stop();
+			if (getTarget() != null && !level().isEmptyBlock(blockPosition().below(3)) || !getDropped() && getY() < pickupHeight + 10D)
 				getNavigation().moveTo(getX(), getY() + 10D, getZ(), 1D);
-				this.setDeltaMovement(vec3.multiply(1.0D, 1.0D, 1.0D));
-			}
 			
 			if (!level().isClientSide() && captured() && (getY() > pickupHeight + 10D || countDown <= 0 || !level().isClientSide() && captured() && level().getBlockState(blockPosition().above()).isRedstoneConductor(level(), blockPosition()))) {
 				setDropped(true);
@@ -213,9 +213,9 @@ public class Dragonfly extends Monster {
 
 		if (level().isClientSide())
 			if (getSkin() == 0) {
-				//spawnParticles(level(), getX(), getY(), getZ(), random);
-				//if (!hasCustomName())
-				//	setCustomName(Component "Ender Dragonfly");
+				spawnParticles(level(), getX(), getY(), getZ(), random);
+				if (!hasCustomName())
+					setCustomName(Component.literal("Ender Dragonfly")); //TODO - Lang this up at some point.
 			}
 
 		if(isInWater())
@@ -224,11 +224,11 @@ public class Dragonfly extends Monster {
 	
     @Nullable
     public boolean isBeingRidden()  {
-        return !this.getPassengers().isEmpty() && (Entity)this.getPassengers().get(0) != null;
+        return !this.getPassengers().isEmpty();
     }
 
     @OnlyIn(Dist.CLIENT)
-	public void spawnParticles(Level level, double x, double y, double z, Random rand) {
+	public void spawnParticles(Level level, double x, double y, double z, RandomSource rand) {
 		for (int count = 0; count < 20; ++count) {
 			double velX = 0.0D;
 			double velY = 0.0D;
@@ -238,8 +238,7 @@ public class Dragonfly extends Monster {
 			velY = (rand.nextFloat() - 0.5D) * 0.125D;
 			velZ = rand.nextFloat() * 1.0F * motionZ;
 			velX = rand.nextFloat() * 1.0F * motionX;
-		//	Erebus.PROXY.spawnCustomParticle("portal", level(), x, y, z, velX, velY, velZ);
-		//	TODO Particles
+			level().addParticle(ParticleTypes.PORTAL, x, y, z, velX, velY, velZ);
 		}
 	}
 
@@ -247,10 +246,8 @@ public class Dragonfly extends Monster {
 	public void playerTouch(Player player) {
 		super.playerTouch(player);
 		if (!level().isClientSide() && !player.isCreative() && !captured() && random.nextInt(20) == 0 && !getDropped()) {
-			Vec3 vec3 = this.getDeltaMovement();
-			setDeltaMovement(vec3.multiply(0D, 0D, 0D));
 			pickupHeight = getY();
-			setPos(getX(), player.getY() + player.getBbHeight() + getBbHeight() * 0.5F, getZ());
+			setPos(getX(), player.getY() + player.getBbHeight() + getBbHeight(), getZ());
 			player.startRiding(this, true);
 			setCountdown(60);
 		}
@@ -326,7 +323,7 @@ public class Dragonfly extends Monster {
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
-		setSkin(level.getRandom().nextInt(51));
+		setSkin(level.getRandom().nextInt(1)); //51
 		return spawnGroupData;
 	}
 
@@ -361,5 +358,174 @@ public class Dragonfly extends Monster {
 			Vec3 vec31 = HoverRandomPos.getPos(this.mob, 16, 2, vec3.x, vec3.z, ((float) Math.PI / 2F), 2, 1);
 			return vec31 != null ? vec31 : AirAndWaterRandomPos.getPos(this.mob, 16, 2, -2, vec3.x, vec3.z, (double) ((float) Math.PI / 2F));
 		}
+	}
+
+	class MeleeAttackGoalMoveToHead extends Goal {
+		
+		 protected final PathfinderMob mob;
+		    private final double speedModifier;
+		    private final boolean followingTargetEvenIfNotSeen;
+		    private Path path;
+		    private double pathedTargetX;
+		    private double pathedTargetY;
+		    private double pathedTargetZ;
+		    private int ticksUntilNextPathRecalculation;
+		    private int ticksUntilNextAttack;
+		    private final int attackInterval = 20;
+		    private long lastCanUseCheck;
+		    private static final long COOLDOWN_BETWEEN_CAN_USE_CHECKS = 20L;
+		    private int failedPathFindingPenalty = 0;
+		    private boolean canPenalize = false;
+
+		    public MeleeAttackGoalMoveToHead(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
+		        this.mob = mob;
+		        this.speedModifier = speedModifier;
+		        this.followingTargetEvenIfNotSeen = followingTargetEvenIfNotSeen;
+		        this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+		    }
+
+		    @Override
+		    public boolean canUse() {
+		        long i = this.mob.level().getGameTime();
+		        if (i - this.lastCanUseCheck < 20L) {
+		            return false;
+		        } else {
+		            this.lastCanUseCheck = i;
+		            LivingEntity livingentity = this.mob.getTarget();
+		            if (livingentity == null) {
+		                return false;
+		            } else if (!livingentity.isAlive()) {
+		                return false;
+		            } else {
+		              if (canPenalize) {
+		                    if (--this.ticksUntilNextPathRecalculation <= 0) {
+		                        this.path = this.mob.getNavigation().createPath(livingentity.getX(), livingentity.getY() + livingentity.getBbHeight() + mob.getBbHeight(), livingentity.getZ(), 0);
+		                        this.ticksUntilNextPathRecalculation = 4 + this.mob.getRandom().nextInt(7);
+		                        return this.path != null;
+		                    } else {
+		                        return true;
+		                    }
+		                }
+		              	this.path = this.mob.getNavigation().createPath(livingentity.getX(), livingentity.getY() + livingentity.getBbHeight() + mob.getBbHeight(), livingentity.getZ(), 0);
+		                return this.path != null ? true : this.mob.isWithinMeleeAttackRange(livingentity);
+		            }
+		        }
+		    }
+
+		    @Override
+		    public boolean canContinueToUse() {
+		        LivingEntity livingentity = this.mob.getTarget();
+		        if (livingentity == null) {
+		            return false;
+		        } else if (!livingentity.isAlive()) {
+		            return false;
+		        } else if (!this.followingTargetEvenIfNotSeen) {
+		            return !this.mob.getNavigation().isDone();
+		        } else {
+		            return !this.mob.isWithinRestriction(livingentity.blockPosition())
+		                ? false
+		                : !(livingentity instanceof Player) || !livingentity.isSpectator() && !((Player)livingentity).isCreative();
+		        }
+		    }
+
+		    @Override
+		    public void start() {
+		        this.mob.getNavigation().moveTo(this.path, this.speedModifier);
+		        this.mob.setAggressive(true);
+		        this.ticksUntilNextPathRecalculation = 0;
+		        this.ticksUntilNextAttack = 0;
+		    }
+
+		    @Override
+		    public void stop() {
+		        LivingEntity livingentity = this.mob.getTarget();
+		        if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingentity)) {
+		            this.mob.setTarget(null);
+		        }
+
+		        this.mob.setAggressive(false);
+		        this.mob.getNavigation().stop();
+		    }
+
+		    @Override
+		    public boolean requiresUpdateEveryTick() {
+		        return true;
+		    }
+
+		    @Override
+		    public void tick() {
+		        LivingEntity livingentity = this.mob.getTarget();
+		        if (livingentity != null) {
+		            this.mob.getLookControl().setLookAt(livingentity, 30.0F, 30.0F);
+		            this.ticksUntilNextPathRecalculation = Math.max(this.ticksUntilNextPathRecalculation - 1, 0);
+		            if ((this.followingTargetEvenIfNotSeen || this.mob.getSensing().hasLineOfSight(livingentity))
+		                && this.ticksUntilNextPathRecalculation <= 0
+		                && (
+		                    this.pathedTargetX == 0.0 && this.pathedTargetY == 0.0 && this.pathedTargetZ == 0.0
+		                        || livingentity.distanceToSqr(this.pathedTargetX, this.pathedTargetY, this.pathedTargetZ) >= 1.0
+		                        || this.mob.getRandom().nextFloat() < 0.05F
+		                )) {
+		                this.pathedTargetX = livingentity.getX();
+		                this.pathedTargetY = livingentity.getY() + livingentity.getBbHeight() + mob.getBbHeight();
+		                this.pathedTargetZ = livingentity.getZ();
+		                this.ticksUntilNextPathRecalculation = 4 + this.mob.getRandom().nextInt(7);
+		                double d0 = this.mob.distanceToSqr(livingentity);
+		                if (this.canPenalize) {
+		                    this.ticksUntilNextPathRecalculation += failedPathFindingPenalty;
+		                    if (this.mob.getNavigation().getPath() != null) {
+		                        net.minecraft.world.level.pathfinder.Node finalPathPoint = this.mob.getNavigation().getPath().getEndNode();
+		                        if (finalPathPoint != null && livingentity.distanceToSqr(finalPathPoint.x, finalPathPoint.y, finalPathPoint.z) < 1)
+		                            failedPathFindingPenalty = 0;
+		                        else
+		                            failedPathFindingPenalty += 10;
+		                    } else {
+		                        failedPathFindingPenalty += 10;
+		                    }
+		                }
+		                if (d0 > 1024.0) {
+		                    this.ticksUntilNextPathRecalculation += 10;
+		                } else if (d0 > 256.0) {
+		                    this.ticksUntilNextPathRecalculation += 5;
+		                }
+
+		                if (!this.mob.getNavigation().moveTo(livingentity, this.speedModifier)) {
+		                    this.ticksUntilNextPathRecalculation += 15;
+		                }
+
+		                this.ticksUntilNextPathRecalculation = this.adjustedTickDelay(this.ticksUntilNextPathRecalculation);
+		            }
+
+		            this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
+		            this.checkAndPerformAttack(livingentity);
+		        }
+		    }
+
+		    protected void checkAndPerformAttack(LivingEntity target) {
+		        if (this.canPerformAttack(target)) {
+		            this.resetAttackCooldown();
+		            this.mob.swing(InteractionHand.MAIN_HAND);
+		            this.mob.doHurtTarget(target);
+		        }
+		    }
+
+		    protected void resetAttackCooldown() {
+		        this.ticksUntilNextAttack = this.adjustedTickDelay(20);
+		    }
+
+		    protected boolean isTimeToAttack() {
+		        return this.ticksUntilNextAttack <= 0;
+		    }
+
+		    protected boolean canPerformAttack(LivingEntity entity) {
+		        return this.isTimeToAttack() && this.mob.isWithinMeleeAttackRange(entity) && this.mob.getSensing().hasLineOfSight(entity);
+		    }
+
+		    protected int getTicksUntilNextAttack() {
+		        return this.ticksUntilNextAttack;
+		    }
+
+		    protected int getAttackInterval() {
+		        return this.adjustedTickDelay(20);
+		    }
 	}
 }
