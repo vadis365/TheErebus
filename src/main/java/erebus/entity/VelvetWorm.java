@@ -89,7 +89,7 @@ public class VelvetWorm extends Monster {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new RandomStrollGoal(this, 1D, 1));
+		goalSelector.addGoal(1, new RandomStrollGoal(this, 0.8D, 1));
 		goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false));
 		goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 4.0F));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this));

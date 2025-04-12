@@ -18,45 +18,31 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> {
 	public ModelPart root;
-	public ModelPart Head1;
-	public ModelPart BodA1;
-	public ModelPart RLA1;
-	public ModelPart LLA1;
-	public ModelPart BodB1;
-	public ModelPart RLB1;
-	public ModelPart LLB1;
-	public ModelPart BodC1;
-	public ModelPart RLC1;
-	public ModelPart LLC1;
-	public ModelPart BodD1;
-	public ModelPart RLD1;
-	public ModelPart LLD1;
-	public ModelPart BodE1;
-	public ModelPart RLE1;
-	public ModelPart LLE1;
-	public ModelPart BodF1;
-	public ModelPart BodF2;
+	private final ModelPart Head1;
+	private final ModelPart Body1;
+	private final ModelPart Body1RightLeg;
+	private final ModelPart Body1LeftLeg;
+	private final ModelPart Body2;
+	private final ModelPart Body2RightLeg;
+	private final ModelPart Body2LeftLeg;
+	private final ModelPart Tail;
+	private final ModelPart TailFin;
+	private final ModelPart LAnt;
+	private final ModelPart RAnt;
 
 	public VelvetWormModel(ModelPart root) {
 		this.root = root;
 		this.Head1 = root.getChild("Head1");
-		this.BodA1 = root.getChild("BodA1");
-		this.RLA1 = root.getChild("RLA1");
-		this.LLA1 = root.getChild("LLA1");
-		this.BodB1 = root.getChild("BodB1");
-		this.RLB1 = root.getChild("RLB1");
-		this.LLB1 = root.getChild("LLB1");
-		this.BodC1 = root.getChild("BodC1");
-		this.RLC1 = root.getChild("RLC1");
-		this.LLC1 = root.getChild("LLC1");
-		this.BodD1 = root.getChild("BodD1");
-		this.RLD1 = root.getChild("RLD1");
-		this.LLD1 = root.getChild("LLD1");
-		this.BodE1 = root.getChild("BodE1");
-		this.RLE1 = root.getChild("RLE1");
-		this.LLE1 = root.getChild("LLE1");
-		this.BodF1 = root.getChild("BodF1");
-		this.BodF2 = root.getChild("BodF2");
+		this.Body1 = root.getChild("Body1");
+		this.Body1RightLeg = root.getChild("Body1RightLeg");
+		this.Body1LeftLeg = root.getChild("Body1LeftLeg");
+		this.Body2 = root.getChild("Body2");
+		this.Body2RightLeg = root.getChild("Body2RightLeg");
+		this.Body2LeftLeg = root.getChild("Body2LeftLeg");
+		this.Tail = root.getChild("Tail");
+		this.TailFin = root.getChild("TailFin");
+		LAnt = Head1.getChild("LAnt");
+		RAnt =  Head1.getChild("RAnt");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -64,58 +50,40 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 		PartDefinition partdefinition = meshdefinition.getRoot();
 		partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition Head1 = partdefinition.addOrReplaceChild("Head1", CubeListBuilder.create().texOffs(21, 19).addBox(-2.5F, -1.5F, -5.0F, 5.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 0F));
+		PartDefinition Head1 = partdefinition.addOrReplaceChild("Head1", CubeListBuilder.create().texOffs(12, 0).addBox(-2.5F, -2.0F, -5.0F, 5.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 1.0F));
 
-		PartDefinition Head2 = Head1.addOrReplaceChild("Head2", CubeListBuilder.create().texOffs(26, 12).addBox(-0.5F, -0.5F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 2.0F, -5.0F));
+		PartDefinition Head2 = Head1.addOrReplaceChild("Head2", CubeListBuilder.create().texOffs(26, 18).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 1.0F, -5.0F));
 
-		PartDefinition Head3 = Head1.addOrReplaceChild("Head3", CubeListBuilder.create().texOffs(26, 12).addBox(-0.5F, -0.5F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 2.0F, -5.0F));
+		PartDefinition Head3 = Head1.addOrReplaceChild("Head3", CubeListBuilder.create().texOffs(26, 18).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 1.0F, -5.0F));
 
-		PartDefinition LAnt = Head1.addOrReplaceChild("LAnt", CubeListBuilder.create().texOffs(23, 0).addBox(-0.6014F, 0.0F, -6.7287F, 1.0F, 1.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.0F, -1.0F, -5.0F, 0.0F, -0.1745F, 0.0F));
+		PartDefinition LAnt = Head1.addOrReplaceChild("LAnt", CubeListBuilder.create().texOffs(16, 21).addBox(-0.6014F, -0.5F, -6.7287F, 1.0F, 1.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.0F, -0.5F, -5.0F, 0.0F, -0.1745F, 0.0F));
 
-		PartDefinition RAnt = Head1.addOrReplaceChild("RAnt", CubeListBuilder.create().texOffs(23, 0).addBox(-0.3986F, 0.0F, -6.7287F, 1.0F, 1.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.0F, -1.0F, -5.0F, 0.0F, 0.1745F, 0.0F));
+		PartDefinition RAnt = Head1.addOrReplaceChild("RAnt", CubeListBuilder.create().texOffs(16, 21).addBox(-0.3986F, -0.5F, -6.7287F, 1.0F, 1.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.0F, -0.5F, -5.0F, 0.0F, 0.1745F, 0.0F));
 
-		PartDefinition BodA1 = partdefinition.addOrReplaceChild("BodA1", CubeListBuilder.create().texOffs(40, 0).addBox(-3.0F, -2.5F, -3.0F, 6.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 0.0F));
+		PartDefinition Body1 = partdefinition.addOrReplaceChild("Body1", CubeListBuilder.create().texOffs(0, 10).addBox(-3.0F, -2.5F, -3.0F, 6.0F, 5.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 0.0F));
 
-		PartDefinition RLA1 = partdefinition.addOrReplaceChild("RLA1", CubeListBuilder.create().texOffs(13, 0).addBox(-3.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 21.5F, 0.0F, 0.0F, 0.0F, -0.4363F));
+		PartDefinition Body1RightLeg = partdefinition.addOrReplaceChild("Body1RightLeg", CubeListBuilder.create().texOffs(0, 5).addBox(-3.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 21.5F, 0.0F, 0.0F, 0.0F, -0.4363F));
 
-		PartDefinition LLA1 = partdefinition.addOrReplaceChild("LLA1", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 21.5F, 0F, 0.0F, 0.0F, 0.4363F));
+		PartDefinition Body1LeftLeg = partdefinition.addOrReplaceChild("Body1LeftLeg", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 21.5F, 0.0F, 0.0F, 0.0F, 0.4363F));
 
-		PartDefinition BodB1 = partdefinition.addOrReplaceChild("BodB1", CubeListBuilder.create().texOffs(0, 7).addBox(-3.0F, -3.5F, -3.0F, 6.0F, 6.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, -2.0F));
+		PartDefinition Body2 = partdefinition.addOrReplaceChild("Body2", CubeListBuilder.create().texOffs(0, 10).addBox(-3.0F, -2.5F, -3.0F, 6.0F, 5.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 0.0F));
 
-		PartDefinition RLB1 = partdefinition.addOrReplaceChild("RLB1", CubeListBuilder.create().texOffs(13, 0).addBox(-3.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 21.5F, -2.0F, 0.0F, 0.0F, -0.4363F));
+		PartDefinition Body2RightLeg = partdefinition.addOrReplaceChild("Body2RightLeg", CubeListBuilder.create().texOffs(0, 5).addBox(-3.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 21.5F, 0.0F, 0.0F, 0.0F, -0.4363F));
 
-		PartDefinition LLB1 = partdefinition.addOrReplaceChild("LLB1", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 21.5F, -2.0F, 0.0F, 0.0F, 0.4363F));
+		PartDefinition Body2LeftLeg = partdefinition.addOrReplaceChild("Body2LeftLeg", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 21.5F, 0.0F, 0.0F, 0.0F, 0.4363F));
 
-		PartDefinition BodC1 = partdefinition.addOrReplaceChild("BodC1", CubeListBuilder.create().texOffs(0, 7).addBox(-3.0F, -3.5F, -3.0F, 6.0F, 6.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 3.0F));
+		PartDefinition Tail = partdefinition.addOrReplaceChild("Tail", CubeListBuilder.create().texOffs(1, 24).addBox(-2.0F, -1.0F, -0.5F, 4.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 0F));
 
-		PartDefinition RLC1 = partdefinition.addOrReplaceChild("RLC1", CubeListBuilder.create().texOffs(13, 0).addBox(-3.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 21.5F, 3.0F, 0.0F, 0.0F, -0.4363F));
+		PartDefinition TailFin = partdefinition.addOrReplaceChild("TailFin", CubeListBuilder.create().texOffs(13, 9).addBox(-3.0F, 0.5F, -0.5F, 6.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 0F));
 
-		PartDefinition LLC1 = partdefinition.addOrReplaceChild("LLC1", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 21.5F, 3.0F, 0.0F, 0.0F, 0.4363F));
-
-		PartDefinition BodD1 = partdefinition.addOrReplaceChild("BodD1", CubeListBuilder.create().texOffs(40, 0).addBox(-3.0F, -2.5F, -3.0F, 6.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 8.0F));
-
-		PartDefinition RLD1 = partdefinition.addOrReplaceChild("RLD1", CubeListBuilder.create().texOffs(13, 0).addBox(-3.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 21.5F, 8.0F, 0.0F, 0.0F, -0.4363F));
-
-		PartDefinition LLD1 = partdefinition.addOrReplaceChild("LLD1", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 21.5F, 8.0F, 0.0F, 0.0F, 0.4363F));
-
-		PartDefinition BodE1 = partdefinition.addOrReplaceChild("BodE1", CubeListBuilder.create().texOffs(40, 11).addBox(-3.0F, -1.5F, -3.0F, 6.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 13.0F));
-
-		PartDefinition RLE1 = partdefinition.addOrReplaceChild("RLE1", CubeListBuilder.create().texOffs(13, 0).addBox(-3.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 21.5F, 13.0F, 0.0F, 0.0F, -0.4363F));
-
-		PartDefinition LLE1 = partdefinition.addOrReplaceChild("LLE1", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, -0.9F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 21.5F, 13.0F, 0.0F, 0.0F, 0.4363F));
-
-		PartDefinition BodF1 = partdefinition.addOrReplaceChild("BodF1", CubeListBuilder.create().texOffs(0, 20).addBox(-2.0F, -0.5F, -3.0F, 4.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 0.0F));
-
-		PartDefinition BodF2 = partdefinition.addOrReplaceChild("BodF2", CubeListBuilder.create().texOffs(38, 21).addBox(-3.0F, 1.5F, -3.0F, 6.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 0.0F));
-
-		return LayerDefinition.create(meshdefinition, 64, 32);
+		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float ba = (float) (Math.sin(limbSwing) * limbSwingAmount);
-		RLA1.yRot = -ba;
-		LLA1.yRot = ba;
+		Body1RightLeg.yRot = -ba;
+		Body1LeftLeg.yRot = ba;
 	/*	float ba = (float) (Math.sin(limbSwing) * limbSwingAmount);
 		float bb = (float) (Math.sin(limbSwing + 1.0F) * 2.0F * limbSwingAmount);
 		float bc = (float) (Math.sin(limbSwing + 2.0F) * 2.6F * limbSwingAmount);
@@ -205,29 +173,69 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 	public void renderHead(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm worm, int frame, float wibbleStrength, float partialTicks) {
 		float smoothedTicks = worm.tickCount + frame + (worm.tickCount + frame - (worm.tickCount + frame - 1)) * partialTicks;
 		float wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.125F * wibbleStrength);
-		float jaw_wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.5F) * 0.5F);
-		stack.translate(0F, - 0.0625F - wibble * 0.5F, + 0.0625 + wibble * 2F);  ///This needs a tweak
+		float ant_wibbleSin = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.25F);
+		float ant_wibbleCos = (float) (Math.cos(1F + (smoothedTicks) * 0.25F) * 0.25F);
+		stack.translate(0F, 0F - wibble, 0F + wibble * 2F);  ///This needs a tweak
+		stack.scale(1F + wibble * 2F, 1F + wibble, 1.5F - wibble * 1.25F);
 		Head1.xRot = worm.getXRot() / Mth.RAD_TO_DEG;
-		Head1.render(stack, consumer, light, overlay, colour);
-		
+		LAnt.xRot = 0F + ant_wibbleSin;
+		RAnt.xRot = 0F + ant_wibbleCos;
+		LAnt.yRot = -0.1745F  - ant_wibbleCos;
+		RAnt.yRot = 0.1745F + ant_wibbleSin;
+		Head1.render(stack, consumer, light, overlay, colour); 
 	}
-
-	public void renderBody(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm worm, int frame, float wibbleStrength, float partialTicks) {
+	//TODO remake renderer and use layers
+	public void renderBody(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm worm, int frame, float wibbleStrength, float partialTicks, boolean isPartA) {
 		float smoothedTicks = worm.tickCount + frame + (worm.tickCount + frame - (worm.tickCount + frame - 1)) * partialTicks;
 		float wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.125F * wibbleStrength);
+		float ba = wibble * 2F;//(float) (Math.sin(limbSwing) * limbSwingAmount);
+
 		stack.translate(0F, 0F - wibble, 0F - wibble * 2F);
-		stack.scale(1F + wibble * 2F, 1F + wibble, 1.25F - wibble * 1.5F);
-		BodA1.render(stack, consumer, light, overlay, colour);
-		RLA1.render(stack, consumer, light, overlay, colour);
-		LLA1.render(stack, consumer, light, overlay, colour);
+		
+		stack.pushPose();
+		stack.scale(1F + wibble * 2F, 1F + wibble, 1.5F - wibble * 1.25F);
+		Body1.render(stack, consumer, light, overlay, colour);
+		stack.popPose();
+		if(isPartA) {
+			stack.pushPose();
+			stack.scale(1F, 1F, 1F);
+			stack.translate(0F - wibble * 0.5F, 0F + wibble, 0F);
+			Body1RightLeg.yRot = -ba;
+			Body1RightLeg.render(stack, consumer, light, overlay, colour);
+			stack.popPose();
+			
+			stack.pushPose();
+			stack.scale(1F, 1F, 1F);
+			stack.translate(0F + wibble * 0.5F, 0F + wibble, 0F);
+			Body1LeftLeg.yRot = ba;
+			Body1LeftLeg.render(stack, consumer, light, overlay, colour);
+			stack.popPose();
+		}
+		else {
+			stack.pushPose();
+			stack.scale(1F, 1F, 1F);
+			stack.translate(0F - wibble * 0.5F, 0F + wibble, 0F);
+			Body2RightLeg.yRot = ba;
+			Body2RightLeg.render(stack, consumer, light, overlay, colour);
+			stack.popPose();
+			
+			stack.pushPose();
+			stack.scale(1F, 1F, 1F);
+			stack.translate(0F + wibble * 0.5F, 0F + wibble, 0F);
+			Body2LeftLeg.yRot =- ba;
+			Body2LeftLeg.render(stack, consumer, light, overlay, colour);
+			stack.popPose();
+		}
 		
 	}
 
 	public void renderTail(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm worm, int frame, float wibbleStrength, float partialTicks) {
 		float smoothedTicks = worm.tickCount + frame + (worm.tickCount + frame - (worm.tickCount + frame - 1)) * partialTicks;
 		float wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.125F * wibbleStrength);
-		stack.translate(0F, - 0.0625F - wibble * 0.5F, 0F + wibble * 2F);
-		BodF1.render(stack, consumer, light, overlay, colour);
-		BodF2.render(stack, consumer, light, overlay, colour);
+
+		stack.translate(0F, 0F - wibble, 0F + wibble * 2F);
+		stack.scale(1F + wibble * 2F, 1F + wibble, 1.625F - wibble * 1.25F);
+		Tail.render(stack, consumer, light, overlay, colour);
+		TailFin.render(stack, consumer, light, overlay, colour);
 	}
 }

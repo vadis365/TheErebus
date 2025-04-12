@@ -23,12 +23,13 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<VelvetWorm>> {
-	public static final ResourceLocation TEXTURE_1 = Erebus.prefix("textures/entity/velvetworm.png");
+	public static final ResourceLocation TEXTURE_1 = Erebus.prefix("textures/entity/velvetworm_1.png");
 	public static final ResourceLocation TEXTURE_2 = Erebus.prefix("textures/entity/velvetworm_2.png");
 
 
 	public VelvetWormRenderer(EntityRendererProvider.Context context) {
 		super(context, new VelvetWormModel<>(context.bakeLayer(ModEntityRendering.VELVET_WORM)), 0.1F);
+		//TODO remake renderer and use layers for body sections parts
 	}
 
 	@Override
@@ -79,7 +80,7 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<
 		if(renderType != null) {
 			consumer = buffer.getBuffer(renderType);
 			for(int i = 0; i < entity.parts.length - 1; i++)
-				renderBodyPart(stack, consumer, packedLight, overlay, colour, entity, entity.parts[i], i > 0 ? entity.parts[i - 1] : entity, rx, ry, rz, i, avgWibbleStrength, zOffset -= 0.001F, partialTicks);
+				renderBodyPart(stack, consumer, packedLight, overlay, colour, entity, entity.parts[i], i > 0 ? entity.parts[i - 1] : entity, rx, ry, rz, i, avgWibbleStrength, zOffset -= 0.001F, partialTicks, i > 0 && i%2 == 0 ? true : false);
 			renderTailPart(stack, consumer, packedLight, overlay, colour, entity, entity.parts[entity.parts.length - 1], entity.parts[entity.parts.length - 2], rx, ry, rz, entity.parts.length - 1, avgWibbleStrength, partialTicks);
 		}
 		stack.popPose();
@@ -100,14 +101,14 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<
 	@Nullable
 	protected RenderType getRenderType(VelvetWorm entity, boolean isHeadPart, boolean isVisible, boolean isTranslucentToPlayer, boolean isGlowing) {
 		if (isTranslucentToPlayer)
-			return RenderType.itemEntityTranslucentCull(getTextureLocation(entity));
+			return RenderType.entityTranslucentCull(getTextureLocation(entity));
 		else if (isVisible)
 			return this.model.renderType(getTextureLocation(entity));
 		else
 			return isGlowing ? RenderType.outline(getTextureLocation(entity)) : null;
 	}
 
-	protected void renderBodyPart(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm entity, VelvetWormMultipart part, Entity prevPart, double rx, double ry, double rz, int frame, float avgWibbleStrength, float zOffset, float partialTicks) {
+	protected void renderBodyPart(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm entity, VelvetWormMultipart part, Entity prevPart, double rx, double ry, double rz, int frame, float avgWibbleStrength, float zOffset, float partialTicks, boolean isPartA) {
 		double x = part.xOld + (part.xo - part.xOld) * (double)partialTicks - rx;
 		double y = part.yOld + (part.yo - part.yOld) * (double)partialTicks - ry;
 		double z = part.zOld + (part.zo - part.zOld) * (double)partialTicks - rz;
@@ -120,7 +121,7 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<
 		stack.translate(x, y + 1.525f + zOffset, z);
 		stack.scale(-1F, -1F, 1F);
 		stack.mulPose(Axis.YN.rotationDegrees(-yaw));
-		model.renderBody(stack, consumer, light, overlay, colour, entity, frame, wibbleStrength, partialTicks);
+		model.renderBody(stack, consumer, light, overlay, colour, entity, frame, wibbleStrength, partialTicks, isPartA);
 		stack.popPose();
 	}
 
