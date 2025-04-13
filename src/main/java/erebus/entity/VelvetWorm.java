@@ -57,6 +57,14 @@ public class VelvetWorm extends Monster {
 			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
 			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
 			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
 			new VelvetWormMultipart(this, 0.3125F, 0.3125F)
 			};
 		setId(ENTITY_COUNTER.getAndAdd(this.parts.length + 1) + 1);
