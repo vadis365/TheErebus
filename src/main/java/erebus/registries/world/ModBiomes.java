@@ -19,7 +19,7 @@ public class ModBiomes {
     public static final SubterraneanSavannahBiome SUBTERRANEAN_SAVANNAH = new SubterraneanSavannahBiome(0xB6B957, 0x8C7409);
     public static final UlteriorOutbackBiome ULTERIOR_OUTBACK = new UlteriorOutbackBiome(0xC1B668, 0xEAC272);
     public static final UndergroundJungleBiome UNDERGROUND_JUNGLE = new UndergroundJungleBiome(0x53CA37, 0x088008);
-    public static final VolcanicDessertBiome VOLCANIC_DESERT = new VolcanicDessertBiome(0xA6BB4E, 0xFFE70A);
+    public static final VolcanicDesertBiome VOLCANIC_DESERT = new VolcanicDesertBiome(0xA6BB4E, 0xFFE70A);
 
     public static void bootstrap(BootstrapContext<Biome> context) {
         HolderGetter<PlacedFeature> featureGetter = context.lookup(Registries.PLACED_FEATURE);

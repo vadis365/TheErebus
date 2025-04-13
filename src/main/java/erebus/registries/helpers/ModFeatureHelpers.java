@@ -54,20 +54,20 @@ public class ModFeatureHelpers {
         registerConfiguredFeature(context, feature.getConfiguredResourceKey(), Feature.ORE, new OreConfiguration(test, block.get().defaultBlockState(), veinSize));
     }
 
-    protected static void registerSimpleConfiguredPlant(BootstrapContext<ConfiguredFeature<?, ?>> context, ErebusFeature feature, Supplier<? extends Block> block) {
+    protected static void registerSimpleConfiguredPlant(BootstrapContext<ConfiguredFeature<?, ?>> context, ErebusFeature feature, Supplier<? extends Block> block, int tries) {
         registerConfiguredFeature(
                 context,
                 feature.getConfiguredResourceKey(),
                 Feature.FLOWER,
-                new RandomPatchConfiguration(
-                        64,
-                        6,
-                        2,
-                        PlacementUtils.onlyWhenEmpty(
-                                Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(BlockStateProvider.simple(block.get().defaultBlockState()))
-                        )
-                )
+                patch(block.get(), tries)
         );
+    }
+
+    private static RandomPatchConfiguration patch(Block block, int tries) {
+        return FeatureUtils.simpleRandomPatchConfiguration(tries, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(block))));
+    }
+
+    private static RandomPatchConfiguration patch(Block block, int tries, List<Block> whitelist) {
+        return FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(block)), whitelist, tries);
     }
 }

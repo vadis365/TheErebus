@@ -1,12 +1,15 @@
 package erebus.world.feature;
 
 import erebus.Erebus;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.List;
 
@@ -38,5 +41,29 @@ public class ErebusFeature {
 
     public List<PlacementModifier> getPlacementModifiers() {
         return null;
+    }
+
+    /**
+     * Placement Utils
+     */
+
+    protected List<PlacementModifier> tree(int count) {
+        return List.of(CountPlacement.of(count), BiomeFilter.biome(), PlacementUtils.FULL_RANGE, BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)));
+    }
+
+    protected List<PlacementModifier> patch(int count) {
+        return List.of(CountPlacement.of(count), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BiomeFilter.biome());
+    }
+
+    protected List<PlacementModifier> patchWithFilter(int count, BlockPredicate filter) {
+        return List.of(CountPlacement.of(count), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BlockPredicateFilter.forPredicate(filter), BiomeFilter.biome());
+    }
+
+    protected List<PlacementModifier> noise(int noiseToCountRatio, double factor, double offset) {
+        return List.of(NoiseBasedCountPlacement.of(noiseToCountRatio, factor, offset), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BiomeFilter.biome());
+    }
+
+    protected List<PlacementModifier> noiseWithFilter(int noiseToCountRatio, double factor, double offset, BlockPredicate filter) {
+        return List.of(NoiseBasedCountPlacement.of(noiseToCountRatio, factor, offset), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BlockPredicateFilter.forPredicate(filter), BiomeFilter.biome());
     }
 }

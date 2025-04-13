@@ -10,7 +10,9 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ErebusTree extends ErebusFeature {
@@ -31,5 +33,10 @@ public class ErebusTree extends ErebusFeature {
 
     public TreeConfiguration getTreeConfiguration() {
         return null;
+    }
+
+    @Override
+    public List<PlacementModifier> getPlacementModifiers() {
+        return tree(8);
     }
 }

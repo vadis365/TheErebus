@@ -37,13 +37,9 @@
     [],
     [],
     [
-      "erebus:cypress",
-      "minecraft:trees_birch",
-      "erebus:nettle",
-      "erebus:tall_bloom",
-      "erebus:weeping_bluebell",
-      "erebus:fern",
-      "erebus:tall_fern"
+      "erebus:asper",
+      "erebus:baobab",
+      "minecraft:trees_savanna"
     ]
   ],
   "has_precipitation": false,
@@ -58,5 +54,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.85
+  "temperature": 2.0
 }

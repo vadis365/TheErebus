@@ -28,7 +28,7 @@ public class ElysianForestBiome extends ErebusBiome {
     @Override
     public Biome getBiome(HolderGetter<PlacedFeature> featureGetter, HolderGetter<ConfiguredWorldCarver<?>> carverGetter) {
         return new Biome.BiomeBuilder()
-                .temperature(0.85F)
+                .temperature(0.7F)
                 .hasPrecipitation(false)
                 .downfall(0)
                 .specialEffects(new BiomeSpecialEffects.Builder()

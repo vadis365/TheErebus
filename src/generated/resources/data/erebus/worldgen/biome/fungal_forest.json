@@ -37,8 +37,8 @@
     [],
     [],
     [
-      "erebus:cypress",
-      "minecraft:trees_birch",
+      "minecraft:brown_mushroom_swamp",
+      "minecraft:red_mushroom_swamp",
       "erebus:nettle",
       "erebus:tall_bloom",
       "erebus:weeping_bluebell",
@@ -58,5 +58,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.85
+  "temperature": 0.7
 }

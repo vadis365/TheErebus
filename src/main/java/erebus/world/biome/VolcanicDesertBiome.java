@@ -12,10 +12,10 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-public class VolcanicDessertBiome extends ErebusBiome {
+public class VolcanicDesertBiome extends ErebusBiome {
     public static final ResourceKey<Biome> RESOURCE_KEY = makeKey("volcanic_desert");
 
-    public VolcanicDessertBiome(int color, int fogColor) {
+    public VolcanicDesertBiome(int color, int fogColor) {
         super(color, fogColor);
     }
 
@@ -27,7 +27,7 @@ public class VolcanicDessertBiome extends ErebusBiome {
     @Override
     public Biome getBiome(HolderGetter<PlacedFeature> featureGetter, HolderGetter<ConfiguredWorldCarver<?>> carverGetter) {
         return new Biome.BiomeBuilder()
-                .temperature(0.85F)
+                .temperature(2.0F)
                 .hasPrecipitation(false)
                 .downfall(0)
                 .specialEffects(new BiomeSpecialEffects.Builder()

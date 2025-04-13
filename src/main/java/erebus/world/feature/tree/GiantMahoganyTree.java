@@ -5,19 +5,12 @@ import com.google.common.collect.ImmutableList;
 import erebus.registries.ModBlocks;
 import erebus.world.feature.tree.decorator.LeaveThornDecorator;
 import erebus.world.feature.tree.decorator.TrunkThornDecorator;
-import net.minecraft.data.worldgen.placement.PlacementUtils;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaJungleFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.MegaJungleTrunkPlacer;
-import net.minecraft.world.level.levelgen.placement.PlacementModifier;
-
-import java.util.List;
 
 public class GiantMahoganyTree extends ErebusTree {
 
@@ -36,10 +29,5 @@ public class GiantMahoganyTree extends ErebusTree {
         )
                 .decorators(ImmutableList.of(TrunkThornDecorator.INSTANCE, new LeaveThornDecorator(0.25F)))
                 .build();
-    }
-
-    @Override
-    public List<PlacementModifier> getPlacementModifiers() {
-        return VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1F, 2), ModBlocks.SAPLING_MAHOGANY.get());
     }
 }

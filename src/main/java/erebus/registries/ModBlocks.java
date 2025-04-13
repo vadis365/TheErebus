@@ -279,11 +279,11 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> SARCASTIC_CZECH_MUSHROOM_BLOCK = registerSimpleBlock("sarcastic_czech_mushroom_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DESERT_SHRUB = registerSimpleBlock("desert_shrub", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
     public static final DeferredBlock<Block> MIRE_CORAL = registerSimpleBlock("mire_coral", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> NETTLE = registerSimpleBlock("nettle", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
-    public static final DeferredBlock<Block> NETTLE_FLOWERED = registerSimpleBlock("nettle_flowered", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
+    public static final DeferredBlock<Block> NETTLE = registerSimpleBlock("nettle", BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS));
+    public static final DeferredBlock<Block> NETTLE_FLOWERED = registerSimpleBlock("nettle_flowered", BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS));
     public static final DeferredBlock<Block> SWAMP_PLANT = registerSimpleBlock("swamp_plant", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
     public static final DeferredBlock<Block> FIRE_BLOOM = registerSimpleBlock("fire_bloom", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
-    public static final DeferredBlock<Block> FERN = registerSimpleBlock("fern", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
+    public static final DeferredBlock<Block> FERN = registerSimpleBlock("fern", BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS));
     public static final DeferredBlock<Block> FIDDLE_HEAD = registerSimpleBlock("fiddle_head", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
     public static final DeferredBlock<VineBlock> THORNS = registerBlock("thorns", () -> new VineBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.VINE)));
     public static final DeferredBlock<Block> MOSS_DOWN = registerSimpleBlock("moss_down", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));

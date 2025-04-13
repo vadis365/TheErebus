@@ -37,8 +37,15 @@
     [],
     [],
     [
-      "erebus:cypress",
-      "minecraft:trees_birch",
+      "erebus:mahogany",
+      "erebus:giant_mahogany",
+      "erebus:asper",
+      "erebus:eucalyptus",
+      "erebus:mossbark",
+      "minecraft:trees_jungle",
+      "minecraft:bamboo",
+      "minecraft:patch_melon",
+      "minecraft:mushroom_island_vegetation",
       "erebus:nettle",
       "erebus:tall_bloom",
       "erebus:weeping_bluebell",
@@ -58,5 +65,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.85
+  "temperature": 0.95
 }
