@@ -266,6 +266,16 @@ public class ModBlockStates extends ModBlockStateProvider {
         crossBlock(CULTIVATED_MOULD_DOWN);
         simpleBlock(ALGAE.get(), models().getExistingFile(modLoc("block/algae")));
         crossBlock(HANGING_WEB);
+        block(DARK_CAPPED_MUSHROOM_BLOCK, "mushroom_block_skin_dark_capped");
+        block(SARCASTIC_CZECH_MUSHROOM_BLOCK, "mushroom_block_skin_sarcastic_czech");
+        block(GRANDMAS_SHOES_MUSHROOM_BLOCK, "mushroom_block_skin_grandmas_shoes");
+        block(DUTCH_CAP_MUSHROOM_BLOCK, "mushroom_block_skin_dutch_cap");
+        block(KAIZERS_FINGERS_MUSHROOM_BLOCK, "mushroom_block_skin_kaizers_fingers");
+        crossBlock(DARK_CAPPED_MUSHROOM, "mushroom_dark_capped");
+        crossBlock(SARCASTIC_CZECH_MUSHROOM, "mushroom_sarcastic_czech");
+        crossBlock(GRANDMAS_SHOES_MUSHROOM, "mushroom_grandmas_shoes");
+        crossBlock(DUTCH_CAP_MUSHROOM, "mushroom_dutch_cap");
+        crossBlock(KAIZERS_FINGERS_MUSHROOM, "mushroom_kaizers_fingers");
 
         block(PETAL_BLACK);
         block(PETAL_RED);

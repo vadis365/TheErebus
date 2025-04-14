@@ -67,6 +67,10 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
                         .build());
     }
 
+    public void crossBlock(Supplier<? extends Block> block, String texture) {
+        crossBlock(block, models().cross(name(block), texture(texture)).renderType("cutout"));
+    }
+
     public void crossBlock(Supplier<? extends Block> block) {
         crossBlock(block, models().cross(name(block), texture(name(block))).renderType("cutout"));
     }

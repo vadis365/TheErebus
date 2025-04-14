@@ -1,6 +1,0 @@
-{
-    "parent": "minecraft:block/cube_all",
-    "textures": {
-        "all": "erebus:block/mushroom_block_inside_dark_capped"
-    }
-}
