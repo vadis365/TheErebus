@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "M": {
+      "item": "erebus:mould_down"
+    },
+    "S": {
+      "item": "erebus:supernatural_velocity"
+    }
+  },
+  "pattern": [
+    "LSL",
+    "SMS",
+    "LSL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:cultivated_mould_down"
+  }
+}

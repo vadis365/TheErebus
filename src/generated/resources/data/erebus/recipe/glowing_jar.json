@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "erebus:bio_luminescence"
+    },
+    "G": {
+      "item": "erebus:amber_glass"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "III",
+    "GBG",
+    "GGG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:glowing_jar"
+  }
+}

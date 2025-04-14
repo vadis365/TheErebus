@@ -227,14 +227,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         twoByTwo(ModItems.PETRIFIED_WOOD, ModBlocks.PLANKS_PETRIFIED);
         twoByTwo(ModBlocks.PLANKS_PETRIFIED, ModBlocks.PETRIFIED_CRAFTING_TABLE);
 
-        ShapedRecipeBuilder.shaped(MISC, ModBlocks.PETRIFIED_WOOD_CHEST)
-                .pattern("PPP")
-                .pattern("PGP")
-                .pattern("PPP")
-                .define('P', ModBlocks.PLANKS_PETRIFIED)
-                .define('G', Items.GOLD_INGOT)
-                .unlockedBy("has_planks_petrified", has(ModBlocks.PLANKS_PETRIFIED))
-                .save(output);
+        surround(ModBlocks.PLANKS_PETRIFIED, Items.GOLD_INGOT, ModBlocks.PETRIFIED_WOOD_CHEST);
 
         ShapedRecipeBuilder.shaped(TOOLS, ModItems.JADE_PICKAXE)
                 .pattern("JJJ")
@@ -312,14 +305,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         leggings(ModItems.PLATE_EXO_RHINO, ModItems.RHINO_EXOSKELETON_LEGGINGS);
         boots(ModItems.PLATE_EXO_RHINO, ModItems.RHINO_EXOSKELETON_BOOTS);
 
-        ShapedRecipeBuilder.shaped(MISC, ModItems.COMPOUND_LENS)
-                .pattern("EEE")
-                .pattern("EAE")
-                .pattern("EEE")
-                .define('E', ModItems.COMPOUND_EYES)
-                .define('A', ModBlocks.AMBER)
-                .unlockedBy("has_compound_eyes", has(ModItems.COMPOUND_EYES))
-                .save(output);
+        surround(ModItems.COMPOUND_EYES, ModBlocks.AMBER, ModItems.COMPOUND_LENS);
 
         ShapedRecipeBuilder.shaped(COMBAT, ModItems.COMPOUND_GOGGLES)
                 .pattern("EEE")
@@ -349,15 +335,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_fly_wing", has(ModItems.FLY_WING))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(COMBAT, ModItems.SPRINT_LEGGINGS)
-                .pattern("BBB")
-                .pattern("BPB")
-                .pattern("BBB")
-                .define('B', ModItems.BIO_VELOCITY)
-                .define('P', ModItems.REIN_EXOSKELETON_LEGGINGS)
-                .unlockedBy("has_rein_exo_leggings", has(ModItems.REIN_EXOSKELETON_LEGGINGS))
-                .unlockedBy("has_bio_velocity", has(ModItems.BIO_VELOCITY))
-                .save(output);
+        surround(ModItems.BIO_VELOCITY, ModItems.REIN_EXOSKELETON_LEGGINGS, ModItems.SPRINT_LEGGINGS);
 
         ShapedRecipeBuilder.shaped(COMBAT, ModItems.GLIDER_CHESTPLATE)
                 .pattern("WCW")
@@ -381,15 +359,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_velocity_block", has(ModBlocks.VELOCITY))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(COMBAT, ModItems.WATER_STRIDERS)
-                .pattern("WWW")
-                .pattern("WBW")
-                .pattern("WWW")
-                .define('W', ModItems.WATER_REPELLENT)
-                .define('B', ModItems.REIN_EXOSKELETON_BOOTS)
-                .unlockedBy("has_water_repellent", has(ModItems.WATER_REPELLENT))
-                .unlockedBy("has_rein_exo_boots", has(ModItems.REIN_EXOSKELETON_BOOTS))
-                .save(output);
+        surround(ModItems.WATER_REPELLENT, ModItems.REIN_EXOSKELETON_BOOTS, ModItems.WATER_STRIDERS);
 
         ShapedRecipeBuilder.shaped(COMBAT, ModItems.ENHANCED_SCORPION_PINCER)
                 .pattern("I I")
@@ -624,13 +594,292 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_repellent", has(ModItems.REPELLENT))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(MISC, ModBlocks.ALTAR_BASE)
-                .pattern("AAA")
-                .pattern("AOA")
-                .pattern("AAA")
-                .define('A', ModItems.ALTAR_FRAGMENT)
+        surround(ModItems.ALTAR_FRAGMENT, Blocks.OBSIDIAN, ModBlocks.ALTAR_BASE);
+
+        ShapedRecipeBuilder.shaped(MISC, ModBlocks.GLOWING_JAR)
+                .pattern("III")
+                .pattern("GBG")
+                .pattern("GGG")
+                .define('B', ModItems.BIO_LUMINESCENCE)
+                .define('I', Items.IRON_INGOT)
+                .define('G', ModBlocks.AMBER_GLASS)
+                .unlockedBy("has_bio_luminescence", has(ModItems.BIO_LUMINESCENCE))
+                .save(output);
+
+        threeByThree(ModItems.BIO_VELOCITY, ModBlocks.VELOCITY);
+        twoByTwo(ModItems.MUD_BRICK, ModBlocks.MUD_BRICKS);
+
+        ShapedRecipeBuilder.shaped(TOOLS, ModItems.HOMING_BEECON)
+                .pattern("GNG")
+                .pattern("NCN")
+                .pattern("GNG")
+                .define('G', Items.GOLD_INGOT)
+                .define('N', ModItems.NECTAR)
+                .define('C', Items.COMPASS)
+                .unlockedBy("has_nectar", has(ModItems.NECTAR))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(TOOLS, ModItems.NECTAR_COLLECTOR)
+                .pattern("  B")
+                .pattern(" S ")
+                .pattern("S  ")
+                .define('B', Items.BOWL)
+                .define('S', Items.STICK)
+                .unlockedBy("has_stick", has(Items.STICK))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(MISC, ModBlocks.FLUID_JAR)
+                .pattern("PPP")
+                .pattern("GBG")
+                .pattern("GGG")
+                .define('P', ModBlocks.PLANKS_VARNISHED)
+                .define('B', Items.BUCKET)
+                .define('G', ModBlocks.AMBER_GLASS)
+                .unlockedBy("has_amber_glass", has(ModBlocks.AMBER_GLASS))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(MISC, ModItems.MUCUS_CHARGE)
+                .pattern("SSS")
+                .pattern("SRS")
+                .pattern("SSS")
+                .define('S', Tags.Items.SLIME_BALLS)
+                .define('R', ModItems.REPELLENT)
+                .unlockedBy("has_repellent", has(ModItems.REPELLENT))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.HONEY_COMB)
+                .pattern("NPN")
+                .pattern("PCP")
+                .pattern("NPN")
+                .define('N', ModItems.NECTAR)
+                .define('P', ModItems.PAPYRUS)
+                .define('C', Blocks.CHEST);
+
+        threeByThree(ModBlocks.FIRE_BLOOM, Items.BLAZE_POWDER);
+        threeByThree(ModBlocks.MOSS_DOWN, ModItems.MOSS_BALL);
+
+        ShapedRecipeBuilder.shaped(TOOLS, ModItems.PORTAL_ACTIVATOR)
+                .pattern("VSG")
+                .pattern("VSS")
+                .pattern("IVV")
+                .define('V', Blocks.VINE)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .define('I', Items.GOLD_INGOT)
+                .define('G', ModItems.GAEAN_GEM)
+                .unlockedBy("has_gaean_gem", has(ModItems.GAEAN_GEM))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(MISC, ModBlocks.GAEAN_KEYSTONE)
+                .pattern("V V")
+                .pattern("SOS")
+                .pattern("SSS")
+                .define('V', Blocks.VINE)
+                .define('S', ItemTags.STONE_BRICKS)
                 .define('O', Blocks.OBSIDIAN)
-                .unlockedBy("has_altar_fragment", has(ModItems.ALTAR_FRAGMENT))
+                .unlockedBy("has_vine", has(Blocks.VINE))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(TOOLS, ModItems.ANT_TAMING_AMULET)
+                .pattern("PGP")
+                .pattern("GOG")
+                .pattern("PGP")
+                .define('P', ModItems.ANT_PHEROMONES)
+                .define('G', Items.GOLD_INGOT)
+                .define('O', Blocks.OBSIDIAN)
+                .unlockedBy("has_ant_pheremones", has(ModItems.ANT_PHEROMONES))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(MISC, ModBlocks.COMPOSTER)
+                .pattern("PSP")
+                .pattern("PGP")
+                .pattern("PSP")
+                .define('P', ModBlocks.PLANKS_VARNISHED)
+                .define('S', ModBlocks.SLAB_PLANKS_VARNISHED)
+                .define('G', Tags.Items.DYES_GREEN)
+                .unlockedBy("has_planks_varnished", has(ModBlocks.PLANKS_VARNISHED))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.SILO_SUPPORTS)
+                .pattern("SSS")
+                .pattern("F F")
+                .pattern("F F")
+                .define('S', ItemTags.WOODEN_SLABS)
+                .define('F', ItemTags.FENCES)
+                .unlockedBy("has_fence", has(ItemTags.FENCES))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.SILO_TANK)
+                .pattern("IPI")
+                .pattern("BCB")
+                .pattern("IPI")
+                .define('I', Items.IRON_INGOT)
+                .define('P', ModBlocks.PLANKS_VARNISHED)
+                .define('B', Blocks.IRON_BLOCK)
+                .define('C', ModBlocks.PETRIFIED_WOOD_CHEST)
+                .unlockedBy("has_petrified_wood_chest", has(ModBlocks.PETRIFIED_WOOD_CHEST))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.SILO_ROOF)
+                .pattern(" P ")
+                .pattern("PPP")
+                .define('P', ModBlocks.PLANKS_VARNISHED)
+                .unlockedBy("has_planks_varnished", has(ModBlocks.PLANKS_VARNISHED))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(MISC, ModBlocks.ALTAR_OFFERING)
+                .pattern("SGS")
+                .pattern("BOB")
+                .pattern("SBS")
+                .define('S', Tags.Items.STONES)
+                .define('G', Tags.Items.INGOTS_GOLD)
+                .define('O', Tags.Items.OBSIDIANS)
+                .define('B', ItemTags.STONE_BRICKS)
+                .unlockedBy("has_obsidian", has(Tags.Items.OBSIDIANS))
+                .save(output);
+
+        twoByTwo(ModBlocks.TEMPLE_BRICK, ModBlocks.TEMPLE_TILE, 4);
+        twoByTwo(ModItems.TEMPLE_ROCK, ModBlocks.TEMPLE_BRICK);
+        twoByTwo(ModItems.GNEISS_ROCK, ModBlocks.GNEISS);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.TEMPLE_PILLAR)
+                .pattern("T")
+                .pattern("T")
+                .define('T', ModBlocks.TEMPLE_TILE)
+                .unlockedBy("has_temple_tile", has(ModBlocks.TEMPLE_TILE))
+                .save(output);
+
+        threeByThree(ModItems.JADE_BERRIES, ModItems.JADE);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.CULTIVATED_MOSS_DOWN)
+                .pattern("GSG")
+                .pattern("SMS")
+                .pattern("GSG")
+                .define('S', ModItems.SUPERNATURAL_VELOCITY)
+                .define('M', ModBlocks.MOSS_DOWN)
+                .define('G', Tags.Items.DYES_GREEN)
+                .unlockedBy("has_supernatural_velocity", has(ModItems.SUPERNATURAL_VELOCITY))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.CULTIVATED_MOULD_DOWN)
+                .pattern("LSL")
+                .pattern("SMS")
+                .pattern("LSL")
+                .define('S', ModItems.SUPERNATURAL_VELOCITY)
+                .define('M', ModBlocks.MOULD_DOWN)
+                .define('L', Items.LAPIS_LAZULI)
+                .unlockedBy("has_supernatural_velocity", has(ModItems.SUPERNATURAL_VELOCITY))
+                .save(output);
+
+        surround(ModItems.HYDROFUGE, ModItems.REPELLENT, ModItems.WATER_REPELLENT);
+
+        twoByTwo(ModItems.HIDE_SHROOM, Items.LEATHER, 8);
+        twoByTwo(ModItems.PLATE_ZOMBIE_ANT, Items.ROTTEN_FLESH);
+
+        ShapedRecipeBuilder.shaped(MISC, ModItems.WHETSTONE)
+                .pattern("SSS")
+                .pattern("PPP")
+                .pattern("UUU")
+                .define('S', ItemTags.SAND)
+                .define('U', ModBlocks.UMBERSTONE)
+                .define('P', ModItems.PETRIFIED_WOOD)
+                .unlockedBy("has_petrified_wood", has(ModItems.PETRIFIED_WOOD))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(MISC, ModItems.AMBER_STAR)
+                .pattern(" R ")
+                .pattern("RGR")
+                .pattern(" R ")
+                .define('R', ModItems.RESIN)
+                .define('G', ModBlocks.AMBER_GLASS)
+                .unlockedBy("has_resin", has(ModItems.RESIN))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(MISC, ModItems.BEETLE_RIDING_KIT)
+                .pattern(" SP")
+                .pattern("CCC")
+                .pattern("LLL")
+                .define('S', Items.STRING)
+                .define('P', ModItems.PLATE_EXO)
+                .define('C', ItemTags.WOOL_CARPETS)
+                .define('L', Items.LAPIS_LAZULI)
+                .unlockedBy("has_plate_exo", has(ModItems.PLATE_EXO))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(MISC, ModItems.BEETLE_TAMING_AMULET)
+                .pattern(" N ")
+                .pattern("NJN")
+                .pattern(" A ")
+                .define('N', Tags.Items.NUGGETS_GOLD)
+                .define('J', ModItems.JADE)
+                .define('A', ModItems.ALTAR_FRAGMENT)
+                .unlockedBy("has_jade", has(ModItems.JADE))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(MISC, ModItems.UMBERGOLEM_HEAD)
+                .pattern("SSS")
+                .pattern("SHS")
+                .pattern("SMS")
+                .define('S', Tags.Items.STONES)
+                .define('H', ModItems.REIN_COMPOUND_GOGGLES)
+                .define('M', ModItems.STAG_BEETLE_MANDIBLES)
+                .unlockedBy("has_rein_compound_goggles", has(ModItems.REIN_COMPOUND_GOGGLES))
+                .save(output);
+
+        surround(ModItems.ALTAR_FRAGMENT, ModItems.RED_GEM, ModItems.UMBERGOLEM_CORE);
+
+        ShapedRecipeBuilder.shaped(MISC, ModItems.UMBERGOLEM_LEGS)
+                .pattern("SSS")
+                .pattern("S S")
+                .pattern("P P")
+                .define('S', Tags.Items.STONES)
+                .define('P', ModItems.REINFORCED_PLATE_EXO)
+                .unlockedBy("has_reinforced_place_exo", has(ModItems.REINFORCED_PLATE_EXO))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(MISC, ModItems.UMBERGOLEM_CLAW)
+                .pattern("SSP")
+                .pattern("S  ")
+                .define('S', Tags.Items.STONES)
+                .define('P', ModItems.SCORPION_PINCER)
+                .unlockedBy("has_scorpion_pincer", has(ModItems.SCORPION_PINCER))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(MISC, ModItems.UMBERGOLEM_CLAW)
+                .pattern("P  ")
+                .pattern("S  ")
+                .pattern("SS ")
+                .define('S', Tags.Items.STONES)
+                .define('P', ModItems.SCORPION_PINCER)
+                .unlockedBy("has_scorpion_pincer", has(ModItems.SCORPION_PINCER))
+                .save(output, "umbergolem_claw_vertical");
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.UMBER_GOLEM_STATUE)
+                .pattern(" H ")
+                .pattern("CTC")
+                .pattern(" L ")
+                .define('H', ModItems.UMBERGOLEM_HEAD)
+                .define('C', ModItems.UMBERGOLEM_CLAW)
+                .define('T', ModItems.UMBERGOLEM_CORE)
+                .define('L', ModItems.UMBERGOLEM_LEGS)
+                .unlockedBy("has_umbergolem_head", has(ModItems.UMBERGOLEM_HEAD))
+                .unlockedBy("has_umbergolem_claw", has(ModItems.UMBERGOLEM_CLAW))
+                .unlockedBy("has_umbergolem_core", has(ModItems.UMBERGOLEM_CORE))
+                .unlockedBy("has_umbergolem_legs", has(ModItems.UMBERGOLEM_LEGS))
+                .save(output);
+
+        surround(ModBlocks.MUD, ModBlocks.UMBER_GOLEM_STATUE, ModItems.MUD_UMBERGOLEM);
+        surround(Blocks.IRON_BLOCK, ModBlocks.UMBER_GOLEM_STATUE, ModItems.IRON_UMBERGOLEM);
+        surround(Blocks.GOLD_BLOCK, ModBlocks.UMBER_GOLEM_STATUE, ModItems.GOLD_UMBERGOLEM);
+        surround(ModBlocks.JADE_BLOCK, ModBlocks.UMBER_GOLEM_STATUE, ModItems.JADE_UMBERGOLEM);
+
+        ShapedRecipeBuilder.shaped(TOOLS, ModItems.WAND_OF_ANIMATION)
+                .pattern(" GC")
+                .pattern(" SG")
+                .pattern("G  ")
+                .define('G', Tags.Items.INGOTS_GOLD)
+                .define('C', ModItems.SOUL_CRYSTAL)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .unlockedBy("has_soul_crystal", has(ModItems.SOUL_CRYSTAL))
                 .save(output);
     }
 
@@ -697,10 +946,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_papyrus", has(ModItems.PAPYRUS))
                 .save(output);
 
-        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, ModBlocks.JADE_BLOCK)
-                .requires(ModItems.JADE, 9)
-                .unlockedBy("has_jade", has(ModItems.JADE))
-                .save(output);
+        nineBlockStorageRecipes(output, MISC, ModItems.JADE, BUILDING_BLOCKS, ModBlocks.JADE_BLOCK);
 
         ShapelessRecipeBuilder.shapeless(MISC, ModItems.PLANTICIDE, 2)
                 .requires(ModItems.POISON_GLAND)
@@ -881,6 +1127,18 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("M M")
                 .define('M', material)
                 .unlockedBy("has_jade", has(material))
+                .save(output);
+    }
+
+    private void surround(ItemLike outer, ItemLike inner, ItemLike result) {
+        ShapedRecipeBuilder.shaped(MISC, result)
+                .pattern("OOO")
+                .pattern("OIO")
+                .pattern("OOO")
+                .define('O', outer)
+                .define('I', inner)
+                .unlockedBy("has_outer", has(outer))
+                .unlockedBy("has_inner", has(inner))
                 .save(output);
     }
 }

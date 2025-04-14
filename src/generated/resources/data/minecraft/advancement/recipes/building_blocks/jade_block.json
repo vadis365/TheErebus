@@ -1,21 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_inner": {
+    "has_jade": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:amber"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_outer": {
-      "conditions": {
-        "items": [
-          {
-            "items": "erebus:compound_eyes"
+            "items": "erebus:jade"
           }
         ]
       },
@@ -23,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "erebus:compound_lens"
+        "recipe": "minecraft:jade_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -31,13 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_outer",
-      "has_inner"
+      "has_jade"
     ]
   ],
   "rewards": {
     "recipes": [
-      "erebus:compound_lens"
+      "minecraft:jade_block"
     ]
   }
 }

@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:amber"
+            "items": "erebus:umber_golem_statue"
           }
         ]
       },
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:compound_eyes"
+            "items": "minecraft:iron_block"
           }
         ]
       },
@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "erebus:compound_lens"
+        "recipe": "erebus:iron_umbergolem"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "erebus:compound_lens"
+      "erebus:iron_umbergolem"
     ]
   }
 }

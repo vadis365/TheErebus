@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:umber_golem_statue"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_umbergolem_claw": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:umbergolem_claw"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_umbergolem_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:umbergolem_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_umbergolem_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:umbergolem_head"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_umbergolem_legs": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:umbergolem_legs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_umbergolem_head",
+      "has_umbergolem_claw",
+      "has_umbergolem_core",
+      "has_umbergolem_legs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:umber_golem_statue"
+    ]
+  }
+}

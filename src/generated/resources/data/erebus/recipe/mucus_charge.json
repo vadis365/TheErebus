@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "erebus:repellent"
+    },
+    "S": {
+      "tag": "c:slime_balls"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SRS",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:mucus_charge"
+  }
+}

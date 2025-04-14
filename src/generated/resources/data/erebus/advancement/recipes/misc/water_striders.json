@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:amber"
+            "items": "erebus:rein_exoskeleton_boots"
           }
         ]
       },
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:compound_eyes"
+            "items": "erebus:water_repellent"
           }
         ]
       },
@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "erebus:compound_lens"
+        "recipe": "erebus:water_striders"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "erebus:compound_lens"
+      "erebus:water_striders"
     ]
   }
 }

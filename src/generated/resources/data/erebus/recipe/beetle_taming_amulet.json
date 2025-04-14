@@ -2,20 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "I": {
-      "item": "minecraft:obsidian"
-    },
-    "O": {
+    "A": {
       "item": "erebus:altar_fragment"
+    },
+    "J": {
+      "item": "erebus:jade"
+    },
+    "N": {
+      "tag": "c:nuggets/gold"
     }
   },
   "pattern": [
-    "OOO",
-    "OIO",
-    "OOO"
+    " N ",
+    "NJN",
+    " A "
   ],
   "result": {
     "count": 1,
-    "id": "erebus:altar_base"
+    "id": "erebus:beetle_taming_amulet"
   }
 }

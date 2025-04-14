@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:bowl"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "  B",
+    " S ",
+    "S  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:nectar_collector"
+  }
+}

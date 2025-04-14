@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:compass"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "N": {
+      "item": "erebus:nectar"
+    }
+  },
+  "pattern": [
+    "GNG",
+    "NCN",
+    "GNG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:homing_beecon"
+  }
+}

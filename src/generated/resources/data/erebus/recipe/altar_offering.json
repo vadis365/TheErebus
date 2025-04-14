@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "minecraft:stone_bricks"
+    },
+    "G": {
+      "tag": "c:ingots/gold"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    },
+    "S": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "SGS",
+    "BOB",
+    "SBS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:altar_offering"
+  }
+}

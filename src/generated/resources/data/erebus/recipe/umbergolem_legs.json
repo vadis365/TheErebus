@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "erebus:reinforced_plate_exo"
+    },
+    "S": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "S S",
+    "P P"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:umbergolem_legs"
+  }
+}

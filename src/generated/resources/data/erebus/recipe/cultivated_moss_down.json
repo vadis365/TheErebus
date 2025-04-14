@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "G": {
+      "tag": "c:dyes/green"
+    },
+    "M": {
+      "item": "erebus:moss_down"
+    },
+    "S": {
+      "item": "erebus:supernatural_velocity"
+    }
+  },
+  "pattern": [
+    "GSG",
+    "SMS",
+    "GSG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:cultivated_moss_down"
+  }
+}

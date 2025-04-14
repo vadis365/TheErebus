@@ -2,20 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "I": {
+    "O": {
       "item": "minecraft:obsidian"
     },
-    "O": {
-      "item": "erebus:altar_fragment"
+    "S": {
+      "tag": "minecraft:stone_bricks"
+    },
+    "V": {
+      "item": "minecraft:vine"
     }
   },
   "pattern": [
-    "OOO",
-    "OIO",
-    "OOO"
+    "V V",
+    "SOS",
+    "SSS"
   ],
   "result": {
     "count": 1,
-    "id": "erebus:altar_base"
+    "id": "erebus:gaean_keystone"
   }
 }

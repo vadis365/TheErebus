@@ -1,21 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_inner": {
+    "has_soul_crystal": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:amber"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_outer": {
-      "conditions": {
-        "items": [
-          {
-            "items": "erebus:compound_eyes"
+            "items": "erebus:soul_crystal"
           }
         ]
       },
@@ -23,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "erebus:compound_lens"
+        "recipe": "erebus:wand_of_animation"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -31,13 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_outer",
-      "has_inner"
+      "has_soul_crystal"
     ]
   ],
   "rewards": {
     "recipes": [
-      "erebus:compound_lens"
+      "erebus:wand_of_animation"
     ]
   }
 }

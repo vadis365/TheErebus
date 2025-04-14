@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "I": {
-      "item": "erebus:rein_exoskeleton_leggings"
+      "item": "erebus:red_gem"
     },
     "O": {
-      "item": "erebus:bio_velocity"
+      "item": "erebus:altar_fragment"
     }
   },
   "pattern": [
@@ -16,6 +16,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "erebus:sprint_leggings"
+    "id": "erebus:umbergolem_core"
   }
 }

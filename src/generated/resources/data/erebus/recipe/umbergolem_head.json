@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": {
+      "item": "erebus:rein_compound_goggles"
+    },
+    "M": {
+      "item": "erebus:stag_beetle_mandibles"
+    },
+    "S": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SHS",
+    "SMS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:umbergolem_head"
+  }
+}

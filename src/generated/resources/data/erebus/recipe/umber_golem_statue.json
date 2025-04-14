@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {
+      "item": "erebus:umbergolem_claw"
+    },
+    "H": {
+      "item": "erebus:umbergolem_head"
+    },
+    "L": {
+      "item": "erebus:umbergolem_legs"
+    },
+    "T": {
+      "item": "erebus:umbergolem_core"
+    }
+  },
+  "pattern": [
+    " H ",
+    "CTC",
+    " L "
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:umber_golem_statue"
+  }
+}

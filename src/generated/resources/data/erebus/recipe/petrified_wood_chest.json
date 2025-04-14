@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "G": {
+    "I": {
       "item": "minecraft:gold_ingot"
     },
-    "P": {
+    "O": {
       "item": "erebus:planks_petrified"
     }
   },
   "pattern": [
-    "PPP",
-    "PGP",
-    "PPP"
+    "OOO",
+    "OIO",
+    "OOO"
   ],
   "result": {
     "count": 1,

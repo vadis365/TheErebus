@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "erebus:scorpion_pincer"
+    },
+    "S": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "P  ",
+    "S  ",
+    "SS "
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:umbergolem_claw"
+  }
+}

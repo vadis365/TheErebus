@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "erebus:planks_varnished"
+    }
+  },
+  "pattern": [
+    " P ",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:silo_roof"
+  }
+}

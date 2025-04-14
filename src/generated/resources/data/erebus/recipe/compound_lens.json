@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
+    "I": {
       "item": "erebus:amber"
     },
-    "E": {
+    "O": {
       "item": "erebus:compound_eyes"
     }
   },
   "pattern": [
-    "EEE",
-    "EAE",
-    "EEE"
+    "OOO",
+    "OIO",
+    "OOO"
   ],
   "result": {
     "count": 1,
