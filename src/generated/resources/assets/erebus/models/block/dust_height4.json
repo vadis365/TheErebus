@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/snow_height4",
+  "textures": {
+    "particle": "erebus:block/dust",
+    "texture": "erebus:block/dust"
+  }
+}

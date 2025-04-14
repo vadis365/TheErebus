@@ -17,7 +17,6 @@ import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public abstract class ModBlockStateProvider extends BlockStateProvider {
@@ -316,39 +315,62 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
     }
 
     public void crop(Supplier<? extends ModCropBlock> crop) {
-        Function<BlockState, ConfiguredModel[]> function = state -> states(state, crop.get(), name(crop));
-        getVariantBuilder(crop.get()).forAllStates(function);
+        getVariantBuilder(crop.get()).forAllStates(state -> cropStates(state, crop.get(), name(crop)));
     }
 
     public void bush(Supplier<? extends Block> bush, IntegerProperty age) {
-        Function<BlockState, ConfiguredModel[]> function = state -> states(state, name(bush), age);
-        getVariantBuilder(bush.get()).forAllStates(function);
+        getVariantBuilder(bush.get()).forAllStates(state -> bushStates(state, name(bush), age));
+    }
+
+    public void dust(Supplier<? extends Block> dust) {
+        getVariantBuilder(dust.get()).forAllStates(state -> dustStates(state));
     }
 
     public void stigma(Supplier<? extends Block> stigma) {
         block(stigma, "stigma");
     }
 
-    private ConfiguredModel[] states(BlockState state, ModCropBlock crop, String modelName) {
+    private ConfiguredModel[] cropStates(BlockState state, ModCropBlock crop, String modelName) {
         ConfiguredModel[] models = new ConfiguredModel[1];
         models[0] = new ConfiguredModel(
                 models().crop(
                         "%s_%d".formatted(modelName, state.getValue(crop.getAgeProperty())),
-                        ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_%d".formatted(modelName, state.getValue(crop.getAgeProperty())))
+                        modLoc("block/%s_%d".formatted(modelName, state.getValue(crop.getAgeProperty())))
                 ).renderType("cutout")
         );
 
         return models;
     }
 
-    private ConfiguredModel[] states(BlockState state, String modelName, IntegerProperty property) {
+    private ConfiguredModel[] bushStates(BlockState state, String modelName, IntegerProperty property) {
         ConfiguredModel[] models = new ConfiguredModel[1];
         models[0] = new ConfiguredModel(
                 models().cross(
                         "%s_%d".formatted(modelName, state.getValue(property)),
-                        ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "block/%s_%d".formatted(modelName, state.getValue(property)))
+                        modLoc("block/%s_%d".formatted(modelName, state.getValue(property)))
                 ).renderType("cutout")
         );
+        return models;
+    }
+
+    private ConfiguredModel[] dustStates(BlockState state) {
+        ConfiguredModel[] models = new ConfiguredModel[1];
+        int height = state.getValue(SnowLayerBlock.LAYERS) * 2;
+
+        if (height != 16) {
+            models[0] = new ConfiguredModel(
+                    models().withExistingParent(
+                                    "dust_height%d".formatted(height),
+                                    mcLoc("snow_height%d".formatted(height))
+                            )
+                            .texture("texture", modLoc("block/dust"))
+                            .texture("particle", modLoc("block/dust"))
+            );
+        } else {
+            models[0] = new ConfiguredModel(
+                    models().cubeAll("dust", modLoc("block/dust"))
+            );
+        }
         return models;
     }
 }

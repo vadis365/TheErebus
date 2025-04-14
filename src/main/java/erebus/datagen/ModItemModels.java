@@ -277,7 +277,7 @@ public class ModItemModels extends ModItemModelProvider {
         block(UMBERSTONE_PILLAR);
         block(VOLCANIC_ROCK);
         block(DUST);
-        block(DUST_LAYER);
+        block(DUST_LAYER, "dust");
         block(PETRIFIED_WOOD_ROCK);
         block(PETRIFIED_WOOD_ROCK_2);
         block(PETRIFIED_WOOD_ROCK_3);

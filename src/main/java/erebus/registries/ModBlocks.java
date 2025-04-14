@@ -38,7 +38,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<RotatedPillarBlock> UMBERSTONE_PILLAR = registerBlock("umberstone_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)));
     public static final DeferredBlock<Block> VOLCANIC_ROCK = registerSimpleBlock("volcanic_rock", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DUST = registerSimpleBlock("dust", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> DUST_LAYER = registerSimpleBlock("dust_layer", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> DUST_LAYER = registerBlock("dust_layer", () -> new SnowLayerBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SNOW)));
     public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK = registerSimpleBlock("petrified_wood_rock", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_2 = registerSimpleBlock("petrified_wood_rock_2", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_3 = registerSimpleBlock("petrified_wood_rock_3", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
