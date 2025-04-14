@@ -4,15 +4,14 @@ import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SmokingRecipe;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
@@ -85,7 +84,21 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     }
 
     private void addShapedCraftingRecipes() {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.UMBERPAVER, 4)
+                .pattern("##")
+                .pattern("##")
+                .define('#', ModBlocks.UMBERSTONE)
+                .unlockedBy("has_umberstone", has(ModBlocks.UMBERSTONE))
+                .save(output);
 
+        ShapedRecipeBuilder.shaped(DECORATIONS, ModBlocks.UMBER_FURNACE, 1)
+                .pattern("SSS")
+                .pattern("SBS")
+                .pattern("SSS")
+                .define('S', ModBlocks.UMBERCOBBLE)
+                .define('B', Items.BUCKET)
+                .unlockedBy("has_umbercobble", has(ModBlocks.UMBERCOBBLE))
+                .save(output);
     }
 
     private void addShapelessCraftingRecipes() {
@@ -100,6 +113,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         shapeless(BUILDING_BLOCKS, ModBlocks.LOG_ROTTEN, ModBlocks.PLANKS_ROTTEN, 4);
         shapeless(BUILDING_BLOCKS, ModBlocks.LOG_MARSHWOOD, ModBlocks.PLANKS_MARSHWOOD, 4);
         shapeless(BUILDING_BLOCKS, ModBlocks.LOG_SCORCHED, ModBlocks.PLANKS_SCORCHED, 4);
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, ModBlocks.PLANKS_VARNISHED, 1)
+                .requires(ItemTags.PLANKS)
+                .requires(Tags.Items.SLIME_BALLS)
+                .requires(ModItems.REPELLENT)
+                .unlockedBy("has_repellent", has(ModItems.REPELLENT))
+                .save(output);
 
         shapeless(BUILDING_BLOCKS, ModItems.RED_GEM, Items.REDSTONE, 2);
 
@@ -126,6 +145,81 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapelessRecipeBuilder.shapeless(MISC, Items.BONE_MEAL, 1)
                 .requires(ModItems.SHARD_BONE)
                 .unlockedBy("has_shard_bone", has(ModItems.SHARD_BONE))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, ModBlocks.REIN_EXO, 1)
+                .requires(ModItems.REINFORCED_PLATE_EXO, 4)
+                .unlockedBy("has_reinforced_plate_exo", has(ModItems.REINFORCED_PLATE_EXO))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(MISC, Items.BOOK, 1)
+                .requires(ModItems.PLATE_EXO)
+                .requires(Items.PAPER, 3)
+                .unlockedBy("has_plate_exo", has(ModItems.PLATE_EXO))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(MISC, Items.PAPER, 4)
+                .requires(ModItems.PAPYRUS, 2)
+                .unlockedBy("has_papyrus", has(ModItems.PAPYRUS))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, ModBlocks.JADE_BLOCK, 1)
+                .requires(ModItems.JADE, 9)
+                .unlockedBy("has_jade", has(ModItems.JADE))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(MISC, ModItems.PLANTICIDE, 2)
+                .requires(ModItems.POISON_GLAND)
+                .requires(Tags.Items.SLIME_BALLS)
+                .requires(Tags.Items.DYES_WHITE)
+                .unlockedBy("has_poison_gland", has(ModItems.POISON_GLAND))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(MISC, ModItems.STEW_POT, 1)
+                .requires(Items.CAULDRON)
+                .requires(Tags.Items.RODS_WOODEN)
+                .unlockedBy("has_cauldron", has(Items.CAULDRON))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(MISC, ModItems.TITAN_STEW, 1)
+                .requires(ModItems.STEW_POT)
+                .requires(ModItems.TITAN_CHOP_RAW)
+                .requires(Items.POTATO)
+                .requires(Items.CARROT)
+                .requires(ModItems.CABBAGE)
+                .requires(Tags.Items.MUSHROOMS)
+                .requires(Tags.Items.MUSHROOMS)
+                .unlockedBy("has_stew_pot", has(ModItems.STEW_POT))
+                .save(output);
+
+        /*ShapelessRecipeBuilder.shapeless(MISC, ModItems.TITAN_STEW, 1)
+                .requires(ModItems.STEW_POT)
+                .requires(Items.BEEF, 2)
+                .requires(Items.POTATO)
+                .requires(Items.CARROT)
+                .requires(ModItems.CABBAGE)
+                .requires(Tags.Items.MUSHROOMS)
+                .requires(Tags.Items.MUSHROOMS)
+                .unlockedBy("has_stew_pot", has(ModItems.STEW_POT))
+                .save(output);*/
+
+        ShapelessRecipeBuilder.shapeless(MISC, ModItems.SMOOTHIE_GLASS, 1)
+                .requires(Items.GLASS_BOTTLE, 3)
+                .unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(COMBAT, ModItems.WEB_SLINGER_WITHER, 1)
+                .requires(ModItems.WEB_SLINGER)
+                .requires(Blocks.SOUL_SAND)
+                .requires(ModItems.POISON_GLAND)
+                .requires(ModBlocks.WITHER_WEB, 3)
+                .unlockedBy("has_web_slinger", has(ModItems.WEB_SLINGER))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(MISC, ModBlocks.LIGHTNING_SPEED, 1)
+                .requires(ModBlocks.VELOCITY)
+                .requires(ModItems.SUPERNATURAL_VELOCITY, 8)
+                .unlockedBy("has_velocity_block", has(ModBlocks.VELOCITY))
                 .save(output);
     }
 

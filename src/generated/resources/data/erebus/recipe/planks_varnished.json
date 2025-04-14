@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "tag": "minecraft:planks"
+    },
+    {
+      "tag": "c:slime_balls"
+    },
+    {
+      "item": "erebus:repellent"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:planks_varnished"
+  }
+}

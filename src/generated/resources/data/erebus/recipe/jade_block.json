@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "erebus:jade"
+    },
+    {
+      "item": "erebus:jade"
+    },
+    {
+      "item": "erebus:jade"
+    },
+    {
+      "item": "erebus:jade"
+    },
+    {
+      "item": "erebus:jade"
+    },
+    {
+      "item": "erebus:jade"
+    },
+    {
+      "item": "erebus:jade"
+    },
+    {
+      "item": "erebus:jade"
+    },
+    {
+      "item": "erebus:jade"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:jade_block"
+  }
+}
