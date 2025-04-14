@@ -14,6 +14,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Locale;
@@ -30,7 +31,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput output) {
+    protected void buildRecipes(@NotNull RecipeOutput output) {
         this.output = output;
 
         addCookingRecipes();
@@ -237,7 +238,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         oreBlasting(output, List.of(ore), MISC, ingot, 0.25F, 100, group);
     }
 
-    private void shapeless(RecipeCategory category, ItemLike ingredient, ItemLike result, int amount) {
+    private void shapeless(@SuppressWarnings("SameParameterValue") RecipeCategory category, ItemLike ingredient, ItemLike result, int amount) {
         ShapelessRecipeBuilder.shapeless(category, result, amount)
                 .requires(ingredient)
                 .unlockedBy("has_%s".formatted(ingredient.asItem().getDescriptionId().toLowerCase(Locale.ROOT)), has(ingredient))
