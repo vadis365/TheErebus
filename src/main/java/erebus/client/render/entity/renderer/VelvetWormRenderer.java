@@ -80,7 +80,7 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<
 		if(renderType != null) {
 			consumer = buffer.getBuffer(renderType);
 			for(int i = 0; i < entity.parts.length - 1; i++)
-				renderBodyPart(stack, consumer, packedLight, overlay, colour, entity, entity.parts[i], i > 0 ? entity.parts[i - 1] : entity, rx, ry, rz, i, avgWibbleStrength, zOffset -= 0.001F, partialTicks, i > 0 && i%2 == 0 ? true : false);
+				renderBodyPart(stack, consumer, packedLight, overlay, colour, entity, entity.parts[i], i > 0 ? entity.parts[i - 1] : entity, rx, ry, rz, i, avgWibbleStrength, zOffset -= 0.001F, partialTicks, i > 0 && i%2 != 0 ? true : false);
 			renderTailPart(stack, consumer, packedLight, overlay, colour, entity, entity.parts[entity.parts.length - 1], entity.parts[entity.parts.length - 2], rx, ry, rz, entity.parts.length - 1, avgWibbleStrength, partialTicks);
 		}
 		stack.popPose();

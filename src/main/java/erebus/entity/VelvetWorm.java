@@ -24,7 +24,6 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
@@ -46,16 +45,12 @@ public class VelvetWorm extends Monster {
 	public VelvetWormMultipart[] parts;
 
 	private int wallInvulnerabilityTicks = 40;
-	private boolean doSpawningAnimation = true;
+	private boolean doSpawningAnimation = false;
 
 	public VelvetWorm(EntityType<? extends Monster> type, Level level) {
 		super(type, level);
 		this.setPathfindingMalus(PathType.WATER, -1.0F);
 		this.parts = new VelvetWormMultipart[]{
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
 			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
 			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
 			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
@@ -202,18 +197,9 @@ public class VelvetWorm extends Monster {
 		for (VelvetWormMultipart part : this.parts) {
 			part.yRotO = part.getYRot();
 			part.xRotO = part.getXRot();
-			part.xOld = part.xo;
-			part.yOld = part.yo;
-			part.zOld = part.zo;
-			Vec3 vec3 = part.getDeltaMovement();
-			if (part.yo < this.yo && level().collidesWithSuffocatingBlock(part, part.getBoundingBox()))
-				part.setDeltaMovement(vec3.add(0.0D, 0.1D, 0.0D));
-
-			double motionY = vec3.y;
-			motionY -= 0.08D;
-			part.setDeltaMovement(vec3.add(0D, motionY, 0D));
-			motionY *= 0.98D * this.getTailMotionYMultiplier();
-			part.setDeltaMovement(vec3.add(0D, motionY, 0D));
+			part.xOld = part.getX();
+			part.yOld = part.getY();
+			part.zOld = part.getZ();
 		}
 
 		for (int i = 0; i < this.parts.length; i++) {
@@ -242,11 +228,14 @@ public class VelvetWorm extends Monster {
 			if (len > maxDist) {
 				Vec3 correction = diff.scale(1.0D / len * (len - maxDist));
 				targetPart.xo += correction.x;
-				targetPart.yo += correction.y; // this?
+				if(tickCount <= 1)
+					targetPart.yo = destinationPart.yo;
+				else
+					targetPart.yo += correction.y; // this?
 				targetPart.zo += correction.z;
 				targetPart.setPos(targetPart.xo, targetPart.yo, targetPart.zo);
 
-				double cy = targetPart.yo;
+				double cy = targetPart.getY();
 				Vec3 vec3 = targetPart.getDeltaMovement();
 				targetPart.setDeltaMovement(vec3.add(0D, correction.y, 0D));
 
@@ -278,6 +267,8 @@ public class VelvetWorm extends Monster {
 		rotationYaw += yawInterpolant / yawSpeed;
 		targetPart.setYRot((float) rotationYaw);
 		targetPart.setXRot(0F);
+		if ((yo < targetPart.yo) && level().collidesWithSuffocatingBlock(targetPart, targetPart.getBoundingBox()))
+			targetPart.yo += 0.02D;
 		targetPart.setPos(targetPart.xo, targetPart.yo, targetPart.zo);
 	}
 
