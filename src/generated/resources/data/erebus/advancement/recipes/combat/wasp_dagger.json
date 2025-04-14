@@ -1,32 +1,32 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.erebus.umbercobble": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:wasp_dagger"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wasp_sting": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:umbercobble"
+            "items": "erebus:wasp_sting"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
-    },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "erebus:umberpaver"
-      },
-      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.erebus.umbercobble"
+      "has_wasp_sting"
     ]
   ],
   "rewards": {
     "recipes": [
-      "erebus:umberpaver"
+      "erebus:wasp_dagger"
     ]
   }
 }

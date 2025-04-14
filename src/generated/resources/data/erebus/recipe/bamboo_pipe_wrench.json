@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "erebus:bamboo"
+    },
+    "P": {
+      "item": "erebus:planks_bamboo"
+    }
+  },
+  "pattern": [
+    "B B",
+    " P ",
+    " B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:bamboo_pipe_wrench"
+  }
+}

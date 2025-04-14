@@ -3,15 +3,16 @@
   "category": "building",
   "key": {
     "#": {
-      "item": "erebus:umbercobble"
+      "item": "erebus:dark_capped_mushroom"
     }
   },
   "pattern": [
-    "##",
-    "##"
+    "###",
+    "###",
+    "###"
   ],
   "result": {
-    "count": 4,
-    "id": "erebus:umberpaver"
+    "count": 1,
+    "id": "erebus:dark_capped_mushroom_block"
   }
 }

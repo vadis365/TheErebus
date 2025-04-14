@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "erebus:bio_velocity"
+    },
+    "P": {
+      "item": "erebus:rein_exoskeleton_leggings"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BPB",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:sprint_leggings"
+  }
+}

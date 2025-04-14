@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "erebus:bamboo"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "BIB",
+    "BBB",
+    " B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:bamboo_shield"
+  }
+}

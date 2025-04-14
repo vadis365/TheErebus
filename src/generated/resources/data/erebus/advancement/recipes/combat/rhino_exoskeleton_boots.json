@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.erebus.umbercobble": {
+    "has_jade": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:umbercobble"
+            "items": "erebus:plate_exo_rhino"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "erebus:umberpaver"
+        "recipe": "erebus:rhino_exoskeleton_boots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.erebus.umbercobble"
+      "has_jade"
     ]
   ],
   "rewards": {
     "recipes": [
-      "erebus:umberpaver"
+      "erebus:rhino_exoskeleton_boots"
     ]
   }
 }

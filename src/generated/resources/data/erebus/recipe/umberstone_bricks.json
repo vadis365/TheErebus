@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "#": {
-      "item": "erebus:umbercobble"
+      "item": "erebus:umberstone"
     }
   },
   "pattern": [
@@ -12,6 +12,6 @@
   ],
   "result": {
     "count": 4,
-    "id": "erebus:umberpaver"
+    "id": "erebus:umberstone_bricks"
   }
 }

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:lever"
+    },
+    {
+      "item": "erebus:bamboo_pipe"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:bamboo_pipe_extract"
+  }
+}

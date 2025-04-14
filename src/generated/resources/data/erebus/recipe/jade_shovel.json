@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "J": {
+      "item": "erebus:jade"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    " J ",
+    " S ",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:jade_shovel"
+  }
+}

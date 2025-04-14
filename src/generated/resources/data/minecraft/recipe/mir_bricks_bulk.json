@@ -2,16 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "erebus:umbercobble"
+    "A": {
+      "item": "erebus:mud_bricks"
+    },
+    "B": {
+      "item": "minecraft:clay"
     }
   },
   "pattern": [
-    "##",
-    "##"
+    "AB",
+    "BA"
   ],
   "result": {
     "count": 4,
-    "id": "erebus:umberpaver"
+    "id": "erebus:mir_bricks"
   }
 }

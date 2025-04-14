@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "F": {
+      "item": "erebus:elastic_fiber"
+    },
+    "G": {
+      "item": "erebus:glider_chestplate"
+    },
+    "V": {
+      "item": "erebus:velocity"
+    },
+    "W": {
+      "item": "erebus:enhanced_glider_wing"
+    }
+  },
+  "pattern": [
+    "W W",
+    "FGF",
+    " V "
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:glider_chestplate_powered"
+  }
+}

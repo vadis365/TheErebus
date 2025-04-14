@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "tag": "c:dyes/black"
+    },
+    "P": {
+      "item": "erebus:papyrus"
+    },
+    "W": {
+      "item": "erebus:whetstone_powder"
+    }
+  },
+  "pattern": [
+    "PWP",
+    "PBP",
+    "PWP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:rolled_newspaper"
+  }
+}

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.erebus.umbercobble": {
+    "has_bamboo": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:umbercobble"
+            "items": "erebus:bamboo"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "erebus:umberpaver"
+        "recipe": "erebus:bambucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.erebus.umbercobble"
+      "has_bamboo"
     ]
   ],
   "rewards": {
     "recipes": [
-      "erebus:umberpaver"
+      "erebus:bambucket"
     ]
   }
 }

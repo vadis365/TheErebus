@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": {
+      "item": "erebus:hide_shroom"
+    },
+    "P": {
+      "item": "minecraft:pumpkin"
+    }
+  },
+  "pattern": [
+    "HHH",
+    "HPH"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:mushroom_helmet"
+  }
+}

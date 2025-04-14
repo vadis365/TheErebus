@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "erebus:rein_exoskeleton_chestplate"
+    },
+    "W": {
+      "item": "erebus:glider_wing"
+    }
+  },
+  "pattern": [
+    "WCW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:glider_chestplate"
+  }
+}

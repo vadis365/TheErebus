@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "erebus:amber"
+    },
+    "E": {
+      "item": "erebus:compound_eyes"
+    }
+  },
+  "pattern": [
+    "EEE",
+    "EAE",
+    "EEE"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:compound_lens"
+  }
+}

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.erebus.umbercobble": {
+    "has_altar_fragment": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:umbercobble"
+            "items": "erebus:altar_fragment"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "erebus:umberpaver"
+        "recipe": "erebus:altar_base"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.erebus.umbercobble"
+      "has_altar_fragment"
     ]
   ],
   "rewards": {
     "recipes": [
-      "erebus:umberpaver"
+      "erebus:altar_base"
     ]
   }
 }

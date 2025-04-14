@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "erebus:plate_exo"
+    },
+    {
+      "item": "erebus:plate_exo"
+    },
+    {
+      "item": "erebus:plate_exo"
+    },
+    {
+      "item": "erebus:plate_exo"
+    },
+    {
+      "item": "erebus:plate_exo"
+    },
+    {
+      "item": "erebus:plate_exo"
+    },
+    {
+      "item": "erebus:plate_exo"
+    },
+    {
+      "item": "erebus:plate_exo"
+    },
+    {
+      "item": "erebus:plate_exo"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:reinforced_plate_exo"
+  }
+}

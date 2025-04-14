@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "erebus:mud_brick"
+    },
+    "B": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "pattern": [
+    "AB",
+    "BA"
+  ],
+  "result": {
+    "count": 4,
+    "id": "erebus:mir_bricks"
+  }
+}

@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "erebus:hollow_log" },
-        "facing=south": { "model": "erebus:hollow_log", "y": 180 },
-        "facing=west":  { "model": "erebus:hollow_log", "y": 270 },
-        "facing=east":  { "model": "erebus:hollow_log" , "y": 90 }
-    }
-}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "erebus:jade_axe"
+    },
+    "H": {
+      "item": "erebus:jade_shovel"
+    },
+    "P": {
+      "item": "erebus:jade_pickaxe"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "AHP",
+    " S ",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:jade_paxel"
+  }
+}

@@ -1,6 +1,0 @@
-{
-	"variants": {
-		"type=amber": { "model": "erebus:amber" },
-        "type=amber_glass": { "model": "erebus:amber_glass" }
-	}
-}

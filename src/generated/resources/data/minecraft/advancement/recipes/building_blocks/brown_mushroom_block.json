@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.erebus.umbercobble": {
+    "has_block.minecraft.brown_mushroom": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:umbercobble"
+            "items": "minecraft:brown_mushroom"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "erebus:umberpaver"
+        "recipe": "minecraft:brown_mushroom_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.erebus.umbercobble"
+      "has_block.minecraft.brown_mushroom"
     ]
   ],
   "rewards": {
     "recipes": [
-      "erebus:umberpaver"
+      "minecraft:brown_mushroom_block"
     ]
   }
 }

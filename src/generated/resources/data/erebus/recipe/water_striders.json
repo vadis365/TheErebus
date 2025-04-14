@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "erebus:rein_exoskeleton_boots"
+    },
+    "W": {
+      "item": "erebus:water_repellent"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "WBW",
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:water_striders"
+  }
+}

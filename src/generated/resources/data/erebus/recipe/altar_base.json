@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "erebus:altar_fragment"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "AOA",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:altar_base"
+  }
+}

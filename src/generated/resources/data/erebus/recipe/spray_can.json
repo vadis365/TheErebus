@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "minecraft:buttons"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "erebus:repellent"
+    }
+  },
+  "pattern": [
+    " B ",
+    "IRI",
+    "III"
+  ],
+  "result": {
+    "count": 9,
+    "id": "erebus:spray_can"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "tag": "c:rods/wooden"
+    },
+    {
+      "item": "erebus:wasp_sting"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:wasp_dagger"
+  }
+}

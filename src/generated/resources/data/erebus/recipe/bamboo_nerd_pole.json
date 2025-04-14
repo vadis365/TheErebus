@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "erebus:bamboo"
+    },
+    "S": {
+      "tag": "c:slime_balls"
+    }
+  },
+  "pattern": [
+    "S",
+    "B",
+    "B"
+  ],
+  "result": {
+    "count": 4,
+    "id": "erebus:bamboo_nerd_pole"
+  }
+}

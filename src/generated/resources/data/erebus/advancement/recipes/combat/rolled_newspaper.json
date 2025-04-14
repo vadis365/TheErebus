@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.erebus.umbercobble": {
+    "has_papyrus": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:umbercobble"
+            "items": "erebus:papyrus"
           }
         ]
       },
@@ -13,20 +13,31 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "erebus:umberpaver"
+        "recipe": "erebus:rolled_newspaper"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_whetstone_powder": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:whetstone_powder"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.erebus.umbercobble"
+      "has_papyrus",
+      "has_whetstone_powder"
     ]
   ],
   "rewards": {
     "recipes": [
-      "erebus:umberpaver"
+      "erebus:rolled_newspaper"
     ]
   }
 }

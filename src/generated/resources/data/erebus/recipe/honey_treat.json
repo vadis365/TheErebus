@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bread"
+    },
+    "H": {
+      "item": "erebus:honey_drip"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "pattern": [
+    "SHS",
+    "HBH",
+    "SHS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:honey_treat"
+  }
+}

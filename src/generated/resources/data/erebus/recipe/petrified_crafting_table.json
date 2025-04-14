@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "#": {
-      "item": "erebus:umbercobble"
+      "item": "erebus:planks_petrified"
     }
   },
   "pattern": [
@@ -11,7 +11,7 @@
     "##"
   ],
   "result": {
-    "count": 4,
-    "id": "erebus:umberpaver"
+    "count": 1,
+    "id": "erebus:petrified_crafting_table"
   }
 }
