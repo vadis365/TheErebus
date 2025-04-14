@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ore_jade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:ore_jade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:jade_from_blasting_ore_jade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ore_jade"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:jade_from_blasting_ore_jade"
+    ]
+  }
+}

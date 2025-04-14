@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_amber_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:amber_glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:amber"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_amber_glass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:amber"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_beetle_larva_raw": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:beetle_larva_raw"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:beetle_larva_cooked_from_campfire_cooking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_beetle_larva_raw"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:beetle_larva_cooked_from_campfire_cooking"
+    ]
+  }
+}

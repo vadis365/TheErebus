@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "erebus:log_eucalyptus"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "erebus:planks_eucalyptus"
+  }
+}

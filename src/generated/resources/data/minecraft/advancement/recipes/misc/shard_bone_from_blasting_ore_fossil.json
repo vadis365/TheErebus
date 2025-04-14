@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ore_fossil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:ore_fossil"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:shard_bone_from_blasting_ore_fossil"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ore_fossil"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:shard_bone_from_blasting_ore_fossil"
+    ]
+  }
+}

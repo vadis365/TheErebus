@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.erebus.log_eucalyptus": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:log_eucalyptus"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:planks_eucalyptus"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.erebus.log_eucalyptus"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:planks_eucalyptus"
+    ]
+  }
+}

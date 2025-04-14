@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_grasshopper_leg_raw": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:grasshopper_leg_raw"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:grasshopper_leg_cooked_from_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_grasshopper_leg_raw"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:grasshopper_leg_cooked_from_smoking"
+    ]
+  }
+}

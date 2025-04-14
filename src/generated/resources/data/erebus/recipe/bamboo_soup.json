@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "erebus:bamboo_shoot"
+    },
+    {
+      "item": "erebus:bamboo"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:bamboo_soup"
+  }
+}

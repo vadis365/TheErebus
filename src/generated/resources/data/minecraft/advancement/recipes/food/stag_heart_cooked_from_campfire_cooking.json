@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stag_heart_raw": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:stag_heart_raw"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:stag_heart_cooked_from_campfire_cooking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_stag_heart_raw"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:stag_heart_cooked_from_campfire_cooking"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "group": "shard_bone",
+  "ingredient": {
+    "item": "erebus:ore_fossil"
+  },
+  "result": {
+    "count": 1,
+    "id": "erebus:shard_bone"
+  }
+}

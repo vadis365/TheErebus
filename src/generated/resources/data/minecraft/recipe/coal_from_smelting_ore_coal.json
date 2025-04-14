@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "group": "coal",
+  "ingredient": {
+    "item": "erebus:ore_coal"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:coal"
+  }
+}
