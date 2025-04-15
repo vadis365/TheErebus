@@ -26,7 +26,7 @@ public class ModNoiseGenerator {
                 ModNoiseRouter.erebus(context.lookup(Registries.DENSITY_FUNCTION), context.lookup(Registries.NOISE)),
                 ModSurfaceRules.erebus(),
                 (new OverworldBiomeBuilder()).spawnTarget(),
-                32,
+                0,
                 false,
                 false,
                 false,
