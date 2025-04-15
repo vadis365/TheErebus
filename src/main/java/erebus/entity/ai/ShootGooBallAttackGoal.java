@@ -8,14 +8,13 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.player.Player;
 
 public class ShootGooBallAttackGoal extends Goal {
 
 	private final PathfinderMob mob;
 	private final double speedModifier;
-	private int attackStep;
 	private int attackTime;
+	private int shootTime;
 
 	public ShootGooBallAttackGoal(PathfinderMob mobIn, double speedModifierIn) {
 		mob = mobIn;
@@ -31,12 +30,13 @@ public class ShootGooBallAttackGoal extends Goal {
 
 	@Override
 	public void start() {
-		attackStep = 0;
+		attackTime = 0;
 	}
 
 	@Override
 	public void tick() {
 		--attackTime;
+		--shootTime;
 		LivingEntity livingentity = mob.getTarget();
 		double distance = mob.distanceToSqr(livingentity);
 
@@ -53,26 +53,13 @@ public class ShootGooBallAttackGoal extends Goal {
 			double targetY = livingentity.getBoundingBox().minY + (double) (livingentity.getBbHeight()) - (mob.getY() + (double) (mob.getBbHeight()));
 			double targetZ = livingentity.getZ() - mob.getZ();
 
-			if (attackTime <= 0) {
-				++attackStep;
-				
-				if (attackStep == 1) {
-					attackTime = 60;
-
-				} else if (attackStep <= 4) {
-					attackTime = 6;
-				} else {
-					attackTime = 100;
-					attackStep = 0;
-				}
-
-				if (attackStep == 1 && livingentity instanceof Player) {
-						mob.level().playSound(null, mob.blockPosition(), ModSounds.WEBSLING_THROW.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
-						GooBall gooBall = new GooBall(mob.level(), mob, 0F);
-						gooBall.setPos(mob.getX(), mob.getY() + (double) (mob.getBbHeight()  + 0.3D), mob.getZ());
-						gooBall.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
-						mob.level().addFreshEntity(gooBall);
-					}
+			if (shootTime <= 0) {
+				mob.level().playSound(null, mob.blockPosition(), ModSounds.WEBSLING_THROW.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
+				GooBall gooBall = new GooBall(mob.level(), mob, 0F);
+				gooBall.setPos(mob.getX(), mob.getY() + (double) (mob.getBbHeight() + 0.3D), mob.getZ());
+				gooBall.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
+				mob.level().addFreshEntity(gooBall);
+				shootTime = 100;
 			}
 			mob.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
 			mob.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), speedModifier);

@@ -21,8 +21,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
@@ -64,7 +63,7 @@ public class VelvetWorm extends Monster {
 			};
 		setId(ENTITY_COUNTER.getAndAdd(this.parts.length + 1) + 1);
 	}
-	
+
 	@Override
 	public void setId(int id) {
 		super.setId(id);
@@ -81,7 +80,7 @@ public class VelvetWorm extends Monster {
 	public boolean isMultipartEntity() {
 		return true;
 	}
-	
+
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
@@ -91,13 +90,11 @@ public class VelvetWorm extends Monster {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
-		goalSelector.addGoal(1, new ShootGooBallAttackGoal(this, 1.0D));
-		goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.8D, 1));
-		goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 4.0F));
+		goalSelector.addGoal(1, new ShootGooBallAttackGoal(this, 1.3D));
+		goalSelector.addGoal(3, new RandomStrollGoal(this, 0.8D, 1));
+		goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 4.0F));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this));
 		targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
-		
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -161,6 +158,15 @@ public class VelvetWorm extends Monster {
 		return newBox;
     }
 
+	@Override
+	public boolean shouldRenderAtSqrDistance(double distance) {
+		double aabbSize = this.getBoundingBox().getSize() * 10.0;
+		if (Double.isNaN(aabbSize))
+			aabbSize = 1.0;
+		aabbSize *= 64.0 * getViewScale();
+		return distance < aabbSize * aabbSize;
+	}
+
 	@OnlyIn(Dist.CLIENT)
 	public void spawnParticles(Level level, double x, double y, double z, RandomSource rand) {
 		for (int count = 0; count < 1 + level.getRandom().nextInt(4); ++count) {
@@ -170,7 +176,7 @@ public class VelvetWorm extends Monster {
 			level.addParticle(ParticleTypes.ITEM_SLIME, false, x + offSetX, y, z + offSetZ, 0, 0, 0);
 		}
 	}
-	
+
 	@Override
 	public void makeStuckInBlock(BlockState state, Vec3 motionMultiplier) {
 		if (!state.is(Blocks.COBWEB))
@@ -279,7 +285,7 @@ public class VelvetWorm extends Monster {
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, @Nullable SpawnGroupData data) {
-		setSkin(level.getRandom().nextInt(2));
+		setSkin(level.getRandom().nextInt(5));
 		for (VelvetWormMultipart part : this.parts) {
 			part.setPos(this.xo, this.yo, this.zo);
 			part.setYRot(this.getYRot());
