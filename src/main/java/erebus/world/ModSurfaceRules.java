@@ -116,34 +116,31 @@ public class ModSurfaceRules {
     private static RuleSource decorateSubmergedSwamp() {
         return ifTrue(
                 isBiome(ModBiomes.SUBMERGED_SWAMP.getResourceKey()),
-                ifTrue(
-                        abovePreliminarySurface(),
-                        sequence(
+                sequence(
+                        ifTrue(
+                                stoneDepthCheck(0, false, 0, CaveSurface.FLOOR),
                                 ifTrue(
-                                        stoneDepthCheck(0, false, 0, CaveSurface.FLOOR),
+                                        yBlockCheck(VerticalAnchor.absolute(0), 0),
                                         ifTrue(
-                                                yBlockCheck(VerticalAnchor.absolute(60), 0),
+                                                not(yBlockCheck(VerticalAnchor.absolute(63), 0)),
                                                 ifTrue(
-                                                        not(yBlockCheck(VerticalAnchor.absolute(63), 0)),
-                                                        ifTrue(
-                                                                noiseCondition(Noises.SWAMP, 0, 1.7976931348623157e+308),
-                                                                WATER
-                                                        )
+                                                        noiseCondition(Noises.SWAMP, 0, 1.7976931348623157e+308),
+                                                        WATER
                                                 )
                                         )
-                                ),
+                                )
+                        ),
+                        ifTrue(
+                                stoneDepthCheck(0, false, 0, CaveSurface.FLOOR),
                                 ifTrue(
-                                        stoneDepthCheck(0, false, 0, CaveSurface.FLOOR),
-                                        ifTrue(
-                                                waterBlockCheck(-1, 0),
-                                                sequence(
-                                                        MUD,
-                                                        ifTrue(
-                                                                waterBlockCheck(0, 0),
-                                                                placeGrass()
-                                                        ),
-                                                        placeDirtUnderGrass()
-                                                )
+                                        waterBlockCheck(-1, 0),
+                                        sequence(
+                                                MUD,
+                                                ifTrue(
+                                                        waterBlockCheck(0, 0),
+                                                        placeGrass()
+                                                ),
+                                                placeDirtUnderGrass()
                                         )
                                 )
                         )
