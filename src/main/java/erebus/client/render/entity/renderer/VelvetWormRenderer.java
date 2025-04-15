@@ -28,7 +28,7 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<
 
 
 	public VelvetWormRenderer(EntityRendererProvider.Context context) {
-		super(context, new VelvetWormModel<>(context.bakeLayer(ModEntityRendering.VELVET_WORM)), 0.1F);
+		super(context, new VelvetWormModel<>(context.bakeLayer(ModEntityRendering.VELVET_WORM)), 0F);
 		//TODO remake renderer and use layers for body sections parts
 	}
 
@@ -103,7 +103,7 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<
 		if (isTranslucentToPlayer)
 			return RenderType.entityTranslucentCull(getTextureLocation(entity));
 		else if (isVisible)
-			return this.model.renderType(getTextureLocation(entity));
+			return RenderType.entityCutout(getTextureLocation(entity));
 		else
 			return isGlowing ? RenderType.outline(getTextureLocation(entity)) : null;
 	}

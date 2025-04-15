@@ -81,104 +81,18 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float legs = (float) (Math.sin(limbSwing) * limbSwingAmount);
-		Body1RightLeg.yRot = -legs;
-		Body1LeftLeg.yRot = legs;
-	/*	float legs = (float) (Math.sin(limbSwing) * limbSwingAmount);
-		float bb = (float) (Math.sin(limbSwing + 1.0F) * 2.0F * limbSwingAmount);
-		float bc = (float) (Math.sin(limbSwing + 2.0F) * 2.6F * limbSwingAmount);
-		float bd = (float) (Math.sin(limbSwing + 3.0F) * 2.0F * limbSwingAmount);
-		float be = (float) (Math.sin(limbSwing + 4.0F) * limbSwingAmount);
-		float bf = (float) (Math.sin(limbSwing + 5.0F) * 0.35F * limbSwingAmount);
-
-		Head1.x = bf;
-
-		BodA1.y = 21F + legs;
-
-		BodB1.y = 21F + bb;
-
-		BodC1.y = 21F + bc;
-
-		BodD1.y = 21F + bd;
-
-		BodE1.y = 21F + be;
-
-		BodF1.y = 21F + bf;
-		BodF2.y = 21F + bf;
-
-		RLA1.y = 21.5F + legs;
-		LLA1.y = 21.5F + legs;
-
-		RLB1.y = 21.5F + bb;
-		LLB1.y = 21.5F + bb;
-
-		RLC1.y = 21.5F + bc;
-		LLC1.y = 21.5F + bc;
-
-		RLD1.y = 21.5F + bd;
-		LLD1.y = 21.5F + bd;
-
-		RLE1.y = 21.5F + be;
-		LLE1.y = 21.5F + be;
-
-
-
-		RLB1.yRot = legs;
-		LLB1.yRot = -legs;
-
-		RLC1.yRot = -legs;
-		LLC1.yRot = legs;
-
-		RLD1.yRot = legs;
-		LLD1.yRot = -legs;
-
-		RLE1.yRot = -legs;
-		LLE1.yRot = legs;
-
-		Head1.yRot = netHeadYaw / (180F / (float) Math.PI);
-		Head1.xRot = headPitch / (180F / (float) Math.PI);
-
-		BodF1.xRot = headPitch / (180F / (float) Math.PI);
-		BodF2.xRot = headPitch / (180F / (float) Math.PI);
-		*/
 	}
-/*
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		Head1.render(stack, consumer, light, overlay, colour);
-		BodA1.render(stack, consumer, light, overlay, colour);
-		RLA1.render(stack, consumer, light, overlay, colour);
-		LLA1.render(stack, consumer, light, overlay, colour);
-		BodB1.render(stack, consumer, light, overlay, colour);
-		RLB1.render(stack, consumer, light, overlay, colour);
-		LLB1.render(stack, consumer, light, overlay, colour);
-		BodC1.render(stack, consumer, light, overlay, colour);
-		RLC1.render(stack, consumer, light, overlay, colour);
-		LLC1.render(stack, consumer, light, overlay, colour);
-		BodD1.render(stack, consumer, light, overlay, colour);
-		RLD1.render(stack, consumer, light, overlay, colour);
-		LLD1.render(stack, consumer, light, overlay, colour);
-		BodE1.render(stack, consumer, light, overlay, colour);
-		RLE1.render(stack, consumer, light, overlay, colour);
-		LLE1.render(stack, consumer, light, overlay, colour);
-		BodF1.render(stack, consumer, light, overlay, colour);
-		BodF2.render(stack, consumer, light, overlay, colour);
-	}
-*/
+
 	@Override
 	public ModelPart root() {
 		return root;
 	}
 
 	public void renderHead(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm worm, int frame, float wibbleStrength, float partialTicks) {
-		float limbSwing = worm.walkAnimation.position(partialTicks);
-		float limbSwingAmount = worm.walkAnimation.speed(partialTicks);
-		float smoothedTicks = limbSwing + frame;
-		float wibble = (float) (Math.sin((smoothedTicks) * 0.3F) * 0.25F * limbSwingAmount * wibbleStrength);
-		float antTicks = worm.tickCount + frame + (worm.tickCount + frame - (worm.tickCount + frame - 1)) * partialTicks;
-		float ant_wibbleSin = (float) (Math.sin(1F + (antTicks) * 0.25F) * 0.25F);
-		float ant_wibbleCos = (float) (Math.cos(1F + (antTicks) * 0.25F) * 0.25F);
-		
+		float smoothedTicks = worm.tickCount + frame + (worm.tickCount + frame - (worm.tickCount + frame - 1)) * partialTicks;
+		float wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.125F * wibbleStrength);
+		float ant_wibbleSin = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.25F);
+		float ant_wibbleCos = (float) (Math.cos(1F + (smoothedTicks) * 0.25F) * 0.25F);
 		stack.translate(0F, 0F - wibble * 2F, 0F + wibble * 2F);
 		stack.scale(1F + wibble * 2F, 1F + wibble, 1.5F - wibble * 1.25F);
 		Head1.xRot = worm.getXRot() / Mth.RAD_TO_DEG;
@@ -192,10 +106,10 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 	public void renderBody(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm worm, int frame, float wibbleStrength, float partialTicks, boolean isPartA) {
 		float limbSwing = worm.walkAnimation.position(partialTicks);
 		float limbSwingAmount = worm.walkAnimation.speed(partialTicks);
-		float smoothedTicks = limbSwing + frame;
-		float wibble = (float) (Math.sin((smoothedTicks) * 0.3F) * 0.25F * limbSwingAmount * wibbleStrength);
-		float legsSin = (float) (Math.sin(smoothedTicks * 0.3F) * 0.75F * limbSwingAmount * wibbleStrength);
-		float legsCos = (float) (Math.cos(smoothedTicks * 0.3F) * 0.5F * limbSwingAmount);
+		float smoothedTicks = worm.tickCount + frame + (worm.tickCount + frame - (worm.tickCount + frame - 1)) * partialTicks;
+		float wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.125F * wibbleStrength);
+		float legsSin = (float) (Math.sin(limbSwing + frame * 0.3F) * 0.75F * limbSwingAmount * wibbleStrength);
+		float legsCos = (float) (Math.cos(limbSwing + frame * 0.3F) * 0.5F * limbSwingAmount);
 
 		stack.translate(0F, 0F - wibble, 0F - wibble * 2F);
 
@@ -241,10 +155,8 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 	}
 
 	public void renderTail(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm worm, int frame, float wibbleStrength, float partialTicks) {
-		float limbSwing = worm.walkAnimation.position(partialTicks);
-		float limbSwingAmount = worm.walkAnimation.speed(partialTicks);
-		float smoothedTicks = limbSwing + frame;
-		float wibble = (float) (Math.sin((smoothedTicks) * 0.3F) * 0.25F * limbSwingAmount * wibbleStrength);
+		float smoothedTicks = worm.tickCount + frame + (worm.tickCount + frame - (worm.tickCount + frame - 1)) * partialTicks;
+		float wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.125F * wibbleStrength);
 
 		stack.translate(0F, 0F - wibble * 2F, 0F + wibble * 2F);
 		stack.scale(1F + wibble * 2F, 1F + wibble, 1.625F - wibble * 1.25F);

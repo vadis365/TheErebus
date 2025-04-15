@@ -8,8 +8,7 @@ public class VelvetWormMultipart extends GenericPartEntity<VelvetWorm> {
 
 	@Override
     protected double getDefaultGravity() {
-        return 0.1;
+        return 0.2;
     }
 
 }
-

@@ -35,6 +35,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -141,7 +142,7 @@ public class VelvetWorm extends Monster {
 	public void tick() {
 		super.tick();
 
-		if (this.level().isClientSide() && this.tickCount % 10 == 0) {
+		if (this.level().isClientSide() && this.tickCount % 20 == 0) {
 			this.spawnParticles(this.level(), this.xo, this.yo, this.zo, this.getRandom());
 		}
 
@@ -153,12 +154,20 @@ public class VelvetWorm extends Monster {
 		this.setDeltaMovement(vec3.multiply(1.0D, this.getHeadMotionYMultiplier(), 1.0D));
 	}
 
+    @Override
+    public AABB getBoundingBoxForCulling() {
+    	AABB newBox = getBoundingBox();
+		for(VelvetWormMultipart part : this.parts)
+			newBox = getBoundingBox().minmax(part.getBoundingBox());
+		return newBox;
+    }
+
 	@OnlyIn(Dist.CLIENT)
 	public void spawnParticles(Level level, double x, double y, double z, RandomSource rand) {
 		for (int count = 0; count < 1 + level.getRandom().nextInt(4); ++count) {
 			double a = Math.toRadians(this.yBodyRot);
-			double offSetX = -Math.sin(a) * 0D + rand.nextDouble() * 0.3D - rand.nextDouble() * 0.3D;
-			double offSetZ = Math.cos(a) * 0D + rand.nextDouble() * 0.3D - rand.nextDouble() * 0.3D;
+			double offSetX = -Math.sin(a) * 0D + rand.nextDouble() * 0.5D - rand.nextDouble() * 0.5D;
+			double offSetZ = Math.cos(a) * 0D + rand.nextDouble() * 0.5D - rand.nextDouble() * 0.5D;
 			level.addParticle(ParticleTypes.ITEM_SLIME, false, x + offSetX, y, z + offSetZ, 0, 0, 0);
 		}
 	}
