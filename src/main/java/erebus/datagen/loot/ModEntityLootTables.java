@@ -49,6 +49,7 @@ public class ModEntityLootTables extends EntityLootSubProvider {
 		this.noLoot(ModEntities.ANTLION);
 
 		this.noLoot(ModEntities.BOT_FLY);
+		this.noLoot(ModEntities.BOT_FLY_LARVA);
 		this.noLoot(ModEntities.FLY);
 		this.noLoot(ModEntities.DRAGON_FLY);
     }

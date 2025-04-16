@@ -5,6 +5,7 @@ import erebus.entity.AnimatedBlock;
 import erebus.entity.Antlion;
 import erebus.entity.BlackWidow;
 import erebus.entity.BotFly;
+import erebus.entity.BotFlyLarva;
 import erebus.entity.Dragonfly;
 import erebus.entity.Fly;
 import erebus.entity.LavaWebSpider;
@@ -52,6 +53,7 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<VelvetWorm>> VELVET_WORM = registerWithEgg("velvet_worm", EntityType.Builder.of(VelvetWorm::new, MobCategory.MONSTER).sized(0.3125F, 0.3125F), 0x88444B, 0xFFDAC0);
     public static final DeferredHolder<EntityType<?>, EntityType<Antlion>> ANTLION = registerWithEgg("antlion", EntityType.Builder.of(Antlion::new, MobCategory.MONSTER).sized(1.9F, 0.9F).fireImmune(), 0x958A54, 0xBB4602);
     public static final DeferredHolder<EntityType<?>, EntityType<BotFly>> BOT_FLY = registerWithEgg("bot_fly", EntityType.Builder.of(BotFly::new, MobCategory.MONSTER).sized(0.9F, 0.75F), 0xEFE2B9, 0x858B95);
+    public static final DeferredHolder<EntityType<?>, EntityType<BotFlyLarva>> BOT_FLY_LARVA = registerNoEgg("bot_fly_larva", EntityType.Builder.of(BotFlyLarva::new, MobCategory.MONSTER).sized(0.5F, 0.2F).fireImmune());
     public static final DeferredHolder<EntityType<?>, EntityType<Fly>> FLY = registerWithEgg("fly", EntityType.Builder.of(Fly::new, MobCategory.MONSTER).sized(0.5F, 0.45F), 0x381C22, 0x990000);
     public static final DeferredHolder<EntityType<?>, EntityType<Dragonfly>> DRAGON_FLY = registerWithEgg("dragon_fly", EntityType.Builder.of(Dragonfly::new, MobCategory.MONSTER).sized(2.5F, 1.0F).fireImmune(), 0x37A87C, 0xE9E9E9);
     
@@ -87,6 +89,7 @@ public class ModEntities {
 		event.put(VELVET_WORM.get(), VelvetWorm.createAttributes().build());
 		event.put(ANTLION.get(), Antlion.createAttributes().build());
 		event.put(BOT_FLY.get(), BotFly.createAttributes().build());
+		event.put(BOT_FLY_LARVA.get(), BotFlyLarva.createAttributes().build());
 		event.put(FLY.get(), Fly.createAttributes().build());
 		event.put(DRAGON_FLY.get(), Dragonfly.createAttributes().build());
 	}

@@ -3,6 +3,7 @@ package erebus.entity;
 import javax.annotation.Nullable;
 
 import erebus.registries.ModSounds;
+import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
@@ -164,35 +165,39 @@ public class BotFly extends Monster {
 		}
 	}
 */
-@Override
-public boolean doHurtTarget(Entity entity) {
-	if (hasLineOfSight(entity)) {
-		if (super.doHurtTarget(entity)) {
-			if (entity instanceof Player) {
-			//	if (random.nextInt(20) == 0 && !entity.hasPassenger(BotFlyLava)) {
-					// BotFlyLarva entityBotFlyLarva = new BotFlyLarva(getEntityWorld());
-					// entityBotFlyLarva.setPosition(entity.posX, entity.posY + 1, entity.posZ);
-					// entityBotFlyLarva.setParasiteCount((byte) 1);
-					// entityBotFlyLarva.startRiding(entity, true);
-					// getEntityWorld().spawnEntity(entityBotFlyLarva);
-			//	} // else if (random.nextInt(20) == 0 && getParasite((Player) entity) != null)
-					// if (((BotFlyLarva) getParasite((Player) entity)).getParasiteCount() < 3)
-					// ((BotFlyLarva) getParasite((Player) entity)).setParasiteCount((byte)
-					// (((BotFlyLarva) getParasite((Player) entity)).getParasiteCount() + 1));
+	@Override
+	public boolean doHurtTarget(Entity entity) {
+		if (hasLineOfSight(entity)) {
+			if (super.doHurtTarget(entity)) {
+				if (entity instanceof Player) {
+					Player player = (Player) entity;
+					if (random.nextInt(1) == 0 && getParasite(player) == null) {
+						BotFlyLarva entityBotFlyLarva = ModEntities.BOT_FLY_LARVA.get().create(this.level());
+						if (entityBotFlyLarva != null) {
+							entityBotFlyLarva.setPos(entity.getX(), entity.getY() + 1, entity.getZ());
+							entityBotFlyLarva.setParasiteCount((byte) 1);
+							entityBotFlyLarva.startRiding(entity, true);
+							level().addFreshEntity(entityBotFlyLarva);
+						}
+					} else if (random.nextInt(1) == 0 && getParasite(player) != null) {
+						BotFlyLarva larva = (BotFlyLarva) getParasite(player);
+						if (larva.getParasiteCount() < 3)
+							larva.setParasiteCount((byte) (larva.getParasiteCount() + 1));
+					}
+				}
 			}
+			return true;
 		}
-		return true;
+		return false;
 	}
-	return false;
-}
-/* TODO Add back the larva
+	
+	@Nullable
 	public Entity getParasite(Player player) {
 		for (Entity entity : player.getPassengers())
 			if (entity instanceof BotFlyLarva)
 				return entity;
 		return null;
 	}
-	*/
 
 	class AIFlyingWander extends WaterAvoidingRandomStrollGoal {
 		public AIFlyingWander(BotFly creatureIn, double speedIn, float chance) {

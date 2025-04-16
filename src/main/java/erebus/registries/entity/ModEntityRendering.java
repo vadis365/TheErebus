@@ -4,6 +4,7 @@ import erebus.Erebus;
 import erebus.client.render.entity.model.AnimatedBlockModel;
 import erebus.client.render.entity.model.AntlionModel;
 import erebus.client.render.entity.model.BlackWidowModel;
+import erebus.client.render.entity.model.BotFlyLarvaModel;
 import erebus.client.render.entity.model.BotFlyModel;
 import erebus.client.render.entity.model.DragonflyModel;
 import erebus.client.render.entity.model.FlyModel;
@@ -15,6 +16,7 @@ import erebus.client.render.entity.model.WaspModel;
 import erebus.client.render.entity.renderer.AnimatedBlockRenderer;
 import erebus.client.render.entity.renderer.AntlionRenderer;
 import erebus.client.render.entity.renderer.BlackWidowRenderer;
+import erebus.client.render.entity.renderer.BotFlyLarvaRenderer;
 import erebus.client.render.entity.renderer.BotFlyRenderer;
 import erebus.client.render.entity.renderer.DragonflyRenderer;
 import erebus.client.render.entity.renderer.FlyRenderer;
@@ -44,6 +46,7 @@ public class ModEntityRendering {
 	public static ModelLayerLocation VELVET_WORM = new ModelLayerLocation(Erebus.prefix("velvet_worm"), "main");
 	public static ModelLayerLocation ANTLION = new ModelLayerLocation(Erebus.prefix("antlion"), "main");
 	public static ModelLayerLocation BOT_FLY = new ModelLayerLocation(Erebus.prefix("bot_fly"), "main");
+	public static ModelLayerLocation BOT_FLY_LARVA = new ModelLayerLocation(Erebus.prefix("bot_fly_larva"), "main");
 	public static ModelLayerLocation FLY = new ModelLayerLocation(Erebus.prefix("fly"), "main");
 	public static ModelLayerLocation DRAGON_FLY = new ModelLayerLocation(Erebus.prefix("dragon_fly"), "main");
 
@@ -60,6 +63,7 @@ public class ModEntityRendering {
     	event.registerLayerDefinition(VELVET_WORM, VelvetWormModel::createBodyLayer);
     	event.registerLayerDefinition(ANTLION, AntlionModel::createBodyLayer);
     	event.registerLayerDefinition(BOT_FLY, BotFlyModel::createBodyLayer);
+    	event.registerLayerDefinition(BOT_FLY_LARVA, BotFlyLarvaModel::createBodyLayer);
     	event.registerLayerDefinition(FLY, FlyModel::createBodyLayer);
     	event.registerLayerDefinition(DRAGON_FLY, DragonflyModel::createBodyLayer);
     }
@@ -76,6 +80,7 @@ public class ModEntityRendering {
     	event.registerEntityRenderer(ModEntities.VELVET_WORM.get(), VelvetWormRenderer::new);
     	event.registerEntityRenderer(ModEntities.ANTLION.get(), AntlionRenderer::new);
     	event.registerEntityRenderer(ModEntities.BOT_FLY.get(), BotFlyRenderer::new);
+    	event.registerEntityRenderer(ModEntities.BOT_FLY_LARVA.get(), BotFlyLarvaRenderer::new);
     	event.registerEntityRenderer(ModEntities.FLY.get(), FlyRenderer::new);
     	event.registerEntityRenderer(ModEntities.DRAGON_FLY.get(), DragonflyRenderer::new);
     	event.registerEntityRenderer(ModEntities.THROWN_BLOCK_AS_ITEM.get(), context -> new ThrownItemRenderer<ThrownBlockAsItem>(context, 3.0F, true));
