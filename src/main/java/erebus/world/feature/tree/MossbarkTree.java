@@ -30,6 +30,6 @@ public class MossbarkTree extends ErebusTree {
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return tree(3, 0.1F, 2, ModBlocks.SAPLING_MOSSBARK);
+        return tree(3, ModBlocks.SAPLING_MOSSBARK);
     }
 }

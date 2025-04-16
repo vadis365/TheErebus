@@ -29,6 +29,6 @@ public class AsperTree extends ErebusTree {
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return tree(3, 0.1F, 2, ModBlocks.SAPLING_ASPER);
+        return tree(8, ModBlocks.SAPLING_ASPER);
     }
 }
