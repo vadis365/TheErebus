@@ -7,6 +7,9 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+
+import java.util.List;
 
 public class AsperTree extends ErebusTree {
 
@@ -22,5 +25,10 @@ public class AsperTree extends ErebusTree {
                 BlockStateProvider.simple(ModBlocks.LEAVES_ASPER.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), 3),
                 new TwoLayersFeatureSize(1, 0, 1)).build();
+    }
+
+    @Override
+    public List<PlacementModifier> getPlacementModifiers() {
+        return tree(3, 0.1F, 2, ModBlocks.SAPLING_ASPER);
     }
 }

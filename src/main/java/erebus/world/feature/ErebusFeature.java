@@ -1,17 +1,18 @@
 package erebus.world.feature;
 
 import erebus.Erebus;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ErebusFeature {
 
@@ -47,8 +48,8 @@ public class ErebusFeature {
      * Placement Utils
      */
 
-    protected List<PlacementModifier> tree(int count) {
-        return List.of(CountPlacement.of(count), BiomeFilter.biome(), PlacementUtils.FULL_RANGE, BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)));
+    protected List<PlacementModifier> tree(int baseValue, float chance, int addedAmount, Supplier<? extends Block> sapling) {
+        return VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1F, 2), sapling.get());
     }
 
     protected List<PlacementModifier> patch(int count) {

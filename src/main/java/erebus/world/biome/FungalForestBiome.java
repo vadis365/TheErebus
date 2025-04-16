@@ -2,7 +2,6 @@ package erebus.world.biome;
 
 import erebus.registries.world.ModFeatures;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -44,8 +43,14 @@ public class FungalForestBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_SWAMP)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_SWAMP)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.ASPER_TREE.getPlacedResourceKey())
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.BALSAM_TREE.getPlacedResourceKey())
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.BAOBAB_TREE.getPlacedResourceKey())
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.CYPRESS_TREE.getPlacedResourceKey())
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.EUCALYPTUS_TREE.getPlacedResourceKey())
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.MAHOGANY_TREE.getPlacedResourceKey())
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.MARSHWOOD_TREE.getPlacedResourceKey())
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.MOSSBARK_TREE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.NETTLE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.TALL_BLOOM.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.WEEPING_BLUEBELL.getPlacedResourceKey())

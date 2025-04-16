@@ -1,18 +1,14 @@
 package erebus.world.feature.tree;
 
 import erebus.world.feature.ErebusFeature;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
-import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 public class ErebusTree extends ErebusFeature {
@@ -33,10 +29,5 @@ public class ErebusTree extends ErebusFeature {
 
     public TreeConfiguration getTreeConfiguration() {
         return null;
-    }
-
-    @Override
-    public List<PlacementModifier> getPlacementModifiers() {
-        return tree(8);
     }
 }

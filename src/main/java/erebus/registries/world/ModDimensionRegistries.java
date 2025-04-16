@@ -58,7 +58,7 @@ public class ModDimensionRegistries {
                                 List.of(
                                         Pair.of(
                                                 Climate.parameters(
-                                                        0.85F,
+                                                        0.0F,
                                                         0.0F,
                                                         0.0F,
                                                         0.0F,
@@ -68,7 +68,7 @@ public class ModDimensionRegistries {
                                                 ), biomeRegistry.getOrThrow(ModBiomes.ELYSIAN_FIELDS.getResourceKey())),
                                         Pair.of(
                                                 Climate.parameters(
-                                                        0.85F,
+                                                        0.0F,
                                                         0.0F,
                                                         0.0F,
                                                         0.0F,
@@ -78,73 +78,73 @@ public class ModDimensionRegistries {
                                                 ), biomeRegistry.getOrThrow(ModBiomes.ELYSIAN_FOREST.getResourceKey())),
                                         Pair.of(
                                                 Climate.parameters(
-                                                        0.1F,
-                                                        0.2F,
+                                                        0.4F,
                                                         0.0F,
-                                                        0.2F,
+                                                        0.0F,
+                                                        0.0F,
                                                         0.0F,
                                                         0.0F,
                                                         0.0F),
                                                 biomeRegistry.getOrThrow(ModBiomes.FUNGAL_FOREST.getResourceKey())),
                                         Pair.of(
                                                 Climate.parameters(
-                                                        0.3F,
-                                                        0.6F,
-                                                        0.1F,
-                                                        0.1F,
+                                                        0.0F,
+                                                        0.5F,
+                                                        0.0F,
+                                                        0.0F,
                                                         0.0F,
                                                         0.0F,
                                                         0.0F),
                                                 biomeRegistry.getOrThrow(ModBiomes.PETRIFIED_FOREST.getResourceKey())),
                                         Pair.of(
                                                 Climate.parameters(
-                                                        0.4F,
-                                                        0.3F,
+                                                        0.0F,
+                                                        -0.5F,
                                                         0.2F,
-                                                        0.1F,
+                                                        0.0F,
                                                         0.0F,
                                                         0.0F,
                                                         0.0F),
                                                 biomeRegistry.getOrThrow(ModBiomes.SUBMERGED_SWAMP.getResourceKey())),
                                         Pair.of(
                                                 Climate.parameters(
-                                                        0.4F,
-                                                        0.3F,
-                                                        0.2F,
-                                                        0.1F,
+                                                        0.0F,
+                                                        -0.5F,
+                                                        0.0F,
+                                                        0.0F,
                                                         0.0F,
                                                         0.0F,
                                                         0.0F),
                                                 biomeRegistry.getOrThrow(ModBiomes.SUBTERRANEAN_SAVANNAH.getResourceKey())),
                                         Pair.of(
                                                 Climate.parameters(
-                                                        0.4F,
-                                                        0.3F,
-                                                        0.2F,
-                                                        0.1F,
+                                                        0.0F,
+                                                        0.5F,
                                                         0.0F,
                                                         0.0F,
-                                                        0.0F),
+                                                        0.0F,
+                                                        0.0F,
+                                                        0.375F),
                                                 biomeRegistry.getOrThrow(ModBiomes.ULTERIOR_OUTBACK.getResourceKey())),
                                         Pair.of(
                                                 Climate.parameters(
                                                         0.4F,
-                                                        0.3F,
-                                                        0.2F,
-                                                        0.1F,
+                                                        0.0F,
+                                                        0.0F,
+                                                        0.0F,
                                                         0.0F,
                                                         0.0F,
                                                         0.0F),
                                                 biomeRegistry.getOrThrow(ModBiomes.UNDERGROUND_JUNGLE.getResourceKey())),
                                         Pair.of(
                                                 Climate.parameters(
-                                                        0.4F,
-                                                        0.3F,
-                                                        0.2F,
-                                                        0.1F,
+                                                        -0.5F,
                                                         0.0F,
                                                         0.0F,
-                                                        0.0F),
+                                                        0.0F,
+                                                        0.0F,
+                                                        0.0F,
+                                                        0.175F),
                                                 biomeRegistry.getOrThrow(ModBiomes.VOLCANIC_DESERT.getResourceKey()))
 
                                 )

@@ -7,6 +7,9 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+
+import java.util.List;
 
 public class BaobabTree extends ErebusTree {
 
@@ -23,5 +26,10 @@ public class BaobabTree extends ErebusTree {
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), 3),
                 new TwoLayersFeatureSize(1, 0, 2)
         ).build();
+    }
+
+    @Override
+    public List<PlacementModifier> getPlacementModifiers() {
+        return tree(3, 0.1F, 2, ModBlocks.SAPLING_BAOBAB);
     }
 }

@@ -55,7 +55,7 @@ public class ModBlockHelpers {
     }
 
     protected static DeferredBlock<SaplingBlock> registerSapling(String name, TreeGrower grower) {
-        return registerBlock(name, () -> new SaplingBlock(grower, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+        return registerBlock(name, () -> new SaplingBlock(grower, BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS)));
     }
 
     protected static DeferredBlock<DoublePlantBlock> registerDoublePlant(String name, BlockBehaviour.Properties properties) {

@@ -37,8 +37,8 @@
     [],
     [],
     [
-      "erebus:eucalyptus",
       "erebus:balsam",
+      "erebus:eucalyptus",
       "minecraft:trees_savanna",
       "minecraft:patch_grass_savanna"
     ]
