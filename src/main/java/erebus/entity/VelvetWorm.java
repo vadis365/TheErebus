@@ -2,14 +2,13 @@ package erebus.entity;
 
 import javax.annotation.Nullable;
 
-import erebus.registries.ModSounds;
+import erebus.entity.ai.ShootGooBallAttackGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -22,7 +21,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -35,6 +33,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -64,7 +63,7 @@ public class VelvetWorm extends Monster {
 			};
 		setId(ENTITY_COUNTER.getAndAdd(this.parts.length + 1) + 1);
 	}
-	
+
 	@Override
 	public void setId(int id) {
 		super.setId(id);
@@ -81,23 +80,21 @@ public class VelvetWorm extends Monster {
 	public boolean isMultipartEntity() {
 		return true;
 	}
-	
+
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(SKIN_TYPE, 0);
-		//builder.define(INFLATE_SIZE, 0);
 	}
 
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
-		goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8D, 1));
-		goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 4.0F));
+		goalSelector.addGoal(1, new ShootGooBallAttackGoal(this, 1.3D));
+		goalSelector.addGoal(3, new RandomStrollGoal(this, 0.8D, 1));
+		goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 4.0F));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this));
 		targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
-		
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -141,7 +138,7 @@ public class VelvetWorm extends Monster {
 	public void tick() {
 		super.tick();
 
-		if (this.level().isClientSide() && this.tickCount % 10 == 0) {
+		if (this.level().isClientSide() && this.tickCount % 20 == 0) {
 			this.spawnParticles(this.level(), this.xo, this.yo, this.zo, this.getRandom());
 		}
 
@@ -153,24 +150,37 @@ public class VelvetWorm extends Monster {
 		this.setDeltaMovement(vec3.multiply(1.0D, this.getHeadMotionYMultiplier(), 1.0D));
 	}
 
+    @Override
+    public AABB getBoundingBoxForCulling() {
+    	AABB newBox = getBoundingBox();
+		for(VelvetWormMultipart part : this.parts)
+			newBox = getBoundingBox().minmax(part.getBoundingBox());
+		return newBox;
+    }
+
+	@Override
+	public boolean shouldRenderAtSqrDistance(double distance) {
+		double aabbSize = this.getBoundingBox().getSize() * 10.0;
+		if (Double.isNaN(aabbSize))
+			aabbSize = 1.0;
+		aabbSize *= 64.0 * getViewScale();
+		return distance < aabbSize * aabbSize;
+	}
+
 	@OnlyIn(Dist.CLIENT)
 	public void spawnParticles(Level level, double x, double y, double z, RandomSource rand) {
 		for (int count = 0; count < 1 + level.getRandom().nextInt(4); ++count) {
 			double a = Math.toRadians(this.yBodyRot);
-			double offSetX = -Math.sin(a) * 0D + rand.nextDouble() * 0.3D - rand.nextDouble() * 0.3D;
-			double offSetZ = Math.cos(a) * 0D + rand.nextDouble() * 0.3D - rand.nextDouble() * 0.3D;
+			double offSetX = -Math.sin(a) * 0D + rand.nextDouble() * 0.5D - rand.nextDouble() * 0.5D;
+			double offSetZ = Math.cos(a) * 0D + rand.nextDouble() * 0.5D - rand.nextDouble() * 0.5D;
 			level.addParticle(ParticleTypes.ITEM_SLIME, false, x + offSetX, y, z + offSetZ, 0, 0, 0);
 		}
 	}
-	
+
 	@Override
 	public void makeStuckInBlock(BlockState state, Vec3 motionMultiplier) {
 		if (!state.is(Blocks.COBWEB))
 			super.makeStuckInBlock(state, motionMultiplier);
-	}
-
-	protected SoundEvent getWebSlingThrowSound() {
-		return ModSounds.WEBSLING_THROW.get();
 	}
 
 	public double getAttackStrength() {
@@ -275,7 +285,7 @@ public class VelvetWorm extends Monster {
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, @Nullable SpawnGroupData data) {
-		setSkin(level.getRandom().nextInt(2));
+		setSkin(level.getRandom().nextInt(5));
 		for (VelvetWormMultipart part : this.parts) {
 			part.setPos(this.xo, this.yo, this.zo);
 			part.setYRot(this.getYRot());

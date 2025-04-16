@@ -23,12 +23,16 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<VelvetWorm>> {
-	public static final ResourceLocation TEXTURE_1 = Erebus.prefix("textures/entity/velvetworm_1.png");
-	public static final ResourceLocation TEXTURE_2 = Erebus.prefix("textures/entity/velvetworm_2.png");
-
+	private static final ResourceLocation[] TEXTURES = new ResourceLocation[] {
+			Erebus.prefix("textures/entity/velvetworm_1.png"),
+			Erebus.prefix("textures/entity/velvetworm_2.png"),
+			Erebus.prefix("textures/entity/velvetworm_3.png"),
+			Erebus.prefix("textures/entity/velvetworm_4.png"),
+			Erebus.prefix("textures/entity/velvetworm_5.png")
+	};
 
 	public VelvetWormRenderer(EntityRendererProvider.Context context) {
-		super(context, new VelvetWormModel<>(context.bakeLayer(ModEntityRendering.VELVET_WORM)), 0.1F);
+		super(context, new VelvetWormModel<>(context.bakeLayer(ModEntityRendering.VELVET_WORM)), 0F);
 		//TODO remake renderer and use layers for body sections parts
 	}
 
@@ -63,7 +67,7 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<
 		float x = 0F;
 		float y = 0F;
 		float z = 0F;
-		RenderType renderType = getRenderType(entity, true, isVisible, isTranslucentToPlayer, isGlowing);
+		RenderType renderType = getRenderType(entity, isVisible, isTranslucentToPlayer, isGlowing);
 		VertexConsumer consumer;
 		if(renderType != null) {
 			consumer = buffer.getBuffer(renderType);
@@ -76,7 +80,6 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<
 		double ry = ey - y;
 		double rz = ez - z;
 		float zOffset = 0;
-		renderType = getRenderType(entity, false, isVisible, isTranslucentToPlayer, isGlowing);
 		if(renderType != null) {
 			consumer = buffer.getBuffer(renderType);
 			for(int i = 0; i < entity.parts.length - 1; i++)
@@ -99,11 +102,11 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<
 	}
 
 	@Nullable
-	protected RenderType getRenderType(VelvetWorm entity, boolean isHeadPart, boolean isVisible, boolean isTranslucentToPlayer, boolean isGlowing) {
+	protected RenderType getRenderType(VelvetWorm entity, boolean isVisible, boolean isTranslucentToPlayer, boolean isGlowing) {
 		if (isTranslucentToPlayer)
 			return RenderType.entityTranslucentCull(getTextureLocation(entity));
 		else if (isVisible)
-			return this.model.renderType(getTextureLocation(entity));
+			return RenderType.entityCutout(getTextureLocation(entity));
 		else
 			return isGlowing ? RenderType.outline(getTextureLocation(entity)) : null;
 	}
@@ -144,9 +147,6 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<
 
 	@Override
 	public  ResourceLocation getTextureLocation(VelvetWorm velvetworm) {
-		if (velvetworm.getSkin() == 0)
-			return TEXTURE_1;
-		else
-			return TEXTURE_2;
+		return TEXTURES[velvetworm.getSkin()];
 	}
 }
