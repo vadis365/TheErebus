@@ -6,6 +6,7 @@ import erebus.entity.Antlion;
 import erebus.entity.BlackWidow;
 import erebus.entity.BotFly;
 import erebus.entity.BotFlyLarva;
+import erebus.entity.Centipede;
 import erebus.entity.Dragonfly;
 import erebus.entity.Fly;
 import erebus.entity.LavaWebSpider;
@@ -56,6 +57,7 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<BotFlyLarva>> BOT_FLY_LARVA = registerNoEgg("bot_fly_larva", EntityType.Builder.of(BotFlyLarva::new, MobCategory.MONSTER).sized(0.5F, 0.2F).fireImmune());
     public static final DeferredHolder<EntityType<?>, EntityType<Fly>> FLY = registerWithEgg("fly", EntityType.Builder.of(Fly::new, MobCategory.MONSTER).sized(0.5F, 0.45F), 0x381C22, 0x990000);
     public static final DeferredHolder<EntityType<?>, EntityType<Dragonfly>> DRAGON_FLY = registerWithEgg("dragon_fly", EntityType.Builder.of(Dragonfly::new, MobCategory.MONSTER).sized(2.5F, 1.0F).fireImmune(), 0x37A87C, 0xE9E9E9);
+    public static final DeferredHolder<EntityType<?>, EntityType<Centipede>> CENTIPEDE = registerWithEgg("centipede", EntityType.Builder.of(Centipede::new, MobCategory.MONSTER).sized(0.3125F, 0.3125F), 0x3C0000, 0xEA0000);
     
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownBlockAsItem>> THROWN_BLOCK_AS_ITEM = registerNonMobEntity("thrown_block_as_item", EntityType.Builder.<ThrownBlockAsItem>of(ThrownBlockAsItem::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
     public static final DeferredHolder<EntityType<?>, EntityType<GooBall>> GOO_BALL = registerNonMobEntity("goo_ball", EntityType.Builder.<GooBall>of(GooBall::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
@@ -76,6 +78,7 @@ public class ModEntities {
 		event.register(BOT_FLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BotFly::canSpawnHere, null);
 		event.register(FLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Fly::canSpawnHere, null);
 		event.register(DRAGON_FLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Dragonfly::canSpawnHere, null);
+		event.register(CENTIPEDE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Centipede::canSpawnHere, null);
 	}
 	
 	public static void initializeAttributes(EntityAttributeCreationEvent event) {
@@ -92,6 +95,7 @@ public class ModEntities {
 		event.put(BOT_FLY_LARVA.get(), BotFlyLarva.createAttributes().build());
 		event.put(FLY.get(), Fly.createAttributes().build());
 		event.put(DRAGON_FLY.get(), Dragonfly.createAttributes().build());
+		event.put(CENTIPEDE.get(), Centipede.createAttributes().build());
 	}
 
 	public static DeferredRegister<EntityType<?>> getEntityTypes() {

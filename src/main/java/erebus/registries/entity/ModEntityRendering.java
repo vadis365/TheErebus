@@ -6,6 +6,7 @@ import erebus.client.render.entity.model.AntlionModel;
 import erebus.client.render.entity.model.BlackWidowModel;
 import erebus.client.render.entity.model.BotFlyLarvaModel;
 import erebus.client.render.entity.model.BotFlyModel;
+import erebus.client.render.entity.model.CentipedeModel;
 import erebus.client.render.entity.model.DragonflyModel;
 import erebus.client.render.entity.model.FlyModel;
 import erebus.client.render.entity.model.LavaWebSpiderModel;
@@ -18,6 +19,7 @@ import erebus.client.render.entity.renderer.AntlionRenderer;
 import erebus.client.render.entity.renderer.BlackWidowRenderer;
 import erebus.client.render.entity.renderer.BotFlyLarvaRenderer;
 import erebus.client.render.entity.renderer.BotFlyRenderer;
+import erebus.client.render.entity.renderer.CentipedeRenderer;
 import erebus.client.render.entity.renderer.DragonflyRenderer;
 import erebus.client.render.entity.renderer.FlyRenderer;
 import erebus.client.render.entity.renderer.LavaWebSpiderRenderer;
@@ -49,7 +51,8 @@ public class ModEntityRendering {
 	public static ModelLayerLocation BOT_FLY_LARVA = new ModelLayerLocation(Erebus.prefix("bot_fly_larva"), "main");
 	public static ModelLayerLocation FLY = new ModelLayerLocation(Erebus.prefix("fly"), "main");
 	public static ModelLayerLocation DRAGON_FLY = new ModelLayerLocation(Erebus.prefix("dragon_fly"), "main");
-
+	public static ModelLayerLocation CENTIPEDE = new ModelLayerLocation(Erebus.prefix("centipede"), "main");
+	
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
     	//  event.registerLayerDefinition(GRASHOPPER, ModelGrasshopper::createBodyLayer);
     	event.registerLayerDefinition(WASP, WaspModel::createBodyLayer);
@@ -66,6 +69,7 @@ public class ModEntityRendering {
     	event.registerLayerDefinition(BOT_FLY_LARVA, BotFlyLarvaModel::createBodyLayer);
     	event.registerLayerDefinition(FLY, FlyModel::createBodyLayer);
     	event.registerLayerDefinition(DRAGON_FLY, DragonflyModel::createBodyLayer);
+    	event.registerLayerDefinition(CENTIPEDE, CentipedeModel::createBodyLayer);
     }
 
     public static void registerEntityRender(EntityRenderersEvent.RegisterRenderers event) {
@@ -83,6 +87,8 @@ public class ModEntityRendering {
     	event.registerEntityRenderer(ModEntities.BOT_FLY_LARVA.get(), BotFlyLarvaRenderer::new);
     	event.registerEntityRenderer(ModEntities.FLY.get(), FlyRenderer::new);
     	event.registerEntityRenderer(ModEntities.DRAGON_FLY.get(), DragonflyRenderer::new);
+    	event.registerEntityRenderer(ModEntities.CENTIPEDE.get(), CentipedeRenderer::new);
+
     	event.registerEntityRenderer(ModEntities.THROWN_BLOCK_AS_ITEM.get(), context -> new ThrownItemRenderer<ThrownBlockAsItem>(context, 3.0F, true));
     	event.registerEntityRenderer(ModEntities.GOO_BALL.get(), context -> new ThrownItemRenderer<GooBall>(context, 3.0F, true));
     }
