@@ -30,18 +30,10 @@ public abstract class ErebusRecipeProvider extends RecipeProvider implements ICo
 
     /**
      * Generate recipes for this provider.
-     * This method is called by the main ModRecipeProvider.
      */
     public void buildRecipes(@NotNull RecipeOutput output) {
         this.output = output;
-        buildRecipes();
     }
-
-    /**
-     * Generate recipes for this provider.
-     * Implemented by subclasses to add their specific recipes.
-     */
-    protected abstract void buildRecipes();
 
     // Utility methods shared across recipe providers
 

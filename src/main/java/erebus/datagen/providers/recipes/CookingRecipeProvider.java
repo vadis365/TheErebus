@@ -3,6 +3,8 @@ package erebus.datagen.providers.recipes;
 import erebus.registries.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeOutput;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -16,7 +18,8 @@ public class CookingRecipeProvider extends ErebusRecipeProvider {
     }
 
     @Override
-    public void buildRecipes() {
+    public void buildRecipes(@NotNull RecipeOutput output) {
+        this.output = output;
         cook(ModItems.BEETLE_LARVA_RAW, ModItems.BEETLE_LARVA_COOKED);
         cook(ModItems.GRASSHOPPER_LEG_RAW, ModItems.GRASSHOPPER_LEG_COOKED);
         cook(ModItems.TARANTULA_LEG_RAW, ModItems.TARANTULA_LEG_COOKED);

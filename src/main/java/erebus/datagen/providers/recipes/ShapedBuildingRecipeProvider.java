@@ -5,11 +5,13 @@ import erebus.registries.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -25,7 +27,8 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
     }
 
     @Override
-    public void buildRecipes() {
+    public void buildRecipes(@NotNull RecipeOutput output) {
+        this.output = output;
         addBasicBlockRecipes();
         addSlabRecipes();
         addStairsRecipes();

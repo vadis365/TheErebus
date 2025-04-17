@@ -29,7 +29,7 @@ import java.util.Locale;
 public class Erebus {
 
     public static final String MODID = "erebus";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public Erebus(IEventBus bus, ModContainer container, Dist dist) {
         bus.addListener(this::commonSetup);

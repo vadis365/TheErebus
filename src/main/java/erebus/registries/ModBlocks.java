@@ -2,6 +2,7 @@ package erebus.registries;
 
 import erebus.Erebus;
 import erebus.block.*;
+import erebus.block.portal.ErebusPortalBlock;
 import erebus.registries.helpers.ModBlockHelpers;
 import erebus.registries.world.ModTreeGrowers;
 import net.minecraft.core.BlockPos;

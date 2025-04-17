@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "N": {
+      "item": "erebus:nectar"
+    },
+    "P": {
+      "item": "erebus:papyrus"
+    }
+  },
+  "pattern": [
+    "NPN",
+    "PCP",
+    "NPN"
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:honey_comb"
+  }
+}

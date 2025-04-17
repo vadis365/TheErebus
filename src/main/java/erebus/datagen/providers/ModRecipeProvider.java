@@ -16,11 +16,13 @@ import java.util.concurrent.CompletableFuture;
  */
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
 
-    private PackOutput packOutput;
-    private CompletableFuture<HolderLookup.Provider> registries;
+    private final PackOutput packOutput;
+    private final CompletableFuture<HolderLookup.Provider> registries;
 
     public ModRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> registries) {
         super(packOutput, registries);
+        this.packOutput = packOutput;
+        this.registries = registries;
     }
 
     @Override
@@ -35,12 +37,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapelessCraftingRecipeProvider shapelessProvider = new ShapelessCraftingRecipeProvider(packOutput, registries);
 
         // Call buildRecipes on each provider
-        cookingProvider.buildRecipes();
-        smeltingProvider.buildRecipes();
-        buildingProvider.buildRecipes();
-        toolsProvider.buildRecipes();
-        armorProvider.buildRecipes();
-        miscProvider.buildRecipes();
-        shapelessProvider.buildRecipes();
+        cookingProvider.buildRecipes(output);
+        smeltingProvider.buildRecipes(output);
+        buildingProvider.buildRecipes(output);
+        toolsProvider.buildRecipes(output);
+        armorProvider.buildRecipes(output);
+        miscProvider.buildRecipes(output);
+        shapelessProvider.buildRecipes(output);
     }
 }
