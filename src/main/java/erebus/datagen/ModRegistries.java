@@ -20,7 +20,6 @@ public class ModRegistries extends DatapackBuiltinEntriesProvider {
             .add(Registries.BIOME, ModBiomes::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, ModFeatures::bootstrapConfiguredFeatures)
             .add(Registries.PLACED_FEATURE, ModFeatures::bootstrapPlacedFeatures)
-            //.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
             .add(Registries.DIMENSION_TYPE, ModDimensionRegistries::bootstrapType)
             .add(Registries.NOISE_SETTINGS, ModNoiseGenerator::bootstrap)
             .add(Registries.LEVEL_STEM, ModDimensionRegistries::bootstrapStem);
