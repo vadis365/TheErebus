@@ -149,7 +149,7 @@ public class Scytodes extends Monster {
 
 	@Override
 	public boolean hurt(DamageSource source, float damage) {
-		if (source.type().equals(DamageTypes.IN_WALL)) {
+		if (source.is(DamageTypes.IN_WALL)) {
 			return false;
 		}
 		return super.hurt(source, damage);

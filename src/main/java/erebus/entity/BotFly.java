@@ -48,7 +48,7 @@ public class BotFly extends Monster {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, false));
+		goalSelector.addGoal(1, new MeleeAttackGoal(this, 1D, false));
 		goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 		goalSelector.addGoal(4, new AIFlyingWander(this, 0.75D, 0.01F));
@@ -60,7 +60,7 @@ public class BotFly extends Monster {
 		return Monster.createMonsterAttributes()
 				.add(Attributes.MAX_HEALTH, 15D)
 				.add(Attributes.FOLLOW_RANGE, 16D)
-				.add(Attributes.MOVEMENT_SPEED, 0.3D)
+				.add(Attributes.MOVEMENT_SPEED, 0.5D)
 				.add(Attributes.FLYING_SPEED, 1D)
 				.add(Attributes.ATTACK_DAMAGE, 1D);
 	}
