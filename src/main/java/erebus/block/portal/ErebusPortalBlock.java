@@ -2,6 +2,7 @@ package erebus.block.portal;
 
 import com.mojang.serialization.MapCodec;
 import erebus.Erebus;
+import erebus.registries.ModBlocks;
 import erebus.registries.world.ModDimensionRegistries;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
@@ -11,13 +12,12 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Portal;
@@ -29,8 +29,6 @@ import net.minecraft.world.level.border.WorldBorder;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -39,8 +37,6 @@ public class ErebusPortalBlock extends Block implements Portal {
 
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
     public static final MapCodec<ErebusPortalBlock> CODEC = simpleCodec(ErebusPortalBlock::new);
-    protected static final VoxelShape X_AXIS_AABB = Block.box(0, 0, 6, 16, 16, 10);
-    protected static final VoxelShape Z_AXIS_AABB = Block.box(6, 0, 0, 10, 16, 16);
 
     public ErebusPortalBlock(Properties properties) {
         super(properties);
@@ -52,18 +48,45 @@ public class ErebusPortalBlock extends Block implements Portal {
         builder.add(AXIS);
     }
 
-    @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return state.getValue(AXIS) == Direction.Axis.X ? X_AXIS_AABB : Z_AXIS_AABB;
+    public static boolean obeysPortalRule(Level level, BlockPos pos, boolean actualPortal) {
+        int neighborPortals = 0;
+        int axisFlag = 0;
+
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+
+        for (Direction direction : Direction.values()) {
+            final int atX = x + direction.getStepX();
+            final int atY = y + direction.getStepY();
+            final int atZ = z + direction.getStepZ();
+            BlockState state = level.getBlockState(new BlockPos(atX, atY, atZ));
+            if (isSubstrate(state, actualPortal)) continue;
+
+            final int opX = x - direction.getStepZ();
+            final int opY = y - direction.getStepY();
+            final int opZ = z - direction.getStepX();
+            BlockState stateOpposite = level.getBlockState(new BlockPos(opX, opY, opZ));
+
+            if (!stateOpposite.isCollisionShapeFullBlock(level, new BlockPos(opX, opY, opZ)) && isSubstrate(stateOpposite, actualPortal)) {
+                return false;
+            }
+
+            neighborPortals++;
+            axisFlag |= 1 << (direction.getAxis().ordinal() >> 1);
+        }
+
+        if (neighborPortals < 1) return false;
+        return axisFlag != 0x7;
+    }
+
+    private static boolean isSubstrate(BlockState state, boolean actualPortal) {
+        return actualPortal ? !state.is(ModBlocks.PORTAL) : !state.is(BlockTags.LEAVES);
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
-        Direction.Axis axis = state.getValue(AXIS);
-        Direction.Axis facingAxis = facing.getAxis();
-        boolean flag = axis != facingAxis && facingAxis.isHorizontal();
-
-        return !flag && !facingState.is(this) && !new ErebusPortalShape(level, pos, axis).isComplete() ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, pos, facingPos);
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+        if (!obeysPortalRule(level, pos, true)) level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
     }
 
     @Override
