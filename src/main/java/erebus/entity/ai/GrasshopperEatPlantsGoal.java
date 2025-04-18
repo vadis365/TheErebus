@@ -1,5 +1,7 @@
 package erebus.entity.ai;
-/*
+
+import erebus.entity.Grasshopper;
+import erebus.entity.Locust;
 import erebus.registries.ModBlocks;
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
@@ -68,24 +70,23 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 		grasshopper.setIsEating(false);
 		plantsEaten++;
 		if (plantsEaten == 6)
-			if (grasshopper.level().countEntities(Grasshopper.class) < 80) {
+			if (grasshopper.level().getEntitiesOfClass(Grasshopper.class, grasshopper.getBoundingBox().inflate(16)).size() < 10) {
 				Grasshopper newGrasshopper = ModEntities.GRASSHOPPER.get().create(grasshopper.level());
 				if (newGrasshopper != null) {
 					newGrasshopper.copyPosition(grasshopper);
 					grasshopper.level().addFreshEntity(newGrasshopper);
-					grasshopper.getNavigator().clearPath();
+					grasshopper.getNavigation().stop();
 				}
 			}
 		if (plantsEaten >= 12) {
-			if (grasshopper.level().countEntities(Locust.class) < 5) {
+			if (grasshopper.level().getEntitiesOfClass(Locust.class, grasshopper.getBoundingBox().inflate(16)).size() < 5) {
 				Locust locust = ModEntities.LOCUST.get().create(grasshopper.level());
 				if (locust != null) {
 					locust.copyPosition(grasshopper);
 					grasshopper.remove(Entity.RemovalReason.DISCARDED);
 					grasshopper.level().addFreshEntity(locust);
-					grasshopper.level().playSound(null, locust.getPosition(), ModSounds.LOCUST_SPAWN.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
+					grasshopper.level().playSound(null, locust.blockPosition(), ModSounds.LOCUST_SPAWN.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
 				}
-
 			}
 		}
 	}
@@ -95,4 +96,4 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 		// TODO Auto-generated method stub
 		
 	}
-}*/
+}

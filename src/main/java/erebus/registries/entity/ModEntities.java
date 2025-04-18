@@ -9,7 +9,9 @@ import erebus.entity.BotFlyLarva;
 import erebus.entity.Centipede;
 import erebus.entity.Dragonfly;
 import erebus.entity.Fly;
+import erebus.entity.Grasshopper;
 import erebus.entity.LavaWebSpider;
+import erebus.entity.Locust;
 import erebus.entity.MoneySpider;
 import erebus.entity.Moth;
 import erebus.entity.Scytodes;
@@ -36,14 +38,8 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, Erebus.MODID);
     public static final DeferredRegister.Items SPAWN_EGGS = DeferredRegister.createItems(Erebus.MODID);
 
-    /*public static final Supplier<EntityType<GrassHopperEntity>> GRASSHOPPER = ENTITY_TYPES.register(
-            "grasshopper",
-            () -> EntityType.Builder.of(
-                            GrassHopperEntity::new,
-                            MobCategory.CREATURE)
-                    .sized(1.3F, 0.75F)
-                    .build(prefix("grasshopper")));*/
-
+    public static final DeferredHolder<EntityType<?>, EntityType<Grasshopper>> GRASSHOPPER = registerWithEgg("grasshopper", EntityType.Builder.of(Grasshopper::new, MobCategory.CREATURE).sized(1.3F, 0.75F), 0x63A02E, 0xE5D11B);
+    public static final DeferredHolder<EntityType<?>, EntityType<Locust>> LOCUST = registerWithEgg("locust", EntityType.Builder.of(Locust::new, MobCategory.MONSTER).sized(2F, 1F), 0xA07E2E, 0xEC3200);
     public static final DeferredHolder<EntityType<?>, EntityType<Wasp>> WASP = registerWithEgg("wasp", EntityType.Builder.of(Wasp::new, MobCategory.MONSTER).sized(0.5F, 0.4F), 0xFECD09, 0x141414);
     public static final DeferredHolder<EntityType<?>, EntityType<AnimatedBlock>> ANIMATED_BLOCK = registerNoEgg("animated_block", EntityType.Builder.of(AnimatedBlock::new, MobCategory.MISC).fireImmune().sized(1F, 1.25F).clientTrackingRange(4).updateInterval(10));
     public static final DeferredHolder<EntityType<?>, EntityType<Scytodes>> SCYTODES = registerWithEgg("scytodes", EntityType.Builder.of(Scytodes::new, MobCategory.MONSTER).sized(2F, 1F).fireImmune(), 0xC2833C, 0x520D06);
@@ -79,6 +75,8 @@ public class ModEntities {
 		event.register(FLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Fly::canSpawnHere, null);
 		event.register(DRAGON_FLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Dragonfly::canSpawnHere, null);
 		event.register(CENTIPEDE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Centipede::canSpawnHere, null);
+		event.register(GRASSHOPPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Grasshopper::canSpawnHere, null);
+		event.register(LOCUST.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Locust::canSpawnHere, null);
 	}
 	
 	public static void initializeAttributes(EntityAttributeCreationEvent event) {
@@ -96,6 +94,8 @@ public class ModEntities {
 		event.put(FLY.get(), Fly.createAttributes().build());
 		event.put(DRAGON_FLY.get(), Dragonfly.createAttributes().build());
 		event.put(CENTIPEDE.get(), Centipede.createAttributes().build());
+		event.put(GRASSHOPPER.get(), Grasshopper.createAttributes().build());
+		event.put(LOCUST.get(), Locust.createAttributes().build());
 	}
 
 	public static DeferredRegister<EntityType<?>> getEntityTypes() {

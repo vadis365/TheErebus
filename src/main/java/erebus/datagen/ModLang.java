@@ -2,8 +2,8 @@ package erebus.datagen;
 
 import erebus.datagen.providers.ModLangProvider;
 import erebus.registries.ModBlocks;
-import erebus.registries.entity.ModEntities;
 import erebus.registries.ModItems;
+import erebus.registries.entity.ModEntities;
 import net.minecraft.data.PackOutput;
 
 public class ModLang extends ModLangProvider {
@@ -671,6 +671,8 @@ public class ModLang extends ModLangProvider {
         addEntity(ModEntities.BOT_FLY_LARVA, "Botfly Larva");
         addEntity(ModEntities.DRAGON_FLY, "Dragonfly");
         addEntity(ModEntities.CENTIPEDE, "Centipede");
+        addEntity(ModEntities.GRASSHOPPER, "Grasshopper");
+        addEntity(ModEntities.LOCUST, "Locust");
         
         addEntityNoEgg(ModEntities.THROWN_BLOCK_AS_ITEM, "Mob Projectile"); // needs a better name
         addEntityNoEgg(ModEntities.GOO_BALL, "Goo Ball");
