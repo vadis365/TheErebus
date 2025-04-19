@@ -60,28 +60,36 @@ public class ErebusPortalBlock extends Block implements Portal {
             final int atX = x + direction.getStepX();
             final int atY = y + direction.getStepY();
             final int atZ = z + direction.getStepZ();
-            BlockState state = level.getBlockState(new BlockPos(atX, atY, atZ));
-            if (isSubstrate(state, actualPortal)) continue;
+            BlockPos neighborPos = new BlockPos(atX, atY, atZ);
+            BlockState state = level.getBlockState(neighborPos);
+            if (!isSubstrate(state, actualPortal)) {
+                continue;
+            }
 
-            final int opX = x - direction.getStepZ();
+            final int opX = x - direction.getStepX();
             final int opY = y - direction.getStepY();
-            final int opZ = z - direction.getStepX();
-            BlockState stateOpposite = level.getBlockState(new BlockPos(opX, opY, opZ));
+            final int opZ = z - direction.getStepZ();
+            BlockPos opPos = new BlockPos(opX, opY, opZ);
+            BlockState stateOpposite = level.getBlockState(opPos);
 
-            if (!stateOpposite.isCollisionShapeFullBlock(level, new BlockPos(opX, opY, opZ)) && isSubstrate(stateOpposite, actualPortal)) {
+            if (!isSubstrate(stateOpposite, actualPortal) && !stateOpposite.isCollisionShapeFullBlock(level, opPos)) {
                 return false;
             }
 
             neighborPortals++;
-            axisFlag |= 1 << (direction.getAxis().ordinal() >> 1);
+            axisFlag |= 1 << (direction.ordinal() >> 1);
         }
 
-        if (neighborPortals < 1) return false;
-        return axisFlag != 0x7;
+        if (neighborPortals < 1) {
+            return false;
+        }
+        boolean result = axisFlag != 0x7;
+        return result;
     }
 
-    private static boolean isSubstrate(BlockState state, boolean actualPortal) {
-        return actualPortal ? !state.is(ModBlocks.PORTAL) : !state.is(BlockTags.LEAVES);
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    private static boolean isSubstrate(BlockState state, boolean portalNotLeaf) {
+        return portalNotLeaf ? state.is(ModBlocks.PORTAL) : state.is(BlockTags.LEAVES);
     }
 
     @Override
