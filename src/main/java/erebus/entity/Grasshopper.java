@@ -17,6 +17,7 @@ import net.minecraft.world.entity.ai.control.JumpControl;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -38,7 +39,6 @@ public class Grasshopper extends PathfinderMob {
 
 	public Grasshopper(EntityType<? extends Grasshopper> type, Level level ) {
 		super(type, level);
-		setPathfindingMalus(PathType.WATER, -8F);
 		jumpControl = new Grasshopper.GrasshopperJumpControl(this);
 		moveControl = new Grasshopper.GrasshopperMoveControl(this);
 		setSpeedModifier(0.5D);
@@ -47,10 +47,10 @@ public class Grasshopper extends PathfinderMob {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.48D));
-		goalSelector.addGoal(2, new GrasshopperEatPlantsGoal(this, 0.6D, 20, true));
-		goalSelector.addGoal(3, new PanicGoal(this, 0.8D));
-		///tasks.addTask(4, new EntityAILookIdle(this));
+		goalSelector.addGoal(1, new GrasshopperEatPlantsGoal(this, 0.6D, 20, false));
+		goalSelector.addGoal(2, new PanicGoal(this, 0.8D));
+		goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.48D));
+		goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -116,7 +116,7 @@ public class Grasshopper extends PathfinderMob {
     protected float getJumpPower() {
 		if (!horizontalCollision || moveControl.hasWanted() && this.moveControl.getWantedY() > this.getY() + 0.5) {
 			Path path = navigation.getPath();
-			if (path != null && path.isDone()) {
+			if (path != null && !path.isDone()) {
 				Vec3 vec3 = path.getNextEntityPos(this);
 				if (vec3.y > getY() + 0.5D)
 					return 0.5F;
@@ -229,6 +229,17 @@ public class Grasshopper extends PathfinderMob {
 			setJumping(false);
 		}
 	}
+    
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == 1) {
+          //  this.spawnSprintParticle();
+            this.jumpDuration = 10;
+            this.jumpTicks = 0;
+        } else {
+            super.handleEntityEvent(id);
+        }
+    }
 
 	public class GrasshopperJumpControl extends JumpControl {
 		private final Grasshopper grasshopper;

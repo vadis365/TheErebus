@@ -2,10 +2,12 @@ package erebus.entity;
 
 import javax.annotation.Nullable;
 
+import erebus.entity.ai.FlyingMoveControlLessSpin;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
@@ -17,7 +19,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -38,11 +39,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public class Locust extends Monster {
+	public int animationTicks, prevAnimationTicks;
 	public boolean canJump = true;
 
 	public Locust(EntityType<? extends Locust> type, Level level) {
 		super(type, level);
-		moveControl = new FlyingMoveControl(this, 10, false);
+		moveControl = new FlyingMoveControlLessSpin(this, 10, false);
 	/*	jumpMovementFactor = 0.05F;
 		setPathPriority(PathNodeType.WATER, -8F);
 		setPathPriority(PathNodeType.BLOCKED, -8.0F);
@@ -53,7 +55,7 @@ public class Locust extends Monster {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, true));
+		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.75D, true));
 		goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 		goalSelector.addGoal(4, new Locust.AIRandomJumpWhenIdle(this));
@@ -66,8 +68,8 @@ public class Locust extends Monster {
 		return Monster.createMonsterAttributes()
 				.add(Attributes.MAX_HEALTH, 100D)
 				.add(Attributes.FOLLOW_RANGE, 16D)
-				.add(Attributes.MOVEMENT_SPEED, 1D)
-				.add(Attributes.FLYING_SPEED, 1D)
+				.add(Attributes.MOVEMENT_SPEED, 0.75D)
+				.add(Attributes.FLYING_SPEED, 0.75D)
 				.add(Attributes.ATTACK_DAMAGE, 4D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
 				.add(Attributes.STEP_HEIGHT, 1D);
@@ -130,34 +132,59 @@ public class Locust extends Monster {
 			entityDropItem(new ItemStack(ModItems.MATERIALS, amount, ItemMaterials.EnumErebusMaterialsType.ELASTIC_FIBRE.ordinal()), 0.0F);
 	}
 */
-	public boolean randJump() {
-		return random.nextInt(50) == 0;
-	}
-	
-	// PROBABLY DONT NEED THS ANYMORE
-	public void jump() {
-		setDeltaMovement(getDeltaMovement().add(0.0, 0.3, 0.0));
-		setCanJump(false);
-	}
-
 	public void setCanJump(boolean ableToJump) {
 		canJump = ableToJump;
 	}
 
 	@Override
+    protected float getJumpPower() {
+        return this.getJumpPower(1.5F);
+    }
+
+	@Override
+	public void aiStep() {
+		Vec3 vec3 = this.getDeltaMovement().multiply(1.0, 0.6, 1.0);
+		if (!this.level().isClientSide()) {
+			if (getTarget() != null) {
+				double d0 = vec3.y;
+				if (this.getY() < getTarget().getY() || this.getY() < getTarget().getY() + 1.0) {
+					d0 = Math.max(0.0, d0);
+					d0 += 0.025 - d0 * 0.05F;
+				}
+				vec3 = new Vec3(vec3.x, d0, vec3.z);
+				Vec3 vec31 = new Vec3(getTarget().getX() - this.getX(), 0.0, getTarget().getZ() - this.getZ());
+				if (vec31.horizontalDistanceSqr() > 9.0) {
+					Vec3 vec32 = vec31.normalize();
+					vec3 = vec3.add(vec32.x * 0.025 - vec3.x * 0.05, 0.0, vec32.z * 0.025 - vec3.z * 0.05);
+				}
+			}
+		}
+		if (getTarget() != null)
+			this.setDeltaMovement(vec3);
+		if (vec3.horizontalDistanceSqr() > 0.05)
+			this.setYRot((float) Mth.atan2(vec3.z, vec3.x) * (180.0F / (float) Math.PI) - 90.0F);
+		super.aiStep();
+	}
+
+	@Override
 	public void tick() {
 		super.tick();
-		Vec3 vec3 = this.getDeltaMovement();
-		if (!this.onGround() && vec3.y < 0.0D) {
-			if (getTarget() == null)
-				this.setDeltaMovement(vec3.multiply(1.0D, 0.2D, 1.0D));
-			else
-				this.setDeltaMovement(vec3.multiply(1.0D, 0.75D, 1.0D));
+		if (level().isClientSide()) {
+			prevAnimationTicks = animationTicks;
+			if (animationTicks < 360)
+				animationTicks += 1;
+			if (animationTicks >= 360) {
+				animationTicks -= 360;
+				prevAnimationTicks -= 360;
+			}
 		}
+		
+		Vec3 vec3 = this.getDeltaMovement();
+		if (getTarget() == null && !this.onGround() && vec3.y < 0.0D)
+			this.setDeltaMovement(vec3.multiply(1.0D, 0.75D, 1.0D));
 
 		if(isInWater())
 			getNavigation().moveTo(getX(), getY() + 1D, getZ(), 0.5D);
-
 	}
 
 	@Override
@@ -192,11 +219,16 @@ public class Locust extends Monster {
 			this.locust = locustIn;
 		}
 
+	    @Override
+	    public boolean canUse() {
+			return locust.getTarget() == null && super.canUse();	
+	    }
+
 		@Nullable
 		@Override
 		protected Vec3 getPosition() {
 			Vec3 vec3 = this.mob.getViewVector(0.0F);
-			return AirAndWaterRandomPos.getPos(this.mob, 32, 4, -2, vec3.x, vec3.z, (double) ((float) Math.PI / 2F));
+			return AirAndWaterRandomPos.getPos(this.mob, 32, 4, -2, vec3.x, vec3.z, (float) Math.PI / 2F);
 		}
 	}
 

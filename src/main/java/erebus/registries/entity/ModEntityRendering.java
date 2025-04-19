@@ -9,7 +9,9 @@ import erebus.client.render.entity.model.BotFlyModel;
 import erebus.client.render.entity.model.CentipedeModel;
 import erebus.client.render.entity.model.DragonflyModel;
 import erebus.client.render.entity.model.FlyModel;
+import erebus.client.render.entity.model.GrasshopperModel;
 import erebus.client.render.entity.model.LavaWebSpiderModel;
+import erebus.client.render.entity.model.LocustModel;
 import erebus.client.render.entity.model.MothModel;
 import erebus.client.render.entity.model.ScytodesModel;
 import erebus.client.render.entity.model.VelvetWormModel;
@@ -22,7 +24,9 @@ import erebus.client.render.entity.renderer.BotFlyRenderer;
 import erebus.client.render.entity.renderer.CentipedeRenderer;
 import erebus.client.render.entity.renderer.DragonflyRenderer;
 import erebus.client.render.entity.renderer.FlyRenderer;
+import erebus.client.render.entity.renderer.GrasshopperRenderer;
 import erebus.client.render.entity.renderer.LavaWebSpiderRenderer;
+import erebus.client.render.entity.renderer.LocustRenderer;
 import erebus.client.render.entity.renderer.MoneySpiderRenderer;
 import erebus.client.render.entity.renderer.MothRenderer;
 import erebus.client.render.entity.renderer.ScytodesRenderer;
@@ -70,8 +74,8 @@ public class ModEntityRendering {
     	event.registerLayerDefinition(FLY, FlyModel::createBodyLayer);
     	event.registerLayerDefinition(DRAGON_FLY, DragonflyModel::createBodyLayer);
     	event.registerLayerDefinition(CENTIPEDE, CentipedeModel::createBodyLayer);
-    //	event.registerLayerDefinition(GRASHOPPER, GrasshopperModel::createBodyLayer);
-    //	event.registerLayerDefinition(LOCUST, LocustModel::createBodyLayer);
+    	event.registerLayerDefinition(GRASSHOPPER, GrasshopperModel::createBodyLayer);
+    	event.registerLayerDefinition(LOCUST, LocustModel::createBodyLayer);
     }
 
     public static void registerEntityRender(EntityRenderersEvent.RegisterRenderers event) {
@@ -89,8 +93,8 @@ public class ModEntityRendering {
     	event.registerEntityRenderer(ModEntities.FLY.get(), FlyRenderer::new);
     	event.registerEntityRenderer(ModEntities.DRAGON_FLY.get(), DragonflyRenderer::new);
     	event.registerEntityRenderer(ModEntities.CENTIPEDE.get(), CentipedeRenderer::new);
-    //	event.registerEntityRenderer(ModEntities.GRASSHOPPER.get(), GrasshopperRenderer::new);
-    //	event.registerEntityRenderer(ModEntities.LOCUST.get(), LocustRenderer::new);
+    	event.registerEntityRenderer(ModEntities.GRASSHOPPER.get(), GrasshopperRenderer::new);
+    	event.registerEntityRenderer(ModEntities.LOCUST.get(), LocustRenderer::new);
 
     	event.registerEntityRenderer(ModEntities.THROWN_BLOCK_AS_ITEM.get(), context -> new ThrownItemRenderer<ThrownBlockAsItem>(context, 3.0F, true));
     	event.registerEntityRenderer(ModEntities.GOO_BALL.get(), context -> new ThrownItemRenderer<GooBall>(context, 3.0F, true));
