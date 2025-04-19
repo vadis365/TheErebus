@@ -9,7 +9,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -287,8 +286,4 @@ public class ModArmorMaterials {
                     0
             )
     );
-
-    public static void register(IEventBus bus) {
-        ARMOR_MATERIALS.register(bus);
-    }
 }

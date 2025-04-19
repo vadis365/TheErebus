@@ -7,6 +7,7 @@ import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.network.ModNetwork;
+import erebus.registries.world.ModPOIs;
 import erebus.registries.world.ModTreeDecorators;
 import erebus.registries.world.ModTrunkPlacers;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -34,20 +35,21 @@ public class Erebus {
     public Erebus(IEventBus bus, ModContainer container, Dist dist) {
         bus.addListener(this::commonSetup);
 
-        ModArmorMaterials.register(bus);
-        ModBlocks.register(bus);
-        ModItems.register(bus);
+        ModArmorMaterials.ARMOR_MATERIALS.register(bus);
+        ModBlocks.BLOCKS.register(bus);
+        ModItems.ITEMS.register(bus);
         ModToolMaterials.init();
-        ModTabs.register(bus);
+        ModTabs.CREATIVE_MODE_TABS.register(bus);
         ModEntities.getEntityTypes().register(bus);
         bus.addListener(ModEntities::registerSpawnPlacements);
         bus.addListener(ModEntities::initializeAttributes);
         ModEntities.SPAWN_EGGS.register(bus);
         ModSounds.SOUNDS.register(bus);
-        ModMenuTypes.register(bus);
-        ModTrunkPlacers.register(bus);
-        ModTreeDecorators.register(bus);
-        ModBlockEntities.register(bus);
+        ModMenuTypes.MENU_TYPES.register(bus);
+        ModTrunkPlacers.TRUNK_PLACERS.register(bus);
+        ModTreeDecorators.TREE_DECORATORS.register(bus);
+        ModBlockEntities.BLOCK_ENTITIES.register(bus);
+        ModPOIs.POI.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 

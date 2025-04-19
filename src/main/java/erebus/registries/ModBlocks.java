@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -496,8 +495,4 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> FORCE_LOCK = registerSimpleBlock("force_lock", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
 
     public static final DeferredBlock<Block> ANT_HILL_BLOCK = registerSimpleBlock("ant_hill_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-
-    public static void register(IEventBus eventBus) {
-        BLOCKS.register(eventBus);
-    }
 }
