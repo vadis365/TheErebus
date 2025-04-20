@@ -1,9 +1,6 @@
 package erebus.client.render.item.renderer;
 
-import javax.annotation.Nonnull;
-
 import com.mojang.blaze3d.vertex.PoseStack;
-
 import erebus.Erebus;
 import erebus.client.render.item.model.WandOfAnimationItemModel;
 import erebus.registries.ModItemRendering;
@@ -12,7 +9,6 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -20,14 +16,16 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
+
 @OnlyIn(Dist.CLIENT)
 public class WandOfAnimationItemRenderer extends BlockEntityWithoutLevelRenderer {
 
 	private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/items/wand_of_animation.png");
 	private final WandOfAnimationItemModel wand_model;
 
-	public WandOfAnimationItemRenderer(BlockEntityRenderDispatcher renderer, EntityModelSet modelSet) {
-		super(renderer, modelSet);
+	public WandOfAnimationItemRenderer() {
+		super(null, null);
 		EntityModelSet EntityModelSetThatIsntNULL = Minecraft.getInstance().getEntityModels();
 		wand_model = new WandOfAnimationItemModel(EntityModelSetThatIsntNULL.bakeLayer(ModItemRendering.WAND_OF_ANIMATION));
 	}

@@ -21,12 +21,12 @@ import net.neoforged.api.distmarker.OnlyIn;
 import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
-public class PortalActivatorRenderer extends BlockEntityWithoutLevelRenderer {
+public class WaspSwordRenderer extends BlockEntityWithoutLevelRenderer {
 
     private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/items/portal_activator.png");
     private final PortalActivatorModel portalActivatorModel;
 
-    public PortalActivatorRenderer() {
+    public WaspSwordRenderer() {
         super(null, null);
         EntityModelSet EntityModelSetThatIsntNULL = Minecraft.getInstance().getEntityModels();
         portalActivatorModel = new PortalActivatorModel(EntityModelSetThatIsntNULL.bakeLayer(ModItemRendering.PORTAL_ACTIVATOR));
