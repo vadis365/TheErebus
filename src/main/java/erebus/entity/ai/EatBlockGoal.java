@@ -45,7 +45,7 @@ public abstract class EatBlockGoal extends Goal {
 
 	@Override
 	public boolean canUse() {
-		return entity.level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
+		return entity.level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && eatTicks == 0;
 	}
 
 	@Override
@@ -53,8 +53,13 @@ public abstract class EatBlockGoal extends Goal {
 		return !entity.isBaby();
 	}
 
-    public void start() {
-		if (canContinueToUse())
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
+    public void tick() {
+		if (!canContinueToUse())
 			return;
 
 		int xCoord = (int) entity.getX();
@@ -64,9 +69,8 @@ public abstract class EatBlockGoal extends Goal {
 		for (int i = 0; i < CHECKS_PER_TICK; i++)
 			if (!hasTarget) {
 				increment();
-
 				Point p = getNextPoint();
-				for (int y = -4; y < 4; y++)
+				for (int y = -2; y < 4; y++)
 					if (canEatBlock(entity.level().getBlockState(new BlockPos(xCoord + p.x, yCoord + y, zCoord + p.y)))) {
 						targetX = xCoord + p.x;
 						targetY = yCoord + y;
@@ -74,11 +78,12 @@ public abstract class EatBlockGoal extends Goal {
 						hasTarget = true;
 					}
 			} else if (isEntityReady()) {
-				moveToLocation();
-				entity.getLookControl().setLookAt(targetX + 0.5D, targetY + 0.5D, targetZ + 0.5D, 30.0F, 8.0F);
 				AABB blockbounds = getBlockAABB(targetX, targetY, targetZ);
 				boolean flag = entity.getBoundingBox().maxY >= blockbounds.minY && entity.getBoundingBox().minY <= blockbounds.maxY && entity.getBoundingBox().maxX >= blockbounds.minX && entity.getBoundingBox().minX <= blockbounds.maxX && entity.getBoundingBox().maxZ >= blockbounds.minZ && entity.getBoundingBox().minZ <= blockbounds.maxZ;
-
+				if(!flag && canEatBlock(getTargetBlock()))
+					moveToLocation();
+				entity.getLookControl().setLookAt(targetX + 0.5D, targetY + 0.5D, targetZ + 0.5D, 30.0F, 8.0F);
+		
 				if (flag && canEatBlock(getTargetBlock())) {
 					prepareToEat();
 					eatTicks++;

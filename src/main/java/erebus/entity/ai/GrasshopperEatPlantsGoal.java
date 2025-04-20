@@ -1,5 +1,7 @@
 package erebus.entity.ai;
 
+import java.util.EnumSet;
+
 import erebus.entity.Grasshopper;
 import erebus.entity.Locust;
 import erebus.registries.ModBlocks;
@@ -8,6 +10,7 @@ import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
@@ -21,6 +24,7 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 
 	public GrasshopperEatPlantsGoal(Grasshopper grasshopper, double moveSpeed, int eatSpeed, boolean doDropItem) {
 		super(grasshopper, null, moveSpeed, eatSpeed, doDropItem);
+		setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
 		this.moveSpeed = moveSpeed;
 		this.dropItem = doDropItem;
 		this.grasshopper = grasshopper;
@@ -31,7 +35,7 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 		Block block = state.getBlock();
 		if (state.isAir() || block == null)
 			return false;
-		else if (state.is(Blocks.TALL_GRASS) || state.is(ModBlocks.FERN.get()) || block instanceof CropBlock && ((CropBlock)block).isMaxAge(state))
+		else if (state.is(Blocks.SHORT_GRASS) || state.is(ModBlocks.FERN.get()) || block instanceof CropBlock && ((CropBlock)block).isMaxAge(state))
 			return true;
 		return false;
 	}
@@ -43,13 +47,12 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 	
 	@Override
 	public boolean canUse() {
-	return !grasshopper.getMoveControl().hasWanted() && super.canUse();
+		return !grasshopper.isEating && super.canUse();
 	}
 
 	@Override
 	protected void moveToLocation() {
-		if (!grasshopper.isEating)
-			grasshopper.getMoveControl().setWantedPosition(targetX + 0.5D, targetY + 0.5D, targetZ + 0.5D, moveSpeed);
+		grasshopper.getMoveControl().setWantedPosition(targetX + 0.5D, targetY + 0.5D, targetZ + 0.5D, moveSpeed);
 	}
 
 	@Override
@@ -60,7 +63,7 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 	@Override
 	protected void eatingInterupted() {
 		grasshopper.setIsEating(false);
-		grasshopper.getNavigation().stop();
+	//	grasshopper.getNavigation().recomputePath();
 	}
 
 	@Override
@@ -75,7 +78,7 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 				if (newGrasshopper != null) {
 					newGrasshopper.copyPosition(grasshopper);
 					grasshopper.level().addFreshEntity(newGrasshopper);
-					grasshopper.getNavigation().stop();
+					//grasshopper.getNavigation().recomputePath();
 				}
 			}
 		if (plantsEaten >= 12) {
