@@ -1,7 +1,6 @@
 package erebus.entity.ai;
 
 import java.awt.Point;
-import java.util.EnumSet;
 import java.util.List;
 
 import erebus.utils.Spiral;
@@ -34,7 +33,6 @@ public abstract class EatBlockGoal extends Goal {
 	private static final List<Point> spiral = new Spiral(16, 16).spiral();
 
 	public EatBlockGoal(Mob entity, BlockState state, double moveSpeed, int eatSpeed, boolean shouldDropItem) {
-		setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
 		this.entity = entity;
 		blockState = state;
 		hasTarget = false;

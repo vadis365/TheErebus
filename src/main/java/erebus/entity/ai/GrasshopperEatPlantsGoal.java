@@ -1,7 +1,5 @@
 package erebus.entity.ai;
 
-import java.util.EnumSet;
-
 import erebus.entity.Grasshopper;
 import erebus.entity.Locust;
 import erebus.registries.ModBlocks;
@@ -10,7 +8,6 @@ import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
@@ -24,7 +21,6 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 
 	public GrasshopperEatPlantsGoal(Grasshopper grasshopper, double moveSpeed, int eatSpeed, boolean doDropItem) {
 		super(grasshopper, null, moveSpeed, eatSpeed, doDropItem);
-		setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
 		this.moveSpeed = moveSpeed;
 		this.dropItem = doDropItem;
 		this.grasshopper = grasshopper;
@@ -47,7 +43,7 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 	
 	@Override
 	public boolean canUse() {
-		return !grasshopper.isEating && super.canUse();
+		return !grasshopper.getMoveControl().hasWanted() && !grasshopper.isEating && super.canUse();
 	}
 
 	@Override

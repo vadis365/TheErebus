@@ -47,9 +47,9 @@ public class Grasshopper extends PathfinderMob {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
+		goalSelector.addGoal(1, new WaterAvoidingRandomStrollGoal(this, 0.48D));
 		goalSelector.addGoal(1, new GrasshopperEatPlantsGoal(this, 0.6D, 20, false));
 		goalSelector.addGoal(2, new PanicGoal(this, 0.8D));
-		goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.48D));
 		goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 	}
 
