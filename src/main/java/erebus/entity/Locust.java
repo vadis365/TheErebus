@@ -154,7 +154,7 @@ public class Locust extends Monster {
             this.level().broadcastEntityEvent(this, (byte)1);
         }
 	}
-
+// TODO sort out a a proper flying pose animation  
 	public void startFlying() {
 		setIsFlying(true);
 		jumpDuration = 40;
