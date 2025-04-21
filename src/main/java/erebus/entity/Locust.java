@@ -37,10 +37,15 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class Locust extends Monster {
 	public int animationTicks, prevAnimationTicks;
 	public boolean canJump = true;
+	public boolean flying = false;
+	private int jumpTicks;
+	private int jumpDuration;
 
 	public Locust(EntityType<? extends Locust> type, Level level) {
 		super(type, level);
@@ -135,14 +140,81 @@ public class Locust extends Monster {
 	public void setCanJump(boolean ableToJump) {
 		canJump = ableToJump;
 	}
+	
+	public void setIsFlying(boolean flyingIn) {
+		flying = flyingIn;
+	}
+
+	@Override
+	public void jumpFromGround() {
+		super.jumpFromGround();
+		jumpDuration = 20;
+		jumpTicks = 0;
+        if (!this.level().isClientSide()) {
+            this.level().broadcastEntityEvent(this, (byte)1);
+        }
+	}
+
+	public void startFlying() {
+		setIsFlying(true);
+		jumpDuration = 40;
+		jumpTicks = 0;
+        if (!this.level().isClientSide()) {
+            this.level().broadcastEntityEvent(this, (byte)2);
+        }
+	}
+	
+	public void stopFlying() {
+		jumpDuration = 0;
+		jumpTicks = 0;
+        if (!this.level().isClientSide()) {
+            this.level().broadcastEntityEvent(this, (byte)3);
+        }
+	}
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == 1) {
+          //  this.spawnSprintParticle();
+            this.jumpDuration = 20;
+            this.jumpTicks = 0;
+        } 
+        if (id == 2) {
+            //  this.spawnSprintParticle();
+              this.jumpDuration = 40;
+              this.jumpTicks = 0;
+          }
+        if (id == 3) {
+            //  this.spawnSprintParticle();
+              this.jumpDuration = 0;
+              this.jumpTicks = 0;
+          }
+        else {
+            super.handleEntityEvent(id);
+        }
+    }
 
 	@Override
     protected float getJumpPower() {
         return this.getJumpPower(1.5F);
     }
 
+	@OnlyIn(Dist.CLIENT)
+	 public float getJumpCompletion(float partialTick) {
+		return jumpDuration == 0 ? 0.0F : ((float) jumpTicks + partialTick) / (float) jumpDuration;
+	}
+
 	@Override
 	public void aiStep() {
+		if (jumpTicks != jumpDuration && !flying) {
+			++jumpTicks;
+		} else if (jumpDuration != 0) {
+			jumpTicks = 0;
+			jumpDuration = 0;
+			//setJumping(false);
+		}
+		if(onGround() && flying)
+			setIsFlying(false);
 		Vec3 vec3 = this.getDeltaMovement().multiply(1.0, 0.6, 1.0);
 		if (!this.level().isClientSide()) {
 			if (getTarget() != null) {
@@ -180,7 +252,7 @@ public class Locust extends Monster {
 		}
 		
 		Vec3 vec3 = this.getDeltaMovement();
-		if (getTarget() == null && !this.onGround() && vec3.y < 0.0D)
+		if (getTarget() == null && !this.onGround() && vec3.y < 0.0D && !canJump)
 			this.setDeltaMovement(vec3.multiply(1.0D, 0.75D, 1.0D));
 
 		if(isInWater())
@@ -209,7 +281,6 @@ public class Locust extends Monster {
 			return false;
 	}
 	
-
 	public class AIFlyingWander extends WaterAvoidingRandomStrollGoal {
 
 		private final Locust locust;
@@ -222,6 +293,18 @@ public class Locust extends Monster {
 	    @Override
 	    public boolean canUse() {
 			return locust.getTarget() == null && super.canUse();	
+	    }
+	    
+	    @Override
+	    public void start() {
+	    	super.start();
+	    	locust.startFlying();
+	    }
+	    
+	    @Override
+	    public void stop() {
+	        super.stop();
+	       // locust.stopFlying();
 	    }
 
 		@Nullable

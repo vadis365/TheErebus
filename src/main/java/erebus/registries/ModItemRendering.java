@@ -22,7 +22,7 @@ public class ModItemRendering {
 	public static final ModelLayerLocation WEB_SLINGER = new ModelLayerLocation(Erebus.prefix("web_slinger"), "main");
 
 	public static void registerItemLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		event.registerLayerDefinition(WAND_OF_ANIMATION, WandOfAnimationItemModel::createBodyLayer);
+	/*	event.registerLayerDefinition(WAND_OF_ANIMATION, WandOfAnimationItemModel::createBodyLayer);
 		event.registerLayerDefinition(PORTAL_ACTIVATOR, PortalActivatorModel::createBodyLayer);
 		event.registerLayerDefinition(EREBUS_SHIELD_PARTS, ErebusShieldPartsModel::createBodyLayer);
 		event.registerLayerDefinition(SCORPION_PINCER, ScorpionPincerModel::createBodyLayer);
@@ -31,10 +31,11 @@ public class ModItemRendering {
 		event.registerLayerDefinition(WASP_DAGGER, WaspDaggerModel::createBodyLayer);
 		event.registerLayerDefinition(WASP_SWORD, WaspSwordModel::createBodyLayer);
 		event.registerLayerDefinition(WEB_SLINGER, WebSlingerModel::createBodyLayer);
+		*/
 	}
 
 	public static void registerItemRender(RegisterClientExtensionsEvent event) {
-		registerItemWithRenderer(event, new WandOfAnimationItemRenderer(), ModItems.WAND_OF_ANIMATION.get());
+	/*	registerItemWithRenderer(event, new WandOfAnimationItemRenderer(), ModItems.WAND_OF_ANIMATION.get());
 		registerItemWithRenderer(event, new WandOfPreservationRenderer(), ModItems.WAND_OF_PRESERVATION.get());
 		registerItemWithRenderer(event, new PortalActivatorRenderer(), ModItems.PORTAL_ACTIVATOR.get());
 
@@ -52,6 +53,7 @@ public class ModItemRendering {
 				ModItems.REIN_EXOSKELETON_SHIELD.get(),
 				ModItems.RHINO_EXOSKELETON_SHIELD.get()
 		);
+		*/
 	}
 
 	private static <T extends BlockEntityWithoutLevelRenderer> void registerItemWithRenderer(RegisterClientExtensionsEvent event, T renderer, Item... item) {

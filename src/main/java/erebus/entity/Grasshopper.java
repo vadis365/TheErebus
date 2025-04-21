@@ -36,6 +36,7 @@ public class Grasshopper extends PathfinderMob {
 	private boolean wasOnGround;
 	private int currentMoveTypeDuration;
 	public boolean isEating;
+	public int animationTicks, prevAnimationTicks;
 
 	public Grasshopper(EntityType<? extends Grasshopper> type, Level level ) {
 		super(type, level);
@@ -215,6 +216,21 @@ public class Grasshopper extends PathfinderMob {
 	private void checkLandingDelay() {
 		updateMoveTypeDuration();
 		disableJumpControl();
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+
+		if (level().isClientSide()) {
+			prevAnimationTicks = animationTicks;
+			if (animationTicks < 720)
+				animationTicks += 1;
+			if (animationTicks >= 720) {
+				animationTicks -= 720;
+				prevAnimationTicks -= 720;
+			}
+		}
 	}
 
     @Override
