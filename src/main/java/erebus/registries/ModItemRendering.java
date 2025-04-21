@@ -41,7 +41,17 @@ public class ModItemRendering {
 		registerItemWithRenderer(event, new WaspSwordRenderer(), ModItems.WASP_SWORD.get());
 		registerItemWithRenderer(event, new WaspDaggerRenderer(), ModItems.WASP_DAGGER.get());
 
+		registerItemWithRenderer(event, new WarHammerRenderer(), ModItems.WAR_HAMMER.get());
+		registerItemWithRenderer(event, new ScorpionPincerRenderer(), ModItems.ENHANCED_SCORPION_PINCER.get());
 		registerItemWithRenderer(event, new WebSlingerRenderer(), ModItems.WEB_SLINGER.get(), ModItems.WEB_SLINGER_WITHER.get());
+
+		registerItemWithRenderer(event, new ErebusShieldPartsRenderer(),
+				ModItems.BAMBOO_SHIELD.get(),
+				ModItems.JADE_SHIELD.get(),
+				ModItems.EXOSKELETON_SHIELD.get(),
+				ModItems.REIN_EXOSKELETON_SHIELD.get(),
+				ModItems.RHINO_EXOSKELETON_SHIELD.get()
+		);
 	}
 
 	private static <T extends BlockEntityWithoutLevelRenderer> void registerItemWithRenderer(RegisterClientExtensionsEvent event, T renderer, Item... item) {

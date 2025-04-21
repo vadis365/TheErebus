@@ -9,15 +9,21 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 
 public class WaspDaggerModel extends Model {
-    public final ModelPart clawR4;
-    public final ModelPart clawR5Top;
-    public final ModelPart clawR5Bot;
+    public final ModelPart point;
+    public final ModelPart blade;
+    public final ModelPart tang;
+    public final ModelPart hilt;
+    public final ModelPart pommel;
+    public final ModelPart jewel;
 
     public WaspDaggerModel(ModelPart root) {
         super(RenderType::entitySolid);
-        clawR4 = root.getChild("ClawR4");
-        clawR5Top = root.getChild("ClawR5Top");
-        clawR5Bot = root.getChild("ClawR5Bot");
+        point = root.getChild("Point");
+        blade = root.getChild("Blade");
+        tang = root.getChild("Tang");
+        hilt = root.getChild("Hilt");
+        pommel = root.getChild("Pommel");
+        jewel = root.getChild("Jewel");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -25,60 +31,111 @@ public class WaspDaggerModel extends Model {
         PartDefinition partdefinition = meshdefinition.getRoot();
 
         partdefinition.addOrReplaceChild(
-                "ClawR4",
+                "Point",
                 CubeListBuilder.create()
-                        .texOffs(0, 6)
+                        .texOffs(23, 0)
                         .addBox(
-                                -2,
-                                0,
-                                -2,
-                                4,
-                                6,
-                                4,
-                                new CubeDeformation(0)
-                        ),
-                PartPose.ZERO
-        );
-
-        partdefinition.addOrReplaceChild(
-                "ClawR5Top",
-                CubeListBuilder.create()
-                        .texOffs(11, 0)
-                        .addBox(
-                                -3,
-                                5,
-                                0.5F,
-                                1,
-                                4,
+                                -1.5F,
+                                -1.5F,
+                                -0.5F,
+                                3,
+                                3,
                                 1,
                                 new CubeDeformation(0)
                         ),
-                PartPose.offsetAndRotation(0, 0, 0, 0, 0, -0.3490659F)
+                PartPose.offsetAndRotation(0, -12, 0, 0, 0, 0.7853982F)
         );
 
         partdefinition.addOrReplaceChild(
-                "ClawR5Bot",
+                "Blade",
                 CubeListBuilder.create()
                         .texOffs(0, 0)
                         .addBox(
-                                -3,
-                                5,
-                                -1.5F,
-                                1,
+                                -2,
+                                -36,
+                                -0.5F,
                                 4,
+                                16,
                                 1,
                                 new CubeDeformation(0)
                         ),
-                PartPose.offsetAndRotation(0, 0, 0, 0, 0, -0.3490659F)
+                PartPose.offset(0, 24, 0)
         );
 
-        return LayerDefinition.create(meshdefinition, 16, 16);
+        partdefinition.addOrReplaceChild(
+                "Tang",
+                CubeListBuilder.create()
+                        .texOffs(10, 46)
+                        .addBox(
+                                -4,
+                                -20,
+                                -1.5F,
+                                4,
+                                16,
+                                1,
+                                new CubeDeformation(0)
+                        ),
+                PartPose.offset(0, 24, 0)
+        );
+
+        partdefinition.addOrReplaceChild(
+                "Hilt",
+                CubeListBuilder.create()
+                        .texOffs(0, 49)
+                        .addBox(
+                                -1.5F,
+                                -18,
+                                -1,
+                                3,
+                                13,
+                                2,
+                                new CubeDeformation(0)
+                        ),
+                PartPose.offset(0, 24, 0)
+        );
+
+        partdefinition.addOrReplaceChild(
+                "Pommel",
+                CubeListBuilder.create()
+                        .texOffs(13, 56)
+                        .addBox(
+                                -5,
+                                -5,
+                                -2,
+                                4,
+                                4,
+                                4,
+                                new CubeDeformation(0)
+                        ),
+                PartPose.offsetAndRotation(0, 24, 0, 0, 0, 0.7853982F)
+        );
+
+        partdefinition.addOrReplaceChild(
+                "Jewel",
+                CubeListBuilder.create()
+                        .texOffs(13, 56)
+                        .addBox(
+                                -5,
+                                -5,
+                                -2,
+                                4,
+                                4,
+                                4,
+                                new CubeDeformation(0)
+                        ),
+                PartPose.offsetAndRotation(0, 10, 0, 0, 0, 0.7853982F)
+        );
+
+        return LayerDefinition.create(meshdefinition, 32, 64);
     }
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-        clawR4.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        clawR5Top.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        clawR5Bot.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        point.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        blade.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        tang.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        hilt.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        pommel.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        jewel.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

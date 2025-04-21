@@ -9,15 +9,17 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 
 public class WarHammerModel extends Model {
-    public final ModelPart clawR4;
-    public final ModelPart clawR5Top;
-    public final ModelPart clawR5Bot;
+    public final ModelPart head;
+    public final ModelPart head2;
+    public final ModelPart handle;
+    public final ModelPart counterWeight;
 
     public WarHammerModel(ModelPart root) {
         super(RenderType::entitySolid);
-        clawR4 = root.getChild("ClawR4");
-        clawR5Top = root.getChild("ClawR5Top");
-        clawR5Bot = root.getChild("ClawR5Bot");
+        head = root.getChild("head");
+        head2 = root.getChild("head2");
+        handle = root.getChild("handle");
+        counterWeight = root.getChild("counterWeight");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -25,60 +27,77 @@ public class WarHammerModel extends Model {
         PartDefinition partdefinition = meshdefinition.getRoot();
 
         partdefinition.addOrReplaceChild(
-                "ClawR4",
+                "head",
                 CubeListBuilder.create()
-                        .texOffs(0, 6)
+                        .texOffs(0, 0)
                         .addBox(
                                 -2,
-                                0,
-                                -2,
+                                -4,
+                                -4.5F,
                                 4,
-                                6,
                                 4,
+                                9,
                                 new CubeDeformation(0)
                         ),
                 PartPose.ZERO
         );
 
         partdefinition.addOrReplaceChild(
-                "ClawR5Top",
+                "head2",
                 CubeListBuilder.create()
-                        .texOffs(11, 0)
+                        .texOffs(0, 14)
                         .addBox(
-                                -3,
-                                5,
-                                0.5F,
+                                -1,
+                                0,
+                                -1,
+                                2,
                                 1,
-                                4,
-                                1,
+                                2,
                                 new CubeDeformation(0)
                         ),
-                PartPose.offsetAndRotation(0, 0, 0, 0, 0, -0.3490659F)
+                PartPose.ZERO
         );
 
         partdefinition.addOrReplaceChild(
-                "ClawR5Bot",
+                "handle",
                 CubeListBuilder.create()
-                        .texOffs(0, 0)
+                        .texOffs(27, 0)
                         .addBox(
-                                -3,
-                                5,
-                                -1.5F,
+                                -0.5F,
                                 1,
-                                4,
+                                -0.5F,
+                                1,
+                                12,
                                 1,
                                 new CubeDeformation(0)
                         ),
-                PartPose.offsetAndRotation(0, 0, 0, 0, 0, -0.3490659F)
+                PartPose.ZERO
         );
 
-        return LayerDefinition.create(meshdefinition, 16, 16);
+        partdefinition.addOrReplaceChild(
+                "counterWeight",
+                CubeListBuilder.create()
+                        .texOffs(0, 18)
+                        .addBox(
+                                -2,
+                                13,
+                                -1,
+                                2,
+                                2,
+                                2,
+                                new CubeDeformation(0)
+                        ),
+                PartPose.ZERO
+        );
+
+        return LayerDefinition.create(meshdefinition, 64, 32);
     }
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-        clawR4.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        clawR5Top.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        clawR5Bot.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        head.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        head2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        handle.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+        counterWeight.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }
