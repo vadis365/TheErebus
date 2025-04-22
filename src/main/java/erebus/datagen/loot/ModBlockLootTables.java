@@ -1,18 +1,14 @@
 package erebus.datagen.loot;
 
-import static erebus.registries.ModBlocks.*;
-
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-
 import erebus.datagen.providers.ModBlockLootTableProvider;
-import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import org.jetbrains.annotations.NotNull;
+
+import static erebus.registries.ModBlocks.*;
 
 public class ModBlockLootTables extends ModBlockLootTableProvider {
 
@@ -22,8 +18,6 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
 
     @Override
     protected void generate() {
-        HolderLookup.RegistryLookup<Enchantment> registryLookup = registries.lookupOrThrow(Registries.ENCHANTMENT);
-
         // MARK: Umberstone
         dropWhenSilkTouch(UMBERSTONE.get());
         dropOther(UMBERSTONE, UMBERCOBBLE);
@@ -471,12 +465,12 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ANT_HILL_BLOCK);
         
         //Webs
-        dropOther(WITHER_WEB, Items.STRING);
-        dropOther(LAVA_WEB, Items.STRING);
+        add(WITHER_WEB.get(), createSilkTouchOrShearsDispatchTable(WITHER_WEB.get(), applyExplosionCondition(WITHER_WEB, LootItem.lootTableItem(Items.STRING))));
+        add(LAVA_WEB.get(), createSilkTouchOrShearsDispatchTable(LAVA_WEB.get(), applyExplosionCondition(WITHER_WEB, LootItem.lootTableItem(Items.STRING))));
     }
 
     @Override
-    protected Iterable<Block> getKnownBlocks() {
-        return BLOCKS.getEntries().stream().map(Supplier::get).collect(Collectors.toSet());
+    protected @NotNull Iterable<Block> getKnownBlocks() {
+        return BLOCKS.getEntries().stream().map(e -> (Block) e.value()).toList();
     }
 }

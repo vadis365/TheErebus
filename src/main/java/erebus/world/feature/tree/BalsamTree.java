@@ -21,7 +21,7 @@ public class BalsamTree extends ErebusTree {
     public TreeConfiguration getTreeConfiguration() {
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.LOG_BALSAM.get()),
-                new BalsamTrunkPlacer(4, 4, 3),
+                new BalsamTrunkPlacer(12, 4, 3),
                 BlockStateProvider.simple(ModBlocks.LEAVES_BALSAM.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), 3),
                 new TwoLayersFeatureSize(1, 0, 2)

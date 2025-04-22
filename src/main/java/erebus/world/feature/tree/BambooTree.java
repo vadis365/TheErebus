@@ -21,7 +21,7 @@ public class BambooTree extends ErebusTree {
     public TreeConfiguration getTreeConfiguration() {
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.LOG_ASPER.get()),
-                new AsperTrunkPlacer(4, 2, 0, 1),
+                new AsperTrunkPlacer(4, 2, 0),
                 BlockStateProvider.simple(ModBlocks.LEAVES_ASPER.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), 3),
                 new TwoLayersFeatureSize(1, 0, 1)).build();
