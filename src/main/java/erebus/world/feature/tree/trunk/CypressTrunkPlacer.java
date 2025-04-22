@@ -1,6 +1,5 @@
 package erebus.world.feature.tree.trunk;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -13,6 +12,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import org.apache.commons.compress.utils.Lists;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -39,11 +39,16 @@ public class CypressTrunkPlacer extends TrunkPlacer {
     @Override
     public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos pos, TreeConfiguration config) {
         setDirtAt(level, blockSetter, random, pos.below(), config);
+        List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
 
         for (int c = 0; c < freeTreeHeight; ++c) {
             placeLog(level, blockSetter, random, pos.above(c), config);
+            if (c >= 2)
+                list.add(new FoliagePlacer.FoliageAttachment(pos.above(c), 0, false));
         }
 
-        return ImmutableList.of(new FoliagePlacer.FoliageAttachment(pos.above(freeTreeHeight), 0, false));
+        list.add(new FoliagePlacer.FoliageAttachment(pos.above(freeTreeHeight), 0, false));
+
+        return list;
     }
 }
