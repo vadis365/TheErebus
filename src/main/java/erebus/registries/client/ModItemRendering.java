@@ -1,8 +1,9 @@
-package erebus.registries;
+package erebus.registries.client;
 
 import erebus.Erebus;
 import erebus.client.render.item.model.*;
 import erebus.client.render.item.renderer.*;
+import erebus.registries.ModItems;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;

@@ -371,7 +371,7 @@ public class ModBlocks extends ModBlockHelpers {
 
     // MARK: Other
     public static final DeferredBlock<ErebusPortalBlock> PORTAL = registerBlock("portal", () -> new ErebusPortalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_PORTAL)));
-    public static final DeferredBlock<GaeanKeystoneBlock> GAEAN_KEYSTONE = registerBlock("gaean_keystone", GaeanKeystoneBlock::new);
+    public static final DeferredBlock<GaeanKeystoneBlock> GAEAN_KEYSTONE = registerBlock("gaean_keystone", () -> new GaeanKeystoneBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.END_PORTAL_FRAME)));
     public static final DeferredBlock<Block> JADE_BLOCK = registerSimpleBlock("jade_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> MUD = registerBlock("mud", () -> new MudBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MUD)) {
         @Override

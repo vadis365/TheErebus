@@ -2,6 +2,8 @@ package erebus;
 
 import com.mojang.logging.LogUtils;
 import erebus.registries.*;
+import erebus.registries.client.ModItemRendering;
+import erebus.registries.client.ModMenuTypes;
 import erebus.registries.data.ModArmorMaterials;
 import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;

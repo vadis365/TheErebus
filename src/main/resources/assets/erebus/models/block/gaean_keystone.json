@@ -3,7 +3,7 @@
     "textures": {
         "0": "erebus:block/keystone_sides",
         "1": "erebus:block/keystone_top",
-        "2": "minecraft:block/stonebrick",
+        "2": "minecraft:block/stone_bricks",
         "particle": "erebus:block/keystone_top"
     },
     "elements": [

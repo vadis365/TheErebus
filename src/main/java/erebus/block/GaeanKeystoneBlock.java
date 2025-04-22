@@ -1,6 +1,7 @@
 package erebus.block;
 
-import erebus.Erebus;
+import com.mojang.serialization.MapCodec;
+import erebus.block.entity.GaeanKeystoneBlockEntity;
 import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
 import erebus.utils.AdvancedBlockPos;
@@ -10,27 +11,30 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class GaeanKeystoneBlock extends Block {
+public class GaeanKeystoneBlock extends BaseEntityBlock {
 
+    public static final MapCodec<GaeanKeystoneBlock> CODEC = simpleCodec(GaeanKeystoneBlock::new);
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
     private static final int LEAF_SEARCH = 8;
     private static final int MAX_PORTAL_SIZE = 81;
 
-    public GaeanKeystoneBlock() {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public GaeanKeystoneBlock(Properties properties) {
+        super(properties);
 
         registerDefaultState(getStateDefinition().any()
                 .setValue(ACTIVE, false)
@@ -38,8 +42,23 @@ public class GaeanKeystoneBlock extends Block {
     }
 
     @Override
+    protected RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(ACTIVE);
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new GaeanKeystoneBlockEntity(pos, state);
     }
 
     @Override
@@ -69,20 +88,16 @@ public class GaeanKeystoneBlock extends Block {
     }
 
     private void breakPortal(Level level, BlockPos pos) {
-        Erebus.LOGGER.debug("GaeanKeystoneBlock: Breaking portal at {}", pos);
         AdvancedBlockPos here = new AdvancedBlockPos(level, pos);
         AdvancedBlockPos min = here.add(-LEAF_SEARCH, -LEAF_SEARCH, -LEAF_SEARCH);
         AdvancedBlockPos max = here.add(LEAF_SEARCH, LEAF_SEARCH, LEAF_SEARCH);
 
-        Erebus.LOGGER.debug("GaeanKeystoneBlock: Searching for portal blocks in cube from {} to {}", min, max);
         here.iterateCube(min, max, at -> {
             BlockState state = level.getBlockState(at);
             if (!state.is(ModBlocks.PORTAL.get())) {
-                Erebus.LOGGER.debug("GaeanKeystoneBlock: Found portal block at {}, skipping", at);
                 return false;
             }
 
-            Erebus.LOGGER.debug("GaeanKeystoneBlock: Starting portal search from {}", at);
             HashSet<AdvancedBlockPos> found = new HashSet<>();
             ArrayList<AdvancedBlockPos> frontier = new ArrayList<>();
             frontier.add(at);
@@ -96,13 +111,11 @@ public class GaeanKeystoneBlock extends Block {
                 }
             }
 
-            Erebus.LOGGER.debug("GaeanKeystoneBlock: Found {} portal blocks to remove", found.size());
             for (AdvancedBlockPos abp : found) {
                 level.setBlockAndUpdate(abp, Blocks.AIR.defaultBlockState());
             }
             return true;
         });
-        Erebus.LOGGER.debug("GaeanKeystoneBlock: Portal breaking completed");
     }
 
     private boolean makePortal(Level level, BlockPos pos) {

@@ -86,7 +86,7 @@ public class PortalActivatorModel extends Model {
                         .texOffs(5, 9)
                         .addBox(-0.5F,
                                 -0.5F,
-                                1.5F,
+                                -2.5F,
                                 1,
                                 3,
                                 1,

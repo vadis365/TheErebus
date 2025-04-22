@@ -130,7 +130,6 @@ dependencies {
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
     runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
 
-    implementation("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}")
     implementation "maven.modrinth:jade:15.7.1+neoforge"
     implementation "com.github.cech12.BucketLib:neoforge:${bucketlib_version}"
 

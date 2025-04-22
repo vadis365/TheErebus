@@ -3,7 +3,7 @@ package erebus.events;
 import erebus.Erebus;
 import erebus.client.screen.PetrifiedCraftingTableScreen;
 import erebus.client.screen.UmberFurnaceScreen;
-import erebus.registries.ModMenuTypes;
+import erebus.registries.client.ModMenuTypes;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;

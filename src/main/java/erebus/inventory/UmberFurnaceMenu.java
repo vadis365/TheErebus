@@ -2,7 +2,7 @@ package erebus.inventory;
 
 import erebus.inventory.slot.FluidContainerSlot;
 import erebus.inventory.slot.UmberFurnaceFuelSlot;
-import erebus.registries.ModMenuTypes;
+import erebus.registries.client.ModMenuTypes;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;

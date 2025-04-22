@@ -1,4 +1,4 @@
-package erebus.registries;
+package erebus.registries.client;
 
 import erebus.Erebus;
 import erebus.inventory.PetrifiedCraftingMenu;
