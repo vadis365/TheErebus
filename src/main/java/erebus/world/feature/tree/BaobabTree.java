@@ -1,7 +1,7 @@
 package erebus.world.feature.tree;
 
 import erebus.registries.ModBlocks;
-import erebus.world.feature.tree.trunkplacer.BaobabTrunkPlacer;
+import erebus.world.feature.tree.trunk.BaobabTrunkPlacer;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;

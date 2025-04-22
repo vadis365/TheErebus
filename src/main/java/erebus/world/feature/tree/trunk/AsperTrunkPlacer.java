@@ -1,4 +1,4 @@
-package erebus.world.feature.tree.trunkplacer;
+package erebus.world.feature.tree.trunk;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

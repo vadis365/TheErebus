@@ -9,9 +9,8 @@
       }
     },
     "foliage_placer": {
-      "type": "minecraft:blob_foliage_placer",
-      "height": 3,
-      "offset": 3,
+      "type": "erebus:balsam_foliage_placer",
+      "offset": 0,
       "radius": 2
     },
     "foliage_provider": {

@@ -1,4 +1,4 @@
-package erebus.world.feature.tree.trunkplacer;
+package erebus.world.feature.tree.trunk;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
@@ -17,23 +17,23 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public class MarshwoodTrunkPlacer extends TrunkPlacer {
+public class GiantEucalyptusTrunkPlacer extends TrunkPlacer {
 
-    public static final MapCodec<MarshwoodTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
+    public static final MapCodec<GiantEucalyptusTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     Codec.intRange(0, 32).fieldOf("base_height").forGetter(placer -> placer.baseHeight),
                     Codec.intRange(0, 32).fieldOf("height_rand_a").forGetter(placer -> placer.heightRandA),
                     Codec.intRange(0, 32).fieldOf("height_rand_b").forGetter(placer -> placer.heightRandB)
-            ).apply(instance, MarshwoodTrunkPlacer::new)
+            ).apply(instance, GiantEucalyptusTrunkPlacer::new)
     );
 
-    public MarshwoodTrunkPlacer(int baseHeight, int heightRandA, int heightRandB) {
+    public GiantEucalyptusTrunkPlacer(int baseHeight, int heightRandA, int heightRandB) {
         super(baseHeight, heightRandA, heightRandB);
     }
 
     @Override
     protected TrunkPlacerType<?> type() {
-        return ModTrunkPlacers.MARSHWOOD_TRUNK_PLACER.get();
+        return ModTrunkPlacers.GIANT_EUCALYPTUS_TRUNK_PLACER.get();
     }
 
     @Override

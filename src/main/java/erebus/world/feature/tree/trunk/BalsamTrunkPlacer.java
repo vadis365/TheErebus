@@ -1,4 +1,4 @@
-package erebus.world.feature.tree.trunkplacer;
+package erebus.world.feature.tree.trunk;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -67,7 +67,7 @@ public class BalsamTrunkPlacer extends TrunkPlacer {
             }
         }
 
-        //list.add(new FoliagePlacer.FoliageAttachment(pos.above(height), 0, false));
+        list.add(new FoliagePlacer.FoliageAttachment(pos.above(height), 0, false));
 
         return list;
     }
@@ -106,7 +106,7 @@ public class BalsamTrunkPlacer extends TrunkPlacer {
                     config,
                     state -> state.setValue(BlockStateProperties.AXIS, axis)
             );
-            //list.add(new FoliagePlacer.FoliageAttachment(pos.relative(axis, 2).relative(Direction.Axis.Y, y), 0, false));
+            if (y == 1) list.add(new FoliagePlacer.FoliageAttachment(place, 0, false));
         }
     }
 }

@@ -1,4 +1,4 @@
-package erebus.world.feature.tree.trunkplacer;
+package erebus.world.feature.tree.trunk;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;

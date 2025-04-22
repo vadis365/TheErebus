@@ -2,7 +2,7 @@ package erebus.registries.world;
 
 import com.mojang.serialization.MapCodec;
 import erebus.Erebus;
-import erebus.world.feature.tree.trunkplacer.*;
+import erebus.world.feature.tree.trunk.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
