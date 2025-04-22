@@ -82,7 +82,7 @@ public class WebSlingerModel extends Model {
 
         partdefinition.addOrReplaceChild("ShapeA", CubeListBuilder.create()
                         .texOffs(0, 0)
-                        .addBox(-2.5F, -4.466667F, 2.5F, 5, 5, 1, new CubeDeformation(0)),
+                        .addBox(-2.5F, -4.466667F, 2.5F, 5, 1, 1, new CubeDeformation(0)),
                 PartPose.offsetAndRotation(0, 8, -9, 0, 0, -3.141593F));
 
         partdefinition.addOrReplaceChild("ShapeB", CubeListBuilder.create()

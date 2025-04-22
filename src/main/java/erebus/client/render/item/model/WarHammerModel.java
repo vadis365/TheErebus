@@ -39,7 +39,7 @@ public class WarHammerModel extends Model {
                                 9,
                                 new CubeDeformation(0)
                         ),
-                PartPose.ZERO
+                PartPose.offset(0, 9, 0)
         );
 
         partdefinition.addOrReplaceChild(
@@ -55,7 +55,7 @@ public class WarHammerModel extends Model {
                                 2,
                                 new CubeDeformation(0)
                         ),
-                PartPose.ZERO
+                PartPose.offset(0, 9, 0)
         );
 
         partdefinition.addOrReplaceChild(
@@ -71,7 +71,7 @@ public class WarHammerModel extends Model {
                                 1,
                                 new CubeDeformation(0)
                         ),
-                PartPose.ZERO
+                PartPose.offset(0, 9, 0)
         );
 
         partdefinition.addOrReplaceChild(
@@ -79,7 +79,7 @@ public class WarHammerModel extends Model {
                 CubeListBuilder.create()
                         .texOffs(0, 18)
                         .addBox(
-                                -2,
+                                -1,
                                 13,
                                 -1,
                                 2,
@@ -87,7 +87,7 @@ public class WarHammerModel extends Model {
                                 2,
                                 new CubeDeformation(0)
                         ),
-                PartPose.ZERO
+                PartPose.offset(0, 9, 0)
         );
 
         return LayerDefinition.create(meshdefinition, 64, 32);

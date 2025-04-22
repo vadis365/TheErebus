@@ -3,6 +3,7 @@
 package erebus.client.render.item.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import erebus.Erebus;
 import erebus.client.render.item.model.WarHammerModel;
 import erebus.registries.ModItemRendering;
@@ -34,11 +35,13 @@ public class WarHammerRenderer extends BlockEntityWithoutLevelRenderer {
     }
 
     @Override
-    public void renderByItem(ItemStack stack, @Nonnull ItemDisplayContext transformType, PoseStack matrixStack, MultiBufferSource bufferIn, int combinedLight, int combinedOverlayIn) {
-        matrixStack.pushPose();
-        matrixStack.scale(1, 1, 1);
-        warHammerModel.renderToBuffer(matrixStack, bufferIn.getBuffer(RenderType.entitySmoothCutout(TEXTURE)), combinedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
-        matrixStack.popPose();
+    public void renderByItem(ItemStack stack, @Nonnull ItemDisplayContext transformType, PoseStack pose, MultiBufferSource bufferIn, int combinedLight, int combinedOverlayIn) {
+        pose.pushPose();
+        pose.scale(2, 2, 2);
+        pose.rotateAround(Axis.YN.rotationDegrees(90), 0, 1, 0);
+        pose.translate(0, 0.25 - 1, 0);
+        warHammerModel.renderToBuffer(pose, bufferIn.getBuffer(RenderType.entitySmoothCutout(TEXTURE)), combinedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
+        pose.popPose();
     }
 
 }
