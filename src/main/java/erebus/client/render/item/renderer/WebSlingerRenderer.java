@@ -4,6 +4,7 @@
 package erebus.client.render.item.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import erebus.Erebus;
 import erebus.client.render.item.model.WebSlingerModel;
 import erebus.registries.ModItemRendering;
@@ -40,7 +41,11 @@ public class WebSlingerRenderer extends BlockEntityWithoutLevelRenderer {
     @Override
     public void renderByItem(ItemStack stack, @Nonnull ItemDisplayContext transformType, PoseStack matrixStack, MultiBufferSource bufferIn, int combinedLight, int combinedOverlayIn) {
         matrixStack.pushPose();
-        matrixStack.scale(1, 1, 1);
+        matrixStack.scale(1.5F, 1.5F, 1.5F);
+        matrixStack.rotateAround(Axis.ZP.rotationDegrees(180), 0, 0, 1);
+        matrixStack.rotateAround(Axis.YN.rotationDegrees(45), 0, 1, 0);
+        matrixStack.rotateAround(Axis.XP.rotationDegrees(80), 1, 0, 0);
+        matrixStack.translate(0, 0, -0.25F);
         webSlingerModel.renderToBuffer(matrixStack, bufferIn.getBuffer(RenderType.entitySmoothCutout(isWither ? TEXTURE_WITHER : TEXTURE)), combinedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
         matrixStack.popPose();
     }

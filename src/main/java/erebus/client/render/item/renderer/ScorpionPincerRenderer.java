@@ -36,7 +36,7 @@ public class ScorpionPincerRenderer extends BlockEntityWithoutLevelRenderer {
     @Override
     public void renderByItem(ItemStack stack, @Nonnull ItemDisplayContext transformType, PoseStack matrixStack, MultiBufferSource bufferIn, int combinedLight, int combinedOverlayIn) {
         matrixStack.pushPose();
-        matrixStack.scale(1, 1, 1);
+        matrixStack.scale(1, -1, -1);
         scorpionPincerModel.renderToBuffer(matrixStack, bufferIn.getBuffer(RenderType.entitySmoothCutout(TEXTURE)), combinedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
         matrixStack.popPose();
     }
