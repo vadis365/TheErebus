@@ -40,10 +40,10 @@ public class WaspSwordModel extends Model {
         spikeMid2 = root.getChild("SpikeMid2");
         spikeBot1 = root.getChild("SpikeBot1");
         spikeBot2 = root.getChild("SpikeBot2");
-        Decl4 = root.getChild("Decl4");
-        Decl3 = root.getChild("Decl3");
-        Decl2 = root.getChild("Decl2");
-        Decl1 = root.getChild("Decl1");
+        Decl4 = root.getChild("DecL4");
+        Decl3 = root.getChild("DecL3");
+        Decl2 = root.getChild("DecL2");
+        Decl1 = root.getChild("DecL1");
         DecR1 = root.getChild("DecR1");
         DecR2 = root.getChild("DecR2");
         DecR3 = root.getChild("DecR3");

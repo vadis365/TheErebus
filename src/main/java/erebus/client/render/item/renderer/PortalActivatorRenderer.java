@@ -11,6 +11,7 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -26,8 +27,8 @@ public class PortalActivatorRenderer extends BlockEntityWithoutLevelRenderer {
     private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/items/portal_activator.png");
     private final PortalActivatorModel portalActivatorModel;
 
-    public PortalActivatorRenderer() {
-        super(null, null);
+    public PortalActivatorRenderer(BlockEntityRenderDispatcher blockEntityRenderDispatcher, EntityModelSet entityModelSet) {
+        super(blockEntityRenderDispatcher, entityModelSet);
         EntityModelSet EntityModelSetThatIsntNULL = Minecraft.getInstance().getEntityModels();
         portalActivatorModel = new PortalActivatorModel(EntityModelSetThatIsntNULL.bakeLayer(ModItemRendering.PORTAL_ACTIVATOR));
     }

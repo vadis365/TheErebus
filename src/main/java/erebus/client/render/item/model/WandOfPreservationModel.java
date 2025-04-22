@@ -33,14 +33,14 @@ public class WandOfPreservationModel extends Model {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition topMid = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "topMid",
                 CubeListBuilder.create()
                         .texOffs(21, 0)
                         .addBox(
                                 -3,
                                 1,
-                                -1,
+                                -3,
                                 6,
                                 6,
                                 6,
@@ -49,7 +49,7 @@ public class WandOfPreservationModel extends Model {
                 PartPose.ZERO
         );
 
-        PartDefinition topMain = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "topMain",
                 CubeListBuilder.create()
                         .texOffs(0, 0)
@@ -65,7 +65,7 @@ public class WandOfPreservationModel extends Model {
                 PartPose.offsetAndRotation(0, 0, 0, 0, 0.7853982F, 0)
         );
 
-        PartDefinition topBase = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "topBase",
                 CubeListBuilder.create()
                         .texOffs(46, 5)
@@ -81,7 +81,7 @@ public class WandOfPreservationModel extends Model {
                 PartPose.ZERO
         );
 
-        PartDefinition shaft1 = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "shaft1",
                 CubeListBuilder.create()
                         .texOffs(0, 14)
@@ -97,7 +97,7 @@ public class WandOfPreservationModel extends Model {
                 PartPose.ZERO
         );
 
-        PartDefinition shaft2 = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "shaft2",
                 CubeListBuilder.create()
                         .texOffs(9, 14)
@@ -113,7 +113,7 @@ public class WandOfPreservationModel extends Model {
                 PartPose.offsetAndRotation(0, 0, 0, 0, 0.7853982F, 0)
         );
 
-        PartDefinition pommel1 = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "pommel1",
                 CubeListBuilder.create()
                         .texOffs(21, 13)
@@ -129,7 +129,7 @@ public class WandOfPreservationModel extends Model {
                 PartPose.ZERO
         );
 
-        PartDefinition pommel2 = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "pommel2",
                 CubeListBuilder.create()
                         .texOffs(21, 20)

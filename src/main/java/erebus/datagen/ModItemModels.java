@@ -187,18 +187,7 @@ public class ModItemModels extends ModItemModelProvider {
         normalItem(ModItems.SPRINT_LEGGINGS);
         normalItem(ModItems.JUMP_BOOTS);
         normalItem(ModItems.WATER_STRIDERS);
-        //normalItem(ModItems.ENHANCED_SCORPION_PINCER); TODO: Figure out models
-        //normalItem(ModItems.WAR_HAMMER);
-        //normalItem(ModItems.WEB_SLINGER);
-        //normalItem(ModItems.WEB_SLINGER_WITHER);
         //normalItem(ModItems.MAX_SPEED_BOW);
-
-        // MARK: Shields
-        normalItem(ModItems.BAMBOO_SHIELD);
-        normalItem(ModItems.EXOSKELETON_SHIELD);
-        normalItem(ModItems.JADE_SHIELD);
-        normalItem(ModItems.REIN_EXOSKELETON_SHIELD);
-        normalItem(ModItems.RHINO_EXOSKELETON_SHIELD);
 
         // MARK: Misc
         //normalItem(ModItems.PORTAL_ACTIVATOR);
@@ -206,8 +195,6 @@ public class ModItemModels extends ModItemModelProvider {
         normalItem(ModItems.NECTAR_COLLECTOR);
         normalItem(ModItems.ANT_TAMING_AMULET);
         normalItem(ModItems.BEE_TAMING_AMULET);
-        normalItem(ModItems.WASP_SWORD);
-        //normalItem(ModItems.WASP_DAGGER);
         normalItem(ModItems.ANTI_VENOM_BOTTLE);
         //normalItem(ModItems.DEATH_COMPASS);
         normalItem(ModItems.ROLLED_NEWSPAPER);
