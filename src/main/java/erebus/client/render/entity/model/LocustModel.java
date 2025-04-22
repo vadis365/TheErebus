@@ -186,24 +186,40 @@ public class LocustModel<T extends Locust>  extends HierarchicalModel<T> {
 	public void prepareMobModel(T locust, float limbSwing, float limbSwingAmount, float partialRenderTicks) {
 		float smoothedTicks = locust.animationTicks + (locust.animationTicks - locust.prevAnimationTicks) * partialRenderTicks;
 		float flap = (float) (Math.sin((smoothedTicks) * 1.2F) * 0.5F);
-		float jumpAngle = Mth.sin(locust.getJumpCompletion(partialRenderTicks) * (float) Math.PI);
-
-		LeftFrontLeg.xRot = -jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		LeftMidLeg.xRot = jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		RightFrontLeg.xRot = -jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		RightMidLeg.xRot = jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-	
-		LeftBackLeg.xRot = -jumpAngle * 75.0F * (float) (Math.PI / 180.0);
-		RightBackLeg.xRot = -jumpAngle * 75.0F * (float) (Math.PI / 180.0);
-	
-		RBL4.xRot = 0.5236F - RightBackLeg.xRot + jumpAngle * 75.0F * (float) (Math.PI / 180.0);
-		RBL5.xRot = -0.6981F + RightBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		RBL6.xRot = 0.1745F + RightBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-	
-		LBL4.xRot = 0.5236F - LeftBackLeg.xRot + jumpAngle * 75.0F * (float) (Math.PI / 180.0);
-		LBL5.xRot = -0.6981F + LeftBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		LBL6.xRot = 0.1745F + LeftBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		HeadMain.xRot = -0.1745F + jumpAngle * 20.0F * (float) (Math.PI / 180.0);
+		float jumpAngle = Mth.sin(locust.getJumpPose(partialRenderTicks) * (float) Math.PI);
+		float flightAngle = locust.getFlyingPose(partialRenderTicks) * 0.1F;
+		if (!locust.flying && locust.flyingTicks <= 0) {
+			LeftFrontLeg.xRot = -jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			LeftMidLeg.xRot = jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			RightFrontLeg.xRot = -jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			RightMidLeg.xRot = jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+		
+			LeftBackLeg.xRot = -jumpAngle * 75.0F * (float) (Math.PI / 180.0);
+			RightBackLeg.xRot = -jumpAngle * 75.0F * (float) (Math.PI / 180.0);
+		
+			RBL4.xRot = 0.5236F - RightBackLeg.xRot + jumpAngle * 75.0F * (float) (Math.PI / 180.0);
+			RBL5.xRot = -0.6981F + RightBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			RBL6.xRot = 0.1745F + RightBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+		
+			LBL4.xRot = 0.5236F - LeftBackLeg.xRot + jumpAngle * 75.0F * (float) (Math.PI / 180.0);
+			LBL5.xRot = -0.6981F + LeftBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			LBL6.xRot = 0.1745F + LeftBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			HeadMain.xRot = -0.1745F + jumpAngle * 20.0F * (float) (Math.PI / 180.0);
+		}
+		else {
+			LeftBackLeg.xRot = -flightAngle * 0.75F;
+			RightBackLeg.xRot = -flightAngle * 0.75F;
+		
+			RBL4.xRot = 0.5236F - RightBackLeg.xRot + flightAngle * 0.75F;
+			RBL5.xRot = -0.6981F + RightBackLeg.xRot + flightAngle * 0.5F;
+			RBL6.xRot = 0.1745F + RightBackLeg.xRot + flightAngle * 0.5F;
+		
+			LBL4.xRot = 0.5236F - LeftBackLeg.xRot + flightAngle * 0.75F;
+			LBL5.xRot = -0.6981F + LeftBackLeg.xRot + flightAngle * 0.5F;
+			LBL6.xRot = 0.1745F + LeftBackLeg.xRot + flightAngle * 0.5F;
+			HeadMain.xRot = -0.1745F + flightAngle * 0.2F;
+		}
+		
 		if (locust.onGround()) {
 			flap = 0;
 			RFWing.yRot = 0F;
