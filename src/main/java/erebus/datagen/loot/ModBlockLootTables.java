@@ -351,7 +351,6 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(TALL_FERN);
 
         dropSelf(PORTAL);
-        dropSelf(GAEAN_KEYSTONE);
         dropSelf(JADE_BLOCK);
         dropSelf(MUD);
         dropSelf(QUICK_SAND);
@@ -360,7 +359,6 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(GNEISS_VENT);
         dropSelf(RED_GEM_BLOCK);
         dropSelf(RED_GEM_LAMP);
-        dropSelf(WITHER_WEB);
         dropSelf(GNEISS);
         dropSelf(GNEISS_CARVED);
         dropSelf(GNEISS_RELIEF);
