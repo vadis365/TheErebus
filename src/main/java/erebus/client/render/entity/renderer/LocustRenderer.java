@@ -20,16 +20,17 @@ public class LocustRenderer extends MobRenderer<Locust, LocustModel<Locust>> {
 
 	public LocustRenderer(EntityRendererProvider.Context context) {
 		super(context, new LocustModel<>(context.bakeLayer(ModEntityRendering.LOCUST)), 0.75F);
+		addLayer(new LocustLayer(this, context.getModelSet()));
 	}
 
 	@Override
 	protected void scale(Locust locust, PoseStack stack, float partialTickTime) {
 		stack.scale(1.5F, 1.5F, 1.5F);
 		float jumpAngle = Mth.sin(locust.getJumpPose(partialTickTime) * (float) Math.PI);
-		float flightAngle = locust.getFlyingPose(partialTickTime) * 0.1F;
+		float flightAngle = locust.getFlyingPose(partialTickTime) * 0.001F;
 		stack.mulPose(Axis.XP.rotation(-jumpAngle * 10.0F * (float) (Math.PI / 180.0)));
 		if(locust.flying) {
-			stack.mulPose(Axis.XP.rotation(-flightAngle * 0.1F));
+			stack.mulPose(Axis.XP.rotation(-flightAngle * 10F));
 		}
 	}
 

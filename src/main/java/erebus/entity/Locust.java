@@ -52,10 +52,6 @@ public class Locust extends Monster {
 	public Locust(EntityType<? extends Locust> type, Level level) {
 		super(type, level);
 		moveControl = new FlyingMoveControlLessSpin(this, 10, false);
-	/*	setPathPriority(PathNodeType.WATER, -8F);
-		setPathPriority(PathNodeType.BLOCKED, -8.0F);
-		setPathPriority(PathNodeType.OPEN, 8.0F);
-		*/
 	}
 
 	@Override
@@ -214,6 +210,13 @@ public class Locust extends Monster {
 
 		Vec3 vec3 = this.getDeltaMovement().multiply(1.0, 0.6, 1.0);
 		if (!this.level().isClientSide()) {
+			if(getNavigation().getPath() !=null && getNavigation().getPath().getTarget() != blockPosition()) {
+				if(!flying)
+					startFlying();
+			}
+			else if(flying)
+				stopFlying();
+
 			if (getTarget() != null) {
 				double d0 = vec3.y;
 				if (this.getY() < getTarget().getY() || this.getY() < getTarget().getY() + 1.0) {
@@ -230,28 +233,29 @@ public class Locust extends Monster {
 		}
 		if (getTarget() != null)
 			this.setDeltaMovement(vec3);
-		if (vec3.horizontalDistanceSqr() > 0.05)
+		if (vec3.horizontalDistanceSqr() > 0.025)
 			this.setYRot((float) Mth.atan2(vec3.z, vec3.x) * (180.0F / (float) Math.PI) - 90.0F);
 		super.aiStep();
 	}
 
 	@Override
 	public void tick() {
-		super.tick();
 		if (level().isClientSide()) {
 			prevAnimationTicks = animationTicks;
 			prevflyingTicks = flyingTicks;
-			if (animationTicks < 360)
+			if (animationTicks < 720)
 				animationTicks += 1;
-			if (animationTicks >= 360) {
-				animationTicks -= 360;
-				prevAnimationTicks -= 360;
+			if (animationTicks >= 720) {
+				animationTicks -= 720;
+				prevAnimationTicks -= 720;
 			}
 			if (flyingTicks < 18 && flying)
 				flyingTicks++;
 			else if (flyingTicks > 0 && !flying)
 				flyingTicks -= 2;
 		}
+
+		super.tick();
 
 		Vec3 vec3 = this.getDeltaMovement();
 		if (getTarget() == null && !this.onGround() && vec3.y < 0.0D && !canJump)
@@ -296,18 +300,6 @@ public class Locust extends Monster {
 	    public boolean canUse() {
 			return locust.getTarget() == null && super.canUse();	
 	    }
-	    
-	    @Override
-	    public void start() {
-	    	super.start();
-	    	locust.startFlying();
-	    }
-	    
-	    @Override
-	    public void stop() {
-	        super.stop();
-	        locust.stopFlying();
-	    }
 
 		@Nullable
 		@Override
@@ -328,7 +320,7 @@ public class Locust extends Monster {
 
 		@Override
 		public boolean canUse() {
-			return locust.random.nextFloat() < 0.02F && locust.onGround() && locust.canJump;
+			return locust.random.nextFloat() < 0.02F && locust.onGround() && locust.canJump && !locust.flying;
 		}
 
 		@Override

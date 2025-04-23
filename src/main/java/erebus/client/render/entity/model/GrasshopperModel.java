@@ -166,44 +166,41 @@ public class GrasshopperModel<T extends Grasshopper> extends HierarchicalModel<T
 	@Override
 	public void setupAnim(T grasshopper, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		HeadMain.yRot = netHeadYaw / (180F / (float) Math.PI);
-		//	HeadMain.xRot = headPitch / (180F / (float) Math.PI);
 	}
 
 	@Override
 	public void prepareMobModel(T grasshopper, float limbSwing, float limbSwingAngle, float partialRenderTicks) {
-	//	float smoothedTicks = grasshopper.animationTicks + (grasshopper.animationTicks - grasshopper.prevAnimationTicks)  * partialRenderTicks;
-	//	float flap2 = Mth.sin((smoothedTicks) * 0.5F) * 0.25F;
-	//	float flap3 = Mth.cos((smoothedTicks) * 0.5F) * 0.25F;
-
+		float smoothedTicks = grasshopper.animationTicks + (grasshopper.animationTicks - grasshopper.prevAnimationTicks)  * partialRenderTicks;
+		float antSin = Mth.sin((smoothedTicks) * 0.25F) * 0.125F;
+		float antCos = Mth.cos((smoothedTicks) * 0.25F) * 0.125F;
 		float jumpAngle = Mth.sin(grasshopper.getJumpCompletion(partialRenderTicks) * (float) Math.PI);
-	
+
 		LeftFrontLeg.xRot = -jumpAngle * 50.0F * (float) (Math.PI / 180.0);
 		LeftMidLeg.xRot = jumpAngle * 50.0F * (float) (Math.PI / 180.0);
 		RightFrontLeg.xRot = -jumpAngle * 50.0F * (float) (Math.PI / 180.0);
 		RightMidLeg.xRot = jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-	
 		LeftBackLeg.xRot = -jumpAngle * 75.0F * (float) (Math.PI / 180.0);
 		RightBackLeg.xRot = -jumpAngle * 75.0F * (float) (Math.PI / 180.0);
-	
 		RBL4.xRot = 0.5236F - RightBackLeg.xRot + jumpAngle * 75.0F * (float) (Math.PI / 180.0);
 		RBL5.xRot = -0.6981F + RightBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
 		RBL6.xRot = 0.1745F + RightBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-	
 		LBL4.xRot = 0.5236F - LeftBackLeg.xRot + jumpAngle * 75.0F * (float) (Math.PI / 180.0);
 		LBL5.xRot = -0.6981F + LeftBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
 		LBL6.xRot = 0.1745F + LeftBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
 		HeadMain.xRot = -0.1745F + jumpAngle * 20.0F * (float) (Math.PI / 180.0);
 
-		/*TODO Not sure this is worth it tbh
 		if (grasshopper.onGround()) {
-		 
-			LAnt.zRot = 0F + flap2;
-			LAnt.yRot = 0F + flap3;
-			RAnt.zRot = 0F - flap3;
-			RAnt.yRot = 0F - flap2;
-			
+			LAnt.zRot = 0F + antSin;
+			LAnt.yRot = 0F + antCos;
+			RAnt.zRot = 0F - antCos;
+			RAnt.yRot = 0F - antSin;
 		}
-		*/
+		else {
+			LAnt.zRot = 0F;
+			LAnt.yRot = 0F;
+			RAnt.zRot = 0F;
+			RAnt.yRot = 0F;
+		}
 	}
 
 	@Override

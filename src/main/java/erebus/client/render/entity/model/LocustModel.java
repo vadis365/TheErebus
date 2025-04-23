@@ -179,66 +179,74 @@ public class LocustModel<T extends Locust>  extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T locust, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {	
+	public void setupAnim(T locust, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		HeadMain.yRot = netHeadYaw / (180F / (float) Math.PI);
 	}
 
 	@Override
 	public void prepareMobModel(T locust, float limbSwing, float limbSwingAmount, float partialRenderTicks) {
 		float smoothedTicks = locust.animationTicks + (locust.animationTicks - locust.prevAnimationTicks) * partialRenderTicks;
-		float flap = (float) (Math.sin((smoothedTicks) * 1.2F) * 0.5F);
+		float flapSin = (float) (Math.sin((smoothedTicks) * 0.85F) * 0.5F);
+		float flapCos = (float) (Math.cos((smoothedTicks) * 0.85F) * 0.5F);
+		float antSin = Mth.sin((smoothedTicks) * 0.25F) * 0.125F;
+		float antCos = Mth.cos((smoothedTicks) * 0.25F) * 0.125F;
 		float jumpAngle = Mth.sin(locust.getJumpPose(partialRenderTicks) * (float) Math.PI);
-		float flightAngle = locust.getFlyingPose(partialRenderTicks) * 0.1F;
+		float flightAngle = locust.getFlyingPose(partialRenderTicks) * 0.001F;
+
 		if (!locust.flying && locust.flyingTicks <= 0) {
+			flapSin = 0;
+			flapCos = 0;
 			LeftFrontLeg.xRot = -jumpAngle * 50.0F * (float) (Math.PI / 180.0);
 			LeftMidLeg.xRot = jumpAngle * 50.0F * (float) (Math.PI / 180.0);
 			RightFrontLeg.xRot = -jumpAngle * 50.0F * (float) (Math.PI / 180.0);
 			RightMidLeg.xRot = jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		
 			LeftBackLeg.xRot = -jumpAngle * 75.0F * (float) (Math.PI / 180.0);
 			RightBackLeg.xRot = -jumpAngle * 75.0F * (float) (Math.PI / 180.0);
-		
 			RBL4.xRot = 0.5236F - RightBackLeg.xRot + jumpAngle * 75.0F * (float) (Math.PI / 180.0);
 			RBL5.xRot = -0.6981F + RightBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
 			RBL6.xRot = 0.1745F + RightBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		
 			LBL4.xRot = 0.5236F - LeftBackLeg.xRot + jumpAngle * 75.0F * (float) (Math.PI / 180.0);
 			LBL5.xRot = -0.6981F + LeftBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
 			LBL6.xRot = 0.1745F + LeftBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
 			HeadMain.xRot = -0.1745F + jumpAngle * 20.0F * (float) (Math.PI / 180.0);
+			RFWing.yRot = -jumpAngle * 95F * (float) (Math.PI / 180.0);
+			RBWing.yRot = -jumpAngle * 50F * (float) (Math.PI / 180.0);
+			LFWing.yRot = jumpAngle * 95F * (float) (Math.PI / 180.0);
+			LBWing.yRot = jumpAngle * 50F * (float) (Math.PI / 180.0);
 		}
 		else {
-			LeftBackLeg.xRot = -flightAngle * 0.75F;
-			RightBackLeg.xRot = -flightAngle * 0.75F;
-		
-			RBL4.xRot = 0.5236F - RightBackLeg.xRot + flightAngle * 0.75F;
-			RBL5.xRot = -0.6981F + RightBackLeg.xRot + flightAngle * 0.5F;
-			RBL6.xRot = 0.1745F + RightBackLeg.xRot + flightAngle * 0.5F;
-		
-			LBL4.xRot = 0.5236F - LeftBackLeg.xRot + flightAngle * 0.75F;
-			LBL5.xRot = -0.6981F + LeftBackLeg.xRot + flightAngle * 0.5F;
-			LBL6.xRot = 0.1745F + LeftBackLeg.xRot + flightAngle * 0.5F;
-			HeadMain.xRot = -0.1745F + flightAngle * 0.2F;
+			LeftBackLeg.xRot = -flightAngle * 75F;
+			RightBackLeg.xRot = -flightAngle * 75F;
+			RBL4.xRot = 0.5236F - RightBackLeg.xRot + flightAngle * 75F;
+			RBL5.xRot = -0.6981F + RightBackLeg.xRot + flightAngle * 50F;
+			RBL6.xRot = 0.1745F + RightBackLeg.xRot + flightAngle * 50F;
+			LBL4.xRot = 0.5236F - LeftBackLeg.xRot + flightAngle * 75F;
+			LBL5.xRot = -0.6981F + LeftBackLeg.xRot + flightAngle * 50F;
+			LBL6.xRot = 0.1745F + LeftBackLeg.xRot + flightAngle * 50F;
+			HeadMain.xRot = -0.1745F + flightAngle * 20F;
+			RFWing.yRot = -flightAngle * 95F;
+			RBWing.yRot = -flightAngle * 50F;
+			LFWing.yRot = flightAngle * 95F;
+			LBWing.yRot = flightAngle * 50F;
 		}
-		
+
 		if (locust.onGround()) {
-			flap = 0;
-			RFWing.yRot = 0F;
-			RBWing.yRot = 0F;
-			LFWing.yRot = 0F;
-			LBWing.yRot = 0F;
+			LAnt.zRot = 0F + antSin;
+			LAnt.yRot = 0F + antCos;
+			RAnt.zRot = 0F - antCos;
+			RAnt.yRot = 0F - antSin;
 		}
-
-		if (!locust.onGround()) {
-			RFWing.yRot = -1.7F;
-			RBWing.yRot = -0.9F;
-			LFWing.yRot = 1.7F;
-			LBWing.yRot = 0.9F;
+		else {
+			LAnt.zRot = 0F;
+			LAnt.yRot = 0F;
+			RAnt.zRot = 0F;
+			RAnt.yRot = 0F;
 		}
-
-		RFWing.xRot = flap;
-		RBWing.xRot = flap;
-		LFWing.xRot = flap;
-		LBWing.xRot = flap;
+		
+		RFWing.xRot = flapSin;
+		RBWing.xRot = flapCos;
+		LFWing.xRot = flapSin;
+		LBWing.xRot = flapCos;
 	}
 
 	@Override
@@ -251,14 +259,18 @@ public class LocustModel<T extends Locust>  extends HierarchicalModel<T> {
 		RightMidLeg.render(stack, consumer, light, overlay, colour);
 		RightBackLeg.render(stack, consumer, light, overlay, colour);
 		Body.render(stack, consumer, light, overlay, colour);
-		LFWing.render(stack, consumer, light, overlay, colour);
-		RFWing.render(stack, consumer, light, overlay, colour);
-		LBWing.render(stack, consumer, light, overlay, colour);
-		RBWing.render(stack, consumer, light, overlay, colour);
 	}
 	
 	@Override
 	public ModelPart root() {
 		return root;
+	}
+
+	public void renderWings(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
+		LFWing.render(stack, consumer, light, overlay, colour);
+		RFWing.render(stack, consumer, light, overlay, colour);
+		LBWing.render(stack, consumer, light, overlay, colour);
+		RBWing.render(stack, consumer, light, overlay, colour);
+		
 	}
 }
