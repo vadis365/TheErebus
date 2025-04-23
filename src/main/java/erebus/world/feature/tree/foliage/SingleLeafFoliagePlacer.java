@@ -11,18 +11,18 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import org.jetbrains.annotations.NotNull;
 
-public class EucalyptusFoliagePlacer extends FoliagePlacer {
+public class SingleLeafFoliagePlacer extends FoliagePlacer {
 
-    public static final MapCodec<EucalyptusFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance -> foliagePlacerParts(instance).apply(instance, EucalyptusFoliagePlacer::new));
+    public static final MapCodec<SingleLeafFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance -> foliagePlacerParts(instance).apply(instance, SingleLeafFoliagePlacer::new));
 
 
-    public EucalyptusFoliagePlacer(IntProvider radius, IntProvider offset) {
+    public SingleLeafFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
     }
 
     @Override
     protected @NotNull FoliagePlacerType<?> type() {
-        return ModFoliagePlacers.EUCALYPTUS_FOLIAGE_PLACER.get();
+        return ModFoliagePlacers.SINGLE_LEAF_FOLIAGE_PLACER.get();
     }
 
     @Override

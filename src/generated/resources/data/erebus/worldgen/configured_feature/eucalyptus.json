@@ -9,7 +9,7 @@
       }
     },
     "foliage_placer": {
-      "type": "erebus:eucalyptus_foliage_placer",
+      "type": "erebus:single_leaf_foliage_placer",
       "offset": 0,
       "radius": 0
     },

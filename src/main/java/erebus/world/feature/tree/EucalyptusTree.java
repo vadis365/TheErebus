@@ -1,7 +1,7 @@
 package erebus.world.feature.tree;
 
 import erebus.registries.ModBlocks;
-import erebus.world.feature.tree.foliage.EucalyptusFoliagePlacer;
+import erebus.world.feature.tree.foliage.SingleLeafFoliagePlacer;
 import erebus.world.feature.tree.trunk.EucalyptusTrunkPlacer;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -23,7 +23,7 @@ public class EucalyptusTree extends ErebusTree {
                 BlockStateProvider.simple(ModBlocks.LOG_EUCALYPTUS.get()),
                 new EucalyptusTrunkPlacer(8, 4, 0),
                 BlockStateProvider.simple(ModBlocks.LEAVES_EUCALYPTUS.get()),
-                new EucalyptusFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
+                new SingleLeafFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
                 new TwoLayersFeatureSize(1, 0, 2)
         ).build();
     }
