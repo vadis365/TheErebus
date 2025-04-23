@@ -1,11 +1,11 @@
 package erebus.world.feature.tree;
 
 import erebus.registries.ModBlocks;
+import erebus.world.feature.tree.foliage.EucalyptusFoliagePlacer;
 import erebus.world.feature.tree.trunk.EucalyptusTrunkPlacer;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
@@ -21,9 +21,9 @@ public class EucalyptusTree extends ErebusTree {
     public TreeConfiguration getTreeConfiguration() {
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.LOG_EUCALYPTUS.get()),
-                new EucalyptusTrunkPlacer(4, 4, 3),
+                new EucalyptusTrunkPlacer(8, 4, 0),
                 BlockStateProvider.simple(ModBlocks.LEAVES_EUCALYPTUS.get()),
-                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), 3),
+                new EucalyptusFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
                 new TwoLayersFeatureSize(1, 0, 2)
         ).build();
     }
