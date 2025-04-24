@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "erebus:altar_offering"
+          "name": "erebus:offering_altar"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "erebus:blocks/altar_offering"
+  "random_sequence": "erebus:blocks/offering_altar"
 }

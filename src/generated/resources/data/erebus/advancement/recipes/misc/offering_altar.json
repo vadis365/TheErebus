@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "erebus:altar_offering"
+        "recipe": "erebus:offering_altar"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "erebus:altar_offering"
+      "erebus:offering_altar"
     ]
   }
 }

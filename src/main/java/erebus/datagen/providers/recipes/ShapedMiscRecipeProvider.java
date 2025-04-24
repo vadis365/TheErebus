@@ -201,7 +201,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_petrified_wood_chest", has(ModBlocks.PETRIFIED_WOOD_CHEST))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(MISC, ModBlocks.ALTAR_OFFERING)
+        ShapedRecipeBuilder.shaped(MISC, ModBlocks.OFFERING_ALTAR)
                 .pattern("SGS")
                 .pattern("BOB")
                 .pattern("SBS")

@@ -636,7 +636,7 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.ALTAR_HEALING, "Altar of Healing");
         addBlock(ModBlocks.ALTAR_XP, "Altar of Experience");
         addBlock(ModBlocks.ALTAR_REPAIR, "Altar of Repair");
-        addBlock(ModBlocks.ALTAR_OFFERING, "Offering Altar");
+        addBlock(ModBlocks.OFFERING_ALTAR, "Offering Altar");
 
         // MARK: Antlion Dungeon
         addBlock(ModBlocks.CAPSTONE, "Capstone");

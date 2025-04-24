@@ -1,7 +1,17 @@
 package erebus;
 
+import java.util.Locale;
+
+import org.slf4j.Logger;
+
 import com.mojang.logging.LogUtils;
-import erebus.registries.*;
+
+import erebus.registries.ModBlockEntities;
+import erebus.registries.ModBlocks;
+import erebus.registries.ModItems;
+import erebus.registries.ModSounds;
+import erebus.registries.ModTabs;
+import erebus.registries.client.ModBlockEntityRendering;
 import erebus.registries.client.ModItemRendering;
 import erebus.registries.client.ModMenuTypes;
 import erebus.registries.data.ModArmorMaterials;
@@ -9,7 +19,11 @@ import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.network.ModNetwork;
-import erebus.registries.world.*;
+import erebus.registries.world.ModFoliagePlacers;
+import erebus.registries.world.ModPOIs;
+import erebus.registries.world.ModStructures;
+import erebus.registries.world.ModTreeDecorators;
+import erebus.registries.world.ModTrunkPlacers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -22,9 +36,6 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import org.slf4j.Logger;
-
-import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -64,6 +75,8 @@ public class Erebus {
 			bus.addListener(ModEntityRendering::registerEntityRender);
 			bus.addListener(ModItemRendering::registerItemLayerDefinitions);
 			bus.addListener(ModItemRendering::registerItemRender);
+			bus.addListener(ModBlockEntityRendering::registerBlockEntityLayerDefinitions);
+			bus.addListener(ModBlockEntityRendering::registerBlockEntityRenderers);
 		}
     }
 

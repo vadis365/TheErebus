@@ -140,7 +140,7 @@ public class ModTabs {
                         output.accept(ModBlocks.ALTAR_HEALING.get());
                         output.accept(ModBlocks.ALTAR_XP.get());
                         output.accept(ModBlocks.ALTAR_REPAIR.get());
-                        output.accept(ModBlocks.ALTAR_OFFERING.get());
+                        output.accept(ModBlocks.OFFERING_ALTAR.get());
                         output.accept(ModBlocks.WASP_NEST.get());
                         output.accept(ModBlocks.STAIRS_WASP_NEST.get());
                         output.accept(ModBlocks.ANTLION_EGG.get());

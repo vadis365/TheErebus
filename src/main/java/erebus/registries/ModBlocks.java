@@ -1,7 +1,17 @@
 package erebus.registries;
 
 import erebus.Erebus;
-import erebus.block.*;
+import erebus.block.CandleHoneyTreatBlock;
+import erebus.block.ConnectedTextureBlock;
+import erebus.block.GaeanKeystoneBlock;
+import erebus.block.HoneyTreatBlock;
+import erebus.block.LavaWeb;
+import erebus.block.ModBerryBushBlock;
+import erebus.block.ModCropBlock;
+import erebus.block.PetrifiedCraftingTableBlock;
+import erebus.block.UmberFurnaceBlock;
+import erebus.block.WitherWeb;
+import erebus.block.altars.OfferingAltar;
 import erebus.block.portal.ErebusPortalBlock;
 import erebus.registries.helpers.ModBlockHelpers;
 import erebus.registries.world.ModTreeGrowers;
@@ -10,7 +20,26 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.MudBlock;
+import net.minecraft.world.level.block.MushroomBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.TransparentBlock;
+import net.minecraft.world.level.block.VineBlock;
+import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.WaterlilyBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -476,7 +505,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> ALTAR_HEALING = registerSimpleBlock("altar_healing", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> ALTAR_XP = registerSimpleBlock("altar_xp", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> ALTAR_REPAIR = registerSimpleBlock("altar_repair", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ALTAR_OFFERING = registerSimpleBlock("altar_offering", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<OfferingAltar> OFFERING_ALTAR = registerBlock("offering_altar", () -> new OfferingAltar(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
 
     // MARK: Antlion Dungeon
     public static final DeferredBlock<Block> CAPSTONE = registerSimpleBlock("capstone", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
