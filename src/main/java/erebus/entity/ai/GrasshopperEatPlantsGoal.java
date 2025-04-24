@@ -40,7 +40,7 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 	protected boolean isEntityReady() {
 		return true;
 	}
-	
+
 	@Override
 	public boolean canUse() {
 		return !grasshopper.getMoveControl().hasWanted() && !grasshopper.isEating && super.canUse();
@@ -59,13 +59,11 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 	@Override
 	protected void eatingInterupted() {
 		grasshopper.setIsEating(false);
-	//	grasshopper.getNavigation().recomputePath();
 	}
 
 	@Override
 	protected void afterEaten() {
 		grasshopper.level().destroyBlock(new BlockPos(targetX, targetY, targetZ), dropItem, grasshopper);
-
 		grasshopper.setIsEating(false);
 		plantsEaten++;
 		if (plantsEaten == 6)
@@ -74,7 +72,6 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 				if (newGrasshopper != null) {
 					newGrasshopper.copyPosition(grasshopper);
 					grasshopper.level().addFreshEntity(newGrasshopper);
-					//grasshopper.getNavigation().recomputePath();
 				}
 			}
 		if (plantsEaten >= 12) {
@@ -93,6 +90,5 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 	@Override
 	protected void dropItem() {
 		// TODO Auto-generated method stub
-		
 	}
 }

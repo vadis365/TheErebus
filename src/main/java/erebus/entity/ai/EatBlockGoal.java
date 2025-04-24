@@ -19,7 +19,7 @@ public abstract class EatBlockGoal extends Goal {
 	 * The bigger you make this value the faster the AI will be. But performance will also decrease so be sensible
 	 */
 	private static final int CHECKS_PER_TICK = 3;
-	private final int EAT_SPEED;
+	private final int eatSpeed;
 	protected final Mob entity;
 	private final BlockState blockState;
 
@@ -30,15 +30,15 @@ public abstract class EatBlockGoal extends Goal {
 	private int spiralIndex;
 	public int eatTicks;
 	public boolean dropItem;
-	private static final List<Point> spiral = new Spiral(16, 16).spiral();
+	private static final List<Point> SPIRAL = new Spiral(16, 16).spiral();
 
 	public EatBlockGoal(Mob entity, BlockState state, double moveSpeed, int eatSpeed, boolean shouldDropItem) {
 		this.entity = entity;
-		blockState = state;
+		this.blockState = state;
+		this.eatSpeed = eatSpeed * 20;
+		this.dropItem = shouldDropItem;
 		hasTarget = false;
 		spiralIndex = 0;
-		EAT_SPEED = eatSpeed * 20;
-		dropItem = shouldDropItem;
 	}
 
 	@Override
@@ -86,13 +86,7 @@ public abstract class EatBlockGoal extends Goal {
 					prepareToEat();
 					eatTicks++;
 					entity.level().destroyBlockProgress(entity.getId(), new BlockPos(targetX, targetY, targetZ), getScaledEatTicks());
-					if (!canEatBlock(getTargetBlock())) {
-						eatingInterupted();
-						hasTarget = false;
-						eatTicks = 0;
-						return;
-					}
-					else if (EAT_SPEED <= eatTicks) {
+					if (eatSpeed <= eatTicks) {
 						entity.level().levelEvent(2001, new BlockPos(targetX, targetY, targetZ), Block.getId(getTargetBlock()));
 						if (dropItem)
 							dropItem();
@@ -112,17 +106,17 @@ public abstract class EatBlockGoal extends Goal {
 	}
 
 	protected int getScaledEatTicks() {
-		return (int) ((float) eatTicks / (float) EAT_SPEED * 10.0F);
+		return (int) ((float) eatTicks / (float) eatSpeed * 10.0F);
 	}
 
 	private void increment() {
 		spiralIndex++;
-		if (spiralIndex >= spiral.size())
+		if (spiralIndex >= SPIRAL.size())
 			spiralIndex = 0;
 	}
 
 	private Point getNextPoint() {
-		return spiral.get(spiralIndex);
+		return SPIRAL.get(spiralIndex);
 	}
 
 	public BlockState getTargetBlock() {
@@ -166,7 +160,7 @@ public abstract class EatBlockGoal extends Goal {
 	 * Gets called just after block has been eaten, if dropItem is true.
 	 */
 	protected abstract void dropItem();
-	
+
 	/**
 	 * Gets called just after block has been eaten.
 	 */
