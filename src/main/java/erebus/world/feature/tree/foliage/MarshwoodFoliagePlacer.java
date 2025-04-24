@@ -23,7 +23,7 @@ public class MarshwoodFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected @NotNull FoliagePlacerType<?> type() {
-        return ModFoliagePlacers.BALSAM_FOLIAGE_PLACER.get();
+        return ModFoliagePlacers.MARSHWOOD_FOLIAGE_PLACER.get();
     }
 
     @Override

@@ -16,7 +16,6 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import org.apache.commons.compress.utils.Lists;
 import org.jetbrains.annotations.NotNull;
-import org.spongepowered.asm.mixin.Mutable;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -68,23 +67,35 @@ public class MarshwoodTrunkPlacer extends TrunkPlacer {
             }
 
             if(y == height - 1) {
-                createBranch(level, setter, config, list, random, pos.offset(radius + 1, y - random.nextInt(3), 0), 1, false);
-                createBranch(level, setter, config, list, random, pos.offset(radius - 1, y - random.nextInt(3), 0), 2, false);
-                createBranch(level, setter, config, list, random, pos.offset(0, y - random.nextInt(3), radius + 1), 3, false);
-                createBranch(level, setter, config, list, random, pos.offset(0, y - random.nextInt(3), radius - 1), 4, false);
+                createBranch(level, setter, config, list, random, pos.offset(radius + 1, getYOffset(y), 0), 1, false);
+                createBranch(level, setter, config, list, random, pos.offset(radius - 1, getYOffset(y), 0), 2, false);
+                createBranch(level, setter, config, list, random, pos.offset(0, getYOffset(y), radius + 1), 3, false);
+                createBranch(level, setter, config, list, random, pos.offset(0, getYOffset(y), radius - 1), 4, false);
 
-                createBranch(level, setter, config, list, random, pos.offset(radius + 1, y - random.nextInt(3), radius + 1), 5, false);
-                createBranch(level, setter, config, list, random, pos.offset(-radius - 1, y - random.nextInt(3), -radius - 1), 6, false);
-                createBranch(level, setter, config, list, random, pos.offset(-radius - 1, y - random.nextInt(3), radius + 1), 7, false);
-                createBranch(level, setter, config, list, random, pos.offset(radius + 1, y - random.nextInt(3), -radius - 1), 8, false);
+                createBranch(level, setter, config, list, random, pos.offset(radius + 1, getYOffset(y), radius + 1), 5, false);
+                createBranch(level, setter, config, list, random, pos.offset(-radius - 1, getYOffset(y), -radius - 1), 6, false);
+                createBranch(level, setter, config, list, random, pos.offset(-radius - 1, getYOffset(y), radius + 1), 7, false);
+                createBranch(level, setter, config, list, random, pos.offset(radius + 1, getYOffset(y), -radius - 1), 8, false);
             }
 
             if(pos.getY() + 1 == pos.above().getY()) {
-                createBranch(level, setter, config, list, random, pos.offset(radius + 1, y - random.nextInt(3), 0), 1, true);
+                createBranch(level, setter, config, list, random, pos.offset(radius + 1, getYOffset(y), 0), 1, true);
+                createBranch(level, setter, config, list, random, pos.offset(radius - 1, getYOffset(y), 0), 2, true);
+                createBranch(level, setter, config, list, random, pos.offset(0, getYOffset(y), radius + 1), 3, true);
+                createBranch(level, setter, config, list, random, pos.offset(0, getYOffset(y), radius - 1), 4, true);
+
+                createBranch(level, setter, config, list, random, pos.offset(radius + 1, getYOffset(y), radius + 1), 5, true);
+                createBranch(level, setter, config, list, random, pos.offset(-radius - 1, getYOffset(y), -radius - 1), 6, true);
+                createBranch(level, setter, config, list, random, pos.offset(-radius - 1, getYOffset(y), radius + 1), 7, true);
+                createBranch(level, setter, config, list, random, pos.offset(radius + 1, getYOffset(y), -radius - 1), 8, true);
             }
         }
 
         return list;
+    }
+
+    private int getYOffset(int y) {
+        return y - RandomSource.create().nextInt(3);
     }
 
     private void createBranch(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> setter, @NotNull TreeConfiguration config, List<FoliagePlacer.FoliageAttachment> list, RandomSource random, BlockPos pos, int direction, boolean root) {

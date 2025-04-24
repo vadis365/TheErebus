@@ -23,7 +23,7 @@ public class MarshwoodTree extends ErebusTree {
                 BlockStateProvider.simple(ModBlocks.LOG_MARSHWOOD.get()),
                 new MarshwoodTrunkPlacer(12, 2, 3),
                 BlockStateProvider.simple(ModBlocks.LEAVES_MARSHWOOD.get()),
-                new MarshwoodFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
+                new MarshwoodFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2)),
                 new TwoLayersFeatureSize(1, 0, 2)
         ).build();
     }

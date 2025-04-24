@@ -9,9 +9,8 @@
       }
     },
     "foliage_placer": {
-      "type": "minecraft:blob_foliage_placer",
-      "height": 3,
-      "offset": 3,
+      "type": "erebus:marshwood_foliage_placer",
+      "offset": 2,
       "radius": 2
     },
     "foliage_provider": {
@@ -29,9 +28,9 @@
       "upper_size": 2
     },
     "trunk_placer": {
-      "type": "minecraft:forking_trunk_placer",
-      "base_height": 4,
-      "height_rand_a": 4,
+      "type": "erebus:marshwood_trunk_placer",
+      "base_height": 12,
+      "height_rand_a": 2,
       "height_rand_b": 3
     },
     "trunk_provider": {

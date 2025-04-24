@@ -36,7 +36,7 @@
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "erebus:log_balsam",
+        "Name": "erebus:log_balsam_resinless",
         "Properties": {
           "axis": "y"
         }
