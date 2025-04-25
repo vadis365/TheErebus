@@ -57,20 +57,6 @@ public class OfferingAltar extends Block implements EntityBlock {
 		return RenderShape.INVISIBLE;
 	}
 
-	@Nonnull
-	@Override
-	public InteractionResult useWithoutItem(BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull BlockHitResult hitResult) {
-		if (!level.isClientSide()) {
-			BlockEntity blockEntity = level.getBlockEntity(pos);
-			if (blockEntity  instanceof OfferingAltarBlockEntity)
-				if (player.isCrouching()) {
-					((OfferingAltarBlockEntity) blockEntity).popStack();
-					return InteractionResult.SUCCESS;
-				}
-		}
-		return InteractionResult.SUCCESS;
-	}
-	
     @Nonnull
 	@Override
     public ItemInteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
@@ -78,10 +64,15 @@ public class OfferingAltar extends Block implements EntityBlock {
     	if (level.isClientSide()) {
 			return ItemInteractionResult.SUCCESS;
 		}
-		else if(blockEntity  instanceof OfferingAltarBlockEntity) {
-			if (!player.isCrouching()) {
+		else if (blockEntity instanceof OfferingAltarBlockEntity) {
+			if (stack.isEmpty()) {
+				if (player.isCrouching()) {
+					((OfferingAltarBlockEntity) blockEntity).popStack();
+					return ItemInteractionResult.SUCCESS;
+				}
+			} else if (!player.isCrouching()) {
 				((OfferingAltarBlockEntity) blockEntity).addStack(stack);
-			return ItemInteractionResult.SUCCESS;
+				return ItemInteractionResult.SUCCESS;
 			}
 		}
 		return ItemInteractionResult.FAIL;

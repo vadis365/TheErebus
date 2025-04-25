@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
+import erebus.recipes.ModCustomRecipes;
 import erebus.registries.ModBlockEntities;
 import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
@@ -63,6 +64,8 @@ public class Erebus {
         ModBlockEntities.BLOCK_ENTITIES.register(bus);
         ModPOIs.POI.register(bus);
         ModStructures.STRUCTURES.register(bus);
+    	ModCustomRecipes.RECIPE_TYPES.register(bus);
+    	ModCustomRecipes.RECIPE_SERIALIZERS.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 

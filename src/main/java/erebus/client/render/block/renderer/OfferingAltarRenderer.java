@@ -93,9 +93,9 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 	@SuppressWarnings("deprecation")
 	public String getParticleType (Item itemIn) {
 		if(itemIn == Item.byBlock(Blocks.OBSIDIAN))
-			return "flame";
+			return "swampflame_green";
 		if(itemIn == Items.DIAMOND)
-			return "swampflame";
+			return "swampflame_green";
 		if(itemIn == Items.EMERALD)
 			return "swampflame_green";
 		return "flame";

@@ -2,29 +2,36 @@ package erebus.block.entity;
 
 import javax.annotation.Nonnull;
 
+import erebus.network.client.OfferingAltarNBTPacket;
+import erebus.network.client.OfferingAltarTimerPacket;
+import erebus.recipes.ModCustomRecipes;
+import erebus.recipes.MultiStackInput;
+import erebus.recipes.OfferingAltarRecipe;
 import erebus.registries.ModBlockEntities;
-import erebus.registries.ModBlocks;
-import erebus.registries.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 	public int time = 0;
 	protected ItemStack output;
 	private static final int MAX_TIME = 450;
-
+	public final RecipeManager.CachedCheck<MultiStackInput, OfferingAltarRecipe> quickCheck = RecipeManager.createCheck(ModCustomRecipes.OFFERING_ALTAR_RECIPE.get());
 	public OfferingAltarBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntities.OFFERING_ALTAR.get(), 4, pos, state);
 		output = ItemStack.EMPTY;
@@ -48,10 +55,16 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 		if (!getLevel().isClientSide())
 			for (int i = getItems().size() - 1; i >= 0; i--)
 				if (!getItems().get(i).isEmpty()) {
-					
+				/*	double yOffSet = (double) EntityType.ITEM.getHeight() / 2.0;
+					double x = (double) getBlockPos().getX() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25);
+					double y = (double) getBlockPos().getY() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25) - yOffSet;
+					double z = (double) getBlockPos().getZ() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25);
+					ItemEntity itementity = new ItemEntity(level, x, y, z, getItems().get(i).copy());
+					itementity.setDefaultPickUpDelay();
+					level.addFreshEntity(itementity);*/
 					Block.popResource(getLevel(), getBlockPos().above(), getItems().get(i).copy());
 					getItems().set(i, ItemStack.EMPTY);
-					updateBlockWhenChanged();
+					updateBlock();
 					return;
 				}
 	}
@@ -80,13 +93,16 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 		if(blockEntity instanceof OfferingAltarBlockEntity altar) {
 		if (level.isClientSide())
 			return;
+		MultiStackInput input = new MultiStackInput(altar.getItems().subList(0, 3));
+		RecipeHolder<OfferingAltarRecipe> recipe = altar.quickCheck.getRecipeFor(input, level).orElse(null);
+		if (recipe!= null)
+			altar.output = recipe.value().assemble(input, level.registryAccess());
 
-		if (altar.output.isEmpty())
+		if (altar.output.isEmpty() || recipe == null)
 			altar.time = 0;
 		else {
 			altar.time++;
-			//Erebus.NETWORK_WRAPPER.sendToAll(new PacketOfferingAltarTimer(getPos().getX(), getPos().getY(), getPos().getZ(), time));
-			altar.updateBlockWhenChanged(); // REMOVE! Just need to see if things go bang or not 
+			PacketDistributor.sendToPlayersNear((ServerLevel) altar.getLevel(), null, altar.getBlockPos().getX(), altar.getBlockPos().getY(), altar.getBlockPos().getZ(), 30, new OfferingAltarTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(), altar.getBlockPos().getZ(), altar.time));
 			if (altar.time == 90 || altar.time == 270 || altar.time == 450) {
 				for(int count = 0; count < 5; count++)
 					level.levelEvent(2005, pos.above(), 4);
@@ -125,20 +141,24 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 
 	@Override
 	public void onDataPacket(@Nonnull Connection net, ClientboundBlockEntityDataPacket packet, @Nonnull HolderLookup.Provider registries) {
+		super.onDataPacket(net, packet, registries);
 		loadAdditional(packet.getTag(), registries);
 		updateBlockWhenChanged();
 	}
 
 	public void updateBlockWhenChanged() {
-		output = new ItemStack(ModItems.GAEAN_GEM.get()); // just to see if it renders
-		//output = OfferingAltarRecipe.getOutput(getItems().get(0), getItems().get(1), getItems().get(2));
-
 		if (!getLevel().isClientSide()) {
+			CompoundTag nbt = new CompoundTag();
+			saveAdditional(nbt, level.registryAccess());
+			PacketDistributor.sendToPlayersNear((ServerLevel) getLevel(), null, getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ(), 30, new OfferingAltarNBTPacket(getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ(), nbt));
 			final BlockState state = getLevel().getBlockState(getBlockPos());
 			getLevel().sendBlockUpdated(getBlockPos(), state, state, 8);
 			setChanged();
-			//Erebus.NETWORK_WRAPPER.sendToAll(new PacketOfferingAltar(getPos().getX(), getPos().getY(), getPos().getZ(), nbt));
 		}
+	}
+	
+	public void updateBlock() {
+		getLevel().sendBlockUpdated(worldPosition, getLevel().getBlockState(worldPosition), getLevel().getBlockState(worldPosition), 3);
 	}
 /*
 	@Override

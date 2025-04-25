@@ -2,12 +2,16 @@ package erebus.registries.network;
 
 import erebus.Erebus;
 import erebus.network.client.AntlionParticlePacket;
+import erebus.network.client.OfferingAltarNBTPacket;
+import erebus.network.client.OfferingAltarTimerPacket;
 import erebus.network.client.ParticlePacket;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 public class ModNetwork {
 	 public static void register(final RegisterPayloadHandlersEvent event) {
 		 event.registrar(Erebus.MODID)
+		 .playToClient(OfferingAltarTimerPacket.TYPE, OfferingAltarTimerPacket.STREAM_CODEC, OfferingAltarTimerPacket::handle)
+		 .playToClient(OfferingAltarNBTPacket.TYPE, OfferingAltarNBTPacket.STREAM_CODEC, OfferingAltarNBTPacket::handle)
 		 .playToClient(ParticlePacket.TYPE, ParticlePacket.STREAM_CODEC, ParticlePacket::handle)
 		 .playToClient(AntlionParticlePacket.TYPE, AntlionParticlePacket.STREAM_CODEC, AntlionParticlePacket::handle);
 		// .playToServer(ColossalCratePage.class, ColossalCratePage.class, 1, Side.SERVER)
@@ -18,8 +22,8 @@ public class ModNetwork {
 		//	.playToServer(PacketGliderPowered.class, PacketGliderPowered.class, 6, Side.SERVER)
 		//	.playToClient(PacketBones.class, PacketBones.class, 7, Side.CLIENT)
 		//	.playToClient(MessageSyncEntityCapabilities.class, MessageSyncEntityCapabilities.class, 8, Side.CLIENT)
-		//	.playToClient(PacketOfferingAltar.class, PacketOfferingAltar.class, 9, Side.CLIENT)
-		//	.playToClient(PacketOfferingAltarTimer.class, PacketOfferingAltarTimer.class, 10, Side.CLIENT)
+		//	
+		//	.playToClient(OfferingAltarTimerPacket.class, PacketOfferingAltarTimer.class, 10, Side.CLIENT)
 		//	.playToClient(PacketSmoothieMakerGUI.class, PacketSmoothieMakerGUI.class, 11, Side.CLIENT)
 		//	.playToClient(PacketAltarAnimationTimer.class, PacketAltarAnimationTimer.class, 12, Side.CLIENT);
 	 }
