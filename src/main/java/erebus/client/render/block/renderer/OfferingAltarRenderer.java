@@ -9,6 +9,7 @@ import erebus.block.entity.OfferingAltarBlockEntity;
 import erebus.client.render.block.model.OfferingAltarModel;
 import erebus.network.client.ClientParticles;
 import erebus.registries.client.ModBlockEntityRendering;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -16,7 +17,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Con
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -56,27 +56,28 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 
 	@SuppressWarnings("resource")
 	private void renderItems(OfferingAltarBlockEntity tile, float partialTick, PoseStack stack, MultiBufferSource buffer, int packedLight, int packedOverlay, double x, double y, double z) {
-		float angle = tile.time;
+		float angle = tile.time + (tile.time - tile.prevTime) * partialTick;
+		float renderRotation = tile.rotation + (tile.rotation - tile.prevRotation) * partialTick;
 		if (tile.getItems().get(3).isEmpty()) {
 			stack.translate(0F, 0.75, 0F);
 			for (int i = 0; i < 3; i++) {
 				ItemStack item = tile.getItems().get(i);
 				if (!item.isEmpty()) {
 					stack.pushPose();
-					stack.mulPose(Axis.YP.rotationDegrees((float)120 * (i + 1) + tile.getLevel().getGameTime()));
+					stack.mulPose(Axis.YP.rotationDegrees((float)120 * (i + 1) + renderRotation));
 					stack.translate(Math.cos(Math.toRadians(angle)), 0, 0);
 					stack.scale(0.5F, 0.5F, 0.5F);
 					stack.pushPose();
-					stack.mulPose(Axis.XP.rotationDegrees((float)120 * (i + 1) + tile.getLevel().getGameTime()));
-					stack.mulPose(Axis.YP.rotationDegrees((float)120 * (i + 1) + tile.getLevel().getGameTime()));
-					stack.mulPose(Axis.ZP.rotationDegrees((float)120 * (i + 1) + tile.getLevel().getGameTime()));
-			        itemRenderer.renderStatic(item, ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, stack, buffer, tile.getLevel(), 1);
+					stack.mulPose(Axis.XP.rotationDegrees((float)120 * (i + 1) + renderRotation));
+					stack.mulPose(Axis.YP.rotationDegrees((float)120 * (i + 1) + renderRotation));
+					stack.mulPose(Axis.ZP.rotationDegrees((float)120 * (i + 1) + renderRotation));
+			        itemRenderer.renderStatic(item, ItemDisplayContext.FIXED, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, stack, buffer, tile.getLevel(), 1);
 					stack.popPose();
 					stack.popPose();
-					double a = -Math.toRadians((float)120 * (i + 1) + tile.getLevel().getGameTime() -90);
+					double a = -Math.toRadians((float)120 * (i + 1) + renderRotation -90);
 					double offSetX = -Math.sin(a) * Math.cos(Math.toRadians(angle));
 					double offSetZ = Math.cos(a) * Math.cos(Math.toRadians(angle));
-					if(tile.getLevel().getGameTime()%4 == 0)
+					if(tile.getLevel().getGameTime()%2 == 0)
 						ClientParticles.spawnCustomParticle(getParticleType(item.getItem()), tile.getBlockPos().getX() + 0.5F - offSetX , tile.getBlockPos().getY() + 1.5F + (tile.getLevel().random.nextFloat() - tile.getLevel().random.nextFloat()) *0.1F, tile.getBlockPos().getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
 				}
 			}

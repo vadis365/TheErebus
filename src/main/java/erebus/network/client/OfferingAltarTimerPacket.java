@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record OfferingAltarTimerPacket(int xPos, int yPos, int zPos, int time) implements CustomPacketPayload {
+public record OfferingAltarTimerPacket(int xPos, int yPos, int zPos, int time, boolean isCrafting) implements CustomPacketPayload {
 
 	public static final Type<OfferingAltarTimerPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "offering_altar_timer"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, OfferingAltarTimerPacket> STREAM_CODEC = StreamCodec.composite(
@@ -21,8 +21,12 @@ public record OfferingAltarTimerPacket(int xPos, int yPos, int zPos, int time) i
 					OfferingAltarTimerPacket::xPos,
 					ByteBufCodecs.INT,
 					OfferingAltarTimerPacket::yPos,
-					ByteBufCodecs.INT, OfferingAltarTimerPacket::zPos,
-					ByteBufCodecs.INT, OfferingAltarTimerPacket::time,
+					ByteBufCodecs.INT,
+					OfferingAltarTimerPacket::zPos,
+					ByteBufCodecs.INT,
+					OfferingAltarTimerPacket::time,
+					ByteBufCodecs.BOOL,
+					OfferingAltarTimerPacket::isCrafting,
 					OfferingAltarTimerPacket::new
 					);
 
@@ -30,8 +34,10 @@ public record OfferingAltarTimerPacket(int xPos, int yPos, int zPos, int time) i
 		ctx.enqueueWork(() -> {
 			Level level = Minecraft.getInstance().level;
 			BlockEntity tile = level.getBlockEntity(new BlockPos(message.xPos, message.yPos, message.zPos));
-			if (tile instanceof OfferingAltarBlockEntity)
-				((OfferingAltarBlockEntity) tile).time = message.time;
+			if (tile instanceof OfferingAltarBlockEntity altar) {
+				altar.time = message.time;
+				altar.isCrafting = message.isCrafting;
+			}
 		});
 	}
 

@@ -8,7 +8,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ClientParticles {
- // TODO THIS IS A TEMP CLASS UNTIL ATT THE PARTICLE STUFF IS SORTED
+ // TODO THIS IS A TEMP CLASS UNTIL ALL THE PARTICLE STUFF IS SORTED
 	@SuppressWarnings("resource")
 	public static void spawnCustomParticle(String particleName, double x, double y, double z, double vecX, double vecY, double vecZ) {
 		Level level = Minecraft.getInstance().level;

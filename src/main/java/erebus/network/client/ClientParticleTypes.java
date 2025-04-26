@@ -8,7 +8,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-public class ClientParticlePackets {
+public class ClientParticleTypes {
 	public static enum ParticleType {
 		BEETLE_LARVA_SQUISH,
 		SPRAY_CAN,

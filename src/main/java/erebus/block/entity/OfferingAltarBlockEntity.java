@@ -3,7 +3,6 @@ package erebus.block.entity;
 import javax.annotation.Nonnull;
 
 import erebus.network.client.OfferingAltarNBTPacket;
-import erebus.network.client.OfferingAltarTimerPacket;
 import erebus.recipes.ModCustomRecipes;
 import erebus.recipes.MultiStackInput;
 import erebus.recipes.OfferingAltarRecipe;
@@ -29,18 +28,18 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 	public int time = 0;
+	public int prevTime;
 	protected ItemStack output;
 	private static final int MAX_TIME = 450;
 	public final RecipeManager.CachedCheck<MultiStackInput, OfferingAltarRecipe> quickCheck = RecipeManager.createCheck(ModCustomRecipes.OFFERING_ALTAR_RECIPE.get());
+	public float rotation;
+	public float prevRotation;
+	public boolean isCrafting = false;
+
 	public OfferingAltarBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntities.OFFERING_ALTAR.get(), 4, pos, state);
 		output = ItemStack.EMPTY;
 	}
-
-	//@Override
-	//public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
-	//	return oldState.getBlock() != newState.getBlock();
-	//}
 
 	@OnlyIn(Dist.CLIENT)
 	public ItemStack getItemForRendering(int slot) {
@@ -55,16 +54,9 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 		if (!getLevel().isClientSide())
 			for (int i = getItems().size() - 1; i >= 0; i--)
 				if (!getItems().get(i).isEmpty()) {
-				/*	double yOffSet = (double) EntityType.ITEM.getHeight() / 2.0;
-					double x = (double) getBlockPos().getX() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25);
-					double y = (double) getBlockPos().getY() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25) - yOffSet;
-					double z = (double) getBlockPos().getZ() + 0.5 + Mth.nextDouble(level.random, -0.25, 0.25);
-					ItemEntity itementity = new ItemEntity(level, x, y, z, getItems().get(i).copy());
-					itementity.setDefaultPickUpDelay();
-					level.addFreshEntity(itementity);*/
 					Block.popResource(getLevel(), getBlockPos().above(), getItems().get(i).copy());
 					getItems().set(i, ItemStack.EMPTY);
-					updateBlock();
+					updateBlockWhenChanged();
 					return;
 				}
 	}
@@ -90,37 +82,56 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 	}
 
 	public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState blockState, T blockEntity) {
-		if(blockEntity instanceof OfferingAltarBlockEntity altar) {
-		if (level.isClientSide())
-			return;
-		MultiStackInput input = new MultiStackInput(altar.getItems().subList(0, 3));
-		RecipeHolder<OfferingAltarRecipe> recipe = altar.quickCheck.getRecipeFor(input, level).orElse(null);
-		if (recipe!= null)
-			altar.output = recipe.value().assemble(input, level.registryAccess());
+		if (blockEntity instanceof OfferingAltarBlockEntity altar) {
+			if (level.isClientSide()) {
+				altar.prevRotation = altar.rotation;
+				altar.prevTime = altar.time;
+				altar.rotation += 2F;
+				if (altar.rotation >= 360.0F) {
+					altar.rotation -= 360.0F;
+					altar.prevRotation -= 360.0F;
+				}
+				if(altar.isCrafting)
+					altar.time += 2;
+				else
+					altar.time = 0;
+			} else {
+				MultiStackInput input = new MultiStackInput(altar.getItems().subList(0, 3));
+				RecipeHolder<OfferingAltarRecipe> recipe = altar.quickCheck.getRecipeFor(input, level).orElse(null);
+				if (recipe != null && !altar.isCrafting) {
+					altar.output = recipe.value().assemble(input, level.registryAccess());
+					altar.isCrafting = true;
+					altar.updateBlockWhenChanged();
+				}
 
-		if (altar.output.isEmpty() || recipe == null)
-			altar.time = 0;
-		else {
-			altar.time++;
-			PacketDistributor.sendToPlayersNear((ServerLevel) altar.getLevel(), null, altar.getBlockPos().getX(), altar.getBlockPos().getY(), altar.getBlockPos().getZ(), 30, new OfferingAltarTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(), altar.getBlockPos().getZ(), altar.time));
-			if (altar.time == 90 || altar.time == 270 || altar.time == 450) {
-				for(int count = 0; count < 5; count++)
-					level.levelEvent(2005, pos.above(), 4);
-				if (altar.time >= MAX_TIME)
-					level.levelEvent(2004, pos.above(), 0);
-			}
-			if (altar.time >= MAX_TIME) {
-				altar.getItems().set(3, altar.output.copy());
-				for (int i = 0; i < 3; i++)
-					if (!altar.getItems().get(i).isEmpty()) {
-						altar.getItems().get(i).shrink(1);
-						if (altar.getItems().get(i).getCount() <= 0)
-							altar.getItems().set(i, ItemStack.EMPTY);
+				if ((altar.output.isEmpty() || recipe == null) && (altar.isCrafting || altar.time > 0)) {
+					altar.time = 0;
+					altar.isCrafting = false;
+					altar.updateBlockWhenChanged();
 					}
-				altar.time = 0;
-				altar.updateBlockWhenChanged();
+				else {
+					altar.isCrafting = true;
+					altar.time += 2;
+					//TODO not sure this is even needed tbh - won't know until server testing 
+					//PacketDistributor.sendToPlayersNear((ServerLevel) altar.getLevel(), null, altar.getBlockPos().getX(), altar.getBlockPos().getY(), altar.getBlockPos().getZ(), 30, new OfferingAltarTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(), altar.getBlockPos().getZ(), altar.time, true));
+					if (altar.time == 90 || altar.time == 270 || altar.time == 450)
+						level.levelEvent(2011, pos.above(), 15);
+
+					if (altar.time >= MAX_TIME) {
+						level.levelEvent(2004, pos.above(), 0);
+						altar.getItems().set(3, altar.output.copy());
+						for (int i = 0; i < 3; i++)
+							if (!altar.getItems().get(i).isEmpty()) {
+								altar.getItems().get(i).shrink(1);
+								if (altar.getItems().get(i).getCount() <= 0)
+									altar.getItems().set(i, ItemStack.EMPTY);
+							}
+						altar.isCrafting = false;
+						altar.time = 0;
+						altar.updateBlockWhenChanged();
+					}
+				}
 			}
-		}
 		}
 	}
 
@@ -160,23 +171,19 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 	public void updateBlock() {
 		getLevel().sendBlockUpdated(worldPosition, getLevel().getBlockState(worldPosition), getLevel().getBlockState(worldPosition), 3);
 	}
-/*
-	@Override
-	@SideOnly(Side.CLIENT)
-	public AxisAlignedBB getRenderBoundingBox() {
-		return new AxisAlignedBB(getPos()).grow(2);
-	}
-*/
+
 	@Override
 	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registries) {
 		super.loadAdditional(nbt, registries);
 		time = nbt.getInt("time");
+		isCrafting = nbt.getBoolean("isCrafting");
 	}
 
 	@Override
 	public void saveAdditional(CompoundTag nbt, HolderLookup.Provider registries) {
 		super.saveAdditional(nbt, registries);
 		nbt.putInt("time", time);
+		nbt.putBoolean("isCrafting", isCrafting);
 	}
 
 	@Override
