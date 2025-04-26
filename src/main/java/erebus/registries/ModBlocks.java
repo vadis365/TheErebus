@@ -11,6 +11,7 @@ import erebus.block.ModCropBlock;
 import erebus.block.PetrifiedCraftingTableBlock;
 import erebus.block.UmberFurnaceBlock;
 import erebus.block.WitherWeb;
+import erebus.block.altars.AltarBase;
 import erebus.block.altars.OfferingAltar;
 import erebus.block.portal.ErebusPortalBlock;
 import erebus.registries.helpers.ModBlockHelpers;
@@ -500,7 +501,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> MUCUS_BOMB = registerSimpleBlock("mucus_bomb", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> UMBER_GOLEM_STATUE = registerSimpleBlock("umber_golem_statue", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
 
-    public static final DeferredBlock<Block> ALTAR_BASE = registerSimpleBlock("altar_base", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<AltarBase> ALTAR_BASE = registerBlock("altar_base", () -> new AltarBase(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
     public static final DeferredBlock<Block> ALTAR_LIGHTNING = registerSimpleBlock("altar_lightning", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> ALTAR_HEALING = registerSimpleBlock("altar_healing", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> ALTAR_XP = registerSimpleBlock("altar_xp", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));

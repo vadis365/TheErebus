@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "erebus:block/altar_base" }
+        "normal": { "model": "erebus:block/offering_altar" }
     }
 }
