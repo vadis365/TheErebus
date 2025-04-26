@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -15,14 +16,18 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import org.apache.commons.compress.utils.Lists;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 public class MarshwoodTrunkPlacer extends TrunkPlacer {
 
     private final List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
+    private LevelSimulatedReader level;
+    private BiConsumer<BlockPos, BlockState> setter;
+    private RandomSource random;
+    private TreeConfiguration config;
 
     public static final MapCodec<MarshwoodTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
@@ -46,155 +51,184 @@ public class MarshwoodTrunkPlacer extends TrunkPlacer {
         setDirtAt(level, setter, random, pos.below(), config);
         int radius = random.nextInt(heightRandA) + heightRandB;
         int height = random.nextInt(radius) + baseHeight;
+        this.level = level;
+        this.setter = setter;
+        this.config = config;
+        this.random = random;
 
-        for(int y = 0; y < height; y++) {
-            if(pos.getY() + y % 5 == 0 && radius != 1) --radius;
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+
+        for (int yy = y; yy < height; yy++) {
+            if (yy % 5 == 0 && radius != 1) --radius;
 
             for(int xOff = -radius; xOff <= radius; xOff++) {
                 for(int zOff = -radius; zOff <= radius; zOff++) {
                     double dSq = Math.pow(xOff, 2) + Math.pow(zOff, 2);
                     long rounded = Math.round(Math.sqrt(dSq));
                     if(rounded <= radius) {
-                        if(pos.getY() + y <= pos.getY() + height - 2) {
-                            placeLog(level, setter, random, pos.offset(xOff, y, zOff), config);
+                        BlockPos newPos = new BlockPos(x + xOff, yy, z + zOff);
+                        if (yy <= y + height - 2) {
+                            placeLog(level, setter, random, newPos, config);
                         }
 
-                        if(y == 0 || pos.getY() + y == pos.getY() + height - 1) {
-                            placeLog(level, setter, random, pos.offset(xOff, y, zOff), config);
+                        if (yy == y || yy == y + height - 1) {
+                            placeLog(level, setter, random, newPos, config);
                         }
                     }
                 }
             }
 
-            if(y == height - 1) {
-                createBranch(level, setter, config, list, random, pos.offset(radius + 1, getYOffset(y), 0), 1, false);
-                createBranch(level, setter, config, list, random, pos.offset(radius - 1, getYOffset(y), 0), 2, false);
-                createBranch(level, setter, config, list, random, pos.offset(0, getYOffset(y), radius + 1), 3, false);
-                createBranch(level, setter, config, list, random, pos.offset(0, getYOffset(y), radius - 1), 4, false);
-
-                createBranch(level, setter, config, list, random, pos.offset(radius + 1, getYOffset(y), radius + 1), 5, false);
-                createBranch(level, setter, config, list, random, pos.offset(-radius - 1, getYOffset(y), -radius - 1), 6, false);
-                createBranch(level, setter, config, list, random, pos.offset(-radius - 1, getYOffset(y), radius + 1), 7, false);
-                createBranch(level, setter, config, list, random, pos.offset(radius + 1, getYOffset(y), -radius - 1), 8, false);
+            if (yy == y + height - 1) {
+                createBranches(x, yy, z, radius, false);
             }
 
-            if(pos.getY() + 1 == pos.above().getY()) {
-                createBranch(level, setter, config, list, random, pos.offset(radius + 1, getYOffset(y), 0), 1, true);
-                createBranch(level, setter, config, list, random, pos.offset(radius - 1, getYOffset(y), 0), 2, true);
-                createBranch(level, setter, config, list, random, pos.offset(0, getYOffset(y), radius + 1), 3, true);
-                createBranch(level, setter, config, list, random, pos.offset(0, getYOffset(y), radius - 1), 4, true);
-
-                createBranch(level, setter, config, list, random, pos.offset(radius + 1, getYOffset(y), radius + 1), 5, true);
-                createBranch(level, setter, config, list, random, pos.offset(-radius - 1, getYOffset(y), -radius - 1), 6, true);
-                createBranch(level, setter, config, list, random, pos.offset(-radius - 1, getYOffset(y), radius + 1), 7, true);
-                createBranch(level, setter, config, list, random, pos.offset(radius + 1, getYOffset(y), -radius - 1), 8, true);
+            if (yy == y + 1) {
+                createBranches(x, yy, z, radius, true);
             }
         }
 
         return list;
     }
 
+    private void createBranches(int x, int y, int z, int radius, boolean root) {
+        createBranch(getPos(x + radius - 1, y, z), 1, root);
+        createBranch(getPos(x - radius - 1, y, z), 2, root);
+        createBranch(getPos(x, y, z + radius + 1), 3, root);
+        createBranch(getPos(x, y, z - radius - 1), 4, root);
+
+        createBranch(getPos(x + radius + 1, y, z + radius + 1), 5, root);
+        createBranch(getPos(x - radius - 1, y, z - radius - 1), 6, root);
+        createBranch(getPos(x - radius - 1, y, z + radius + 1), 7, root);
+        createBranch(getPos(x + radius + 1, y, z - radius - 1), 8, root);
+    }
+
+    private BlockPos getPos(int x, int y, int z) {
+        return new BlockPos(x, getYOffset(y), z);
+    }
+
     private int getYOffset(int y) {
         return y - RandomSource.create().nextInt(3);
     }
 
-    private void createBranch(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> setter, @NotNull TreeConfiguration config, List<FoliagePlacer.FoliageAttachment> list, RandomSource random, BlockPos pos, int direction, boolean root) {
+    private void createBranch(BlockPos pos, int direction, boolean root) {
         int branchLength = random.nextInt(heightRandA) + heightRandB;
-        int yOffset = 0;
+
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
 
         for (int c = 0; c <= branchLength; c++) {
             if (c >= 3) {
-                yOffset--;
+                y--;
             }
 
             if (direction == 1) {
+                BlockPos logPos = new BlockPos(x + c, y, z);
                 if (!root) {
-                    placeLog(level, setter, random, pos.offset(c, yOffset, 0), config, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.X));
+                    placeLog(logPos, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.X));
 
                     if (c < branchLength) {
                         //TODO: Add vines
                     }
 
-                    if (c == branchLength) createLeaves(pos.east(c).below(), 1);
+                    if (c == branchLength) createLeaves(logPos.below());
                 } else {
-                    placeLog(level, setter, random, pos.offset(c, yOffset, 0), config);
-                    placeLog(level, setter, random, pos.offset(c, yOffset - 1, 0), config);
+                    placeLog(logPos);
+                    placeLog(logPos.below());
                 }
             }
 
             if (direction == 2) {
+                BlockPos logPos = new BlockPos(x - c, y, z);
                 if (!root) {
-                    placeLog(level, setter, random, pos.offset(-c, yOffset, 0), config, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.X));
-                    if (c == branchLength) createLeaves(pos.offset(-c, yOffset - 1, 0), 1);
+                    placeLog(logPos, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.X));
+                    if (c == branchLength) createLeaves(logPos.below());
                 } else {
-                    placeLog(level, setter, random, pos.offset(-c, yOffset, 0), config);
-                    placeLog(level, setter, random, pos.offset(-c, yOffset - 1, 0), config);
+                    placeLog(logPos);
+                    placeLog(logPos.below());
                 }
             }
 
             if (direction == 3) {
+                BlockPos logPos = new BlockPos(x, y, z + c);
                 if (!root) {
-                    placeLog(level, setter, random, pos.offset(0, yOffset, c), config, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.Z));
-                    if(c == branchLength) createLeaves(pos.offset(0, yOffset - 1, c), 1);
+                    placeLog(logPos, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.Z));
+                    if (c == branchLength) createLeaves(logPos.below());
                 } else {
-                    placeLog(level, setter, random, pos.offset(0, yOffset, c), config);
-                    placeLog(level, setter, random, pos.offset(0, yOffset - 1, c), config);
+                    placeLog(logPos);
+                    placeLog(logPos.below());
                 }
             }
 
             if (direction == 4) {
+                BlockPos logPos = new BlockPos(x, y, z - c);
                 if (!root) {
-                    placeLog(level, setter, random, pos.offset(0, yOffset, -c), config, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.Z));
-                    if(c == branchLength) createLeaves(pos.offset(0, yOffset - 1, -c), 1);
+                    placeLog(logPos, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.Z));
+                    if (c == branchLength) createLeaves(logPos.below());
                 } else {
-                    placeLog(level, setter, random, pos.offset(0, yOffset, -c), config);
-                    placeLog(level, setter, random, pos.offset(0, yOffset - 1, -c), config);
+                    placeLog(logPos);
+                    placeLog(logPos.below());
                 }
             }
 
             if (direction == 5) {
+                BlockPos logPos = new BlockPos(x + c - 1, y, z + c - 1);
                 if (!root) {
-                    placeLog(level, setter, random, pos.offset(c - 1, yOffset, c - 1), config, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.X));
-                    if(c == branchLength) createLeaves(pos.offset(0, yOffset - 1, c), 1);
+                    placeLog(logPos, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.X));
+                    if (c == branchLength) createLeaves(new BlockPos(x + c, y - 1, z + c));
                 } else {
-                    placeLog(level, setter, random, pos.offset(c - 1, yOffset, c - 1), config);
-                    placeLog(level, setter, random, pos.offset(c - 1, yOffset - 1, c - 1), config);
+                    placeLog(logPos);
+                    placeLog(logPos.below());
                 }
             }
 
             if (direction == 6) {
+                BlockPos logPos = new BlockPos(x - c + 1, y, z - c + 1);
                 if (!root) {
-                    placeLog(level, setter, random, pos.offset(-c + 1, yOffset, -c + 1), config, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.X));
-                    if(c == branchLength) createLeaves(pos.offset(-c, yOffset - 1, -c), 1);
+                    placeLog(logPos, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.X));
+                    if (c == branchLength) createLeaves(new BlockPos(x - c, y - 1, z - c));
                 } else {
-                    placeLog(level, setter, random, pos.offset(-c + 1, yOffset, -c + 1), config);
-                    placeLog(level, setter, random, pos.offset(-c + 1, yOffset - 1, -c + 1), config);
+                    placeLog(logPos);
+                    placeLog(logPos.below());
                 }
             }
 
             if (direction == 7) {
+                BlockPos logPos = new BlockPos(x - c + 1, y, z + c - 1);
                 if (!root) {
-                    placeLog(level, setter, random, pos.offset(-c + 1, yOffset, c - 1), config, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.Z));
-                    if(c == branchLength) createLeaves(pos.offset(-c, yOffset - 1, c), 1);
+                    placeLog(logPos, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.Z));
+                    if (c == branchLength) createLeaves(new BlockPos(x - c, y - 1, z + c));
                 } else {
-                    placeLog(level, setter, random, pos.offset(-c + 1, yOffset, c - 1), config);
-                    placeLog(level, setter, random, pos.offset(-c + 1, yOffset - 1, c - 1), config);
+                    placeLog(logPos);
+                    placeLog(logPos.below());
                 }
             }
 
             if (direction == 8) {
+                BlockPos logPos = new BlockPos(x + c - 1, y, z - c + 1);
                 if (!root) {
-                    placeLog(level, setter, random, pos.offset(c - 1, yOffset, -c + 1), config, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.Z));
-                    if(c == branchLength) createLeaves(pos.offset(c, yOffset - 1, -c), 1);
+                    placeLog(logPos, state -> state.setValue(BlockStateProperties.AXIS, Direction.Axis.Z));
+                    if (c == branchLength) createLeaves(new BlockPos(x + c, y - 1, z - c));
                 } else {
-                    placeLog(level, setter, random, pos.offset(c - 1, yOffset, -c + 1), config);
-                    placeLog(level, setter, random, pos.offset(c - 1, yOffset - 1, -c + 1), config);
+                    placeLog(logPos);
+                    placeLog(logPos.below());
                 }
             }
         }
     }
 
-    private void createLeaves(BlockPos pos, int radius) {
-        list.add(new FoliagePlacer.FoliageAttachment(pos, radius, false));
+    private void placeLog(BlockPos pos, Function<BlockState, BlockState> propertySetter) {
+        placeLog(level, setter, random, pos, config, propertySetter);
+    }
+
+    private void placeLog(BlockPos pos) {
+        setter.accept(pos, Blocks.AIR.defaultBlockState());
+        placeLog(level, setter, random, pos, config);
+    }
+
+    private void createLeaves(BlockPos pos) {
+        list.add(new FoliagePlacer.FoliageAttachment(pos, 1, false));
     }
 }
