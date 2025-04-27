@@ -273,7 +273,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<ModBerryBushBlock> JADE_BERRY_BUSH = registerBush("jade_berry_bush", ModItems.JADE_BERRIES, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
     public static final DeferredBlock<ModBerryBushBlock> HEART_BERRY_BUSH = registerBush("heart_berry_bush", ModItems.HEART_BERRIES, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
     public static final DeferredBlock<ModBerryBushBlock> SWAMP_BERRY_BUSH = registerBush("swamp_berry_bush", ModItems.SWAMP_BERRIES, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
-    public static final DeferredBlock<DarkFruitVineBlock> DARK_FRUIT_VINE = registerBlock("dark_fruit_vine", () -> new DarkFruitVineBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)));
+    public static final DeferredBlock<DarkFruitVineBlock> DARK_FRUIT_VINE = registerBlock("dark_fruit_vine", () -> new DarkFruitVineBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES).noCollission()));
     public static final DeferredBlock<Block> PRICKLY_PEAR = registerSimpleBlock("prickly_pear", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DARK_CAPPED_MUSHROOM = registerBlock("dark_capped_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
     public static final DeferredBlock<Block> DUTCH_CAP_MUSHROOM = registerBlock("dutch_cap_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
