@@ -1,25 +1,10 @@
 package erebus.registries.client;
 
 import erebus.Erebus;
+import erebus.client.render.block.renderer.BlockOfBonesStackItemRenderer;
 import erebus.client.render.block.renderer.OfferingAltarStackItemRenderer;
-import erebus.client.render.item.model.ErebusShieldPartsModel;
-import erebus.client.render.item.model.PortalActivatorModel;
-import erebus.client.render.item.model.ScorpionPincerModel;
-import erebus.client.render.item.model.WandOfAnimationItemModel;
-import erebus.client.render.item.model.WandOfPreservationModel;
-import erebus.client.render.item.model.WarHammerModel;
-import erebus.client.render.item.model.WaspDaggerModel;
-import erebus.client.render.item.model.WaspSwordModel;
-import erebus.client.render.item.model.WebSlingerModel;
-import erebus.client.render.item.renderer.ErebusShieldPartsRenderer;
-import erebus.client.render.item.renderer.PortalActivatorRenderer;
-import erebus.client.render.item.renderer.ScorpionPincerRenderer;
-import erebus.client.render.item.renderer.WandOfAnimationItemRenderer;
-import erebus.client.render.item.renderer.WandOfPreservationRenderer;
-import erebus.client.render.item.renderer.WarHammerRenderer;
-import erebus.client.render.item.renderer.WaspDaggerRenderer;
-import erebus.client.render.item.renderer.WaspSwordRenderer;
-import erebus.client.render.item.renderer.WebSlingerRenderer;
+import erebus.client.render.item.model.*;
+import erebus.client.render.item.renderer.*;
 import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -134,5 +119,12 @@ public class ModItemRendering {
                 return new OfferingAltarStackItemRenderer(null, null);
             }
         }, ModBlocks.OFFERING_ALTAR.get().asItem());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return new BlockOfBonesStackItemRenderer(null, null);
+            }
+        }, ModBlocks.BLOCK_OF_BONES.get().asItem());
 	}
 }

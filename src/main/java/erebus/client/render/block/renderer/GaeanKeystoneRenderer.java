@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
@@ -31,7 +30,6 @@ public class GaeanKeystoneRenderer implements BlockEntityRenderer<GaeanKeystoneB
             double now = (entity.getLevel().getGameTime() % Short.MAX_VALUE) + partialTick;
             double hover = (Math.sin(now / 40) + 1) / 16;
             float scale = 1.25F;
-            BlockPos pos = entity.getBlockPos();
 
             double x = 0.5F;
             double y = scale + 12F / 18F + hover;

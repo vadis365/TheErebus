@@ -403,7 +403,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> REIN_EXO = registerSimpleBlock("rein_exo", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<RotatedPillarBlock> VELOCITY = registerBlock("velocity", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
     public static final DeferredBlock<RotatedPillarBlock> LIGHTNING_SPEED = registerBlock("lightning_speed", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
-    public static final DeferredBlock<Block> BLOCK_OF_BONES = registerSimpleBlock("block_of_bones", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<BlockOfBonesBlock> BLOCK_OF_BONES = registerBlock("block_of_bones", () -> new BlockOfBonesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).noCollission()));
     public static final DeferredBlock<Block> ANTLION_EGG = registerSimpleBlock("antlion_egg", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> TARANTULA_EGG = registerSimpleBlock("tarantula_egg", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<HoneyTreatBlock> HONEY_TREAT = registerBlock("honey_treat", () -> new HoneyTreatBlock(BlockBehaviour.Properties.of().forceSolidOn().strength(0.5F).sound(SoundType.WOOL).pushReaction(PushReaction.DESTROY)));

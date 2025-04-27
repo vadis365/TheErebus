@@ -1,14 +1,15 @@
 package erebus.registries;
 
-import java.util.function.Supplier;
-
 import erebus.Erebus;
+import erebus.block.entity.BlockOfBonesBlockEntity;
 import erebus.block.entity.GaeanKeystoneBlockEntity;
 import erebus.block.entity.OfferingAltarBlockEntity;
 import erebus.block.entity.UmberFurnaceBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 public class ModBlockEntities {
 
@@ -32,6 +33,13 @@ public class ModBlockEntities {
             "altar_offering",
             () -> BlockEntityType.Builder.of(
             		OfferingAltarBlockEntity::new, ModBlocks.OFFERING_ALTAR.get()
+            ).build(null)
+    );
+
+    public static final Supplier<BlockEntityType<BlockOfBonesBlockEntity>> BLOCK_OF_BONES = BLOCK_ENTITIES.register(
+            "block_of_bones",
+            () -> BlockEntityType.Builder.of(
+                    BlockOfBonesBlockEntity::new, ModBlocks.BLOCK_OF_BONES.get()
             ).build(null)
     );
 }

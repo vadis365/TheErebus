@@ -24,7 +24,7 @@ public class PortalActivatorModel extends Model {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition box0 = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "box0",
                 CubeListBuilder.create()
                         .texOffs(0, 0)
@@ -38,7 +38,7 @@ public class PortalActivatorModel extends Model {
                 PartPose.ZERO
         );
 
-        PartDefinition box1 = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "box1",
                 CubeListBuilder.create()
                         .texOffs(0, 8)
@@ -52,7 +52,7 @@ public class PortalActivatorModel extends Model {
                 PartPose.ZERO
         );
 
-        PartDefinition box2 = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "box2",
                 CubeListBuilder.create()
                         .texOffs(16, 4)
@@ -66,7 +66,7 @@ public class PortalActivatorModel extends Model {
                 PartPose.ZERO
         );
 
-        PartDefinition box3 = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "box3",
                 CubeListBuilder.create()
                         .texOffs(4, 20)
@@ -80,7 +80,7 @@ public class PortalActivatorModel extends Model {
                 PartPose.ZERO
         );
 
-        PartDefinition box4 = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "box4",
                 CubeListBuilder.create()
                         .texOffs(5, 9)
@@ -94,7 +94,7 @@ public class PortalActivatorModel extends Model {
                 PartPose.ZERO
         );
 
-        PartDefinition box5 = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "box5",
                 CubeListBuilder.create()
                         .texOffs(5, 9)
@@ -108,7 +108,7 @@ public class PortalActivatorModel extends Model {
                 PartPose.ZERO
         );
 
-        PartDefinition box6 = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "box6",
                 CubeListBuilder.create()
                         .texOffs(5, 9)
@@ -122,7 +122,7 @@ public class PortalActivatorModel extends Model {
                 PartPose.ZERO
         );
 
-        PartDefinition box7 = partdefinition.addOrReplaceChild(
+        partdefinition.addOrReplaceChild(
                 "box7",
                 CubeListBuilder.create()
                         .texOffs(5, 9)

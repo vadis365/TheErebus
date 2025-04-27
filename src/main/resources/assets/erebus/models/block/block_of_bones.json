@@ -1,3 +1,6 @@
 {
-    "parent": "builtin/entity"
+  "parent": "builtin/entity",
+  "textures": {
+    "particle": "minecraft:block/bone_block_side"
+  }
 }
