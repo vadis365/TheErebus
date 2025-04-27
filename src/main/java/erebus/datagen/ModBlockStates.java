@@ -1,5 +1,7 @@
 package erebus.datagen;
 
+import erebus.block.DarkFruitVineBlock;
+import erebus.block.ModBerryBushBlock;
 import erebus.datagen.providers.ModBlockStateProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Blocks;
@@ -250,9 +252,10 @@ public class ModBlockStates extends ModBlockStateProvider {
         crop(CROP_TURNIP);
         crop(CROP_CABBAGE);
         crop(CROP_MANDRAKE);
-        bush(JADE_BERRY_BUSH, JADE_BERRY_BUSH.get().getAgeProperty());
-        bush(HEART_BERRY_BUSH, HEART_BERRY_BUSH.get().getAgeProperty());
-        bush(SWAMP_BERRY_BUSH, SWAMP_BERRY_BUSH.get().getAgeProperty());
+        bush(JADE_BERRY_BUSH, ModBerryBushBlock.AGE);
+        bush(HEART_BERRY_BUSH, ModBerryBushBlock.AGE);
+        bush(SWAMP_BERRY_BUSH, ModBerryBushBlock.AGE);
+        bush(DARK_FRUIT_VINE, DarkFruitVineBlock.AGE);
         //crossBlock(MIRE_CORAL); // TODO: I don't think this is implemented
         crossBlock(NETTLE);
         crossBlock(NETTLE_FLOWERED);

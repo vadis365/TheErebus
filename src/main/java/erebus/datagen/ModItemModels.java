@@ -481,6 +481,10 @@ public class ModItemModels extends ModItemModelProvider {
         wall(WALL_AMBER_BRICKS, AMBER_BRICKS);
 
         // MARK: Plants
+        blockFlatWithBlockTexture(HEART_BERRY_BUSH, "heart_berry_bush_3");
+        blockFlatWithBlockTexture(JADE_BERRY_BUSH, "jade_berry_bush_3");
+        blockFlatWithBlockTexture(SWAMP_BERRY_BUSH, "swamp_berry_bush_3");
+        blockFlatWithBlockTexture(DARK_FRUIT_VINE, "dark_fruit_vine_5");
         blockFlat(DESERT_SHRUB);
         //blockFlat(MIRE_CORAL);
         blockFlat(NETTLE);

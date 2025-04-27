@@ -225,6 +225,7 @@ public class MarshwoodTrunkPlacer extends TrunkPlacer {
 
     private void placeLog(BlockPos pos) {
         setter.accept(pos, Blocks.AIR.defaultBlockState());
+
         placeLog(level, setter, random, pos, config);
     }
 

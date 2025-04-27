@@ -1,6 +1,7 @@
 package erebus.world.feature.tree;
 
 import erebus.registries.ModBlocks;
+import erebus.world.feature.tree.decorator.LeaveDarkFruitVineDecorator;
 import erebus.world.feature.tree.foliage.MarshwoodFoliagePlacer;
 import erebus.world.feature.tree.trunk.MarshwoodTrunkPlacer;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -25,7 +26,13 @@ public class MarshwoodTree extends ErebusTree {
                 BlockStateProvider.simple(ModBlocks.LEAVES_MARSHWOOD.get()),
                 new MarshwoodFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2)),
                 new TwoLayersFeatureSize(1, 0, 2)
-        ).build();
+        )
+                .decorators(
+                        List.of(
+                                new LeaveDarkFruitVineDecorator(0.125F)
+                        )
+                )
+                .build();
     }
 
     @Override
