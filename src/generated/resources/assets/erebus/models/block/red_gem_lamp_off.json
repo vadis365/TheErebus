@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/redstone_lamp",
+  "textures": {
+    "all": "erebus:block/red_lamp_off"
+  }
+}

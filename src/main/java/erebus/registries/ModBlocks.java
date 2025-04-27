@@ -386,7 +386,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> SWAMP_VENT = registerSimpleBlock("swamp_vent", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> GNEISS_VENT = registerSimpleBlock("gneiss_vent", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> RED_GEM_BLOCK = registerSimpleBlock("red_gem_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> RED_GEM_LAMP = registerSimpleBlock("red_gem_lamp", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> RED_GEM_LAMP = registerBlock("red_gem_lamp", () -> new RedstoneLampBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.REDSTONE_LAMP)));
     public static final DeferredBlock<WitherWeb> WITHER_WEB = registerBlock("wither_web", () -> new WitherWeb(BlockBehaviour.Properties.of().mapColor(MapColor.WOOL).sound(SoundType.COBWEB).forceSolidOn().noCollission().requiresCorrectToolForDrops().strength(4.0F).pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<LavaWeb> LAVA_WEB = registerBlock("lava_web", () -> new LavaWeb(BlockBehaviour.Properties.of().mapColor(MapColor.WOOL).sound(SoundType.COBWEB).forceSolidOn().noCollission().requiresCorrectToolForDrops().strength(4.0F).pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<Block> GNEISS = registerSimpleBlock("gneiss", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));

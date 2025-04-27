@@ -319,7 +319,7 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
     }
 
     public void crop(Supplier<? extends ModCropBlock> crop) {
-        getVariantBuilder(crop.get()).forAllStates(state -> cropStates(state, crop.get(), name(crop)));
+        getVariantBuilder(crop.get()).forAllStates(state -> cropStates(state, name(crop)));
     }
 
     public void bush(Supplier<? extends Block> bush, IntegerProperty age) {
@@ -327,19 +327,23 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
     }
 
     public void dust(Supplier<? extends Block> dust) {
-        getVariantBuilder(dust.get()).forAllStates(state -> dustStates(state));
+        getVariantBuilder(dust.get()).forAllStates(this::dustStates);
+    }
+
+    public void lamp(Supplier<? extends Block> lamp) {
+        getVariantBuilder(lamp.get()).forAllStates(this::lampStates);
     }
 
     public void stigma(Supplier<? extends Block> stigma) {
         block(stigma, "stigma");
     }
 
-    private ConfiguredModel[] cropStates(BlockState state, ModCropBlock crop, String modelName) {
+    private ConfiguredModel[] cropStates(BlockState state, String modelName) {
         ConfiguredModel[] models = new ConfiguredModel[1];
         models[0] = new ConfiguredModel(
                 models().crop(
-                        "%s_%d".formatted(modelName, state.getValue(crop.getAgeProperty())),
-                        modLoc("block/%s_%d".formatted(modelName, state.getValue(crop.getAgeProperty())))
+                        "%s_%d".formatted(modelName, state.getValue(ModCropBlock.AGE)),
+                        modLoc("block/%s_%d".formatted(modelName, state.getValue(ModCropBlock.AGE)))
                 ).renderType("cutout")
         );
 
@@ -375,6 +379,18 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
                     models().cubeAll("dust", modLoc("block/dust"))
             );
         }
+        return models;
+    }
+
+    private ConfiguredModel[] lampStates(BlockState state) {
+        ConfiguredModel[] models = new ConfiguredModel[1];
+        boolean lit = state.getValue(RedstoneLampBlock.LIT);
+
+        models[0] = new ConfiguredModel(
+                models().withExistingParent("red_gem_lamp_%s".formatted(lit ? "on" : "off"), mcLoc("block/redstone_lamp"))
+                        .texture("all", modLoc(lit ? "block/red_lamp_on" : "block/red_lamp_off"))
+        );
+
         return models;
     }
 }

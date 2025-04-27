@@ -327,7 +327,7 @@ public class ModBlockStates extends ModBlockStateProvider {
         block(QUICK_SAND);
         block(GHOST_SAND);
         block(RED_GEM_BLOCK);
-        //block(RED_GEM_LAMP); TODO: Implement Redstone Lamp
+        lamp(RED_GEM_LAMP);
         crossBlock(WITHER_WEB);
         crossBlock(LAVA_WEB);
         block(GNEISS);
