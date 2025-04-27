@@ -598,7 +598,6 @@ public class ModItemModels extends ModItemModelProvider {
         block(REIN_EXO);
         block(VELOCITY);
         block(LIGHTNING_SPEED);
-        block(BLOCK_OF_BONES);
         block(ANTLION_EGG);
         block(TARANTULA_EGG);
         block(HONEY_TREAT);

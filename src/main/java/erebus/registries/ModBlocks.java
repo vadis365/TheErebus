@@ -383,7 +383,7 @@ public class ModBlocks extends ModBlockHelpers {
     });
     public static final DeferredBlock<Block> QUICK_SAND = registerSimpleBlock("quick_sand", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> GHOST_SAND = registerSimpleBlock("ghost_sand", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> SWAMP_VENT = registerSimpleBlock("swamp_vent", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> SWAMP_VENT = registerBlock("swamp_vent", () -> new SwampVentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK)));
     public static final DeferredBlock<Block> GNEISS_VENT = registerSimpleBlock("gneiss_vent", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> RED_GEM_BLOCK = registerSimpleBlock("red_gem_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> RED_GEM_LAMP = registerBlock("red_gem_lamp", () -> new RedstoneLampBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.REDSTONE_LAMP)));

@@ -1,30 +1,18 @@
 package erebus;
 
-import java.util.Locale;
-
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
 import erebus.recipes.ModCustomRecipes;
-import erebus.registries.ModBlockEntities;
-import erebus.registries.ModBlocks;
-import erebus.registries.ModItems;
-import erebus.registries.ModSounds;
-import erebus.registries.ModTabs;
+import erebus.registries.*;
 import erebus.registries.client.ModBlockEntityRendering;
 import erebus.registries.client.ModItemRendering;
 import erebus.registries.client.ModMenuTypes;
+import erebus.registries.client.ModParticles;
 import erebus.registries.data.ModArmorMaterials;
 import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.network.ModNetwork;
-import erebus.registries.world.ModFoliagePlacers;
-import erebus.registries.world.ModPOIs;
-import erebus.registries.world.ModStructures;
-import erebus.registries.world.ModTreeDecorators;
-import erebus.registries.world.ModTrunkPlacers;
+import erebus.registries.world.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -37,6 +25,9 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import org.slf4j.Logger;
+
+import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -66,6 +57,7 @@ public class Erebus {
         ModStructures.STRUCTURES.register(bus);
     	ModCustomRecipes.RECIPE_TYPES.register(bus);
     	ModCustomRecipes.RECIPE_SERIALIZERS.register(bus);
+        ModParticles.PARTICLES.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 
@@ -80,6 +72,7 @@ public class Erebus {
 			bus.addListener(ModItemRendering::registerItemRender);
 			bus.addListener(ModBlockEntityRendering::registerBlockEntityLayerDefinitions);
 			bus.addListener(ModBlockEntityRendering::registerBlockEntityRenderers);
+            bus.addListener(ModParticles::registerParticleFactories);
 		}
     }
 

@@ -13,7 +13,7 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = Erebus.MODID)
 public class RegisterColorHandlersEventHandler {
 
-    private static BlockColor foliageColor = (state, tint, pos, tintIndex) -> {
+    private static final BlockColor foliageColor = (state, tint, pos, tintIndex) -> {
         if(tint != null && pos != null) {
             return BiomeColors.getAverageFoliageColor(tint, pos);
         } else {
@@ -21,7 +21,15 @@ public class RegisterColorHandlersEventHandler {
         }
     };
 
-    private static ItemColor itemFoliageColor = (itemStack, i) -> GrassColor.getDefaultColor();
+    private static final BlockColor grassColor = (state, tint, pos, tintIndex) -> {
+        if (tint != null && pos != null) {
+            return BiomeColors.getAverageGrassColor(tint, pos);
+        } else {
+            return GrassColor.getDefaultColor();
+        }
+    };
+
+    private static final ItemColor itemFoliageColor = (itemStack, i) -> GrassColor.getDefaultColor();
 
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
@@ -30,6 +38,8 @@ public class RegisterColorHandlersEventHandler {
                 ModBlocks.FIDDLE_HEAD.get(),
                 ModBlocks.TALL_FERN.get()
         );
+
+        event.register(grassColor, ModBlocks.SWAMP_VENT.get());
     }
 
     @SubscribeEvent
@@ -37,7 +47,8 @@ public class RegisterColorHandlersEventHandler {
         event.register(itemFoliageColor,
                 ModBlocks.FERN.get(),
                 ModBlocks.FIDDLE_HEAD.get(),
-                ModBlocks.TALL_FERN.get()
+                ModBlocks.TALL_FERN.get(),
+                ModBlocks.SWAMP_VENT.get()
         );
     }
 }
