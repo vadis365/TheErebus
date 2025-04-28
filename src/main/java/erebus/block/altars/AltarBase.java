@@ -21,12 +21,16 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class AltarBase extends AltarAbstract {
 	public static final MapCodec<AltarBase> CODEC = simpleCodec(AltarBase::new);
+
 	private final Map<Item, Block> ALTAR_TYPES = new HashMap<Item, Block>();
 	
 	public AltarBase(Properties properties) {
@@ -40,7 +44,13 @@ public class AltarBase extends AltarAbstract {
 
 	@Override
 	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-		return null;//new TileEntityErebusAltarEmpty();
+		return null;
+	}
+
+	@Nonnull
+	@Override
+	public RenderShape getRenderShape(@Nonnull BlockState state) {
+		return RenderShape.MODEL;
 	}
 
 	 @Nonnull
@@ -52,9 +62,7 @@ public class AltarBase extends AltarAbstract {
 
 		if (!stack.isEmpty()) {
 			Block altar = ALTAR_TYPES.get(stack.getItem());
-			System.out.println("Clicky");
 			if (altar != null) {
-				System.out.println("Altar is: " + altar);
 				if (!level.isClientSide()) {
 					level.setBlock(pos, altar.defaultBlockState()/*.setValue(FACING, state.getValue(FACING))*/, 3); // TODO not made the other altar blocks directional yet ;P
 					level.playSound(null, pos, ModSounds.ALTAR_OFFERING.get(), SoundSource.BLOCKS, 0.2F, 1.0F);

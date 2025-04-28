@@ -68,9 +68,9 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 					stack.translate(Math.cos(Math.toRadians(angle)), 0, 0);
 					stack.scale(0.5F, 0.5F, 0.5F);
 					stack.pushPose();
-					stack.mulPose(Axis.XP.rotationDegrees((float)120 * (i + 1) + renderRotation));
-					stack.mulPose(Axis.YP.rotationDegrees((float)120 * (i + 1) + renderRotation));
-					stack.mulPose(Axis.ZP.rotationDegrees((float)120 * (i + 1) + renderRotation));
+					stack.mulPose(Axis.XN.rotationDegrees((float)120 * (i + 1) + renderRotation + angle));
+					stack.mulPose(Axis.YN.rotationDegrees((float)120 * (i + 1) + renderRotation * 2F + angle));
+					stack.mulPose(Axis.ZN.rotationDegrees((float)120 * (i + 1) + renderRotation + angle));
 			        itemRenderer.renderStatic(item, ItemDisplayContext.FIXED, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, stack, buffer, tile.getLevel(), 1);
 					stack.popPose();
 					stack.popPose();

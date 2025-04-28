@@ -1,5 +1,5 @@
 {
-    "parent": "erebus:block/offering_altar",
+    "parent": "erebus:block/altar_base",
      "display": {
      
       "thirdperson_righthand": {

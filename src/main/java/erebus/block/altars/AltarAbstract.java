@@ -9,8 +9,8 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -18,7 +18,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public abstract class AltarAbstract extends DirectionalBlock implements EntityBlock {
+public abstract class AltarAbstract extends HorizontalDirectionalBlock implements EntityBlock {
 	public static final VoxelShape ALTAR_AABB = Block.box(0D, 0D, 0D, 16D, 15D, 16D);
 
 	public AltarAbstract(Properties properties) {
@@ -54,7 +54,7 @@ public abstract class AltarAbstract extends DirectionalBlock implements EntityBl
 
 	@Override
 	 public BlockState getStateForPlacement(BlockPlaceContext context) {
-		Direction direction = context.getNearestLookingDirection().getOpposite();
+		Direction direction = context.getHorizontalDirection().getOpposite();
 		return this.defaultBlockState().setValue(FACING, direction);
 	}
 
