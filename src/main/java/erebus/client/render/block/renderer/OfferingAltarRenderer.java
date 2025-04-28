@@ -6,8 +6,8 @@ import com.mojang.math.Axis;
 
 import erebus.Erebus;
 import erebus.block.entity.OfferingAltarBlockEntity;
+import erebus.client.particle.ClientParticles;
 import erebus.client.render.block.model.OfferingAltarModel;
-import erebus.network.client.ClientParticles;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;

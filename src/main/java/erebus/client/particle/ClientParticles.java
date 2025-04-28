@@ -1,4 +1,4 @@
-package erebus.network.client;
+package erebus.client.particle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
@@ -31,6 +31,9 @@ public class ClientParticles {
 			//fx.setParticleTextureIndex(96);
 			//fx.setRBGColorF(1F, 1F, 0F);
 		}
+		
+		if (particleName.equals("heart"))
+			level.addParticle(ParticleTypes.HEART, false, x, y, z, vecX, vecY, vecZ);
 	/*	
 		if (particleName.equals("repellent")) {
 			fx = new ParticleRepellent(world, x, y, z, 0.0F, 0.0F, 0.0F);

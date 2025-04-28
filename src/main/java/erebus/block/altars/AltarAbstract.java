@@ -47,12 +47,6 @@ public abstract class AltarAbstract extends HorizontalDirectionalBlock implement
 	}
 
 	@Override
-	public void onRemove(BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
-		level.levelEvent(2001, pos, Block.getId(ModBlocks.TEMPLE_BRICK.get().defaultBlockState()));
-		super.onRemove(state, level, pos, newState, isMoving);
-	}
-
-	@Override
 	 public BlockState getStateForPlacement(BlockPlaceContext context) {
 		Direction direction = context.getHorizontalDirection().getOpposite();
 		return this.defaultBlockState().setValue(FACING, direction);

@@ -1,4 +1,4 @@
-package erebus.network.client;
+package erebus.client.particle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.BlockParticleOption;

@@ -1,6 +1,7 @@
 package erebus.registries.network;
 
 import erebus.Erebus;
+import erebus.network.client.AltarAnimatonTimerPacket;
 import erebus.network.client.AntlionParticlePacket;
 import erebus.network.client.OfferingAltarNBTPacket;
 import erebus.network.client.OfferingAltarTimerPacket;
@@ -10,6 +11,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 public class ModNetwork {
 	 public static void register(final RegisterPayloadHandlersEvent event) {
 		 event.registrar(Erebus.MODID)
+		 .playToClient(AltarAnimatonTimerPacket.TYPE, AltarAnimatonTimerPacket.STREAM_CODEC, AltarAnimatonTimerPacket::handle)
 		 .playToClient(OfferingAltarTimerPacket.TYPE, OfferingAltarTimerPacket.STREAM_CODEC, OfferingAltarTimerPacket::handle)
 		 .playToClient(OfferingAltarNBTPacket.TYPE, OfferingAltarNBTPacket.STREAM_CODEC, OfferingAltarNBTPacket::handle)
 		 .playToClient(ParticlePacket.TYPE, ParticlePacket.STREAM_CODEC, ParticlePacket::handle)

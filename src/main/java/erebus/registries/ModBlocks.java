@@ -3,6 +3,7 @@ package erebus.registries;
 import erebus.Erebus;
 import erebus.block.*;
 import erebus.block.altars.AltarBase;
+import erebus.block.altars.HealingAltar;
 import erebus.block.altars.OfferingAltar;
 import erebus.block.bamboo.BambooCrateBlock;
 import erebus.block.bamboo.BambooTorchBlock;
@@ -477,7 +478,7 @@ public class ModBlocks extends ModBlockHelpers {
 
     public static final DeferredBlock<AltarBase> ALTAR_BASE = registerBlock("altar_base", () -> new AltarBase(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
     public static final DeferredBlock<Block> ALTAR_LIGHTNING = registerSimpleBlock("altar_lightning", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ALTAR_HEALING = registerSimpleBlock("altar_healing", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<HealingAltar> ALTAR_HEALING = registerBlock("altar_healing", () -> new HealingAltar(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
     public static final DeferredBlock<Block> ALTAR_XP = registerSimpleBlock("altar_xp", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> ALTAR_REPAIR = registerSimpleBlock("altar_repair", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<OfferingAltar> OFFERING_ALTAR = registerBlock("offering_altar", () -> new OfferingAltar(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));

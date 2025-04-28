@@ -64,7 +64,7 @@ public class AltarBase extends AltarAbstract {
 			Block altar = ALTAR_TYPES.get(stack.getItem());
 			if (altar != null) {
 				if (!level.isClientSide()) {
-					level.setBlock(pos, altar.defaultBlockState()/*.setValue(FACING, state.getValue(FACING))*/, 3); // TODO not made the other altar blocks directional yet ;P
+					level.setBlock(pos, altar.defaultBlockState().setValue(FACING, state.getValue(FACING)), 3);
 					level.playSound(null, pos, ModSounds.ALTAR_OFFERING.get(), SoundSource.BLOCKS, 0.2F, 1.0F);
 					if (!player.isCreative() && stack.getCount() <= 0)
 						player.setItemInHand(hand, ItemStack.EMPTY);
