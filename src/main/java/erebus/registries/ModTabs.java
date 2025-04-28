@@ -472,6 +472,7 @@ public class ModTabs {
                         output.accept(ModItems.HOMING_BEECON);
                         output.accept(ModItems.HOMING_BEECON_ADVANCED);
                         output.accept(ModItems.WAND_OF_PRESERVATION);
+                        output.accept(ModItems.DEATH_COMPASS);
                     })
                     .build()
     );

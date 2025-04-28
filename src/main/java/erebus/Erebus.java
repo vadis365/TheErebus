@@ -13,8 +13,11 @@ import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.network.ModNetwork;
 import erebus.registries.world.*;
+import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -77,6 +80,14 @@ public class Erebus {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        ItemProperties.register(
+                ModItems.DEATH_COMPASS.get(),
+                ResourceLocation.withDefaultNamespace("angle"),
+                new CompassItemPropertyFunction(
+                        (level, stack, entity) -> entity instanceof Player player ? player.getLastDeathLocation().orElse(null) : null
+                )
+        );
+
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
 

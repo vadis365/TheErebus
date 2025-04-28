@@ -203,7 +203,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> WASP_SWORD = registerItem("wasp_sword");
     public static final DeferredItem<Item> WASP_DAGGER = registerItem("wasp_dagger");
     public static final DeferredItem<Item> ANTI_VENOM_BOTTLE = registerItem("anti_venom_bottle");
-    public static final DeferredItem<Item> DEATH_COMPASS = registerItem("death_compass");
+    public static final DeferredItem<Item> DEATH_COMPASS = ITEMS.register("death_compass", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ROLLED_NEWSPAPER = registerItem("rolled_newspaper");
     public static final DeferredItem<Item> BAMBUCKET = registerBucket("bambucket");
     public static final DeferredItem<Item> HOMING_BEECON = registerItem("homing_beecon");

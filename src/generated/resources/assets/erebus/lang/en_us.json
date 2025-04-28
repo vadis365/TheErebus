@@ -608,5 +608,6 @@
   "item.erebus.web_slinger_wither": "Wither Web Slinger",
   "item.erebus.whetstone": "Whetstone",
   "item.erebus.whetstone_powder": "Whetstone Powder",
-  "item.erebus.woodlouse_ball": "Woodlouse Ball"
+  "item.erebus.woodlouse_ball": "Woodlouse Ball",
+  "tooltip.erebus.dimension": "t"
 }
