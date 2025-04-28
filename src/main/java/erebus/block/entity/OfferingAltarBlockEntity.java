@@ -32,8 +32,8 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 	protected ItemStack output;
 	private static final int MAX_TIME = 450;
 	public final RecipeManager.CachedCheck<MultiStackInput, OfferingAltarRecipe> quickCheck = RecipeManager.createCheck(ModCustomRecipes.OFFERING_ALTAR_RECIPE.get());
-	public float rotation;
-	public float prevRotation;
+	public int rotation;
+	public int prevRotation;
 	public boolean isCrafting = false;
 
 	public OfferingAltarBlockEntity(BlockPos pos, BlockState state) {
@@ -86,10 +86,10 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 			if (level.isClientSide()) {
 				altar.prevRotation = altar.rotation;
 				altar.prevTime = altar.time;
-				altar.rotation += 2F;
-				if (altar.rotation >= 360.0F) {
-					altar.rotation -= 360.0F;
-					altar.prevRotation -= 360.0F;
+				altar.rotation += 2;
+				if (altar.rotation >= 360) {
+					altar.rotation -= 360;
+					altar.prevRotation -= 360;
 				}
 				if(altar.isCrafting)
 					altar.time += 2;
