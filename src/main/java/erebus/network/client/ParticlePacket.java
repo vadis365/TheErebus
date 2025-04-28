@@ -2,6 +2,7 @@ package erebus.network.client;
 
 
 import erebus.Erebus;
+import erebus.client.particle.ClientParticleTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
