@@ -88,7 +88,6 @@ public class ModBlockStates extends ModBlockStateProvider {
         log(LOG_MARSHWOOD);
         log(LOG_SCORCHED);
         log(LOG_BAMBOO);
-        log(LOG_HOLLOW);
 
         // MARK: Saplings
         crossBlock(SAPLING_BAOBAB);

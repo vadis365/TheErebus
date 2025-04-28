@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "erebus:block/log_hollow_end",
-    "side": "erebus:block/log_hollow_side"
-  }
-}

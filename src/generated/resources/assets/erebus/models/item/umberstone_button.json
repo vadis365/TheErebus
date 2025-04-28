@@ -1,3 +1,6 @@
 {
-  "parent": "erebus:block/umberstone_button"
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "erebus:block/umberstone"
+  }
 }

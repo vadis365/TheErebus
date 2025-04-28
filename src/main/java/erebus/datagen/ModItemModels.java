@@ -320,7 +320,6 @@ public class ModItemModels extends ModItemModelProvider {
         block(LOG_MARSHWOOD);
         block(LOG_SCORCHED);
         block(LOG_BAMBOO);
-        block(LOG_HOLLOW);
 
         // MARK: Saplings
         blockFlat(SAPLING_BAOBAB);
@@ -655,7 +654,7 @@ public class ModItemModels extends ModItemModelProvider {
         block(COMPOSTER);
         block(BLENDER);
         block(UMBER_FURNACE);
-        block(UMBERSTONE_BUTTON);
+        button(UMBERSTONE_BUTTON, UMBERSTONE);
         //block(LIQUIFIER);
         //block(GLOW_GEM);
         //block(MUCUS_BOMB);

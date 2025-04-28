@@ -109,7 +109,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<RotatedPillarBlock> LOG_MARSHWOOD = registerBlock("log_marshwood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
     public static final DeferredBlock<RotatedPillarBlock> LOG_SCORCHED = registerBlock("log_scorched", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
     public static final DeferredBlock<RotatedPillarBlock> LOG_BAMBOO = registerBlock("log_bamboo", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
-    public static final DeferredBlock<RotatedPillarBlock> LOG_HOLLOW = registerBlock("log_hollow", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)));
+    public static final DeferredBlock<RotatedPillarBlock> LOG_HOLLOW = registerBlock("log_hollow", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).noOcclusion()));
 
     // MARK: Saplings
     public static final DeferredBlock<SaplingBlock> SAPLING_MOSSBARK = registerSapling("sapling_mossbark", ModTreeGrowers.MOSSBARK);
