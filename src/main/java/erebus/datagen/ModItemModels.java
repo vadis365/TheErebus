@@ -639,12 +639,12 @@ public class ModItemModels extends ModItemModelProvider {
         // MARK: Utility Blocks
         block(PETRIFIED_CRAFTING_TABLE);
         //block(PETRIFIED_WOOD_CHEST);
-        //block(BAMBOO_CRATE);
+        block(BAMBOO_CRATE, "bamboo_crate_default");
         //block(BAMBOO_BRIDGE);
-        //block(BAMBOO_LADDER);
+        block(BAMBOO_LADDER);
         //block(BAMBOO_NERD_POLE);
         //block(BAMBOO_EXTENDER);
-        //blockFlat(BAMBOO_TORCH);
+        block(BAMBOO_TORCH, "bamboo_torch_upper");
         //block(BAMBOO_PIPE);
         //block(BAMBOO_PIPE_EXTRACT);
         //block(BAMBOO_PIPE_EXTRACT_ACTIVE);

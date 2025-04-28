@@ -1,9 +1,9 @@
 {
    "parent": "block/cube",
     "textures": {
-        "0": "erebus:blocks/bamboo_torch",
-        "1": "erebus:blocks/bamboo_torch_top",
-        "particle": "erebus:blocks/bamboo_torch"
+      "0": "erebus:block/bamboo_torch",
+      "1": "erebus:block/bamboo_torch_top",
+      "particle": "erebus:block/bamboo_torch"
     },
     "elements": [
         {

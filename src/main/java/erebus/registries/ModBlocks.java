@@ -4,6 +4,8 @@ import erebus.Erebus;
 import erebus.block.*;
 import erebus.block.altars.AltarBase;
 import erebus.block.altars.OfferingAltar;
+import erebus.block.bamboo.BambooCrateBlock;
+import erebus.block.bamboo.BambooTorchBlock;
 import erebus.block.portal.ErebusPortalBlock;
 import erebus.registries.helpers.ModBlockHelpers;
 import erebus.registries.world.ModTreeGrowers;
@@ -451,12 +453,12 @@ public class ModBlocks extends ModBlockHelpers {
     // MARK: Utility Blocks
     public static final DeferredBlock<PetrifiedCraftingTableBlock> PETRIFIED_CRAFTING_TABLE = registerBlock("petrified_crafting_table", () -> new PetrifiedCraftingTableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)));
     public static final DeferredBlock<Block> PETRIFIED_WOOD_CHEST = registerSimpleBlock("petrified_wood_chest", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> BAMBOO_CRATE = registerSimpleBlock("bamboo_crate", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> BAMBOO_CRATE = registerBlock("bamboo_crate", () -> new BambooCrateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHEST).noOcclusion()));
     public static final DeferredBlock<Block> BAMBOO_BRIDGE = registerSimpleBlock("bamboo_bridge", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> BAMBOO_LADDER = registerSimpleBlock("bamboo_ladder", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<LadderBlock> BAMBOO_LADDER = registerBlock("bamboo_ladder", () -> new LadderBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).sound(SoundType.BAMBOO)));
     public static final DeferredBlock<Block> BAMBOO_NERD_POLE = registerSimpleBlock("bamboo_nerd_pole", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> BAMBOO_EXTENDER = registerSimpleBlock("bamboo_extender", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> BAMBOO_TORCH = registerSimpleBlock("bamboo_torch", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<BambooTorchBlock> BAMBOO_TORCH = registerBlock("bamboo_torch", () -> new BambooTorchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TORCH).noCollission().sound(SoundType.BAMBOO).lightLevel((state) -> 15).requiresCorrectToolForDrops()));
     public static final DeferredBlock<Block> BAMBOO_PIPE = registerSimpleBlock("bamboo_pipe", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> BAMBOO_PIPE_EXTRACT = registerSimpleBlock("bamboo_pipe_extract", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> BAMBOO_PIPE_EXTRACT_ACTIVE = registerSimpleBlock("bamboo_pipe_extract_active", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
