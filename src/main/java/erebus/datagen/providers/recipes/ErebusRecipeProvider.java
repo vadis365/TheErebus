@@ -59,7 +59,9 @@ public abstract class ErebusRecipeProvider extends RecipeProvider implements ICo
     }
 
     protected void stairs(ItemLike material, ItemLike result) {
-        stairBuilder(result, Ingredient.of(material));
+        stairBuilder(result, Ingredient.of(material))
+                .unlockedBy("has_%s".formatted(material.asItem().getDescriptionId().toLowerCase(Locale.ROOT)), has(material))
+                .save(output);
     }
 
     protected void slab(ItemLike material, ItemLike result) {

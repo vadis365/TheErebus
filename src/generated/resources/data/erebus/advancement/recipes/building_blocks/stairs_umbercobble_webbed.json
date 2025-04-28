@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.erebus.umbercobble_webbed": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:umbercobble_webbed"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:stairs_umbercobble_webbed"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.erebus.umbercobble_webbed"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:stairs_umbercobble_webbed"
+    ]
+  }
+}

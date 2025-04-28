@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.erebus.umbertile_smooth": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:umbertile_smooth"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:stairs_umberstone_smooth"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.erebus.umbertile_smooth"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:stairs_umberstone_smooth"
+    ]
+  }
+}
