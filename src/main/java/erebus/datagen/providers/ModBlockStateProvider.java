@@ -326,6 +326,13 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         getVariantBuilder(bush.get()).forAllStates(state -> bushStates(state, name(bush), age));
     }
 
+    public void egg(Supplier<? extends Block> egg) {
+        ModelFile model = models().withExistingParent(name(egg), mcLoc("block/dragon_egg"))
+                .texture("particle", texture(name(egg)))
+                .texture("all", texture(name(egg)));
+        simpleBlock(egg.get(), model);
+    }
+
     public void dust(Supplier<? extends Block> dust) {
         getVariantBuilder(dust.get()).forAllStates(this::dustStates);
     }

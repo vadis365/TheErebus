@@ -407,8 +407,8 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<RotatedPillarBlock> VELOCITY = registerBlock("velocity", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
     public static final DeferredBlock<RotatedPillarBlock> LIGHTNING_SPEED = registerBlock("lightning_speed", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
     public static final DeferredBlock<BlockOfBonesBlock> BLOCK_OF_BONES = registerBlock("block_of_bones", () -> new BlockOfBonesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).noCollission()));
-    public static final DeferredBlock<Block> ANTLION_EGG = registerSimpleBlock("antlion_egg", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> TARANTULA_EGG = registerSimpleBlock("tarantula_egg", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> ANTLION_EGG = registerSimpleBlock("antlion_egg", BlockBehaviour.Properties.of().mapColor(MapColor.STONE).noOcclusion());
+    public static final DeferredBlock<Block> TARANTULA_EGG = registerSimpleBlock("tarantula_egg", BlockBehaviour.Properties.of().mapColor(MapColor.STONE).noOcclusion());
     public static final DeferredBlock<HoneyTreatBlock> HONEY_TREAT = registerBlock("honey_treat", () -> new HoneyTreatBlock(BlockBehaviour.Properties.of().forceSolidOn().strength(0.5F).sound(SoundType.WOOL).pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<CandleHoneyTreatBlock> CANDLE_HONEY_TREAT = registerBlock("candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.CANDLE));
     public static final DeferredBlock<CandleHoneyTreatBlock> WHITE_CANDLE_HONEY_TREAT = registerBlock("white_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.WHITE_CANDLE));

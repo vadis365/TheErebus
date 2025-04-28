@@ -343,8 +343,8 @@ public class ModBlockStates extends ModBlockStateProvider {
         block(REIN_EXO);
         log(VELOCITY);
         log(LIGHTNING_SPEED);
-        block(ANTLION_EGG);
-        block(TARANTULA_EGG);
+        egg(ANTLION_EGG);
+        egg(TARANTULA_EGG);
         cake(HONEY_TREAT);
         cakeWithCandle(CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.CANDLE);
         cakeWithCandle(WHITE_CANDLE_HONEY_TREAT, HONEY_TREAT, Blocks.WHITE_CANDLE);
