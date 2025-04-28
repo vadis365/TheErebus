@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.erebus.planks_asper": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:planks_asper"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:door_asper"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.erebus.planks_asper"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:door_asper"
+    ]
+  }
+}
