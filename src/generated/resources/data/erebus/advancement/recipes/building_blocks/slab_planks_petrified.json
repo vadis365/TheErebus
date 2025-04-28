@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.erebus.planks_petrified": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:planks_petrified"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:slab_planks_petrified"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.erebus.planks_petrified"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:slab_planks_petrified"
+    ]
+  }
+}

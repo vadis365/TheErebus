@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.erebus.umbertile_smooth_small": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:umbertile_smooth_small"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:slab_umberstone_smooth_small"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.erebus.umbertile_smooth_small"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:slab_umberstone_smooth_small"
+    ]
+  }
+}

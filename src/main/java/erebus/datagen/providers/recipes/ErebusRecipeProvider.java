@@ -63,23 +63,33 @@ public abstract class ErebusRecipeProvider extends RecipeProvider implements ICo
     }
 
     protected void slab(ItemLike material, ItemLike result) {
-        slabBuilder(BUILDING_BLOCKS, result, Ingredient.of(material));
+        slabBuilder(BUILDING_BLOCKS, result, Ingredient.of(material))
+                .unlockedBy("has_%s".formatted(material.asItem().getDescriptionId().toLowerCase(Locale.ROOT)), has(material))
+                .save(output);
     }
 
     protected void door(ItemLike material, ItemLike result) {
-        doorBuilder(result, Ingredient.of(material));
+        doorBuilder(result, Ingredient.of(material))
+                .unlockedBy("has_%s".formatted(material.asItem().getDescriptionId().toLowerCase(Locale.ROOT)), has(material))
+                .save(output);
     }
 
     protected void fence(ItemLike material, ItemLike result) {
-        fenceBuilder(result, Ingredient.of(material));
+        fenceBuilder(result, Ingredient.of(material))
+                .unlockedBy("has_%s".formatted(material.asItem().getDescriptionId().toLowerCase(Locale.ROOT)), has(material))
+                .save(output);
     }
 
     protected void fenceGate(ItemLike material, ItemLike result) {
-        fenceGateBuilder(result, Ingredient.of(material));
+        fenceGateBuilder(result, Ingredient.of(material))
+                .unlockedBy("has_%s".formatted(material.asItem().getDescriptionId().toLowerCase(Locale.ROOT)), has(material))
+                .save(output);
     }
 
     protected void wall(ItemLike material, ItemLike result) {
-        wallBuilder(BUILDING_BLOCKS, result, Ingredient.of(material));
+        wallBuilder(BUILDING_BLOCKS, result, Ingredient.of(material))
+                .unlockedBy("has_%s".formatted(material.asItem().getDescriptionId().toLowerCase(Locale.ROOT)), has(material))
+                .save(output);
     }
 
     protected void twoByTwo(ItemLike material, ItemLike result) {
