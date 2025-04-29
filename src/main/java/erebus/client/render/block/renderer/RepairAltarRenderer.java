@@ -23,10 +23,10 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class RepairAltarRenderer implements BlockEntityRenderer<RepairAltarBlockEntity> {
 	private static final ResourceLocation[] TEXTURE = new ResourceLocation[] {
 			Erebus.prefix("textures/special/tiles/altar_repair_1.png"),
-			Erebus.prefix("erebus:textures/special/tiles/altar_repair_2.png"),
-			Erebus.prefix("erebus:textures/special/tiles/altar_repair_3.png"),
-			Erebus.prefix("erebus:textures/special/tiles/altar_repair_4.png"),
-			Erebus.prefix("erebus:textures/special/tiles/altar_repair_5.png")
+			Erebus.prefix("textures/special/tiles/altar_repair_2.png"),
+			Erebus.prefix("textures/special/tiles/altar_repair_3.png"),
+			Erebus.prefix("textures/special/tiles/altar_repair_4.png"),
+			Erebus.prefix("textures/special/tiles/altar_repair_5.png")
 			};
 
 	private final RepairAltarModel model;

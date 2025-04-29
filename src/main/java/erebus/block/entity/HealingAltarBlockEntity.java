@@ -2,6 +2,7 @@ package erebus.block.entity;
 
 import java.util.List;
 
+import erebus.block.altars.AltarAbstract;
 import erebus.client.particle.ClientParticles;
 import erebus.network.client.AltarAnimatonTimerPacket;
 import erebus.registries.ModBlockEntities;
@@ -46,7 +47,7 @@ public class HealingAltarBlockEntity extends AltarAbstractBlockEntity {
 					if (altar.animationTicks > 0)
 						altar.animationTicks--;
 					if (altar.animationTicks == 1)
-						level.setBlockAndUpdate(pos, ModBlocks.ALTAR_BASE.get().defaultBlockState());
+						level.setBlockAndUpdate(pos, ModBlocks.ALTAR_BASE.get().defaultBlockState().setValue(AltarAbstract.FACING, altar.getBlockState().getValue(AltarAbstract.FACING)));
 				}
 				if (altar.spawnTicks == 0) {
 					altar.setActive(false);

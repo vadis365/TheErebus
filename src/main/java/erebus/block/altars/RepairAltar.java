@@ -48,10 +48,37 @@ public class RepairAltar extends AltarAbstract {
 	@Override
 	 protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
 		BlockEntity blockEntity =  level.getBlockEntity(pos);
-		if (blockEntity instanceof RepairAltarBlockEntity altar)
+		if (blockEntity instanceof RepairAltarBlockEntity altar) {
 			altar.setActive(false);
+			altar.setcanBeUsed(true);
+		}
 	}
-
+	/*
+	@Override
+	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity) {
+		TileEntityErebusAltarRepair te = Utils.getTileEntity(world, pos, TileEntityErebusAltarRepair.class);
+		double offsetY = 0.9D;
+		if (entity instanceof EntityItem && entity.getEntityBoundingBox().minY >= pos.getY() + offsetY && te.active) {
+			te.setCollisions(te.getCollisions() + 1);
+			ItemStack is = ((EntityItem) entity).getItem();
+			entity.posY = pos.getY() + 1.6D;
+			int repairDamage = is.getItemDamage();
+			if (is.isItemStackDamageable() && repairDamage > 0) {
+				if (te.notUsed)
+					te.setSpawnTicks(160);
+				if (te.getSpawnTicks() == 60 && te.getCollisions() == 101) {
+					world.playSound((EntityPlayer)null, pos, SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, 0.2F, 1.0F);
+					is.getItem().setDamage(is, -repairDamage);
+				}
+				if (te.getSpawnTicks() % 2 == 0 && te.getCollisions() < 101)
+					if (world.isRemote)
+						te.sparky(world, pos);
+			}
+			if (te.getCollisions() > 101)
+				te.setSpawnTicks(0);
+		}
+	}
+*/
 	@Override
 	public ItemInteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
 		BlockEntity blockEntity = level.getBlockEntity(pos);

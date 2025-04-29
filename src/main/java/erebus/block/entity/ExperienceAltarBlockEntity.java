@@ -1,5 +1,6 @@
 package erebus.block.entity;
 
+import erebus.block.altars.AltarAbstract;
 import erebus.client.particle.ClientParticles;
 import erebus.network.client.AltarAnimatonTimerPacket;
 import erebus.registries.ModBlockEntities;
@@ -36,7 +37,7 @@ public class ExperienceAltarBlockEntity extends AltarAbstractBlockEntity {
 				if (altar.animationTicks > 0)
 					altar.animationTicks--;
 				if (altar.animationTicks == 1)
-					level.setBlockAndUpdate(pos, ModBlocks.ALTAR_BASE.get().defaultBlockState());
+					level.setBlockAndUpdate(pos, ModBlocks.ALTAR_BASE.get().defaultBlockState().setValue(AltarAbstract.FACING, altar.getBlockState().getValue(AltarAbstract.FACING)));
 			}
 			if (altar.prevAnimationTicks != altar.animationTicks)
 				PacketDistributor.sendToPlayersNear((ServerLevel) altar.getLevel(), null, altar.getBlockPos().getX(),
