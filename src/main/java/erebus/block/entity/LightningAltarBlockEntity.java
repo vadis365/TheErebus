@@ -103,7 +103,7 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 		spawnTicks = i;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unlikely-arg-type")
 	protected void findEnemyToAttack() {
 		List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(getBlockPos()).inflate(6D, 2D, 6D));
 		if (active)
@@ -111,7 +111,7 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 				Entity entity = list.get(i);
 				if (entity != null)
 					if (entity instanceof LivingEntity target)
-						if (!target.getTags().isEmpty() && target.getTags().contains((EntityTypeTags.ARTHROPOD))); {
+						if (!target.getTags().isEmpty() && target.getTags().contains(EntityTypeTags.ARTHROPOD)); {
 							double a = entity.getX();
 							double b = entity.getBoundingBox().minY;
 							double c = entity.getZ();

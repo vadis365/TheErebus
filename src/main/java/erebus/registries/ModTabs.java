@@ -138,7 +138,7 @@ public class ModTabs {
                         output.accept(ModBlocks.ALTAR_BASE.get());
                         output.accept(ModBlocks.ALTAR_LIGHTNING.get());
                         output.accept(ModBlocks.ALTAR_HEALING.get());
-                        output.accept(ModBlocks.ALTAR_XP.get());
+                        output.accept(ModBlocks.ALTAR_EXPERIENCE.get());
                         output.accept(ModBlocks.ALTAR_REPAIR.get());
                         output.accept(ModBlocks.OFFERING_ALTAR.get());
                         output.accept(ModBlocks.WASP_NEST.get());

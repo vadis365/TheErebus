@@ -442,7 +442,7 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ALTAR_BASE);
         dropSelf(ALTAR_LIGHTNING);
         dropSelf(ALTAR_HEALING);
-        dropSelf(ALTAR_XP);
+        dropSelf(ALTAR_EXPERIENCE);
         dropSelf(ALTAR_REPAIR);
         dropSelf(OFFERING_ALTAR);
 

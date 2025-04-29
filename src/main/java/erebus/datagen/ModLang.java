@@ -634,7 +634,7 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.ALTAR_BASE, "Altar Base");
         addBlock(ModBlocks.ALTAR_LIGHTNING, "Altar of Lightning");
         addBlock(ModBlocks.ALTAR_HEALING, "Altar of Healing");
-        addBlock(ModBlocks.ALTAR_XP, "Altar of Experience");
+        addBlock(ModBlocks.ALTAR_EXPERIENCE, "Altar of Experience");
         addBlock(ModBlocks.ALTAR_REPAIR, "Altar of Repair");
         addBlock(ModBlocks.OFFERING_ALTAR, "Offering Altar");
 
