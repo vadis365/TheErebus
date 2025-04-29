@@ -112,14 +112,14 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 				Entity entity = list.get(i);
 				if (entity != null)
 					if (entity instanceof LivingEntity target)
-						if (!target.getTags().isEmpty() && target.getTags().contains(Tags.getTagTranslationKey(EntityTypeTags.ARTHROPOD))); {
+						if (!target.getTags().isEmpty() && target.getTags().contains(Tags.getTagTranslationKey(EntityTypeTags.ARTHROPOD))) {
 							double a = entity.getX();
 							double b = entity.getBoundingBox().minY;
 							double c = entity.getZ();
 							LightningBolt entitybolt = EntityType.LIGHTNING_BOLT.create(level);
-							if(entitybolt != null) {
-							entitybolt.setPos(a, b, c);
-							level.addFreshEntity(entitybolt);
+							if (entitybolt != null) {
+								entitybolt.setPos(a, b, c);
+								level.addFreshEntity(entitybolt);
 							}
 						}
 			}

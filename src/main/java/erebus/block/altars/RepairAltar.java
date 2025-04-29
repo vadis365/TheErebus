@@ -9,9 +9,12 @@ import erebus.block.entity.RepairAltarBlockEntity;
 import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -53,32 +56,33 @@ public class RepairAltar extends AltarAbstract {
 			altar.setcanBeUsed(true);
 		}
 	}
-	/*
+
 	@Override
-	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity) {
-		TileEntityErebusAltarRepair te = Utils.getTileEntity(world, pos, TileEntityErebusAltarRepair.class);
-		double offsetY = 0.9D;
-		if (entity instanceof EntityItem && entity.getEntityBoundingBox().minY >= pos.getY() + offsetY && te.active) {
-			te.setCollisions(te.getCollisions() + 1);
-			ItemStack is = ((EntityItem) entity).getItem();
-			entity.posY = pos.getY() + 1.6D;
-			int repairDamage = is.getItemDamage();
-			if (is.isItemStackDamageable() && repairDamage > 0) {
-				if (te.notUsed)
-					te.setSpawnTicks(160);
-				if (te.getSpawnTicks() == 60 && te.getCollisions() == 101) {
-					world.playSound((EntityPlayer)null, pos, SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, 0.2F, 1.0F);
-					is.getItem().setDamage(is, -repairDamage);
+	 public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+			BlockEntity blockEntity = level.getBlockEntity(pos);
+			if (blockEntity instanceof RepairAltarBlockEntity altar) {
+				if (entity instanceof ItemEntity && altar.active) {
+					altar.setCollisions(altar.getCollisions() + 1);
+					ItemStack is = ((ItemEntity) entity).getItem();
+					entity.yo = pos.getY() + 1.6D;
+					int repairDamage = is.getMaxDamage();
+					if (is.isRepairable() && repairDamage > 0) {
+						if (altar.notUsed)
+							altar.setSpawnTicks(160);
+						if (altar.getSpawnTicks() == 60 && altar.getCollisions() == 101) {
+							level.playSound(null, pos, SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 0.2F, 1.0F);
+							is.getItem().setDamage(is, -repairDamage);
+						}
+						if (altar.getSpawnTicks() % 2 == 0 && altar.getCollisions() < 101)
+							if (level.isClientSide())
+								altar.sparky(level, pos);
+					}
+					if (altar.getCollisions() > 101)
+						altar.setSpawnTicks(0);
 				}
-				if (te.getSpawnTicks() % 2 == 0 && te.getCollisions() < 101)
-					if (world.isRemote)
-						te.sparky(world, pos);
 			}
-			if (te.getCollisions() > 101)
-				te.setSpawnTicks(0);
 		}
-	}
-*/
+
 	@Override
 	public ItemInteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
 		BlockEntity blockEntity = level.getBlockEntity(pos);

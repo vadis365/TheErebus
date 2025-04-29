@@ -95,7 +95,7 @@ public class RepairAltarBlockEntity extends AltarAbstractBlockEntity {
 	public void setcanBeUsed(boolean canBeUsed) {
 		notUsed = canBeUsed;
 	}
-/*
+
 	public void sparky(Level level, BlockPos pos) {
 		if (level.isClientSide()) {
 			double x = pos.getX() + 0.53125F;
@@ -108,7 +108,7 @@ public class RepairAltarBlockEntity extends AltarAbstractBlockEntity {
 			ClientParticles.spawnCustomParticle("portal", x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
 		}
 	}
-*/
+
 	@Override
 	protected void writeTileToNBT(CompoundTag nbt) {
 		nbt.putInt("animationTicks", animationTicks);

@@ -19,7 +19,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public abstract class AltarAbstract extends HorizontalDirectionalBlock implements EntityBlock {
-	public static final VoxelShape ALTAR_AABB = Block.box(0D, 0D, 0D, 16D, 15D, 16D);
+	public static final VoxelShape ALTAR_AABB = Block.box(0D, 0D, 0D, 16D, 16D, 16D);
 
 	public AltarAbstract(Properties properties) {
 		super(properties);

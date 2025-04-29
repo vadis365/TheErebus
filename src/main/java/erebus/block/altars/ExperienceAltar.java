@@ -12,9 +12,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Entity.RemovalReason;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -51,33 +56,36 @@ public class ExperienceAltar extends AltarAbstract {
 		if (blockEntity instanceof ExperienceAltarBlockEntity altar)
 			altar.setActive(false);
 	}
-/*
+
 	@Override
-	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity) {
-		ExperienceAltarBlockEntity te = Utils.getTileEntity(world, pos, ExperienceAltarBlockEntity.class);
-		double offsetY = 0.9D;
-		if (!world.isRemote) {
-			if (entity instanceof EntityItem && entity.getEntityBoundingBox().minY >= pos.getY() + offsetY && te.active) {
-				ItemStack stack = ((EntityItem) entity).getItem();
-				if (stack.getItem() == ModItems.MATERIALS) {
-					te.setUses(te.getUses() + stack.getCount());
+	 public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+		BlockEntity blockEntity = level.getBlockEntity(pos);
+		if (blockEntity instanceof ExperienceAltarBlockEntity altar) {
+		if (!level.isClientSide()) {
+			if (entity instanceof ItemEntity && altar.active) {
+				ItemStack stack = ((ItemEntity) entity).getItem();
+				if (stack.getItem() == ModItems.BIO_LUMINESCENCE.get()) { //TODO make this only Erebus materials items
+					altar.setUses(altar.getUses() + stack.getCount());
 					ItemStack stackLeft = stack.copy();
-					entity.setDead();
-					if (te.getUses() <= 165)
-						world.spawnEntity(new EntityXPOrb(world, pos.getX() + 0.5D, pos.getY() + 1.8D, pos.getZ() + 0.5D, stack.getCount() * 5));
-					if (te.getExcess() > 0) {
-						stackLeft.setCount(te.getExcess());
-						Utils.dropStackNoRandom(world, pos.up(), stackLeft);
+					entity.remove(RemovalReason.DISCARDED);
+					if (altar.getUses() <= 165) {
+						ExperienceOrb orb = new ExperienceOrb(level, pos.getX() + 0.5D, pos.getY() - 0.125D, pos.getZ() + 0.5D, stack.getCount() * 5);
+						level.addFreshEntity(orb);
 					}
-					if (te.getUses() > 165) {
-						te.active = false;
-						te.setSpawnTicks(0);
+					if (altar.getExcess() > 0) {
+						stackLeft.setCount(altar.getExcess());
+						Block.popResource(level, pos.above(), stackLeft);
+					}
+					if (altar.getUses() > 165) {
+						altar.active = false;
+						altar.setSpawnTicks(0);
 					}
 				}
 			}
 		}
+		}
 	}
-*/
+
 	@Override
 	public ItemInteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
 		BlockEntity blockEntity = level.getBlockEntity(pos);
