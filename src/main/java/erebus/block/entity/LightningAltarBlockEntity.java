@@ -21,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
@@ -62,7 +63,7 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 			}
 	
 			if (level.isClientSide()) {
-			if (altar.animationTicks >= 0 && altar.animationTicks <= 20)
+			if (altar.animationTicks > 0 && altar.animationTicks < 20)
 				altar.flameOn(level, pos);
 			if (altar.animationTicks == 20)
 				if (altar.fuzz < 20) {
@@ -104,7 +105,6 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 		spawnTicks = i;
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
 	protected void findEnemyToAttack() {
 		List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(getBlockPos()).inflate(6D, 2D, 6D));
 		if (active)
@@ -112,7 +112,7 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 				Entity entity = list.get(i);
 				if (entity != null)
 					if (entity instanceof LivingEntity target)
-						if (!target.getTags().isEmpty() && target.getTags().contains(EntityTypeTags.ARTHROPOD)); {
+						if (!target.getTags().isEmpty() && target.getTags().contains(Tags.getTagTranslationKey(EntityTypeTags.ARTHROPOD))); {
 							double a = entity.getX();
 							double b = entity.getBoundingBox().minY;
 							double c = entity.getZ();

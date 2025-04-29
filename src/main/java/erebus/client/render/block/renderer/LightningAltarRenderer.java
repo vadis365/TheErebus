@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 
 import erebus.Erebus;
-import erebus.block.altars.AltarAbstract;
 import erebus.block.entity.LightningAltarBlockEntity;
 import erebus.client.render.block.model.LightningAltarModel;
 import erebus.registries.client.ModBlockEntityRendering;
@@ -14,7 +13,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -41,29 +39,11 @@ public class LightningAltarRenderer implements BlockEntityRenderer<LightningAlta
     public void render(LightningAltarBlockEntity tile, float partialTick, PoseStack stack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
 		if(tile == null || !tile.hasLevel())
 			return;
-		Direction facing = tile.getBlockState().getValue(AltarAbstract.FACING);
 		VertexConsumer consumer = buffer.getBuffer(RenderType.entitySolid(getAltarTexture(tile)));
-
 		stack.pushPose();
 		stack.translate(0.5D, 0.75D, 0.5D);
 		stack.scale(0.5F, -0.5F, -0.5F);
-
-		switch (facing) {
-		case UP:
-		case DOWN:
-		case NORTH:
-			stack.mulPose(Axis.YP.rotationDegrees(180F));
-			break;
-		case SOUTH:
-			break;
-		case WEST:
-			stack.mulPose(Axis.YP.rotationDegrees(90F));
-			break;
-		case EAST:
-			stack.mulPose(Axis.YN.rotationDegrees(90F));
-			break;
-		}
-
+		stack.mulPose(Axis.YP.rotationDegrees(180F));
 		model.renderWithTile(stack, consumer, packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF, tile, partialTick);
 		stack.popPose();
 	}
