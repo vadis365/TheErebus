@@ -65,7 +65,7 @@ public class RepairAltar extends AltarAbstract {
 					altar.setCollisions(altar.getCollisions() + 1);
 					ItemStack is = ((ItemEntity) entity).getItem();
 					entity.yo = pos.getY() + 1.6D;
-					int repairDamage = is.getMaxDamage();
+					int repairDamage = is.getDamageValue();
 					if (is.isRepairable() && repairDamage > 0) {
 						if (altar.notUsed)
 							altar.setSpawnTicks(160);
