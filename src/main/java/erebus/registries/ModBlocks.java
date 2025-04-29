@@ -15,9 +15,11 @@ import erebus.block.SwampVentBlock;
 import erebus.block.UmberFurnaceBlock;
 import erebus.block.WitherWeb;
 import erebus.block.altars.AltarBase;
+import erebus.block.altars.ExperienceAltar;
 import erebus.block.altars.HealingAltar;
 import erebus.block.altars.LightningAltar;
 import erebus.block.altars.OfferingAltar;
+import erebus.block.altars.RepairAltar;
 import erebus.block.bamboo.BambooCrateBlock;
 import erebus.block.bamboo.BambooTorchBlock;
 import erebus.block.portal.ErebusPortalBlock;
@@ -513,8 +515,8 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<AltarBase> ALTAR_BASE = registerBlock("altar_base", () -> new AltarBase(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
     public static final DeferredBlock<LightningAltar> ALTAR_LIGHTNING = registerBlock("altar_lightning", () -> new LightningAltar(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
     public static final DeferredBlock<HealingAltar> ALTAR_HEALING = registerBlock("altar_healing", () -> new HealingAltar(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
-    public static final DeferredBlock<Block> ALTAR_XP = registerSimpleBlock("altar_xp", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> ALTAR_REPAIR = registerSimpleBlock("altar_repair", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<ExperienceAltar> ALTAR_EXPERIENCE = registerBlock("altar_experience", () -> new ExperienceAltar(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
+    public static final DeferredBlock<RepairAltar> ALTAR_REPAIR = registerBlock("altar_repair", () -> new RepairAltar(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
     public static final DeferredBlock<OfferingAltar> OFFERING_ALTAR = registerBlock("offering_altar", () -> new OfferingAltar(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
 
     // MARK: Antlion Dungeon

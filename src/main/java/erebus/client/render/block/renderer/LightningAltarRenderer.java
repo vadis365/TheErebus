@@ -6,8 +6,8 @@ import com.mojang.math.Axis;
 
 import erebus.Erebus;
 import erebus.block.altars.AltarAbstract;
-import erebus.block.entity.HealingAltarBlockEntity;
-import erebus.client.render.block.model.HealingAltarModel;
+import erebus.block.entity.LightningAltarBlockEntity;
+import erebus.client.render.block.model.LightningAltarModel;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -20,23 +20,25 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class HealingAltarRenderer implements BlockEntityRenderer<HealingAltarBlockEntity> {
+public class LightningAltarRenderer implements BlockEntityRenderer<LightningAltarBlockEntity> {
 	private static final ResourceLocation[] TEXTURE = new ResourceLocation[] {
-			Erebus.prefix("textures/special/tiles/altar_healing_1.png"),
-			Erebus.prefix("textures/special/tiles/altar_healing_2.png"),
-			Erebus.prefix("textures/special/tiles/altar_healing_3.png"),
-			Erebus.prefix("textures/special/tiles/altar_healing_4.png"),
-			Erebus.prefix("textures/special/tiles/altar_healing_5.png")
+			Erebus.prefix("textures/special/tiles/altar_lightning_1.png"),
+			Erebus.prefix("textures/special/tiles/altar_lightning_2.png"),
+			Erebus.prefix("textures/special/tiles/altar_lightning_3.png"),
+			Erebus.prefix("textures/special/tiles/altar_lightning_4.png"),
+			Erebus.prefix("textures/special/tiles/altar_lightning_5.png"),
+			Erebus.prefix("textures/special/tiles/altar_lightning_6.png"),
+			Erebus.prefix("textures/special/tiles/altar_lightning_7.png")
 			};
 
-	private final HealingAltarModel model;
-	
-	public HealingAltarRenderer(Context context) {
-		model = new HealingAltarModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_HEALING));
+	private final LightningAltarModel model;
+
+	public LightningAltarRenderer(Context context) {
+		model = new LightningAltarModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_LIGHTNING));
 	}
 
 	@Override
-    public void render(HealingAltarBlockEntity tile, float partialTick, PoseStack stack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+    public void render(LightningAltarBlockEntity tile, float partialTick, PoseStack stack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
 		if(tile == null || !tile.hasLevel())
 			return;
 		Direction facing = tile.getBlockState().getValue(AltarAbstract.FACING);
@@ -66,7 +68,7 @@ public class HealingAltarRenderer implements BlockEntityRenderer<HealingAltarBlo
 		stack.popPose();
 	}
 
-	protected ResourceLocation getAltarTexture(HealingAltarBlockEntity tile) {
+	protected ResourceLocation getAltarTexture(LightningAltarBlockEntity tile) {
 		if (tile.animationTicks <= 4)
 			return TEXTURE[0];
 		else if (tile.animationTicks > 4 && tile.animationTicks <= 8)
@@ -75,8 +77,14 @@ public class HealingAltarRenderer implements BlockEntityRenderer<HealingAltarBlo
 			return TEXTURE[2];
 		else if (tile.animationTicks > 12 && tile.animationTicks <= 16)
 			return TEXTURE[3];
-		else if (tile.animationTicks > 16 && tile.animationTicks <= 20)
+		else if (tile.animationTicks > 16 && tile.animationTicks < 20)
 			return TEXTURE[4];
+		else if (tile.animationTicks == 20 && tile.fuzz <= 5)
+			return TEXTURE[4];
+		else if (tile.animationTicks == 20 && tile.fuzz > 5 && tile.fuzz <= 10 || tile.animationTicks == 20 && tile.fuzz > 15 && tile.fuzz <= 20)
+			return TEXTURE[5];
+		else if (tile.animationTicks == 20 && tile.fuzz > 10 && tile.fuzz <= 15)
+			return TEXTURE[6];
 		else
 			return TEXTURE[0];
 	}

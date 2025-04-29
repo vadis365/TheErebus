@@ -6,8 +6,8 @@ import com.mojang.math.Axis;
 
 import erebus.Erebus;
 import erebus.block.altars.AltarAbstract;
-import erebus.block.entity.HealingAltarBlockEntity;
-import erebus.client.render.block.model.HealingAltarModel;
+import erebus.block.entity.RepairAltarBlockEntity;
+import erebus.client.render.block.model.RepairAltarModel;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -20,23 +20,23 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class HealingAltarRenderer implements BlockEntityRenderer<HealingAltarBlockEntity> {
+public class RepairAltarRenderer implements BlockEntityRenderer<RepairAltarBlockEntity> {
 	private static final ResourceLocation[] TEXTURE = new ResourceLocation[] {
-			Erebus.prefix("textures/special/tiles/altar_healing_1.png"),
-			Erebus.prefix("textures/special/tiles/altar_healing_2.png"),
-			Erebus.prefix("textures/special/tiles/altar_healing_3.png"),
-			Erebus.prefix("textures/special/tiles/altar_healing_4.png"),
-			Erebus.prefix("textures/special/tiles/altar_healing_5.png")
+			Erebus.prefix("textures/special/tiles/altar_repair_1.png"),
+			Erebus.prefix("erebus:textures/special/tiles/altar_repair_2.png"),
+			Erebus.prefix("erebus:textures/special/tiles/altar_repair_3.png"),
+			Erebus.prefix("erebus:textures/special/tiles/altar_repair_4.png"),
+			Erebus.prefix("erebus:textures/special/tiles/altar_repair_5.png")
 			};
 
-	private final HealingAltarModel model;
+	private final RepairAltarModel model;
 	
-	public HealingAltarRenderer(Context context) {
-		model = new HealingAltarModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_HEALING));
+	public RepairAltarRenderer(Context context) {
+		model = new RepairAltarModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_REPAIR));
 	}
 
 	@Override
-    public void render(HealingAltarBlockEntity tile, float partialTick, PoseStack stack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+    public void render(RepairAltarBlockEntity tile, float partialTick, PoseStack stack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
 		if(tile == null || !tile.hasLevel())
 			return;
 		Direction facing = tile.getBlockState().getValue(AltarAbstract.FACING);
@@ -66,7 +66,7 @@ public class HealingAltarRenderer implements BlockEntityRenderer<HealingAltarBlo
 		stack.popPose();
 	}
 
-	protected ResourceLocation getAltarTexture(HealingAltarBlockEntity tile) {
+	protected ResourceLocation getAltarTexture(RepairAltarBlockEntity tile) {
 		if (tile.animationTicks <= 4)
 			return TEXTURE[0];
 		else if (tile.animationTicks > 4 && tile.animationTicks <= 8)

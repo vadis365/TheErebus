@@ -4,10 +4,12 @@ import java.util.function.Supplier;
 
 import erebus.Erebus;
 import erebus.block.entity.BlockOfBonesBlockEntity;
+import erebus.block.entity.ExperienceAltarBlockEntity;
 import erebus.block.entity.GaeanKeystoneBlockEntity;
 import erebus.block.entity.HealingAltarBlockEntity;
 import erebus.block.entity.LightningAltarBlockEntity;
 import erebus.block.entity.OfferingAltarBlockEntity;
+import erebus.block.entity.RepairAltarBlockEntity;
 import erebus.block.entity.UmberFurnaceBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -59,4 +61,17 @@ public class ModBlockEntities {
             ).build(null)
     );
 
+	    public static final Supplier<BlockEntityType<RepairAltarBlockEntity>> ALTAR_REPAIR = BLOCK_ENTITIES.register(
+	            "altar_repair",
+	            () -> BlockEntityType.Builder.of(
+	            		RepairAltarBlockEntity::new, ModBlocks.ALTAR_REPAIR.get()
+	            ).build(null)
+	    );
+
+	    public static final Supplier<BlockEntityType<ExperienceAltarBlockEntity>> ALTAR_EXPERIENCE = BLOCK_ENTITIES.register(
+	            "altar_experience",
+	            () -> BlockEntityType.Builder.of(
+	            		ExperienceAltarBlockEntity::new, ModBlocks.ALTAR_EXPERIENCE.get()
+	            ).build(null)
+	    );
 }

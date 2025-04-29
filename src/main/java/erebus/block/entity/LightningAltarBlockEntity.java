@@ -23,14 +23,14 @@ import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
-	
-	public LightningAltarBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntities.ALTAR_LIGHTNING.get(), pos, state);
-	}
 
 	public boolean active;
 	public int fuzz;
 	private int spawnTicks;
+	
+	public LightningAltarBlockEntity(BlockPos pos, BlockState state) {
+		super(ModBlockEntities.ALTAR_LIGHTNING.get(), pos, state);
+	}
 
 	public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState blockState, T blockEntity) {
 		if (blockEntity instanceof LightningAltarBlockEntity altar) {

@@ -24,8 +24,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class AltarBase extends AltarAbstract {
@@ -83,7 +81,7 @@ public class AltarBase extends AltarAbstract {
 
 	private void initMap() {
 		if (ALTAR_TYPES.isEmpty()) {
-			ALTAR_TYPES.put(ModItems.BIO_VELOCITY.get(), ModBlocks.ALTAR_XP.get());
+			ALTAR_TYPES.put(ModItems.BIO_VELOCITY.get(), ModBlocks.ALTAR_EXPERIENCE.get());
 			ALTAR_TYPES.put(ModItems.ELASTIC_FIBER.get(), ModBlocks.ALTAR_REPAIR.get());
 			ALTAR_TYPES.put(ModItems.RED_GEM.get(), ModBlocks.ALTAR_LIGHTNING.get());
 			ALTAR_TYPES.put(ModItems.BIO_LUMINESCENCE.get(), ModBlocks.ALTAR_HEALING.get());
