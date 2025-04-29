@@ -6,6 +6,7 @@ import erebus.Erebus;
 import erebus.block.entity.BlockOfBonesBlockEntity;
 import erebus.block.entity.GaeanKeystoneBlockEntity;
 import erebus.block.entity.HealingAltarBlockEntity;
+import erebus.block.entity.LightningAltarBlockEntity;
 import erebus.block.entity.OfferingAltarBlockEntity;
 import erebus.block.entity.UmberFurnaceBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -48,6 +49,13 @@ public class ModBlockEntities {
             "altar_healing",
             () -> BlockEntityType.Builder.of(
             		HealingAltarBlockEntity::new, ModBlocks.ALTAR_HEALING.get()
+            ).build(null)
+    );
+
+	    public static final Supplier<BlockEntityType<LightningAltarBlockEntity>> ALTAR_LIGHTNING = BLOCK_ENTITIES.register(
+            "altar_lightning",
+            () -> BlockEntityType.Builder.of(
+            		LightningAltarBlockEntity::new, ModBlocks.ALTAR_LIGHTNING.get()
             ).build(null)
     );
 

@@ -11,34 +11,35 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class HealingAltarBlockEntity extends AltarAbstractBlockEntity {
-
-	public HealingAltarBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntities.ALTAR_HEALING.get(), pos, state);
+public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
+	
+	public LightningAltarBlockEntity(BlockPos pos, BlockState state) {
+		super(ModBlockEntities.ALTAR_LIGHTNING.get(), pos, state);
 	}
 
 	public boolean active;
+	public int fuzz;
 	private int spawnTicks;
 
 	public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState blockState, T blockEntity) {
-		if (blockEntity instanceof HealingAltarBlockEntity altar) {
+		if (blockEntity instanceof LightningAltarBlockEntity altar) {
 			if (!level.isClientSide()) {
 				altar.prevAnimationTicks = altar.animationTicks;
 				
 				altar.spawnTicks--;
 				if (altar.active) {
-					altar.findPlayerToHeal();
+					altar.findEnemyToAttack();
 					if (altar.animationTicks < 20)
 						altar.animationTicks++;
 				}
@@ -60,24 +61,37 @@ public class HealingAltarBlockEntity extends AltarAbstractBlockEntity {
 			}
 	
 			if (level.isClientSide()) {
-				if (altar.animationTicks == 6)
-					altar.bigLove(level, pos);
-			}
+			if (altar.animationTicks >= 0 && altar.animationTicks <= 20)
+				altar.flameOn(level, pos);
+			if (altar.animationTicks == 20)
+				if (altar.fuzz < 20) {
+					altar.fuzz++;
+					if (altar.fuzz >= 20)
+						altar.fuzz = 0;
+				}
+		}
 		}
 	}
 
-	public void bigLove(Level level, BlockPos pos) {
+	public void flameOn(Level level, BlockPos pos) {
 		if (level.isClientSide()) {
 			double x = pos.getX() + 0.53125F;
 			double y = pos.getY() + 1.25F;
 			double z = pos.getZ() + 0.53125F;
-			ClientParticles.spawnCustomParticle("heart", x, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("heart", x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("heart", x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("heart", x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("heart", x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("heart", x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("heart", x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("smoke", x, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("flame", x, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("smoke", x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("flame", x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("smoke", x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("flame", x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("smoke", x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("flame", x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("smoke", x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("flame", x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("smoke", x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("flame", x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("smoke", x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("flame", x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -89,20 +103,30 @@ public class HealingAltarBlockEntity extends AltarAbstractBlockEntity {
 		spawnTicks = i;
 	}
 
-	public void findPlayerToHeal() {
-		List<Player> list = level.getEntitiesOfClass(Player.class, new AABB(getBlockPos()).inflate(4D, 2D, 4D));
+	@SuppressWarnings("unchecked")
+	protected void findEnemyToAttack() {
+		List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(getBlockPos()).inflate(6D, 2D, 6D));
 		if (active)
 			for (int i = 0; i < list.size(); i++) {
 				Entity entity = list.get(i);
-				if (!(entity instanceof FakePlayer))
-					((Player) entity).addEffect(new MobEffectInstance(MobEffects.HEAL, 1 * 20, 0));
+				if (entity != null)
+					if (entity instanceof LivingEntity target)
+						if (!target.getTags().isEmpty() && target.getTags().contains((EntityTypeTags.ARTHROPOD))); {
+							double a = entity.getX();
+							double b = entity.getBoundingBox().minY;
+							double c = entity.getZ();
+							LightningBolt entitybolt = EntityType.LIGHTNING_BOLT.create(level);
+							if(entitybolt != null) {
+							entitybolt.setPos(a, b, c);
+							level.addFreshEntity(entitybolt);
+							}
+						}
 			}
 	}
 
 	@Override
 	protected void writeTileToNBT(CompoundTag nbt) {
 		nbt.putInt("animationTicks", animationTicks);
-		nbt.putInt("prevAnimationTicks", prevAnimationTicks);
 		nbt.putInt("spawnTicks", spawnTicks);
 		nbt.putBoolean("active", active);
 	}
@@ -110,7 +134,6 @@ public class HealingAltarBlockEntity extends AltarAbstractBlockEntity {
 	@Override
 	protected void readTileFromNBT(CompoundTag nbt) {
 		animationTicks = nbt.getInt("animationTicks");
-		prevAnimationTicks = nbt.getInt("prevAnimationTicks");
 		spawnTicks = nbt.getInt("spawnTicks");
 		active = nbt.getBoolean("active");
 	}
