@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "erebus:block/altar_repair" }
+    }
+}
