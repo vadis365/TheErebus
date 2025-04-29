@@ -1,10 +1,10 @@
 {
   "block.erebus.algae": "Swamp Algae",
   "block.erebus.altar_base": "Altar Base",
+  "block.erebus.altar_experience": "Altar of Experience",
   "block.erebus.altar_healing": "Altar of Healing",
   "block.erebus.altar_lightning": "Altar of Lightning",
   "block.erebus.altar_repair": "Altar of Repair",
-  "block.erebus.altar_xp": "Altar of Experience",
   "block.erebus.amber": "Amber",
   "block.erebus.amber_bricks": "Amber Bricks",
   "block.erebus.amber_door": "Amber Door",
@@ -608,6 +608,5 @@
   "item.erebus.web_slinger_wither": "Wither Web Slinger",
   "item.erebus.whetstone": "Whetstone",
   "item.erebus.whetstone_powder": "Whetstone Powder",
-  "item.erebus.woodlouse_ball": "Woodlouse Ball",
-  "tooltip.erebus.dimension": "t"
+  "item.erebus.woodlouse_ball": "Woodlouse Ball"
 }

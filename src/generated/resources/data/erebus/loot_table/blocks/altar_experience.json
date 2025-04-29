@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "erebus:altar_xp"
+          "name": "erebus:altar_experience"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "erebus:blocks/altar_xp"
+  "random_sequence": "erebus:blocks/altar_experience"
 }
