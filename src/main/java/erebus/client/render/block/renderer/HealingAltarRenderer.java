@@ -2,7 +2,6 @@ package erebus.client.render.block.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 
 import erebus.Erebus;
 import erebus.block.entity.HealingAltarBlockEntity;
@@ -40,8 +39,7 @@ public class HealingAltarRenderer implements BlockEntityRenderer<HealingAltarBlo
 		VertexConsumer consumer = buffer.getBuffer(RenderType.entitySolid(getAltarTexture(tile)));
 		stack.pushPose();
 		stack.translate(0.5D, 0.75D, 0.5D);
-		stack.scale(0.5F, -0.5F, -0.5F);
-		stack.mulPose(Axis.YP.rotationDegrees(180F));
+		stack.scale(-0.5F, -0.5F, 0.5F);
 		model.renderWithTile(stack, consumer, packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF, tile, partialTick);
 		stack.popPose();
 	}

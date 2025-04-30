@@ -73,17 +73,6 @@ public class RepairAltarModel extends Model {
 
 	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		AnvilFrontFoot.render(stack, consumer, light, overlay, colour);
-		AnvilRearFoot.render(stack, consumer, light, overlay, colour);
-		AnvilBase.render(stack, consumer, light, overlay, colour);
-		AnvilWaist.render(stack, consumer, light, overlay, colour);
-		AnvilFace.render(stack, consumer, light, overlay, colour);
-		AnvilTable.render(stack, consumer, light, overlay, colour);
-		AnvilHorn.render(stack, consumer, light, overlay, colour);
-		AnvilHeel.render(stack, consumer, light, overlay, colour);
-		Top.render(stack, consumer, light, overlay, colour);
-		Mid.render(stack, consumer, light, overlay, colour);
-		Bot.render(stack, consumer, light, overlay, colour);
 	}
 
 	public void renderWithTile(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, RepairAltarBlockEntity tile, float partialTick) {
@@ -91,7 +80,8 @@ public class RepairAltarModel extends Model {
 		if (x > 20)
 			x = 20;
 		stack.pushPose();
-		stack.scale(0.04F * x, 0.04F * x, 0.04F * x);
+		stack.mulPose(Axis.YP.rotationDegrees(-x * 9F + 90F));
+		stack.scale(0.05F * x, 0.05F * x, 0.05F * x);
 		AnvilFrontFoot.render(stack, consumer, light, overlay, colour);
 		AnvilRearFoot.render(stack, consumer, light, overlay, colour);
 		AnvilBase.render(stack, consumer, light, overlay, colour);

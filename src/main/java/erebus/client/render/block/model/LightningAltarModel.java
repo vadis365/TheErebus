@@ -88,7 +88,8 @@ public class LightningAltarModel extends Model {
 		if (x > 20)
 			x = 20;
 		stack.pushPose();
-		stack.scale(0.04F * x, 0.04F * x, 0.04F * x);
+		stack.mulPose(Axis.YP.rotationDegrees(-x * 9F + 90F));
+		stack.scale(0.05F * x, 0.05F * x, 0.05F * x);
 		SmallBox.render(stack, consumer, light, overlay, colour);
 		ElectrodeF1.render(stack, consumer, light, overlay, colour);
 		ElectrodeF2.render(stack, consumer, light, overlay, colour);

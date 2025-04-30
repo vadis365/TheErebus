@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record AltarAnimatonTimerPacket(int xPos, int yPos, int zPos, int animationTicks, int prevAnimationTicks) implements CustomPacketPayload {
+public record AltarAnimatonTimerPacket(int xPos, int yPos, int zPos, int animationTicks) implements CustomPacketPayload {
 
 	public static final Type<AltarAnimatonTimerPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "altar_animation_timer"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, AltarAnimatonTimerPacket> STREAM_CODEC = StreamCodec.composite(
@@ -25,8 +25,6 @@ public record AltarAnimatonTimerPacket(int xPos, int yPos, int zPos, int animati
 					AltarAnimatonTimerPacket::zPos,
 					ByteBufCodecs.INT,
 					AltarAnimatonTimerPacket::animationTicks,
-					ByteBufCodecs.INT,
-					AltarAnimatonTimerPacket::prevAnimationTicks,
 					AltarAnimatonTimerPacket::new
 					);
 
@@ -37,8 +35,6 @@ public record AltarAnimatonTimerPacket(int xPos, int yPos, int zPos, int animati
 			BlockEntity tile = level.getBlockEntity(new BlockPos(message.xPos, message.yPos, message.zPos));
 			if (tile instanceof AltarAbstractBlockEntity altar) {
 				altar.animationTicks = message.animationTicks;
-				altar.prevAnimationTicks = message.prevAnimationTicks;
-				
 			}
 		});
 	}

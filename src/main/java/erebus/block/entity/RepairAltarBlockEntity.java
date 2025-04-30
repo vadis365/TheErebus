@@ -25,8 +25,8 @@ public class RepairAltarBlockEntity extends AltarAbstractBlockEntity {
 
 	public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState blockState, T blockEntity) {
 		if (blockEntity instanceof RepairAltarBlockEntity altar) {
+			altar.prevAnimationTicks = altar.animationTicks;
 			if (!level.isClientSide()) {
-				altar.prevAnimationTicks = altar.animationTicks;
 				if (altar.active) {
 					if (altar.animationTicks < 20)
 						altar.animationTicks++;
@@ -47,7 +47,7 @@ public class RepairAltarBlockEntity extends AltarAbstractBlockEntity {
 					PacketDistributor.sendToPlayersNear((ServerLevel) altar.getLevel(), null,
 							altar.getBlockPos().getX(), altar.getBlockPos().getY(), altar.getBlockPos().getZ(), 30,
 							new AltarAnimatonTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(),
-									altar.getBlockPos().getZ(), altar.animationTicks, altar.prevAnimationTicks));
+									altar.getBlockPos().getZ(), altar.animationTicks));
 			}
 
 			if (level.isClientSide()) {
@@ -112,7 +112,6 @@ public class RepairAltarBlockEntity extends AltarAbstractBlockEntity {
 	@Override
 	protected void writeTileToNBT(CompoundTag nbt) {
 		nbt.putInt("animationTicks", animationTicks);
-		nbt.putInt("prevAnimationTicks", prevAnimationTicks);
 		nbt.putInt("spawnTicks", spawnTicks);
 		nbt.putBoolean("active", active);
 	}
@@ -120,7 +119,6 @@ public class RepairAltarBlockEntity extends AltarAbstractBlockEntity {
 	@Override
 	protected void readTileFromNBT(CompoundTag nbt) {
 		animationTicks = nbt.getInt("animationTicks");
-		prevAnimationTicks = nbt.getInt("prevAnimationTicks");
 		spawnTicks = nbt.getInt("spawnTicks");
 		active = nbt.getBoolean("active");
 	}

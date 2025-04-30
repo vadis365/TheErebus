@@ -21,7 +21,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
@@ -36,9 +35,8 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 
 	public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState blockState, T blockEntity) {
 		if (blockEntity instanceof LightningAltarBlockEntity altar) {
+			altar.prevAnimationTicks = altar.animationTicks;
 			if (!level.isClientSide()) {
-				altar.prevAnimationTicks = altar.animationTicks;
-				
 				altar.spawnTicks--;
 				if (altar.active) {
 					altar.findEnemyToAttack();
@@ -59,19 +57,19 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 					PacketDistributor.sendToPlayersNear((ServerLevel) altar.getLevel(), null, altar.getBlockPos().getX(),
 							altar.getBlockPos().getY(), altar.getBlockPos().getZ(), 30,
 							new AltarAnimatonTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(),
-									altar.getBlockPos().getZ(), altar.animationTicks, altar.prevAnimationTicks));
+									altar.getBlockPos().getZ(), altar.animationTicks));
 			}
 	
 			if (level.isClientSide()) {
-			if (altar.animationTicks > 0 && altar.animationTicks < 20)
-				altar.flameOn(level, pos);
-			if (altar.animationTicks == 20)
-				if (altar.fuzz < 20) {
-					altar.fuzz++;
-					if (altar.fuzz >= 20)
-						altar.fuzz = 0;
-				}
-		}
+				if (altar.animationTicks == 6)
+					altar.flameOn(level, pos);
+				if (altar.animationTicks == 20)
+					if (altar.fuzz < 20) {
+						altar.fuzz++;
+						if (altar.fuzz >= 20)
+							altar.fuzz = 0;
+					}
+			}
 		}
 	}
 

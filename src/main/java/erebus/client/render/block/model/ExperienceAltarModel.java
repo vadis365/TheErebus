@@ -77,18 +77,6 @@ public class ExperienceAltarModel extends Model {
 
 	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		GlassTop.render(stack, consumer, light, overlay, colour);
-		GlassBot.render(stack, consumer, light, overlay, colour);
-		GlassMid.render(stack, consumer, light, overlay, colour);
-		BPlate.render(stack, consumer, light, overlay, colour);
-		TPlate.render(stack, consumer, light, overlay, colour);
-		RFSupport.render(stack, consumer, light, overlay, colour);
-		RBSupport.render(stack, consumer, light, overlay, colour);
-		LFSupport.render(stack, consumer, light, overlay, colour);
-		LBSupport.render(stack, consumer, light, overlay, colour);
-		Top.render(stack, consumer, light, overlay, colour);
-		Mid.render(stack, consumer, light, overlay, colour);
-		Bot.render(stack, consumer, light, overlay, colour);
 	}
 
 	public void renderWithTile(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, ExperienceAltarBlockEntity tile, float partialTick) {
@@ -96,7 +84,9 @@ public class ExperienceAltarModel extends Model {
 		if (x > 20)
 			x = 20;
 		stack.pushPose();
-		stack.scale(0.04F * x, 0.04F * x, 0.04F * x);GlassTop.render(stack, consumer, light, overlay, colour);
+		stack.mulPose(Axis.YP.rotationDegrees(-x * 9F + 90F));
+		stack.scale(0.05F * x, 0.05F * x, 0.05F * x);
+		GlassTop.render(stack, consumer, light, overlay, colour);
 		GlassBot.render(stack, consumer, light, overlay, colour);
 		GlassMid.render(stack, consumer, light, overlay, colour);
 		BPlate.render(stack, consumer, light, overlay, colour);

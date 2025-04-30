@@ -24,8 +24,8 @@ public class ExperienceAltarBlockEntity extends AltarAbstractBlockEntity {
 
 	public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState blockState, T blockEntity) {
 		if (blockEntity instanceof ExperienceAltarBlockEntity altar) {
+			altar.prevAnimationTicks = altar.animationTicks;
 			if (!level.isClientSide()) {
-				altar.prevAnimationTicks = altar.animationTicks;
 			if (altar.active) {
 				if (altar.animationTicks <= 20)
 					altar.animationTicks++;
@@ -43,14 +43,14 @@ public class ExperienceAltarBlockEntity extends AltarAbstractBlockEntity {
 				PacketDistributor.sendToPlayersNear((ServerLevel) altar.getLevel(), null, altar.getBlockPos().getX(),
 						altar.getBlockPos().getY(), altar.getBlockPos().getZ(), 30,
 						new AltarAnimatonTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(),
-								altar.getBlockPos().getZ(), altar.animationTicks, altar.prevAnimationTicks));
+								altar.getBlockPos().getZ(), altar.animationTicks));
 		}
 
-			if (level.isClientSide()) {
+		if (level.isClientSide()) {
 			if (altar.animationTicks == 6)
 				altar.cloudBurst(level, pos);
-			}
 		}
+	}
 	}
 
 	private void cloudBurst(Level level, BlockPos pos) {
