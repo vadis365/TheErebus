@@ -99,7 +99,7 @@ public class LightningAltarModel extends Model {
 		ElectrodeB2.render(stack, consumer, light, overlay, colour);
 		ElectrodeR1.render(stack, consumer, light, overlay, colour);
 		ElectrodeR2.render(stack, consumer, light, overlay, colour);
-		Sparks.render(stack, consumer, light, overlay, colour);
+		//Sparks.render(stack, consumer, light, overlay, colour);
 		stack.popPose();
 
 		stack.pushPose();

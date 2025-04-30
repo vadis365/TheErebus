@@ -1,9 +1,14 @@
 package erebus.client.particle;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.ParticleUtils;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -19,7 +24,8 @@ public class ClientParticleTypes {
 		HAMMER_BLAM,
 		GAS_VENT_SWAMP,
 		GAS_VENT_VOLCANIC,
-		WASP_DAGGER;
+		WASP_DAGGER,
+		ELECTRIC;
 
 		static final ParticleType[] values = values();
 	}
@@ -109,6 +115,12 @@ public class ClientParticleTypes {
 		case WASP_DAGGER:
 			for (int i = 0; i < 8; i++)
 				level.addParticle(DustParticleOptions.REDSTONE, false, xPos, yPos, zPos, 0.0D, 0.0D, 0.0D);
+			break;
+		case ELECTRIC:
+			float vx = (level.random.nextFloat() * 0.5f - 0.25f) * 0.00125f;
+			float vy = (level.random.nextFloat() * 0.5f - 0.25f) * 0.00125f;
+			float vz = (level.random.nextFloat() * 0.5f - 0.25f) * 0.00125f;
+			level.addParticle(ParticleTypes.ELECTRIC_SPARK, false, xPos, yPos, zPos, vx, vy, vz);
 			break;
 		default:
         }
