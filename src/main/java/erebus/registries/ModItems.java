@@ -3,15 +3,21 @@ package erebus.registries;
 import erebus.Erebus;
 import erebus.item.PaxelItem;
 import erebus.item.WandOfAnimationItem;
+import erebus.network.data.DeathCompassData;
 import erebus.registries.data.ModArmorMaterials;
+import erebus.registries.data.ModDataComponents;
 import erebus.registries.data.ModToolMaterials;
 import erebus.registries.helpers.ModItemHelpers;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Map;
 
 public class ModItems extends ModItemHelpers {
@@ -203,7 +209,20 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> WASP_SWORD = registerItem("wasp_sword");
     public static final DeferredItem<Item> WASP_DAGGER = registerItem("wasp_dagger");
     public static final DeferredItem<Item> ANTI_VENOM_BOTTLE = registerItem("anti_venom_bottle");
-    public static final DeferredItem<Item> DEATH_COMPASS = ITEMS.register("death_compass", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> DEATH_COMPASS = ITEMS.register("death_compass", () -> new Item(new Item.Properties()) {
+        @Override
+        public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
+            DeathCompassData data = stack.getComponents().get(ModDataComponents.DEATH_COMPASS.get());
+            if (data != null) {
+                components.add(
+                        Component
+                                .translatable("tooltip.death_compass.pos")
+                                .append("%d, %d, %d".formatted(data.x(), data.y(), data.z()))
+                                .withStyle(ChatFormatting.YELLOW)
+                );
+            }
+        }
+    });
     public static final DeferredItem<Item> ROLLED_NEWSPAPER = registerItem("rolled_newspaper");
     public static final DeferredItem<Item> BAMBUCKET = registerBucket("bambucket");
     public static final DeferredItem<Item> HOMING_BEECON = registerItem("homing_beecon");

@@ -1,6 +1,7 @@
 package erebus;
 
 import com.mojang.logging.LogUtils;
+import erebus.network.data.DeathCompassData;
 import erebus.recipes.ModCustomRecipes;
 import erebus.registries.*;
 import erebus.registries.client.ModBlockEntityRendering;
@@ -8,6 +9,7 @@ import erebus.registries.client.ModItemRendering;
 import erebus.registries.client.ModMenuTypes;
 import erebus.registries.client.ModParticles;
 import erebus.registries.data.ModArmorMaterials;
+import erebus.registries.data.ModDataComponents;
 import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
@@ -61,6 +63,7 @@ public class Erebus {
     	ModCustomRecipes.RECIPE_TYPES.register(bus);
     	ModCustomRecipes.RECIPE_SERIALIZERS.register(bus);
         ModParticles.PARTICLES.register(bus);
+        ModDataComponents.REGISTRY.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 
@@ -84,7 +87,16 @@ public class Erebus {
                 ModItems.DEATH_COMPASS.get(),
                 ResourceLocation.withDefaultNamespace("angle"),
                 new CompassItemPropertyFunction(
-                        (level, stack, entity) -> entity instanceof Player player ? player.getLastDeathLocation().orElse(null) : null
+                        (level, stack, entity) -> {
+                            DeathCompassData data = stack.get(ModDataComponents.DEATH_COMPASS);
+                            if (data != null) {
+                                if (entity instanceof Player player) {
+                                    return player.getLastDeathLocation().orElse(null);
+                                }
+                            }
+
+                            return null;
+                        }
                 )
         );
 

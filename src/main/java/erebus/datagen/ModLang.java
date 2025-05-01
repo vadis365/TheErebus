@@ -690,7 +690,7 @@ public class ModLang extends ModLangProvider {
     }
 
     private void addToolTipTranslations() {
-
+        add("tooltip.death_compass.pos", "Death Pos: ");
     }
 
     private void addBookTranslations() {
