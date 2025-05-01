@@ -23,9 +23,7 @@ public class LightningAltarRenderer implements BlockEntityRenderer<LightningAlta
 			Erebus.prefix("textures/special/tiles/altar_lightning_2.png"),
 			Erebus.prefix("textures/special/tiles/altar_lightning_3.png"),
 			Erebus.prefix("textures/special/tiles/altar_lightning_4.png"),
-			Erebus.prefix("textures/special/tiles/altar_lightning_5.png"),
-			Erebus.prefix("textures/special/tiles/altar_lightning_6.png"),
-			Erebus.prefix("textures/special/tiles/altar_lightning_7.png")
+			Erebus.prefix("textures/special/tiles/altar_lightning_5.png")
 			};
 
 	private final LightningAltarModel model;
@@ -38,7 +36,7 @@ public class LightningAltarRenderer implements BlockEntityRenderer<LightningAlta
     public void render(LightningAltarBlockEntity tile, float partialTick, PoseStack stack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
 		if(tile == null || !tile.hasLevel())
 			return;
-		VertexConsumer consumer = buffer.getBuffer(RenderType.entityTranslucent(getAltarTexture(tile)));
+		VertexConsumer consumer = buffer.getBuffer(RenderType.entitySolid(getAltarTexture(tile)));
 		stack.pushPose();
 		stack.translate(0.5D, 0.75D, 0.5D);
 		stack.scale(-0.5F, -0.5F, 0.5F);
@@ -55,14 +53,8 @@ public class LightningAltarRenderer implements BlockEntityRenderer<LightningAlta
 			return TEXTURE[2];
 		else if (tile.animationTicks > 12 && tile.animationTicks <= 16)
 			return TEXTURE[3];
-		else if (tile.animationTicks > 16 && tile.animationTicks < 20)
+		else if (tile.animationTicks > 16 && tile.animationTicks <= 20)
 			return TEXTURE[4];
-		else if (tile.animationTicks == 20 && tile.fuzz <= 5)
-			return TEXTURE[4];
-		else if (tile.animationTicks == 20 && tile.fuzz > 5 && tile.fuzz <= 10 || tile.animationTicks == 20 && tile.fuzz > 15 && tile.fuzz <= 20)
-			return TEXTURE[5];
-		else if (tile.animationTicks == 20 && tile.fuzz > 10 && tile.fuzz <= 15)
-			return TEXTURE[6];
 		else
 			return TEXTURE[0];
 	}

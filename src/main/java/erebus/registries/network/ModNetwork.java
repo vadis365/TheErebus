@@ -3,6 +3,7 @@ package erebus.registries.network;
 import erebus.Erebus;
 import erebus.network.client.AltarAnimatonTimerPacket;
 import erebus.network.client.AntlionParticlePacket;
+import erebus.network.client.LightningAltarRenderPacket;
 import erebus.network.client.OfferingAltarNBTPacket;
 import erebus.network.client.OfferingAltarTimerPacket;
 import erebus.network.client.ParticlePacket;
@@ -11,6 +12,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 public class ModNetwork {
 	 public static void register(final RegisterPayloadHandlersEvent event) {
 		 event.registrar(Erebus.MODID)
+		 .playToClient(LightningAltarRenderPacket.TYPE, LightningAltarRenderPacket.STREAM_CODEC, LightningAltarRenderPacket::handle)
 		 .playToClient(AltarAnimatonTimerPacket.TYPE, AltarAnimatonTimerPacket.STREAM_CODEC, AltarAnimatonTimerPacket::handle)
 		 .playToClient(OfferingAltarTimerPacket.TYPE, OfferingAltarTimerPacket.STREAM_CODEC, OfferingAltarTimerPacket::handle)
 		 .playToClient(OfferingAltarNBTPacket.TYPE, OfferingAltarNBTPacket.STREAM_CODEC, OfferingAltarNBTPacket::handle)

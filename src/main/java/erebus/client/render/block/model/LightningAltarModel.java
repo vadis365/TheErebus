@@ -27,7 +27,6 @@ public class LightningAltarModel extends Model {
 	private final ModelPart ElectrodeB2;
 	private final ModelPart ElectrodeR1;
 	private final ModelPart ElectrodeR2;
-	private final ModelPart Sparks;
 
 	public LightningAltarModel(ModelPart root) {
 		super(RenderType::entitySolid);
@@ -43,7 +42,6 @@ public class LightningAltarModel extends Model {
 		this.ElectrodeB2 = root.getChild("ElectrodeB2");
 		this.ElectrodeR1 = root.getChild("ElectrodeR1");
 		this.ElectrodeR2 = root.getChild("ElectrodeR2");
-		this.Sparks = root.getChild("Sparks");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -74,7 +72,6 @@ public class LightningAltarModel extends Model {
 
 		PartDefinition ElectrodeR2 = partdefinition.addOrReplaceChild("ElectrodeR2", CubeListBuilder.create().texOffs(78, 38).addBox(-1.0F, 1.0F, -11.0F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -22.0F, 0.0F, -1.0472F, 1.5708F, 0.0F));
 
-		PartDefinition Sparks = partdefinition.addOrReplaceChild("Sparks", CubeListBuilder.create().texOffs(90, 166).addBox(-5.0F, -11.0F, -5.0F, 10.0F, 6.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -22.0F, 0.0F, 0.0F, 0.7854F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 256, 64);
 	}
@@ -99,7 +96,6 @@ public class LightningAltarModel extends Model {
 		ElectrodeB2.render(stack, consumer, light, overlay, colour);
 		ElectrodeR1.render(stack, consumer, light, overlay, colour);
 		ElectrodeR2.render(stack, consumer, light, overlay, colour);
-		//Sparks.render(stack, consumer, light, overlay, colour);
 		stack.popPose();
 
 		stack.pushPose();
