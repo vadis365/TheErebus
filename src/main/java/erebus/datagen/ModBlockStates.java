@@ -278,6 +278,7 @@ public class ModBlockStates extends ModBlockStateProvider {
         crossBlock(GRANDMAS_SHOES_MUSHROOM, "mushroom_grandmas_shoes");
         crossBlock(DUTCH_CAP_MUSHROOM, "mushroom_dutch_cap");
         crossBlock(KAIZERS_FINGERS_MUSHROOM, "mushroom_kaizers_fingers");
+        block(GIANT_LILY_PAD);
 
         block(PETAL_BLACK);
         block(PETAL_RED);

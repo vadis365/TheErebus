@@ -558,6 +558,7 @@ public class ModTabs {
                         output.accept(ModBlocks.GRANDMAS_SHOES_MUSHROOM);
                         output.accept(ModBlocks.DUTCH_CAP_MUSHROOM);
                         output.accept(ModBlocks.KAIZERS_FINGERS_MUSHROOM);
+                        output.accept(ModBlocks.GIANT_LILY_PAD);
                         output.accept(ModBlocks.GLOWSHROOM_BLOCK);
                         output.accept(ModBlocks.GLOWSHROOM_STALK);
                         output.accept(ModBlocks.SAPLING_BAOBAB);

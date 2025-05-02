@@ -499,6 +499,7 @@ public class ModItemModels extends ModItemModelProvider {
         blockFlat(CULTIVATED_MOULD_DOWN);
         blockFlat(ALGAE);
         blockFlat(HANGING_WEB);
+        block(GIANT_LILY_PAD);
 
         block(PETAL_BLACK);
         block(PETAL_RED);

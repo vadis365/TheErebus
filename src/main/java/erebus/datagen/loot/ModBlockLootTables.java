@@ -290,6 +290,7 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(GLOWSHROOM_BLOCK);
         dropSelf(GLOWSHROOM_STALK);
         dropSelf(HANGING_WEB);
+        dropSelf(GIANT_LILY_PAD);
 
         // MARK: Flowers
         dropSelf(PETAL_BLACK);
