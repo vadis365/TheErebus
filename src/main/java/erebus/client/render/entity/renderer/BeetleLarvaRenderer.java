@@ -1,6 +1,7 @@
 package erebus.client.render.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 
 import erebus.Erebus;
 import erebus.client.render.entity.model.BeetleLarvaModel;
@@ -37,8 +38,16 @@ public class BeetleLarvaRenderer extends MobRenderer<BeetleLarva, BeetleLarvaMod
 		int overlay = getOverlayCoords(entity, this.getWhiteOverlayProgress(entity, partialTicks));
 		int colour = isTranslucentToPlayer ? 654311423 : -1;
 		RenderType renderType = getRenderType(entity, isVisible, isTranslucentToPlayer, isGlowing);
-		if(renderType != null)
+		if(renderType != null) {
+			stack.pushPose();
+			stack.translate(0, 1F, 0);
+			stack.scale(-1F, -1F, 1F);
+			stack.mulPose(Axis.YP.rotationDegrees(entityYaw));
+			model.prepareMobModel(entity, overlay, colour, partialTicks);
+			model.setupAnim(entity, entityYaw, partialTicks, packedLight, overlay, colour);
 			model.renderLarva(stack, buffer.getBuffer(renderType), packedLight, overlay, colour, entity,partialTicks);
+			stack.popPose();
+		}
 	}
 
 	@Override
