@@ -3,6 +3,7 @@ package erebus.registries.entity;
 import erebus.Erebus;
 import erebus.client.render.entity.model.AnimatedBlockModel;
 import erebus.client.render.entity.model.AntlionModel;
+import erebus.client.render.entity.model.BeetleLarvaModel;
 import erebus.client.render.entity.model.BlackWidowModel;
 import erebus.client.render.entity.model.BotFlyLarvaModel;
 import erebus.client.render.entity.model.BotFlyModel;
@@ -18,6 +19,7 @@ import erebus.client.render.entity.model.VelvetWormModel;
 import erebus.client.render.entity.model.WaspModel;
 import erebus.client.render.entity.renderer.AnimatedBlockRenderer;
 import erebus.client.render.entity.renderer.AntlionRenderer;
+import erebus.client.render.entity.renderer.BeetleLarvaRenderer;
 import erebus.client.render.entity.renderer.BlackWidowRenderer;
 import erebus.client.render.entity.renderer.BotFlyLarvaRenderer;
 import erebus.client.render.entity.renderer.BotFlyRenderer;
@@ -57,7 +59,9 @@ public class ModEntityRendering {
 	public static ModelLayerLocation CENTIPEDE = new ModelLayerLocation(Erebus.prefix("centipede"), "main");
 	public static ModelLayerLocation GRASSHOPPER = new ModelLayerLocation(Erebus.prefix("grasshopper"), "main");
 	public static ModelLayerLocation LOCUST = new ModelLayerLocation(Erebus.prefix("locust"), "main");
-	
+	public static ModelLayerLocation BEETLE_LARVA = new ModelLayerLocation(Erebus.prefix("beetle_larva"), "main");
+	//public static ModelLayerLocation BOMBARDIER_BEETLE_LARVA = new ModelLayerLocation(Erebus.prefix("bombardier_beetle_larva"), "main");
+
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
     	event.registerLayerDefinition(WASP, WaspModel::createBodyLayer);
     	event.registerLayerDefinition(ANIMATED_BLOCK, AnimatedBlockModel::createBodyLayer);
@@ -76,6 +80,8 @@ public class ModEntityRendering {
     	event.registerLayerDefinition(CENTIPEDE, CentipedeModel::createBodyLayer);
     	event.registerLayerDefinition(GRASSHOPPER, GrasshopperModel::createBodyLayer);
     	event.registerLayerDefinition(LOCUST, LocustModel::createBodyLayer);
+    	event.registerLayerDefinition(BEETLE_LARVA, BeetleLarvaModel::createBodyLayer);
+    	//event.registerLayerDefinition(BOMBARDIER_BEETLE_LARVA, BeetleLarvaModel::createBodyLayer);
     }
 
     public static void registerEntityRender(EntityRenderersEvent.RegisterRenderers event) {
@@ -95,6 +101,8 @@ public class ModEntityRendering {
     	event.registerEntityRenderer(ModEntities.CENTIPEDE.get(), CentipedeRenderer::new);
     	event.registerEntityRenderer(ModEntities.GRASSHOPPER.get(), GrasshopperRenderer::new);
     	event.registerEntityRenderer(ModEntities.LOCUST.get(), LocustRenderer::new);
+    	event.registerEntityRenderer(ModEntities.BEETLE_LARVA.get(), BeetleLarvaRenderer::new);
+    //	event.registerEntityRenderer(ModEntities.BOMBARDIER_BEETLE_LARVA.get(), BeetleLarvaRenderer::new);
 
     	event.registerEntityRenderer(ModEntities.THROWN_BLOCK_AS_ITEM.get(), context -> new ThrownItemRenderer<ThrownBlockAsItem>(context, 3.0F, true));
     	event.registerEntityRenderer(ModEntities.GOO_BALL.get(), context -> new ThrownItemRenderer<GooBall>(context, 3.0F, true));

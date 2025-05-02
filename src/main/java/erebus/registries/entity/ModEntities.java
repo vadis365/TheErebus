@@ -3,6 +3,7 @@ package erebus.registries.entity;
 import erebus.Erebus;
 import erebus.entity.AnimatedBlock;
 import erebus.entity.Antlion;
+import erebus.entity.BeetleLarva;
 import erebus.entity.BlackWidow;
 import erebus.entity.BotFly;
 import erebus.entity.BotFlyLarva;
@@ -55,6 +56,9 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<Dragonfly>> DRAGON_FLY = registerWithEgg("dragon_fly", EntityType.Builder.of(Dragonfly::new, MobCategory.MONSTER).sized(2.5F, 1.0F).fireImmune(), 0x37A87C, 0xE9E9E9);
     public static final DeferredHolder<EntityType<?>, EntityType<Centipede>> CENTIPEDE = registerWithEgg("centipede", EntityType.Builder.of(Centipede::new, MobCategory.MONSTER).sized(0.3125F, 0.3125F), 0x3C0000, 0xEA0000);
     
+    public static final DeferredHolder<EntityType<?>, EntityType<BeetleLarva>> BEETLE_LARVA = registerWithEgg("beetle_larva", EntityType.Builder.of(BeetleLarva::new, MobCategory.CREATURE).sized(0.9F, 0.5F), 0xE5DEC4, 0x472A0F);
+ //   public static final DeferredHolder<EntityType<?>, EntityType<BombardierBeetleLarva>> BOMBARDIER_BEETLE_LARVA = registerWithEgg("bombardier_beetle_larva", EntityType.Builder.of(BombardierBeetleLarva::new, MobCategory.MONSTER).sized(0.9F, 0.5F), 0xE5DEC4, 0x232B98);
+    
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownBlockAsItem>> THROWN_BLOCK_AS_ITEM = registerNonMobEntity("thrown_block_as_item", EntityType.Builder.<ThrownBlockAsItem>of(ThrownBlockAsItem::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
     public static final DeferredHolder<EntityType<?>, EntityType<GooBall>> GOO_BALL = registerNonMobEntity("goo_ball", EntityType.Builder.<GooBall>of(GooBall::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
 
@@ -77,6 +81,8 @@ public class ModEntities {
 		event.register(CENTIPEDE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Centipede::canSpawnHere, null);
 		event.register(GRASSHOPPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Grasshopper::canSpawnHere, null);
 		event.register(LOCUST.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Locust::canSpawnHere, null);
+		event.register(BEETLE_LARVA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BeetleLarva::canSpawnHere, null);
+	//	event.register(BOMBARDIER_BEETLE_LARVA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BombardierBeetleLarva::canSpawnHere, null);
 	}
 	
 	public static void initializeAttributes(EntityAttributeCreationEvent event) {
@@ -96,6 +102,8 @@ public class ModEntities {
 		event.put(CENTIPEDE.get(), Centipede.createAttributes().build());
 		event.put(GRASSHOPPER.get(), Grasshopper.createAttributes().build());
 		event.put(LOCUST.get(), Locust.createAttributes().build());
+		event.put(BEETLE_LARVA.get(), BeetleLarva.createAttributes().build());
+	//	event.put(BOMBARDIER_BEETLE_LARVA.get(), BombardierBeetleLarva.createAttributes().build());
 	}
 
 	public static DeferredRegister<EntityType<?>> getEntityTypes() {

@@ -1,5 +1,6 @@
 package erebus.entity.ai;
-/*
+
+import erebus.entity.BeetleLarva;
 import erebus.registries.ModBlocks;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
@@ -69,7 +70,7 @@ public class LarvaEatWoodenBlocksGoal extends EatBlockGoal {
 	@Override
 	public void prepareToEat() {
 		if(eatTicks%100 == 0)
-			beetleLarva.getEntityWorld().playSound(null, beetleLarva.getPosition(), ModSounds.BEETLE_LARVA_MUNCH.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+			beetleLarva.level().playSound(null, beetleLarva.blockPosition(), ModSounds.BEETLE_LARVA_MUNCH.get(), SoundSource.NEUTRAL, 0.5F, 1F);
 		beetleLarva.setIsEating(true);
 	}
 
@@ -93,4 +94,4 @@ public class LarvaEatWoodenBlocksGoal extends EatBlockGoal {
 		
 	}
 	
-}*/
+}
