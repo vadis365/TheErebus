@@ -1,12 +1,15 @@
 package erebus.entity;
 
+import erebus.client.particle.ClientParticleTypes.ParticleType;
 import erebus.entity.ai.LarvaEatWoodenBlocksGoal;
+import erebus.network.client.ParticlePacket;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -26,18 +29,17 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.ai.util.GoalUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class BeetleLarva extends PathfinderMob {
 	public static final EntityDataAccessor<Byte> LARVA_TYPE = SynchedEntityData.defineId(BeetleLarva.class, EntityDataSerializers.BYTE);
@@ -113,6 +115,7 @@ public class BeetleLarva extends PathfinderMob {
 				player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, duration * 20, 0));
 			setIsSquashed(true);
 			kill();
+			deathTime = 19;
 			tickDeath();
 		}
 	}
@@ -195,7 +198,9 @@ public class BeetleLarva extends PathfinderMob {
     	super.tickDeath();
 		if (getIsSquashed()) {
 			if (!level().isClientSide())
-		//		Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.BEETLE_LARVA_SQUISH, (float) posX, (float)posY, (float)posZ));
+				PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, blockPosition().getX(),
+						blockPosition().getY(), blockPosition().getZ(), 30,
+						new ParticlePacket((byte) ParticleType.BEETLE_LARVA_SQUISH.ordinal(), blockPosition().getX() + 0.5D, blockPosition().getY() + 0.5D, blockPosition().getZ() + 0.5D));
 			level().playSound(null, blockPosition(), getJumpedOnSound(), SoundSource.NEUTRAL, 1.0F, 0.5F);
 			level().playSound(null, blockPosition(), getDeathSound(), SoundSource.NEUTRAL, 1.0F, 0.7F);
 			if (!level().isClientSide()) {
