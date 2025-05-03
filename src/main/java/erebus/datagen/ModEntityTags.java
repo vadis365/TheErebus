@@ -24,6 +24,8 @@ public class ModEntityTags extends IntrinsicHolderTagsProvider<EntityType<?>> {
 	@Override
 	protected void addTags(Provider provider) {
 		tag(EntityTypeTags.ARTHROPOD)
+        .add(ModEntities.BEETLE_LARVA.get())
+        .add(ModEntities.BOMBARDIER_BEETLE_LARVA.get())
         .add(ModEntities.BLACK_WIDOW.get())
         .add(ModEntities.BOT_FLY.get())
         .add(ModEntities.BOT_FLY_LARVA.get())

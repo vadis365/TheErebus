@@ -49,16 +49,13 @@ public class BeetleLarva extends PathfinderMob {
 
 	public BeetleLarva(EntityType<? extends BeetleLarva> type, Level level) {
 		super(type, level);
-		//setSize(0.9F, 0.5F);
-		//setPathPriority(PathNodeType.WATER, -8F);
-		//stepHeight = 1F;
 	}
 
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(LARVA_SIZE, 1F);
-		builder.define(LARVA_TYPE, (byte) random.nextInt(6));
+		builder.define(LARVA_TYPE, (byte) 0);
 		builder.define(IS_SQUASHED, false);
 	}
 
@@ -89,7 +86,8 @@ public class BeetleLarva extends PathfinderMob {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 8D)
 				.add(Attributes.FOLLOW_RANGE, 16D)
-				.add(Attributes.MOVEMENT_SPEED, 0.35D);
+				.add(Attributes.MOVEMENT_SPEED, 0.35D)
+				.add(Attributes.STEP_HEIGHT, 1D);
 	}
 
 	public static boolean canSpawnHere(EntityType<BeetleLarva> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {

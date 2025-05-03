@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.Erebus;
 import erebus.client.render.entity.model.BeetleLarvaModel;
 import erebus.entity.BeetleLarva;
+import erebus.entity.BombardierBeetleLarva;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -28,19 +29,19 @@ public class BeetleLarvaRenderer extends MobRenderer<BeetleLarva, BeetleLarvaMod
 	@Override
 	protected void scale(BeetleLarva larva, PoseStack matrix, float partialTickTime) {
 		float larvaSize = larva.getLarvaSize();
-		//if (larva instanceof BombardierBeetleLarva) {
-		//	int size = ((BombardierBeetleLarva) larva).getInflateSize();
-		//	matrix.scale((float) (size * 0.009 + larvaSize), (float) (size * 0.009 + larvaSize), (float) (-size * 0.0025 + larvaSize));
-		//}
-	//	else
+		if (larva instanceof BombardierBeetleLarva) {
+			int size = ((BombardierBeetleLarva) larva).getInflateSize();
+			matrix.scale((float) (size * 0.009 + larvaSize), (float) (size * 0.009 + larvaSize), (float) (-size * 0.0025 + larvaSize));
+		}
+		else
 			matrix.scale(larvaSize, larvaSize, larvaSize);
 	}
 
 	@Override
 	public ResourceLocation getTextureLocation(BeetleLarva larva) {
-		//if (larva.getLarvaType() == 4 || larva instanceof BombardierBeetleLarva)
-		//	return TEXTURES[1];
-		//else
+		if (larva.getLarvaType() == 4 || larva instanceof BombardierBeetleLarva)
+			return TEXTURES[1];
+		else
 		if (larva.getLarvaType() == 5)
 			return TEXTURES[2];
 		else
