@@ -25,10 +25,13 @@ import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.util.GoalUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -53,16 +56,16 @@ public class BeetleLarva extends PathfinderMob {
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(LARVA_SIZE, 1F);
-		builder.define(LARVA_TYPE, (byte) 0);
+		builder.define(LARVA_TYPE, (byte) random.nextInt(6));
 		builder.define(IS_SQUASHED, false);
 	}
 
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new WaterAvoidingRandomStrollGoal(this, 0.48D));
-		goalSelector.addGoal(2, new LarvaEatWoodenBlocksGoal(this, 0.48D, 10));
-		goalSelector.addGoal(3, new TemptGoal(this, 0.48D, item -> item.is(Items.STICK), false));
+		goalSelector.addGoal(1, new LarvaEatWoodenBlocksGoal(this, 0.48D, 10));
+		goalSelector.addGoal(2, new TemptGoal(this, 0.48D, item -> item.is(Items.STICK), false));
+		goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.48D));
 		goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 		goalSelector.addGoal(5, new PanicGoal(this, 0.48D));
 	}
@@ -228,6 +231,8 @@ public class BeetleLarva extends PathfinderMob {
 
 	public void setIsEating(boolean eating) {
 		isEating = eating;
+		this.goalSelector.setControlFlag(Goal.Flag.LOOK, !eating);
+		this.goalSelector.setControlFlag(Goal.Flag.MOVE, !eating);
 	}
 
 	@Override

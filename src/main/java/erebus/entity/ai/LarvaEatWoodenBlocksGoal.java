@@ -53,18 +53,17 @@ public class LarvaEatWoodenBlocksGoal extends EatBlockGoal {
 
 	@Override
 	protected boolean isEntityReady() {
-		return true;
+		return hasTarget;
 	}
 	
 	@Override
 	public boolean canUse() {
-	return !beetleLarva.getMoveControl().hasWanted() && super.canUse();
+	return !beetleLarva.getMoveControl().hasWanted() && !beetleLarva.isEating && super.canUse();
 	}
 
 	@Override
 	protected void moveToLocation() {
-		if (!beetleLarva.isEating)
-			beetleLarva.getMoveControl().setWantedPosition(targetX + 0.5D, targetY + 0.5D, targetZ + 0.5D, moveSpeed);
+		beetleLarva.getMoveControl().setWantedPosition(targetX + 0.5D, targetY + 0.5D, targetZ + 0.5D, moveSpeed);
 	}
 
 	@Override
@@ -77,7 +76,6 @@ public class LarvaEatWoodenBlocksGoal extends EatBlockGoal {
 	@Override
 	protected void eatingInterupted() {
 		beetleLarva.setIsEating(false);
-		entity.getNavigation().stop();
 	}
 
 	@Override
@@ -85,7 +83,6 @@ public class LarvaEatWoodenBlocksGoal extends EatBlockGoal {
 		beetleLarva.level().destroyBlock(new BlockPos(targetX, targetY, targetZ), dropItem, beetleLarva);
 		beetleLarva.setIsEating(false);
 		beetleLarva.setLarvaSize(beetleLarva.getLarvaSize() + 0.1F);
-		beetleLarva.getNavigation().stop();
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -49,6 +50,7 @@ public class BeetleLarvaModel<T extends BeetleLarva> extends HierarchicalModel<T
 	private final ModelPart jawStagRight;
 
 	public BeetleLarvaModel(ModelPart root) {
+		super(RenderType::entityCutout);
 		this.root = root;
 		this.torso1 = root.getChild("torso1");
 		this.torso2 = root.getChild("torso2");
@@ -213,9 +215,6 @@ public class BeetleLarvaModel<T extends BeetleLarva> extends HierarchicalModel<T
 	}
 	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-	}
-
-	public void renderLarva(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, BeetleLarva larva, float partialTicks) {
 		torso1.render(stack, consumer, light, overlay, colour);
 		torso2.render(stack, consumer, light, overlay, colour);
 		torso3.render(stack, consumer, light, overlay, colour);
@@ -236,36 +235,28 @@ public class BeetleLarvaModel<T extends BeetleLarva> extends HierarchicalModel<T
 		mouthjaw.render(stack, consumer, light, overlay, colour);
 		sensorleft.render(stack, consumer, light, overlay, colour);
 		sensorright.render(stack, consumer, light, overlay, colour);
-		
-		if (larva.getLarvaType() == 2) {
+	}
+
+	public void renderLarvaRhino(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
 			horn1.render(stack, consumer, light, overlay, colour);
 			horn2.render(stack, consumer, light, overlay, colour);
 			horn3.render(stack, consumer, light, overlay, colour);
-		}
-		if (larva.getLarvaType() == 3) {
+	}
+
+	public void renderLarvaTitan(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
 			titanL1.render(stack, consumer, light, overlay, colour);
 			titanL2.render(stack, consumer, light, overlay, colour);
 			titanR1.render(stack, consumer, light, overlay, colour);
 			titanR2.render(stack, consumer, light, overlay, colour);
-		}
-		if (larva.getLarvaType() == 5) {
+	}
+
+	public void renderLarvaStag(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
 			jawleft.visible = false;
 			jawright.visible = false;
 			jawStagLeft.render(stack, consumer, light, overlay, colour);
 			jawStagRight.render(stack, consumer, light, overlay, colour);
-		}/*
-		horn1.render(stack, consumer, light, overlay, colour);
-		horn2.render(stack, consumer, light, overlay, colour);
-		horn3.render(stack, consumer, light, overlay, colour);
-		titanL1.render(stack, consumer, light, overlay, colour);
-		titanL2.render(stack, consumer, light, overlay, colour);
-		titanR1.render(stack, consumer, light, overlay, colour);
-		titanR2.render(stack, consumer, light, overlay, colour);
-		jawStagLeft.render(stack, consumer, light, overlay, colour);
-		jawStagRight.render(stack, consumer, light, overlay, colour);
-		*/
 	}
-	
+
 	@Override
 	public ModelPart root() {
 		return root;

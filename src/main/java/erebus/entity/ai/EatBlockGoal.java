@@ -23,7 +23,7 @@ public abstract class EatBlockGoal extends Goal {
 	protected final Mob entity;
 	private final BlockState blockState;
 
-	private boolean hasTarget;
+	public boolean hasTarget;
 	public int targetX;
 	public int targetY;
 	public int targetZ;
@@ -48,7 +48,7 @@ public abstract class EatBlockGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return !entity.isBaby();
+		return hasTarget;
 	}
 
     @Override
@@ -57,9 +57,6 @@ public abstract class EatBlockGoal extends Goal {
     }
 
     public void tick() {
-		if (!canContinueToUse())
-			return;
-
 		int xCoord = (int) entity.getX();
 		int yCoord = (int) entity.getY();
 		int zCoord = (int) entity.getZ();
@@ -76,13 +73,14 @@ public abstract class EatBlockGoal extends Goal {
 						hasTarget = true;
 					}
 			} else if (isEntityReady()) {
-				AABB blockbounds = getBlockAABB(targetX, targetY, targetZ);
+				AABB blockbounds = getBlockAABB(targetX, targetY, targetZ).inflate(0.0625D);
 				boolean flag = entity.getBoundingBox().maxY >= blockbounds.minY && entity.getBoundingBox().minY <= blockbounds.maxY && entity.getBoundingBox().maxX >= blockbounds.minX && entity.getBoundingBox().minX <= blockbounds.maxX && entity.getBoundingBox().maxZ >= blockbounds.minZ && entity.getBoundingBox().minZ <= blockbounds.maxZ;
 				if(!flag && canEatBlock(getTargetBlock()))
 					moveToLocation();
 				entity.getLookControl().setLookAt(targetX + 0.5D, targetY + 0.5D, targetZ + 0.5D, 30.0F, 8.0F);
 		
 				if (flag && canEatBlock(getTargetBlock())) {
+					entity.getNavigation().stop();
 					prepareToEat();
 					eatTicks++;
 					entity.level().destroyBlockProgress(entity.getId(), new BlockPos(targetX, targetY, targetZ), getScaledEatTicks());
@@ -96,7 +94,7 @@ public abstract class EatBlockGoal extends Goal {
 						return;
 					}
 				}
-				if (!flag && eatTicks > 0 || eatTicks > 0 && getTargetBlock().isAir()) {
+				else if (eatTicks > 0) {
 					eatingInterupted();
 					hasTarget = false;
 					eatTicks = 0;

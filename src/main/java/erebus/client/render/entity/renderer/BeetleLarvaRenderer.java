@@ -1,16 +1,11 @@
 package erebus.client.render.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 
 import erebus.Erebus;
 import erebus.client.render.entity.model.BeetleLarvaModel;
 import erebus.entity.BeetleLarva;
-import erebus.entity.Centipede;
 import erebus.registries.entity.ModEntityRendering;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -27,27 +22,7 @@ public class BeetleLarvaRenderer extends MobRenderer<BeetleLarva, BeetleLarvaMod
 
 	public BeetleLarvaRenderer(EntityRendererProvider.Context context) {
 		super(context, new BeetleLarvaModel<>(context.bakeLayer(ModEntityRendering.BEETLE_LARVA)), 0.3F);
-	}
-	
-	@Override
-	public void render(BeetleLarva entity, float entityYaw, float partialTicks, PoseStack stack, MultiBufferSource buffer, int packedLight) {
-		Minecraft minecraft = Minecraft.getInstance();
-		boolean isVisible = this.isBodyVisible(entity);
-		boolean isTranslucentToPlayer = !isVisible && !entity.isInvisibleTo(minecraft.player);
-		boolean isGlowing = minecraft.shouldEntityAppearGlowing(entity);
-		int overlay = getOverlayCoords(entity, this.getWhiteOverlayProgress(entity, partialTicks));
-		int colour = isTranslucentToPlayer ? 654311423 : -1;
-		RenderType renderType = getRenderType(entity, isVisible, isTranslucentToPlayer, isGlowing);
-		if(renderType != null) {
-			stack.pushPose();
-			stack.translate(0, 1F, 0);
-			stack.scale(-1F, -1F, 1F);
-			stack.mulPose(Axis.YP.rotationDegrees(entityYaw));
-			model.prepareMobModel(entity, overlay, colour, partialTicks);
-			model.setupAnim(entity, entityYaw, partialTicks, packedLight, overlay, colour);
-			model.renderLarva(stack, buffer.getBuffer(renderType), packedLight, overlay, colour, entity,partialTicks);
-			stack.popPose();
-		}
+		addLayer(new BeetleLarvaLayer(this, context.getModelSet()));
 	}
 
 	@Override
