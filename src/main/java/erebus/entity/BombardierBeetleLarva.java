@@ -57,7 +57,7 @@ public class BombardierBeetleLarva extends BeetleLarva implements Enemy {
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 8D)
-				.add(Attributes.ATTACK_DAMAGE, 1D)
+				.add(Attributes.ATTACK_DAMAGE, 0.5D)
 				.add(Attributes.FOLLOW_RANGE, 16D)
 				.add(Attributes.MOVEMENT_SPEED, 0.35D)
 				.add(Attributes.STEP_HEIGHT, 1D);
@@ -85,7 +85,7 @@ public class BombardierBeetleLarva extends BeetleLarva implements Enemy {
 
 	private void explode() {
 		if (!level().isClientSide()) {
-			level().explode(this, getX(), getY(), getZ(), 1F, Level.ExplosionInteraction.NONE).finalizeExplosion(false);
+			level().explode(this, getX(), getY(), getZ(), 1.5F, Level.ExplosionInteraction.NONE).finalizeExplosion(false);
 			PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, blockPosition().getX(),
 					blockPosition().getY(), blockPosition().getZ(), 30,
 					new ParticlePacket((byte) ParticleType.BEETLE_LARVA_SQUISH.ordinal(), blockPosition().getX() + 0.5D,
