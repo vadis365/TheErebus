@@ -43,10 +43,9 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class Beetle extends Animal {
+
 	private static final EntityDataAccessor<Integer>  SKIN_TYPE = SynchedEntityData.defineId(Beetle.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> TAMED = SynchedEntityData.defineId(Beetle.class, EntityDataSerializers.BOOLEAN);
-
-	int shagCount;
 
 	public Beetle(EntityType<? extends Beetle> type, Level level) {
 		super(type, level);
@@ -117,8 +116,6 @@ public class Beetle extends Animal {
 	@Override
 	public void tick() {
 		super.tick();
-		if (shagCount > 0)
-			shagCount--;
 	}
 
 	@Override
@@ -139,13 +136,13 @@ public class Beetle extends Animal {
 			}
 		}
 	*/	
-		if (!stack.isEmpty() && stack.getItem() == ModItems.TURNIP.get() && !shagging()) {
+		if (!stack.isEmpty() && stack.getItem() == ModItems.TURNIP.get() && !isInLove()) {
 			stack.shrink(1);
 			if(!getIsTame())
 				setTame(true);
 			if(getHealth() < getMaxHealth())
 				heal(1);
-			shagCount = 600;
+			setInLoveTime(600);
 			level().playSound(null, blockPosition(), ModSounds.BEETLE_LARVA_MUNCH.get(), SoundSource.NEUTRAL, 1.0F, 0.75F);
 			return InteractionResult.SUCCESS;
 		}
@@ -164,9 +161,6 @@ public class Beetle extends Animal {
 		return FluidUtil.getFluidContained(container);
 	}
 */
-	public boolean shagging() {
-		return shagCount > 0;
-	}
 
 /* TODO LOOT TABLES
 	@Override
