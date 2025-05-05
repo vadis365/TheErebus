@@ -1,8 +1,8 @@
 {   
     "parent": "minecraft:block/block",
     "textures": {
-        "particle": "erebus:block/prickly_pair_fruited",
-        "0": "erebus:block/prickly_pair_fruited",
+        "particle": "erebus:block/prickly_pear_fruited",
+        "0": "erebus:block/prickly_pear_fruited",
         "1": "erebus:block/prickly_pear_top"
     },
     "elements": [
