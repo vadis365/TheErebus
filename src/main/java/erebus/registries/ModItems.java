@@ -6,6 +6,7 @@ import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 
 import erebus.Erebus;
+import erebus.item.BeettleJuiceBucketItem;
 import erebus.item.PaxelItem;
 import erebus.item.WandOfAnimationItem;
 import erebus.network.data.DeathCompassData;
@@ -323,5 +324,5 @@ public class ModItems extends ModItemHelpers {
     }
     
     	// buckets
-    public static final DeferredItem<BucketItem> BEETLE_JUICE_BUCKET = ITEMS.register("beetle_juice_bucket", () -> new BucketItem(ModFluids.BEETLE_JUICE_STILL.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<BeettleJuiceBucketItem> BEETLE_JUICE_BUCKET = ITEMS.register("beetle_juice_bucket", () -> new BeettleJuiceBucketItem(ModFluids.BEETLE_JUICE_STILL.get(), new Item.Properties().stacksTo(1)));
 }
