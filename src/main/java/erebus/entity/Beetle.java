@@ -129,12 +129,12 @@ public class Beetle extends Animal {
 				stack.shrink(1);
 				ItemStack newStack = FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid("beetle_juice"), Fluid.BUCKET_VOLUME));
 				player.playSound(SoundEvents.BUCKET_FILL, 1.0F, 1.0F);
-				if (!player.getInventory().addItemStackToInventory(newStack))
-					player.dropItem(newStack, false);
+				if (!player.getInventory().add(newStack))
+					player.drop(newStack, false);
 				return InteractionResult.SUCCESS;
 			}
 		}
-		*/
+	*/	
 		if (!stack.isEmpty() && stack.getItem() == ModItems.TURNIP.get() && !isInLove()) {
 			stack.shrink(1);
 			if(!getIsTame())
