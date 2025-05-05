@@ -1,9 +1,19 @@
 package erebus;
 
+import java.util.Locale;
+
+import org.slf4j.Logger;
+
 import com.mojang.logging.LogUtils;
+
 import erebus.network.data.DeathCompassData;
 import erebus.recipes.ModCustomRecipes;
-import erebus.registries.*;
+import erebus.registries.ModBlockEntities;
+import erebus.registries.ModBlocks;
+import erebus.registries.ModFluids;
+import erebus.registries.ModItems;
+import erebus.registries.ModSounds;
+import erebus.registries.ModTabs;
 import erebus.registries.client.ModBlockEntityRendering;
 import erebus.registries.client.ModItemRendering;
 import erebus.registries.client.ModMenuTypes;
@@ -32,10 +42,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import org.slf4j.Logger;
-
-import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -49,6 +57,8 @@ public class Erebus {
         ModArmorMaterials.ARMOR_MATERIALS.register(bus);
         ModBlocks.BLOCKS.register(bus);
         ModItems.ITEMS.register(bus);
+		ModFluids.FLUIDS.register(bus);
+		ModFluids.FLUID_TYPES.register(bus);
         ModToolMaterials.init();
         ModTabs.CREATIVE_MODE_TABS.register(bus);
         ModEntities.getEntityTypes().register(bus);
@@ -72,7 +82,9 @@ public class Erebus {
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         
         bus.addListener(ModNetwork::register);
-        
+
+        NeoForgeMod.enableMilkFluid(); // TEMP - JUST FOR BEETLE MILKING TEST
+
 		if (dist.isClient()) {
 			bus.addListener(ModEntityRendering::registerEntityLayers);
 			bus.addListener(ModEntityRendering::registerEntityRender);

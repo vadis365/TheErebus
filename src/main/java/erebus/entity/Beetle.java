@@ -1,7 +1,10 @@
 package erebus.entity;
 
+import java.util.Optional;
+
 import javax.annotation.Nullable;
 
+import erebus.registries.ModFluids;
 import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
@@ -36,11 +39,17 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.NeoForgeMod;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 
 public class Beetle extends Animal {
 
@@ -118,24 +127,21 @@ public class Beetle extends Animal {
 	}
 
 	@Override
-    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-	/*	TODO - WE NEED SOME FLUID STUFF FIRST
-	if (FluidUtil.getFluidHandler(stack) != null) {
-			FluidStack fluidStack = getFluid(stack);
-			if (fluidStack != null)
-				return InteractionResult.FAIL;
-			if (!stack.isEmpty() && stack.getItem() == Items.BUCKET && !player.isCreative()) {
+		Optional<IFluidHandlerItem> fluidHandler = FluidUtil.getFluidHandler(stack);
+		if (fluidHandler.isPresent()) {
+			if (!stack.isEmpty() && stack.is(Items.BUCKET) && !player.isCreative()) {
 				stack.shrink(1);
-				ItemStack newStack = FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid("beetle_juice"), Fluid.BUCKET_VOLUME));
+				ItemStack newStack = FluidUtil.getFilledBucket(new FluidStack(ModFluids.BEETLE_JUICE_STILL.get(), FluidType.BUCKET_VOLUME));
 				player.playSound(SoundEvents.BUCKET_FILL, 1.0F, 1.0F);
 				if (!player.getInventory().add(newStack))
 					player.drop(newStack, false);
 				return InteractionResult.SUCCESS;
 			}
 		}
-	*/	
-		if (!stack.isEmpty() && stack.getItem() == ModItems.TURNIP.get() && !isInLove()) {
+		
+		if (!stack.isEmpty() && stack.is(ModItems.TURNIP.get()) && !isInLove()) {
 			stack.shrink(1);
 			if(!getIsTame())
 				setTame(true);
@@ -145,7 +151,7 @@ public class Beetle extends Animal {
 			level().playSound(null, blockPosition(), ModSounds.BEETLE_LARVA_MUNCH.get(), SoundSource.NEUTRAL, 1.0F, 0.75F);
 			return InteractionResult.SUCCESS;
 		}
-		if (!stack.isEmpty() && stack.getItem() == ModItems.BEETLE_TAMING_AMULET.get()) {
+		if (!stack.isEmpty() && stack.is(ModItems.BEETLE_TAMING_AMULET.get())) {
 			stack.shrink(1);
 			if(!getIsTame())
 				setTame(true);
@@ -174,7 +180,7 @@ public class Beetle extends Animal {
 */	
 	@Override
 	public boolean isFood(ItemStack stack) {
-		return !stack.isEmpty() && stack.getItem() == ModItems.TURNIP.get();
+		return !stack.isEmpty() && stack.is(ModItems.TURNIP.get());
 	}
 
 	@Override
