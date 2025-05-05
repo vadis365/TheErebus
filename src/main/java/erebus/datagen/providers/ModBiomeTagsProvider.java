@@ -28,5 +28,14 @@ public class ModBiomeTagsProvider extends BiomeTagsProvider {
                 .add(ModBiomes.ULTERIOR_OUTBACK.getResourceKey())
                 .add(ModBiomes.UNDERGROUND_JUNGLE.getResourceKey())
                 .add(ModBiomes.VOLCANIC_DESERT.getResourceKey());
+
+        tag(ModTags.HAS_DRAGONFLY_DUNGEON)
+                .add(ModBiomes.SUBMERGED_SWAMP.getResourceKey());
+
+        tag(ModTags.HAS_LOCUST_SHRINE)
+                .add(ModBiomes.SUBTERRANEAN_SAVANNAH.getResourceKey());
+
+        tag(ModTags.HAS_WASP_DUNGEON)
+                .add(ModBiomes.UNDERGROUND_JUNGLE.getResourceKey());
     }
 }
