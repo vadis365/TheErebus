@@ -37,6 +37,7 @@
     [],
     [],
     [
+      "minecraft:patch_grass_forest",
       "minecraft:mushroom_island_vegetation",
       "erebus:cypress",
       "erebus:nettle",

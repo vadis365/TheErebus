@@ -44,6 +44,7 @@ public class SubmergedSwampBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.MUSHROOM_ISLAND_VEGETATION)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.MARSHWOOD_TREE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.MOSSBARK_TREE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.SWAMP_PLANT.getPlacedResourceKey())

@@ -37,9 +37,10 @@
     [],
     [],
     [
+      "minecraft:patch_grass_savanna",
+      "minecraft:trees_savanna",
       "erebus:asper",
-      "erebus:baobab",
-      "minecraft:trees_savanna"
+      "erebus:baobab"
     ]
   ],
   "has_precipitation": false,

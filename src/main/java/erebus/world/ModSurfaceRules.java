@@ -117,7 +117,9 @@ public class ModSurfaceRules {
         return ifTrue(
                 isBiome(ModBiomes.SUBMERGED_SWAMP.getResourceKey()),
                 sequence(
-                        ifTrue(
+                        placeGrass(),
+                        placeDirtUnderGrass()
+                        /*ifTrue(
                                 stoneDepthCheck(0, false, 0, CaveSurface.FLOOR),
                                 ifTrue(
                                         yBlockCheck(VerticalAnchor.absolute(0), 0),
@@ -143,7 +145,7 @@ public class ModSurfaceRules {
                                                 placeDirtUnderGrass()
                                         )
                                 )
-                        )
+                        )*/
                 )
         );
     }

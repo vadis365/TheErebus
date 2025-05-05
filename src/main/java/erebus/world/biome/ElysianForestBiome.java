@@ -44,6 +44,7 @@ public class ElysianForestBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_FOREST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.CYPRESS_TREE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_BIRCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.NETTLE.getPlacedResourceKey())

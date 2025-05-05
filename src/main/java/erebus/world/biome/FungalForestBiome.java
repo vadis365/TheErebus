@@ -46,6 +46,7 @@ public class FungalForestBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
+                        .addFeature(VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_FOREST)
                         .addFeature(VEGETAL_DECORATION, VegetationPlacements.MUSHROOM_ISLAND_VEGETATION)
                         .addFeature(VEGETAL_DECORATION, ModFeatures.CYPRESS_TREE.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, ModFeatures.NETTLE.getPlacedResourceKey())
