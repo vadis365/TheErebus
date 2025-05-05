@@ -211,8 +211,8 @@ public class BeetleLarvaModel<T extends BeetleLarva> extends HierarchicalModel<T
 
 		legright3.xRot = -Mth.cos(limbSwing + 1.0F * 1.0F) * 0.5F * limbSwingAmount;
 		legleft3.xRot = Mth.cos(limbSwing + 1.0F * 1.0F) * 0.5F * limbSwingAmount;
-
 	}
+
 	@Override
 	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
 		torso1.render(stack, consumer, light, overlay, colour);

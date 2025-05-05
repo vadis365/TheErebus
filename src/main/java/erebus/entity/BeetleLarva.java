@@ -4,6 +4,7 @@ import erebus.client.particle.ClientParticleTypes.ParticleType;
 import erebus.entity.ai.LarvaEatWoodenBlocksGoal;
 import erebus.network.client.ParticlePacket;
 import erebus.registries.ModSounds;
+import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -157,18 +158,24 @@ public class BeetleLarva extends PathfinderMob {
 	}
 
 	private void spawnBeetle() {
-		System.out.println("Spawn Beetles Here");
-	/*	if (getLarvaType() == 0) {
-			EntityBeetle entityBeetle = new EntityBeetle(level());
-			entityBeetle.setPosition(posX, posY, posZ);
-			level().spawnEntity(entityBeetle);
+		if (getLarvaType() == 0) {
+			Beetle entityBeetle = ModEntities.BEETLE.get().create(this.level());
+			if(entityBeetle != null) {
+				entityBeetle.finalizeSpawn((ServerLevel)level(), level().getCurrentDifficultyAt(blockPosition()), MobSpawnType.CONVERSION, null);
+				level().addFreshEntity(entityBeetle);
+				entityBeetle.copyPosition(this);
+			}
 		}
 		if (getLarvaType() == 1) {
-			EntityBeetle entityBeetle = new EntityBeetle(level());
-			entityBeetle.setPosition(posX, posY, posZ);
-			entityBeetle.setTame(true);
-			level().spawnEntity(entityBeetle);
-		} else if (getLarvaType() == 2) {
+			Beetle entityBeetle = ModEntities.BEETLE.get().create(this.level());
+			if (entityBeetle != null) {
+				entityBeetle.setTame(true);
+				entityBeetle.finalizeSpawn((ServerLevel)level(), level().getCurrentDifficultyAt(blockPosition()), MobSpawnType.CONVERSION, null);
+				level().addFreshEntity(entityBeetle);
+				entityBeetle.copyPosition(this);
+			}
+		} /*
+		else if (getLarvaType() == 2) {
 			EntityRhinoBeetle entityRhinoBeetle = new EntityRhinoBeetle(level());
 			entityRhinoBeetle.setPosition(posX, posY, posZ);
 			entityRhinoBeetle.setTameState((byte) 1);

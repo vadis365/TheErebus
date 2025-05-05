@@ -49,7 +49,6 @@ public class Beetle extends Animal {
 
 	public Beetle(EntityType<? extends Beetle> type, Level level) {
 		super(type, level);
-	//	setSize(1.6F, 0.9F);
 	}
 
 	@Override
@@ -78,7 +77,7 @@ public class Beetle extends Animal {
 				.add(Attributes.STEP_HEIGHT, 1D);
 	}
 
-	public static boolean canSpawnHere(EntityType<BeetleLarva> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<Beetle> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
 		float light = level.getLightLevelDependentMagicValue(pos);
 		return light >= 0F;
 	}
@@ -135,7 +134,7 @@ public class Beetle extends Animal {
 				return InteractionResult.SUCCESS;
 			}
 		}
-	*/	
+		*/
 		if (!stack.isEmpty() && stack.getItem() == ModItems.TURNIP.get() && !isInLove()) {
 			stack.shrink(1);
 			if(!getIsTame())
@@ -180,12 +179,16 @@ public class Beetle extends Animal {
 
 	@Override
 	public void spawnChildFromBreeding(ServerLevel level, Animal mate) {
-		BeetleLarva entityBeetleLarva = new BeetleLarva(ModEntities.BEETLE_LARVA.get(), level());
+		BeetleLarva entityBeetleLarva = ModEntities.BEETLE_LARVA.get().create(this.level());
 		if (entityBeetleLarva != null) {
 			entityBeetleLarva.setLarvaType((byte) 1);
 			entityBeetleLarva.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
-			level.addFreshEntityWithPassengers(entityBeetleLarva);
+			level.addFreshEntity(entityBeetleLarva);
 		}
+		resetLove();
+		mate.resetLove();
+		setAge(6000);
+		mate.setAge(6000);
 	}
 
 	@Override
