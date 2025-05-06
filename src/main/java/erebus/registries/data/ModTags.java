@@ -18,6 +18,7 @@ public class ModTags {
     // MARK: World Tags
     public static final TagKey<Biome> IS_EREBUS = TagKey.create(Registries.BIOME, Erebus.prefix("is_erebus"));
     public static final TagKey<Biome> HAS_DRAGONFLY_DUNGEON = TagKey.create(Registries.BIOME, Erebus.prefix("has_dragonfly_dungeon"));
+    public static final TagKey<Biome> NO_DRAGONFLY_DUNGEON = TagKey.create(Registries.BIOME, Erebus.prefix("no_dragonfly_dungeon"));
     public static final TagKey<Biome> HAS_LOCUST_SHRINE = TagKey.create(Registries.BIOME, Erebus.prefix("has_locust_shrine"));
     public static final TagKey<Biome> HAS_WASP_DUNGEON = TagKey.create(Registries.BIOME, Erebus.prefix("has_wasp_dungeon"));
     public static final TagKey<Block> UMBERSTONE_ORE_REPLACEABLES = TagKey.create(Registries.BLOCK, Erebus.prefix("umberstone_ore_replaceables"));

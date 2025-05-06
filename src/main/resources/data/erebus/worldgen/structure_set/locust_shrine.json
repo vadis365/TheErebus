@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "erebus:locust_shrine",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 2,
+    "spacing": 14,
+    "separation": 5
+  }
+}

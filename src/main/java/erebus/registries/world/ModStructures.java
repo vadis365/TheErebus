@@ -1,32 +1,22 @@
 package erebus.registries.world;
 
 import erebus.Erebus;
+import erebus.world.structure.SkyStructure;
+import erebus.world.structure.WaterStructure;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.levelgen.structure.StructureType;
-import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModStructures {
 
     public static final DeferredRegister<StructureType<?>> STRUCTURES = DeferredRegister.create(Registries.STRUCTURE_TYPE, Erebus.MODID);
 
-    public static void bootstrapStructures(BootstrapContext<Structure> context) {
+    public static final DeferredHolder<StructureType<?>, StructureType<WaterStructure>> WATER_STRUCTURES;
+    public static final DeferredHolder<StructureType<?>, StructureType<SkyStructure>> SKY_STRUCTURES;
 
-    }
-
-    public static void bootstrapSets(BootstrapContext<StructureSet> context) {
-
-    }
-
-    public static void bootstrapPools(BootstrapContext<StructureTemplatePool> context) {
-
-    }
-
-    public static void bootstrapProcessors(BootstrapContext<StructureProcessorList> context) {
-
+    static {
+        WATER_STRUCTURES = STRUCTURES.register("water_structures", () -> () -> WaterStructure.CODEC);
+        SKY_STRUCTURES = STRUCTURES.register("sky_structures", () -> () -> SkyStructure.CODEC);
     }
 }

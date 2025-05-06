@@ -1,19 +1,9 @@
 package erebus;
 
-import java.util.Locale;
-
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
 import erebus.network.data.DeathCompassData;
 import erebus.recipes.ModCustomRecipes;
-import erebus.registries.ModBlockEntities;
-import erebus.registries.ModBlocks;
-import erebus.registries.ModFluids;
-import erebus.registries.ModItems;
-import erebus.registries.ModSounds;
-import erebus.registries.ModTabs;
+import erebus.registries.*;
 import erebus.registries.client.ModBlockEntityRendering;
 import erebus.registries.client.ModItemRendering;
 import erebus.registries.client.ModMenuTypes;
@@ -24,10 +14,7 @@ import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.network.ModNetwork;
-import erebus.registries.world.ModFoliagePlacers;
-import erebus.registries.world.ModPOIs;
-import erebus.registries.world.ModTreeDecorators;
-import erebus.registries.world.ModTrunkPlacers;
+import erebus.registries.world.*;
 import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -44,6 +31,9 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import org.slf4j.Logger;
+
+import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -72,6 +62,7 @@ public class Erebus {
         ModTreeDecorators.TREE_DECORATORS.register(bus);
         ModBlockEntities.BLOCK_ENTITIES.register(bus);
         ModPOIs.POI.register(bus);
+        ModStructures.STRUCTURES.register(bus);
     	ModCustomRecipes.RECIPE_TYPES.register(bus);
     	ModCustomRecipes.RECIPE_SERIALIZERS.register(bus);
         ModParticles.PARTICLES.register(bus);

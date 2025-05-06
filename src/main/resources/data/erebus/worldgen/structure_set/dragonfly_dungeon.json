@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "erebus:dragonfly_dungeon",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1,
+    "spacing": 14,
+    "separation": 5
+  }
+}
