@@ -96,8 +96,8 @@ public class BotFlyLarva extends Mob {
 			setRot(getVehicle().getYRot(), 0F);
 			if (!level().isClientSide()) {
 				//TODO
-				if(getVehicle().isCrouching()) //remove after test
-					setABitDead();
+			//	if(getVehicle().isCrouching()) //remove after test
+				//	setABitDead();
 				//
 				if (getParasiteCount() > 0 && random.nextInt(180 / getParasiteCount()) == 0) {
 					byte duration = (byte) (getParasiteCount() * 5);

@@ -20,7 +20,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
@@ -324,5 +323,5 @@ public class ModItems extends ModItemHelpers {
     }
     
     	// buckets
-    public static final DeferredItem<BeettleJuiceBucketItem> BEETLE_JUICE_BUCKET = ITEMS.register("beetle_juice_bucket", () -> new BeettleJuiceBucketItem(ModFluids.BEETLE_JUICE_STILL.get(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> BEETLE_JUICE_BUCKET = ITEMS.register("beetle_juice_bucket", () -> new BeettleJuiceBucketItem(ModFluids.BEETLE_JUICE_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 }

@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import javax.annotation.Nullable;
 
-import erebus.registries.ModFluids;
 import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
@@ -45,9 +44,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 
@@ -131,9 +127,11 @@ public class Beetle extends Animal {
 		ItemStack stack = player.getItemInHand(hand);
 		Optional<IFluidHandlerItem> fluidHandler = FluidUtil.getFluidHandler(stack);
 		if (fluidHandler.isPresent()) {
-			if (!stack.isEmpty() && stack.is(Items.BUCKET) && !player.isCreative()) {
+			if (!stack.isEmpty() && stack.is(Items.BUCKET)/* && !player.isCreative()*/) {
 				stack.shrink(1);
-				ItemStack newStack = FluidUtil.getFilledBucket(new FluidStack(ModFluids.BEETLE_JUICE_STILL.get(), FluidType.BUCKET_VOLUME));
+				ItemStack newStack = new ItemStack(ModItems.BEETLE_JUICE_BUCKET.get());//FluidUtil.getFilledBucket(new FluidStack(ModFluids.BEETLE_JUICE_STILL.get(), FluidType.BUCKET_VOLUME));
+				//BucketLibUtil.addFluid(newStack, Fluids.LAVA);
+				//System.out.println("FLUID IS: " + BucketLibUtil.getFluid(newStack));
 				player.playSound(SoundEvents.BUCKET_FILL, 1.0F, 1.0F);
 				if (!player.getInventory().add(newStack))
 					player.drop(newStack, false);
