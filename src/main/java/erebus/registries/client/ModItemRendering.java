@@ -1,8 +1,9 @@
 package erebus.registries.client;
 
 import erebus.Erebus;
-import erebus.client.render.block.renderer.BlockOfBonesStackItemRenderer;
-import erebus.client.render.block.renderer.OfferingAltarStackItemRenderer;
+import erebus.client.render.block.renderer.stack.BlenderStackItemRenderer;
+import erebus.client.render.block.renderer.stack.BlockOfBonesStackItemRenderer;
+import erebus.client.render.block.renderer.stack.OfferingAltarStackItemRenderer;
 import erebus.client.render.item.model.*;
 import erebus.client.render.item.renderer.*;
 import erebus.registries.ModBlocks;
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class ModItemRendering {
 
@@ -40,70 +42,70 @@ public class ModItemRendering {
 	public static void registerItemRender(RegisterClientExtensionsEvent event) {
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new WandOfAnimationItemRenderer(null, null);
             }
         }, ModItems.WAND_OF_ANIMATION.get());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new WandOfPreservationRenderer(null, null);
             }
         }, ModItems.WAND_OF_PRESERVATION.get());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new PortalActivatorRenderer(null, null);
             }
         }, ModItems.PORTAL_ACTIVATOR.get());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new WaspSwordRenderer(null, null);
             }
         }, ModItems.WASP_SWORD.get());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new WaspDaggerRenderer(null, null);
             }
         }, ModItems.WASP_DAGGER.get());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new WarHammerRenderer(null, null);
             }
         }, ModItems.WAR_HAMMER.get());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new ScorpionPincerRenderer(null, null);
             }
         }, ModItems.ENHANCED_SCORPION_PINCER.get());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new WebSlingerRenderer(null, null, false);
             }
         }, ModItems.WEB_SLINGER.get());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new WebSlingerRenderer(null, null, true);
             }
         }, ModItems.WEB_SLINGER_WITHER.get());
 
         event.registerItem(new IClientItemExtensions() {
                                @Override
-                               public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                               public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                                    return new ErebusShieldPartsRenderer(null, null);
                                }
                            },
@@ -115,16 +117,23 @@ public class ModItemRendering {
         
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new OfferingAltarStackItemRenderer(null, null);
             }
         }, ModBlocks.OFFERING_ALTAR.get().asItem());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new BlockOfBonesStackItemRenderer(null, null);
             }
         }, ModBlocks.BLOCK_OF_BONES.get().asItem());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return new BlenderStackItemRenderer(null, null);
+            }
+        }, ModBlocks.BLENDER.get().asItem());
 	}
 }

@@ -1,19 +1,8 @@
 package erebus.registries.client;
 
 import erebus.Erebus;
-import erebus.client.render.block.model.BlockOfBonesModel;
-import erebus.client.render.block.model.ExperienceAltarModel;
-import erebus.client.render.block.model.HealingAltarModel;
-import erebus.client.render.block.model.LightningAltarModel;
-import erebus.client.render.block.model.OfferingAltarModel;
-import erebus.client.render.block.model.RepairAltarModel;
-import erebus.client.render.block.renderer.BlockOfBonesRenderer;
-import erebus.client.render.block.renderer.ExperienceAltarRenderer;
-import erebus.client.render.block.renderer.GaeanKeystoneRenderer;
-import erebus.client.render.block.renderer.HealingAltarRenderer;
-import erebus.client.render.block.renderer.LightningAltarRenderer;
-import erebus.client.render.block.renderer.OfferingAltarRenderer;
-import erebus.client.render.block.renderer.RepairAltarRenderer;
+import erebus.client.render.block.model.*;
+import erebus.client.render.block.renderer.*;
 import erebus.registries.ModBlockEntities;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -25,6 +14,7 @@ public class ModBlockEntityRendering {
     public static final ModelLayerLocation ALTAR_LIGHTNING = new ModelLayerLocation(Erebus.prefix("altar_lightning"), "main");
     public static final ModelLayerLocation ALTAR_REPAIR = new ModelLayerLocation(Erebus.prefix("altar_repair"), "main");
     public static final ModelLayerLocation ALTAR_EXPERIENCE = new ModelLayerLocation(Erebus.prefix("altar_experience"), "main");
+    public static final ModelLayerLocation BLENDER = new ModelLayerLocation(Erebus.prefix("blender"), "main");
     
 	public static void registerBlockEntityLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(OFFERING_ALTAR, OfferingAltarModel::createBodyLayer);
@@ -33,6 +23,7 @@ public class ModBlockEntityRendering {
         event.registerLayerDefinition(ALTAR_LIGHTNING, LightningAltarModel::createBodyLayer);
         event.registerLayerDefinition(ALTAR_REPAIR, RepairAltarModel::createBodyLayer);
         event.registerLayerDefinition(ALTAR_EXPERIENCE, ExperienceAltarModel::createBodyLayer);
+        event.registerLayerDefinition(BLENDER, BlenderModel::createBodyLayer);
 	}
 	
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -43,6 +34,7 @@ public class ModBlockEntityRendering {
         event.registerBlockEntityRenderer(ModBlockEntities.ALTAR_LIGHTNING.get(), LightningAltarRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.ALTAR_REPAIR.get(), RepairAltarRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.ALTAR_EXPERIENCE.get(), ExperienceAltarRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.BLENDER.get(), BlenderRenderer::new);
     }
     
 }

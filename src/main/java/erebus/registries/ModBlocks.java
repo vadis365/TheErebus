@@ -468,7 +468,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> SILO_SUPPORTS = registerSimpleBlock("silo_supports", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> HONEY_COMB = registerSimpleBlock("honey_comb", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> COMPOSTER = registerSimpleBlock("composter", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> BLENDER = registerSimpleBlock("blender", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> BLENDER = registerBlock("blender", () -> new BlenderBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).noOcclusion()));
     public static final DeferredBlock<UmberFurnaceBlock> UMBER_FURNACE = registerBlock("umber_furnace", () -> new UmberFurnaceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FURNACE)));
     public static final DeferredBlock<ButtonBlock> UMBERSTONE_BUTTON = registerBlock("umberstone_button", () -> new ButtonBlock(BlockSetType.STONE, 10, BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
     public static final DeferredBlock<Block> LIQUIFIER = registerSimpleBlock("liquifier", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));

@@ -1,9 +1,10 @@
-package erebus.client.render.block.renderer;
+package erebus.client.render.block.renderer.stack;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import erebus.Erebus;
-import erebus.client.render.block.model.BlockOfBonesModel;
+import erebus.client.render.block.model.BlenderModel;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -18,23 +19,25 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class BlockOfBonesStackItemRenderer extends BlockEntityWithoutLevelRenderer {
+public class BlenderStackItemRenderer extends BlockEntityWithoutLevelRenderer {
 
-    private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/bone_block.png");
-    private final BlockOfBonesModel model;
+    private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/blender.png");
+    private final BlenderModel model;
 
-    public BlockOfBonesStackItemRenderer(BlockEntityRenderDispatcher renderer, EntityModelSet modelSet) {
+    public BlenderStackItemRenderer(BlockEntityRenderDispatcher renderer, EntityModelSet modelSet) {
         super(renderer, modelSet);
         EntityModelSet set = Minecraft.getInstance().getEntityModels();
-        model = new BlockOfBonesModel(set.bakeLayer(ModBlockEntityRendering.BLOCK_OF_BONES));
+        model = new BlenderModel(set.bakeLayer(ModBlockEntityRendering.BLENDER));
     }
 
     @Override
     public void renderByItem(@Nonnull ItemStack itemStackIn, @Nonnull ItemDisplayContext transformType, PoseStack stack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         VertexConsumer consumer = buffer.getBuffer(RenderType.entitySolid(TEXTURE));
         stack.pushPose();
-        stack.translate(0.5D, 1.5D, 0.5D);
-        stack.scale(-1, -1, 1);
+        stack.translate(0.5D, 0.89D, 0.5D);
+        stack.scale(1, -1, -1);
+        stack.scale(0.5F, 0.5F, 0.5F);
+        stack.rotateAround(Axis.YN.rotationDegrees(90), 0, 1, 0);
         model.renderToBuffer(stack, consumer, packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
         stack.popPose();
     }
