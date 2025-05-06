@@ -22,6 +22,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.NotNull;
 
 public class ModBlocks extends ModBlockHelpers {
 
@@ -379,7 +380,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> JADE_BLOCK = registerSimpleBlock("jade_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> MUD = registerBlock("mud", () -> new MudBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MUD)) {
         @Override
-        public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
+        public @NotNull TriState canSustainPlant(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos soilPosition, @NotNull Direction facing, @NotNull BlockState plant) {
             return TriState.TRUE;
         }
     });
@@ -447,7 +448,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> ZOMBIE_ANT_SOLDIER_SPAWNER = registerSimpleBlock("zombie_ant_soldier_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> MAGMA_CRAWLER_SPAWNER = registerSimpleBlock("magma_crawler_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<Block> DUNG_SPAWNER_FLY = registerSimpleBlock("dung_spawner_fly", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> DUNG_SPAWNER_BOT_FLY = registerSimpleBlock("dung_spawner_bot_fly", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> DUNG_SPAWNER_BOT_FLY = registerBlock("dung_spawner_bot_fly", () -> new BotFlySpawnerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).noOcclusion()));
     public static final DeferredBlock<Block> LOCUST_SPAWNER = registerSimpleBlock("locust_spawner", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
 
     // MARK: Utility Blocks
