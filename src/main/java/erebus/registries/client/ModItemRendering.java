@@ -7,6 +7,7 @@ import erebus.client.render.block.renderer.stack.BlenderStackItemRenderer;
 import erebus.client.render.block.renderer.stack.BlockOfBonesStackItemRenderer;
 import erebus.client.render.block.renderer.stack.FluidJarStackItemRenderer;
 import erebus.client.render.block.renderer.stack.OfferingAltarStackItemRenderer;
+import erebus.client.render.item.model.EmptyModel;
 import erebus.client.render.item.model.ErebusShieldPartsModel;
 import erebus.client.render.item.model.PortalActivatorModel;
 import erebus.client.render.item.model.ScorpionPincerModel;
@@ -56,7 +57,7 @@ public class ModItemRendering {
 		event.registerLayerDefinition(WASP_DAGGER, WaspDaggerModel::createBodyLayer);
 		event.registerLayerDefinition(WASP_SWORD, WaspSwordModel::createBodyLayer);
 		event.registerLayerDefinition(WEB_SLINGER, WebSlingerModel::createBodyLayer);
-		event.registerLayerDefinition(FLUID_JAR, null);
+		event.registerLayerDefinition(FLUID_JAR, EmptyModel::createBodyLayer);
 	}
 
 	public static void registerItemRender(RegisterClientExtensionsEvent event) {

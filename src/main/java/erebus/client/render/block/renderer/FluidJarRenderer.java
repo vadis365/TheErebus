@@ -33,7 +33,7 @@ public class FluidJarRenderer implements BlockEntityRenderer<FluidJarBlockEntity
 		if (fluidLevel < 1)
 			return;
 		FluidStack fluidStack = new FluidStack(tile.tank.getFluid().getFluidHolder(), 100);
-		float height = (0.96875F / tile.tank.getCapacity()) * tile.tank.getFluidAmount();
+		float height = (0.7421875F / tile.tank.getCapacity()) * tile.tank.getFluidAmount();
 
 		var fluidExtensions = IClientFluidTypeExtensions.of(fluidStack.getFluid());
 		
@@ -43,10 +43,10 @@ public class FluidJarRenderer implements BlockEntityRenderer<FluidJarBlockEntity
 		stack.pushPose();
 		stack.translate(0D, 0D, 0D);
 		float xMax, zMax, xMin, zMin, yMin = 0;
-		xMax = 1.984375F;
-		zMax = 1.984375F;
-		xMin = 0.015625F;
-		zMin = 0.015625F;
+		xMax = 1.859375F;
+		zMax = 1.859375F;
+		xMin = 0.140625F;
+		zMin = 0.140625F;
 		yMin = 0.015625F;
 		float alpha = 1F;
 		float red = (fluidColor >> 16 & 0xFF) / 255.0F;

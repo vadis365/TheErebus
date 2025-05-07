@@ -40,7 +40,7 @@ public class FluidJarStackItemRenderer extends BlockEntityWithoutLevelRenderer {
 		if (fluidLevel < 1)
 			return;
 		float tankMax = 32000F;
-		float height = (0.96875F / tankMax) * fluidLevel; // volumes hardcoded until config
+		float height = (0.7421875F / tankMax) * fluidLevel; // volumes hardcoded until config
 
 		var fluidExtensions = IClientFluidTypeExtensions.of(fluidStack.getFluid());
 
@@ -50,10 +50,10 @@ public class FluidJarStackItemRenderer extends BlockEntityWithoutLevelRenderer {
 		matrixStack.pushPose();
 		matrixStack.translate(0D, 0D, 0D);
 		float xMax, zMax, xMin, zMin, yMin = 0;
-		xMax = 1.984375F;
-		zMax = 1.984375F;
-		xMin = 0.015625F;
-		zMin = 0.015625F;
+		xMax = 1.859375F;
+		zMax = 1.859375F;
+		xMin = 0.140625F;
+		zMin = 0.140625F;
 		yMin = 0.015625F;
 		float alpha = 1F;
 		float red = (fluidColor >> 16 & 0xFF) / 255.0F;
