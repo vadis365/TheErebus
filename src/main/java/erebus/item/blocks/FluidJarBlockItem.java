@@ -17,12 +17,12 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 public class FluidJarBlockItem extends BlockItem {
+	private final int capacity;
 
 	public FluidJarBlockItem(FluidJarBlock blockIn, int capacity, Properties builder) {
 		super(blockIn, builder);
 		this.capacity = capacity;
 	}
-	private final int capacity;
 
 	@Override
 	@OnlyIn(Dist.CLIENT)

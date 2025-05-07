@@ -44,6 +44,7 @@ public class ModItemRendering {
 	public static final ModelLayerLocation WASP_DAGGER = new ModelLayerLocation(Erebus.prefix("wasp_dagger"), "main");
 	public static final ModelLayerLocation WASP_SWORD = new ModelLayerLocation(Erebus.prefix("wasp_sword"), "main");
 	public static final ModelLayerLocation WEB_SLINGER = new ModelLayerLocation(Erebus.prefix("web_slinger"), "main");
+	public static final ModelLayerLocation FLUID_JAR = new ModelLayerLocation(Erebus.prefix("fluid_jar"), "main");
 
 	public static void registerItemLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(WAND_OF_ANIMATION, WandOfAnimationItemModel::createBodyLayer);
@@ -55,6 +56,7 @@ public class ModItemRendering {
 		event.registerLayerDefinition(WASP_DAGGER, WaspDaggerModel::createBodyLayer);
 		event.registerLayerDefinition(WASP_SWORD, WaspSwordModel::createBodyLayer);
 		event.registerLayerDefinition(WEB_SLINGER, WebSlingerModel::createBodyLayer);
+		event.registerLayerDefinition(FLUID_JAR, null);
 	}
 
 	public static void registerItemRender(RegisterClientExtensionsEvent event) {
