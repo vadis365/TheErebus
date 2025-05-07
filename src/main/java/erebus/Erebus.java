@@ -1,9 +1,20 @@
 package erebus;
 
+import java.util.Locale;
+
+import org.slf4j.Logger;
+
 import com.mojang.logging.LogUtils;
+
+import erebus.block.entity.FluidJarBlockEntity;
 import erebus.network.data.DeathCompassData;
 import erebus.recipes.ModCustomRecipes;
-import erebus.registries.*;
+import erebus.registries.ModBlockEntities;
+import erebus.registries.ModBlocks;
+import erebus.registries.ModFluids;
+import erebus.registries.ModItems;
+import erebus.registries.ModSounds;
+import erebus.registries.ModTabs;
 import erebus.registries.client.ModBlockEntityRendering;
 import erebus.registries.client.ModItemRendering;
 import erebus.registries.client.ModMenuTypes;
@@ -14,7 +25,11 @@ import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.network.ModNetwork;
-import erebus.registries.world.*;
+import erebus.registries.world.ModFoliagePlacers;
+import erebus.registries.world.ModPOIs;
+import erebus.registries.world.ModStructures;
+import erebus.registries.world.ModTreeDecorators;
+import erebus.registries.world.ModTrunkPlacers;
 import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -28,12 +43,11 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import org.slf4j.Logger;
-
-import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -75,6 +89,8 @@ public class Erebus {
         bus.addListener(ModNetwork::register);
 
         NeoForgeMod.enableMilkFluid(); // TEMP - JUST FOR BEETLE MILKING TEST
+        
+        bus.addListener(this::registerCaps);
 
 		if (dist.isClient()) {
 			bus.addListener(ModEntityRendering::registerEntityLayers);
@@ -125,5 +141,9 @@ public class Erebus {
 
 	public static ResourceLocation prefix(String name) {
 		return ResourceLocation.fromNamespaceAndPath(MODID, name.toLowerCase(Locale.ROOT));
+	}
+	
+	public void registerCaps(final RegisterCapabilitiesEvent evt) {
+		evt.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.FLUID_JAR.get(), FluidJarBlockEntity::getTank);
 	}
 }
