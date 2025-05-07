@@ -694,6 +694,8 @@ public class ModLang extends ModLangProvider {
 
     private void addToolTipTranslations() {
         add("tooltip.death_compass.pos", "Death Pos: ");
+        add("tooltip.shield.damage", "Damage: ");
+        add("tooltip.shield.repair", "Anvil Repair: ");
     }
 
     private void addBookTranslations() {

@@ -1,14 +1,11 @@
 package erebus.registries;
 
-import java.util.List;
-import java.util.Map;
-
-import org.jetbrains.annotations.NotNull;
-
 import erebus.Erebus;
 import erebus.item.BeettleJuiceBucketItem;
 import erebus.item.PaxelItem;
 import erebus.item.WandOfAnimationItem;
+import erebus.item.shield.ErebusShieldItem;
+import erebus.item.shield.type.*;
 import erebus.network.data.DeathCompassData;
 import erebus.registries.data.ModArmorMaterials;
 import erebus.registries.data.ModDataComponents;
@@ -18,20 +15,13 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Map;
 
 public class ModItems extends ModItemHelpers {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Erebus.MODID);
@@ -205,11 +195,11 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> MAX_SPEED_BOW = registerItem("max_speed_bow");
 
     // MARK: Shields
-    public static final DeferredItem<ShieldItem> BAMBOO_SHIELD = registerShield("bamboo_shield",336);
-    public static final DeferredItem<ShieldItem> EXOSKELETON_SHIELD = registerShield("exoskeleton_shield",336);
-    public static final DeferredItem<ShieldItem> JADE_SHIELD = registerShield("jade_shield",336);
-    public static final DeferredItem<ShieldItem> REIN_EXOSKELETON_SHIELD = registerShield("rein_exoskeleton_shield",336);
-    public static final DeferredItem<ShieldItem> RHINO_EXOSKELETON_SHIELD = registerShield("rhino_exoskeleton_shield",336);
+    public static final DeferredItem<ErebusShieldItem> BAMBOO_SHIELD = registerShield("bamboo_shield", 256, new BambooShieldType());
+    public static final DeferredItem<ErebusShieldItem> EXOSKELETON_SHIELD = registerShield("exoskeleton_shield", 352, new ExoSkeletonShieldType());
+    public static final DeferredItem<ErebusShieldItem> JADE_SHIELD = registerShield("jade_shield", 768, new JadeShieldType());
+    public static final DeferredItem<ErebusShieldItem> REIN_EXOSKELETON_SHIELD = registerShield("rein_exoskeleton_shield", 1056, new ReinforcedShieldType());
+    public static final DeferredItem<ErebusShieldItem> RHINO_EXOSKELETON_SHIELD = registerShield("rhino_exoskeleton_shield", 1056, new RhinoShieldType());
 
     // MARK: Misc
     public static final DeferredItem<Item> WAND_OF_ANIMATION = ITEMS.register("wand_of_animation", () -> new WandOfAnimationItem(new Item.Properties().stacksTo(1).durability(64).setNoRepair()));

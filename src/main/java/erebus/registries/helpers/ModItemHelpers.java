@@ -3,18 +3,19 @@ package erebus.registries.helpers;
 import de.cech12.bucketlib.api.item.UniversalBucketItem;
 import erebus.item.PaxelItem;
 import erebus.item.SmoothieItem;
+import erebus.item.shield.ErebusShieldItem;
+import erebus.item.shield.IShieldType;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-import java.util.*;
-import java.util.function.Supplier;
+import java.util.HashMap;
+import java.util.Map;
 
 import static erebus.registries.ModItems.ITEMS;
 
@@ -144,7 +145,7 @@ public class ModItemHelpers {
         return ITEMS.register(name, () -> new UniversalBucketItem(new UniversalBucketItem.Properties()));
     }
 
-    public static DeferredItem<ShieldItem> registerShield(String name, int maxDamage) {
-        return ITEMS.register(name, () -> new ShieldItem(new Item.Properties().durability(maxDamage)));
+    public static DeferredItem<ErebusShieldItem> registerShield(String name, int maxDamage, IShieldType shieldType) {
+        return ITEMS.register(name, () -> new ErebusShieldItem(new Item.Properties().durability(maxDamage), shieldType));
     }
 }

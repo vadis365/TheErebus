@@ -1,6 +1,6 @@
 {
   "parent": "erebus:block/blank",
   "textures": {
-    "layer0": "erebus:item/bamboo_shield"
+    "layer0": "erebus:item/jade_shield"
   }
 }

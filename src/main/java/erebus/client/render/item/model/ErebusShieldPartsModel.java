@@ -7,6 +7,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
+import org.jetbrains.annotations.NotNull;
 
 public class ErebusShieldPartsModel extends Model {
     public final ModelPart handle;
@@ -21,62 +22,38 @@ public class ErebusShieldPartsModel extends Model {
     }
 
     public static LayerDefinition createBodyLayer() {
-        MeshDefinition meshdefinition = new MeshDefinition();
-        PartDefinition partdefinition = meshdefinition.getRoot();
+        MeshDefinition mesh = new MeshDefinition();
+        PartDefinition parts = mesh.getRoot();
 
-        PartDefinition handle = partdefinition.addOrReplaceChild(
+        parts.addOrReplaceChild(
                 "handle",
                 CubeListBuilder.create()
                         .texOffs(26, 0)
-                        .addBox(
-                                -1,
-                                3,
-                                -1,
-                                2,
-                                6,
-                                6,
-                                new CubeDeformation(0)
-                        ),
+                        .addBox(-1, 3, -1, 2, 6, 6, new CubeDeformation(0)),
                 PartPose.ZERO
         );
 
-        PartDefinition boss1 = partdefinition.addOrReplaceChild(
+        parts.addOrReplaceChild(
                 "boss1",
                 CubeListBuilder.create()
                         .texOffs(7, 4)
-                        .addBox(
-                                -1.5F,
-                                -1.5F,
-                                -3.25F,
-                                3,
-                                3,
-                                1,
-                                new CubeDeformation(0)
-                        ),
+                        .addBox(-1.5F, -1.5F, -3.25F, 3, 3, 1, new CubeDeformation(0)),
                 PartPose.ZERO
         );
 
-        PartDefinition boss2 = partdefinition.addOrReplaceChild(
+        parts.addOrReplaceChild(
                 "boss2",
                 CubeListBuilder.create()
                         .texOffs(7, 9)
-                        .addBox(
-                                -0.5F,
-                                -0.5F,
-                                -4.25F,
-                                1,
-                                1,
-                                1,
-                                new CubeDeformation(0)
-                        ),
+                        .addBox(-0.5F, -0.5F, -4.25F, 1, 1, 1, new CubeDeformation(0)),
                 PartPose.ZERO
         );
 
-        return LayerDefinition.create(meshdefinition, 64, 64);
+        return LayerDefinition.create(mesh, 64, 64);
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+    public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
         handle.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
         boss1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
         boss2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
