@@ -615,5 +615,7 @@
   "item.erebus.whetstone": "ǝuoʇsʇǝɥM",
   "item.erebus.whetstone_powder": "ɹǝpʍoԀ ǝuoʇsʇǝɥM",
   "item.erebus.woodlouse_ball": "ꞁꞁɐᗺ ǝsnoꞁpooM",
-  "tooltip.death_compass.pos": " :soԀ ɥʇɐǝᗡ"
+  "tooltip.death_compass.pos": " :soԀ ɥʇɐǝᗡ",
+  "tooltip.shield.damage": " :ǝᵷɐɯɐᗡ",
+  "tooltip.shield.repair": " :ɹᴉɐdǝᴚ ꞁᴉʌuⱯ"
 }

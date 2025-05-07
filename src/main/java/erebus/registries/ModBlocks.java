@@ -70,7 +70,7 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<ConnectedTextureBlock> PRESERVED_AMBER_GLASS = registerConnectedTextureBlock("preserved_amber_glass", BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).strength(2.5F).sound(SoundType.GLASS).mapColor(MapColor.GOLD));
 
     public static final DeferredBlock<Block> GLOWING_JAR = registerSimpleBlock("glowing_jar", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> FLUID_JAR = registerSimpleBlock("fluid_jar", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<FluidJarBlock> FLUID_JAR = registerBlockWithoutBlockItem("fluid_jar", () -> new FluidJarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).mapColor(MapColor.STONE).strength(1.0F, 2000.0F).sound(SoundType.GLASS).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false)));
 
     public static final DeferredBlock<DoorBlock> AMBER_DOOR = registerDoor("amber_door", BlockSetType.STONE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR));
 

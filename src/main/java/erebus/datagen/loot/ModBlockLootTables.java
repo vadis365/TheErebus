@@ -1,14 +1,17 @@
 package erebus.datagen.loot;
 
+import static erebus.registries.ModBlocks.*;
+
+import org.jetbrains.annotations.NotNull;
+
 import erebus.datagen.providers.ModBlockLootTableProvider;
 import erebus.registries.ModItems;
+import erebus.registries.data.ModDataComponents;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import org.jetbrains.annotations.NotNull;
-
-import static erebus.registries.ModBlocks.*;
+import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 
 public class ModBlockLootTables extends ModBlockLootTableProvider {
 
@@ -466,6 +469,12 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         //Webs
         add(WITHER_WEB.get(), createSilkTouchOrShearsDispatchTable(WITHER_WEB.get(), applyExplosionCondition(WITHER_WEB, LootItem.lootTableItem(Items.STRING))));
         add(LAVA_WEB.get(), createSilkTouchOrShearsDispatchTable(LAVA_WEB.get(), applyExplosionCondition(WITHER_WEB, LootItem.lootTableItem(Items.STRING))));
+    
+        // Fluid Tank Blocks
+        CopyComponentsFunction.Builder copyFluid = CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+                .include(ModDataComponents.FLUID.get());
+
+        dropComponents(FLUID_JAR, $ -> $.apply(copyFluid));
     }
 
     @Override

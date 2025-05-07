@@ -73,6 +73,11 @@ public class ModBlockHelpers {
         registerBlockItem(name, deferredBlock);
         return deferredBlock;
     }
+    
+    protected static <T extends Block> DeferredBlock<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {
+        DeferredBlock<T> deferredBlock = BLOCKS.register(name, block);
+        return deferredBlock;
+    }
 
     protected static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block) {
         ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));

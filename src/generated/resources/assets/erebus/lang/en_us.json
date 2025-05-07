@@ -616,6 +616,6 @@
   "item.erebus.whetstone_powder": "Whetstone Powder",
   "item.erebus.woodlouse_ball": "Woodlouse Ball",
   "tooltip.death_compass.pos": "Death Pos: ",
-  "tooltip.shield.damage": "Damage:",
-  "tooltip.shield.repair": "Anvil Repair:"
+  "tooltip.shield.damage": "Damage: ",
+  "tooltip.shield.repair": "Anvil Repair: "
 }

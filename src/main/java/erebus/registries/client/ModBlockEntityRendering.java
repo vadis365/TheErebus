@@ -1,8 +1,22 @@
 package erebus.registries.client;
 
 import erebus.Erebus;
-import erebus.client.render.block.model.*;
-import erebus.client.render.block.renderer.*;
+import erebus.client.render.block.model.BlenderModel;
+import erebus.client.render.block.model.BlockOfBonesModel;
+import erebus.client.render.block.model.ExperienceAltarModel;
+import erebus.client.render.block.model.HealingAltarModel;
+import erebus.client.render.block.model.LightningAltarModel;
+import erebus.client.render.block.model.OfferingAltarModel;
+import erebus.client.render.block.model.RepairAltarModel;
+import erebus.client.render.block.renderer.BlenderRenderer;
+import erebus.client.render.block.renderer.BlockOfBonesRenderer;
+import erebus.client.render.block.renderer.ExperienceAltarRenderer;
+import erebus.client.render.block.renderer.FluidJarRenderer;
+import erebus.client.render.block.renderer.GaeanKeystoneRenderer;
+import erebus.client.render.block.renderer.HealingAltarRenderer;
+import erebus.client.render.block.renderer.LightningAltarRenderer;
+import erebus.client.render.block.renderer.OfferingAltarRenderer;
+import erebus.client.render.block.renderer.RepairAltarRenderer;
 import erebus.registries.ModBlockEntities;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -35,6 +49,7 @@ public class ModBlockEntityRendering {
         event.registerBlockEntityRenderer(ModBlockEntities.ALTAR_REPAIR.get(), RepairAltarRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.ALTAR_EXPERIENCE.get(), ExperienceAltarRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.BLENDER.get(), BlenderRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.FLUID_JAR.get(), FluidJarRenderer::new);
     }
     
 }

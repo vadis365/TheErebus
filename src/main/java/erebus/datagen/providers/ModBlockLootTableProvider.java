@@ -1,5 +1,10 @@
 package erebus.datagen.providers;
 
+import java.util.HashMap;
+import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 import erebus.block.ModCropBlock;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
@@ -13,17 +18,15 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-
-import java.util.HashMap;
-import java.util.Set;
-import java.util.function.Supplier;
 
 public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
 
@@ -68,5 +71,12 @@ public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
         LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(crop.get())
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ModCropBlock.AGE, 3));
         add(crop.get(), createCropDrops(crop.get(), grownDrop.get(), seed.get(), condition));
+    }
+    
+    public void dropComponents(Supplier<? extends Block> blockSupplier, Consumer<LootPool.Builder> lootFunctionSupplier) {
+        LootPool.Builder lootPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(blockSupplier.get()));
+        lootFunctionSupplier.accept(lootPool);
+        add(blockSupplier.get(), LootTable.lootTable().withPool(applyExplosionCondition(blockSupplier.get(), lootPool)));
     }
 }

@@ -1,4 +1,5 @@
 {
+ 	"render_type": "translucent",
     "parent": "minecraft:block/cube_all",
     "textures": {
         "0": "erebus:block/fluid_jar_side",

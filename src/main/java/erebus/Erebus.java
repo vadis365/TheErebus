@@ -66,7 +66,7 @@ public class Erebus {
     	ModCustomRecipes.RECIPE_TYPES.register(bus);
     	ModCustomRecipes.RECIPE_SERIALIZERS.register(bus);
         ModParticles.PARTICLES.register(bus);
-        ModDataComponents.REGISTRY.register(bus);
+        ModDataComponents.DATA_COMPONENT_REGISTRY.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 
