@@ -22,7 +22,7 @@ public class BasicFluidType implements IClientFluidTypeExtensions {
 	@Override
 	public ResourceLocation getFlowingTexture() {
 		System.out.println("AAAAAAAAAAAAHAHHHHHHHHHHHHHHHHHHHHHHHHGGGGGGGGGGGGGGHHHHHHH");
-		System.out.println(Erebus.prefix("fluids/" + this.fluidName + "_flow").toString());
+		System.out.println(Erebus.prefix("fluids/" + this.fluidName + "_flowing").toString());
 		return Erebus.prefix("fluids/" + this.fluidName + "_flowing");
 	}
 }
