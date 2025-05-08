@@ -44,6 +44,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
@@ -95,6 +96,7 @@ public class Erebus {
         bus.addListener(this::registerCaps);
 
 		if (dist.isClient()) {
+			bus.addListener(this::doClientStuff);
 			bus.addListener(ModEntityRendering::registerEntityLayers);
 			bus.addListener(ModEntityRendering::registerEntityRender);
 			bus.addListener(ModItemRendering::registerItemLayerDefinitions);
@@ -102,12 +104,14 @@ public class Erebus {
 			bus.addListener(ModBlockEntityRendering::registerBlockEntityLayerDefinitions);
 			bus.addListener(ModBlockEntityRendering::registerBlockEntityRenderers);
             bus.addListener(ModParticles::registerParticleFactories);
-            
-       //     ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_FLOW.get(), RenderType.translucent());
-    	//	ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_STILL.get(), RenderType.translucent());
 		}
     }
 
+    private void doClientStuff(final FMLClientSetupEvent event) {
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_FLOW.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_STILL.get(), RenderType.translucent());
+    }
+    
     private void commonSetup(final FMLCommonSetupEvent event) {
         ItemProperties.register(
                 ModItems.DEATH_COMPASS.get(),

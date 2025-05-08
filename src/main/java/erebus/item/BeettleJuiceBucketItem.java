@@ -1,7 +1,25 @@
 package erebus.item;
 
+import javax.annotation.Nonnull;
+
+import erebus.entity.BotFlyLarva;
+import erebus.registries.ModFluids;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
 public class BeettleJuiceBucketItem extends BucketItem {
 	private static final int DRINK_DURATION = 32;
@@ -10,16 +28,17 @@ public class BeettleJuiceBucketItem extends BucketItem {
 		super(content, properties);
 		 this.content = content;
 	}
-/*
+
 	@Override
 	@Nonnull
 	public InteractionResultHolder<ItemStack> use(@Nonnull Level level, @Nonnull Player player, @Nonnull InteractionHand hand) {
-		ItemStack itemstack = player.getItemInHand(hand);
+		ItemStack stack = player.getItemInHand(hand);
+		super.use(level, player, hand);
 		if (containsBeetleJuice())
 			return ItemUtils.startUsingInstantly(level, player, hand);
-		return super.use(level, player, hand);
+		return InteractionResultHolder.pass(stack);
 	}
-	
+
 	public Entity getParasite(Entity entityIn) {
 		for (Entity entity : entityIn.getPassengers())
 			if (entity instanceof BotFlyLarva)
@@ -70,5 +89,5 @@ public class BeettleJuiceBucketItem extends BucketItem {
 			return true;
 		return false;
 	}
-*/
+
 }
