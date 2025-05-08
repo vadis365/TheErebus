@@ -129,9 +129,7 @@ public class Beetle extends Animal {
 		if (fluidHandler.isPresent()) {
 			if (!stack.isEmpty() && stack.is(Items.BUCKET)/* && !player.isCreative()*/) {
 				stack.shrink(1);
-				ItemStack newStack = new ItemStack(ModItems.BEETLE_JUICE_BUCKET.get());//FluidUtil.getFilledBucket(new FluidStack(ModFluids.BEETLE_JUICE_STILL.get(), FluidType.BUCKET_VOLUME));
-				//BucketLibUtil.addFluid(newStack, Fluids.LAVA);
-				//System.out.println("FLUID IS: " + BucketLibUtil.getFluid(newStack));
+				ItemStack newStack = new ItemStack(ModItems.BEETLE_JUICE_BUCKET.get());
 				player.playSound(SoundEvents.BUCKET_FILL, 1.0F, 1.0F);
 				if (!player.getInventory().add(newStack))
 					player.drop(newStack, false);

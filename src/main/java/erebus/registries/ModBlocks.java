@@ -1,8 +1,31 @@
 package erebus.registries;
 
+import org.jetbrains.annotations.NotNull;
+
 import erebus.Erebus;
-import erebus.block.*;
-import erebus.block.altars.*;
+import erebus.block.BlenderBlock;
+import erebus.block.BlockOfBonesBlock;
+import erebus.block.BotFlySpawnerBlock;
+import erebus.block.CandleHoneyTreatBlock;
+import erebus.block.ConnectedTextureBlock;
+import erebus.block.DarkFruitVineBlock;
+import erebus.block.FluidJarBlock;
+import erebus.block.GaeanKeystoneBlock;
+import erebus.block.HoneyTreatBlock;
+import erebus.block.LavaWeb;
+import erebus.block.ModBerryBushBlock;
+import erebus.block.ModCropBlock;
+import erebus.block.PetrifiedCraftingTableBlock;
+import erebus.block.PicklyPearBlock;
+import erebus.block.SwampVentBlock;
+import erebus.block.UmberFurnaceBlock;
+import erebus.block.WitherWeb;
+import erebus.block.altars.AltarBase;
+import erebus.block.altars.ExperienceAltar;
+import erebus.block.altars.HealingAltar;
+import erebus.block.altars.LightningAltar;
+import erebus.block.altars.OfferingAltar;
+import erebus.block.altars.RepairAltar;
 import erebus.block.bamboo.BambooCrateBlock;
 import erebus.block.bamboo.BambooTorchBlock;
 import erebus.block.portal.ErebusPortalBlock;
@@ -13,7 +36,29 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.MudBlock;
+import net.minecraft.world.level.block.MushroomBlock;
+import net.minecraft.world.level.block.RedstoneLampBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.TransparentBlock;
+import net.minecraft.world.level.block.VineBlock;
+import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.WaterlilyBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -22,7 +67,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.jetbrains.annotations.NotNull;
 
 public class ModBlocks extends ModBlockHelpers {
 
@@ -500,4 +544,8 @@ public class ModBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> FORCE_LOCK = registerSimpleBlock("force_lock", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
 
     public static final DeferredBlock<Block> ANT_HILL_BLOCK = registerSimpleBlock("ant_hill_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+
+
+    //Fluids?
+    public static final DeferredBlock<LiquidBlock> BEETLE_JUICE_BLOCK = BLOCKS.register("beetle_juice", () -> new LiquidBlock(ModFluids.BEETLE_JUICE_STILL.get(), BlockBehaviour.Properties.of().mapColor(MapColor.WATER).replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY)));
 }

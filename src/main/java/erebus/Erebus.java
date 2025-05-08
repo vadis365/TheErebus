@@ -30,6 +30,8 @@ import erebus.registries.world.ModPOIs;
 import erebus.registries.world.ModStructures;
 import erebus.registries.world.ModTreeDecorators;
 import erebus.registries.world.ModTrunkPlacers;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -100,6 +102,9 @@ public class Erebus {
 			bus.addListener(ModBlockEntityRendering::registerBlockEntityLayerDefinitions);
 			bus.addListener(ModBlockEntityRendering::registerBlockEntityRenderers);
             bus.addListener(ModParticles::registerParticleFactories);
+            
+       //     ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_FLOW.get(), RenderType.translucent());
+    	//	ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_STILL.get(), RenderType.translucent());
 		}
     }
 

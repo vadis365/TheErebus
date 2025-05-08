@@ -3,6 +3,7 @@ package erebus.registries.client;
 import org.jetbrains.annotations.NotNull;
 
 import erebus.Erebus;
+import erebus.block.fluid.BasicFluidType;
 import erebus.client.render.block.renderer.stack.BlenderStackItemRenderer;
 import erebus.client.render.block.renderer.stack.BlockOfBonesStackItemRenderer;
 import erebus.client.render.block.renderer.stack.FluidJarStackItemRenderer;
@@ -27,6 +28,7 @@ import erebus.client.render.item.renderer.WaspDaggerRenderer;
 import erebus.client.render.item.renderer.WaspSwordRenderer;
 import erebus.client.render.item.renderer.WebSlingerRenderer;
 import erebus.registries.ModBlocks;
+import erebus.registries.ModFluids;
 import erebus.registries.ModItems;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -163,5 +165,8 @@ public class ModItemRendering {
                 return new FluidJarStackItemRenderer(null, null);
             }
         }, ModBlocks.FLUID_JAR.get().asItem());
+        
+        //Fluids
+        event.registerFluidType(new BasicFluidType("beetle_juice"), ModFluids.BEETLE_JUICE_TYPE.get());
 	}
 }

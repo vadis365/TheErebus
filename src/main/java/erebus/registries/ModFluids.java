@@ -38,10 +38,11 @@ public class ModFluids {
 		}
 	});
 
-	public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> BEETLE_JUICE_STILL = FLUIDS.register("beetle_juice_still", () -> new BaseFlowingFluid.Source(ModFluids.BEETLE_JUICE_PROPERTIES));
-	public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> BEETLE_JUICE_FLOW = FLUIDS.register("beetle_juice_flowing", () -> new BaseFlowingFluid.Flowing(ModFluids.BEETLE_JUICE_PROPERTIES));
-	public static final BaseFlowingFluid.Properties BEETLE_JUICE_PROPERTIES = new BaseFlowingFluid.Properties(() -> BEETLE_JUICE_TYPE.get(), () -> BEETLE_JUICE_STILL.get(), () -> BEETLE_JUICE_FLOW.get()).bucket(() -> ModItems.BEETLE_JUICE_BUCKET.get());
-/*	
+	public static final DeferredHolder<Fluid, BaseFlowingFluid> BEETLE_JUICE_STILL = FLUIDS.register("beetle_juice_still", () -> new BaseFlowingFluid.Source(ModFluids.BEETLE_JUICE_PROPERTIES));
+	public static final DeferredHolder<Fluid, BaseFlowingFluid> BEETLE_JUICE_FLOW = FLUIDS.register("beetle_juice_flowing", () -> new BaseFlowingFluid.Flowing(ModFluids.BEETLE_JUICE_PROPERTIES));
+	public static final BaseFlowingFluid.Properties BEETLE_JUICE_PROPERTIES = new BaseFlowingFluid.Properties(() -> BEETLE_JUICE_TYPE.get(), () -> BEETLE_JUICE_STILL.get(), () -> BEETLE_JUICE_FLOW.get()).block(() -> ModBlocks.BEETLE_JUICE_BLOCK.get()).bucket(() -> ModItems.BEETLE_JUICE_BUCKET.get());
+
+	/*	
 	@Nonnull
     public static ItemStack getFilledBambucket(@Nonnull FluidStack fluidStack) {
         Fluid fluid = fluidStack.getFluid();

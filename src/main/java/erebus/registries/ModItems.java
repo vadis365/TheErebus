@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.jetbrains.annotations.NotNull;
 
+import de.cech12.bucketlib.api.item.UniversalBucketItem;
 import erebus.Erebus;
 import erebus.item.BeettleJuiceBucketItem;
 import erebus.item.PaxelItem;
