@@ -44,7 +44,7 @@ public final class SpawnerErebus {
 
 		//TimeMeasurement.start("whatever");
 		WorldServer erebusWorld = DimensionManager.getWorld(ConfigHandler.INSTANCE.erebusDimensionID);
-		if(erebusWorld.playerEntities.isEmpty())
+		if(erebusWorld != null && erebusWorld.playerEntities.isEmpty())
 			return;
 		if (erebusWorld != null && erebusWorld.getGameRules().getGameRuleBooleanValue("doMobSpawning"))
 			runGradualSpawning(erebusWorld);
