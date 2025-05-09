@@ -2,12 +2,14 @@ package erebus.item;
 
 import javax.annotation.Nonnull;
 
+import de.cech12.bucketlib.util.BucketLibUtil;
 import erebus.entity.BotFlyLarva;
 import erebus.registries.ModFluids;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,19 +25,24 @@ import net.minecraft.world.level.material.Fluids;
 
 public class BeettleJuiceBucketItem extends BucketItem {
 	private static final int DRINK_DURATION = 32;
-	public final Fluid content;
+
 	public BeettleJuiceBucketItem(Fluid content, Properties properties) {
 		super(content, properties);
-		 this.content = content;
 	}
 
 	@Override
 	@Nonnull
 	public InteractionResultHolder<ItemStack> use(@Nonnull Level level, @Nonnull Player player, @Nonnull InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		super.use(level, player, hand);
-		if (containsBeetleJuice())
-			return ItemUtils.startUsingInstantly(level, player, hand);
+		if(super.use(level, player, hand).getResult() == InteractionResult.PASS) {
+			if (containsBeetleJuice(stack))
+				return ItemUtils.startUsingInstantly(level, player, hand);
+		}
+		else if(super.use(level, player, hand).getResult() == InteractionResult.CONSUME) {
+			 ItemStack itemstack1 = ItemUtils.createFilledResult(stack, player, getEmptySuccessItem(stack, player));
+             return InteractionResultHolder.sidedSuccess(itemstack1, level.isClientSide());
+		}
+
 		return InteractionResultHolder.pass(stack);
 	}
 
@@ -49,6 +56,7 @@ public class BeettleJuiceBucketItem extends BucketItem {
 	@Override
 	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
 		super.finishUsingItem(stack, level, entityLiving);
+		
 		if (entityLiving instanceof ServerPlayer serverplayer) {
 			CriteriaTriggers.CONSUME_ITEM.trigger(serverplayer, stack);
 			serverplayer.awardStat(Stats.ITEM_USED.get(this));
@@ -69,23 +77,24 @@ public class BeettleJuiceBucketItem extends BucketItem {
 		}
 	}
 
+
+
 	@Override
 	public int getUseDuration(ItemStack stack, LivingEntity entity) {
-		if (containsBeetleJuice())
+		if (containsBeetleJuice(stack))
 			return DRINK_DURATION;
 		return super.getUseDuration(stack, entity);
 	}
 
 	@Override
 	public UseAnim getUseAnimation(ItemStack stack) {
-		if (containsBeetleJuice())
+		if (containsBeetleJuice(stack))
 			return UseAnim.DRINK;
 		return super.getUseAnimation(stack);
 	}
 
-	public boolean containsBeetleJuice() {
-		System.out.println("TRYING TO DRINK: " + this.content);
-		if (content != Fluids.EMPTY && content == ModFluids.BEETLE_JUICE_STILL.get())
+	public boolean containsBeetleJuice(ItemStack stack) {
+		if (BucketLibUtil.getFluid(stack) != Fluids.EMPTY && BucketLibUtil.getFluid(stack) == ModFluids.BEETLE_JUICE_STILL.get())
 			return true;
 		return false;
 	}

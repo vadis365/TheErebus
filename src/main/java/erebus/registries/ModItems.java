@@ -1,12 +1,21 @@
 package erebus.registries;
 
+import java.util.List;
+import java.util.Map;
+
+import org.jetbrains.annotations.NotNull;
+
 import erebus.Erebus;
 import erebus.item.BeettleJuiceBucketItem;
 import erebus.item.PaxelItem;
 import erebus.item.WandOfAnimationItem;
 import erebus.item.blocks.FluidJarBlockItem;
 import erebus.item.shield.ErebusShieldItem;
-import erebus.item.shield.type.*;
+import erebus.item.shield.type.BambooShieldType;
+import erebus.item.shield.type.ExoSkeletonShieldType;
+import erebus.item.shield.type.JadeShieldType;
+import erebus.item.shield.type.ReinforcedShieldType;
+import erebus.item.shield.type.RhinoShieldType;
 import erebus.network.data.DeathCompassData;
 import erebus.registries.blocks.providers.AmberBlocks;
 import erebus.registries.blocks.providers.PlantBlocks;
@@ -18,14 +27,22 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-import java.util.Map;
 
 public class ModItems extends ModItemHelpers {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Erebus.MODID);
@@ -317,7 +334,11 @@ public class ModItems extends ModItemHelpers {
     }
     
     	// buckets
-    public static final DeferredItem<Item> BEETLE_JUICE_BUCKET = ITEMS.register("beetle_juice_bucket", () -> new BeettleJuiceBucketItem(ModFluids.BEETLE_JUICE_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final DeferredItem<BucketItem> FORMIC_ACID_BUCKET = ITEMS.register("formic_acid_bucket", () -> new BucketItem(ModFluids.FORMIC_ACID_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final DeferredItem<BucketItem> HONEY_BUCKET = ITEMS.register("honey_bucket", () -> new BucketItem(ModFluids.HONEY_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final DeferredItem<BucketItem> ANTI_VENOM_BUCKET = ITEMS.register("anti_venom_bucket", () -> new BucketItem(ModFluids.ANTI_VENOM_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    //need to fix drinking
+    public static final DeferredItem<BucketItem> BEETLE_JUICE_BUCKET = ITEMS.register("beetle_juice_bucket", () -> new BeettleJuiceBucketItem(ModFluids.BEETLE_JUICE_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     // Block Items
     public static final DeferredItem<BlockItem> FLUID_JAR = ITEMS.register("fluid_jar", () -> new FluidJarBlockItem(AmberBlocks.FLUID_JAR.get(), FluidType.BUCKET_VOLUME * 32, new Item.Properties()));

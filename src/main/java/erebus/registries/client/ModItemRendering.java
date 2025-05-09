@@ -1,23 +1,46 @@
 package erebus.registries.client;
 
+import org.jetbrains.annotations.NotNull;
+
 import erebus.Erebus;
 import erebus.block.fluid.BasicFluidType;
 import erebus.client.render.block.renderer.stack.BlenderStackItemRenderer;
 import erebus.client.render.block.renderer.stack.BlockOfBonesStackItemRenderer;
 import erebus.client.render.block.renderer.stack.FluidJarStackItemRenderer;
 import erebus.client.render.block.renderer.stack.OfferingAltarStackItemRenderer;
-import erebus.client.render.item.model.*;
-import erebus.client.render.item.renderer.*;
+import erebus.client.render.item.model.EmptyModel;
+import erebus.client.render.item.model.ErebusShieldPartsModel;
+import erebus.client.render.item.model.PortalActivatorModel;
+import erebus.client.render.item.model.ScorpionPincerModel;
+import erebus.client.render.item.model.WandOfAnimationItemModel;
+import erebus.client.render.item.model.WandOfPreservationModel;
+import erebus.client.render.item.model.WarHammerModel;
+import erebus.client.render.item.model.WaspDaggerModel;
+import erebus.client.render.item.model.WaspSwordModel;
+import erebus.client.render.item.model.WebSlingerModel;
+import erebus.client.render.item.renderer.ErebusShieldPartsRenderer;
+import erebus.client.render.item.renderer.PortalActivatorRenderer;
+import erebus.client.render.item.renderer.ScorpionPincerRenderer;
+import erebus.client.render.item.renderer.WandOfAnimationItemRenderer;
+import erebus.client.render.item.renderer.WandOfPreservationRenderer;
+import erebus.client.render.item.renderer.WarHammerRenderer;
+import erebus.client.render.item.renderer.WaspDaggerRenderer;
+import erebus.client.render.item.renderer.WaspSwordRenderer;
+import erebus.client.render.item.renderer.WebSlingerRenderer;
 import erebus.registries.ModFluids;
 import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.AmberBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.world.item.BucketItem;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
 
 public class ModItemRendering {
 
@@ -151,5 +174,15 @@ public class ModItemRendering {
         
         //Fluids
         event.registerFluidType(new BasicFluidType("beetle_juice"), ModFluids.BEETLE_JUICE_TYPE.get());
+        event.registerFluidType(new BasicFluidType("honey"), ModFluids.HONEY_TYPE.get());
+        event.registerFluidType(new BasicFluidType("anti_venom"), ModFluids.ANTI_VENOM_TYPE.get());
+        event.registerFluidType(new BasicFluidType("formic_acid"), ModFluids.FORMIC_ACID_TYPE.get());
+	}
+	
+	public static void registerItemColors(final RegisterColorHandlersEvent.Item event) {
+		event.register((stack, tint) -> {
+			var fluid = ((BucketItem) stack.getItem()).content;
+			return tint == 1 ? IClientFluidTypeExtensions.of(fluid).getTintColor(new FluidStack(fluid, FluidType.BUCKET_VOLUME)) : -1;
+		}, ModItems.FORMIC_ACID_BUCKET, ModItems.HONEY_BUCKET, ModItems.BEETLE_JUICE_BUCKET, ModItems.ANTI_VENOM_BUCKET);
 	}
 }

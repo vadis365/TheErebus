@@ -1,10 +1,19 @@
 package erebus;
 
+import java.util.Locale;
+
+import org.slf4j.Logger;
+
 import com.mojang.logging.LogUtils;
+
 import erebus.block.entity.FluidJarBlockEntity;
 import erebus.network.data.DeathCompassData;
 import erebus.recipes.ModCustomRecipes;
-import erebus.registries.*;
+import erebus.registries.ModBlockEntities;
+import erebus.registries.ModFluids;
+import erebus.registries.ModItems;
+import erebus.registries.ModSounds;
+import erebus.registries.ModTabs;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModBlockEntityRendering;
 import erebus.registries.client.ModItemRendering;
@@ -16,7 +25,11 @@ import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.network.ModNetwork;
-import erebus.registries.world.*;
+import erebus.registries.world.ModFoliagePlacers;
+import erebus.registries.world.ModPOIs;
+import erebus.registries.world.ModStructures;
+import erebus.registries.world.ModTreeDecorators;
+import erebus.registries.world.ModTrunkPlacers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
@@ -38,9 +51,7 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import org.slf4j.Logger;
-
-import java.util.Locale;
+import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -91,6 +102,7 @@ public class Erebus {
 			bus.addListener(ModEntityRendering::registerEntityRender);
 			bus.addListener(ModItemRendering::registerItemLayerDefinitions);
 			bus.addListener(ModItemRendering::registerItemRender);
+			bus.addListener(ModItemRendering::registerItemColors);
 			bus.addListener(ModBlockEntityRendering::registerBlockEntityLayerDefinitions);
 			bus.addListener(ModBlockEntityRendering::registerBlockEntityRenderers);
             bus.addListener(ModParticles::registerParticleFactories);
@@ -100,6 +112,12 @@ public class Erebus {
     private void doClientStuff(final FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_FLOW.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_STILL.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY_FLOW.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY_STILL.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.ANTI_VENOM_FLOW.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.ANTI_VENOM_STILL.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.FORMIC_ACID_FLOW.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.FORMIC_ACID_STILL.get(), RenderType.translucent());
     }
     
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -142,7 +160,8 @@ public class Erebus {
 		return ResourceLocation.fromNamespaceAndPath(MODID, name.toLowerCase(Locale.ROOT));
 	}
 	
-	public void registerCaps(final RegisterCapabilitiesEvent evt) {
-		evt.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.FLUID_JAR.get(), FluidJarBlockEntity::getTank);
+	public void registerCaps(final RegisterCapabilitiesEvent event) {
+		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.FLUID_JAR.get(), FluidJarBlockEntity::getTank);
+		event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidBucketWrapper(stack), ModItems.BEETLE_JUICE_BUCKET.get());
 	}
 }
