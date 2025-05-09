@@ -332,12 +332,11 @@ public class ModItems extends ModItemHelpers {
         JADE_LEGGINGS = jadeSet.get("legs");
         JADE_BOOTS = jadeSet.get("boots");
     }
-    
-    	// buckets
+
+    // buckets
     public static final DeferredItem<BucketItem> FORMIC_ACID_BUCKET = ITEMS.register("formic_acid_bucket", () -> new BucketItem(ModFluids.FORMIC_ACID_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final DeferredItem<BucketItem> HONEY_BUCKET = ITEMS.register("honey_bucket", () -> new BucketItem(ModFluids.HONEY_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final DeferredItem<BucketItem> ANTI_VENOM_BUCKET = ITEMS.register("anti_venom_bucket", () -> new BucketItem(ModFluids.ANTI_VENOM_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
-    //need to fix drinking
     public static final DeferredItem<BucketItem> BEETLE_JUICE_BUCKET = ITEMS.register("beetle_juice_bucket", () -> new BeettleJuiceBucketItem(ModFluids.BEETLE_JUICE_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     // Block Items
