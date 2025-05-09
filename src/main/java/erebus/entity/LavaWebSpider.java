@@ -1,9 +1,7 @@
 package erebus.entity;
 
-import javax.annotation.Nullable;
-
 import erebus.entity.ai.ThrowWebAttackGoal;
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,12 +28,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -54,6 +47,8 @@ import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
 
 public class LavaWebSpider extends Monster {
 
@@ -76,7 +71,7 @@ public class LavaWebSpider extends Monster {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.8D, ModBlocks.LAVA_WEB.get().defaultBlockState()));
+		goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.8D, OtherBlocks.LAVA_WEB.get().defaultBlockState()));
 		goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0.4F));
 		goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.6D, true));
 		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.6D));
@@ -163,7 +158,7 @@ public class LavaWebSpider extends Monster {
 
     @Override
     public void makeStuckInBlock(BlockState state, Vec3 motionMultiplier) {
-        if (!state.is(Blocks.COBWEB) && !state.is(ModBlocks.LAVA_WEB.get()))
+		if (!state.is(Blocks.COBWEB) && !state.is(OtherBlocks.LAVA_WEB.get()))
             super.makeStuckInBlock(state, motionMultiplier);
     }
 
@@ -187,7 +182,7 @@ public class LavaWebSpider extends Monster {
 
     @Override
     public boolean canBeAffected(MobEffectInstance potioneffect) {
-		 return (potioneffect.is(MobEffects.POISON) || potioneffect.is(MobEffects.WITHER) ? false : super.canBeAffected(potioneffect));
+		 return (!potioneffect.is(MobEffects.POISON) && !potioneffect.is(MobEffects.WITHER) && super.canBeAffected(potioneffect));
 	}
 
 	@Override
@@ -252,8 +247,8 @@ public class LavaWebSpider extends Monster {
 		super.positionRider(entity, moveFunction);
 		if (entity instanceof MoneySpider) {
 			double a = Math.toRadians(yBodyRot);
-			double offSetX = -Math.sin(a) * 1D;
-			double offSetZ = Math.cos(a) * 1D;
+			double offSetX = -Math.sin(a);
+			double offSetZ = Math.cos(a);
 			entity.setPos(getX() - offSetX, getY() + getBbHeight() + 0.0625F, getZ() - offSetZ);
 		}
 	}

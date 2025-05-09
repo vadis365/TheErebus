@@ -1,6 +1,6 @@
 package erebus.world.feature.tree;
 
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.world.feature.tree.foliage.BalsamFoliagePlacer;
 import erebus.world.feature.tree.trunk.BalsamTrunkPlacer;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -20,9 +20,9 @@ public class BalsamTree extends ErebusTree {
     @Override
     public TreeConfiguration getTreeConfiguration() {
         return new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(ModBlocks.LOG_BALSAM_RESINLESS.get()),
+                BlockStateProvider.simple(WoodBlocks.LOG_BALSAM_RESINLESS.get()),
                 new BalsamTrunkPlacer(12, 4, 3),
-                BlockStateProvider.simple(ModBlocks.LEAVES_BALSAM.get()),
+                BlockStateProvider.simple(WoodBlocks.LEAVES_BALSAM.get()),
                 new BalsamFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                 new TwoLayersFeatureSize(1, 0, 2)
         ).build();
@@ -30,6 +30,6 @@ public class BalsamTree extends ErebusTree {
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return tree(3, ModBlocks.SAPLING_BALSAM);
+        return tree(3, WoodBlocks.SAPLING_BALSAM);
     }
 }

@@ -1,7 +1,7 @@
 package erebus.utils;
 
 import erebus.block.portal.ErebusPortalBlock;
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.UmberstoneBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -73,7 +73,7 @@ public class AdvancedBlockPos extends BlockPos {
 
     public void ensureFloored() {
         if (level.getBlockState(pos).canBeReplaced()) {
-            level.setBlockAndUpdate(pos, ModBlocks.UMBERSTONE.get().defaultBlockState());
+            level.setBlockAndUpdate(pos, UmberstoneBlocks.UMBERSTONE.get().defaultBlockState());
         }
     }
 }

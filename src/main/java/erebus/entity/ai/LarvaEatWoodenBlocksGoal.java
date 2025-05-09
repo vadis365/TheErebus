@@ -1,8 +1,11 @@
 package erebus.entity.ai;
 
 import erebus.entity.BeetleLarva;
-import erebus.registries.ModBlocks;
 import erebus.registries.ModSounds;
+import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.blocks.providers.SlabBlocks;
+import erebus.registries.blocks.providers.StairBlocks;
+import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -11,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class LarvaEatWoodenBlocksGoal extends EatBlockGoal {
-	private BeetleLarva beetleLarva;
+	private final BeetleLarva beetleLarva;
 	private final double moveSpeed;
 
 	public LarvaEatWoodenBlocksGoal(BeetleLarva beetleLarva, double moveSpeed, int eatSpeed) {
@@ -26,24 +29,24 @@ public class LarvaEatWoodenBlocksGoal extends EatBlockGoal {
 		if (state.isAir() || block == null)
 			return false;
 
-		if (state.is(ModBlocks.LOG_SCORCHED.get()))
+		if (state.is(WoodBlocks.LOG_SCORCHED.get()))
 			return false;
 
-		if (state.is(ModBlocks.LOG_ROTTEN.get()))
+		if (state.is(WoodBlocks.LOG_ROTTEN.get()))
 			return false;
 
-		if (state.is(ModBlocks.SLAB_PLANKS_BAMBOO.get()))
+		if (state.is(SlabBlocks.SLAB_PLANKS_BAMBOO.get()))
 			return false;
 
-		if (state.is(ModBlocks.STAIRS_BAMBOO.get()))
+		if (state.is(StairBlocks.STAIRS_BAMBOO.get()))
 			return false;
 
-		if (state.is(ModBlocks.PLANKS_BAMBOO.get()))
+		if (state.is(WoodBlocks.PLANKS_BAMBOO.get()))
 			return false;
 
 		//if (ConfigHandler.INSTANCE.beetleLarvaEating == 2)
 		//	return true;
-		else if (state.is(Blocks.BROWN_MUSHROOM_BLOCK) || state.is(Blocks.RED_MUSHROOM_BLOCK) || state.is(ModBlocks.BAMBOO_TORCH.get()) || state.is(ModBlocks.LOG_HOLLOW.get()))
+		else if (state.is(Blocks.BROWN_MUSHROOM_BLOCK) || state.is(Blocks.RED_MUSHROOM_BLOCK) || state.is(OtherBlocks.BAMBOO_TORCH.get()) || state.is(WoodBlocks.LOG_HOLLOW.get()))
 			return false;
 		//else if (ConfigHandler.INSTANCE.beetleLarvaEating == 0 && block.hasBlockEntity(state))
 		//	return false;

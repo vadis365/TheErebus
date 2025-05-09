@@ -1,7 +1,8 @@
 package erebus.events;
 
 import erebus.Erebus;
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.blocks.providers.PlantBlocks;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.renderer.BiomeColors;
@@ -34,21 +35,21 @@ public class RegisterColorHandlersEventHandler {
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.register(foliageColor,
-                ModBlocks.FERN.get(),
-                ModBlocks.FIDDLE_HEAD.get(),
-                ModBlocks.TALL_FERN.get()
+                PlantBlocks.FERN.get(),
+                PlantBlocks.FIDDLE_HEAD.get(),
+                PlantBlocks.TALL_FERN.get()
         );
 
-        event.register(grassColor, ModBlocks.SWAMP_VENT.get());
+        event.register(grassColor, OtherBlocks.SWAMP_VENT.get());
     }
 
     @SubscribeEvent
     public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
         event.register(itemFoliageColor,
-                ModBlocks.FERN.get(),
-                ModBlocks.FIDDLE_HEAD.get(),
-                ModBlocks.TALL_FERN.get(),
-                ModBlocks.SWAMP_VENT.get()
+                PlantBlocks.FERN.get(),
+                PlantBlocks.FIDDLE_HEAD.get(),
+                PlantBlocks.TALL_FERN.get(),
+                OtherBlocks.SWAMP_VENT.get()
         );
     }
 }

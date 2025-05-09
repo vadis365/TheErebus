@@ -1,7 +1,9 @@
 package erebus.datagen.providers.recipes;
 
-import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
+import erebus.registries.blocks.providers.AmberBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -63,7 +65,7 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addSpecialArmorRecipes() {
-        surround(ModItems.COMPOUND_EYES, ModBlocks.AMBER, ModItems.COMPOUND_LENS);
+        surround(ModItems.COMPOUND_EYES, AmberBlocks.AMBER, ModItems.COMPOUND_LENS);
 
         ShapedRecipeBuilder.shaped(COMBAT, ModItems.COMPOUND_GOGGLES)
                 .pattern("EEE")
@@ -110,11 +112,11 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
                 .define('W', ModItems.ENHANCED_GLIDER_WING)
                 .define('F', ModItems.ELASTIC_FIBER)
                 .define('G', ModItems.GLIDER_CHESTPLATE)
-                .define('V', ModBlocks.VELOCITY)
+                .define('V', OtherBlocks.VELOCITY)
                 .unlockedBy("has_enhanced_glider_wing", has(ModItems.ENHANCED_GLIDER_WING))
                 .unlockedBy("has_elastic_fiber", has(ModItems.ELASTIC_FIBER))
                 .unlockedBy("has_glider_chestplate", has(ModItems.GLIDER_CHESTPLATE))
-                .unlockedBy("has_velocity_block", has(ModBlocks.VELOCITY))
+                .unlockedBy("has_velocity_block", has(OtherBlocks.VELOCITY))
                 .save(output);
 
         surround(ModItems.WATER_REPELLENT, ModItems.REIN_EXOSKELETON_BOOTS, ModItems.WATER_STRIDERS);
@@ -129,10 +131,10 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addBambooArmorRecipes() {
-        helmet(ModBlocks.PLANKS_BAMBOO, ModItems.BAMBOO_HELMET);
-        chestplate(ModBlocks.PLANKS_BAMBOO, ModItems.BAMBOO_CHESTPLATE);
-        leggings(ModBlocks.PLANKS_BAMBOO, ModItems.BAMBOO_LEGGINGS);
-        boots(ModBlocks.PLANKS_BAMBOO, ModItems.BAMBOO_BOOTS);
+        helmet(WoodBlocks.PLANKS_BAMBOO, ModItems.BAMBOO_HELMET);
+        chestplate(WoodBlocks.PLANKS_BAMBOO, ModItems.BAMBOO_CHESTPLATE);
+        leggings(WoodBlocks.PLANKS_BAMBOO, ModItems.BAMBOO_LEGGINGS);
+        boots(WoodBlocks.PLANKS_BAMBOO, ModItems.BAMBOO_BOOTS);
 
         ShapedRecipeBuilder.shaped(COMBAT, ModItems.BAMBOO_SHIELD)
                 .pattern("BIB")

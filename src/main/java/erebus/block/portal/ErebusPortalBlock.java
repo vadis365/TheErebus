@@ -2,7 +2,7 @@ package erebus.block.portal;
 
 import com.mojang.serialization.MapCodec;
 import erebus.Erebus;
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.world.ModDimensionRegistries;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.portal.DimensionTransition;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -82,29 +83,28 @@ public class ErebusPortalBlock extends Block implements Portal {
         if (neighborPortals < 1) {
             return false;
         }
-        boolean result = axisFlag != 0x7;
-        return result;
+        return axisFlag != 0x7;
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private static boolean isSubstrate(BlockState state, boolean portalNotLeaf) {
-        return portalNotLeaf ? state.is(ModBlocks.PORTAL) : state.is(BlockTags.LEAVES);
+        return portalNotLeaf ? state.is(OtherBlocks.PORTAL) : state.is(BlockTags.LEAVES);
     }
 
     @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+    protected void neighborChanged(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Block neighborBlock, @NotNull BlockPos neighborPos, boolean movedByPiston) {
         if (!obeysPortalRule(level, pos, true)) level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
     }
 
     @Override
-    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+    protected void entityInside(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Entity entity) {
         if (entity.canUsePortal(false)) {
             entity.setAsInsidePortal(this, entity.blockPosition());
         }
     }
 
     @Override
-    public @Nullable DimensionTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos pos) {
+    public @Nullable DimensionTransition getPortalDestination(ServerLevel level, @NotNull Entity entity, @NotNull BlockPos pos) {
         ResourceKey<Level> dimension = level.dimension() != ModDimensionRegistries.DIMENSION_KEY ? ModDimensionRegistries.DIMENSION_KEY : Level.OVERWORLD;
         ServerLevel server = level.getServer().getLevel(dimension);
 
@@ -120,7 +120,7 @@ public class ErebusPortalBlock extends Block implements Portal {
 
     private DimensionTransition getExitPortal(ServerLevel level, Entity entity, BlockPos pos, BlockPos exitPos, boolean isErebus, WorldBorder border) {
         Optional<BlockPos> optional = ErebusPortalForcer.findClosestPortalPosition(level, exitPos, isErebus, border);
-        BlockUtil.FoundRectangle foundRectangle = null;
+        BlockUtil.FoundRectangle foundRectangle;
         DimensionTransition.PostDimensionTransition postDimensionTransition;
 
         if (optional.isPresent()) {
@@ -150,17 +150,17 @@ public class ErebusPortalBlock extends Block implements Portal {
     }
 
     @Override
-    public int getPortalTransitionTime(ServerLevel level, Entity entity) {
+    public int getPortalTransitionTime(@NotNull ServerLevel level, @NotNull Entity entity) {
         return entity instanceof Player player ? player.getAbilities().invulnerable ? 1 : 80 : 0;
     }
 
     @Override
-    public Transition getLocalTransition() {
+    public @NotNull Transition getLocalTransition() {
         return Transition.CONFUSION;
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+    public void animateTick(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         for (int i = 0; i < 4; i++) {
             double particleX = pos.getX() + random.nextFloat();
             double particleY = pos.getY() + random.nextFloat();

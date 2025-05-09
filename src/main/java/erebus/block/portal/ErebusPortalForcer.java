@@ -1,6 +1,7 @@
 package erebus.block.portal;
 
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.blocks.providers.UmberstoneBlocks;
 import erebus.registries.world.ModPOIs;
 import erebus.utils.AdvancedBlockPos;
 import net.minecraft.BlockUtil;
@@ -87,7 +88,7 @@ public class ErebusPortalForcer {
                         state = Blocks.AIR.defaultBlockState();
                     }
                 } else {
-                    state = level.random.nextBoolean() ? ModBlocks.UMBERTILE_SMOOTH.get().defaultBlockState() : ModBlocks.UMBERTILE_SMOOTH_SMALL.get().defaultBlockState();
+                    state = level.random.nextBoolean() ? UmberstoneBlocks.UMBERTILE_SMOOTH.get().defaultBlockState() : UmberstoneBlocks.UMBERTILE_SMOOTH_SMALL.get().defaultBlockState();
                 }
 
                 level.setBlock(new BlockPos(start.getX() + dx, start.getY() + dy, start.getZ() + dz), state, 3);
@@ -97,7 +98,7 @@ public class ErebusPortalForcer {
 
         keystone.add(-2, 3, -3);
 
-        level.setBlockAndUpdate(keystone, ModBlocks.GAEAN_KEYSTONE.get().defaultBlockState());
+        level.setBlockAndUpdate(keystone, OtherBlocks.GAEAN_KEYSTONE.get().defaultBlockState());
         return Optional.of(new BlockUtil.FoundRectangle(keystone.immutable(), 5, 5));
     }
 

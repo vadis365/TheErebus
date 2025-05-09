@@ -2,7 +2,7 @@ package erebus.world.feature.tree.foliage;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.registries.world.ModFoliagePlacers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -41,7 +41,7 @@ public class BaobabFoliagePlacer extends FoliagePlacer {
                     double sq = Math.pow(xOff - x, 2) + Math.pow(zOff - z, 2) + Math.pow(yOff - y, 2);
                     if (Math.round(Math.sqrt(sq)) <= radius) {
                         if (Math.round(Math.sqrt(sq)) == 0) {
-                            setter.set(new BlockPos(xOff, yOff, zOff), ModBlocks.LOG_BAOBAB.get().defaultBlockState());
+                            setter.set(new BlockPos(xOff, yOff, zOff), WoodBlocks.LOG_BAOBAB.get().defaultBlockState());
                         } else {
                             placeLeavesRow(level, setter, random, config, new BlockPos(xOff, yOff, zOff), radius, 0, attachment.doubleTrunk());
                         }

@@ -1,7 +1,7 @@
 package erebus.world.feature.tree.decorator;
 
 import com.mojang.serialization.MapCodec;
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.world.ModTreeDecorators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -9,16 +9,17 @@ import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
+import org.jetbrains.annotations.NotNull;
 
 public class TrunkThornDecorator extends TreeDecorator {
     public static final TrunkThornDecorator INSTANCE = new TrunkThornDecorator();
     public static final MapCodec<TrunkThornDecorator> CODEC = MapCodec.unit(() -> INSTANCE);
 
     public static void placeThorn(Context context, BlockPos pos, BooleanProperty sideProperty) {
-        context.setBlock(pos, ModBlocks.THORNS.get().defaultBlockState().setValue(sideProperty, true));
+        context.setBlock(pos, PlantBlocks.THORNS.get().defaultBlockState().setValue(sideProperty, true));
     }
 
-    protected TreeDecoratorType<?> type() {
+    protected @NotNull TreeDecoratorType<?> type() {
         return ModTreeDecorators.TRUNK_THORN_DECORATOR.get();
     }
 

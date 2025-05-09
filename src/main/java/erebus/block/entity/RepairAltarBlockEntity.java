@@ -4,7 +4,7 @@ import erebus.block.altars.AltarAbstract;
 import erebus.client.particle.ClientParticles;
 import erebus.network.client.AltarAnimatonTimerPacket;
 import erebus.registries.ModBlockEntities;
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -35,7 +35,7 @@ public class RepairAltarBlockEntity extends AltarAbstractBlockEntity {
 					if (altar.animationTicks > 0)
 						altar.animationTicks--;
 					if (altar.animationTicks == 1)
-						level.setBlockAndUpdate(pos, ModBlocks.ALTAR_BASE.get().defaultBlockState().setValue(AltarAbstract.FACING, altar.getBlockState().getValue(AltarAbstract.FACING)));
+						level.setBlockAndUpdate(pos, OtherBlocks.ALTAR_BASE.get().defaultBlockState().setValue(AltarAbstract.FACING, altar.getBlockState().getValue(AltarAbstract.FACING)));
 				}
 				if (altar.spawnTicks == 160)
 					altar.setcanBeUsed(false);

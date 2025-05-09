@@ -1,6 +1,7 @@
 package erebus.registries.world;
 
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.OreBlocks;
+import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.data.ModTags;
 import erebus.registries.helpers.ModFeatureHelpers;
 import erebus.world.feature.bush.HeartBerryBushFeature;
@@ -101,25 +102,25 @@ public class ModFeatures extends ModFeatureHelpers {
         registerConfiguredBush(context, HEART_BERRY_BUSH);
         registerConfiguredBush(context, JADE_BERRY_BUSH);
 
-        registerConfiguredOre(context, IRON_ORE, umberstoneReplaceables, ModBlocks.ORE_IRON, 9);
-        registerConfiguredOre(context, GOLD_ORE, umberstoneReplaceables, ModBlocks.ORE_GOLD, 9);
-        registerConfiguredOre(context, COAL_ORE, umberstoneReplaceables, ModBlocks.ORE_COAL, 9);
-        registerConfiguredOre(context, DIAMOND_ORE, umberstoneReplaceables, ModBlocks.ORE_DIAMOND, 9);
-        registerConfiguredOre(context, EMERALD_ORE, umberstoneReplaceables, ModBlocks.ORE_EMERALD, 9);
-        registerConfiguredOre(context, LAPIS_ORE, umberstoneReplaceables, ModBlocks.ORE_LAPIS, 9);
-        registerConfiguredOre(context, QUARTZ_ORE, umberstoneReplaceables, ModBlocks.ORE_QUARTZ, 9);
-        registerConfiguredOre(context, PETRIFIED_QUARTZ_ORE, umberstoneReplaceables, ModBlocks.ORE_PETRIFIED_QUARTZ, 9);
-        registerConfiguredOre(context, COPPER_ORE, umberstoneReplaceables, ModBlocks.ORE_COPPER, 9);
-        registerConfiguredOre(context, SILVER_ORE, umberstoneReplaceables, ModBlocks.ORE_SILVER, 9);
-        registerConfiguredOre(context, TIN_ORE, umberstoneReplaceables, ModBlocks.ORE_TIN, 9);
-        registerConfiguredOre(context, LEAD_ORE, umberstoneReplaceables, ModBlocks.ORE_LEAD, 9);
-        registerConfiguredOre(context, ALUMINUM_ORE, umberstoneReplaceables, ModBlocks.ORE_ALUMINUM, 9);
-        registerConfiguredOre(context, JADE_ORE, umberstoneReplaceables, ModBlocks.ORE_JADE, 9);
-        registerConfiguredOre(context, ENCRUSTED_DIAMOND_ORE, umberstoneReplaceables, ModBlocks.ORE_ENCRUSTED_DIAMOND, 9);
-        registerConfiguredOre(context, FOSSIL_ORE, umberstoneReplaceables, ModBlocks.ORE_FOSSIL, 9);
-        registerConfiguredOre(context, GNEISS_ORE, umberstoneReplaceables, ModBlocks.ORE_GNEISS, 9);
-        registerConfiguredOre(context, PETRIFIED_WOOD_ORE, umberstoneReplaceables, ModBlocks.ORE_PETRIFIED_WOOD, 9);
-        registerConfiguredOre(context, TEMPLE_ORE, umberstoneReplaceables, ModBlocks.ORE_TEMPLE, 9);
+        registerConfiguredOre(context, IRON_ORE, umberstoneReplaceables, OreBlocks.ORE_IRON, 9);
+        registerConfiguredOre(context, GOLD_ORE, umberstoneReplaceables, OreBlocks.ORE_GOLD, 9);
+        registerConfiguredOre(context, COAL_ORE, umberstoneReplaceables, OreBlocks.ORE_COAL, 9);
+        registerConfiguredOre(context, DIAMOND_ORE, umberstoneReplaceables, OreBlocks.ORE_DIAMOND, 9);
+        registerConfiguredOre(context, EMERALD_ORE, umberstoneReplaceables, OreBlocks.ORE_EMERALD, 9);
+        registerConfiguredOre(context, LAPIS_ORE, umberstoneReplaceables, OreBlocks.ORE_LAPIS, 9);
+        registerConfiguredOre(context, QUARTZ_ORE, umberstoneReplaceables, OreBlocks.ORE_QUARTZ, 9);
+        registerConfiguredOre(context, PETRIFIED_QUARTZ_ORE, umberstoneReplaceables, OreBlocks.ORE_PETRIFIED_QUARTZ, 9);
+        registerConfiguredOre(context, COPPER_ORE, umberstoneReplaceables, OreBlocks.ORE_COPPER, 9);
+        registerConfiguredOre(context, SILVER_ORE, umberstoneReplaceables, OreBlocks.ORE_SILVER, 9);
+        registerConfiguredOre(context, TIN_ORE, umberstoneReplaceables, OreBlocks.ORE_TIN, 9);
+        registerConfiguredOre(context, LEAD_ORE, umberstoneReplaceables, OreBlocks.ORE_LEAD, 9);
+        registerConfiguredOre(context, ALUMINUM_ORE, umberstoneReplaceables, OreBlocks.ORE_ALUMINUM, 9);
+        registerConfiguredOre(context, JADE_ORE, umberstoneReplaceables, OreBlocks.ORE_JADE, 9);
+        registerConfiguredOre(context, ENCRUSTED_DIAMOND_ORE, umberstoneReplaceables, OreBlocks.ORE_ENCRUSTED_DIAMOND, 9);
+        registerConfiguredOre(context, FOSSIL_ORE, umberstoneReplaceables, OreBlocks.ORE_FOSSIL, 9);
+        registerConfiguredOre(context, GNEISS_ORE, umberstoneReplaceables, OreBlocks.ORE_GNEISS, 9);
+        registerConfiguredOre(context, PETRIFIED_WOOD_ORE, umberstoneReplaceables, OreBlocks.ORE_PETRIFIED_WOOD, 9);
+        registerConfiguredOre(context, TEMPLE_ORE, umberstoneReplaceables, OreBlocks.ORE_TEMPLE, 9);
 
         registerConfiguredFeature(
                 context,
@@ -138,26 +139,26 @@ public class ModFeatures extends ModFeatureHelpers {
                                                 0.005F,
                                                 -0.8F,
                                                 0.33333334F,
-                                                ModBlocks.NETTLE.get().defaultBlockState(),
-                                                List.of(ModBlocks.NETTLE.get().defaultBlockState()),
-                                                List.of(ModBlocks.NETTLE_FLOWERED.get().defaultBlockState())
+                                                PlantBlocks.NETTLE.get().defaultBlockState(),
+                                                List.of(PlantBlocks.NETTLE.get().defaultBlockState()),
+                                                List.of(PlantBlocks.NETTLE_FLOWERED.get().defaultBlockState())
                                         )
                                 )
                         )
                 )
         );
 
-        registerSimpleConfiguredPlant(context, SWAMP_PLANT, ModBlocks.SWAMP_PLANT, 64);
-        registerSimpleConfiguredPlant(context, FIRE_BLOOM, ModBlocks.FIRE_BLOOM, 64);
-        registerSimpleConfiguredPlant(context, FIDDLE_HEAD, ModBlocks.FIDDLE_HEAD, 64);
-        registerSimpleConfiguredPlant(context, BULLRUSH, ModBlocks.BULLRUSH, 64);
-        registerSimpleConfiguredPlant(context, WEEPING_BLUEBELL, ModBlocks.WEEPING_BLUEBELL, 64);
-        registerSimpleConfiguredPlant(context, SUNDEW, ModBlocks.SUNDEW, 64);
-        registerSimpleConfiguredPlant(context, TALL_BLOOM, ModBlocks.TALL_BLOOM, 64);
-        registerSimpleConfiguredPlant(context, TANGLED_STALK, ModBlocks.TANGLED_STALK, 64);
-        registerSimpleConfiguredPlant(context, HIGH_CAPPED_MUSHROOM, ModBlocks.HIGH_CAPPED_MUSHROOM, 64);
-        registerSimpleConfiguredPlant(context, FERN, ModBlocks.FERN, 32);
-        registerSimpleConfiguredPlant(context, TALL_FERN, ModBlocks.TALL_FERN, 32);
+        registerSimpleConfiguredPlant(context, SWAMP_PLANT, PlantBlocks.SWAMP_PLANT, 64);
+        registerSimpleConfiguredPlant(context, FIRE_BLOOM, PlantBlocks.FIRE_BLOOM, 64);
+        registerSimpleConfiguredPlant(context, FIDDLE_HEAD, PlantBlocks.FIDDLE_HEAD, 64);
+        registerSimpleConfiguredPlant(context, BULLRUSH, PlantBlocks.BULLRUSH, 64);
+        registerSimpleConfiguredPlant(context, WEEPING_BLUEBELL, PlantBlocks.WEEPING_BLUEBELL, 64);
+        registerSimpleConfiguredPlant(context, SUNDEW, PlantBlocks.SUNDEW, 64);
+        registerSimpleConfiguredPlant(context, TALL_BLOOM, PlantBlocks.TALL_BLOOM, 64);
+        registerSimpleConfiguredPlant(context, TANGLED_STALK, PlantBlocks.TANGLED_STALK, 64);
+        registerSimpleConfiguredPlant(context, HIGH_CAPPED_MUSHROOM, PlantBlocks.HIGH_CAPPED_MUSHROOM, 64);
+        registerSimpleConfiguredPlant(context, FERN, PlantBlocks.FERN, 32);
+        registerSimpleConfiguredPlant(context, TALL_FERN, PlantBlocks.TALL_FERN, 32);
     }
 
     public static void bootstrapPlacedFeatures(BootstrapContext<PlacedFeature> context) {

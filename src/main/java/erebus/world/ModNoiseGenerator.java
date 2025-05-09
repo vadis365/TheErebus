@@ -1,7 +1,7 @@
 package erebus.world;
 
 import erebus.Erebus;
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.UmberstoneBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -21,7 +21,7 @@ public class ModNoiseGenerator {
     private static NoiseGeneratorSettings erebus(BootstrapContext<?> context) {
         return new NoiseGeneratorSettings(
                 EREBUS_NOISE_SETTINGS,
-                ModBlocks.UMBERSTONE.get().defaultBlockState(),
+                UmberstoneBlocks.UMBERSTONE.get().defaultBlockState(),
                 Blocks.WATER.defaultBlockState(),
                 ModNoiseRouter.erebus(context.lookup(Registries.DENSITY_FUNCTION), context.lookup(Registries.NOISE)),
                 ModSurfaceRules.erebus(),

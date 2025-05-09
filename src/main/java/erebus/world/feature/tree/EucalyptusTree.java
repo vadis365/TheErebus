@@ -1,6 +1,6 @@
 package erebus.world.feature.tree;
 
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.world.feature.tree.foliage.SingleLeafFoliagePlacer;
 import erebus.world.feature.tree.trunk.EucalyptusTrunkPlacer;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -20,9 +20,9 @@ public class EucalyptusTree extends ErebusTree {
     @Override
     public TreeConfiguration getTreeConfiguration() {
         return new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(ModBlocks.LOG_EUCALYPTUS.get()),
+                BlockStateProvider.simple(WoodBlocks.LOG_EUCALYPTUS.get()),
                 new EucalyptusTrunkPlacer(8, 4, 0),
-                BlockStateProvider.simple(ModBlocks.LEAVES_EUCALYPTUS.get()),
+                BlockStateProvider.simple(WoodBlocks.LEAVES_EUCALYPTUS.get()),
                 new SingleLeafFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
                 new TwoLayersFeatureSize(1, 0, 2)
         ).build();
@@ -30,6 +30,6 @@ public class EucalyptusTree extends ErebusTree {
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return tree(3, ModBlocks.SAPLING_EUCALYPTUS);
+        return tree(3, WoodBlocks.SAPLING_EUCALYPTUS);
     }
 }

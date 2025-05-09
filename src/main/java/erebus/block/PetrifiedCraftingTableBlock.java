@@ -10,6 +10,7 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.CraftingTableBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class PetrifiedCraftingTableBlock extends CraftingTableBlock {
     public static final MapCodec<PetrifiedCraftingTableBlock> CODEC = simpleCodec(PetrifiedCraftingTableBlock::new);
@@ -20,12 +21,12 @@ public class PetrifiedCraftingTableBlock extends CraftingTableBlock {
     }
 
     @Override
-    public MapCodec<? extends CraftingTableBlock> codec() {
+    public @NotNull MapCodec<? extends CraftingTableBlock> codec() {
         return CODEC;
     }
 
     @Override
-    protected MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
+    protected @NotNull MenuProvider getMenuProvider(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos) {
         return new SimpleMenuProvider((containerId, inv, player) -> new PetrifiedCraftingMenu(containerId, inv, ContainerLevelAccess.create(level, pos)), CONTAINER_TITLE);
     }
 }

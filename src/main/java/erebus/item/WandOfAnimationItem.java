@@ -1,11 +1,9 @@
 package erebus.item;
 
-import java.util.List;
-
 import erebus.entity.AnimatedBlock;
-import erebus.registries.ModBlocks;
-import erebus.registries.entity.ModEntities;
 import erebus.registries.ModSounds;
+import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
@@ -22,6 +20,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import java.util.List;
 
 public class WandOfAnimationItem extends Item {
 	public WandOfAnimationItem(Properties properties) {
@@ -51,8 +51,7 @@ public class WandOfAnimationItem extends Item {
 				if (state.getBlock() == Blocks.CHEST) {
 					System.out.println("Spawn Chester");
 					//entity = new EntityAnimatedChest(world).setContents(Utils.getTileEntity(world, pos, TileEntityChest.class));
-				}
-				else if (state.getBlock() == ModBlocks.BAMBOO_CRATE.get()) {
+				} else if (state.getBlock() == OtherBlocks.BAMBOO_CRATE.get()) {
 					System.out.println("Spawn Bamber");
 					//entityk = new EntityAnimatedBambooCrate(world).setContents(Utils.getTileEntity(world, pos, TileEntityBambooCrate.class));
 					}
@@ -85,6 +84,6 @@ public class WandOfAnimationItem extends Item {
 	//TODO Make this more sane one day...
 	private boolean canAnimate(BlockState state, Level level, BlockPos pos) {
 		return /*!isBlacklisted(state.getBlock()) && !(state.getBlock() instanceof BlockGaeanKeystone) && !(state.getBlock() instanceof AltarBase) && !(state.getBlock() instanceof BlockDoublePlant) && !(state.getBlock() instanceof BlockDoubleHeightPlant) && !(state.getBlock() instanceof BlockPreservedBlock) && */
-				!(state.getBlock() instanceof Container) && state.getDestroySpeed(level, pos) >= 0F && state.isCollisionShapeFullBlock(level, pos) || state.getBlock() == Blocks.CHEST || state.getBlock() == ModBlocks.BAMBOO_CRATE.get();
+				!(state.getBlock() instanceof Container) && state.getDestroySpeed(level, pos) >= 0F && state.isCollisionShapeFullBlock(level, pos) || state.getBlock() == Blocks.CHEST || state.getBlock() == OtherBlocks.BAMBOO_CRATE.get();
 	}
 }

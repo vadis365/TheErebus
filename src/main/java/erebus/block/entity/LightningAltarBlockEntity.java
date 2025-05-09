@@ -1,16 +1,12 @@
 package erebus.block.entity;
 
-import java.util.List;
-
-import org.joml.Vector3f;
-
 import erebus.block.altars.AltarAbstract;
 import erebus.client.particle.ClientParticles;
 import erebus.network.client.AltarAnimatonTimerPacket;
 import erebus.network.client.LightningAltarRenderPacket;
 import erebus.registries.ModBlockEntities;
-import erebus.registries.ModBlocks;
 import erebus.registries.ModSounds;
+import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -24,6 +20,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.joml.Vector3f;
+
+import java.util.List;
 
 public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 
@@ -50,7 +49,7 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 					if (altar.animationTicks > 0)
 						altar.animationTicks--;
 					if (altar.animationTicks == 1)
-						level.setBlockAndUpdate(pos, ModBlocks.ALTAR_BASE.get().defaultBlockState().setValue(AltarAbstract.FACING, altar.getBlockState().getValue(AltarAbstract.FACING)));
+						level.setBlockAndUpdate(pos, OtherBlocks.ALTAR_BASE.get().defaultBlockState().setValue(AltarAbstract.FACING, altar.getBlockState().getValue(AltarAbstract.FACING)));
 				}
 				if (altar.spawnTicks == 0) {
 					altar.setActive(false);

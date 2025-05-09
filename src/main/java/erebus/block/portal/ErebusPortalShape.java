@@ -1,6 +1,6 @@
 package erebus.block.portal;
 
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -32,7 +32,7 @@ public class ErebusPortalShape {
     }
 
     private static boolean isEmpty(BlockState state) {
-        return state.isAir() || state.is(ModBlocks.PORTAL);
+        return state.isAir() || state.is(OtherBlocks.PORTAL);
     }
 
     private BlockPos calculateBottomLeft(BlockPos pos) {

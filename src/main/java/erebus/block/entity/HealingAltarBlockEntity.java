@@ -1,13 +1,11 @@
 package erebus.block.entity;
 
-import java.util.List;
-
 import erebus.block.altars.AltarAbstract;
 import erebus.client.particle.ClientParticles;
 import erebus.network.client.AltarAnimatonTimerPacket;
 import erebus.registries.ModBlockEntities;
-import erebus.registries.ModBlocks;
 import erebus.registries.ModSounds;
+import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -22,6 +20,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
+
+import java.util.List;
 
 public class HealingAltarBlockEntity extends AltarAbstractBlockEntity {
 
@@ -46,7 +46,7 @@ public class HealingAltarBlockEntity extends AltarAbstractBlockEntity {
 					if (altar.animationTicks > 0)
 						altar.animationTicks--;
 					if (altar.animationTicks == 1)
-						level.setBlockAndUpdate(pos, ModBlocks.ALTAR_BASE.get().defaultBlockState().setValue(AltarAbstract.FACING, altar.getBlockState().getValue(AltarAbstract.FACING)));
+						level.setBlockAndUpdate(pos, OtherBlocks.ALTAR_BASE.get().defaultBlockState().setValue(AltarAbstract.FACING, altar.getBlockState().getValue(AltarAbstract.FACING)));
 				}
 				if (altar.spawnTicks == 0) {
 					altar.setActive(false);
@@ -95,7 +95,7 @@ public class HealingAltarBlockEntity extends AltarAbstractBlockEntity {
 			for (int i = 0; i < list.size(); i++) {
 				Entity entity = list.get(i);
 				if (!(entity instanceof FakePlayer))
-					((Player) entity).addEffect(new MobEffectInstance(MobEffects.HEAL, 1 * 20, 0));
+					((Player) entity).addEffect(new MobEffectInstance(MobEffects.HEAL, 20, 0));
 			}
 	}
 

@@ -2,7 +2,7 @@ package erebus.world.feature.tree.decorator;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.world.ModTreeDecorators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
+import org.jetbrains.annotations.NotNull;
 
 public class LeaveThornDecorator extends TreeDecorator {
     public static final MapCodec<LeaveThornDecorator> CODEC = Codec
@@ -33,11 +34,11 @@ public class LeaveThornDecorator extends TreeDecorator {
     }
 
     public static void placeThorn(Context context, BlockPos pos, BooleanProperty sideProperty) {
-        context.setBlock(pos, ModBlocks.THORNS.get().defaultBlockState().setValue(sideProperty, true));
+        context.setBlock(pos, PlantBlocks.THORNS.get().defaultBlockState().setValue(sideProperty, true));
     }
 
     @Override
-    protected TreeDecoratorType<?> type() {
+    protected @NotNull TreeDecoratorType<?> type() {
         return ModTreeDecorators.LEAVE_THORN_DECORATOR.get();
     }
 
@@ -46,30 +47,30 @@ public class LeaveThornDecorator extends TreeDecorator {
         RandomSource randomsource = context.random();
         context.leaves().forEach((p_226035_) -> {
             if (randomsource.nextFloat() < this.probability) {
-                BlockPos blockpos = p_226035_.west();
-                if (context.isAir(blockpos)) {
-                    addHangingVine(blockpos, VineBlock.EAST, context);
+                BlockPos pos = p_226035_.west();
+                if (context.isAir(pos)) {
+                    addHangingVine(pos, VineBlock.EAST, context);
                 }
             }
 
             if (randomsource.nextFloat() < this.probability) {
-                BlockPos blockpos1 = p_226035_.east();
-                if (context.isAir(blockpos1)) {
-                    addHangingVine(blockpos1, VineBlock.WEST, context);
+                BlockPos pos = p_226035_.east();
+                if (context.isAir(pos)) {
+                    addHangingVine(pos, VineBlock.WEST, context);
                 }
             }
 
             if (randomsource.nextFloat() < this.probability) {
-                BlockPos blockpos2 = p_226035_.north();
-                if (context.isAir(blockpos2)) {
-                    addHangingVine(blockpos2, VineBlock.SOUTH, context);
+                BlockPos pos = p_226035_.north();
+                if (context.isAir(pos)) {
+                    addHangingVine(pos, VineBlock.SOUTH, context);
                 }
             }
 
             if (randomsource.nextFloat() < this.probability) {
-                BlockPos blockpos3 = p_226035_.south();
-                if (context.isAir(blockpos3)) {
-                    addHangingVine(blockpos3, VineBlock.NORTH, context);
+                BlockPos pos = p_226035_.south();
+                if (context.isAir(pos)) {
+                    addHangingVine(pos, VineBlock.NORTH, context);
                 }
             }
 

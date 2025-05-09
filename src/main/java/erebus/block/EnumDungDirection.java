@@ -1,6 +1,6 @@
 package erebus.block;
 
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.utils.IErebusEnum;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +23,7 @@ public enum EnumDungDirection implements IErebusEnum {
 
     @Override
     public ItemStack createStack(int count) {
-        return new ItemStack(ModBlocks.DUNG_SPAWNER_BOT_FLY, count);
+        return new ItemStack(OtherBlocks.DUNG_SPAWNER_BOT_FLY, count);
     }
 
     @Override

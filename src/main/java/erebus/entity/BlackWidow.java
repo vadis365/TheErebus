@@ -1,10 +1,8 @@
 package erebus.entity;
 
-import javax.annotation.Nullable;
-
 import erebus.entity.ai.ThrowWebAttackGoal;
-import erebus.registries.ModBlocks;
 import erebus.registries.ModSounds;
+import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -19,21 +17,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -46,6 +33,9 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
 
 public class BlackWidow extends Monster {
 	private static final EntityDataAccessor<Integer> SIZE = SynchedEntityData.defineId(BlackWidow.class, EntityDataSerializers.INT);
@@ -56,7 +46,7 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(SIZE, 1);
 		builder.define(CLIMBING, (byte) 0);
@@ -86,7 +76,7 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	protected PathNavigation createNavigation(Level level) {
+	protected @NotNull PathNavigation createNavigation(@NotNull Level level) {
 		return new WallClimberNavigation(this, level);
 	}
 
@@ -108,13 +98,13 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	public boolean causeFallDamage(float distance, float damageMultiplier, DamageSource damageSource) {
+	public boolean causeFallDamage(float distance, float damageMultiplier, @NotNull DamageSource damageSource) {
 		return false;
 	}
 
 	@Override
-	public void makeStuckInBlock(BlockState state, Vec3 motionMultiplier) {
-		if (!state.is(Blocks.COBWEB) && !state.is(ModBlocks.WITHER_WEB.get()) && !state.is(ModBlocks.LAVA_WEB.get()))
+	public void makeStuckInBlock(BlockState state, @NotNull Vec3 motionMultiplier) {
+		if (!state.is(Blocks.COBWEB) && !state.is(OtherBlocks.WITHER_WEB.get()) && !state.is(OtherBlocks.LAVA_WEB.get()))
 			super.makeStuckInBlock(state, motionMultiplier);
 	}
 
@@ -138,7 +128,7 @@ public class BlackWidow extends Monster {
 
 	@Override
 	public boolean canBeAffected(MobEffectInstance potioneffect) {
-		return (potioneffect.is(MobEffects.POISON) || potioneffect.is(MobEffects.WITHER) ? false : super.canBeAffected(potioneffect));
+		return (!potioneffect.is(MobEffects.POISON) && !potioneffect.is(MobEffects.WITHER) && super.canBeAffected(potioneffect));
 	}
 
 	@Override
@@ -155,17 +145,17 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected @NotNull SoundEvent getHurtSound(@NotNull DamageSource source) {
 		return ModSounds.BLACK_WIDOW_HURT.get();
 	}
 
 	@Override
-	protected SoundEvent getDeathSound() {
+	protected @NotNull SoundEvent getDeathSound() {
 		return ModSounds.SQUISH.get();
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, BlockState block) {
+	protected void playStepSound(@NotNull BlockPos pos, @NotNull BlockState block) {
 		playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
 	}
 
@@ -181,7 +171,7 @@ public class BlackWidow extends Monster {
 	 */
 
 	@Override
-	public boolean doHurtTarget(Entity entity) {
+	public boolean doHurtTarget(@NotNull Entity entity) {
 		if (super.doHurtTarget(entity)) {
 			if (entity instanceof LivingEntity) {
 				byte duration = 0;
@@ -199,7 +189,7 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
+	public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> key) {
 		if (SIZE.equals(key)) {
 			refreshDimensions();
 			setYRot(this.yHeadRot);
@@ -218,8 +208,8 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	public EntityDimensions getDefaultDimensions(Pose pose) {
-		return super.getDefaultDimensions(pose).scale(1F * (float) this.getWidowSize(), 1F * (float) this.getWidowSize());
+	public @NotNull EntityDimensions getDefaultDimensions(@NotNull Pose pose) {
+		return super.getDefaultDimensions(pose).scale((float) this.getWidowSize(), (float) this.getWidowSize());
 	}
 
 	public void setWidowSize(int size, boolean resetHealth) {
@@ -234,12 +224,12 @@ public class BlackWidow extends Monster {
 		if (size == 2) {
 			getAttribute(Attributes.MAX_HEALTH).setBaseValue(20D);
 			getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1.5D);
-			goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.9D, ModBlocks.WITHER_WEB.get().defaultBlockState()));
+			goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.9D, OtherBlocks.WITHER_WEB.get().defaultBlockState()));
 		}
 		if (size == 4) {
 			getAttribute(Attributes.MAX_HEALTH).setBaseValue(25D);
 			getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(2D);
-			goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.9D, ModBlocks.WITHER_WEB.get().defaultBlockState()));
+			goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.9D, OtherBlocks.WITHER_WEB.get().defaultBlockState()));
 		}
 
 		if (resetHealth)
@@ -253,7 +243,7 @@ public class BlackWidow extends Monster {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		RandomSource randomsource = level.getRandom();
 		int randomSize = randomsource.nextInt(3);
 
@@ -266,13 +256,13 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag nbt) {
+	public void addAdditionalSaveData(@NotNull CompoundTag nbt) {
 		super.addAdditionalSaveData(nbt);
 		nbt.putInt("widowSize", getWidowSize() - 1);
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
+	public void readAdditionalSaveData(@NotNull CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
 		int size = nbt.getInt("widowSize");
 		if (size < 0)

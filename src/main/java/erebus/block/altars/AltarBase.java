@@ -1,15 +1,9 @@
 package erebus.block.altars;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
 import com.mojang.serialization.MapCodec;
-
-import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
+import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
@@ -25,18 +19,23 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AltarBase extends AltarAbstract {
 	public static final MapCodec<AltarBase> CODEC = simpleCodec(AltarBase::new);
 
-	private final Map<Item, Block> ALTAR_TYPES = new HashMap<Item, Block>();
+	private final Map<Item, Block> ALTAR_TYPES = new HashMap<>();
 	
 	public AltarBase(Properties properties) {
 		super(properties);
 	}
 
     @Override
-    protected MapCodec<AltarBase> codec() {
+	protected @NotNull MapCodec<AltarBase> codec() {
         return CODEC;
     }
 
@@ -81,10 +80,10 @@ public class AltarBase extends AltarAbstract {
 
 	private void initMap() {
 		if (ALTAR_TYPES.isEmpty()) {
-			ALTAR_TYPES.put(ModItems.BIO_VELOCITY.get(), ModBlocks.ALTAR_EXPERIENCE.get());
-			ALTAR_TYPES.put(ModItems.ELASTIC_FIBER.get(), ModBlocks.ALTAR_REPAIR.get());
-			ALTAR_TYPES.put(ModItems.RED_GEM.get(), ModBlocks.ALTAR_LIGHTNING.get());
-			ALTAR_TYPES.put(ModItems.BIO_LUMINESCENCE.get(), ModBlocks.ALTAR_HEALING.get());
+			ALTAR_TYPES.put(ModItems.BIO_VELOCITY.get(), OtherBlocks.ALTAR_EXPERIENCE.get());
+			ALTAR_TYPES.put(ModItems.ELASTIC_FIBER.get(), OtherBlocks.ALTAR_REPAIR.get());
+			ALTAR_TYPES.put(ModItems.RED_GEM.get(), OtherBlocks.ALTAR_LIGHTNING.get());
+			ALTAR_TYPES.put(ModItems.BIO_LUMINESCENCE.get(), OtherBlocks.ALTAR_HEALING.get());
 		}
 	}
 }

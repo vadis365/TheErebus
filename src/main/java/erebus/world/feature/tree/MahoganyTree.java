@@ -1,6 +1,6 @@
 package erebus.world.feature.tree;
 
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
@@ -14,11 +14,11 @@ public class MahoganyTree extends ErebusTree {
 
     @Override
     public TreeConfiguration getTreeConfiguration() {
-        return createStraightBlobTree(ModBlocks.LOG_MAHOGANY, ModBlocks.LEAVES_MAHOGANY, 4, 8, 0, 2);
+        return createStraightBlobTree(WoodBlocks.LOG_MAHOGANY, WoodBlocks.LEAVES_MAHOGANY, 4, 8, 0, 2);
     }
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return tree(3, ModBlocks.SAPLING_MAHOGANY);
+        return tree(3, WoodBlocks.SAPLING_MAHOGANY);
     }
 }

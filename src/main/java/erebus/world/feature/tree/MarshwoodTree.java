@@ -1,6 +1,6 @@
 package erebus.world.feature.tree;
 
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.world.feature.tree.decorator.LeaveDarkFruitVineDecorator;
 import erebus.world.feature.tree.foliage.MarshwoodFoliagePlacer;
 import erebus.world.feature.tree.trunk.MarshwoodTrunkPlacer;
@@ -21,9 +21,9 @@ public class MarshwoodTree extends ErebusTree {
     @Override
     public TreeConfiguration getTreeConfiguration() {
         return new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(ModBlocks.LOG_MARSHWOOD.get()),
+                BlockStateProvider.simple(WoodBlocks.LOG_MARSHWOOD.get()),
                 new MarshwoodTrunkPlacer(12, 2, 3),
-                BlockStateProvider.simple(ModBlocks.LEAVES_MARSHWOOD.get()),
+                BlockStateProvider.simple(WoodBlocks.LEAVES_MARSHWOOD.get()),
                 new MarshwoodFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2)),
                 new TwoLayersFeatureSize(1, 0, 2)
         )
@@ -37,6 +37,6 @@ public class MarshwoodTree extends ErebusTree {
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return tree(3, ModBlocks.SAPLING_MARSHWOOD);
+        return tree(3, WoodBlocks.SAPLING_MARSHWOOD);
     }
 }

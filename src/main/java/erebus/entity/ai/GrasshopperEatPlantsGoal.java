@@ -2,8 +2,8 @@ package erebus.entity.ai;
 
 import erebus.entity.Grasshopper;
 import erebus.entity.Locust;
-import erebus.registries.ModBlocks;
 import erebus.registries.ModSounds;
+import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
@@ -17,7 +17,7 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 
 	private final double moveSpeed;
 	private int plantsEaten = 0;
-	private Grasshopper grasshopper;
+	private final Grasshopper grasshopper;
 
 	public GrasshopperEatPlantsGoal(Grasshopper grasshopper, double moveSpeed, int eatSpeed, boolean doDropItem) {
 		super(grasshopper, null, moveSpeed, eatSpeed, doDropItem);
@@ -31,10 +31,8 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 		Block block = state.getBlock();
 		if (state.isAir() || block == null)
 			return false;
-		else if (state.is(Blocks.SHORT_GRASS) || state.is(ModBlocks.FERN.get()) || block instanceof CropBlock && ((CropBlock)block).isMaxAge(state))
-			return true;
-		return false;
-	}
+		else return state.is(Blocks.SHORT_GRASS) || state.is(PlantBlocks.FERN.get()) || block instanceof CropBlock && ((CropBlock) block).isMaxAge(state);
+    }
 
 	@Override
 	protected boolean isEntityReady() {

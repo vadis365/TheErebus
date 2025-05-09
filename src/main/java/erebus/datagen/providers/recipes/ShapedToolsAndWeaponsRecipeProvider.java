@@ -1,7 +1,7 @@
 package erebus.datagen.providers.recipes;
 
-import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
+import erebus.registries.blocks.providers.UmberstoneBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -157,7 +157,7 @@ public class ShapedToolsAndWeaponsRecipeProvider extends ErebusRecipeProvider {
                 .pattern("PPP")
                 .pattern("UUU")
                 .define('S', ItemTags.SAND)
-                .define('U', ModBlocks.UMBERSTONE)
+                .define('U', UmberstoneBlocks.UMBERSTONE)
                 .define('P', ModItems.PETRIFIED_WOOD)
                 .unlockedBy("has_petrified_wood", has(ModItems.PETRIFIED_WOOD))
                 .save(output);

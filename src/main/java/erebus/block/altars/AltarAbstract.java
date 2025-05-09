@@ -1,13 +1,9 @@
 package erebus.block.altars;
 
-import javax.annotation.Nonnull;
-
-import erebus.registries.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -17,6 +13,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import javax.annotation.Nonnull;
 
 public abstract class AltarAbstract extends HorizontalDirectionalBlock implements EntityBlock {
 	public static final VoxelShape ALTAR_AABB = Block.box(0D, 0D, 0D, 16D, 16D, 16D);

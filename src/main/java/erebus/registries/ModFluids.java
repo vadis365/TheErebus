@@ -1,6 +1,7 @@
 package erebus.registries;
 
 import erebus.Erebus;
+import erebus.registries.blocks.providers.FluidBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +13,7 @@ import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 
 public class ModFluids {
 	
@@ -33,14 +35,14 @@ public class ModFluids {
 			.sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
 	{
 		@Override
-		public ItemStack getBucket(FluidStack stack) {
+		public @NotNull ItemStack getBucket(@NotNull FluidStack stack) {
 			return new ItemStack(ModItems.BEETLE_JUICE_BUCKET.get());
 		}
 	});
 
 	public static final DeferredHolder<Fluid, BaseFlowingFluid> BEETLE_JUICE_STILL = FLUIDS.register("beetle_juice_still", () -> new BaseFlowingFluid.Source(ModFluids.BEETLE_JUICE_PROPERTIES));
 	public static final DeferredHolder<Fluid, BaseFlowingFluid> BEETLE_JUICE_FLOW = FLUIDS.register("beetle_juice_flowing", () -> new BaseFlowingFluid.Flowing(ModFluids.BEETLE_JUICE_PROPERTIES));
-	public static final BaseFlowingFluid.Properties BEETLE_JUICE_PROPERTIES = new BaseFlowingFluid.Properties(() -> BEETLE_JUICE_TYPE.get(), () -> BEETLE_JUICE_STILL.get(), () -> BEETLE_JUICE_FLOW.get()).block(() -> ModBlocks.BEETLE_JUICE_BLOCK.get()).bucket(() -> ModItems.BEETLE_JUICE_BUCKET.get());
+	public static final BaseFlowingFluid.Properties BEETLE_JUICE_PROPERTIES = new BaseFlowingFluid.Properties(() -> BEETLE_JUICE_TYPE.get(), BEETLE_JUICE_STILL, BEETLE_JUICE_FLOW).block(FluidBlocks.BEETLE_JUICE_BLOCK).bucket(ModItems.BEETLE_JUICE_BUCKET);
 
 	/*	
 	@Nonnull

@@ -1,7 +1,7 @@
 package erebus.datagen.providers.recipes;
 
-import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
+import erebus.registries.blocks.providers.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -40,49 +40,49 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addBasicBlockRecipes() {
-        twoByTwo(ModBlocks.UMBERCOBBLE, ModBlocks.UMBERPAVER, 4);
-        twoByTwo(ModBlocks.UMBERCOBBLE_MOSSY, ModBlocks.UMBERPAVER_MOSSY, 4);
-        twoByTwo(ModBlocks.UMBERCOBBLE_WEBBED, ModBlocks.UMBERPAVER_WEBBED, 4);
-        twoByTwo(ModBlocks.UMBERSTONE, ModBlocks.UMBERSTONE_BRICKS, 4);
-        twoByTwo(ModItems.PETRIFIED_WOOD, ModBlocks.PLANKS_PETRIFIED);
-        twoByTwo(ModBlocks.PLANKS_PETRIFIED, ModBlocks.PETRIFIED_CRAFTING_TABLE);
-        twoByTwo(ModBlocks.AMBER, ModBlocks.AMBER_BRICKS, 4);
-        twoByTwo(ModItems.MUD_BRICK, ModBlocks.MUD_BRICKS);
+        twoByTwo(UmberstoneBlocks.UMBERCOBBLE, UmberstoneBlocks.UMBERPAVER, 4);
+        twoByTwo(UmberstoneBlocks.UMBERCOBBLE_MOSSY, UmberstoneBlocks.UMBERPAVER_MOSSY, 4);
+        twoByTwo(UmberstoneBlocks.UMBERCOBBLE_WEBBED, UmberstoneBlocks.UMBERPAVER_WEBBED, 4);
+        twoByTwo(UmberstoneBlocks.UMBERSTONE, UmberstoneBlocks.UMBERSTONE_BRICKS, 4);
+        twoByTwo(ModItems.PETRIFIED_WOOD, WoodBlocks.PLANKS_PETRIFIED);
+        twoByTwo(WoodBlocks.PLANKS_PETRIFIED, OtherBlocks.PETRIFIED_CRAFTING_TABLE);
+        twoByTwo(AmberBlocks.AMBER, AmberBlocks.AMBER_BRICKS, 4);
+        twoByTwo(ModItems.MUD_BRICK, UmberstoneBlocks.MUD_BRICKS);
 
-        threeByThree(ModBlocks.UMBERSTONE, ModBlocks.UMBERTILE_SMOOTH, 9);
-        threeByThree(ModBlocks.DARK_CAPPED_MUSHROOM, ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK);
-        threeByThree(ModBlocks.SARCASTIC_CZECH_MUSHROOM, ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK);
-        threeByThree(ModBlocks.GRANDMAS_SHOES_MUSHROOM, ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK);
-        threeByThree(ModBlocks.DUTCH_CAP_MUSHROOM, ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK);
-        threeByThree(ModBlocks.KAIZERS_FINGERS_MUSHROOM, ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK);
+        threeByThree(UmberstoneBlocks.UMBERSTONE, UmberstoneBlocks.UMBERTILE_SMOOTH, 9);
+        threeByThree(PlantBlocks.DARK_CAPPED_MUSHROOM, PlantBlocks.DARK_CAPPED_MUSHROOM_BLOCK);
+        threeByThree(PlantBlocks.SARCASTIC_CZECH_MUSHROOM, PlantBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK);
+        threeByThree(PlantBlocks.GRANDMAS_SHOES_MUSHROOM, PlantBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK);
+        threeByThree(PlantBlocks.DUTCH_CAP_MUSHROOM, PlantBlocks.DUTCH_CAP_MUSHROOM_BLOCK);
+        threeByThree(PlantBlocks.KAIZERS_FINGERS_MUSHROOM, PlantBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK);
         threeByThree(Blocks.RED_MUSHROOM, Blocks.RED_MUSHROOM_BLOCK);
         threeByThree(Blocks.BROWN_MUSHROOM, Blocks.BROWN_MUSHROOM_BLOCK);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.UMBERSTONE_PILLAR, 2)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, UmberstoneBlocks.UMBERSTONE_PILLAR, 2)
                 .pattern("#")
                 .pattern("#")
-                .define('#', ModBlocks.UMBERSTONE)
-                .unlockedBy("has_umberstone", has(ModBlocks.UMBERSTONE))
+                .define('#', UmberstoneBlocks.UMBERSTONE)
+                .unlockedBy("has_umberstone", has(UmberstoneBlocks.UMBERSTONE))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.UMBER_FURNACE)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, OtherBlocks.UMBER_FURNACE)
                 .pattern("SSS")
                 .pattern("SBS")
                 .pattern("SSS")
-                .define('S', ModBlocks.UMBERCOBBLE)
+                .define('S', UmberstoneBlocks.UMBERCOBBLE)
                 .define('B', Items.BUCKET)
-                .unlockedBy("has_umbercobble", has(ModBlocks.UMBERCOBBLE))
+                .unlockedBy("has_umbercobble", has(UmberstoneBlocks.UMBERCOBBLE))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.MIR_BRICKS, 4)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, UmberstoneBlocks.MIR_BRICKS, 4)
                 .pattern("AB")
                 .pattern("BA")
-                .define('A', ModBlocks.MUD_BRICKS)
+                .define('A', UmberstoneBlocks.MUD_BRICKS)
                 .define('B', Blocks.CLAY)
-                .unlockedBy("has_mud_bricks", has(ModBlocks.MUD_BRICKS))
+                .unlockedBy("has_mud_bricks", has(UmberstoneBlocks.MUD_BRICKS))
                 .save(output, "mir_bricks_bulk");
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.MIR_BRICKS, 4)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, UmberstoneBlocks.MIR_BRICKS, 4)
                 .pattern("AB")
                 .pattern("BA")
                 .define('A', ModItems.MUD_BRICK)
@@ -92,140 +92,140 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addSlabRecipes() {
-        slab(ModBlocks.PLANKS_BAOBAB, ModBlocks.SLAB_PLANKS_BAOBAB);
-        slab(ModBlocks.PLANKS_EUCALYPTUS, ModBlocks.SLAB_PLANKS_EUCALYPTUS);
-        slab(ModBlocks.PLANKS_MAHOGANY, ModBlocks.SLAB_PLANKS_MAHOGANY);
-        slab(ModBlocks.PLANKS_MOSSBARK, ModBlocks.SLAB_PLANKS_MOSSBARK);
-        slab(ModBlocks.PLANKS_ASPER, ModBlocks.SLAB_PLANKS_ASPER);
-        slab(ModBlocks.PLANKS_CYPRESS, ModBlocks.SLAB_PLANKS_CYPRESS);
-        slab(ModBlocks.PLANKS_BALSAM, ModBlocks.SLAB_PLANKS_BALSAM);
-        slab(ModBlocks.PLANKS_WHITE, ModBlocks.SLAB_PLANKS_WHITE);
-        slab(ModBlocks.PLANKS_BAMBOO, ModBlocks.SLAB_PLANKS_BAMBOO);
-        slab(ModBlocks.PLANKS_ROTTEN, ModBlocks.SLAB_PLANKS_ROTTEN);
-        slab(ModBlocks.PLANKS_MARSHWOOD, ModBlocks.SLAB_PLANKS_MARSHWOOD);
-        slab(ModBlocks.PLANKS_SCORCHED, ModBlocks.SLAB_PLANKS_SCORCHED);
-        slab(ModBlocks.PLANKS_VARNISHED, ModBlocks.SLAB_PLANKS_VARNISHED);
-        slab(ModBlocks.PLANKS_PETRIFIED, ModBlocks.SLAB_PLANKS_PETRIFIED);
+        slab(WoodBlocks.PLANKS_BAOBAB, SlabBlocks.SLAB_PLANKS_BAOBAB);
+        slab(WoodBlocks.PLANKS_EUCALYPTUS, SlabBlocks.SLAB_PLANKS_EUCALYPTUS);
+        slab(WoodBlocks.PLANKS_MAHOGANY, SlabBlocks.SLAB_PLANKS_MAHOGANY);
+        slab(WoodBlocks.PLANKS_MOSSBARK, SlabBlocks.SLAB_PLANKS_MOSSBARK);
+        slab(WoodBlocks.PLANKS_ASPER, SlabBlocks.SLAB_PLANKS_ASPER);
+        slab(WoodBlocks.PLANKS_CYPRESS, SlabBlocks.SLAB_PLANKS_CYPRESS);
+        slab(WoodBlocks.PLANKS_BALSAM, SlabBlocks.SLAB_PLANKS_BALSAM);
+        slab(WoodBlocks.PLANKS_WHITE, SlabBlocks.SLAB_PLANKS_WHITE);
+        slab(WoodBlocks.PLANKS_BAMBOO, SlabBlocks.SLAB_PLANKS_BAMBOO);
+        slab(WoodBlocks.PLANKS_ROTTEN, SlabBlocks.SLAB_PLANKS_ROTTEN);
+        slab(WoodBlocks.PLANKS_MARSHWOOD, SlabBlocks.SLAB_PLANKS_MARSHWOOD);
+        slab(WoodBlocks.PLANKS_SCORCHED, SlabBlocks.SLAB_PLANKS_SCORCHED);
+        slab(WoodBlocks.PLANKS_VARNISHED, SlabBlocks.SLAB_PLANKS_VARNISHED);
+        slab(WoodBlocks.PLANKS_PETRIFIED, SlabBlocks.SLAB_PLANKS_PETRIFIED);
 
-        slab(ModBlocks.UMBERSTONE, ModBlocks.SLAB_UMBERSTONE);
-        slab(ModBlocks.UMBERCOBBLE, ModBlocks.SLAB_UMBERCOBBLE);
-        slab(ModBlocks.UMBERCOBBLE_MOSSY, ModBlocks.SLAB_UMBERCOBBLE_MOSSY);
-        slab(ModBlocks.UMBERCOBBLE_WEBBED, ModBlocks.SLAB_UMBERCOBBLE_WEBBED);
-        slab(ModBlocks.UMBERSTONE_BRICKS, ModBlocks.SLAB_UMBERSTONE_BRICKS);
-        slab(ModBlocks.UMBERTILE_SMOOTH, ModBlocks.SLAB_UMBERTILE_SMOOTH);
-        slab(ModBlocks.UMBERTILE_SMOOTH_SMALL, ModBlocks.SLAB_UMBERTILE_SMOOTH_SMALL);
-        slab(ModBlocks.UMBERPAVER, ModBlocks.SLAB_UMBERPAVER);
-        slab(ModBlocks.UMBERPAVER_MOSSY, ModBlocks.SLAB_UMBERPAVER_MOSSY);
-        slab(ModBlocks.UMBERPAVER_WEBBED, ModBlocks.SLAB_UMBERPAVER_WEBBED);
-        slab(ModBlocks.AMBER, ModBlocks.SLAB_AMBER);
-        slab(ModBlocks.AMBER_BRICKS, ModBlocks.SLAB_AMBER_BRICKS);
-        slab(ModBlocks.MUD_BRICKS, ModBlocks.SLAB_MUD_BRICKS);
-        slab(ModBlocks.MIR_BRICKS, ModBlocks.SLAB_MIR_BRICKS);
+        slab(UmberstoneBlocks.UMBERSTONE, SlabBlocks.SLAB_UMBERSTONE);
+        slab(UmberstoneBlocks.UMBERCOBBLE, SlabBlocks.SLAB_UMBERCOBBLE);
+        slab(UmberstoneBlocks.UMBERCOBBLE_MOSSY, SlabBlocks.SLAB_UMBERCOBBLE_MOSSY);
+        slab(UmberstoneBlocks.UMBERCOBBLE_WEBBED, SlabBlocks.SLAB_UMBERCOBBLE_WEBBED);
+        slab(UmberstoneBlocks.UMBERSTONE_BRICKS, SlabBlocks.SLAB_UMBERSTONE_BRICKS);
+        slab(UmberstoneBlocks.UMBERTILE_SMOOTH, SlabBlocks.SLAB_UMBERTILE_SMOOTH);
+        slab(UmberstoneBlocks.UMBERTILE_SMOOTH_SMALL, SlabBlocks.SLAB_UMBERTILE_SMOOTH_SMALL);
+        slab(UmberstoneBlocks.UMBERPAVER, SlabBlocks.SLAB_UMBERPAVER);
+        slab(UmberstoneBlocks.UMBERPAVER_MOSSY, SlabBlocks.SLAB_UMBERPAVER_MOSSY);
+        slab(UmberstoneBlocks.UMBERPAVER_WEBBED, SlabBlocks.SLAB_UMBERPAVER_WEBBED);
+        slab(AmberBlocks.AMBER, SlabBlocks.SLAB_AMBER);
+        slab(AmberBlocks.AMBER_BRICKS, SlabBlocks.SLAB_AMBER_BRICKS);
+        slab(UmberstoneBlocks.MUD_BRICKS, SlabBlocks.SLAB_MUD_BRICKS);
+        slab(UmberstoneBlocks.MIR_BRICKS, SlabBlocks.SLAB_MIR_BRICKS);
     }
 
     private void addStairsRecipes() {
-        stairs(ModBlocks.PLANKS_BAOBAB, ModBlocks.STAIRS_BAOBAB);
-        stairs(ModBlocks.PLANKS_EUCALYPTUS, ModBlocks.STAIRS_EUCALYPTUS);
-        stairs(ModBlocks.PLANKS_MAHOGANY, ModBlocks.STAIRS_MAHOGANY);
-        stairs(ModBlocks.PLANKS_MOSSBARK, ModBlocks.STAIRS_MOSSBARK);
-        stairs(ModBlocks.PLANKS_ASPER, ModBlocks.STAIRS_ASPER);
-        stairs(ModBlocks.PLANKS_CYPRESS, ModBlocks.STAIRS_CYPRESS);
-        stairs(ModBlocks.PLANKS_BALSAM, ModBlocks.STAIRS_BALSAM);
-        stairs(ModBlocks.PLANKS_WHITE, ModBlocks.STAIRS_WHITE);
-        stairs(ModBlocks.PLANKS_BAMBOO, ModBlocks.STAIRS_BAMBOO);
-        stairs(ModBlocks.PLANKS_ROTTEN, ModBlocks.STAIRS_ROTTEN);
-        stairs(ModBlocks.PLANKS_MARSHWOOD, ModBlocks.STAIRS_MARSHWOOD);
-        stairs(ModBlocks.PLANKS_SCORCHED, ModBlocks.STAIRS_SCORCHED);
-        stairs(ModBlocks.PLANKS_VARNISHED, ModBlocks.STAIRS_VARNISHED);
-        stairs(ModBlocks.PLANKS_PETRIFIED, ModBlocks.STAIRS_PETRIFIED);
+        stairs(WoodBlocks.PLANKS_BAOBAB, StairBlocks.STAIRS_BAOBAB);
+        stairs(WoodBlocks.PLANKS_EUCALYPTUS, StairBlocks.STAIRS_EUCALYPTUS);
+        stairs(WoodBlocks.PLANKS_MAHOGANY, StairBlocks.STAIRS_MAHOGANY);
+        stairs(WoodBlocks.PLANKS_MOSSBARK, StairBlocks.STAIRS_MOSSBARK);
+        stairs(WoodBlocks.PLANKS_ASPER, StairBlocks.STAIRS_ASPER);
+        stairs(WoodBlocks.PLANKS_CYPRESS, StairBlocks.STAIRS_CYPRESS);
+        stairs(WoodBlocks.PLANKS_BALSAM, StairBlocks.STAIRS_BALSAM);
+        stairs(WoodBlocks.PLANKS_WHITE, StairBlocks.STAIRS_WHITE);
+        stairs(WoodBlocks.PLANKS_BAMBOO, StairBlocks.STAIRS_BAMBOO);
+        stairs(WoodBlocks.PLANKS_ROTTEN, StairBlocks.STAIRS_ROTTEN);
+        stairs(WoodBlocks.PLANKS_MARSHWOOD, StairBlocks.STAIRS_MARSHWOOD);
+        stairs(WoodBlocks.PLANKS_SCORCHED, StairBlocks.STAIRS_SCORCHED);
+        stairs(WoodBlocks.PLANKS_VARNISHED, StairBlocks.STAIRS_VARNISHED);
+        stairs(WoodBlocks.PLANKS_PETRIFIED, StairBlocks.STAIRS_PETRIFIED);
 
-        stairs(ModBlocks.UMBERSTONE, ModBlocks.STAIRS_UMBERSTONE);
-        stairs(ModBlocks.UMBERCOBBLE, ModBlocks.STAIRS_UMBERCOBBLE);
-        stairs(ModBlocks.UMBERCOBBLE_MOSSY, ModBlocks.STAIRS_UMBERCOBBLE_MOSSY);
-        stairs(ModBlocks.UMBERCOBBLE_WEBBED, ModBlocks.STAIRS_UMBERCOBBLE_WEBBED);
-        stairs(ModBlocks.UMBERSTONE_BRICKS, ModBlocks.STAIRS_UMBERSTONE_BRICKS);
-        stairs(ModBlocks.UMBERTILE_SMOOTH, ModBlocks.STAIRS_UMBERTILE_SMOOTH);
-        stairs(ModBlocks.UMBERTILE_SMOOTH_SMALL, ModBlocks.STAIRS_UMBERTILE_SMOOTH_SMALL);
-        stairs(ModBlocks.UMBERPAVER, ModBlocks.STAIRS_UMBERPAVER);
-        stairs(ModBlocks.UMBERPAVER_MOSSY, ModBlocks.STAIRS_UMBERPAVER_MOSSY);
-        stairs(ModBlocks.UMBERPAVER_WEBBED, ModBlocks.STAIRS_UMBERPAVER_WEBBED);
-        stairs(ModBlocks.AMBER, ModBlocks.STAIRS_AMBER);
-        stairs(ModBlocks.AMBER_BRICKS, ModBlocks.STAIRS_AMBER_BRICKS);
-        stairs(ModBlocks.MUD_BRICKS, ModBlocks.STAIRS_MUD_BRICKS);
-        stairs(ModBlocks.MIR_BRICKS, ModBlocks.STAIRS_MIR_BRICKS);
+        stairs(UmberstoneBlocks.UMBERSTONE, StairBlocks.STAIRS_UMBERSTONE);
+        stairs(UmberstoneBlocks.UMBERCOBBLE, StairBlocks.STAIRS_UMBERCOBBLE);
+        stairs(UmberstoneBlocks.UMBERCOBBLE_MOSSY, StairBlocks.STAIRS_UMBERCOBBLE_MOSSY);
+        stairs(UmberstoneBlocks.UMBERCOBBLE_WEBBED, StairBlocks.STAIRS_UMBERCOBBLE_WEBBED);
+        stairs(UmberstoneBlocks.UMBERSTONE_BRICKS, StairBlocks.STAIRS_UMBERSTONE_BRICKS);
+        stairs(UmberstoneBlocks.UMBERTILE_SMOOTH, StairBlocks.STAIRS_UMBERTILE_SMOOTH);
+        stairs(UmberstoneBlocks.UMBERTILE_SMOOTH_SMALL, StairBlocks.STAIRS_UMBERTILE_SMOOTH_SMALL);
+        stairs(UmberstoneBlocks.UMBERPAVER, StairBlocks.STAIRS_UMBERPAVER);
+        stairs(UmberstoneBlocks.UMBERPAVER_MOSSY, StairBlocks.STAIRS_UMBERPAVER_MOSSY);
+        stairs(UmberstoneBlocks.UMBERPAVER_WEBBED, StairBlocks.STAIRS_UMBERPAVER_WEBBED);
+        stairs(AmberBlocks.AMBER, StairBlocks.STAIRS_AMBER);
+        stairs(AmberBlocks.AMBER_BRICKS, StairBlocks.STAIRS_AMBER_BRICKS);
+        stairs(UmberstoneBlocks.MUD_BRICKS, StairBlocks.STAIRS_MUD_BRICKS);
+        stairs(UmberstoneBlocks.MIR_BRICKS, StairBlocks.STAIRS_MIR_BRICKS);
     }
 
     private void addDoorRecipes() {
-        door(ModBlocks.PLANKS_BAOBAB, ModBlocks.DOOR_BAOBAB);
-        door(ModBlocks.PLANKS_EUCALYPTUS, ModBlocks.DOOR_EUCALYPTUS);
-        door(ModBlocks.PLANKS_MAHOGANY, ModBlocks.DOOR_MAHOGANY);
-        door(ModBlocks.PLANKS_MOSSBARK, ModBlocks.DOOR_MOSSBARK);
-        door(ModBlocks.PLANKS_ASPER, ModBlocks.DOOR_ASPER);
-        door(ModBlocks.PLANKS_CYPRESS, ModBlocks.DOOR_CYPRESS);
-        door(ModBlocks.PLANKS_BALSAM, ModBlocks.DOOR_BALSAM);
-        door(ModBlocks.PLANKS_WHITE, ModBlocks.DOOR_WHITE);
-        door(ModBlocks.PLANKS_ROTTEN, ModBlocks.DOOR_ROTTEN);
-        door(ModBlocks.PLANKS_MARSHWOOD, ModBlocks.DOOR_MARSHWOOD);
-        door(ModBlocks.PLANKS_SCORCHED, ModBlocks.DOOR_SCORCHED);
+        door(WoodBlocks.PLANKS_BAOBAB, DoorBlocks.DOOR_BAOBAB);
+        door(WoodBlocks.PLANKS_EUCALYPTUS, DoorBlocks.DOOR_EUCALYPTUS);
+        door(WoodBlocks.PLANKS_MAHOGANY, DoorBlocks.DOOR_MAHOGANY);
+        door(WoodBlocks.PLANKS_MOSSBARK, DoorBlocks.DOOR_MOSSBARK);
+        door(WoodBlocks.PLANKS_ASPER, DoorBlocks.DOOR_ASPER);
+        door(WoodBlocks.PLANKS_CYPRESS, DoorBlocks.DOOR_CYPRESS);
+        door(WoodBlocks.PLANKS_BALSAM, DoorBlocks.DOOR_BALSAM);
+        door(WoodBlocks.PLANKS_WHITE, DoorBlocks.DOOR_WHITE);
+        door(WoodBlocks.PLANKS_ROTTEN, DoorBlocks.DOOR_ROTTEN);
+        door(WoodBlocks.PLANKS_MARSHWOOD, DoorBlocks.DOOR_MARSHWOOD);
+        door(WoodBlocks.PLANKS_SCORCHED, DoorBlocks.DOOR_SCORCHED);
     }
 
     private void addFenceRecipes() {
-        fence(ModBlocks.PLANKS_BAOBAB, ModBlocks.FENCE_BAOBAB);
-        fence(ModBlocks.PLANKS_EUCALYPTUS, ModBlocks.FENCE_EUCALYPTUS);
-        fence(ModBlocks.PLANKS_MAHOGANY, ModBlocks.FENCE_MAHOGANY);
-        fence(ModBlocks.PLANKS_MOSSBARK, ModBlocks.FENCE_MOSSBARK);
-        fence(ModBlocks.PLANKS_ASPER, ModBlocks.FENCE_ASPER);
-        fence(ModBlocks.PLANKS_CYPRESS, ModBlocks.FENCE_CYPRESS);
-        fence(ModBlocks.PLANKS_BALSAM, ModBlocks.FENCE_BALSAM);
-        fence(ModBlocks.PLANKS_WHITE, ModBlocks.FENCE_WHITE);
-        fence(ModBlocks.PLANKS_ROTTEN, ModBlocks.FENCE_ROTTEN);
-        fence(ModBlocks.PLANKS_MARSHWOOD, ModBlocks.FENCE_MARSHWOOD);
-        fence(ModBlocks.PLANKS_SCORCHED, ModBlocks.FENCE_SCORCHED);
+        fence(WoodBlocks.PLANKS_BAOBAB, FenceBlocks.FENCE_BAOBAB);
+        fence(WoodBlocks.PLANKS_EUCALYPTUS, FenceBlocks.FENCE_EUCALYPTUS);
+        fence(WoodBlocks.PLANKS_MAHOGANY, FenceBlocks.FENCE_MAHOGANY);
+        fence(WoodBlocks.PLANKS_MOSSBARK, FenceBlocks.FENCE_MOSSBARK);
+        fence(WoodBlocks.PLANKS_ASPER, FenceBlocks.FENCE_ASPER);
+        fence(WoodBlocks.PLANKS_CYPRESS, FenceBlocks.FENCE_CYPRESS);
+        fence(WoodBlocks.PLANKS_BALSAM, FenceBlocks.FENCE_BALSAM);
+        fence(WoodBlocks.PLANKS_WHITE, FenceBlocks.FENCE_WHITE);
+        fence(WoodBlocks.PLANKS_ROTTEN, FenceBlocks.FENCE_ROTTEN);
+        fence(WoodBlocks.PLANKS_MARSHWOOD, FenceBlocks.FENCE_MARSHWOOD);
+        fence(WoodBlocks.PLANKS_SCORCHED, FenceBlocks.FENCE_SCORCHED);
     }
 
     private void addFenceGateRecipes() {
-        fenceGate(ModBlocks.PLANKS_BAOBAB, ModBlocks.FENCE_GATE_BAOBAB);
-        fenceGate(ModBlocks.PLANKS_EUCALYPTUS, ModBlocks.FENCE_GATE_EUCALYPTUS);
-        fenceGate(ModBlocks.PLANKS_MAHOGANY, ModBlocks.FENCE_GATE_MAHOGANY);
-        fenceGate(ModBlocks.PLANKS_MOSSBARK, ModBlocks.FENCE_GATE_MOSSBARK);
-        fenceGate(ModBlocks.PLANKS_ASPER, ModBlocks.FENCE_GATE_ASPER);
-        fenceGate(ModBlocks.PLANKS_CYPRESS, ModBlocks.FENCE_GATE_CYPRESS);
-        fenceGate(ModBlocks.PLANKS_BALSAM, ModBlocks.FENCE_GATE_BALSAM);
-        fenceGate(ModBlocks.PLANKS_WHITE, ModBlocks.FENCE_GATE_WHITE);
-        fenceGate(ModBlocks.PLANKS_ROTTEN, ModBlocks.FENCE_GATE_ROTTEN);
-        fenceGate(ModBlocks.PLANKS_MARSHWOOD, ModBlocks.FENCE_GATE_MARSHWOOD);
-        fenceGate(ModBlocks.PLANKS_SCORCHED, ModBlocks.FENCE_GATE_SCORCHED);
+        fenceGate(WoodBlocks.PLANKS_BAOBAB, FenceBlocks.FENCE_GATE_BAOBAB);
+        fenceGate(WoodBlocks.PLANKS_EUCALYPTUS, FenceBlocks.FENCE_GATE_EUCALYPTUS);
+        fenceGate(WoodBlocks.PLANKS_MAHOGANY, FenceBlocks.FENCE_GATE_MAHOGANY);
+        fenceGate(WoodBlocks.PLANKS_MOSSBARK, FenceBlocks.FENCE_GATE_MOSSBARK);
+        fenceGate(WoodBlocks.PLANKS_ASPER, FenceBlocks.FENCE_GATE_ASPER);
+        fenceGate(WoodBlocks.PLANKS_CYPRESS, FenceBlocks.FENCE_GATE_CYPRESS);
+        fenceGate(WoodBlocks.PLANKS_BALSAM, FenceBlocks.FENCE_GATE_BALSAM);
+        fenceGate(WoodBlocks.PLANKS_WHITE, FenceBlocks.FENCE_GATE_WHITE);
+        fenceGate(WoodBlocks.PLANKS_ROTTEN, FenceBlocks.FENCE_GATE_ROTTEN);
+        fenceGate(WoodBlocks.PLANKS_MARSHWOOD, FenceBlocks.FENCE_GATE_MARSHWOOD);
+        fenceGate(WoodBlocks.PLANKS_SCORCHED, FenceBlocks.FENCE_GATE_SCORCHED);
     }
 
     private void addWallRecipes() {
-        wall(ModBlocks.UMBERSTONE, ModBlocks.WALL_UMBERSTONE);
-        wall(ModBlocks.UMBERCOBBLE, ModBlocks.WALL_UMBERCOBBLE);
-        wall(ModBlocks.UMBERCOBBLE_MOSSY, ModBlocks.WALL_UMBERCOBBLE_MOSSY);
-        wall(ModBlocks.UMBERCOBBLE_WEBBED, ModBlocks.WALL_UMBERCOBBLE_WEBBED);
-        wall(ModBlocks.UMBERSTONE_BRICKS, ModBlocks.WALL_UMBERSTONE_BRICKS);
-        wall(ModBlocks.UMBERTILE_SMOOTH, ModBlocks.WALL_UMBERTILE_SMOOTH);
-        wall(ModBlocks.UMBERTILE_SMOOTH_SMALL, ModBlocks.WALL_UMBERTILE_SMOOTH_SMALL);
-        wall(ModBlocks.AMBER, ModBlocks.WALL_AMBER);
-        wall(ModBlocks.AMBER_BRICKS, ModBlocks.WALL_AMBER_BRICKS);
-        wall(ModBlocks.UMBERPAVER, ModBlocks.WALL_UMBERPAVER);
-        wall(ModBlocks.UMBERPAVER_MOSSY, ModBlocks.WALL_UMBERPAVER_MOSSY);
-        wall(ModBlocks.UMBERPAVER_WEBBED, ModBlocks.WALL_UMBERPAVER_WEBBED);
+        wall(UmberstoneBlocks.UMBERSTONE, WallBlocks.WALL_UMBERSTONE);
+        wall(UmberstoneBlocks.UMBERCOBBLE, WallBlocks.WALL_UMBERCOBBLE);
+        wall(UmberstoneBlocks.UMBERCOBBLE_MOSSY, WallBlocks.WALL_UMBERCOBBLE_MOSSY);
+        wall(UmberstoneBlocks.UMBERCOBBLE_WEBBED, WallBlocks.WALL_UMBERCOBBLE_WEBBED);
+        wall(UmberstoneBlocks.UMBERSTONE_BRICKS, WallBlocks.WALL_UMBERSTONE_BRICKS);
+        wall(UmberstoneBlocks.UMBERTILE_SMOOTH, WallBlocks.WALL_UMBERTILE_SMOOTH);
+        wall(UmberstoneBlocks.UMBERTILE_SMOOTH_SMALL, WallBlocks.WALL_UMBERTILE_SMOOTH_SMALL);
+        wall(AmberBlocks.AMBER, WallBlocks.WALL_AMBER);
+        wall(AmberBlocks.AMBER_BRICKS, WallBlocks.WALL_AMBER_BRICKS);
+        wall(UmberstoneBlocks.UMBERPAVER, WallBlocks.WALL_UMBERPAVER);
+        wall(UmberstoneBlocks.UMBERPAVER_MOSSY, WallBlocks.WALL_UMBERPAVER_MOSSY);
+        wall(UmberstoneBlocks.UMBERPAVER_WEBBED, WallBlocks.WALL_UMBERPAVER_WEBBED);
     }
 
     private void addSpecialBlockRecipes() {
-        surround(ModBlocks.PLANKS_PETRIFIED, Items.GOLD_INGOT, ModBlocks.PETRIFIED_WOOD_CHEST);
+        surround(WoodBlocks.PLANKS_PETRIFIED, Items.GOLD_INGOT, OtherBlocks.PETRIFIED_WOOD_CHEST);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.BAMBOO_BRIDGE, 3)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.BAMBOO_BRIDGE, 3)
                 .pattern("SSS")
                 .pattern("B B")
                 .pattern("LLL")
                 .define('S', Items.STRING)
                 .define('B', ModItems.BAMBOO)
-                .define('L', ModBlocks.BAMBOO_LADDER)
-                .unlockedBy("has_bamboo_ladder", has(ModBlocks.BAMBOO_LADDER))
+                .define('L', OtherBlocks.BAMBOO_LADDER)
+                .unlockedBy("has_bamboo_ladder", has(OtherBlocks.BAMBOO_LADDER))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.BAMBOO_LADDER, 3)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.BAMBOO_LADDER, 3)
                 .pattern("BBB")
                 .pattern("S S")
                 .pattern("BBB")
@@ -234,7 +234,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_bamboo", has(ModItems.BAMBOO))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.BAMBOO_NERD_POLE, 4)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.BAMBOO_NERD_POLE, 4)
                 .pattern("S")
                 .pattern("B")
                 .pattern("B")
@@ -243,7 +243,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_bamboo", has(ModItems.BAMBOO))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.SILO_SUPPORTS)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.SILO_SUPPORTS)
                 .pattern("SSS")
                 .pattern("F F")
                 .pattern("F F")
@@ -252,22 +252,22 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_fence", has(ItemTags.FENCES))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.SILO_ROOF)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.SILO_ROOF)
                 .pattern(" P ")
                 .pattern("PPP")
-                .define('P', ModBlocks.PLANKS_VARNISHED)
-                .unlockedBy("has_planks_varnished", has(ModBlocks.PLANKS_VARNISHED))
+                .define('P', WoodBlocks.PLANKS_VARNISHED)
+                .unlockedBy("has_planks_varnished", has(WoodBlocks.PLANKS_VARNISHED))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.TEMPLE_PILLAR)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.TEMPLE_PILLAR)
                 .pattern("T")
                 .pattern("T")
-                .define('T', ModBlocks.TEMPLE_TILE)
-                .unlockedBy("has_temple_tile", has(ModBlocks.TEMPLE_TILE))
+                .define('T', OtherBlocks.TEMPLE_TILE)
+                .unlockedBy("has_temple_tile", has(OtherBlocks.TEMPLE_TILE))
                 .save(output);
 
-        twoByTwo(ModBlocks.TEMPLE_BRICK, ModBlocks.TEMPLE_TILE, 4);
-        twoByTwo(ModItems.TEMPLE_ROCK, ModBlocks.TEMPLE_BRICK);
-        twoByTwo(ModItems.GNEISS_ROCK, ModBlocks.GNEISS);
+        twoByTwo(OtherBlocks.TEMPLE_BRICK, OtherBlocks.TEMPLE_TILE, 4);
+        twoByTwo(ModItems.TEMPLE_ROCK, OtherBlocks.TEMPLE_BRICK);
+        twoByTwo(ModItems.GNEISS_ROCK, OtherBlocks.GNEISS);
     }
 }

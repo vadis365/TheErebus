@@ -1,6 +1,6 @@
 package erebus.block.bamboo;
 
-import erebus.registries.ModBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -89,11 +89,11 @@ public class BambooCrateBlock extends Block {
 
     @Override
     public void onNeighborChange(@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockPos neighbor) {
-        if (level.getBlockState(neighbor).is(ModBlocks.BAMBOO_CRATE)) {
+        if (level.getBlockState(neighbor).is(OtherBlocks.BAMBOO_CRATE)) {
             for (int x = -1; x <= 1; x++) {
                 for (int y = -1; y <= 1; y++) {
                     for (int z = -1; z <= 1; z++) {
-                        if (level.getBlockState(pos.offset(x, y, z)).is(ModBlocks.BAMBOO_CRATE)) {
+                        if (level.getBlockState(pos.offset(x, y, z)).is(OtherBlocks.BAMBOO_CRATE)) {
                             onPlace(state, (Level) level, pos, state, false);
                             onPlace(state, (Level) level, neighbor, state, false);
                         }
@@ -104,6 +104,6 @@ public class BambooCrateBlock extends Block {
     }
 
     private boolean isCrate(Level level, BlockPos pos) {
-        return level.getBlockState(pos).is(ModBlocks.BAMBOO_CRATE.get());
+        return level.getBlockState(pos).is(OtherBlocks.BAMBOO_CRATE.get());
     }
 }

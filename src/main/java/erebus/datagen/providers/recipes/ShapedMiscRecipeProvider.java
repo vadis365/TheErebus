@@ -1,7 +1,7 @@
 package erebus.datagen.providers.recipes;
 
-import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
+import erebus.registries.blocks.providers.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -66,7 +66,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_bamboo", has(ModItems.BAMBOO))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(MISC, ModBlocks.BAMBOO_TORCH, 4)
+        ShapedRecipeBuilder.shaped(MISC, OtherBlocks.BAMBOO_TORCH, 4)
                 .pattern("C")
                 .pattern("B")
                 .pattern("B")
@@ -75,16 +75,16 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_bamboo", has(ModItems.BAMBOO))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(MISC, ModBlocks.BAMBOO_CRATE)
+        ShapedRecipeBuilder.shaped(MISC, OtherBlocks.BAMBOO_CRATE)
                 .pattern("BPB")
                 .pattern("P P")
                 .pattern("BPB")
                 .define('B', ModItems.BAMBOO)
-                .define('P', ModBlocks.PLANKS_BAMBOO)
+                .define('P', WoodBlocks.PLANKS_BAMBOO)
                 .unlockedBy("has_bamboo", has(ModItems.BAMBOO))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(MISC, ModBlocks.BAMBOO_PIPE)
+        ShapedRecipeBuilder.shaped(MISC, OtherBlocks.BAMBOO_PIPE)
                 .pattern("  B")
                 .pattern("HBS")
                 .pattern("B  ")
@@ -99,7 +99,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .pattern(" P ")
                 .pattern(" B ")
                 .define('B', ModItems.BAMBOO)
-                .define('P', ModBlocks.PLANKS_BAMBOO)
+                .define('P', WoodBlocks.PLANKS_BAMBOO)
                 .unlockedBy("has_bamboo", has(ModItems.BAMBOO))
                 .save(output);
     }
@@ -114,7 +114,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_honey_drip", has(ModItems.HONEY_DRIP))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(FOOD, ModBlocks.HONEY_TREAT)
+        ShapedRecipeBuilder.shaped(FOOD, OtherBlocks.HONEY_TREAT)
                 .pattern("SHS")
                 .pattern("HBH")
                 .pattern("SHS")
@@ -126,26 +126,26 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addBlockRecipes() {
-        ShapedRecipeBuilder.shaped(MISC, ModBlocks.GLOWING_JAR)
+        ShapedRecipeBuilder.shaped(MISC, AmberBlocks.GLOWING_JAR)
                 .pattern("III")
                 .pattern("GBG")
                 .pattern("GGG")
                 .define('B', ModItems.BIO_LUMINESCENCE)
                 .define('I', Items.IRON_INGOT)
-                .define('G', ModBlocks.AMBER_GLASS)
+                .define('G', AmberBlocks.AMBER_GLASS)
                 .unlockedBy("has_bio_luminescence", has(ModItems.BIO_LUMINESCENCE))
                 .save(output);
 
-        threeByThree(ModItems.BIO_VELOCITY, ModBlocks.VELOCITY);
+        threeByThree(ModItems.BIO_VELOCITY, OtherBlocks.VELOCITY);
 
-        ShapedRecipeBuilder.shaped(MISC, ModBlocks.FLUID_JAR)
+        ShapedRecipeBuilder.shaped(MISC, AmberBlocks.FLUID_JAR)
                 .pattern("PPP")
                 .pattern("GBG")
                 .pattern("GGG")
-                .define('P', ModBlocks.PLANKS_VARNISHED)
+                .define('P', WoodBlocks.PLANKS_VARNISHED)
                 .define('B', Items.BUCKET)
-                .define('G', ModBlocks.AMBER_GLASS)
-                .unlockedBy("has_amber_glass", has(ModBlocks.AMBER_GLASS))
+                .define('G', AmberBlocks.AMBER_GLASS)
+                .unlockedBy("has_amber_glass", has(AmberBlocks.AMBER_GLASS))
                 .save(output);
 
         ShapedRecipeBuilder.shaped(MISC, ModItems.MUCUS_CHARGE)
@@ -157,7 +157,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_repellent", has(ModItems.REPELLENT))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.HONEY_COMB)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.HONEY_COMB)
                 .pattern("NPN")
                 .pattern("PCP")
                 .pattern("NPN")
@@ -167,10 +167,10 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_nectar", has(ModItems.NECTAR))
                 .save(output);
 
-        threeByThree(ModBlocks.FIRE_BLOOM, Items.BLAZE_POWDER);
-        threeByThree(ModBlocks.MOSS_DOWN, ModItems.MOSS_BALL);
+        threeByThree(PlantBlocks.FIRE_BLOOM, Items.BLAZE_POWDER);
+        threeByThree(PlantBlocks.MOSS_DOWN, ModItems.MOSS_BALL);
 
-        ShapedRecipeBuilder.shaped(MISC, ModBlocks.GAEAN_KEYSTONE)
+        ShapedRecipeBuilder.shaped(MISC, OtherBlocks.GAEAN_KEYSTONE)
                 .pattern("V V")
                 .pattern("SOS")
                 .pattern("SSS")
@@ -180,28 +180,28 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_vine", has(Blocks.VINE))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(MISC, ModBlocks.COMPOSTER)
+        ShapedRecipeBuilder.shaped(MISC, OtherBlocks.COMPOSTER)
                 .pattern("PSP")
                 .pattern("PGP")
                 .pattern("PSP")
-                .define('P', ModBlocks.PLANKS_VARNISHED)
-                .define('S', ModBlocks.SLAB_PLANKS_VARNISHED)
+                .define('P', WoodBlocks.PLANKS_VARNISHED)
+                .define('S', SlabBlocks.SLAB_PLANKS_VARNISHED)
                 .define('G', Tags.Items.DYES_GREEN)
-                .unlockedBy("has_planks_varnished", has(ModBlocks.PLANKS_VARNISHED))
+                .unlockedBy("has_planks_varnished", has(WoodBlocks.PLANKS_VARNISHED))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.SILO_TANK)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.SILO_TANK)
                 .pattern("IPI")
                 .pattern("BCB")
                 .pattern("IPI")
                 .define('I', Items.IRON_INGOT)
-                .define('P', ModBlocks.PLANKS_VARNISHED)
+                .define('P', WoodBlocks.PLANKS_VARNISHED)
                 .define('B', Blocks.IRON_BLOCK)
-                .define('C', ModBlocks.PETRIFIED_WOOD_CHEST)
-                .unlockedBy("has_petrified_wood_chest", has(ModBlocks.PETRIFIED_WOOD_CHEST))
+                .define('C', OtherBlocks.PETRIFIED_WOOD_CHEST)
+                .unlockedBy("has_petrified_wood_chest", has(OtherBlocks.PETRIFIED_WOOD_CHEST))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(MISC, ModBlocks.OFFERING_ALTAR)
+        ShapedRecipeBuilder.shaped(MISC, OtherBlocks.OFFERING_ALTAR)
                 .pattern("SGS")
                 .pattern("BOB")
                 .pattern("SBS")
@@ -212,28 +212,28 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_obsidian", has(Tags.Items.OBSIDIANS))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.CULTIVATED_MOSS_DOWN)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, PlantBlocks.CULTIVATED_MOSS_DOWN)
                 .pattern("GSG")
                 .pattern("SMS")
                 .pattern("GSG")
                 .define('S', ModItems.SUPERNATURAL_VELOCITY)
-                .define('M', ModBlocks.MOSS_DOWN)
+                .define('M', PlantBlocks.MOSS_DOWN)
                 .define('G', Tags.Items.DYES_GREEN)
                 .unlockedBy("has_supernatural_velocity", has(ModItems.SUPERNATURAL_VELOCITY))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.CULTIVATED_MOULD_DOWN)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, PlantBlocks.CULTIVATED_MOULD_DOWN)
                 .pattern("LSL")
                 .pattern("SMS")
                 .pattern("LSL")
                 .define('S', ModItems.SUPERNATURAL_VELOCITY)
-                .define('M', ModBlocks.MOULD_DOWN)
+                .define('M', PlantBlocks.MOULD_DOWN)
                 .define('L', Items.LAPIS_LAZULI)
                 .unlockedBy("has_supernatural_velocity", has(ModItems.SUPERNATURAL_VELOCITY))
                 .save(output);
 
         surround(ModItems.HYDROFUGE, ModItems.REPELLENT, ModItems.WATER_REPELLENT);
-        surround(ModItems.ALTAR_FRAGMENT, Blocks.OBSIDIAN, ModBlocks.ALTAR_BASE);
+        surround(ModItems.ALTAR_FRAGMENT, Blocks.OBSIDIAN, OtherBlocks.ALTAR_BASE);
     }
 
     private void addGolemRecipes() {
@@ -275,7 +275,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_scorpion_pincer", has(ModItems.SCORPION_PINCER))
                 .save(output, "umbergolem_claw_vertical");
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ModBlocks.UMBER_GOLEM_STATUE)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.UMBER_GOLEM_STATUE)
                 .pattern(" H ")
                 .pattern("CTC")
                 .pattern(" L ")
@@ -289,10 +289,10 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_umbergolem_legs", has(ModItems.UMBERGOLEM_LEGS))
                 .save(output);
 
-        surround(ModBlocks.MUD, ModBlocks.UMBER_GOLEM_STATUE, ModItems.MUD_UMBERGOLEM);
-        surround(Blocks.IRON_BLOCK, ModBlocks.UMBER_GOLEM_STATUE, ModItems.IRON_UMBERGOLEM);
-        surround(Blocks.GOLD_BLOCK, ModBlocks.UMBER_GOLEM_STATUE, ModItems.GOLD_UMBERGOLEM);
-        surround(ModBlocks.JADE_BLOCK, ModBlocks.UMBER_GOLEM_STATUE, ModItems.JADE_UMBERGOLEM);
+        surround(OtherBlocks.MUD, OtherBlocks.UMBER_GOLEM_STATUE, ModItems.MUD_UMBERGOLEM);
+        surround(Blocks.IRON_BLOCK, OtherBlocks.UMBER_GOLEM_STATUE, ModItems.IRON_UMBERGOLEM);
+        surround(Blocks.GOLD_BLOCK, OtherBlocks.UMBER_GOLEM_STATUE, ModItems.GOLD_UMBERGOLEM);
+        surround(OtherBlocks.JADE_BLOCK, OtherBlocks.UMBER_GOLEM_STATUE, ModItems.JADE_UMBERGOLEM);
     }
 
     private void addMiscItemRecipes() {
@@ -314,7 +314,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .pattern("RGR")
                 .pattern(" R ")
                 .define('R', ModItems.RESIN)
-                .define('G', ModBlocks.AMBER_GLASS)
+                .define('G', AmberBlocks.AMBER_GLASS)
                 .unlockedBy("has_resin", has(ModItems.RESIN))
                 .save(output);
 

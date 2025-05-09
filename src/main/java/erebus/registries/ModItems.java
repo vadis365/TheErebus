@@ -1,23 +1,15 @@
 package erebus.registries;
 
-import java.util.List;
-import java.util.Map;
-
-import org.jetbrains.annotations.NotNull;
-
-import de.cech12.bucketlib.api.item.UniversalBucketItem;
 import erebus.Erebus;
 import erebus.item.BeettleJuiceBucketItem;
 import erebus.item.PaxelItem;
 import erebus.item.WandOfAnimationItem;
 import erebus.item.blocks.FluidJarBlockItem;
 import erebus.item.shield.ErebusShieldItem;
-import erebus.item.shield.type.BambooShieldType;
-import erebus.item.shield.type.ExoSkeletonShieldType;
-import erebus.item.shield.type.JadeShieldType;
-import erebus.item.shield.type.ReinforcedShieldType;
-import erebus.item.shield.type.RhinoShieldType;
+import erebus.item.shield.type.*;
 import erebus.network.data.DeathCompassData;
+import erebus.registries.blocks.providers.AmberBlocks;
+import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.data.ModArmorMaterials;
 import erebus.registries.data.ModDataComponents;
 import erebus.registries.data.ModToolMaterials;
@@ -26,21 +18,14 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Map;
 
 public class ModItems extends ModItemHelpers {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Erebus.MODID);
@@ -101,7 +86,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> UMBERGOLEM_HEAD = registerItem("umbergolem_head");
     public static final DeferredItem<Item> UMBERGOLEM_CLAW = registerItem("umbergolem_claw");
     public static final DeferredItem<Item> UMBERGOLEM_LEGS = registerItem("umbergolem_legs");
-    public static final DeferredItem<Item> JADE_BERRIES = ITEMS.register("jade_berries", () -> new ItemNameBlockItem(ModBlocks.JADE_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
+    public static final DeferredItem<Item> JADE_BERRIES = ITEMS.register("jade_berries", () -> new ItemNameBlockItem(PlantBlocks.JADE_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
             .nutrition(1)
             .saturationModifier(0.1F)
             .build()
@@ -136,7 +121,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> DARK_FRUIT = registerFoodItem("dark_fruit", 2, 0.3F);
     public static final DeferredItem<Item> TITAN_CHOP_RAW = registerFoodItem("titan_chop_raw", 4, 0.3F);
     public static final DeferredItem<Item> TITAN_CHOP_COOKED = registerFoodItem("titan_chop_cooked", 8, 0.8F, MobEffects.DAMAGE_BOOST, 600, 1);
-    public static final DeferredItem<Item> SWAMP_BERRIES = ITEMS.register("swamp_berries", () -> new ItemNameBlockItem(ModBlocks.SWAMP_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
+    public static final DeferredItem<Item> SWAMP_BERRIES = ITEMS.register("swamp_berries", () -> new ItemNameBlockItem(PlantBlocks.SWAMP_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
             .nutrition(1)
             .saturationModifier(0.1F)
             .build()
@@ -271,9 +256,9 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> EREBUS_MAP_FILLED = registerItem("erebus_map_filled");
 
     // MARK: Plants
-    public static final DeferredItem<Item> TURNIP = ITEMS.register("turnip", () -> new ItemNameBlockItem(ModBlocks.CROP_TURNIP.get(), new Item.Properties()));
-    public static final DeferredItem<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds", () -> new ItemNameBlockItem(ModBlocks.CROP_CABBAGE.get(), new Item.Properties()));
-    public static final DeferredItem<Item> MANDRAKE_ROOT = ITEMS.register("mandrake_root", () -> new ItemNameBlockItem(ModBlocks.CROP_MANDRAKE.get(), new Item.Properties()));
+    public static final DeferredItem<Item> TURNIP = ITEMS.register("turnip", () -> new ItemNameBlockItem(PlantBlocks.CROP_TURNIP.get(), new Item.Properties()));
+    public static final DeferredItem<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds", () -> new ItemNameBlockItem(PlantBlocks.CROP_CABBAGE.get(), new Item.Properties()));
+    public static final DeferredItem<Item> MANDRAKE_ROOT = ITEMS.register("mandrake_root", () -> new ItemNameBlockItem(PlantBlocks.CROP_MANDRAKE.get(), new Item.Properties()));
     public static final DeferredItem<Item> SEED_BLACK = registerItem("seed_black");
     public static final DeferredItem<Item> SEED_RED = registerItem("seed_red");
     public static final DeferredItem<Item> SEED_BROWN = registerItem("seed_brown");
@@ -291,7 +276,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> SEED_RAINBOW = registerItem("seed_rainbow");
 
     public static final DeferredItem<Item> LIFE_BLOOD = registerItem("life_blood");
-    public static final DeferredItem<Item> HEART_BERRIES = ITEMS.register("heart_berries", () -> new ItemNameBlockItem(ModBlocks.HEART_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
+    public static final DeferredItem<Item> HEART_BERRIES = ITEMS.register("heart_berries", () -> new ItemNameBlockItem(PlantBlocks.HEART_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
             .nutrition(1)
             .saturationModifier(0.1F)
             .build()
@@ -335,5 +320,5 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> BEETLE_JUICE_BUCKET = ITEMS.register("beetle_juice_bucket", () -> new BeettleJuiceBucketItem(ModFluids.BEETLE_JUICE_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     // Block Items
-    public static final DeferredItem<BlockItem> FLUID_JAR = ITEMS.register("fluid_jar", () -> new FluidJarBlockItem(ModBlocks.FLUID_JAR.get(), FluidType.BUCKET_VOLUME * 32, new Item.Properties()));
+    public static final DeferredItem<BlockItem> FLUID_JAR = ITEMS.register("fluid_jar", () -> new FluidJarBlockItem(AmberBlocks.FLUID_JAR.get(), FluidType.BUCKET_VOLUME * 32, new Item.Properties()));
 }

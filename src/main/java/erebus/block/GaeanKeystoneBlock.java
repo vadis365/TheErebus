@@ -2,8 +2,8 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.GaeanKeystoneBlockEntity;
-import erebus.registries.ModBlocks;
 import erebus.registries.ModItems;
+import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.utils.AdvancedBlockPos;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -42,7 +42,7 @@ public class GaeanKeystoneBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected RenderShape getRenderShape(BlockState state) {
+    protected @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.MODEL;
     }
 
@@ -52,12 +52,12 @@ public class GaeanKeystoneBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new GaeanKeystoneBlockEntity(pos, state);
     }
 
@@ -94,7 +94,7 @@ public class GaeanKeystoneBlock extends BaseEntityBlock {
 
         here.iterateCube(min, max, at -> {
             BlockState state = level.getBlockState(at);
-            if (!state.is(ModBlocks.PORTAL.get())) {
+            if (!state.is(OtherBlocks.PORTAL.get())) {
                 return false;
             }
 
@@ -107,7 +107,7 @@ public class GaeanKeystoneBlock extends BaseEntityBlock {
                 found.add(f);
                 for (AdvancedBlockPos abp : f.neighbors()) {
                     if (found.contains(abp)) continue;
-                    if (level.getBlockState(abp).is(ModBlocks.PORTAL)) frontier.add(abp);
+                    if (level.getBlockState(abp).is(OtherBlocks.PORTAL)) frontier.add(abp);
                 }
             }
 
@@ -147,7 +147,7 @@ public class GaeanKeystoneBlock extends BaseEntityBlock {
         }
 
         for (AdvancedBlockPos at : contig) {
-            level.setBlockAndUpdate(at, ModBlocks.PORTAL.get().defaultBlockState());
+            level.setBlockAndUpdate(at, OtherBlocks.PORTAL.get().defaultBlockState());
         }
         return true;
     }
