@@ -164,21 +164,21 @@ public class ModItemRendering {
                 return new BlenderStackItemRenderer(null, null);
             }
         }, OtherBlocks.BLENDER.get().asItem());
-        
+
         event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new FluidJarStackItemRenderer(null, null);
             }
         }, AmberBlocks.FLUID_JAR.get().asItem());
-        
+ 
         //Fluids
         event.registerFluidType(new BasicFluidType("beetle_juice"), ModFluids.BEETLE_JUICE_TYPE.get());
         event.registerFluidType(new BasicFluidType("honey"), ModFluids.HONEY_TYPE.get());
         event.registerFluidType(new BasicFluidType("anti_venom"), ModFluids.ANTI_VENOM_TYPE.get());
         event.registerFluidType(new BasicFluidType("formic_acid"), ModFluids.FORMIC_ACID_TYPE.get());
 	}
-	
+
 	public static void registerItemColors(final RegisterColorHandlersEvent.Item event) {
 		event.register((stack, tint) -> {
 			var fluid = ((BucketItem) stack.getItem()).content;

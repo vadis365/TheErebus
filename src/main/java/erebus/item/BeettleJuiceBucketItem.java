@@ -34,15 +34,13 @@ public class BeettleJuiceBucketItem extends BucketItem {
 	@Nonnull
 	public InteractionResultHolder<ItemStack> use(@Nonnull Level level, @Nonnull Player player, @Nonnull InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if(super.use(level, player, hand).getResult() == InteractionResult.PASS) {
+		if (super.use(level, player, hand).getResult() == InteractionResult.PASS) {
 			if (containsBeetleJuice(stack))
 				return ItemUtils.startUsingInstantly(level, player, hand);
+		} else if (super.use(level, player, hand).getResult() == InteractionResult.CONSUME) {
+			ItemStack itemstack1 = ItemUtils.createFilledResult(stack, player, getEmptySuccessItem(stack, player));
+			return InteractionResultHolder.sidedSuccess(itemstack1, level.isClientSide());
 		}
-		else if(super.use(level, player, hand).getResult() == InteractionResult.CONSUME) {
-			 ItemStack itemstack1 = ItemUtils.createFilledResult(stack, player, getEmptySuccessItem(stack, player));
-             return InteractionResultHolder.sidedSuccess(itemstack1, level.isClientSide());
-		}
-
 		return InteractionResultHolder.pass(stack);
 	}
 
@@ -56,28 +54,26 @@ public class BeettleJuiceBucketItem extends BucketItem {
 	@Override
 	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
 		super.finishUsingItem(stack, level, entityLiving);
-		
+
 		if (entityLiving instanceof ServerPlayer serverplayer) {
 			CriteriaTriggers.CONSUME_ITEM.trigger(serverplayer, stack);
 			serverplayer.awardStat(Stats.ITEM_USED.get(this));
 		}
+
 		if (!level.isClientSide) {
 			entityLiving.removeEffectsCuredBy(net.neoforged.neoforge.common.EffectCures.MILK);
 			if (entityLiving.isVehicle() && getParasite(entityLiving) != null)
-				if (((BotFlyLarva) getParasite(entityLiving)).getParasiteCount() > 0) {
+				if (((BotFlyLarva) getParasite(entityLiving)).getParasiteCount() > 0)
 					((BotFlyLarva) getParasite(entityLiving)).setABitDead();
-				}
 		}
 
-		if (entityLiving instanceof Player player) {
+		if (entityLiving instanceof Player player) 
 			return ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET), false);
-		} else {
+		else {
 			stack.consume(1, entityLiving);
 			return stack;
 		}
 	}
-
-
 
 	@Override
 	public int getUseDuration(ItemStack stack, LivingEntity entity) {

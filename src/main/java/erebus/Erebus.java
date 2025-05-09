@@ -89,11 +89,11 @@ public class Erebus {
         NeoForge.EVENT_BUS.register(this);
 
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-        
+
         bus.addListener(ModNetwork::register);
 
         NeoForgeMod.enableMilkFluid(); // TEMP - JUST FOR BEETLE MILKING TEST
-        
+
         bus.addListener(this::registerCaps);
 
 		if (dist.isClient()) {
@@ -119,7 +119,7 @@ public class Erebus {
         ItemBlockRenderTypes.setRenderLayer(ModFluids.FORMIC_ACID_FLOW.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.FORMIC_ACID_STILL.get(), RenderType.translucent());
     }
-    
+
     private void commonSetup(final FMLCommonSetupEvent event) {
         ItemProperties.register(
                 ModItems.DEATH_COMPASS.get(),
@@ -159,7 +159,7 @@ public class Erebus {
 	public static ResourceLocation prefix(String name) {
 		return ResourceLocation.fromNamespaceAndPath(MODID, name.toLowerCase(Locale.ROOT));
 	}
-	
+
 	public void registerCaps(final RegisterCapabilitiesEvent event) {
 		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.FLUID_JAR.get(), FluidJarBlockEntity::getTank);
 		event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidBucketWrapper(stack), ModItems.BEETLE_JUICE_BUCKET.get());

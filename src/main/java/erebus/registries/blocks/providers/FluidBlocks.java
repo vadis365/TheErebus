@@ -25,7 +25,7 @@ public class FluidBlocks extends ModBlockHelpers {
                 .noLootTable()
                 .liquid()
                 .sound(SoundType.EMPTY);
-        
+
         HONEY_PROPERTIES = Properties.of()
                 .mapColor(MapColor.WATER)
                 .replaceable()
@@ -35,7 +35,7 @@ public class FluidBlocks extends ModBlockHelpers {
                 .noLootTable()
                 .liquid()
                 .sound(SoundType.EMPTY);
-        
+
         BEETLE_JUICE_PROPERTIES = Properties.of()
                 .mapColor(MapColor.WATER)
                 .replaceable()
@@ -45,7 +45,7 @@ public class FluidBlocks extends ModBlockHelpers {
                 .noLootTable()
                 .liquid()
                 .sound(SoundType.EMPTY);
-        
+
         ANTI_VENOM_PROPERTIES = Properties.of()
                 .mapColor(MapColor.WATER)
                 .replaceable()
@@ -55,7 +55,7 @@ public class FluidBlocks extends ModBlockHelpers {
                 .noLootTable()
                 .liquid()
                 .sound(SoundType.EMPTY);
-        
+
         FORMIC_ACID_BLOCK = registerBlock("formic_acid", () -> new FormicAcidFluidBlock(ModFluids.FORMIC_ACID_STILL.get(), FORMIC_ACID_PROPERTIES));
         HONEY_BLOCK = registerBlock("honey", () -> new LiquidBlock(ModFluids.HONEY_STILL.get(), HONEY_PROPERTIES));
         BEETLE_JUICE_BLOCK = registerBlock("beetle_juice", () -> new LiquidBlock(ModFluids.BEETLE_JUICE_STILL.get(), BEETLE_JUICE_PROPERTIES));
