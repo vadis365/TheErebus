@@ -3,6 +3,7 @@ package erebus.registries.blocks.providers;
 import erebus.block.*;
 import erebus.block.altars.*;
 import erebus.block.bamboo.BambooCrateBlock;
+import erebus.block.bamboo.BambooPipe;
 import erebus.block.bamboo.BambooTorchBlock;
 import erebus.block.portal.ErebusPortalBlock;
 import erebus.registries.helpers.ModBlockHelpers;
@@ -223,7 +224,7 @@ public class OtherBlocks extends ModBlockHelpers {
         BAMBOO_NERD_POLE = registerSimpleBlock("bamboo_nerd_pole", Properties.of().mapColor(MapColor.STONE));
         BAMBOO_EXTENDER = registerSimpleBlock("bamboo_extender", Properties.of().mapColor(MapColor.STONE));
         BAMBOO_TORCH = registerBlock("bamboo_torch", () -> new BambooTorchBlock(Properties.ofFullCopy(Blocks.TORCH).noCollission().sound(SoundType.BAMBOO).lightLevel((state) -> 15).requiresCorrectToolForDrops()));
-        BAMBOO_PIPE = registerSimpleBlock("bamboo_pipe", Properties.of().mapColor(MapColor.STONE));
+        BAMBOO_PIPE = registerBlock("bamboo_pipe", () -> new BambooPipe(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO)));
         BAMBOO_PIPE_EXTRACT = registerSimpleBlock("bamboo_pipe_extract", Properties.of().mapColor(MapColor.STONE));
         BAMBOO_PIPE_EXTRACT_ACTIVE = registerSimpleBlock("bamboo_pipe_extract_active", Properties.of().mapColor(MapColor.STONE));
         SILO_ROOF = registerSimpleBlock("silo_roof", Properties.of().mapColor(MapColor.STONE));
