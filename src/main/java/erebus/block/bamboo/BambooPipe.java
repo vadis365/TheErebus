@@ -67,7 +67,7 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
 	@Nonnull
 	@Override
 	public RenderShape getRenderShape(@Nonnull BlockState state) {
-		return RenderShape.INVISIBLE;
+		return RenderShape.MODEL;
 	}
 
     @Override
