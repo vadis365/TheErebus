@@ -1,13 +1,12 @@
 package erebus.block.bamboo;
 
-import java.util.Optional;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.mojang.serialization.MapCodec;
 
 import erebus.block.entity.BambooPipeBlockEntity;
+import erebus.utils.CapHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -15,7 +14,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -27,8 +25,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class BambooPipe extends DirectionalBlock implements EntityBlock {
 	public static final MapCodec<BambooPipe> CODEC = simpleCodec(BambooPipe::new);
@@ -87,13 +83,13 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
 		if (state.getValue(FACING) == Direction.WEST) minX = 0.0F;
 		if (state.getValue(FACING) == Direction.EAST) maxX = 16.0F;
 
-		if (isSideConnectable (worldIn, pos, Direction.UP)) maxY = 16.0F;
-		if (isSideConnectable (worldIn, pos, Direction.DOWN)) minY = 0.0F;
-		if (isSideConnectable (worldIn, pos, Direction.SOUTH)) maxZ = 16.0F;
-		if (isSideConnectable (worldIn, pos, Direction.NORTH)) minZ = 0.0F;
-		if (isSideConnectable (worldIn, pos, Direction.WEST)) minX = 0.0F;
-		if (isSideConnectable (worldIn, pos, Direction.EAST)) maxX = 16.0F;
-		
+		if (state.getValue(CONNECTED_UP)) maxY = 16.0F;
+		if (state.getValue(CONNECTED_DOWN)) minY = 0.0F;
+		if (state.getValue(CONNECTED_SOUTH)) maxZ = 16.0F;
+		if (state.getValue(CONNECTED_NORTH)) minZ = 0.0F;
+		if (state.getValue(CONNECTED_WEST)) minX = 0.0F;
+		if (state.getValue(CONNECTED_EAST)) maxX = 16.0F;
+
 		VoxelShape voxelshape = Block.box(minX, minY, minZ, maxX, maxY, maxZ);
 		return voxelshape;
 	}
@@ -110,27 +106,28 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
 		if (state.getValue(FACING) == Direction.WEST) minX = 0.0F;
 		if (state.getValue(FACING) == Direction.EAST) maxX = 16.0F;
 
-		if (isSideConnectable (worldIn, pos, Direction.UP)) maxY = 16.0F;
-		if (isSideConnectable (worldIn, pos, Direction.DOWN)) minY = 0.0F;
-		if (isSideConnectable (worldIn, pos, Direction.SOUTH)) maxZ = 16.0F;
-		if (isSideConnectable (worldIn, pos, Direction.NORTH)) minZ = 0.0F;
-		if (isSideConnectable (worldIn, pos, Direction.WEST)) minX = 0.0F;
-		if (isSideConnectable (worldIn, pos, Direction.EAST)) maxX = 16.0F;
+		if (state.getValue(CONNECTED_UP)) maxY = 16.0F;
+		if (state.getValue(CONNECTED_DOWN)) minY = 0.0F;
+		if (state.getValue(CONNECTED_SOUTH)) maxZ = 16.0F;
+		if (state.getValue(CONNECTED_NORTH)) minZ = 0.0F;
+		if (state.getValue(CONNECTED_WEST)) minX = 0.0F;
+		if (state.getValue(CONNECTED_EAST)) maxX = 16.0F;
+
 		VoxelShape voxelshape = Block.box(minX, minY, minZ, maxX, maxY, maxZ);
 		return voxelshape;
 	}
 
-//	@Override
-//	public BlockState getStateForPlacement(BlockPlaceContext context) {
-//		Direction direction = context.getClickedFace().getOpposite();
-//		return this.defaultBlockState().setValue(FACING, direction);
-//	}
+	@Override
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		Direction direction = context.getClickedFace().getOpposite();
+		return this.defaultBlockState().setValue(FACING, direction);
+	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING, CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST);
 	}
-
+/*
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockGetter level = context.getLevel();
@@ -152,38 +149,21 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
 
         return state.setValue(FACING, direction).setValue(CONNECTED_DOWN, this.isSideConnectable(level, position, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, position, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, position, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, position, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, position, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, position, Direction.WEST));
     }
-	
+*/	
     @Override
     protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-    	if (facing == Direction.UP)
-			return state.setValue(FACING, facing).setValue(CONNECTED_DOWN, this.isSideConnectable(level, currentPos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, currentPos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, currentPos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, currentPos, Direction.SOUTH)).setValue(CONNECTED_UP, false).setValue(CONNECTED_WEST, this.isSideConnectable(level, currentPos, Direction.WEST));
-		if (facing == Direction.DOWN)
-			return state.setValue(FACING, facing).setValue(CONNECTED_DOWN, false).setValue(CONNECTED_EAST, this.isSideConnectable(level, currentPos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, currentPos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, currentPos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, currentPos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, currentPos, Direction.WEST));
-		if (facing == Direction.SOUTH)
-			return state.setValue(FACING, facing).setValue(CONNECTED_DOWN, this.isSideConnectable(level, currentPos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, currentPos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, currentPos, Direction.NORTH)).setValue(CONNECTED_SOUTH, false).setValue(CONNECTED_UP, this.isSideConnectable(level, currentPos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, currentPos, Direction.WEST));
-		if (facing == Direction.NORTH)
-			return state.setValue(FACING, facing).setValue(CONNECTED_DOWN, this.isSideConnectable(level, currentPos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, currentPos, Direction.EAST)).setValue(CONNECTED_NORTH, false).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, currentPos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, currentPos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, currentPos, Direction.WEST));
-		if (facing == Direction.WEST)
-			return state.setValue(FACING, facing).setValue(CONNECTED_DOWN, this.isSideConnectable(level, currentPos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, currentPos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, currentPos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, currentPos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, currentPos, Direction.UP)).setValue(CONNECTED_WEST, false);
-		if (facing == Direction.EAST)
-			return state.setValue(CONNECTED_DOWN, this.isSideConnectable(level, currentPos, Direction.DOWN)).setValue(CONNECTED_EAST, false).setValue(CONNECTED_NORTH, this.isSideConnectable(level, currentPos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, currentPos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, currentPos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, currentPos, Direction.WEST));
-
-        return state.setValue(FACING, facing).setValue(CONNECTED_DOWN, this.isSideConnectable(level, currentPos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, currentPos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, currentPos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, currentPos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, currentPos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, currentPos, Direction.WEST));
+    	return state.setValue(CONNECTED_DOWN, this.isSideConnectable(level, currentPos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, currentPos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, currentPos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, currentPos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, currentPos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, currentPos, Direction.WEST));
     }
 
-    private boolean isSideConnectable (BlockGetter world, BlockPos pos, Direction side) {
-    	final BlockState stateConnection = world.getBlockState(pos.relative(side));
-        return world.getBlockState(pos.relative(side)).getBlock() != Blocks.AIR;// stateConnection != null;? false : getFluidHandler(world, pos.relative(side, 1), side) != null;
+    private boolean isSideConnectable (LevelAccessor level, BlockPos pos, Direction side) {
+    	final BlockState stateConnection = level.getBlockState(pos.relative(side));
+    	BlockEntity blockEntity = level.getBlockEntity(pos.relative(side));
+    	System.out.println("OUTWARDS DIRECTION: "+ side.getName() + " STATE CONNECTION IS: " + stateConnection.getBlock().getName());
+    	if(blockEntity != null && blockEntity.getLevel() != null)
+    		System.out.println("INWARDS DIRECTION: "+ side.getOpposite().getName() + " STATE CONNECTION IS: " + blockEntity.getBlockState().getBlock().getName());
+        return (blockEntity != null && blockEntity.getLevel() != null) ? CapHelper.getFluidHandler(blockEntity.getLevel(), pos.relative(side), side.getOpposite()).isPresent(): false;/*level.getBlockState(pos.relative(side)).getBlock() != Blocks.AIR;*/ 
     }
 
-    @Nonnull
-    public static Optional<IFluidHandler> getFluidHandler(@Nonnull Level level, @Nonnull BlockPos pos, @Nullable Direction side) {
-    	BlockEntity blockEntity = level.getBlockEntity(pos);
-    	if(blockEntity!= null)
-    		Optional.ofNullable(level.getCapability(Capabilities.FluidHandler.BLOCK, pos, level.getBlockState(pos), blockEntity, side));
-    	return Optional.empty();
-    }
-    
     @Override
 	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
 		return new BambooPipeBlockEntity(pos, state);
