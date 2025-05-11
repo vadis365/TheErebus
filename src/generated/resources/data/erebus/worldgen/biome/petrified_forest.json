@@ -41,7 +41,38 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
+    "creature": [
+      {
+        "type": "erebus:fly",
+        "maxCount": 8,
+        "minCount": 8,
+        "weight": 10
+      },
+      {
+        "type": "erebus:bot_fly",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 10
+      },
+      {
+        "type": "erebus:black_widow",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "erebus:moth",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 15
+      },
+      {
+        "type": "erebus:scytodes",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 20
+      }
+    ],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],

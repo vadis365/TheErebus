@@ -1,8 +1,10 @@
 package erebus.world.biome;
 
+import erebus.registries.entity.ModEntities;
 import erebus.registries.world.ModFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
@@ -40,6 +42,11 @@ public class PetrifiedForestBiome extends ErebusBiome {
                         .build()
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.FLY.get(), 10, 8, 8))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.BOT_FLY.get(), 10, 2, 3))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.BLACK_WIDOW.get(), 5, 1, 1))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 15, 2, 3))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.SCYTODES.get(), 20, 1, 4))
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)

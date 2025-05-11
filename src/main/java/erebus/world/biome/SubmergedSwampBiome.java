@@ -1,9 +1,11 @@
 package erebus.world.biome;
 
+import erebus.registries.entity.ModEntities;
 import erebus.registries.world.ModFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
@@ -41,6 +43,10 @@ public class SubmergedSwampBiome extends ErebusBiome {
                         .build()
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.DRAGON_FLY.get(), 20, 1, 3))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE.get(), 20, 1, 2))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE_LARVA.get(), 25, 2, 4))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.CENTIPEDE.get(), 10, 4, 8))
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)

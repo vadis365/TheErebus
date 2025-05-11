@@ -21,9 +21,11 @@ public class ModSurfaceRules {
     private static final RuleSource UMBERSTONE = makeStateRule(UmberstoneBlocks.UMBERSTONE);
     private static final RuleSource DUST_LAYER = makeStateRule(UmberstoneBlocks.DUST_LAYER);
     private static final RuleSource DUST = makeStateRule(UmberstoneBlocks.DUST);
+    private static final RuleSource VOLCANIC_ROCK = makeStateRule(UmberstoneBlocks.VOLCANIC_ROCK);
 
     // Vanilla
     private static final RuleSource SAND = makeStateRule(Blocks.SAND);
+    private static final RuleSource SANDSTONE = makeStateRule(Blocks.SANDSTONE);
     private static final RuleSource RED_SAND = makeStateRule(Blocks.RED_SAND);
     private static final RuleSource BEDROCK = makeStateRule(Blocks.BEDROCK);
     private static final RuleSource GRASS = makeStateRule(Blocks.GRASS_BLOCK);
@@ -48,6 +50,7 @@ public class ModSurfaceRules {
                         decorateSubmergedSwamp(),
                         decorateSubterraneanSavannah(),
                         decorateUlteriorOutback(),
+                        decorateUndergroundJungle(),
                         decorateVolcanicDesert()
                 )
         );
@@ -67,8 +70,8 @@ public class ModSurfaceRules {
         return ifTrue(
                 isBiome(ModBiomes.ELYSIAN_FIELDS.getResourceKey()),
                 sequence(
-                        placeGrass(),
-                        placeDirtUnderGrass()
+                        placeBlock(GRASS, false),
+                        placeBlock(DIRT, true)
                 )
         );
     }
@@ -78,8 +81,8 @@ public class ModSurfaceRules {
         return ifTrue(
                 isBiome(ModBiomes.ELYSIAN_FOREST.getResourceKey()),
                 sequence(
-                        placeGrass(),
-                        placeDirtUnderGrass()
+                        placeBlock(GRASS, false),
+                        placeBlock(DIRT, true)
                 )
         );
     }
@@ -89,8 +92,8 @@ public class ModSurfaceRules {
         return ifTrue(
                 isBiome(ModBiomes.FUNGAL_FOREST.getResourceKey()),
                 sequence(
-                        placeGrass(),
-                        placeDirtUnderGrass()
+                        placeBlock(GRASS, false),
+                        placeBlock(DIRT, true)
                 )
         );
     }
@@ -106,8 +109,8 @@ public class ModSurfaceRules {
                                         noiseCondition(Noises.POWDER_SNOW, 0.45, 0.58),
                                         DUST_LAYER
                                 ),
-                                placeGrass(),
-                                placeDirtUnderGrass()
+                                placeBlock(VOLCANIC_ROCK, false),
+                                placeBlock(VOLCANIC_ROCK, true)
                         )
                 )
         );
@@ -118,8 +121,8 @@ public class ModSurfaceRules {
         return ifTrue(
                 isBiome(ModBiomes.SUBMERGED_SWAMP.getResourceKey()),
                 sequence(
-                        placeGrass(),
-                        placeDirtUnderGrass()
+                        placeBlock(GRASS, false),
+                        placeBlock(DIRT, true)
                         /*ifTrue(
                                 stoneDepthCheck(0, false, 0, CaveSurface.FLOOR),
                                 ifTrue(
@@ -156,8 +159,8 @@ public class ModSurfaceRules {
         return ifTrue(
                 isBiome(ModBiomes.SUBTERRANEAN_SAVANNAH.getResourceKey()),
                 sequence(
-                        placeGrass(),
-                        placeDirtUnderGrass()
+                        placeBlock(GRASS, false),
+                        placeBlock(DIRT, true)
                 )
         );
     }
@@ -184,8 +187,8 @@ public class ModSurfaceRules {
         return ifTrue(
                 isBiome(ModBiomes.UNDERGROUND_JUNGLE.getResourceKey()),
                 sequence(
-                        placeGrass(),
-                        placeDirtUnderGrass()
+                        placeBlock(GRASS, false),
+                        placeBlock(DIRT, true)
                 )
         );
     }
@@ -194,21 +197,17 @@ public class ModSurfaceRules {
     private static RuleSource decorateVolcanicDesert() {
         return ifTrue(
                 isBiome(ModBiomes.VOLCANIC_DESERT.getResourceKey()),
-                SAND
+                sequence(
+                        placeBlock(SAND, false),
+                        placeBlock(SANDSTONE, true)
+                )
         );
     }
 
-    private static RuleSource placeGrass() {
+    private static RuleSource placeBlock(RuleSource source, boolean addSurfaceDepth) {
         return ifTrue(
-                stoneDepthCheck(0, false, 0, CaveSurface.FLOOR),
-                GRASS
-        );
-    }
-
-    private static RuleSource placeDirtUnderGrass() {
-        return ifTrue(
-                stoneDepthCheck(0, true, 0, CaveSurface.FLOOR),
-                DIRT
+                stoneDepthCheck(0, addSurfaceDepth, 0, CaveSurface.FLOOR),
+                source
         );
     }
 
