@@ -1,19 +1,10 @@
 package erebus;
 
-import java.util.Locale;
-
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
 import erebus.block.entity.FluidJarBlockEntity;
 import erebus.network.data.DeathCompassData;
 import erebus.recipes.ModCustomRecipes;
-import erebus.registries.ModBlockEntities;
-import erebus.registries.ModFluids;
-import erebus.registries.ModItems;
-import erebus.registries.ModSounds;
-import erebus.registries.ModTabs;
+import erebus.registries.*;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModBlockEntityRendering;
 import erebus.registries.client.ModItemRendering;
@@ -25,11 +16,7 @@ import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.network.ModNetwork;
-import erebus.registries.world.ModFoliagePlacers;
-import erebus.registries.world.ModPOIs;
-import erebus.registries.world.ModStructures;
-import erebus.registries.world.ModTreeDecorators;
-import erebus.registries.world.ModTrunkPlacers;
+import erebus.registries.world.*;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
@@ -52,6 +39,9 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
+import org.slf4j.Logger;
+
+import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -85,6 +75,7 @@ public class Erebus {
     	ModCustomRecipes.RECIPE_SERIALIZERS.register(bus);
         ModParticles.PARTICLES.register(bus);
         ModDataComponents.DATA_COMPONENT_REGISTRY.register(bus);
+        ModFeatures.FEATURES.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 

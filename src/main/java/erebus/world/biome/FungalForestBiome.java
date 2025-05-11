@@ -54,6 +54,7 @@ public class FungalForestBiome extends ErebusBiome {
                         .addFeature(VEGETAL_DECORATION, ModFeatures.WEEPING_BLUEBELL.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, ModFeatures.FERN.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, ModFeatures.TALL_FERN.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, ModFeatures.RED_GEM.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, ModFeatures.IRON_ORE.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, ModFeatures.GOLD_ORE.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, ModFeatures.COAL_ORE.getPlacedResourceKey())

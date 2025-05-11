@@ -2,7 +2,6 @@ package erebus.world.biome;
 
 import erebus.registries.world.ModFeatures;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -44,6 +43,7 @@ public class PetrifiedForestBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.RED_GEM.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.IRON_ORE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.GOLD_ORE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.COAL_ORE.getPlacedResourceKey())

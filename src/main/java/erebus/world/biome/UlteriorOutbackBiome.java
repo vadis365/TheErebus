@@ -47,6 +47,7 @@ public class UlteriorOutbackBiome extends ErebusBiome {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_SAVANNA)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.BALSAM_TREE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.EUCALYPTUS_TREE.getPlacedResourceKey())
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.RED_GEM.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.IRON_ORE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.GOLD_ORE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.COAL_ORE.getPlacedResourceKey())

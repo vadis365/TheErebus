@@ -52,6 +52,7 @@ public class ElysianForestBiome extends ErebusBiome {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.WEEPING_BLUEBELL.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.FERN.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.TALL_FERN.getPlacedResourceKey())
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.RED_GEM.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.IRON_ORE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.GOLD_ORE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.COAL_ORE.getPlacedResourceKey())

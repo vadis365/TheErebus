@@ -1,5 +1,6 @@
 package erebus.registries.world;
 
+import erebus.Erebus;
 import erebus.registries.blocks.providers.OreBlocks;
 import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.data.ModTags;
@@ -7,13 +8,18 @@ import erebus.registries.helpers.ModFeatureHelpers;
 import erebus.world.feature.bush.HeartBerryBushFeature;
 import erebus.world.feature.bush.JadeBerryBushFeature;
 import erebus.world.feature.bush.SwampBerryBushFeature;
+import erebus.world.feature.misc.RedGemFeature;
+import erebus.world.feature.misc.RedGemFeatureConfiguration;
 import erebus.world.feature.ore.*;
 import erebus.world.feature.plant.ErebusPlantFeature;
 import erebus.world.feature.tree.*;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseThresholdProvider;
@@ -21,10 +27,14 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
 
 public class ModFeatures extends ModFeatureHelpers {
+
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(BuiltInRegistries.FEATURE, Erebus.MODID);
 
     // MARK: Trees
     public static AsperTree ASPER_TREE = new AsperTree();
@@ -78,6 +88,10 @@ public class ModFeatures extends ModFeatureHelpers {
     public static ErebusPlantFeature HIGH_CAPPED_MUSHROOM = new ErebusPlantFeature("high_capped_mushroom");
     public static ErebusPlantFeature FERN = new ErebusPlantFeature("fern");
     public static ErebusPlantFeature TALL_FERN = new ErebusPlantFeature("tall_fern");
+
+    // MARK: MISC
+    public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> RED_GEM_FEATURE_CONFIG = FEATURES.register("red_gem", RedGemFeatureConfiguration::new);
+    public static RedGemFeature RED_GEM = new RedGemFeature();
 
     public static void bootstrapConfiguredFeatures(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         SWAMP_BERRY_BUSH = new SwampBerryBushFeature();
@@ -148,6 +162,8 @@ public class ModFeatures extends ModFeatureHelpers {
                 )
         );
 
+        registerConfiguredFeature(context, RED_GEM.getConfiguredResourceKey(), RED_GEM_FEATURE_CONFIG.get(), FeatureConfiguration.NONE);
+
         registerSimpleConfiguredPlant(context, SWAMP_PLANT, PlantBlocks.SWAMP_PLANT, 64);
         registerSimpleConfiguredPlant(context, FIRE_BLOOM, PlantBlocks.FIRE_BLOOM, 64);
         registerSimpleConfiguredPlant(context, FIDDLE_HEAD, PlantBlocks.FIDDLE_HEAD, 64);
@@ -210,5 +226,7 @@ public class ModFeatures extends ModFeatureHelpers {
         registerPlacedFeature(context, HIGH_CAPPED_MUSHROOM);
         registerPlacedFeature(context, FERN);
         registerPlacedFeature(context, TALL_FERN);
+
+        registerPlacedFeature(context, RED_GEM);
     }
 }

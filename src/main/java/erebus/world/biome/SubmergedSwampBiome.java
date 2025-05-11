@@ -48,6 +48,7 @@ public class SubmergedSwampBiome extends ErebusBiome {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.MARSHWOOD_TREE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.MOSSBARK_TREE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModFeatures.SWAMP_PLANT.getPlacedResourceKey())
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.RED_GEM.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.IRON_ORE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.GOLD_ORE.getPlacedResourceKey())
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModFeatures.COAL_ORE.getPlacedResourceKey())
