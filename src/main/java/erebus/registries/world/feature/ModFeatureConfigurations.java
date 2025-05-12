@@ -1,14 +1,21 @@
 package erebus.registries.world.feature;
 
 import erebus.Erebus;
+import erebus.registries.blocks.providers.OreBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.blocks.providers.UmberstoneBlocks;
 import erebus.world.feature.misc.config.*;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.Random;
+
 public class ModFeatureConfigurations {
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> LAVA_LAKE_CONFIG;
 
     public static final DeferredRegister<Feature<?>> CONFIGS = DeferredRegister.create(BuiltInRegistries.FEATURE, Erebus.MODID);
 
@@ -16,7 +23,14 @@ public class ModFeatureConfigurations {
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> AMBER_UMBERSTONE_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> DESERT_ROCK_GNEISS_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GAS_VENT_CONFIG;
-    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> LAKE_WITH_EDGE_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> WATER_LAKE_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PETRIFIED_TREE_BROWN_SMALL_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PETRIFIED_TREE_BROWN_MEDIUM_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PETRIFIED_TREE_BROWN_LARGE_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PETRIFIED_TREE_RED_SMALL_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PETRIFIED_TREE_RED_MEDIUM_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PETRIFIED_TREE_RED_LARGE_CONFIG;
+    private static final Random random = new Random();
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> POND_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> QUICK_SAND_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> RED_GEM_FEATURE_CONFIG;
@@ -30,7 +44,49 @@ public class ModFeatureConfigurations {
         AMBER_UMBERSTONE_CONFIG = CONFIGS.register("amber_umberstone", AmberUmberstoneFeatureConfiguration::new);
         DESERT_ROCK_GNEISS_CONFIG = CONFIGS.register("desert_rock_gneiss", DesertRockGneissFeatureConfiguration::new);
         GAS_VENT_CONFIG = CONFIGS.register("gas_vent", GasVentFeatureConfiguration::new);
-        LAKE_WITH_EDGE_CONFIG = CONFIGS.register("lake_with_edge", LakeWithEdgeFeatureConfiguration::new);
+        LAVA_LAKE_CONFIG = CONFIGS.register("lava_lake", () -> new LakeWithEdgeFeatureConfiguration(Blocks.LAVA, UmberstoneBlocks.VOLCANIC_ROCK));
+        WATER_LAKE_CONFIG = CONFIGS.register("water_lake", () -> new LakeWithEdgeFeatureConfiguration(Blocks.WATER, OtherBlocks.MUD));
+
+        PETRIFIED_TREE_BROWN_SMALL_CONFIG = CONFIGS.register("petrified_tree_brown_small", () -> new PetrifiedTreeFeatureConfiguration(
+                6 + random.nextInt(5),
+                1,
+                UmberstoneBlocks.PETRIFIED_BARK_BROWN
+        ));
+        PETRIFIED_TREE_BROWN_MEDIUM_CONFIG = CONFIGS.register("petrified_tree_brown_medium", () -> new PetrifiedTreeFeatureConfiguration(
+                11 + random.nextInt(4),
+                2,
+                UmberstoneBlocks.PETRIFIED_BARK_BROWN,
+                UmberstoneBlocks.PETRIFIED_LOG_INNER,
+                OreBlocks.ORE_PETRIFIED_QUARTZ
+        ));
+        PETRIFIED_TREE_BROWN_LARGE_CONFIG = CONFIGS.register("petrified_tree_brown_large", () -> new PetrifiedTreeFeatureConfiguration(
+                16 + random.nextInt(10),
+                3,
+                UmberstoneBlocks.PETRIFIED_BARK_BROWN,
+                UmberstoneBlocks.PETRIFIED_LOG_INNER,
+                OreBlocks.ORE_PETRIFIED_QUARTZ
+        ));
+
+        PETRIFIED_TREE_RED_SMALL_CONFIG = CONFIGS.register("petrified_tree_red_small", () -> new PetrifiedTreeFeatureConfiguration(
+                6 + random.nextInt(5),
+                1,
+                UmberstoneBlocks.PETRIFIED_BARK_RED
+        ));
+        PETRIFIED_TREE_RED_MEDIUM_CONFIG = CONFIGS.register("petrified_tree_red_medium", () -> new PetrifiedTreeFeatureConfiguration(
+                11 + random.nextInt(4),
+                2,
+                UmberstoneBlocks.PETRIFIED_BARK_RED,
+                UmberstoneBlocks.PETRIFIED_LOG_INNER,
+                OreBlocks.ORE_PETRIFIED_QUARTZ
+        ));
+        PETRIFIED_TREE_RED_LARGE_CONFIG = CONFIGS.register("petrified_tree_red_large", () -> new PetrifiedTreeFeatureConfiguration(
+                16 + random.nextInt(10),
+                3,
+                UmberstoneBlocks.PETRIFIED_BARK_RED,
+                UmberstoneBlocks.PETRIFIED_LOG_INNER,
+                OreBlocks.ORE_PETRIFIED_QUARTZ
+        ));
+
         POND_CONFIG = CONFIGS.register("pond", PondFeatureConfiguration::new);
         QUICK_SAND_CONFIG = CONFIGS.register("quick_sand", QuickSandFeatureConfiguration::new);
         RED_GEM_FEATURE_CONFIG = CONFIGS.register("red_gem", RedGemFeatureConfiguration::new);

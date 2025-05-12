@@ -9,14 +9,17 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
 import java.util.List;
 
-public class LakeWithEdgeFeature extends ErebusFeature {
+public class PetrifiedTreeFeature extends ErebusFeature {
 
-    public LakeWithEdgeFeature(String name) {
+    private final int chance;
+
+    public PetrifiedTreeFeature(String name, int chance) {
         super(name);
+        this.chance = chance;
     }
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return List.of(CountPlacement.of(10), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BiomeFilter.biome());
+        return List.of(CountPlacement.of(chance), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BiomeFilter.biome());
     }
 }

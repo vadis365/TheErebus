@@ -61,8 +61,8 @@ public class UmberstoneBlocks extends ModBlockHelpers {
         PETRIFIED_WOOD_ROCK_4 = registerSimpleBlock("petrified_wood_rock_4", Properties.of().mapColor(MapColor.STONE));
         PETRIFIED_WOOD_ROCK_5 = registerSimpleBlock("petrified_wood_rock_5", Properties.of().mapColor(MapColor.STONE));
         PETRIFIED_WOOD_ROCK_6 = registerSimpleBlock("petrified_wood_rock_6", Properties.of().mapColor(MapColor.STONE));
-        PETRIFIED_BARK_RED = registerSimpleBlock("petrified_bark_red", Properties.of().mapColor(MapColor.STONE));
-        PETRIFIED_BARK_BROWN = registerSimpleBlock("petrified_bark_brown", Properties.of().mapColor(MapColor.STONE));
+        PETRIFIED_BARK_RED = registerBlock("petrified_bark_red", () -> new RotatedPillarBlock(Properties.ofFullCopy(Blocks.OAK_LOG)));
+        PETRIFIED_BARK_BROWN = registerBlock("petrified_bark_brown", () -> new RotatedPillarBlock(Properties.ofFullCopy(Blocks.OAK_LOG)));
         PETRIFIED_LOG_INNER = registerSimpleBlock("petrified_log_inner", Properties.of().mapColor(MapColor.STONE));
         DUNG = registerSimpleBlock("dung", Properties.of().mapColor(MapColor.STONE));
         MIR_BRICKS = registerSimpleBlock("mir_bricks", Properties.of().mapColor(MapColor.STONE));

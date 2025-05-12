@@ -85,7 +85,14 @@ public class ModFeatures extends ModFeatureHelpers {
     public static AmberUmberstoneFeature AMBER_UMBERSTONE = new AmberUmberstoneFeature();
     public static DesertRockGneissFeature DESERT_ROCK_GNEISS = new DesertRockGneissFeature();
     public static GasVentFeature GAS_VENT = new GasVentFeature();
-    public static LakeWithEdgeFeature LAKE_WITH_EDGE = new LakeWithEdgeFeature();
+    public static LakeWithEdgeFeature LAVA_LAKE = new LakeWithEdgeFeature("lava_lake");
+    public static LakeWithEdgeFeature WATER_LAKE = new LakeWithEdgeFeature("water_lake");
+    public static PetrifiedTreeFeature PETRIFIED_TREE_BROWN_SMALL = new PetrifiedTreeFeature("petrified_tree_brown_small", 30);
+    public static PetrifiedTreeFeature PETRIFIED_TREE_BROWN_MEDIUM = new PetrifiedTreeFeature("petrified_tree_brown_medium", 5);
+    public static PetrifiedTreeFeature PETRIFIED_TREE_BROWN_LARGE = new PetrifiedTreeFeature("petrified_tree_brown_large", 5);
+    public static PetrifiedTreeFeature PETRIFIED_TREE_RED_SMALL = new PetrifiedTreeFeature("petrified_tree_red_small", 30);
+    public static PetrifiedTreeFeature PETRIFIED_TREE_RED_MEDIUM = new PetrifiedTreeFeature("petrified_tree_red_medium", 5);
+    public static PetrifiedTreeFeature PETRIFIED_TREE_RED_LARGE = new PetrifiedTreeFeature("petrified_tree_red_large", 5);
     public static PondFeature POND = new PondFeature();
     public static QuickSandFeature QUICK_SAND = new QuickSandFeature();
     public static RedGemFeature RED_GEM = new RedGemFeature();
@@ -179,7 +186,14 @@ public class ModFeatures extends ModFeatureHelpers {
         registerConfiguredFeatureWithConfig(AMBER_UMBERSTONE, ModFeatureConfigurations.AMBER_UMBERSTONE_CONFIG);
         registerConfiguredFeatureWithConfig(DESERT_ROCK_GNEISS, ModFeatureConfigurations.DESERT_ROCK_GNEISS_CONFIG);
         registerConfiguredFeatureWithConfig(GAS_VENT, ModFeatureConfigurations.GAS_VENT_CONFIG);
-        registerConfiguredFeatureWithConfig(LAKE_WITH_EDGE, ModFeatureConfigurations.LAKE_WITH_EDGE_CONFIG);
+        registerConfiguredFeatureWithConfig(WATER_LAKE, ModFeatureConfigurations.WATER_LAKE_CONFIG);
+        registerConfiguredFeatureWithConfig(LAVA_LAKE, ModFeatureConfigurations.LAVA_LAKE_CONFIG);
+        registerConfiguredFeatureWithConfig(PETRIFIED_TREE_BROWN_SMALL, ModFeatureConfigurations.PETRIFIED_TREE_BROWN_SMALL_CONFIG);
+        registerConfiguredFeatureWithConfig(PETRIFIED_TREE_BROWN_MEDIUM, ModFeatureConfigurations.PETRIFIED_TREE_BROWN_MEDIUM_CONFIG);
+        registerConfiguredFeatureWithConfig(PETRIFIED_TREE_BROWN_LARGE, ModFeatureConfigurations.PETRIFIED_TREE_BROWN_LARGE_CONFIG);
+        registerConfiguredFeatureWithConfig(PETRIFIED_TREE_RED_SMALL, ModFeatureConfigurations.PETRIFIED_TREE_RED_SMALL_CONFIG);
+        registerConfiguredFeatureWithConfig(PETRIFIED_TREE_RED_MEDIUM, ModFeatureConfigurations.PETRIFIED_TREE_RED_MEDIUM_CONFIG);
+        registerConfiguredFeatureWithConfig(PETRIFIED_TREE_RED_LARGE, ModFeatureConfigurations.PETRIFIED_TREE_RED_LARGE_CONFIG);
         registerConfiguredFeatureWithConfig(POND, ModFeatureConfigurations.POND_CONFIG);
         registerConfiguredFeatureWithConfig(QUICK_SAND, ModFeatureConfigurations.QUICK_SAND_CONFIG);
         registerConfiguredFeatureWithConfig(RED_GEM, ModFeatureConfigurations.RED_GEM_FEATURE_CONFIG);
@@ -240,6 +254,25 @@ public class ModFeatures extends ModFeatureHelpers {
         registerPlacedFeature(FERN);
         registerPlacedFeature(TALL_FERN);
 
+
+        registerPlacedFeature(AMBER_GROUND);
+        registerPlacedFeature(AMBER_UMBERSTONE);
+        registerPlacedFeature(DESERT_ROCK_GNEISS);
+        registerPlacedFeature(GAS_VENT);
+        registerPlacedFeature(WATER_LAKE);
+        registerPlacedFeature(LAVA_LAKE);
+        registerPlacedFeature(PETRIFIED_TREE_BROWN_SMALL);
+        registerPlacedFeature(PETRIFIED_TREE_BROWN_MEDIUM);
+        registerPlacedFeature(PETRIFIED_TREE_BROWN_LARGE);
+        registerPlacedFeature(PETRIFIED_TREE_RED_SMALL);
+        registerPlacedFeature(PETRIFIED_TREE_RED_MEDIUM);
+        registerPlacedFeature(PETRIFIED_TREE_RED_LARGE);
+        registerPlacedFeature(POND);
+        registerPlacedFeature(QUICK_SAND);
         registerPlacedFeature(RED_GEM);
+        registerPlacedFeature(ROCK_SPIKE);
+        registerPlacedFeature(ROTTEN_ACACIA);
+        registerPlacedFeature(SAVANNAH_ROCK);
+        registerPlacedFeature(SCORCHED_WOOD);
     }
 }
