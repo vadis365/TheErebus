@@ -1,6 +1,8 @@
 package erebus;
 
 import com.mojang.logging.LogUtils;
+
+import erebus.block.entity.BambooPipeBlockEntity;
 import erebus.block.entity.FluidJarBlockEntity;
 import erebus.network.data.DeathCompassData;
 import erebus.recipes.ModCustomRecipes;
@@ -158,6 +160,7 @@ public class Erebus {
 
 	public void registerCaps(final RegisterCapabilitiesEvent event) {
 		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.FLUID_JAR.get(), FluidJarBlockEntity::getTank);
+		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.BAMBOO_PIPE.get(), BambooPipeBlockEntity::getTank);
 		event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidBucketWrapper(stack), ModItems.BEETLE_JUICE_BUCKET.get());
 	}
 }

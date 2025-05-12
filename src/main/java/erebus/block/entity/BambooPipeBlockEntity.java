@@ -3,6 +3,7 @@ package erebus.block.entity;
 import java.util.Optional;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import erebus.registries.ModBlockEntities;
 import erebus.utils.CapHelper;
@@ -26,7 +27,7 @@ public class BambooPipeBlockEntity extends BlockEntity {
 	public BambooPipeBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntities.BAMBOO_PIPE.get(), pos, state);
 	}
-	
+
 	public static <T extends BlockEntity> void serverTick(Level level, BlockPos pos, BlockState state, T t) {
 		if (t instanceof BambooPipeBlockEntity tile) {
 			if (tile.prevTankAmount != tile.tank.getFluidAmount()) {
@@ -89,6 +90,14 @@ public class BambooPipeBlockEntity extends BlockEntity {
 	public void saveAdditional(@Nonnull CompoundTag nbt, @Nonnull HolderLookup.Provider registries) {
 		super.saveAdditional(nbt, registries);
 		tank.writeToNBT(registries, nbt);
+	}
+
+	public FluidTank getTank() {
+		return this.tank;
+	}
+
+	public FluidTank getTank(@Nullable Direction direction) {
+		return this.tank;
 	}
 }
 

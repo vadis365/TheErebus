@@ -6,6 +6,7 @@ import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 
 import erebus.Erebus;
+import erebus.item.BambooPipeWrenchItem;
 import erebus.item.BeettleJuiceBucketItem;
 import erebus.item.PaxelItem;
 import erebus.item.WandOfAnimationItem;
@@ -120,7 +121,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> PLATE_ZOMBIE_ANT = registerItem("plate_zombie_ant");
     public static final DeferredItem<Item> STAG_BEETLE_MANDIBLES = registerItem("stag_beetle_mandibles");
     public static final DeferredItem<Item> TERPSISHROOM = registerItem("terpsishroom");
-    public static final DeferredItem<Item> BAMBOO_PIPE_WRENCH = registerItem("bamboo_pipe_wrench");
+    public static final DeferredItem<BambooPipeWrenchItem> BAMBOO_PIPE_WRENCH = ITEMS.register("bamboo_pipe_wrench", () -> new BambooPipeWrenchItem(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> TEMPLE_ROCK = registerItem("temple_rock");
 
     // MARK: Food
