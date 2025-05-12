@@ -1,48 +1,117 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "erebus:block/bamboo_pipe_centre",
-    "custom": { "flip-v": true },
-    "textures": {
-      "particle": "erebus:block/bamboo_pipes",
-      "side": "erebus:block/bamboo_pipes"
-    },
-    "transform": "forge:default-block"
-  },
-  "variants": {
-        "normal": [{}],
-        "inventory": [{}],
-        "facing": {
-            "down": { "submodel": "erebus:block/bamboo_pipe_extract_on", "x": 90, "y": 180 },
-            "east": { "submodel": "erebus:block/bamboo_pipe_extract_on", "y": 90 },
-            "north": {"submodel": "erebus:block/bamboo_pipe_extract_on" },
-            "south": { "submodel": "erebus:block/bamboo_pipe_extract_on", "y": 180 },
-            "up": { "submodel": "erebus:block/bamboo_pipe_extract_on", "x": 270 },
-            "west": { "submodel": "erebus:block/bamboo_pipe_extract_on", "y": 270 }
-        },
-        "connected_down": {
-            "false": {},
-            "true": { "submodel": "erebus:block/bamboo_pipe_join", "x": 90 }
-        },
-        "connected_east": {
-            "false": {},
-            "true": { "submodel": "erebus:block/bamboo_pipe_join", "y": 90 }
-        },
-        "connected_north": {
-            "false": {},
-            "true": { "submodel": "erebus:block/bamboo_pipe_join" }
-        },
-        "connected_south": {
-            "false": {},
-            "true": { "submodel": "erebus:block/bamboo_pipe_join", "x": 180 }
-        },
-        "connected_up": {
-            "false": {},
-            "true": { "submodel": "erebus:block/bamboo_pipe_join", "x": 270 }
-        },
-        "connected_west": {
-            "false": {},
-            "true": { "submodel": "erebus:block/bamboo_pipe_join", "y": 270 }
-        }
-    }
+   "multipart":[
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_centre"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_extract_on",
+            "x":270
+         },
+         "when":{
+            "facing":"up"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_extract_on",
+            "x":90,
+            "y":180
+         },
+         "when":{
+            "facing":"down"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_extract_on"
+         },
+         "when":{
+            "facing":"north"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_extract_on",
+            "y":90
+         },
+         "when":{
+            "facing":"east"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_extract_on",
+            "y":180
+         },
+         "when":{
+            "facing":"south"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_extract_on",
+            "y":270
+         },
+         "when":{
+            "facing":"west"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_join",
+            "x":90
+         },
+         "when":{
+            "connected_down":"true"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_join",
+            "y":90
+         },
+         "when":{
+            "connected_east":"true"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_join"
+         },
+         "when":{
+            "connected_north":"true"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_join",
+            "x":180
+         },
+         "when":{
+            "connected_south":"true"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_join",
+            "x":270
+         },
+         "when":{
+            "connected_up":"true"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_join",
+            "y":270
+         },
+         "when":{
+            "connected_west":"true"
+         }
+      }
+   ]
 }
+
