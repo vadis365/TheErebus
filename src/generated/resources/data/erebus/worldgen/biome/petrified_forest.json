@@ -14,7 +14,14 @@
     [],
     [],
     [],
-    [],
+    [
+      "erebus:petrified_tree_brown_small",
+      "erebus:petrified_tree_brown_medium",
+      "erebus:petrified_tree_brown_large",
+      "erebus:petrified_tree_red_small",
+      "erebus:petrified_tree_red_medium",
+      "erebus:petrified_tree_red_large"
+    ],
     [],
     [
       "erebus:red_gem",
