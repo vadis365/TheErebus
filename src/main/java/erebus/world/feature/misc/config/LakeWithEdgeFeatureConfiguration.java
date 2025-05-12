@@ -1,5 +1,6 @@
 package erebus.world.feature.misc.config;
 
+import erebus.registries.world.ModBiomes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -134,10 +135,8 @@ public class LakeWithEdgeFeatureConfiguration extends Feature<NoneFeatureConfigu
                         BlockPos pos2 = pos.offset(x, y - 1, z);
 
                         if (level.getBlockState(pos2).is(Blocks.DIRT) && level.getBlockState(pos2).getLightEmission(level, pos2) > 0) {
-                            String biome = level.getBiome(pos2).getRegisteredName();
-
                             // Use mycelium in fungal forest biome, grass block elsewhere
-                            if (biome.equals("erebus:fungal_forest")) {
+                            if (level.getBiome(pos2).is(ModBiomes.FUNGAL_FOREST.getResourceKey())) {
                                 level.setBlock(pos2, Blocks.MYCELIUM.defaultBlockState(), 2);
                             } else {
                                 level.setBlock(pos2, Blocks.GRASS_BLOCK.defaultBlockState(), 2);
