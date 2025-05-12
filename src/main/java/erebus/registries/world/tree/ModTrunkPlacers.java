@@ -1,4 +1,4 @@
-package erebus.registries.world;
+package erebus.registries.world.tree;
 
 import com.mojang.serialization.MapCodec;
 import erebus.Erebus;

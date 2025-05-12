@@ -1,7 +1,7 @@
 package erebus.world.biome;
 
 import erebus.registries.entity.ModEntities;
-import erebus.registries.world.ModFeatures;
+import erebus.registries.world.feature.ModFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;

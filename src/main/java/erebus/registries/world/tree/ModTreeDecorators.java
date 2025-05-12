@@ -1,4 +1,4 @@
-package erebus.registries.world;
+package erebus.registries.world.tree;
 
 import erebus.Erebus;
 import erebus.world.feature.tree.decorator.LeaveDarkFruitVineDecorator;

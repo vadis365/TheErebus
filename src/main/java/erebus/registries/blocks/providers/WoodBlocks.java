@@ -1,7 +1,7 @@
 package erebus.registries.blocks.providers;
 
 import erebus.registries.helpers.ModBlockHelpers;
-import erebus.registries.world.ModTreeGrowers;
+import erebus.registries.world.tree.ModTreeGrowers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;

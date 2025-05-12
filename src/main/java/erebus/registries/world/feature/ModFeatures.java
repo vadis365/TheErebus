@@ -1,6 +1,5 @@
-package erebus.registries.world;
+package erebus.registries.world.feature;
 
-import erebus.Erebus;
 import erebus.registries.blocks.providers.OreBlocks;
 import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.data.ModTags;
@@ -8,18 +7,14 @@ import erebus.registries.helpers.ModFeatureHelpers;
 import erebus.world.feature.bush.HeartBerryBushFeature;
 import erebus.world.feature.bush.JadeBerryBushFeature;
 import erebus.world.feature.bush.SwampBerryBushFeature;
-import erebus.world.feature.misc.RedGemFeature;
-import erebus.world.feature.misc.RedGemFeatureConfiguration;
+import erebus.world.feature.misc.*;
 import erebus.world.feature.ore.*;
 import erebus.world.feature.plant.ErebusPlantFeature;
 import erebus.world.feature.tree.*;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseThresholdProvider;
@@ -27,14 +22,10 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
 
 public class ModFeatures extends ModFeatureHelpers {
-
-    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(BuiltInRegistries.FEATURE, Erebus.MODID);
 
     // MARK: Trees
     public static AsperTree ASPER_TREE = new AsperTree();
@@ -90,54 +81,64 @@ public class ModFeatures extends ModFeatureHelpers {
     public static ErebusPlantFeature TALL_FERN = new ErebusPlantFeature("tall_fern");
 
     // MARK: MISC
-    public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> RED_GEM_FEATURE_CONFIG = FEATURES.register("red_gem", RedGemFeatureConfiguration::new);
+    public static AmberGroundFeature AMBER_GROUND = new AmberGroundFeature();
+    public static AmberUmberstoneFeature AMBER_UMBERSTONE = new AmberUmberstoneFeature();
+    public static DesertRockGneissFeature DESERT_ROCK_GNEISS = new DesertRockGneissFeature();
+    public static GasVentFeature GAS_VENT = new GasVentFeature();
+    public static LakeWithEdgeFeature LAKE_WITH_EDGE = new LakeWithEdgeFeature();
+    public static PondFeature POND = new PondFeature();
+    public static QuickSandFeature QUICK_SAND = new QuickSandFeature();
     public static RedGemFeature RED_GEM = new RedGemFeature();
+    public static RockSpikeFeature ROCK_SPIKE = new RockSpikeFeature();
+    public static RottenAcaciaFeature ROTTEN_ACACIA = new RottenAcaciaFeature();
+    public static SavannahRockFeature SAVANNAH_ROCK = new SavannahRockFeature();
+    public static ScorchedWoodFeature SCORCHED_WOOD = new ScorchedWoodFeature();
 
     public static void bootstrapConfiguredFeatures(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        setConfiguredContext(context);
         SWAMP_BERRY_BUSH = new SwampBerryBushFeature();
         HEART_BERRY_BUSH = new HeartBerryBushFeature();
         JADE_BERRY_BUSH = new JadeBerryBushFeature();
 
         RuleTest umberstoneReplaceables = new TagMatchTest(ModTags.UMBERSTONE_ORE_REPLACEABLES);
 
-        registerConfiguredTree(context, ASPER_TREE);
-        registerConfiguredTree(context, BALSAM_TREE);
-        registerConfiguredTree(context, BAMBOO_TREE);
-        registerConfiguredTree(context, BAOBAB_TREE);
-        registerConfiguredTree(context, CYPRESS_TREE);
-        registerConfiguredTree(context, EUCALYPTUS_TREE);
-        registerConfiguredTree(context, GIANT_EUCALYPTUS_TREE);
-        registerConfiguredTree(context, MAHOGANY_TREE);
-        registerConfiguredTree(context, GIANT_MAHOGANY_TREE);
-        registerConfiguredTree(context, MARSHWOOD_TREE);
-        registerConfiguredTree(context, MOSSBARK_TREE);
+        registerConfiguredTree(ASPER_TREE);
+        registerConfiguredTree(BALSAM_TREE);
+        registerConfiguredTree(BAMBOO_TREE);
+        registerConfiguredTree(BAOBAB_TREE);
+        registerConfiguredTree(CYPRESS_TREE);
+        registerConfiguredTree(EUCALYPTUS_TREE);
+        registerConfiguredTree(GIANT_EUCALYPTUS_TREE);
+        registerConfiguredTree(MAHOGANY_TREE);
+        registerConfiguredTree(GIANT_MAHOGANY_TREE);
+        registerConfiguredTree(MARSHWOOD_TREE);
+        registerConfiguredTree(MOSSBARK_TREE);
 
-        registerConfiguredBush(context, SWAMP_BERRY_BUSH);
-        registerConfiguredBush(context, HEART_BERRY_BUSH);
-        registerConfiguredBush(context, JADE_BERRY_BUSH);
+        registerConfiguredBush(SWAMP_BERRY_BUSH);
+        registerConfiguredBush(HEART_BERRY_BUSH);
+        registerConfiguredBush(JADE_BERRY_BUSH);
 
-        registerConfiguredOre(context, IRON_ORE, umberstoneReplaceables, OreBlocks.ORE_IRON, 9);
-        registerConfiguredOre(context, GOLD_ORE, umberstoneReplaceables, OreBlocks.ORE_GOLD, 9);
-        registerConfiguredOre(context, COAL_ORE, umberstoneReplaceables, OreBlocks.ORE_COAL, 9);
-        registerConfiguredOre(context, DIAMOND_ORE, umberstoneReplaceables, OreBlocks.ORE_DIAMOND, 9);
-        registerConfiguredOre(context, EMERALD_ORE, umberstoneReplaceables, OreBlocks.ORE_EMERALD, 9);
-        registerConfiguredOre(context, LAPIS_ORE, umberstoneReplaceables, OreBlocks.ORE_LAPIS, 9);
-        registerConfiguredOre(context, QUARTZ_ORE, umberstoneReplaceables, OreBlocks.ORE_QUARTZ, 9);
-        registerConfiguredOre(context, PETRIFIED_QUARTZ_ORE, umberstoneReplaceables, OreBlocks.ORE_PETRIFIED_QUARTZ, 9);
-        registerConfiguredOre(context, COPPER_ORE, umberstoneReplaceables, OreBlocks.ORE_COPPER, 9);
-        registerConfiguredOre(context, SILVER_ORE, umberstoneReplaceables, OreBlocks.ORE_SILVER, 9);
-        registerConfiguredOre(context, TIN_ORE, umberstoneReplaceables, OreBlocks.ORE_TIN, 9);
-        registerConfiguredOre(context, LEAD_ORE, umberstoneReplaceables, OreBlocks.ORE_LEAD, 9);
-        registerConfiguredOre(context, ALUMINUM_ORE, umberstoneReplaceables, OreBlocks.ORE_ALUMINUM, 9);
-        registerConfiguredOre(context, JADE_ORE, umberstoneReplaceables, OreBlocks.ORE_JADE, 9);
-        registerConfiguredOre(context, ENCRUSTED_DIAMOND_ORE, umberstoneReplaceables, OreBlocks.ORE_ENCRUSTED_DIAMOND, 9);
-        registerConfiguredOre(context, FOSSIL_ORE, umberstoneReplaceables, OreBlocks.ORE_FOSSIL, 9);
-        registerConfiguredOre(context, GNEISS_ORE, umberstoneReplaceables, OreBlocks.ORE_GNEISS, 9);
-        registerConfiguredOre(context, PETRIFIED_WOOD_ORE, umberstoneReplaceables, OreBlocks.ORE_PETRIFIED_WOOD, 9);
-        registerConfiguredOre(context, TEMPLE_ORE, umberstoneReplaceables, OreBlocks.ORE_TEMPLE, 9);
+        registerConfiguredOre(IRON_ORE, umberstoneReplaceables, OreBlocks.ORE_IRON, 9);
+        registerConfiguredOre(GOLD_ORE, umberstoneReplaceables, OreBlocks.ORE_GOLD, 9);
+        registerConfiguredOre(COAL_ORE, umberstoneReplaceables, OreBlocks.ORE_COAL, 9);
+        registerConfiguredOre(DIAMOND_ORE, umberstoneReplaceables, OreBlocks.ORE_DIAMOND, 9);
+        registerConfiguredOre(EMERALD_ORE, umberstoneReplaceables, OreBlocks.ORE_EMERALD, 9);
+        registerConfiguredOre(LAPIS_ORE, umberstoneReplaceables, OreBlocks.ORE_LAPIS, 9);
+        registerConfiguredOre(QUARTZ_ORE, umberstoneReplaceables, OreBlocks.ORE_QUARTZ, 9);
+        registerConfiguredOre(PETRIFIED_QUARTZ_ORE, umberstoneReplaceables, OreBlocks.ORE_PETRIFIED_QUARTZ, 9);
+        registerConfiguredOre(COPPER_ORE, umberstoneReplaceables, OreBlocks.ORE_COPPER, 9);
+        registerConfiguredOre(SILVER_ORE, umberstoneReplaceables, OreBlocks.ORE_SILVER, 9);
+        registerConfiguredOre(TIN_ORE, umberstoneReplaceables, OreBlocks.ORE_TIN, 9);
+        registerConfiguredOre(LEAD_ORE, umberstoneReplaceables, OreBlocks.ORE_LEAD, 9);
+        registerConfiguredOre(ALUMINUM_ORE, umberstoneReplaceables, OreBlocks.ORE_ALUMINUM, 9);
+        registerConfiguredOre(JADE_ORE, umberstoneReplaceables, OreBlocks.ORE_JADE, 9);
+        registerConfiguredOre(ENCRUSTED_DIAMOND_ORE, umberstoneReplaceables, OreBlocks.ORE_ENCRUSTED_DIAMOND, 9);
+        registerConfiguredOre(FOSSIL_ORE, umberstoneReplaceables, OreBlocks.ORE_FOSSIL, 9);
+        registerConfiguredOre(GNEISS_ORE, umberstoneReplaceables, OreBlocks.ORE_GNEISS, 9);
+        registerConfiguredOre(PETRIFIED_WOOD_ORE, umberstoneReplaceables, OreBlocks.ORE_PETRIFIED_WOOD, 9);
+        registerConfiguredOre(TEMPLE_ORE, umberstoneReplaceables, OreBlocks.ORE_TEMPLE, 9);
 
         registerConfiguredFeature(
-                context,
                 NETTLE.getConfiguredResourceKey(),
                 Feature.FLOWER,
                 new RandomPatchConfiguration(
@@ -162,8 +163,6 @@ public class ModFeatures extends ModFeatureHelpers {
                 )
         );
 
-        registerConfiguredFeature(context, RED_GEM.getConfiguredResourceKey(), RED_GEM_FEATURE_CONFIG.get(), FeatureConfiguration.NONE);
-
         registerSimpleConfiguredPlant(context, SWAMP_PLANT, PlantBlocks.SWAMP_PLANT, 64);
         registerSimpleConfiguredPlant(context, FIRE_BLOOM, PlantBlocks.FIRE_BLOOM, 64);
         registerSimpleConfiguredPlant(context, FIDDLE_HEAD, PlantBlocks.FIDDLE_HEAD, 64);
@@ -175,58 +174,72 @@ public class ModFeatures extends ModFeatureHelpers {
         registerSimpleConfiguredPlant(context, HIGH_CAPPED_MUSHROOM, PlantBlocks.HIGH_CAPPED_MUSHROOM, 64);
         registerSimpleConfiguredPlant(context, FERN, PlantBlocks.FERN, 32);
         registerSimpleConfiguredPlant(context, TALL_FERN, PlantBlocks.TALL_FERN, 32);
+
+        registerConfiguredFeatureWithConfig(AMBER_GROUND, ModFeatureConfigurations.AMBER_GROUND_CONFIG);
+        registerConfiguredFeatureWithConfig(AMBER_UMBERSTONE, ModFeatureConfigurations.AMBER_UMBERSTONE_CONFIG);
+        registerConfiguredFeatureWithConfig(DESERT_ROCK_GNEISS, ModFeatureConfigurations.DESERT_ROCK_GNEISS_CONFIG);
+        registerConfiguredFeatureWithConfig(GAS_VENT, ModFeatureConfigurations.GAS_VENT_CONFIG);
+        registerConfiguredFeatureWithConfig(LAKE_WITH_EDGE, ModFeatureConfigurations.LAKE_WITH_EDGE_CONFIG);
+        registerConfiguredFeatureWithConfig(POND, ModFeatureConfigurations.POND_CONFIG);
+        registerConfiguredFeatureWithConfig(QUICK_SAND, ModFeatureConfigurations.QUICK_SAND_CONFIG);
+        registerConfiguredFeatureWithConfig(RED_GEM, ModFeatureConfigurations.RED_GEM_FEATURE_CONFIG);
+        registerConfiguredFeatureWithConfig(ROCK_SPIKE, ModFeatureConfigurations.ROCK_SPIKE_CONFIG);
+        registerConfiguredFeatureWithConfig(ROTTEN_ACACIA, ModFeatureConfigurations.ROTTEN_ACACIA_CONFIG);
+        registerConfiguredFeatureWithConfig(SAVANNAH_ROCK, ModFeatureConfigurations.SAVANNAH_ROCK_CONFIG);
+        registerConfiguredFeatureWithConfig(SCORCHED_WOOD, ModFeatureConfigurations.SCORCHED_WOOD_CONFIG);
     }
 
     public static void bootstrapPlacedFeatures(BootstrapContext<PlacedFeature> context) {
-        registerPlacedFeature(context, ASPER_TREE);
-        registerPlacedFeature(context, BALSAM_TREE);
-        registerPlacedFeature(context, BAMBOO_TREE);
-        registerPlacedFeature(context, BAOBAB_TREE);
-        registerPlacedFeature(context, CYPRESS_TREE);
-        registerPlacedFeature(context, EUCALYPTUS_TREE);
-        registerPlacedFeature(context, GIANT_EUCALYPTUS_TREE);
-        registerPlacedFeature(context, MAHOGANY_TREE);
-        registerPlacedFeature(context, GIANT_MAHOGANY_TREE);
-        registerPlacedFeature(context, MARSHWOOD_TREE);
-        registerPlacedFeature(context, MOSSBARK_TREE);
+        setPlacedContext(context);
+        registerPlacedFeature(ASPER_TREE);
+        registerPlacedFeature(BALSAM_TREE);
+        registerPlacedFeature(BAMBOO_TREE);
+        registerPlacedFeature(BAOBAB_TREE);
+        registerPlacedFeature(CYPRESS_TREE);
+        registerPlacedFeature(EUCALYPTUS_TREE);
+        registerPlacedFeature(GIANT_EUCALYPTUS_TREE);
+        registerPlacedFeature(MAHOGANY_TREE);
+        registerPlacedFeature(GIANT_MAHOGANY_TREE);
+        registerPlacedFeature(MARSHWOOD_TREE);
+        registerPlacedFeature(MOSSBARK_TREE);
 
-        registerPlacedFeature(context, SWAMP_BERRY_BUSH);
-        registerPlacedFeature(context, HEART_BERRY_BUSH);
-        registerPlacedFeature(context, JADE_BERRY_BUSH);
+        registerPlacedFeature(SWAMP_BERRY_BUSH);
+        registerPlacedFeature(HEART_BERRY_BUSH);
+        registerPlacedFeature(JADE_BERRY_BUSH);
 
-        registerPlacedFeature(context, IRON_ORE);
-        registerPlacedFeature(context, GOLD_ORE);
-        registerPlacedFeature(context, COAL_ORE);
-        registerPlacedFeature(context, DIAMOND_ORE);
-        registerPlacedFeature(context, EMERALD_ORE);
-        registerPlacedFeature(context, LAPIS_ORE);
-        registerPlacedFeature(context, QUARTZ_ORE);
-        registerPlacedFeature(context, PETRIFIED_QUARTZ_ORE);
-        registerPlacedFeature(context, COPPER_ORE);
-        registerPlacedFeature(context, SILVER_ORE);
-        registerPlacedFeature(context, TIN_ORE);
-        registerPlacedFeature(context, LEAD_ORE);
-        registerPlacedFeature(context, ALUMINUM_ORE);
-        registerPlacedFeature(context, JADE_ORE);
-        registerPlacedFeature(context, ENCRUSTED_DIAMOND_ORE);
-        registerPlacedFeature(context, FOSSIL_ORE);
-        registerPlacedFeature(context, GNEISS_ORE);
-        registerPlacedFeature(context, PETRIFIED_WOOD_ORE);
-        registerPlacedFeature(context, TEMPLE_ORE);
+        registerPlacedFeature(IRON_ORE);
+        registerPlacedFeature(GOLD_ORE);
+        registerPlacedFeature(COAL_ORE);
+        registerPlacedFeature(DIAMOND_ORE);
+        registerPlacedFeature(EMERALD_ORE);
+        registerPlacedFeature(LAPIS_ORE);
+        registerPlacedFeature(QUARTZ_ORE);
+        registerPlacedFeature(PETRIFIED_QUARTZ_ORE);
+        registerPlacedFeature(COPPER_ORE);
+        registerPlacedFeature(SILVER_ORE);
+        registerPlacedFeature(TIN_ORE);
+        registerPlacedFeature(LEAD_ORE);
+        registerPlacedFeature(ALUMINUM_ORE);
+        registerPlacedFeature(JADE_ORE);
+        registerPlacedFeature(ENCRUSTED_DIAMOND_ORE);
+        registerPlacedFeature(FOSSIL_ORE);
+        registerPlacedFeature(GNEISS_ORE);
+        registerPlacedFeature(PETRIFIED_WOOD_ORE);
+        registerPlacedFeature(TEMPLE_ORE);
 
-        registerPlacedFeature(context, NETTLE);
-        registerPlacedFeature(context, SWAMP_PLANT);
-        registerPlacedFeature(context, FIRE_BLOOM);
-        registerPlacedFeature(context, FIDDLE_HEAD);
-        registerPlacedFeature(context, BULLRUSH);
-        registerPlacedFeature(context, WEEPING_BLUEBELL);
-        registerPlacedFeature(context, SUNDEW);
-        registerPlacedFeature(context, TALL_BLOOM);
-        registerPlacedFeature(context, TANGLED_STALK);
-        registerPlacedFeature(context, HIGH_CAPPED_MUSHROOM);
-        registerPlacedFeature(context, FERN);
-        registerPlacedFeature(context, TALL_FERN);
+        registerPlacedFeature(NETTLE);
+        registerPlacedFeature(SWAMP_PLANT);
+        registerPlacedFeature(FIRE_BLOOM);
+        registerPlacedFeature(FIDDLE_HEAD);
+        registerPlacedFeature(BULLRUSH);
+        registerPlacedFeature(WEEPING_BLUEBELL);
+        registerPlacedFeature(SUNDEW);
+        registerPlacedFeature(TALL_BLOOM);
+        registerPlacedFeature(TANGLED_STALK);
+        registerPlacedFeature(HIGH_CAPPED_MUSHROOM);
+        registerPlacedFeature(FERN);
+        registerPlacedFeature(TALL_FERN);
 
-        registerPlacedFeature(context, RED_GEM);
+        registerPlacedFeature(RED_GEM);
     }
 }

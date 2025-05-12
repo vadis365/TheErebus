@@ -2,7 +2,7 @@ package erebus.world.feature.tree.foliage;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import erebus.registries.world.ModFoliagePlacers;
+import erebus.registries.world.tree.ModFoliagePlacers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;

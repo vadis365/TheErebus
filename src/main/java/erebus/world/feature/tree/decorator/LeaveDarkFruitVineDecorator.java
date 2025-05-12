@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import erebus.block.DarkFruitVineBlock;
 import erebus.registries.blocks.providers.PlantBlocks;
-import erebus.registries.world.ModTreeDecorators;
+import erebus.registries.world.tree.ModTreeDecorators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;

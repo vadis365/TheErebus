@@ -3,7 +3,7 @@ package erebus.world.feature.tree.trunk;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import erebus.registries.world.ModTrunkPlacers;
+import erebus.registries.world.tree.ModTrunkPlacers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;

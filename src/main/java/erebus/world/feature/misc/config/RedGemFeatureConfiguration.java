@@ -1,4 +1,4 @@
-package erebus.world.feature.misc;
+package erebus.world.feature.misc.config;
 
 import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.blocks.providers.UmberstoneBlocks;

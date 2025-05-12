@@ -1,11 +1,11 @@
-package erebus.registries.world;
+package erebus.registries.world.tree;
 
 import erebus.Erebus;
 import net.minecraft.world.level.block.grower.TreeGrower;
 
 import java.util.Optional;
 
-import static erebus.registries.world.ModFeatures.*;
+import static erebus.registries.world.feature.ModFeatures.*;
 
 public class ModTreeGrowers {
 

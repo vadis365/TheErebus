@@ -3,7 +3,7 @@ package erebus.datagen;
 import erebus.Erebus;
 import erebus.registries.world.ModBiomes;
 import erebus.registries.world.ModDimensionRegistries;
-import erebus.registries.world.ModFeatures;
+import erebus.registries.world.feature.ModFeatures;
 import erebus.world.ModNoiseGenerator;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;

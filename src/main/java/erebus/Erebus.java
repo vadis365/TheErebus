@@ -16,7 +16,12 @@ import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.network.ModNetwork;
-import erebus.registries.world.*;
+import erebus.registries.world.ModPOIs;
+import erebus.registries.world.ModStructures;
+import erebus.registries.world.feature.ModFeatureConfigurations;
+import erebus.registries.world.tree.ModFoliagePlacers;
+import erebus.registries.world.tree.ModTreeDecorators;
+import erebus.registries.world.tree.ModTrunkPlacers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
@@ -75,7 +80,7 @@ public class Erebus {
     	ModCustomRecipes.RECIPE_SERIALIZERS.register(bus);
         ModParticles.PARTICLES.register(bus);
         ModDataComponents.DATA_COMPONENT_REGISTRY.register(bus);
-        ModFeatures.FEATURES.register(bus);
+        ModFeatureConfigurations.CONFIGS.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 
