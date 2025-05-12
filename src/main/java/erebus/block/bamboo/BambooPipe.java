@@ -1,5 +1,7 @@
 package erebus.block.bamboo;
 
+import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -7,8 +9,13 @@ import com.mojang.serialization.MapCodec;
 
 import erebus.block.entity.BambooPipeBlockEntity;
 import erebus.utils.CapHelper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item.TooltipContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -49,6 +56,11 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
 		return pLevel.isClientSide ? null : BambooPipeBlockEntity::serverTick;
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+		tooltipComponents.add(Component.translatable("tooltip.erebus.bamboo_pipe").withStyle(ChatFormatting.YELLOW));
 	}
 
 	@Nonnull

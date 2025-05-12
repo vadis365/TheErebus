@@ -33,7 +33,7 @@ public class BambooPipeWrenchItem extends Item {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
-		tooltip.add(Component.translatable("tooltip.erebus.bamboopipewrench"));
+		tooltip.add(Component.translatable("tooltip.erebus.bamboo_pipe_wrench"));
 	}
 
 	// TODO make this nicer for use on all the pipe types

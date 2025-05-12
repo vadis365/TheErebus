@@ -616,6 +616,10 @@
   "item.erebus.whetstone_powder": "Whetstone Powder",
   "item.erebus.woodlouse_ball": "Woodlouse Ball",
   "tooltip.death_compass.pos": "Death Pos: ",
+  "tooltip.erebus.bamboo_pipe": "A very basic directional fluid pipe.",
+  "tooltip.erebus.bamboo_pipe_extract": "Extracts fluids from fluid containers and pushes them in to pipes and fluid containers.",
+  "tooltip.erebus.bamboo_pipe_wrench": "Use on any Bamboo Pipe to rotate them or Use + Sneak to insta-break them.",
+  "tooltip.erebus.wand_of_animation": "Right click blocks to animate them.",
   "tooltip.shield.damage": "Damage: ",
   "tooltip.shield.repair": "Anvil Repair: "
 }

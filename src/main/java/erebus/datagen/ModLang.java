@@ -696,7 +696,11 @@ public class ModLang extends ModLangProvider {
         add("tooltip.death_compass.pos", "Death Pos: ");
         add("tooltip.shield.damage", "Damage: ");
         add("tooltip.shield.repair", "Anvil Repair: ");
-    }
+		add("tooltip.erebus.wand_of_animation", "Right click blocks to animate them.");
+		add("tooltip.erebus.bamboo_pipe", "A very basic directional fluid pipe.");
+		add("tooltip.erebus.bamboo_pipe_extract", "Extracts fluids from fluid containers and pushes them in to pipes and fluid containers.");
+		add("tooltip.erebus.bamboo_pipe_wrench", "Use on any Bamboo Pipe to rotate them or Use + Sneak to insta-break them.");
+	}
 
     private void addBookTranslations() {
 
