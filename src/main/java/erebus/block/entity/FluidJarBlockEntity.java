@@ -74,10 +74,11 @@ public class FluidJarBlockEntity extends BlockEntity {
 		tank.writeToNBT(registries, nbt);
 	}
 
-	public FluidTank getTank(){
+	public FluidTank getTank() {
 		return this.tank;
 	}
-	public FluidTank getTank(@Nullable Direction direction){
+
+	public FluidTank getTank(@Nullable Direction direction) {
 		return this.tank;
 	}
 

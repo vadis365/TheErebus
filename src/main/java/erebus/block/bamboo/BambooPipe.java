@@ -34,26 +34,17 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
     public static final BooleanProperty CONNECTED_SOUTH = BooleanProperty.create("connected_south");
     public static final BooleanProperty CONNECTED_WEST = BooleanProperty.create("connected_west");
     public static final BooleanProperty CONNECTED_EAST = BooleanProperty.create("connected_east");
-    
-	//public static final EnumProperty<Direction> TYPE = EnumProperty.create("type", Direction.class);
-//public static final VoxelShape PIPE_MIDDLE = Block.box(5D, 5D, 5D, 11D, 11D, 11D);
-	//public static final VoxelShape CONNECTED_DOWN = Block.box(5D, 0D, 5D, 11D, 11D, 11D);
-	//public static final VoxelShape CONNECTED_SOUTH = Block.box(5D, 5D, 5D, 11D, 11D, 16D);
-	//public static final VoxelShape CONNECTED_NORTH = Block.box(5D, 5D, 0D, 11D, 11D, 11D);
-	//public static final VoxelShape CONNECTED_WEST = Block.box(0D, 5D, 5D, 11D, 11D, 11D);
-	//public static final VoxelShape CONNECTED_EAST = Block.box(5D, 5D, 5D, 16D, 11D, 11D);
-
 
 	public BambooPipe(Properties properties) {
 		super(properties);
 		registerDefaultState(this.stateDefinition.any().setValue(CONNECTED_DOWN, Boolean.FALSE).setValue(CONNECTED_EAST, Boolean.FALSE).setValue(CONNECTED_NORTH, Boolean.FALSE).setValue(CONNECTED_SOUTH, Boolean.FALSE).setValue(CONNECTED_UP, Boolean.FALSE).setValue(CONNECTED_WEST, Boolean.FALSE));
 	}
-	
+
 	@Override
 	protected MapCodec<BambooPipe> codec() {
 		return CODEC;
 	}
-	
+
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
@@ -127,70 +118,19 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING, CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST);
 	}
-/*
-	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		BlockGetter level = context.getLevel();
-		Direction direction = context.getClickedFace().getOpposite();
-		BlockPos position = context.getClickedPos();
-		BlockState state = defaultBlockState();
-		if (direction == Direction.UP)
-			return state.setValue(FACING, direction).setValue(CONNECTED_DOWN, this.isSideConnectable(level, position, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, position, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, position, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, position, Direction.SOUTH)).setValue(CONNECTED_UP, false).setValue(CONNECTED_WEST, this.isSideConnectable(level, position, Direction.WEST));
-		if (direction == Direction.DOWN)
-			return state.setValue(FACING, direction).setValue(CONNECTED_DOWN, false).setValue(CONNECTED_EAST, this.isSideConnectable(level, position, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, position, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, position, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, position, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, position, Direction.WEST));
-		if (direction == Direction.SOUTH)
-			return state.setValue(FACING, direction).setValue(CONNECTED_DOWN, this.isSideConnectable(level, position, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, position, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, position, Direction.NORTH)).setValue(CONNECTED_SOUTH, false).setValue(CONNECTED_UP, this.isSideConnectable(level, position, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, position, Direction.WEST));
-		if (direction == Direction.NORTH)
-			return state.setValue(FACING, direction).setValue(CONNECTED_DOWN, this.isSideConnectable(level, position, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, position, Direction.EAST)).setValue(CONNECTED_NORTH, false).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, position, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, position, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, position, Direction.WEST));
-		if (direction == Direction.WEST)
-			return state.setValue(FACING, direction).setValue(CONNECTED_DOWN, this.isSideConnectable(level, position, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, position, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, position, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, position, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, position, Direction.UP)).setValue(CONNECTED_WEST, false);
-		if (direction == Direction.EAST)
-			return state.setValue(CONNECTED_DOWN, this.isSideConnectable(level, position, Direction.DOWN)).setValue(CONNECTED_EAST, false).setValue(CONNECTED_NORTH, this.isSideConnectable(level, position, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, position, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, position, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, position, Direction.WEST));
 
-        return state.setValue(FACING, direction).setValue(CONNECTED_DOWN, this.isSideConnectable(level, position, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, position, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, position, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, position, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, position, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, position, Direction.WEST));
-    }
-*/	
     @Override
     protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
     	return state.setValue(CONNECTED_DOWN, this.isSideConnectable(level, currentPos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, currentPos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, currentPos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, currentPos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, currentPos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, currentPos, Direction.WEST));
     }
 
     private boolean isSideConnectable (LevelAccessor level, BlockPos pos, Direction side) {
-    	final BlockState stateConnection = level.getBlockState(pos.relative(side));
     	BlockEntity blockEntity = level.getBlockEntity(pos.relative(side));
-    	System.out.println("OUTWARDS DIRECTION: "+ side.getName() + " STATE CONNECTION IS: " + stateConnection.getBlock().getName());
-    	if(blockEntity != null && blockEntity.getLevel() != null)
-    		System.out.println("INWARDS DIRECTION: "+ side.getOpposite().getName() + " STATE CONNECTION IS: " + blockEntity.getBlockState().getBlock().getName());
-        return (blockEntity != null && blockEntity.getLevel() != null) ? CapHelper.getFluidHandler(blockEntity.getLevel(), pos.relative(side), side.getOpposite()).isPresent(): false;/*level.getBlockState(pos.relative(side)).getBlock() != Blocks.AIR;*/ 
+        return (blockEntity != null && blockEntity.getLevel() != null) ? CapHelper.getFluidHandler(blockEntity.getLevel(), pos.relative(side), side.getOpposite()).isPresent(): false;
     }
 
     @Override
 	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
 		return new BambooPipeBlockEntity(pos, state);
 	}
-/*
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, Direction side, float hitX, float hitY, float hitZ) {
-		if (world.isRemote) {
-			return true;
-		} else {
-			ItemStack stack = player.getHeldItem(hand);
-			if (!stack.isEmpty() && stack.getItem() == ModItems.MATERIALS && stack.getItemDamage() == ItemMaterials.EnumErebusMaterialsType.BAMBOO_PIPE_WRENCH.ordinal()) {
-				if (!player.isSneaking()) {
-					state = state.cycleProperty(FACING);
-					state.cycleProperty(FACING);
-					world.setBlockState(pos, state, 3);
-					return true;
-				}
-				else {
-					breakBlock(world, pos, state);
-					dropBlockAsItem(world, pos, state, 0);
-					world.setBlockToAir(pos);
-					return true;
-				}
-			}
-			return false;
-		}
-	}
-	*/
 }
