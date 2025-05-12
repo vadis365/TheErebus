@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import erebus.block.bamboo.BambooPipe;
 import erebus.registries.blocks.providers.OtherBlocks;
+import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -33,7 +34,7 @@ public class BambooPipeWrenchItem extends Item {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
-		tooltip.add(Component.translatable("tooltip.erebus.bamboo_pipe_wrench"));
+		tooltip.add(Component.translatable("tooltip.erebus.bamboo_pipe_wrench").withStyle(ChatFormatting.YELLOW));
 	}
 
 	// TODO make this nicer for use on all the pipe types
