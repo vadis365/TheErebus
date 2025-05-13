@@ -31,7 +31,6 @@ public class DecorationFeatures extends ModFeatureHelpers {
 
     public static void initConfiguredFeatures(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         setConfiguredContext(context);
-
         registerConfiguredFeatureWithConfig(AMBER_GROUND, AMBER_GROUND_CONFIG);
         registerConfiguredFeatureWithConfig(AMBER_UMBERSTONE, AMBER_UMBERSTONE_CONFIG);
         registerConfiguredFeatureWithConfig(DESERT_ROCK_GNEISS, DESERT_ROCK_GNEISS_CONFIG);

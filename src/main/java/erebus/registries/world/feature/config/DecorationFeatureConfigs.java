@@ -92,4 +92,7 @@ public class DecorationFeatureConfigs {
         SAVANNAH_ROCK_CONFIG = CONFIGS.register("savannah_rock", SavannahRockFeatureConfiguration::new);
         SCORCHED_WOOD_CONFIG = CONFIGS.register("scorched_wood", ScorchedWoodFeatureConfiguration::new);
     }
+
+    public static void init() {
+    }
 }
