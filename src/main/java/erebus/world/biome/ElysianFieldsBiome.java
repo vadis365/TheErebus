@@ -1,7 +1,10 @@
 package erebus.world.biome;
 
 import erebus.registries.entity.ModEntities;
-import erebus.registries.world.feature.ModFeatures;
+import erebus.registries.world.feature.DecorationFeatures;
+import erebus.registries.world.feature.OreFeatures;
+import erebus.registries.world.feature.PlantFeatures;
+import erebus.registries.world.feature.TreeFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
@@ -61,29 +64,29 @@ public class ElysianFieldsBiome extends ErebusBiome {
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
                         .addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_NORMAL)
                         .addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.FLOWER_FLOWER_FOREST)
-                        .addFeature(Decoration.VEGETAL_DECORATION, ModFeatures.CYPRESS_TREE.getPlacedResourceKey())
-                        .addFeature(Decoration.VEGETAL_DECORATION, ModFeatures.NETTLE.getPlacedResourceKey())
-                        .addFeature(Decoration.VEGETAL_DECORATION, ModFeatures.TALL_BLOOM.getPlacedResourceKey())
-                        .addFeature(Decoration.VEGETAL_DECORATION, ModFeatures.WEEPING_BLUEBELL.getPlacedResourceKey())
-                        .addFeature(Decoration.VEGETAL_DECORATION, ModFeatures.FERN.getPlacedResourceKey())
-                        .addFeature(Decoration.VEGETAL_DECORATION, ModFeatures.TALL_FERN.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.RED_GEM.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.IRON_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.GOLD_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.COAL_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.DIAMOND_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.EMERALD_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.LAPIS_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.QUARTZ_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.COPPER_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.SILVER_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.TIN_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.LEAD_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.ALUMINUM_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.JADE_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.FOSSIL_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.GNEISS_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, ModFeatures.TEMPLE_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, TreeFeatures.CYPRESS_TREE.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.NETTLE.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.TALL_BLOOM.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.WEEPING_BLUEBELL.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.FERN.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.TALL_FERN.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.GOLD_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.COAL_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.DIAMOND_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.EMERALD_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.LAPIS_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.QUARTZ_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.COPPER_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.SILVER_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.TIN_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.LEAD_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.ALUMINUM_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.JADE_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.FOSSIL_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.GNEISS_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.TEMPLE_ORE.getPlacedResourceKey())
                         .build())
                 .build();
     }

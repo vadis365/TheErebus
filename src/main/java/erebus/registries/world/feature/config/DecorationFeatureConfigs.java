@@ -1,28 +1,25 @@
-package erebus.registries.world.feature;
+package erebus.registries.world.feature.config;
 
-import erebus.Erebus;
 import erebus.registries.blocks.providers.OreBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.blocks.providers.UmberstoneBlocks;
 import erebus.world.feature.misc.config.*;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Random;
 
-public class ModFeatureConfigurations {
-    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> LAVA_LAKE_CONFIG;
+import static erebus.registries.world.feature.ModFeatures.CONFIGS;
 
-    public static final DeferredRegister<Feature<?>> CONFIGS = DeferredRegister.create(BuiltInRegistries.FEATURE, Erebus.MODID);
+public class DecorationFeatureConfigs {
 
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> AMBER_GROUND_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> AMBER_UMBERSTONE_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> DESERT_ROCK_GNEISS_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GAS_VENT_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> LAVA_LAKE_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> WATER_LAKE_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PETRIFIED_TREE_BROWN_SMALL_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PETRIFIED_TREE_BROWN_MEDIUM_CONFIG;
@@ -30,7 +27,6 @@ public class ModFeatureConfigurations {
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PETRIFIED_TREE_RED_SMALL_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PETRIFIED_TREE_RED_MEDIUM_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PETRIFIED_TREE_RED_LARGE_CONFIG;
-    private static final Random random = new Random();
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> POND_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> QUICK_SAND_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> RED_GEM_FEATURE_CONFIG;
@@ -38,6 +34,7 @@ public class ModFeatureConfigurations {
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> ROTTEN_ACACIA_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> SAVANNAH_ROCK_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> SCORCHED_WOOD_CONFIG;
+    private static final Random random = new Random();
 
     static {
         AMBER_GROUND_CONFIG = CONFIGS.register("amber_ground", AmberGroundFeatureConfiguration::new);

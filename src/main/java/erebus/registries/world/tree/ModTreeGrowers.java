@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.grower.TreeGrower;
 
 import java.util.Optional;
 
-import static erebus.registries.world.feature.ModFeatures.*;
+import static erebus.registries.world.feature.TreeFeatures.*;
 
 public class ModTreeGrowers {
 

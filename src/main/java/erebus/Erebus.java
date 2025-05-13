@@ -20,7 +20,7 @@ import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.network.ModNetwork;
 import erebus.registries.world.ModPOIs;
 import erebus.registries.world.ModStructures;
-import erebus.registries.world.feature.ModFeatureConfigurations;
+import erebus.registries.world.feature.ModFeatures;
 import erebus.registries.world.tree.ModFoliagePlacers;
 import erebus.registries.world.tree.ModTreeDecorators;
 import erebus.registries.world.tree.ModTrunkPlacers;
@@ -82,7 +82,7 @@ public class Erebus {
     	ModCustomRecipes.RECIPE_SERIALIZERS.register(bus);
         ModParticles.PARTICLES.register(bus);
         ModDataComponents.DATA_COMPONENT_REGISTRY.register(bus);
-        ModFeatureConfigurations.CONFIGS.register(bus);
+        ModFeatures.CONFIGS.register(bus);
 
         NeoForge.EVENT_BUS.register(this);
 
