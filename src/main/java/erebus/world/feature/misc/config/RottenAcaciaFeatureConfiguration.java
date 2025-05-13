@@ -1,8 +1,11 @@
 package erebus.world.feature.misc.config;
 
+import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction.Axis;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -16,8 +19,24 @@ public class RottenAcaciaFeatureConfiguration extends Feature<NoneFeatureConfigu
     @Override
     public boolean place(@NotNull FeaturePlaceContext<NoneFeatureConfiguration> context) {
         WorldGenLevel level = context.level();
-        BlockPos pos = context.origin();
+        BlockPos origin = context.origin();
         RandomSource random = context.random();
+
+        int length = random.nextInt(3) + 3;
+        int offsetX = random.nextInt(2);
+        int offsetZ = 1 - offsetX;
+
+        for (int c = 0; c < length; c++) {
+            BlockPos pos = origin.offset(offsetX * c, 0, offsetZ * c);
+            if (!level.getBlockState(pos).isAir() || level.getBlockState(pos.below()).isAir()) {
+                return false;
+            }
+        }
+
+        for (int c = 0; c < length; c++) {
+            BlockPos pos = origin.offset(offsetX * c, 0, offsetZ * c);
+            setBlock(level, pos, WoodBlocks.LOG_HOLLOW.get().defaultBlockState().setValue(BlockStateProperties.AXIS, offsetX == 0 ? Axis.Z : Axis.X));
+        }
 
         return true;
     }

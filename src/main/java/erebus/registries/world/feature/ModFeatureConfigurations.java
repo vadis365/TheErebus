@@ -87,7 +87,7 @@ public class ModFeatureConfigurations {
                 OreBlocks.ORE_PETRIFIED_QUARTZ
         ));
 
-        POND_CONFIG = CONFIGS.register("pond", PondFeatureConfiguration::new);
+        POND_CONFIG = CONFIGS.register("pond", () -> new PondFeatureConfiguration(10));
         QUICK_SAND_CONFIG = CONFIGS.register("quick_sand", QuickSandFeatureConfiguration::new);
         RED_GEM_FEATURE_CONFIG = CONFIGS.register("red_gem", RedGemFeatureConfiguration::new);
         ROCK_SPIKE_CONFIG = CONFIGS.register("rock_spike", RockSpikeFeatureConfiguration::new);
