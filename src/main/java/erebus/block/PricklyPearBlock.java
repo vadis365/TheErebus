@@ -19,11 +19,11 @@ import net.neoforged.neoforge.common.CommonHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PicklyPearBlock extends Block implements BonemealableBlock {
+public class PricklyPearBlock extends Block implements BonemealableBlock {
 
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 11);
 
-    public PicklyPearBlock(Properties properties) {
+    public PricklyPearBlock(Properties properties) {
         super(properties);
         registerDefaultState(getStateDefinition().any().setValue(AGE, 0));
     }

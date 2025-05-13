@@ -3,7 +3,7 @@ package erebus.registries.blocks.providers;
 import erebus.block.DarkFruitVineBlock;
 import erebus.block.ModBerryBushBlock;
 import erebus.block.ModCropBlock;
-import erebus.block.PicklyPearBlock;
+import erebus.block.PricklyPearBlock;
 import erebus.registries.ModItems;
 import erebus.registries.helpers.ModBlockHelpers;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
@@ -121,7 +121,7 @@ public class PlantBlocks extends ModBlockHelpers {
         HEART_BERRY_BUSH = registerBush("heart_berry_bush", ModItems.HEART_BERRIES, Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
         SWAMP_BERRY_BUSH = registerBush("swamp_berry_bush", ModItems.SWAMP_BERRIES, Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
         DARK_FRUIT_VINE = registerBlock("dark_fruit_vine", () -> new DarkFruitVineBlock(Properties.ofFullCopy(Blocks.OAK_LEAVES).noCollission()));
-        PRICKLY_PEAR = registerBlock("prickly_pear", () -> new PicklyPearBlock(Properties.ofFullCopy(Blocks.CACTUS).noOcclusion()));
+        PRICKLY_PEAR = registerBlock("prickly_pear", () -> new PricklyPearBlock(Properties.ofFullCopy(Blocks.CACTUS).noOcclusion()));
         DARK_CAPPED_MUSHROOM = registerBlock("dark_capped_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
         DUTCH_CAP_MUSHROOM = registerBlock("dutch_cap_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
         GRANDMAS_SHOES_MUSHROOM = registerBlock("grandmas_shoes_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));

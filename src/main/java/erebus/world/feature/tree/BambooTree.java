@@ -14,7 +14,7 @@ import java.util.List;
 public class BambooTree extends ErebusTree {
 
     public BambooTree() {
-        super("bamboo");
+        super("bamboo_tree");
     }
 
     @Override

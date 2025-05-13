@@ -22,6 +22,7 @@ import erebus.registries.world.ModPOIs;
 import erebus.registries.world.ModStructures;
 import erebus.registries.world.feature.ModFeatures;
 import erebus.registries.world.feature.config.DecorationFeatureConfigs;
+import erebus.registries.world.feature.config.PlantFeatureConfigs;
 import erebus.registries.world.tree.ModFoliagePlacers;
 import erebus.registries.world.tree.ModTreeDecorators;
 import erebus.registries.world.tree.ModTrunkPlacers;
@@ -60,6 +61,7 @@ public class Erebus {
     public Erebus(IEventBus bus, ModContainer container, Dist dist) {
         bus.addListener(this::commonSetup);
         DecorationFeatureConfigs.init();
+        PlantFeatureConfigs.init();
 
         ModArmorMaterials.ARMOR_MATERIALS.register(bus);
         ModBlocks.register(bus);
