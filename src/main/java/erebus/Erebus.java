@@ -163,7 +163,7 @@ public class Erebus {
 	public void registerCaps(final RegisterCapabilitiesEvent event) {
 		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.FLUID_JAR.get(), FluidJarBlockEntity::getTank);
 		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.BAMBOO_PIPE.get(), BambooPipeBlockEntity::getTank);
-        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.BAMBOO_PIPE_EXTRACT_ACTIVE.get(), BambooPipeExtractBlockEntity::getTank);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.BAMBOO_PIPE_EXTRACT.get(), BambooPipeExtractBlockEntity::getTank);
 		event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidBucketWrapper(stack), ModItems.BEETLE_JUICE_BUCKET.get());
 	}
 }

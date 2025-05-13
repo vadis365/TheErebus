@@ -11,7 +11,8 @@
             "x":270
          },
          "when":{
-            "facing":"up"
+            "facing":"up",
+            "active":"false"
          }
       },
       {
@@ -21,7 +22,8 @@
             "y":180
          },
          "when":{
-            "facing":"down"
+            "facing":"down",
+            "active":"false"
          }
       },
       {
@@ -29,7 +31,8 @@
             "model":"erebus:block/bamboo_pipe_extract_off"
          },
          "when":{
-            "facing":"north"
+            "facing":"north",
+            "active":"false"
          }
       },
       {
@@ -38,7 +41,8 @@
             "y":90
          },
          "when":{
-            "facing":"east"
+            "facing":"east",
+            "active":"false"
          }
       },
       {
@@ -47,7 +51,8 @@
             "y":180
          },
          "when":{
-            "facing":"south"
+            "facing":"south",
+            "active":"false"
          }
       },
       {
@@ -56,9 +61,70 @@
             "y":270
          },
          "when":{
-            "facing":"west"
+            "facing":"west",
+            "active":"false"
          }
       },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_extract_on",
+            "x":270
+         },
+         "when":{
+            "facing":"up",
+            "active":"true"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_extract_on",
+            "x":90,
+            "y":180
+         },
+         "when":{
+            "facing":"down",
+            "active":"true"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_extract_on"
+         },
+         "when":{
+            "facing":"north",
+            "active":"true"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_extract_on",
+            "y":90
+         },
+         "when":{
+            "facing":"east",
+            "active":"true"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_extract_on",
+            "y":180
+         },
+         "when":{
+            "facing":"south",
+            "active":"true"
+         }
+      },
+      {
+         "apply":{
+            "model":"erebus:block/bamboo_pipe_extract_on",
+            "y":270
+         },
+         "when":{
+            "facing":"west",
+            "active":"true"
+         }
+      }, 
       {
          "apply":{
             "model":"erebus:block/bamboo_pipe_join",

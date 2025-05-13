@@ -1,6 +1,11 @@
 package erebus.block.entity;
 
-import erebus.block.bamboo.BambooPipeExtractActive;
+import java.util.Optional;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import erebus.block.bamboo.BambooPipeExtract;
 import erebus.registries.ModBlockEntities;
 import erebus.utils.CapHelper;
 import net.minecraft.core.BlockPos;
@@ -16,17 +21,13 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.Optional;
-
 public class BambooPipeExtractBlockEntity extends BlockEntity {
 
 	public FluidTank tank = new FluidTank(100);
 	public int prevTankAmount;
 
 	public BambooPipeExtractBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntities.BAMBOO_PIPE_EXTRACT_ACTIVE.get(), pos, state);
+		super(ModBlockEntities.BAMBOO_PIPE_EXTRACT.get(), pos, state);
 	}
 
 	public static <T extends BlockEntity> void serverTick(Level level, BlockPos pos, BlockState state, T t) {
@@ -37,11 +38,12 @@ public class BambooPipeExtractBlockEntity extends BlockEntity {
 			}
 			tile.prevTankAmount = tile.tank.getFluidAmount();
 			
-			if (!(level.getBlockState(pos).getBlock() instanceof BambooPipeExtractActive)) {
-            }
+			if (!state.getValue(BambooPipeExtract.ACTIVE)) {
+				return;
+				}
 
 			else {
-				Direction pipeFacing = tile.getBlockState().getValue(BambooPipeExtractActive.FACING);
+				Direction pipeFacing = tile.getBlockState().getValue(BambooPipeExtract.FACING);
 				Optional<IFluidHandler> handlerOptionalInput = CapHelper.getFluidHandler(level, pos.relative(pipeFacing.getOpposite()), pipeFacing);
 				handlerOptionalInput.ifPresent((tankToDrawFrom) -> {
 					int tanks = tankToDrawFrom.getTanks();

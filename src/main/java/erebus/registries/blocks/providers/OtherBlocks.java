@@ -22,7 +22,6 @@ import erebus.block.altars.RepairAltar;
 import erebus.block.bamboo.BambooCrateBlock;
 import erebus.block.bamboo.BambooPipe;
 import erebus.block.bamboo.BambooPipeExtract;
-import erebus.block.bamboo.BambooPipeExtractActive;
 import erebus.block.bamboo.BambooTorchBlock;
 import erebus.block.portal.ErebusPortalBlock;
 import erebus.registries.helpers.ModBlockHelpers;
@@ -125,7 +124,6 @@ public class OtherBlocks extends ModBlockHelpers {
     public static final DeferredBlock<BambooTorchBlock> BAMBOO_TORCH;
     public static final DeferredBlock<Block> BAMBOO_PIPE;
     public static final DeferredBlock<Block> BAMBOO_PIPE_EXTRACT;
-    public static final DeferredBlock<Block> BAMBOO_PIPE_EXTRACT_ACTIVE;
     public static final DeferredBlock<Block> SILO_ROOF;
     public static final DeferredBlock<Block> SILO_TANK;
     public static final DeferredBlock<Block> SILO_SUPPORTS;
@@ -252,7 +250,6 @@ public class OtherBlocks extends ModBlockHelpers {
         BAMBOO_TORCH = registerBlock("bamboo_torch", () -> new BambooTorchBlock(Properties.ofFullCopy(Blocks.TORCH).noCollission().sound(SoundType.BAMBOO).lightLevel((state) -> 15).requiresCorrectToolForDrops()));
         BAMBOO_PIPE = registerBlock("bamboo_pipe", () -> new BambooPipe(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO)));
         BAMBOO_PIPE_EXTRACT = registerBlock("bamboo_pipe_extract", () -> new BambooPipeExtract(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO)));
-        BAMBOO_PIPE_EXTRACT_ACTIVE = registerBlock("bamboo_pipe_extract_active", () -> new BambooPipeExtractActive(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO)));
         SILO_ROOF = registerSimpleBlock("silo_roof", Properties.of().mapColor(MapColor.STONE));
         SILO_TANK = registerSimpleBlock("silo_tank", Properties.of().mapColor(MapColor.STONE));
         SILO_SUPPORTS = registerSimpleBlock("silo_supports", Properties.of().mapColor(MapColor.STONE));

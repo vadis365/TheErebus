@@ -48,10 +48,11 @@ public class BambooPipeExtract extends DirectionalBlock implements EntityBlock {
     public static final BooleanProperty CONNECTED_SOUTH = BooleanProperty.create("connected_south");
     public static final BooleanProperty CONNECTED_WEST = BooleanProperty.create("connected_west");
     public static final BooleanProperty CONNECTED_EAST = BooleanProperty.create("connected_east");
+    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
 	public BambooPipeExtract(Properties properties) {
 		super(properties);
-		registerDefaultState(this.stateDefinition.any().setValue(CONNECTED_DOWN, Boolean.FALSE).setValue(CONNECTED_EAST, Boolean.FALSE).setValue(CONNECTED_NORTH, Boolean.FALSE).setValue(CONNECTED_SOUTH, Boolean.FALSE).setValue(CONNECTED_UP, Boolean.FALSE).setValue(CONNECTED_WEST, Boolean.FALSE));
+		registerDefaultState(this.stateDefinition.any().setValue(CONNECTED_DOWN, Boolean.FALSE).setValue(CONNECTED_EAST, Boolean.FALSE).setValue(CONNECTED_NORTH, Boolean.FALSE).setValue(CONNECTED_SOUTH, Boolean.FALSE).setValue(CONNECTED_UP, Boolean.FALSE).setValue(CONNECTED_WEST, Boolean.FALSE).setValue(ACTIVE, Boolean.FALSE));
 	}
 	
 	@Override
@@ -129,7 +130,7 @@ public class BambooPipeExtract extends DirectionalBlock implements EntityBlock {
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(FACING, CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST);
+		builder.add(FACING, CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST, ACTIVE);
 	}
 
     @Override
@@ -145,7 +146,7 @@ public class BambooPipeExtract extends DirectionalBlock implements EntityBlock {
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		Direction direction = context.getClickedFace().getOpposite();
-		return this.defaultBlockState().setValue(FACING, direction);
+		return this.defaultBlockState().setValue(FACING, direction).setValue(ACTIVE, false);
 	}
 
     @Nonnull
@@ -156,7 +157,7 @@ public class BambooPipeExtract extends DirectionalBlock implements EntityBlock {
 		}
 		 else {
 			 if (stack.isEmpty()) {
-				BlockState activeState = OtherBlocks.BAMBOO_PIPE_EXTRACT_ACTIVE.get().defaultBlockState().setValue(BambooPipeExtractActive.FACING, state.getValue(FACING));
+				BlockState activeState = OtherBlocks.BAMBOO_PIPE_EXTRACT.get().defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(ACTIVE, !state.getValue(ACTIVE)).setValue(CONNECTED_DOWN, this.isSideConnectable(level, pos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, pos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, pos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, pos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, pos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, pos, Direction.WEST));
 				level.setBlock(pos, activeState, 3);
 				level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, 0.5F);
 				return ItemInteractionResult.SUCCESS;

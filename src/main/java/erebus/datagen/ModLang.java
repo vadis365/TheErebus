@@ -618,7 +618,6 @@ public class ModLang extends ModLangProvider {
         addBlock(OtherBlocks.BAMBOO_TORCH, "Bamboo Torch");
         addBlock(OtherBlocks.BAMBOO_PIPE, "Bamboo Fluid Pipe");
         addBlock(OtherBlocks.BAMBOO_PIPE_EXTRACT, "Bamboo Fluid Extraction Pipe");
-        addBlock(OtherBlocks.BAMBOO_PIPE_EXTRACT_ACTIVE, "Bamboo Fluid Extraction Pipe");
         addBlock(OtherBlocks.SILO_ROOF, "Silo Roof");
         addBlock(OtherBlocks.SILO_TANK, "Silo Tank");
         addBlock(OtherBlocks.SILO_SUPPORTS, "Silo Supports");

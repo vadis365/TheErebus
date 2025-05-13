@@ -1,16 +1,27 @@
 package erebus.datagen.loot;
 
+import org.jetbrains.annotations.NotNull;
+
 import erebus.datagen.providers.ModBlockLootTableProvider;
 import erebus.registries.ModItems;
 import erebus.registries.blocks.ModBlocks;
-import erebus.registries.blocks.providers.*;
+import erebus.registries.blocks.providers.AmberBlocks;
+import erebus.registries.blocks.providers.DoorBlocks;
+import erebus.registries.blocks.providers.FenceBlocks;
+import erebus.registries.blocks.providers.OreBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.blocks.providers.PlantBlocks;
+import erebus.registries.blocks.providers.SlabBlocks;
+import erebus.registries.blocks.providers.StairBlocks;
+import erebus.registries.blocks.providers.UmberstoneBlocks;
+import erebus.registries.blocks.providers.WallBlocks;
+import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
-import org.jetbrains.annotations.NotNull;
 
 public class ModBlockLootTables extends ModBlockLootTableProvider {
 
@@ -425,7 +436,6 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(OtherBlocks.BAMBOO_TORCH);
         dropSelf(OtherBlocks.BAMBOO_PIPE);
         dropSelf(OtherBlocks.BAMBOO_PIPE_EXTRACT);
-        dropSelf(OtherBlocks.BAMBOO_PIPE_EXTRACT_ACTIVE);
         dropSelf(OtherBlocks.SILO_ROOF);
         dropSelf(OtherBlocks.SILO_TANK);
         dropSelf(OtherBlocks.SILO_SUPPORTS);

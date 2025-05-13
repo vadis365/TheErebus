@@ -66,8 +66,8 @@ public class ModBlockEntities {
 	public static final Supplier<BlockEntityType<BambooPipeBlockEntity>> BAMBOO_PIPE = BLOCK_ENTITIES.register(
 			"bamboo_pipe",
 			() -> BlockEntityType.Builder.of(BambooPipeBlockEntity::new, OtherBlocks.BAMBOO_PIPE.get()).build(null));
-
-	public static final Supplier<BlockEntityType<BambooPipeExtractBlockEntity>> BAMBOO_PIPE_EXTRACT_ACTIVE = BLOCK_ENTITIES.register(
-			"bamboo_pipe_extract_active",
-			() -> BlockEntityType.Builder.of(BambooPipeExtractBlockEntity::new, OtherBlocks.BAMBOO_PIPE_EXTRACT_ACTIVE.get()).build(null));
+	
+	public static final Supplier<BlockEntityType<BambooPipeExtractBlockEntity>> BAMBOO_PIPE_EXTRACT = BLOCK_ENTITIES.register(
+			"bamboo_pipe_extract",
+			() -> BlockEntityType.Builder.of(BambooPipeExtractBlockEntity::new, OtherBlocks.BAMBOO_PIPE_EXTRACT.get()).build(null));
 }
