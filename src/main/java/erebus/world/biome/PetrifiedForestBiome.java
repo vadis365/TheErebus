@@ -57,6 +57,8 @@ public class PetrifiedForestBiome extends ErebusBiome {
                         .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_RED_SMALL.getPlacedResourceKey())
                         .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_RED_MEDIUM.getPlacedResourceKey())
                         .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_RED_LARGE.getPlacedResourceKey())
+                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.LAVA_LAKE.getPlacedResourceKey())
+                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.ROCK_SPIKE.getPlacedResourceKey())
                         .addFeature(Decoration.UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
                         .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())
                         .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.GOLD_ORE.getPlacedResourceKey())

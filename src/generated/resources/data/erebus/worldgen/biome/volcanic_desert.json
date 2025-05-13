@@ -14,7 +14,11 @@
     [],
     [],
     [],
-    [],
+    [
+      "erebus:scorched_wood",
+      "erebus:lava_lake",
+      "erebus:desert_rock_gneiss"
+    ],
     [],
     [
       "erebus:red_gem",
@@ -38,13 +42,7 @@
     [],
     [],
     [
-      "erebus:cypress",
-      "minecraft:trees_birch",
-      "erebus:nettle",
-      "erebus:tall_bloom",
-      "erebus:weeping_bluebell",
-      "erebus:fern",
-      "erebus:tall_fern"
+      "erebus:prickly_pear"
     ]
   ],
   "has_precipitation": false,

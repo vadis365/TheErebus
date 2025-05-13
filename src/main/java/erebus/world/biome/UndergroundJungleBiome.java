@@ -6,14 +6,13 @@ import erebus.registries.world.feature.OreFeatures;
 import erebus.registries.world.feature.PlantFeatures;
 import erebus.registries.world.feature.TreeFeatures;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -57,34 +56,37 @@ public class UndergroundJungleBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_JUNGLE)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TreeFeatures.ASPER_TREE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TreeFeatures.EUCALYPTUS_TREE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TreeFeatures.MAHOGANY_TREE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TreeFeatures.GIANT_MAHOGANY_TREE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TreeFeatures.MOSSBARK_TREE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, PlantFeatures.NETTLE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, PlantFeatures.TALL_BLOOM.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, PlantFeatures.WEEPING_BLUEBELL.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, PlantFeatures.FERN.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, PlantFeatures.TALL_FERN.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.GOLD_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.COAL_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.DIAMOND_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.EMERALD_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.LAPIS_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.QUARTZ_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.COPPER_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.SILVER_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.TIN_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.LEAD_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.ALUMINUM_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.JADE_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.FOSSIL_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.GNEISS_ORE.getPlacedResourceKey())
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OreFeatures.TEMPLE_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.QUICK_SAND.getPlacedResourceKey())
+                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.POND.getPlacedResourceKey())
+                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.AMBER_GROUND.getPlacedResourceKey())
+                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.AMBER_UMBERSTONE.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, TreeFeatures.ASPER_TREE.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, TreeFeatures.EUCALYPTUS_TREE.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, TreeFeatures.MAHOGANY_TREE.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, TreeFeatures.GIANT_MAHOGANY_TREE.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, TreeFeatures.MOSSBARK_TREE.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.GIANT_MUSHROOM.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.BAMBOO.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.TURNIP.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.MELON.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.FERN.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.GOLD_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.COAL_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.DIAMOND_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.EMERALD_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.LAPIS_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.QUARTZ_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.COPPER_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.SILVER_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.TIN_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.LEAD_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.ALUMINUM_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.JADE_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.FOSSIL_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.GNEISS_ORE.getPlacedResourceKey())
+                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.TEMPLE_ORE.getPlacedResourceKey())
                         .build())
                 .build();
     }

@@ -1,3 +1,4 @@
+
 package erebus.world.feature.plant.config;
 
 import erebus.registries.blocks.providers.PlantBlocks;
@@ -9,8 +10,8 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class AlgaeFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
-    public AlgaeFeatureConfiguration() {
+public class FernFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
+    public FernFeatureConfiguration() {
         super(NoneFeatureConfiguration.CODEC);
     }
 
@@ -20,16 +21,10 @@ public class AlgaeFeatureConfiguration extends Feature<NoneFeatureConfiguration>
         BlockPos pos = context.origin();
         RandomSource random = context.random();
 
-        for (int attempt = 0; attempt < 300; attempt++) {
-            int xOff = random.nextInt(8) - random.nextInt(8);
-            int yOff = random.nextInt(4) - random.nextInt(4);
-            int zOff = random.nextInt(8) - random.nextInt(8);
-
-            BlockPos check = pos.offset(xOff, yOff, zOff);
-
-            if (level.isEmptyBlock(check) && level.getBlockState(check.below()).is(Blocks.WATER)) {
-                setBlock(level, check, PlantBlocks.ALGAE.get().defaultBlockState());
-            }
+        if (random.nextInt(10) == 0 && level.isEmptyBlock(pos.above(2)) && level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)) {
+            setBlock(level, pos, PlantBlocks.TALL_FERN.get().defaultBlockState());
+        } else if (level.isEmptyBlock(pos.above()) && level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)) {
+            setBlock(level, pos, PlantBlocks.FERN.get().defaultBlockState());
         }
 
         return true;

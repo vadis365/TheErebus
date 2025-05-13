@@ -1,0 +1,100 @@
+{
+  "variants": {
+    "east=false,north=false,south=false,up=false,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=false,south=false,up=false,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=false,south=false,up=true,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=false,south=false,up=true,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=false,south=true,up=false,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=false,south=true,up=false,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=false,south=true,up=true,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=false,south=true,up=true,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=true,south=false,up=false,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=true,south=false,up=false,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=true,south=false,up=true,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=true,south=false,up=true,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=true,south=true,up=false,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=true,south=true,up=false,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=true,south=true,up=true,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=false,north=true,south=true,up=true,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=false,south=false,up=false,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=false,south=false,up=false,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=false,south=false,up=true,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=false,south=false,up=true,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=false,south=true,up=false,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=false,south=true,up=false,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=false,south=true,up=true,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=false,south=true,up=true,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=true,south=false,up=false,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=true,south=false,up=false,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=true,south=false,up=true,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=true,south=false,up=true,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=true,south=true,up=false,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=true,south=true,up=false,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=true,south=true,up=true,west=false": {
+      "model": "erebus:block/cultivated_mould"
+    },
+    "east=true,north=true,south=true,up=true,west=true": {
+      "model": "erebus:block/cultivated_mould"
+    }
+  }
+}

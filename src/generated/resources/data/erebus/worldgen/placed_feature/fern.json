@@ -3,10 +3,7 @@
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 20
-    },
-    {
-      "type": "minecraft:in_square"
+      "count": 10
     },
     {
       "type": "minecraft:height_range",
@@ -17,15 +14,6 @@
         },
         "min_inclusive": {
           "above_bottom": 0
-        }
-      }
-    },
-    {
-      "type": "minecraft:block_predicate_filter",
-      "predicate": {
-        "type": "minecraft:would_survive",
-        "state": {
-          "Name": "minecraft:short_grass"
         }
       }
     },

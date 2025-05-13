@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cross",
   "render_type": "minecraft:cutout",
   "textures": {
-    "cross": "erebus:block/cultivated_moss_down"
+    "cross": "erebus:block/cultivated_moss"
   }
 }

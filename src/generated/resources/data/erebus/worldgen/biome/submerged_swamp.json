@@ -14,7 +14,11 @@
     [],
     [],
     [],
-    [],
+    [
+      "erebus:quick_sand",
+      "erebus:rotten_acacia",
+      "erebus:gas_vent"
+    ],
     [],
     [
       "erebus:red_gem",
@@ -41,7 +45,9 @@
       "erebus:marshwood",
       "erebus:mossbark",
       "erebus:vines",
-      "erebus:swamp_plant"
+      "erebus:swamp_bush",
+      "erebus:moss",
+      "erebus:algae"
     ]
   ],
   "has_precipitation": false,

@@ -14,7 +14,12 @@
     [],
     [],
     [],
-    [],
+    [
+      "erebus:quick_sand",
+      "erebus:pond",
+      "erebus:amber_ground",
+      "erebus:amber_umberstone"
+    ],
     [],
     [
       "erebus:red_gem",
@@ -38,17 +43,16 @@
     [],
     [],
     [
-      "minecraft:patch_grass_jungle",
       "erebus:asper",
       "erebus:eucalyptus",
       "erebus:mahogany",
       "erebus:giant_mahogany",
       "erebus:mossbark",
-      "erebus:nettle",
-      "erebus:tall_bloom",
-      "erebus:weeping_bluebell",
-      "erebus:fern",
-      "erebus:tall_fern"
+      "erebus:giant_mushroom",
+      "erebus:bamboo",
+      "erebus:turnip",
+      "erebus:melon",
+      "erebus:fern"
     ]
   ],
   "has_precipitation": false,

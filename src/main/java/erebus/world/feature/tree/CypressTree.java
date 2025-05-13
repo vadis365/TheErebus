@@ -30,6 +30,6 @@ public class CypressTree extends ErebusTree {
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return tree(3, WoodBlocks.SAPLING_CYPRESS);
+        return tree(1, WoodBlocks.SAPLING_CYPRESS);
     }
 }

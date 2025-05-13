@@ -168,7 +168,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .save(output);
 
         threeByThree(PlantBlocks.FIRE_BLOOM, Items.BLAZE_POWDER);
-        threeByThree(PlantBlocks.MOSS_DOWN, ModItems.MOSS_BALL);
+        threeByThree(PlantBlocks.MOSS, ModItems.MOSS_BALL);
 
         ShapedRecipeBuilder.shaped(MISC, OtherBlocks.GAEAN_KEYSTONE)
                 .pattern("V V")
@@ -217,7 +217,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .pattern("SMS")
                 .pattern("GSG")
                 .define('S', ModItems.SUPERNATURAL_VELOCITY)
-                .define('M', PlantBlocks.MOSS_DOWN)
+                .define('M', PlantBlocks.MOSS)
                 .define('G', Tags.Items.DYES_GREEN)
                 .unlockedBy("has_supernatural_velocity", has(ModItems.SUPERNATURAL_VELOCITY))
                 .save(output);
@@ -227,7 +227,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .pattern("SMS")
                 .pattern("LSL")
                 .define('S', ModItems.SUPERNATURAL_VELOCITY)
-                .define('M', PlantBlocks.MOULD_DOWN)
+                .define('M', PlantBlocks.MOULD)
                 .define('L', Items.LAPIS_LAZULI)
                 .unlockedBy("has_supernatural_velocity", has(ModItems.SUPERNATURAL_VELOCITY))
                 .save(output);

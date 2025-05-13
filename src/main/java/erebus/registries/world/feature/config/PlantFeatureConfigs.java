@@ -14,7 +14,9 @@ public class PlantFeatureConfigs {
 
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> ALGAE_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> BAMBOO_CONFIG;
-    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> BIG_LOGS_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> BIG_LOGS_X_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> BIG_LOGS_Z_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> FERN_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GIANT_FLOWER_RANDOM_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GIANT_FLOWER_BLACK_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GIANT_FLOWER_RED_CONFIG;
@@ -44,7 +46,9 @@ public class PlantFeatureConfigs {
     static {
         ALGAE_CONFIG = CONFIGS.register("algae", AlgaeFeatureConfiguration::new);
         BAMBOO_CONFIG = CONFIGS.register("bamboo", () -> new BambooFeatureConfiguration(false, false));
-        BIG_LOGS_CONFIG = CONFIGS.register("big_logs", () -> new BigLogsFeatureConfiguration(5, 5, Direction.NORTH, WoodBlocks.LOG_MAHOGANY));
+        BIG_LOGS_X_CONFIG = CONFIGS.register("big_logs_x", () -> new BigLogsFeatureConfiguration(Direction.NORTH, WoodBlocks.LOG_ROTTEN));
+        BIG_LOGS_Z_CONFIG = CONFIGS.register("big_logs_z", () -> new BigLogsFeatureConfiguration(Direction.EAST, WoodBlocks.LOG_ROTTEN));
+        FERN_CONFIG = CONFIGS.register("fern", FernFeatureConfiguration::new);
         GIANT_FLOWER_RANDOM_CONFIG = CONFIGS.register("giant_flower_random", () -> new GiantFlowerFeatureConfiguration());
         GIANT_FLOWER_BLACK_CONFIG = CONFIGS.register("giant_flower_black", () -> new GiantFlowerFeatureConfiguration(0));
         GIANT_FLOWER_RED_CONFIG = CONFIGS.register("giant_flower_red", () -> new GiantFlowerFeatureConfiguration(1));
@@ -62,8 +66,8 @@ public class PlantFeatureConfigs {
         GIANT_FLOWER_WHITE_CONFIG = CONFIGS.register("giant_flower_white", () -> new GiantFlowerFeatureConfiguration(13));
         GIANT_MUSHROOM_CONFIG = CONFIGS.register("giant_mushroom", GiantMushroomFeatureConfiguration::new);
         MELON_CONFIG = CONFIGS.register("melon", MelonFeatureConfiguration::new);
-        MOSS_CONFIG = CONFIGS.register("moss", () -> new MossPatchFeatureConfiguration(PlantBlocks.MOSS_DOWN));
-        MOULD_CONFIG = CONFIGS.register("mould", () -> new MossPatchFeatureConfiguration(PlantBlocks.MOULD_DOWN));
+        MOSS_CONFIG = CONFIGS.register("moss", () -> new MossPatchFeatureConfiguration(PlantBlocks.MOSS));
+        MOULD_CONFIG = CONFIGS.register("mould", () -> new MossPatchFeatureConfiguration(PlantBlocks.MOULD));
         NETTLE_CONFIG = CONFIGS.register("nettle", NettlePatchFeatureConfiguration::new);
         PRICKLY_PEAR_CONFIG = CONFIGS.register("prickly_pear", PricklyPearPatchFeatureConfiguration::new);
         ROTTEN_TREE_STUMP_CONFIG = CONFIGS.register("rotten_tree_stump", () -> new RottenTreeStumpFeatureConfiguration(5, 5));

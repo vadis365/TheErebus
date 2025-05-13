@@ -1,5 +1,5 @@
 {
-  "feature": "erebus:big_logs",
+  "feature": "erebus:big_logs_z",
   "placement": [
     {
       "type": "minecraft:count",

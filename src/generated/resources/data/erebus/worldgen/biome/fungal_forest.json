@@ -14,7 +14,12 @@
     [],
     [],
     [],
-    [],
+    [
+      "erebus:big_logs_x",
+      "erebus:big_logs_z",
+      "erebus:rotten_tree_stump",
+      "erebus:rotten_acacia"
+    ],
     [],
     [
       "erebus:red_gem",
@@ -38,14 +43,12 @@
     [],
     [],
     [
-      "minecraft:patch_grass_forest",
-      "minecraft:mushroom_island_vegetation",
       "erebus:cypress",
-      "erebus:nettle",
-      "erebus:tall_bloom",
-      "erebus:weeping_bluebell",
+      "erebus:giant_mushroom",
+      "erebus:tangled_stalk",
+      "erebus:high_capped_mushroom",
       "erebus:fern",
-      "erebus:tall_fern"
+      "erebus:moss"
     ]
   ],
   "has_precipitation": false,

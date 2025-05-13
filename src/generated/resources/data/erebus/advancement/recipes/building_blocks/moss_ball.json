@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.erebus.moss_down": {
+    "has_block.erebus.moss": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:moss_down"
+            "items": "erebus:moss"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.erebus.moss_down"
+      "has_block.erebus.moss"
     ]
   ],
   "rewards": {

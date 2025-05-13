@@ -6,7 +6,7 @@
       "item": "minecraft:lapis_lazuli"
     },
     "M": {
-      "item": "erebus:mould_down"
+      "item": "erebus:mould"
     },
     "S": {
       "item": "erebus:supernatural_velocity"
@@ -19,6 +19,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "erebus:cultivated_mould_down"
+    "id": "erebus:cultivated_mould"
   }
 }

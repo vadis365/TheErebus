@@ -6,7 +6,7 @@
       "tag": "c:dyes/green"
     },
     "M": {
-      "item": "erebus:moss_down"
+      "item": "erebus:moss"
     },
     "S": {
       "item": "erebus:supernatural_velocity"
@@ -19,6 +19,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "erebus:cultivated_moss_down"
+    "id": "erebus:cultivated_moss"
   }
 }

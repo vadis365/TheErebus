@@ -62,7 +62,7 @@ public class ModFeatureHelpers {
         registerConfiguredFeature(feature.getConfiguredResourceKey(), Feature.ORE, new OreConfiguration(test, block.get().defaultBlockState(), veinSize));
     }
 
-    protected static void registerSimpleConfiguredPlant(BootstrapContext<ConfiguredFeature<?, ?>> context, ErebusFeature feature, Supplier<? extends Block> block, int tries) {
+    protected static void registerSimpleConfiguredPlant(ErebusFeature feature, Supplier<? extends Block> block, int tries) {
         registerConfiguredFeature(
                 feature.getConfiguredResourceKey(),
                 Feature.FLOWER,

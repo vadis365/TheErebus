@@ -44,8 +44,8 @@ public class PlantBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> FERN;
     public static final DeferredBlock<Block> FIDDLE_HEAD;
     public static final DeferredBlock<VineBlock> THORNS;
-    public static final DeferredBlock<Block> MOSS_DOWN;
-    public static final DeferredBlock<Block> MOULD_DOWN;
+    public static final DeferredBlock<Block> MOSS;
+    public static final DeferredBlock<Block> MOULD;
     public static final DeferredBlock<Block> CULTIVATED_MOSS_DOWN;
     public static final DeferredBlock<Block> CULTIVATED_MOULD_DOWN;
     public static final DeferredBlock<WaterlilyBlock> ALGAE;
@@ -142,10 +142,10 @@ public class PlantBlocks extends ModBlockHelpers {
         FERN = registerSimpleBlock("fern", Properties.ofFullCopy(Blocks.SHORT_GRASS));
         FIDDLE_HEAD = registerSimpleBlock("fiddle_head", Properties.ofFullCopy(Blocks.TALL_GRASS));
         THORNS = registerBlock("thorns", () -> new VineBlock(Properties.ofFullCopy(Blocks.VINE)));
-        MOSS_DOWN = registerSimpleBlock("moss_down", Properties.of().mapColor(MapColor.STONE));
-        MOULD_DOWN = registerSimpleBlock("mould_down", Properties.of().mapColor(MapColor.STONE));
-        CULTIVATED_MOSS_DOWN = registerSimpleBlock("cultivated_moss_down", Properties.of().mapColor(MapColor.STONE));
-        CULTIVATED_MOULD_DOWN = registerSimpleBlock("cultivated_mould_down", Properties.of().mapColor(MapColor.STONE));
+        MOSS = registerBlock("moss", () -> new VineBlock(Properties.ofFullCopy(Blocks.VINE)));
+        MOULD = registerBlock("mould", () -> new VineBlock(Properties.ofFullCopy(Blocks.VINE)));
+        CULTIVATED_MOSS_DOWN = registerBlock("cultivated_moss", () -> new VineBlock(Properties.ofFullCopy(Blocks.VINE)));
+        CULTIVATED_MOULD_DOWN = registerBlock("cultivated_mould", () -> new VineBlock(Properties.ofFullCopy(Blocks.VINE)));
         ALGAE = registerBlock(
                 "algae",
                 () -> new WaterlilyBlock(Properties.of()

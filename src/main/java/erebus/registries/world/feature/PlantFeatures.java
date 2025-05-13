@@ -17,7 +17,9 @@ public class PlantFeatures extends ModFeatureHelpers {
     //NEW
     public static AlgaeFeature ALGAE = new AlgaeFeature("algae");
     public static BambooFeature BAMBOO = new BambooFeature("bamboo");
-    public static BigLogsFeature BIG_LOGS = new BigLogsFeature("big_logs");
+    public static BigLogsFeature BIG_LOGS_X = new BigLogsFeature("big_logs_x");
+    public static BigLogsFeature BIG_LOGS_Z = new BigLogsFeature("big_logs_z");
+    public static FernFeature FERN = new FernFeature("fern");
     public static GiantFlowerFeature GIANT_FLOWER = new GiantFlowerFeature("giant_flower");
     public static GiantFlowerFeature GIANT_FLOWER_BLACK = new GiantFlowerFeature("giant_flower_black");
     public static GiantFlowerFeature GIANT_FLOWER_RED = new GiantFlowerFeature("giant_flower_red");
@@ -43,19 +45,17 @@ public class PlantFeatures extends ModFeatureHelpers {
     public static SwampBushFeature SWAMP_BUSH = new SwampBushFeature("swamp_bush");
     public static TurnipFeature TURNIP = new TurnipFeature("turnip");
     public static VinesFeature VINES = new VinesFeature("vines");
+    public static WeepingBluebell WEEPING_BLUEBELL = new WeepingBluebell("weeping_bluebell");
 
     // Old
     public static ErebusPlantFeature SWAMP_PLANT = new ErebusPlantFeature("swamp_plant");
     public static ErebusPlantFeature FIRE_BLOOM = new ErebusPlantFeature("fire_bloom");
     public static ErebusPlantFeature FIDDLE_HEAD = new ErebusPlantFeature("fiddle_head");
     public static ErebusPlantFeature BULLRUSH = new ErebusPlantFeature("bullrush");
-    public static ErebusPlantFeature WEEPING_BLUEBELL = new ErebusPlantFeature("weeping_bluebell");
     public static ErebusPlantFeature SUNDEW = new ErebusPlantFeature("sundew");
     public static ErebusPlantFeature TALL_BLOOM = new ErebusPlantFeature("tall_bloom");
     public static ErebusPlantFeature TANGLED_STALK = new ErebusPlantFeature("tangled_stalk");
     public static ErebusPlantFeature HIGH_CAPPED_MUSHROOM = new ErebusPlantFeature("high_capped_mushroom");
-    public static ErebusPlantFeature FERN = new ErebusPlantFeature("fern");
-    public static ErebusPlantFeature TALL_FERN = new ErebusPlantFeature("tall_fern");
 
     public static SwampBerryBushFeature SWAMP_BERRY_BUSH;
     public static HeartBerryBushFeature HEART_BERRY_BUSH;
@@ -65,7 +65,9 @@ public class PlantFeatures extends ModFeatureHelpers {
         setConfiguredContext(context);
         registerConfiguredFeatureWithConfig(ALGAE, ALGAE_CONFIG);
         registerConfiguredFeatureWithConfig(BAMBOO, BAMBOO_CONFIG);
-        registerConfiguredFeatureWithConfig(BIG_LOGS, BIG_LOGS_CONFIG);
+        registerConfiguredFeatureWithConfig(BIG_LOGS_X, BIG_LOGS_X_CONFIG);
+        registerConfiguredFeatureWithConfig(BIG_LOGS_Z, BIG_LOGS_Z_CONFIG);
+        registerConfiguredFeatureWithConfig(FERN, FERN_CONFIG);
         registerConfiguredFeatureWithConfig(GIANT_FLOWER, GIANT_FLOWER_RANDOM_CONFIG);
         registerConfiguredFeatureWithConfig(GIANT_FLOWER_BLACK, GIANT_FLOWER_BLACK_CONFIG);
         registerConfiguredFeatureWithConfig(GIANT_FLOWER_RED, GIANT_FLOWER_RED_CONFIG);
@@ -91,6 +93,7 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerConfiguredFeatureWithConfig(SWAMP_BUSH, SWAMP_BUSH_CONFIG);
         registerConfiguredFeatureWithConfig(TURNIP, TURNIP_CONFIG);
         registerConfiguredFeatureWithConfig(VINES, VINES_CONFIG);
+        registerSimpleConfiguredPlant(WEEPING_BLUEBELL, PlantBlocks.WEEPING_BLUEBELL, 5);
 
         SWAMP_BERRY_BUSH = new SwampBerryBushFeature();
         HEART_BERRY_BUSH = new HeartBerryBushFeature();
@@ -100,24 +103,23 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerConfiguredBush(HEART_BERRY_BUSH);
         registerConfiguredBush(JADE_BERRY_BUSH);
 
-        registerSimpleConfiguredPlant(context, SWAMP_PLANT, PlantBlocks.SWAMP_PLANT, 64);
-        registerSimpleConfiguredPlant(context, FIRE_BLOOM, PlantBlocks.FIRE_BLOOM, 64);
-        registerSimpleConfiguredPlant(context, FIDDLE_HEAD, PlantBlocks.FIDDLE_HEAD, 64);
-        registerSimpleConfiguredPlant(context, BULLRUSH, PlantBlocks.BULLRUSH, 64);
-        registerSimpleConfiguredPlant(context, WEEPING_BLUEBELL, PlantBlocks.WEEPING_BLUEBELL, 64);
-        registerSimpleConfiguredPlant(context, SUNDEW, PlantBlocks.SUNDEW, 64);
-        registerSimpleConfiguredPlant(context, TALL_BLOOM, PlantBlocks.TALL_BLOOM, 64);
-        registerSimpleConfiguredPlant(context, TANGLED_STALK, PlantBlocks.TANGLED_STALK, 64);
-        registerSimpleConfiguredPlant(context, HIGH_CAPPED_MUSHROOM, PlantBlocks.HIGH_CAPPED_MUSHROOM, 64);
-        registerSimpleConfiguredPlant(context, FERN, PlantBlocks.FERN, 32);
-        registerSimpleConfiguredPlant(context, TALL_FERN, PlantBlocks.TALL_FERN, 32);
+        registerSimpleConfiguredPlant(SWAMP_PLANT, PlantBlocks.SWAMP_PLANT, 64);
+        registerSimpleConfiguredPlant(FIRE_BLOOM, PlantBlocks.FIRE_BLOOM, 64);
+        registerSimpleConfiguredPlant(FIDDLE_HEAD, PlantBlocks.FIDDLE_HEAD, 64);
+        registerSimpleConfiguredPlant(BULLRUSH, PlantBlocks.BULLRUSH, 64);
+        registerSimpleConfiguredPlant(SUNDEW, PlantBlocks.SUNDEW, 64);
+        registerSimpleConfiguredPlant(TALL_BLOOM, PlantBlocks.TALL_BLOOM, 64);
+        registerSimpleConfiguredPlant(TANGLED_STALK, PlantBlocks.TANGLED_STALK, 64);
+        registerSimpleConfiguredPlant(HIGH_CAPPED_MUSHROOM, PlantBlocks.HIGH_CAPPED_MUSHROOM, 64);
     }
 
     public static void initPlacedFeatures(BootstrapContext<PlacedFeature> context) {
         setPlacedContext(context);
         registerPlacedFeature(ALGAE);
         registerPlacedFeature(BAMBOO);
-        registerPlacedFeature(BIG_LOGS);
+        registerPlacedFeature(BIG_LOGS_X);
+        registerPlacedFeature(BIG_LOGS_Z);
+        registerPlacedFeature(FERN);
         registerPlacedFeature(GIANT_FLOWER);
         registerPlacedFeature(GIANT_FLOWER_BLACK);
         registerPlacedFeature(GIANT_FLOWER_RED);
@@ -157,7 +159,5 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerPlacedFeature(TALL_BLOOM);
         registerPlacedFeature(TANGLED_STALK);
         registerPlacedFeature(HIGH_CAPPED_MUSHROOM);
-        registerPlacedFeature(FERN);
-        registerPlacedFeature(TALL_FERN);
     }
 }

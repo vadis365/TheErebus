@@ -494,8 +494,8 @@ public class ModLang extends ModLangProvider {
         addBlock(PlantBlocks.FERN, "Fern");
         addBlock(PlantBlocks.FIDDLE_HEAD, "Fiddlehead");
         addBlock(PlantBlocks.THORNS, "Thorns");
-        addBlock(PlantBlocks.MOSS_DOWN, "Moss");
-        addBlock(PlantBlocks.MOULD_DOWN, "Mould");
+        addBlock(PlantBlocks.MOSS, "Moss");
+        addBlock(PlantBlocks.MOULD, "Mould");
         addBlock(PlantBlocks.CULTIVATED_MOSS_DOWN, "Cultivated Moss");
         addBlock(PlantBlocks.CULTIVATED_MOULD_DOWN, "Cultivated Mould");
         addBlock(PlantBlocks.ALGAE, "Swamp Algae");

@@ -6,6 +6,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -14,18 +15,16 @@ import java.util.function.Supplier;
 
 public class BigLogsFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
 
-    private final int length;
-    private final int baseRadius;
+    private int length;
+    private int baseRadius;
     private final Direction direction;
     private final boolean genOres;
     protected Supplier<? extends Block> log;
     protected Supplier<? extends Block> core;
     protected Supplier<? extends Block> ore;
 
-    public BigLogsFeatureConfiguration(int length, int baseRadius, Direction direction, Supplier<? extends Block> log, Supplier<? extends Block> core, Supplier<? extends Block> ore, boolean genOres) {
+    public BigLogsFeatureConfiguration(Direction direction, Supplier<? extends Block> log, Supplier<? extends Block> core, Supplier<? extends Block> ore, boolean genOres) {
         super(NoneFeatureConfiguration.CODEC);
-        this.length = length;
-        this.baseRadius = baseRadius;
         this.direction = direction;
         this.log = log;
         this.core = core;
@@ -33,10 +32,8 @@ public class BigLogsFeatureConfiguration extends Feature<NoneFeatureConfiguratio
         this.genOres = genOres;
     }
 
-    public BigLogsFeatureConfiguration(int length, int baseRadius, Direction direction, Supplier<? extends Block> outerLayer) {
+    public BigLogsFeatureConfiguration(Direction direction, Supplier<? extends Block> outerLayer) {
         super(NoneFeatureConfiguration.CODEC);
-        this.length = length;
-        this.baseRadius = baseRadius;
         this.direction = direction;
         this.log = outerLayer;
         this.ore = outerLayer;
@@ -49,6 +46,8 @@ public class BigLogsFeatureConfiguration extends Feature<NoneFeatureConfiguratio
         WorldGenLevel level = context.level();
         BlockPos pos = context.origin();
         RandomSource random = context.random();
+        length = random.nextInt(5) + 4;
+        baseRadius = random.nextInt(3) + 2;
 
         boolean isNorthSouth = direction == Direction.NORTH || direction == Direction.SOUTH;
 
@@ -81,7 +80,8 @@ public class BigLogsFeatureConfiguration extends Feature<NoneFeatureConfiguratio
                 }
             }
         }
-        return true;
+
+        return level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK);
     }
 
     private void generateLogStructure(WorldGenLevel level, BlockPos pos, RandomSource random, boolean isNorthSouth) {
@@ -107,7 +107,7 @@ public class BigLogsFeatureConfiguration extends Feature<NoneFeatureConfiguratio
                         pos.offset(axisPos, y + baseRadius, i);
 
                 if (rounded == baseRadius) {
-                    setBlock(level, blockPos, log.get().defaultBlockState());
+                    setBlock(level, blockPos, log.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, isNorthSouth ? Direction.Axis.Z : Direction.Axis.X));
 
                     if (random.nextInt(12) == 0) {
                         setBlock(level, blockPos, Blocks.AIR.defaultBlockState());

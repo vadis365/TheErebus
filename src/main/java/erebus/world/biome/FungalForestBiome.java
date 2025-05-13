@@ -5,7 +5,6 @@ import erebus.registries.world.feature.OreFeatures;
 import erebus.registries.world.feature.PlantFeatures;
 import erebus.registries.world.feature.TreeFeatures;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -14,8 +13,7 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.UNDERGROUND_ORES;
-import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.VEGETAL_DECORATION;
+import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.*;
 
 public class FungalForestBiome extends ErebusBiome {
 
@@ -49,14 +47,16 @@ public class FungalForestBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
-                        .addFeature(VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_FOREST)
-                        .addFeature(VEGETAL_DECORATION, VegetationPlacements.MUSHROOM_ISLAND_VEGETATION)
+                        .addFeature(SURFACE_STRUCTURES, PlantFeatures.BIG_LOGS_X.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, PlantFeatures.BIG_LOGS_Z.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, PlantFeatures.ROTTEN_TREE_STUMP.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ROTTEN_ACACIA.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, TreeFeatures.CYPRESS_TREE.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, PlantFeatures.NETTLE.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, PlantFeatures.TALL_BLOOM.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, PlantFeatures.WEEPING_BLUEBELL.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.GIANT_MUSHROOM.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.TANGLED_STALK.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.HIGH_CAPPED_MUSHROOM.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.FERN.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, PlantFeatures.TALL_FERN.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.MOSS.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.GOLD_ORE.getPlacedResourceKey())

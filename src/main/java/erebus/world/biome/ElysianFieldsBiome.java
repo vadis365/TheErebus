@@ -67,7 +67,7 @@ public class ElysianFieldsBiome extends ErebusBiome {
                         .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.TALL_BLOOM.getPlacedResourceKey())
                         .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.WEEPING_BLUEBELL.getPlacedResourceKey())
                         .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.FERN.getPlacedResourceKey())
-                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.TALL_FERN.getPlacedResourceKey())
+                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.MOSS.getPlacedResourceKey())
                         .addFeature(Decoration.UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
                         .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())
                         .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.GOLD_ORE.getPlacedResourceKey())

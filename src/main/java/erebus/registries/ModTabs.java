@@ -549,8 +549,8 @@ public class ModTabs {
                         output.accept(PlantBlocks.TANGLED_STALK);
                         output.accept(PlantBlocks.HIGH_CAPPED_MUSHROOM);
                         output.accept(PlantBlocks.TALL_FERN);
-                        output.accept(PlantBlocks.MOSS_DOWN);
-                        output.accept(PlantBlocks.MOULD_DOWN);
+                        output.accept(PlantBlocks.MOSS);
+                        output.accept(PlantBlocks.MOULD);
                         output.accept(PlantBlocks.CULTIVATED_MOSS_DOWN);
                         output.accept(PlantBlocks.CULTIVATED_MOULD_DOWN);
                         output.accept(PlantBlocks.ALGAE);

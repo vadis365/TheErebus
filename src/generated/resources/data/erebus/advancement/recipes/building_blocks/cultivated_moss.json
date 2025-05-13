@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "erebus:cultivated_moss_down"
+        "recipe": "erebus:cultivated_moss"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "erebus:cultivated_moss_down"
+      "erebus:cultivated_moss"
     ]
   }
 }

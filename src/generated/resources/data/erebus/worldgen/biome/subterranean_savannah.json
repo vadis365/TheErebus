@@ -14,7 +14,13 @@
     [],
     [],
     [],
-    [],
+    [
+      "erebus:pond",
+      "erebus:savannah_rock",
+      "erebus:rotten_acacia",
+      "erebus:amber_ground",
+      "erebus:amber_umberstone"
+    ],
     [],
     [
       "erebus:red_gem",
@@ -38,10 +44,10 @@
     [],
     [],
     [
-      "minecraft:patch_grass_savanna",
       "minecraft:trees_savanna",
       "erebus:asper",
-      "erebus:baobab"
+      "erebus:baobab",
+      "erebus:bamboo"
     ]
   ],
   "has_precipitation": false,

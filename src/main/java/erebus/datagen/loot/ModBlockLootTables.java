@@ -1,27 +1,16 @@
 package erebus.datagen.loot;
 
-import org.jetbrains.annotations.NotNull;
-
 import erebus.datagen.providers.ModBlockLootTableProvider;
 import erebus.registries.ModItems;
 import erebus.registries.blocks.ModBlocks;
-import erebus.registries.blocks.providers.AmberBlocks;
-import erebus.registries.blocks.providers.DoorBlocks;
-import erebus.registries.blocks.providers.FenceBlocks;
-import erebus.registries.blocks.providers.OreBlocks;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.PlantBlocks;
-import erebus.registries.blocks.providers.SlabBlocks;
-import erebus.registries.blocks.providers.StairBlocks;
-import erebus.registries.blocks.providers.UmberstoneBlocks;
-import erebus.registries.blocks.providers.WallBlocks;
-import erebus.registries.blocks.providers.WoodBlocks;
+import erebus.registries.blocks.providers.*;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
+import org.jetbrains.annotations.NotNull;
 
 public class ModBlockLootTables extends ModBlockLootTableProvider {
 
@@ -294,8 +283,8 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(PlantBlocks.FERN);
         dropSelf(PlantBlocks.FIDDLE_HEAD);
         dropSelf(PlantBlocks.THORNS);
-        dropSelf(PlantBlocks.MOSS_DOWN);
-        dropSelf(PlantBlocks.MOULD_DOWN);
+        dropSelf(PlantBlocks.MOSS);
+        dropSelf(PlantBlocks.MOULD);
         dropSelf(PlantBlocks.CULTIVATED_MOSS_DOWN);
         dropSelf(PlantBlocks.CULTIVATED_MOULD_DOWN);
         dropSelf(PlantBlocks.ALGAE);
