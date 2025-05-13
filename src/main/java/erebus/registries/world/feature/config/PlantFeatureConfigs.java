@@ -15,6 +15,7 @@ public class PlantFeatureConfigs {
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> ALGAE_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> BAMBOO_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> BIG_LOGS_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GIANT_FLOWER_RANDOM_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GIANT_FLOWER_BLACK_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GIANT_FLOWER_RED_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GIANT_FLOWER_BROWN_CONFIG;
@@ -44,6 +45,7 @@ public class PlantFeatureConfigs {
         ALGAE_CONFIG = CONFIGS.register("algae", AlgaeFeatureConfiguration::new);
         BAMBOO_CONFIG = CONFIGS.register("bamboo", () -> new BambooFeatureConfiguration(false, false));
         BIG_LOGS_CONFIG = CONFIGS.register("big_logs", () -> new BigLogsFeatureConfiguration(5, 5, Direction.NORTH, WoodBlocks.LOG_MAHOGANY));
+        GIANT_FLOWER_RANDOM_CONFIG = CONFIGS.register("giant_flower_random", () -> new GiantFlowerFeatureConfiguration());
         GIANT_FLOWER_BLACK_CONFIG = CONFIGS.register("giant_flower_black", () -> new GiantFlowerFeatureConfiguration(0));
         GIANT_FLOWER_RED_CONFIG = CONFIGS.register("giant_flower_red", () -> new GiantFlowerFeatureConfiguration(1));
         GIANT_FLOWER_BROWN_CONFIG = CONFIGS.register("giant_flower_brown", () -> new GiantFlowerFeatureConfiguration(2));
@@ -67,7 +69,7 @@ public class PlantFeatureConfigs {
         ROTTEN_TREE_STUMP_CONFIG = CONFIGS.register("rotten_tree_stump", () -> new RottenTreeStumpFeatureConfiguration(5, 5));
         SWAMP_BUSH_CONFIG = CONFIGS.register("swamp_bush", SwampBushFeatureConfiguration::new);
         TURNIP_CONFIG = CONFIGS.register("turnip", TurnipFeatureConfiguration::new);
-        VINES_CONFIG = CONFIGS.register("vines", VinesFeatureConfiguration::new);
+        VINES_CONFIG = CONFIGS.register("vines", () -> new VinesFeatureConfiguration(70, 5));
     }
 
     public static void init() {

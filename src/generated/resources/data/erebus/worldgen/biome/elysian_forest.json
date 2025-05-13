@@ -55,6 +55,15 @@
     "axolotls": [],
     "creature": [
       {
+        "type": "erebus:velvet_worm",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      }
+    ],
+    "misc": [],
+    "monster": [
+      {
         "type": "erebus:fly",
         "maxCount": 2,
         "minCount": 1,
@@ -95,16 +104,8 @@
         "maxCount": 3,
         "minCount": 2,
         "weight": 15
-      },
-      {
-        "type": "erebus:velvet_worm",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 10
       }
     ],
-    "misc": [],
-    "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

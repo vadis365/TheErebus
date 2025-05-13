@@ -48,7 +48,9 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [
+    "creature": [],
+    "misc": [],
+    "monster": [
       {
         "type": "erebus:fly",
         "maxCount": 8,
@@ -80,8 +82,6 @@
         "weight": 20
       }
     ],
-    "misc": [],
-    "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

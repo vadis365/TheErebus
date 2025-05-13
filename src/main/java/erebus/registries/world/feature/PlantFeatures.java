@@ -18,6 +18,7 @@ public class PlantFeatures extends ModFeatureHelpers {
     public static AlgaeFeature ALGAE = new AlgaeFeature("algae");
     public static BambooFeature BAMBOO = new BambooFeature("bamboo");
     public static BigLogsFeature BIG_LOGS = new BigLogsFeature("big_logs");
+    public static GiantFlowerFeature GIANT_FLOWER = new GiantFlowerFeature("giant_flower");
     public static GiantFlowerFeature GIANT_FLOWER_BLACK = new GiantFlowerFeature("giant_flower_black");
     public static GiantFlowerFeature GIANT_FLOWER_RED = new GiantFlowerFeature("giant_flower_red");
     public static GiantFlowerFeature GIANT_FLOWER_BROWN = new GiantFlowerFeature("giant_flower_brown");
@@ -65,6 +66,7 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerConfiguredFeatureWithConfig(ALGAE, ALGAE_CONFIG);
         registerConfiguredFeatureWithConfig(BAMBOO, BAMBOO_CONFIG);
         registerConfiguredFeatureWithConfig(BIG_LOGS, BIG_LOGS_CONFIG);
+        registerConfiguredFeatureWithConfig(GIANT_FLOWER, GIANT_FLOWER_RANDOM_CONFIG);
         registerConfiguredFeatureWithConfig(GIANT_FLOWER_BLACK, GIANT_FLOWER_BLACK_CONFIG);
         registerConfiguredFeatureWithConfig(GIANT_FLOWER_RED, GIANT_FLOWER_RED_CONFIG);
         registerConfiguredFeatureWithConfig(GIANT_FLOWER_BROWN, GIANT_FLOWER_BROWN_CONFIG);
@@ -116,6 +118,7 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerPlacedFeature(ALGAE);
         registerPlacedFeature(BAMBOO);
         registerPlacedFeature(BIG_LOGS);
+        registerPlacedFeature(GIANT_FLOWER);
         registerPlacedFeature(GIANT_FLOWER_BLACK);
         registerPlacedFeature(GIANT_FLOWER_RED);
         registerPlacedFeature(GIANT_FLOWER_BROWN);

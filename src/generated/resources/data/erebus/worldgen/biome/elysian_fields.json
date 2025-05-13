@@ -38,9 +38,8 @@
     [],
     [],
     [
-      "minecraft:patch_grass_normal",
-      "minecraft:flower_flower_forest",
       "erebus:cypress",
+      "erebus:giant_flower",
       "erebus:nettle",
       "erebus:tall_bloom",
       "erebus:weeping_bluebell",
@@ -53,7 +52,9 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [
+    "creature": [],
+    "misc": [],
+    "monster": [
       {
         "type": "erebus:fly",
         "maxCount": 2,
@@ -103,8 +104,6 @@
         "weight": 10
       }
     ],
-    "misc": [],
-    "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []
