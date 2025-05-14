@@ -37,14 +37,14 @@ public class BambooPipeExtractBlockEntity extends BlockEntity {
 				tile.setChanged();
 			}
 			tile.prevTankAmount = tile.tank.getFluidAmount();
-			
+
 			if (!state.getValue(BambooPipeExtract.ACTIVE)) {
 				return;
-				}
+			}
 
 			else {
 				Direction pipeFacing = tile.getBlockState().getValue(BambooPipeExtract.FACING);
-				Optional<IFluidHandler> handlerOptionalInput = CapHelper.getFluidHandler(level, pos.relative(pipeFacing.getOpposite()), pipeFacing);
+				Optional<IFluidHandler> handlerOptionalInput = CapHelper.getFluidHandler(level, pos.relative(pipeFacing), pipeFacing.getOpposite());
 				handlerOptionalInput.ifPresent((tankToDrawFrom) -> {
 					int tanks = tankToDrawFrom.getTanks();
 					for (int x = 0; x < tanks; x++) {
@@ -60,24 +60,26 @@ public class BambooPipeExtractBlockEntity extends BlockEntity {
 					}
 				});
 
-			for (Direction facing : Direction.values()) {
-				Optional<IFluidHandler> handlerOptionalOutput = CapHelper.getFluidHandler(level, pos.relative(facing), facing.getOpposite());
-				handlerOptionalOutput.ifPresent((receptacle) -> {
-					int tanks = receptacle.getTanks();
-					for (int x = 0; x < tanks; x++) {
-						if (receptacle.getTankCapacity(x) > 0) {
-							FluidStack contents = receptacle.getFluidInTank(x);
-							if (!tile.tank.getFluid().isEmpty()) {
-								if (contents.isEmpty() || contents.getAmount() <= receptacle.getTankCapacity(x) - tile.tank.getFluid().getAmount() && contents.is(tile.tank.getFluid().getFluid())) {
-									receptacle.fill(tile.tank.drain(new FluidStack(tile.tank.getFluid().getFluid(), tile.tank.getFluid().getAmount()), IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE);
-									tile.setChanged();
+				for (Direction facing : Direction.values()) {
+					if (facing != pipeFacing) {
+						Optional<IFluidHandler> handlerOptionalOutput = CapHelper.getFluidHandler(level, pos.relative(facing), facing.getOpposite());
+						handlerOptionalOutput.ifPresent((receptacle) -> {
+							int tanks = receptacle.getTanks();
+							for (int x = 0; x < tanks; x++) {
+								if (receptacle.getTankCapacity(x) > 0) {
+									FluidStack contents = receptacle.getFluidInTank(x);
+									if (!tile.tank.getFluid().isEmpty()) {
+										if (contents.isEmpty() || contents.getAmount() <= receptacle.getTankCapacity(x) - tile.tank.getFluid().getAmount() && contents.is(tile.tank.getFluid().getFluid())) {
+											receptacle.fill(tile.tank.drain(new FluidStack(tile.tank.getFluid().getFluid(), tile.tank.getFluid().getAmount()), IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE);
+											tile.setChanged();
+										}
+									}
 								}
 							}
-						}
+						});
 					}
-				});
+				}
 			}
-		}
 		}
 	}
 

@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import erebus.block.bamboo.BambooPipe;
 import erebus.registries.ModBlockEntities;
 import erebus.utils.CapHelper;
 import net.minecraft.core.BlockPos;
@@ -35,22 +36,25 @@ public class BambooPipeBlockEntity extends BlockEntity {
 				tile.setChanged();
 			}
 			tile.prevTankAmount = tile.tank.getFluidAmount();
+			Direction pipeFacing = tile.getBlockState().getValue(BambooPipe.FACING);
 			for (Direction facing : Direction.values()) {
-				Optional<IFluidHandler> handlerOptional = CapHelper.getFluidHandler(level, pos.relative(facing), facing.getOpposite());
-				handlerOptional.ifPresent((receptacle) -> {
-					int tanks = receptacle.getTanks();
-					for (int x = 0; x < tanks; x++) {
-						if (receptacle.getTankCapacity(x) > 0) {
-							FluidStack contents = receptacle.getFluidInTank(x);
-							if (!tile.tank.getFluid().isEmpty()) {
-								if (contents.isEmpty() || contents.getAmount() <= receptacle.getTankCapacity(x) - tile.tank.getFluid().getAmount() && contents.is(tile.tank.getFluid().getFluid())) {
-									receptacle.fill(tile.tank.drain(new FluidStack(tile.tank.getFluid().getFluid(), tile.tank.getFluid().getAmount()), IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE);
-									tile.setChanged();
+				if(facing != pipeFacing) {
+					Optional<IFluidHandler> handlerOptional = CapHelper.getFluidHandler(level, pos.relative(facing), facing.getOpposite());
+					handlerOptional.ifPresent((receptacle) -> {
+						int tanks = receptacle.getTanks();
+						for (int x = 0; x < tanks; x++) {
+							if (receptacle.getTankCapacity(x) > 0) {
+								FluidStack contents = receptacle.getFluidInTank(x);
+								if (!tile.tank.getFluid().isEmpty()) {
+									if (contents.isEmpty() || contents.getAmount() <= receptacle.getTankCapacity(x) - tile.tank.getFluid().getAmount() && contents.is(tile.tank.getFluid().getFluid())) {
+										receptacle.fill(tile.tank.drain(new FluidStack(tile.tank.getFluid().getFluid(), tile.tank.getFluid().getAmount()), IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE);
+										tile.setChanged();
+									}
 								}
 							}
 						}
-					}
-				});
+					});
+				}
 			}
 		}
 	}
