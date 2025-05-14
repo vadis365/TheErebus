@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import erebus.block.entity.FluidJarBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
@@ -38,7 +39,7 @@ public class FluidJarRenderer implements BlockEntityRenderer<FluidJarBlockEntity
 		var fluidExtensions = IClientFluidTypeExtensions.of(fluidStack.getFluid());
 		
 		TextureAtlasSprite fluidStillSprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidExtensions.getStillTexture());
-		VertexConsumer buffer = bufferIn.getBuffer(Sheets.translucentCullBlockSheet());
+		VertexConsumer buffer = bufferIn.getBuffer(RenderType.CUTOUT);
 		int fluidColor = fluidExtensions.getTintColor();
 		stack.pushPose();
 		stack.translate(0D, 0D, 0D);

@@ -45,7 +45,7 @@ public class FluidJarStackItemRenderer extends BlockEntityWithoutLevelRenderer {
 		var fluidExtensions = IClientFluidTypeExtensions.of(fluidStack.getFluid());
 
 		TextureAtlasSprite fluidStillSprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidExtensions.getStillTexture());
-		VertexConsumer buffer = bufferIn.getBuffer(RenderType.translucent());
+		VertexConsumer buffer = bufferIn.getBuffer(RenderType.CUTOUT);
 		int fluidColor = fluidExtensions.getTintColor();
 		matrixStack.pushPose();
 		matrixStack.translate(0D, 0D, 0D);
