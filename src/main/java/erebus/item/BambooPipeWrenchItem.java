@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import erebus.block.bamboo.BambooPipe;
+import erebus.block.bamboo.BambooPipeExtract;
 import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -54,6 +55,21 @@ public class BambooPipeWrenchItem extends Item {
 					level.removeBlockEntity(pos);
 					level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
 					ItemStack stackDrop = new ItemStack(OtherBlocks.BAMBOO_PIPE.get());
+					Block.popResource(level, pos, stackDrop);
+					level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.5F, 2.0F);
+					return InteractionResult.SUCCESS;
+				}
+			}
+			
+			if (state != null && state.getBlock() == OtherBlocks.BAMBOO_PIPE_EXTRACT.get()) {
+				if (!player.isCrouching()) {
+					BlockState stateNew = cycleState(state, BambooPipeExtract.FACING);
+					level.setBlock(pos, stateNew, Block.UPDATE_ALL);
+					return InteractionResult.SUCCESS;
+				} else {
+					level.removeBlockEntity(pos);
+					level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+					ItemStack stackDrop = new ItemStack(OtherBlocks.BAMBOO_PIPE_EXTRACT.get());
 					Block.popResource(level, pos, stackDrop);
 					level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.5F, 2.0F);
 					return InteractionResult.SUCCESS;
