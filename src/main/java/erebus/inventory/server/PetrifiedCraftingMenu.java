@@ -1,4 +1,4 @@
-package erebus.inventory;
+package erebus.inventory.server;
 
 import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.client.ModMenuTypes;

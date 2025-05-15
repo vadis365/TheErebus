@@ -1,12 +1,22 @@
 package erebus;
 
+import java.util.Locale;
+
+import org.slf4j.Logger;
+
 import com.mojang.logging.LogUtils;
+
 import erebus.block.entity.BambooPipeBlockEntity;
 import erebus.block.entity.BambooPipeExtractBlockEntity;
 import erebus.block.entity.FluidJarBlockEntity;
+import erebus.block.entity.LiquifierBlockEntity;
 import erebus.network.data.DeathCompassData;
 import erebus.recipes.ModCustomRecipes;
-import erebus.registries.*;
+import erebus.registries.ModBlockEntities;
+import erebus.registries.ModFluids;
+import erebus.registries.ModItems;
+import erebus.registries.ModSounds;
+import erebus.registries.ModTabs;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModBlockEntityRendering;
 import erebus.registries.client.ModItemRendering;
@@ -48,9 +58,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
-import org.slf4j.Logger;
-
-import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -166,6 +173,7 @@ public class Erebus {
 		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.FLUID_JAR.get(), FluidJarBlockEntity::getTank);
 		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.BAMBOO_PIPE.get(), BambooPipeBlockEntity::getTank);
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.BAMBOO_PIPE_EXTRACT.get(), BambooPipeExtractBlockEntity::getTank);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.LIQUIFIER.get(), LiquifierBlockEntity::getTank);
 		event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidBucketWrapper(stack), ModItems.BEETLE_JUICE_BUCKET.get());
 	}
 }

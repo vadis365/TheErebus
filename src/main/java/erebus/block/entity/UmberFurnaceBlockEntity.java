@@ -1,6 +1,6 @@
 package erebus.block.entity;
 
-import erebus.inventory.UmberFurnaceMenu;
+import erebus.inventory.server.UmberFurnaceMenu;
 import erebus.registries.ModBlockEntities;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;

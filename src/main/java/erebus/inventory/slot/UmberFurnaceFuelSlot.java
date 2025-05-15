@@ -1,6 +1,6 @@
 package erebus.inventory.slot;
 
-import erebus.inventory.UmberFurnaceMenu;
+import erebus.inventory.server.UmberFurnaceMenu;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;

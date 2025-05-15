@@ -1,14 +1,17 @@
 package erebus.registries.client;
 
+import java.util.function.Supplier;
+
 import erebus.Erebus;
-import erebus.inventory.PetrifiedCraftingMenu;
-import erebus.inventory.UmberFurnaceMenu;
+import erebus.inventory.server.LiquifierMenu;
+import erebus.inventory.server.PetrifiedCraftingMenu;
+import erebus.inventory.server.UmberFurnaceMenu;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
+import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.function.Supplier;
 
 public class ModMenuTypes {
 
@@ -16,4 +19,5 @@ public class ModMenuTypes {
 
     public static final Supplier<MenuType<PetrifiedCraftingMenu>> PETRIFIED_CRAFTING_MENU = MENU_TYPES.register("petrified_crafting_table", () -> new MenuType<>(PetrifiedCraftingMenu::new, FeatureFlags.DEFAULT_FLAGS));
     public static final Supplier<MenuType<UmberFurnaceMenu>> UMBER_FURNACE_MENU = MENU_TYPES.register("umberfurnace", () -> new MenuType<>(UmberFurnaceMenu::new, FeatureFlags.DEFAULT_FLAGS));
+    public static final DeferredHolder<MenuType<?>, MenuType<LiquifierMenu>> LIQUIFIER = MENU_TYPES.register("liquifier", () -> IMenuTypeExtension.create(LiquifierMenu::new));
 }

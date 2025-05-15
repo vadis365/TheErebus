@@ -1,7 +1,8 @@
 package erebus.block;
 
 import com.mojang.serialization.MapCodec;
-import erebus.inventory.PetrifiedCraftingMenu;
+
+import erebus.inventory.server.PetrifiedCraftingMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;

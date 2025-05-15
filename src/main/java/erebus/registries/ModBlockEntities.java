@@ -14,6 +14,7 @@ import erebus.block.entity.HealingAltarBlockEntity;
 import erebus.block.entity.LightningAltarBlockEntity;
 import erebus.block.entity.OfferingAltarBlockEntity;
 import erebus.block.entity.RepairAltarBlockEntity;
+import erebus.block.entity.LiquifierBlockEntity;
 import erebus.block.entity.UmberFurnaceBlockEntity;
 import erebus.registries.blocks.providers.AmberBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
@@ -70,4 +71,8 @@ public class ModBlockEntities {
 	public static final Supplier<BlockEntityType<BambooPipeExtractBlockEntity>> BAMBOO_PIPE_EXTRACT = BLOCK_ENTITIES.register(
 			"bamboo_pipe_extract",
 			() -> BlockEntityType.Builder.of(BambooPipeExtractBlockEntity::new, OtherBlocks.BAMBOO_PIPE_EXTRACT.get()).build(null));
+	
+	public static final Supplier<BlockEntityType<LiquifierBlockEntity>> LIQUIFIER = BLOCK_ENTITIES.register(
+			"liquifier",
+			() -> BlockEntityType.Builder.of(LiquifierBlockEntity::new, OtherBlocks.LIQUIFIER.get()).build(null));
 }

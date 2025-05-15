@@ -1,4 +1,4 @@
-package erebus.inventory;
+package erebus.inventory.server;
 
 import erebus.inventory.slot.FluidContainerSlot;
 import erebus.inventory.slot.UmberFurnaceFuelSlot;
