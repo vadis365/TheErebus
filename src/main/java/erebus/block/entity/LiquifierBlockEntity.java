@@ -72,7 +72,6 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 				
 				if (!tile.getItems().get(0).isEmpty()) {
 					if (tile.canOperate()) {
-						System.out.println("Operating");
 						++tile.operatingTime;
 
 						if (tile.operatingTime >= 180) {
@@ -105,9 +104,7 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 
 	public void liquifyItem() {
 		if (canOperate()) {
-			System.out.println("Liquifying");
 			if (tank.isEmpty() || tank.getFluid().getAmount() <= tank.getCapacity() - 50 && tank.getFluid().is(ModFluids.HONEY_TYPE.get())) {
-				System.out.println("Filling Tank");
 				tank.fill(new FluidStack(ModFluids.HONEY_STILL.get(), 50), IFluidHandler.FluidAction.EXECUTE);
 				getItems().get(0).shrink(1);
 				if (getItems().get(0).getCount() <= 0)

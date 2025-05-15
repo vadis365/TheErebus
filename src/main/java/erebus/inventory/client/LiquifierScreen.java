@@ -25,7 +25,7 @@ public class LiquifierScreen extends ErebusScreen<LiquifierMenu> {
 		super(container, playerInventory, name, Erebus.prefix("textures/gui/container/liquifier.png"));
 		this.container = container;
 		this.liquifier = this.container.liquifier;
-		imageHeight = 226;
+		imageHeight = 166;
 		imageWidth = 176;
 	}
 	
@@ -39,8 +39,8 @@ public class LiquifierScreen extends ErebusScreen<LiquifierMenu> {
 
 	@Override
 	protected void renderLabels(@Nonnull GuiGraphics gg, int mouseX, int mouseY) {
-		gg.drawString(font, title, 8, imageHeight - 220, 16777215, true);
-		gg.drawString(font, Component.translatable("container.inventory"), 8, this.imageHeight - 82, 16777215, true);
+		gg.drawString(font, title, 8, 6, 16777215, true);
+		gg.drawString(font, Component.translatable("container.inventory"), 8, this.imageHeight - 94, 16777215, true);
 	}
 
 	@Override
