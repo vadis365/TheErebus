@@ -11,6 +11,7 @@ import erebus.item.BeettleJuiceBucketItem;
 import erebus.item.PaxelItem;
 import erebus.item.WandOfAnimationItem;
 import erebus.item.blocks.FluidJarBlockItem;
+import erebus.item.blocks.LiquifierBlockItem;
 import erebus.item.shield.ErebusShieldItem;
 import erebus.item.shield.type.BambooShieldType;
 import erebus.item.shield.type.ExoSkeletonShieldType;
@@ -19,6 +20,7 @@ import erebus.item.shield.type.ReinforcedShieldType;
 import erebus.item.shield.type.RhinoShieldType;
 import erebus.network.data.DeathCompassData;
 import erebus.registries.blocks.providers.AmberBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.data.ModArmorMaterials;
 import erebus.registries.data.ModDataComponents;
@@ -342,4 +344,5 @@ public class ModItems extends ModItemHelpers {
 
     // Block Items
     public static final DeferredItem<BlockItem> FLUID_JAR = ITEMS.register("fluid_jar", () -> new FluidJarBlockItem(AmberBlocks.FLUID_JAR.get(), FluidType.BUCKET_VOLUME * 32, new Item.Properties()));
+    public static final DeferredItem<BlockItem> LIQUIFIER = ITEMS.register("liquifier", () -> new LiquifierBlockItem(OtherBlocks.LIQUIFIER.get(), FluidType.BUCKET_VOLUME * 8, new Item.Properties()));
 }

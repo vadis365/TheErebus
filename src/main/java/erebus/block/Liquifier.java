@@ -54,7 +54,7 @@ public class Liquifier extends HorizontalDirectionalBlock implements EntityBlock
 	@Nonnull
 	@Override
 	public RenderShape getRenderShape(@Nonnull BlockState state) {
-		return RenderShape.MODEL;
+		return RenderShape.INVISIBLE;
 	}
 
 	@Nullable
@@ -65,7 +65,7 @@ public class Liquifier extends HorizontalDirectionalBlock implements EntityBlock
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		Direction direction = context.getNearestLookingDirection().getOpposite();
+		Direction direction = context.getHorizontalDirection();
 		return this.defaultBlockState().setValue(FACING, direction).setValue(POWERED, false);
 	}
 	

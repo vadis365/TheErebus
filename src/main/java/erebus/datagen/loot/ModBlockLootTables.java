@@ -470,6 +470,7 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
                 .include(ModDataComponents.FLUID.get());
 
         dropComponents(AmberBlocks.FLUID_JAR, $ -> $.apply(copyFluid));
+        dropComponents(OtherBlocks.LIQUIFIER, $ -> $.apply(copyFluid));
     }
 
     @Override

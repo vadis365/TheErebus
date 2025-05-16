@@ -259,7 +259,7 @@ public class OtherBlocks extends ModBlockHelpers {
         BLENDER = registerBlock("blender", () -> new BlenderBlock(Properties.of().mapColor(MapColor.STONE).noOcclusion()));
         UMBER_FURNACE = registerBlock("umber_furnace", () -> new UmberFurnaceBlock(Properties.ofFullCopy(Blocks.FURNACE)));
         UMBERSTONE_BUTTON = registerBlock("umberstone_button", () -> new ButtonBlock(BlockSetType.STONE, 10, Properties.of().mapColor(MapColor.STONE)));
-        LIQUIFIER = registerBlock/*WithoutBlockItem*/("liquifier", () -> new Liquifier(Properties.ofFullCopy(Blocks.GLASS).mapColor(MapColor.STONE).strength(1.0F, 2000.0F).sound(SoundType.GLASS).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false)));
+        LIQUIFIER = registerBlockWithoutBlockItem("liquifier", () -> new Liquifier(Properties.ofFullCopy(Blocks.GLASS).mapColor(MapColor.STONE).strength(1.0F, 2000.0F).sound(SoundType.GLASS).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false)));
         GLOW_GEM = registerSimpleBlock("glow_gem", Properties.of().mapColor(MapColor.STONE));
         MUCUS_BOMB = registerSimpleBlock("mucus_bomb", Properties.of().mapColor(MapColor.STONE));
         UMBER_GOLEM_STATUE = registerSimpleBlock("umber_golem_statue", Properties.of().mapColor(MapColor.STONE));

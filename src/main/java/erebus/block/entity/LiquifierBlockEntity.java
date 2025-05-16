@@ -8,10 +8,13 @@ import erebus.inventory.server.LiquifierMenu;
 import erebus.registries.ModBlockEntities;
 import erebus.registries.ModFluids;
 import erebus.registries.ModItems;
+import erebus.registries.data.FluidContents;
+import erebus.registries.data.ModDataComponents;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.FriendlyByteBuf;
@@ -56,6 +59,8 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 					tile.prevAnimationTicks -= 360;
 				}
 			}
+			else
+				tile.prevAnimationTicks = tile.animationTicks = 0;
 		}
 	}
 
@@ -171,6 +176,19 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 
 	public FluidTank getTank(@Nullable Direction direction) {
 		return this.tank;
+	}
+	@Override
+	protected void applyImplicitComponents(@Nonnull DataComponentInput componentInput) {
+		super.applyImplicitComponents(componentInput);
+
+		tank.setFluid(componentInput.getOrDefault(ModDataComponents.FLUID, FluidContents.EMPTY).get());
+	}
+
+	@Override
+	protected void collectImplicitComponents(@Nonnull DataComponentMap.Builder builder) {
+		super.collectImplicitComponents(builder);
+
+		builder.set(ModDataComponents.FLUID, FluidContents.of(tank.getFluid()));
 	}
 
 	public int getScaledFluid(int scale) {

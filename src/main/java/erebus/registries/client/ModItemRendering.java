@@ -7,6 +7,7 @@ import erebus.block.fluid.BasicFluidType;
 import erebus.client.render.block.renderer.stack.BlenderStackItemRenderer;
 import erebus.client.render.block.renderer.stack.BlockOfBonesStackItemRenderer;
 import erebus.client.render.block.renderer.stack.FluidJarStackItemRenderer;
+import erebus.client.render.block.renderer.stack.LiquifierStackItemRenderer;
 import erebus.client.render.block.renderer.stack.OfferingAltarStackItemRenderer;
 import erebus.client.render.item.model.EmptyModel;
 import erebus.client.render.item.model.ErebusShieldPartsModel;
@@ -54,6 +55,7 @@ public class ModItemRendering {
 	public static final ModelLayerLocation WASP_SWORD = new ModelLayerLocation(Erebus.prefix("wasp_sword"), "main");
 	public static final ModelLayerLocation WEB_SLINGER = new ModelLayerLocation(Erebus.prefix("web_slinger"), "main");
 	public static final ModelLayerLocation FLUID_JAR = new ModelLayerLocation(Erebus.prefix("fluid_jar"), "main");
+	public static final ModelLayerLocation LIQUIFIER = new ModelLayerLocation(Erebus.prefix("liquifier"), "main");
 
 	public static void registerItemLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(WAND_OF_ANIMATION, WandOfAnimationItemModel::createBodyLayer);
@@ -66,6 +68,7 @@ public class ModItemRendering {
 		event.registerLayerDefinition(WASP_SWORD, WaspSwordModel::createBodyLayer);
 		event.registerLayerDefinition(WEB_SLINGER, WebSlingerModel::createBodyLayer);
 		event.registerLayerDefinition(FLUID_JAR, EmptyModel::createBodyLayer);
+		event.registerLayerDefinition(LIQUIFIER, EmptyModel::createBodyLayer);
 	}
 
 	public static void registerItemRender(RegisterClientExtensionsEvent event) {
@@ -171,7 +174,14 @@ public class ModItemRendering {
                 return new FluidJarStackItemRenderer(null, null);
             }
         }, AmberBlocks.FLUID_JAR.get().asItem());
- 
+        
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return new LiquifierStackItemRenderer(null, null);
+            }
+        }, OtherBlocks.LIQUIFIER.get().asItem());
+
         //Fluids
         event.registerFluidType(new BasicFluidType("beetle_juice"), ModFluids.BEETLE_JUICE_TYPE.get());
         event.registerFluidType(new BasicFluidType("honey"), ModFluids.HONEY_TYPE.get());
