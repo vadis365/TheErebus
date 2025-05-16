@@ -77,6 +77,10 @@ public class ModSounds {
 	//Misc 
 	public static final DeferredHolder<SoundEvent, SoundEvent> BLAM_SOUND = register("blam_sound");
 
+	//World
+	public static final DeferredHolder<SoundEvent, SoundEvent> AMBIENT_BUG_IN_THE_SYSTEM = register("music/ambient_bug_in_the_system");
+	public static final DeferredHolder<SoundEvent, SoundEvent> AMBIENT_FEINT_SLEEPLESS = register("music/ambient_feint_sleepless");
+
 	public static DeferredHolder<SoundEvent, SoundEvent> register(String name) {
 		return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(Erebus.prefix(name)));
 	}

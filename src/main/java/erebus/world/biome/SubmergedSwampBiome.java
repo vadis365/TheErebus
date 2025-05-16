@@ -1,5 +1,6 @@
 package erebus.world.biome;
 
+import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
@@ -42,6 +43,7 @@ public class SubmergedSwampBiome extends ErebusBiome {
                         .grassColorOverride(COLOR)
                         .fogColor(FOG_COLOR)
                         .waterFogColor(FOG_COLOR)
+                        .ambientLoopSound(ModSounds.AMBIENT_BUG_IN_THE_SYSTEM)
                         .build()
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()

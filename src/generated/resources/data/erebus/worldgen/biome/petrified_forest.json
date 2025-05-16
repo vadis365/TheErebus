@@ -2,6 +2,7 @@
   "carvers": {},
   "downfall": 0.0,
   "effects": {
+    "ambient_sound": "erebus:music/ambient_feint_sleepless",
     "fog_color": 15385202,
     "foliage_color": 12695144,
     "grass_color": 12695144,

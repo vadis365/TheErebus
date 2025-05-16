@@ -2,6 +2,7 @@
   "carvers": {},
   "downfall": 0.0,
   "effects": {
+    "ambient_sound": "erebus:music/ambient_bug_in_the_system",
     "fog_color": 13357530,
     "foliage_color": 5146675,
     "grass_color": 5146675,

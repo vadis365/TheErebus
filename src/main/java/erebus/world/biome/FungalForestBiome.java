@@ -1,5 +1,6 @@
 package erebus.world.biome;
 
+import erebus.registries.ModSounds;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
 import erebus.registries.world.feature.PlantFeatures;
@@ -41,6 +42,7 @@ public class FungalForestBiome extends ErebusBiome {
                         .grassColorOverride(COLOR)
                         .fogColor(FOG_COLOR)
                         .waterFogColor(FOG_COLOR)
+                        .ambientLoopSound(ModSounds.AMBIENT_BUG_IN_THE_SYSTEM)
                         .build()
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()
