@@ -1,9 +1,9 @@
 package erebus.registries.blocks.providers;
 
 import erebus.block.DarkFruitVineBlock;
-import erebus.block.ModBerryBushBlock;
-import erebus.block.ModCropBlock;
 import erebus.block.PricklyPearBlock;
+import erebus.block.util.ModBerryBushBlock;
+import erebus.block.util.ModCropBlock;
 import erebus.registries.ModItems;
 import erebus.registries.helpers.ModBlockHelpers;
 import net.minecraft.data.worldgen.features.VegetationFeatures;

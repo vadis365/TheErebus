@@ -12,28 +12,29 @@ public class ClientParticles {
 	@SuppressWarnings("resource")
 	public static void spawnCustomParticle(String particleName, double x, double y, double z, double vecX, double vecY, double vecZ) {
 		Level level = Minecraft.getInstance().level;
-		Particle fx = null;
-		if (particleName.equals("lava"))
-			level.addParticle(ParticleTypes.LAVA, false, x, y, z, vecX, vecY, vecZ);
+		if (level != null) {
+			Particle fx = null;
+			if (particleName.equals("lava"))
+				level.addParticle(ParticleTypes.LAVA, false, x, y, z, vecX, vecY, vecZ);
 
-		if (particleName.equals("smoke"))
-			level.addParticle(ParticleTypes.LARGE_SMOKE, false, x, y, z, vecX, vecY, vecZ);
+			if (particleName.equals("smoke"))
+				level.addParticle(ParticleTypes.LARGE_SMOKE, false, x, y, z, vecX, vecY, vecZ);
 
-		if (particleName.equals("flame"))
-			level.addParticle(ParticleTypes.FLAME, false, x, y, z, vecX, vecY, vecZ);
-		
-		if (particleName.equals("swampflame")) {
-			level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, false, x, y, z, vecX, vecY, vecZ);
-		}
+			if (particleName.equals("flame"))
+				level.addParticle(ParticleTypes.FLAME, false, x, y, z, vecX, vecY, vecZ);
 
-		if (particleName.equals("swampflame_green")) {
-			level.addParticle(ParticleTypes.SMALL_FLAME, false, x, y, z, vecX, vecY, vecZ);
-			//fx.setParticleTextureIndex(96);
-			//fx.setRBGColorF(1F, 1F, 0F);
-		}
-		
-		if (particleName.equals("heart"))
-			level.addParticle(ParticleTypes.HEART, false, x, y, z, vecX, vecY, vecZ);
+			if (particleName.equals("swampflame")) {
+				level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, false, x, y, z, vecX, vecY, vecZ);
+			}
+
+			if (particleName.equals("swampflame_green")) {
+				level.addParticle(ParticleTypes.SMALL_FLAME, false, x, y, z, vecX, vecY, vecZ);
+				//fx.setParticleTextureIndex(96);
+				//fx.setRBGColorF(1F, 1F, 0F);
+			}
+
+			if (particleName.equals("heart"))
+				level.addParticle(ParticleTypes.HEART, false, x, y, z, vecX, vecY, vecZ);
 	/*	
 		if (particleName.equals("repellent")) {
 			fx = new ParticleRepellent(world, x, y, z, 0.0F, 0.0F, 0.0F);
@@ -111,5 +112,6 @@ public class ClientParticles {
 		if (particleName.equals("huge_explode"))
 			fx = new ParticleExplosionHuge.Factory().createParticle(EnumParticleTypes.EXPLOSION_HUGE.getParticleID(), world, x, y, z, vecX, vecY, vecZ, 0);
 */
+		}
 	}
 }

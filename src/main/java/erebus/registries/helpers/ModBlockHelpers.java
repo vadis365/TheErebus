@@ -1,25 +1,34 @@
 package erebus.registries.helpers;
 
-import erebus.block.ConnectedTextureBlock;
-import erebus.block.ModBerryBushBlock;
-import erebus.block.ModCropBlock;
+import erebus.block.util.ConnectedTextureBlock;
+import erebus.block.util.ModBerryBushBlock;
+import erebus.block.util.ModCropBlock;
 import erebus.registries.ModItems;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
 import static erebus.registries.blocks.ModBlocks.BLOCKS;
 
 public class ModBlockHelpers {
-    protected static DeferredBlock<TransparentBlock> registerTransparentBlock(String name, Properties properties) {
-        return registerBlock(name, () -> new TransparentBlock(properties));
+    protected static DeferredBlock<TransparentBlock> registerTransparentBlock(String name, Properties properties, float lightOpacity) {
+        return registerBlock(name, () -> new TransparentBlock(properties) {
+            @Override
+            protected float getShadeBrightness(@NotNull BlockState state, @NotNull BlockGetter getter, @NotNull BlockPos pos) {
+                return lightOpacity;
+            }
+        });
     }
 
     protected static DeferredBlock<ConnectedTextureBlock> registerConnectedTextureBlock(String name, Properties properties) {

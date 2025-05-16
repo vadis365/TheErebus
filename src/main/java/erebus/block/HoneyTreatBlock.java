@@ -29,15 +29,13 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class HoneyTreatBlock extends Block {
 
     public static MapCodec<HoneyTreatBlock> CODEC = simpleCodec(HoneyTreatBlock::new);
-    public static final int MAX_BITES = 6;
     public static final IntegerProperty BITES = BlockStateProperties.BITES;
     public static final int FULL_TREAT_SIGNAL = getOutputSignal(0);
-    protected static final float AABB_OFFSET = 1.0F;
-    protected static final float AABB_SIZE_PER_BITE = 2.0F;
     protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[]{Block.box(1.0F, 0.0F, 1.0F, 15.0F, 8.0F, 15.0F), Block.box(3.0F, 0.0F, 1.0F, 15.0F, 8.0F, 15.0F), Block.box(5.0F, 0.0F, 1.0F, 15.0F, 8.0F, 15.0F), Block.box(7.0F, 0.0F, 1.0F, 15.0F, 8.0F, 15.0F), Block.box(9.0F, 0.0F, 1.0F, 15.0F, 8.0F, 15.0F), Block.box(11.0F, 0.0F, 1.0F, 15.0F, 8.0F, 15.0F), Block.box(13.0F, 0.0F, 1.0F, 15.0F, 8.0F, 15.0F)};
 
     public HoneyTreatBlock(Properties properties) {
@@ -46,17 +44,16 @@ public class HoneyTreatBlock extends Block {
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    protected @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return SHAPE_BY_BITE[state.getValue(BITES)];
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, @NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
         Item item = stack.getItem();
         if(stack.is(ItemTags.CANDLES) && state.getValue(BITES) == 0) {
             Block block = Block.byItem(item);
-            if(block instanceof CandleBlock) {
-                CandleBlock candle = (CandleBlock) block;
+            if (block instanceof CandleBlock candle) {
                 stack.consume(1, player);
                 level.playSound(null, pos, SoundEvents.CAKE_ADD_CANDLE, SoundSource.BLOCKS, 1.0F, 1.0F);
                 level.setBlockAndUpdate(pos, CandleHoneyTreatBlock.byCandle(candle));
@@ -89,12 +86,12 @@ public class HoneyTreatBlock extends Block {
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, Direction facing, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+    protected @NotNull BlockState updateShape(@NotNull BlockState state, @NotNull Direction facing, @NotNull BlockState neighborState, @NotNull LevelAccessor level, @NotNull BlockPos pos, @NotNull BlockPos neighborPos) {
         return facing == Direction.DOWN && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, neighborState, level, pos, neighborPos);
     }
 
     @Override
-    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    protected boolean canSurvive(@NotNull BlockState state, LevelReader level, BlockPos pos) {
         return level.getBlockState(pos.below()).isSolid();
     }
 
@@ -104,7 +101,7 @@ public class HoneyTreatBlock extends Block {
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+    protected int getAnalogOutputSignal(BlockState state, @NotNull Level level, @NotNull BlockPos pos) {
         return getOutputSignal(state.getValue(BITES));
     }
 
@@ -113,12 +110,12 @@ public class HoneyTreatBlock extends Block {
     }
 
     @Override
-    protected boolean hasAnalogOutputSignal(BlockState state) {
+    protected boolean hasAnalogOutputSignal(@NotNull BlockState state) {
         return true;
     }
 
     @Override
-    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
+    protected boolean isPathfindable(@NotNull BlockState state, @NotNull PathComputationType pathComputationType) {
         return false;
     }
 }

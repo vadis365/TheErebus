@@ -1,13 +1,15 @@
-package erebus.block;
+package erebus.block.util;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ConnectedTextureBlock extends Block {
@@ -51,7 +53,7 @@ public class ConnectedTextureBlock extends Block {
     }
 
     @Override
-    protected boolean skipRendering(BlockState state, BlockState adjacentState, Direction direction) {
+    protected boolean skipRendering(@NotNull BlockState state, BlockState adjacentState, @NotNull Direction direction) {
         return adjacentState.is(this) || super.skipRendering(state, adjacentState, direction);
     }
 
@@ -66,7 +68,12 @@ public class ConnectedTextureBlock extends Block {
     }
 
     @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+    protected void neighborChanged(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Block neighborBlock, @NotNull BlockPos neighborPos, boolean movedByPiston) {
         level.setBlock(pos, getConnectableSides(level, pos), Block.UPDATE_ALL);
+    }
+
+    @Override
+    protected float getShadeBrightness(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos) {
+        return 3;
     }
 }

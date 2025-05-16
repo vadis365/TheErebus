@@ -14,6 +14,7 @@ public class ModParticles {
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(Registries.PARTICLE_TYPE, Erebus.MODID);
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SWAMP_VENT = register("swamp_vent");
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GNEISS_VENT = register("gneiss_vent");
 
     private static DeferredHolder<ParticleType<?>, SimpleParticleType> register(String name) {
         return PARTICLES.register(name, () -> new SimpleParticleType(false));

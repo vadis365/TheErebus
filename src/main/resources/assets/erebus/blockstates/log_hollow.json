@@ -1,17 +1,19 @@
 {
   "variants": {
-    "axis=x": {
-      "model": "erebus:block/log_hollow",
-      "x": 90,
-      "y": 90
+    "facing=north": {
+      "model": "erebus:block/log_hollow"
     },
-    "axis=y": {
+    "facing=south": {
+      "model": "erebus:block/log_hollow",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "erebus:block/log_hollow",
+      "y": 270
+    },
+    "facing=east": {
       "model": "erebus:block/log_hollow",
       "y": 90
-    },
-    "axis=z": {
-      "model": "erebus:block/log_hollow",
-      "x": 90
     }
   }
 }

@@ -1,5 +1,6 @@
 package erebus.registries.blocks.providers;
 
+import erebus.block.HollowLogBlock;
 import erebus.registries.helpers.ModBlockHelpers;
 import erebus.registries.world.tree.ModTreeGrowers;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +24,7 @@ public class WoodBlocks extends ModBlockHelpers {
     public static final DeferredBlock<RotatedPillarBlock> LOG_MARSHWOOD;
     public static final DeferredBlock<RotatedPillarBlock> LOG_SCORCHED;
     public static final DeferredBlock<RotatedPillarBlock> LOG_BAMBOO;
-    public static final DeferredBlock<RotatedPillarBlock> LOG_HOLLOW;
+    public static final DeferredBlock<Block> LOG_HOLLOW;
 
     // Saplings
     public static final DeferredBlock<SaplingBlock> SAPLING_MOSSBARK;
@@ -76,7 +77,7 @@ public class WoodBlocks extends ModBlockHelpers {
         LOG_MARSHWOOD = registerBlock("log_marshwood", () -> new RotatedPillarBlock(Properties.ofFullCopy(Blocks.OAK_LOG)));
         LOG_SCORCHED = registerBlock("log_scorched", () -> new RotatedPillarBlock(Properties.ofFullCopy(Blocks.OAK_LOG)));
         LOG_BAMBOO = registerBlock("log_bamboo", () -> new RotatedPillarBlock(Properties.ofFullCopy(Blocks.OAK_LOG)));
-        LOG_HOLLOW = registerBlock("log_hollow", () -> new RotatedPillarBlock(Properties.ofFullCopy(Blocks.OAK_LOG).noOcclusion()));
+        LOG_HOLLOW = registerBlock("log_hollow", () -> new HollowLogBlock(Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
 
         // Saplings
         SAPLING_MOSSBARK = registerSapling("sapling_mossbark", ModTreeGrowers.MOSSBARK);

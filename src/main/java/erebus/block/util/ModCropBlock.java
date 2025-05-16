@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.util;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;

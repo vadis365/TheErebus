@@ -1,11 +1,11 @@
 package erebus.registries.blocks.providers;
 
-import erebus.block.ConnectedTextureBlock;
 import erebus.block.FluidJarBlock;
+import erebus.block.util.ConnectedTextureBlock;
+import erebus.block.util.ModBlockSetTypes;
 import erebus.registries.helpers.ModBlockHelpers;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -21,15 +21,41 @@ public class AmberBlocks extends ModBlockHelpers {
 
     public static final DeferredBlock<DoorBlock> AMBER_DOOR;
 
+    private static final Properties AMBER_PROPERTIES = Properties.of()
+            .noOcclusion()
+            .isViewBlocking((blockState, blockGetter, blockPos) -> false)
+            .mapColor(MapColor.GOLD)
+            .explosionResistance(10.0F)
+            .sound(SoundType.GLASS);
+
     static {
-        AMBER = registerTransparentBlock("amber", Properties.ofFullCopy(Blocks.GLASS).strength(1.5F).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false).sound(SoundType.GLASS).mapColor(MapColor.GOLD));
-        AMBER_BRICKS = registerTransparentBlock("amber_bricks", Properties.ofFullCopy(Blocks.GLASS).strength(2.5F).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false).sound(SoundType.GLASS).mapColor(MapColor.GOLD));
-        AMBER_GLASS = registerConnectedTextureBlock("amber_glass", Properties.ofFullCopy(Blocks.GLASS).strength(2.5F).sound(SoundType.GLASS).mapColor(MapColor.GOLD));
-        PRESERVED_AMBER = registerTransparentBlock("preserved_amber", Properties.ofFullCopy(Blocks.GLASS).strength(2.5F).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false).sound(SoundType.GLASS).mapColor(MapColor.GOLD));
-        PRESERVED_AMBER_GLASS = registerConnectedTextureBlock("preserved_amber_glass", Properties.ofFullCopy(Blocks.GLASS).strength(2.5F).sound(SoundType.GLASS).mapColor(MapColor.GOLD));
-        GLOWING_JAR = registerSimpleBlock("glowing_jar", Properties.of().mapColor(MapColor.STONE));
-        FLUID_JAR = registerBlockWithoutBlockItem("fluid_jar", () -> new FluidJarBlock(Properties.ofFullCopy(Blocks.GLASS).mapColor(MapColor.STONE).strength(1.0F, 2000.0F).sound(SoundType.GLASS).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false)));
-        AMBER_DOOR = registerDoor("amber_door", BlockSetType.STONE, Properties.ofFullCopy(Blocks.OAK_DOOR));
+        AMBER = registerTransparentBlock(
+                "amber", AMBER_PROPERTIES.strength(1.5F), 3);
+        AMBER_BRICKS = registerTransparentBlock("amber_bricks", AMBER_PROPERTIES.strength(2.0F), 3);
+        AMBER_GLASS = registerConnectedTextureBlock("amber_glass", AMBER_PROPERTIES.strength(1.5F));
+        PRESERVED_AMBER = registerTransparentBlock("preserved_amber", AMBER_PROPERTIES.strength(10), 3);
+        PRESERVED_AMBER_GLASS = registerConnectedTextureBlock("preserved_amber_glass", AMBER_PROPERTIES.strength(10));
+        GLOWING_JAR = registerSimpleBlock(
+                "glowing_jar",
+                Properties.of()
+                        .strength(0.5F, 10.0F)
+                        .sound(SoundType.GLASS)
+                        .lightLevel(value -> 1)
+                        .noOcclusion()
+                        .isViewBlocking((state, getter, pos) -> false)
+        );
+        FLUID_JAR = registerBlockWithoutBlockItem(
+                "fluid_jar",
+                () -> new FluidJarBlock(
+                        Properties.ofFullCopy(Blocks.GLASS)
+                                .mapColor(MapColor.STONE)
+                                .strength(1.0F, 2000.0F)
+                                .sound(SoundType.GLASS)
+                                .noOcclusion()
+                                .isViewBlocking((state, getter, pos) -> false)
+                )
+        );
+        AMBER_DOOR = registerDoor("amber_door", ModBlockSetTypes.AMBER, Properties.ofFullCopy(Blocks.OAK_DOOR));
     }
 
     public static void init() {
