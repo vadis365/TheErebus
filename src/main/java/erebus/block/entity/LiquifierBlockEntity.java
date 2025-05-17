@@ -66,46 +66,51 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 
 	public static <T extends BlockEntity> void serverTick(Level level, BlockPos pos, BlockState state, T t) {
 		if (t instanceof LiquifierBlockEntity tile) {
+			boolean isDirty = false;
+
 			if(tile.prevTankAmount != tile.tank.getFluidAmount()) {
-				tile.updateBlock();
+				isDirty = true;
 				tile.setChanged();
 			}
+
 			tile.prevTankAmount = tile.tank.getFluidAmount();
 
 			if (level.getBlockState(pos).getValue(Liquifier.POWERED)) {
-				boolean isDirty = false;
-				
-				if (!tile.getItems().get(0).isEmpty()) {
-					if (tile.canOperate()) {
-						++tile.operatingTime;
-
-						if (tile.operatingTime >= 180) {
-							tile.operatingTime = 0;
-							tile.liquifyItem();
-							isDirty = true;
-						}
-					} else
+				if (tile.canOperate()) {
+					++tile.operatingTime;
+					isDirty = true;
+					if (tile.operatingTime >= 180) {
 						tile.operatingTime = 0;
-					tile.updateBlock(); // TODO remove this and sort out the gui update properly
+						tile.liquifyItem();
+					}
+				} else {
+					if (tile.operatingTime != 0) {
+						tile.operatingTime = 0;
+						isDirty = true;
+					}
 				}
-
-				if (isDirty)
-					tile.updateBlock();
-			}
-			else if(tile.operatingTime != 0)
+			} else if (tile.operatingTime != 0) {
 				tile.operatingTime = 0;
+				isDirty = true;
+			}
+
+			if (isDirty)
+				tile.updateBlock();
 		}
 	}
 
 	private boolean canOperate() {
-		if (getItems().get(0).isEmpty())
+		if (getItems().get(0).isEmpty()) {
 			return false;
+		}
 		else {
 			ItemStack stack = getItems().get(0);
-			if (stack.getItem() == ModItems.HONEY_DRIP.get())
+			if (stack.getItem() == ModItems.HONEY_DRIP.get()) {
 				if(tank.isEmpty() || tank.getFluid().getAmount() <= tank.getCapacity() - 50 && tank.getFluid().is(ModFluids.HONEY_TYPE.get()));
-					return true;
-		}
+				return true;
+			}
+			return false;
+		}	
 	}
 
 	public void liquifyItem() {
