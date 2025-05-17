@@ -1,5 +1,6 @@
 {
     "parent": "builtin/entity",
+    "render_type": "translucent",
     "textures": {
         "particle": "erebus:block/liquifier_tank_top_bottom"
     }

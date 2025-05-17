@@ -54,7 +54,7 @@ public class ModItemModels extends ModItemModelProvider {
         normalItem(ModItems.SCORPION_PINCER);
         normalItem(ModItems.CAMO_POWDER);
         normalItem(ModItems.NECTAR);
-        normalItem(ModItems.HONEY_DRIP);
+        normalItemCutout(ModItems.HONEY_DRIP);
         normalItem(ModItems.POISON_GLAND);
         normalItem(ModItems.MUD_BRICK);
         normalItem(ModItems.WHETSTONE_POWDER);

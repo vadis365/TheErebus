@@ -43,42 +43,47 @@ public class LiquifierStackItemRenderer extends BlockEntityWithoutLevelRenderer 
 
 	@Override
 	public void renderByItem(ItemStack stack, @Nonnull ItemDisplayContext transformType, PoseStack matrixStack, MultiBufferSource bufferIn, int combinedLight, int combinedOverlayIn) {
+		fluidStack = stack.getOrDefault(ModDataComponents.FLUID.get(), FluidContents.EMPTY).get();
+		float fluidLevel = fluidStack.getAmount();
+		if (fluidLevel  > 0) {
+			float tankMax = 8000F;
+			float height = (0.375F/ tankMax) * fluidLevel;
+			var fluidExtensions = IClientFluidTypeExtensions.of(fluidStack.getFluid());
+			TextureAtlasSprite fluidStillSprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidExtensions.getStillTexture());
+			VertexConsumer buffer = bufferIn.getBuffer(RenderType.CUTOUT);
+			int fluidColor = fluidExtensions.getTintColor();
+	
+			matrixStack.pushPose();
+			matrixStack.translate(0D, 0D, 0D);
+			float xMax, zMax, xMin, zMin, yMin = 0;
+			xMax = 1.984375F;
+			zMax = 1.984375F;
+			xMin = 0.015625F;
+			zMin = 0.015625F;
+			yMin = 0.015625F;
+			float alpha = 1F;
+			float red = (fluidColor >> 16 & 0xFF) / 255.0F;
+			float green = (fluidColor >> 8 & 0xFF) / 255.0F;
+			float blue = (fluidColor & 0xFF) / 255.0F;
+			renderCuboid(buffer, matrixStack, xMax, xMin, yMin, height, zMin, zMax, fluidStillSprite, red, green, blue, alpha, combinedLight);
+			matrixStack.popPose();
+		}
+		
 		VertexConsumer consumer = bufferIn.getBuffer(RenderType.entityTranslucent(TEXTURE));
+
 		matrixStack.pushPose();
+		RenderSystem.depthMask(false);
+		RenderSystem.enableBlend();
+		RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 		matrixStack.translate(0.5D, 1.5D, 0.5D);
 		matrixStack.scale(-1, -1, 1);
 		model.renderToBuffer(matrixStack, consumer, combinedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
 		model.renderBlades(matrixStack, consumer, combinedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
 		model.renderLidStatic(matrixStack, consumer, combinedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
+		RenderSystem.disableBlend();
+		RenderSystem.depthMask(true);
 		matrixStack.popPose();
 
-		fluidStack = stack.getOrDefault(ModDataComponents.FLUID.get(), FluidContents.EMPTY).get();
-
-		float fluidLevel = fluidStack.getAmount();
-		if (fluidLevel < 1)
-			return;
-
-		float tankMax = 8000F;
-		float height = (0.375F/ tankMax) * fluidLevel; // volumes hardcoded until config
-		var fluidExtensions = IClientFluidTypeExtensions.of(fluidStack.getFluid());
-		TextureAtlasSprite fluidStillSprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidExtensions.getStillTexture());
-		VertexConsumer buffer = bufferIn.getBuffer(RenderType.CUTOUT);
-		int fluidColor = fluidExtensions.getTintColor();
-
-		matrixStack.pushPose();
-		matrixStack.translate(0D, 0D, 0D);
-		float xMax, zMax, xMin, zMin, yMin = 0;
-		xMax = 1.984375F;
-		zMax = 1.984375F;
-		xMin = 0.015625F;
-		zMin = 0.015625F;
-		yMin = 0.015625F;
-		float alpha = 1F;
-		float red = (fluidColor >> 16 & 0xFF) / 255.0F;
-		float green = (fluidColor >> 8 & 0xFF) / 255.0F;
-		float blue = (fluidColor & 0xFF) / 255.0F;
-		renderCuboid(buffer, matrixStack, xMax, xMin, yMin, height, zMin, zMax, fluidStillSprite, red, green, blue, alpha, combinedLight);
-		matrixStack.popPose();
 	}
 
 	private void renderCuboid(VertexConsumer buffer, PoseStack matrixStack, float xMax, float xMin, float yMin, float height, float zMin, float zMax, TextureAtlasSprite textureAtlasSprite, float red, float green, float blue, float alpha, int combinedLight) {

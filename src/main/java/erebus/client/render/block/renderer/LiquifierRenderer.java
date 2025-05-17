@@ -44,10 +44,50 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 		if(tile == null || !tile.hasLevel())
 			return;
 
-		float ticks = tile.animationTicks + (tile.animationTicks - tile.prevAnimationTicks) * partialTick;
+		if (!tile.tank.getFluid().isEmpty()) {
+			float fluidLevel = tile.tank.getFluidAmount();
 
-		VertexConsumer buffer = bufferIn.getBuffer(RenderType.entityTranslucent(TEXTURE));
+			if (fluidLevel > 0) {
+				FluidStack fluidStack = new FluidStack(tile.tank.getFluid().getFluidHolder(), 100);
+				float height = (0.375F / tile.tank.getCapacity()) * tile.tank.getFluidAmount();
+				var fluidExtensions = IClientFluidTypeExtensions.of(fluidStack.getFluid());
+				TextureAtlasSprite fluidStillSprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidExtensions.getStillTexture());
+				VertexConsumer buffer = bufferIn.getBuffer(RenderType.CUTOUT);
+				int fluidColor = fluidExtensions.getTintColor();
+				stack.pushPose();
+				
+				stack.translate(0D, 0D, 0D);
+				float xMax, zMax, xMin, zMin, yMin = 0;
+				xMax = 1.984375F;
+				zMax = 1.984375F;
+				xMin = 0.015625F;
+				zMin = 0.015625F;
+				yMin = 0.015625F;
+		
+				float alpha = 1F;
+				float red = (fluidColor >> 16 & 0xFF) / 255.0F;
+				float green = (fluidColor >> 8 & 0xFF) / 255.0F;
+				float blue = (fluidColor & 0xFF) / 255.0F;
+				renderCuboid(buffer, stack, xMax, xMin, yMin, height, zMin, zMax, fluidStillSprite, red, green, blue, alpha, combinedLight);
+				stack.popPose();
+			}
+		}
+
+		float ticks = tile.animationTicks + (tile.animationTicks - tile.prevAnimationTicks) * partialTick;
+		
 		stack.pushPose();
+		stack.translate(0.5D, 0.5D, 0.5D);
+		if(!tile.getItems().get(0).isEmpty()) {
+			stack.mulPose(Axis.YP.rotationDegrees(ticks));
+			renderItemInSlot(tile, partialTick, stack, bufferIn, combinedLight, combinedOverlay, tile.getItems().get(0), 0D, 0D, 0D, 0.25F);
+		}
+		stack.popPose();
+
+		
+		VertexConsumer buffer = bufferIn.getBuffer(RenderType.entityTranslucent(TEXTURE));
+
+		stack.pushPose();
+		RenderSystem.depthMask(false);
 		RenderSystem.enableBlend();
 		RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 		stack.translate(0.5D, 1.5D, 0.5D);
@@ -59,57 +99,19 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 		stack.popPose();
 		model.renderToBuffer(stack, buffer, combinedLight, combinedOverlay, 0xFFFFFFFF);
 		RenderSystem.disableBlend();
-	    RenderSystem.defaultBlendFunc();
+		RenderSystem.depthMask(true);
 		stack.popPose();
 		
-		stack.pushPose();
-		stack.translate(0.5D, 0.5D, 0.5D);
-		if(!tile.getItems().get(0).isEmpty()) {
-			stack.mulPose(Axis.YP.rotationDegrees(ticks));
-			renderItemInSlot(tile, partialTick, stack, bufferIn, combinedLight, combinedOverlay, tile.getItems().get(0), 0D, 0D, 0D, 0.5F);
-		}
-		stack.popPose();
-		
-		if (tile.tank.getFluid().isEmpty())
-			return;
-
-		float fluidLevel = tile.tank.getFluidAmount();
-		
-		if (fluidLevel < 1)
-			return;
-
-		FluidStack fluidStack = new FluidStack(tile.tank.getFluid().getFluidHolder(), 100);
-		float height = (0.375F / tile.tank.getCapacity()) * tile.tank.getFluidAmount();
-		var fluidExtensions = IClientFluidTypeExtensions.of(fluidStack.getFluid());
-		TextureAtlasSprite fluidStillSprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidExtensions.getStillTexture());
-		buffer = bufferIn.getBuffer(RenderType.CUTOUT);
-		int fluidColor = fluidExtensions.getTintColor();
-
-		stack.pushPose();
-		stack.translate(0D, 0D, 0D);
-		float xMax, zMax, xMin, zMin, yMin = 0;
-		xMax = 1.984375F;
-		zMax = 1.984375F;
-		xMin = 0.015625F;
-		zMin = 0.015625F;
-		yMin = 0.015625F;
-
-		float alpha = 1F;
-		float red = (fluidColor >> 16 & 0xFF) / 255.0F;
-		float green = (fluidColor >> 8 & 0xFF) / 255.0F;
-		float blue = (fluidColor & 0xFF) / 255.0F;
-		renderCuboid(buffer, stack, xMax, xMin, yMin, height, zMin, zMax, fluidStillSprite, red, green, blue, alpha, combinedLight);
-		stack.popPose();
 	}
 
-	public void renderItemInSlot(LiquifierBlockEntity tile, float partialTick, PoseStack stack, MultiBufferSource buffer, int packedLight, int packedOverlay, ItemStack itemStack, double x, double y, double z, float scale) {
+	public void renderItemInSlot(LiquifierBlockEntity tile, float partialTick, PoseStack stack, MultiBufferSource bufferIn, int packedLight, int packedOverlay, ItemStack itemStack, double x, double y, double z, float scale) {
 		if (!itemStack.isEmpty()) {
 			stack.pushPose();
 			stack.translate(x, y, z);
 			stack.scale(-scale, -scale, scale);
 			stack.mulPose(Axis.YP.rotationDegrees(180));
 			stack.mulPose(Axis.XP.rotationDegrees(180));
-			itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, stack, buffer, tile.getLevel(), 1);
+			itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, stack, bufferIn, tile.getLevel(), 1);
 			stack.popPose();
 		}
 	}

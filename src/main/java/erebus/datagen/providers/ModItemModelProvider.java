@@ -61,6 +61,11 @@ public abstract class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(), mcLoc("item/generated"))
                 .texture("layer0", modLoc("item/%s".formatted(BuiltInRegistries.ITEM.getKey(item.get()).getPath())));
     }
+    
+    public void normalItemCutout(Supplier<? extends Item> item) {
+        withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(), mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/%s".formatted(BuiltInRegistries.ITEM.getKey(item.get()).getPath()))).renderType("cutout");
+    }
 
     public void normalItemSpecifiedTexture(Supplier<? extends Item> item, String name) {
         withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(), mcLoc("item/generated"))
