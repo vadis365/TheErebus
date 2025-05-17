@@ -12,7 +12,7 @@ public class ModSounds {
 
 	//Entities
 	public static final DeferredHolder<SoundEvent, SoundEvent> SQUISH = register("squish");
-	public static final DeferredHolder<SoundEvent, SoundEvent> WASP_LIVING = register("wasp_living");
+	public static final DeferredHolder<SoundEvent, SoundEvent> WASP_SOUND = register("wasp_sound");
 	public static final DeferredHolder<SoundEvent, SoundEvent> WASP_HURT = register("wasp_hurt");
 	// the rest
 	public static final DeferredHolder<SoundEvent, SoundEvent> BEETLE_HURT = register("beetle_hurt");

@@ -2,8 +2,8 @@ package erebus.entity;
 
 import javax.annotation.Nullable;
 
-import erebus.registries.entity.ModEntities;
 import erebus.registries.ModSounds;
+import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
@@ -92,7 +92,7 @@ public class Wasp extends Monster {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return ModSounds.WASP_LIVING.get();
+		return ModSounds.WASP_SOUND.get();
 	}
 
 	@Override
