@@ -86,7 +86,7 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 						}
 					} else
 						tile.operatingTime = 0;
-					tile.updateBlock();
+					tile.updateBlock(); // TODO remove this and sort out the gui update properly
 				}
 
 				if (isDirty)

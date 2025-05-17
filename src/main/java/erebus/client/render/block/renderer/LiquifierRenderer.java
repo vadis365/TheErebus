@@ -46,7 +46,6 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 
 		if (!tile.tank.getFluid().isEmpty()) {
 			float fluidLevel = tile.tank.getFluidAmount();
-
 			if (fluidLevel > 0) {
 				FluidStack fluidStack = new FluidStack(tile.tank.getFluid().getFluidHolder(), 100);
 				float height = (0.375F / tile.tank.getCapacity()) * tile.tank.getFluidAmount();
@@ -74,7 +73,7 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 		}
 
 		float ticks = tile.animationTicks + (tile.animationTicks - tile.prevAnimationTicks) * partialTick;
-		
+
 		stack.pushPose();
 		stack.translate(0.5D, 0.5D, 0.5D);
 		if(!tile.getItems().get(0).isEmpty()) {
@@ -83,7 +82,6 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 		}
 		stack.popPose();
 
-		
 		VertexConsumer buffer = bufferIn.getBuffer(RenderType.entityTranslucent(TEXTURE));
 
 		stack.pushPose();
@@ -101,7 +99,6 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 		RenderSystem.disableBlend();
 		RenderSystem.depthMask(true);
 		stack.popPose();
-		
 	}
 
 	public void renderItemInSlot(LiquifierBlockEntity tile, float partialTick, PoseStack stack, MultiBufferSource bufferIn, int packedLight, int packedOverlay, ItemStack itemStack, double x, double y, double z, float scale) {

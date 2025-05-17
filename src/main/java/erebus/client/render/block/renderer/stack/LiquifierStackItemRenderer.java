@@ -68,7 +68,7 @@ public class LiquifierStackItemRenderer extends BlockEntityWithoutLevelRenderer 
 			renderCuboid(buffer, matrixStack, xMax, xMin, yMin, height, zMin, zMax, fluidStillSprite, red, green, blue, alpha, combinedLight);
 			matrixStack.popPose();
 		}
-		
+
 		VertexConsumer consumer = bufferIn.getBuffer(RenderType.entityTranslucent(TEXTURE));
 
 		matrixStack.pushPose();
@@ -83,7 +83,6 @@ public class LiquifierStackItemRenderer extends BlockEntityWithoutLevelRenderer 
 		RenderSystem.disableBlend();
 		RenderSystem.depthMask(true);
 		matrixStack.popPose();
-
 	}
 
 	private void renderCuboid(VertexConsumer buffer, PoseStack matrixStack, float xMax, float xMin, float yMin, float height, float zMin, float zMax, TextureAtlasSprite textureAtlasSprite, float red, float green, float blue, float alpha, int combinedLight) {
