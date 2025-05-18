@@ -23,7 +23,7 @@ public class EucalyptusTree extends ErebusTree {
                 BlockStateProvider.simple(WoodBlocks.LOG_EUCALYPTUS.get()),
                 new EucalyptusTrunkPlacer(8, 4, 0),
                 BlockStateProvider.simple(WoodBlocks.LEAVES_EUCALYPTUS.get()),
-                new SingleLeafFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
+                new SingleLeafFoliagePlacer(ConstantInt.ZERO, ConstantInt.ZERO),
                 new TwoLayersFeatureSize(1, 0, 2)
         ).build();
     }
