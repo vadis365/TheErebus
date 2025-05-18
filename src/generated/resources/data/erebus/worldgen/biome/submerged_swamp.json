@@ -56,15 +56,7 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
-    "misc": [],
-    "monster": [
-      {
-        "type": "erebus:dragon_fly",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 20
-      },
+    "creature": [
       {
         "type": "erebus:beetle",
         "maxCount": 2,
@@ -76,6 +68,15 @@
         "maxCount": 4,
         "minCount": 2,
         "weight": 25
+      }
+    ],
+    "misc": [],
+    "monster": [
+      {
+        "type": "erebus:dragon_fly",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 20
       },
       {
         "type": "erebus:centipede",

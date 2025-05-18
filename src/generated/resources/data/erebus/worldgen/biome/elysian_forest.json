@@ -55,6 +55,24 @@
     "axolotls": [],
     "creature": [
       {
+        "type": "erebus:beetle",
+        "maxCount": 5,
+        "minCount": 3,
+        "weight": 20
+      },
+      {
+        "type": "erebus:beetle_larva",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 10
+      },
+      {
+        "type": "erebus:grasshopper",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
         "type": "erebus:velvet_worm",
         "maxCount": 2,
         "minCount": 1,
@@ -76,27 +94,9 @@
         "weight": 10
       },
       {
-        "type": "erebus:beetle",
-        "maxCount": 5,
-        "minCount": 3,
-        "weight": 20
-      },
-      {
-        "type": "erebus:beetle_larva",
-        "maxCount": 3,
-        "minCount": 2,
-        "weight": 10
-      },
-      {
         "type": "erebus:bot_fly",
         "maxCount": 3,
         "minCount": 2,
-        "weight": 10
-      },
-      {
-        "type": "erebus:grasshopper",
-        "maxCount": 3,
-        "minCount": 1,
         "weight": 10
       },
       {

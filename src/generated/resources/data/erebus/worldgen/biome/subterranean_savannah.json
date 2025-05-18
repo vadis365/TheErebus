@@ -56,21 +56,7 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
-    "misc": [],
-    "monster": [
-      {
-        "type": "erebus:fly",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 15
-      },
-      {
-        "type": "erebus:wasp",
-        "maxCount": 8,
-        "minCount": 4,
-        "weight": 20
-      },
+    "creature": [
       {
         "type": "erebus:beetle_larva",
         "maxCount": 4,
@@ -88,6 +74,21 @@
         "maxCount": 8,
         "minCount": 4,
         "weight": 10
+      }
+    ],
+    "misc": [],
+    "monster": [
+      {
+        "type": "erebus:fly",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 15
+      },
+      {
+        "type": "erebus:wasp",
+        "maxCount": 8,
+        "minCount": 4,
+        "weight": 20
       },
       {
         "type": "erebus:scytodes",
