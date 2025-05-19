@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom_right_open",
-  "textures": {
-    "bottom": "erebus:block/door_cypress_lower",
-    "top": "erebus:block/door_cypress_upper"
-  }
-}

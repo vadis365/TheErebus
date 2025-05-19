@@ -161,8 +161,8 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         fenceGateBlock(block.get(), texture(name(fullBlock)));
     }
 
-    public void door(Supplier<? extends DoorBlock> block, String name) {
-        doorBlockWithRenderType(block.get(), name(block), texture("%s_door_bottom".formatted(name)), texture("%s_door_top".formatted(name)), "cutout");
+    public void door(Supplier<? extends DoorBlock> block) {
+        doorBlockWithRenderType(block.get(), name(block), texture("%s_lower".formatted(name(block))), texture("%s_upper".formatted(name(block))), "cutout");
     }
 
     public void trapdoor(Supplier<? extends TrapDoorBlock> block, String name) {

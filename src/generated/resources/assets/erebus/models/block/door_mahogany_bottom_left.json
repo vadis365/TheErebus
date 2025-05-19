@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom_left",
-  "textures": {
-    "bottom": "erebus:block/door_mahogany_lower",
-    "top": "erebus:block/door_mahogany_upper"
-  }
-}

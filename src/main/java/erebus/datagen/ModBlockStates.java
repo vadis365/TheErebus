@@ -190,17 +190,17 @@ public class ModBlockStates extends ModBlockStateProvider {
         stairs(StairBlocks.STAIRS_MIR_BRICKS, UmberstoneBlocks.MIR_BRICKS);
 
         // MARK: Doors
-        doorBlock(DoorBlocks.DOOR_BAOBAB.get(), modLoc("block/door_baobab_lower"), modLoc("block/door_baobab_upper"));
-        doorBlock(DoorBlocks.DOOR_EUCALYPTUS.get(), modLoc("block/door_eucalyptus_lower"), modLoc("block/door_eucalyptus_upper"));
-        doorBlock(DoorBlocks.DOOR_MAHOGANY.get(), modLoc("block/door_mahogany_lower"), modLoc("block/door_mahogany_upper"));
-        doorBlock(DoorBlocks.DOOR_MOSSBARK.get(), modLoc("block/door_mossbark_lower"), modLoc("block/door_mossbark_upper"));
-        doorBlock(DoorBlocks.DOOR_ASPER.get(), modLoc("block/door_asper_lower"), modLoc("block/door_asper_upper"));
-        doorBlock(DoorBlocks.DOOR_CYPRESS.get(), modLoc("block/door_cypress_lower"), modLoc("block/door_cypress_upper"));
-        doorBlock(DoorBlocks.DOOR_BALSAM.get(), modLoc("block/door_balsam_lower"), modLoc("block/door_balsam_upper"));
-        doorBlock(DoorBlocks.DOOR_WHITE.get(), modLoc("block/door_white_lower"), modLoc("block/door_white_upper"));
-        doorBlock(DoorBlocks.DOOR_ROTTEN.get(), modLoc("block/door_rotten_lower"), modLoc("block/door_rotten_upper"));
-        doorBlock(DoorBlocks.DOOR_MARSHWOOD.get(), modLoc("block/door_marshwood_lower"), modLoc("block/door_marshwood_upper"));
-        doorBlock(DoorBlocks.DOOR_SCORCHED.get(), modLoc("block/door_scorched_lower"), modLoc("block/door_scorched_upper"));
+        door(DoorBlocks.DOOR_BAOBAB);
+        door(DoorBlocks.DOOR_EUCALYPTUS);
+        door(DoorBlocks.DOOR_MAHOGANY);
+        door(DoorBlocks.DOOR_MOSSBARK);
+        door(DoorBlocks.DOOR_ASPER);
+        door(DoorBlocks.DOOR_CYPRESS);
+        door(DoorBlocks.DOOR_BALSAM);
+        door(DoorBlocks.DOOR_WHITE);
+        door(DoorBlocks.DOOR_ROTTEN);
+        door(DoorBlocks.DOOR_MARSHWOOD);
+        door(DoorBlocks.DOOR_SCORCHED);
 
         // MARK: Fences
         fence(FenceBlocks.FENCE_BAOBAB, WoodBlocks.PLANKS_BAOBAB);
