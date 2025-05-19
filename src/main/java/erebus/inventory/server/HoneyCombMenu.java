@@ -34,7 +34,7 @@ public class HoneyCombMenu extends AbstractContainerMenu {
 
 		for (j = 0; j < numRows; ++j)
 			for (k = 0; k < 9; ++k)
-				addSlot(new Slot((Container) tile, k + j * 9, 8 + k * 18, 18 + j * 18));
+				addSlot(new Slot((Container) honey_comb, k + j * 9, 8 + k * 18, 18 + j * 18));
 
 		for (j = 0; j < 3; ++j)
 			for (k = 0; k < 9; ++k)
