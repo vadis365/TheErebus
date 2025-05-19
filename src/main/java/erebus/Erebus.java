@@ -29,7 +29,6 @@ import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.network.ModNetwork;
 import erebus.registries.world.ModPOIs;
-import erebus.registries.world.ModStructures;
 import erebus.registries.world.feature.ModFeatures;
 import erebus.registries.world.feature.config.DecorationFeatureConfigs;
 import erebus.registries.world.feature.config.PlantFeatureConfigs;
@@ -89,7 +88,6 @@ public class Erebus {
         ModTreeDecorators.TREE_DECORATORS.register(bus);
         ModBlockEntities.BLOCK_ENTITIES.register(bus);
         ModPOIs.POI.register(bus);
-        ModStructures.STRUCTURES.register(bus);
     	ModCustomRecipes.RECIPE_TYPES.register(bus);
     	ModCustomRecipes.RECIPE_SERIALIZERS.register(bus);
         ModParticles.PARTICLES.register(bus);
