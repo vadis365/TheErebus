@@ -14,7 +14,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class HoneyCombScreen extends ErebusScreen<HoneyCombMenu> {
 
 	public HoneyCombScreen(HoneyCombMenu container, Inventory playerInventory, Component name) {
-		super(container, playerInventory, name, Erebus.prefix("textures/gui/container/honey_comb.png"));
+		super(container, playerInventory, name, Erebus.prefix("textures/gui/container/honey_comb_gui.png"));
 		imageHeight = 166;
 		imageWidth = 176;
 	}
