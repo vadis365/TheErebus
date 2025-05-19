@@ -20,6 +20,6 @@ public class PetrifiedTreeFeature extends ErebusFeature {
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return List.of(CountPlacement.of(chance), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BiomeFilter.biome());
+        return List.of(CountPlacement.of(chance), PlacementUtils.FULL_RANGE, BiomeFilter.biome());
     }
 }

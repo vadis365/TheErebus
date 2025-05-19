@@ -166,11 +166,7 @@ public class CypressTrunkPlacer extends TrunkPlacer {
 
                 if(y <= height - 2) {
                     for(int c = 0; c < 4; c++) {
-                        if(y < height - 3 || random.nextBoolean()) {
-                            placeLog(level, setter, random, pos.offset(offsetX[c], y, offsetZ[c]), config);
-                        } else {
-                            placeLeaf(pos.offset(offsetX[c], y, offsetZ[c]));
-                        }
+                        placeLeaf(pos.offset(offsetX[c], y, offsetZ[c]));
                     }
                 }
             }

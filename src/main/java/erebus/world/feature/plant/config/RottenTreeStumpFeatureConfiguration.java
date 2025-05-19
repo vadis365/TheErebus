@@ -41,6 +41,8 @@ public class RottenTreeStumpFeatureConfiguration extends Feature<NoneFeatureConf
             }
         }
 
+        if(level.isEmptyBlock(pos.below())) return false;
+
         generateTrunk(level, pos, random, log);
         generateRoots(level, pos, random, log);
 
