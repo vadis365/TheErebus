@@ -244,6 +244,8 @@ public class ModLang extends ModLangProvider {
         addBlock(UmberstoneBlocks.UMBERCOBBLE_MOSSY, "Mossy Umbercobble");
         addBlock(UmberstoneBlocks.UMBERCOBBLE_WEBBED, "Webbed Umbercobble");
         addBlock(UmberstoneBlocks.UMBERSTONE_BRICKS, "Umberbricks");
+        addBlock(UmberstoneBlocks.UMBERTILE_SMOOTH, "Smooth Umbertile");
+        addBlock(UmberstoneBlocks.UMBERTILE_SMOOTH_SMALL, "Small Umbertiles");
         addBlock(UmberstoneBlocks.UMBERGRAVEL, "Umberpebbles");
         addBlock(UmberstoneBlocks.UMBERPAVER, "Umberpaver");
         addBlock(UmberstoneBlocks.UMBERPAVER_MOSSY, "Mossy Umberpaver");
@@ -502,6 +504,7 @@ public class ModLang extends ModLangProvider {
         addBlock(PlantBlocks.GLOWSHROOM_BLOCK, "Glowshroom");
         addBlock(PlantBlocks.GLOWSHROOM_STALK, "Glowshroom Stalk");
         addBlock(PlantBlocks.HANGING_WEB, "Hanging Webs");
+        addBlock(PlantBlocks.GIANT_LILY_PAD, "Giant Lily Pad");
 
         // MARK: Flowers
         addBlock(PlantBlocks.PETAL_BLACK, "Black Petal Block");
