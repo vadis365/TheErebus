@@ -176,6 +176,9 @@ public class Erebus {
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.LIQUIFIER.get(), (liquifier, side) -> {
             return new InvWrapper(liquifier);
         });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.HONEY_COMB.get(), (honey_comb, side) -> {
+            return new InvWrapper(honey_comb);
+        });
 		event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidBucketWrapper(stack), ModItems.BEETLE_JUICE_BUCKET.get());
 	}
 }

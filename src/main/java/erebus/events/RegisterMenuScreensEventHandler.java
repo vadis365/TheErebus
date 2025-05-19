@@ -1,6 +1,7 @@
 package erebus.events;
 
 import erebus.Erebus;
+import erebus.inventory.client.HoneyCombScreen;
 import erebus.inventory.client.LiquifierScreen;
 import erebus.inventory.client.PetrifiedCraftingTableScreen;
 import erebus.inventory.client.UmberFurnaceScreen;
@@ -17,5 +18,6 @@ public class RegisterMenuScreensEventHandler {
         event.register(ModMenuTypes.PETRIFIED_CRAFTING_MENU.get(), PetrifiedCraftingTableScreen::new);
         event.register(ModMenuTypes.UMBER_FURNACE_MENU.get(), UmberFurnaceScreen::new);
         event.register(ModMenuTypes.LIQUIFIER.get(), LiquifierScreen::new);
+        event.register(ModMenuTypes.HONEY_COMB.get(), HoneyCombScreen::new);
     }
 }
