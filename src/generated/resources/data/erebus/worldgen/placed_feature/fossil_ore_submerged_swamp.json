@@ -1,0 +1,21 @@
+{
+  "feature": "erebus:fossil_ore_submerged_swamp",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 2
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 48
+        },
+        "min_inclusive": {
+          "absolute": 5
+        }
+      }
+    }
+  ]
+}

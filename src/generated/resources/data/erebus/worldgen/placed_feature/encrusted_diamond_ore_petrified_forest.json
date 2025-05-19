@@ -1,0 +1,21 @@
+{
+  "feature": "erebus:encrusted_diamond_ore_petrified_forest",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 2
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 48
+        },
+        "min_inclusive": {
+          "absolute": 5
+        }
+      }
+    }
+  ]
+}

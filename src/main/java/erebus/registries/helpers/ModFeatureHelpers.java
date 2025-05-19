@@ -1,5 +1,6 @@
 package erebus.registries.helpers;
 
+import erebus.registries.data.ModTags;
 import erebus.world.feature.ErebusFeature;
 import erebus.world.feature.bush.ErebusBushFeature;
 import erebus.world.feature.tree.ErebusTree;
@@ -17,6 +18,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -25,6 +27,8 @@ public class ModFeatureHelpers {
 
     private static BootstrapContext<ConfiguredFeature<?, ?>> configuredContext;
     private static BootstrapContext<PlacedFeature> placedContext;
+
+    private static final RuleTest umberstoneReplaceables = new TagMatchTest(ModTags.UMBERSTONE_ORE_REPLACEABLES);
 
     protected static void setConfiguredContext(BootstrapContext<ConfiguredFeature<?, ?>> configuredContext) {
         ModFeatureHelpers.configuredContext = configuredContext;
@@ -58,8 +62,8 @@ public class ModFeatureHelpers {
         );
     }
 
-    protected static <F extends ErebusFeature> void registerConfiguredOre(F feature, RuleTest test, Supplier<? extends Block> block, int veinSize) {
-        registerConfiguredFeature(feature.getConfiguredResourceKey(), Feature.ORE, new OreConfiguration(test, block.get().defaultBlockState(), veinSize));
+    protected static <F extends ErebusFeature> void registerConfiguredOre(F feature, Supplier<? extends Block> ore, int veinSize) {
+        registerConfiguredFeature(feature.getConfiguredResourceKey(), Feature.ORE, new OreConfiguration(umberstoneReplaceables, ore.get().defaultBlockState(), veinSize));
     }
 
     protected static void registerSimpleConfiguredPlant(ErebusFeature feature, Supplier<? extends Block> block, int tries) {

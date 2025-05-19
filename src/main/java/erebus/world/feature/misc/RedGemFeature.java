@@ -17,6 +17,6 @@ public class RedGemFeature extends ErebusFeature {
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return List.of(CountPlacement.of(10), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BiomeFilter.biome());
+        return List.of(CountPlacement.of(5), PlacementUtils.FULL_RANGE, BiomeFilter.biome());
     }
 }
