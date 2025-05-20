@@ -2,6 +2,7 @@ package erebus.registries;
 
 import erebus.Erebus;
 import erebus.item.BambooPipeWrenchItem;
+import erebus.item.BeeTamingAmulet;
 import erebus.item.BeettleJuiceBucketItem;
 import erebus.item.PaxelItem;
 import erebus.item.WandOfAnimationItem;
@@ -215,7 +216,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> WOODLOUSE_BALL = registerItem("woodlouse_ball");
     public static final DeferredItem<Item> NECTAR_COLLECTOR = registerItem("nectar_collector");
     public static final DeferredItem<Item> ANT_TAMING_AMULET = registerItem("ant_taming_amulet");
-    public static final DeferredItem<Item> BEE_TAMING_AMULET = registerItem("bee_taming_amulet");
+    public static final DeferredItem<Item> BEE_TAMING_AMULET = ITEMS.register("bee_taming_amulet", () -> new BeeTamingAmulet(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> WASP_SWORD = registerItem("wasp_sword");
     public static final DeferredItem<Item> WASP_DAGGER = registerItem("wasp_dagger");
     public static final DeferredItem<Item> ANTI_VENOM_BOTTLE = registerItem("anti_venom_bottle");
