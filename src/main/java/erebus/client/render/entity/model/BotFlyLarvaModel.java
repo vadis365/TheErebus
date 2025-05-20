@@ -1,10 +1,7 @@
 package erebus.client.render.entity.model;
 
-import java.util.Arrays;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -16,6 +13,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import java.util.Arrays;
 
 @OnlyIn(Dist.CLIENT)
 public class BotFlyLarvaModel<T extends Entity> extends HierarchicalModel<T> {

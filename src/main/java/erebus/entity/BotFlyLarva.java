@@ -1,10 +1,5 @@
 package erebus.entity;
 
-import java.util.Optional;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -29,6 +24,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+
+import javax.annotation.Nullable;
+import java.util.Optional;
+import java.util.UUID;
 
 public class BotFlyLarva extends Mob {
 	private static final EntityDataAccessor<Byte> PARASITE_COUNT = SynchedEntityData.defineId(BotFlyLarva.class, EntityDataSerializers.BYTE);
@@ -113,7 +112,7 @@ public class BotFlyLarva extends Mob {
 	}
 
 	public void setABitDead() {
-		level().playSound((Player)null, blockPosition(), getDeathSound(), SoundSource.HOSTILE, 1.0F, 0.7F);
+		level().playSound(null, blockPosition(), getDeathSound(), SoundSource.HOSTILE, 1.0F, 0.7F);
 		if (level().isClientSide())
 			level().addParticle(ParticleTypes.SMOKE, getX(), getY(), getZ(), 0.0D, 0.0D, 0.0D);
 		if (!level().isClientSide())

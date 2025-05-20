@@ -1,11 +1,8 @@
 package erebus.client.render.entity.renderer;
 
-import javax.annotation.Nullable;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-
 import erebus.Erebus;
 import erebus.client.render.entity.model.CentipedeModel;
 import erebus.entity.Centipede;
@@ -19,6 +16,8 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
 
 @OnlyIn(Dist.CLIENT)
 public class CentipedeRenderer extends MobRenderer<Centipede, CentipedeModel<Centipede>> {
@@ -49,7 +48,7 @@ public class CentipedeRenderer extends MobRenderer<Centipede, CentipedeModel<Cen
 		if(renderType != null) {
 			renderHead(stack, buffer.getBuffer(renderType), packedLight, overlay, colour, entity, 0F, 0F + 1.5F, 0F, entityYaw, partialTicks);
 			for(int i = 0; i < entity.parts.length - 1; i++)
-				renderBody(stack, buffer.getBuffer(renderType), packedLight, overlay, colour, entity, entity.parts[i], rx, ry, rz, i, yOffset -= 0.001F, partialTicks, i > 0 && i%2 != 0 ? true : false);
+				renderBody(stack, buffer.getBuffer(renderType), packedLight, overlay, colour, entity, entity.parts[i], rx, ry, rz, i, yOffset -= 0.001F, partialTicks, i > 0 && i % 2 != 0);
 			renderTailPart(stack, buffer.getBuffer(renderType), packedLight, overlay, colour, entity, entity.parts[entity.parts.length - 1], rx, ry, rz, partialTicks);
 		}
 	}

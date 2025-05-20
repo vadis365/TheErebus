@@ -1,10 +1,6 @@
 package erebus.block.altars;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.mojang.serialization.MapCodec;
-
 import erebus.block.entity.HealingAltarBlockEntity;
 import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
@@ -20,6 +16,9 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class HealingAltar extends AltarAbstract {
 	public static final MapCodec<HealingAltar> CODEC = simpleCodec(HealingAltar::new);

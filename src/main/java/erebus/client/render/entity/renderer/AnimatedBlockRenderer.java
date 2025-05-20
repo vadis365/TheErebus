@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-
 import erebus.client.render.entity.model.AnimatedBlockModel;
 import erebus.entity.AnimatedBlock;
 import erebus.registries.entity.ModEntityRendering;

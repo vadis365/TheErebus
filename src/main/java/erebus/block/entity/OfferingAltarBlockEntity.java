@@ -1,7 +1,5 @@
 package erebus.block.entity;
 
-import javax.annotation.Nonnull;
-
 import erebus.network.client.OfferingAltarNBTPacket;
 import erebus.recipes.ModCustomRecipes;
 import erebus.recipes.MultiStackInput;
@@ -25,6 +23,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
+
+import javax.annotation.Nonnull;
 
 public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 	public int time = 0;

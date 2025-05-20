@@ -1,16 +1,12 @@
 package erebus.client.render.entity.model;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-
 import erebus.entity.BeetleLarva;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
@@ -150,12 +146,12 @@ public class BeetleLarvaModel<T extends BeetleLarva> extends HierarchicalModel<T
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float ba = Mth.cos(limbSwing * 1.0F) * 1.5F * limbSwingAmount;
-		float bb = Mth.cos(limbSwing + 1.0F * 1.0F) * 2.25F * limbSwingAmount;
-		float bc = Mth.cos(limbSwing + 2.0F * 1.0F) * 3.F * limbSwingAmount;
-		float bd = Mth.cos(limbSwing + 3.0F * 1.0F) * 2.5F * limbSwingAmount;
-		float be = Mth.cos(limbSwing + 4.0F * 1.0F) * 1.5F * limbSwingAmount;
-		float bf = Mth.cos(limbSwing + 5.0F * 1.0F) * 0.75F * limbSwingAmount;
+		float ba = Mth.cos(limbSwing) * 1.5F * limbSwingAmount;
+		float bb = Mth.cos(limbSwing + 1.0f) * 2.25F * limbSwingAmount;
+		float bc = Mth.cos(limbSwing + 2.0F) * 3.F * limbSwingAmount;
+		float bd = Mth.cos(limbSwing + 3.0F) * 2.5F * limbSwingAmount;
+		float be = Mth.cos(limbSwing + 4.0F) * 1.5F * limbSwingAmount;
+		float bf = Mth.cos(limbSwing + 5.0F) * 0.75F * limbSwingAmount;
 
 		head.x = bf;
 		jawleft.x = bf;
@@ -194,23 +190,23 @@ public class BeetleLarvaModel<T extends BeetleLarva> extends HierarchicalModel<T
 		legright3.y = bc + 21F;
 		legleft3.y = bc + 21F;
 
-		legright1.xRot = -Mth.cos(limbSwing * 1.0F) * 1.3F * limbSwingAmount;
-		legleft1.xRot = Mth.cos(limbSwing * 1.0F) * 1.3F * limbSwingAmount;
+		legright1.xRot = -Mth.cos(limbSwing) * 1.3F * limbSwingAmount;
+		legleft1.xRot = Mth.cos(limbSwing) * 1.3F * limbSwingAmount;
 
-		legright1.xRot = -Mth.cos(limbSwing * 1.0F) * 0.5F * limbSwingAmount;
-		legleft1.xRot = Mth.cos(limbSwing * 1.0F) * 0.5F * limbSwingAmount;
+		legright1.xRot = -Mth.cos(limbSwing) * 0.5F * limbSwingAmount;
+		legleft1.xRot = Mth.cos(limbSwing) * 0.5F * limbSwingAmount;
 
-		legright2.xRot = -Mth.cos(limbSwing * 1.0F + (float) Math.PI) * 1.3F * limbSwingAmount;
-		legleft2.xRot = Mth.cos(limbSwing * 1.0F + (float) Math.PI) * 1.3F * limbSwingAmount;
+		legright2.xRot = -Mth.cos(limbSwing + (float) Math.PI) * 1.3F * limbSwingAmount;
+		legleft2.xRot = Mth.cos(limbSwing + (float) Math.PI) * 1.3F * limbSwingAmount;
 
-		legright2.xRot = -Mth.cos(limbSwing + 0.5F * 1.0F + (float) Math.PI) * 0.5F * limbSwingAmount;
-		legleft2.xRot = Mth.cos(limbSwing + 0.5F * 1.0F + (float) Math.PI) * 0.5F * limbSwingAmount;
+		legright2.xRot = -Mth.cos(limbSwing + 0.5F + (float) Math.PI) * 0.5F * limbSwingAmount;
+		legleft2.xRot = Mth.cos(limbSwing + 0.5F + (float) Math.PI) * 0.5F * limbSwingAmount;
 
-		legright3.xRot = -Mth.cos(limbSwing * 1.0F) * 1.3F * limbSwingAmount;
-		legleft3.xRot = Mth.cos(limbSwing * 1.0F) * 1.3F * limbSwingAmount;
+		legright3.xRot = -Mth.cos(limbSwing) * 1.3F * limbSwingAmount;
+		legleft3.xRot = Mth.cos(limbSwing) * 1.3F * limbSwingAmount;
 
-		legright3.xRot = -Mth.cos(limbSwing + 1.0F * 1.0F) * 0.5F * limbSwingAmount;
-		legleft3.xRot = Mth.cos(limbSwing + 1.0F * 1.0F) * 0.5F * limbSwingAmount;
+		legright3.xRot = -Mth.cos(limbSwing + 1.0f) * 0.5F * limbSwingAmount;
+		legleft3.xRot = Mth.cos(limbSwing + 1.0f) * 0.5F * limbSwingAmount;
 	}
 
 	@Override

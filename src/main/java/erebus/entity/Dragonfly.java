@@ -1,9 +1,5 @@
 package erebus.entity;
 
-import java.util.EnumSet;
-
-import javax.annotation.Nullable;
-
 import erebus.entity.ai.FlyingMoveControlLessSpin;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
@@ -18,14 +14,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySelector;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -48,6 +37,9 @@ import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
+import java.util.EnumSet;
 
 public class Dragonfly extends Monster {
 
@@ -301,7 +293,7 @@ public class Dragonfly extends Monster {
 			return false;
 		else {
 			int light = level.getMaxLocalRawBrightness(pos);
-			return light > random.nextInt(7) ? false : checkMobSpawnRules(entity, level, spawn, pos, random);
+			return light <= random.nextInt(7) && checkMobSpawnRules(entity, level, spawn, pos, random);
 		}
 	}
 
@@ -356,7 +348,7 @@ public class Dragonfly extends Monster {
 		protected Vec3 getPosition() {
 			Vec3 vec3 = this.mob.getViewVector(0.0F);
 			Vec3 vec31 = HoverRandomPos.getPos(this.mob, 16, 2, vec3.x, vec3.z, ((float) Math.PI / 2F), 2, 1);
-			return vec31 != null ? vec31 : AirAndWaterRandomPos.getPos(this.mob, 16, 2, -2, vec3.x, vec3.z, (double) ((float) Math.PI / 2F));
+			return vec31 != null ? vec31 : AirAndWaterRandomPos.getPos(this.mob, 16, 2, -2, vec3.x, vec3.z, (float) Math.PI / 2F);
 		}
 	}
 
@@ -375,7 +367,7 @@ public class Dragonfly extends Monster {
 		    private long lastCanUseCheck;
 		    private static final long COOLDOWN_BETWEEN_CAN_USE_CHECKS = 20L;
 		    private int failedPathFindingPenalty = 0;
-		    private boolean canPenalize = false;
+		    private final boolean canPenalize = false;
 
 		    public MeleeAttackGoalMoveToHead(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
 		        this.mob = mob;
@@ -407,7 +399,7 @@ public class Dragonfly extends Monster {
 		                    }
 		                }
 		              	this.path = this.mob.getNavigation().createPath(livingentity.getX(), livingentity.getY() + livingentity.getBbHeight() + mob.getBbHeight(), livingentity.getZ(), 0);
-		                return this.path != null ? true : this.mob.isWithinMeleeAttackRange(livingentity);
+		                return this.path != null || this.mob.isWithinMeleeAttackRange(livingentity);
 		            }
 		        }
 		    }
@@ -422,9 +414,7 @@ public class Dragonfly extends Monster {
 		        } else if (!this.followingTargetEvenIfNotSeen) {
 		            return !this.mob.getNavigation().isDone();
 		        } else {
-		            return !this.mob.isWithinRestriction(livingentity.blockPosition())
-		                ? false
-		                : !(livingentity instanceof Player) || !livingentity.isSpectator() && !((Player)livingentity).isCreative();
+		            return this.mob.isWithinRestriction(livingentity.blockPosition()) && (!(livingentity instanceof Player) || !livingentity.isSpectator() && !((Player) livingentity).isCreative());
 		        }
 		    }
 

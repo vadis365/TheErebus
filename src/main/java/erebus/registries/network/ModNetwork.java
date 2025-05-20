@@ -1,12 +1,7 @@
 package erebus.registries.network;
 
 import erebus.Erebus;
-import erebus.network.client.AltarAnimatonTimerPacket;
-import erebus.network.client.AntlionParticlePacket;
-import erebus.network.client.LightningAltarRenderPacket;
-import erebus.network.client.OfferingAltarNBTPacket;
-import erebus.network.client.OfferingAltarTimerPacket;
-import erebus.network.client.ParticlePacket;
+import erebus.network.client.*;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 public class ModNetwork {

@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import javax.annotation.Nullable;
-
 import erebus.entity.ai.ThrowWebAttackGoal;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
@@ -26,12 +24,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -47,6 +40,8 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+
+import javax.annotation.Nullable;
 
 public class Scytodes extends Monster {
 
@@ -144,7 +139,7 @@ public class Scytodes extends Monster {
 
     @Override
     public boolean canBeAffected(MobEffectInstance potioneffect) {
-		 return (potioneffect.is(MobEffects.POISON) || potioneffect.is(MobEffects.WITHER) ? false : super.canBeAffected(potioneffect));
+		 return (!potioneffect.is(MobEffects.POISON) && !potioneffect.is(MobEffects.WITHER) && super.canBeAffected(potioneffect));
 	}
 
 	@Override

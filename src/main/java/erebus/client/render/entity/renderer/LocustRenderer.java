@@ -2,7 +2,6 @@ package erebus.client.render.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-
 import erebus.Erebus;
 import erebus.client.render.entity.model.LocustModel;
 import erebus.entity.Locust;

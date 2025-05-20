@@ -1,14 +1,7 @@
 package erebus.events;
 
-import java.util.concurrent.CompletableFuture;
-
 import erebus.Erebus;
-import erebus.datagen.ModBlockStates;
-import erebus.datagen.ModBlockTags;
-import erebus.datagen.ModEntityTags;
-import erebus.datagen.ModItemModels;
-import erebus.datagen.ModLang;
-import erebus.datagen.ModRegistries;
+import erebus.datagen.*;
 import erebus.datagen.providers.ModBiomeTagsProvider;
 import erebus.datagen.providers.ModLootTableProvider;
 import erebus.datagen.providers.ModRecipeProvider;
@@ -20,6 +13,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+
+import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = Erebus.MODID)
 public class GatherDataEventHandler {

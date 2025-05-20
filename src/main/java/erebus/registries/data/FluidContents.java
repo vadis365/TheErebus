@@ -1,7 +1,6 @@
 package erebus.registries.data;
 
 import com.mojang.serialization.Codec;
-
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.fluids.FluidStack;

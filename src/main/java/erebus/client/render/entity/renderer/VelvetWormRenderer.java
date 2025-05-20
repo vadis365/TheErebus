@@ -1,11 +1,8 @@
 package erebus.client.render.entity.renderer;
 
-import javax.annotation.Nullable;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-
 import erebus.Erebus;
 import erebus.client.render.entity.model.VelvetWormModel;
 import erebus.entity.VelvetWorm;
@@ -20,6 +17,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
 
 @OnlyIn(Dist.CLIENT)
 public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<VelvetWorm>> {
@@ -83,7 +82,7 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<
 		if(renderType != null) {
 			consumer = buffer.getBuffer(renderType);
 			for(int i = 0; i < entity.parts.length - 1; i++)
-				renderBodyPart(stack, consumer, packedLight, overlay, colour, entity, entity.parts[i], i > 0 ? entity.parts[i - 1] : entity, rx, ry, rz, i, avgWibbleStrength, zOffset -= 0.001F, partialTicks, i > 0 && i%2 != 0 ? true : false);
+				renderBodyPart(stack, consumer, packedLight, overlay, colour, entity, entity.parts[i], i > 0 ? entity.parts[i - 1] : entity, rx, ry, rz, i, avgWibbleStrength, zOffset -= 0.001F, partialTicks, i > 0 && i % 2 != 0);
 			renderTailPart(stack, consumer, packedLight, overlay, colour, entity, entity.parts[entity.parts.length - 1], entity.parts[entity.parts.length - 2], rx, ry, rz, entity.parts.length - 1, avgWibbleStrength, partialTicks);
 		}
 		stack.popPose();

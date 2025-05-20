@@ -1,7 +1,5 @@
 package erebus.block.fluid;
 
-import javax.annotation.Nonnull;
-
 import erebus.client.particle.ClientParticles;
 import erebus.registries.client.ModParticles;
 import net.minecraft.core.BlockPos;
@@ -15,6 +13,8 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
+
 public class FormicAcidFluidBlock extends LiquidBlock  {
 
 	public FormicAcidFluidBlock(FlowingFluid fluid, Properties properties) {
@@ -25,7 +25,7 @@ public class FormicAcidFluidBlock extends LiquidBlock  {
 	public void entityInside(@Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Entity entity) {
 		if (!level.isClientSide)
 			if (entity instanceof LivingEntity)
-				((LivingEntity) entity).hurt(entity.damageSources().generic(), 2F);
+				entity.hurt(entity.damageSources().generic(), 2F);
 	}
 
 	@Override
@@ -39,15 +39,15 @@ public class FormicAcidFluidBlock extends LiquidBlock  {
 			float fixedOffset = 0.25F;
 			float randomOffset = rand.nextFloat() * 0.6F - 0.3F;
 
-			level.addParticle(ModParticles.SWAMP_VENT.get(), (double) (xx - fixedOffset), (double) pos.getY() + 0.75D, (double) (zz + randomOffset), 0.0D, 0.0D, 0.0D);
-			level.addParticle(ModParticles.SWAMP_VENT.get(), (double) (xx + fixedOffset), (double) pos.getY() + 0.75D, (double) (zz + randomOffset), 0.0D, 0.0D, 0.0D);
-			level.addParticle(ModParticles.SWAMP_VENT.get(), (double) (xx + randomOffset), (double) pos.getY() + 0.75D, (double) (zz - fixedOffset), 0.0D, 0.0D, 0.0D);
-			level.addParticle(ModParticles.SWAMP_VENT.get(), (double) (xx + randomOffset), (double) pos.getY() + 0.75D, (double) (zz + fixedOffset), 0.0D, 0.0D, 0.0D);
+			level.addParticle(ModParticles.SWAMP_VENT.get(), xx - fixedOffset, (double) pos.getY() + 0.75D, zz + randomOffset, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ModParticles.SWAMP_VENT.get(), xx + fixedOffset, (double) pos.getY() + 0.75D, zz + randomOffset, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ModParticles.SWAMP_VENT.get(), xx + randomOffset, (double) pos.getY() + 0.75D, zz - fixedOffset, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ModParticles.SWAMP_VENT.get(), xx + randomOffset, (double) pos.getY() + 0.75D, zz + fixedOffset, 0.0D, 0.0D, 0.0D);
 
-			ClientParticles.spawnCustomParticle("swampflame", (double) (xx - fixedOffset), yy, (double) (zz + randomOffset), 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("swampflame", (double) (xx + fixedOffset), yy, (double) (zz + randomOffset), 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("swampflame", (double) (xx + randomOffset), yy, (double) (zz - fixedOffset), 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("swampflame", (double) (xx + randomOffset), yy, (double) (zz + fixedOffset), 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("swampflame", xx - fixedOffset, yy, zz + randomOffset, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("swampflame", xx + fixedOffset, yy, zz + randomOffset, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("swampflame", xx + randomOffset, yy, zz - fixedOffset, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnCustomParticle("swampflame", xx + randomOffset, yy, zz + fixedOffset, 0.0D, 0.0D, 0.0D);
 		}
 	}
 }

@@ -1,10 +1,5 @@
 package erebus.block.entity;
 
-import java.util.Optional;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import erebus.block.bamboo.BambooPipeExtract;
 import erebus.registries.ModBlockEntities;
 import erebus.utils.CapHelper;
@@ -20,6 +15,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class BambooPipeExtractBlockEntity extends BlockEntity {
 
@@ -39,8 +38,7 @@ public class BambooPipeExtractBlockEntity extends BlockEntity {
 			tile.prevTankAmount = tile.tank.getFluidAmount();
 
 			if (!state.getValue(BambooPipeExtract.ACTIVE)) {
-				return;
-			}
+            }
 
 			else {
 				Direction pipeFacing = tile.getBlockState().getValue(BambooPipeExtract.FACING);

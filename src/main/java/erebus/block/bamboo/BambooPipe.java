@@ -1,12 +1,6 @@
 package erebus.block.bamboo;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.mojang.serialization.MapCodec;
-
 import erebus.block.entity.BambooPipeBlockEntity;
 import erebus.utils.CapHelper;
 import net.minecraft.ChatFormatting;
@@ -32,6 +26,10 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BambooPipe extends DirectionalBlock implements EntityBlock {
 	public static final MapCodec<BambooPipe> CODEC = simpleCodec(BambooPipe::new);
@@ -138,7 +136,7 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
 
     private boolean isSideConnectable (LevelAccessor level, BlockPos pos, Direction side) {
     	BlockEntity blockEntity = level.getBlockEntity(pos.relative(side));
-        return (blockEntity != null && blockEntity.getLevel() != null) ? CapHelper.getFluidHandler(blockEntity.getLevel(), pos.relative(side), side.getOpposite()).isPresent(): false;
+        return blockEntity != null && blockEntity.getLevel() != null && CapHelper.getFluidHandler(blockEntity.getLevel(), pos.relative(side), side.getOpposite()).isPresent();
     }
 
     @Override

@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import javax.annotation.Nullable;
-
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
@@ -37,6 +35,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+
+import javax.annotation.Nullable;
 
 public class Wasp extends Monster {
 	public int animationTicks, prevAnimationTicks;
@@ -196,7 +196,7 @@ public class Wasp extends Monster {
 		protected Vec3 getPosition() {
 			Vec3 vec3 = this.mob.getViewVector(0.0F);
 			Vec3 vec31 = HoverRandomPos.getPos(this.mob, 8, 7, vec3.x, vec3.z, ((float) Math.PI / 2F), 2, 1);
-			return vec31 != null ? vec31 : AirAndWaterRandomPos.getPos(this.mob, 8, 4, -2, vec3.x, vec3.z, (double) ((float) Math.PI / 2F));
+			return vec31 != null ? vec31 : AirAndWaterRandomPos.getPos(this.mob, 8, 4, -2, vec3.x, vec3.z, (float) Math.PI / 2F);
 		}
 	}
 

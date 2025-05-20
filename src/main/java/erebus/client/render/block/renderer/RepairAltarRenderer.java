@@ -2,7 +2,6 @@ package erebus.client.render.block.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-
 import erebus.Erebus;
 import erebus.block.entity.RepairAltarBlockEntity;
 import erebus.client.render.block.model.RepairAltarModel;

@@ -1,10 +1,5 @@
 package erebus.registries;
 
-import java.util.List;
-import java.util.Map;
-
-import org.jetbrains.annotations.NotNull;
-
 import erebus.Erebus;
 import erebus.item.BambooPipeWrenchItem;
 import erebus.item.BeettleJuiceBucketItem;
@@ -13,11 +8,7 @@ import erebus.item.WandOfAnimationItem;
 import erebus.item.blocks.FluidJarBlockItem;
 import erebus.item.blocks.LiquifierBlockItem;
 import erebus.item.shield.ErebusShieldItem;
-import erebus.item.shield.type.BambooShieldType;
-import erebus.item.shield.type.ExoSkeletonShieldType;
-import erebus.item.shield.type.JadeShieldType;
-import erebus.item.shield.type.ReinforcedShieldType;
-import erebus.item.shield.type.RhinoShieldType;
+import erebus.item.shield.type.*;
 import erebus.network.data.DeathCompassData;
 import erebus.registries.blocks.providers.AmberBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
@@ -30,22 +21,14 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Map;
 
 public class ModItems extends ModItemHelpers {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Erebus.MODID);

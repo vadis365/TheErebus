@@ -1,8 +1,5 @@
 package erebus.entity.ai;
 
-import java.awt.Point;
-import java.util.List;
-
 import erebus.utils.Spiral;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
@@ -12,6 +9,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+
+import java.awt.*;
+import java.util.List;
 
 public abstract class EatBlockGoal extends Goal {
 
@@ -125,7 +125,7 @@ public abstract class EatBlockGoal extends Goal {
 	/**
 	 * Override this if you wish to do a more advanced checking on which blocks should be eaten
 	 *
-	 * @param block
+	 * @param state
 	 * @return true is should eat block, false is it shouldn't
 	 */
 	protected boolean canEatBlock(BlockState state) {

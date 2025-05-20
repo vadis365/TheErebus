@@ -1,7 +1,6 @@
 package erebus.client.render.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-
 import erebus.Erebus;
 import erebus.client.render.entity.model.MothModel;
 import erebus.entity.Moth;

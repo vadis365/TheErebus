@@ -1,33 +1,10 @@
 package erebus.registries.client;
 
-import org.jetbrains.annotations.NotNull;
-
 import erebus.Erebus;
 import erebus.block.fluid.BasicFluidType;
-import erebus.client.render.block.renderer.stack.BlenderStackItemRenderer;
-import erebus.client.render.block.renderer.stack.BlockOfBonesStackItemRenderer;
-import erebus.client.render.block.renderer.stack.FluidJarStackItemRenderer;
-import erebus.client.render.block.renderer.stack.LiquifierStackItemRenderer;
-import erebus.client.render.block.renderer.stack.OfferingAltarStackItemRenderer;
-import erebus.client.render.item.model.EmptyModel;
-import erebus.client.render.item.model.ErebusShieldPartsModel;
-import erebus.client.render.item.model.PortalActivatorModel;
-import erebus.client.render.item.model.ScorpionPincerModel;
-import erebus.client.render.item.model.WandOfAnimationItemModel;
-import erebus.client.render.item.model.WandOfPreservationModel;
-import erebus.client.render.item.model.WarHammerModel;
-import erebus.client.render.item.model.WaspDaggerModel;
-import erebus.client.render.item.model.WaspSwordModel;
-import erebus.client.render.item.model.WebSlingerModel;
-import erebus.client.render.item.renderer.ErebusShieldPartsRenderer;
-import erebus.client.render.item.renderer.PortalActivatorRenderer;
-import erebus.client.render.item.renderer.ScorpionPincerRenderer;
-import erebus.client.render.item.renderer.WandOfAnimationItemRenderer;
-import erebus.client.render.item.renderer.WandOfPreservationRenderer;
-import erebus.client.render.item.renderer.WarHammerRenderer;
-import erebus.client.render.item.renderer.WaspDaggerRenderer;
-import erebus.client.render.item.renderer.WaspSwordRenderer;
-import erebus.client.render.item.renderer.WebSlingerRenderer;
+import erebus.client.render.block.renderer.stack.*;
+import erebus.client.render.item.model.*;
+import erebus.client.render.item.renderer.*;
 import erebus.registries.ModFluids;
 import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.AmberBlocks;
@@ -42,6 +19,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
+import org.jetbrains.annotations.NotNull;
 
 public class ModItemRendering {
 

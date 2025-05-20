@@ -1,8 +1,5 @@
 package erebus.block.entity;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import erebus.block.Liquifier;
 import erebus.inventory.server.LiquifierMenu;
 import erebus.registries.ModBlockEntities;
@@ -35,6 +32,9 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 	public FluidTank tank = new FluidTank(FluidType.BUCKET_VOLUME * 8);

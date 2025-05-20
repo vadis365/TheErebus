@@ -2,16 +2,11 @@ package erebus.client.render.entity.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-
 import erebus.entity.BlackWidow;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.model.geom.builders.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -244,7 +239,7 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float sizeModifier = 1F / entity.getWidowSize() * 1F;
+		float sizeModifier = 1F / entity.getWidowSize();
 		float sin = (float) (Math.sin(limbSwing * (0.4F + sizeModifier)) * 0.4F * limbSwingAmount);
 		float cos = (float) (Math.cos(limbSwing * (0.4F + sizeModifier)) * 0.4F * limbSwingAmount);
 		

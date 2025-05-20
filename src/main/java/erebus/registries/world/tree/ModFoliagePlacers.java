@@ -2,7 +2,10 @@ package erebus.registries.world.tree;
 
 import com.mojang.serialization.MapCodec;
 import erebus.Erebus;
-import erebus.world.feature.tree.foliage.*;
+import erebus.world.feature.tree.foliage.BalsamFoliagePlacer;
+import erebus.world.feature.tree.foliage.BaobabFoliagePlacer;
+import erebus.world.feature.tree.foliage.MarshwoodFoliagePlacer;
+import erebus.world.feature.tree.foliage.SingleLeafFoliagePlacer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;

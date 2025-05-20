@@ -1,10 +1,6 @@
 package erebus.block;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.mojang.serialization.MapCodec;
-
 import erebus.block.entity.LiquifierBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,6 +22,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class Liquifier extends HorizontalDirectionalBlock implements EntityBlock {
 

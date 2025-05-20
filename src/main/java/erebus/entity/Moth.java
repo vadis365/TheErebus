@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import javax.annotation.Nullable;
-
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -12,11 +10,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ambient.AmbientCreature;
@@ -26,6 +20,8 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+
+import javax.annotation.Nullable;
 
 public class Moth extends AmbientCreature {
 	private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(Moth.class, EntityDataSerializers.INT);
@@ -152,7 +148,7 @@ public class Moth extends AmbientCreature {
 			int light = level.getMaxLocalRawBrightness(pos);
 			if (random.nextBoolean())
 				return false;
-			return light > random.nextInt(4)? false : checkMobSpawnRules(entity, level, spawn, pos, random);
+			return light <= random.nextInt(4) && checkMobSpawnRules(entity, level, spawn, pos, random);
 		}
 	}
 

@@ -1,12 +1,8 @@
 package erebus.recipes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
 import erebus.registries.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -17,6 +13,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.RecipeMatcher;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public record OfferingAltarRecipeMaker(NonNullList<Ingredient> items, ItemStack result) implements OfferingAltarRecipe {
 

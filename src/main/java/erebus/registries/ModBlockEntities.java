@@ -1,27 +1,14 @@
 package erebus.registries;
 
-import java.util.function.Supplier;
-
 import erebus.Erebus;
-import erebus.block.entity.BambooPipeBlockEntity;
-import erebus.block.entity.BambooPipeExtractBlockEntity;
-import erebus.block.entity.BlenderBlockEntity;
-import erebus.block.entity.BlockOfBonesBlockEntity;
-import erebus.block.entity.ExperienceAltarBlockEntity;
-import erebus.block.entity.FluidJarBlockEntity;
-import erebus.block.entity.GaeanKeystoneBlockEntity;
-import erebus.block.entity.HealingAltarBlockEntity;
-import erebus.block.entity.HoneyCombBlockEntity;
-import erebus.block.entity.LightningAltarBlockEntity;
-import erebus.block.entity.LiquifierBlockEntity;
-import erebus.block.entity.OfferingAltarBlockEntity;
-import erebus.block.entity.RepairAltarBlockEntity;
-import erebus.block.entity.UmberFurnaceBlockEntity;
+import erebus.block.entity.*;
 import erebus.registries.blocks.providers.AmberBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 public class ModBlockEntities {
 

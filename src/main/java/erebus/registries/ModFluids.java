@@ -1,7 +1,5 @@
 package erebus.registries;
 
-import org.jetbrains.annotations.NotNull;
-
 import erebus.Erebus;
 import erebus.registries.blocks.providers.FluidBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,6 +13,7 @@ import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 
 public class ModFluids {
 	

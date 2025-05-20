@@ -2,7 +2,6 @@ package erebus.client.render.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-
 import erebus.Erebus;
 import erebus.client.render.entity.model.FlyModel;
 import erebus.entity.Fly;
@@ -35,7 +34,7 @@ public class FlyRenderer extends MobRenderer<Fly, FlyModel<Fly>> {
 
 	@Override
 	protected void setupRotations(Fly entity, PoseStack stack, float bob, float yBodyRot, float partialTick, float scale) {
-		Fly fly = (Fly) entity;
+		Fly fly = entity;
 		if (fly.getIsFlyHanging()) {
 			stack.translate(0F, 0.5F, 0F);
 			stack.mulPose(Axis.XP.rotationDegrees(180F));

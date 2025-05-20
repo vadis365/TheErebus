@@ -1,7 +1,5 @@
 package erebus.inventory.server;
 
-import javax.annotation.Nonnull;
-
 import erebus.block.entity.LiquifierBlockEntity;
 import erebus.registries.client.ModMenuTypes;
 import net.minecraft.core.BlockPos;
@@ -13,6 +11,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+
+import javax.annotation.Nonnull;
 
 public class LiquifierMenu extends AbstractContainerMenu {
 	public LiquifierBlockEntity liquifier;

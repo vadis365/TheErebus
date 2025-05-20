@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import javax.annotation.Nullable;
-
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -24,6 +22,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+
+import javax.annotation.Nullable;
 
 public class Fly extends AmbientCreature {
 	@Nullable
@@ -88,11 +88,11 @@ public class Fly extends AmbientCreature {
     }
 
 	public boolean getIsFlyHanging() {
-		return (((Byte) entityData.get(HANGING)).byteValue() & 1) != 0;
+		return (entityData.get(HANGING).byteValue() & 1) != 0;
 	}
 
 	public void setIsFlyHanging(boolean isHanging) {
-		byte b0 = ((Byte) entityData.get(HANGING)).byteValue();
+		byte b0 = entityData.get(HANGING).byteValue();
 		if (isHanging)
 			entityData.set(HANGING, Byte.valueOf((byte) (b0 | 1)));
 		else
@@ -212,7 +212,7 @@ public class Fly extends AmbientCreature {
 			int light = level.getMaxLocalRawBrightness(pos);
 			if (random.nextBoolean())
 				return false;
-			return light > random.nextInt(7) ? false : checkMobSpawnRules(entity, level, spawn, pos, random);
+			return light <= random.nextInt(7) && checkMobSpawnRules(entity, level, spawn, pos, random);
 		}
 	}
 

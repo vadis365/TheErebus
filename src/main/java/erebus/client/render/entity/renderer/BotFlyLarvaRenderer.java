@@ -1,10 +1,7 @@
 package erebus.client.render.entity.renderer;
 
-import javax.annotation.Nullable;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-
 import erebus.Erebus;
 import erebus.client.render.entity.model.BotFlyLarvaModel;
 import erebus.entity.BotFlyLarva;
@@ -17,6 +14,8 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
 
 @OnlyIn(Dist.CLIENT)
 public class BotFlyLarvaRenderer extends MobRenderer<BotFlyLarva, BotFlyLarvaModel<BotFlyLarva>> {

@@ -1,8 +1,5 @@
 package erebus.datagen.loot;
 
-import java.util.function.Supplier;
-import java.util.stream.Stream;
-
 import erebus.registries.ModItems;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.HolderLookup;
@@ -17,6 +14,9 @@ import net.minecraft.world.level.storage.loot.functions.EnchantedCountIncreaseFu
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.neoforged.neoforge.registries.DeferredHolder;
+
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class ModEntityLootTables extends EntityLootSubProvider {
 

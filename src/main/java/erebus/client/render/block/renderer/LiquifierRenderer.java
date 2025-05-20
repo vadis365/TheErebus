@@ -5,7 +5,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-
 import erebus.Erebus;
 import erebus.block.entity.LiquifierBlockEntity;
 import erebus.client.render.block.model.LiquifierModel;

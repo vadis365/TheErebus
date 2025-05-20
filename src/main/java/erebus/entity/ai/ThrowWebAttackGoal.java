@@ -1,7 +1,5 @@
 package erebus.entity.ai;
 
-import java.util.EnumSet;
-
 import erebus.entity.projectile.ThrownBlockAsItem;
 import erebus.registries.ModSounds;
 import net.minecraft.sounds.SoundSource;
@@ -10,6 +8,8 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.EnumSet;
 
 public class ThrowWebAttackGoal extends Goal {
 

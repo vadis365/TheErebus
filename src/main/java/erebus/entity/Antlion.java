@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import javax.annotation.Nullable;
-
 import erebus.network.client.AntlionParticlePacket;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
@@ -38,6 +36,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.network.PacketDistributor;
+
+import javax.annotation.Nullable;
 
 public class Antlion extends Monster {
 	public static final EntityDataAccessor<Boolean> IS_ACTIVE = SynchedEntityData.defineId(Antlion.class, EntityDataSerializers.BOOLEAN);
@@ -144,7 +144,7 @@ public class Antlion extends Monster {
 					setActive(true);
 					if (isHiding()) {
 				      Vec3 vec3 = getDeltaMovement();
-				      setDeltaMovement(vec3.x, (double)getJumpPower(), vec3.z);
+				      setDeltaMovement(vec3.x, getJumpPower(), vec3.z);
 				      hasImpulse = true;
 				      PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(), getY() + 1D, getZ(), 30, new AntlionParticlePacket(Block.getId(level().getBlockState(blockPosition())), getX(), getY() + 1D, getZ(), 0.75D, false));
 					}

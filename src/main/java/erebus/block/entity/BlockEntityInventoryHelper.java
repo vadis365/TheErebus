@@ -1,7 +1,5 @@
 package erebus.block.entity;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -14,13 +12,15 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+import javax.annotation.Nullable;
+
 public abstract class BlockEntityInventoryHelper extends BlockEntity implements WorldlyContainer {
 
 	private NonNullList<ItemStack> inventory;
 
 	public BlockEntityInventoryHelper(BlockEntityType<?> tileEntityTypeIn, int invtSize, BlockPos pos, BlockState state) {
 		super(tileEntityTypeIn, pos, state);
-		inventory = NonNullList.<ItemStack>withSize(invtSize, ItemStack.EMPTY);
+		inventory = NonNullList.withSize(invtSize, ItemStack.EMPTY);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public abstract class BlockEntityInventoryHelper extends BlockEntity implements 
 	@Override
 	public void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
 		super.loadAdditional(compound, registries);
-		inventory = NonNullList.<ItemStack>withSize(this.getContainerSize(), ItemStack.EMPTY);
+		inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
 		if (compound.contains("Items", 9))
 			ContainerHelper.loadAllItems(compound, inventory, registries);
 	}

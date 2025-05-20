@@ -1,7 +1,5 @@
 package erebus.inventory.server;
 
-import javax.annotation.Nonnull;
-
 import erebus.block.entity.HoneyCombBlockEntity;
 import erebus.registries.client.ModMenuTypes;
 import net.minecraft.core.BlockPos;
@@ -13,6 +11,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+
+import javax.annotation.Nonnull;
 
 public class HoneyCombMenu extends AbstractContainerMenu {
 	public HoneyCombBlockEntity honey_comb;
@@ -34,7 +34,7 @@ public class HoneyCombMenu extends AbstractContainerMenu {
 
 		for (j = 0; j < numRows; ++j)
 			for (k = 0; k < 9; ++k)
-				addSlot(new Slot((Container) honey_comb, k + j * 9, 8 + k * 18, 18 + j * 18));
+				addSlot(new Slot(honey_comb, k + j * 9, 8 + k * 18, 18 + j * 18));
 
 		for (j = 0; j < 3; ++j)
 			for (k = 0; k < 9; ++k)

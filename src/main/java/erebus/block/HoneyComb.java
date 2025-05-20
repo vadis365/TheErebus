@@ -1,9 +1,6 @@
 package erebus.block;
 
-import javax.annotation.Nonnull;
-
 import com.mojang.serialization.MapCodec;
-
 import erebus.block.entity.HoneyCombBlockEntity;
 import erebus.registries.ModItems;
 import net.minecraft.core.BlockPos;
@@ -20,6 +17,8 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+
+import javax.annotation.Nonnull;
 
 public class HoneyComb extends Block implements EntityBlock {
 	

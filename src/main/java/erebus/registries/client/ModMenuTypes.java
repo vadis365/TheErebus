@@ -1,7 +1,5 @@
 package erebus.registries.client;
 
-import java.util.function.Supplier;
-
 import erebus.Erebus;
 import erebus.inventory.server.HoneyCombMenu;
 import erebus.inventory.server.LiquifierMenu;
@@ -13,6 +11,8 @@ import net.minecraft.world.inventory.MenuType;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 public class ModMenuTypes {
 

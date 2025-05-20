@@ -1,7 +1,5 @@
 package erebus.network.client;
 
-import org.joml.Vector3f;
-
 import erebus.Erebus;
 import erebus.block.entity.LightningAltarBlockEntity;
 import net.minecraft.client.Minecraft;
@@ -15,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+import org.joml.Vector3f;
 
 public record LightningAltarRenderPacket(int xPos, int yPos, int zPos, Vector3f targetVector) implements CustomPacketPayload {
 

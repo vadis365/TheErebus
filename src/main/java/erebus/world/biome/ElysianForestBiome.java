@@ -17,7 +17,8 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.*;
+import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.UNDERGROUND_ORES;
+import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.VEGETAL_DECORATION;
 
 public class ElysianForestBiome extends ErebusBiome {
 

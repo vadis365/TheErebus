@@ -3,7 +3,6 @@ package erebus.client.render.entity.renderer;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-
 import erebus.client.render.entity.model.DragonflyModel;
 import erebus.entity.Dragonfly;
 import erebus.registries.entity.ModEntityRendering;

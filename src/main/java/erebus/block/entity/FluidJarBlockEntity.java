@@ -1,8 +1,5 @@
 package erebus.block.entity;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import erebus.registries.ModBlockEntities;
 import erebus.registries.data.FluidContents;
 import erebus.registries.data.ModDataComponents;
@@ -18,6 +15,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class FluidJarBlockEntity extends BlockEntity {
 	public FluidTank tank = new FluidTank(FluidType.BUCKET_VOLUME * 32);

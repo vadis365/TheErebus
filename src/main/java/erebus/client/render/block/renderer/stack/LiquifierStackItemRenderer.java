@@ -1,12 +1,9 @@
 package erebus.client.render.block.renderer.stack;
 
-import javax.annotation.Nonnull;
-
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-
 import erebus.Erebus;
 import erebus.client.render.block.model.LiquifierModel;
 import erebus.registries.client.ModBlockEntityRendering;
@@ -28,6 +25,8 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
 public class LiquifierStackItemRenderer extends BlockEntityWithoutLevelRenderer {

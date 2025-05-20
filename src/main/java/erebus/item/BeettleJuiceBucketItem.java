@@ -1,7 +1,5 @@
 package erebus.item;
 
-import javax.annotation.Nonnull;
-
 import de.cech12.bucketlib.util.BucketLibUtil;
 import erebus.entity.BotFlyLarva;
 import erebus.registries.ModFluids;
@@ -14,14 +12,12 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+
+import javax.annotation.Nonnull;
 
 public class BeettleJuiceBucketItem extends BucketItem {
 	private static final int DRINK_DURATION = 32;
@@ -90,9 +86,7 @@ public class BeettleJuiceBucketItem extends BucketItem {
 	}
 
 	public boolean containsBeetleJuice(ItemStack stack) {
-		if (BucketLibUtil.getFluid(stack) != Fluids.EMPTY && BucketLibUtil.getFluid(stack) == ModFluids.BEETLE_JUICE_STILL.get())
-			return true;
-		return false;
-	}
+        return BucketLibUtil.getFluid(stack) != Fluids.EMPTY && BucketLibUtil.getFluid(stack) == ModFluids.BEETLE_JUICE_STILL.get();
+    }
 
 }

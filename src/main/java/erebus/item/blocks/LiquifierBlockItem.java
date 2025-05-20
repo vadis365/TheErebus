@@ -1,9 +1,5 @@
 package erebus.item.blocks;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import erebus.block.Liquifier;
 import erebus.registries.data.FluidContents;
 import erebus.registries.data.ModDataComponents;
@@ -15,6 +11,9 @@ import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class LiquifierBlockItem extends BlockItem {
 	private final int capacity;

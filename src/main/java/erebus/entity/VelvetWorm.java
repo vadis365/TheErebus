@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import javax.annotation.Nullable;
-
 import erebus.entity.ai.ShootGooBallAttackGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -39,12 +37,14 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.entity.PartEntity;
 
+import javax.annotation.Nullable;
+
 public class VelvetWorm extends Monster {
 	private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(VelvetWorm.class, EntityDataSerializers.INT);
 	public VelvetWormMultipart[] parts;
 
 	private int wallInvulnerabilityTicks = 40;
-	private boolean doSpawningAnimation = false;
+	private final boolean doSpawningAnimation = false;
 
 	public VelvetWorm(EntityType<? extends Monster> type, Level level) {
 		super(type, level);

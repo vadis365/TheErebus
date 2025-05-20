@@ -1,10 +1,10 @@
 package erebus.recipes;
 
-import java.util.List;
-
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
+
+import java.util.List;
 
 public class MultiStackInput implements RecipeInput {
 

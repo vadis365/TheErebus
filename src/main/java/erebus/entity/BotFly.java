@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import javax.annotation.Nullable;
-
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
@@ -14,11 +12,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
@@ -32,6 +26,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+
+import javax.annotation.Nullable;
 
 public class BotFly extends Monster {
 	// AKA ButtFly
@@ -140,7 +136,7 @@ public class BotFly extends Monster {
 			return false;
 		else {
 			int light = level.getMaxLocalRawBrightness(pos);
-			return light > random.nextInt(7) ? false : checkMobSpawnRules(entity, level, spawn, pos, random);
+			return light <= random.nextInt(7) && checkMobSpawnRules(entity, level, spawn, pos, random);
 		}
 	}
 
@@ -169,9 +165,8 @@ public class BotFly extends Monster {
 	public boolean doHurtTarget(Entity entity) {
 		if (hasLineOfSight(entity)) {
 			if (super.doHurtTarget(entity)) {
-				if (entity instanceof Player) {
-					Player player = (Player) entity;
-					if (random.nextInt(1) == 0 && getParasite(player) == null) {
+				if (entity instanceof Player player) {
+                    if (random.nextInt(1) == 0 && getParasite(player) == null) {
 						BotFlyLarva entityBotFlyLarva = ModEntities.BOT_FLY_LARVA.get().create(this.level());
 						if (entityBotFlyLarva != null) {
 							entityBotFlyLarva.setPos(entity.getX(), entity.getY() + 1, entity.getZ());
@@ -208,7 +203,7 @@ public class BotFly extends Monster {
 		protected Vec3 getPosition() {
 			Vec3 vec3 = this.mob.getViewVector(0.0F);
 			Vec3 vec31 = HoverRandomPos.getPos(this.mob, 8, 7, vec3.x, vec3.z, ((float) Math.PI / 2F), 2, 1);
-			return vec31 != null ? vec31 : AirAndWaterRandomPos.getPos(this.mob, 8, 4, -2, vec3.x, vec3.z, (double) ((float) Math.PI / 2F));
+			return vec31 != null ? vec31 : AirAndWaterRandomPos.getPos(this.mob, 8, 4, -2, vec3.x, vec3.z, (float) Math.PI / 2F);
 		}
 	}
 }

@@ -1,12 +1,6 @@
 package erebus.block;
 
-import java.util.Optional;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.mojang.serialization.MapCodec;
-
 import erebus.block.entity.FluidJarBlockEntity;
 import erebus.utils.CapHelper;
 import net.minecraft.core.BlockPos;
@@ -25,6 +19,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class FluidJarBlock extends BaseEntityBlock {
 	

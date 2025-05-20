@@ -1,26 +1,7 @@
 package erebus.registries.blocks.providers;
 
-import org.jetbrains.annotations.NotNull;
-
-import erebus.block.BlenderBlock;
-import erebus.block.BlockOfBonesBlock;
-import erebus.block.BotFlySpawnerBlock;
-import erebus.block.CandleHoneyTreatBlock;
-import erebus.block.GaeanKeystoneBlock;
-import erebus.block.HoneyComb;
-import erebus.block.HoneyTreatBlock;
-import erebus.block.LavaWeb;
-import erebus.block.Liquifier;
-import erebus.block.PetrifiedCraftingTableBlock;
-import erebus.block.SwampVentBlock;
-import erebus.block.UmberFurnaceBlock;
-import erebus.block.WitherWeb;
-import erebus.block.altars.AltarBase;
-import erebus.block.altars.ExperienceAltar;
-import erebus.block.altars.HealingAltar;
-import erebus.block.altars.LightningAltar;
-import erebus.block.altars.OfferingAltar;
-import erebus.block.altars.RepairAltar;
+import erebus.block.*;
+import erebus.block.altars.*;
 import erebus.block.bamboo.BambooCrateBlock;
 import erebus.block.bamboo.BambooPipe;
 import erebus.block.bamboo.BambooPipeExtract;
@@ -30,15 +11,7 @@ import erebus.registries.helpers.ModBlockHelpers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.block.LadderBlock;
-import net.minecraft.world.level.block.MudBlock;
-import net.minecraft.world.level.block.RedstoneLampBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -46,6 +19,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import org.jetbrains.annotations.NotNull;
 
 public class OtherBlocks extends ModBlockHelpers {
 

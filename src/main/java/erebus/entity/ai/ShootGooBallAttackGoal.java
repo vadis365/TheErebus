@@ -1,13 +1,13 @@
 package erebus.entity.ai;
 
-import java.util.EnumSet;
-
 import erebus.entity.projectile.GooBall;
 import erebus.registries.ModSounds;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
+
+import java.util.EnumSet;
 
 public class ShootGooBallAttackGoal extends Goal {
 
@@ -56,7 +56,7 @@ public class ShootGooBallAttackGoal extends Goal {
 			if (shootTime <= 0) {
 				mob.level().playSound(null, mob.blockPosition(), ModSounds.WEBSLING_THROW.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
 				GooBall gooBall = new GooBall(mob.level(), mob, 0F);
-				gooBall.setPos(mob.getX(), mob.getY() + (double) (mob.getBbHeight() + 0.3D), mob.getZ());
+				gooBall.setPos(mob.getX(), mob.getY() + (mob.getBbHeight() + 0.3D), mob.getZ());
 				gooBall.shoot(targetX, targetY, targetZ, 1.0F, 0.0F);
 				mob.level().addFreshEntity(gooBall);
 				shootTime = 100;

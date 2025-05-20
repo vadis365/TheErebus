@@ -1,9 +1,5 @@
 package erebus.item;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import erebus.block.bamboo.BambooPipe;
 import erebus.block.bamboo.BambooPipeExtract;
 import erebus.registries.blocks.providers.OtherBlocks;
@@ -26,6 +22,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BambooPipeWrenchItem extends Item {
 	public BambooPipeWrenchItem(Properties properties) {

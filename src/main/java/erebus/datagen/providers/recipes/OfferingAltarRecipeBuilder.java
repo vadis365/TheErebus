@@ -1,7 +1,5 @@
 package erebus.datagen.providers.recipes;
 
-import javax.annotation.Nullable;
-
 import erebus.recipes.OfferingAltarRecipe;
 import erebus.recipes.OfferingAltarRecipeMaker;
 import net.minecraft.advancements.Criterion;
@@ -15,6 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+
+import javax.annotation.Nullable;
 
 public class OfferingAltarRecipeBuilder implements RecipeBuilder {
 

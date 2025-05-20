@@ -3,7 +3,6 @@ package erebus.client.render.block.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-
 import erebus.Erebus;
 import erebus.block.entity.OfferingAltarBlockEntity;
 import erebus.client.particle.ClientParticles;
