@@ -4,6 +4,8 @@ import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
+import erebus.registries.world.feature.PlantFeatures;
+import erebus.registries.world.feature.TreeFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.MobCategory;
@@ -14,6 +16,8 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+
+import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.*;
 
 public class PetrifiedForestBiome extends ErebusBiome {
 
@@ -53,31 +57,31 @@ public class PetrifiedForestBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
-                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_BROWN_SMALL.getPlacedResourceKey())
-                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_BROWN_MEDIUM.getPlacedResourceKey())
-                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_BROWN_LARGE.getPlacedResourceKey())
-                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_RED_SMALL.getPlacedResourceKey())
-                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_RED_MEDIUM.getPlacedResourceKey())
-                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_RED_LARGE.getPlacedResourceKey())
-                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.LAVA_LAKE.getPlacedResourceKey())
-                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.ROCK_SPIKE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.GOLD_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.COAL_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.DIAMOND_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.EMERALD_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.LAPIS_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.QUARTZ_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.COPPER_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.SILVER_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.TIN_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.LEAD_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.ALUMINUM_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.JADE_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.FOSSIL_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.GNEISS_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.TEMPLE_ORE.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_BROWN_SMALL.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_BROWN_MEDIUM.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_BROWN_LARGE.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_RED_SMALL.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_RED_MEDIUM.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_RED_LARGE.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.LAVA_LAKE.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ROCK_SPIKE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.LAPIS_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.EMERALD_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.PETRIFIED_WOOD_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.ALUMINUM_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.COPPER_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.LEAD_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.SILVER_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.TIN_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.QUARTZ_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.GNEISS_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.TEMPLE_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.GOLD_ORE_PETRIFIED_FOREST.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.ENCRUSTED_DIAMOND_ORE_PETRIFIED_FOREST.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.JADE_ORE_PETRIFIED_FOREST.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.FOSSIL_ORE_PETRIFIED_FOREST.getPlacedResourceKey())
                         .build())
                 .build();
     }

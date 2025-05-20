@@ -13,9 +13,10 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+
+import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.*;
 
 public class SubmergedSwampBiome extends ErebusBiome {
 
@@ -54,32 +55,33 @@ public class SubmergedSwampBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
-                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.QUICK_SAND.getPlacedResourceKey())
-                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.ROTTEN_ACACIA.getPlacedResourceKey())
-                        .addFeature(Decoration.SURFACE_STRUCTURES, DecorationFeatures.GAS_VENT.getPlacedResourceKey())
-                        .addFeature(Decoration.VEGETAL_DECORATION, TreeFeatures.MARSHWOOD_TREE.getPlacedResourceKey())
-                        .addFeature(Decoration.VEGETAL_DECORATION, TreeFeatures.MOSSBARK_TREE.getPlacedResourceKey())
-                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.VINES.getPlacedResourceKey())
-                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.SWAMP_BUSH.getPlacedResourceKey())
-                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.MOSS.getPlacedResourceKey())
-                        .addFeature(Decoration.VEGETAL_DECORATION, PlantFeatures.ALGAE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.GOLD_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.COAL_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.DIAMOND_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.EMERALD_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.LAPIS_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.QUARTZ_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.COPPER_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.SILVER_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.TIN_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.LEAD_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.ALUMINUM_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.JADE_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.FOSSIL_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.GNEISS_ORE.getPlacedResourceKey())
-                        .addFeature(Decoration.UNDERGROUND_ORES, OreFeatures.TEMPLE_ORE.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.QUICK_SAND.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ROTTEN_ACACIA.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.GAS_VENT.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, TreeFeatures.MARSHWOOD_TREE.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, TreeFeatures.MOSSBARK_TREE.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.VINES.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.SWAMP_BUSH.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.MOSS.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.ALGAE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.GOLD_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.LAPIS_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.JADE_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.ALUMINUM_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.COPPER_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.LEAD_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.SILVER_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.TIN_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.QUARTZ_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.GNEISS_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.TEMPLE_ORE.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.COAL_ORE_SUBMERGED_SWAMP.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.EMERALD_ORE_SUBMERGED_SWAMP.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.DIAMOND_ORE_SUBMERGED_SWAMP.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.PETRIFIED_WOOD_ORE_SUBMERGED_SWAMP.getPlacedResourceKey())
+                        .addFeature(UNDERGROUND_ORES, OreFeatures.FOSSIL_ORE_SUBMERGED_SWAMP.getPlacedResourceKey())
                         .build())
                 .build();
     }

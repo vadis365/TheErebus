@@ -1,16 +1,16 @@
 {
-  "feature": "erebus:petrified_wood_ore_elysian_fields",
+  "feature": "erebus:jade_ore_elysian_fields",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 2
+      "count": 3
     },
     {
       "type": "minecraft:height_range",
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 48
+          "absolute": 112
         },
         "min_inclusive": {
           "absolute": 5
