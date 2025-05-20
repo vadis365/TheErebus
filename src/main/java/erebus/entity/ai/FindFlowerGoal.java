@@ -19,7 +19,7 @@ public abstract class FindFlowerGoal extends Goal {
 	 */
 	private static final int CHECKS_PER_TICK = 6;
 
-	private final int COLLECT_SPEED;
+	private final int collectSpeed;
 	protected final Mob entity;
 	private final BlockState blockState;
 
@@ -29,19 +29,19 @@ public abstract class FindFlowerGoal extends Goal {
 	public int flowerZ;
 	private int spiralIndex;
 	private int collectTicks;
-	private static final List<Point> spiral = new Spiral(32, 32).spiral();
+	private static final List<Point> SPIRAL = new Spiral(32, 32).spiral();
 
 	public FindFlowerGoal(Mob entity, BlockState state, int pollinateSpeed) {
 		this.entity = entity;
 		blockState = state;
 		hasTarget = false;
 		spiralIndex = 0;
-		COLLECT_SPEED = pollinateSpeed * 20;
+		collectSpeed = pollinateSpeed * 20;
 	}
 
 	@Override
 	public boolean canUse() {
-		return !hasTarget;
+		return !hasTarget && collectTicks == 0;
 	}
 
 	@Override
@@ -72,27 +72,26 @@ public abstract class FindFlowerGoal extends Goal {
 						hasTarget = true;
 					}
 			} else if (isEntityReady()) {
-				moveToLocation();
-				entity.getLookControl().setLookAt(flowerX + 0.5D, flowerY + 0.5D, flowerZ + 0.5D, 30.0F, 8.0F);
 				AABB blockbounds = getBlockAABB(flowerX, flowerY, flowerZ);
 				boolean flag = entity.getBoundingBox().maxY >= blockbounds.minY && entity.getBoundingBox().minY <= blockbounds.maxY + 0.25D && entity.getBoundingBox().maxX >= blockbounds.minX && entity.getBoundingBox().minX <= blockbounds.maxX && entity.getBoundingBox().maxZ >= blockbounds.minZ && entity.getBoundingBox().minZ <= blockbounds.maxZ;
+				if(!flag && canPolinate(getTargetBlock()))
+					moveToLocation();
+				entity.getLookControl().setLookAt(flowerX + 0.5D, flowerY + 0.5D, flowerZ + 0.5D, 30.0F, 8.0F);
 
-				if (flag) {
+				if (flag && canPolinate(getTargetBlock())) {
+					entity.getNavigation().stop();
 					prepareToPollinate();
 					collectTicks++;
 					//entity.level().sendBlockBreakProgress(entity.getEntityId(), new BlockPos(flowerX, flowerY, flowerZ), getScaledcollectTicks());
-					if (!canPolinate(entity.level().getBlockState(new BlockPos(flowerX, flowerY, flowerZ)))) {
-						hasTarget = false;
-						return;
-					}
-					else if (COLLECT_SPEED <= collectTicks) {
+
+					if (collectSpeed <= collectTicks) {
 						hasTarget = false;
 						collectTicks = 0;
 						afterPollination();
 						return;
 					}
 				}
-				if (!flag && collectTicks > 1) {
+				else if (collectTicks > 0) {
 					pollinationInterupted();
 					hasTarget = false;
 					collectTicks = 0;
@@ -102,21 +101,22 @@ public abstract class FindFlowerGoal extends Goal {
 	}
 
 	private int getScaledcollectTicks() {
-		return (int) ((float) collectTicks / (float) COLLECT_SPEED * 10.0F);
+		return (int) ((float) collectTicks / (float) collectSpeed * 10.0F);
 	}
 
 	private void increment() {
 		spiralIndex++;
-		if (spiralIndex >= spiral.size())
+		if (spiralIndex >= SPIRAL.size())
 			spiralIndex = 0;
 	}
 
 	private Point getNextPoint() {
-		return spiral.get(spiralIndex);
+		return SPIRAL.get(spiralIndex);
 	}
-
-	public Block getTargetBlockID() {
-		return entity.level().getBlockState(new BlockPos(flowerX, flowerY, flowerZ)).getBlock();
+	
+	public BlockState getTargetBlock() {
+		BlockState state = entity.level().getBlockState(new BlockPos(flowerX, flowerY, flowerZ));
+		return state;
 	}
 
 	protected boolean canPolinate(BlockState state) {

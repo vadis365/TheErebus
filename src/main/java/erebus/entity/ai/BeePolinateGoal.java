@@ -32,8 +32,7 @@ public class BeePolinateGoal extends FindFlowerGoal {
 	
 	@Override
 	public boolean canUse() {
-		return !bee.beeCollecting && !bee.beePollinating && super.canUse();
-		//return !bee.getNavigator().noPath() && super.shouldExecute();
+		return !bee.getMoveControl().hasWanted() && !bee.beeCollecting && !bee.beePollinating && super.canUse();
 	}
 	
 	@Override
@@ -43,13 +42,10 @@ public class BeePolinateGoal extends FindFlowerGoal {
 
 	@Override
 	protected void moveToLocation() {
-		if(!bee.level().isClientSide()) {
-		//bee.jumpFromGround();
 		if (bee.getTameState() == 1)
 			bee.setBeeCollecting(false);
 		bee.setBeePollinating(true);
 		bee.getMoveControl().setWantedPosition(flowerX + 0.5D, flowerY + 1D, flowerZ + 0.5D, 1D);
-		}
 	}
 
 	@Override
@@ -61,24 +57,20 @@ public class BeePolinateGoal extends FindFlowerGoal {
 
 	@Override
 	protected void pollinationInterupted() {
-		if(!bee.level().isClientSide()) {
 			bee.setBeePollinating(false);
+		if (bee.getTameState() == 1)
 			bee.setBeeCollecting(true);
-		}
 	}
 
 	@Override
 	protected void afterPollination() {
-		if (!bee.level().isClientSide()) {
-			if (bee.getNectarPoints() < 127)
-				bee.setNectarPoints(bee.getNectarPoints() + 2);
-			if (bee.getTameState() == 0) {
-				bee.setBeePollinating(false);
-			} else if (bee.getTameState() == 1) {
-				bee.setBeePollinating(false);
-				bee.setBeeCollecting(true);
-				bee.getNavigation().stop();
-			}
+		if (bee.getNectarPoints() < 127)
+			bee.setNectarPoints(bee.getNectarPoints() + 2);
+		if (bee.getTameState() == 0) {
+			bee.setBeePollinating(false);
+		} else if (bee.getTameState() == 1) {
+			bee.setBeePollinating(false);
+			bee.setBeeCollecting(true);
 		}
 	}
 }
