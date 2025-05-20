@@ -1,0 +1,309 @@
+package erebus.entity;
+
+import javax.annotation.Nullable;
+
+import erebus.entity.ai.BeePolinateGoal;
+import erebus.registries.ModItems;
+import erebus.registries.ModSounds;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
+import net.minecraft.world.entity.ai.util.HoverRandomPos;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+
+public class WorkerBee extends Animal {
+	public boolean beeFlying;
+	public boolean beePollinating = false;
+	public boolean beeCollecting = false;
+	private static final EntityDataAccessor<Integer> DROP_POINT_X = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> DROP_POINT_Y = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> DROP_POINT_Z = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> NECTAR_POINTS = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Byte> TAME_STATE = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.BYTE);
+	private EntityAIFlyingWander aiFlyingWander;
+
+	public WorkerBee(EntityType<? extends WorkerBee> type, Level level) {
+		super(type, level);
+		this.moveControl = new FlyingMoveControl(this, 10, false);
+
+	//	setPathPriority(PathNodeType.WATER, -8F);
+	//	setPathPriority(PathNodeType.BLOCKED, -8.0F);
+	//	setPathPriority(PathNodeType.OPEN, 8.0F);
+	}
+
+	@Override
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+        builder.define(DROP_POINT_X, 0);
+        builder.define(DROP_POINT_Y, 0);
+        builder.define(DROP_POINT_Z, 0);
+        builder.define(NECTAR_POINTS, 0);
+        builder.define(TAME_STATE, (byte)0);
+	}
+
+	@Override
+	protected void registerGoals() {
+		aiFlyingWander = new EntityAIFlyingWander(this, 0.5D, 0.02F);
+		goalSelector.addGoal(0, new BeePolinateGoal(this, 10));
+		goalSelector.addGoal(1, new FloatGoal(this));
+		goalSelector.addGoal(2, new MeleeAttackGoal(this, 0.5D, true));
+		//tasks.addTask(3, new EntityAITempt(this, 0.5D, Items.SUGAR, false));
+		goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+		targetSelector.addGoal(0, new HurtByTargetGoal(this).setAlertOthers(WorkerBee.class));
+		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Wasp>(this, Wasp.class, true, false));
+	}
+
+	public static AttributeSupplier.Builder createAttributes() {
+		return Mob.createMobAttributes()
+				.add(Attributes.MAX_HEALTH, 30D)
+				.add(Attributes.FOLLOW_RANGE, 64D)
+				.add(Attributes.MOVEMENT_SPEED, 0.5D)
+				.add(Attributes.FLYING_SPEED, 1D)
+				.add(Attributes.ATTACK_DAMAGE, 4D);
+	}
+
+	public static boolean canSpawnHere(EntityType<WorkerBee> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+		float light = level.getLightLevelDependentMagicValue(pos);
+		return light >= 0F;
+	}
+
+	@Override
+	public boolean checkSpawnObstruction(LevelReader world) {
+		return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
+	}
+
+	@Override
+	public int getMaxSpawnClusterSize() {
+		return 3;
+	}
+
+	@Override
+	public boolean isPersistenceRequired() {
+		return getTameState() != 0;
+	}
+
+	public boolean isFlying() {
+		return !onGround();
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+	
+		Vec3 vec3 = this.getDeltaMovement();
+		if (!this.onGround() && vec3.y < 0.0D)
+			this.setDeltaMovement(vec3.multiply(1.0D, 0.4D, 1.0D));
+
+		if (!level().isClientSide()) {
+			//if(tickCount == 1)
+			//	if(getTameState() == 0)
+			//		goalSelector.addGoal(3, aiFlyingWander);
+
+			if (beeCollecting && !beePollinating)
+				getNavigation().moveTo(getDropPointX() + 0.5D, getDropPointY() + 1D, getDropPointZ() + 0.5D, 0.25D);
+			
+			if (distanceToSqr(getDropPointX() + 0.5D, getDropPointY() + 0.5D, getDropPointZ() + 0.5D) < 1D && getNectarPoints() > 0) {
+				addHoneyToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
+				setBeeCollecting(false);
+				getNavigation().stop();
+			}
+
+			if(isInWater())
+				getNavigation().moveTo(getX(), getY() + 1D, getZ(), 0.5D);
+		}
+
+	}
+
+	private void addHoneyToInventory(int x, int y, int z) {
+	//	if (Utils.addItemStackToInventory(Utils.getTileEntity(getEntityWorld(),new BlockPos(x, y, z), IInventory.class), ItemMaterials.EnumErebusMaterialsType.NECTAR.createStack(getNectarPoints())))
+			setNectarPoints(0);
+	}
+
+	public void setBeeFlying(boolean state) {
+		beeFlying = state;
+	}
+
+	public void setBeePollinating(boolean state) {
+		beePollinating = state;
+	}
+
+	public void setBeeCollecting(boolean state) {
+		beeCollecting = state;
+	}
+
+	@Override
+    protected PathNavigation createNavigation(Level level){
+		return new FlyingPathNavigation(this, level);
+	}
+
+	@Override
+	public boolean causeFallDamage(float distance, float damageMultiplier, DamageSource damageSource) {
+		return false;
+	}
+	
+    @Override
+    public boolean isIgnoringBlockTriggers() {
+        return true;
+    }
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return ModSounds.WASP_SOUND.get();
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource source) {
+		return ModSounds.WASP_HURT.get();
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return ModSounds.SQUISH.get();
+	}
+/*
+	@Override
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		if (recentlyHit) {
+			entityDropItem(ItemMaterials.EnumErebusMaterialsType.NECTAR.createStack(2), 0.0F);
+		}
+	}
+*/
+	@Override
+    protected void playStepSound(BlockPos pos, BlockState blockIn) {
+        this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
+    }
+
+	@Override
+	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (!level().isClientSide() && !stack.isEmpty() && stack.getItem() ==  ModItems.NECTAR_COLLECTOR.get())
+			if (getNectarPoints() > 0) {
+				spawnAtLocation(new ItemStack(ModItems.NECTAR.get(), 2), 0.0F);
+				stack.getItem().damageItem(stack, 1, player, null);
+				setNectarPoints(getNectarPoints() - 2);
+				return InteractionResult.SUCCESS;
+			}
+/*
+		if (stack != null && stack.getItem() == ModItems.BEE_TAMING_AMULET.get() && stack.hasTagCompound() && stack.getTagCompound().hasKey("homeX")) {
+			if (!level().isClientSide()) {
+				setDropPoint(stack.getTagCompound().getInteger("homeX"), stack.getTagCompound().getInteger("homeY"), stack.getTagCompound().getInteger("homeZ"));
+				setTameState((byte) 1);
+				tasks.removeTask(aiFlyingWander);
+				setAttackTarget((EntityLivingBase) null);
+			}
+			playTameEffect(true);
+			player.swingArm(hand);
+			return true;
+		}*/
+		return super.mobInteract(player, hand);
+	}
+
+	public void setDropPoint(int x, int y, int z) {
+		entityData.set(DROP_POINT_X, x);
+		entityData.set(DROP_POINT_Y, y);
+		entityData.set(DROP_POINT_Z, z);
+	}
+
+	public int getDropPointX() {
+		return entityData.get(DROP_POINT_X);
+	}
+
+	public int getDropPointY() {
+		return entityData.get(DROP_POINT_Y);
+	}
+
+	public int getDropPointZ() {
+		return entityData.get(DROP_POINT_Z);
+	}
+
+	public void setTameState(byte state) {
+		entityData.set(TAME_STATE, state);
+	}
+
+	public byte getTameState() {
+		return entityData.get(TAME_STATE);
+	}
+
+	public void setNectarPoints(int count) {
+		entityData.set(NECTAR_POINTS, count);
+	}
+
+	public int getNectarPoints() {
+		return entityData.get(NECTAR_POINTS);
+	}
+
+	@Override
+	public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
+		return null;
+	}
+
+	@Override
+	  public void addAdditionalSaveData(CompoundTag nbt) {
+		super.addAdditionalSaveData(nbt);
+		nbt.putInt("nectarPoints", getNectarPoints());
+		nbt.putByte("tameState", getTameState());
+		nbt.putInt("dropPointX", getDropPointX());
+		nbt.putInt("dropPointY", getDropPointY());
+		nbt.putInt("dropPointZ", getDropPointZ());
+	}
+
+	@Override
+	public void readAdditionalSaveData(CompoundTag nbt) {
+		super.readAdditionalSaveData(nbt);
+		setNectarPoints(nbt.getInt("nectarPoints"));
+		setTameState(nbt.getByte("tameState"));
+		setDropPoint(nbt.getInt("dropPointX"), nbt.getInt("dropPointY"), nbt.getInt("dropPointZ"));
+	}
+
+	@Override
+	public boolean isFood(ItemStack stack) {
+		return false;
+	}
+
+	class EntityAIFlyingWander extends WaterAvoidingRandomStrollGoal {
+		public EntityAIFlyingWander(WorkerBee creatureIn, double speedIn, float chance) {
+			super(creatureIn, speedIn, chance);
+		}
+
+		@Nullable
+		protected Vec3 getPosition() {
+			Vec3 vec3 = this.mob.getViewVector(0.0F);
+			Vec3 vec31 = HoverRandomPos.getPos(this.mob, 8, 7, vec3.x, vec3.z, ((float) Math.PI / 2F), 2, 1);
+			return vec31 != null ? vec31 : AirAndWaterRandomPos.getPos(this.mob, 8, 4, -2, vec3.x, vec3.z, (float) Math.PI / 2F);
+		}
+	}
+}
