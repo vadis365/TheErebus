@@ -29,11 +29,10 @@ public class AmberBlocks extends ModBlockHelpers {
             .sound(SoundType.GLASS);
 
     static {
-        AMBER = registerTransparentBlock(
-                "amber", AMBER_PROPERTIES.strength(1.5F), 3);
-        AMBER_BRICKS = registerTransparentBlock("amber_bricks", AMBER_PROPERTIES.strength(2.0F), 3);
+        AMBER = registerTransparentBlock("amber", AMBER_PROPERTIES.strength(1.5F));
+        AMBER_BRICKS = registerTransparentBlock("amber_bricks", AMBER_PROPERTIES.strength(2.0F));
         AMBER_GLASS = registerConnectedTextureBlock("amber_glass", AMBER_PROPERTIES.strength(1.5F));
-        PRESERVED_AMBER = registerTransparentBlock("preserved_amber", AMBER_PROPERTIES.strength(10), 3);
+        PRESERVED_AMBER = registerTransparentBlock("preserved_amber", AMBER_PROPERTIES.strength(10));
         PRESERVED_AMBER_GLASS = registerConnectedTextureBlock("preserved_amber_glass", AMBER_PROPERTIES.strength(10));
         GLOWING_JAR = registerSimpleBlock(
                 "glowing_jar",
