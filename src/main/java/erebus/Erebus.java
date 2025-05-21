@@ -42,7 +42,6 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
@@ -85,8 +84,6 @@ public class Erebus {
         ModParticles.PARTICLES.register(bus);
         ModDataComponents.DATA_COMPONENT_REGISTRY.register(bus);
         ModFeatures.CONFIGS.register(bus);
-
-        NeoForge.EVENT_BUS.register(this);
 
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
