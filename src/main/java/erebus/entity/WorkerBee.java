@@ -143,13 +143,15 @@ public class WorkerBee extends Animal {
 				if(getTameState() == 0)
 					goalSelector.addGoal(3, aiFlyingWander);
 
-			if (beeCollecting && !beePollinating)
+			if (beeCollecting && !beePollinating) {
 				getNavigation().moveTo(getDropPointX() + 0.5D, getDropPointY() + 1D, getDropPointZ() + 0.5D, 1D);
 			
-			if (distanceToSqr(getDropPointX() + 0.5D, getDropPointY() + 0.5D, getDropPointZ() + 0.5D) <= 1D && getNectarPoints() > 0) {
-				addHoneyToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
-				setBeeCollecting(false);
-				//getNavigation().stop();
+				if (distanceToSqr(getDropPointX() + 0.5D, getDropPointY() + 0.5D, getDropPointZ() + 1D) <= 1D) {
+					if(getNectarPoints() > 0)
+						addHoneyToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
+					setBeeCollecting(false);
+					//getNavigation().stop();
+				}
 			}
 
 			if(isInWater())
@@ -160,7 +162,7 @@ public class WorkerBee extends Animal {
 	private void addHoneyToInventory(int x, int y, int z) {
 		BlockEntity tile = level().getBlockEntity(new BlockPos(x, y, z));
 		if (tile instanceof HoneyCombBlockEntity honeycomb) {
-			Optional<IItemHandler> handlerOptional = CapHelper.getItemHandler(level(), new BlockPos(x, y, z), Direction.UP);
+			Optional<IItemHandler> handlerOptional = CapHelper.getItemHandler(level(), new BlockPos(x, y, z), null);
 			if (handlerOptional.isPresent()) {
 				handlerOptional.ifPresent((handler) -> {
 					ItemStack stack = new ItemStack(ModItems.NECTAR.get(), getNectarPoints());

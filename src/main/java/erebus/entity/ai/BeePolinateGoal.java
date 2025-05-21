@@ -37,7 +37,7 @@ public class BeePolinateGoal extends FindFlowerGoal {
 	
 	@Override
 	public boolean canContinueToUse() {
-		return bee.getTarget() == null;
+		return bee.getTarget() == null && super.canContinueToUse();
 	}
 
 	@Override
