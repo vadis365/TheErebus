@@ -624,7 +624,7 @@ public class ModLang extends ModLangProvider {
         addBlock(OtherBlocks.SILO_ROOF, "Silo Roof");
         addBlock(OtherBlocks.SILO_TANK, "Silo Tank");
         addBlock(OtherBlocks.SILO_SUPPORTS, "Silo Supports");
-        addBlock(OtherBlocks.HONEY_COMB, "Honeycomb");
+        addBlock(OtherBlocks.HONEY_COMB, "Honeycomb Cell");
         addBlock(OtherBlocks.COMPOSTER, "Organic Composter");
         addBlock(OtherBlocks.BLENDER, "ErebusCo. Smoothie-matic 2000");
         addBlock(OtherBlocks.UMBER_FURNACE, "Umber Furnace");
@@ -702,6 +702,11 @@ public class ModLang extends ModLangProvider {
 		add("tooltip.erebus.bamboo_pipe", "A very basic directional fluid pipe.");
 		add("tooltip.erebus.bamboo_pipe_extract", "Extracts fluids from fluid containers and pushes them in to pipes and fluid containers.");
 		add("tooltip.erebus.bamboo_pipe_wrench", "Use on any Bamboo Pipe to rotate them or Use + Sneak to insta-break them.");
+		add("tooltip.erebus.honeycomb_x", "Honeycomb Cell X: %s");
+		add("tooltip.erebus.honeycomb_y", "Honeycomb Cell Y: %s");
+		add("tooltip.erebus.honeycomb_z", "Honeycomb Cell Z: %s");
+		add("tooltip.erebus.bee_taming_amulet_1", "Click on a Honeycomb Cell to set as target for Bee drops.");
+		add("tooltip.erebus.bee_taming_amulet_2", "Then click on Bee to tame.");
 	}
 
     private void addBookTranslations() {

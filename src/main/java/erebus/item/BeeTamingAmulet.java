@@ -3,6 +3,7 @@ package erebus.item;
 import java.util.List;
 
 import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.data.ModDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -20,32 +21,36 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class BeeTamingAmulet extends Item {
 	public BeeTamingAmulet(Properties properties) {
 		super(properties);
+		//setMaxStackSize(1);
+		//setMaxDamage(16);
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
-		tooltip.add(Component.translatable("tooltip.erebus.beetamingamulet_1").withStyle(ChatFormatting.YELLOW));
-		tooltip.add(Component.translatable("tooltip.erebus.beetamingamulet_2").withStyle(ChatFormatting.YELLOW));
+		if (stack.has(ModDataComponents.BEE_TAMING_AMULET)) {
+			BlockPos dataBlockPos = stack.getComponents().get(ModDataComponents.BEE_TAMING_AMULET.get());
+			tooltip.add(Component.translatable("tooltip.erebus.honeycomb_x", dataBlockPos.getX()).withStyle(ChatFormatting.YELLOW));
+			tooltip.add(Component.translatable("tooltip.erebus.honeycomb_y", dataBlockPos.getY()).withStyle(ChatFormatting.YELLOW));
+			tooltip.add(Component.translatable("tooltip.erebus.honeycomb_z", dataBlockPos.getZ()).withStyle(ChatFormatting.YELLOW));
+		} else {
+			tooltip.add(Component.translatable("tooltip.erebus.bee_taming_amulet_1").withStyle(ChatFormatting.YELLOW));
+			tooltip.add(Component.translatable("tooltip.erebus.bee_taming_amulet_2").withStyle(ChatFormatting.YELLOW));
+		}
 	}
 
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
 		Player player = context.getPlayer();
 		Level level = context.getLevel();
+		ItemStack stack = context.getItemInHand();
 		if (!level.isClientSide() && player != null) {
 			BlockPos pos = context.getClickedPos();
 			BlockState state = level.getBlockState(pos);
 			if (state != null && state.getBlock() == OtherBlocks.HONEY_COMB.get()) {
-/*
- 			TODO Apply ItemStackData components here 
-				stack.getTagCompound().setInteger("homeX", pos.getX());
-				stack.getTagCompound().setInteger("homeY", pos.getY());
-				stack.getTagCompound().setInteger("homeZ", pos.getZ());
-*/
+				stack.set(ModDataComponents.BEE_TAMING_AMULET, pos);
 				System.out.println("Clicky on Honeycomb");
 				return InteractionResult.SUCCESS;
-				
 			}
 		}
 
