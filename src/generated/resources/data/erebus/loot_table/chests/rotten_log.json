@@ -533,7 +533,11 @@
           "name": "minecraft:golden_boots"
         }
       ],
-      "rolls": 1.0
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 10.0,
+        "min": 3.0
+      }
     }
   ],
   "random_sequence": "erebus:chests/rotten_log"
