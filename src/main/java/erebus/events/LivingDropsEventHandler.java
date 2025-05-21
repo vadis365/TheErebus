@@ -10,7 +10,6 @@ import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
@@ -50,6 +49,8 @@ public class LivingDropsEventHandler {
                 data -> new DeathCompassData(pos.getX(), pos.getY(), pos.getZ())
         );
 
-        event.getEntity().setItemInHand(InteractionHand.MAIN_HAND, stack);
+       // event.getEntity().setItemInHand(InteractionHand.MAIN_HAND, stack);
+		if (!event.getEntity().getInventory().add(stack))
+			event.getEntity().drop(stack, false);
     }
 }
