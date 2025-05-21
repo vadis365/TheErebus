@@ -1,11 +1,17 @@
 package erebus.entity;
 
+import java.util.Optional;
+
 import javax.annotation.Nullable;
 
+import erebus.block.entity.HoneyCombBlockEntity;
 import erebus.entity.ai.BeePolinateGoal;
 import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
+import erebus.registries.data.ModDataComponents;
+import erebus.utils.CapHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -19,6 +25,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -41,8 +48,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 public class WorkerBee extends Animal {
 	public boolean beeFlying;
@@ -126,31 +136,49 @@ public class WorkerBee extends Animal {
 	
 		Vec3 vec3 = this.getDeltaMovement();
 		if (!this.onGround() && vec3.y < 0.0D)
-			this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
+			this.setDeltaMovement(vec3.multiply(1.0D, 0.7D, 1.0D));
 
 		if (!level().isClientSide()) {
-			//if(tickCount == 1)
-			//	if(getTameState() == 0)
-			//		goalSelector.addGoal(3, aiFlyingWander);
+			if(tickCount == 1)
+				if(getTameState() == 0)
+					goalSelector.addGoal(3, aiFlyingWander);
 
 			if (beeCollecting && !beePollinating)
-				getNavigation().moveTo(getDropPointX() + 0.5D, getDropPointY() + 1D, getDropPointZ() + 0.5D, 0.25D);
+				getNavigation().moveTo(getDropPointX() + 0.5D, getDropPointY() + 1D, getDropPointZ() + 0.5D, 1D);
 			
-			if (distanceToSqr(getDropPointX() + 0.5D, getDropPointY() + 0.5D, getDropPointZ() + 0.5D) < 1D && getNectarPoints() > 0) {
+			if (distanceToSqr(getDropPointX() + 0.5D, getDropPointY() + 0.5D, getDropPointZ() + 0.5D) <= 1D && getNectarPoints() > 0) {
 				addHoneyToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
 				setBeeCollecting(false);
-				getNavigation().stop();
+				//getNavigation().stop();
 			}
 
 			if(isInWater())
 				getNavigation().moveTo(getX(), getY() + 1D, getZ(), 0.5D);
 		}
-
 	}
 
 	private void addHoneyToInventory(int x, int y, int z) {
-	//	if (Utils.addItemStackToInventory(Utils.getTileEntity(getEntityWorld(),new BlockPos(x, y, z), IInventory.class), ItemMaterials.EnumErebusMaterialsType.NECTAR.createStack(getNectarPoints())))
-			setNectarPoints(0);
+		BlockEntity tile = level().getBlockEntity(new BlockPos(x, y, z));
+		if (tile instanceof HoneyCombBlockEntity honeycomb) {
+			Optional<IItemHandler> handlerOptional = CapHelper.getItemHandler(level(), new BlockPos(x, y, z), Direction.UP);
+			if (handlerOptional.isPresent()) {
+				handlerOptional.ifPresent((handler) -> {
+					ItemStack stack = new ItemStack(ModItems.NECTAR.get(), getNectarPoints());
+					ItemStack stack1 = ItemHandlerHelper.insertItem(handler, stack, true);
+					if (stack1.isEmpty()) {
+						ItemHandlerHelper.insertItem(handler, stack, false);
+						honeycomb.setChanged();
+						setNectarPoints(0);
+					} else {
+						spawnAtLocation(new ItemStack(ModItems.NECTAR.get(), getNectarPoints()), 0.0F);
+						setNectarPoints(0);
+					}
+				});
+			} else {
+				spawnAtLocation(new ItemStack(ModItems.NECTAR.get(), getNectarPoints()), 0.0F); // just in case
+				setNectarPoints(0);
+			}
+		}
 	}
 
 	public void setBeeFlying(boolean state) {
@@ -214,21 +242,23 @@ public class WorkerBee extends Animal {
 			if (getNectarPoints() > 0) {
 				spawnAtLocation(new ItemStack(ModItems.NECTAR.get(), 2), 0.0F);
 				stack.getItem().damageItem(stack, 1, player, null);
+				stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 				setNectarPoints(getNectarPoints() - 2);
 				return InteractionResult.SUCCESS;
 			}
-/*
-		if (stack != null && stack.getItem() == ModItems.BEE_TAMING_AMULET.get() && stack.hasTagCompound() && stack.getTagCompound().hasKey("homeX")) {
+
+		if (!stack.isEmpty() && stack.getItem() == ModItems.BEE_TAMING_AMULET.get() && stack.has(ModDataComponents.BEE_TAMING_AMULET)) {
 			if (!level().isClientSide()) {
-				setDropPoint(stack.getTagCompound().getInteger("homeX"), stack.getTagCompound().getInteger("homeY"), stack.getTagCompound().getInteger("homeZ"));
+				BlockPos dataBlockPos = stack.getComponents().get(ModDataComponents.BEE_TAMING_AMULET.get());
+				setDropPoint(dataBlockPos.getX(), dataBlockPos.getY(), dataBlockPos.getZ());
 				setTameState((byte) 1);
-				tasks.removeTask(aiFlyingWander);
-				setAttackTarget((EntityLivingBase) null);
+				goalSelector.removeGoal(aiFlyingWander);
+				setTarget((LivingEntity) null);
 			}
-			playTameEffect(true);
-			player.swingArm(hand);
-			return true;
-		}*/
+			level().broadcastEntityEvent(this, (byte)18);
+			player.swing(hand);
+			return InteractionResult.SUCCESS;
+		}
 		return super.mobInteract(player, hand);
 	}
 

@@ -8,6 +8,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -21,8 +22,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class BeeTamingAmulet extends Item {
 	public BeeTamingAmulet(Properties properties) {
 		super(properties);
-		//setMaxStackSize(1);
-		//setMaxDamage(16);
 	}
 
 	@Override
@@ -49,11 +48,10 @@ public class BeeTamingAmulet extends Item {
 			BlockState state = level.getBlockState(pos);
 			if (state != null && state.getBlock() == OtherBlocks.HONEY_COMB.get()) {
 				stack.set(ModDataComponents.BEE_TAMING_AMULET, pos);
-				System.out.println("Clicky on Honeycomb");
+				stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()));
 				return InteractionResult.SUCCESS;
 			}
 		}
-
 		return InteractionResult.sidedSuccess(level.isClientSide);
 	}
 }
