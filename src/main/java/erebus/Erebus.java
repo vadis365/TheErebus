@@ -23,6 +23,7 @@ import erebus.registries.world.ModPOIs;
 import erebus.registries.world.feature.ModFeatures;
 import erebus.registries.world.feature.config.DecorationFeatureConfigs;
 import erebus.registries.world.feature.config.PlantFeatureConfigs;
+import erebus.registries.world.feature.config.StructureFeatureConfigs;
 import erebus.registries.world.tree.ModFoliagePlacers;
 import erebus.registries.world.tree.ModTreeDecorators;
 import erebus.registries.world.tree.ModTrunkPlacers;
@@ -30,13 +31,10 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
@@ -46,7 +44,6 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import org.slf4j.Logger;
@@ -63,6 +60,7 @@ public class Erebus {
         bus.addListener(this::commonSetup);
         DecorationFeatureConfigs.init();
         PlantFeatureConfigs.init();
+        StructureFeatureConfigs.init();
 
         ModArmorMaterials.ARMOR_MATERIALS.register(bus);
         ModBlocks.register(bus);
@@ -99,7 +97,7 @@ public class Erebus {
         bus.addListener(this::registerCaps);
 
 		if (dist.isClient()) {
-			bus.addListener(this::doClientStuff);
+			bus.addListener(this::setFluidRenderTypes);
 			bus.addListener(ModEntityRendering::registerEntityLayers);
 			bus.addListener(ModEntityRendering::registerEntityRender);
 			bus.addListener(ModItemRendering::registerItemLayerDefinitions);
@@ -111,7 +109,7 @@ public class Erebus {
 		}
     }
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
+    private void setFluidRenderTypes(final FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_FLOW.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_STILL.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY_FLOW.get(), RenderType.translucent());
@@ -139,23 +137,6 @@ public class Erebus {
                         }
                 )
         );
-
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
-
-        if (Config.logDirtBlock)
-            LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
-
-        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
-
-        Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
-    }
-
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
     }
 
 	public static ResourceLocation prefix(String name) {
@@ -167,12 +148,8 @@ public class Erebus {
 		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.BAMBOO_PIPE.get(), BambooPipeBlockEntity::getTank);
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.BAMBOO_PIPE_EXTRACT.get(), BambooPipeExtractBlockEntity::getTank);
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.LIQUIFIER.get(), LiquifierBlockEntity::getTank);
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.LIQUIFIER.get(), (liquifier, side) -> {
-            return new InvWrapper(liquifier);
-        });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.HONEY_COMB.get(), (honey_comb, side) -> {
-            return new InvWrapper(honey_comb);
-        });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.LIQUIFIER.get(), (liquifier, side) -> new InvWrapper(liquifier));
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.HONEY_COMB.get(), (honey_comb, side) -> new InvWrapper(honey_comb));
 		event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidBucketWrapper(stack), ModItems.BEETLE_JUICE_BUCKET.get());
 	}
 }
