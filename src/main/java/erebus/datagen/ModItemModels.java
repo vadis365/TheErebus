@@ -567,6 +567,8 @@ public class ModItemModels extends ModItemModelProvider {
         blockFlatWithBlockTexture(PlantBlocks.GRANDMAS_SHOES_MUSHROOM, "mushroom_grandmas_shoes");
         blockFlatWithBlockTexture(PlantBlocks.DUTCH_CAP_MUSHROOM, "mushroom_dutch_cap");
         blockFlatWithBlockTexture(PlantBlocks.KAIZERS_FINGERS_MUSHROOM, "mushroom_kaizers_fingers");
+        block(PlantBlocks.GLOWSHROOM_BLOCK, "glowshroom");
+        block(PlantBlocks.GLOWSHROOM_STALK, "glowshroom_stalk_main");
 
         // MARK: Other
         block(OtherBlocks.PORTAL);

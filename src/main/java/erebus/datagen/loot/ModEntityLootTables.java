@@ -41,6 +41,7 @@ public class ModEntityLootTables extends EntityLootSubProvider {
 		this.noLoot(ModEntities.MONEY_SPIDER);
 
 		this.noLoot(ModEntities.WASP);
+		this.noLoot(ModEntities.WORKER_BEE);
 
 		this.noLoot(ModEntities.MOTH);
 

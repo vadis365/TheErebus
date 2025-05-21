@@ -1,6 +1,7 @@
 package erebus.registries.blocks.providers;
 
 import erebus.block.DarkFruitVineBlock;
+import erebus.block.GlowshroomStalkBlock;
 import erebus.block.PricklyPearBlock;
 import erebus.block.util.ModBerryBushBlock;
 import erebus.block.util.ModCropBlock;
@@ -14,6 +15,8 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class PlantBlocks extends ModBlockHelpers {
+
+    private static final Properties FLOWER_PROPS = Properties.of().noCollission().noOcclusion().instabreak().sound(SoundType.AZALEA).isViewBlocking((state, level, pos) -> false);
 
     // MARK: Plants
     public static final DeferredBlock<ModCropBlock> CROP_TURNIP;
@@ -156,8 +159,8 @@ public class PlantBlocks extends ModBlockHelpers {
                         .pushReaction(PushReaction.DESTROY)
                 )
         );
-        GLOWSHROOM_BLOCK = registerSimpleBlock("glowshroom_block", Properties.of().mapColor(MapColor.STONE));
-        GLOWSHROOM_STALK = registerSimpleBlock("glowshroom_stalk", Properties.of().mapColor(MapColor.STONE));
+        GLOWSHROOM_BLOCK = registerSimpleBlock("glowshroom_block", Properties.of().mapColor(MapColor.STONE).noOcclusion());
+        GLOWSHROOM_STALK = registerBlock("glowshroom_stalk", () -> new GlowshroomStalkBlock(Properties.of().mapColor(MapColor.STONE)));
         HANGING_WEB = registerSimpleBlock("hanging_web", Properties.of().mapColor(MapColor.STONE).noOcclusion());
 
         // MARK: Flowers
@@ -193,21 +196,21 @@ public class PlantBlocks extends ModBlockHelpers {
         STIGMA_ORANGE = registerSimpleBlock("stigma_orange", Properties.of().mapColor(MapColor.COLOR_YELLOW));
         STIGMA_WHITE = registerSimpleBlock("stigma_white", Properties.of().mapColor(MapColor.COLOR_YELLOW));
 
-        FLOWER_BLACK = registerSimpleBlock("flower_black", Properties.of().mapColor(MapColor.COLOR_BLACK));
-        FLOWER_RED = registerSimpleBlock("flower_red", Properties.of().mapColor(MapColor.COLOR_RED));
-        FLOWER_BROWN = registerSimpleBlock("flower_brown", Properties.of().mapColor(MapColor.COLOR_BROWN));
-        FLOWER_BLUE = registerSimpleBlock("flower_blue", Properties.of().mapColor(MapColor.COLOR_BLUE));
-        FLOWER_PURPLE = registerSimpleBlock("flower_purple", Properties.of().mapColor(MapColor.COLOR_PURPLE));
-        FLOWER_CYAN = registerSimpleBlock("flower_cyan", Properties.of().mapColor(MapColor.COLOR_CYAN));
-        FLOWER_LIGHT_GRAY = registerSimpleBlock("flower_light_gray", Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY));
-        FLOWER_GRAY = registerSimpleBlock("flower_gray", Properties.of().mapColor(MapColor.COLOR_GRAY));
-        FLOWER_PINK = registerSimpleBlock("flower_pink", Properties.of().mapColor(MapColor.COLOR_PINK));
-        FLOWER_YELLOW = registerSimpleBlock("flower_yellow", Properties.of().mapColor(MapColor.COLOR_YELLOW));
-        FLOWER_LIGHT_BLUE = registerSimpleBlock("flower_light_blue", Properties.of().mapColor(MapColor.COLOR_LIGHT_BLUE));
-        FLOWER_MAGENTA = registerSimpleBlock("flower_magenta", Properties.of().mapColor(MapColor.COLOR_MAGENTA));
-        FLOWER_ORANGE = registerSimpleBlock("flower_orange", Properties.of().mapColor(MapColor.COLOR_ORANGE));
-        FLOWER_WHITE = registerSimpleBlock("flower_white", Properties.of().mapColor(MapColor.TERRACOTTA_WHITE));
-        FLOWER_RAINBOW = registerSimpleBlock("flower_rainbow", Properties.of().mapColor(MapColor.COLOR_RED));
+        FLOWER_BLACK = registerSimpleBlock("flower_black", FLOWER_PROPS.mapColor(MapColor.COLOR_BLACK));
+        FLOWER_RED = registerSimpleBlock("flower_red", FLOWER_PROPS.mapColor(MapColor.COLOR_RED));
+        FLOWER_BROWN = registerSimpleBlock("flower_brown", FLOWER_PROPS.mapColor(MapColor.COLOR_BROWN));
+        FLOWER_BLUE = registerSimpleBlock("flower_blue", FLOWER_PROPS.mapColor(MapColor.COLOR_BLUE));
+        FLOWER_PURPLE = registerSimpleBlock("flower_purple", FLOWER_PROPS.mapColor(MapColor.COLOR_PURPLE));
+        FLOWER_CYAN = registerSimpleBlock("flower_cyan", FLOWER_PROPS.mapColor(MapColor.COLOR_CYAN));
+        FLOWER_LIGHT_GRAY = registerSimpleBlock("flower_light_gray", FLOWER_PROPS.mapColor(MapColor.COLOR_LIGHT_GRAY));
+        FLOWER_GRAY = registerSimpleBlock("flower_gray", FLOWER_PROPS.mapColor(MapColor.COLOR_GRAY));
+        FLOWER_PINK = registerSimpleBlock("flower_pink", FLOWER_PROPS.mapColor(MapColor.COLOR_PINK));
+        FLOWER_YELLOW = registerSimpleBlock("flower_yellow", FLOWER_PROPS.mapColor(MapColor.COLOR_YELLOW));
+        FLOWER_LIGHT_BLUE = registerSimpleBlock("flower_light_blue", FLOWER_PROPS.mapColor(MapColor.COLOR_LIGHT_BLUE));
+        FLOWER_MAGENTA = registerSimpleBlock("flower_magenta", FLOWER_PROPS.mapColor(MapColor.COLOR_MAGENTA));
+        FLOWER_ORANGE = registerSimpleBlock("flower_orange", FLOWER_PROPS.mapColor(MapColor.COLOR_ORANGE));
+        FLOWER_WHITE = registerSimpleBlock("flower_white", FLOWER_PROPS.mapColor(MapColor.TERRACOTTA_WHITE));
+        FLOWER_RAINBOW = registerSimpleBlock("flower_rainbow", FLOWER_PROPS.mapColor(MapColor.COLOR_RED));
 
         // MARK: Flowers Double Height
         BULLRUSH = registerDoublePlant("bullrush", Properties.ofFullCopy(Blocks.ROSE_BUSH));
