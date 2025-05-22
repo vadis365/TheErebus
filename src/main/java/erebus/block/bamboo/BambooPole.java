@@ -1,0 +1,66 @@
+package erebus.block.bamboo;
+
+import javax.annotation.Nonnull;
+
+import com.mojang.serialization.MapCodec;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+public class BambooPole extends Block {
+	public static final MapCodec<BambooPole> CODEC = simpleCodec(BambooPole::new);
+	public static final VoxelShape NERD_POLE = Block.box(6D, 0D, 6D, 10D, 16D, 10D);
+
+	public BambooPole(Properties properties) {
+		super(properties);
+	}
+	
+	@Nonnull
+	@Override
+	protected MapCodec<BambooPole> codec() {
+		return CODEC;
+	}
+
+	@Nonnull
+	@Override
+	public VoxelShape getShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+		return NERD_POLE;
+	}
+
+	@Nonnull
+	@Override
+	public VoxelShape getInteractionShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos) {
+		return NERD_POLE;
+	}
+
+	@Nonnull
+	@Override
+	public RenderShape getRenderShape(@Nonnull BlockState state) {
+		return RenderShape.MODEL;
+	}
+
+    @Override
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return this.canPlaceAt(level, pos.relative(Direction.DOWN), Direction.UP);
+    }
+
+	public boolean canPlaceAt(BlockGetter blockReader, BlockPos pos, Direction direction) {
+		BlockState stateBelow = blockReader.getBlockState(pos);
+		return stateBelow.getBlock() == this || stateBelow.isFaceSturdy(blockReader, pos, direction) && !stateBelow.is(BlockTags.LEAVES) && !stateBelow.is(BlockTags.AIR);
+	}
+	
+    @Override
+    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+		return facing == Direction.DOWN && !this.canSurvive(state, level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+	}
+}

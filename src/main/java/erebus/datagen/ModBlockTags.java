@@ -139,5 +139,9 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
                 PlantBlocks.STIGMA_YELLOW.get(),
                 PlantBlocks.EXPLODING_STIGMA.get()
         );
+        
+		// Bamboo Stuff?
+		tag(BlockTags.CLIMBABLE).add(OtherBlocks.BAMBOO_NERD_POLE.get());
+        		
     }
 }

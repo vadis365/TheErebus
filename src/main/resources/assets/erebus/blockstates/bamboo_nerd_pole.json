@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "erebus:block/bamboo_nerd_pole" }
+        "": { "model": "erebus:block/bamboo_nerd_pole" }
     }
 }
