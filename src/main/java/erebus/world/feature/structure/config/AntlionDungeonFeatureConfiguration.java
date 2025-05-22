@@ -31,8 +31,21 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Antlion Dungeon Feature Configuration
+ * 
+ * This class is responsible for generating the Antlion Dungeon structure in the Erebus dimension.
+ * The structure consists of:
+ * - A maze-like underground dungeon with multiple levels
+ * - A central pyramid structure with teleporters
+ * - A courtyard surrounding the pyramid
+ * - Various decorative and functional elements (chests, spawners, etc.)
+ * 
+ * The generation process uses a perfect maze algorithm to create the dungeon layout.
+ */
 public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
 
+    // Block states used throughout the structure
     private final BlockState GNEISS = OtherBlocks.GNEISS.get().defaultBlockState();
     private final BlockState GNEISS_RELIEF = OtherBlocks.GNEISS_RELIEF.get().defaultBlockState();
     private final BlockState GNEISS_CARVED = OtherBlocks.GNEISS_CARVED.get().defaultBlockState();
@@ -58,8 +71,14 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
     private final BlockState SAND = Blocks.SAND.defaultBlockState();
     private final BlockState AIR = Blocks.AIR.defaultBlockState();
 
+    // Map to track which blocks are considered part of the structure
     private final Map<BlockState, Boolean> STRUCTURE_BLOCKS = new HashMap<>();
 
+    /**
+     * Constructor for the Antlion Dungeon feature.
+     * Initializes the structure blocks map with all blocks that are considered part of the structure.
+     * This is used to determine which blocks should not be replaced during generation.
+     */
     public AntlionDungeonFeatureConfiguration() {
         super(NoneFeatureConfiguration.CODEC);
         if(STRUCTURE_BLOCKS.isEmpty()) {
@@ -82,12 +101,24 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
             STRUCTURE_BLOCKS.put(LAVA, true);
         }
     }
-    // MARK: isSolidStructureBlock
+
+    /**
+     * Checks if a block is part of the structure and should not be replaced during generation.
+     * 
+     * @param block The block state to check
+     * @return true if the block is part of the structure, false otherwise
+     */
     public boolean isSolidStructureBlock(BlockState block) {
         return STRUCTURE_BLOCKS.getOrDefault(block, false);
     }
 
-    // MARK: place
+    /**
+     * Main method called to place the structure in the world.
+     * Checks if the location is valid and then generates the structure.
+     * 
+     * @param context The context containing level, position, and random source
+     * @return true if the structure was successfully placed, false otherwise
+     */
     @Override
     public boolean place(@NotNull FeaturePlaceContext<NoneFeatureConfiguration> context) {
         WorldGenLevel level = context.level();
@@ -102,16 +133,30 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
         return false;
     }
 
-    // MARK: checkLocation
+    /**
+     * Checks if the location is valid for placing the structure.
+     * Currently always returns true, but could be extended to check biome or other conditions.
+     * 
+     * @param level The world generation level
+     * @param pos The position to check
+     * @return true if the location is valid, false otherwise
+     */
     public boolean checkLocation(WorldGenLevel level, BlockPos pos) {
         //if(!checkBiome(level, pos)) return false;
 
-        //TODO: Add in NBT Data
+        //TODO: Add in NBT Data to prevent duplicate structures
 
         return true;
     }
 
-    // MARK: checkBiome
+    /**
+     * Checks if the structure is near a Volcanic Desert biome.
+     * Looks in four cardinal directions at a distance of 64 blocks.
+     * 
+     * @param level The world generation level
+     * @param pos The position to check from
+     * @return true if any of the checked positions are in a Volcanic Desert biome
+     */
     public boolean checkBiome(WorldGenLevel level, BlockPos pos) {
         ResourceKey<Biome> volcanicDesert = ModBiomes.VOLCANIC_DESERT.getResourceKey();
 
@@ -126,6 +171,12 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
         return level.getBiome(west).is(volcanicDesert);
     }
 
+    /**
+     * Removes force-loaded chunks after structure generation.
+     * 
+     * @param level The world generation level
+     * @param pos The central position of the structure
+     */
     private void removeForceLoads(WorldGenLevel level, BlockPos pos) {
         BlockPos north = pos.north(64);
         BlockPos south = pos.south(64);
@@ -138,27 +189,50 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
         level.getLevel().setChunkForced(west.getX(), west.getZ(), false);
     }
 
-    // MARK: generateStructure
+    /**
+     * Main method for generating the entire Antlion Dungeon structure.
+     * Coordinates the generation of all components:
+     * - Maze levels
+     * - Floor and roof
+     * - Courtyard
+     * - Pyramid
+     * - Decorations and features
+     * 
+     * @param level The world generation level
+     * @param pos The central position for the structure
+     * @param random Random source for variation
+     */
     public void generateStructure(WorldGenLevel level, BlockPos pos, RandomSource random) {
+        // Define structure dimensions
         int sizeX = 60;
         int sizeY = 4;
         int sizeZ = 60;
         int width = sizeX / 2;
         int length = sizeZ / 2;
+
+        // Generate the maze layout
         int[][] maze;
         MazeGenerator generator = new PerfectMazeGenerator(width, length);
         maze = generator.generateMaze();
 
+        // Build the main structure components
         buildFloor(level, pos.below(sizeY), width, length, random);
         buildRoof(level, pos, width, length, random);
 
+        // Build the three maze levels with different block types
         buildLevel(level, pos.offset(-sizeX, -sizeY + 1, -sizeZ), width, length, maze, GNEISS_RELIEF);
         buildLevel(level, pos.offset(-sizeX, -sizeY + 2, -sizeZ), width, length, maze, GNEISS_CARVED);
         buildLevel(level, pos.offset(-sizeX, -sizeY + 3, -sizeZ), width, length, maze, GNEISS_RELIEF);
+
+        // Create air pockets and add features to the maze
         createAir(level, pos.below(sizeY - 1), width, length, random);
         addFeature(level, pos.offset(-sizeX, 0, -sizeZ), width, length, maze, random);
+
+        // Build the courtyard and central pyramid
         buildCourtyard(level, TEMPLE_PILLAR, pos.below(sizeY), sizeX - 8, sizeY, sizeZ - 8);
         createPyramid(level, pos.below(sizeY), TEMPLE_BRICK_UNBREAKING, true, width - 8, length - 8);
+
+        // Add decorations and special features
         decoratePyramid(level, pos.offset(-width + 8, -sizeY, -length + 8));
         addTeleporters(level, pos.offset(-width + 8, -sizeY, -length + 8));
         addCapstones(level, pos.above(17));
@@ -242,19 +316,40 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
         }
     }
 
-    // MARK: setTeleporter
+    /**
+     * Places a teleporter block at the specified position.
+     * The teleporter can be configured with a type and target position.
+     * 
+     * @param level The world generation level
+     * @param pos The position to place the teleporter
+     * @param type The type of teleporter (determines appearance or behavior)
+     * @param target The target position that this teleporter links to
+     */
     private void setTeleporter(WorldGenLevel level, BlockPos pos, int type, BlockPos target) {
+        // TODO: Implement teleporter type and target functionality
         setBlock(level, pos, OtherBlocks.TEMPLE_TELEPORTER.get().defaultBlockState());
     }
 
-    // MARK: buildFloor
+    /**
+     * Builds the floor of the dungeon structure.
+     * Creates a hollow pyramid in the center and places floor tiles with occasional lava or vents.
+     * 
+     * @param level The world generation level
+     * @param pos The base position for the floor
+     * @param width The width of the floor area
+     * @param length The length of the floor area
+     * @param random Random source for variation
+     */
     private void buildFloor(WorldGenLevel level, BlockPos pos, int width, int length, RandomSource random) {
+        // Create a hollow pyramid in the center of the floor
         createPyramid(level, pos.above(5), Blocks.AIR.defaultBlockState(), true, 24, 24);
 
+        // Place floor tiles throughout the area
         for(int z = -length * 2; z <= length * 2; z++) {
             for(int x = -width * 2; x <= width * 2; x++) {
                 BlockPos featurePos = pos.offset(x, 0, z);
                 if(canPlaceFloorAt(pos, featurePos)) {
+                    // 1/15 chance to place lava or a vent
                     if(random.nextInt(15) == 0) {
                         if(random.nextBoolean() && random.nextBoolean()) {
                             setBlock(level, featurePos, LAVA);
@@ -262,6 +357,7 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
                             setBlock(level, featurePos, GNEISS_VENT);
                         }
                     } else {
+                        // Otherwise place a normal floor tile
                         setBlock(level, featurePos, GNEISS_TILES);
                     }
                 }
@@ -269,7 +365,16 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
         }
     }
 
-    // MARK: buildRoof
+    /**
+     * Builds the roof of the dungeon structure.
+     * Places brick blocks throughout the roof area.
+     * 
+     * @param level The world generation level
+     * @param pos The base position for the roof
+     * @param width The width of the roof area
+     * @param length The length of the roof area
+     * @param random Random source for variation
+     */
     private void buildRoof(WorldGenLevel level, BlockPos pos, int width, int length, RandomSource random) {
         for(int z = -length * 2; z <= length * 2; z++) {
             for(int x = -width * 2; x <= width * 2; x++) {
@@ -281,12 +386,23 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
         }
     }
 
-    // MARK: createAir
+    /**
+     * Creates air pockets within the dungeon structure.
+     * Replaces non-structure blocks with air to create open spaces.
+     * 
+     * @param level The world generation level
+     * @param pos The base position for creating air
+     * @param width The width of the area
+     * @param length The length of the area
+     * @param random Random source for variation
+     */
     private void createAir(WorldGenLevel level, BlockPos pos, int width, int length, RandomSource random) {
+        // Create air in a 3-block high space
         for(int z = -length * 2; z <= length * 2; z++) {
             for(int x = -width * 2; x <= width * 2; x++) {
                 for(int y = 0; y <= 2; y++) {
                     if(canPlaceFeatureAt(pos, pos.offset(x, y, z))) {
+                        // Only replace non-structure blocks with air
                         if(!isSolidStructureBlock(level.getBlockState(pos.offset(x, y, z)))) {
                             setBlock(level, pos.offset(x, y, z), AIR);
                         }
@@ -449,19 +565,30 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
         }
     }
 
-    // MARK: addFeature
+    /**
+     * Adds features (torches, chests, bones, spawners) to the maze structure.
+     * Features are placed based on the maze layout and random chance.
+     * 
+     * @param level The world generation level
+     * @param pos The base position for feature placement
+     * @param width The width of the maze
+     * @param length The length of the maze
+     * @param maze The 2D array representing the maze layout
+     * @param random Random source for variation
+     */
     private void addFeature(WorldGenLevel level, BlockPos pos, int width, int length, int[][] maze, RandomSource random) {
+        BlockPos basePos = pos.offset(60, 0, 60);
+
+        // Process each cell in the maze
         for(int z = 0; z < length; z++) {
             for(int x = 0; x < width; x++) {
+                // Check for south passage
                 if((maze[x][z] & 1) == 0) {
-                    if(random.nextInt(25) == 0 && canPlaceFeatureAt(pos.offset(60, 0, 60), pos.offset(1 + x * 4, -1, 1 + z * 4))) {
-                        setBlock(level, pos.offset(1 + x * 4, -1, 1 + z * 4), TORCH);
-                        if(random.nextInt(4) == 0) {
-                            placeChest(level, pos.offset(1 + x * 4, -1, 1 + z * 4), Direction.SOUTH);
-                        } else if(random.nextInt(6) == 0) {
-                            placeBones(level, pos.offset(1 + x * 4, -1, 1 + z * 4), Direction.SOUTH);
-                        }
-                    } else if(random.nextInt(10) == 0) {
+                    // Try to place torch and chest/bones
+                    tryPlaceFeature(level, basePos, pos, x, z, 1, 1, Direction.SOUTH, random);
+
+                    // Randomly place spawners
+                    if(random.nextInt(10) == 0) {
                         if(random.nextBoolean()) {
                             setBlock(level, pos.offset(2 + x * 4, -2, 2 + z * 4), ANTLION_SPAWNER);
                         } else {
@@ -469,109 +596,150 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
                         }
                     }
                 }
-            }
 
-            for(int x = 0; x < width; x++) {
+                // Check for east passage
                 if((maze[x][z] & 8) == 0) {
-                    if(random.nextInt(25) == 0 && canPlaceFeatureAt(pos.offset(60, 0, 60), pos.offset(1 + x * 4, -1, 2 + z * 4))) {
-                        setBlock(level, pos.offset(1 + x * 4, 0, 2 + z * 4), TORCH);
-                        if(random.nextInt(4) == 0) {
-                            placeChest(level, pos.offset(1 + x * 4, -1, 2 + z * 4), Direction.EAST);
-                        } else if(random.nextInt(6) == 0) {
-                            placeBones(level, pos.offset(1 + x * 4, -1, 2 + z * 4), Direction.EAST);
-                        }
-                    }
+                    tryPlaceFeature(level, basePos, pos, x, z, 1, 2, Direction.EAST, random);
                 }
-            }
 
-            for(int x = 0; x < width; x++) {
+                // Check for west passage
                 if((maze[x][z] & 4) == 0) {
-                    if(random.nextInt(25) == 0 && canPlaceFeatureAt(pos.offset(60, 0, 60), pos.offset(3 + x * 4, -1, 2 + z * 4))) {
-                        setBlock(level, pos.offset(3 + x * 4, 0, 2 + z * 4), TORCH);
-                        if(random.nextInt(4) == 0) {
-                            placeChest(level, pos.offset(3 + x * 4, -1, 2 + z * 4), Direction.WEST);
-                        } else if(random.nextInt(6) == 0) {
-                            placeBones(level, pos.offset(3 + x * 4, -1, 2 + z * 4), Direction.WEST);
-                        }
-                    }
+                    tryPlaceFeature(level, basePos, pos, x, z, 3, 2, Direction.WEST, random);
                 }
-            }
 
-            for(int x = 0; x < width; x++) {
+                // Check for north passage
                 if((maze[x][z] & 2) == 0) {
-                    if(random.nextInt(25) == 0 && canPlaceFeatureAt(pos.offset(60, 0, 60), pos.offset(2 + x * 4, -1, 3 + z * 4))) {
-                        setBlock(level, pos.offset(2 + x * 4, 0, 3 + z * 4), TORCH);
-                        if(random.nextInt(4) == 0) {
-                            placeChest(level, pos.offset(2 + x * 4, -1, 3 + z * 4), Direction.NORTH);
-                        } else if(random.nextInt(6) == 0) {
-                            placeBones(level, pos.offset(2 + x * 4, -1, 3 + z * 4), Direction.NORTH);
-                        }
-                    }
+                    tryPlaceFeature(level, basePos, pos, x, z, 2, 3, Direction.NORTH, random);
                 }
             }
         }
     }
 
-    // MARK: buildLevel
-    private void buildLevel(WorldGenLevel level, BlockPos pos, int width, int length, int[][] maze, BlockState block) {
-        BlockPos base = pos.offset(60, 0, 60);
-        for(int z = 0; z < length; z++) {
-            for(int x = 0; x < width; x++) {
-                if((maze[x][z] & 1) == 0) {
-                    if(canPlaceFeatureAt(base, pos.offset(x * 4, 0, z * 4))) {
-                        if(canPlaceFeatureAt(base, pos.offset(x * 4 + 1, 0, z * 4))) {
-                            if(canPlaceFeatureAt(base, pos.offset(x * 4 + 2, 0, z * 4))) {
-                                if(canPlaceFeatureAt(base, pos.offset(x * 4 + 3, 0, z * 4))) {
-                                    setBlock(level, pos.offset(x * 4, 0, z * 4), block);
-                                    setBlock(level, pos.offset(x * 4 + 1, 0, z * 4), block);
-                                    setBlock(level, pos.offset(x * 4 + 2, 0, z * 4), block);
-                                    setBlock(level, pos.offset(x * 4 + 3, 0, z * 4), block);
-                                }
-                            }
-                        }
-                    } else if (canPlaceFeatureAt(base, pos.offset(x * 4, 1, z * 4))) {
-                        setBlock(level, pos.offset(x * 4, 1, z * 4), block);
-                    }
-                }
-            }
+    /**
+     * Helper method to try placing a feature (torch, chest, or bones) at a specific position.
+     * 
+     * @param level The world generation level
+     * @param basePos The base position for feature placement checks
+     * @param pos The base position for the maze
+     * @param x The x coordinate in the maze
+     * @param z The z coordinate in the maze
+     * @param xOffset The x offset within the cell
+     * @param zOffset The z offset within the cell
+     * @param direction The direction the feature should face
+     * @param random Random source for variation
+     */
+    private void tryPlaceFeature(WorldGenLevel level, BlockPos basePos, BlockPos pos, 
+                                int x, int z, int xOffset, int zOffset, Direction direction, RandomSource random) {
+        BlockPos featurePos = pos.offset(xOffset + x * 4, -1, zOffset + z * 4);
 
-            for(int x = 0; x < width; x++) {
-                if((maze[x][z] & 8) == 0) {
-                    if(canPlaceFeatureAt(base, pos.offset(x * 4, 0, z * 4 + 1))) {
-                        if(canPlaceFeatureAt(base, pos.offset(x * 4, 0, z * 4 + 2))) {
-                            if(canPlaceFeatureAt(base, pos.offset(x * 4, 0, z * 4 + 3))) {
-                                setBlock(level, pos.offset(x * 4, 0, z * 4), block);
-                                setBlock(level, pos.offset(x * 4, 0, z * 4 + 1), block);
-                                setBlock(level, pos.offset(x * 4, 0, z * 4 + 2), block);
-                                setBlock(level, pos.offset(x * 4, 0, z * 4 + 3), block);
-                            }
-                        }
-                    }
-                }
-            }
+        // Only place features with a 1/25 chance and if the position is valid
+        if(random.nextInt(25) == 0 && canPlaceFeatureAt(basePos, featurePos)) {
+            // Place torch
+            setBlock(level, featurePos, TORCH);
 
-            if(canPlaceFeatureAt(base, pos.offset(width * 4, 0, z * 4))) {
-                if(canPlaceFeatureAt(base, pos.offset(width * 4, 0, z * 4 + 1))) {
-                    if(canPlaceFeatureAt(base, pos.offset(width * 4, 0, z * 4 + 2))) {
-                        if(canPlaceFeatureAt(base, pos.offset(width * 4, 0, z * 4 + 3))) {
-                            setBlock(level, pos.offset(width * 4, 0, z * 4), block);
-                            setBlock(level, pos.offset(width * 4, 0, z * 4 + 1), block);
-                            setBlock(level, pos.offset(width * 4, 0, z * 4 + 2), block);
-                            setBlock(level, pos.offset(width * 4, 0, z * 4 + 3), block);
-                        }
-                    }
-                }
+            // 1/4 chance to place a chest
+            if(random.nextInt(4) == 0) {
+                placeChest(level, featurePos, direction);
+            } 
+            // 1/6 chance to place bones
+            else if(random.nextInt(6) == 0) {
+                placeBones(level, featurePos, direction);
             }
         }
+    }
 
-        for(int x = 0; x <= width * 4; x++) {
+    /**
+     * Builds a level of the maze structure using the provided maze layout.
+     * Places blocks to form the walls of the maze.
+     * 
+     * @param level The world generation level
+     * @param pos The base position for the level
+     * @param width The width of the maze
+     * @param length The length of the maze
+     * @param maze The 2D array representing the maze layout
+     * @param block The block state to use for the walls
+     */
+    private void buildLevel(WorldGenLevel level, BlockPos pos, int width, int length, int[][] maze, BlockState block) {
+        BlockPos base = pos.offset(60, 0, 60);
+
+        // Process each cell in the maze
+        for(int z = 0; z < length; z++) {
+            for(int x = 0; x < width; x++) {
+                // Check for south passage
+                if((maze[x][z] & 1) == 0) {
+                    tryPlaceWallRow(level, base, pos, x, z, 0, 0, 4, 0, block);
+                }
+
+                // Check for east passage
+                if((maze[x][z] & 8) == 0) {
+                    tryPlaceWallRow(level, base, pos, x, z, 0, 0, 0, 4, block);
+                }
+            }
+
+            // Place the eastern boundary wall
+            tryPlaceWallRow(level, base, pos, width, z, 0, 0, 0, 4, block);
+        }
+
+        // Place the southern boundary wall
+        for(int x = 0; x <= width; x++) {
             if(canPlaceFeatureAt(base, pos.offset(x * 4, 0, length * 4))) {
                 setBlock(level, pos.offset(x * 4, 0, length * 4), block);
             }
         }
     }
 
-    // MARK: addCapstones
+    /**
+     * Helper method to try placing a row of wall blocks.
+     * Checks if all positions are valid before placing any blocks.
+     * 
+     * @param level The world generation level
+     * @param base The base position for feature placement checks
+     * @param pos The base position for the maze
+     * @param x The x coordinate in the maze
+     * @param z The z coordinate in the maze
+     * @param xStart The starting x offset within the cell
+     * @param zStart The starting z offset within the cell
+     * @param xLength The length of the wall in the x direction
+     * @param zLength The length of the wall in the z direction
+     * @param block The block state to use for the wall
+     */
+    private void tryPlaceWallRow(WorldGenLevel level, BlockPos base, BlockPos pos, 
+                               int x, int z, int xStart, int zStart, int xLength, int zLength, BlockState block) {
+        // Check if all positions are valid
+        boolean canPlace = true;
+
+        for(int i = 0; i <= Math.max(xLength, zLength); i++) {
+            int xOffset = xStart + (xLength > 0 ? i : 0);
+            int zOffset = zStart + (zLength > 0 ? i : 0);
+
+            if(!canPlaceFeatureAt(base, pos.offset(x * 4 + xOffset, 0, z * 4 + zOffset))) {
+                canPlace = false;
+                break;
+            }
+        }
+
+        // If all positions are valid, place the blocks
+        if(canPlace) {
+            for(int i = 0; i <= Math.max(xLength, zLength); i++) {
+                int xOffset = xStart + (xLength > 0 ? i : 0);
+                int zOffset = zStart + (zLength > 0 ? i : 0);
+
+                setBlock(level, pos.offset(x * 4 + xOffset, 0, z * 4 + zOffset), block);
+            }
+        } 
+        // Try placing at a higher y-level if ground level doesn't work
+        else if(xLength == 0 && zLength == 0 && canPlaceFeatureAt(base, pos.offset(x * 4, 1, z * 4))) {
+            setBlock(level, pos.offset(x * 4, 1, z * 4), block);
+        }
+    }
+
+    /**
+     * Adds capstones to the top of the pyramid structure.
+     * These are special blocks that serve as markers or decorative elements.
+     * 
+     * @param level The world generation level
+     * @param pos The position to place the capstones
+     */
     private void addCapstones(WorldGenLevel level, BlockPos pos) {
         setBlock(level, pos.north().west(), OtherBlocks.CAPSTONE_MUD.get().defaultBlockState());
         setBlock(level, pos.north(), OtherBlocks.CAPSTONE_IRON.get().defaultBlockState());
@@ -579,18 +747,34 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
         setBlock(level, pos, OtherBlocks.CAPSTONE_JADE.get().defaultBlockState());
     }
 
+    /**
+     * Creates a pyramid structure with the specified dimensions.
+     * The pyramid can be hollow or solid.
+     * 
+     * @param level The world generation level
+     * @param pos The base position of the pyramid
+     * @param block The block state to use for the pyramid walls
+     * @param isHollow Whether the pyramid should be hollow
+     * @param baseX The base width of the pyramid in the X direction
+     * @param baseZ The base width of the pyramid in the Z direction
+     */
     private void createPyramid(WorldGenLevel level, BlockPos pos, BlockState block, boolean isHollow, int baseX, int baseZ) {
+        // Build the pyramid layer by layer, starting from the bottom
         for(int y = 0; y < 21; y++) {
             int maxX = baseX - 1;
             int maxZ = baseZ - 1;
 
+            // For each layer, build the perimeter
             for(int x = -baseX; x <= maxX; x++) {
                 for(int z = -baseZ; z <= maxZ; z++) {
                     BlockPos offset = pos.offset(x, y, z);
+
+                    // Only place blocks on the perimeter of the current layer
                     if(x == -baseX || x == maxX || z == -baseZ || z == maxZ) {
                         if(!isSolidStructureBlock(level.getBlockState(offset))) {
                             setBlock(level, offset, block);
                         } else if(isHollow) {
+                            // If the pyramid is hollow, clear non-structure blocks inside
                             if(!isSolidStructureBlock(level.getBlockState(offset))) {
                                 if(!level.isEmptyBlock(offset)) {
                                     setBlock(level, offset, AIR);
@@ -601,12 +785,19 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
                 }
             }
 
+            // Decrease the size of the next layer to create the pyramid shape
             baseX--;
             baseZ--;
         }
     }
 
-    // MARK: placeChest
+    /**
+     * Places a chest with the Antlion Dungeon loot table.
+     * 
+     * @param level The world generation level
+     * @param pos The position to place the chest
+     * @param direction The direction the chest should face
+     */
     private void placeChest(WorldGenLevel level, BlockPos pos, Direction direction) {
         setBlock(level, pos, Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, direction));
         ChestBlockEntity chest = (ChestBlockEntity) level.getBlockEntity(pos);
@@ -615,17 +806,33 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
         }
     }
 
-    // MARK: placeBones
+    /**
+     * Places a block of bones with the specified facing direction.
+     * 
+     * @param level The world generation level
+     * @param pos The position to place the bones
+     * @param direction The direction the bones should face
+     */
     private void placeBones(WorldGenLevel level, BlockPos pos, Direction direction) {
         setBlock(level, pos, OtherBlocks.BLOCK_OF_BONES.get().defaultBlockState().setValue(BlockOfBonesBlock.FACING, direction));
         BlockOfBonesBlockEntity bones = (BlockOfBonesBlockEntity) level.getBlockEntity(pos);
-        if(bones != null) {
-            //bones.setLootTable(ModChestLootTables.ANTLION_DUNGEON);
-        }
+        // TODO: Implement loot table for bones if needed
+        // if(bones != null) {
+        //     bones.setLootTable(ModChestLootTables.ANTLION_DUNGEON);
+        // }
     }
 
-    // MARK: canPlaceAt
+    /**
+     * Checks if a feature can be placed at a specific position.
+     * Ensures that features don't overlap by checking if the position is within a certain distance of another feature.
+     * 
+     * @param pos The position of the existing feature
+     * @param featurePos The position to check for placement
+     * @param size The minimum distance required between features
+     * @return true if the feature can be placed, false otherwise
+     */
     private boolean canPlaceAt(BlockPos pos, BlockPos featurePos, int size) {
+        // Check if the feature position is within the exclusion zone of another feature
         for(int x = pos.getX() - size; x < pos.getX() + size; x++) {
             for(int z = pos.getZ() - size; z < pos.getZ() + size; z++) {
                 if(x == featurePos.getX() && z == featurePos.getZ()) return false;
@@ -634,12 +841,26 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
         return true;
     }
 
-    // MARK: canPlaceFeatureAt
+    /**
+     * Checks if a general feature can be placed at a specific position.
+     * Uses a standard exclusion zone size of 26 blocks.
+     * 
+     * @param pos The position of the existing feature
+     * @param featurePos The position to check for placement
+     * @return true if the feature can be placed, false otherwise
+     */
     private boolean canPlaceFeatureAt(BlockPos pos, BlockPos featurePos) {
         return canPlaceAt(pos, featurePos, 26);
     }
 
-    // MARK: canPlaceFloorAt
+    /**
+     * Checks if a floor element can be placed at a specific position.
+     * Uses a smaller exclusion zone size of 22 blocks.
+     * 
+     * @param pos The position of the existing feature
+     * @param featurePos The position to check for placement
+     * @return true if the floor element can be placed, false otherwise
+     */
     private boolean canPlaceFloorAt(BlockPos pos, BlockPos featurePos) {
         return canPlaceAt(pos, featurePos, 22);
     }
