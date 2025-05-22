@@ -5,7 +5,7 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 import erebus.block.entity.HoneyCombBlockEntity;
-import erebus.entity.ai.BeePolinateGoal;
+import erebus.entity.ai.BeePollinateGoal;
 import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
 import erebus.registries.data.ModDataComponents;
@@ -79,7 +79,7 @@ public class WorkerBee extends Animal {
 	@Override
 	protected void registerGoals() {
 		aiFlyingWander = new EntityAIFlyingWander(this, 0.5D, 0.02F);
-		goalSelector.addGoal(0, new BeePolinateGoal(this, 10));
+		goalSelector.addGoal(0, new BeePollinateGoal(this, 10));
 		goalSelector.addGoal(1, new FloatGoal(this));
 		goalSelector.addGoal(2, new MeleeAttackGoal(this, 0.5D, true));
 		//tasks.addTask(3, new EntityAITempt(this, 0.5D, Items.SUGAR, false));

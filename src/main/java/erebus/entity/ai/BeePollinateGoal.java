@@ -7,10 +7,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 
-public class BeePolinateGoal extends FindFlowerGoal {
+public class BeePollinateGoal extends FindFlowerGoal {
 	private final WorkerBee bee;
 
-	public BeePolinateGoal(WorkerBee bee, int pollinateSpeed) {
+	public BeePollinateGoal(WorkerBee bee, int pollinateSpeed) {
 		super(bee, null, pollinateSpeed);
 		this.bee = bee;
 	}
@@ -19,7 +19,7 @@ public class BeePolinateGoal extends FindFlowerGoal {
 	protected boolean canPolinate(BlockState state) {
 		if (state == null)
 			return false;
-		else if (state.is(ModTags.BEE_POLINATION_BLOCKS))
+		else if (state.is(ModTags.BEE_POLLINATION_BLOCKS))
 			return true;
 
 		return false;

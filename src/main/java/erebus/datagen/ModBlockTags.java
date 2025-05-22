@@ -121,7 +121,7 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
                 .add(UmberstoneBlocks.UMBERSTONE.get());
         
         // Stigma Blocks for Bees
-        tag(ModTags.BEE_POLINATION_BLOCKS)
+        tag(ModTags.BEE_POLLINATION_BLOCKS)
         .add(
                 PlantBlocks.STIGMA_BLACK.get(),
                 PlantBlocks.STIGMA_BLUE.get(),
