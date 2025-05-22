@@ -42,7 +42,7 @@ public class BeePolinateGoal extends FindFlowerGoal {
 
 	@Override
 	protected void moveToLocation() {
-		if (bee.getTameState() == 1)
+		if (bee.isTamedBee())
 			bee.setBeeCollecting(false);
 		bee.setBeePollinating(true);
 		bee.getMoveControl().setWantedPosition(flowerX + 0.5D, flowerY + 1D, flowerZ + 0.5D, 1D);
@@ -58,7 +58,7 @@ public class BeePolinateGoal extends FindFlowerGoal {
 	@Override
 	protected void pollinationInterupted() {
 			bee.setBeePollinating(false);
-		if (bee.getTameState() == 1)
+		if (bee.isTamedBee())
 			bee.setBeeCollecting(true);
 	}
 
@@ -66,9 +66,9 @@ public class BeePolinateGoal extends FindFlowerGoal {
 	protected void afterPollination() {
 		if (bee.getNectarPoints() < 127)
 			bee.setNectarPoints(bee.getNectarPoints() + 2);
-		if (bee.getTameState() == 0) {
+		if (!bee.isTamedBee()) {
 			bee.setBeePollinating(false);
-		} else if (bee.getTameState() == 1) {
+		} else if (bee.isTamedBee()) {
 			bee.setBeePollinating(false);
 			bee.setBeeCollecting(true);
 		}

@@ -11,8 +11,8 @@ import erebus.registries.ModSounds;
 import erebus.registries.data.ModDataComponents;
 import erebus.utils.CapHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -58,30 +58,22 @@ public class WorkerBee extends Animal {
 	public boolean beeFlying;
 	public boolean beePollinating = false;
 	public boolean beeCollecting = false;
-	private static final EntityDataAccessor<Integer> DROP_POINT_X = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Integer> DROP_POINT_Y = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Integer> DROP_POINT_Z = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<BlockPos> DROP_POINT= SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.BLOCK_POS);
 	private static final EntityDataAccessor<Integer> NECTAR_POINTS = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Byte> TAME_STATE = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.BYTE);
+	private static final EntityDataAccessor<Boolean> TAME_STATE = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.BOOLEAN);
 	private EntityAIFlyingWander aiFlyingWander;
 
 	public WorkerBee(EntityType<? extends WorkerBee> type, Level level) {
 		super(type, level);
 		this.moveControl = new FlyingMoveControl(this, 10, false);
-
-	//	setPathPriority(PathNodeType.WATER, -8F);
-	//	setPathPriority(PathNodeType.BLOCKED, -8.0F);
-	//	setPathPriority(PathNodeType.OPEN, 8.0F);
 	}
 
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
-        builder.define(DROP_POINT_X, 0);
-        builder.define(DROP_POINT_Y, 0);
-        builder.define(DROP_POINT_Z, 0);
+        builder.define(DROP_POINT, this.blockPosition());
         builder.define(NECTAR_POINTS, 0);
-        builder.define(TAME_STATE, (byte)0);
+        builder.define(TAME_STATE, false);
 	}
 
 	@Override
@@ -123,7 +115,7 @@ public class WorkerBee extends Animal {
 
 	@Override
 	public boolean isPersistenceRequired() {
-		return getTameState() != 0;
+		return isTamedBee();
 	}
 
 	public boolean isFlying() {
@@ -140,15 +132,15 @@ public class WorkerBee extends Animal {
 
 		if (!level().isClientSide()) {
 			if(tickCount == 1)
-				if(getTameState() == 0)
+				if(!isTamedBee())
 					goalSelector.addGoal(3, aiFlyingWander);
 
 			if (beeCollecting && !beePollinating) {
-				getNavigation().moveTo(getDropPointX() + 0.5D, getDropPointY() + 1D, getDropPointZ() + 0.5D, 1D);
+				getNavigation().moveTo(getDropPoint().getX() + 0.5D, getDropPoint().getY() + 1D, getDropPoint().getZ() + 0.5D, 1D);
 			
-				if (distanceToSqr(getDropPointX() + 0.5D, getDropPointY() + 0.5D, getDropPointZ() + 1D) <= 1D) {
+				if (distanceToSqr(getDropPoint().getX() + 0.5D, getDropPoint().getY() + 0.5D, getDropPoint().getZ() + 1D) <= 1D) {
 					if(getNectarPoints() > 0)
-						addHoneyToInventory(getDropPointX(), getDropPointY(), getDropPointZ());
+						addHoneyToInventory(getDropPoint().getX(), getDropPoint().getY(), getDropPoint().getZ());
 					setBeeCollecting(false);
 					//getNavigation().stop();
 				}
@@ -252,8 +244,8 @@ public class WorkerBee extends Animal {
 		if (!stack.isEmpty() && stack.getItem() == ModItems.BEE_TAMING_AMULET.get() && stack.has(ModDataComponents.BEE_TAMING_AMULET)) {
 			if (!level().isClientSide()) {
 				BlockPos dataBlockPos = stack.getComponents().get(ModDataComponents.BEE_TAMING_AMULET.get());
-				setDropPoint(dataBlockPos.getX(), dataBlockPos.getY(), dataBlockPos.getZ());
-				setTameState((byte) 1);
+				setDropPoint(dataBlockPos);
+				setTameState(true);
 				goalSelector.removeGoal(aiFlyingWander);
 				setTarget((LivingEntity) null);
 			}
@@ -264,29 +256,19 @@ public class WorkerBee extends Animal {
 		return super.mobInteract(player, hand);
 	}
 
-	public void setDropPoint(int x, int y, int z) {
-		entityData.set(DROP_POINT_X, x);
-		entityData.set(DROP_POINT_Y, y);
-		entityData.set(DROP_POINT_Z, z);
+	public void setDropPoint(BlockPos pos) {
+		entityData.set(DROP_POINT, pos);
 	}
 
-	public int getDropPointX() {
-		return entityData.get(DROP_POINT_X);
+	public BlockPos getDropPoint() {
+		return entityData.get(DROP_POINT);
 	}
 
-	public int getDropPointY() {
-		return entityData.get(DROP_POINT_Y);
-	}
-
-	public int getDropPointZ() {
-		return entityData.get(DROP_POINT_Z);
-	}
-
-	public void setTameState(byte state) {
+	public void setTameState(boolean state) {
 		entityData.set(TAME_STATE, state);
 	}
 
-	public byte getTameState() {
+	public boolean isTamedBee() {
 		return entityData.get(TAME_STATE);
 	}
 
@@ -307,18 +289,18 @@ public class WorkerBee extends Animal {
 	  public void addAdditionalSaveData(CompoundTag nbt) {
 		super.addAdditionalSaveData(nbt);
 		nbt.putInt("nectarPoints", getNectarPoints());
-		nbt.putByte("tameState", getTameState());
-		nbt.putInt("dropPointX", getDropPointX());
-		nbt.putInt("dropPointY", getDropPointY());
-		nbt.putInt("dropPointZ", getDropPointZ());
+		nbt.putBoolean("tameState", isTamedBee());
+		nbt.put("dropPoint", NbtUtils.writeBlockPos(getDropPoint()));
 	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
 		setNectarPoints(nbt.getInt("nectarPoints"));
-		setTameState(nbt.getByte("tameState"));
-		setDropPoint(nbt.getInt("dropPointX"), nbt.getInt("dropPointY"), nbt.getInt("dropPointZ"));
+		setTameState(nbt.getBoolean("tameState"));
+		Optional<BlockPos> optional = NbtUtils.readBlockPos(nbt, "dropPoint");
+		if(!optional.isEmpty())
+			setDropPoint(optional.get());
 	}
 
 	@Override
