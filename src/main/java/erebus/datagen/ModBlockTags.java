@@ -119,5 +119,25 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
 
         tag(ModTags.UMBERSTONE_ORE_REPLACEABLES)
                 .add(UmberstoneBlocks.UMBERSTONE.get());
+        
+        // Stigma Blocks for Bees
+        tag(ModTags.BEE_POLINATION_BLOCKS)
+        .add(
+                PlantBlocks.STIGMA_BLACK.get(),
+                PlantBlocks.STIGMA_BLUE.get(),
+                PlantBlocks.STIGMA_BROWN.get(),
+                PlantBlocks.STIGMA_CYAN.get(),
+                PlantBlocks.STIGMA_GRAY.get(),
+                PlantBlocks.STIGMA_LIGHT_BLUE.get(),
+                PlantBlocks.STIGMA_LIGHT_GRAY.get(),
+                PlantBlocks.STIGMA_MAGENTA.get(),
+                PlantBlocks.STIGMA_ORANGE.get(),
+                PlantBlocks.STIGMA_PINK.get(),
+                PlantBlocks.STIGMA_PURPLE.get(),
+                PlantBlocks.STIGMA_RED.get(),
+                PlantBlocks.STIGMA_WHITE.get(),
+                PlantBlocks.STIGMA_YELLOW.get(),
+                PlantBlocks.EXPLODING_STIGMA.get()
+        );
     }
 }

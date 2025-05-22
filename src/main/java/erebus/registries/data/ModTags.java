@@ -22,4 +22,5 @@ public class ModTags {
     public static final TagKey<Biome> HAS_LOCUST_SHRINE = TagKey.create(Registries.BIOME, Erebus.prefix("has_locust_shrine"));
     public static final TagKey<Biome> HAS_WASP_DUNGEON = TagKey.create(Registries.BIOME, Erebus.prefix("has_wasp_dungeon"));
     public static final TagKey<Block> UMBERSTONE_ORE_REPLACEABLES = TagKey.create(Registries.BLOCK, Erebus.prefix("umberstone_ore_replaceables"));
+    public static final TagKey<Block> BEE_POLINATION_BLOCKS = TagKey.create(Registries.BLOCK, Erebus.prefix("bee_polination_blocks"));
 }

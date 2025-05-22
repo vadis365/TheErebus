@@ -2,7 +2,7 @@ package erebus.entity.ai;
 
 
 import erebus.entity.WorkerBee;
-import erebus.registries.blocks.providers.PlantBlocks;
+import erebus.registries.data.ModTags;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
@@ -19,7 +19,7 @@ public class BeePolinateGoal extends FindFlowerGoal {
 	protected boolean canPolinate(BlockState state) {
 		if (state == null)
 			return false;
-		else if (state.getBlock() == PlantBlocks.STIGMA_WHITE.get()) //- FFS we need a blocktag probably or a generic block here for instanceof check
+		else if (state.is(ModTags.BEE_POLINATION_BLOCKS)) //- FFS we need a blocktag probably or a generic block here for instanceof check
 			return true;
 
 		return false;
