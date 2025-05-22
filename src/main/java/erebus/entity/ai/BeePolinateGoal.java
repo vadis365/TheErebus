@@ -19,7 +19,7 @@ public class BeePolinateGoal extends FindFlowerGoal {
 	protected boolean canPolinate(BlockState state) {
 		if (state == null)
 			return false;
-		else if (state.is(ModTags.BEE_POLINATION_BLOCKS)) //- FFS we need a blocktag probably or a generic block here for instanceof check
+		else if (state.is(ModTags.BEE_POLINATION_BLOCKS))
 			return true;
 
 		return false;
