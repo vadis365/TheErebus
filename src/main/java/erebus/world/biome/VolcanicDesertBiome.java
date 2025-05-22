@@ -54,6 +54,7 @@ public class VolcanicDesertBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
+                        //.addFeature(SURFACE_STRUCTURES, StructureFeatures.ANTLION_DUNGEON.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.SCORCHED_WOOD.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.LAVA_LAKE.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.DESERT_ROCK_GNEISS.getPlacedResourceKey())
