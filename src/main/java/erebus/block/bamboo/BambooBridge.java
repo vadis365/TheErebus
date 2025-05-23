@@ -141,14 +141,15 @@ public class BambooBridge extends HorizontalDirectionalBlock implements EntityBl
 	@Override
 	public VoxelShape getShape(BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		BlockEntity te = level.getBlockEntity(pos);
+		VoxelShape side_1 = Shapes.empty();
+		VoxelShape side_2 = Shapes.empty();
+		VoxelShape s_combined = Shapes.empty();
+
 		if (te instanceof BambooBridgeBlockEntity bridge) {
 			boolean front = canConnectBridgeTo(bridge.getLevel(), pos.offset(0, 0, -1));
 			boolean back = canConnectBridgeTo(bridge.getLevel(), pos.offset(0, 0, 1));
 			boolean left = canConnectBridgeTo(bridge.getLevel(), pos.offset(-1, 0, 0));
 			boolean right = canConnectBridgeTo(bridge.getLevel(), pos.offset(1, 0, 0));
-			VoxelShape side_1 = Shapes.empty();
-			VoxelShape side_2 = Shapes.empty();
-			VoxelShape s_combined = Shapes.empty();
 
 			if (state.getValue(FACING).equals(Direction.NORTH) || state.getValue(FACING).equals(Direction.SOUTH)) {
 				if (!right)
@@ -165,9 +166,9 @@ public class BambooBridge extends HorizontalDirectionalBlock implements EntityBl
 					side_2 = FRONT_AABB;
 				s_combined = Shapes.join(side_1, side_2, BooleanOp.OR);
 			}
-			return Shapes.join(BASE, s_combined, BooleanOp.OR);
 		}
-		return BASE;
+
+		return Shapes.join(BASE, s_combined, BooleanOp.OR);
 	}
 
 	public boolean canConnectBridgeTo(LevelAccessor level, BlockPos pos) {
