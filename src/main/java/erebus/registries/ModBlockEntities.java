@@ -1,14 +1,28 @@
 package erebus.registries;
 
+import java.util.function.Supplier;
+
 import erebus.Erebus;
-import erebus.block.entity.*;
+import erebus.block.entity.BambooBridgeBlockEntity;
+import erebus.block.entity.BambooPipeBlockEntity;
+import erebus.block.entity.BambooPipeExtractBlockEntity;
+import erebus.block.entity.BlenderBlockEntity;
+import erebus.block.entity.BlockOfBonesBlockEntity;
+import erebus.block.entity.ExperienceAltarBlockEntity;
+import erebus.block.entity.FluidJarBlockEntity;
+import erebus.block.entity.GaeanKeystoneBlockEntity;
+import erebus.block.entity.HealingAltarBlockEntity;
+import erebus.block.entity.HoneyCombBlockEntity;
+import erebus.block.entity.LightningAltarBlockEntity;
+import erebus.block.entity.LiquifierBlockEntity;
+import erebus.block.entity.OfferingAltarBlockEntity;
+import erebus.block.entity.RepairAltarBlockEntity;
+import erebus.block.entity.UmberFurnaceBlockEntity;
 import erebus.registries.blocks.providers.AmberBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.function.Supplier;
 
 public class ModBlockEntities {
 
@@ -67,4 +81,8 @@ public class ModBlockEntities {
 	public static final Supplier<BlockEntityType<HoneyCombBlockEntity>> HONEY_COMB = BLOCK_ENTITIES.register(
 			"honey_comb",
 			() -> BlockEntityType.Builder.of(HoneyCombBlockEntity::new, OtherBlocks.HONEY_COMB.get()).build(null));
+
+	public static final Supplier<BlockEntityType<BambooBridgeBlockEntity>> BAMBOO_BRIDGE = BLOCK_ENTITIES.register(
+			"bamboo_bridge",
+			() -> BlockEntityType.Builder.of(BambooBridgeBlockEntity::new, OtherBlocks.BAMBOO_BRIDGE.get()).build(null));
 }

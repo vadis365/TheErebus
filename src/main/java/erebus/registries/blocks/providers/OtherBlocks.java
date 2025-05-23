@@ -21,6 +21,7 @@ import erebus.block.altars.HealingAltar;
 import erebus.block.altars.LightningAltar;
 import erebus.block.altars.OfferingAltar;
 import erebus.block.altars.RepairAltar;
+import erebus.block.bamboo.BambooBridge;
 import erebus.block.bamboo.BambooCrateBlock;
 import erebus.block.bamboo.BambooPipe;
 import erebus.block.bamboo.BambooPipeExtract;
@@ -246,7 +247,7 @@ public class OtherBlocks extends ModBlockHelpers {
         PETRIFIED_CRAFTING_TABLE = registerBlock("petrified_crafting_table", () -> new PetrifiedCraftingTableBlock(Properties.ofFullCopy(Blocks.CRAFTING_TABLE)));
         PETRIFIED_WOOD_CHEST = registerSimpleBlock("petrified_wood_chest", Properties.of().mapColor(MapColor.STONE));
         BAMBOO_CRATE = registerBlock("bamboo_crate", () -> new BambooCrateBlock(Properties.ofFullCopy(Blocks.CHEST).noOcclusion()));
-        BAMBOO_BRIDGE = registerSimpleBlock("bamboo_bridge", Properties.of().mapColor(MapColor.STONE));
+        BAMBOO_BRIDGE = registerBlock("bamboo_bridge", () -> new BambooBridge(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER)));
         BAMBOO_LADDER = registerBlock("bamboo_ladder", () -> new LadderBlock(Properties.ofFullCopy(Blocks.LADDER).sound(SoundType.BAMBOO)));
         BAMBOO_NERD_POLE = registerBlock("bamboo_nerd_pole", () -> new BambooPole(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER)));
         BAMBOO_EXTENDER = registerSimpleBlock("bamboo_extender", Properties.of().mapColor(MapColor.STONE));
