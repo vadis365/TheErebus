@@ -93,7 +93,7 @@ public class CypressTrunkPlacer extends TrunkPlacer {
             for(int y = height + 1; y <= height + 2; y++) placeLeaf(pos.above(y));
 
             for(int c = 0; c < 4; c++) {
-                for(int y = trunkHeight; y <= height; y++) placeLog(level, setter, random, pos.offset(offsetX[c], y, offsetZ[c]), config);
+                for(int y = trunkHeight; y <= height; y++) placeLeaf(pos.offset(offsetX[c], y, offsetZ[c]));
 
                 if(leafHeight - 4 > 1) {
                     for(int y = trunkHeight + 2; y <= height - 2; y++) {

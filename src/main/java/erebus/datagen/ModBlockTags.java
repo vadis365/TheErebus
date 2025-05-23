@@ -10,6 +10,7 @@ import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -21,7 +22,7 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider provider) {
+    protected void addTags(HolderLookup.@NotNull Provider provider) {
 
         // MARK: Paxel
         tag(ModTags.MINEABLE_WITH_PAXEL)
@@ -141,7 +142,9 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
         );
         
 		// Bamboo Stuff?
-		tag(BlockTags.CLIMBABLE).add(OtherBlocks.BAMBOO_NERD_POLE.get());
+		tag(BlockTags.CLIMBABLE)
+                .add(OtherBlocks.BAMBOO_LADDER.get())
+                .add(OtherBlocks.BAMBOO_NERD_POLE.get());
         		
     }
 }

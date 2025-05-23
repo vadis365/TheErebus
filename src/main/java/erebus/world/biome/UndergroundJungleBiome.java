@@ -2,10 +2,7 @@ package erebus.world.biome;
 
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
-import erebus.registries.world.feature.DecorationFeatures;
-import erebus.registries.world.feature.OreFeatures;
-import erebus.registries.world.feature.PlantFeatures;
-import erebus.registries.world.feature.TreeFeatures;
+import erebus.registries.world.feature.*;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.MobCategory;
@@ -59,6 +56,7 @@ public class UndergroundJungleBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
+                        .addFeature(SURFACE_STRUCTURES, StructureFeatures.WASP_DUNGEON.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.QUICK_SAND.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.POND.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.AMBER_GROUND.getPlacedResourceKey())
