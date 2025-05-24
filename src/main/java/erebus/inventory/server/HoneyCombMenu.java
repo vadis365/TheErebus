@@ -1,18 +1,17 @@
 package erebus.inventory.server;
 
+import javax.annotation.Nonnull;
+
 import erebus.block.entity.HoneyCombBlockEntity;
 import erebus.registries.client.ModMenuTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-
-import javax.annotation.Nonnull;
 
 public class HoneyCombMenu extends AbstractContainerMenu {
 	public HoneyCombBlockEntity honey_comb;

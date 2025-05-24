@@ -4,13 +4,16 @@ import javax.annotation.Nonnull;
 
 import erebus.block.bamboo.BambooBridge;
 import erebus.block.bamboo.BambooExtender;
+import erebus.inventory.server.BambooExtenderMenu;
 import erebus.registries.ModBlockEntities;
 import erebus.registries.blocks.providers.OtherBlocks;
+import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundSource;
@@ -52,39 +55,31 @@ public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implem
 			index--;
 		}
 
-		int x = tile.getBlockPos().getX() + index * tile.direction.getStepX();
-		int y = tile.getBlockPos().getY() + index * tile.direction.getStepY();
-		int z = tile.getBlockPos().getZ() + index * tile.direction.getStepZ();
-		if (x == tile.getBlockPos().getX() && y == tile.getBlockPos().getY() && z == tile.getBlockPos().getZ())
+		BlockPos blockIndex = tile.getBlockPos().relative(tile.direction, index);
+		if (blockIndex == tile.getBlockPos())
 			return;
 
-		if (state.getBlock() == null || tile.getLevel().getBlockState(new BlockPos(x, y, z)).is(BlockTags.REPLACEABLE) || !tile.extending)
+		if (state == null || tile.getLevel().getBlockState(blockIndex).is(BlockTags.REPLACEABLE) || !tile.extending)
 			if (tile.decreaseInventory(blockID))
-				if (tile.addToInventory(new BlockPos(x, y, z)))
+				if (tile.addToInventory(blockIndex))
 					if (tile.extending) {
-						tile.getLevel().setBlock(new BlockPos(x, y, z), tile.getStateFromDirection(tile.direction), 3);
-						tile.getLevel().playSound(null, new BlockPos(x, y, z), extension.getSoundType().getBreakSound(), SoundSource.BLOCKS, (extension.getSoundType().getVolume() + 1.0F) / 2.0F, extension.getSoundType().getPitch() * 0.8F);
+						tile.getLevel().setBlock(blockIndex, tile.getStateFromDirection(tile.direction), 3);
+						tile.getLevel().playSound(null, blockIndex, extension.getSoundType().getBreakSound(), SoundSource.BLOCKS, (extension.getSoundType().getVolume() + 1.0F) / 2.0F, extension.getSoundType().getPitch() * 0.8F);
 					} else {
-						tile.getLevel().setBlock(new BlockPos(x, y, z), Blocks.AIR.defaultBlockState(), 3);
-						tile.getLevel().levelEvent(null, 2001, new BlockPos(x, y, z), Block.getId(extension));
+						tile.getLevel().setBlock(blockIndex, Blocks.AIR.defaultBlockState(), 3);
+						tile.getLevel().levelEvent(null, 2001, blockIndex, Block.getId(extension));
 					}
 		}
 	}
 
 	private int getIndex(BlockState extension) {
 		int index = 1;
-
-		int x = getBlockPos().getX() + index * direction.getStepX();
-		int y = getBlockPos().getY() + index * direction.getStepY();
-		int z = getBlockPos().getZ() + index * direction.getStepZ();
-
-		while (getLevel().getBlockState(new BlockPos (x, y, z)) == extension) {
+		BlockPos blockIndex = getBlockPos().relative(direction, index);
+		while (getLevel().getBlockState(blockIndex).is(extension.getBlock())) {
 			index++;
-			x = getBlockPos().getX() + index * direction.getStepX();
-			y = getBlockPos().getY() + index * direction.getStepY();
-			z = getBlockPos().getZ() + index * direction.getStepZ();
+			blockIndex = getBlockPos().relative(direction, index);
 		}
-		BlockState state = getLevel().getBlockState(new BlockPos(x, y, z));
+		BlockState state = getLevel().getBlockState(blockIndex);
 		if (state.getBlock() == null || state.is(BlockTags.REPLACEABLE) || !extending)
 			return index;
 
@@ -100,7 +95,7 @@ public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implem
 			if (getItems().get(i).isEmpty()) {
 				getItems().set(i, new ItemStack(state.getBlock(), 1));
 				return true;
-			} else if (getItems().get(i).getItem() == Item.byBlock(state.getBlock()) && getItems().get(i).getCount() < getItems().get(i).getMaxStackSize()) {
+			} else if (getItems().get(i).getItem() == state.getBlock().asItem() && getItems().get(i).getCount() < getItems().get(i).getMaxStackSize()) {
 				getItems().get(i).grow(1);
 				return true;
 			}
@@ -111,7 +106,7 @@ public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implem
 		if (blockID == null)
 			return true;
 		for (int i = 0; i < getItems().size(); i++)
-			if (!getItems().get(i).isEmpty() && getItems().get(i).getItem() == Item.byBlock(blockID.getBlock())) {
+			if (!getItems().get(i).isEmpty() && getItems().get(i).getItem() == blockID.getBlock().asItem()) {
 				getItems().get(i).shrink(1);
 				if (getItems().get(i).getCount() <= 0)
 					getItems().set(i, ItemStack.EMPTY);
@@ -217,8 +212,7 @@ public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implem
 
 	@Override
 	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-		// TODO Auto-generated method stub
-		return null;
+		return new BambooExtenderMenu(containerId, playerInventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
 	}
 
 
