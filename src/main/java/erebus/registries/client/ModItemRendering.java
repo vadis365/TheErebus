@@ -1,10 +1,34 @@
 package erebus.registries.client;
 
+import org.jetbrains.annotations.NotNull;
+
 import erebus.Erebus;
 import erebus.block.fluid.BasicFluidType;
-import erebus.client.render.block.renderer.stack.*;
-import erebus.client.render.item.model.*;
-import erebus.client.render.item.renderer.*;
+import erebus.client.render.block.renderer.stack.BambooBridgeItemRenderer;
+import erebus.client.render.block.renderer.stack.BlenderStackItemRenderer;
+import erebus.client.render.block.renderer.stack.BlockOfBonesStackItemRenderer;
+import erebus.client.render.block.renderer.stack.FluidJarStackItemRenderer;
+import erebus.client.render.block.renderer.stack.LiquifierStackItemRenderer;
+import erebus.client.render.block.renderer.stack.OfferingAltarStackItemRenderer;
+import erebus.client.render.item.model.EmptyModel;
+import erebus.client.render.item.model.ErebusShieldPartsModel;
+import erebus.client.render.item.model.PortalActivatorModel;
+import erebus.client.render.item.model.ScorpionPincerModel;
+import erebus.client.render.item.model.WandOfAnimationItemModel;
+import erebus.client.render.item.model.WandOfPreservationModel;
+import erebus.client.render.item.model.WarHammerModel;
+import erebus.client.render.item.model.WaspDaggerModel;
+import erebus.client.render.item.model.WaspSwordModel;
+import erebus.client.render.item.model.WebSlingerModel;
+import erebus.client.render.item.renderer.ErebusShieldPartsRenderer;
+import erebus.client.render.item.renderer.PortalActivatorRenderer;
+import erebus.client.render.item.renderer.ScorpionPincerRenderer;
+import erebus.client.render.item.renderer.WandOfAnimationItemRenderer;
+import erebus.client.render.item.renderer.WandOfPreservationRenderer;
+import erebus.client.render.item.renderer.WarHammerRenderer;
+import erebus.client.render.item.renderer.WaspDaggerRenderer;
+import erebus.client.render.item.renderer.WaspSwordRenderer;
+import erebus.client.render.item.renderer.WebSlingerRenderer;
 import erebus.registries.ModFluids;
 import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.AmberBlocks;
@@ -19,7 +43,6 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
-import org.jetbrains.annotations.NotNull;
 
 public class ModItemRendering {
 
@@ -34,7 +57,8 @@ public class ModItemRendering {
 	public static final ModelLayerLocation WEB_SLINGER = new ModelLayerLocation(Erebus.prefix("web_slinger"), "main");
 	public static final ModelLayerLocation FLUID_JAR = new ModelLayerLocation(Erebus.prefix("fluid_jar"), "main");
 	public static final ModelLayerLocation LIQUIFIER = new ModelLayerLocation(Erebus.prefix("liquifier"), "main");
-
+	public static final ModelLayerLocation BAMBOO_BRIDGE = new ModelLayerLocation(Erebus.prefix("bamboo_bridge"), "main");
+	
 	public static void registerItemLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(WAND_OF_ANIMATION, WandOfAnimationItemModel::createBodyLayer);
         event.registerLayerDefinition(WAND_OF_PRESERVATION, WandOfPreservationModel::createBodyLayer);
@@ -47,6 +71,7 @@ public class ModItemRendering {
 		event.registerLayerDefinition(WEB_SLINGER, WebSlingerModel::createBodyLayer);
 		event.registerLayerDefinition(FLUID_JAR, EmptyModel::createBodyLayer);
 		event.registerLayerDefinition(LIQUIFIER, EmptyModel::createBodyLayer);
+		event.registerLayerDefinition(BAMBOO_BRIDGE, EmptyModel::createBodyLayer);
 	}
 
 	public static void registerItemRender(RegisterClientExtensionsEvent event) {
@@ -152,13 +177,20 @@ public class ModItemRendering {
                 return new FluidJarStackItemRenderer(null, null);
             }
         }, AmberBlocks.FLUID_JAR.get().asItem());
-        
+
         event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new LiquifierStackItemRenderer(null, null);
             }
         }, OtherBlocks.LIQUIFIER.get().asItem());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return new BambooBridgeItemRenderer(null, null);
+            }
+        }, OtherBlocks.BAMBOO_BRIDGE.get().asItem());
 
         //Fluids
         event.registerFluidType(new BasicFluidType("beetle_juice"), ModFluids.BEETLE_JUICE_TYPE.get());

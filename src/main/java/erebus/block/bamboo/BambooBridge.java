@@ -21,21 +21,19 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BambooBridge extends HorizontalDirectionalBlock implements EntityBlock {
+
 	public static final MapCodec<BambooBridge> CODEC = simpleCodec(BambooBridge::new);
+
 	public BambooBridge(Properties properties) {
 		super(properties);
 		registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-	//	setCreativeTab(ModTabs.BLOCKS);
-	//	setHardness(0.4F);
-	//	setSoundType(SoundType.LADDER);
 	}
-	
+
     @Override
 	protected @NotNull MapCodec<BambooBridge> codec() {
         return CODEC;
@@ -62,79 +60,51 @@ public class BambooBridge extends HorizontalDirectionalBlock implements EntityBl
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}
-/*
+
 	@Override
-    public void breakBlock(World level, BlockPos pos, IBlockState state) {
-		level.playEvent(2001, pos, Block.getStateId(EnumWood.BAMBOO.getLog().getDefaultState()));
-		super.breakBlock(level, pos, state);
+	protected void onPlace(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState newState, boolean movedByPiston) {
+		BlockEntity te = level.getBlockEntity(pos);
+		if (te instanceof BambooBridgeBlockEntity bridge)
+			updateShape(state, state.getValue(FACING), newState, level, pos, pos);
 	}
-*/
-	 @Override
-	    protected void onPlace(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState oldState, boolean movedByPiston) {
+
+	@Override
+	protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
 		BlockEntity te = level.getBlockEntity(pos);
 		if (te instanceof BambooBridgeBlockEntity bridge) {
-			boolean front = canConnectBridgeTo(level, pos.offset(0, 0, - 1));
+			boolean front = canConnectBridgeTo(level, pos.offset(0, 0, -1));
 			boolean back = canConnectBridgeTo(level, pos.offset(0, 0, 1));
-			boolean left = canConnectBridgeTo(level, pos.offset(- 1, 0, 0));
+			boolean left = canConnectBridgeTo(level, pos.offset(-1, 0, 0));
 			boolean right = canConnectBridgeTo(level, pos.offset(1, 0, 0));
-	
+
 			switch (state.getValue(FACING)) {
-				case NORTH: //North
-					if (!right)
-						bridge.setRenderSide1(true);
-					if (!left)
-						bridge.setRenderSide2(true);
-					if (right)
-						bridge.setRenderSide1(false);
-					if (left)
-						bridge.setRenderSide2(false);
-					break;
-				case SOUTH: //SOUTH
-					if (!right)
-						bridge.setRenderSide2(true);
-					if (!left)
-						bridge.setRenderSide1(true);
-					if (right)
-						bridge.setRenderSide2(false);
-					if (left)
-						bridge.setRenderSide1(false);
-					break;
-				case EAST: // WEST
-					if (!back)
-						bridge.setRenderSide1(true);
-					if (!front)
-						bridge.setRenderSide2(true);
-					if (back)
-						bridge.setRenderSide1(false);
-					if (front)
-						bridge.setRenderSide2(false);
-					break;
-				case WEST: //EAST
-					if (!back)
-						bridge.setRenderSide2(true);
-					if (!front)
-						bridge.setRenderSide1(true);
-					if (back)
-						bridge.setRenderSide2(false);
-					if (front)
-						bridge.setRenderSide1(false);
-					break;
+			case NORTH:
+				bridge.setRenderSide1(!right);
+				bridge.setRenderSide2(!left);
+				break;
+			case SOUTH:
+				bridge.setRenderSide2(!right);
+				bridge.setRenderSide1(!left);
+				break;
+			case EAST:
+				bridge.setRenderSide1(!back);
+				bridge.setRenderSide2(!front);
+				break;
+			case WEST:
+				bridge.setRenderSide2(!back);
+				bridge.setRenderSide1(!front);
+				break;
 			default:
 				break;
 			}
-		level.sendBlockUpdated(pos, state, oldState, UPDATE_ALL);
 		}
+		return state;
 	}
 
-	 @Override
-	protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		 return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
-	}
-
-    public static final VoxelShape  RIGHT_AABB = Block.box(14.0D, 0.0D, 0.0D, 16.0D, 14D, 16.0D);
-    public static final VoxelShape LEFT_AABB = Block.box(0.0D, 0.0D, 0.0D, 2.0D, 14D, 16.0D);
-    public static final VoxelShape BACK_AABB = Block.box(0.0D, 0.0D, 14.0D, 16.0D, 14D, 16.0D);
-    public static final VoxelShape FRONT_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14D, 2.0D);
+    public static final VoxelShape RIGHT_SIDE = Block.box(14.0D, 0.0D, 0.0D, 16.0D, 14D, 16.0D);
+    public static final VoxelShape LEFT_SIDE = Block.box(0.0D, 0.0D, 0.0D, 2.0D, 14D, 16.0D);
+    public static final VoxelShape BACK_SIDE = Block.box(0.0D, 0.0D, 14.0D, 16.0D, 14D, 16.0D); //hue
+    public static final VoxelShape FRONT_SIDE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14D, 2.0D);
     public static final VoxelShape BASE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2D, 16.0D);
 
 	@Nonnull
@@ -143,7 +113,6 @@ public class BambooBridge extends HorizontalDirectionalBlock implements EntityBl
 		BlockEntity te = level.getBlockEntity(pos);
 		VoxelShape side_1 = Shapes.empty();
 		VoxelShape side_2 = Shapes.empty();
-		VoxelShape s_combined = Shapes.empty();
 
 		if (te instanceof BambooBridgeBlockEntity bridge) {
 			boolean front = canConnectBridgeTo(bridge.getLevel(), pos.offset(0, 0, -1));
@@ -153,22 +122,20 @@ public class BambooBridge extends HorizontalDirectionalBlock implements EntityBl
 
 			if (state.getValue(FACING).equals(Direction.NORTH) || state.getValue(FACING).equals(Direction.SOUTH)) {
 				if (!right)
-					side_1 = RIGHT_AABB;
+					side_1 = RIGHT_SIDE;
 				if (!left)
-					side_2 = LEFT_AABB;
-				s_combined = Shapes.join(side_1, side_2, BooleanOp.OR);
+					side_2 = LEFT_SIDE;
 			}
 
 			if (state.getValue(FACING).equals(Direction.EAST) || state.getValue(FACING).equals(Direction.WEST)) {
 				if (!back)
-					side_1 = BACK_AABB;
+					side_1 = BACK_SIDE;
 				if (!front)
-					side_2 = FRONT_AABB;
-				s_combined = Shapes.join(side_1, side_2, BooleanOp.OR);
+					side_2 = FRONT_SIDE;
 			}
 		}
 
-		return Shapes.join(BASE, s_combined, BooleanOp.OR);
+		return Shapes.or(BASE, side_1, side_2);
 	}
 
 	public boolean canConnectBridgeTo(LevelAccessor level, BlockPos pos) {

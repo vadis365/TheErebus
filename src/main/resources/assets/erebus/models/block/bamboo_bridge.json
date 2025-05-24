@@ -1,6 +1,6 @@
 {
     "parent": "builtin/entity",
     "textures": {
-        "particle": "erebus:block/bamboo_crate"
+        "particle": "erebus:block/bamboo_ladder"
     }
 }
