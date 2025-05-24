@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import erebus.Erebus;
 import erebus.block.entity.BambooBridgeBlockEntity;
+import erebus.block.entity.BambooExtenderBlockEntity;
 import erebus.block.entity.BambooPipeBlockEntity;
 import erebus.block.entity.BambooPipeExtractBlockEntity;
 import erebus.block.entity.BlenderBlockEntity;
@@ -85,4 +86,8 @@ public class ModBlockEntities {
 	public static final Supplier<BlockEntityType<BambooBridgeBlockEntity>> BAMBOO_BRIDGE = BLOCK_ENTITIES.register(
 			"bamboo_bridge",
 			() -> BlockEntityType.Builder.of(BambooBridgeBlockEntity::new, OtherBlocks.BAMBOO_BRIDGE.get()).build(null));
+	
+	public static final Supplier<BlockEntityType<BambooExtenderBlockEntity>> BAMBOO_EXTENDER = BLOCK_ENTITIES.register(
+			"bamboo_extender",
+			() -> BlockEntityType.Builder.of(BambooExtenderBlockEntity::new, OtherBlocks.BAMBOO_EXTENDER.get()).build(null));
 }

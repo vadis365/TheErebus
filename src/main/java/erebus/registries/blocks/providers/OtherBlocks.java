@@ -23,6 +23,7 @@ import erebus.block.altars.OfferingAltar;
 import erebus.block.altars.RepairAltar;
 import erebus.block.bamboo.BambooBridge;
 import erebus.block.bamboo.BambooCrateBlock;
+import erebus.block.bamboo.BambooExtender;
 import erebus.block.bamboo.BambooPipe;
 import erebus.block.bamboo.BambooPipeExtract;
 import erebus.block.bamboo.BambooPole;
@@ -250,7 +251,7 @@ public class OtherBlocks extends ModBlockHelpers {
         BAMBOO_BRIDGE = registerBlock("bamboo_bridge", () -> new BambooBridge(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER)));
         BAMBOO_LADDER = registerBlock("bamboo_ladder", () -> new LadderBlock(Properties.ofFullCopy(Blocks.LADDER).sound(SoundType.BAMBOO)));
         BAMBOO_NERD_POLE = registerBlock("bamboo_nerd_pole", () -> new BambooPole(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER)));
-        BAMBOO_EXTENDER = registerSimpleBlock("bamboo_extender", Properties.of().mapColor(MapColor.STONE));
+        BAMBOO_EXTENDER = registerBlock("bamboo_extender", () -> new BambooExtender(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER)));
         BAMBOO_TORCH = registerBlock("bamboo_torch", () -> new BambooTorchBlock(Properties.ofFullCopy(Blocks.TORCH).noCollission().sound(SoundType.BAMBOO).lightLevel((state) -> 15).requiresCorrectToolForDrops()));
         BAMBOO_PIPE = registerBlock("bamboo_pipe", () -> new BambooPipe(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO)));
         BAMBOO_PIPE_EXTRACT = registerBlock("bamboo_pipe_extract", () -> new BambooPipeExtract(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO)));
