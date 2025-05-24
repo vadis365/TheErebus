@@ -92,7 +92,7 @@ public class BambooExtender extends DirectionalBlock  implements EntityBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		Direction direction = context.getHorizontalDirection();
+		Direction direction = context.getNearestLookingDirection();
 		return this.defaultBlockState().setValue(FACING, direction).setValue(POWERED, false);
 	}
 
