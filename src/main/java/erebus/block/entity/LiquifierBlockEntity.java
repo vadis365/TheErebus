@@ -1,6 +1,6 @@
 package erebus.block.entity;
 
-import erebus.block.Liquifier;
+import erebus.block.LiquifierBlock;
 import erebus.inventory.server.LiquifierMenu;
 import erebus.registries.ModBlockEntities;
 import erebus.registries.ModFluids;
@@ -75,7 +75,7 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 
 			tile.prevTankAmount = tile.tank.getFluidAmount();
 
-			if (level.getBlockState(pos).getValue(Liquifier.POWERED)) {
+			if (level.getBlockState(pos).getValue(LiquifierBlock.POWERED)) {
 				if (tile.canOperate()) {
 					++tile.operatingTime;
 					isDirty = true;

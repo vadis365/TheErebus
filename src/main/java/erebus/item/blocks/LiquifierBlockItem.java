@@ -1,6 +1,6 @@
 package erebus.item.blocks;
 
-import erebus.block.Liquifier;
+import erebus.block.LiquifierBlock;
 import erebus.registries.data.FluidContents;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.ChatFormatting;
@@ -18,7 +18,7 @@ import java.util.List;
 public class LiquifierBlockItem extends BlockItem {
 	private final int capacity;
 
-	public LiquifierBlockItem(Liquifier blockIn, int capacity, Properties builder) {
+	public LiquifierBlockItem(LiquifierBlock blockIn, int capacity, Properties builder) {
 		super(blockIn, builder);
 		this.capacity = capacity;
 	}

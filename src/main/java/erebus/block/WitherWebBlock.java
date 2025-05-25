@@ -10,21 +10,22 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.WebBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
-public class WitherWeb extends WebBlock {
+public class WitherWebBlock extends WebBlock {
 
-	public WitherWeb(Properties properties) {
+	public WitherWebBlock(Properties properties) {
 		super(properties);
 	}
 
 	@Override
-	protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+	protected void entityInside(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Entity entity) {
 		Vec3 vec3 = new Vec3(0.25, 0.05F, 0.25);
 		if (entity instanceof LivingEntity livingentity && livingentity.hasEffect(MobEffects.WEAVING))
 			vec3 = new Vec3(0.5, 0.25, 0.5);
 
 		if (entity instanceof LivingEntity livingentity && !(livingentity instanceof BlackWidow))
-			((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0));
+			livingentity.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0));
 
 		entity.makeStuckInBlock(state, vec3);
 	}

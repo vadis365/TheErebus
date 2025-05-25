@@ -10,27 +10,28 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.WebBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
-public class LavaWeb extends WebBlock {
+public class LavaWebBlock extends WebBlock {
 
-	public LavaWeb(Properties properties) {
+	public LavaWebBlock(Properties properties) {
 		super(properties);
 	}
 
 	@Override
-	protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+	protected void entityInside(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Entity entity) {
 		Vec3 vec3 = new Vec3(0.25, 0.05F, 0.25);
 		if (entity instanceof LivingEntity livingentity && livingentity.hasEffect(MobEffects.WEAVING))
 			vec3 = new Vec3(0.5, 0.25, 0.5);
 
-		if (entity instanceof LivingEntity livingentity)
-			((LivingEntity) entity).setRemainingFireTicks(100);
+		if (entity instanceof LivingEntity)
+			entity.setRemainingFireTicks(100);
 
 		entity.makeStuckInBlock(state, vec3);
 	}
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+    public void animateTick(@NotNull BlockState state, Level level, BlockPos pos, @NotNull RandomSource random) {
         BlockPos blockpos = pos.above();
         if (level.getBlockState(blockpos).isAir() && !level.getBlockState(blockpos).isSolidRender(level, blockpos)) {
             if (random.nextInt(50) == 0 && level.isClientSide()) {

@@ -22,22 +22,23 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class Liquifier extends HorizontalDirectionalBlock implements EntityBlock {
+public class LiquifierBlock extends HorizontalDirectionalBlock implements EntityBlock {
 
-	public static final MapCodec<Liquifier> CODEC = simpleCodec(Liquifier::new);
+	public static final MapCodec<LiquifierBlock> CODEC = simpleCodec(LiquifierBlock::new);
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 
-	public Liquifier(Properties properties) {
+	public LiquifierBlock(Properties properties) {
 		super(properties);
 		registerDefaultState(this.stateDefinition.any().setValue(POWERED, false));
 	}
 
 	@Override
-	protected MapCodec<Liquifier> codec() {
+	protected @NotNull MapCodec<LiquifierBlock> codec() {
 		return CODEC;
 	}
 
@@ -71,7 +72,7 @@ public class Liquifier extends HorizontalDirectionalBlock implements EntityBlock
 
 	@Nonnull
 	@Override
-	public InteractionResult useWithoutItem(BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull BlockHitResult hitResult) {
+	public InteractionResult useWithoutItem(@NotNull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull BlockHitResult hitResult) {
 		if (!world.isClientSide()) {
 			if (world.getBlockEntity(pos) instanceof LiquifierBlockEntity liquifier)
 				player.openMenu(liquifier, pos);
@@ -92,7 +93,7 @@ public class Liquifier extends HorizontalDirectionalBlock implements EntityBlock
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Block block, @Nonnull BlockPos fromPos, boolean isMoving) {
+	public void neighborChanged(@NotNull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Block block, @Nonnull BlockPos fromPos, boolean isMoving) {
 		if (!level.isClientSide()) {
 			LiquifierBlockEntity tile = (LiquifierBlockEntity) level.getBlockEntity(pos);
 			boolean flag = level.hasNeighborSignal(pos);
