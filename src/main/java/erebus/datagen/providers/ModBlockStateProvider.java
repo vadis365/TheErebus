@@ -346,8 +346,8 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         block(stigma, "stigma");
     }
 
-    public void hugeMushroom(Supplier<? extends HugeMushroomBlock> hugeMushroom, String texture) {
-        ModelFile outerModel = models().withExistingParent(name(hugeMushroom), mcLoc("block/template_single_face")).texture("texture", texture("mushroom_block_skin_%s".formatted(texture)));
+    public void hugeMushroom(Supplier<? extends HugeMushroomBlock> hugeMushroom, String texture, boolean isStem) {
+        ModelFile outerModel = models().withExistingParent(name(hugeMushroom), mcLoc("block/template_single_face")).texture("texture", texture("mushroom_block_skin_%s".formatted(isStem ? "stem_%s".formatted(texture) : texture)));
         ModelFile innerModel = models().withExistingParent("%s_inside".formatted(name(hugeMushroom)), mcLoc("block/template_single_face")).texture("texture", texture("mushroom_block_inside_%s".formatted(texture)));
 
         MultiPartBlockStateBuilder builder = getMultipartBuilder(hugeMushroom.get());

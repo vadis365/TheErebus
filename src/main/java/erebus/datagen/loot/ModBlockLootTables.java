@@ -270,10 +270,15 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(PlantBlocks.KAIZERS_FINGERS_MUSHROOM);
         dropSelf(PlantBlocks.SARCASTIC_CZECH_MUSHROOM);
         dropSelf(PlantBlocks.DARK_CAPPED_MUSHROOM_BLOCK);
+        dropSelf(PlantBlocks.DARK_CAPPED_MUSHROOM_STEM);
         dropSelf(PlantBlocks.DUTCH_CAP_MUSHROOM_BLOCK);
+        dropSelf(PlantBlocks.DUTCH_CAP_MUSHROOM_STEM);
         dropSelf(PlantBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK);
+        dropSelf(PlantBlocks.GRANDMAS_SHOES_MUSHROOM_STEM);
         dropSelf(PlantBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK);
+        dropSelf(PlantBlocks.KAIZERS_FINGERS_MUSHROOM_STEM);
         dropSelf(PlantBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK);
+        dropSelf(PlantBlocks.SARCASTIC_CZECH_MUSHROOM_STEM);
         dropSelf(PlantBlocks.DESERT_SHRUB);
         dropSelf(PlantBlocks.MIRE_CORAL);
         dropSelf(PlantBlocks.NETTLE);
