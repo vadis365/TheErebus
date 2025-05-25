@@ -1,4 +1,4 @@
-package erebus.world.feature.plant;
+package erebus.world.feature.mushroom;
 
 import erebus.world.feature.ErebusFeature;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -9,9 +9,10 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
 import java.util.List;
 
-public class GiantMushroomFeature extends ErebusFeature {
-    public GiantMushroomFeature(String name) {
-        super(name);
+public class KaizersFingersMushroomFeature extends ErebusFeature {
+
+    public KaizersFingersMushroomFeature() {
+        super("kaizers_fingers_mushroom");
     }
 
     @Override

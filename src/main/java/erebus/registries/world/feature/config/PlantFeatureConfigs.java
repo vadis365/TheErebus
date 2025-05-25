@@ -2,6 +2,7 @@ package erebus.registries.world.feature.config;
 
 import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.blocks.providers.WoodBlocks;
+import erebus.world.feature.mushroom.config.*;
 import erebus.world.feature.plant.config.*;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -32,7 +33,11 @@ public class PlantFeatureConfigs {
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GIANT_FLOWER_MAGENTA_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GIANT_FLOWER_ORANGE_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GIANT_FLOWER_WHITE_CONFIG;
-    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GIANT_MUSHROOM_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> DARK_CAPPED_MUSHROOM_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> DUTCH_CAP_MUSHROOM_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> GRANDMAS_SHOES_MUSHROOM_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> KAIZERS_FINGERS_MUSHROOM_CONFIG;
+    public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> SARCASTIC_CZECH_MUSHROOM_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> MELON_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> MOSS_CONFIG;
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> MOULD_CONFIG;
@@ -64,7 +69,11 @@ public class PlantFeatureConfigs {
         GIANT_FLOWER_MAGENTA_CONFIG = CONFIGS.register("giant_flower_magenta", () -> new GiantFlowerFeatureConfiguration(11));
         GIANT_FLOWER_ORANGE_CONFIG = CONFIGS.register("giant_flower_orange", () -> new GiantFlowerFeatureConfiguration(12));
         GIANT_FLOWER_WHITE_CONFIG = CONFIGS.register("giant_flower_white", () -> new GiantFlowerFeatureConfiguration(13));
-        GIANT_MUSHROOM_CONFIG = CONFIGS.register("giant_mushroom", GiantMushroomFeatureConfiguration::new);
+        DARK_CAPPED_MUSHROOM_CONFIG = CONFIGS.register("dark_capped_mushroom", DarkCappedMushroomFeatureConfiguration::new);
+        DUTCH_CAP_MUSHROOM_CONFIG = CONFIGS.register("dutch_cap_mushroom", DutchCapMushroomFeatureConfiguration::new);
+        GRANDMAS_SHOES_MUSHROOM_CONFIG = CONFIGS.register("grandmas_shoes_mushroom", GrandmasShoesMushroomFeatureConfiguration::new);
+        KAIZERS_FINGERS_MUSHROOM_CONFIG = CONFIGS.register("kaizers_fingers_mushroom", KaizersFingersMushroomFeatureConfiguration::new);
+        SARCASTIC_CZECH_MUSHROOM_CONFIG = CONFIGS.register("sarcastic_czech_mushroom", SarcasticCzechMushroomFeatureConfiguration::new);
         MELON_CONFIG = CONFIGS.register("melon", MelonFeatureConfiguration::new);
         MOSS_CONFIG = CONFIGS.register("moss", () -> new MossPatchFeatureConfiguration(PlantBlocks.MOSS));
         MOULD_CONFIG = CONFIGS.register("mould", () -> new MossPatchFeatureConfiguration(PlantBlocks.MOULD));

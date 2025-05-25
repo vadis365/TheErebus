@@ -5,6 +5,7 @@ import erebus.registries.helpers.ModFeatureHelpers;
 import erebus.world.feature.bush.HeartBerryBushFeature;
 import erebus.world.feature.bush.JadeBerryBushFeature;
 import erebus.world.feature.bush.SwampBerryBushFeature;
+import erebus.world.feature.mushroom.*;
 import erebus.world.feature.plant.*;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -35,7 +36,11 @@ public class PlantFeatures extends ModFeatureHelpers {
     public static GiantFlowerFeature GIANT_FLOWER_MAGENTA = new GiantFlowerFeature("giant_flower_magenta");
     public static GiantFlowerFeature GIANT_FLOWER_ORANGE = new GiantFlowerFeature("giant_flower_orange");
     public static GiantFlowerFeature GIANT_FLOWER_WHITE = new GiantFlowerFeature("giant_flower_white");
-    public static GiantMushroomFeature GIANT_MUSHROOM = new GiantMushroomFeature("giant_mushroom");
+    public static DarkCappedMushroomFeature DARK_CAPPED_MUSHROOM = new DarkCappedMushroomFeature();
+    public static DutchCapMushroomFeature DUTCH_CAP_MUSHROOM = new DutchCapMushroomFeature();
+    public static GrandmasShoesMushroomFeature GRANDMAS_SHOES_MUSHROOM = new GrandmasShoesMushroomFeature();
+    public static KaizersFingersMushroomFeature KAIZERS_FINGERS_MUSHROOM = new KaizersFingersMushroomFeature();
+    public static SarcasticCzechMushroomFeature SARCASTIC_CZECH_MUSHROOM = new SarcasticCzechMushroomFeature();
     public static MelonFeature MELON = new MelonFeature("melon");
     public static MossPatchFeature MOSS = new MossPatchFeature("moss");
     public static MossPatchFeature MOULD = new MossPatchFeature("mould");
@@ -83,7 +88,12 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerConfiguredFeatureWithConfig(GIANT_FLOWER_MAGENTA, GIANT_FLOWER_MAGENTA_CONFIG);
         registerConfiguredFeatureWithConfig(GIANT_FLOWER_ORANGE, GIANT_FLOWER_ORANGE_CONFIG);
         registerConfiguredFeatureWithConfig(GIANT_FLOWER_WHITE, GIANT_FLOWER_WHITE_CONFIG);
-        registerConfiguredFeatureWithConfig(GIANT_MUSHROOM, GIANT_MUSHROOM_CONFIG);
+        registerConfiguredFeatureWithConfig(DARK_CAPPED_MUSHROOM, DARK_CAPPED_MUSHROOM_CONFIG);
+        registerConfiguredFeatureWithConfig(DUTCH_CAP_MUSHROOM, DUTCH_CAP_MUSHROOM_CONFIG);
+        registerConfiguredFeatureWithConfig(GRANDMAS_SHOES_MUSHROOM, GRANDMAS_SHOES_MUSHROOM_CONFIG);
+        registerConfiguredFeatureWithConfig(KAIZERS_FINGERS_MUSHROOM, KAIZERS_FINGERS_MUSHROOM_CONFIG);
+        registerConfiguredFeatureWithConfig(SARCASTIC_CZECH_MUSHROOM, SARCASTIC_CZECH_MUSHROOM_CONFIG);
+
         registerConfiguredFeatureWithConfig(MELON, MELON_CONFIG);
         registerConfiguredFeatureWithConfig(MOSS, MOSS_CONFIG);
         registerConfiguredFeatureWithConfig(MOULD, MOULD_CONFIG);
@@ -135,7 +145,11 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerPlacedFeature(GIANT_FLOWER_MAGENTA);
         registerPlacedFeature(GIANT_FLOWER_ORANGE);
         registerPlacedFeature(GIANT_FLOWER_WHITE);
-        registerPlacedFeature(GIANT_MUSHROOM);
+        registerPlacedFeature(DARK_CAPPED_MUSHROOM);
+        registerPlacedFeature(DUTCH_CAP_MUSHROOM);
+        registerPlacedFeature(GRANDMAS_SHOES_MUSHROOM);
+        registerPlacedFeature(KAIZERS_FINGERS_MUSHROOM);
+        registerPlacedFeature(SARCASTIC_CZECH_MUSHROOM);
         registerPlacedFeature(MELON);
         registerPlacedFeature(MOSS);
         registerPlacedFeature(MOULD);
