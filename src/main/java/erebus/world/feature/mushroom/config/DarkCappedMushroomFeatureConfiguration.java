@@ -5,15 +5,19 @@ import erebus.world.util.FeatureConfigurationUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 public class DarkCappedMushroomFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
-    private final int[] offsetX = {0, -1, 0, 1};
-    private final int[] offsetZ = {1, 0, -1, 0};
     private final FeatureConfigurationUtils utils = new FeatureConfigurationUtils();
+    private final BlockState STEM = PlantBlocks.DARK_CAPPED_MUSHROOM_STEM.get().defaultBlockState()
+            .setValue(HugeMushroomBlock.UP, true)
+            .setValue(HugeMushroomBlock.DOWN, true);
+    private final BlockState SHROOM = PlantBlocks.DARK_CAPPED_MUSHROOM_BLOCK.get().defaultBlockState();
 
     public DarkCappedMushroomFeatureConfiguration() {
         super(NoneFeatureConfiguration.CODEC);
@@ -31,7 +35,22 @@ public class DarkCappedMushroomFeatureConfiguration extends Feature<NoneFeatureC
             return false;
         }
 
-        utils.setBlockPillar(level, pos, stalkHeight, PlantBlocks.DARK_CAPPED_MUSHROOM_BLOCK.get().defaultBlockState());
+        utils.setBlockPillar(level, pos, stalkHeight, STEM);
+
+        for(int x = -1; x <= 1; x++) {
+            for(int z = -1; z <= 1; z++) {
+                setBlock(level, pos.offset(x, stalkHeight, z), SHROOM);
+            }
+        }
+
+        for(int y = 1; y <= sideHeight; y++) {
+            for(int offset = -1; offset <= 1; offset++) {
+                setBlock(level, pos.offset(2, stalkHeight - y, offset), SHROOM);
+                setBlock(level, pos.offset(-2, stalkHeight - y, offset), SHROOM);
+                setBlock(level, pos.offset(offset, stalkHeight - y, 2), SHROOM);
+                setBlock(level, pos.offset(offset, stalkHeight - y, -2), SHROOM);
+            }
+        }
 
         return true;
     }
