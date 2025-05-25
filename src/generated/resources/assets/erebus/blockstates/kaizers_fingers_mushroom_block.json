@@ -1,7 +1,120 @@
 {
-  "variants": {
-    "": {
-      "model": "erebus:block/kaizers_fingers_mushroom_block"
+  "multipart": [
+    {
+      "apply": {
+        "model": "erebus:block/kaizers_fingers_mushroom_block"
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/kaizers_fingers_mushroom_block",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/kaizers_fingers_mushroom_block",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/kaizers_fingers_mushroom_block",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/kaizers_fingers_mushroom_block",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/kaizers_fingers_mushroom_block",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "down": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/kaizers_fingers_mushroom_block_inside"
+      },
+      "when": {
+        "north": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/kaizers_fingers_mushroom_block_inside",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/kaizers_fingers_mushroom_block_inside",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/kaizers_fingers_mushroom_block_inside",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/kaizers_fingers_mushroom_block_inside",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "up": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/kaizers_fingers_mushroom_block_inside",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "down": "false"
+      }
     }
-  }
+  ]
 }

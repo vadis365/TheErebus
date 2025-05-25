@@ -14,10 +14,9 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
+import static erebus.registries.blocks.properties.PlantBlockProperties.*;
+
 public class PlantBlocks extends ModBlockHelpers {
-
-    private static final Properties FLOWER_PROPS = Properties.of().noCollission().noOcclusion().instabreak().sound(SoundType.AZALEA).isViewBlocking((state, level, pos) -> false);
-
     // MARK: Plants
     public static final DeferredBlock<ModCropBlock> CROP_TURNIP;
     public static final DeferredBlock<ModCropBlock> CROP_CABBAGE;
@@ -32,11 +31,11 @@ public class PlantBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> GRANDMAS_SHOES_MUSHROOM;
     public static final DeferredBlock<Block> KAIZERS_FINGERS_MUSHROOM;
     public static final DeferredBlock<Block> SARCASTIC_CZECH_MUSHROOM;
-    public static final DeferredBlock<Block> DARK_CAPPED_MUSHROOM_BLOCK;
-    public static final DeferredBlock<Block> DUTCH_CAP_MUSHROOM_BLOCK;
-    public static final DeferredBlock<Block> GRANDMAS_SHOES_MUSHROOM_BLOCK;
-    public static final DeferredBlock<Block> KAIZERS_FINGERS_MUSHROOM_BLOCK;
-    public static final DeferredBlock<Block> SARCASTIC_CZECH_MUSHROOM_BLOCK;
+    public static final DeferredBlock<HugeMushroomBlock> DARK_CAPPED_MUSHROOM_BLOCK;
+    public static final DeferredBlock<HugeMushroomBlock> DUTCH_CAP_MUSHROOM_BLOCK;
+    public static final DeferredBlock<HugeMushroomBlock> GRANDMAS_SHOES_MUSHROOM_BLOCK;
+    public static final DeferredBlock<HugeMushroomBlock> KAIZERS_FINGERS_MUSHROOM_BLOCK;
+    public static final DeferredBlock<HugeMushroomBlock> SARCASTIC_CZECH_MUSHROOM_BLOCK;
     public static final DeferredBlock<Block> GIANT_LILY_PAD;
     public static final DeferredBlock<Block> DESERT_SHRUB;
     public static final DeferredBlock<Block> MIRE_CORAL;
@@ -117,24 +116,24 @@ public class PlantBlocks extends ModBlockHelpers {
 
     static {
         // MARK: Plants
-        CROP_TURNIP = registerCrop("crop_turnip", ModItems.TURNIP, Properties.ofFullCopy(Blocks.BEETROOTS));
-        CROP_CABBAGE = registerCrop("crop_cabbage", ModItems.CABBAGE_SEEDS, Properties.ofFullCopy(Blocks.BEETROOTS));
-        CROP_MANDRAKE = registerCrop("crop_mandrake", ModItems.MANDRAKE_ROOT, Properties.ofFullCopy(Blocks.BEETROOTS));
-        JADE_BERRY_BUSH = registerBush("jade_berry_bush", ModItems.JADE_BERRIES, Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
-        HEART_BERRY_BUSH = registerBush("heart_berry_bush", ModItems.HEART_BERRIES, Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
-        SWAMP_BERRY_BUSH = registerBush("swamp_berry_bush", ModItems.SWAMP_BERRIES, Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
-        DARK_FRUIT_VINE = registerBlock("dark_fruit_vine", () -> new DarkFruitVineBlock(Properties.ofFullCopy(Blocks.OAK_LEAVES).noCollission()));
-        PRICKLY_PEAR = registerBlock("prickly_pear", () -> new PricklyPearBlock(Properties.ofFullCopy(Blocks.CACTUS).noOcclusion()));
-        DARK_CAPPED_MUSHROOM = registerBlock("dark_capped_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
-        DUTCH_CAP_MUSHROOM = registerBlock("dutch_cap_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
-        GRANDMAS_SHOES_MUSHROOM = registerBlock("grandmas_shoes_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
-        KAIZERS_FINGERS_MUSHROOM = registerBlock("kaizers_fingers_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
-        SARCASTIC_CZECH_MUSHROOM = registerBlock("sarcastic_czech_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
-        DARK_CAPPED_MUSHROOM_BLOCK = registerSimpleBlock("dark_capped_mushroom_block", Properties.of().mapColor(MapColor.STONE));
-        DUTCH_CAP_MUSHROOM_BLOCK = registerSimpleBlock("dutch_cap_mushroom_block", Properties.of().mapColor(MapColor.STONE));
-        GRANDMAS_SHOES_MUSHROOM_BLOCK = registerSimpleBlock("grandmas_shoes_mushroom_block", Properties.of().mapColor(MapColor.STONE));
-        KAIZERS_FINGERS_MUSHROOM_BLOCK = registerSimpleBlock("kaizers_fingers_mushroom_block", Properties.of().mapColor(MapColor.STONE));
-        SARCASTIC_CZECH_MUSHROOM_BLOCK = registerSimpleBlock("sarcastic_czech_mushroom_block", Properties.of().mapColor(MapColor.STONE));
+        CROP_TURNIP = registerCrop("crop_turnip", ModItems.TURNIP, CROP_PROPS);
+        CROP_CABBAGE = registerCrop("crop_cabbage", ModItems.CABBAGE_SEEDS, CROP_PROPS);
+        CROP_MANDRAKE = registerCrop("crop_mandrake", ModItems.MANDRAKE_ROOT, CROP_PROPS);
+        JADE_BERRY_BUSH = registerBush("jade_berry_bush", ModItems.JADE_BERRIES, BUSH_PROPS);
+        HEART_BERRY_BUSH = registerBush("heart_berry_bush", ModItems.HEART_BERRIES, BUSH_PROPS);
+        SWAMP_BERRY_BUSH = registerBush("swamp_berry_bush", ModItems.SWAMP_BERRIES, BUSH_PROPS);
+        DARK_FRUIT_VINE = registerBlock("dark_fruit_vine", () -> new DarkFruitVineBlock(DARK_FRUIT_VINE_PROPS));
+        PRICKLY_PEAR = registerBlock("prickly_pear", () -> new PricklyPearBlock(PRICKLY_PEAR_PROPS));
+        DARK_CAPPED_MUSHROOM = registerBlock("dark_capped_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, DARK_CAPPED_MUSHROOM_PROPS));
+        DUTCH_CAP_MUSHROOM = registerBlock("dutch_cap_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, DUTCH_CAP_MUSHROOM_PROPS));
+        GRANDMAS_SHOES_MUSHROOM = registerBlock("grandmas_shoes_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, GRANDMAS_SHOES_MUSHROOM_PROPS));
+        KAIZERS_FINGERS_MUSHROOM = registerBlock("kaizers_fingers_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, KAIZERS_FINGERS_MUSHROOM_PROPS));
+        SARCASTIC_CZECH_MUSHROOM = registerBlock("sarcastic_czech_mushroom", () -> new MushroomBlock(VegetationFeatures.PATCH_BROWN_MUSHROOM, SARCASTIC_CZECH_MUSHROOM_PROPS));
+        DARK_CAPPED_MUSHROOM_BLOCK = registerHugeMushroom("dark_capped_mushroom_block", DARK_CAPPED_MUSHROOM_BLOCK_PROPS);
+        DUTCH_CAP_MUSHROOM_BLOCK = registerHugeMushroom("dutch_cap_mushroom_block", DUTCH_CAP_MUSHROOM_BLOCK_PROPS);
+        GRANDMAS_SHOES_MUSHROOM_BLOCK = registerHugeMushroom("grandmas_shoes_mushroom_block", GRANDMAS_SHOES_MUSHROOM_BLOCK_PROPS);
+        KAIZERS_FINGERS_MUSHROOM_BLOCK = registerHugeMushroom("kaizers_fingers_mushroom_block", KAIZERS_FINGERS_MUSHROOM_BLOCK_PROPS);
+        SARCASTIC_CZECH_MUSHROOM_BLOCK = registerHugeMushroom("sarcastic_czech_mushroom_block", SARCASTIC_CZECH_MUSHROOM_BLOCK_PROPS);
         GIANT_LILY_PAD = registerSimpleBlock("giant_lily_pad", Properties.of().mapColor(MapColor.STONE));
         DESERT_SHRUB = registerSimpleBlock("desert_shrub", Properties.ofFullCopy(Blocks.TALL_GRASS));
         MIRE_CORAL = registerSimpleBlock("mire_coral", Properties.of().mapColor(MapColor.STONE));
@@ -196,21 +195,21 @@ public class PlantBlocks extends ModBlockHelpers {
         STIGMA_ORANGE = registerSimpleBlock("stigma_orange", Properties.of().mapColor(MapColor.COLOR_YELLOW));
         STIGMA_WHITE = registerSimpleBlock("stigma_white", Properties.of().mapColor(MapColor.COLOR_YELLOW));
 
-        FLOWER_BLACK = registerSimpleBlock("flower_black", FLOWER_PROPS.mapColor(MapColor.COLOR_BLACK));
-        FLOWER_RED = registerSimpleBlock("flower_red", FLOWER_PROPS.mapColor(MapColor.COLOR_RED));
-        FLOWER_BROWN = registerSimpleBlock("flower_brown", FLOWER_PROPS.mapColor(MapColor.COLOR_BROWN));
-        FLOWER_BLUE = registerSimpleBlock("flower_blue", FLOWER_PROPS.mapColor(MapColor.COLOR_BLUE));
-        FLOWER_PURPLE = registerSimpleBlock("flower_purple", FLOWER_PROPS.mapColor(MapColor.COLOR_PURPLE));
-        FLOWER_CYAN = registerSimpleBlock("flower_cyan", FLOWER_PROPS.mapColor(MapColor.COLOR_CYAN));
-        FLOWER_LIGHT_GRAY = registerSimpleBlock("flower_light_gray", FLOWER_PROPS.mapColor(MapColor.COLOR_LIGHT_GRAY));
-        FLOWER_GRAY = registerSimpleBlock("flower_gray", FLOWER_PROPS.mapColor(MapColor.COLOR_GRAY));
-        FLOWER_PINK = registerSimpleBlock("flower_pink", FLOWER_PROPS.mapColor(MapColor.COLOR_PINK));
-        FLOWER_YELLOW = registerSimpleBlock("flower_yellow", FLOWER_PROPS.mapColor(MapColor.COLOR_YELLOW));
-        FLOWER_LIGHT_BLUE = registerSimpleBlock("flower_light_blue", FLOWER_PROPS.mapColor(MapColor.COLOR_LIGHT_BLUE));
-        FLOWER_MAGENTA = registerSimpleBlock("flower_magenta", FLOWER_PROPS.mapColor(MapColor.COLOR_MAGENTA));
-        FLOWER_ORANGE = registerSimpleBlock("flower_orange", FLOWER_PROPS.mapColor(MapColor.COLOR_ORANGE));
-        FLOWER_WHITE = registerSimpleBlock("flower_white", FLOWER_PROPS.mapColor(MapColor.TERRACOTTA_WHITE));
-        FLOWER_RAINBOW = registerSimpleBlock("flower_rainbow", FLOWER_PROPS.mapColor(MapColor.COLOR_RED));
+        FLOWER_BLACK = registerSimpleBlock("flower_black", FLOWER_BLACK_PROPS);
+        FLOWER_RED = registerSimpleBlock("flower_red", FLOWER_RED_PROPS);
+        FLOWER_BROWN = registerSimpleBlock("flower_brown", FLOWER_BROWN_PROPS);
+        FLOWER_BLUE = registerSimpleBlock("flower_blue", FLOWER_BLUE_PROPS);
+        FLOWER_PURPLE = registerSimpleBlock("flower_purple", FLOWER_PURPLE_PROPS);
+        FLOWER_CYAN = registerSimpleBlock("flower_cyan", FLOWER_CYAN_PROPS);
+        FLOWER_LIGHT_GRAY = registerSimpleBlock("flower_light_gray", FLOWER_LIGHT_GRAY_PROPS);
+        FLOWER_GRAY = registerSimpleBlock("flower_gray", FLOWER_GRAY_PROPS);
+        FLOWER_PINK = registerSimpleBlock("flower_pink", FLOWER_PINK_PROPS);
+        FLOWER_YELLOW = registerSimpleBlock("flower_yellow", FLOWER_YELLOW_PROPS);
+        FLOWER_LIGHT_BLUE = registerSimpleBlock("flower_light_blue", FLOWER_LIGHT_BLUE_PROPS);
+        FLOWER_MAGENTA = registerSimpleBlock("flower_magenta", FLOWER_MAGENTA_PROPS);
+        FLOWER_ORANGE = registerSimpleBlock("flower_orange", FLOWER_ORANGE_PROPS);
+        FLOWER_WHITE = registerSimpleBlock("flower_white", FLOWER_WHITE_PROPS);
+        FLOWER_RAINBOW = registerSimpleBlock("flower_rainbow", FLOWER_RAINBOW_PROPS);
 
         // MARK: Flowers Double Height
         BULLRUSH = registerDoublePlant("bullrush", Properties.ofFullCopy(Blocks.ROSE_BUSH));

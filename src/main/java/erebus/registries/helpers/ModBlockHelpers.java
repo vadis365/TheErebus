@@ -43,7 +43,7 @@ public class ModBlockHelpers {
     }
 
     protected static DeferredBlock<FenceGateBlock> registerSimpleFenceGate(String name) {
-        return registerBlock(name, () -> new FenceGateBlock(WoodType.OAK, Properties.ofFullCopy(Blocks.OAK_FENCE_GATE)));
+        return registerFenceGate(name, WoodType.OAK, Properties.ofFullCopy(Blocks.OAK_FENCE_GATE));
     }
 
     protected static DeferredBlock<FenceGateBlock> registerFenceGate(String name, WoodType type, Properties props) {
@@ -64,6 +64,10 @@ public class ModBlockHelpers {
 
     protected static DeferredBlock<DoublePlantBlock> registerDoublePlant(String name, Properties properties) {
         return registerBlock(name, () -> new DoublePlantBlock(properties));
+    }
+
+    protected static DeferredBlock<HugeMushroomBlock> registerHugeMushroom(String name, Properties properties) {
+        return registerBlock(name, () -> new HugeMushroomBlock(properties));
     }
 
     protected static DeferredBlock<Block> registerSimpleBlock(String name, Properties properties) {

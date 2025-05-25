@@ -41,6 +41,10 @@ public abstract class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(blockName(block), modLoc("block/%s".formatted(name)));
     }
 
+    public void hugeMushroom(Supplier<? extends Block> block) {
+        withExistingParent(blockName(block), modLoc("block/%s_inventory".formatted(blockName(block))));
+    }
+
     public void blockFlat(Supplier<? extends Block> block) {
         withExistingParent(blockName(block), mcLoc("item/generated"))
                 .texture("layer0", modLoc("block/%s".formatted(blockName(block))));

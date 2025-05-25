@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_single_face",
   "textures": {
-    "texture": "erebus:block/mushroom_block_skin_grandmas_shoes"
+    "texture": "erebus:block/mushroom_block_inside_dutch_cap"
   }
 }

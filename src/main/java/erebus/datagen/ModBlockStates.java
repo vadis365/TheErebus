@@ -267,11 +267,11 @@ public class ModBlockStates extends ModBlockStateProvider {
         crossBlock(PlantBlocks.CULTIVATED_MOULD_DOWN);
         simpleBlock(PlantBlocks.ALGAE.get(), models().getExistingFile(modLoc("block/algae")));
         crossBlock(PlantBlocks.HANGING_WEB);
-        block(PlantBlocks.DARK_CAPPED_MUSHROOM_BLOCK, "mushroom_block_skin_dark_capped");
-        block(PlantBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK, "mushroom_block_skin_sarcastic_czech");
-        block(PlantBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK, "mushroom_block_skin_grandmas_shoes");
-        block(PlantBlocks.DUTCH_CAP_MUSHROOM_BLOCK, "mushroom_block_skin_dutch_cap");
-        block(PlantBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK, "mushroom_block_skin_kaizers_fingers");
+        hugeMushroom(PlantBlocks.DARK_CAPPED_MUSHROOM_BLOCK, "dark_capped");
+        hugeMushroom(PlantBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK, "sarcastic_czech");
+        hugeMushroom(PlantBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK, "grandmas_shoes");
+        hugeMushroom(PlantBlocks.DUTCH_CAP_MUSHROOM_BLOCK, "dutch_cap");
+        hugeMushroom(PlantBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK, "kaizers_fingers");
         crossBlock(PlantBlocks.DARK_CAPPED_MUSHROOM, "mushroom_dark_capped");
         crossBlock(PlantBlocks.SARCASTIC_CZECH_MUSHROOM, "mushroom_sarcastic_czech");
         crossBlock(PlantBlocks.GRANDMAS_SHOES_MUSHROOM, "mushroom_grandmas_shoes");
@@ -384,13 +384,10 @@ public class ModBlockStates extends ModBlockStateProvider {
         block(OtherBlocks.SILO_ROOF);
         block(OtherBlocks.SILO_TANK, "silo_tank_inactive");
         block(OtherBlocks.SILO_SUPPORTS);
-        //horizontalBlock(HONEY_COMB.get(), modLoc("block/%s_sides".formatted(name(HONEY_COMB))), modLoc("block/%s_front".formatted(name(HONEY_COMB))), modLoc("block/%s_top".formatted(name(HONEY_COMB))));
         furnace(OtherBlocks.UMBER_FURNACE);
         button(OtherBlocks.UMBERSTONE_BUTTON, UmberstoneBlocks.UMBERSTONE);
-//        block(LIQUIFIER);
 //        block(GLOW_GEM); TODO Implement these
 //        block(MUCUS_BOMB);
-//        block(UMBER_GOLEM_STATUE);
 
         // MARK: Antlion Dungeon
         block(OtherBlocks.CAPSTONE);

@@ -4,10 +4,12 @@ import erebus.block.FluidJarBlock;
 import erebus.block.util.ConnectedTextureBlock;
 import erebus.block.util.ModBlockSetTypes;
 import erebus.registries.helpers.ModBlockHelpers;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.TransparentBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
+
+import static erebus.registries.blocks.properties.AmberBlockProperties.*;
 
 public class AmberBlocks extends ModBlockHelpers {
     public static final DeferredBlock<TransparentBlock> AMBER;
@@ -21,40 +23,15 @@ public class AmberBlocks extends ModBlockHelpers {
 
     public static final DeferredBlock<DoorBlock> AMBER_DOOR;
 
-    private static final Properties AMBER_PROPERTIES = Properties.of()
-            .noOcclusion()
-            .isViewBlocking((blockState, blockGetter, blockPos) -> false)
-            .mapColor(MapColor.GOLD)
-            .explosionResistance(10.0F)
-            .sound(SoundType.GLASS);
-
     static {
         AMBER = registerTransparentBlock("amber", AMBER_PROPERTIES.strength(1.5F));
         AMBER_BRICKS = registerTransparentBlock("amber_bricks", AMBER_PROPERTIES.strength(2.0F));
         AMBER_GLASS = registerConnectedTextureBlock("amber_glass", AMBER_PROPERTIES.strength(1.5F));
         PRESERVED_AMBER = registerTransparentBlock("preserved_amber", AMBER_PROPERTIES.strength(10));
         PRESERVED_AMBER_GLASS = registerConnectedTextureBlock("preserved_amber_glass", AMBER_PROPERTIES.strength(10));
-        GLOWING_JAR = registerSimpleBlock(
-                "glowing_jar",
-                Properties.of()
-                        .strength(0.5F, 10.0F)
-                        .sound(SoundType.GLASS)
-                        .lightLevel(value -> 1)
-                        .noOcclusion()
-                        .isViewBlocking((state, getter, pos) -> false)
-        );
-        FLUID_JAR = registerBlockWithoutBlockItem(
-                "fluid_jar",
-                () -> new FluidJarBlock(
-                        Properties.ofFullCopy(Blocks.GLASS)
-                                .mapColor(MapColor.STONE)
-                                .strength(1.0F, 2000.0F)
-                                .sound(SoundType.GLASS)
-                                .noOcclusion()
-                                .isViewBlocking((state, getter, pos) -> false)
-                )
-        );
-        AMBER_DOOR = registerDoor("amber_door", ModBlockSetTypes.AMBER, Properties.ofFullCopy(Blocks.OAK_DOOR));
+        GLOWING_JAR = registerSimpleBlock("glowing_jar", GLOWING_JAR_PROPERTIES);
+        FLUID_JAR = registerBlockWithoutBlockItem("fluid_jar", () -> new FluidJarBlock(FLUID_JAR_PROPERTIES));
+        AMBER_DOOR = registerDoor("amber_door", ModBlockSetTypes.AMBER, AMBER_DOOR_PROPERTIES);
     }
 
     public static void init() {

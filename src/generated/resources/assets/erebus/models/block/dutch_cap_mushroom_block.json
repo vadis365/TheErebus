@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/template_single_face",
   "textures": {
-    "all": "erebus:block/mushroom_block_skin_dutch_cap"
+    "texture": "erebus:block/mushroom_block_skin_dutch_cap"
   }
 }

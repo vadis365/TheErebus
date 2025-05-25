@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.function.Supplier;
@@ -343,6 +344,61 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
 
     public void stigma(Supplier<? extends Block> stigma) {
         block(stigma, "stigma");
+    }
+
+    public void hugeMushroom(Supplier<? extends HugeMushroomBlock> hugeMushroom, String texture) {
+        ModelFile outerModel = models().withExistingParent(name(hugeMushroom), mcLoc("block/template_single_face")).texture("texture", texture("mushroom_block_skin_%s".formatted(texture)));
+        ModelFile innerModel = models().withExistingParent("%s_inside".formatted(name(hugeMushroom)), mcLoc("block/template_single_face")).texture("texture", texture("mushroom_block_inside_%s".formatted(texture)));
+
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(hugeMushroom.get());
+        builder
+                .part().modelFile(outerModel).addModel()
+                .condition(HugeMushroomBlock.NORTH, true)
+                .end()
+
+                .part().modelFile(outerModel).uvLock(true).rotationY(90).addModel()
+                .condition(HugeMushroomBlock.EAST, true)
+                .end()
+
+                .part().modelFile(outerModel).uvLock(true).rotationY(180).addModel()
+                .condition(HugeMushroomBlock.SOUTH, true)
+                .end()
+
+                .part().modelFile(outerModel).uvLock(true).rotationY(270).addModel()
+                .condition(HugeMushroomBlock.WEST, true)
+                .end()
+
+                .part().modelFile(outerModel).uvLock(true).rotationX(270).addModel()
+                .condition(HugeMushroomBlock.UP, true)
+                .end()
+
+                .part().modelFile(outerModel).uvLock(true).rotationX(90).addModel()
+                .condition(HugeMushroomBlock.DOWN, true)
+                .end()
+
+                .part().modelFile(innerModel).addModel()
+                .condition(HugeMushroomBlock.NORTH, false)
+                .end()
+
+                .part().modelFile(innerModel).uvLock(true).rotationY(90).addModel()
+                .condition(HugeMushroomBlock.EAST, false)
+                .end()
+
+                .part().modelFile(innerModel).uvLock(true).rotationY(180).addModel()
+                .condition(HugeMushroomBlock.SOUTH, false)
+                .end()
+
+                .part().modelFile(innerModel).uvLock(true).rotationY(270).addModel()
+                .condition(HugeMushroomBlock.WEST, false)
+                .end()
+
+                .part().modelFile(innerModel).uvLock(true).rotationX(270).addModel()
+                .condition(HugeMushroomBlock.UP, false)
+                .end()
+
+                .part().modelFile(innerModel).uvLock(true).rotationX(90).addModel()
+                .condition(HugeMushroomBlock.DOWN, false)
+                .end();
     }
 
     private ConfiguredModel[] cropStates(BlockState state, String modelName) {

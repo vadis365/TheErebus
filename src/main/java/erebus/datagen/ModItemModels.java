@@ -557,11 +557,11 @@ public class ModItemModels extends ModItemModelProvider {
         blockFlatWithBlockTexture(PlantBlocks.HIGH_CAPPED_MUSHROOM, "high_capped_mushroom_upper");
         blockFlatWithBlockTexture(PlantBlocks.TALL_FERN, "tall_fern_upper");
 
-        block(PlantBlocks.DARK_CAPPED_MUSHROOM_BLOCK);
-        block(PlantBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK);
-        block(PlantBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK);
-        block(PlantBlocks.DUTCH_CAP_MUSHROOM_BLOCK);
-        block(PlantBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK);
+        hugeMushroom(PlantBlocks.DARK_CAPPED_MUSHROOM_BLOCK);
+        hugeMushroom(PlantBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK);
+        hugeMushroom(PlantBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK);
+        hugeMushroom(PlantBlocks.DUTCH_CAP_MUSHROOM_BLOCK);
+        hugeMushroom(PlantBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK);
         blockFlatWithBlockTexture(PlantBlocks.DARK_CAPPED_MUSHROOM, "mushroom_dark_capped");
         blockFlatWithBlockTexture(PlantBlocks.SARCASTIC_CZECH_MUSHROOM, "mushroom_sarcastic_czech");
         blockFlatWithBlockTexture(PlantBlocks.GRANDMAS_SHOES_MUSHROOM, "mushroom_grandmas_shoes");
