@@ -90,7 +90,7 @@ public abstract class ModLangProvider extends LanguageProvider {
     }
 
     protected void addContainer(String containerName, String name) {
-        add("container.%s".formatted(containerName), name);
+        add("erebus.container.%s".formatted(containerName), name);
     }
 
     @Override
