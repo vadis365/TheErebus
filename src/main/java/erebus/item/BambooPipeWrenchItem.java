@@ -1,7 +1,9 @@
 package erebus.item;
 
+import erebus.block.bamboo.BambooExtender;
 import erebus.block.bamboo.BambooPipe;
 import erebus.block.bamboo.BambooPipeExtract;
+import erebus.block.entity.BambooExtenderBlockEntity;
 import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -18,6 +20,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.api.distmarker.Dist;
@@ -72,6 +75,18 @@ public class BambooPipeWrenchItem extends Item {
 					Block.popResource(level, pos, stackDrop);
 					level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.5F, 2.0F);
 					return InteractionResult.SUCCESS;
+				}
+			}
+
+			if (state != null && state.getBlock() == OtherBlocks.BAMBOO_EXTENDER.get()) {
+				BlockEntity blockEntity = level.getBlockEntity(pos);
+				if (blockEntity instanceof BambooExtenderBlockEntity extender) {
+					if (!player.isCrouching()) {
+						BlockState stateNew = cycleState(state, BambooExtender.FACING);
+						extender.direction = stateNew.getValue(BambooExtender.FACING);
+						level.setBlock(pos, stateNew, Block.UPDATE_ALL);
+						return InteractionResult.SUCCESS;
+					}
 				}
 			}
 		}

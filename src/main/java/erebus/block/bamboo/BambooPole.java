@@ -8,10 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -49,18 +46,9 @@ public class BambooPole extends Block {
 		return RenderShape.MODEL;
 	}
 
-    @Override
-    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return this.canPlaceAt(level, pos.relative(Direction.DOWN), Direction.UP);
-    }
-
-	public boolean canPlaceAt(BlockGetter blockReader, BlockPos pos, Direction direction) {
+	public boolean canPlace(BlockGetter blockReader, BlockPos pos, Direction direction) { //TODO - this is now done by the item block (will have to add one)
 		BlockState stateBelow = blockReader.getBlockState(pos);
 		return stateBelow.getBlock() == this || stateBelow.isFaceSturdy(blockReader, pos, direction) && !stateBelow.is(BlockTags.LEAVES) && !stateBelow.is(BlockTags.AIR);
 	}
-	
-    @Override
-    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		return facing == Direction.DOWN && !this.canSurvive(state, level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, currentPos, facingPos);
-	}
+
 }

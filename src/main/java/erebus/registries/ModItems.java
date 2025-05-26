@@ -11,6 +11,7 @@ import erebus.item.BeeTamingAmulet;
 import erebus.item.BeettleJuiceBucketItem;
 import erebus.item.PaxelItem;
 import erebus.item.WandOfAnimationItem;
+import erebus.item.blocks.BambooCrateItem;
 import erebus.item.blocks.FluidJarBlockItem;
 import erebus.item.blocks.LiquifierBlockItem;
 import erebus.item.shield.ErebusShieldItem;
@@ -346,4 +347,5 @@ public class ModItems extends ModItemHelpers {
     // Block Items
     public static final DeferredItem<BlockItem> FLUID_JAR = ITEMS.register("fluid_jar", () -> new FluidJarBlockItem(AmberBlocks.FLUID_JAR.get(), FluidType.BUCKET_VOLUME * 32, new Item.Properties()));
     public static final DeferredItem<BlockItem> LIQUIFIER = ITEMS.register("liquifier", () -> new LiquifierBlockItem(OtherBlocks.LIQUIFIER.get(), FluidType.BUCKET_VOLUME * 8, new Item.Properties()));
+    public static final DeferredItem<BlockItem> BAMBOO_CRATE = ITEMS.register("bamboo_crate", () -> new BambooCrateItem(OtherBlocks.BAMBOO_CRATE.get(), new Item.Properties()));
 }

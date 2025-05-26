@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PetrifiedCraftingTableBlock extends CraftingTableBlock {
     public static final MapCodec<PetrifiedCraftingTableBlock> CODEC = simpleCodec(PetrifiedCraftingTableBlock::new);
-    private static final Component CONTAINER_TITLE = Component.translatable("container.petrified_crafting_table");
+    private static final Component CONTAINER_TITLE = Component.translatable("erebus.container.petrified_crafting_table");
 
     public PetrifiedCraftingTableBlock(Properties properties) {
         super(properties);

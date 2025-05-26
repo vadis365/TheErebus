@@ -281,7 +281,7 @@ public class UmberFurnaceBlockEntity extends BaseContainerBlockEntity implements
 
     @Override
     protected Component getDefaultName() {
-        return Component.translatable("container.umberfurnace");
+        return Component.translatable("erebus.container.umberfurnace");
     }
 
     private boolean isLit() {

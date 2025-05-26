@@ -15,7 +15,7 @@ public class BambooExtenderScreen extends ErebusScreen<BambooExtenderMenu> {
 
 	public BambooExtenderScreen(BambooExtenderMenu container, Inventory playerInventory, Component name) {
 		super(container, playerInventory, name, Erebus.prefix("textures/gui/container/bamboo_extender_gui.png"));
-		imageHeight = 166;
+		imageHeight = 136;
 		imageWidth = 176;
 	}
 

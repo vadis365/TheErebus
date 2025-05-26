@@ -207,7 +207,7 @@ public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implem
 
 	@Override
 	public Component getDisplayName() {
-		return Component.translatable("erebus.containers.bamboo_extender");
+		return Component.translatable("erebus.container.bamboo_extender");
 	}	
 
 	@Override

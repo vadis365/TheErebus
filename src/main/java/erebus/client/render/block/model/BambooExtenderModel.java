@@ -90,4 +90,8 @@ public class BambooExtenderModel extends Model {
 		Polebit.render(stack, consumer, light, overlay, colour);
 		Main.render(stack, consumer, light, overlay, colour);
 	}
+
+	public void render2(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
+		Polebit.render(stack, consumer, light, overlay, colour);
+	}
 }
