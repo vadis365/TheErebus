@@ -1,47 +1,14 @@
 package erebus.registries.blocks.providers;
 
-import org.jetbrains.annotations.NotNull;
-
-import erebus.block.BlenderBlock;
-import erebus.block.BlockOfBonesBlock;
-import erebus.block.BotFlySpawnerBlock;
-import erebus.block.CandleHoneyTreatBlock;
-import erebus.block.GaeanKeystoneBlock;
-import erebus.block.HoneyCombBlock;
-import erebus.block.HoneyTreatBlock;
-import erebus.block.LavaWebBlock;
-import erebus.block.LiquifierBlock;
-import erebus.block.PetrifiedCraftingTableBlock;
-import erebus.block.SwampVentBlock;
-import erebus.block.UmberFurnaceBlock;
-import erebus.block.WitherWebBlock;
-import erebus.block.altars.AltarBase;
-import erebus.block.altars.ExperienceAltar;
-import erebus.block.altars.HealingAltar;
-import erebus.block.altars.LightningAltar;
-import erebus.block.altars.OfferingAltar;
-import erebus.block.altars.RepairAltar;
-import erebus.block.bamboo.BambooBridge;
-import erebus.block.bamboo.BambooCrateBlock;
-import erebus.block.bamboo.BambooExtender;
-import erebus.block.bamboo.BambooPipe;
-import erebus.block.bamboo.BambooPipeExtract;
-import erebus.block.bamboo.BambooPole;
-import erebus.block.bamboo.BambooTorchBlock;
+import erebus.block.*;
+import erebus.block.altars.*;
+import erebus.block.bamboo.*;
 import erebus.block.portal.ErebusPortalBlock;
 import erebus.registries.helpers.ModBlockHelpers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.block.LadderBlock;
-import net.minecraft.world.level.block.MudBlock;
-import net.minecraft.world.level.block.RedstoneLampBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -49,6 +16,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import org.jetbrains.annotations.NotNull;
 
 public class OtherBlocks extends ModBlockHelpers {
 
@@ -177,7 +145,7 @@ public class OtherBlocks extends ModBlockHelpers {
                 return TriState.TRUE;
             }
         });
-        QUICK_SAND = registerSimpleBlock("quick_sand", Properties.of().mapColor(MapColor.STONE));
+        QUICK_SAND = registerBlock("quick_sand", () -> new QuicksandBlock(Properties.of().strength(28F).sound(SoundType.SAND).mapColor(MapColor.SAND).noCollission()));
         GHOST_SAND = registerSimpleBlock("ghost_sand", Properties.of().mapColor(MapColor.STONE));
         SWAMP_VENT = registerBlock("swamp_vent", () -> new SwampVentBlock(Properties.ofFullCopy(Blocks.GRASS_BLOCK)));
         GNEISS_VENT = registerSimpleBlock("gneiss_vent", Properties.of().mapColor(MapColor.STONE));
