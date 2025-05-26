@@ -46,7 +46,7 @@ public class BambooPole extends Block {
 		return RenderShape.MODEL;
 	}
 
-	public boolean canPlaceAt(BlockGetter blockReader, BlockPos pos, Direction direction) {
+	public boolean canPlace(BlockGetter blockReader, BlockPos pos, Direction direction) { //TODO - this is now done by the item block (will have to add one)
 		BlockState stateBelow = blockReader.getBlockState(pos);
 		return stateBelow.getBlock() == this || stateBelow.isFaceSturdy(blockReader, pos, direction) && !stateBelow.is(BlockTags.LEAVES) && !stateBelow.is(BlockTags.AIR);
 	}
