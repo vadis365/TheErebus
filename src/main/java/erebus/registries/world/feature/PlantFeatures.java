@@ -8,7 +8,9 @@ import erebus.world.feature.bush.SwampBerryBushFeature;
 import erebus.world.feature.mushroom.*;
 import erebus.world.feature.plant.*;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import static erebus.registries.world.feature.config.PlantFeatureConfigs.*;
@@ -21,6 +23,7 @@ public class PlantFeatures extends ModFeatureHelpers {
     public static BigLogsFeature BIG_LOGS_X = new BigLogsFeature("big_logs_x");
     public static BigLogsFeature BIG_LOGS_Z = new BigLogsFeature("big_logs_z");
     public static FernFeature FERN = new FernFeature("fern");
+    public static GrassFeature GRASS = new GrassFeature();
     public static GiantFlowerFeature GIANT_FLOWER = new GiantFlowerFeature("giant_flower");
     public static GiantFlowerFeature GIANT_FLOWER_BLACK = new GiantFlowerFeature("giant_flower_black");
     public static GiantFlowerFeature GIANT_FLOWER_RED = new GiantFlowerFeature("giant_flower_red");
@@ -113,6 +116,8 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerConfiguredBush(HEART_BERRY_BUSH);
         registerConfiguredBush(JADE_BERRY_BUSH);
 
+        registerConfiguredFeature(GRASS.getConfiguredResourceKey(), Feature.RANDOM_PATCH, patch(Blocks.SHORT_GRASS, 105));
+
         registerSimpleConfiguredPlant(SWAMP_PLANT, PlantBlocks.SWAMP_PLANT, 64);
         registerSimpleConfiguredPlant(FIRE_BLOOM, PlantBlocks.FIRE_BLOOM, 64);
         registerSimpleConfiguredPlant(FIDDLE_HEAD, PlantBlocks.FIDDLE_HEAD, 64);
@@ -163,6 +168,8 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerPlacedFeature(SWAMP_BERRY_BUSH);
         registerPlacedFeature(HEART_BERRY_BUSH);
         registerPlacedFeature(JADE_BERRY_BUSH);
+
+        registerPlacedFeature(GRASS);
 
         registerPlacedFeature(SWAMP_PLANT);
         registerPlacedFeature(FIRE_BLOOM);

@@ -41,6 +41,8 @@ public class SwampHutFeatureConfiguration extends Feature<NoneFeatureConfigurati
         BlockPos pos = context.origin();
         RandomSource random = context.random();
 
+        if(!level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)) return false;
+
         verticalBeam(level, pos.offset(5, 0, 5), LOG, 4);
         verticalBeam(level, pos.offset(10, 0, 5), LOG, 4);
         verticalBeam(level, pos.offset(5, 0, 10), LOG, 4);

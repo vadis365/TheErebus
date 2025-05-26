@@ -78,11 +78,11 @@ public class ModFeatureHelpers {
         registerConfiguredFeature(feature.getConfiguredResourceKey(), config.get(), FeatureConfiguration.NONE);
     }
 
-    private static RandomPatchConfiguration patch(Block block, int tries) {
+    protected static RandomPatchConfiguration patch(Block block, int tries) {
         return FeatureUtils.simpleRandomPatchConfiguration(tries, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(block))));
     }
 
-    private static RandomPatchConfiguration patch(Block block, int tries, List<Block> whitelist) {
+    protected static RandomPatchConfiguration patch(Block block, int tries, List<Block> whitelist) {
         return FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(block)), whitelist, tries);
     }
 }

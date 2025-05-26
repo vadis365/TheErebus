@@ -64,7 +64,7 @@ public class ErebusFeature {
         return List.of(NoiseBasedCountPlacement.of(noiseToCountRatio, factor, offset), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BiomeFilter.biome());
     }
 
-    protected List<PlacementModifier> noiseWithFilter(int noiseToCountRatio, double factor, double offset, BlockPredicate filter) {
-        return List.of(NoiseBasedCountPlacement.of(noiseToCountRatio, factor, offset), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BlockPredicateFilter.forPredicate(filter), BiomeFilter.biome());
+    protected List<PlacementModifier> noiseWithFilter(double noiseLevel, int belowNoise, int aboveNoise, BlockPredicate filter) {
+        return List.of(NoiseThresholdCountPlacement.of(noiseLevel, belowNoise, aboveNoise), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BlockPredicateFilter.forPredicate(filter), BiomeFilter.biome());
     }
 }

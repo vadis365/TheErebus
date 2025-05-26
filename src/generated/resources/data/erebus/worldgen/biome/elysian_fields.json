@@ -45,7 +45,8 @@
       "erebus:tall_bloom",
       "erebus:weeping_bluebell",
       "erebus:fern",
-      "erebus:moss"
+      "erebus:moss",
+      "erebus:grass"
     ]
   ],
   "has_precipitation": false,
