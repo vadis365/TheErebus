@@ -23,7 +23,7 @@ public class HoneyCombBlockEntity extends BlockEntityInventoryHelper implements 
 
 	@Override
 	public Component getDisplayName() {
-		return Component.literal("Honeycomb Cell X:" + getBlockPos().getX() + " Y:" + getBlockPos().getY() + " Z:" + getBlockPos().getZ());
+		return Component.translatable("erebus.container.honeycomb_cell" + " X:" + getBlockPos().getX() + " Y:" + getBlockPos().getY() + " Z:" + getBlockPos().getZ());
 	}
 
 	@Override

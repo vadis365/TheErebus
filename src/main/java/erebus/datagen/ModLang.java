@@ -2,7 +2,17 @@ package erebus.datagen;
 
 import erebus.datagen.providers.ModLangProvider;
 import erebus.registries.ModItems;
-import erebus.registries.blocks.providers.*;
+import erebus.registries.blocks.providers.AmberBlocks;
+import erebus.registries.blocks.providers.DoorBlocks;
+import erebus.registries.blocks.providers.FenceBlocks;
+import erebus.registries.blocks.providers.OreBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.blocks.providers.PlantBlocks;
+import erebus.registries.blocks.providers.SlabBlocks;
+import erebus.registries.blocks.providers.StairBlocks;
+import erebus.registries.blocks.providers.UmberstoneBlocks;
+import erebus.registries.blocks.providers.WallBlocks;
+import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.data.PackOutput;
 
@@ -725,5 +735,8 @@ public class ModLang extends ModLangProvider {
     private void addContainerTranslations() {
         addContainer("petrified_crafting_table", "Petrified Crafting Table");
         addContainer("umberfurnace", "Umber Furnace");
+        addContainer("liquifier", "Honey Liquifier");
+        addContainer("honeycomb_cell", "Honeycomb Cell");
+        addContainer("bamboo_extender", "Bamboo Extender");
     }
 }

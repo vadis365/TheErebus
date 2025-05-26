@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import erebus.Erebus;
 import erebus.block.fluid.BasicFluidType;
 import erebus.client.render.block.renderer.stack.BambooBridgeItemRenderer;
+import erebus.client.render.block.renderer.stack.BambooExtenderItemRenderer;
 import erebus.client.render.block.renderer.stack.BlenderStackItemRenderer;
 import erebus.client.render.block.renderer.stack.BlockOfBonesStackItemRenderer;
 import erebus.client.render.block.renderer.stack.FluidJarStackItemRenderer;
@@ -58,6 +59,7 @@ public class ModItemRendering {
 	public static final ModelLayerLocation FLUID_JAR = new ModelLayerLocation(Erebus.prefix("fluid_jar"), "main");
 	public static final ModelLayerLocation LIQUIFIER = new ModelLayerLocation(Erebus.prefix("liquifier"), "main");
 	public static final ModelLayerLocation BAMBOO_BRIDGE = new ModelLayerLocation(Erebus.prefix("bamboo_bridge"), "main");
+	public static final ModelLayerLocation BAMBOO_EXTENDER = new ModelLayerLocation(Erebus.prefix("bamboo_extender"), "main");
 	
 	public static void registerItemLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(WAND_OF_ANIMATION, WandOfAnimationItemModel::createBodyLayer);
@@ -72,6 +74,7 @@ public class ModItemRendering {
 		event.registerLayerDefinition(FLUID_JAR, EmptyModel::createBodyLayer);
 		event.registerLayerDefinition(LIQUIFIER, EmptyModel::createBodyLayer);
 		event.registerLayerDefinition(BAMBOO_BRIDGE, EmptyModel::createBodyLayer);
+		event.registerLayerDefinition(BAMBOO_EXTENDER, EmptyModel::createBodyLayer);
 	}
 
 	public static void registerItemRender(RegisterClientExtensionsEvent event) {
@@ -191,6 +194,13 @@ public class ModItemRendering {
                 return new BambooBridgeItemRenderer(null, null);
             }
         }, OtherBlocks.BAMBOO_BRIDGE.get().asItem());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return new BambooExtenderItemRenderer(null, null);
+            }
+        }, OtherBlocks.BAMBOO_EXTENDER.get().asItem());
 
         //Fluids
         event.registerFluidType(new BasicFluidType("beetle_juice"), ModFluids.BEETLE_JUICE_TYPE.get());

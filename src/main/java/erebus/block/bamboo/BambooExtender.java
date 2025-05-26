@@ -73,14 +73,7 @@ public class BambooExtender extends DirectionalBlock  implements EntityBlock {
  			return ItemInteractionResult.SUCCESS;
      	} else if (blockEntity instanceof BambooExtenderBlockEntity extender) {
 			if (!stack.isEmpty() && stack.getItem() == ModItems.BAMBOO_PIPE_WRENCH.get()) {
-			/*	if (!player.isSneaking()) {
-					state = state.cycleProperty(FACING);
-					//state.cycleProperty(FACING);
-					TileEntityExtenderThingy tile = Utils.getTileEntity(world, pos, TileEntityExtenderThingy.class);
-					tile.direction = state.getValue(FACING);
-					world.setBlockState(pos, state, 3);
-					return true;
-				}*/
+				return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
 			}
 			else {
 				player.openMenu(extender, pos);
@@ -93,6 +86,8 @@ public class BambooExtender extends DirectionalBlock  implements EntityBlock {
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		Direction direction = context.getNearestLookingDirection();
+		if(direction == Direction.UP || direction == Direction.DOWN)
+			return this.defaultBlockState().setValue(FACING, direction.getOpposite()).setValue(POWERED, false);
 		return this.defaultBlockState().setValue(FACING, direction).setValue(POWERED, false);
 	}
 

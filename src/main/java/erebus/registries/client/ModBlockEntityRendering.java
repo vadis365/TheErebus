@@ -2,6 +2,7 @@ package erebus.registries.client;
 
 import erebus.Erebus;
 import erebus.client.render.block.model.BambooBridgeModel;
+import erebus.client.render.block.model.BambooExtenderModel;
 import erebus.client.render.block.model.BlenderModel;
 import erebus.client.render.block.model.BlockOfBonesModel;
 import erebus.client.render.block.model.ExperienceAltarModel;
@@ -11,6 +12,7 @@ import erebus.client.render.block.model.LiquifierModel;
 import erebus.client.render.block.model.OfferingAltarModel;
 import erebus.client.render.block.model.RepairAltarModel;
 import erebus.client.render.block.renderer.BambooBridgeRenderer;
+import erebus.client.render.block.renderer.BambooExtenderRenderer;
 import erebus.client.render.block.renderer.BlenderRenderer;
 import erebus.client.render.block.renderer.BlockOfBonesRenderer;
 import erebus.client.render.block.renderer.ExperienceAltarRenderer;
@@ -35,6 +37,7 @@ public class ModBlockEntityRendering {
     public static final ModelLayerLocation BLENDER = new ModelLayerLocation(Erebus.prefix("blender"), "main");
     public static final ModelLayerLocation LIQUIFIER = new ModelLayerLocation(Erebus.prefix("liquifier"), "main");
     public static final ModelLayerLocation BAMBOO_BRIDGE = new ModelLayerLocation(Erebus.prefix("bamboo_bridge"), "main");
+    public static final ModelLayerLocation BAMBOO_EXTENDER = new ModelLayerLocation(Erebus.prefix("bamboo_extender"), "main");
 
 	public static void registerBlockEntityLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(OFFERING_ALTAR, OfferingAltarModel::createBodyLayer);
@@ -46,6 +49,7 @@ public class ModBlockEntityRendering {
         event.registerLayerDefinition(BLENDER, BlenderModel::createBodyLayer);
         event.registerLayerDefinition(LIQUIFIER, LiquifierModel::createBodyLayer);
         event.registerLayerDefinition(BAMBOO_BRIDGE, BambooBridgeModel::createBodyLayer);
+        event.registerLayerDefinition(BAMBOO_EXTENDER, BambooExtenderModel::createBodyLayer);
 	}
 	
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -60,6 +64,7 @@ public class ModBlockEntityRendering {
         event.registerBlockEntityRenderer(ModBlockEntities.FLUID_JAR.get(), FluidJarRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.LIQUIFIER.get(), LiquifierRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_BRIDGE.get(), BambooBridgeRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_EXTENDER.get(), BambooExtenderRenderer::new);
     }
     
 }
