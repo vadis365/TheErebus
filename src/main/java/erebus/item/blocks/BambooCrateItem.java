@@ -54,7 +54,7 @@ public class BambooCrateItem extends BlockItem {
 				EnumCrateType type = state.getValue(BambooCrateBlock.CRATE_TYPE);
 				if (type != EnumCrateType.DEFAULT)
 					return InteractionResult.FAIL;
-				if (level.getBlockState(pos.offset(dir.getStepX(), dir.getStepY(), dir.getStepZ())).is(OtherBlocks.BAMBOO_CRATE.get()))
+				if (level.getBlockState(pos.offset(dir.getOpposite().getStepX(), dir.getOpposite().getStepY(), dir.getOpposite().getStepZ())).is(OtherBlocks.BAMBOO_CRATE.get()))
 					return InteractionResult.FAIL;
 			}
 		}
