@@ -1,6 +1,7 @@
 package erebus.events;
 
 import erebus.Erebus;
+import erebus.inventory.client.BambooCrateScreen;
 import erebus.inventory.client.BambooExtenderScreen;
 import erebus.inventory.client.HoneyCombScreen;
 import erebus.inventory.client.LiquifierScreen;
@@ -21,5 +22,6 @@ public class RegisterMenuScreensEventHandler {
         event.register(ModMenuTypes.LIQUIFIER.get(), LiquifierScreen::new);
         event.register(ModMenuTypes.HONEY_COMB.get(), HoneyCombScreen::new);
         event.register(ModMenuTypes.BAMBOO_EXTENDER.get(), BambooExtenderScreen::new);
+        event.register(ModMenuTypes.BAMBOO_CRATE.get(), BambooCrateScreen::new);
     }
 }

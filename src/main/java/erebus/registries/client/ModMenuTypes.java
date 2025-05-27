@@ -3,6 +3,7 @@ package erebus.registries.client;
 import java.util.function.Supplier;
 
 import erebus.Erebus;
+import erebus.inventory.server.BambooCrateMenu;
 import erebus.inventory.server.BambooExtenderMenu;
 import erebus.inventory.server.HoneyCombMenu;
 import erebus.inventory.server.LiquifierMenu;
@@ -24,4 +25,5 @@ public class ModMenuTypes {
     public static final DeferredHolder<MenuType<?>, MenuType<LiquifierMenu>> LIQUIFIER = MENU_TYPES.register("liquifier", () -> IMenuTypeExtension.create(LiquifierMenu::new));
     public static final DeferredHolder<MenuType<?>, MenuType<HoneyCombMenu>> HONEY_COMB = MENU_TYPES.register("honey_comb", () -> IMenuTypeExtension.create(HoneyCombMenu::new));
     public static final DeferredHolder<MenuType<?>, MenuType<BambooExtenderMenu>> BAMBOO_EXTENDER = MENU_TYPES.register("bamboo_extender", () -> IMenuTypeExtension.create(BambooExtenderMenu::new));
+    public static final DeferredHolder<MenuType<?>, MenuType<BambooCrateMenu>> BAMBOO_CRATE = MENU_TYPES.register("bamboo_crate", () -> IMenuTypeExtension.create(BambooCrateMenu::new));
 }
