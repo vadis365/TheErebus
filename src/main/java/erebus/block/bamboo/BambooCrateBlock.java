@@ -108,8 +108,9 @@ public class BambooCrateBlock extends Block implements EntityBlock {
 							if (level.getBlockState(pos.offset(i, k, j)).is(OtherBlocks.BAMBOO_CRATE.get())) {
 								BlockState crateState = level.getBlockState(pos.offset(i, k, j));
 								if (crateState.getValue(CRATE_TYPE) == EnumCrateType.BTL) {
-									System.out.println("WILL OPEN BIG CRATE MENU HERE");
-									//player.openGui(Erebus.INSTANCE, CommonProxy.GuiID.COLOSSAL_CRATE.ordinal(), world, pos.getX() + i, pos.getY() + k, pos.getZ() + j);
+									BlockEntity blockEntityOther = level.getBlockEntity(pos.offset(i, k, j));
+									if (blockEntityOther instanceof BambooCrateBlockEntity crateOther)
+										player.openMenu(crateOther, pos.offset(i, k, j));
 									return ItemInteractionResult.SUCCESS;
 								}
 							}

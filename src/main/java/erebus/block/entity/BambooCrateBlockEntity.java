@@ -1,6 +1,9 @@
 package erebus.block.entity;
 
+import erebus.block.bamboo.BambooCrateBlock;
+import erebus.block.bamboo.EnumCrateType;
 import erebus.inventory.server.BambooCrateMenu;
+import erebus.inventory.server.ColossalCrateMenu;
 import erebus.registries.ModBlockEntities;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
@@ -57,6 +60,9 @@ public class BambooCrateBlockEntity extends BlockEntityInventoryHelper implement
 
 	@Override
 	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+		if (this.getBlockState().getValue(BambooCrateBlock.CRATE_TYPE) != EnumCrateType.DEFAULT) {
+			return new ColossalCrateMenu(containerId, playerInventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
+		}
 		return new BambooCrateMenu(containerId, playerInventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
 	}
 
