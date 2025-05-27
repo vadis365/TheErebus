@@ -98,18 +98,5 @@ public class BambooCrateBlock extends Block {
     private boolean isCrate(LevelAccessor level, BlockPos pos) {
         return level.getBlockState(pos).is(OtherBlocks.BAMBOO_CRATE.get());
     }
-/*
-    public boolean canPlace(Level level, BlockPos pos) {  // TODO done in an itemb lock now (will crash if placed next to already formed big ones atm)
-		for (Direction dir : Direction.values()) {
-			BlockState state = level.getBlockState(pos.offset(dir.getStepX(), dir.getStepY(), dir.getStepZ()));
-			if (state.getBlock() == this) {
-				EnumCrateType type = state.getValue(CRATE_TYPE);
-				if (type != EnumCrateType.DEFAULT)
-					return false;
-				if (level.getBlockState(pos.offset(dir.getOpposite().getStepX(), dir.getOpposite().getStepY(), dir.getOpposite().getStepZ())).getBlock() == this)
-					return false;
-			}
-		}
-		return true;
-	}*/
+
 }

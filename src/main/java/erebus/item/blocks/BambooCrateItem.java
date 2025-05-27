@@ -10,13 +10,11 @@ import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -44,21 +42,19 @@ public class BambooCrateItem extends BlockItem {
 	}
 
     @Override
-    public InteractionResult useOn(UseOnContext context) {
+    protected boolean canPlace(BlockPlaceContext context, BlockState state) {
 		Level level = context.getLevel();
 		BlockPos pos = context.getClickedPos();
-		Direction dirOpp = context.getClickedFace();
 		for (Direction dir : Direction.values()) {
-			BlockState state = level.getBlockState(pos.offset(dir.getStepX(), dir.getStepY(), dir.getStepZ()));
-			if (state.is(OtherBlocks.BAMBOO_CRATE.get())) {
-				EnumCrateType type = state.getValue(BambooCrateBlock.CRATE_TYPE);
+			BlockState state2 = level.getBlockState(pos.offset(dir.getStepX(), dir.getStepY(), dir.getStepZ()));
+			if (state2.is(OtherBlocks.BAMBOO_CRATE.get())) {
+				EnumCrateType type = state2.getValue(BambooCrateBlock.CRATE_TYPE);
 				if (type != EnumCrateType.DEFAULT)
-					return InteractionResult.FAIL;
+					return false;
 				if (level.getBlockState(pos.offset(dir.getOpposite().getStepX(), dir.getOpposite().getStepY(), dir.getOpposite().getStepZ())).is(OtherBlocks.BAMBOO_CRATE.get()))
-					return InteractionResult.FAIL;
+					return false;
 			}
 		}
-		level.setBlock(pos.offset(dirOpp.getStepX(), dirOpp.getStepY(), dirOpp.getStepZ()), OtherBlocks.BAMBOO_CRATE.get().defaultBlockState(), Block.UPDATE_ALL);
-		return InteractionResult.SUCCESS;
+		return super.canPlace(context, state);
 	}
 }
