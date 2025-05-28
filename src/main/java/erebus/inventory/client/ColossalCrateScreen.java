@@ -27,13 +27,13 @@ public class ColossalCrateScreen extends AbstractContainerScreen<ColossalCrateMe
 	public void init() {
 		super.init();
 		addRenderableWidget(new GuiInvisibleButton(leftPos + 7, topPos + 4, 17, 11, Component.literal(""), (button) -> {
-			PacketDistributor.sendToServer(new ColossalCratePage(getPageNumber() - 1));
-			((ColossalCrateMenu) menu).changePage(getPageNumber() - 1);
+					PacketDistributor.sendToServer(new ColossalCratePage(getPageNumber() - 1));
+					getMenu().changePage(getPageNumber() - 1);
 		}));
 
 		addRenderableWidget(new GuiInvisibleButton(leftPos + 205, topPos + 4, 17, 11, Component.literal(""), (button) -> {
 					PacketDistributor.sendToServer(new ColossalCratePage(getPageNumber() + 1));
-					((ColossalCrateMenu) menu).changePage(getPageNumber() + 1);
+					getMenu().changePage(getPageNumber() + 1);
 				}));
 	}
 
@@ -43,7 +43,7 @@ public class ColossalCrateScreen extends AbstractContainerScreen<ColossalCrateMe
 	}
 
 	public int getPageNumber() {
-		return ((ColossalCrateMenu)getMenu()).page;
+		return getMenu().page;
 	}
 
     @Override
@@ -55,7 +55,7 @@ public class ColossalCrateScreen extends AbstractContainerScreen<ColossalCrateMe
     protected void renderLabels(@Nonnull GuiGraphics gg, int x, int y) {
     	gg.drawString(font, Component.translatable("erebus.container.colossal_crate"), 28, 6, 4210752, false);
 		String str = getPageNumber() + "/3";
-		gg.drawCenteredString(font, str, getXSize() / 2, 6, 4210752);
+		gg.drawString(font, str, getXSize() / 2 - font.width(str) / 2, 6, 4210752, false);
 		gg.drawString(font, Component.translatable("container.inventory"), 32, imageHeight - 96 + 3, 4210752, false);
 	}
 

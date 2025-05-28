@@ -23,13 +23,7 @@ public class BambooCrateBlockEntity extends BlockEntityInventoryHelper implement
 	public BambooCrateBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntities.BAMBOO_CRATE.get(), 27,  pos, state);
 	}
-/*
-	@Override
-	@SideOnly(Side.CLIENT)
-	public AxisAlignedBB getRenderBoundingBox() {
-		return new AxisAlignedBB(getPos().add(-1, 0, -1),getPos().add(2, 2, 2));
-	}
-*/
+
 	@Override
 	public int[] getSlotsForFace(Direction side) {
 		int[] SLOTS = new int[getContainerSize()];

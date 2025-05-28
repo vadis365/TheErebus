@@ -21,8 +21,8 @@ public class BambooCrateScreen extends ErebusScreen<BambooCrateMenu> {
 
 	@Override
 	protected void renderLabels(@Nonnull GuiGraphics gg, int mouseX, int mouseY) {
-		gg.drawString(font, Component.translatable("erebus.container.bamboo_crate"), 8, 6, 16777215, true);
-		gg.drawString(font, Component.translatable("container.inventory"), 8, this.imageHeight - 94, 16777215, true);
+		gg.drawString(font, Component.translatable("erebus.container.bamboo_crate"), 8, 6, 4210752, false);
+		gg.drawString(font, Component.translatable("container.inventory"), 8, this.imageHeight - 94, 4210752, false);
 	}
 
 	@Override
