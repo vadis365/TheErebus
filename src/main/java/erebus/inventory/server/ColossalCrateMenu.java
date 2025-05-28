@@ -81,7 +81,6 @@ public class ColossalCrateMenu extends AbstractContainerMenu {
 			i -= 3;
 		page = i;
 		slots.clear();
-		//lastSlots.clear();
 		addSlots();
 	}
 

@@ -738,5 +738,7 @@ public class ModLang extends ModLangProvider {
         addContainer("liquifier", "Honey Liquifier");
         addContainer("honeycomb_cell", "Honeycomb Cell");
         addContainer("bamboo_extender", "Bamboo Extender");
+        addContainer("bamboo_crate", "Bamboo Crate");
+        addContainer("colossal_crate", "Bamboo Crate");
     }
 }

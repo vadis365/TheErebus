@@ -1,7 +1,13 @@
 package erebus.registries.network;
 
 import erebus.Erebus;
-import erebus.network.client.*;
+import erebus.network.client.AltarAnimatonTimerPacket;
+import erebus.network.client.AntlionParticlePacket;
+import erebus.network.client.LightningAltarRenderPacket;
+import erebus.network.client.OfferingAltarNBTPacket;
+import erebus.network.client.OfferingAltarTimerPacket;
+import erebus.network.client.ParticlePacket;
+import erebus.network.server.ColossalCratePage;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 public class ModNetwork {
@@ -12,8 +18,8 @@ public class ModNetwork {
 		 .playToClient(OfferingAltarTimerPacket.TYPE, OfferingAltarTimerPacket.STREAM_CODEC, OfferingAltarTimerPacket::handle)
 		 .playToClient(OfferingAltarNBTPacket.TYPE, OfferingAltarNBTPacket.STREAM_CODEC, OfferingAltarNBTPacket::handle)
 		 .playToClient(ParticlePacket.TYPE, ParticlePacket.STREAM_CODEC, ParticlePacket::handle)
-		 .playToClient(AntlionParticlePacket.TYPE, AntlionParticlePacket.STREAM_CODEC, AntlionParticlePacket::handle);
-		// .playToServer(ColossalCratePage.class, ColossalCratePage.class, 1, Side.SERVER)
+		 .playToClient(AntlionParticlePacket.TYPE, AntlionParticlePacket.STREAM_CODEC, AntlionParticlePacket::handle)
+		 .playToServer(ColossalCratePage.TYPE, ColossalCratePage.STREAM_CODEC, ColossalCratePage::handle);
 		// .playToServer(PacketBeetleDig.class, PacketBeetleDig.class, 2, Side.SERVER)
 		// .playToServer(PacketBeetleRamAttack.class, PacketBeetleRamAttack.class, 3, Side.SERVER)
 		//	.playToClient(PacketAntiVenom.class, PacketAntiVenom.class, 4, Side.CLIENT)
