@@ -7,12 +7,15 @@ import javax.annotation.Nonnull;
 import erebus.block.bamboo.BambooCrateBlock;
 import erebus.block.bamboo.EnumCrateType;
 import erebus.registries.blocks.providers.OtherBlocks;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,17 +31,13 @@ public class BambooCrateItem extends BlockItem {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nonnull TooltipContext context, @Nonnull List<Component> list, @Nonnull TooltipFlag flag) {
-		//if (stack.has(ModDataComponents.ITEMS)) {
-			list.add(Component.literal("Stores Items When Broken"));
-		/*	if (stack.hasTagCompound() && stack.getTagCompound().getTagList("Items", 10) != null) {
-				NBTTagList tags = stack.getTagCompound().getTagList("Items", 10);
-
-				for (int i = 0; i < tags.tagCount(); i++) {
-					NBTTagCompound data = tags.getCompoundTagAt(i);
-					int j = data.getByte("Slot") & 255;
-					list.add(Component.literal("Slot " + (j + 1) + ": " + TextFormatting.GREEN + new ItemStack(data).getDisplayName() + " x " + new ItemStack(data).getCount());
-				}
-		}*/
+		list.add(Component.literal("Stores Items When Broken"));
+		if (stack.has(DataComponents.CONTAINER)) {
+			ItemContainerContents contents = stack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
+			for (int i = 0; i < contents.getSlots(); i++)
+				if (!contents.getStackInSlot(i).isEmpty())
+					list.add(Component.literal("Slot " + (i + 1) + ": " + contents.getStackInSlot(i).getHoverName().getString() + " x " + contents.getStackInSlot(i).getCount()).withStyle(ChatFormatting.GREEN));
+		}
 	}
 
     @Override

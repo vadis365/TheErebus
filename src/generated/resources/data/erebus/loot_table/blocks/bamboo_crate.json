@@ -14,6 +14,15 @@
           "name": "erebus:bamboo_crate"
         }
       ],
+      "functions": [
+        {
+          "function": "minecraft:copy_components",
+          "include": [
+            "minecraft:container"
+          ],
+          "source": "block_entity"
+        }
+      ],
       "rolls": 1.0
     }
   ],
