@@ -15,6 +15,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.MoveTowardsRestrictionGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -40,9 +41,9 @@ public class BombardierBeetle extends Monster {
 		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.6D, true));
 		goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.5D));
-		//tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.6D));
+		goalSelector.addGoal(4, new MoveTowardsRestrictionGoal(this, 0.6D));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this));
-		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, false, true));
+		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, false, false));
 	}
 	
 	public static AttributeSupplier.Builder createAttributes() {
@@ -115,7 +116,7 @@ public class BombardierBeetle extends Monster {
 		if (hasLineOfSight(entity)) {
 			if (super.doHurtTarget(entity)) {
 				if (level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING))
-					level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), 1.0F, Level.ExplosionInteraction.NONE).finalizeExplosion(false);
+					level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), 1.0F, Level.ExplosionInteraction.NONE).finalizeExplosion(true);
 			}
 		}
 		return false;
@@ -132,7 +133,7 @@ public class BombardierBeetle extends Monster {
 		BlockPos infront = blockPosition().relative(this.getDirection(), 1);
 		//boolean rule = level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
 		//if (ConfigHandler.INSTANCE.bombardierBlockDestroy == true)
-		level().explode(this, infront.getX(), infront.getY() + 1, infront.getZ(), explosionRadius, Level.ExplosionInteraction.NONE).finalizeExplosion(false);
+		level().explode(this, infront.getX(), infront.getY() + 1, infront.getZ(), explosionRadius, Level.ExplosionInteraction.BLOCK).finalizeExplosion(true);
 	}
 
 }
