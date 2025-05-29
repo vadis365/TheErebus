@@ -5,6 +5,7 @@ import erebus.Erebus;
 import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.world.ModDimensionRegistries;
 import net.minecraft.BlockUtil;
+import net.minecraft.BlockUtil.FoundRectangle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -15,11 +16,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.world.level.block.Portal;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -28,6 +29,8 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.portal.DimensionTransition;
+import net.minecraft.world.level.portal.PortalShape;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -120,7 +123,7 @@ public class ErebusPortalBlock extends Block implements Portal {
 
     private DimensionTransition getExitPortal(ServerLevel level, Entity entity, BlockPos pos, BlockPos exitPos, boolean isErebus, WorldBorder border) {
         Optional<BlockPos> optional = ErebusPortalForcer.findClosestPortalPosition(level, exitPos, isErebus, border);
-        BlockUtil.FoundRectangle foundRectangle;
+        FoundRectangle foundRectangle;
         DimensionTransition.PostDimensionTransition postDimensionTransition;
 
         if (optional.isPresent()) {
@@ -136,7 +139,7 @@ public class ErebusPortalBlock extends Block implements Portal {
             );
             postDimensionTransition = DimensionTransition.PLAY_PORTAL_SOUND.then(player -> player.placePortalTicket(blockPos));
         } else {
-            Optional<BlockUtil.FoundRectangle> optionalPortal = ErebusPortalForcer.createPortal(level, pos);
+            Optional<FoundRectangle> optionalPortal = ErebusPortalForcer.createPortal(level, pos, Direction.Axis.X);
             if (optionalPortal.isEmpty()) {
                 Erebus.LOGGER.error("Unable to create a portal, likely target out of world border");
                 return null;
@@ -146,7 +149,42 @@ public class ErebusPortalBlock extends Block implements Portal {
             postDimensionTransition = DimensionTransition.PLAY_PORTAL_SOUND.then(DimensionTransition.PLACE_PORTAL_TICKET);
         }
 
-        return NetherPortalBlock.getDimensionTransitionFromExit(entity, pos, foundRectangle, level, postDimensionTransition);
+        return createDimensionTransitionFromExit(entity, pos, foundRectangle, level, postDimensionTransition);
+    }
+
+    private DimensionTransition createDimensionTransitionFromExit(Entity entity, BlockPos pos, FoundRectangle rectangle, ServerLevel level, DimensionTransition.PostDimensionTransition postDimensionTransition) {
+        BlockState state = entity.level().getBlockState(pos);
+        Direction.Axis axis;
+        Vec3 vec3;
+
+        if(state.hasProperty(BlockStateProperties.HORIZONTAL_AXIS)) {
+            axis = state.getValue(BlockStateProperties.HORIZONTAL_AXIS);
+            FoundRectangle foundRectangle = BlockUtil.getLargestRectangleAround(pos, axis, ErebusPortalShape.WIDTH, Direction.Axis.Y, ErebusPortalShape.HEIGHT, check -> entity.level().getBlockState(check) == state);
+            vec3 = entity.getRelativePortalPosition(axis, foundRectangle);
+        } else {
+            axis = Direction.Axis.X;
+            vec3 = new Vec3(0.5F, 0.5F, 0.5F);
+        }
+
+        return createDimensionTransition(level, rectangle, axis, vec3, entity, entity.getDeltaMovement(), entity.getYRot(), entity.getXRot(), postDimensionTransition);
+    }
+
+    private static DimensionTransition createDimensionTransition(ServerLevel level, FoundRectangle rectangle, Direction.Axis axis, Vec3 offset, Entity entity, Vec3 speed, float yRot, float xRot, DimensionTransition.PostDimensionTransition postDimensionTransition) {
+        BlockPos blockpos = rectangle.minCorner;
+        BlockState blockstate = level.getBlockState(blockpos);
+        Direction.Axis direction$axis = blockstate.getOptionalValue(BlockStateProperties.HORIZONTAL_AXIS).orElse(Direction.Axis.X);
+        double d0 = rectangle.axis1Size;
+        double d1 = rectangle.axis2Size;
+        EntityDimensions entitydimensions = entity.getDimensions(entity.getPose());
+        int i = axis == direction$axis ? 0 : 90;
+        Vec3 vec3 = axis == direction$axis ? speed : new Vec3(speed.z, speed.y, -speed.x);
+        double d2 = (double)entitydimensions.width() / (double)2.0F + (d0 - (double)entitydimensions.width()) * offset.x();
+        double d3 = (d1 - (double)entitydimensions.height()) * offset.y();
+        double d4 = (double)0.5F + offset.z();
+        boolean flag = direction$axis == Direction.Axis.X;
+        Vec3 vec31 = new Vec3((double)blockpos.getX() + (flag ? d2 : d4), (double)blockpos.getY() + d3, (double)blockpos.getZ() + (flag ? d4 : d2));
+        Vec3 vec32 = PortalShape.findCollisionFreePosition(vec31, level, entity, entitydimensions);
+        return new DimensionTransition(level, vec32, vec3, yRot + (float)i, xRot, postDimensionTransition);
     }
 
     @Override

@@ -12,7 +12,7 @@ import net.minecraft.world.level.levelgen.NoiseSettings;
 
 public class ModNoiseGenerator {
     public static final ResourceKey<NoiseGeneratorSettings> NOISE_GENERATOR = ResourceKey.create(Registries.NOISE_SETTINGS, Erebus.prefix(Erebus.MODID));
-    private static final NoiseSettings EREBUS_NOISE_SETTINGS = NoiseSettings.create(0, 128, 2, 2);
+    private static final NoiseSettings EREBUS_NOISE_SETTINGS = NoiseSettings.create(0, 128, 1, 2);
 
     public static void bootstrap(BootstrapContext<NoiseGeneratorSettings> context) {
         context.register(NOISE_GENERATOR, erebus(context));
