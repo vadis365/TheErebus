@@ -39,7 +39,8 @@ public class ModEntityTags extends IntrinsicHolderTagsProvider<EntityType<?>> {
         .add(ModEntities.SCYTODES.get())
         .add(ModEntities.VELVET_WORM.get())
         .add(ModEntities.WASP.get())
-        .add(ModEntities.WORKER_BEE.get());
+        .add(ModEntities.WORKER_BEE.get())
+		.add(ModEntities.BOMBARDIER_BEETLE.get());
 	}
 
 }

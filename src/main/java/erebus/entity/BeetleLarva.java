@@ -20,10 +20,20 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -161,8 +171,8 @@ public class BeetleLarva extends PathfinderMob {
 				level().addFreshEntity(entityBeetle);
 				entityBeetle.copyPosition(this);
 			}
-		} /*
-		else if (getLarvaType() == 2) {
+		} 
+		/*	else if (getLarvaType() == 2) {
 			EntityRhinoBeetle entityRhinoBeetle = new EntityRhinoBeetle(level());
 			entityRhinoBeetle.setPosition(posX, posY, posZ);
 			entityRhinoBeetle.setTameState((byte) 1);
@@ -172,17 +182,18 @@ public class BeetleLarva extends PathfinderMob {
 			entityTitanBeetle.setPosition(posX, posY, posZ);
 			entityTitanBeetle.setTameState((byte) 1);
 			level().spawnEntity(entityTitanBeetle);
-		} else if (getLarvaType() == 4) {
-			EntityBombardierBeetle entityBombardierBeetle = new EntityBombardierBeetle(level());
-			entityBombardierBeetle.setPosition(posX, posY, posZ);
-			level().spawnEntity(entityBombardierBeetle);
-		} else if (getLarvaType() == 5) {
+		}*/ else if (getLarvaType() == 4) {
+			BombardierBeetle entityBombardierBeetle = ModEntities.BOMBARDIER_BEETLE.get().create(this.level());
+			//entityBombardierBeetle.finalizeSpawn((ServerLevel)level(), level().getCurrentDifficultyAt(blockPosition()), MobSpawnType.CONVERSION, null);
+			level().addFreshEntity(entityBombardierBeetle);
+			entityBombardierBeetle.copyPosition(this);
+		} /*else if (getLarvaType() == 5) {
 			EntityStagBeetle entityStagBeetle = new EntityStagBeetle(level());
 			entityStagBeetle.setPosition(posX, posY, posZ);
 			entityStagBeetle.setTameState((byte) 1);
 			level().spawnEntity(entityStagBeetle);
 		}
-		*/
+	*/	
 	}
 
     @Override
