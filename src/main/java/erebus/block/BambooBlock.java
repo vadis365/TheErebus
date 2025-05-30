@@ -66,8 +66,7 @@ public class BambooBlock extends Block {
 	}
 
 	@Override
-	protected void randomTick(BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos,
-			@NotNull RandomSource random) {
+	protected void randomTick(BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
 		if (level.isEmptyBlock(pos.above())) {
 			int growthHeight;
 
