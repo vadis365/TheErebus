@@ -3,7 +3,17 @@ package erebus.datagen;
 import erebus.block.DarkFruitVineBlock;
 import erebus.block.util.ModBerryBushBlock;
 import erebus.datagen.providers.ModBlockStateProvider;
-import erebus.registries.blocks.providers.*;
+import erebus.registries.blocks.providers.AmberBlocks;
+import erebus.registries.blocks.providers.DoorBlocks;
+import erebus.registries.blocks.providers.FenceBlocks;
+import erebus.registries.blocks.providers.OreBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.blocks.providers.PlantBlocks;
+import erebus.registries.blocks.providers.SlabBlocks;
+import erebus.registries.blocks.providers.StairBlocks;
+import erebus.registries.blocks.providers.UmberstoneBlocks;
+import erebus.registries.blocks.providers.WallBlocks;
+import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -86,7 +96,6 @@ public class ModBlockStates extends ModBlockStateProvider {
         log(WoodBlocks.LOG_ROTTEN);
         log(WoodBlocks.LOG_MARSHWOOD);
         log(WoodBlocks.LOG_SCORCHED);
-        log(WoodBlocks.LOG_BAMBOO);
 
         // MARK: Saplings
         crossBlock(WoodBlocks.SAPLING_BAOBAB);

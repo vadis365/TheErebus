@@ -319,7 +319,6 @@ public class ModLang extends ModLangProvider {
         addBlock(WoodBlocks.LOG_ROTTEN, "Rotten Wood");
         addBlock(WoodBlocks.LOG_MARSHWOOD, "Marshwood Wood");
         addBlock(WoodBlocks.LOG_SCORCHED, "Scorched Wood");
-        addBlock(WoodBlocks.LOG_BAMBOO, "Bamboo Wood");
         addBlock(WoodBlocks.LOG_HOLLOW, "Hollow Acacia Log");
 
         // MARK: Saplings
@@ -487,6 +486,7 @@ public class ModLang extends ModLangProvider {
         addBlock(PlantBlocks.SWAMP_BERRY_BUSH, "Swamp Berry Bush");
         addBlock(PlantBlocks.DARK_FRUIT_VINE, "Dark Fruit Vine");
         addBlock(PlantBlocks.PRICKLY_PEAR, "Prickly Pear Cactus");
+        addBlock(PlantBlocks.COLOSSAL_BAMBOO, "Colossal Bamboo");
         addBlock(PlantBlocks.DARK_CAPPED_MUSHROOM, "Dark Capped Mushroom");
         addBlock(PlantBlocks.DUTCH_CAP_MUSHROOM, "Dutch Capped Mushroom");
         addBlock(PlantBlocks.GRANDMAS_SHOES_MUSHROOM, "Grandma's Shoes Mushroom");

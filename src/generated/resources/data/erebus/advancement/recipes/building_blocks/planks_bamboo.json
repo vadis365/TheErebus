@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.erebus.log_bamboo": {
+    "has_item.erebus.bamboo": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:log_bamboo"
+            "items": "erebus:bamboo"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.erebus.log_bamboo"
+      "has_item.erebus.bamboo"
     ]
   ],
   "rewards": {

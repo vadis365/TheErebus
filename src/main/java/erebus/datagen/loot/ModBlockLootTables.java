@@ -105,7 +105,6 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(WoodBlocks.LOG_ROTTEN);
         dropSelf(WoodBlocks.LOG_MARSHWOOD);
         dropSelf(WoodBlocks.LOG_SCORCHED);
-        dropSelf(WoodBlocks.LOG_BAMBOO);
         dropSelf(WoodBlocks.LOG_HOLLOW);
 
         // MARK: Saplings
@@ -276,6 +275,7 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(PlantBlocks.SWAMP_BERRY_BUSH);
         dropSelf(PlantBlocks.DARK_FRUIT_VINE);
         dropPricklyPearBasedOffCondition(PlantBlocks.PRICKLY_PEAR);
+        dropOther(PlantBlocks.COLOSSAL_BAMBOO, ModItems.BAMBOO);
         dropSelf(PlantBlocks.DARK_CAPPED_MUSHROOM);
         dropSelf(PlantBlocks.DUTCH_CAP_MUSHROOM);
         dropSelf(PlantBlocks.GRANDMAS_SHOES_MUSHROOM);

@@ -38,6 +38,12 @@ public class PlantBlockProperties {
             .sound(SoundType.WOOL)
             .pushReaction(PushReaction.DESTROY);
 
+    public static final Properties COLOSSAL_BAMBOO_PROPS = BASE
+            .randomTicks()
+            .strength(2F)
+            .sound(SoundType.BAMBOO)
+            .pushReaction(PushReaction.DESTROY);
+
     private static final Properties MUSHROOM_PROPS = Properties.of()
             .noCollission()
             .randomTicks()

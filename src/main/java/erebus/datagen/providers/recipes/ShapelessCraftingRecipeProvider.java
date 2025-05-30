@@ -1,5 +1,14 @@
 package erebus.datagen.providers.recipes;
 
+import static net.minecraft.data.recipes.RecipeCategory.BUILDING_BLOCKS;
+import static net.minecraft.data.recipes.RecipeCategory.COMBAT;
+import static net.minecraft.data.recipes.RecipeCategory.FOOD;
+import static net.minecraft.data.recipes.RecipeCategory.MISC;
+
+import java.util.concurrent.CompletableFuture;
+
+import org.jetbrains.annotations.NotNull;
+
 import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.blocks.providers.UmberstoneBlocks;
@@ -12,11 +21,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.CompletableFuture;
-
-import static net.minecraft.data.recipes.RecipeCategory.*;
 
 /**
  * Provider for shapeless crafting recipes.
@@ -44,7 +48,7 @@ public class ShapelessCraftingRecipeProvider extends ErebusRecipeProvider {
         shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_MOSSBARK, WoodBlocks.PLANKS_MOSSBARK, 4);
         shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_CYPRESS, WoodBlocks.PLANKS_CYPRESS, 4);
         shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_BALSAM, WoodBlocks.PLANKS_BALSAM, 4);
-        shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_BAMBOO, WoodBlocks.PLANKS_BAMBOO, 4);
+        shapeless(BUILDING_BLOCKS, ModItems.BAMBOO, WoodBlocks.PLANKS_BAMBOO, 4);
         shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_ROTTEN, WoodBlocks.PLANKS_ROTTEN, 4);
         shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_MARSHWOOD, WoodBlocks.PLANKS_MARSHWOOD, 4);
         shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_SCORCHED, WoodBlocks.PLANKS_SCORCHED, 4);

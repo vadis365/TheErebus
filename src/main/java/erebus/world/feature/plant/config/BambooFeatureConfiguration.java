@@ -1,5 +1,6 @@
 package erebus.world.feature.plant.config;
 
+import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -61,7 +62,7 @@ public class BambooFeatureConfiguration extends Feature<NoneFeatureConfiguration
                     BlockPos check = pos.offset(xOff, yOff, zOff);
 
                     if (level.isEmptyBlock(check) && level.getBlockState(check.below()).is(Blocks.GRASS_BLOCK)) {
-                        setBlock(level, check, WoodBlocks.LOG_BAMBOO.get().defaultBlockState());
+                        setBlock(level, check, PlantBlocks.COLOSSAL_BAMBOO.get().defaultBlockState());
                         placeBambooShaft(level, check, random);
 
                         bambooPlaced++;
@@ -80,7 +81,7 @@ public class BambooFeatureConfiguration extends Feature<NoneFeatureConfiguration
         int height = random.nextInt(6) + 4;
         for (int y = 0; y < height; y++) {
             if (level.isEmptyBlock(pos.above(y))) {
-                setBlock(level, pos.above(y), WoodBlocks.LOG_BAMBOO.get().defaultBlockState());
+                setBlock(level, pos.above(y), PlantBlocks.COLOSSAL_BAMBOO.get().defaultBlockState());
             } else {
                 break;
             }

@@ -97,7 +97,7 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
                         WoodBlocks.LOG_CYPRESS.get(),
                         WoodBlocks.LOG_EUCALYPTUS.get(),
                         WoodBlocks.LOG_BALSAM_RESINLESS.get(),
-                        WoodBlocks.LOG_BAMBOO.get(),
+                        PlantBlocks.COLOSSAL_BAMBOO.get(),
                         WoodBlocks.LOG_HOLLOW.get(),
                         WoodBlocks.LOG_MAHOGANY.get(),
                         WoodBlocks.LOG_MARSHWOOD.get(),

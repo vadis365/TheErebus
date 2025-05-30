@@ -318,7 +318,6 @@ public class ModItemModels extends ModItemModelProvider {
         block(WoodBlocks.LOG_ROTTEN);
         block(WoodBlocks.LOG_MARSHWOOD);
         block(WoodBlocks.LOG_SCORCHED);
-        block(WoodBlocks.LOG_BAMBOO);
 
         // MARK: Saplings
         blockFlat(WoodBlocks.SAPLING_BAOBAB);

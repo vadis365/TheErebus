@@ -23,7 +23,7 @@ public class WoodBlocks extends ModBlockHelpers {
     public static final DeferredBlock<RotatedPillarBlock> LOG_ROTTEN;
     public static final DeferredBlock<RotatedPillarBlock> LOG_MARSHWOOD;
     public static final DeferredBlock<RotatedPillarBlock> LOG_SCORCHED;
-    public static final DeferredBlock<RotatedPillarBlock> LOG_BAMBOO;
+
     public static final DeferredBlock<Block> LOG_HOLLOW;
 
     // Saplings
@@ -76,7 +76,6 @@ public class WoodBlocks extends ModBlockHelpers {
         LOG_ROTTEN = registerBlock("log_rotten", () -> new RotatedPillarBlock(Properties.ofFullCopy(Blocks.OAK_LOG)));
         LOG_MARSHWOOD = registerBlock("log_marshwood", () -> new RotatedPillarBlock(Properties.ofFullCopy(Blocks.OAK_LOG)));
         LOG_SCORCHED = registerBlock("log_scorched", () -> new RotatedPillarBlock(Properties.ofFullCopy(Blocks.OAK_LOG)));
-        LOG_BAMBOO = registerBlock("log_bamboo", () -> new RotatedPillarBlock(Properties.ofFullCopy(Blocks.OAK_LOG)));
         LOG_HOLLOW = registerBlock("log_hollow", () -> new HollowLogBlock(Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
 
         // Saplings

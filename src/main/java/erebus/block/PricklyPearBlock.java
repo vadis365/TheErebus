@@ -80,7 +80,7 @@ public class PricklyPearBlock extends Block implements BonemealableBlock {
 			for (growthHeight = 1; level.getBlockState(pos.below(growthHeight)).is(this); ++growthHeight);
 
 			if (growthHeight < 3) {
-				int stage = ((Integer) state.getValue(AGE)).intValue();
+				int stage = state.getValue(AGE);
 
 				if (stage == 10) {
 					level.setBlockAndUpdate(pos.above(), defaultBlockState());
@@ -103,10 +103,8 @@ public class PricklyPearBlock extends Block implements BonemealableBlock {
 
     @Override
     protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-        if (!state.canSurvive(level, currentPos)) {
+        if (!state.canSurvive(level, currentPos))
             level.scheduleTick(currentPos, this, 1);
-        }
-
         return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 

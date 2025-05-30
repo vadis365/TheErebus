@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "erebus:log_bamboo"
+          "name": "erebus:colossal_bambo"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "erebus:blocks/log_bamboo"
+  "random_sequence": "erebus:blocks/colossal_bambo"
 }

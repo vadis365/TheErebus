@@ -1,5 +1,37 @@
 package erebus.registries.blocks.providers;
 
+import static erebus.registries.blocks.properties.PlantBlockProperties.BUSH_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.COLOSSAL_BAMBOO_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.CROP_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.DARK_CAPPED_MUSHROOM_BLOCK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.DARK_CAPPED_MUSHROOM_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.DARK_FRUIT_VINE_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.DUTCH_CAP_MUSHROOM_BLOCK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.DUTCH_CAP_MUSHROOM_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_BLACK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_BLUE_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_BROWN_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_CYAN_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_GRAY_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_LIGHT_BLUE_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_LIGHT_GRAY_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_MAGENTA_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_ORANGE_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_PINK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_PURPLE_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_RAINBOW_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_RED_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_WHITE_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_YELLOW_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.GRANDMAS_SHOES_MUSHROOM_BLOCK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.GRANDMAS_SHOES_MUSHROOM_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.KAIZERS_FINGERS_MUSHROOM_BLOCK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.KAIZERS_FINGERS_MUSHROOM_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.PRICKLY_PEAR_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.SARCASTIC_CZECH_MUSHROOM_BLOCK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.SARCASTIC_CZECH_MUSHROOM_PROPS;
+
+import erebus.block.BambooBlock;
 import erebus.block.DarkFruitVineBlock;
 import erebus.block.GlowshroomStalkBlock;
 import erebus.block.PricklyPearBlock;
@@ -8,13 +40,18 @@ import erebus.block.util.ModCropBlock;
 import erebus.registries.ModItems;
 import erebus.registries.helpers.ModBlockHelpers;
 import erebus.registries.world.feature.PlantFeatures;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.block.MushroomBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.VineBlock;
+import net.minecraft.world.level.block.WaterlilyBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
-
-import static erebus.registries.blocks.properties.PlantBlockProperties.*;
 
 public class PlantBlocks extends ModBlockHelpers {
     // MARK: Plants
@@ -25,7 +62,8 @@ public class PlantBlocks extends ModBlockHelpers {
     public static final DeferredBlock<ModBerryBushBlock> HEART_BERRY_BUSH;
     public static final DeferredBlock<ModBerryBushBlock> SWAMP_BERRY_BUSH;
     public static final DeferredBlock<DarkFruitVineBlock> DARK_FRUIT_VINE;
-    public static final DeferredBlock<Block> PRICKLY_PEAR;
+    public static final DeferredBlock<PricklyPearBlock> PRICKLY_PEAR;
+    public static final DeferredBlock<BambooBlock> COLOSSAL_BAMBOO;
     public static final DeferredBlock<Block> DARK_CAPPED_MUSHROOM;
     public static final DeferredBlock<Block> DUTCH_CAP_MUSHROOM;
     public static final DeferredBlock<Block> GRANDMAS_SHOES_MUSHROOM;
@@ -129,6 +167,7 @@ public class PlantBlocks extends ModBlockHelpers {
         SWAMP_BERRY_BUSH = registerBush("swamp_berry_bush", ModItems.SWAMP_BERRIES, BUSH_PROPS);
         DARK_FRUIT_VINE = registerBlock("dark_fruit_vine", () -> new DarkFruitVineBlock(DARK_FRUIT_VINE_PROPS));
         PRICKLY_PEAR = registerBlock("prickly_pear", () -> new PricklyPearBlock(PRICKLY_PEAR_PROPS));
+        COLOSSAL_BAMBOO = registerBlock("colossal_bambo", () -> new BambooBlock(COLOSSAL_BAMBOO_PROPS));
         DARK_CAPPED_MUSHROOM = registerBlock("dark_capped_mushroom", () -> new MushroomBlock(PlantFeatures.DARK_CAPPED_MUSHROOM.getConfiguredResourceKey(), DARK_CAPPED_MUSHROOM_PROPS));
         DUTCH_CAP_MUSHROOM = registerBlock("dutch_cap_mushroom", () -> new MushroomBlock(PlantFeatures.DUTCH_CAP_MUSHROOM.getConfiguredResourceKey(), DUTCH_CAP_MUSHROOM_PROPS));
         GRANDMAS_SHOES_MUSHROOM = registerBlock("grandmas_shoes_mushroom", () -> new MushroomBlock(PlantFeatures.GRANDMAS_SHOES_MUSHROOM.getConfiguredResourceKey(), GRANDMAS_SHOES_MUSHROOM_PROPS));
