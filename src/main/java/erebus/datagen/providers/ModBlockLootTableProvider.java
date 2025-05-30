@@ -1,5 +1,6 @@
 package erebus.datagen.providers;
 
+import erebus.block.PricklyPearBlock;
 import erebus.block.util.ModCropBlock;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
@@ -72,7 +73,13 @@ public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ModCropBlock.AGE, 3));
         add(crop.get(), createCropDrops(crop.get(), grownDrop.get(), seed.get(), condition));
     }
-    
+
+    public void dropPricklyPearBasedOffCondition(Supplier<? extends Block> blockIn, Supplier<? extends Block> blockToDrop, Supplier<? extends Item> itemTodrop) {
+        LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(blockIn.get())
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PricklyPearBlock.AGE, 11));
+        add(blockIn.get(), createCropDrops(blockIn.get(), itemTodrop.get(), blockToDrop.get().asItem(), condition));
+    }
+
     public void dropComponents(Supplier<? extends Block> blockSupplier, Consumer<LootPool.Builder> lootFunctionSupplier) {
         LootPool.Builder lootPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(LootItem.lootTableItem(blockSupplier.get()));
