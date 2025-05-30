@@ -32,17 +32,21 @@ public class PlantBlockProperties {
             .ignitedByLava()
             .pushReaction(PushReaction.DESTROY);
 
-    public static final Properties PRICKLY_PEAR_PROPS = BASE
-            .randomTicks()
+    public static final Properties PRICKLY_PEAR_PROPS = Properties.of()
+    		.mapColor(MapColor.PLANT)
+    		.randomTicks()
             .strength(0.4F)
             .sound(SoundType.WOOL)
-            .pushReaction(PushReaction.DESTROY);
+            .pushReaction(PushReaction.DESTROY)
+            .noOcclusion();
 
-    public static final Properties COLOSSAL_BAMBOO_PROPS = BASE
-            .randomTicks()
+    public static final Properties COLOSSAL_BAMBOO_PROPS = Properties.of()
+    		.mapColor(MapColor.PLANT)
+    		.randomTicks()
             .strength(2F)
             .sound(SoundType.BAMBOO)
-            .pushReaction(PushReaction.DESTROY);
+            .pushReaction(PushReaction.DESTROY)
+            .noOcclusion();
 
     private static final Properties MUSHROOM_PROPS = Properties.of()
             .noCollission()

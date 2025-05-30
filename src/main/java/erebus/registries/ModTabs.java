@@ -487,6 +487,7 @@ public class ModTabs {
                         output.accept(ModItems.CABBAGE);
                         output.accept(PlantBlocks.DARK_FRUIT_VINE);
                         output.accept(PlantBlocks.PRICKLY_PEAR);
+                        output.accept(PlantBlocks.COLOSSAL_BAMBOO);
                         output.accept(PlantBlocks.PETAL_BLACK);
                         output.accept(PlantBlocks.PETAL_RED);
                         output.accept(PlantBlocks.PETAL_BROWN);
