@@ -1,9 +1,9 @@
 {
-    "parent": "block/block",
+    "parent": "minecraft:block/block",
     "textures": {
-        "0": "erebus:block/log_bamboo",
-        "1": "erebus:block/log_bamboo_top",
-        "particle": "erebus:block/log_bamboo"
+        "0": "erebus:block/log_bamboo_side",
+        "1": "erebus:block/log_bamboo_end",
+        "particle": "erebus:block/log_bamboo_side"
     },
     "elements": [
         {
