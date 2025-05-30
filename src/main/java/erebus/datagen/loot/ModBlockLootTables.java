@@ -275,7 +275,7 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(PlantBlocks.HEART_BERRY_BUSH);
         dropSelf(PlantBlocks.SWAMP_BERRY_BUSH);
         dropSelf(PlantBlocks.DARK_FRUIT_VINE);
-        dropPricklyPearBasedOffCondition(PlantBlocks.PRICKLY_PEAR, PlantBlocks.PRICKLY_PEAR, ModItems.PRICKLY_PEAR_RAW);
+        dropPricklyPearBasedOffCondition(PlantBlocks.PRICKLY_PEAR);
         dropSelf(PlantBlocks.DARK_CAPPED_MUSHROOM);
         dropSelf(PlantBlocks.DUTCH_CAP_MUSHROOM);
         dropSelf(PlantBlocks.GRANDMAS_SHOES_MUSHROOM);
