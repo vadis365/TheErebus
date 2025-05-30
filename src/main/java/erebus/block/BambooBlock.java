@@ -75,7 +75,7 @@ public class BambooBlock extends Block {
 			if (growthHeight < 8) {
 				int stage = state.getValue(AGE);
 
-				if (stage == 15) {
+				if (stage == 14) {
 					level.setBlockAndUpdate(pos.above(), defaultBlockState());
 					level.setBlock(pos, state.setValue(AGE, 0), 4);
 				} else
