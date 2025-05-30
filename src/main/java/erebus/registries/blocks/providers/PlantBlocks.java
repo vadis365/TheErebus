@@ -167,7 +167,7 @@ public class PlantBlocks extends ModBlockHelpers {
         SWAMP_BERRY_BUSH = registerBush("swamp_berry_bush", ModItems.SWAMP_BERRIES, BUSH_PROPS);
         DARK_FRUIT_VINE = registerBlock("dark_fruit_vine", () -> new DarkFruitVineBlock(DARK_FRUIT_VINE_PROPS));
         PRICKLY_PEAR = registerBlock("prickly_pear", () -> new PricklyPearBlock(PRICKLY_PEAR_PROPS));
-        COLOSSAL_BAMBOO = registerBlock("colossal_bambo", () -> new BambooBlock(COLOSSAL_BAMBOO_PROPS));
+        COLOSSAL_BAMBOO = registerBlock("colossal_bamboo", () -> new BambooBlock(COLOSSAL_BAMBOO_PROPS));
         DARK_CAPPED_MUSHROOM = registerBlock("dark_capped_mushroom", () -> new MushroomBlock(PlantFeatures.DARK_CAPPED_MUSHROOM.getConfiguredResourceKey(), DARK_CAPPED_MUSHROOM_PROPS));
         DUTCH_CAP_MUSHROOM = registerBlock("dutch_cap_mushroom", () -> new MushroomBlock(PlantFeatures.DUTCH_CAP_MUSHROOM.getConfiguredResourceKey(), DUTCH_CAP_MUSHROOM_PROPS));
         GRANDMAS_SHOES_MUSHROOM = registerBlock("grandmas_shoes_mushroom", () -> new MushroomBlock(PlantFeatures.GRANDMAS_SHOES_MUSHROOM.getConfiguredResourceKey(), GRANDMAS_SHOES_MUSHROOM_PROPS));
