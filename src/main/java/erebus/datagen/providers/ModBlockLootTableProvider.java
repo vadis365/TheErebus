@@ -5,9 +5,11 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import erebus.block.BambooBlock;
 import erebus.block.PricklyPearBlock;
 import erebus.block.util.ModCropBlock;
 import erebus.registries.ModItems;
+import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -83,6 +85,18 @@ public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
 						.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
 								.add(LootItem.lootTableItem(ModItems.PRICKLY_PEAR_RAW).when(condition)
 										.otherwise(LootItem.lootTableItem(blockIn.get().asItem())))));
+	}
+
+	public void dropColossalBambooBasedOffCondition(Supplier<? extends Block> blockIn) {
+		LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(blockIn.get())
+				.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BambooBlock.AGE, 15));
+		add(blockIn.get(),
+				LootTable.lootTable()
+						.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+								.add(LootItem.lootTableItem(ModItems.BAMBOO)))
+						.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+							//	.add(LootItem.lootTableItem(ModItems.BAMBOO))
+								.add(LootItem.lootTableItem(WoodBlocks.SAPLING_BAMBOO.get().asItem()).when(condition))));
 	}
 
     public void dropComponents(Supplier<? extends Block> blockSupplier, Consumer<LootPool.Builder> lootFunctionSupplier) {

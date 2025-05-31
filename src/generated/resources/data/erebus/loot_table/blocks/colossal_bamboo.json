@@ -3,15 +3,29 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
           "name": "erebus:bamboo"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "erebus:colossal_bamboo",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "age": "15"
+              }
+            }
+          ],
+          "name": "erebus:sapling_bamboo"
         }
       ],
       "rolls": 1.0
