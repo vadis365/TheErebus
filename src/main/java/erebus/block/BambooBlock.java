@@ -76,11 +76,21 @@ public class BambooBlock extends Block {
 				int stage = state.getValue(AGE);
 
 				if (stage == 14) {
-					level.setBlockAndUpdate(pos.above(), defaultBlockState());
-					level.setBlock(pos, state.setValue(AGE, 0), 4);
-				} else
+					if (growthHeight == 7) // 4 leafy blocks possible but at least 1 guaranteed
+						level.setBlock(pos.above(), state.setValue(AGE, 15), 2);
+					else
+						level.setBlockAndUpdate(pos.above(), defaultBlockState());
+
+					if (random.nextBoolean() && growthHeight > 4)
+						level.setBlock(pos, state.setValue(AGE, 15), 2);
+					else
+						level.setBlock(pos, state.setValue(AGE, 0), 4);
+				} else {
 					level.setBlock(pos, state.setValue(AGE, stage + 1), 4);
+				}
+
 			}
+
 		}
 	}
 

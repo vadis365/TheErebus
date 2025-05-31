@@ -15,6 +15,6 @@
 		"age=12": { "model": "erebus:block/colossal_bamboo" },
 		"age=13": { "model": "erebus:block/colossal_bamboo" },
 		"age=14": { "model": "erebus:block/colossal_bamboo" },
-		"age=15": { "model": "erebus:block/colossal_bamboo" }
+		"age=15": { "model": "erebus:block/colossal_bamboo_leafy" }
 	}
 }
