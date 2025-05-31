@@ -1,4 +1,4 @@
-package erebus.block.bamboo;
+package erebus.block.types;
 
 import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.utils.IErebusEnum;

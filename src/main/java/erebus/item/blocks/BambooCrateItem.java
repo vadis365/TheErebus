@@ -1,11 +1,7 @@
 package erebus.item.blocks;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import erebus.block.bamboo.BambooCrateBlock;
-import erebus.block.bamboo.EnumCrateType;
+import erebus.block.types.EnumCrateType;
 import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -21,6 +17,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class BambooCrateItem extends BlockItem {
 	

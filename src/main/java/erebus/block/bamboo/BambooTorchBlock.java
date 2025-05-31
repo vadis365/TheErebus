@@ -1,5 +1,6 @@
 package erebus.block.bamboo;
 
+import erebus.block.types.EnumTorchBlockHalf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;

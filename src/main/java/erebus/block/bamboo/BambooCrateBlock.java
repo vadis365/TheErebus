@@ -1,10 +1,7 @@
 package erebus.block.bamboo;
 
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NotNull;
-
 import erebus.block.entity.BambooCrateBlockEntity;
+import erebus.block.types.EnumCrateType;
 import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
@@ -23,6 +20,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public class BambooCrateBlock extends Block implements EntityBlock {
 

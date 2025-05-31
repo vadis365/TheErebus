@@ -2,8 +2,8 @@ package erebus.world.feature.structure.config;
 
 import erebus.block.BlockOfBonesBlock;
 import erebus.block.bamboo.BambooTorchBlock;
-import erebus.block.bamboo.EnumTorchBlockHalf;
 import erebus.block.entity.BlockOfBonesBlockEntity;
+import erebus.block.types.EnumTorchBlockHalf;
 import erebus.datagen.loot.ModChestLootTables;
 import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.OtherBlocks;

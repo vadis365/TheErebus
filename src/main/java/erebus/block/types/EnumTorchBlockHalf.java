@@ -1,4 +1,4 @@
-package erebus.block.bamboo;
+package erebus.block.types;
 
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.NotNull;

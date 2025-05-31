@@ -1,7 +1,7 @@
 package erebus.block.entity;
 
 import erebus.block.bamboo.BambooCrateBlock;
-import erebus.block.bamboo.EnumCrateType;
+import erebus.block.types.EnumCrateType;
 import erebus.inventory.server.BambooCrateMenu;
 import erebus.inventory.server.ColossalCrateMenu;
 import erebus.registries.ModBlockEntities;
