@@ -1,57 +1,21 @@
 package erebus.registries.blocks.providers;
 
-import static erebus.registries.blocks.properties.PlantBlockProperties.BUSH_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.COLOSSAL_BAMBOO_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.CROP_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.DARK_CAPPED_MUSHROOM_BLOCK_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.DARK_CAPPED_MUSHROOM_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.DARK_FRUIT_VINE_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.DUTCH_CAP_MUSHROOM_BLOCK_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.DUTCH_CAP_MUSHROOM_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_BLACK_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_BLUE_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_BROWN_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_CYAN_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_GRAY_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_LIGHT_BLUE_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_LIGHT_GRAY_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_MAGENTA_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_ORANGE_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_PINK_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_PURPLE_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_RAINBOW_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_RED_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_WHITE_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_YELLOW_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.GRANDMAS_SHOES_MUSHROOM_BLOCK_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.GRANDMAS_SHOES_MUSHROOM_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.KAIZERS_FINGERS_MUSHROOM_BLOCK_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.KAIZERS_FINGERS_MUSHROOM_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.PRICKLY_PEAR_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.SARCASTIC_CZECH_MUSHROOM_BLOCK_PROPS;
-import static erebus.registries.blocks.properties.PlantBlockProperties.SARCASTIC_CZECH_MUSHROOM_PROPS;
-
-import erebus.block.BambooBlock;
 import erebus.block.DarkFruitVineBlock;
 import erebus.block.GlowshroomStalkBlock;
 import erebus.block.PricklyPearBlock;
+import erebus.block.bamboo.BambooBlock;
 import erebus.block.util.ModBerryBushBlock;
 import erebus.block.util.ModCropBlock;
 import erebus.registries.ModItems;
 import erebus.registries.helpers.ModBlockHelpers;
 import erebus.registries.world.feature.PlantFeatures;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoublePlantBlock;
-import net.minecraft.world.level.block.HugeMushroomBlock;
-import net.minecraft.world.level.block.MushroomBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.VineBlock;
-import net.minecraft.world.level.block.WaterlilyBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
+
+import static erebus.registries.blocks.properties.PlantBlockProperties.*;
 
 public class PlantBlocks extends ModBlockHelpers {
     // MARK: Plants

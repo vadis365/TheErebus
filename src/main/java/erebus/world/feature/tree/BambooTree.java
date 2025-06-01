@@ -1,12 +1,12 @@
 package erebus.world.feature.tree;
 
+import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.blocks.providers.WoodBlocks;
-import erebus.world.feature.tree.trunk.AsperTrunkPlacer;
-import net.minecraft.util.valueproviders.ConstantInt;
+import erebus.world.feature.tree.foliage.SingleLeafFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
 import java.util.List;
@@ -20,10 +20,10 @@ public class BambooTree extends ErebusTree {
     @Override
     public TreeConfiguration getTreeConfiguration() {
         return new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(WoodBlocks.LOG_ASPER.get()),
-                new AsperTrunkPlacer(4, 2, 0),
-                BlockStateProvider.simple(WoodBlocks.LEAVES_ASPER.get()),
-                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), 3),
+                BlockStateProvider.simple(PlantBlocks.COLOSSAL_BAMBOO.get()),
+                new StraightTrunkPlacer(4, 6, 6),
+                BlockStateProvider.simple(PlantBlocks.COLOSSAL_BAMBOO.get()),
+                new SingleLeafFoliagePlacer(),
                 new TwoLayersFeatureSize(1, 0, 1)).build();
     }
 

@@ -15,6 +15,7 @@ public class ModTrunkPlacers {
 
     public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<AsperTrunkPlacer>> ASPER_TRUNK_PLACER = register("asper_trunk_placer", AsperTrunkPlacer.CODEC);
     public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<BalsamTrunkPlacer>> BALSAM_TRUNK_PLACER = register("balsam_trunk_placer", BalsamTrunkPlacer.CODEC);
+    public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<BambooTrunkPlacer>> BAMBOO_TRUNK_PLACER = register("bamboo_trunk_placer", BambooTrunkPlacer.CODEC);
     public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<BaobabTrunkPlacer>> BAOBAB_TRUNK_PLACER = register("baobab_trunk_placer", BaobabTrunkPlacer.CODEC);
     public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<CypressTrunkPlacer>> CYPRESS_TRUNK_PLACER = register("cypress_trunk_placer", CypressTrunkPlacer.CODEC);
     public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<EucalyptusTrunkPlacer>> EUCALYPTUS_TRUNK_PLACER = register("eucalyptus_trunk_placer", EucalyptusTrunkPlacer.CODEC);

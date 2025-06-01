@@ -1,9 +1,4 @@
-package erebus.block;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.jetbrains.annotations.NotNull;
+package erebus.block.bamboo;
 
 import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.BlockPos;
@@ -29,6 +24,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.util.TriState;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class BambooBlock extends Block {
 
@@ -69,13 +68,13 @@ public class BambooBlock extends Block {
 	}
 
 	@Override
-	protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+	protected void tick(BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
 		if (!state.canSurvive(level, pos))
 			level.destroyBlock(pos, true);
 	}
 
 	@Override
-	protected void randomTick(BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+	protected void randomTick(@NotNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
 		if (level.isEmptyBlock(pos.above())) {
 			int growthHeight;
 
@@ -105,7 +104,7 @@ public class BambooBlock extends Block {
 
 	@Nonnull
 	@Override
-	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+	public ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
 		if (level.isClientSide)
 			return ItemInteractionResult.SUCCESS;
 
@@ -120,14 +119,14 @@ public class BambooBlock extends Block {
 	}
 
 	@Override
-	protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+	protected @NotNull BlockState updateShape(BlockState state, @NotNull Direction facing, @NotNull BlockState facingState, @NotNull LevelAccessor level, @NotNull BlockPos currentPos, @NotNull BlockPos facingPos) {
 		if (!state.canSurvive(level, currentPos))
 			level.scheduleTick(currentPos, this, 1);
 		return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
 	}
 
 	@Override
-	protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+	protected boolean canSurvive(@NotNull BlockState state, LevelReader level, BlockPos pos) {
 		BlockState stateBelow = level.getBlockState(pos.below());
 		if (stateBelow.is(this)) {
 			return true;
@@ -135,9 +134,7 @@ public class BambooBlock extends Block {
 			TriState soilDecision = stateBelow.canSustainPlant(level, pos.below(), Direction.UP, state);
 			if (!soilDecision.isDefault())
 				return soilDecision.isTrue();
-			if (stateBelow.is(BlockTags.DIRT) || stateBelow.is(BlockTags.SAND))
-				return true;
+            return stateBelow.is(BlockTags.DIRT) || stateBelow.is(BlockTags.SAND);
 		}
-		return false;
-	}
+    }
 }

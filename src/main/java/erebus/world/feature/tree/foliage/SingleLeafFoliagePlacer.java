@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import erebus.registries.world.tree.ModFoliagePlacers;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -15,6 +16,9 @@ public class SingleLeafFoliagePlacer extends FoliagePlacer {
 
     public static final MapCodec<SingleLeafFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance -> foliagePlacerParts(instance).apply(instance, SingleLeafFoliagePlacer::new));
 
+    public SingleLeafFoliagePlacer() {
+        this(ConstantInt.ZERO, ConstantInt.ZERO);
+    }
 
     public SingleLeafFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);

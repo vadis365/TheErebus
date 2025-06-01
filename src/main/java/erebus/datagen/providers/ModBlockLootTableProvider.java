@@ -1,12 +1,7 @@
 package erebus.datagen.providers;
 
-import java.util.HashMap;
-import java.util.Set;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
-import erebus.block.BambooBlock;
 import erebus.block.PricklyPearBlock;
+import erebus.block.bamboo.BambooBlock;
 import erebus.block.util.ModCropBlock;
 import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.WoodBlocks;
@@ -31,6 +26,11 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePrope
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+
+import java.util.HashMap;
+import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
 
