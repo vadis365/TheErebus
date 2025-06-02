@@ -4,7 +4,7 @@ import erebus.network.client.OfferingAltarNBTPacket;
 import erebus.recipes.ModCustomRecipes;
 import erebus.recipes.MultiStackInput;
 import erebus.recipes.OfferingAltarRecipe;
-import erebus.registries.ModBlockEntities;
+import erebus.registries.blocks.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;

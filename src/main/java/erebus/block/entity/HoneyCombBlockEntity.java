@@ -1,7 +1,7 @@
 package erebus.block.entity;
 
 import erebus.inventory.server.HoneyCombMenu;
-import erebus.registries.ModBlockEntities;
+import erebus.registries.blocks.ModBlockEntities;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

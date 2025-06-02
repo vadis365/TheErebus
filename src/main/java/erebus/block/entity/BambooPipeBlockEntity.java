@@ -1,7 +1,7 @@
 package erebus.block.entity;
 
 import erebus.block.bamboo.BambooPipe;
-import erebus.registries.ModBlockEntities;
+import erebus.registries.blocks.ModBlockEntities;
 import erebus.utils.CapHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

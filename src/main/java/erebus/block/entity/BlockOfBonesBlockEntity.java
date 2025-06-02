@@ -1,6 +1,6 @@
 package erebus.block.entity;
 
-import erebus.registries.ModBlockEntities;
+import erebus.registries.blocks.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;

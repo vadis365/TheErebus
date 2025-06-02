@@ -1,11 +1,9 @@
 package erebus.block.entity;
 
-import javax.annotation.Nonnull;
-
 import erebus.block.bamboo.BambooBridge;
 import erebus.block.bamboo.BambooExtender;
 import erebus.inventory.server.BambooExtenderMenu;
-import erebus.registries.ModBlockEntities;
+import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.blocks.providers.OtherBlocks;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
@@ -29,6 +27,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+
+import javax.annotation.Nonnull;
 
 public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 

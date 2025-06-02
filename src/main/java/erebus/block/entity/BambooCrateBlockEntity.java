@@ -4,7 +4,7 @@ import erebus.block.bamboo.BambooCrateBlock;
 import erebus.block.types.EnumCrateType;
 import erebus.inventory.server.BambooCrateMenu;
 import erebus.inventory.server.ColossalCrateMenu;
-import erebus.registries.ModBlockEntities;
+import erebus.registries.blocks.ModBlockEntities;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

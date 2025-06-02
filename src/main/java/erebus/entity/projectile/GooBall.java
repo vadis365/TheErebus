@@ -71,7 +71,7 @@ public class GooBall extends ThrowableProjectile implements ItemSupplier {
 			}
 		}
 
-		if (typeOfHit != null && typeOfHit == HitResult.Type.BLOCK)
+		if (typeOfHit == HitResult.Type.BLOCK)
 			kill();
 
 		if (level().isClientSide())
@@ -92,9 +92,9 @@ public class GooBall extends ThrowableProjectile implements ItemSupplier {
 	@OnlyIn(Dist.CLIENT)
 	public void trailParticles(Level level, double x, double y, double z, RandomSource rand) {
 		for (int count = 0; count < 20; ++count) {
-			double velX = 0.0D;
-			double velY = 0.0D;
-			double velZ = 0.0D;
+			double velX;
+			double velY;
+			double velZ;
 			int motionX = rand.nextInt(2) * 2 - 1;
 			int motionZ = rand.nextInt(2) * 2 - 1;
 			velY = (rand.nextFloat() - 0.5D) * 0.125D;

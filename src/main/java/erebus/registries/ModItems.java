@@ -1,25 +1,17 @@
 package erebus.registries;
 
-import java.util.List;
-import java.util.Map;
-
-import org.jetbrains.annotations.NotNull;
-
 import erebus.Erebus;
 import erebus.item.BambooPipeWrenchItem;
 import erebus.item.BeeTamingAmulet;
 import erebus.item.BeettleJuiceBucketItem;
 import erebus.item.PaxelItem;
-import erebus.item.WandOfAnimationItem;
 import erebus.item.blocks.BambooCrateItem;
 import erebus.item.blocks.FluidJarBlockItem;
 import erebus.item.blocks.LiquifierBlockItem;
 import erebus.item.shield.ErebusShieldItem;
-import erebus.item.shield.type.BambooShieldType;
-import erebus.item.shield.type.ExoSkeletonShieldType;
-import erebus.item.shield.type.JadeShieldType;
-import erebus.item.shield.type.ReinforcedShieldType;
-import erebus.item.shield.type.RhinoShieldType;
+import erebus.item.shield.type.*;
+import erebus.item.wand.WandOfAnimationItem;
+import erebus.item.wand.WandOfPreservationItem;
 import erebus.network.data.DeathCompassData;
 import erebus.registries.blocks.providers.AmberBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
@@ -32,22 +24,14 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Map;
 
 public class ModItems extends ModItemHelpers {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Erebus.MODID);
@@ -108,7 +92,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> UMBERGOLEM_HEAD = registerItem("umbergolem_head");
     public static final DeferredItem<Item> UMBERGOLEM_CLAW = registerItem("umbergolem_claw");
     public static final DeferredItem<Item> UMBERGOLEM_LEGS = registerItem("umbergolem_legs");
-    public static final DeferredItem<Item> JADE_BERRIES = ITEMS.register("jade_berries", () -> new ItemNameBlockItem(PlantBlocks.JADE_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
+    public static final DeferredItem<Item> JADE_BERRIES = registerItem("jade_berries", () -> new ItemNameBlockItem(PlantBlocks.JADE_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
             .nutrition(1)
             .saturationModifier(0.1F)
             .build()
@@ -228,17 +212,17 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<ErebusShieldItem> RHINO_EXOSKELETON_SHIELD = registerShield("rhino_exoskeleton_shield", 1056, new RhinoShieldType());
 
     // MARK: Misc
-    public static final DeferredItem<Item> WAND_OF_ANIMATION = ITEMS.register("wand_of_animation", () -> new WandOfAnimationItem(new Item.Properties().stacksTo(1).durability(64).setNoRepair()));
-    public static final DeferredItem<Item> WAND_OF_PRESERVATION = registerItem("wand_of_preservation");
+    public static final DeferredItem<Item> WAND_OF_ANIMATION = registerItem("wand_of_animation", () -> new WandOfAnimationItem(new Item.Properties().stacksTo(1).durability(64).setNoRepair()));
+    public static final DeferredItem<Item> WAND_OF_PRESERVATION = registerItem("wand_of_preservation", () -> new WandOfPreservationItem(new Item.Properties().stacksTo(1).durability(64).setNoRepair()));
     public static final DeferredItem<Item> PORTAL_ACTIVATOR = registerItem("portal_activator");
     public static final DeferredItem<Item> WOODLOUSE_BALL = registerItem("woodlouse_ball");
-    public static final DeferredItem<Item> NECTAR_COLLECTOR = ITEMS.register("nectar_collector", () -> new Item((new Item.Properties().stacksTo(1).durability(16))));
+    public static final DeferredItem<Item> NECTAR_COLLECTOR = registerItem("nectar_collector", () -> new Item((new Item.Properties().stacksTo(1).durability(16))));
     public static final DeferredItem<Item> ANT_TAMING_AMULET = registerItem("ant_taming_amulet");
-    public static final DeferredItem<Item> BEE_TAMING_AMULET = ITEMS.register("bee_taming_amulet", () -> new BeeTamingAmulet(new Item.Properties().stacksTo(1).durability(16)));
+    public static final DeferredItem<Item> BEE_TAMING_AMULET = registerItem("bee_taming_amulet", () -> new BeeTamingAmulet(new Item.Properties().stacksTo(1).durability(16)));
     public static final DeferredItem<Item> WASP_SWORD = registerItem("wasp_sword");
     public static final DeferredItem<Item> WASP_DAGGER = registerItem("wasp_dagger");
     public static final DeferredItem<Item> ANTI_VENOM_BOTTLE = registerItem("anti_venom_bottle");
-    public static final DeferredItem<Item> DEATH_COMPASS = ITEMS.register("death_compass", () -> new Item(new Item.Properties()) {
+    public static final DeferredItem<Item> DEATH_COMPASS = registerItem("death_compass", () -> new Item(new Item.Properties()) {
         @Override
         public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
             DeathCompassData data = stack.getComponents().get(ModDataComponents.DEATH_COMPASS.get());
@@ -278,9 +262,9 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> EREBUS_MAP_FILLED = registerItem("erebus_map_filled");
 
     // MARK: Plants
-    public static final DeferredItem<Item> TURNIP = ITEMS.register("turnip", () -> new ItemNameBlockItem(PlantBlocks.CROP_TURNIP.get(), new Item.Properties()));
-    public static final DeferredItem<Item> CABBAGE_SEEDS = ITEMS.register("cabbage_seeds", () -> new ItemNameBlockItem(PlantBlocks.CROP_CABBAGE.get(), new Item.Properties()));
-    public static final DeferredItem<Item> MANDRAKE_ROOT = ITEMS.register("mandrake_root", () -> new ItemNameBlockItem(PlantBlocks.CROP_MANDRAKE.get(), new Item.Properties()));
+    public static final DeferredItem<Item> TURNIP = registerItem("turnip", () -> new ItemNameBlockItem(PlantBlocks.CROP_TURNIP.get(), new Item.Properties()));
+    public static final DeferredItem<Item> CABBAGE_SEEDS = registerItem("cabbage_seeds", () -> new ItemNameBlockItem(PlantBlocks.CROP_CABBAGE.get(), new Item.Properties()));
+    public static final DeferredItem<Item> MANDRAKE_ROOT = registerItem("mandrake_root", () -> new ItemNameBlockItem(PlantBlocks.CROP_MANDRAKE.get(), new Item.Properties()));
     public static final DeferredItem<Item> SEED_BLACK = registerItem("seed_black");
     public static final DeferredItem<Item> SEED_RED = registerItem("seed_red");
     public static final DeferredItem<Item> SEED_BROWN = registerItem("seed_brown");
@@ -298,7 +282,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> SEED_RAINBOW = registerItem("seed_rainbow");
 
     public static final DeferredItem<Item> LIFE_BLOOD = registerItem("life_blood");
-    public static final DeferredItem<Item> HEART_BERRIES = ITEMS.register("heart_berries", () -> new ItemNameBlockItem(PlantBlocks.HEART_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
+    public static final DeferredItem<Item> HEART_BERRIES = registerItem("heart_berries", () -> new ItemNameBlockItem(PlantBlocks.HEART_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
             .nutrition(1)
             .saturationModifier(0.1F)
             .build()

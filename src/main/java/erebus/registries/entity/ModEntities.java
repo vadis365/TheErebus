@@ -1,35 +1,12 @@
 package erebus.registries.entity;
 
 import erebus.Erebus;
-import erebus.entity.AnimatedBlock;
-import erebus.entity.Antlion;
-import erebus.entity.Beetle;
-import erebus.entity.BeetleLarva;
-import erebus.entity.BlackWidow;
-import erebus.entity.BombardierBeetle;
-import erebus.entity.BombardierBeetleLarva;
-import erebus.entity.BotFly;
-import erebus.entity.BotFlyLarva;
-import erebus.entity.Centipede;
-import erebus.entity.Dragonfly;
-import erebus.entity.Fly;
-import erebus.entity.Grasshopper;
-import erebus.entity.LavaWebSpider;
-import erebus.entity.Locust;
-import erebus.entity.MoneySpider;
-import erebus.entity.Moth;
-import erebus.entity.Scytodes;
-import erebus.entity.VelvetWorm;
-import erebus.entity.Wasp;
-import erebus.entity.WorkerBee;
+import erebus.entity.*;
+import erebus.entity.projectile.AmberStar;
 import erebus.entity.projectile.GooBall;
 import erebus.entity.projectile.ThrownBlockAsItem;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
@@ -68,6 +45,7 @@ public class ModEntities {
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownBlockAsItem>> THROWN_BLOCK_AS_ITEM = registerNonMobEntity("thrown_block_as_item", EntityType.Builder.<ThrownBlockAsItem>of(ThrownBlockAsItem::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
     public static final DeferredHolder<EntityType<?>, EntityType<GooBall>> GOO_BALL = registerNonMobEntity("goo_ball", EntityType.Builder.<GooBall>of(GooBall::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
+	public static final DeferredHolder<EntityType<?>, EntityType<AmberStar>> AMBER_STAR = registerNonMobEntity("amber_star", EntityType.Builder.<AmberStar>of(AmberStar::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
 
 	// just calls a helper in the main mod because it'll be used all over probably
 	private static String prefix(String name) {
@@ -129,13 +107,11 @@ public class ModEntities {
 	}
 
 	public static <E extends Mob> DeferredHolder<EntityType<?>, EntityType<E>> registerNoEgg(String name, EntityType.Builder<E> builder) {
-		DeferredHolder<EntityType<?>, EntityType<E>> ret = ENTITY_TYPES.register(name, () -> builder.build(prefix(name)));
-		return ret;
+        return ENTITY_TYPES.register(name, () -> builder.build(prefix(name)));
 	}
 
 	private static <E extends Entity> DeferredHolder<EntityType<?>, EntityType<E>> registerNonMobEntity(String name, EntityType.Builder<E> builder) {
-		DeferredHolder<EntityType<?>, EntityType<E>> ret = ENTITY_TYPES.register(name, () -> builder.build(prefix(name)));
-		return ret;
+        return ENTITY_TYPES.register(name, () -> builder.build(prefix(name)));
 	}
 
 }

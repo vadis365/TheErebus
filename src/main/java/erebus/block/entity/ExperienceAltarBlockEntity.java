@@ -3,7 +3,7 @@ package erebus.block.entity;
 import erebus.block.altars.AltarAbstract;
 import erebus.client.particle.ClientParticles;
 import erebus.network.client.AltarAnimatonTimerPacket;
-import erebus.registries.ModBlockEntities;
+import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

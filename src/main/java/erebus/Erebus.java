@@ -1,22 +1,17 @@
 package erebus;
 
-import java.util.Locale;
-
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
 import erebus.block.entity.BambooPipeBlockEntity;
 import erebus.block.entity.BambooPipeExtractBlockEntity;
 import erebus.block.entity.FluidJarBlockEntity;
 import erebus.block.entity.LiquifierBlockEntity;
 import erebus.network.data.DeathCompassData;
 import erebus.recipes.ModCustomRecipes;
-import erebus.registries.ModBlockEntities;
 import erebus.registries.ModFluids;
 import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
 import erebus.registries.ModTabs;
+import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModBlockEntityRendering;
 import erebus.registries.client.ModItemRendering;
@@ -54,6 +49,9 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import org.slf4j.Logger;
+
+import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {

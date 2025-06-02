@@ -16,6 +16,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 import static erebus.registries.ModItems.ITEMS;
 
@@ -23,6 +24,10 @@ public class ModItemHelpers {
 
     public static DeferredItem<Item> registerItem(String name) {
         return ITEMS.registerSimpleItem(name);
+    }
+
+    public static <I extends Item> DeferredItem<Item> registerItem(String name, Supplier<? extends I> item) {
+        return ITEMS.register(name, item);
     }
 
     public static DeferredItem<Item> registerFoodItem(String name, int nutrition, float saturation) {

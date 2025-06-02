@@ -1,6 +1,6 @@
 package erebus.block.entity;
 
-import erebus.registries.ModBlockEntities;
+import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.data.FluidContents;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.core.BlockPos;

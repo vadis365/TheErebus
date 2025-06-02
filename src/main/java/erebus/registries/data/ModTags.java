@@ -4,6 +4,7 @@ import erebus.Erebus;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
@@ -23,4 +24,7 @@ public class ModTags {
     public static final TagKey<Biome> HAS_WASP_DUNGEON = TagKey.create(Registries.BIOME, Erebus.prefix("has_wasp_dungeon"));
     public static final TagKey<Block> UMBERSTONE_ORE_REPLACEABLES = TagKey.create(Registries.BLOCK, Erebus.prefix("umberstone_ore_replaceables"));
     public static final TagKey<Block> BEE_POLLINATION_BLOCKS = TagKey.create(Registries.BLOCK, Erebus.prefix("bee_pollination_blocks"));
+
+    // MARK: Entity
+    public static final TagKey<EntityType<?>> CAN_BE_PRESERVED = TagKey.create(Registries.ENTITY_TYPE, Erebus.prefix("can_be_preserved"));
 }

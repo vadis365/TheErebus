@@ -2,7 +2,7 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.UmberFurnaceBlockEntity;
-import erebus.registries.ModBlockEntities;
+import erebus.registries.blocks.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;

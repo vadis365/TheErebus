@@ -68,8 +68,7 @@ public class PlantBlockProperties {
             .noCollission()
             .noOcclusion()
             .instabreak()
-            .sound(SoundType.AZALEA)
-            .isViewBlocking(BlockPropUtils::never);
+            .sound(SoundType.AZALEA);
 
     public static final Properties DARK_CAPPED_MUSHROOM_PROPS = MUSHROOM_PROPS.mapColor(MapColor.COLOR_BROWN);
     public static final Properties DUTCH_CAP_MUSHROOM_PROPS = MUSHROOM_PROPS.mapColor(MapColor.COLOR_BROWN);

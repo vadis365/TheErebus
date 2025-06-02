@@ -1,4 +1,4 @@
-package erebus.item;
+package erebus.item.wand;
 
 import erebus.entity.AnimatedBlock;
 import erebus.registries.ModSounds;
@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -30,13 +31,13 @@ public class WandOfAnimationItem extends Item {
 	
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	   public void appendHoverText(ItemStack stack,TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
+	   public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, List<Component> tooltip, @NotNull TooltipFlag flagIn) {
 		tooltip.add(Component.translatable("tooltip.erebus.wandofanimation"));
 		}
 
 
 	@Override
-	public InteractionResult useOn(UseOnContext context) {
+	public @NotNull InteractionResult useOn(UseOnContext context) {
 		Level level = context.getLevel();
 		Player player = context.getPlayer();
 		InteractionHand hand = context.getHand();
