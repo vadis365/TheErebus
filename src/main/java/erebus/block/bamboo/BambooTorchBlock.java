@@ -10,6 +10,8 @@ import com.mojang.serialization.MapCodec;
 import erebus.block.types.EnumTorchBlockHalf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -94,5 +96,29 @@ public class BambooTorchBlock extends Block {
             return blockstate.is(this) && blockstate.getValue(HALF) == EnumTorchBlockHalf.LOWER;
         }
     }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+		if (state.getValue(HALF) == EnumTorchBlockHalf.UPPER) {
+			double d0 = pos.getX() + 0.4375F;
+			double d1 = pos.getY() + 1.0625F;
+			double d2 = pos.getZ() + 0.4375F;
+			double d3 = pos.getX() + 0.5625F;
+			double d4 = pos.getZ() + 0.5625F;
+			double d5 = pos.getX() + 0.5F;
+			double d6 = pos.getY() + 1.25F;
+			double d7 = pos.getZ() + 0.5F;
+			level.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ParticleTypes.SMOKE, d0, d1, d4, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ParticleTypes.FLAME, d0, d1, d4, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ParticleTypes.SMOKE, d3, d1, d2, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ParticleTypes.FLAME, d3, d1, d2, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ParticleTypes.SMOKE, d3, d1, d4, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ParticleTypes.FLAME, d3, d1, d4, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ParticleTypes.SMOKE, d5, d6, d7, 0.0D, 0.0D, 0.0D);
+			level.addParticle(ParticleTypes.FLAME, d5, d6, d7, 0.0D, 0.0D, 0.0D);
+		}
+	}
 
 }
