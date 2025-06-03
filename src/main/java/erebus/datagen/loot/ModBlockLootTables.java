@@ -439,7 +439,7 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(OtherBlocks.BAMBOO_LADDER);
         dropSelf(OtherBlocks.BAMBOO_NERD_POLE);
         dropSelf(OtherBlocks.BAMBOO_EXTENDER);
-        dropSelf(OtherBlocks.BAMBOO_TORCH);
+        dropSingleBambooTorchCondition(OtherBlocks.BAMBOO_TORCH);
         dropSelf(OtherBlocks.BAMBOO_PIPE);
         dropSelf(OtherBlocks.BAMBOO_PIPE_EXTRACT);
         dropSelf(OtherBlocks.SILO_ROOF);

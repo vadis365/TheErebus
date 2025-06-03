@@ -1,7 +1,14 @@
 package erebus.datagen.providers;
 
+import java.util.HashMap;
+import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 import erebus.block.PricklyPearBlock;
 import erebus.block.bamboo.BambooBlock;
+import erebus.block.bamboo.BambooTorchBlock;
+import erebus.block.types.EnumTorchBlockHalf;
 import erebus.block.util.ModCropBlock;
 import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.WoodBlocks;
@@ -26,11 +33,6 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePrope
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-
-import java.util.HashMap;
-import java.util.Set;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
 
@@ -95,8 +97,16 @@ public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
 						.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
 								.add(LootItem.lootTableItem(ModItems.BAMBOO)))
 						.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-							//	.add(LootItem.lootTableItem(ModItems.BAMBOO))
 								.add(LootItem.lootTableItem(WoodBlocks.SAPLING_BAMBOO.get().asItem()).when(condition))));
+	}
+	
+	public void dropSingleBambooTorchCondition(Supplier<? extends Block> blockIn) {
+		LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(blockIn.get())
+				.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BambooTorchBlock.HALF, EnumTorchBlockHalf.UPPER));
+		add(blockIn.get(),
+				LootTable.lootTable()
+				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+						.add(LootItem.lootTableItem(blockIn.get().asItem()).when(condition))));
 	}
 
     public void dropComponents(Supplier<? extends Block> blockSupplier, Consumer<LootPool.Builder> lootFunctionSupplier) {
