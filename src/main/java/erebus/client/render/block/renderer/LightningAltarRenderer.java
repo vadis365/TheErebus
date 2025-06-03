@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class LightningAltarRenderer implements BlockEntityRenderer<LightningAltarBlockEntity> {
@@ -32,7 +33,7 @@ public class LightningAltarRenderer implements BlockEntityRenderer<LightningAlta
 	}
 
 	@Override
-    public void render(LightningAltarBlockEntity tile, float partialTick, PoseStack stack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+    public void render(@NotNull LightningAltarBlockEntity tile, float partialTick, @NotNull PoseStack stack, @NotNull MultiBufferSource buffer, int packedLight, int packedOverlay) {
 		if(tile == null || !tile.hasLevel())
 			return;
 		VertexConsumer consumer = buffer.getBuffer(RenderType.entitySolid(getAltarTexture(tile)));

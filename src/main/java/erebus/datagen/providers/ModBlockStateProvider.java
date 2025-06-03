@@ -46,6 +46,10 @@ public abstract class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(block.get(), models().cubeAll(name(block), blockTexture(block.get())).renderType("translucent"));
     }
 
+    public void blockTranslucent(Supplier<? extends Block> block, String texture) {
+        simpleBlock(block.get(), models().cubeAll(name(block), texture(texture)).renderType("translucent"));
+    }
+
     public void log(Supplier<? extends RotatedPillarBlock> block) {
         axisBlock(block.get(), texture(name(block)));
     }

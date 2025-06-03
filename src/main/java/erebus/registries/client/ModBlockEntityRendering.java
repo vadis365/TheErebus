@@ -45,6 +45,7 @@ public class ModBlockEntityRendering {
         event.registerBlockEntityRenderer(ModBlockEntities.LIQUIFIER.get(), LiquifierRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_BRIDGE.get(), BambooBridgeRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_EXTENDER.get(), BambooExtenderRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.PRESERVED_BLOCK.get(), PreservedBlockRenderer::new);
     }
     
 }

@@ -3,17 +3,7 @@ package erebus.datagen;
 import erebus.block.DarkFruitVineBlock;
 import erebus.block.util.ModBerryBushBlock;
 import erebus.datagen.providers.ModBlockStateProvider;
-import erebus.registries.blocks.providers.AmberBlocks;
-import erebus.registries.blocks.providers.DoorBlocks;
-import erebus.registries.blocks.providers.FenceBlocks;
-import erebus.registries.blocks.providers.OreBlocks;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.PlantBlocks;
-import erebus.registries.blocks.providers.SlabBlocks;
-import erebus.registries.blocks.providers.StairBlocks;
-import erebus.registries.blocks.providers.UmberstoneBlocks;
-import erebus.registries.blocks.providers.WallBlocks;
-import erebus.registries.blocks.providers.WoodBlocks;
+import erebus.registries.blocks.providers.*;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -59,8 +49,8 @@ public class ModBlockStates extends ModBlockStateProvider {
         // MARK: Amber
         blockTranslucent(AmberBlocks.AMBER);
         blockTranslucent(AmberBlocks.AMBER_BRICKS);
-        //blockTranslucent(PRESERVED_AMBER); // TODO: Figure out Preserved Blocks
-        //blockTranslucent(PRESERVED_AMBER_GLASS);
+        blockTranslucent(AmberBlocks.PRESERVED_AMBER, "amber");
+        blockTranslucent(AmberBlocks.PRESERVED_AMBER_GLASS, "amber_glass_island");
         doorBlockWithRenderType(AmberBlocks.AMBER_DOOR.get(), modLoc("block/amber_door_lower"), modLoc("block/amber_door_upper"), "translucent");
 
         // MARK: Ores
