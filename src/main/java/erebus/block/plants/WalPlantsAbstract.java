@@ -43,11 +43,7 @@ public abstract class WalPlantsAbstract extends DirectionalBlock implements IShe
 		super(properties);
 	}
 
-	// TODO use this to set scheduled ticks
-	public void setScheduledTickRate(int tickRateIn) {
-		tickRate = tickRateIn;
-	}
-
+	//TODO override this, return an int, and make it simple.
 	public int getScheduledTickRate() {
 		return tickRate;
 	}
@@ -99,7 +95,6 @@ public abstract class WalPlantsAbstract extends DirectionalBlock implements IShe
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
         if (!state.is(oldState.getBlock())) {
             if (!level.isClientSide() && !level.getBlockTicks().hasScheduledTick(pos, this)) {
-            	// setScheduledTickRate(tickRateIn); - use this in child classes before supering or just overide the whole onPlace method?
             	level.scheduleTick(pos, this, getScheduledTickRate());
             }
         }
