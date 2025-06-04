@@ -37,9 +37,19 @@ public abstract class WalPlantsAbstract extends DirectionalBlock implements IShe
 	protected static final VoxelShape EAST_AABB = Block.box(0D, 0D, 0D, 3D, 16D, 16D);
 	protected static final VoxelShape SOUTH_AABB = Block.box(0D, 0D, 0D, 16D, 16D, 3D);
 	protected static final VoxelShape NORTH_AABB = Block.box(0D, 0D, 13D, 16D, 16D, 16D);
+	public int tickRate = 10; // just a default
 
 	protected WalPlantsAbstract(Properties properties) {
 		super(properties);
+	}
+
+	// TODO use this to set scheduled ticks
+	public void setScheduledTickRate(int tickRateIn) {
+		tickRate = tickRateIn;
+	}
+
+	public int getScheduledTickRate() {
+		return tickRate;
 	}
 
 	@Nonnull
@@ -85,6 +95,16 @@ public abstract class WalPlantsAbstract extends DirectionalBlock implements IShe
 		builder.add(FACING);
 	}
 
+    @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        if (!state.is(oldState.getBlock())) {
+            if (!level.isClientSide() && !level.getBlockTicks().hasScheduledTick(pos, this)) {
+            	// setScheduledTickRate(tickRateIn); - use this in child classes before supering or just overide the whole onPlace method?
+            	level.scheduleTick(pos, this, getScheduledTickRate());
+            }
+        }
+    }
+
 	@Override
 	protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		return level.getBlockState(pos.relative(state.getValue(FACING).getOpposite())).isFaceSturdy(level, pos.relative(state.getValue(FACING).getOpposite()), state.getValue(FACING)) && isValidBlock(level.getBlockState(pos.relative(state.getValue(FACING).getOpposite())));
@@ -123,7 +143,7 @@ public abstract class WalPlantsAbstract extends DirectionalBlock implements IShe
 	}
 
 	@Override
-	 protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+	 protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		BlockPos.MutableBlockPos checkPos = new BlockPos.MutableBlockPos();
 
 		if (random.nextInt(2) == 0) {
@@ -171,5 +191,6 @@ public abstract class WalPlantsAbstract extends DirectionalBlock implements IShe
 		} else if (random.nextInt(25) == 0) {
 			level.removeBlock(pos, false);
 		}
+		level.scheduleTick(pos, this, getScheduledTickRate());
 	}
 }
