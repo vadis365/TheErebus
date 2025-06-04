@@ -16,6 +16,7 @@ import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.NotNull;
@@ -51,7 +52,7 @@ public class AmberStar extends ThrowableProjectile implements ItemSupplier {
 
         if (!(entity instanceof Player)) {
             if(canTrap(entity)) {
-                level.setBlockAndUpdate(pos, AmberBlocks.PRESERVED_AMBER_GLASS.get().defaultBlockState());
+                level.setBlock(pos, AmberBlocks.PRESERVED_AMBER_GLASS.get().defaultBlockState(), Block.UPDATE_ALL);
                 PreservedBlockEntity blockEntity = (PreservedBlockEntity) level.getBlockEntity(pos);
                 if(blockEntity != null)
                     blockEntity.setTrappedEntity(trapEntity(entity));
