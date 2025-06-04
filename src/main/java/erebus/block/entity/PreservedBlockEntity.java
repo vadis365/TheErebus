@@ -42,7 +42,9 @@ public class PreservedBlockEntity extends BlockEntity {
     @Override
     public void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.put("TrappedEntity", entityTag);
+        if(entityTag != null) {
+            tag.put("TrappedEntity", entityTag);
+        }
     }
 
     @Override

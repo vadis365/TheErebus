@@ -37,8 +37,8 @@ public class AmberStar extends ThrowableProjectile implements ItemSupplier {
     @Override
     protected void onHitBlock(@NotNull BlockHitResult result) {
         BlockPos pos = result.getBlockPos();
-        level().setBlock(pos, AmberBlocks.AMBER.get().defaultBlockState(), 2);
-        kill();
+        level().setBlock(pos.relative(result.getDirection()), AmberBlocks.AMBER.get().defaultBlockState(), 2);
+        remove(RemovalReason.DISCARDED);
     }
 
     @Override
@@ -55,11 +55,11 @@ public class AmberStar extends ThrowableProjectile implements ItemSupplier {
                 PreservedBlockEntity blockEntity = (PreservedBlockEntity) level.getBlockEntity(pos);
                 if(blockEntity != null)
                     blockEntity.setTrappedEntity(trapEntity(entity));
-                entity.kill();
+                entity.remove(RemovalReason.DISCARDED);
             }
         }
 
-        kill();
+        remove(RemovalReason.DISCARDED);
     }
 
     private boolean canTrap(Entity entity) {
