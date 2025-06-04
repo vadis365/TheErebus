@@ -4,7 +4,6 @@ import org.jetbrains.annotations.NotNull;
 
 import com.mojang.serialization.MapCodec;
 
-import erebus.registries.blocks.providers.UmberstoneBlocks;
 import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.world.level.block.state.BlockState;
 
