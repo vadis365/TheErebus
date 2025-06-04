@@ -30,7 +30,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.IShearable;
 
-public abstract class WalPlantsAbstract extends DirectionalBlock implements IShearable {
+public abstract class WallPlantsAbstract extends DirectionalBlock implements IShearable {
 	protected static final VoxelShape UP_AABB = Block.box(0D, 0D, 0D, 16D, 3D, 16D);
 	protected static final VoxelShape DOWN_AABB = Block.box(0D, 13D, 0D, 16D, 16D, 16D);
 	protected static final VoxelShape WEST_AABB = Block.box(13D, 0D, 0D, 16D, 1D, 16D);
@@ -39,7 +39,7 @@ public abstract class WalPlantsAbstract extends DirectionalBlock implements IShe
 	protected static final VoxelShape NORTH_AABB = Block.box(0D, 0D, 13D, 16D, 16D, 16D);
 	public int tickRate = 10; // just a default
 
-	protected WalPlantsAbstract(Properties properties) {
+	protected WallPlantsAbstract(Properties properties) {
 		super(properties);
 	}
 
@@ -47,6 +47,11 @@ public abstract class WalPlantsAbstract extends DirectionalBlock implements IShe
 	public int getScheduledTickRate() {
 		return tickRate;
 	}
+	
+	public boolean shouldScheduleTick() {
+		return true;
+	}
+
 
 	@Nonnull
 	@Override
@@ -94,7 +99,7 @@ public abstract class WalPlantsAbstract extends DirectionalBlock implements IShe
     @Override
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
         if (!state.is(oldState.getBlock())) {
-            if (!level.isClientSide() && !level.getBlockTicks().hasScheduledTick(pos, this)) {
+            if (!level.isClientSide() && shouldScheduleTick() && !level.getBlockTicks().hasScheduledTick(pos, this)) {
             	level.scheduleTick(pos, this, getScheduledTickRate());
             }
         }
@@ -106,7 +111,7 @@ public abstract class WalPlantsAbstract extends DirectionalBlock implements IShe
 	}
 
 	// TODO override this and remove umberstone for cultivated moss and mould or implement a tag.
-	private boolean isValidBlock(BlockState state) {
+	public boolean isValidBlock(BlockState state) {
 		return state.is(WoodBlocks.LOG_ROTTEN.get()) || state.is(UmberstoneBlocks.UMBERSTONE.get());
 	}
 
@@ -136,56 +141,63 @@ public abstract class WalPlantsAbstract extends DirectionalBlock implements IShe
 		}
 		return ret;
 	}
+	
+	@Override
+	 protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		this.tick(state, level, pos, random);
+	}
 
 	@Override
 	 protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		BlockPos.MutableBlockPos checkPos = new BlockPos.MutableBlockPos();
+			BlockPos.MutableBlockPos checkPos = new BlockPos.MutableBlockPos();
 
-		if (random.nextInt(2) == 0) {
-			byte radius = 4;
-			int distance = 5;
-			for (int xx = pos.getX() - radius; xx <= pos.getX() + radius; ++xx)
-				for (int zz = pos.getZ() - radius; zz <= pos.getZ() + radius; ++zz)
-					for (int yy = pos.getY() - radius; yy <= pos.getY() + radius; ++yy)
-						if (level.isLoaded(checkPos.set(xx, yy, zz)) && level.getBlockState(checkPos.set(xx, yy, zz)).getBlock() == this) {
-							--distance;
-							if (distance <= 0)
-								return;
+			if (random.nextInt(2) == 0) {
+				byte radius = 4;
+				int distance = 5;
+				for (int xx = pos.getX() - radius; xx <= pos.getX() + radius; ++xx)
+					for (int zz = pos.getZ() - radius; zz <= pos.getZ() + radius; ++zz)
+						for (int yy = pos.getY() - radius; yy <= pos.getY() + radius; ++yy)
+							if (level.isLoaded(checkPos.set(xx, yy, zz)) && level.getBlockState(checkPos.set(xx, yy, zz)).getBlock() == this) {
+								--distance;
+								if (distance <= 0)
+									return;
+							}
+				for (int attempt = 0; attempt < 6; attempt++) {
+					int xx = pos.getX() + random.nextInt(3) - 1;
+					int yy = pos.getY() + random.nextInt(3) - 1;
+					int zz = pos.getZ() + random.nextInt(3) - 1;
+					int offsetDir = 0;
+					if (xx != pos.getX())
+						offsetDir++;
+					if (yy != pos.getY())
+						offsetDir++;
+					if (zz != pos.getZ())
+						offsetDir++;
+					if (offsetDir > 1)
+						continue;
+					BlockPos offsetPos = new BlockPos(xx, yy, zz);
+					if (level.isEmptyBlock(offsetPos)) {
+						Direction facing = Direction.getRandom(random);
+						Direction.Axis axis = facing.getAxis();
+						Direction oppositeFacing = facing.getOpposite();
+						boolean isInvalid = false;
+						if (axis.isHorizontal() && !level.getBlockState(offsetPos.relative(oppositeFacing)).isFaceSturdy(level, offsetPos.relative(oppositeFacing), facing)) {
+							isInvalid = true;
+						} else if (axis.isVertical() && !state.canSurvive(level, offsetPos.relative(oppositeFacing))) {
+							isInvalid = true;
 						}
-			for (int attempt = 0; attempt < 6; attempt++) {
-				int xx = pos.getX() + random.nextInt(3) - 1;
-				int yy = pos.getY() + random.nextInt(3) - 1;
-				int zz = pos.getZ() + random.nextInt(3) - 1;
-				int offsetDir = 0;
-				if (xx != pos.getX())
-					offsetDir++;
-				if (yy != pos.getY())
-					offsetDir++;
-				if (zz != pos.getZ())
-					offsetDir++;
-				if (offsetDir > 1)
-					continue;
-				BlockPos offsetPos = new BlockPos(xx, yy, zz);
-				if (level.isEmptyBlock(offsetPos)) {
-					Direction facing = Direction.getRandom(random);
-					Direction.Axis axis = facing.getAxis();
-					Direction oppositeFacing = facing.getOpposite();
-					boolean isInvalid = false;
-					if (axis.isHorizontal() && !level.getBlockState(offsetPos.relative(oppositeFacing)).isFaceSturdy(level, offsetPos.relative(oppositeFacing), facing)) {
-						isInvalid = true;
-					} else if (axis.isVertical() && !state.canSurvive(level, offsetPos.relative(oppositeFacing))) {
-						isInvalid = true;
-					}
-					if (!isInvalid) {
-						level.setBlockAndUpdate(offsetPos, this.defaultBlockState().setValue(FACING, facing));
-						break;
+						if (!isInvalid) {
+							level.setBlockAndUpdate(offsetPos, this.defaultBlockState().setValue(FACING, facing));
+							break;
+						}
 					}
 				}
+	
+			} else if (random.nextInt(25) == 0) {
+				level.removeBlock(pos, false);
 			}
 
-		} else if (random.nextInt(25) == 0) {
-			level.removeBlock(pos, false);
-		}
-		level.scheduleTick(pos, this, getScheduledTickRate());
+			if(shouldScheduleTick())
+				level.scheduleTick(pos, this, getScheduledTickRate());
 	}
 }
