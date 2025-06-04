@@ -89,6 +89,51 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
                         OtherBlocks.BLACK_CANDLE_HONEY_TREAT.get()
                 );
 
+        tag(BlockTags.FENCES)
+                .add(FenceBlocks.FENCE_ASPER.get())
+                .add(FenceBlocks.FENCE_BAMBOO.get())
+                .add(FenceBlocks.FENCE_BAOBAB.get())
+                .add(FenceBlocks.FENCE_BALSAM.get())
+                .add(FenceBlocks.FENCE_CYPRESS.get())
+                .add(FenceBlocks.FENCE_EUCALYPTUS.get())
+                .add(FenceBlocks.FENCE_MAHOGANY.get())
+                .add(FenceBlocks.FENCE_MARSHWOOD.get())
+                .add(FenceBlocks.FENCE_MOSSBARK.get())
+                .add(FenceBlocks.FENCE_ROTTEN.get())
+                .add(FenceBlocks.FENCE_SCORCHED.get())
+                .add(FenceBlocks.FENCE_VARNISHED.get())
+                .add(FenceBlocks.FENCE_WHITE.get());
+
+        tag(BlockTags.WOODEN_FENCES)
+                .add(FenceBlocks.FENCE_ASPER.get())
+                .add(FenceBlocks.FENCE_BAMBOO.get())
+                .add(FenceBlocks.FENCE_BAOBAB.get())
+                .add(FenceBlocks.FENCE_BALSAM.get())
+                .add(FenceBlocks.FENCE_CYPRESS.get())
+                .add(FenceBlocks.FENCE_EUCALYPTUS.get())
+                .add(FenceBlocks.FENCE_MAHOGANY.get())
+                .add(FenceBlocks.FENCE_MARSHWOOD.get())
+                .add(FenceBlocks.FENCE_MOSSBARK.get())
+                .add(FenceBlocks.FENCE_ROTTEN.get())
+                .add(FenceBlocks.FENCE_SCORCHED.get())
+                .add(FenceBlocks.FENCE_VARNISHED.get())
+                .add(FenceBlocks.FENCE_WHITE.get());
+
+        tag(BlockTags.FENCE_GATES)
+                .add(FenceBlocks.FENCE_GATE_ASPER.get())
+                .add(FenceBlocks.FENCE_GATE_BAMBOO.get())
+                .add(FenceBlocks.FENCE_GATE_BAOBAB.get())
+                .add(FenceBlocks.FENCE_GATE_BALSAM.get())
+                .add(FenceBlocks.FENCE_GATE_CYPRESS.get())
+                .add(FenceBlocks.FENCE_GATE_EUCALYPTUS.get())
+                .add(FenceBlocks.FENCE_GATE_MAHOGANY.get())
+                .add(FenceBlocks.FENCE_GATE_MARSHWOOD.get())
+                .add(FenceBlocks.FENCE_GATE_MOSSBARK.get())
+                .add(FenceBlocks.FENCE_GATE_ROTTEN.get())
+                .add(FenceBlocks.FENCE_GATE_SCORCHED.get())
+                .add(FenceBlocks.FENCE_GATE_VARNISHED.get())
+                .add(FenceBlocks.FENCE_GATE_WHITE.get());
+
         tag(BlockTags.LOGS_THAT_BURN)
                 .add(
                         WoodBlocks.LOG_ASPER.get(),
