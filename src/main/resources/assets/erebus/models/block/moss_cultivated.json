@@ -1,5 +1,6 @@
 {
-    "parent": "minecraft:block/cube_all",
+  "parent": "block/thin_block",
+  "render_type": "minecraft:cutout",
     "textures": {
         "particle": "erebus:block/moss_cultivated",
         "moss": "erebus:block/moss_cultivated"

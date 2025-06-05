@@ -33,11 +33,11 @@ import net.neoforged.neoforge.common.IShearable;
 public abstract class WallPlantsAbstract extends DirectionalBlock implements IShearable {
 	protected static final VoxelShape UP_AABB = Block.box(0D, 0D, 0D, 16D, 3D, 16D);
 	protected static final VoxelShape DOWN_AABB = Block.box(0D, 13D, 0D, 16D, 16D, 16D);
-	protected static final VoxelShape WEST_AABB = Block.box(13D, 0D, 0D, 16D, 1D, 16D);
+	protected static final VoxelShape WEST_AABB = Block.box(13D, 0D, 0D, 16D, 16D, 16D);
 	protected static final VoxelShape EAST_AABB = Block.box(0D, 0D, 0D, 3D, 16D, 16D);
 	protected static final VoxelShape SOUTH_AABB = Block.box(0D, 0D, 0D, 16D, 16D, 3D);
 	protected static final VoxelShape NORTH_AABB = Block.box(0D, 0D, 13D, 16D, 16D, 16D);
-	public int tickRate = 10; // just a default
+	public int tickRate = 40; // just a default
 
 	protected WallPlantsAbstract(Properties properties) {
 		super(properties);
@@ -117,7 +117,9 @@ public abstract class WallPlantsAbstract extends DirectionalBlock implements ISh
 
 	@Override
 	protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-		return state.canSurvive(level, pos) ? super.updateShape(state, direction, neighborState, level, pos, neighborPos) : Blocks.AIR.defaultBlockState();
+		if (shouldScheduleTick())
+			level.scheduleTick(pos, this, getScheduledTickRate());
+		return canSurvive(state, level, pos) ? super.updateShape(state, direction, neighborState, level, pos, neighborPos) : Blocks.AIR.defaultBlockState();
 	}
 
 	@Override
@@ -141,63 +143,45 @@ public abstract class WallPlantsAbstract extends DirectionalBlock implements ISh
 		}
 		return ret;
 	}
-	
+
 	@Override
 	 protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		this.tick(state, level, pos, random);
 	}
 
 	@Override
-	 protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-			BlockPos.MutableBlockPos checkPos = new BlockPos.MutableBlockPos();
+	protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		if (random.nextInt(25) == 0 && !shouldScheduleTick())
+			level.removeBlock(pos, false);
 
-			if (random.nextInt(2) == 0) {
-				byte radius = 4;
-				int distance = 5;
-				for (int xx = pos.getX() - radius; xx <= pos.getX() + radius; ++xx)
-					for (int zz = pos.getZ() - radius; zz <= pos.getZ() + radius; ++zz)
-						for (int yy = pos.getY() - radius; yy <= pos.getY() + radius; ++yy)
-							if (level.isLoaded(checkPos.set(xx, yy, zz)) && level.getBlockState(checkPos.set(xx, yy, zz)).getBlock() == this) {
-								--distance;
-								if (distance <= 0)
-									return;
-							}
+		BlockPos.MutableBlockPos checkPos = new BlockPos.MutableBlockPos();
+			byte radius = 4;
+			int distance = 5;
+			for (int xx = pos.getX() - radius; xx <= pos.getX() + radius; ++xx)
+				for (int zz = pos.getZ() - radius; zz <= pos.getZ() + radius; ++zz)
+					for (int yy = pos.getY() - radius; yy <= pos.getY() + radius; ++yy)
+						if (level.isLoaded(checkPos.set(xx, yy, zz)) && level.getBlockState(checkPos.set(xx, yy, zz)).getBlock() == this) {
+							--distance;
+							if (distance <= 0)
+								return;
+						}
+			
+			BlockPos growingOnBlock = pos.relative(state.getValue(FACING).getOpposite());
+			Direction randomiseDirection = Direction.getRandom(random);
+			BlockPos blockToGrowOnPos = growingOnBlock.relative(randomiseDirection);
+
+			if(level.isEmptyBlock(blockToGrowOnPos)) //allows for floating blocks to grow on all sides
+				blockToGrowOnPos = growingOnBlock;
+
+			if (isValidBlock(level.getBlockState(blockToGrowOnPos))) {
 				for (int attempt = 0; attempt < 6; attempt++) {
-					int xx = pos.getX() + random.nextInt(3) - 1;
-					int yy = pos.getY() + random.nextInt(3) - 1;
-					int zz = pos.getZ() + random.nextInt(3) - 1;
-					int offsetDir = 0;
-					if (xx != pos.getX())
-						offsetDir++;
-					if (yy != pos.getY())
-						offsetDir++;
-					if (zz != pos.getZ())
-						offsetDir++;
-					if (offsetDir > 1)
-						continue;
-					BlockPos offsetPos = new BlockPos(xx, yy, zz);
-					if (level.isEmptyBlock(offsetPos)) {
-						Direction facing = Direction.getRandom(random);
-						Direction.Axis axis = facing.getAxis();
-						Direction oppositeFacing = facing.getOpposite();
-						boolean isInvalid = false;
-						if (axis.isHorizontal() && !level.getBlockState(offsetPos.relative(oppositeFacing)).isFaceSturdy(level, offsetPos.relative(oppositeFacing), facing)) {
-							isInvalid = true;
-						} else if (axis.isVertical() && !state.canSurvive(level, offsetPos.relative(oppositeFacing))) {
-							isInvalid = true;
-						}
-						if (!isInvalid) {
-							level.setBlockAndUpdate(offsetPos, this.defaultBlockState().setValue(FACING, facing));
-							break;
-						}
-					}
+					Direction randomiseSide = Direction.getRandom(random);
+					if (level.isEmptyBlock(blockToGrowOnPos.relative(randomiseSide)) && level.getBlockState(blockToGrowOnPos).isFaceSturdy(level, blockToGrowOnPos, randomiseSide))
+						level.setBlockAndUpdate(blockToGrowOnPos.relative(randomiseSide), this.defaultBlockState().setValue(FACING, randomiseSide));
 				}
-	
-			} else if (random.nextInt(25) == 0) {
-				level.removeBlock(pos, false);
 			}
 
-			if(shouldScheduleTick())
+			if (shouldScheduleTick())
 				level.scheduleTick(pos, this, getScheduledTickRate());
 	}
 }
