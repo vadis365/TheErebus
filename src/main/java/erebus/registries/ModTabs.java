@@ -552,8 +552,8 @@ public class ModTabs {
                         output.accept(PlantBlocks.TALL_FERN);
                         output.accept(PlantBlocks.MOSS);
                         output.accept(PlantBlocks.MOULD);
-                        output.accept(PlantBlocks.CULTIVATED_MOSS);
-                        output.accept(PlantBlocks.CULTIVATED_MOULD);
+                        output.accept(PlantBlocks.MOSS_CULTIVATED);
+                        output.accept(PlantBlocks.MOULD_CULTIVATED);
                         output.accept(PlantBlocks.ALGAE);
                         output.accept(PlantBlocks.DARK_CAPPED_MUSHROOM);
                         output.accept(PlantBlocks.SARCASTIC_CZECH_MUSHROOM);

@@ -58,8 +58,8 @@ public class PlantBlocks extends ModBlockHelpers {
     public static final DeferredBlock<VineBlock> THORNS;
     public static final DeferredBlock<Block> MOSS;
     public static final DeferredBlock<Block> MOULD;
-    public static final DeferredBlock<Block> CULTIVATED_MOSS;
-    public static final DeferredBlock<Block> CULTIVATED_MOULD;
+    public static final DeferredBlock<Block> MOSS_CULTIVATED;
+    public static final DeferredBlock<Block> MOULD_CULTIVATED;
     public static final DeferredBlock<WaterlilyBlock> ALGAE;
     public static final DeferredBlock<Block> GLOWSHROOM_BLOCK;
     public static final DeferredBlock<Block> GLOWSHROOM_STALK;
@@ -162,8 +162,8 @@ public class PlantBlocks extends ModBlockHelpers {
         THORNS = registerBlock("thorns", () -> new VineBlock(Properties.ofFullCopy(Blocks.VINE)));
         MOSS = registerBlock("moss", () -> new MossBlock(Properties.of().strength(0.2F).noCollission().randomTicks().sound(SoundType.VINE).noOcclusion()));
         MOULD = registerBlock("mould", () -> new MouldBlock(Properties.of().strength(0.2F).noCollission().randomTicks().sound(SoundType.VINE).noOcclusion()));
-        CULTIVATED_MOSS = registerBlock("cultivated_moss", () -> new MossCultivatedBlock(Properties.of().strength(0.2F).noCollission().sound(SoundType.VINE).noOcclusion()));
-        CULTIVATED_MOULD = registerBlock("cultivated_mould", () -> new MouldCultivatedBlock(Properties.of().strength(0.2F).noCollission().sound(SoundType.VINE).noOcclusion()));
+        MOSS_CULTIVATED = registerBlock("moss_cultivated", () -> new MossCultivatedBlock(Properties.of().strength(0.2F).noCollission().sound(SoundType.VINE).noOcclusion()));
+        MOULD_CULTIVATED = registerBlock("mould_cultivated", () -> new MouldCultivatedBlock(Properties.of().strength(0.2F).noCollission().sound(SoundType.VINE).noOcclusion()));
         ALGAE = registerBlock(
                 "algae",
                 () -> new WaterlilyBlock(Properties.of()

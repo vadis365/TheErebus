@@ -1,5 +1,5 @@
 {
-    "ambientocclusion": true,
+    "parent": "minecraft:block/cube_all",
     "textures": {
         "particle": "erebus:block/moss_cultivated",
         "moss": "erebus:block/moss_cultivated"

@@ -212,7 +212,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_obsidian", has(Tags.Items.OBSIDIANS))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, PlantBlocks.CULTIVATED_MOSS)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, PlantBlocks.MOSS_CULTIVATED)
                 .pattern("GSG")
                 .pattern("SMS")
                 .pattern("GSG")
@@ -222,7 +222,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_supernatural_velocity", has(ModItems.SUPERNATURAL_VELOCITY))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, PlantBlocks.CULTIVATED_MOULD)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, PlantBlocks.MOULD_CULTIVATED)
                 .pattern("LSL")
                 .pattern("SMS")
                 .pattern("LSL")

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "erebus:cultivated_moss"
+          "name": "erebus:mould_cultivated"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "erebus:blocks/cultivated_moss"
+  "random_sequence": "erebus:blocks/mould_cultivated"
 }
