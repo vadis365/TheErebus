@@ -260,10 +260,6 @@ public class ModBlockStates extends ModBlockStateProvider {
         crossBlock(PlantBlocks.FIRE_BLOOM);
         tintedCrossBlock(PlantBlocks.FIDDLE_HEAD);
         vines(PlantBlocks.THORNS);
-        crossBlock(PlantBlocks.MOSS);
-        crossBlock(PlantBlocks.MOULD);
-        crossBlock(PlantBlocks.CULTIVATED_MOSS_DOWN);
-        crossBlock(PlantBlocks.CULTIVATED_MOULD_DOWN);
         simpleBlock(PlantBlocks.ALGAE.get(), models().getExistingFile(modLoc("block/algae")));
         crossBlock(PlantBlocks.HANGING_WEB);
         hugeMushroom(PlantBlocks.DARK_CAPPED_MUSHROOM_BLOCK, "dark_capped", false);

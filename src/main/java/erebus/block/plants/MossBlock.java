@@ -8,7 +8,7 @@ public class MossBlock extends WallPlantsAbstract {
 
 	public static final MapCodec<MossBlock> CODEC = simpleCodec(MossBlock::new);
 
-	protected MossBlock(Properties properties) {
+	public MossBlock(Properties properties) {
 		super(properties);
 	}
 

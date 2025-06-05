@@ -11,7 +11,7 @@ public class MouldCultivatedBlock extends WallPlantsAbstract {
 	// REMEMBER TO SET THE CULTIVATED BLOCKS NOT TO RANDOM TICK ON REG!
 	public static final MapCodec<MouldCultivatedBlock> CODEC = simpleCodec(MouldCultivatedBlock::new);
 
-	protected MouldCultivatedBlock(Properties properties) {
+	public MouldCultivatedBlock(Properties properties) {
 		super(properties);
 	}
 

@@ -491,10 +491,6 @@ public class ModItemModels extends ModItemModelProvider {
         blockFlat(PlantBlocks.FERN);
         blockFlat(PlantBlocks.FIDDLE_HEAD);
         blockFlat(PlantBlocks.THORNS);
-        blockFlat(PlantBlocks.MOSS);
-        blockFlat(PlantBlocks.MOULD);
-        blockFlat(PlantBlocks.CULTIVATED_MOSS_DOWN);
-        blockFlat(PlantBlocks.CULTIVATED_MOULD_DOWN);
         blockFlat(PlantBlocks.ALGAE);
         blockFlat(PlantBlocks.HANGING_WEB);
         block(PlantBlocks.GIANT_LILY_PAD);

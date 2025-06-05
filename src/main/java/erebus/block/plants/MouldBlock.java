@@ -8,7 +8,7 @@ public class MouldBlock extends WallPlantsAbstract {
 
 	public static final MapCodec<MouldBlock> CODEC = simpleCodec(MouldBlock::new);
 
-	protected MouldBlock(Properties properties) {
+	public MouldBlock(Properties properties) {
 		super(properties);
 	}
 
