@@ -31,6 +31,7 @@ import erebus.registries.world.feature.config.StructureFeatureConfigs;
 import erebus.registries.world.tree.ModFoliagePlacers;
 import erebus.registries.world.tree.ModTreeDecorators;
 import erebus.registries.world.tree.ModTrunkPlacers;
+import erebus.world.carver.ModWorldCarvers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
@@ -88,6 +89,7 @@ public class Erebus {
         ModParticles.PARTICLES.register(bus);
         ModDataComponents.DATA_COMPONENT_REGISTRY.register(bus);
         ModFeatures.CONFIGS.register(bus);
+        ModWorldCarvers.CARVERS.register(bus);
 
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 

@@ -165,6 +165,9 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
 
         tag(ModTags.UMBERSTONE_ORE_REPLACEABLES)
                 .add(UmberstoneBlocks.UMBERSTONE.get());
+
+        tag(ModTags.EREBUS_CARVER_REPLACEABLES)
+                .add(UmberstoneBlocks.UMBERSTONE.get());
         
         // Stigma Blocks for Bees
         tag(ModTags.BEE_POLLINATION_BLOCKS)

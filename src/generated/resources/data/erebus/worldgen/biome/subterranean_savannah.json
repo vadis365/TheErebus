@@ -1,5 +1,7 @@
 {
-  "carvers": {},
+  "carvers": {
+    "air": "erebus:erebus_cave"
+  },
   "downfall": 0.0,
   "effects": {
     "ambient_sound": "erebus:music/ambient_bug_in_the_system",

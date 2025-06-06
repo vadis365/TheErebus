@@ -6,6 +6,7 @@ import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
 import erebus.registries.world.feature.StructureFeatures;
 import erebus.registries.world.feature.TreeFeatures;
+import erebus.world.carver.ModCarvers;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -57,6 +59,7 @@ public class UlteriorOutbackBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
+                        .addCarver(GenerationStep.Carving.AIR, ModCarvers.EREBUS_CAVE)
                         .addFeature(SURFACE_STRUCTURES, StructureFeatures.DUNG_PILE.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ROTTEN_ACACIA.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_SAVANNA)

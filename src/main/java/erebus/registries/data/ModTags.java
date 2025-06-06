@@ -24,6 +24,7 @@ public class ModTags {
     public static final TagKey<Biome> HAS_WASP_DUNGEON = TagKey.create(Registries.BIOME, Erebus.prefix("has_wasp_dungeon"));
     public static final TagKey<Block> UMBERSTONE_ORE_REPLACEABLES = TagKey.create(Registries.BLOCK, Erebus.prefix("umberstone_ore_replaceables"));
     public static final TagKey<Block> BEE_POLLINATION_BLOCKS = TagKey.create(Registries.BLOCK, Erebus.prefix("bee_pollination_blocks"));
+    public static final TagKey<Block> EREBUS_CARVER_REPLACEABLES = TagKey.create(Registries.BLOCK, Erebus.prefix("erebus_carver_replaceables"));
 
     // MARK: Entity
     public static final TagKey<EntityType<?>> CAN_BE_PRESERVED = TagKey.create(Registries.ENTITY_TYPE, Erebus.prefix("can_be_preserved"));

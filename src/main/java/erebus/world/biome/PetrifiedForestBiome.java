@@ -4,6 +4,7 @@ import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
+import erebus.world.carver.ModCarvers;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.MobCategory;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -55,6 +57,7 @@ public class PetrifiedForestBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
+                        .addCarver(GenerationStep.Carving.AIR, ModCarvers.EREBUS_CAVE)
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_BROWN_SMALL.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_BROWN_MEDIUM.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_BROWN_LARGE.getPlacedResourceKey())
