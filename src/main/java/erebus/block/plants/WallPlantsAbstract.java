@@ -37,7 +37,7 @@ public abstract class WallPlantsAbstract extends DirectionalBlock implements ISh
 	protected static final VoxelShape EAST_AABB = Block.box(0D, 0D, 0D, 3D, 16D, 16D);
 	protected static final VoxelShape SOUTH_AABB = Block.box(0D, 0D, 0D, 16D, 16D, 3D);
 	protected static final VoxelShape NORTH_AABB = Block.box(0D, 0D, 13D, 16D, 16D, 16D);
-	public int tickRate = 40; // just a default
+	public int tickRate = 100; // just a default
 
 	protected WallPlantsAbstract(Properties properties) {
 		super(properties);
@@ -47,11 +47,10 @@ public abstract class WallPlantsAbstract extends DirectionalBlock implements ISh
 	public int getScheduledTickRate() {
 		return tickRate;
 	}
-	
+
 	public boolean shouldScheduleTick() {
 		return true;
 	}
-
 
 	@Nonnull
 	@Override
@@ -118,7 +117,8 @@ public abstract class WallPlantsAbstract extends DirectionalBlock implements ISh
 	@Override
 	protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
 		if (shouldScheduleTick())
-			level.scheduleTick(pos, this, getScheduledTickRate());
+			if(!level.getBlockTicks().hasScheduledTick(pos, this))
+				level.scheduleTick(pos, this, getScheduledTickRate());
 		return canSurvive(state, level, pos) ? super.updateShape(state, direction, neighborState, level, pos, neighborPos) : Blocks.AIR.defaultBlockState();
 	}
 
@@ -151,18 +151,22 @@ public abstract class WallPlantsAbstract extends DirectionalBlock implements ISh
 
 	@Override
 	protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		if (shouldScheduleTick())
+			if(!level.getBlockTicks().hasScheduledTick(pos, this))
+				level.scheduleTick(pos, this, getScheduledTickRate());
+		
 		if (random.nextInt(25) == 0 && !shouldScheduleTick())
 			level.removeBlock(pos, false);
 
 		BlockPos.MutableBlockPos checkPos = new BlockPos.MutableBlockPos();
-			byte radius = 4;
-			int distance = 5;
+			byte radius = 2;
+			int maxNearby = 6;
 			for (int xx = pos.getX() - radius; xx <= pos.getX() + radius; ++xx)
 				for (int zz = pos.getZ() - radius; zz <= pos.getZ() + radius; ++zz)
 					for (int yy = pos.getY() - radius; yy <= pos.getY() + radius; ++yy)
 						if (level.isLoaded(checkPos.set(xx, yy, zz)) && level.getBlockState(checkPos.set(xx, yy, zz)).getBlock() == this) {
-							--distance;
-							if (distance <= 0)
+							--maxNearby;
+							if (maxNearby <= 0)
 								return;
 						}
 			
@@ -180,8 +184,5 @@ public abstract class WallPlantsAbstract extends DirectionalBlock implements ISh
 						level.setBlockAndUpdate(blockToGrowOnPos.relative(randomiseSide), this.defaultBlockState().setValue(FACING, randomiseSide));
 				}
 			}
-
-			if (shouldScheduleTick())
-				level.scheduleTick(pos, this, getScheduledTickRate());
 	}
 }
