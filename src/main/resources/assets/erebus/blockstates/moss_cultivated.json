@@ -1,0 +1,10 @@
+{
+  "variants": {
+      "facing=up": { "model": "erebus:block/moss_cultivated", "x": 90 },
+      "facing=down": { "model": "erebus:block/moss_cultivated", "x": -90 },
+      "facing=south": { "model": "erebus:block/moss_cultivated" },
+      "facing=west": { "model": "erebus:block/moss_cultivated", "y": 90 },
+      "facing=north": { "model": "erebus:block/moss_cultivated", "y": 180 },
+      "facing=east": { "model": "erebus:block/moss_cultivated", "y": 270 }
+  }
+}

@@ -302,8 +302,8 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(PlantBlocks.THORNS);
         dropSelf(PlantBlocks.MOSS);
         dropSelf(PlantBlocks.MOULD);
-        dropSelf(PlantBlocks.CULTIVATED_MOSS_DOWN);
-        dropSelf(PlantBlocks.CULTIVATED_MOULD_DOWN);
+        dropSelf(PlantBlocks.MOSS_CULTIVATED);
+        dropSelf(PlantBlocks.MOULD_CULTIVATED);
         dropSelf(PlantBlocks.ALGAE);
         dropSelf(PlantBlocks.GLOWSHROOM_BLOCK);
         dropSelf(PlantBlocks.GLOWSHROOM_STALK);

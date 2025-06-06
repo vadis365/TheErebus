@@ -1,21 +1,61 @@
 package erebus.registries.blocks.providers;
 
+import static erebus.registries.blocks.properties.PlantBlockProperties.BUSH_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.COLOSSAL_BAMBOO_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.CROP_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.DARK_CAPPED_MUSHROOM_BLOCK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.DARK_CAPPED_MUSHROOM_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.DARK_FRUIT_VINE_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.DUTCH_CAP_MUSHROOM_BLOCK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.DUTCH_CAP_MUSHROOM_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_BLACK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_BLUE_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_BROWN_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_CYAN_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_GRAY_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_LIGHT_BLUE_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_LIGHT_GRAY_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_MAGENTA_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_ORANGE_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_PINK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_PURPLE_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_RAINBOW_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_RED_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_WHITE_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.FLOWER_YELLOW_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.GRANDMAS_SHOES_MUSHROOM_BLOCK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.GRANDMAS_SHOES_MUSHROOM_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.KAIZERS_FINGERS_MUSHROOM_BLOCK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.KAIZERS_FINGERS_MUSHROOM_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.PRICKLY_PEAR_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.SARCASTIC_CZECH_MUSHROOM_BLOCK_PROPS;
+import static erebus.registries.blocks.properties.PlantBlockProperties.SARCASTIC_CZECH_MUSHROOM_PROPS;
+
 import erebus.block.DarkFruitVineBlock;
 import erebus.block.GlowshroomStalkBlock;
 import erebus.block.PricklyPearBlock;
 import erebus.block.bamboo.BambooBlock;
+import erebus.block.plants.MossBlock;
+import erebus.block.plants.MossCultivatedBlock;
+import erebus.block.plants.MouldBlock;
+import erebus.block.plants.MouldCultivatedBlock;
 import erebus.block.util.ModBerryBushBlock;
 import erebus.block.util.ModCropBlock;
 import erebus.registries.ModItems;
 import erebus.registries.helpers.ModBlockHelpers;
 import erebus.registries.world.feature.PlantFeatures;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.HugeMushroomBlock;
+import net.minecraft.world.level.block.MushroomBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.VineBlock;
+import net.minecraft.world.level.block.WaterlilyBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
-
-import static erebus.registries.blocks.properties.PlantBlockProperties.*;
 
 public class PlantBlocks extends ModBlockHelpers {
     // MARK: Plants
@@ -55,8 +95,8 @@ public class PlantBlocks extends ModBlockHelpers {
     public static final DeferredBlock<VineBlock> THORNS;
     public static final DeferredBlock<Block> MOSS;
     public static final DeferredBlock<Block> MOULD;
-    public static final DeferredBlock<Block> CULTIVATED_MOSS_DOWN;
-    public static final DeferredBlock<Block> CULTIVATED_MOULD_DOWN;
+    public static final DeferredBlock<Block> MOSS_CULTIVATED;
+    public static final DeferredBlock<Block> MOULD_CULTIVATED;
     public static final DeferredBlock<WaterlilyBlock> ALGAE;
     public static final DeferredBlock<Block> GLOWSHROOM_BLOCK;
     public static final DeferredBlock<Block> GLOWSHROOM_STALK;
@@ -157,10 +197,10 @@ public class PlantBlocks extends ModBlockHelpers {
         FERN = registerSimpleBlock("fern", Properties.ofFullCopy(Blocks.SHORT_GRASS));
         FIDDLE_HEAD = registerSimpleBlock("fiddle_head", Properties.ofFullCopy(Blocks.TALL_GRASS));
         THORNS = registerBlock("thorns", () -> new VineBlock(Properties.ofFullCopy(Blocks.VINE)));
-        MOSS = registerBlock("moss", () -> new VineBlock(Properties.ofFullCopy(Blocks.VINE)));
-        MOULD = registerBlock("mould", () -> new VineBlock(Properties.ofFullCopy(Blocks.VINE)));
-        CULTIVATED_MOSS_DOWN = registerBlock("cultivated_moss", () -> new VineBlock(Properties.ofFullCopy(Blocks.VINE)));
-        CULTIVATED_MOULD_DOWN = registerBlock("cultivated_mould", () -> new VineBlock(Properties.ofFullCopy(Blocks.VINE)));
+        MOSS = registerBlock("moss", () -> new MossBlock(Properties.of().strength(0.2F).noCollission().randomTicks().sound(SoundType.VINE).noOcclusion().replaceable()));
+        MOULD = registerBlock("mould", () -> new MouldBlock(Properties.of().strength(0.2F).noCollission().randomTicks().sound(SoundType.VINE).noOcclusion().replaceable()));
+        MOSS_CULTIVATED = registerBlock("moss_cultivated", () -> new MossCultivatedBlock(Properties.of().strength(0.2F).noCollission().sound(SoundType.VINE).noOcclusion().replaceable()));
+        MOULD_CULTIVATED = registerBlock("mould_cultivated", () -> new MouldCultivatedBlock(Properties.of().strength(0.2F).noCollission().sound(SoundType.VINE).noOcclusion().replaceable()));
         ALGAE = registerBlock(
                 "algae",
                 () -> new WaterlilyBlock(Properties.of()
