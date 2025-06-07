@@ -32,6 +32,7 @@ import static erebus.registries.blocks.properties.PlantBlockProperties.SARCASTIC
 import static erebus.registries.blocks.properties.PlantBlockProperties.SARCASTIC_CZECH_MUSHROOM_PROPS;
 
 import erebus.block.DarkFruitVineBlock;
+import erebus.block.GlowshroomBlock;
 import erebus.block.GlowshroomStalkBlock;
 import erebus.block.PricklyPearBlock;
 import erebus.block.bamboo.BambooBlock;
@@ -211,8 +212,8 @@ public class PlantBlocks extends ModBlockHelpers {
                         .pushReaction(PushReaction.DESTROY)
                 )
         );
-        GLOWSHROOM_BLOCK = registerSimpleBlock("glowshroom_block", Properties.of().mapColor(MapColor.STONE).noOcclusion());
-        GLOWSHROOM_STALK = registerBlock("glowshroom_stalk", () -> new GlowshroomStalkBlock(Properties.of().mapColor(MapColor.STONE)));
+        GLOWSHROOM_BLOCK = registerBlock("glowshroom_block", () -> new GlowshroomBlock(Properties.of().mapColor(MapColor.STONE).sound(SoundType.FUNGUS).strength(0.2F).lightLevel((state) -> 15).noOcclusion()));
+        GLOWSHROOM_STALK = registerBlock("glowshroom_stalk", () -> new GlowshroomStalkBlock(Properties.of().mapColor(MapColor.STONE).sound(SoundType.FUNGUS).strength(0.2F).instabreak().noOcclusion().randomTicks()));
         HANGING_WEB = registerSimpleBlock("hanging_web", Properties.of().mapColor(MapColor.STONE).noOcclusion());
 
         // MARK: Flowers

@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
-public enum EnumPartType implements IErebusEnum {
+public enum EnumGlowshroomPart implements IErebusEnum {
     MAIN,
     DOWN_1,
     DOWN_2,
