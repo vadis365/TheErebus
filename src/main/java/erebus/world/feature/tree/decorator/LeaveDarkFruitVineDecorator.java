@@ -2,7 +2,7 @@ package erebus.world.feature.tree.decorator;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import erebus.block.DarkFruitVineBlock;
+import erebus.block.plants.DarkFruitVineBlock;
 import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.world.tree.ModTreeDecorators;
 import net.minecraft.core.BlockPos;

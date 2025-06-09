@@ -3,7 +3,7 @@ package erebus.datagen.providers;
 import erebus.Erebus;
 import erebus.block.CandleHoneyTreatBlock;
 import erebus.block.HoneyTreatBlock;
-import erebus.block.util.ModCropBlock;
+import erebus.block.plants.ModCropBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;

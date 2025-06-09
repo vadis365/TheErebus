@@ -1,4 +1,4 @@
-package erebus.block;
+package erebus.block.plants;
 
 import com.mojang.serialization.MapCodec;
 import erebus.registries.ModItems;

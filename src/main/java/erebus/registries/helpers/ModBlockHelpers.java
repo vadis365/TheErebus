@@ -1,8 +1,8 @@
 package erebus.registries.helpers;
 
+import erebus.block.plants.ModBerryBushBlock;
+import erebus.block.plants.ModCropBlock;
 import erebus.block.util.ConnectedTextureBlock;
-import erebus.block.util.ModBerryBushBlock;
-import erebus.block.util.ModCropBlock;
 import erebus.registries.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

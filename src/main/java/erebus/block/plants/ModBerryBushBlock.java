@@ -1,4 +1,4 @@
-package erebus.block.util;
+package erebus.block.plants;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;

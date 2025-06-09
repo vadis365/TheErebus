@@ -1,6 +1,6 @@
 package erebus.world.feature.plant.config;
 
-import erebus.block.util.ModBerryBushBlock;
+import erebus.block.plants.ModBerryBushBlock;
 import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.blocks.providers.UmberstoneBlocks;
 import net.minecraft.core.BlockPos;

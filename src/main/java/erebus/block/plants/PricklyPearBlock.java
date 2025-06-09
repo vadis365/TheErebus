@@ -1,7 +1,4 @@
-package erebus.block;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+package erebus.block.plants;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,6 +18,8 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.util.TriState;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PricklyPearBlock extends Block implements BonemealableBlock {
 
@@ -117,9 +116,7 @@ public class PricklyPearBlock extends Block implements BonemealableBlock {
 			TriState soilDecision = stateBelow.canSustainPlant(level, pos.below(), Direction.UP, state);
 			if (!soilDecision.isDefault())
 				return soilDecision.isTrue();
-			if (stateBelow.is(BlockTags.DIRT) || stateBelow.is(BlockTags.SAND))
-				return true;
+            return stateBelow.is(BlockTags.DIRT) || stateBelow.is(BlockTags.SAND);
 		}
-		return false;
-	}
+    }
 }

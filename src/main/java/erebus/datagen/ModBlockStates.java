@@ -1,7 +1,7 @@
 package erebus.datagen;
 
-import erebus.block.DarkFruitVineBlock;
-import erebus.block.util.ModBerryBushBlock;
+import erebus.block.plants.DarkFruitVineBlock;
+import erebus.block.plants.ModBerryBushBlock;
 import erebus.datagen.providers.ModBlockStateProvider;
 import erebus.registries.blocks.providers.*;
 import net.minecraft.data.PackOutput;

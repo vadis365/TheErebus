@@ -1,6 +1,6 @@
 package erebus.world.feature.bush;
 
-import erebus.block.util.ModBerryBushBlock;
+import erebus.block.plants.ModBerryBushBlock;
 import erebus.world.feature.ErebusFeature;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;

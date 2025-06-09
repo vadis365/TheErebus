@@ -7,8 +7,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -42,10 +42,7 @@ public class MossPatchFeatureConfiguration extends Feature<NoneFeatureConfigurat
         Direction side = Direction.getRandom(random);
 
         if (level.getBlockState(pos.relative(side)).isFaceSturdy(level, pos.relative(side), side.getOpposite()) && isValidBlock(level, pos.relative(side))) {
-            moss.setValue(VineBlock.NORTH, side.getName().equals(Direction.NORTH.getName()));
-            moss.setValue(VineBlock.SOUTH, side.getName().equals(Direction.SOUTH.getName()));
-            moss.setValue(VineBlock.EAST, side.getName().equals(Direction.EAST.getName()));
-            moss.setValue(VineBlock.WEST, side.getName().equals(Direction.WEST.getName()));
+            moss.setValue(BlockStateProperties.FACING, side);
             setBlock(level, pos, moss);
             blockPlaced = true;
         }
