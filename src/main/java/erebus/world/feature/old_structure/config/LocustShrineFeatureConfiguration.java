@@ -1,4 +1,4 @@
-package erebus.world.feature.structure.config;
+package erebus.world.feature.old_structure.config;
 
 import erebus.block.BlockOfBonesBlock;
 import erebus.block.entity.BlockOfBonesBlockEntity;

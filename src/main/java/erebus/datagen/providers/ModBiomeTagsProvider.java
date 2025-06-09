@@ -29,7 +29,6 @@ public class ModBiomeTagsProvider extends BiomeTagsProvider {
                 .add(ModBiomes.UNDERGROUND_JUNGLE.getResourceKey())
                 .add(ModBiomes.VOLCANIC_DESERT.getResourceKey());
 
-        tag(ModTags.NO_DRAGONFLY_DUNGEON);
         tag(ModTags.HAS_DRAGONFLY_DUNGEON)
                 .add(ModBiomes.SUBMERGED_SWAMP.getResourceKey());
 

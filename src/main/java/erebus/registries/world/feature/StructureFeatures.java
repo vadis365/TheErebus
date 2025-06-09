@@ -1,7 +1,7 @@
 package erebus.registries.world.feature;
 
 import erebus.registries.helpers.ModFeatureHelpers;
-import erebus.world.feature.structure.*;
+import erebus.world.feature.old_structure.*;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;

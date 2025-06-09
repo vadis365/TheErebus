@@ -1,4 +1,4 @@
-package erebus.world.feature.structure;
+package erebus.world.feature.old_structure;
 
 import erebus.world.feature.ErebusFeature;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -8,8 +8,8 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
 import java.util.List;
 
-public class AntlionLairFeature extends ErebusFeature {
-    public AntlionLairFeature(String name) {
+public class DungPileFeature extends ErebusFeature {
+    public DungPileFeature(String name) {
         super(name);
     }
 

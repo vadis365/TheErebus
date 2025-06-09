@@ -1,6 +1,6 @@
 package erebus.registries.world.feature.config;
 
-import erebus.world.feature.structure.config.*;
+import erebus.world.feature.old_structure.config.*;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.neoforged.neoforge.registries.DeferredHolder;
