@@ -13,7 +13,14 @@ import net.minecraft.world.level.levelgen.structure.placement.StructurePlacement
 
 public class ModStructureSets {
 
+    public static final ResourceKey<StructureSet> ANTLION_DUNGEON = createKey("antlion_dungeon");
+    public static final ResourceKey<StructureSet> ANTLION_LAIR = createKey("antlion_lair");
+    public static final ResourceKey<StructureSet> DRAGONFLY_DUNGEON = createKey("dragonfly_dungeon");
+    public static final ResourceKey<StructureSet> DUNG_PILE = createKey("dung_pile");
     public static final ResourceKey<StructureSet> LOCUST_SHRINE = createKey("locust_shrine");
+    public static final ResourceKey<StructureSet> SPIDER_DUNGEON = createKey("spider_dungeon");
+    public static final ResourceKey<StructureSet> SWAMP_HUT = createKey("swamp_hut");
+    public static final ResourceKey<StructureSet> WASP_DUNGEON = createKey("wasp_dungeon");
 
     private static HolderGetter<Structure> structures;
     private static HolderGetter<StructureSet> structureSets;
@@ -28,7 +35,14 @@ public class ModStructureSets {
         structureSets = ctx.lookup(Registries.STRUCTURE_SET);
         context = ctx;
 
+        register(ANTLION_DUNGEON, ModStructures.ANTLION_DUNGEON, new RandomSpreadStructurePlacement(2, 1, RandomSpreadType.LINEAR, 1435132));
+        register(ANTLION_LAIR, ModStructures.ANTLION_LAIR, new RandomSpreadStructurePlacement(2, 1, RandomSpreadType.LINEAR, 1435132));
+        register(DRAGONFLY_DUNGEON, ModStructures.DRAGONFLY_DUNGEON, new RandomSpreadStructurePlacement(2, 1, RandomSpreadType.LINEAR, 1435132));
+        register(DUNG_PILE, ModStructures.DUNG_PILE, new RandomSpreadStructurePlacement(2, 1, RandomSpreadType.LINEAR, 1435132));
         register(LOCUST_SHRINE, ModStructures.LOCUST_SHRINE, new RandomSpreadStructurePlacement(2, 1, RandomSpreadType.LINEAR, 1435132));
+        register(SPIDER_DUNGEON, ModStructures.SPIDER_DUNGEON, new RandomSpreadStructurePlacement(2, 1, RandomSpreadType.LINEAR, 1435132));
+        register(SWAMP_HUT, ModStructures.SWAMP_HUT, new RandomSpreadStructurePlacement(2, 1, RandomSpreadType.LINEAR, 1435132));
+        register(WASP_DUNGEON, ModStructures.WASP_DUNGEON, new RandomSpreadStructurePlacement(2, 1, RandomSpreadType.LINEAR, 1435132));
     }
 
     private static void register(ResourceKey<StructureSet> key, ResourceKey<Structure> structure, StructurePlacement placement) {
