@@ -2,7 +2,10 @@ package erebus.world.biome;
 
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
-import erebus.registries.world.feature.*;
+import erebus.registries.world.feature.DecorationFeatures;
+import erebus.registries.world.feature.OreFeatures;
+import erebus.registries.world.feature.PlantFeatures;
+import erebus.registries.world.feature.TreeFeatures;
 import erebus.world.carver.ModCarvers;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
@@ -57,7 +60,6 @@ public class SubterraneanSavannahBiome extends ErebusBiome {
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
                         .addCarver(GenerationStep.Carving.AIR, ModCarvers.EREBUS_CAVE)
-                        .addFeature(SURFACE_STRUCTURES, StructureFeatures.LOCUST_SHRINE.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.POND.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.SAVANNAH_ROCK.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ROTTEN_ACACIA.getPlacedResourceKey())

@@ -1,7 +1,7 @@
 package erebus.world.feature.mushroom.config;
 
 import erebus.registries.blocks.providers.PlantBlocks;
-import erebus.world.util.FeatureConfigurationUtils;
+import erebus.world.util.FeatureUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class SarcasticCzechMushroomFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
     private final int[] offsetX = {0, -1, 0, 1};
     private final int[] offsetZ = {1, 0, -1, 0};
-    private final FeatureConfigurationUtils Utils = new FeatureConfigurationUtils();
+    private final FeatureUtils Utils = new FeatureUtils();
     private final BlockState STEM = PlantBlocks.SARCASTIC_CZECH_MUSHROOM_STEM.get().defaultBlockState()
             .setValue(HugeMushroomBlock.UP, true)
             .setValue(HugeMushroomBlock.DOWN, true);

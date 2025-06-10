@@ -30,6 +30,6 @@ public class BaobabTree extends ErebusTree {
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return tree(3, WoodBlocks.SAPLING_BAOBAB);
+        return tree(1, WoodBlocks.SAPLING_BAOBAB);
     }
 }

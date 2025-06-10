@@ -28,6 +28,9 @@ import erebus.registries.world.feature.ModFeatures;
 import erebus.registries.world.feature.config.DecorationFeatureConfigs;
 import erebus.registries.world.feature.config.PlantFeatureConfigs;
 import erebus.registries.world.feature.config.StructureFeatureConfigs;
+import erebus.registries.world.structure.ModStructurePieces;
+import erebus.registries.world.structure.ModStructureProcessors;
+import erebus.registries.world.structure.ModStructureTypes;
 import erebus.registries.world.tree.ModFoliagePlacers;
 import erebus.registries.world.tree.ModTreeDecorators;
 import erebus.registries.world.tree.ModTrunkPlacers;
@@ -90,6 +93,9 @@ public class Erebus {
         ModDataComponents.DATA_COMPONENT_REGISTRY.register(bus);
         ModFeatures.CONFIGS.register(bus);
         ModWorldCarvers.CARVERS.register(bus);
+        ModStructurePieces.STRUCTURE_PIECES.register(bus);
+        ModStructureProcessors.STRUCTURE_PROCESSORS.register(bus);
+        ModStructureTypes.STRUCTURE_TYPES.register(bus);
 
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 

@@ -4,6 +4,8 @@ import erebus.Erebus;
 import erebus.registries.world.ModBiomes;
 import erebus.registries.world.ModDimensionRegistries;
 import erebus.registries.world.feature.ModFeatures;
+import erebus.registries.world.structure.ModStructureSets;
+import erebus.registries.world.structure.ModStructures;
 import erebus.world.ModNoiseGenerator;
 import erebus.world.carver.ModCarvers;
 import net.minecraft.core.HolderLookup;
@@ -24,6 +26,8 @@ public class ModRegistries extends DatapackBuiltinEntriesProvider {
             .add(Registries.DIMENSION_TYPE, ModDimensionRegistries::bootstrapType)
             .add(Registries.NOISE_SETTINGS, ModNoiseGenerator::bootstrap)
             .add(Registries.CONFIGURED_CARVER, ModCarvers::bootstrap)
+            .add(Registries.STRUCTURE, ModStructures::registerStructures)
+            .add(Registries.STRUCTURE_SET, ModStructureSets::bootstrap)
             .add(Registries.LEVEL_STEM, ModDimensionRegistries::bootstrapStem);
 
     public ModRegistries(PackOutput output, CompletableFuture<HolderLookup.Provider> future) {
