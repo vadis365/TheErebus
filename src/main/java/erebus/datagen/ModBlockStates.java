@@ -275,7 +275,7 @@ public class ModBlockStates extends ModBlockStateProvider {
        // crossBlock(PlantBlocks.DARK_CAPPED_MUSHROOM, "mushroom_dark_capped");
         crossBlock(PlantBlocks.SARCASTIC_CZECH_MUSHROOM, "mushroom_sarcastic_czech");
         crossBlock(PlantBlocks.GRANDMAS_SHOES_MUSHROOM, "mushroom_grandmas_shoes");
-        crossBlock(PlantBlocks.DUTCH_CAP_MUSHROOM, "mushroom_dutch_cap");
+        //crossBlock(PlantBlocks.DUTCH_CAP_MUSHROOM, "mushroom_dutch_cap");
         crossBlock(PlantBlocks.KAIZERS_FINGERS_MUSHROOM, "mushroom_kaizers_fingers");
         block(PlantBlocks.GIANT_LILY_PAD);
 
