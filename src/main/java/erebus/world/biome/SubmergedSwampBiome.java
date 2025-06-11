@@ -2,7 +2,10 @@ package erebus.world.biome;
 
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
-import erebus.registries.world.feature.*;
+import erebus.registries.world.feature.DecorationFeatures;
+import erebus.registries.world.feature.OreFeatures;
+import erebus.registries.world.feature.PlantFeatures;
+import erebus.registries.world.feature.TreeFeatures;
 import erebus.world.carver.ModCarvers;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
@@ -55,8 +58,6 @@ public class SubmergedSwampBiome extends ErebusBiome {
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
                         .addCarver(GenerationStep.Carving.AIR, ModCarvers.EREBUS_CAVE)
-                        .addFeature(SURFACE_STRUCTURES, StructureFeatures.DRAGONFLY_DUNGEON.getPlacedResourceKey())
-                        .addFeature(SURFACE_STRUCTURES, StructureFeatures.SWAMP_HUT.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.QUICK_SAND.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ROTTEN_ACACIA.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.GAS_VENT.getPlacedResourceKey())

@@ -3,7 +3,7 @@ package erebus.world.feature.structure;
 import com.mojang.serialization.MapCodec;
 import erebus.registries.data.ModTags;
 import erebus.registries.world.structure.ModStructureTypes;
-import erebus.world.feature.structure.pieces.LocustShrinePiece;
+import erebus.world.feature.structure.pieces.SpiderDungeonPiece;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.util.random.WeightedRandomList;
@@ -34,12 +34,12 @@ public class SpiderDungeon extends Structure {
     }
 
     private static void generatePieces(StructurePiecesBuilder builder, GenerationContext context) {
-        builder.addPiece(new LocustShrinePiece(context.random(), context.chunkPos().getMinBlockX(), context.chunkPos().getMinBlockZ()));
+        builder.addPiece(new SpiderDungeonPiece(context.random(), context.chunkPos().getMinBlockX(), context.chunkPos().getMinBlockZ()));
     }
 
     public static SpiderDungeon buildConfig(BootstrapContext<Structure> context) {
         return new SpiderDungeon(
-                new StructureSettings.Builder(context.lookup(Registries.BIOME).getOrThrow(ModTags.HAS_LOCUST_SHRINE))
+                new StructureSettings.Builder(context.lookup(Registries.BIOME).getOrThrow(ModTags.HAS_SPIDER_DUNGEON))
                         .spawnOverrides(
                                 Map.of(
                                         MobCategory.MONSTER,
@@ -57,6 +57,6 @@ public class SpiderDungeon extends Structure {
 
     @Override
     public @NotNull StructureType<?> type() {
-        return ModStructureTypes.LOCUST_SHRINE.get();
+        return ModStructureTypes.SPIDER_DUNGEON.get();
     }
 }

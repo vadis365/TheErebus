@@ -1,6 +1,6 @@
 {
-  "type": "erebus:locust_shrine",
-  "biomes": "#erebus:has_locust_shrine",
+  "type": "erebus:wasp_dungeon",
+  "biomes": "#erebus:has_wasp_dungeon",
   "spawn_overrides": {
     "monster": {
       "bounding_box": "full",

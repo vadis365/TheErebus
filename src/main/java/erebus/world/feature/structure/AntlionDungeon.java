@@ -39,7 +39,7 @@ public class AntlionDungeon extends Structure {
 
     public static AntlionDungeon buildConfig(BootstrapContext<Structure> context) {
         return new AntlionDungeon(
-                new StructureSettings.Builder(context.lookup(Registries.BIOME).getOrThrow(ModTags.HAS_LOCUST_SHRINE))
+                new StructureSettings.Builder(context.lookup(Registries.BIOME).getOrThrow(ModTags.HAS_ANTLION_DUNGEON))
                         .spawnOverrides(
                                 Map.of(
                                         MobCategory.MONSTER,
@@ -57,6 +57,6 @@ public class AntlionDungeon extends Structure {
 
     @Override
     public @NotNull StructureType<?> type() {
-        return ModStructureTypes.LOCUST_SHRINE.get();
+        return ModStructureTypes.ANTLION_DUNGEON.get();
     }
 }

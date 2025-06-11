@@ -5,7 +5,6 @@ import erebus.registries.entity.ModEntities;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
 import erebus.registries.world.feature.PlantFeatures;
-import erebus.registries.world.feature.StructureFeatures;
 import erebus.world.carver.ModCarvers;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
@@ -58,8 +57,6 @@ public class VolcanicDesertBiome extends ErebusBiome {
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
                         .addCarver(GenerationStep.Carving.AIR, ModCarvers.EREBUS_CAVE)
-                        //.addFeature(SURFACE_STRUCTURES, StructureFeatures.ANTLION_DUNGEON.getPlacedResourceKey())
-                        .addFeature(SURFACE_STRUCTURES, StructureFeatures.ANTLION_LAIR.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.SCORCHED_WOOD.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.LAVA_LAKE.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.DESERT_ROCK_GNEISS.getPlacedResourceKey())
