@@ -46,7 +46,7 @@ public class AntlionLairPiece extends ScatteredFeaturePiece {
                         }
                     }
 
-                    if(layer > 0 && !level.isEmptyBlock(pos.offset(xx, yy, zz))) {
+                    if(layer > 0) {
                         level.setBlock(pos.offset(xx, yy, zz), Blocks.SAND.defaultBlockState(), Block.UPDATE_ALL);
                     }
                 }

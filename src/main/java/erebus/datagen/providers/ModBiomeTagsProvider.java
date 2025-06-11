@@ -32,8 +32,8 @@ public class ModBiomeTagsProvider extends BiomeTagsProvider {
 
         tag(ModTags.HAS_ANTLION_DUNGEON)
                 .add(ModBiomes.VOLCANIC_DESERT.getResourceKey());
-        tag(ModTags.HAS_ANTLION_LAIR)
-                .add(ModBiomes.VOLCANIC_DESERT.getResourceKey());
+        tag(ModTags.HAS_ANTLION_LAIR);
+                //.add(ModBiomes.VOLCANIC_DESERT.getResourceKey());
         tag(ModTags.HAS_DRAGONFLY_DUNGEON)
                 .add(ModBiomes.SUBMERGED_SWAMP.getResourceKey());
         tag(ModTags.HAS_DUNG_PILE)

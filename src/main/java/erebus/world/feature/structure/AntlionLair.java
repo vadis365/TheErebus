@@ -34,7 +34,7 @@ public class AntlionLair extends Structure {
     }
 
     private static void generatePieces(StructurePiecesBuilder builder, GenerationContext context) {
-        builder.addPiece(new AntlionLairPiece(context.random(), context.chunkPos().getMinBlockX(), context.chunkPos().getMinBlockZ()));
+        builder.addPiece(new AntlionLairPiece(context.random(), context.chunkPos().getMiddleBlockX(), context.chunkPos().getMiddleBlockZ()));
     }
 
     public static AntlionLair buildConfig(BootstrapContext<Structure> context) {
