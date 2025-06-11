@@ -272,7 +272,7 @@ public class ModBlockStates extends ModBlockStateProvider {
         hugeMushroom(PlantBlocks.DUTCH_CAP_MUSHROOM_STEM, "dutch_cap", true);
         hugeMushroom(PlantBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK, "kaizers_fingers", false);
         hugeMushroom(PlantBlocks.KAIZERS_FINGERS_MUSHROOM_STEM, "kaizers_fingers", true);
-        crossBlock(PlantBlocks.DARK_CAPPED_MUSHROOM, "mushroom_dark_capped");
+       // crossBlock(PlantBlocks.DARK_CAPPED_MUSHROOM, "mushroom_dark_capped");
         crossBlock(PlantBlocks.SARCASTIC_CZECH_MUSHROOM, "mushroom_sarcastic_czech");
         crossBlock(PlantBlocks.GRANDMAS_SHOES_MUSHROOM, "mushroom_grandmas_shoes");
         crossBlock(PlantBlocks.DUTCH_CAP_MUSHROOM, "mushroom_dutch_cap");
