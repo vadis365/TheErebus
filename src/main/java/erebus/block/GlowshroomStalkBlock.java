@@ -59,7 +59,7 @@ public class GlowshroomStalkBlock extends Block {
 		return isValidBlock(level.getBlockState(pos.below())) || isValidBlock(level.getBlockState(pos.above())) || isValidBlock(level.getBlockState(pos.north())) || isValidBlock(level.getBlockState(pos.south())) || isValidBlock(level.getBlockState(pos.west())) || isValidBlock(level.getBlockState(pos.east()));
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
+	@SuppressWarnings("deprecation")
 	private boolean isValidBlock(BlockState state) {
 		 return state.isSolid() || state.is(this);
 	}
