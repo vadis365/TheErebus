@@ -2,6 +2,7 @@ package erebus.registries.blocks.properties;
 
 import erebus.utils.BlockPropUtils;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
@@ -55,7 +56,8 @@ public class PlantBlockProperties {
             .sound(SoundType.GRASS)
             .lightLevel((state) -> 1)
             .hasPostProcess(BlockPropUtils::always)
-            .pushReaction(PushReaction.DESTROY);
+            .pushReaction(PushReaction.DESTROY)
+            .offsetType(BlockBehaviour.OffsetType.XZ);
 
     private static final Properties HUGE_MUSHROOM_PROPS = Properties.of()
             .mapColor(MapColor.DIRT)

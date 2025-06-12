@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "": [
+            { "model": "erebus:block/kaizers_fingers_mushroom" },
+            { "model": "erebus:block/kaizers_fingers_mushroom" , "y": 90 },
+            { "model": "erebus:block/kaizers_fingers_mushroom" , "y": 180 },
+            { "model": "erebus:block/kaizers_fingers_mushroom" , "y": 270 }
+        ]
+    }
+}

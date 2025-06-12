@@ -558,10 +558,10 @@ public class ModItemModels extends ModItemModelProvider {
         hugeMushroom(PlantBlocks.DUTCH_CAP_MUSHROOM_BLOCK, PlantBlocks.DUTCH_CAP_MUSHROOM_STEM);
         hugeMushroom(PlantBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK, PlantBlocks.KAIZERS_FINGERS_MUSHROOM_STEM);
         //blockFlatWithBlockTexture(PlantBlocks.DARK_CAPPED_MUSHROOM, "mushroom_dark_capped");
-        blockFlatWithBlockTexture(PlantBlocks.SARCASTIC_CZECH_MUSHROOM, "mushroom_sarcastic_czech");
-        blockFlatWithBlockTexture(PlantBlocks.GRANDMAS_SHOES_MUSHROOM, "mushroom_grandmas_shoes");
+        //blockFlatWithBlockTexture(PlantBlocks.SARCASTIC_CZECH_MUSHROOM, "mushroom_sarcastic_czech");
+        //blockFlatWithBlockTexture(PlantBlocks.GRANDMAS_SHOES_MUSHROOM, "mushroom_grandmas_shoes");
         //blockFlatWithBlockTexture(PlantBlocks.DUTCH_CAP_MUSHROOM, "mushroom_dutch_cap");
-        blockFlatWithBlockTexture(PlantBlocks.KAIZERS_FINGERS_MUSHROOM, "mushroom_kaizers_fingers");
+        //blockFlatWithBlockTexture(PlantBlocks.KAIZERS_FINGERS_MUSHROOM, "mushroom_kaizers_fingers");
         block(PlantBlocks.GLOWSHROOM_BLOCK, "glowshroom");
         block(PlantBlocks.GLOWSHROOM_STALK, "glowshroom_stalk_main");
 
