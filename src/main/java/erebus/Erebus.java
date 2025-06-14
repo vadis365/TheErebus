@@ -23,6 +23,7 @@ import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.network.ModNetwork;
+import erebus.registries.world.ModBiomeLayerTypes;
 import erebus.registries.world.ModPOIs;
 import erebus.registries.world.feature.ModFeatures;
 import erebus.registries.world.feature.config.DecorationFeatureConfigs;
@@ -96,6 +97,7 @@ public class Erebus {
         ModStructurePieces.STRUCTURE_PIECES.register(bus);
         ModStructureProcessors.STRUCTURE_PROCESSORS.register(bus);
         ModStructureTypes.STRUCTURE_TYPES.register(bus);
+        ModBiomeLayerTypes.BIOME_LAYER_TYPES.register(bus);
 
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 

@@ -6,6 +6,7 @@ import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
 import erebus.registries.world.feature.PlantFeatures;
 import erebus.registries.world.feature.TreeFeatures;
+import erebus.world.biome.util.ErebusBiome;
 import erebus.world.carver.ModCarvers;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;

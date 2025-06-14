@@ -4,6 +4,7 @@ import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
+import erebus.world.biome.util.ErebusBiome;
 import erebus.world.carver.ModCarvers;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;

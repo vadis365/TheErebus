@@ -1,4 +1,4 @@
-package erebus.world.biome;
+package erebus.world.biome.util;
 
 import erebus.Erebus;
 import net.minecraft.core.HolderGetter;

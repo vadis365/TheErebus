@@ -28,7 +28,7 @@ public class TurnipFeatureConfiguration extends Feature<NoneFeatureConfiguration
             BlockPos turnip = pos.offset(x, y, z);
 
             if (level.isEmptyBlock(turnip) && level.getBlockState(turnip.below()).is(Blocks.GRASS_BLOCK)) {
-                setBlock(level, turnip, PlantBlocks.CROP_TURNIP.get().defaultBlockState().setValue(ModCropBlock.AGE, 7));
+                setBlock(level, turnip, PlantBlocks.CROP_TURNIP.get().defaultBlockState().setValue(ModCropBlock.AGE, 3));
             }
         }
 
