@@ -1,0 +1,45 @@
+{
+  "parent": "erebus:portal/portal_activator",
+  "criteria": {
+    "portal_activate": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "erebus:gaean_keystone"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "erebus:portal_activator"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.portal/portal.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:oak_leaves"
+    },
+    "title": {
+      "translate": "advancement.erebus.portal/portal.title"
+    }
+  },
+  "requirements": [
+    [
+      "portal_activate"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

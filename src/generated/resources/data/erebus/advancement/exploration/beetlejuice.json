@@ -1,0 +1,44 @@
+{
+  "parent": "erebus:exploration/root",
+  "criteria": {
+    "bambucket": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:bambucket"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "bucket": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:bambucket"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/beetlejuice.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:bambucket"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/beetlejuice.title"
+    }
+  },
+  "requirements": [
+    [
+      "bambucket",
+      "bucket"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

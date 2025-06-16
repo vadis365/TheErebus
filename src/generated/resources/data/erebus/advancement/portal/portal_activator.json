@@ -1,0 +1,46 @@
+{
+  "parent": "erebus:portal/gaean_gem",
+  "criteria": {
+    "obtain_activator": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:portal_activator"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "obtain_keystone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:gaean_keystone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.portal/portal_activator.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:portal_activator"
+    },
+    "title": {
+      "translate": "advancement.erebus.portal/portal_activator.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_activator"
+    ],
+    [
+      "obtain_keystone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

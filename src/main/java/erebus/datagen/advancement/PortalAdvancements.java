@@ -39,7 +39,7 @@ public class PortalAdvancements extends ModAdvancements {
         setExistingFileHelper(existingFileHelper);
 
         root = save(
-                getRootBuilder(TASK, Blocks.STONE_BRICKS, "root", ResourceLocation.withDefaultNamespace("textures/block/stonebrick_mossy.png"))
+                getRootBuilder(TASK, Blocks.STONE_BRICKS, "root", ResourceLocation.withDefaultNamespace("textures/block/mossy_stone_bricks.png"))
                         .addCriterion("diamond", hasItems(Items.DIAMOND))
                         .addCriterion("emerald", hasItems(Items.EMERALD))
                         .addCriterion("obsidian", hasItems(Blocks.OBSIDIAN))

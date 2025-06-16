@@ -57,6 +57,9 @@ public class ExplorationAdvancements extends ModAdvancements {
     public AdvancementHolder woodlouse;
     public AdvancementHolder woodlouse_ball;
 
+    /**
+     * TODO: Fix the buckets with correct fluids
+     */
     public ExplorationAdvancements() {
         super("exploration");
     }
@@ -71,6 +74,8 @@ public class ExplorationAdvancements extends ModAdvancements {
                         .addCriterion("enter_dimension", ChangeDimensionTrigger.TriggerInstance.changedDimension(Level.OVERWORLD, ModDimensionRegistries.DIMENSION_KEY))
                         .requirements(AdvancementRequirements.allOf(List.of("enter_dimension"))),
                 "root");
+
+        smoothie_blender = createSimpleAdvancementWithParent(root, TASK, OtherBlocks.BLENDER, "smoothie_blender", "has_blender", hasItems(OtherBlocks.BLENDER));
 
         antivenom = save(
                 getAdvancedBuilderWithParent(smoothie_blender, TASK, ModItems.ANTI_VENOM_BOTTLE, "antivenom")
@@ -106,13 +111,14 @@ public class ExplorationAdvancements extends ModAdvancements {
                 "arborist"
         );
 
-        beetledrink = createSimpleAdvancementWithParent(beetlejuice, TASK, ModItems.BAMBUCKET, "beetledrink", "drink_juice", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.BAMBUCKET));
+        //TODO: Find Beetles
         beetlejuice = save(
-                getAdvancedBuilderWithParent(find_beetles, TASK, ModItems.BAMBUCKET, "beetlejuice")
+                getAdvancedBuilderWithParent(root, TASK, ModItems.BAMBUCKET, "beetlejuice")
                         .addCriterion("bambucket", hasItems(ModItems.BAMBUCKET))
                         .addCriterion("bucket", hasItems(ModItems.BAMBUCKET))
                         .requirements(AdvancementRequirements.anyOf(List.of("bambucket", "bucket"))),
                 "beetlejuice"
         );
+        beetledrink = createSimpleAdvancementWithParent(beetlejuice, TASK, ModItems.BAMBUCKET, "beetledrink", "drink_juice", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.BAMBUCKET));
     }
 }

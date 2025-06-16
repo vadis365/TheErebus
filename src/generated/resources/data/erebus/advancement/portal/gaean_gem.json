@@ -1,0 +1,33 @@
+{
+  "parent": "erebus:portal/altar",
+  "criteria": {
+    "obtain_gem": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:gaean_gem"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.portal/gaean_gem.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:gaean_gem"
+    },
+    "title": {
+      "translate": "advancement.erebus.portal/gaean_gem.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_gem"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

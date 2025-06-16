@@ -1,0 +1,55 @@
+{
+  "parent": "erebus:exploration/smoothie_blender",
+  "criteria": {
+    "has_antivenom_bambucket": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:anti_venom_bucket"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_antivenom_bottle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:anti_venom_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_antivenom_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:anti_venom_bucket"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/antivenom.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:anti_venom_bottle"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/antivenom.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_antivenom_bottle",
+      "has_antivenom_bambucket",
+      "has_antivenom_bucket"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

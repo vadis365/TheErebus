@@ -1,0 +1,31 @@
+{
+  "parent": "erebus:exploration/beetlejuice",
+  "criteria": {
+    "drink_juice": {
+      "conditions": {
+        "item": {
+          "items": "erebus:bambucket"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/beetledrink.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:bambucket"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/beetledrink.title"
+    }
+  },
+  "requirements": [
+    [
+      "drink_juice"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

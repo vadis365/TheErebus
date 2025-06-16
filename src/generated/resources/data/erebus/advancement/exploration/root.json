@@ -9,17 +9,16 @@
     }
   },
   "display": {
-    "background": "minecraft:textures/blocks/stonebrick_mossy.png",
+    "background": "erebus:textures/block/umberstone.png",
     "description": {
-      "translate": "advancement.erebus.portal.desc"
+      "translate": "advancement.erebus.exploration/root.desc"
     },
-    "frame": "goal",
     "icon": {
       "count": 1,
       "id": "erebus:portal"
     },
     "title": {
-      "translate": "advancement.erebus.portal.title"
+      "translate": "advancement.erebus.exploration/root.title"
     }
   },
   "requirements": [

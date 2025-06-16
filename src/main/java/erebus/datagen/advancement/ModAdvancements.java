@@ -73,18 +73,22 @@ public abstract class ModAdvancements implements AdvancementProvider.Advancement
     }
 
     protected AdvancementHolder save(Advancement.Builder builder, String name) {
-        return builder.save(consumer, Erebus.prefix(name), existingFileHelper);
+        return builder.save(consumer, Erebus.prefix(getName(name)), existingFileHelper);
     }
 
     protected Component getTitle(String name) {
-        return Component.translatable("advancement.%s.%s.title".formatted(Erebus.MODID, "%s/%s".formatted(prefix, name)));
+        return Component.translatable("advancement.%s.%s.title".formatted(Erebus.MODID, getName(name)));
     }
 
     protected Component getDescription(String name) {
-        return Component.translatable("advancement.%s.%s.desc".formatted(Erebus.MODID, "%s/%s".formatted(prefix, name)));
+        return Component.translatable("advancement.%s.%s.desc".formatted(Erebus.MODID, getName(name)));
     }
 
     protected Criterion<?> hasItems(ItemLike... items) {
         return InventoryChangeTrigger.TriggerInstance.hasItems(items);
+    }
+
+    private String getName(String name) {
+        return "%s/%s".formatted(prefix, name);
     }
 }

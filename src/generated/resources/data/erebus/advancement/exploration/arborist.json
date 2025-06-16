@@ -1,5 +1,5 @@
 {
-  "parent": "erebus:portal",
+  "parent": "erebus:exploration/root",
   "criteria": {
     "collect_asper_sapling": {
       "conditions": {
@@ -84,7 +84,7 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.erebus.obsessive_arborist.desc"
+      "translate": "advancement.erebus.exploration/arborist.desc"
     },
     "frame": "challenge",
     "icon": {
@@ -92,7 +92,7 @@
       "id": "erebus:sapling_mahogany"
     },
     "title": {
-      "translate": "advancement.erebus.obsessive_arborist.title"
+      "translate": "advancement.erebus.exploration/arborist.title"
     }
   },
   "requirements": [

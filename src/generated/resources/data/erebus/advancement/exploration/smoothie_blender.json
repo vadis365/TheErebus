@@ -1,11 +1,11 @@
 {
-  "parent": "erebus:juice_heads",
+  "parent": "erebus:exploration/root",
   "criteria": {
-    "open_menu": {
+    "has_blender": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:smoothie_book"
+            "items": "erebus:blender"
           }
         ]
       },
@@ -14,20 +14,19 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.erebus.menu.desc"
+      "translate": "advancement.erebus.exploration/smoothie_blender.desc"
     },
-    "frame": "goal",
     "icon": {
       "count": 1,
-      "id": "erebus:smoothie_book"
+      "id": "erebus:blender"
     },
     "title": {
-      "translate": "advancement.erebus.menu.title"
+      "translate": "advancement.erebus.exploration/smoothie_blender.title"
     }
   },
   "requirements": [
     [
-      "open_menu"
+      "has_blender"
     ]
   ],
   "sends_telemetry_event": true

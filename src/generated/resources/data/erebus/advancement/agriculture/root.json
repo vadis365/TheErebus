@@ -1,0 +1,59 @@
+{
+  "criteria": {
+    "diamond": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "emerald": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:emerald"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "obsidian": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:obsidian"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "erebus:textures/block/planks_varnished.png",
+    "description": {
+      "translate": "advancement.erebus.agriculture/root.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:stone_bricks"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/root.title"
+    }
+  },
+  "requirements": [
+    [
+      "diamond"
+    ],
+    [
+      "emerald"
+    ],
+    [
+      "obsidian"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

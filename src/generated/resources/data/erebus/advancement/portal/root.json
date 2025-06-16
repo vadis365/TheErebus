@@ -1,0 +1,59 @@
+{
+  "criteria": {
+    "diamond": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "emerald": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:emerald"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "obsidian": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:obsidian"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "minecraft:textures/block/mossy_stone_bricks.png",
+    "description": {
+      "translate": "advancement.erebus.portal/root.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:stone_bricks"
+    },
+    "title": {
+      "translate": "advancement.erebus.portal/root.title"
+    }
+  },
+  "requirements": [
+    [
+      "diamond"
+    ],
+    [
+      "emerald"
+    ],
+    [
+      "obsidian"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

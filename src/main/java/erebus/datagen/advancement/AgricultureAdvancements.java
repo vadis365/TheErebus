@@ -1,9 +1,9 @@
 package erebus.datagen.advancement;
 
+import erebus.Erebus;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -48,7 +48,7 @@ public class AgricultureAdvancements extends ModAdvancements {
         setExistingFileHelper(existingFileHelper);
 
         root = save(
-                getRootBuilder(TASK, Blocks.STONE_BRICKS, "root", ResourceLocation.withDefaultNamespace("textures/block/stonebrick_mossy.png"))
+                getRootBuilder(TASK, Blocks.STONE_BRICKS, "root", Erebus.prefix("textures/block/planks_varnished.png"))
                         .addCriterion("diamond", hasItems(Items.DIAMOND))
                         .addCriterion("emerald", hasItems(Items.EMERALD))
                         .addCriterion("obsidian", hasItems(Blocks.OBSIDIAN))

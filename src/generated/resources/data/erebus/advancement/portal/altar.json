@@ -1,0 +1,33 @@
+{
+  "parent": "erebus:portal/root",
+  "criteria": {
+    "obtain_altar": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:offering_altar"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.portal/altar.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:offering_altar"
+    },
+    "title": {
+      "translate": "advancement.erebus.portal/altar.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_altar"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
