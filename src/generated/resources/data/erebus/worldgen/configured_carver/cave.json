@@ -1,5 +1,5 @@
 {
-  "type": "erebus:erebus_cave",
+  "type": "erebus:cave",
   "config": {
     "floor_level": -0.7,
     "horizontal_radius_multiplier": 1.0,

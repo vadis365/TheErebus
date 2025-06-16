@@ -8,5 +8,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModWorldCarvers {
     public static final DeferredRegister<WorldCarver<?>> CARVERS = DeferredRegister.create(BuiltInRegistries.CARVER, Erebus.MODID);
-    public static final DeferredHolder<WorldCarver<?>, WorldCarver<ErebusCaveCarverConfiguration>> EREBUS_CAVE = CARVERS.register("erebus_cave", () -> new ErebusCaveCarver(ErebusCaveCarverConfiguration.CODEC));
+    public static final DeferredHolder<WorldCarver<?>, WorldCarver<ErebusCaveCarverConfiguration>> CAVE = CARVERS.register("cave", () -> new ErebusCaveCarver(ErebusCaveCarverConfiguration.CODEC));
+    public static final DeferredHolder<WorldCarver<?>, WorldCarver<ErebusCanyonCarverConfiguration>> CANYON = CARVERS.register("canyon", () -> new ErebusCanyonCarver(ErebusCanyonCarverConfiguration.CODEC));
 }

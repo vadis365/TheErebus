@@ -1,6 +1,9 @@
 {
   "carvers": {
-    "air": "erebus:erebus_cave"
+    "air": [
+      "erebus:cave",
+      "erebus:canyon"
+    ]
   },
   "downfall": 0.0,
   "effects": {
