@@ -1,0 +1,125 @@
+{
+  "parent": "erebus:portal",
+  "criteria": {
+    "collect_asper_sapling": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:sapling_asper"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "collect_balsam_sapling": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:sapling_balsam"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "collect_baobab_sapling": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:sapling_baobab"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "collect_cypress_sapling": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:sapling_cypress"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "collect_eucalyptus_sapling": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:sapling_eucalyptus"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "collect_mahogany_sapling": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:sapling_mahogany"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "collect_marshwood_sapling": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:sapling_marshwood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "collect_mossbark_sapling": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:sapling_mossbark"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.obsessive_arborist.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "erebus:sapling_mahogany"
+    },
+    "title": {
+      "translate": "advancement.erebus.obsessive_arborist.title"
+    }
+  },
+  "requirements": [
+    [
+      "collect_mossbark_sapling"
+    ],
+    [
+      "collect_asper_sapling"
+    ],
+    [
+      "collect_eucalyptus_sapling"
+    ],
+    [
+      "collect_mahogany_sapling"
+    ],
+    [
+      "collect_balsam_sapling"
+    ],
+    [
+      "collect_baobab_sapling"
+    ],
+    [
+      "collect_marshwood_sapling"
+    ],
+    [
+      "collect_cypress_sapling"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

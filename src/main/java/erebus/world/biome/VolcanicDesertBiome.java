@@ -2,11 +2,11 @@ package erebus.world.biome;
 
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
+import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
 import erebus.registries.world.feature.PlantFeatures;
 import erebus.world.biome.util.ErebusBiome;
-import erebus.world.carver.ModCarvers;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.MobCategory;

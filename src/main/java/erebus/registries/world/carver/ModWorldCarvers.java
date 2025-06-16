@@ -1,6 +1,10 @@
-package erebus.world.carver;
+package erebus.registries.world.carver;
 
 import erebus.Erebus;
+import erebus.world.carver.ErebusCanyonCarver;
+import erebus.world.carver.ErebusCanyonCarverConfiguration;
+import erebus.world.carver.ErebusCaveCarver;
+import erebus.world.carver.ErebusCaveCarverConfiguration;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import net.neoforged.neoforge.registries.DeferredHolder;

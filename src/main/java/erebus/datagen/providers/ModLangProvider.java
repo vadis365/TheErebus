@@ -1,14 +1,7 @@
 package erebus.datagen.providers;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
-
 import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonObject;
-
 import erebus.Erebus;
 import erebus.utils.LangConversionHelper;
 import erebus.utils.LangFormatSplitter;
@@ -23,6 +16,12 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.biome.Biome;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 public abstract class ModLangProvider extends LanguageProvider {
 
@@ -48,6 +47,11 @@ public abstract class ModLangProvider extends LanguageProvider {
     
     protected void addEntityNoEgg(Supplier<? extends EntityType> entity, String name) {
         add(entity.get().getDescriptionId(), name);
+    }
+
+    protected void addAdvancement(String unlocalized, String title, String description) {
+        addAdvTitle(unlocalized, title);
+        addAdvDesc(unlocalized, description);
     }
 
     protected void addAdvTitle(String advancementTitle, String name) {

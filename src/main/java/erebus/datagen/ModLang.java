@@ -2,17 +2,7 @@ package erebus.datagen;
 
 import erebus.datagen.providers.ModLangProvider;
 import erebus.registries.ModItems;
-import erebus.registries.blocks.providers.AmberBlocks;
-import erebus.registries.blocks.providers.DoorBlocks;
-import erebus.registries.blocks.providers.FenceBlocks;
-import erebus.registries.blocks.providers.OreBlocks;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.PlantBlocks;
-import erebus.registries.blocks.providers.SlabBlocks;
-import erebus.registries.blocks.providers.StairBlocks;
-import erebus.registries.blocks.providers.UmberstoneBlocks;
-import erebus.registries.blocks.providers.WallBlocks;
-import erebus.registries.blocks.providers.WoodBlocks;
+import erebus.registries.blocks.providers.*;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.data.PackOutput;
 
@@ -726,7 +716,15 @@ public class ModLang extends ModLangProvider {
     }
 
     private void addAdvancementTranslations() {
-
+        addAdvancement("portal", "The Erebus", "Travel to a long lost world, overrun by gargantuan arthropods: The Erebus");
+        addAdvancement("juice_head", "For the Juiceheads", "Craft the ERebusCo. Smoothie-matic 2000, all rights reserved.");
+        addAdvancement("open_wide", "Just Open Your Mouth", "Brew some Anti-venom in the ErebusCo. Smoothie-matic 2000.");
+        addAdvancement("menu", "The Menu", "Get the smoothie guide book by right clicking the ErebusCo. Smoothie-matic 2000 with a blank book.");
+        addAdvancement("obsessive_arborist", "Obsessive Arborist", "Gather all the different sapling of trees native to the Erebus");
+        addAdvancement("true_traveller", "A True Traveller Never Arrives", "Travel to all biomes the Erebus has to offer.");
+        addAdvancement("aggressive_entomology", "Aggressive Entomology", "Slay a creature native to the Erebus.");
+        addAdvancement("feeling_invertebrate", "Feelin' Invertebrate", "Obtain all four pieces of the Exoskeleton armor set and the Exoskeleton shield.");
+        addAdvancement("pest_control", "Pest Control", "Kill all regular mobs the Erebus has to offer.");
     }
 
     private void addBiomeTranslations() {

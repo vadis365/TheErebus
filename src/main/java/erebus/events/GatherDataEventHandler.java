@@ -2,6 +2,7 @@ package erebus.events;
 
 import erebus.Erebus;
 import erebus.datagen.*;
+import erebus.datagen.providers.ModAdvancementProvider;
 import erebus.datagen.providers.ModBiomeTagsProvider;
 import erebus.datagen.providers.ModLootTableProvider;
 import erebus.datagen.providers.ModRecipeProvider;
@@ -35,6 +36,7 @@ public class GatherDataEventHandler {
         generator.addProvider(event.includeServer(), new ModBiomeTagsProvider(output, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModRecipeProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new ModEntityTags(output, lookupProvider, Erebus.MODID, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModAdvancementProvider(output, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), datapackProvider);
     }
 }

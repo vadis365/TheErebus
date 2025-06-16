@@ -1,0 +1,34 @@
+{
+  "parent": "erebus:juice_heads",
+  "criteria": {
+    "open_menu": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:smoothie_book"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.menu.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "erebus:smoothie_book"
+    },
+    "title": {
+      "translate": "advancement.erebus.menu.title"
+    }
+  },
+  "requirements": [
+    [
+      "open_menu"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

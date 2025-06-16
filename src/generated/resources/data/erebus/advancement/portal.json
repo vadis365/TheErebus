@@ -1,0 +1,31 @@
+{
+  "criteria": {
+    "enter_dimension": {
+      "conditions": {
+        "from": "minecraft:overworld",
+        "to": "erebus:erebus"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "background": "minecraft:textures/blocks/stonebrick_mossy.png",
+    "description": {
+      "translate": "advancement.erebus.portal.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "erebus:portal"
+    },
+    "title": {
+      "translate": "advancement.erebus.portal.title"
+    }
+  },
+  "requirements": [
+    [
+      "enter_dimension"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
