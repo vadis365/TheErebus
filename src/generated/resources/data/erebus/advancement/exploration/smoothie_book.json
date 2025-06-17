@@ -1,0 +1,33 @@
+{
+  "parent": "erebus:exploration/smoothie_blender",
+  "criteria": {
+    "has_smoothie_book": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:smoothie_book"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/smoothie_book.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:smoothie_book"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/smoothie_book.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_smoothie_book"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

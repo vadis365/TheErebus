@@ -1,0 +1,33 @@
+{
+  "parent": "erebus:exploration/whetstone",
+  "criteria": {
+    "has_newspaper": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:rolled_newspaper"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/newspaper.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:rolled_newspaper"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/newspaper.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_newspaper"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

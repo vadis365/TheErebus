@@ -1,0 +1,151 @@
+{
+  "parent": "erebus:exploration/smoothie_book",
+  "criteria": {
+    "has_bryufs_brew": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:bryufs_brew"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_dont_meddle_with_the_nettle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:dont_meddle_with_the_nettle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_givin_me_the_blues": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:givin_me_the_blues"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_green_giant": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:green_giant"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_green_tea_grasshopper": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:green_tea_grasshopper"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_hot_hot_baby": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:hot_hot_baby"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_liquid_gold": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:liquid_gold"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_money_honey": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:money_honey"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_nothing_in_the_middle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:nothing_in_the_middle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_seedy_goodness": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:seedy_goodness"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/smoothie_all.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "erebus:smoothie_glass"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/smoothie_all.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_green_tea_grasshopper"
+    ],
+    [
+      "has_money_honey"
+    ],
+    [
+      "has_nothing_in_the_middle"
+    ],
+    [
+      "has_green_giant"
+    ],
+    [
+      "has_seedy_goodness"
+    ],
+    [
+      "has_givin_me_the_blues"
+    ],
+    [
+      "has_hot_hot_baby"
+    ],
+    [
+      "has_dont_meddle_with_the_nettle"
+    ],
+    [
+      "has_liquid_gold"
+    ],
+    [
+      "has_bryufs_brew"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

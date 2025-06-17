@@ -2,15 +2,20 @@ package erebus.datagen.advancement;
 
 import erebus.Erebus;
 import net.minecraft.advancements.*;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.KilledTrigger;
+import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public abstract class ModAdvancements implements AdvancementProvider.AdvancementGenerator {
 
@@ -86,6 +91,14 @@ public abstract class ModAdvancements implements AdvancementProvider.Advancement
 
     protected Criterion<?> hasItems(ItemLike... items) {
         return InventoryChangeTrigger.TriggerInstance.hasItems(items);
+    }
+
+    protected Criterion<?> killed(Supplier<? extends EntityType<?>> entity) {
+        return KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entity.get()));
+    }
+
+    protected Criterion<?> seen(Supplier<? extends EntityType<?>> entity) {
+        return PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().of(entity.get()));
     }
 
     private String getName(String name) {

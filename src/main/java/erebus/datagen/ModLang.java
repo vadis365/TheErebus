@@ -716,15 +716,69 @@ public class ModLang extends ModLangProvider {
     }
 
     private void addAdvancementTranslations() {
-        addAdvancement("portal", "The Erebus", "Travel to a long lost world, overrun by gargantuan arthropods: The Erebus");
-        addAdvancement("juice_head", "For the Juiceheads", "Craft the ERebusCo. Smoothie-matic 2000, all rights reserved.");
-        addAdvancement("open_wide", "Just Open Your Mouth", "Brew some Anti-venom in the ErebusCo. Smoothie-matic 2000.");
-        addAdvancement("menu", "The Menu", "Get the smoothie guide book by right clicking the ErebusCo. Smoothie-matic 2000 with a blank book.");
-        addAdvancement("obsessive_arborist", "Obsessive Arborist", "Gather all the different sapling of trees native to the Erebus");
-        addAdvancement("true_traveller", "A True Traveller Never Arrives", "Travel to all biomes the Erebus has to offer.");
-        addAdvancement("aggressive_entomology", "Aggressive Entomology", "Slay a creature native to the Erebus.");
-        addAdvancement("feeling_invertebrate", "Feelin' Invertebrate", "Obtain all four pieces of the Exoskeleton armor set and the Exoskeleton shield.");
-        addAdvancement("pest_control", "Pest Control", "Kill all regular mobs the Erebus has to offer.");
+        addExploration("root", "The Erebus", "Travel to a long lost world, overrun by gargantuan arthropods: The Erebus.");
+        addExploration("arborist", "Obsessive Arborist", "Gather all the different saplings of trees native to the Erebus.");
+        addExploration("traveller", "A True Traveller Never Arrives", "Travel to all biomes the Erebus has to offer.");
+        addExploration("quicksand", "Let That Sink In", "Get yourself stuck in some Quicksand.");
+        addExploration("smoothie_all", "Smoothie Enthusiast", "Brew all 10 smoothies.");
+        addExploration("smoothie_book", "The Menu", "Get the smoothie guide book by right-clicking the Smoothie-matic 2000 with a blank book.");
+        addExploration("smoothie_blender", "For The Juiceheads", "Craft the ErebusCo. Smoothie-matic 2000, all rights reserved.");
+        addExploration("antivenom", "Just Open Your Mouth", "Brew some Anti-venom in the Smoothie Maker.");
+        addExploration("jade_ore", "What Shade of Green Is This?", "Obtain Jade.");
+        addExploration("jade_set", "Extremely Jaded", "Obtain all four pieces of the Jade armour set and the Jade Paxel.");
+        addExploration("petrified_chest", "I Love Big Chests", "Craft a Petrified Wood Chest, an expensive but more spaceous chest.");
+        addExploration("petrified_wood", "Very Hard Wood", "Acquire Petrified Wood.");
+        addExploration("entomology", "Aggressive Entomology", "Slay a creature native to the Erebus.");
+        addExploration("kill_all", "Pest Control", "Kill all regular mobs the Erebus has to offer.");
+        addExploration("find_beetles", "Meet the Beetles!", "Have a somewhat unkind encounter with any of the Beetles or their Larvae.");
+        addExploration("beetlejuice", "Alpha Orionis", "Milk a Beetle to obtain Beetle Juice, the Erebus counterpart to milk.");
+        addExploration("beetledrink", "Pour Up, Drank", "Down an entire Bambucket of Beetle Juice. Yes, you heard that right.");
+        addExploration("titan_beetle", "Titanomachy", "Slay a Titan Beetle and obtain its flesh.");
+        addExploration("titan_stew", "Itadakimasu", "Cook yourself some Titan Stew, the most nourishing meal you'll ever eat.");
+        addExploration("rhino_beetle", "That's Poaching", "Kill the Rhinoceros Beetle and obtain its exoskeleton and horn.");
+        addExploration("rhino_exo_set", "Heavy-handed", "Craft the entire Rhino Plate set, including the shield.");
+        addExploration("exo_set", "Feelin' Invertebrate", "Obtain all four pieces of the Exoskeleton armour set and the Exoskeleton Shield.");
+        addExploration("reinexo_set", "Truth Is... I Am Exo Man", "Obtain all four pieces of the Reinforced Exoskeleton armour set and the Reinforced Exoskeleton Shield.");
+        addExploration("planticide", "More Effective Than Herbicide", "Mix together some Planticide to destroy some flora.");
+        addExploration("poison_sac", "Your Cruel Device", "Snag a Poison Sac from the innards of one of the many venomous critters that inhabit the Erebus.");
+        addExploration("repellent", "Utterly Repulsive", "Get your hands on some Repellent.");
+        addExploration("spray_can", "Begone Arthrothot", "Craft some Insect Repellent.");
+        addExploration("stung", "The Boy with the Thorn in His Side", "Get stung by a Wasp or a Scorpion.");
+        addExploration("water_repellent", "Why So Hydrophobic, Bigot?", "Acquire some Hydrofuge to craft Water Repellent.");
+        addExploration("water_striders", "Personal Jesus", "Craft some Water Striders.");
+        addExploration("whetstone", "Sharpen Your Wits", "Get your hands on some Whetstone Powder and apply it to an unenchanted Whetstone.");
+        addExploration("woodlouse", "A Surprise to be Sure", "Encounter and kill a Woodlouse.");
+        addExploration("woodlouse_ball", "Killer Ball", "Catch a Woodlouse by right-clicking it with an empty hand.");
+        addExploration("newspaper", "News of the World", "Enhance some Papyrus with Ink and Whetstone Powder to roll a newspaper with extreme swatting capabilities.");
+
+        // Agriculture advancements
+        addAgriculture("root", "Subterranean Agriculture", "Even though the sun does not shine down here, there are still many plants and other growables to be found. Dive into the wonderful world of subterranean agriculture!");
+        addAgriculture("varnished_planks", "Resist Those Pesky Larvae", "Craft some Varnished Planks.");
+        addAgriculture("silo", "Every Farm Needs One", "Craft the three parts of the Silo multiblock.");
+        addAgriculture("ant_amulet", "Getting Antsy", "Craft the Ant Taming Amulet and tame an Ant.");
+        addAgriculture("nectar", "Sweet Victory", "Obtain some Nectar by asking some Bees with the blade of your weapon.");
+        addAgriculture("honey", "I Love You, Honeybear", "Use the Nectar you obtained to create Honey.");
+        addAgriculture("honeyfoods", "What's For Dinner, Honey?", "Prepare yourself a wonderful meal by crafting all Honey-related foods.");
+        addAgriculture("honeycomb", "Beauty Is...", "Construct a Honeycomb.");
+        addAgriculture("bee_amulet", "...In The Eye of the Bee-holder", "Fashion a Bee Taming Amulet from some Jade and Nectar.");
+        addAgriculture("spoon", "The Big Spoon", "Craft a Nectar Collector, a simple yet ingenious tool to easily collect Nectar from Bees.");
+        addAgriculture("beecon", "Right Where I Bee-long", "Use the Nectar you procured to craft a Homing Beecon, a device that allows you to always find your way back.");
+        addAgriculture("turnip", "SuperRutabaga", "Obtain some Turnips somewhere.");
+        addAgriculture("beetle_breed", "Turnip to Make 'Em Turn Up", "Get two Beetles in the mood by feeding them the most erotic of vegetables - to them at least, we don't judge.");
+        addAgriculture("bamboo", "Colossally Bamboozled", "Get your hands on some Colossal Bamboo and Colossal Bamboo Shoots.");
+        addAgriculture("bamboo_extender", "Fully Extended UwU", "Craft the Bamboo Extender.");
+        addAgriculture("bamboo_bridge", "Seven Bridges Road", "Craft the Bamboo Bridge.");
+        addAgriculture("nerd_pole", "Piercing the Heavens", "Craft the Bamboo Nerd Pole.");
+        addAgriculture("bamboo_crate", "Make Erebus Crate Again", "Craft yourself a Bamboo Crate.");
+        addAgriculture("bamboo_soup", "When eating bamboo sprouts...", "Craft yourself some Bamboo Soup.");
+        addAgriculture("bamboo_plant", "... remember who planted them.", "Plant a Colossal Bamboo Shoot.");
+
+        // Portal advancements
+        addPortalGuide("root", "The Portal", "A world below our own, ready to be accessed...");
+        addPortalGuide("altar", "Contacting the Gods", "Create an Offering Altar.");
+        addPortalGuide("gaean_gem", "A Gift from our Mother", "Offer a Diamond, an Emerald and a piece of Obsidian on the Offering Altar and obtain the Gaean Gem.");
+        addPortalGuide("portal_activator", "The Key and the Lock", "Obtain the Staff of Gaea and the Gaean Keystone.");
+        addPortalGuide("portal", "Constructing the Gate", "Construct the Erebus portal by placing any type of leaf blocks in a frame and activate it by inserting the Staff of Gaea into the Gaean Keystone near it.");
     }
 
     private void addBiomeTranslations() {

@@ -1,0 +1,33 @@
+{
+  "parent": "erebus:exploration/root",
+  "criteria": {
+    "has_jade_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:ore_jade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/jade_ore.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:ore_jade"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/jade_ore.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_jade_ore"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

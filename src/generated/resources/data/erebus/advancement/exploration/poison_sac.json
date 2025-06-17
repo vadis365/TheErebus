@@ -1,0 +1,33 @@
+{
+  "parent": "erebus:exploration/entomology",
+  "criteria": {
+    "has_poison_sac": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:poison_gland"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/poison_sac.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:poison_gland"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/poison_sac.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_poison_sac"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

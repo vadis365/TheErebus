@@ -1,21 +1,21 @@
 {
-  "parent": "erebus:exploration/find_beetles",
+  "parent": "erebus:exploration/woodlouse",
   "criteria": {
-    "bambucket": {
+    "has_powder": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:bambucket"
+            "items": "erebus:whetstone_powder"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "bucket": {
+    "has_whetstone": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:bambucket"
+            "items": "erebus:whetstone"
           }
         ]
       },
@@ -24,20 +24,22 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.erebus.exploration/beetlejuice.desc"
+      "translate": "advancement.erebus.exploration/whetstone.desc"
     },
     "icon": {
       "count": 1,
-      "id": "erebus:bambucket"
+      "id": "erebus:whetstone"
     },
     "title": {
-      "translate": "advancement.erebus.exploration/beetlejuice.title"
+      "translate": "advancement.erebus.exploration/whetstone.title"
     }
   },
   "requirements": [
     [
-      "bambucket",
-      "bucket"
+      "has_powder"
+    ],
+    [
+      "has_whetstone"
     ]
   ],
   "sends_telemetry_event": true

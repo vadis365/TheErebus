@@ -1,0 +1,33 @@
+{
+  "parent": "erebus:exploration/repellent",
+  "criteria": {
+    "has_spray_can": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:spray_can"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/spray_can.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:spray_can"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/spray_can.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_spray_can"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

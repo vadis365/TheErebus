@@ -1,0 +1,33 @@
+{
+  "parent": "erebus:exploration/entomology",
+  "criteria": {
+    "has_repellent": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:repellent"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/repellent.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:repellent"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/repellent.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_repellent"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,37 @@
+{
+  "parent": "erebus:exploration/entomology",
+  "criteria": {
+    "killed_woodlouse": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "erebus:beetle_larva"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/woodlouse.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:log_hollow"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/woodlouse.title"
+    }
+  },
+  "requirements": [
+    [
+      "killed_woodlouse"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

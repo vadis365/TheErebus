@@ -1,0 +1,33 @@
+{
+  "parent": "erebus:exploration/root",
+  "criteria": {
+    "has_petrified_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:petrified_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/petrified_wood.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:ore_petrified_wood"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/petrified_wood.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_petrified_wood"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

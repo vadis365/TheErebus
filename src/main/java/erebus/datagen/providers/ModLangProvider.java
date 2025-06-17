@@ -49,9 +49,21 @@ public abstract class ModLangProvider extends LanguageProvider {
         add(entity.get().getDescriptionId(), name);
     }
 
-    protected void addAdvancement(String unlocalized, String title, String description) {
-        addAdvTitle(unlocalized, title);
-        addAdvDesc(unlocalized, description);
+    protected void addAdvancement(String category, String unlocalized, String title, String description) {
+        addAdvTitle("%s/%s".formatted(category, unlocalized), title);
+        addAdvDesc("%s/%s".formatted(category, unlocalized), description);
+    }
+
+    protected void addExploration(String key, String title, String description) {
+        addAdvancement("exploration", key, title, description);
+    }
+
+    protected void addAgriculture(String key, String title, String description) {
+        addAdvancement("agriculture", key, title, description);
+    }
+
+    protected void addPortalGuide(String key, String title, String description) {
+        addAdvancement("portal", key, title, description);
     }
 
     protected void addAdvTitle(String advancementTitle, String name) {

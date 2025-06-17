@@ -1,0 +1,33 @@
+{
+  "parent": "erebus:exploration/petrified_wood",
+  "criteria": {
+    "has_petrified_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:petrified_wood_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/petrified_chest.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:petrified_wood_chest"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/petrified_chest.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_petrified_chest"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

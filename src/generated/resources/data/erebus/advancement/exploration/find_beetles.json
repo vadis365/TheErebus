@@ -1,0 +1,139 @@
+{
+  "parent": "erebus:exploration/entomology",
+  "criteria": {
+    "find_beetle": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "erebus:beetle"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "find_bombardier": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "erebus:bombardier_beetle"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "find_bombardier_larva": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "erebus:bombardier_beetle_larva"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "find_larva": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "erebus:beetle_larva"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "find_rhino": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "erebus:beetle"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "find_stag": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "erebus:beetle"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "find_titan": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "erebus:beetle"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/find_beetles.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "erebus:beetle_larva_raw"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/find_beetles.title"
+    }
+  },
+  "requirements": [
+    [
+      "find_rhino"
+    ],
+    [
+      "find_titan"
+    ],
+    [
+      "find_stag"
+    ],
+    [
+      "find_bombardier"
+    ],
+    [
+      "find_bombardier_larva"
+    ],
+    [
+      "find_beetle"
+    ],
+    [
+      "find_larva"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
