@@ -5,6 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
@@ -37,4 +38,7 @@ public class ModTags {
 
     // MARK: Entity
     public static final TagKey<EntityType<?>> CAN_BE_PRESERVED = TagKey.create(Registries.ENTITY_TYPE, Erebus.prefix("can_be_preserved"));
+    
+    // MARK: Compostable Items
+    public static final TagKey<Item> COMPOSTABLE = TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix("compostable"));
 }
