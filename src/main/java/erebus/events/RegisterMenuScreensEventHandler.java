@@ -4,6 +4,7 @@ import erebus.Erebus;
 import erebus.inventory.client.BambooCrateScreen;
 import erebus.inventory.client.BambooExtenderScreen;
 import erebus.inventory.client.ColossalCrateScreen;
+import erebus.inventory.client.ComposterScreen;
 import erebus.inventory.client.HoneyCombScreen;
 import erebus.inventory.client.LiquifierScreen;
 import erebus.inventory.client.PetrifiedCraftingTableScreen;
@@ -25,5 +26,6 @@ public class RegisterMenuScreensEventHandler {
         event.register(ModMenuTypes.BAMBOO_EXTENDER.get(), BambooExtenderScreen::new);
         event.register(ModMenuTypes.BAMBOO_CRATE.get(), BambooCrateScreen::new);
         event.register(ModMenuTypes.COLOSSAL_CRATE.get(), ColossalCrateScreen::new);
+        event.register(ModMenuTypes.COMPOSTER.get(), ComposterScreen::new);
     }
 }

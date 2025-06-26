@@ -6,6 +6,7 @@ import erebus.block.BlenderBlock;
 import erebus.block.BlockOfBonesBlock;
 import erebus.block.BotFlySpawnerBlock;
 import erebus.block.CandleHoneyTreatBlock;
+import erebus.block.ComposterBlock;
 import erebus.block.GaeanKeystoneBlock;
 import erebus.block.HoneyCombBlock;
 import erebus.block.HoneyTreatBlock;
@@ -134,7 +135,7 @@ public class OtherBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> SILO_TANK;
     public static final DeferredBlock<Block> SILO_SUPPORTS;
     public static final DeferredBlock<HoneyCombBlock> HONEY_COMB;
-    public static final DeferredBlock<Block> COMPOSTER;
+    public static final DeferredBlock<ComposterBlock> COMPOSTER;
     public static final DeferredBlock<Block> BLENDER;
     public static final DeferredBlock<UmberFurnaceBlock> UMBER_FURNACE;
     public static final DeferredBlock<ButtonBlock> UMBERSTONE_BUTTON;
@@ -260,7 +261,7 @@ public class OtherBlocks extends ModBlockHelpers {
         SILO_TANK = registerSimpleBlock("silo_tank", Properties.of().mapColor(MapColor.STONE));
         SILO_SUPPORTS = registerSimpleBlock("silo_supports", Properties.of().mapColor(MapColor.STONE));
         HONEY_COMB = registerBlock("honey_comb", () -> new HoneyCombBlock(Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.5F, 10F).lightLevel(value -> 1).sound(SoundType.WOOL)));
-        COMPOSTER = registerSimpleBlock("composter", Properties.of().mapColor(MapColor.STONE));
+        COMPOSTER = registerBlock("composter", () -> new ComposterBlock(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(2F, 10F).sound(SoundType.WOOD).noOcclusion()));
         BLENDER = registerBlock("blender", () -> new BlenderBlock(Properties.of().mapColor(MapColor.STONE).noOcclusion()));
         UMBER_FURNACE = registerBlock("umber_furnace", () -> new UmberFurnaceBlock(Properties.ofFullCopy(Blocks.FURNACE)));
         UMBERSTONE_BUTTON = registerBlock("umberstone_button", () -> new ButtonBlock(BlockSetType.STONE, 10, Properties.of().mapColor(MapColor.STONE)));

@@ -164,5 +164,8 @@ public class Erebus {
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.BAMBOO_EXTENDER.get(), (extender, side) -> new InvWrapper(extender));
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.BAMBOO_CRATE.get(), (crate, side) -> new InvWrapper(crate));
 		event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidBucketWrapper(stack), ModItems.BEETLE_JUICE_BUCKET.get());
+		
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.COMPOSTER.get(), (composter, side) -> new InvWrapper(composter));
+	
 	}
 }
