@@ -793,5 +793,6 @@ public class ModLang extends ModLangProvider {
         addContainer("bamboo_extender", "Bamboo Extender");
         addContainer("bamboo_crate", "Bamboo Crate");
         addContainer("colossal_crate", "Colossal Crate");
+        addContainer("composter", "Organic Composter");
     }
 }

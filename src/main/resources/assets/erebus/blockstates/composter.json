@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "erebus:block/composter" }
+        "": { "model": "erebus:block/composter" }
     }
 }

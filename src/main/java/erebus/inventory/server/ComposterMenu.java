@@ -2,34 +2,39 @@ package erebus.inventory.server;
 
 import javax.annotation.Nonnull;
 
-import erebus.block.entity.ComposterBlockEntity;
 import erebus.registries.client.ModMenuTypes;
 import erebus.registries.data.ModTags;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class ComposterMenu extends AbstractContainerMenu {
-	public ComposterBlockEntity composter;
+	public static final int DATA_MOULD_PROGRESS = 0;
+	public static final int DATA_COMPOSTING_PROGRESS = 1;
+	public static final int DATA_MOULD_MAX_TIME = 2;
+    private final Container container;
+    private final ContainerData data;
 	public int numRows = 3;
+	
+    public ComposterMenu(int id, Inventory inv) {
+        this(id, inv, new SimpleContainer(3), new SimpleContainerData(3));
+    }
 
-	public ComposterMenu(final int windowId, final Inventory playerInventory, FriendlyByteBuf extra) {
+	public ComposterMenu(int windowId, Inventory playerInventory, Container container, ContainerData data) {
 		super(ModMenuTypes.COMPOSTER.get(), windowId);
-		BlockPos tilePos = extra.readBlockPos();
-		BlockEntity tile = playerInventory.player.getCommandSenderWorld().getBlockEntity(tilePos);
-		if (!(tile instanceof ComposterBlockEntity))
-			return;
-		composter = (ComposterBlockEntity) tile;
+        checkContainerDataCount(data, 3);
+        this.container = container;
+        this.data = data;
 		
-		addSlot(new Slot((Container)tile, 0, 56, 17));
-		addSlot(new Slot((Container)tile, 1, 56, 53));
-		addSlot(new Slot((Container)tile, 2, 116, 35));
+		addSlot(new Slot(container, 0, 56, 17));
+		addSlot(new Slot(container, 1, 56, 53));
+		addSlot(new Slot(container, 2, 116, 35));
 
 		for (int i = 0; i < 3; i++)
 			for (int j = 0; j < 9; j++)
@@ -37,11 +42,12 @@ public class ComposterMenu extends AbstractContainerMenu {
 
 		for (int i = 0; i < 9; i++)
 			addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+		addDataSlots(data);
 	}
 	
 	@Override
 	public boolean stillValid(@Nonnull Player player) {
-		return true;
+		return container.stillValid(player);
 	}
 
 	@Nonnull
@@ -62,7 +68,7 @@ public class ComposterMenu extends AbstractContainerMenu {
 				if (!itemstack1.isEmpty() && itemstack1.is(ModTags.COMPOSTABLE)) {
 					if (!moveItemStackTo(itemstack1, 0, 1, false))
 						return ItemStack.EMPTY;
-				} else if (composter.isItemFuel(itemstack1)) {
+				} else if (itemstack1.is(ModTags.COMPOSTABLE)) {
 					if (!moveItemStackTo(itemstack1, 1, 2, false))
 						return ItemStack.EMPTY;
 				} else if (slotIndex >= 3 && slotIndex < 30) {
@@ -166,4 +172,12 @@ public class ComposterMenu extends AbstractContainerMenu {
 
 		return merged;
 	}
+	
+    public int getMouldProgress() {
+        return data.get(DATA_MOULD_PROGRESS);
+    }
+
+    public int getCompostingProgress() {
+    	return data.get(DATA_COMPOSTING_PROGRESS);
+    }
 }
