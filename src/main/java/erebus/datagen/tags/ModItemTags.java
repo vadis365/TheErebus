@@ -1,9 +1,4 @@
-package erebus.datagen;
-
-import java.util.concurrent.CompletableFuture;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+package erebus.datagen.tags;
 
 import erebus.Erebus;
 import erebus.registries.ModItems;
@@ -16,6 +11,10 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.concurrent.CompletableFuture;
 
 public class ModItemTags extends IntrinsicHolderTagsProvider<Item> {
 

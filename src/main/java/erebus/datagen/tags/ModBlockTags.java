@@ -1,4 +1,4 @@
-package erebus.datagen;
+package erebus.datagen.tags;
 
 import erebus.Erebus;
 import erebus.registries.blocks.providers.*;

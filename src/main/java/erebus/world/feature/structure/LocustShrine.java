@@ -49,7 +49,7 @@ public class LocustShrine extends Structure {
                                         )
                                 )
                         )
-                        .terrainAdapation(TerrainAdjustment.BEARD_BOX)
+                        .terrainAdapation(TerrainAdjustment.NONE)
                         .generationStep(GenerationStep.Decoration.SURFACE_STRUCTURES)
                         .build()
         );

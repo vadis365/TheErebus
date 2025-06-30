@@ -8,7 +8,7 @@ import java.util.List;
 public class ModOrePlacement {
 
     public static List<PlacementModifier> orePlacement(int count, int low, int high) {
-        return List.of(CountPlacement.of(count), HeightRangePlacement.uniform(VerticalAnchor.absolute(low),  VerticalAnchor.absolute(high)));
+        return List.of(CountPlacement.of(count), HeightRangePlacement.uniform(VerticalAnchor.absolute(low),  VerticalAnchor.absolute(high)), BiomeFilter.biome());
     }
 
     public static List<PlacementModifier> orePlacement(int count) {

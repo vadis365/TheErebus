@@ -1,4 +1,4 @@
-package erebus.datagen;
+package erebus.datagen.tags;
 
 import erebus.registries.data.ModTags;
 import erebus.registries.entity.ModEntities;

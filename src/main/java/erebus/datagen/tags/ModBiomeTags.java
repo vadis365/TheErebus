@@ -1,4 +1,4 @@
-package erebus.datagen.providers;
+package erebus.datagen.tags;
 
 import erebus.Erebus;
 import erebus.registries.data.ModTags;
@@ -12,8 +12,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModBiomeTagsProvider extends BiomeTagsProvider {
-    public ModBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper existingFileHelper) {
+public class ModBiomeTags extends BiomeTagsProvider {
+    public ModBiomeTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, provider, Erebus.MODID, existingFileHelper);
     }
 
@@ -32,8 +32,8 @@ public class ModBiomeTagsProvider extends BiomeTagsProvider {
 
         tag(ModTags.HAS_ANTLION_DUNGEON)
                 .add(ModBiomes.VOLCANIC_DESERT.getResourceKey());
-        tag(ModTags.HAS_ANTLION_LAIR);
-                //.add(ModBiomes.VOLCANIC_DESERT.getResourceKey());
+        tag(ModTags.HAS_ANTLION_LAIR)
+                .add(ModBiomes.VOLCANIC_DESERT.getResourceKey());
         tag(ModTags.HAS_DRAGONFLY_DUNGEON)
                 .add(ModBiomes.SUBMERGED_SWAMP.getResourceKey());
         tag(ModTags.HAS_DUNG_PILE)
