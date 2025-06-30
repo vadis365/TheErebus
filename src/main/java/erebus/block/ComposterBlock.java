@@ -82,7 +82,7 @@ public class ComposterBlock extends Block implements EntityBlock {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
     	ComposterBlockEntity composter = (ComposterBlockEntity) level.getBlockEntity(pos);
-		if (composter != null && composter.composterBurnTime > 0) {
+		if (composter != null && composter.compostingProgressTicks > 0) {
 			double particleX = pos.getX() + 0.5F;
 			double particleY = pos.getY() + 1.1F + random.nextFloat() * 6.0F / 16.0F;
 			double particleZ = pos.getZ() + 0.5F;
