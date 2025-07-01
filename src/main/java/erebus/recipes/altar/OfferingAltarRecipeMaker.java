@@ -1,8 +1,10 @@
-package erebus.recipes;
+package erebus.recipes.altar;
 
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import erebus.registries.ModCustomRecipes;
+import erebus.recipes.MultiStackInput;
 import erebus.registries.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;

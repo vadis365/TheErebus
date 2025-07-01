@@ -1,7 +1,7 @@
 package erebus.datagen.providers.recipes;
 
-import erebus.recipes.OfferingAltarRecipe;
-import erebus.recipes.OfferingAltarRecipeMaker;
+import erebus.recipes.altar.OfferingAltarRecipe;
+import erebus.recipes.altar.OfferingAltarRecipeMaker;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeBuilder;

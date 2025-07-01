@@ -6,7 +6,7 @@ import erebus.block.entity.BambooPipeExtractBlockEntity;
 import erebus.block.entity.FluidJarBlockEntity;
 import erebus.block.entity.LiquifierBlockEntity;
 import erebus.network.data.DeathCompassData;
-import erebus.recipes.ModCustomRecipes;
+import erebus.registries.ModCustomRecipes;
 import erebus.registries.ModFluids;
 import erebus.registries.ModItems;
 import erebus.registries.ModSounds;

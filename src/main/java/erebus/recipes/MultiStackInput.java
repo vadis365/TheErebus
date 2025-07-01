@@ -3,6 +3,7 @@ package erebus.recipes;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class MultiStackInput implements RecipeInput {
 	}
 
 	@Override
-	public ItemStack getItem(int index) {
+	public @NotNull ItemStack getItem(int index) {
 		return this.items.get(index);
 	}
 

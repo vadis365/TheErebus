@@ -1,9 +1,9 @@
 package erebus.block.entity;
 
 import erebus.network.client.OfferingAltarNBTPacket;
-import erebus.recipes.ModCustomRecipes;
+import erebus.registries.ModCustomRecipes;
 import erebus.recipes.MultiStackInput;
-import erebus.recipes.OfferingAltarRecipe;
+import erebus.recipes.altar.OfferingAltarRecipe;
 import erebus.registries.blocks.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

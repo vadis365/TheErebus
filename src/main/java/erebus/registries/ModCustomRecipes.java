@@ -1,6 +1,8 @@
-package erebus.recipes;
+package erebus.registries;
 
 import erebus.Erebus;
+import erebus.recipes.altar.OfferingAltarRecipe;
+import erebus.recipes.altar.OfferingAltarRecipeMaker;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
