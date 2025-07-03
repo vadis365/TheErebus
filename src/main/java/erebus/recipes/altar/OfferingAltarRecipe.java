@@ -1,7 +1,7 @@
 package erebus.recipes.altar;
 
+import erebus.recipes.util.MultiStackInput;
 import erebus.registries.ModCustomRecipes;
-import erebus.recipes.MultiStackInput;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 

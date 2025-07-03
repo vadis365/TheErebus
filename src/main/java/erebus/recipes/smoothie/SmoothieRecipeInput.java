@@ -1,30 +1,57 @@
 package erebus.recipes.smoothie;
 
+import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
-public record SmoothieRecipeInput(
-        SizedFluidIngredient fluid,
-        SizedFluidIngredient fluid2,
-        SizedFluidIngredient fluid3,
-        SizedFluidIngredient fluid4,
-        Ingredient stack,
-        Ingredient stack2,
-        Ingredient stack3,
-        Ingredient stack4
-) implements RecipeInput {
+import java.util.List;
+
+@SuppressWarnings("unused")
+public class SmoothieRecipeInput implements RecipeInput {
+
+    private final List<SizedFluidIngredient> fluidIngredients;
+    private final List<ItemStack> itemIngredients;
+    private final StackedContents stackedContents = new StackedContents();
+    private final int ingredientCount;
+
+    public SmoothieRecipeInput(List<SizedFluidIngredient> fluidIngredients, List<ItemStack> items) {
+        this.fluidIngredients = fluidIngredients;
+        this.itemIngredients = items;
+        ingredientCount = fluidIngredients.size() + items.size();
+        items.forEach(this.stackedContents::accountStack);
+    }
 
     @Override
-    public @NotNull ItemStack getItem(int slot) {
-        if(slot != 0) throw new IllegalArgumentException("No item for index %d".formatted(slot));
-        return stack.getItems()[slot];
+    @NotNull
+    public ItemStack getItem(int i) {
+        return itemIngredients.get(i);
     }
 
     @Override
     public int size() {
-        return 8;
+        return itemIngredients.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return ingredientCount == 0;
+    }
+
+    public List<ItemStack> getItemIngredients() {
+        return itemIngredients;
+    }
+
+    public List<SizedFluidIngredient> getFluidIngredients() {
+        return fluidIngredients;
+    }
+
+    public int getIngredientCount() {
+        return ingredientCount;
+    }
+
+    public StackedContents getStackedContents() {
+        return stackedContents;
     }
 }

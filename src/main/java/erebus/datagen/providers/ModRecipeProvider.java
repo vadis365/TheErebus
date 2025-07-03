@@ -35,7 +35,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapedArmorRecipeProvider armorProvider = new ShapedArmorRecipeProvider(packOutput, registries);
         ShapedMiscRecipeProvider miscProvider = new ShapedMiscRecipeProvider(packOutput, registries);
         ShapelessCraftingRecipeProvider shapelessProvider = new ShapelessCraftingRecipeProvider(packOutput, registries);
-        CustomRecipeProvider customProvider = new CustomRecipeProvider();
+        CustomRecipeProvider customProvider = new CustomRecipeProvider(packOutput, registries);
 
         // Call buildRecipes on each provider
         cookingProvider.buildRecipes(output);
