@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_smoothie_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:smoothie_glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:dont_meddle_with_the_nettle"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_smoothie_glass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:dont_meddle_with_the_nettle"
+    ]
+  }
+}

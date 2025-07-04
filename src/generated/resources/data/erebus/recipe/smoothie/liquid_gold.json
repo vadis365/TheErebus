@@ -1,0 +1,30 @@
+{
+  "type": "erebus:smoothie_recipes",
+  "fluids": [
+    {
+      "amount": 1000,
+      "tag": "c:milk"
+    }
+  ],
+  "items": [
+    {
+      "item": "erebus:smoothie_glass"
+    },
+    {
+      "item": "erebus:life_blood"
+    },
+    {
+      "item": "erebus:life_blood"
+    },
+    {
+      "item": "erebus:bamboo"
+    },
+    {
+      "item": "minecraft:glistering_melon_slice"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:liquid_gold"
+  }
+}

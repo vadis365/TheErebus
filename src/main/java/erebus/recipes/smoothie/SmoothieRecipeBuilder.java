@@ -45,6 +45,6 @@ public class SmoothieRecipeBuilder extends SimpleRecipeBuilder {
         this.criteria.forEach(advancement::addCriterion);
 
         SmoothieRecipe recipe = new SmoothieRecipe(NonNullList.copyOf(fluids), NonNullList.copyOf(items), new ItemStack(this.result, 1));
-        output.accept(id, recipe, advancement.build(id.withPrefix("recipes/")));
+        output.accept(id.withPrefix("smoothie/"), recipe, advancement.build(id.withPrefix("smoothie/")));
     }
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_poison_gland": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:poison_gland"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:anti_venom_bottle"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_poison_gland"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:anti_venom_bottle"
+    ]
+  }
+}

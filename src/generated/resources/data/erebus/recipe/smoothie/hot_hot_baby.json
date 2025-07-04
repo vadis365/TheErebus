@@ -1,0 +1,30 @@
+{
+  "type": "erebus:smoothie_recipes",
+  "fluids": [
+    {
+      "amount": 1000,
+      "fluid": "erebus:anti_venom_still"
+    }
+  ],
+  "items": [
+    {
+      "item": "erebus:smoothie_glass"
+    },
+    {
+      "item": "erebus:wasp_sting"
+    },
+    {
+      "item": "erebus:bogmaw_root"
+    },
+    {
+      "item": "erebus:fire_bloom"
+    },
+    {
+      "item": "erebus:fire_bloom"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:hot_hot_baby"
+  }
+}

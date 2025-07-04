@@ -1,0 +1,30 @@
+{
+  "type": "erebus:smoothie_recipes",
+  "fluids": [
+    {
+      "amount": 1000,
+      "tag": "c:milk"
+    }
+  ],
+  "items": [
+    {
+      "item": "erebus:smoothie_glass"
+    },
+    {
+      "item": "erebus:bluebell_petal"
+    },
+    {
+      "item": "erebus:bluebell_petal"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "erebus:givin_me_the_blues"
+  }
+}

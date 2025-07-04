@@ -28,8 +28,8 @@ public class SmoothieRecipeSerializer implements RecipeSerializer<SmoothieRecipe
                 if (aingredient.length == 0) {
                     return DataResult.error(() -> "No ingredients for smoothie recipe");
                 } else {
-                    return aingredient.length > 4
-                            ? DataResult.error(() -> "Too many ingredients for smoothie recipe. The maximum is 3")
+                    return aingredient.length > 5
+                            ? DataResult.error(() -> "Too many ingredients for smoothie recipe. The maximum is 5")
                             : DataResult.success(NonNullList.of(Ingredient.EMPTY, aingredient));
                 }
             }, DataResult::success).forGetter(SmoothieRecipe::getItemIngredients),
