@@ -14,6 +14,7 @@ import erebus.block.LavaWebBlock;
 import erebus.block.LiquifierBlock;
 import erebus.block.PetrifiedCraftingTableBlock;
 import erebus.block.QuicksandBlock;
+import erebus.block.SiloTankBlock;
 import erebus.block.SwampVentBlock;
 import erebus.block.UmberFurnaceBlock;
 import erebus.block.WitherWebBlock;
@@ -258,7 +259,7 @@ public class OtherBlocks extends ModBlockHelpers {
         BAMBOO_PIPE = registerBlock("bamboo_pipe", () -> new BambooPipe(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO)));
         BAMBOO_PIPE_EXTRACT = registerBlock("bamboo_pipe_extract", () -> new BambooPipeExtract(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO)));
         SILO_ROOF = registerSimpleBlock("silo_roof", Properties.of().mapColor(MapColor.STONE));
-        SILO_TANK = registerSimpleBlock("silo_tank", Properties.of().mapColor(MapColor.STONE));
+        SILO_TANK = registerBlock("silo_tank", () -> new SiloTankBlock(Properties.of().mapColor(MapColor.WOOD).strength(3F, 10F).sound(SoundType.METAL).noOcclusion()));
         SILO_SUPPORTS = registerSimpleBlock("silo_supports", Properties.of().mapColor(MapColor.STONE));
         HONEY_COMB = registerBlock("honey_comb", () -> new HoneyCombBlock(Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.5F, 10F).lightLevel(value -> 1).sound(SoundType.WOOL)));
         COMPOSTER = registerBlock("composter", () -> new ComposterBlock(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(2F, 10F).sound(SoundType.WOOD).noOcclusion()));

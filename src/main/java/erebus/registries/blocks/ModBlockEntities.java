@@ -21,6 +21,7 @@ import erebus.block.entity.LiquifierBlockEntity;
 import erebus.block.entity.OfferingAltarBlockEntity;
 import erebus.block.entity.PreservedBlockEntity;
 import erebus.block.entity.RepairAltarBlockEntity;
+import erebus.block.entity.SiloTankBlockEntity;
 import erebus.block.entity.UmberFurnaceBlockEntity;
 import erebus.registries.blocks.providers.AmberBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
@@ -53,6 +54,7 @@ public class ModBlockEntities {
 	public static final Supplier<BlockEntityType<PreservedBlockEntity>> PRESERVED_BLOCK;
 	public static final Supplier<BlockEntityType<UmberFurnaceBlockEntity>> UMBERFURNACE;
 	public static final Supplier<BlockEntityType<ComposterBlockEntity>> COMPOSTER;
+	public static final Supplier<BlockEntityType<SiloTankBlockEntity>> SILO_TANK;
 
 	static {
 		ALTAR_EXPERIENCE = register("altar_experience", ExperienceAltarBlockEntity::new, OtherBlocks.ALTAR_EXPERIENCE);
@@ -74,6 +76,7 @@ public class ModBlockEntities {
 		PRESERVED_BLOCK = register("preserved_block", PreservedBlockEntity::new, AmberBlocks.PRESERVED_AMBER, AmberBlocks.PRESERVED_AMBER_GLASS);
 		UMBERFURNACE = register("umberfurnace", UmberFurnaceBlockEntity::new, OtherBlocks.UMBER_FURNACE);
 		COMPOSTER = register("composter", ComposterBlockEntity::new, OtherBlocks.COMPOSTER);
+		SILO_TANK = register("silo_tank", SiloTankBlockEntity::new, OtherBlocks.SILO_TANK);
 	}
 
 	/**

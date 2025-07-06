@@ -8,6 +8,7 @@ import erebus.inventory.client.ComposterScreen;
 import erebus.inventory.client.HoneyCombScreen;
 import erebus.inventory.client.LiquifierScreen;
 import erebus.inventory.client.PetrifiedCraftingTableScreen;
+import erebus.inventory.client.SiloTankScreen;
 import erebus.inventory.client.UmberFurnaceScreen;
 import erebus.registries.client.ModMenuTypes;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -27,5 +28,6 @@ public class RegisterMenuScreensEventHandler {
         event.register(ModMenuTypes.BAMBOO_CRATE.get(), BambooCrateScreen::new);
         event.register(ModMenuTypes.COLOSSAL_CRATE.get(), ColossalCrateScreen::new);
         event.register(ModMenuTypes.COMPOSTER.get(), ComposterScreen::new);
+        event.register(ModMenuTypes.SILO_TANK.get(), SiloTankScreen::new);
     }
 }

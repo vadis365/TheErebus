@@ -1,6 +1,6 @@
 package erebus.block.entity;
 
-import erebus.inventory.server.HoneyCombMenu;
+import erebus.inventory.server.SiloTankMenu;
 import erebus.registries.blocks.ModBlockEntities;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
@@ -15,22 +15,20 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class HoneyCombBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
-	
-	public HoneyCombBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntities.HONEY_COMB.get(), 27,  pos, state);
+public class SiloTankBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
+
+	public SiloTankBlockEntity(BlockPos pos, BlockState state) {
+		super(ModBlockEntities.SILO_TANK.get(), 104,  pos, state);
 	}
 
 	@Override
 	public Component getDisplayName() {
-		return Component.translatable("erebus.container.honeycomb_cell").append(Component.literal(" X:" + getBlockPos().getX() + " Y:" + getBlockPos().getY() + " Z:" + getBlockPos().getZ()));
+		return Component.translatable("erebus.container.silo").append(Component.literal(" X:" + getBlockPos().getX() + " Y:" + getBlockPos().getY() + " Z:" + getBlockPos().getZ()));
 	}
 
 	@Override
 	public int[] getSlotsForFace(Direction side) {
 		int[] SLOTS = new int[getContainerSize()];
-		//for (int index = 0; index < SLOTS.length; index++)
-		//	SLOTS[index] = index;
 		return SLOTS;
 	}
 
@@ -38,7 +36,7 @@ public class HoneyCombBlockEntity extends BlockEntityInventoryHelper implements 
 	public boolean canPlaceItem(int slot, ItemStack stack) {
 		return true;
 	}
-	
+
 	@Override
 	public boolean canPlaceItemThroughFace(int index, ItemStack stack, Direction direction) {
 		return true;
@@ -54,10 +52,9 @@ public class HoneyCombBlockEntity extends BlockEntityInventoryHelper implements 
 		return ContainerHelper.takeItem(getItems(), slot);
 	}
 
+	
 	@Override
 	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-		return new HoneyCombMenu(containerId, playerInventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
+		return new SiloTankMenu(containerId, playerInventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
 	}
-
-
 }

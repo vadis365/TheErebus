@@ -10,6 +10,7 @@ import erebus.inventory.server.ComposterMenu;
 import erebus.inventory.server.HoneyCombMenu;
 import erebus.inventory.server.LiquifierMenu;
 import erebus.inventory.server.PetrifiedCraftingMenu;
+import erebus.inventory.server.SiloTankMenu;
 import erebus.inventory.server.UmberFurnaceMenu;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.flag.FeatureFlags;
@@ -30,4 +31,5 @@ public class ModMenuTypes {
     public static final DeferredHolder<MenuType<?>, MenuType<BambooCrateMenu>> BAMBOO_CRATE = MENU_TYPES.register("bamboo_crate", () -> IMenuTypeExtension.create(BambooCrateMenu::new));
     public static final DeferredHolder<MenuType<?>, MenuType<ColossalCrateMenu>> COLOSSAL_CRATE = MENU_TYPES.register("colossal_crate", () -> IMenuTypeExtension.create(ColossalCrateMenu::new));
     public static final DeferredHolder<MenuType<?>, MenuType<ComposterMenu>> COMPOSTER = MENU_TYPES.register("composter", () -> new MenuType<>(ComposterMenu::new, FeatureFlags.DEFAULT_FLAGS));
+    public static final DeferredHolder<MenuType<?>, MenuType<SiloTankMenu>> SILO_TANK = MENU_TYPES.register("silo_tank", () -> IMenuTypeExtension.create(SiloTankMenu::new));
 }
