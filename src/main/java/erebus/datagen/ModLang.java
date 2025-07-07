@@ -25,6 +25,7 @@ public class ModLang extends ModLangProvider {
         addBiomeTranslations();
         addContainerTranslations();
         addTagTranslations();
+        addEMITranslations();
     }
 
     private void addItemTranslations() {
@@ -801,5 +802,10 @@ public class ModLang extends ModLangProvider {
 
     private void addTagTranslations() {
         add(ModTags.COMPOSTABLE, "Compostable");
+    }
+
+    private void addEMITranslations() {
+        add("emi.category.erebus.blender", "Blending");
+        add("emi.category.erebus.offering_altar", "Offering Altar");
     }
 }
