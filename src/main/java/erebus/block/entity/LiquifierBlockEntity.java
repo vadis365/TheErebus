@@ -32,6 +32,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -206,7 +207,7 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 	}
 
 	@Override
-	public int[] getSlotsForFace(Direction side) {
+	public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
 		return SLOTS;
 	}
 	

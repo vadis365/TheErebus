@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -178,7 +179,7 @@ public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implem
 	}
 
 	@Override
-	public int[] getSlotsForFace(Direction side) {
+	public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
 		int[] SLOTS = new int[getContainerSize()];
 		for (int index = 0; index < SLOTS.length; index++)
 			SLOTS[index] = index;

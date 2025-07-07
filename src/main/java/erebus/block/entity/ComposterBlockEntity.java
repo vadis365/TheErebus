@@ -1,7 +1,5 @@
 package erebus.block.entity;
 
-import javax.annotation.Nonnull;
-
 import erebus.inventory.server.ComposterMenu;
 import erebus.registries.ModItems;
 import erebus.registries.blocks.ModBlockEntities;
@@ -24,6 +22,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public class ComposterBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 	public static final int DATA_MOULD_PROGRESS = 0;
@@ -222,7 +223,7 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 	}
 
 	public boolean isItemValidForSlot(int slot, ItemStack is) {
-		return slot == RESULT_SLOT ? false : slot == FUEL_SLOT ? isItemMould(is) : slot == SMELT_SLOT ? is.is(ModTags.COMPOSTABLE) : false;
+		return slot != RESULT_SLOT && (slot == FUEL_SLOT ? isItemMould(is) : slot == SMELT_SLOT && is.is(ModTags.COMPOSTABLE));
 	}
 
 	@Override
@@ -231,7 +232,7 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 	}
 
 	@Override
-	public int[] getSlotsForFace(Direction side) {
+	public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
 		return side == Direction.DOWN ? new int[] { RESULT_SLOT} : new int[] {FUEL_SLOT, SMELT_SLOT };
 	}
 
@@ -242,7 +243,7 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 
 	@Override
 	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-		return direction == Direction.DOWN ? index == RESULT_SLOT && stack.is(ModItems.COMPOST.get()) : false;
+		return direction == Direction.DOWN && index == RESULT_SLOT && stack.is(ModItems.COMPOST.get());
 	}
 	
 	@Override
@@ -252,7 +253,7 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 	
 	@Override
 	public boolean canTakeItem(Container target, int slot, ItemStack stack) {
-        return target != null ? slot == RESULT_SLOT && stack.is(ModItems.COMPOST.get()) : false;
+        return target != null && slot == RESULT_SLOT && stack.is(ModItems.COMPOST.get());
     }
 
 	@Override

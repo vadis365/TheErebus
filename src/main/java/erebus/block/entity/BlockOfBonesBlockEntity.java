@@ -7,6 +7,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -29,7 +30,7 @@ public class BlockOfBonesBlockEntity extends BlockEntityInventoryHelper {
     }
 
     @Override
-    public ItemStack getItem(int slot) {
+    public @NotNull ItemStack getItem(int slot) {
         return inventory.get(slot);
     }
 
@@ -39,7 +40,7 @@ public class BlockOfBonesBlockEntity extends BlockEntityInventoryHelper {
     }
 
     @Override
-    public int[] getSlotsForFace(Direction direction) {
+    public int @NotNull [] getSlotsForFace(@NotNull Direction direction) {
         return new int[0];
     }
 

@@ -1,6 +1,7 @@
 package erebus.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -11,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -24,12 +26,20 @@ public abstract class BlockEntityInventoryHelper extends BlockEntity implements 
 	}
 
 	@Override
+	public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
+		int[] SLOTS = new int[getContainerSize()];
+		for (int index = 0; index < SLOTS.length; index++)
+			SLOTS[index] = index;
+		return SLOTS;
+	}
+
+	@Override
 	public int getContainerSize() {
 		return inventory.size();
 	}
 
 	@Override
-	public ItemStack getItem(int slot) {
+	public @NotNull ItemStack getItem(int slot) {
 		return inventory.get(slot);
 	}
 
@@ -38,7 +48,7 @@ public abstract class BlockEntityInventoryHelper extends BlockEntity implements 
     }
 
 	@Override
-    public ItemStack removeItem(int index, int count) {
+    public @NotNull ItemStack removeItem(int index, int count) {
 		ItemStack itemstack = ContainerHelper.removeItem(inventory, index, count);
 		if (!itemstack.isEmpty())
 			this.setChanged();
@@ -59,7 +69,7 @@ public abstract class BlockEntityInventoryHelper extends BlockEntity implements 
 	}
 
 	@Override
-	public boolean stillValid(Player player) {
+	public boolean stillValid(@NotNull Player player) {
 		return true;
 	}
 
@@ -75,13 +85,13 @@ public abstract class BlockEntityInventoryHelper extends BlockEntity implements 
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+	public void saveAdditional(@NotNull CompoundTag compound, HolderLookup.@NotNull Provider registries) {
 		super.saveAdditional(compound, registries);
 		ContainerHelper.saveAllItems(compound, inventory, false, registries);
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+	public void loadAdditional(@NotNull CompoundTag compound, HolderLookup.@NotNull Provider registries) {
 		super.loadAdditional(compound, registries);
 		inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
 		if (compound.contains("Items", 9))
@@ -89,11 +99,11 @@ public abstract class BlockEntityInventoryHelper extends BlockEntity implements 
 	}
 
 	@Override
-	public void startOpen(Player playerIn) {
+	public void startOpen(@NotNull Player playerIn) {
 	}
 
 	@Override
-	public void stopOpen(Player playerIn) {
+	public void stopOpen(@NotNull Player playerIn) {
 	}
 
 	@Override

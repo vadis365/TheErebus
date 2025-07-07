@@ -21,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class BambooCrateBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 
@@ -29,35 +30,27 @@ public class BambooCrateBlockEntity extends BlockEntityInventoryHelper implement
 	}
 
 	@Override
-	public int[] getSlotsForFace(Direction side) {
-		int[] SLOTS = new int[getContainerSize()];
-		for (int index = 0; index < SLOTS.length; index++)
-			SLOTS[index] = index;
-		return SLOTS;
-	}
-
-	@Override
-	public boolean canPlaceItem(int slot, ItemStack stack) {
+	public boolean canPlaceItem(int slot, @NotNull ItemStack stack) {
 		return true;
 	}
 
 	@Override
-	public boolean canPlaceItemThroughFace(int index, ItemStack stack, Direction direction) {
+	public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, Direction direction) {
 		return true;
 	}
 
 	@Override
-	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
+	public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
 		return true;
 	}
 
 	@Override
-	public ItemStack removeItemNoUpdate(int slot) {
+	public @NotNull ItemStack removeItemNoUpdate(int slot) {
 		return ContainerHelper.takeItem(getItems(), slot);
 	}
 
 	@Override
-	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+	public AbstractContainerMenu createMenu(int containerId, @NotNull Inventory playerInventory, @NotNull Player player) {
 		if (this.getBlockState().getValue(BambooCrateBlock.CRATE_TYPE) != EnumCrateType.DEFAULT) {
 			return new ColossalCrateMenu(containerId, playerInventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
 		}
@@ -65,18 +58,18 @@ public class BambooCrateBlockEntity extends BlockEntityInventoryHelper implement
 	}
 
 	@Override
-	public Component getDisplayName() {
+	public @NotNull Component getDisplayName() {
 		return Component.translatable("erebus.container.bamboo_crate");
 	}
 
     @Override
-    protected void applyImplicitComponents(BlockEntity.DataComponentInput componentInput) {
+    protected void applyImplicitComponents(BlockEntity.@NotNull DataComponentInput componentInput) {
         super.applyImplicitComponents(componentInput);
         componentInput.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(this.getItems());
     }
 
     @Override
-    protected void collectImplicitComponents(DataComponentMap.Builder builder) {
+    protected void collectImplicitComponents(DataComponentMap.@NotNull Builder builder) {
         super.collectImplicitComponents(builder);
         builder.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(this.getItems()));
     }

@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class HoneyCombBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 	
@@ -27,7 +28,7 @@ public class HoneyCombBlockEntity extends BlockEntityInventoryHelper implements 
 	}
 
 	@Override
-	public int[] getSlotsForFace(Direction side) {
+	public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
 		int[] SLOTS = new int[getContainerSize()];
 		//for (int index = 0; index < SLOTS.length; index++)
 		//	SLOTS[index] = index;

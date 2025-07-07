@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -173,14 +174,14 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registries) {
+	public void loadAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider registries) {
 		super.loadAdditional(nbt, registries);
 		time = nbt.getInt("time");
 		isCrafting = nbt.getBoolean("isCrafting");
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag nbt, HolderLookup.Provider registries) {
+	public void saveAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider registries) {
 		super.saveAdditional(nbt, registries);
 		nbt.putInt("time", time);
 		nbt.putBoolean("isCrafting", isCrafting);
@@ -197,7 +198,7 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 	}
 
 	@Override
-	public int[] getSlotsForFace(Direction side) {
+	public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
 		return null;
 	}
 

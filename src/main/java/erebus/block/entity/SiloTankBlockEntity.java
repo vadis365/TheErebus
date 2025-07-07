@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class SiloTankBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 
@@ -22,39 +23,33 @@ public class SiloTankBlockEntity extends BlockEntityInventoryHelper implements M
 	}
 
 	@Override
-	public Component getDisplayName() {
+	public @NotNull Component getDisplayName() {
 		return Component.translatable("erebus.container.silo").append(Component.literal(" X:" + getBlockPos().getX() + " Y:" + getBlockPos().getY() + " Z:" + getBlockPos().getZ()));
 	}
 
 	@Override
-	public int[] getSlotsForFace(Direction side) {
-		int[] SLOTS = new int[getContainerSize()];
-		return SLOTS;
-	}
-
-	@Override
-	public boolean canPlaceItem(int slot, ItemStack stack) {
+	public boolean canPlaceItem(int slot, @NotNull ItemStack stack) {
 		return true;
 	}
 
 	@Override
-	public boolean canPlaceItemThroughFace(int index, ItemStack stack, Direction direction) {
+	public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, Direction direction) {
 		return true;
 	}
 
 	@Override
-	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
+	public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
 		return true;
 	}
 
 	@Override
-	public ItemStack removeItemNoUpdate(int slot) {
+	public @NotNull ItemStack removeItemNoUpdate(int slot) {
 		return ContainerHelper.takeItem(getItems(), slot);
 	}
 
 	
 	@Override
-	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+	public AbstractContainerMenu createMenu(int containerId, @NotNull Inventory playerInventory, @NotNull Player player) {
 		return new SiloTankMenu(containerId, playerInventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
 	}
 }
