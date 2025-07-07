@@ -1,8 +1,11 @@
 {
   "type": "erebus:smoothie_recipes",
+  "counts": {
+    "fluid_count": 1,
+    "item_count": 2
+  },
   "fluids": [
     {
-      "amount": 1000,
       "fluid": "minecraft:water"
     }
   ],

@@ -3,20 +3,20 @@ package erebus.recipes.smoothie;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import erebus.recipes.util.SmoothieIngredientCounts;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 public class SmoothieRecipeSerializer implements RecipeSerializer<SmoothieRecipe> {
 
     public static final MapCodec<SmoothieRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            SizedFluidIngredient.FLAT_CODEC.listOf().fieldOf("fluids").flatXmap(fluids -> {
+            FluidIngredient.CODEC.listOf().fieldOf("fluids").flatXmap(fluids -> {
                 if(fluids.size() > 4) {
                     return DataResult.error(() -> "Too many fluids for smoothie recipe. The maximum is 4");
                 } else {
@@ -33,7 +33,8 @@ public class SmoothieRecipeSerializer implements RecipeSerializer<SmoothieRecipe
                             : DataResult.success(NonNullList.of(Ingredient.EMPTY, aingredient));
                 }
             }, DataResult::success).forGetter(SmoothieRecipe::getItemIngredients),
-            ItemStack.STRICT_CODEC.fieldOf("result").forGetter(SmoothieRecipe::result)
+            SmoothieIngredientCounts.CODEC.fieldOf("counts").forGetter(SmoothieRecipe::getCounts),
+            ItemStack.STRICT_CODEC.fieldOf("result").forGetter(SmoothieRecipe::getResult)
     ).apply(instance, SmoothieRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SmoothieRecipe> STREAM_CODEC = StreamCodec.of(SmoothieRecipeSerializer::toNetwork, SmoothieRecipeSerializer::fromNetwork);
@@ -49,18 +50,19 @@ public class SmoothieRecipeSerializer implements RecipeSerializer<SmoothieRecipe
     }
 
     public static void toNetwork(RegistryFriendlyByteBuf buffer, SmoothieRecipe recipe) {
-        buffer.writeInt(recipe.getFluidIngredients().size());
-        buffer.writeShort(recipe.getItemIngredients().size());
-        recipe.fluids().forEach(fluid -> SizedFluidIngredient.STREAM_CODEC.encode(buffer, fluid));
-        recipe.items().forEach(item -> Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, item));
-        ItemStack.STREAM_CODEC.encode(buffer, recipe.result());
+        SmoothieIngredientCounts.STREAM_CODEC.encode(buffer, recipe.getCounts());
+        recipe.getFluidIngredients().forEach(fluid -> FluidIngredient.STREAM_CODEC.encode(buffer, fluid));
+        recipe.getItemIngredients().forEach(item -> Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, item));
+        ItemStack.STREAM_CODEC.encode(buffer, recipe.getResult());
     }
 
     public static SmoothieRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
-        NonNullList<SizedFluidIngredient> fluids = NonNullList.withSize(buffer.readInt(), SizedFluidIngredient.of(FluidStack.EMPTY));
-        fluids.replaceAll(fluid -> SizedFluidIngredient.STREAM_CODEC.decode(buffer));
+        SmoothieIngredientCounts counts = SmoothieIngredientCounts.STREAM_CODEC.decode(buffer);
 
-        NonNullList<Ingredient> items = NonNullList.withSize(buffer.readShort(), Ingredient.EMPTY);
+        NonNullList<FluidIngredient> fluids = NonNullList.withSize(counts.fluidCount(), FluidIngredient.empty());
+        fluids.replaceAll(fluid -> FluidIngredient.STREAM_CODEC.decode(buffer));
+
+        NonNullList<Ingredient> items = NonNullList.withSize(counts.itemCount(), Ingredient.EMPTY);
         items.replaceAll(item -> Ingredient.CONTENTS_STREAM_CODEC.decode(buffer));
 
         ItemStack result = ItemStack.STREAM_CODEC.decode(buffer);

@@ -1,9 +1,12 @@
 {
   "type": "erebus:smoothie_recipes",
+  "counts": {
+    "fluid_count": 1,
+    "item_count": 5
+  },
   "fluids": [
     {
-      "amount": 1000,
-      "tag": "c:milk"
+      "fluid": "minecraft:milk"
     }
   ],
   "items": [

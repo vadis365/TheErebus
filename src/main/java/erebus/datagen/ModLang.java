@@ -3,6 +3,7 @@ package erebus.datagen;
 import erebus.datagen.providers.ModLangProvider;
 import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.*;
+import erebus.registries.data.ModTags;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.data.PackOutput;
 
@@ -23,6 +24,7 @@ public class ModLang extends ModLangProvider {
         addAdvancementTranslations();
         addBiomeTranslations();
         addContainerTranslations();
+        addTagTranslations();
     }
 
     private void addItemTranslations() {
@@ -795,5 +797,9 @@ public class ModLang extends ModLangProvider {
         addContainer("colossal_crate", "Colossal Crate");
         addContainer("composter", "Organic Composter");
         addContainer("silo", "Silo Location");
+    }
+
+    private void addTagTranslations() {
+        add(ModTags.COMPOSTABLE, "Compostable");
     }
 }

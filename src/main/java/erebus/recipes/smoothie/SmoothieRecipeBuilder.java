@@ -1,6 +1,7 @@
 package erebus.recipes.smoothie;
 
 import erebus.recipes.util.SimpleRecipeBuilder;
+import erebus.recipes.util.SmoothieIngredientCounts;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
@@ -11,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -19,14 +20,14 @@ import java.util.List;
 
 public class SmoothieRecipeBuilder extends SimpleRecipeBuilder {
 
-    private final List<SizedFluidIngredient> fluids = new ArrayList<>();
+    private final List<FluidIngredient> fluids = new ArrayList<>();
     private final List<Ingredient> items = new ArrayList<>();
 
     public SmoothieRecipeBuilder(ItemLike result) {
         super(result);
     }
 
-    public SmoothieRecipeBuilder addFluidIngredient(SizedFluidIngredient fluid) {
+    public SmoothieRecipeBuilder addFluidIngredient(FluidIngredient fluid) {
         this.fluids.add(fluid);
         return this;
     }
@@ -44,7 +45,12 @@ public class SmoothieRecipeBuilder extends SimpleRecipeBuilder {
                 .requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(advancement::addCriterion);
 
-        SmoothieRecipe recipe = new SmoothieRecipe(NonNullList.copyOf(fluids), NonNullList.copyOf(items), new ItemStack(this.result, 1));
+        SmoothieRecipe recipe = new SmoothieRecipe(
+                NonNullList.copyOf(fluids),
+                NonNullList.copyOf(items),
+                new SmoothieIngredientCounts(fluids.size(), items.size()),
+                new ItemStack(this.result, 1)
+        );
         output.accept(id.withPrefix("smoothie/"), recipe, advancement.build(id.withPrefix("smoothie/")));
     }
 }
