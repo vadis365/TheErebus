@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class SiloTankMenu extends AbstractContainerMenu {
 	public SiloTankBlockEntity siloTank;
-	public int numRows = 3;
+	public int numRows = 8;
 
 	public SiloTankMenu(final int windowId, final Inventory playerInventory, FriendlyByteBuf extra) {
 		super(ModMenuTypes.SILO_TANK.get(), windowId);

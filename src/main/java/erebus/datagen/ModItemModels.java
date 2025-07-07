@@ -644,12 +644,12 @@ public class ModItemModels extends ModItemModelProvider {
         //block(BAMBOO_PIPE);
         //block(BAMBOO_PIPE_EXTRACT);
         //block(BAMBOO_PIPE_EXTRACT_ACTIVE);
-        block(OtherBlocks.SILO_ROOF);
-        block(OtherBlocks.SILO_TANK);
-        block(OtherBlocks.SILO_SUPPORTS);
+        //block(OtherBlocks.SILO_ROOF);
+        //block(OtherBlocks.SILO_TANK);
+        //block(OtherBlocks.SILO_SUPPORTS);
         //block(HONEY_COMB);
-        block(OtherBlocks.COMPOSTER);
-        block(OtherBlocks.BLENDER);
+        //block(OtherBlocks.COMPOSTER);
+        //block(OtherBlocks.BLENDER);
         block(OtherBlocks.UMBER_FURNACE);
         button(OtherBlocks.UMBERSTONE_BUTTON, UmberstoneBlocks.UMBERSTONE);
         //block(LIQUIFIER);

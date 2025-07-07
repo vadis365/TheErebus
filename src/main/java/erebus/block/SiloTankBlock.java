@@ -34,16 +34,16 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class SiloTankBlock extends Block implements EntityBlock {
-	
+
 	public static final MapCodec<SiloTankBlock> CODEC = simpleCodec(SiloTankBlock::new);
 	protected static final VoxelShape SILO_TANK_AABB = Block.box(2D, 0D, 2D, 14D, 16D, 14D);
 	public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
-	
+
 	public SiloTankBlock(Properties properties) {
 		super(properties);
 		registerDefaultState(this.stateDefinition.any().setValue(ACTIVE, false));
 	}
-	
+
 	@Override
 	protected @NotNull MapCodec<SiloTankBlock> codec() {
 		return CODEC;
@@ -59,17 +59,17 @@ public class SiloTankBlock extends Block implements EntityBlock {
 	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
 		return new SiloTankBlockEntity(pos, state);
 	}
-    
+
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return this.defaultBlockState().setValue(ACTIVE, false);
 	}
-	
+
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(ACTIVE);
 	}
-	
+
 	@Override
 	protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
 		boolean canSurvive = false;
@@ -77,7 +77,7 @@ public class SiloTankBlock extends Block implements EntityBlock {
 			canSurvive = true;
 		return !canSurvive ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, pos, facingPos);
 	}
-	
+
 	@Override
 	public void neighborChanged(@NotNull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Block block, @Nonnull BlockPos fromPos, boolean isMoving) {
 		if (!level.isClientSide()) {
@@ -97,6 +97,8 @@ public class SiloTankBlock extends Block implements EntityBlock {
 
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    	if(level.getBlockState(pos).is(this) && level.getBlockState(pos).getValue(ACTIVE))
+    		return isSiloComplete((Level) level, pos);
 		return level.getBlockState(pos.below()).is(OtherBlocks.SILO_SUPPORTS.get());
 	}
 
@@ -114,7 +116,8 @@ public class SiloTankBlock extends Block implements EntityBlock {
     	} else if (blockEntity instanceof SiloTankBlockEntity siloTank) {
 			if (!stack.isEmpty() && stack.is(OtherBlocks.SILO_ROOF.asItem()) || !stack.isEmpty() && stack.getItem() == ModItems.ANT_TAMING_AMULET.get())
 				return ItemInteractionResult.FAIL;
-			player.openMenu(siloTank, pos);
+			if(isSiloComplete(level, pos))
+				player.openMenu(siloTank, pos);
 		}
     	return ItemInteractionResult.SUCCESS;
 	}

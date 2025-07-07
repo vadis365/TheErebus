@@ -1,0 +1,50 @@
+package erebus.block;
+
+import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.NotNull;
+
+import com.mojang.serialization.MapCodec;
+
+import erebus.registries.blocks.providers.OtherBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.state.BlockState;
+
+public class SiloSupportsBlock extends Block {
+
+	public static final MapCodec<SiloSupportsBlock> CODEC = simpleCodec(SiloSupportsBlock::new);
+
+	public SiloSupportsBlock(Properties properties) {
+		super(properties);
+	}
+
+	@Override
+	protected @NotNull MapCodec<SiloSupportsBlock> codec() {
+		return CODEC;
+	}
+
+    @Override
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		return level.getBlockState(pos.below()).is(OtherBlocks.RED_GEM_BLOCK.get());
+	}
+
+	@Override
+	protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
+		boolean canSurvive = false;
+		if (canSurvive(state, level, pos))
+			canSurvive = true;
+		return !canSurvive ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, pos, facingPos);
+	}
+
+	@Nonnull
+	@Override
+	public RenderShape getRenderShape(@Nonnull BlockState state) {
+		return RenderShape.MODEL;
+	}
+}

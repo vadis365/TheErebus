@@ -381,9 +381,9 @@ public class ModBlockStates extends ModBlockStateProvider {
         // MARK: Utility Blocks
         craftingTable(OtherBlocks.PETRIFIED_CRAFTING_TABLE);
         //block(PETRIFIED_WOOD_CHEST); TODO: Add in chest
-        block(OtherBlocks.SILO_ROOF);
-        block(OtherBlocks.SILO_TANK, "silo_tank_inactive");
-        block(OtherBlocks.SILO_SUPPORTS);
+       // block(OtherBlocks.SILO_ROOF);
+       // block(OtherBlocks.SILO_TANK, "silo_tank_inactive");
+        //block(OtherBlocks.SILO_SUPPORTS);
         furnace(OtherBlocks.UMBER_FURNACE);
         button(OtherBlocks.UMBERSTONE_BUTTON, UmberstoneBlocks.UMBERSTONE);
 //        block(GLOW_GEM); TODO Implement these

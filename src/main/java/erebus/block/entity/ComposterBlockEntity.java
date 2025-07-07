@@ -14,6 +14,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.Container;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -221,7 +222,7 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 	}
 
 	public boolean isItemValidForSlot(int slot, ItemStack is) {
-		return slot == RESULT_SLOT ? false : slot == FUEL_SLOT ? isItemMould(is) : true;
+		return slot == RESULT_SLOT ? false : slot == FUEL_SLOT ? isItemMould(is) : slot == SMELT_SLOT ? is.is(ModTags.COMPOSTABLE) : false;
 	}
 
 	@Override
@@ -241,12 +242,22 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 
 	@Override
 	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-		return index == RESULT_SLOT;
+		return direction == Direction.DOWN ? index == RESULT_SLOT && stack.is(ModItems.COMPOST.get()) : false;
 	}
+	
+	@Override
+	public boolean canPlaceItem(int slot, ItemStack stack) {
+        return isItemValidForSlot(slot, stack);
+    }
+	
+	@Override
+	public boolean canTakeItem(Container target, int slot, ItemStack stack) {
+        return target != null ? slot == RESULT_SLOT && stack.is(ModItems.COMPOST.get()) : false;
+    }
 
 	@Override
 	public ItemStack removeItemNoUpdate(int slot) {
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	@Override

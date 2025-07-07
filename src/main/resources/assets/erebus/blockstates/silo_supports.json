@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "erebus:block/silo_supports" }
+    }
+}
