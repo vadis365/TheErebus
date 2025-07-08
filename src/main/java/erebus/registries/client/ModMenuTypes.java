@@ -1,23 +1,15 @@
 package erebus.registries.client;
 
-import java.util.function.Supplier;
-
 import erebus.Erebus;
-import erebus.inventory.server.BambooCrateMenu;
-import erebus.inventory.server.BambooExtenderMenu;
-import erebus.inventory.server.ColossalCrateMenu;
-import erebus.inventory.server.ComposterMenu;
-import erebus.inventory.server.HoneyCombMenu;
-import erebus.inventory.server.LiquifierMenu;
-import erebus.inventory.server.PetrifiedCraftingMenu;
-import erebus.inventory.server.SiloTankMenu;
-import erebus.inventory.server.UmberFurnaceMenu;
+import erebus.inventory.server.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 public class ModMenuTypes {
 
@@ -32,4 +24,5 @@ public class ModMenuTypes {
     public static final DeferredHolder<MenuType<?>, MenuType<ColossalCrateMenu>> COLOSSAL_CRATE = MENU_TYPES.register("colossal_crate", () -> IMenuTypeExtension.create(ColossalCrateMenu::new));
     public static final DeferredHolder<MenuType<?>, MenuType<ComposterMenu>> COMPOSTER = MENU_TYPES.register("composter", () -> new MenuType<>(ComposterMenu::new, FeatureFlags.DEFAULT_FLAGS));
     public static final DeferredHolder<MenuType<?>, MenuType<SiloTankMenu>> SILO_TANK = MENU_TYPES.register("silo_tank", () -> IMenuTypeExtension.create(SiloTankMenu::new));
+    public static final DeferredHolder<MenuType<?>, MenuType<BlenderMenu>> BLENDER = MENU_TYPES.register("blender", () -> IMenuTypeExtension.create(BlenderMenu::new));
 }

@@ -1,4 +1,4 @@
-package erebus.inventory.client;
+package erebus.inventory.client.elements;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;

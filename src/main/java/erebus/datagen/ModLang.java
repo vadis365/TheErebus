@@ -798,6 +798,7 @@ public class ModLang extends ModLangProvider {
         addContainer("colossal_crate", "Colossal Crate");
         addContainer("composter", "Organic Composter");
         addContainer("silo", "Silo Location");
+        addContainer("blender", "ErebusCo. Smoothie-matic 2000");
     }
 
     private void addTagTranslations() {

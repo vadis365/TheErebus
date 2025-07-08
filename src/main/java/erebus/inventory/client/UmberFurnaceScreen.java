@@ -17,6 +17,7 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class UmberFurnaceScreen extends AbstractContainerScreen<UmberFurnaceMenu> implements RecipeUpdateListener {
@@ -55,7 +56,7 @@ public class UmberFurnaceScreen extends AbstractContainerScreen<UmberFurnaceMenu
     }
 
     @Override
-    public void render(GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
+    public void render(@NotNull GuiGraphics gui, int mouseX, int mouseY, float partialTick) {
         if(recipeBookComponent.isVisible() && widthTooNarrow) {
             renderBackground(gui, mouseX, mouseY, partialTick);
             recipeBookComponent.render(gui, mouseX, mouseY, partialTick);
@@ -98,7 +99,7 @@ public class UmberFurnaceScreen extends AbstractContainerScreen<UmberFurnaceMenu
     }
 
     @Override
-    protected void slotClicked(Slot slot, int slotId, int mouseButton, ClickType type) {
+    protected void slotClicked(@NotNull Slot slot, int slotId, int mouseButton, @NotNull ClickType type) {
         super.slotClicked(slot, slotId, mouseButton, type);
         recipeBookComponent.slotClicked(slot);
     }
@@ -125,7 +126,7 @@ public class UmberFurnaceScreen extends AbstractContainerScreen<UmberFurnaceMenu
     }
 
     @Override
-    public RecipeBookComponent getRecipeBookComponent() {
+    public @NotNull RecipeBookComponent getRecipeBookComponent() {
         return recipeBookComponent;
     }
 

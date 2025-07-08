@@ -2,6 +2,7 @@ package erebus.inventory.client;
 
 import erebus.Erebus;
 import erebus.block.entity.LiquifierBlockEntity;
+import erebus.inventory.client.elements.TankGauge;
 import erebus.inventory.server.LiquifierMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
