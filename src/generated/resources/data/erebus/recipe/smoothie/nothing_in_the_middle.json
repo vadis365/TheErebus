@@ -6,6 +6,7 @@
   },
   "fluids": [
     {
+      "amount": 1000,
       "fluid": "erebus:beetle_juice_still"
     }
   ],

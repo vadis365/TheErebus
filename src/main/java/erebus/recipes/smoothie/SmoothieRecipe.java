@@ -10,21 +10,21 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 public class SmoothieRecipe implements Recipe<SmoothieRecipeInput> {
 
-    private final NonNullList<FluidIngredient> fluids;
+    private final NonNullList<SizedFluidIngredient> fluids;
     private final NonNullList<Ingredient> items;
     private final ItemStack result;
     private final SmoothieIngredientCounts counts;
 
-    public SmoothieRecipe(NonNullList<FluidIngredient> fluids, NonNullList<Ingredient> items, ItemStack result) {
+    public SmoothieRecipe(NonNullList<SizedFluidIngredient> fluids, NonNullList<Ingredient> items, ItemStack result) {
         this(fluids, items, new SmoothieIngredientCounts(fluids.size(), items.size()), result);
     }
 
-    public SmoothieRecipe(NonNullList<FluidIngredient> fluids, NonNullList<Ingredient> items, SmoothieIngredientCounts smoothieIngredientCounts, ItemStack result) {
+    public SmoothieRecipe(NonNullList<SizedFluidIngredient> fluids, NonNullList<Ingredient> items, SmoothieIngredientCounts smoothieIngredientCounts, ItemStack result) {
         this.fluids = fluids;
         this.items = items;
         this.counts = smoothieIngredientCounts;
@@ -70,7 +70,7 @@ public class SmoothieRecipe implements Recipe<SmoothieRecipeInput> {
         return ModCustomRecipes.SMOOTHIE_RECIPE_SERIALIZER.get();
     }
 
-    public NonNullList<FluidIngredient> getFluidIngredients() {
+    public NonNullList<SizedFluidIngredient> getFluidIngredients() {
         return fluids;
     }
 

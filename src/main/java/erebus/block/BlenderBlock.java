@@ -2,27 +2,35 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.BlenderBlockEntity;
+import erebus.registries.ModItems;
+import erebus.utils.CapHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.Optional;
 
 public class BlenderBlock extends BaseEntityBlock {
 
@@ -63,8 +71,25 @@ public class BlenderBlock extends BaseEntityBlock {
         if (level.isClientSide()) {
             return ItemInteractionResult.SUCCESS;
         } else if (blockEntity instanceof BlenderBlockEntity blender) {
+            if(player.getItemInHand(hand).is(Items.BOOK)) {
+                player.getItemInHand(hand).shrink(1);
+                player.addItem(new ItemStack(ModItems.SMOOTHIE_BOOK.get()));
+            }
+
+            Optional<IFluidHandler> optional = CapHelper.getFluidHandler(level, pos, hit.getDirection());
+
+            optional.ifPresent(fluidHandler -> {
+                FluidUtil.interactWithFluidHandler(player, hand, level, pos, hit.getDirection());
+            });
+
+
             player.openMenu(blender, pos);
         }
         return ItemInteractionResult.SUCCESS;
+    }
+
+    @Override
+    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> blockEntityType) {
+        return BlenderBlockEntity::tick;
     }
 }

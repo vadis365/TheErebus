@@ -1,21 +1,8 @@
 package erebus;
 
-import java.util.Locale;
-
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
-import erebus.block.entity.BambooPipeBlockEntity;
-import erebus.block.entity.BambooPipeExtractBlockEntity;
-import erebus.block.entity.FluidJarBlockEntity;
-import erebus.block.entity.LiquifierBlockEntity;
 import erebus.network.data.DeathCompassData;
-import erebus.registries.ModCustomRecipes;
-import erebus.registries.ModFluids;
-import erebus.registries.ModItems;
-import erebus.registries.ModSounds;
-import erebus.registries.ModTabs;
+import erebus.registries.*;
 import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModBlockEntityRendering;
@@ -54,12 +41,10 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
-import net.neoforged.neoforge.items.wrapper.InvWrapper;
-import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
+import org.slf4j.Logger;
+
+import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -108,8 +93,6 @@ public class Erebus {
 
         NeoForgeMod.enableMilkFluid(); // TEMP - JUST FOR BEETLE MILKING TEST
 
-        bus.addListener(this::registerCaps);
-
 		if (dist.isClient()) {
 			bus.addListener(this::setFluidRenderTypes);
 			bus.addListener(ModEntityRendering::registerEntityLayers);
@@ -155,20 +138,5 @@ public class Erebus {
 
 	public static ResourceLocation prefix(String name) {
 		return ResourceLocation.fromNamespaceAndPath(MODID, name.toLowerCase(Locale.ROOT));
-	}
-
-	public void registerCaps(final RegisterCapabilitiesEvent event) {
-		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.FLUID_JAR.get(), FluidJarBlockEntity::getTank);
-		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.BAMBOO_PIPE.get(), BambooPipeBlockEntity::getTank);
-        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.BAMBOO_PIPE_EXTRACT.get(), BambooPipeExtractBlockEntity::getTank);
-        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntities.LIQUIFIER.get(), LiquifierBlockEntity::getTank);
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.LIQUIFIER.get(), (liquifier, side) -> new InvWrapper(liquifier));
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.HONEY_COMB.get(), (honey_comb, side) -> new InvWrapper(honey_comb));
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.BAMBOO_EXTENDER.get(), (extender, side) -> new InvWrapper(extender));
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.BAMBOO_CRATE.get(), (crate, side) -> new InvWrapper(crate));
-		event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidBucketWrapper(stack), ModItems.BEETLE_JUICE_BUCKET.get());
-		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.COMPOSTER.get(), (composter, side) -> new SidedInvWrapper(composter, side));
-		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ModBlockEntities.SILO_TANK.get(), (silo, side) -> new SidedInvWrapper(silo, side));
-	
 	}
 }

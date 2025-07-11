@@ -14,7 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class SmoothieEmiRecipe implements EmiRecipe {
     @Override
     public void addWidgets(WidgetHolder widgets) {
         int c = 0;
-        for (FluidIngredient fluid : recipe.getFluidIngredients()) {
+        for (SizedFluidIngredient fluid : recipe.getFluidIngredients()) {
             widgets.addSlot(NeoForgeEmiIngredient.of(fluid), fluidX[c], fluidY[c]);
             if(c != 3) c++;
         }

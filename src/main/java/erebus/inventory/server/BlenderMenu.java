@@ -1,6 +1,7 @@
 package erebus.inventory.server;
 
 import erebus.block.entity.BlenderBlockEntity;
+import erebus.registries.ModItems;
 import erebus.registries.client.ModMenuTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -20,8 +21,9 @@ public class BlenderMenu extends AbstractContainerMenu {
         super(ModMenuTypes.BLENDER.get(), containerId);
         BlockPos tilePos = extra.readBlockPos();
         BlockEntity tile = inventory.player.getCommandSenderWorld().getBlockEntity(tilePos);
-        if (!(tile instanceof BlenderBlockEntity))
+        if (!(tile instanceof BlenderBlockEntity)) {
             return;
+        }
         blender = (BlenderBlockEntity) tile;
 
         addSlot(new Slot(blender, 0, 47, 9));
@@ -30,17 +32,63 @@ public class BlenderMenu extends AbstractContainerMenu {
         addSlot(new Slot(blender, 3, 92, 30));
         addSlot(new Slot(blender, 4, 80, 63));
 
-        for (int c = 0; c < 3; ++c)
-            for (int d = 0; d < 9; ++d)
+        for (int c = 0; c < 3; ++c) {
+            for (int d = 0; d < 9; ++d) {
                 addSlot(new Slot(inventory, d + c * 9 + 9, 8 + d * 18, 84 + c * 18));
-        for (int c = 0; c < 9; ++c)
+            }
+        }
+        for (int c = 0; c < 9; ++c) {
             addSlot(new Slot(inventory, c, 8 + c * 18, 142));
+        }
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int i) {
-        return null;
+    public @NotNull ItemStack quickMoveStack(@NotNull Player player, int slotIndex) {
+        ItemStack resultStack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(slotIndex);
+
+        if (slot.hasItem()) {
+            ItemStack stackInSlot = slot.getItem();
+            resultStack = stackInSlot.copy();
+
+            // Moving from player inventory to blender
+            if (slotIndex > 4) {
+                if (stackInSlot.is(ModItems.SMOOTHIE_GLASS)) {
+                    // Smoothie glass goes to output slot (slot 4)
+                    if (!moveItemStackTo(stackInSlot, 4, 5, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else {
+                    // Other items go to input slots (slots 0-3)
+                    if (!moveItemStackTo(stackInSlot, 0, 4, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                }
+            } 
+            // Moving from blender to player inventory
+            else if (!moveItemStackTo(stackInSlot, 5, slots.size(), false)) {
+                return ItemStack.EMPTY;
+            }
+
+            // Update slot after transfer
+            if (stackInSlot.isEmpty()) {
+                slot.set(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
+            }
+
+            // Handle partial transfers
+            if (stackInSlot.getCount() != resultStack.getCount()) {
+                slot.onTake(player, stackInSlot);
+            } else {
+                return ItemStack.EMPTY;
+            }
+        }
+
+        return resultStack;
     }
+
+
 
     @Override
     public boolean stillValid(@NotNull Player player) {

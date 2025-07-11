@@ -14,8 +14,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.FluidUtil;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -39,12 +40,12 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 				.addItemIngredient(Ingredient.of(ModItems.GRASSHOPPER_LEG_RAW))
 				.addItemIngredient(Ingredient.of(ModItems.ELASTIC_FIBER))
 				.addItemIngredient(Ingredient.of(ModItems.FLY_WING))
-				.addFluidIngredient(FluidIngredient.of(ModFluids.BEETLE_JUICE_STILL.get()))
+				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.BEETLE_JUICE_STILL.get(), FluidType.BUCKET_VOLUME))
 				.unlockedBy("has_smoothie_glass", has(ModItems.SMOOTHIE_GLASS))
 				.save(output);
 
 		new SmoothieRecipeBuilder(ModItems.MONEY_HONEY)
-				.addFluidIngredient(FluidIngredient.of(ModFluids.HONEY_STILL.get()))
+				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.HONEY_STILL.get(), FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(ModItems.HONEY_DRIP))
 				.addItemIngredient(Ingredient.of(ModItems.HONEY_DRIP))
 				.addItemIngredient(Ingredient.of(ModItems.NECTAR))
@@ -54,7 +55,7 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 
 		new SmoothieRecipeBuilder(ModItems.NOTHING_IN_THE_MIDDLE)
 				.addItemIngredient(Ingredient.of(ModItems.SMOOTHIE_GLASS))
-				.addFluidIngredient(FluidIngredient.of(ModFluids.BEETLE_JUICE_STILL.get()))
+				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.BEETLE_JUICE_STILL.get(), FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(ModItems.CAMO_POWDER))
 				.addItemIngredient(Ingredient.of(ModItems.CAMO_POWDER))
 				.addItemIngredient(Ingredient.of(ModItems.DARK_FRUIT))
@@ -64,7 +65,7 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 
 		new SmoothieRecipeBuilder(ModItems.GREEN_GIANT)
 				.addItemIngredient(Ingredient.of(ModItems.SMOOTHIE_GLASS))
-				.addFluidIngredient(FluidIngredient.of(ModFluids.ANTI_VENOM_STILL.get()))
+				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.ANTI_VENOM_STILL.get(), FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(ModItems.REPELLENT))
 				.addItemIngredient(Ingredient.of(ModItems.POISON_GLAND))
 				.addItemIngredient(Ingredient.of(ModItems.POISON_GLAND))
@@ -74,7 +75,7 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 
 		new SmoothieRecipeBuilder(ModItems.SEEDY_GOODNESS)
 				.addItemIngredient(Ingredient.of(ModItems.SMOOTHIE_GLASS))
-				.addFluidIngredient(FluidIngredient.of(ModFluids.BEETLE_JUICE_STILL.get()))
+				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.BEETLE_JUICE_STILL.get(), FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(ModItems.BIO_VELOCITY))
 				.addItemIngredient(Ingredient.of(ModItems.DARK_FRUIT_SEEDS))
 				.addItemIngredient(Ingredient.of(Items.MELON_SEEDS))
@@ -84,7 +85,7 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 
 		new SmoothieRecipeBuilder(ModItems.GIVIN_ME_THE_BLUES)
 				.addItemIngredient(Ingredient.of(ModItems.SMOOTHIE_GLASS))
-				.addFluidIngredient(FluidIngredient.of(NeoForgeMod.MILK.get()))
+				.addFluidIngredient(SizedFluidIngredient.of(NeoForgeMod.MILK.get(), FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(ModItems.BLUEBELL_PETAL))
 				.addItemIngredient(Ingredient.of(ModItems.BLUEBELL_PETAL))
 				.addItemIngredient(Ingredient.of(Items.LAPIS_LAZULI))
@@ -94,7 +95,7 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 
 		new SmoothieRecipeBuilder(ModItems.HOT_HOT_BABY)
 				.addItemIngredient(Ingredient.of(ModItems.SMOOTHIE_GLASS))
-				.addFluidIngredient(FluidIngredient.of(ModFluids.ANTI_VENOM_STILL.get()))
+				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.ANTI_VENOM_STILL.get(), FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(ModItems.WASP_STING))
 				.addItemIngredient(Ingredient.of(ModItems.BOGMAW_ROOT))
 				.addItemIngredient(Ingredient.of(PlantBlocks.FIRE_BLOOM))
@@ -104,7 +105,7 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 
 		new SmoothieRecipeBuilder(ModItems.DONT_MEDDLE_WITH_THE_NETTLE)
 				.addItemIngredient(Ingredient.of(ModItems.SMOOTHIE_GLASS))
-				.addFluidIngredient(FluidIngredient.of(ModFluids.HONEY_STILL.get()))
+				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.HONEY_STILL.get(), FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(ModItems.NETTLE_FLOWERS))
 				.addItemIngredient(Ingredient.of(ModItems.NETTLE_FLOWERS))
 				.addItemIngredient(Ingredient.of(ModItems.JADE_BERRIES))
@@ -114,7 +115,7 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 
 		new SmoothieRecipeBuilder(ModItems.LIQUID_GOLD)
 				.addItemIngredient(Ingredient.of(ModItems.SMOOTHIE_GLASS))
-				.addFluidIngredient(FluidIngredient.of(NeoForgeMod.MILK.get()))
+				.addFluidIngredient(SizedFluidIngredient.of(NeoForgeMod.MILK.get(), FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(ModItems.LIFE_BLOOD))
 				.addItemIngredient(Ingredient.of(ModItems.LIFE_BLOOD))
 				.addItemIngredient(Ingredient.of(ModItems.BAMBOO))
@@ -124,10 +125,10 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 
 		new SmoothieRecipeBuilder(ModItems.BRYUFS_BREW)
 				.addItemIngredient(Ingredient.of(ModItems.SMOOTHIE_GLASS))
-				.addFluidIngredient(FluidIngredient.of(ModFluids.BEETLE_JUICE_STILL.get()))
-				.addFluidIngredient(FluidIngredient.of(ModFluids.HONEY_STILL.get()))
-				.addFluidIngredient(FluidIngredient.of(ModFluids.ANTI_VENOM_STILL.get()))
-				.addFluidIngredient(FluidIngredient.of(NeoForgeMod.MILK.get()))
+				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.BEETLE_JUICE_STILL.get(), FluidType.BUCKET_VOLUME))
+				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.HONEY_STILL.get(), FluidType.BUCKET_VOLUME))
+				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.ANTI_VENOM_STILL.get(), FluidType.BUCKET_VOLUME))
+				.addFluidIngredient(SizedFluidIngredient.of(NeoForgeMod.MILK.get(), FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(ModItems.COMPOUND_EYES))
 				.addItemIngredient(Ingredient.of(ModItems.TERPSISHROOM))
 				.addItemIngredient(Ingredient.of(ModItems.TURNIP))
@@ -137,21 +138,21 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 
 		new SmoothieRecipeBuilder(ModItems.MELONADE)
 				.addItemIngredient(Ingredient.of(ModItems.SMOOTHIE_GLASS))
-				.addFluidIngredient(FluidIngredient.of(Fluids.WATER))
+				.addFluidIngredient(SizedFluidIngredient.of(Fluids.WATER, FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(Items.MELON_SLICE))
 				.unlockedBy("has_smoothie_glass", has(ModItems.SMOOTHIE_GLASS))
 				.save(output);
 
 		new SmoothieRecipeBuilder(ModItems.MELONADE_SPARKLY)
 				.addItemIngredient(Ingredient.of(ModItems.SMOOTHIE_GLASS))
-				.addFluidIngredient(FluidIngredient.of(Fluids.WATER))
+				.addFluidIngredient(SizedFluidIngredient.of(Fluids.WATER, FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(Items.GLISTERING_MELON_SLICE))
 				.unlockedBy("has_smoothie_glass", has(ModItems.SMOOTHIE_GLASS))
 				.save(output);
 
 		new SmoothieRecipeBuilder(FluidUtil.getFilledBucket(new FluidStack(ModFluids.ANTI_VENOM_STILL.get().getSource(), 1000)).getItem())
 				.addItemIngredient(Ingredient.of(Items.BUCKET))
-				.addFluidIngredient(FluidIngredient.of(ModFluids.BEETLE_JUICE_STILL.get()))
+				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.BEETLE_JUICE_STILL.get(), FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(ModItems.POISON_GLAND))
 				.addItemIngredient(Ingredient.of(ModItems.POISON_GLAND))
 				.addItemIngredient(Ingredient.of(ModItems.NETTLE_LEAVES))
@@ -161,7 +162,7 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 
 		new SmoothieRecipeBuilder(ModItems.ANTI_VENOM_BOTTLE)
 				.addItemIngredient(Ingredient.of(Items.GLASS_BOTTLE))
-				.addFluidIngredient(FluidIngredient.of(ModFluids.BEETLE_JUICE_STILL.get()))
+				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.BEETLE_JUICE_STILL.get(), FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(ModItems.POISON_GLAND))
 				.addItemIngredient(Ingredient.of(ModItems.NETTLE_LEAVES))
 				.unlockedBy("has_poison_gland", has(ModItems.POISON_GLAND))
