@@ -234,11 +234,11 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 
 		// TODO handling individual slots rather than iterating here, may change later
 		if (!this.inventory.getItem(TOOL_SLOT).isEmpty())
-        	nbt.put("toolSlot", this.inventory.getItem(TOOL_SLOT).save(registryAccess(), new CompoundTag()));
+        	nbt.put("toolSlot", this.inventory.getItem(TOOL_SLOT).save(registryAccess()));
 		if (!this.inventory.getItem(CROP_ID_SLOT).isEmpty())
-        	nbt.put("cropIdSlot", this.inventory.getItem(CROP_ID_SLOT).save(registryAccess(), new CompoundTag()));
+        	nbt.put("cropIdSlot", this.inventory.getItem(CROP_ID_SLOT).save(registryAccess()));
 		if (!this.inventory.getItem(INVENTORY_SLOT).isEmpty())
-        	nbt.put("inventorySlot", this.inventory.getItem(INVENTORY_SLOT).save(registryAccess(), new CompoundTag()));
+        	nbt.put("inventorySlot", this.inventory.getItem(INVENTORY_SLOT).save(registryAccess()));
 	}
 
 	@Override
@@ -247,14 +247,29 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 		setTameState(nbt.getBoolean("tameState"));
 		setAntRole(nbt.getByte("antRole"));
 		Optional<BlockPos> optional = NbtUtils.readBlockPos(nbt, "dropPoint");
+
 		if(!optional.isEmpty())
 			setDropPoint(optional.get());
 
-		this.inventory.setItem(TOOL_SLOT, ItemStack.parse(this.registryAccess(), nbt.getCompound("toolSlot")).orElse(ItemStack.EMPTY));
-		this.inventory.setItem(CROP_ID_SLOT, ItemStack.parse(this.registryAccess(), nbt.getCompound("cropIdSlot")).orElse(ItemStack.EMPTY));
-		this.inventory.setItem(INVENTORY_SLOT, ItemStack.parse(this.registryAccess(), nbt.getCompound("inventorySlot")).orElse(ItemStack.EMPTY));
+		if (nbt.contains("toolSlot", 10)) {
+			ItemStack stack1 = ItemStack.parse(this.registryAccess(), nbt.getCompound("toolSlot")).orElse(ItemStack.EMPTY);
+			 if (!stack1.isEmpty())
+				 this.inventory.setItem(TOOL_SLOT, stack1);
+		}
+
+		if (nbt.contains("cropIdSlot", 10)) {
+			ItemStack stack2 = ItemStack.parse(this.registryAccess(), nbt.getCompound("cropIdSlot")).orElse(ItemStack.EMPTY);
+			if (!stack2.isEmpty())
+				this.inventory.setItem(CROP_ID_SLOT, stack2);
+		}
+
+		if (nbt.contains("inventorySlot", 10)) {
+			ItemStack stack3 = ItemStack.parse(this.registryAccess(), nbt.getCompound("inventorySlot")).orElse(ItemStack.EMPTY);
+			if (!stack3.isEmpty())
+				this.inventory.setItem(INVENTORY_SLOT, stack3);
+		}
 	}
-	
+
 	// INVENTORY SHIT
 	protected void updateInventory() {
         SimpleContainer previousInventory = this.inventory;
