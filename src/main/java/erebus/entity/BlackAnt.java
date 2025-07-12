@@ -287,7 +287,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
     }
 	
     public int getInventorySize() {
-        return 1;
+        return 3;
     }
 	
     public SimpleContainer getInventory() {
