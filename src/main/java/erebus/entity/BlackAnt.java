@@ -15,11 +15,16 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerListener;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.HasCustomInventoryScreen;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -30,7 +35,9 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -38,7 +45,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class BlackAnt extends Animal {
+public class BlackAnt extends Animal implements ContainerListener, HasCustomInventoryScreen, MenuProvider {
 	private static final EntityDataAccessor<BlockPos> DROP_POINT= SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BLOCK_POS);
 	private static final EntityDataAccessor<Boolean> TAME_STATE = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Byte> ANT_ROLE = SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BYTE);
@@ -52,7 +59,7 @@ public class BlackAnt extends Animal {
 //	public boolean canPickupItems;
 //	public boolean canCollectFromSilo;
 //	public boolean canAddToSilo;
-
+	protected SimpleContainer inventory;
 	public static final int TOOL_SLOT = 0;
 	public static final int CROP_ID_SLOT = 1;
 	public static final int INVENTORY_SLOT = 2;
@@ -65,6 +72,8 @@ public class BlackAnt extends Animal {
 
 	public BlackAnt(EntityType<? extends BlackAnt> type, Level level) {
 		super(type, level);
+		this.inventory = new SimpleContainer(3);
+		updateInventory();
 		//setPathPriority(PathNodeType.WATER, -8F);
 		//stepHeight = 1.0F;
 		//setAttributes = false;
@@ -222,6 +231,14 @@ public class BlackAnt extends Animal {
 		nbt.putBoolean("tameState", isTamedAnt());
 		nbt.putByte("antRole", getAntRole());
 		nbt.put("dropPoint", NbtUtils.writeBlockPos(getDropPoint()));
+
+		// TODO handling individual slots rather than iterating here, may change later
+		if (!this.inventory.getItem(TOOL_SLOT).isEmpty())
+        	nbt.put("toolSlot", this.inventory.getItem(0).save(registryAccess(), new CompoundTag()));
+		if (!this.inventory.getItem(CROP_ID_SLOT).isEmpty())
+        	nbt.put("cropIdSlot", this.inventory.getItem(1).save(registryAccess(), new CompoundTag()));
+		if (!this.inventory.getItem(INVENTORY_SLOT).isEmpty())
+        	nbt.put("inventorySlot", this.inventory.getItem(2).save(registryAccess(), new CompoundTag()));
 	}
 
 	@Override
@@ -232,5 +249,63 @@ public class BlackAnt extends Animal {
 		Optional<BlockPos> optional = NbtUtils.readBlockPos(nbt, "dropPoint");
 		if(!optional.isEmpty())
 			setDropPoint(optional.get());
+
+		this.inventory.setItem(TOOL_SLOT, ItemStack.parse(this.registryAccess(), nbt.getCompound("toolSlot")).orElse(ItemStack.EMPTY));
+		this.inventory.setItem(CROP_ID_SLOT, ItemStack.parse(this.registryAccess(), nbt.getCompound("cropIdSlot")).orElse(ItemStack.EMPTY));
+		this.inventory.setItem(INVENTORY_SLOT, ItemStack.parse(this.registryAccess(), nbt.getCompound("inventorySlot")).orElse(ItemStack.EMPTY));
+	}
+	
+	// INVENTORY SHIT
+	protected void updateInventory() {
+        SimpleContainer previousInventory = this.inventory;
+        this.inventory = new SimpleContainer(this.getInventorySize());
+        if (previousInventory != null) {
+            previousInventory.removeListener(this);
+            int maxSize = Math.min(previousInventory.getContainerSize(), this.inventory.getContainerSize());
+
+            for (int slot = 0; slot < maxSize; ++slot) {
+                ItemStack stack = previousInventory.getItem(slot);
+                if (!stack.isEmpty()) {
+                    this.inventory.setItem(slot, stack.copy());
+                }
+            }
+        }
+
+        this.inventory.addListener(this);
+        this.syncInventoryToFlags();
+    }
+
+    public void syncInventoryToFlags() {
+        if (!this.level().isClientSide()) {
+           // TODO Unused atm
+        }
+    }
+
+    @Override
+    public void containerChanged(Container pContainer) {
+        this.syncInventoryToFlags();
+    }
+	
+    public int getInventorySize() {
+        return 1;
+    }
+	
+    public SimpleContainer getInventory() {
+        if(this.inventory == null){
+            return new SimpleContainer(getInventorySize());
+        }
+        return this.inventory;
+    }
+
+	@Override
+	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void openCustomInventoryScreen(Player player) {
+		// TODO Auto-generated method stub
+		
 	}
 }
