@@ -234,11 +234,11 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 
 		// TODO handling individual slots rather than iterating here, may change later
 		if (!this.inventory.getItem(TOOL_SLOT).isEmpty())
-        	nbt.put("toolSlot", this.inventory.getItem(0).save(registryAccess(), new CompoundTag()));
+        	nbt.put("toolSlot", this.inventory.getItem(TOOL_SLOT).save(registryAccess(), new CompoundTag()));
 		if (!this.inventory.getItem(CROP_ID_SLOT).isEmpty())
-        	nbt.put("cropIdSlot", this.inventory.getItem(1).save(registryAccess(), new CompoundTag()));
+        	nbt.put("cropIdSlot", this.inventory.getItem(CROP_ID_SLOT).save(registryAccess(), new CompoundTag()));
 		if (!this.inventory.getItem(INVENTORY_SLOT).isEmpty())
-        	nbt.put("inventorySlot", this.inventory.getItem(2).save(registryAccess(), new CompoundTag()));
+        	nbt.put("inventorySlot", this.inventory.getItem(INVENTORY_SLOT).save(registryAccess(), new CompoundTag()));
 	}
 
 	@Override
