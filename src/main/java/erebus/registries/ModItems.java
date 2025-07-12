@@ -214,7 +214,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> PORTAL_ACTIVATOR = registerItem("portal_activator");
     public static final DeferredItem<Item> WOODLOUSE_BALL = registerItem("woodlouse_ball");
     public static final DeferredItem<Item> NECTAR_COLLECTOR = registerItem("nectar_collector", () -> new Item((new Item.Properties().stacksTo(1).durability(16))));
-    public static final DeferredItem<Item> ANT_TAMING_AMULET = registerItem("ant_taming_amulet");
+    public static final DeferredItem<Item> ANT_TAMING_AMULET = registerItem("ant_taming_amulet", () -> new AntTamingAmulet(new Item.Properties().stacksTo(1).durability(16)));
     public static final DeferredItem<Item> BEE_TAMING_AMULET = registerItem("bee_taming_amulet", () -> new BeeTamingAmulet(new Item.Properties().stacksTo(1).durability(16)));
     public static final DeferredItem<Item> WASP_SWORD = registerItem("wasp_sword", () -> new WaspSwordItem(ModToolMaterials.WASP_SWORD, new Item.Properties()
             .stacksTo(1)
