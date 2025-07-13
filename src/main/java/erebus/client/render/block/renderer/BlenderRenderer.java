@@ -9,7 +9,6 @@ import erebus.block.entity.BlenderBlockEntity;
 import erebus.client.render.block.model.BlenderModel;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.core.Direction;
@@ -23,11 +22,9 @@ public class BlenderRenderer implements BlockEntityRenderer<BlenderBlockEntity> 
 
     private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/blender.png");
     private final BlenderModel model;
-    private final BlockEntityRenderDispatcher dispatcher;
 
     public BlenderRenderer(Context context) {
         model = new BlenderModel(context.bakeLayer(ModBlockEntityRendering.BLENDER));
-        dispatcher = context.getBlockEntityRenderDispatcher();
     }
 
     @Override

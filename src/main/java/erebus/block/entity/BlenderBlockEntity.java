@@ -7,6 +7,7 @@ import erebus.registries.ModCustomRecipes;
 import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.data.FluidContents;
 import erebus.registries.data.ModDataComponents;
+import erebus.utils.NamedFluidTank;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,8 +15,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -29,18 +35,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.Optional;
 
 public class BlenderBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 
     public final RecipeManager.CachedCheck<SmoothieRecipeInput, SmoothieRecipe> quickCheck = RecipeManager.createCheck(ModCustomRecipes.SMOOTHIE_RECIPE.get());
-    public static FluidTank[] tanks = new FluidTank[4];
+    public static NamedFluidTank[] tanks = new NamedFluidTank[4];
     private static final int MAX_TIME = 432;
     private static int progress = 0;
     private static int prevProgress = 0;
@@ -50,7 +56,7 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
         super(ModBlockEntities.BLENDER.get(), 5, pos, state);
 
         for(int c = 0; c < tanks.length; c++) {
-            tanks[c] = new FluidTank(FluidType.BUCKET_VOLUME * 8);
+            tanks[c] = new NamedFluidTank("tank_%d".formatted(c), FluidType.BUCKET_VOLUME * 8);
         }
     }
 
@@ -63,12 +69,13 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
 
             NonNullList<ItemStack> itemInputs = NonNullList.create();
             for(int c = 0; c < 4; c++) {
-                itemInputs.add(blender.getItem(c));
+                if(!blender.getItem(c).isEmpty())
+                    itemInputs.add(blender.getItem(c));
             }
 
             NonNullList<SizedFluidIngredient> fluidInputs = NonNullList.create();
             for(int c = 0; c < 4; c++) {
-                FluidStack fluid = blender.getTanks(null)[c].getFluid();
+                FluidStack fluid = blender.getTank(c).getFluid();
                 if(!fluid.isEmpty()) {
                     fluidInputs.add(SizedFluidIngredient.of(fluid));
                 }
@@ -101,7 +108,7 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
 
     private static void extractFluids(SmoothieRecipe recipe) {
         for(SizedFluidIngredient fluid : recipe.getFluidIngredients()) {
-            for(FluidTank tank : tanks) {
+            for(NamedFluidTank tank : tanks) {
                 if(tank.getFluid().is(fluid.getFluids()[0].getFluid())) {
                     tank.drain(fluid.amount(), IFluidHandler.FluidAction.EXECUTE);
                 }
@@ -110,47 +117,51 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
     }
 
     @Override
-    public boolean canPlaceItemThroughFace(int i, ItemStack itemStack, @Nullable Direction direction) {
+    public boolean canPlaceItemThroughFace(int i, @NotNull ItemStack itemStack, @Nullable Direction direction) {
         return true;
     }
 
     @Override
-    public boolean canTakeItemThroughFace(int i, ItemStack itemStack, Direction direction) {
+    public boolean canTakeItemThroughFace(int i, @NotNull ItemStack itemStack, @NotNull Direction direction) {
         return true;
     }
 
     @Override
-    public ItemStack removeItemNoUpdate(int i) {
-        return null;
+    public @NotNull ItemStack removeItemNoUpdate(int slot) {
+        return ContainerHelper.takeItem(getItems(), slot);
     }
 
     @Override
-    public Component getDisplayName() {
+    public @NotNull Component getDisplayName() {
         return Component.translatable("erebus.container.blender");
     }
 
     @Override
-    public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
+    public @Nullable AbstractContainerMenu createMenu(int containerId, @NotNull Inventory inventory, @NotNull Player player) {
         return new BlenderMenu(containerId, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
     }
 
-    public FluidTank getTank0(@Nullable Direction direction) {
+    public NamedFluidTank getTank0(@Nullable Direction ignoredDirection) {
         return tanks[0];
     }
 
-    public FluidTank getTank1(@Nullable Direction direction) {
+    public NamedFluidTank getTank1(@Nullable Direction ignoredDirection) {
         return tanks[1];
     }
 
-    public FluidTank getTank2(@Nullable Direction direction) {
+    public NamedFluidTank getTank2(@Nullable Direction ignoredDirection) {
         return tanks[2];
     }
 
-    public FluidTank getTank3(@Nullable Direction direction) {
+    public NamedFluidTank getTank3(@Nullable Direction ignoredDirection) {
         return tanks[3];
     }
 
-    public FluidTank[] getTanks(@Nullable Direction direction) {
+    public NamedFluidTank getTank(int tank) {
+        return tanks[tank];
+    }
+
+    public NamedFluidTank[] getTanks(@Nullable Direction ignoredDirection) {
         return tanks;
     }
 
@@ -169,24 +180,46 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
     @Override
     public void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
         super.saveAdditional(tag, registries);
-        for (FluidTank tank : tanks) {
+        for (NamedFluidTank tank : tanks) {
             tank.writeToNBT(registries, tag);
         }
+        tag.putInt("progress", progress);
     }
 
     @Override
     public void loadAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
         super.loadAdditional(tag, registries);
-        for (FluidTank tank : tanks) {
+        for (NamedFluidTank tank : tanks) {
             tank.readFromNBT(registries, tag);
         }
+        progress = tag.getInt("progress");
+    }
+
+    @Override
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.@NotNull Provider registries) {
+        CompoundTag tag = new CompoundTag();
+        saveAdditional(tag, registries);
+        return tag;
+    }
+
+    @Override
+    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
+        CompoundTag tag = new CompoundTag();
+        saveAdditional(tag, Objects.requireNonNull(level).registryAccess());
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public void onDataPacket(@NotNull Connection net, @NotNull ClientboundBlockEntityDataPacket pkt, HolderLookup.@NotNull Provider lookupProvider) {
+        super.onDataPacket(net, pkt, lookupProvider);
+        loadAdditional(pkt.getTag(), lookupProvider);
     }
 
     @Override
     protected void applyImplicitComponents(@Nonnull DataComponentInput componentInput) {
         super.applyImplicitComponents(componentInput);
 
-        for (FluidTank tank : tanks) {
+        for (NamedFluidTank tank : tanks) {
             tank.setFluid(componentInput.getOrDefault(ModDataComponents.FLUID, FluidContents.EMPTY).get());
         }
     }
@@ -195,7 +228,7 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
     protected void collectImplicitComponents(@Nonnull DataComponentMap.Builder builder) {
         super.collectImplicitComponents(builder);
 
-        for (FluidTank tank : tanks) {
+        for (NamedFluidTank tank : tanks) {
             builder.set(ModDataComponents.FLUID, FluidContents.of(tank.getFluid()));
         }
     }

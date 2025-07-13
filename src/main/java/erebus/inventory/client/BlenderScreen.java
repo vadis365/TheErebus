@@ -1,17 +1,20 @@
 package erebus.inventory.client;
 
 import erebus.Erebus;
+import erebus.block.entity.BlenderBlockEntity;
 import erebus.inventory.client.elements.TankGauge;
 import erebus.inventory.server.BlenderMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("AccessStaticViaInstance")
 public class BlenderScreen extends ErebusScreen<BlenderMenu> {
 
     private final BlenderMenu container;
@@ -25,7 +28,7 @@ public class BlenderScreen extends ErebusScreen<BlenderMenu> {
     private final TankGauge[] tankGauges = new TankGauge[tankPositions.length];
 
     public BlenderScreen(BlenderMenu container, Inventory inventory, Component title) {
-        super(container, inventory, title, Erebus.prefix("textures/gui/container/blender_gui.png"));
+        super(container, inventory, title, Erebus.prefix("textures/gui/container/smoothie_maker.png"));
         this.container = container;
         imageHeight = 166;
         imageWidth = 176;
@@ -45,10 +48,22 @@ public class BlenderScreen extends ErebusScreen<BlenderMenu> {
     protected void renderBg(GuiGraphics gg, float partialTicks, int mX, int mY) {
         super.renderBg(gg, partialTicks, mX, mY);
         gg.blit(TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
+
+        for(Rectangle tank : tankPositions) {
+            gg.blit(TEXTURE, leftPos + tank.x, topPos + 3 + tank.y, 176, 41, tank.width, tank.height);
+        }
+
+        BlenderBlockEntity blender = container.blender;
+        if(blender.isBlending()) {
+            float currentProgress = blender.getBlendProgress();
+            float prevProgress = blender.getPrevBlendProgress();
+            int progress = (int) (currentProgress + (currentProgress - prevProgress) * partialTicks);
+            gg.blit(TEXTURE, leftPos + 52, topPos + 26, 176, 0, 73, progress + 1);
+        }
     }
 
     @Override
-    protected void renderTooltip(GuiGraphics gg, int x, int y) {
+    protected void renderTooltip(@NotNull GuiGraphics gg, int x, int y) {
         super.renderTooltip(gg, x, y);
 
         for(int c = 0; c < tankGauges.length; c++) {

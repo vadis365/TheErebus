@@ -78,7 +78,7 @@ public class FluidJarBlockEntity extends BlockEntity {
 		return this.tank;
 	}
 
-	public FluidTank getTank(@Nullable Direction direction) {
+	public FluidTank getTank(@Nullable Direction ignoredDirection) {
 		return this.tank;
 	}
 
