@@ -27,4 +27,8 @@ public class ModDataComponents {
 	public static final Supplier<DataComponentType<BlockPos>> BEE_TAMING_AMULET = DATA_COMPONENT_REGISTRY.register("bee_taming_amulet",
 			() -> DataComponentType.<BlockPos>builder().persistent(BlockPos.CODEC)
 					.networkSynchronized(BlockPos.STREAM_CODEC).build());
+	
+	public static final Supplier<DataComponentType<BlockPos>> ANT_TAMING_AMULET = DATA_COMPONENT_REGISTRY.register("ant_taming_amulet",
+			() -> DataComponentType.<BlockPos>builder().persistent(BlockPos.CODEC)
+					.networkSynchronized(BlockPos.STREAM_CODEC).build());
 }
