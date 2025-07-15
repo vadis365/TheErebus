@@ -8,6 +8,7 @@ import erebus.registries.data.ModDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -47,7 +48,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class BlackAnt extends Animal implements ContainerListener, HasCustomInventoryScreen, MenuProvider {
 	private static final EntityDataAccessor<BlockPos> DROP_POINT= SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BLOCK_POS);
-	private static final EntityDataAccessor<Boolean> TAME_STATE = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> TAME_STATE = SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Byte> ANT_ROLE = SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BYTE);
 //	public EntityAIPanic aiPanic;
 //	public EntityAIAntHarvestCrops aiHarvestCrops;
@@ -80,7 +81,6 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 		//canPickupItems = false;
 	//	canAddToSilo = false;
 		//canCollectFromSilo = false;
-	//	setSize(0.9F, 0.4F);
 	}
 
 	@Override
@@ -162,8 +162,8 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 
 	public void setTameState(boolean state) {
 		entityData.set(TAME_STATE, state);
-		//	if (!hasCustomName())
-			//	setCustomName(names[level().random.nextInt(names.length)]);
+		if (!hasCustomName())
+			setCustomName(Component.literal(names[random.nextInt(names.length)]));
 	}
 
 	@Override
