@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.NonInteractiveResultSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
@@ -37,7 +38,7 @@ public class BlackAntMenu extends AbstractContainerMenu {
 		int i = -54;
 
 		for (int k = 0; k < 3; k++)
-			addSlot(new Slot(entityInventory, k, 26 + k * 54, 18)); // TODO make k==2 invalid 
+			addSlot(k !=2 ? new Slot(entityInventory, k, 26 + k * 54, 18) : new NonInteractiveResultSlot(entityInventory, k, 26 + k * 54, 18)); // TODO make k==2 invalid 
 
 		for (int j = 0; j < 3; j++)
 			for (int k = 0; k < 9; k++)
@@ -98,7 +99,7 @@ public class BlackAntMenu extends AbstractContainerMenu {
 				slot.set(copy);
 			} else if (!slotStack.isEmpty())
 				slot.set(ItemStack.EMPTY);
-		} else
-			super.clicked(slotId, button, clickType, player);
+		}
+		super.clicked(slotId, button, clickType, player);
 	}
 }

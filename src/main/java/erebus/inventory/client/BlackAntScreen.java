@@ -82,6 +82,7 @@ public class BlackAntScreen extends ErebusScreen<BlackAntMenu> {
 			RenderSystem.enableBlend();
 			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.2F);
 			RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
+			stack2 = new ItemStack(Items.BONE_MEAL);
 			gg.renderFakeItem(stack2, getGuiLeft() + 80, getGuiTop() + 18);
 			RenderSystem.disableBlend();
 		}
