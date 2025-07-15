@@ -1,7 +1,17 @@
 package erebus.events;
 
 import erebus.Erebus;
-import erebus.inventory.client.*;
+import erebus.inventory.client.BambooCrateScreen;
+import erebus.inventory.client.BambooExtenderScreen;
+import erebus.inventory.client.BlackAntScreen;
+import erebus.inventory.client.BlenderScreen;
+import erebus.inventory.client.ColossalCrateScreen;
+import erebus.inventory.client.ComposterScreen;
+import erebus.inventory.client.HoneyCombScreen;
+import erebus.inventory.client.LiquifierScreen;
+import erebus.inventory.client.PetrifiedCraftingTableScreen;
+import erebus.inventory.client.SiloTankScreen;
+import erebus.inventory.client.UmberFurnaceScreen;
 import erebus.registries.client.ModMenuTypes;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -22,5 +32,6 @@ public class RegisterMenuScreensEventHandler {
         event.register(ModMenuTypes.COMPOSTER.get(), ComposterScreen::new);
         event.register(ModMenuTypes.SILO_TANK.get(), SiloTankScreen::new);
         event.register(ModMenuTypes.BLENDER.get(), BlenderScreen::new);
+        event.register(ModMenuTypes.BLACK_ANT.get(), BlackAntScreen::new);
     }
 }

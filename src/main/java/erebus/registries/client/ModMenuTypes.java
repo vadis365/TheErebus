@@ -25,4 +25,5 @@ public class ModMenuTypes {
     public static final DeferredHolder<MenuType<?>, MenuType<ComposterMenu>> COMPOSTER = MENU_TYPES.register("composter", () -> new MenuType<>(ComposterMenu::new, FeatureFlags.DEFAULT_FLAGS));
     public static final DeferredHolder<MenuType<?>, MenuType<SiloTankMenu>> SILO_TANK = MENU_TYPES.register("silo_tank", () -> IMenuTypeExtension.create(SiloTankMenu::new));
     public static final DeferredHolder<MenuType<?>, MenuType<BlenderMenu>> BLENDER = MENU_TYPES.register("blender", () -> IMenuTypeExtension.create(BlenderMenu::new));
+    public static final DeferredHolder<MenuType<?>, MenuType<BlackAntMenu>> BLACK_ANT = MENU_TYPES.register("black_ant", () -> IMenuTypeExtension.create(BlackAntMenu::new));
 }

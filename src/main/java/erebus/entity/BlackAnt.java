@@ -2,6 +2,7 @@ package erebus.entity;
 
 import java.util.Optional;
 
+import erebus.inventory.server.BlackAntMenu;
 import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
 import erebus.registries.data.ModDataComponents;
@@ -13,6 +14,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -185,10 +187,10 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 			setAntRole((byte) (getAntRole() + 1));
 			if (getAntRole() > FERTILIZER)
 				setAntRole(NONE);
-			System.out.println("Ant Role: " + getAntRole());
+			//System.out.println("Ant Role: " + getAntRole());
 			//System.out.println("Ant Drop Point: " + getDropPoint());
 			//System.out.println("Open Gui here");
-			//openCustomInventoryScreen(player);
+			openCustomInventoryScreen(player);
 			return InteractionResult.SUCCESS;
 		}
 		return super.mobInteract(player, hand);
@@ -314,13 +316,16 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 
 	@Override
 	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-		// TODO Auto-generated method stub
-		return null;
+		return new BlackAntMenu(containerId, playerInventory, this);
 	}
 
 	@Override
 	public void openCustomInventoryScreen(Player player) {
-		// TODO Auto-generated method stub
-		
+		if (!level().isClientSide()) {
+			((ServerPlayer) player).openMenu(this, buf -> {
+			buf.writeInt(this.getId());
+			buf.writeInt(this.getId());
+		});
+		}
 	}
 }
