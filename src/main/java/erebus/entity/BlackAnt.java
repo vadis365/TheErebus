@@ -3,6 +3,7 @@ package erebus.entity;
 import java.util.Optional;
 
 import erebus.inventory.server.BlackAntMenu;
+import erebus.inventory.server.BlackAntSimpleContainer;
 import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
 import erebus.registries.data.ModDataComponents;
@@ -23,7 +24,6 @@ import net.minecraft.world.ContainerListener;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
@@ -41,8 +41,11 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -62,7 +65,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 //	public boolean canPickupItems;
 //	public boolean canCollectFromSilo;
 //	public boolean canAddToSilo;
-	protected SimpleContainer inventory;
+	protected BlackAntSimpleContainer inventory;
 	public static final int TOOL_SLOT = 0;
 	public static final int CROP_ID_SLOT = 1;
 	public static final int INVENTORY_SLOT = 2;
@@ -75,7 +78,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 
 	public BlackAnt(EntityType<? extends BlackAnt> type, Level level) {
 		super(type, level);
-		this.inventory = new SimpleContainer(3);
+		this.inventory = new BlackAntSimpleContainer(3);
 		updateInventory();
 		//setPathPriority(PathNodeType.WATER, -8F);
 		//stepHeight = 1.0F;
@@ -183,13 +186,6 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 			return InteractionResult.SUCCESS;
 		}
 		if (isTamedAnt()) {
-			//temp cycle test so when I do some rendering I can see wtf is going on
-			setAntRole((byte) (getAntRole() + 1));
-			if (getAntRole() > FERTILIZER)
-				setAntRole(NONE);
-			//System.out.println("Ant Role: " + getAntRole());
-			//System.out.println("Ant Drop Point: " + getDropPoint());
-			//System.out.println("Open Gui here");
 			openCustomInventoryScreen(player);
 			return InteractionResult.SUCCESS;
 		}
@@ -274,8 +270,8 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 
 	// INVENTORY SHIT
 	protected void updateInventory() {
-        SimpleContainer previousInventory = this.inventory;
-        this.inventory = new SimpleContainer(this.getInventorySize());
+        BlackAntSimpleContainer previousInventory = this.inventory;
+        this.inventory = new BlackAntSimpleContainer(this.getInventorySize());
         if (previousInventory != null) {
             previousInventory.removeListener(this);
             int maxSize = Math.min(previousInventory.getContainerSize(), this.inventory.getContainerSize());
@@ -294,12 +290,35 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 
     public void syncInventoryToFlags() {
         if (!this.level().isClientSide()) {
-           // TODO Unused atm
+        	if (isTaskSlotEmpty() && isTamedAnt()) {
+    			//tasks.addTask(1, aiWander);
+    			entityData.set(ANT_ROLE, NONE);
+    		}
+
+    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof HoeItem) {
+    			//tasks.addTask(1, aiPlantCrops);
+    			entityData.set(ANT_ROLE, PLANTER);
+    		}
+
+    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof BucketItem) {
+    			//canPickupItems = true;
+    			entityData.set(ANT_ROLE, COLLECTOR);
+    		}
+
+    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ShearsItem) {
+    			//tasks.addTask(1, aiHarvestCrops);
+    			entityData.set(ANT_ROLE, HARVESTER);
+    		}
+
+    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.BONE) {
+    			//tasks.addTask(1, aiBonemealCrops);
+    			entityData.set(ANT_ROLE, FERTILIZER);
+    		}
         }
     }
 
     @Override
-    public void containerChanged(Container pContainer) {
+    public void containerChanged(Container Container) {
         this.syncInventoryToFlags();
     }
 	
@@ -307,12 +326,36 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
         return 3;
     }
 	
-    public SimpleContainer getInventory() {
+    public BlackAntSimpleContainer getInventory() {
         if(this.inventory == null){
-            return new SimpleContainer(getInventorySize());
+            return new BlackAntSimpleContainer(getInventorySize());
         }
         return this.inventory;
     }
+    
+    public boolean isTaskSlotEmpty() {
+		return getTaskSlotStack().isEmpty();
+	}
+
+	public ItemStack getTaskSlotStack() {
+		return inventory.getItem(TOOL_SLOT);
+	}
+
+	public boolean isFilterSlotEmpty() {
+		return getFilterSlotStack().isEmpty();
+	}
+
+	public ItemStack getFilterSlotStack() {
+		return inventory.getItem(CROP_ID_SLOT);
+	}
+
+	public boolean isAntInvSlotEmpty() {
+		return getAntInvSlotStack().isEmpty();
+	}
+
+	public ItemStack getAntInvSlotStack() {
+		return inventory.getItem(INVENTORY_SLOT);
+	}
 
 	@Override
 	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {

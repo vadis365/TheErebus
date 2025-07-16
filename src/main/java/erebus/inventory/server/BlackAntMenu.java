@@ -3,42 +3,42 @@ package erebus.inventory.server;
 import javax.annotation.Nonnull;
 
 import erebus.entity.BlackAnt;
+import erebus.inventory.slot.BlackAntSlot;
 import erebus.registries.client.ModMenuTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;
-import net.minecraft.world.inventory.NonInteractiveResultSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class BlackAntMenu extends AbstractContainerMenu {
 
-	private SimpleContainer container;
+	private BlackAntSimpleContainer container;
 	private int entityId;
 	private BlackAnt entity;
 
 	public BlackAntMenu(final int windowId, final Inventory playerInventory, FriendlyByteBuf buf) {
 		this(windowId, playerInventory, (BlackAnt) Minecraft.getInstance().level.getEntity(buf.readInt()));
 		this.entityId = buf.readInt();
-		this.container = new SimpleContainer(3);
+		this.container = new BlackAntSimpleContainer(3);
 		this.entity = (BlackAnt) playerInventory.player.level().getEntity(entityId);
 		this.container.startOpen(playerInventory.player);
 	}
 	
 	public BlackAntMenu(int windowId, Inventory playerInventory, BlackAnt entity) {
 		super(ModMenuTypes.BLACK_ANT.get(), windowId);
-		SimpleContainer entityInventory = entity.getInventory();
+		BlackAntSimpleContainer entityInventory = entity.getInventory();
 		checkContainerSize(entityInventory, entity.getInventorySize());
 		this.container = entityInventory;
 
 		int i = -54;
 
 		for (int k = 0; k < 3; k++)
-			addSlot(k !=2 ? new Slot(entityInventory, k, 26 + k * 54, 18) : new NonInteractiveResultSlot(entityInventory, k, 26 + k * 54, 18)); // TODO make k==2 invalid 
+			addSlot(new BlackAntSlot(entityInventory, k, 26 + k * 54, 18, k == 2));
 
 		for (int j = 0; j < 3; j++)
 			for (int k = 0; k < 9; k++)
@@ -63,6 +63,7 @@ public class BlackAntMenu extends AbstractContainerMenu {
 
 			if (slotIndex == BlackAnt.CROP_ID_SLOT) {
 				slot.set(ItemStack.EMPTY);
+				return stack;
 			} else if (slotIndex < 3) {
 				if (!moveItemStackTo(stack1, 3, container.getContainerSize(), true))
 					return ItemStack.EMPTY;
@@ -91,15 +92,15 @@ public class BlackAntMenu extends AbstractContainerMenu {
 		if (slotId == BlackAnt.CROP_ID_SLOT) {
 			Slot slot = (Slot) slots.get(slotId);
 			ItemStack slotStack = slot.getItem();
-			ItemStack heldStack = player.getInventory().getSelected();
+			ItemStack heldStack = player.containerMenu.getCarried();
 
-			if (slotStack.isEmpty() && !heldStack.isEmpty()) {
+			if (slotStack.isEmpty() && !heldStack.isEmpty() && slots.get(BlackAnt.TOOL_SLOT).hasItem() && !slots.get(BlackAnt.TOOL_SLOT).getItem().is(Items.SHEARS)) {
 				ItemStack copy = heldStack.copy();
 				copy.setCount(1);
 				slot.set(copy);
 			} else if (!slotStack.isEmpty())
 				slot.set(ItemStack.EMPTY);
 		}
-		super.clicked(slotId, button, clickType, player);
+		else super.clicked(slotId, button, clickType, player);
 	}
 }

@@ -7,8 +7,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import erebus.Erebus;
 import erebus.inventory.server.BlackAntMenu;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.BucketItem;
@@ -45,47 +43,32 @@ public class BlackAntScreen extends ErebusScreen<BlackAntMenu> {
 
 	@Override
 	protected void renderBg(GuiGraphics gg, float partialTicks, int mouseX, int mouseY) {
-		 gg.blit(TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
+		gg.blit(TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
+
+		RenderSystem.enableBlend();
+		RenderSystem.setShaderColor(0.5F, 0.5F, 0.5F, 0.2F);
 
 		if (container.getSlot(0).getItem().isEmpty()) {
-			RenderSystem.setShader(GameRenderer::getPositionTexShader);
-			RenderSystem.enableBlend();
-			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.2F);
-			RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
 			gg.renderFakeItem(stack, getGuiLeft() + 26, getGuiTop() + 18);
-			RenderSystem.disableBlend();
 		}
-
-		if (!container.getSlot(0).getItem().isEmpty() && container.getSlot(0).getItem().getItemHolder() instanceof HoeItem) {
-			RenderSystem.setShader(GameRenderer::getPositionTexShader);
-			RenderSystem.enableBlend();
-			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.2F);
-			RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
-			stack2 = new ItemStack(ghostIcon[4]);
-			
-			gg.renderFakeItem(stack2, getGuiLeft() + 80, getGuiTop() + 18);
-			gg.renderFakeItem(stack2, getGuiLeft() + 134, getGuiTop() + 18);
-			RenderSystem.disableBlend();
+		else {
+			if (container.getSlot(1).getItem().isEmpty()) {
+				if (container.getSlot(0).getItem().getItem() instanceof HoeItem) {
+					stack2 = new ItemStack(ghostIcon[4]);
+					gg.renderFakeItem(stack2, getGuiLeft() + 80, getGuiTop() + 18);
+					// gg.renderFakeItem(stack2, getGuiLeft() + 134, getGuiTop() + 18);
+				}
+	
+				if (container.getSlot(0).getItem().getItem() instanceof BucketItem)
+					gg.renderFakeItem(stack2, getGuiLeft() + 80, getGuiTop() + 18);
+	
+				if (container.getSlot(0).getItem().is(Items.BONE)) {
+					stack2 = new ItemStack(Items.BONE_MEAL);
+					gg.renderFakeItem(stack2, getGuiLeft() + 80, getGuiTop() + 18);
+				}
+			}
 		}
-
-		if (!container.getSlot(0).getItem().isEmpty() && container.getSlot(0).getItem().getItemHolder() instanceof BucketItem && container.getSlot(1).getItem().isEmpty()) {
-			RenderSystem.setShader(GameRenderer::getPositionTexShader);
-			RenderSystem.enableBlend();
-			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.2F);
-			RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
-			gg.renderFakeItem(stack2, getGuiLeft() + 80, getGuiTop() + 18);
-			RenderSystem.disableBlend();
-		}
-
-		if (!container.getSlot(0).getItem().isEmpty() && container.getSlot(0).getItem().is(Items.BONE) && container.getSlot(1).getItem().isEmpty()) {
-			RenderSystem.setShader(GameRenderer::getPositionTexShader);
-			RenderSystem.enableBlend();
-			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.2F);
-			RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
-			stack2 = new ItemStack(Items.BONE_MEAL);
-			gg.renderFakeItem(stack2, getGuiLeft() + 80, getGuiTop() + 18);
-			RenderSystem.disableBlend();
-		}
+		RenderSystem.disableBlend();
 	}
 
     @Override
