@@ -1,6 +1,8 @@
 package erebus.entity;
 
+import java.lang.ref.WeakReference;
 import java.util.Optional;
+import java.util.UUID;
 
 import erebus.inventory.server.BlackAntMenu;
 import erebus.inventory.server.BlackAntSimpleContainer;
@@ -50,11 +52,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.util.FakePlayer;
 
 public class BlackAnt extends Animal implements ContainerListener, HasCustomInventoryScreen, MenuProvider {
 	private static final EntityDataAccessor<BlockPos> DROP_POINT= SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BLOCK_POS);
 	private static final EntityDataAccessor<Boolean> TAME_STATE = SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Byte> ANT_ROLE = SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BYTE);
+	private UUID playerOwner = null;
+	private WeakReference<FakePlayer> fakePlayer = new WeakReference<>(null);
 //	public EntityAIPanic aiPanic;
 //	public EntityAIAntHarvestCrops aiHarvestCrops;
 //	public EntityAIAntPlantCrops aiPlantCrops;
@@ -180,6 +185,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 				BlockPos dataBlockPos = is.getComponents().get(ModDataComponents.ANT_TAMING_AMULET.get());
 				setDropPoint(dataBlockPos);
 				setTameState(true);
+				setPlayerOwner(player);
 			}
 			level().broadcastEntityEvent(this, (byte)18);
 			player.swing(hand);
@@ -206,6 +212,10 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 
 	public byte getAntRole() {
 		return entityData.get(ANT_ROLE);
+	}
+
+	public void setPlayerOwner(Player player) {
+		playerOwner = player.getUUID();
 	}
 
     @Override
@@ -237,6 +247,8 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
         	nbt.put("cropIdSlot", this.inventory.getItem(CROP_ID_SLOT).save(registryAccess()));
 		if (!this.inventory.getItem(INVENTORY_SLOT).isEmpty())
         	nbt.put("inventorySlot", this.inventory.getItem(INVENTORY_SLOT).save(registryAccess()));
+
+		if (playerOwner != null) nbt.putUUID("playerOwner", playerOwner);
 	}
 
 	@Override
@@ -266,6 +278,8 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 			if (!stack3.isEmpty())
 				this.inventory.setItem(INVENTORY_SLOT, stack3);
 		}
+
+		playerOwner = nbt.hasUUID("playerOwner") ? nbt.getUUID("playerOwner") : null;
 	}
 
 	// INVENTORY SHIT
