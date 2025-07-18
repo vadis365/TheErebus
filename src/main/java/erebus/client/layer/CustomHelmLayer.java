@@ -7,7 +7,6 @@ import erebus.client.render.item.model.MushroomHelmModel;
 import erebus.client.render.item.model.RhinoHeadModel;
 import erebus.registries.ModItems;
 import erebus.registries.client.ModItemRendering;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -34,7 +33,7 @@ public class CustomHelmLayer<T extends LivingEntity, M extends HumanoidModel<T>,
     public CustomHelmLayer(RenderLayerParent<T, M> renderer, EntityModelSet modelSet, boolean isSlim) {
         super(renderer);
         rhinoHeadModel = new RhinoHeadModel<>(modelSet.bakeLayer(ModelLayers.PLAYER), isSlim, modelSet.bakeLayer(ModItemRendering.RHINO_HELM));
-        mushroomHelmModel = new MushroomHelmModel<>(modelSet.bakeLayer(ModItemRendering.MUSHROOM_HELM));
+        mushroomHelmModel = new MushroomHelmModel<>(modelSet.bakeLayer(ModelLayers.PLAYER), isSlim, modelSet.bakeLayer(ModItemRendering.MUSHROOM_HELM));
     }
 
     @Override
@@ -44,7 +43,6 @@ public class CustomHelmLayer<T extends LivingEntity, M extends HumanoidModel<T>,
         if(shouldRender(stack)) {
             pose.pushPose();
             pose.scale(1.2F, 1.0F, 1.2F);
-            pose.translate(0.0F, 0.2F, 0F);
             if(stack.is(ModItems.RHINO_EXOSKELETON_HELMET)) {
                 renderRhinoHelm(stack, pose, buffer, packedLight, entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
             } else {

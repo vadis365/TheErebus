@@ -1,0 +1,15 @@
+modLoader="javafml"
+loaderVersion="[2,)"
+license="ARR"
+[[mods]]
+modId="erebus"
+version="2.0"
+displayName="Erebus"
+displayURL="http://minecraft.curseforge.com/projects/the-erebus"
+credits="Thanks to people and stuff."
+authors="vadis365, ganymedes01, DylanKaizer, Cricket"
+description='''Discover a world ruled by insects, the Erebus is a place to explore, mine and build'''
+[[mixins]]
+config="erebus.mixins.json"
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"

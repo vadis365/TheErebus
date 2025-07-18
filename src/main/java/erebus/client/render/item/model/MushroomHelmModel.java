@@ -3,7 +3,7 @@ package erebus.client.render.item.model;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.AgeableListModel;
+import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -13,7 +13,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
-public class MushroomHelmModel<T extends LivingEntity> extends AgeableListModel<T> {
+public class MushroomHelmModel<T extends LivingEntity> extends PlayerModel<T> {
 
     private final ModelPart top;
     private final ModelPart middle;
@@ -23,7 +23,8 @@ public class MushroomHelmModel<T extends LivingEntity> extends AgeableListModel<
     private final ModelPart left;
     private final ModelPart mainHead;
 
-    public MushroomHelmModel(ModelPart root) {
+    public MushroomHelmModel(ModelPart playerModel, boolean isSlim, ModelPart root) {
+        super(playerModel, isSlim);
         top = root.getChild("Top");
         middle = top.getChild("Middle");
         front = top.getChild("Front");
@@ -98,7 +99,7 @@ public class MushroomHelmModel<T extends LivingEntity> extends AgeableListModel<
 
     @Override
     public void renderToBuffer(@NotNull PoseStack pose, @NotNull VertexConsumer vertex, int packedLight, int packedOverlay, int color) {
-        headParts().forEach(headPart -> headPart.render(pose, vertex, packedLight, packedOverlay, color));
+        top.render(pose, vertex, packedLight, packedOverlay, color);
     }
 
     @Override
@@ -113,6 +114,6 @@ public class MushroomHelmModel<T extends LivingEntity> extends AgeableListModel<
 
     @Override
     public void setupAnim(@NotNull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+        top.copyFrom(head);
     }
 }

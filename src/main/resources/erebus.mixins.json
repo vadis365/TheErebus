@@ -4,9 +4,9 @@
   "package": "erebus.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "HumanoidArmorLayerMixin"
   ],
   "client": [
-    "HumanoidArmorLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

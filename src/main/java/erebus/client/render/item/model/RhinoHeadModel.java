@@ -198,8 +198,7 @@ public class RhinoHeadModel<T extends LivingEntity> extends PlayerModel<T> {
 
     @Override
     public void renderToBuffer(@NotNull PoseStack pose, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        hat.visible = false;
-        headParts().forEach((part) -> part.render(pose, buffer, packedLight, packedOverlay, color));
+        helmFront.render(pose, buffer, packedLight, packedOverlay, color);
     }
 
     @Override
