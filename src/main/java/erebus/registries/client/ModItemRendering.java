@@ -37,6 +37,8 @@ public class ModItemRendering {
 	public static final ModelLayerLocation BAMBOO_BRIDGE = new ModelLayerLocation(Erebus.prefix("bamboo_bridge"), "main");
 	public static final ModelLayerLocation BAMBOO_EXTENDER = new ModelLayerLocation(Erebus.prefix("bamboo_extender"), "main");
     public static final ModelLayerLocation ARMOR_GLIDER = new ModelLayerLocation(Erebus.prefix("armor_glider"), "main");
+    public static final ModelLayerLocation RHINO_HELM = new ModelLayerLocation(Erebus.prefix("rhino_helm"), "main");
+    public static final ModelLayerLocation MUSHROOM_HELM = new ModelLayerLocation(Erebus.prefix("mushroom_helm"), "main");
 	
 	public static void registerItemLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(WAND_OF_ANIMATION, WandOfAnimationItemModel::createBodyLayer);
@@ -53,6 +55,8 @@ public class ModItemRendering {
 		event.registerLayerDefinition(BAMBOO_BRIDGE, EmptyModel::createBodyLayer);
 		event.registerLayerDefinition(BAMBOO_EXTENDER, EmptyModel::createBodyLayer);
         event.registerLayerDefinition(ARMOR_GLIDER, ArmorGliderModel::createBodyLayer);
+        event.registerLayerDefinition(RHINO_HELM, RhinoHeadModel::createBodyLayer);
+        event.registerLayerDefinition(MUSHROOM_HELM, MushroomHelmModel::createBodyLayer);
 	}
 
 	public static void registerItemRender(RegisterClientExtensionsEvent event) {

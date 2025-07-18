@@ -1,16 +1,18 @@
 package erebus.client.render.item.model;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.Model;
+import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.entity.LivingEntity;
+import org.jetbrains.annotations.NotNull;
 
-public class MushroomHelmModel extends Model {
+public class MushroomHelmModel<T extends LivingEntity> extends AgeableListModel<T> {
     public MushroomHelmModel(ModelPart root) {
-        super(RenderType::entitySolid);
+
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -19,7 +21,22 @@ public class MushroomHelmModel extends Model {
     }
 
     @Override
-    public void renderToBuffer(PoseStack pose, VertexConsumer vertex, int packedLight, int packedOverlay, int color) {
+    public void renderToBuffer(@NotNull PoseStack pose, @NotNull VertexConsumer vertex, int packedLight, int packedOverlay, int color) {
+
+    }
+
+    @Override
+    protected @NotNull Iterable<ModelPart> headParts() {
+        return ImmutableList.of();
+    }
+
+    @Override
+    protected @NotNull Iterable<ModelPart> bodyParts() {
+        return ImmutableList.of();
+    }
+
+    @Override
+    public void setupAnim(@NotNull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
     }
 }
