@@ -4,7 +4,7 @@ import java.lang.ref.WeakReference;
 import java.util.Optional;
 import java.util.UUID;
 
-import erebus.entity.ai.BlankAntPlantCrops;
+import erebus.entity.ai.BlackAntPlantCrops;
 import erebus.inventory.server.BlackAntMenu;
 import erebus.inventory.server.BlackAntSimpleContainer;
 import erebus.registries.ModItems;
@@ -63,7 +63,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	private WeakReference<FakePlayer> fakePlayer = new WeakReference<>(null);
 //	public EntityAIPanic aiPanic;
 //	public EntityAIAntHarvestCrops aiHarvestCrops;
-	public BlankAntPlantCrops aiPlantCrops;
+	public BlackAntPlantCrops aiPlantCrops;
 //	public EntityAIAntBonemealCrops aiBonemealCrops;
 //	public EntityAIWander aiWander;
 
@@ -106,7 +106,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	protected void registerGoals() {
 	//	aiPanic = new EntityAIPanic(this, 0.8D);
 	//	aiHarvestCrops = new EntityAIAntHarvestCrops(this, 0.6D, 1);
-		aiPlantCrops = new BlankAntPlantCrops(this, 0.6D, 4, false);
+		aiPlantCrops = new BlackAntPlantCrops(this, 0.6D, 4, false);
 	//	aiBonemealCrops = new EntityAIAntBonemealCrops(this, 0.6D, 4);
 	//	aiWander = new EntityAIWander(this, 0.6D);
 		

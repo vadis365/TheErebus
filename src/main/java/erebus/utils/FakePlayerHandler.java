@@ -9,13 +9,16 @@ import com.mojang.authlib.GameProfile;
 
 import erebus.Erebus;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 
@@ -57,15 +60,16 @@ public class FakePlayerHandler {
     public static boolean isErebusFakePlayer(FakePlayer fakePlayer) {
         return fakePlayer.getPersistentData().contains(Erebus.MODID);
     }
-    
-    public static void rightClickItemAt(Level level, ItemStack stack, UUID id) {
-		if (level.isClientSide() || stack.isEmpty() || stack.getItem() == null)
+
+	public static void rightClickItemAt(Level level, BlockPos pos, InteractionHand hand, Direction direction, ItemStack itemStack, UUID playerOwner) {
+		if (level.isClientSide() || itemStack.isEmpty() || itemStack.getItem() == null)
 			return;
-		Player player = get((ServerLevel) level, id);
-		player.setItemSlot(EquipmentSlot.MAINHAND, stack);
+		Player player = get((ServerLevel) level, playerOwner);
+		player.setItemSlot(EquipmentSlot.MAINHAND, itemStack);
 		try {
-			player.startUsingItem(InteractionHand.MAIN_HAND);
-		} finally {
+			player.getMainHandItem().useOn(new UseOnContext(player, hand, new BlockHitResult(player.position(), direction, pos, false)));
+			System.out.println("Used Item on Block");
+			} finally {
 			player.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
 		}
 	}

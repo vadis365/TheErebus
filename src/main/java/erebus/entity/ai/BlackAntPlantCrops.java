@@ -3,8 +3,10 @@ package erebus.entity.ai;
 import erebus.entity.BlackAnt;
 import erebus.utils.FakePlayerHandler;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -12,15 +14,15 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
-public class BlankAntPlantCrops extends EatBlockGoal {
+public class BlackAntPlantCrops extends EatBlockGoal {
 
 	BlackAnt blackAnt;
 	public static final int CROP_ID_SLOT = 1;
 	public static final int INVENTORY_SLOT = 2;
 	private final double moveSpeed;
 
-	public BlankAntPlantCrops(BlackAnt blackAnt, double moveSpeed, int eatSpeed, boolean doDropItem) {
-		super(blackAnt, null, moveSpeed, eatSpeed, doDropItem);
+	public BlackAntPlantCrops(BlackAnt blackAnt, double moveSpeed, int eatSpeed, boolean doDropItem) {
+		super(blackAnt, null, moveSpeed, eatSpeed, doDropItem, 1);
 		this.moveSpeed = moveSpeed;
 		this.dropItem = doDropItem;
 		this.blackAnt = blackAnt;
@@ -39,12 +41,13 @@ public class BlankAntPlantCrops extends EatBlockGoal {
 	@Override
 	protected boolean canEatBlock(BlockState state) {
 		Block block = state.getBlock();
+		BlockPos above = new BlockPos(targetX, targetY + 1, targetZ);
 		if (state.isAir() || block == null)
 			return false;
 
-		if (block == Blocks.DIRT || block == Blocks.GRASS_BLOCK)
+		if (state.is(Blocks.DIRT) || state.is(Blocks.GRASS_BLOCK))
 			return true;
-		if (block == Blocks.FARMLAND && blackAnt.level().isEmptyBlock(new BlockPos(targetX, targetY + 1, targetZ)))
+		if (state.is(Blocks.FARMLAND) && blackAnt.level().getBlockState(above).isAir())
 			return true;
 		else if (state.hasBlockEntity())
 			return false;
@@ -75,7 +78,7 @@ public class BlankAntPlantCrops extends EatBlockGoal {
 		BlockPos pos = new BlockPos(targetX, targetY, targetZ);
 		if (!blackAnt.level().isClientSide()) {
 			if (!getTargetBlock().is(Blocks.FARMLAND)) {
-				FakePlayerHandler.rightClickItemAt(blackAnt.level(), new ItemStack(Items.WOODEN_HOE), blackAnt.getPlayerOwner());
+				FakePlayerHandler.rightClickItemAt(blackAnt.level(), pos, InteractionHand.MAIN_HAND, Direction.UP, new ItemStack(Items.WOODEN_HOE), blackAnt.getPlayerOwner());
 				blackAnt.level().playSound(null, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
 			}
 
@@ -84,7 +87,7 @@ public class BlankAntPlantCrops extends EatBlockGoal {
 				ItemStack invItem = getAntInvSlotStack();
 
 				if (ItemStack.isSameItem(filterItem, invItem)) {
-					FakePlayerHandler.rightClickItemAt(blackAnt.level(), invItem, blackAnt.getPlayerOwner());
+					FakePlayerHandler.rightClickItemAt(blackAnt.level(), pos, InteractionHand.MAIN_HAND, Direction.UP, invItem, blackAnt.getPlayerOwner());
 					blackAnt.inventory.setItem(INVENTORY_SLOT, new ItemStack(invItem.getItem(), getAntInvSlotStack().getCount() - 1));
 					if (getAntInvSlotStack().getCount() < 1)
 						blackAnt.inventory.setItem(INVENTORY_SLOT, ItemStack.EMPTY);

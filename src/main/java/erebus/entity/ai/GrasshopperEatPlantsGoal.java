@@ -20,7 +20,7 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 	private final Grasshopper grasshopper;
 
 	public GrasshopperEatPlantsGoal(Grasshopper grasshopper, double moveSpeed, int eatSpeed, boolean doDropItem) {
-		super(grasshopper, null, moveSpeed, eatSpeed, doDropItem);
+		super(grasshopper, null, moveSpeed, eatSpeed, doDropItem, 4);
 		this.moveSpeed = moveSpeed;
 		this.dropItem = doDropItem;
 		this.grasshopper = grasshopper;

@@ -29,14 +29,16 @@ public abstract class EatBlockGoal extends Goal {
 	public int targetZ;
 	private int spiralIndex;
 	public int eatTicks;
+	public int heightY;
 	public boolean dropItem;
 	private static final List<Point> SPIRAL = new Spiral(16, 16).spiral();
-
-	public EatBlockGoal(Mob entity, BlockState state, double moveSpeed, int eatSpeed, boolean shouldDropItem) {
+	
+	public EatBlockGoal(Mob entity, BlockState state, double moveSpeed, int eatSpeed, boolean shouldDropItem, int height) {
 		this.entity = entity;
 		this.blockState = state;
 		this.eatSpeed = eatSpeed * 20;
 		this.dropItem = shouldDropItem;
+		this.heightY = height;
 		hasTarget = false;
 		spiralIndex = 0;
 	}
@@ -65,7 +67,7 @@ public abstract class EatBlockGoal extends Goal {
 			if (!hasTarget) {
 				increment();
 				Point p = getNextPoint();
-				for (int y = -2; y < 4; y++)
+				for (int y = -2; y < heightY; y++)
 					if (canEatBlock(entity.level().getBlockState(new BlockPos(xCoord + p.x, yCoord + y, zCoord + p.y)))) {
 						targetX = xCoord + p.x;
 						targetY = yCoord + y;
@@ -83,7 +85,8 @@ public abstract class EatBlockGoal extends Goal {
 					entity.getNavigation().stop();
 					prepareToEat();
 					eatTicks++;
-					entity.level().destroyBlockProgress(entity.getId(), new BlockPos(targetX, targetY, targetZ), getScaledEatTicks());
+					if (dropItem)
+						entity.level().destroyBlockProgress(entity.getId(), new BlockPos(targetX, targetY, targetZ), getScaledEatTicks());
 					if (eatSpeed <= eatTicks) {
 						entity.level().levelEvent(2001, new BlockPos(targetX, targetY, targetZ), Block.getId(getTargetBlock()));
 						if (dropItem)

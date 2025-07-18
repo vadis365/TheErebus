@@ -38,7 +38,7 @@ public class BlackAntMenu extends AbstractContainerMenu {
 		int i = -54;
 
 		for (int k = 0; k < 3; k++)
-			addSlot(new BlackAntSlot(entityInventory, k, 26 + k * 54, 18, k == 2));
+			addSlot(new BlackAntSlot(entityInventory, k, 26 + k * 54, 18/*, k == 2*/)); //TODO add back slot restriction once done testing
 
 		for (int j = 0; j < 3; j++)
 			for (int k = 0; k < 9; k++)
