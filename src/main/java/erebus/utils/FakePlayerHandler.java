@@ -11,6 +11,11 @@ import erebus.Erebus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
 
@@ -49,7 +54,20 @@ public class FakePlayerHandler {
         }
     }
 
-    public static boolean isMGUFakePlayer(FakePlayer fakePlayer) {
+    public static boolean isErebusFakePlayer(FakePlayer fakePlayer) {
         return fakePlayer.getPersistentData().contains(Erebus.MODID);
     }
+    
+    public static void rightClickItemAt(Level level, ItemStack stack, UUID id) {
+		if (level.isClientSide() || stack.isEmpty() || stack.getItem() == null)
+			return;
+		Player player = get((ServerLevel) level, id);
+		player.setItemSlot(EquipmentSlot.MAINHAND, stack);
+		try {
+			player.startUsingItem(InteractionHand.MAIN_HAND);
+		} finally {
+			player.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+		}
+	}
+
 }

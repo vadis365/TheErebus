@@ -4,6 +4,7 @@ import java.lang.ref.WeakReference;
 import java.util.Optional;
 import java.util.UUID;
 
+import erebus.entity.ai.BlankAntPlantCrops;
 import erebus.inventory.server.BlackAntMenu;
 import erebus.inventory.server.BlackAntSimpleContainer;
 import erebus.registries.ModItems;
@@ -62,7 +63,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	private WeakReference<FakePlayer> fakePlayer = new WeakReference<>(null);
 //	public EntityAIPanic aiPanic;
 //	public EntityAIAntHarvestCrops aiHarvestCrops;
-//	public EntityAIAntPlantCrops aiPlantCrops;
+	public BlankAntPlantCrops aiPlantCrops;
 //	public EntityAIAntBonemealCrops aiBonemealCrops;
 //	public EntityAIWander aiWander;
 
@@ -70,7 +71,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 //	public boolean canPickupItems;
 //	public boolean canCollectFromSilo;
 //	public boolean canAddToSilo;
-	protected BlackAntSimpleContainer inventory;
+	public BlackAntSimpleContainer inventory;
 	public static final int TOOL_SLOT = 0;
 	public static final int CROP_ID_SLOT = 1;
 	public static final int INVENTORY_SLOT = 2;
@@ -105,7 +106,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	protected void registerGoals() {
 	//	aiPanic = new EntityAIPanic(this, 0.8D);
 	//	aiHarvestCrops = new EntityAIAntHarvestCrops(this, 0.6D, 1);
-	//	aiPlantCrops = new EntityAIAntPlantCrops(this, 0.6D, 4);
+		aiPlantCrops = new BlankAntPlantCrops(this, 0.6D, 4, false);
 	//	aiBonemealCrops = new EntityAIAntBonemealCrops(this, 0.6D, 4);
 	//	aiWander = new EntityAIWander(this, 0.6D);
 		
@@ -218,6 +219,10 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 		playerOwner = player.getUUID();
 	}
 
+	public UUID getPlayerOwner() {
+		return playerOwner;
+	}
+
     @Override
     public boolean isIgnoringBlockTriggers() {
         return true;
@@ -310,7 +315,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
     		}
 
     		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof HoeItem) {
-    			//tasks.addTask(1, aiPlantCrops);
+    			goalSelector.addGoal(1, aiPlantCrops);
     			entityData.set(ANT_ROLE, PLANTER);
     		}
 
