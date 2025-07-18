@@ -16,6 +16,7 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.biome.Biome;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -109,8 +110,12 @@ public abstract class ModLangProvider extends LanguageProvider {
         add("erebus.container.%s".formatted(containerName), name);
     }
 
+    protected void addPage(int page, String content) {
+        add("erebus.book.smoothie.%d".formatted(page), content);
+    }
+
     @Override
-    public CompletableFuture<?> run(CachedOutput cache) {
+    public @NotNull CompletableFuture<?> run(@NotNull CachedOutput cache) {
         //generate normal lang file
         CompletableFuture<?> languageGen = super.run(cache);
         ImmutableList.Builder<CompletableFuture<?>> futuresBuilder = new ImmutableList.Builder<>();
