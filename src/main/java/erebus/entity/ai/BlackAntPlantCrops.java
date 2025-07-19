@@ -6,23 +6,23 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 public class BlackAntPlantCrops extends EatBlockGoal {
 
-	BlackAnt blackAnt;
+	private final BlackAnt blackAnt;
 	public static final int CROP_ID_SLOT = 1;
 	public static final int INVENTORY_SLOT = 2;
 	private final double moveSpeed;
 
 	public BlackAntPlantCrops(BlackAnt blackAnt, double moveSpeed, int eatSpeed, boolean doDropItem) {
-		super(blackAnt, null, moveSpeed, eatSpeed, doDropItem, 1);
+		super(blackAnt, null, moveSpeed, eatSpeed, doDropItem, 1, 8, 8);
 		this.moveSpeed = moveSpeed;
 		this.dropItem = doDropItem;
 		this.blackAnt = blackAnt;
@@ -30,29 +30,22 @@ public class BlackAntPlantCrops extends EatBlockGoal {
 
 	@Override
 	public boolean canUse() {
-		return true;//!blackAnt.canCollectFromSilo;
+		return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.PLANTER && !blackAnt.canCollectFromSilo ? !blackAnt.getMoveControl().hasWanted() && super.canUse() : false;
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		return true;// !blackAnt.canCollectFromSilo && !isAntInvSlotEmpty();
+		return !blackAnt.canCollectFromSilo && !isAntInvSlotEmpty() && super.canContinueToUse();
 	}
 
 	@Override
 	protected boolean canEatBlock(BlockState state) {
-		Block block = state.getBlock();
-		BlockPos above = new BlockPos(targetX, targetY + 1, targetZ);
-		if (state.isAir() || block == null)
+		BlockPos pos = new BlockPos(targetX, targetY, targetZ);
+
+		if (state.is(BlockTags.AIR))
 			return false;
 
-		if (state.is(Blocks.DIRT) || state.is(Blocks.GRASS_BLOCK))
-			return true;
-		if (state.is(Blocks.FARMLAND) && blackAnt.level().getBlockState(above).isAir())
-			return true;
-		else if (state.hasBlockEntity())
-			return false;
-
-		return false;
+		return state.is(BlockTags.DIRT) || state.is(Blocks.GRASS_BLOCK) || (state.is(Blocks.FARMLAND) && blackAnt.level().getBlockState(pos.above()).is(BlockTags.AIR));
 	}
 
 	@Override

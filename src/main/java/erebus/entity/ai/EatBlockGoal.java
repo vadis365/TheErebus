@@ -1,5 +1,8 @@
 package erebus.entity.ai;
 
+import java.awt.Point;
+import java.util.List;
+
 import erebus.utils.Spiral;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
@@ -9,9 +12,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-
-import java.awt.*;
-import java.util.List;
 
 public abstract class EatBlockGoal extends Goal {
 
@@ -31,15 +31,16 @@ public abstract class EatBlockGoal extends Goal {
 	public int eatTicks;
 	public int heightY;
 	public boolean dropItem;
-	private static final List<Point> SPIRAL = new Spiral(16, 16).spiral();
+	public List<Point> SPIRAL;// = new Spiral(16, 16).spiral();
 	
-	public EatBlockGoal(Mob entity, BlockState state, double moveSpeed, int eatSpeed, boolean shouldDropItem, int height) {
+	public EatBlockGoal(Mob entity, BlockState state, double moveSpeed, int eatSpeed, boolean shouldDropItem, int height, int width, int length) {
 		this.entity = entity;
 		this.blockState = state;
 		this.eatSpeed = eatSpeed * 20;
 		this.dropItem = shouldDropItem;
 		this.heightY = height;
 		hasTarget = false;
+		this.SPIRAL = new Spiral(width, length).spiral();
 		spiralIndex = 0;
 	}
 
@@ -67,7 +68,7 @@ public abstract class EatBlockGoal extends Goal {
 			if (!hasTarget) {
 				increment();
 				Point p = getNextPoint();
-				for (int y = -2; y < heightY; y++)
+				for (int y = -heightY; y < heightY; y++)
 					if (canEatBlock(entity.level().getBlockState(new BlockPos(xCoord + p.x, yCoord + y, zCoord + p.y)))) {
 						targetX = xCoord + p.x;
 						targetY = yCoord + y;
