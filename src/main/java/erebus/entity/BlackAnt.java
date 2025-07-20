@@ -325,8 +325,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 		getMoveControl().setWantedPosition(getDropPoint().getX() + 0.5D, getDropPoint().getY() - 1D, getDropPoint().getZ() + 0.5D, 0.5D);
 	}
 	
-    public double getDistance(double x, double y, double z)
-    {
+    public double getDistance(double x, double y, double z) {
         double d0 = this.getX() - x;
         double d1 = this.getY() - y;
         double d2 = this.getZ() - z;

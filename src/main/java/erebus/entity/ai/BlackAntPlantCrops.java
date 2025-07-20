@@ -12,9 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 
-public class BlackAntPlantCrops extends EatBlockGoal {
+public class BlackAntPlantCrops extends BlackAntBlockHome {
 
 	private final BlackAnt blackAnt;
 	public static final int CROP_ID_SLOT = 1;
@@ -22,7 +21,7 @@ public class BlackAntPlantCrops extends EatBlockGoal {
 	private final double moveSpeed;
 
 	public BlackAntPlantCrops(BlackAnt blackAnt, double moveSpeed, int eatSpeed, boolean doDropItem) {
-		super(blackAnt, null, moveSpeed, eatSpeed, doDropItem, 1, 8, 8);
+		super(blackAnt, null, moveSpeed, eatSpeed, doDropItem);
 		this.moveSpeed = moveSpeed;
 		this.dropItem = doDropItem;
 		this.blackAnt = blackAnt;
@@ -30,7 +29,7 @@ public class BlackAntPlantCrops extends EatBlockGoal {
 
 	@Override
 	public boolean canUse() {
-		return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.PLANTER && !blackAnt.canCollectFromSilo ? !blackAnt.getMoveControl().hasWanted() && super.canUse() : false;
+		return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.PLANTER && !blackAnt.canCollectFromSilo && !isAntInvSlotEmpty() ? !blackAnt.getMoveControl().hasWanted() && super.canUse() : false;
 	}
 
 	@Override
@@ -109,10 +108,4 @@ public class BlackAntPlantCrops extends EatBlockGoal {
 	protected void dropItem() {
 		// TODO Auto-generated method stub
 	}
-
-	@Override
-	protected AABB getBlockAABB(int x, int y, int z) {
-		return new AABB(targetX, targetY, targetZ, targetX + 1D, targetY + 1D, targetZ + 1D);
-	}
-
 }

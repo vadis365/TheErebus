@@ -18,7 +18,7 @@ public class LarvaEatWoodenBlocksGoal extends EatBlockGoal {
 	private final double moveSpeed;
 
 	public LarvaEatWoodenBlocksGoal(BeetleLarva beetleLarva, double moveSpeed, int eatSpeed) {
-		super(beetleLarva, null, moveSpeed, eatSpeed, false, 4, 16, 16);
+		super(beetleLarva, null, moveSpeed, eatSpeed, false);
 		this.beetleLarva = beetleLarva;
 		this.moveSpeed = moveSpeed;
 	}
