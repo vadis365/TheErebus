@@ -29,12 +29,12 @@ public class BlackAntPlantCrops extends BlackAntBlockHome {
 
 	@Override
 	public boolean canUse() {
-		return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.PLANTER && !blackAnt.canCollectFromSilo && !isAntInvSlotEmpty() ? !blackAnt.getMoveControl().hasWanted() && super.canUse() : false;
+		return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.PLANTER && !blackAnt.canCollectFromSilo && !blackAnt.isAntInvSlotEmpty() ? !blackAnt.getMoveControl().hasWanted() && super.canUse() : false;
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		return !blackAnt.canCollectFromSilo && !isAntInvSlotEmpty() && super.canContinueToUse();
+		return !blackAnt.canCollectFromSilo && !blackAnt.isAntInvSlotEmpty() && super.canContinueToUse();
 	}
 
 	@Override
@@ -74,38 +74,21 @@ public class BlackAntPlantCrops extends BlackAntBlockHome {
 				blackAnt.level().playSound(null, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
 			}
 
-			if (!isFilterSlotEmpty() && !isAntInvSlotEmpty()) {
-				ItemStack filterItem = getFilterSlotStack();
-				ItemStack invItem = getAntInvSlotStack();
+			if (!blackAnt.isFilterSlotEmpty() && !blackAnt.isAntInvSlotEmpty()) {
+				ItemStack filterItem = blackAnt.getFilterSlotStack();
+				ItemStack invItem = blackAnt.getAntInvSlotStack();
 
 				if (ItemStack.isSameItem(filterItem, invItem)) {
 					FakePlayerHandler.rightClickItemAt(blackAnt.level(), pos, InteractionHand.MAIN_HAND, Direction.UP, invItem, blackAnt.getPlayerOwner());
-					blackAnt.inventory.setItem(INVENTORY_SLOT, new ItemStack(invItem.getItem(), getAntInvSlotStack().getCount() - 1));
-					if (getAntInvSlotStack().getCount() < 1)
+					blackAnt.inventory.setItem(INVENTORY_SLOT, new ItemStack(invItem.getItem(), blackAnt.getAntInvSlotStack().getCount() - 1));
+					if (blackAnt.getAntInvSlotStack().getCount() < 1)
 						blackAnt.inventory.setItem(INVENTORY_SLOT, ItemStack.EMPTY);
 				}
 			}
 		}
 	}
 
-	public boolean isFilterSlotEmpty() {
-		return getFilterSlotStack().isEmpty();
-	}
-
-	public ItemStack getFilterSlotStack() {
-		return blackAnt.inventory.getItem(CROP_ID_SLOT);
-	}
-
-	public boolean isAntInvSlotEmpty() {
-		return getAntInvSlotStack().isEmpty();
-	}
-
-	public ItemStack getAntInvSlotStack() {
-		return blackAnt.inventory.getItem(INVENTORY_SLOT);
-	}
-
 	@Override
 	protected void dropItem() {
-		// TODO Auto-generated method stub
 	}
 }

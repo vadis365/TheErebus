@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import erebus.block.entity.SiloTankBlockEntity;
+import erebus.entity.ai.BlackAntBonemealCrops;
+import erebus.entity.ai.BlackAntHarvestCrops;
 import erebus.entity.ai.BlackAntPlantCrops;
 import erebus.inventory.server.BlackAntMenu;
 import erebus.inventory.server.BlackAntSimpleContainer;
@@ -123,6 +125,8 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 		
 		goalSelector.addGoal(0, new FloatGoal(this));
 		goalSelector.addGoal(1, new BlackAntPlantCrops(this, 0.6D, 4, false));
+		goalSelector.addGoal(1, new BlackAntBonemealCrops(this, 0.6D, 4, false));
+		goalSelector.addGoal(1, new BlackAntHarvestCrops(this, 0.6D, 4, true));
 		//goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.5D));
 		goalSelector.addGoal(3, new PanicGoal(this, 0.6D));
 		goalSelector.addGoal(3, new RandomLookAroundGoal(this));
