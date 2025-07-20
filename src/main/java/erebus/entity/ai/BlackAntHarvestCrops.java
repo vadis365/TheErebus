@@ -13,13 +13,13 @@ import net.minecraft.world.level.block.state.BlockState;
 public class BlackAntHarvestCrops extends BlackAntBlockHome {
 	private final BlackAnt blackAnt;
 	private final double moveSpeed;
-	
+
 	public BlackAntHarvestCrops(BlackAnt blackAnt, double moveSpeed, int eatSpeed, boolean shouldDropItem) {
 		super(blackAnt, null, moveSpeed, eatSpeed, shouldDropItem);
 		this.blackAnt = blackAnt;
 		this.moveSpeed = moveSpeed;
 	}
-	
+
 	@Override
 	public boolean canUse() {
 		return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.HARVESTER ? !blackAnt.getMoveControl().hasWanted() && super.canUse() : false;
@@ -52,12 +52,6 @@ public class BlackAntHarvestCrops extends BlackAntBlockHome {
 
 	@Override
 	protected void dropItem() {
-	/*	Random rand = new Random();
-		if (block != null) {
-			Utils.dropStack(getEntityWorld(), getPosition(), new ItemStack(block.getItemDropped(block.getStateFromMeta(meta), rand, 0), rand.nextInt(2) + 1));
-			Utils.dropStack(getEntityWorld(), getPosition(), new ItemStack(block.getItemDropped(block.getDefaultState(), rand, 0), rand.nextInt(2) + 1));
-		}
-		*/
 	}
 
 	@Override

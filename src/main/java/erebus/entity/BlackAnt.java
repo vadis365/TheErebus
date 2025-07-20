@@ -258,8 +258,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
     protected void customServerAiStep() {
         super.customServerAiStep();
 
-		// Don't pick up items unless the filter is defined and the inventory is
-		// not full
+		// Don't pick up items unless the filter is defined and the inventory is not full
 		if (isTamedAnt()) {
 			if (canPickupItems && !isFilterSlotEmpty() && (getAntInvSlotStack().isEmpty() || getAntInvSlotStack().getCount() < getAntInvSlotStack().getMaxStackSize())) {
 				ItemEntity entityitem = getClosestEntityItem(this, 16.0D, getFilterSlotStack());
@@ -305,9 +304,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 
 			if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof HoeItem || !isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.BONE)
 				if (isAntInvSlotEmpty() && !isFilterSlotEmpty())
-					canCollectFromSilo = true; // this stops the planting or
-			// bonemealing AIs and makes the ant
-			// go to the silo
+					canCollectFromSilo = true; // this stops the planting or bonemealing AIs and makes the ant go to the silo
 
 			if (canCollectFromSilo) {
 				moveToSilo();
@@ -515,29 +512,22 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
     		canAddToSilo = false;
     		canCollectFromSilo = false;
         	
-        	if (isTaskSlotEmpty() && isTamedAnt()) {
-    			//tasks.addTask(1, aiWander);
+        	if (isTaskSlotEmpty() && isTamedAnt())
     			entityData.set(ANT_ROLE, NONE);
-    		}
 
-    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof HoeItem) {
+    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof HoeItem)
     			entityData.set(ANT_ROLE, PLANTER);
-    		}
 
     		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof BucketItem) {
     			canPickupItems = true;
     			entityData.set(ANT_ROLE, COLLECTOR);
     		}
 
-    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ShearsItem) {
-    			//tasks.addTask(1, aiHarvestCrops);
+    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ShearsItem)
     			entityData.set(ANT_ROLE, HARVESTER);
-    		}
 
-    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.BONE) {
-    			//tasks.addTask(1, aiBonemealCrops);
+    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.BONE)
     			entityData.set(ANT_ROLE, FERTILIZER);
-    		}
         }
     }
 

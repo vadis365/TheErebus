@@ -14,18 +14,16 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BlackAntBonemealCrops extends BlackAntBlockHome {
-
-	public static final int CROP_ID_SLOT = 1;
 	public static final int INVENTORY_SLOT = 2;
 	private BlackAnt blackAnt;
 	private double moveSpeed;
-	
+
 	public BlackAntBonemealCrops(BlackAnt blackAnt, double moveSpeed, int eatSpeed, boolean shouldDropItem) {
 		super(blackAnt, null, moveSpeed, eatSpeed, shouldDropItem);
 		this.blackAnt = blackAnt;
 		this.moveSpeed = moveSpeed;
 	}
-	
+
 	@Override
 	public boolean canUse() {
 		return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.FERTILIZER && !blackAnt.canCollectFromSilo && !blackAnt.isAntInvSlotEmpty() ? !blackAnt.getMoveControl().hasWanted() && super.canUse() : false;
@@ -35,7 +33,7 @@ public class BlackAntBonemealCrops extends BlackAntBlockHome {
 	public boolean canContinueToUse() {
 		return !blackAnt.canCollectFromSilo && !blackAnt.isAntInvSlotEmpty() && super.canContinueToUse();
 	}
-	
+
 	@Override
 	protected boolean canEatBlock(BlockState state) {
 		Block block = state.getBlock();
