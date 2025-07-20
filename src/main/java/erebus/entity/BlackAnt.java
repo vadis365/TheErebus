@@ -437,12 +437,8 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 				handlerOptional.ifPresent((handler) -> {
 					ItemStack stack1 = ItemHandlerHelper.insertItem(handler, stack, true);
 					if (stack1.isEmpty()) {
-						ItemHandlerHelper.insertItem(handler, stack, false);
+						ItemHandlerHelper.insertItem(handler, decrStackSize(INVENTORY_SLOT, 1), false);
 						silo.setChanged();
-						inventory.setItem(INVENTORY_SLOT, ItemStack.EMPTY); // not nice atm but stops insane behaviours
-					} else {
-						spawnAtLocation(stack, 0.0F);
-						inventory.setItem(INVENTORY_SLOT, ItemStack.EMPTY); // not nice atm but stops insane behaviours
 					}
 				});
 			} else {
@@ -451,6 +447,23 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 			}
 		}
 		}
+	}
+	
+	public ItemStack decrStackSize(int slot, int size) {
+		if (!inventory.getItem(slot).isEmpty()) {
+			ItemStack itemstack;
+			if (inventory.getItem(slot).getCount() <= size) {
+				itemstack = inventory.getItem(slot);
+				inventory.setItem(slot, ItemStack.EMPTY);
+				return itemstack;
+			} else {
+				itemstack = inventory.getItem(slot).split(size);
+				if (inventory.getItem(slot).getCount() == 0)
+					inventory.setItem(slot, ItemStack.EMPTY);
+				return itemstack;
+			}
+		} else
+			return ItemStack.EMPTY;
 	}
 
 	private void getStackFromSilo() {
