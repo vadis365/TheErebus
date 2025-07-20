@@ -215,6 +215,11 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 		return super.mobInteract(player, hand);
 	}
 
+    @Override 
+    public boolean isPushable() {
+        return getAntRole() != PLANTER && getAntRole() != FERTILIZER;
+    }
+
 	public void setDropPoint(BlockPos pos) {
 		entityData.set(DROP_POINT, pos);
 	}

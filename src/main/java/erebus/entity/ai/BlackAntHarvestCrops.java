@@ -38,7 +38,7 @@ public class BlackAntHarvestCrops extends BlackAntBlockHome {
 
 	@Override
 	protected void moveToLocation() {
-		blackAnt.getMoveControl().setWantedPosition(targetX + 0.5D, targetY + 1, targetZ + 0.5D, moveSpeed);
+		blackAnt.getMoveControl().setWantedPosition(targetX + 0.5D, targetY, targetZ + 0.5D, moveSpeed);
 	}
 
 	@Override

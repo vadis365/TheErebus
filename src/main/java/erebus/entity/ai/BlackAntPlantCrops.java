@@ -29,7 +29,7 @@ public class BlackAntPlantCrops extends BlackAntBlockHome {
 
 	@Override
 	public boolean canUse() {
-		return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.PLANTER && !blackAnt.canCollectFromSilo && !blackAnt.isAntInvSlotEmpty() ? !blackAnt.getMoveControl().hasWanted() && super.canUse() : false;
+		return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.PLANTER && !blackAnt.canCollectFromSilo ? !blackAnt.getMoveControl().hasWanted() && super.canUse() : false;
 	}
 
 	@Override
@@ -40,10 +40,6 @@ public class BlackAntPlantCrops extends BlackAntBlockHome {
 	@Override
 	protected boolean canEatBlock(BlockState state) {
 		BlockPos pos = new BlockPos(targetX, targetY, targetZ);
-
-		if (state.is(BlockTags.AIR))
-			return false;
-
 		return state.is(BlockTags.DIRT) || state.is(Blocks.GRASS_BLOCK) || (state.is(Blocks.FARMLAND) && blackAnt.level().getBlockState(pos.above()).is(BlockTags.AIR));
 	}
 
@@ -63,6 +59,7 @@ public class BlackAntPlantCrops extends BlackAntBlockHome {
 
 	@Override
 	protected void eatingInterupted() {
+		blackAnt.getNavigation().stop();
 	}
 
 	@Override

@@ -55,7 +55,8 @@ public class BlackAntBonemealCrops extends BlackAntBlockHome {
 	}
 
 	@Override
-	protected void eatingInterupted() {	
+	protected void eatingInterupted() {
+		blackAnt.getNavigation().stop();
 	}
 
 	@Override
