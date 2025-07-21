@@ -719,7 +719,7 @@ public class ModLang extends ModLangProvider {
         addPage(1, "§0Fluids can be added to the Smoothie-matic 2000 by right clicking on the block with a full bucket.\n\nThe Four top slots in the gui are for the required ingredients and the lower slot must contain a Smoothie Glass.");
         addPage(2, "§9Green Tea Grasshopper\n\n§0Grasshopper Leg x2\nElastic Fibre\nFly Wing\n\n§dBeetle Juice\n\n§4Effects:\nJumping");
         addPage(3, "§9Money Honey\n\n§0Honey drip x2\nNectar\nGold Nugget\n\n§dHoney\n\n§4Effects:\nRegeneration");
-        addPage(4, "§9Darkness In The Middle\n\n§0Cammo powder x2\nDark Fruit\nSwamp Berries\n\n§dBeetle Juice\n\n§4Effects:\nInvisibility");
+        addPage(4, "§9Darkness In The Middle\n\n§0Camo powder x2\nDark Fruit\nSwamp Berries\n\n§dBeetle Juice\n\n§4Effects:\nInvisibility");
         addPage(5, "§9Green Giant\n\n§0Repellent\nPoison Gland x2\nWasp Sting\n\n§dAnti-Venom\n\n§4Effects:\nNegates Potions");
         addPage(6, "§9Seedy Goodness\n\n§0Pumpkin Seeds\nMelon Seeds\nDark Fruit Seeds\nBio-Velocity\n\n§dBeetle Juice\n\n§4Effects:\nDig Speed");
         addPage(7, "§9Givin' Me The Blues\n\n§0Blue Bell Petal x2\nLapis Lazuli x2\n\n§dMilk\n\n§4Effects:\nExtinguish");
