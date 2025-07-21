@@ -60,6 +60,7 @@ public class BlackAntHarvestCrops extends BlackAntBlockHome {
 		if (!blackAnt.level().isClientSide()) {
 			Player player = FakePlayerHandler.get((ServerLevel) blackAnt.level(), blackAnt.getPlayerOwner());
 			blackAnt.level().destroyBlock(new BlockPos(targetX, targetY, targetZ), dropItem, player);
+			// TODO no idea why the empty block above check in the planter is failing so harvester will make dirt for now.
 			blackAnt.level().setBlock(pos.below(), Blocks.DIRT.defaultBlockState(), 3);
 			blackAnt.setPos(targetX + 0.5D, targetY, targetZ + 0.5D); // may stop ant glitching in to farmland once it changed
 			blackAnt.getNavigation().isDone();

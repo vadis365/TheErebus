@@ -73,8 +73,12 @@ public class BlackAntBonemealCrops extends BlackAntBlockHome {
 				ItemStack invItem = blackAnt.getAntInvSlotStack();
 
 				if (ItemStack.isSameItem(filterItem, invItem)) {
-					FakePlayerHandler.rightClickItemAt(blackAnt.level(), pos, InteractionHand.MAIN_HAND, Direction.UP, invItem, blackAnt.getPlayerOwner());
+					//TODO may need the item click for compost so leaving for now
+					//FakePlayerHandler.rightClickItemAt(blackAnt.level(), pos, InteractionHand.MAIN_HAND, Direction.UP, invItem, blackAnt.getPlayerOwner());
+					
+					// TODO may not need this when compost exists also
 					BoneMealItem.applyBonemeal(blackAnt.getAntInvSlotStack(), blackAnt.level(), pos, player);
+
 					if (blackAnt.getAntInvSlotStack().getCount() < 1)
 						blackAnt.inventory.setItem(INVENTORY_SLOT, ItemStack.EMPTY);
 				}
