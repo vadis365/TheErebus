@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -50,6 +49,7 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -66,7 +66,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 
@@ -75,7 +74,6 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	private static final EntityDataAccessor<Boolean> TAME_STATE = SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Byte> ANT_ROLE = SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BYTE);
 	private UUID playerOwner = null;
-	private WeakReference<FakePlayer> fakePlayer = new WeakReference<>(null);
 //	public EntityAIPanic aiPanic;
 //	public EntityAIAntHarvestCrops aiHarvestCrops;
 //	public EntityAIAntBonemealCrops aiBonemealCrops;
@@ -100,9 +98,6 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 		super(type, level);
 		this.inventory = new BlackAntSimpleContainer(3);
 		updateInventory();
-		//setPathPriority(PathNodeType.WATER, -8F);
-		//stepHeight = 1.0F;
-		//setAttributes = false;
 		canPickupItems = false;
 		canAddToSilo = false;
 		canCollectFromSilo = false;
@@ -118,11 +113,6 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	
 	@Override
 	protected void registerGoals() {
-	//	aiPanic = new EntityAIPanic(this, 0.8D);
-	//	aiHarvestCrops = new EntityAIAntHarvestCrops(this, 0.6D, 1);
-	//	aiBonemealCrops = new EntityAIAntBonemealCrops(this, 0.6D, 4);
-	//	aiWander = new EntityAIWander(this, 0.6D);
-		
 		goalSelector.addGoal(0, new FloatGoal(this));
 		goalSelector.addGoal(1, new BlackAntPlantCrops(this, 0.6D, 4, false));
 		goalSelector.addGoal(1, new BlackAntBonemealCrops(this, 0.6D, 4, false));

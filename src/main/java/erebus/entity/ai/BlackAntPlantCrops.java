@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.Tags;
 
 public class BlackAntPlantCrops extends BlackAntBlockHome {
 
@@ -40,7 +41,8 @@ public class BlackAntPlantCrops extends BlackAntBlockHome {
 	@Override
 	protected boolean canEatBlock(BlockState state) {
 		BlockPos pos = new BlockPos(targetX, targetY, targetZ);
-		return state.is(BlockTags.DIRT) || state.is(Blocks.GRASS_BLOCK) || (state.is(Blocks.FARMLAND) && blackAnt.level().getBlockState(pos.above()).is(BlockTags.AIR));
+		// TODO no idea why the empty block above is failing so harvester will make dirt for now.
+		return (state.is(BlockTags.DIRT) || state.is(Blocks.GRASS_BLOCK) || (state.is(Tags.Blocks.VILLAGER_FARMLANDS) && blackAnt.level().isEmptyBlock(pos.above())));
 	}
 
 	@Override
@@ -66,7 +68,7 @@ public class BlackAntPlantCrops extends BlackAntBlockHome {
 	protected void afterEaten() {
 		BlockPos pos = new BlockPos(targetX, targetY, targetZ);
 		if (!blackAnt.level().isClientSide()) {
-			if (!getTargetBlock().is(Blocks.FARMLAND)) {
+			if (!getTargetBlock().is(Tags.Blocks.VILLAGER_FARMLANDS)) {
 				FakePlayerHandler.rightClickItemAt(blackAnt.level(), pos, InteractionHand.MAIN_HAND, Direction.UP, new ItemStack(Items.WOODEN_HOE), blackAnt.getPlayerOwner());
 				blackAnt.level().playSound(null, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
 			}
@@ -77,7 +79,6 @@ public class BlackAntPlantCrops extends BlackAntBlockHome {
 
 				if (ItemStack.isSameItem(filterItem, invItem)) {
 					FakePlayerHandler.rightClickItemAt(blackAnt.level(), pos, InteractionHand.MAIN_HAND, Direction.UP, invItem, blackAnt.getPlayerOwner());
-					blackAnt.inventory.setItem(INVENTORY_SLOT, new ItemStack(invItem.getItem(), blackAnt.getAntInvSlotStack().getCount() - 1));
 					if (blackAnt.getAntInvSlotStack().getCount() < 1)
 						blackAnt.inventory.setItem(INVENTORY_SLOT, ItemStack.EMPTY);
 				}
