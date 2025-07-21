@@ -49,9 +49,4 @@ public class MaxSpeedBowItem extends BowItem {
             }
         }
     }
-
-    @Override
-    public int getUseDuration(@NotNull ItemStack stack, @NotNull LivingEntity entity) {
-        return 5000;
-    }
 }

@@ -1,0 +1,22 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/world/item/ItemUseAnimation",
+      "name": "EREBUS_MAX_SPEED_BOW",
+      "constructor": "(ILjava/lang/String;)V",
+      "parameters": [
+        -1,
+        "erebus:max_speed_bow"
+      ]
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "EREBUS_MAX_SPEED_BOW_POSE",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "erebus/client/AnimationEnumProxies",
+        "field": "MAX_SPEED_BOW_POSE"
+      }
+    }
+  ]
+}
