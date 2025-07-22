@@ -34,7 +34,7 @@ public class FakePlayerHandler {
         return FakePlayerFactory.get(level, GAME_PROFILE);
     }
 
-    private static FakePlayer get(ServerLevel level, @Nullable UUID placer) {
+    public static FakePlayer get(ServerLevel level, @Nullable UUID placer) {
         FakePlayer fakePlayer;
         if (placer == null)
             fakePlayer = getDefault(level);

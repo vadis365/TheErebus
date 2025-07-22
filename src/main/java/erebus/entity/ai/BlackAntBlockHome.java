@@ -3,6 +3,7 @@ package erebus.entity.ai;
 import java.awt.Point;
 import java.util.List;
 
+import erebus.entity.BlackAnt;
 import erebus.utils.Spiral;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
-public abstract class EatBlockGoal extends Goal {
+public abstract class BlackAntBlockHome extends Goal {
 
 	/**
 	 * The bigger you make this value the faster the AI will be. But performance will also decrease so be sensible
@@ -30,9 +31,9 @@ public abstract class EatBlockGoal extends Goal {
 	private int spiralIndex;
 	public int eatTicks;
 	public boolean dropItem;
-	private static final List<Point> SPIRAL = new Spiral(16, 16).spiral();
+	private static final List<Point> SPIRAL = new Spiral(8, 8).spiral();
 	
-	public EatBlockGoal(Mob entity, BlockState state, double moveSpeed, int eatSpeed, boolean shouldDropItem) {
+	public BlackAntBlockHome(Mob entity, BlockState state, double moveSpeed, int eatSpeed, boolean shouldDropItem) {
 		this.entity = entity;
 		this.blockState = state;
 		this.eatSpeed = eatSpeed * 20;
@@ -57,15 +58,17 @@ public abstract class EatBlockGoal extends Goal {
     }
 
     public void tick() {
-		int xCoord = (int) entity.getX();
-		int yCoord = (int) entity.getY();
-		int zCoord = (int) entity.getZ();
+    	BlackAnt blackAnt = (BlackAnt) entity;
+    	BlockPos blockUnderSilo = blackAnt.getDropPoint().below();
+		int xCoord = (int) blockUnderSilo.getX();
+		int yCoord = (int) blockUnderSilo.getY();
+		int zCoord = (int) blockUnderSilo.getZ();
 
 		for (int i = 0; i < CHECKS_PER_TICK; i++)
 			if (!hasTarget) {
 				increment();
 				Point p = getNextPoint();
-				for (int y = -4; y < 4; y++)
+				for (int y = -1; y < 1; y++)
 					if (canEatBlock(entity.level().getBlockState(new BlockPos(xCoord + p.x, yCoord + y, zCoord + p.y)))) {
 						targetX = xCoord + p.x;
 						targetY = yCoord + y;
@@ -83,7 +86,8 @@ public abstract class EatBlockGoal extends Goal {
 					entity.getNavigation().stop();
 					prepareToEat();
 					eatTicks++;
-					entity.level().destroyBlockProgress(entity.getId(), new BlockPos(targetX, targetY, targetZ), getScaledEatTicks());
+					if (dropItem)
+						entity.level().destroyBlockProgress(entity.getId(), new BlockPos(targetX, targetY, targetZ), getScaledEatTicks());
 					if (eatSpeed <= eatTicks) {
 						entity.level().levelEvent(2001, new BlockPos(targetX, targetY, targetZ), Block.getId(getTargetBlock()));
 						if (dropItem)
@@ -165,6 +169,6 @@ public abstract class EatBlockGoal extends Goal {
 	protected abstract void afterEaten();
 
 	protected AABB getBlockAABB(int x, int y, int z) {
-		return new AABB(targetX - 0.3D, targetY - 0.3D, targetZ - 0.3D, targetX + 1.3D, targetY + 1.3D, targetZ + 1.3D);
+		return new AABB(targetX, targetY, targetZ, targetX + 1D, targetY + 1D, targetZ + 1D);
 	}
 }

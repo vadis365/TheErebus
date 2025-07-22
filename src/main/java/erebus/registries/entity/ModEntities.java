@@ -95,6 +95,7 @@ public class ModEntities {
 		event.register(BEETLE_LARVA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BeetleLarva::canSpawnHere, null);
 		event.register(BEETLE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Beetle::canSpawnHere, null);
 		event.register(BOMBARDIER_BEETLE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BombardierBeetle::canSpawnHere, null);
+		event.register(BOMBARDIER_BEETLE_LARVA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BombardierBeetleLarva::canSpawnHereAlt, null);
 		event.register(WORKER_BEE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, WorkerBee::canSpawnHere, null);
 		event.register(BLACK_ANT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlackAnt::canSpawnHere, null);
 	}

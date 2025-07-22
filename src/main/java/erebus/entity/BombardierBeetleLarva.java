@@ -1,8 +1,11 @@
 package erebus.entity;
 
+import javax.annotation.Nullable;
+
 import erebus.client.particle.ClientParticleTypes.ParticleType;
 import erebus.entity.ai.LarvaEatWoodenBlocksGoal;
 import erebus.network.client.ParticlePacket;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -25,10 +28,9 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.neoforged.neoforge.network.PacketDistributor;
-
-import javax.annotation.Nullable;
 
 public class BombardierBeetleLarva extends BeetleLarva implements Enemy {
 	private static final EntityDataAccessor<Integer> INFLATE_SIZE = SynchedEntityData.defineId(BombardierBeetleLarva.class, EntityDataSerializers.INT);
@@ -111,13 +113,16 @@ public class BombardierBeetleLarva extends BeetleLarva implements Enemy {
 	public int getInflateSize() {
 		return entityData.get(INFLATE_SIZE);
 	}
-	
+
+	public static boolean canSpawnHereAlt(EntityType<BombardierBeetleLarva> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+		float light = level.getLightLevelDependentMagicValue(pos);
+		return light >= 0F;
+	}
 
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
-		RandomSource randomsource = level.getRandom();
 		setLarvaType((byte) 4);
 		return spawnGroupData;
 	}

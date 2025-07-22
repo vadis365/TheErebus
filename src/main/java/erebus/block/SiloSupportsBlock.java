@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 
 public class SiloSupportsBlock extends Block {
 
@@ -33,6 +34,11 @@ public class SiloSupportsBlock extends Block {
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		return level.getBlockState(pos.below()).is(OtherBlocks.RED_GEM_BLOCK.get());
 	}
+
+    @Override
+    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
+		return true;
+    }
 
 	@Override
 	protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {

@@ -22,7 +22,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class CustomHelmLayer<T extends LivingEntity, M extends HumanoidModel<T>, A extends HumanoidModel<T>> extends RenderLayer<T, M> {
+public class CustomHelmLayer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
 
     private static final ResourceLocation RHINO_HELM = Erebus.prefix("textures/models/armor/rhino_helm.png");
     private static final ResourceLocation MUSHROOM_HELM = Erebus.prefix("textures/models/armor/mushroom_helm_layer_1.png");
