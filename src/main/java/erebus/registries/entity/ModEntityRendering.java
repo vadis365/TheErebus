@@ -17,6 +17,7 @@ import erebus.client.render.entity.model.GrasshopperModel;
 import erebus.client.render.entity.model.LavaWebSpiderModel;
 import erebus.client.render.entity.model.LocustModel;
 import erebus.client.render.entity.model.MothModel;
+import erebus.client.render.entity.model.PunchroomModel;
 import erebus.client.render.entity.model.ScytodesModel;
 import erebus.client.render.entity.model.VelvetWormModel;
 import erebus.client.render.entity.model.WaspModel;
@@ -38,6 +39,7 @@ import erebus.client.render.entity.renderer.LavaWebSpiderRenderer;
 import erebus.client.render.entity.renderer.LocustRenderer;
 import erebus.client.render.entity.renderer.MoneySpiderRenderer;
 import erebus.client.render.entity.renderer.MothRenderer;
+import erebus.client.render.entity.renderer.PunchroomRenderer;
 import erebus.client.render.entity.renderer.ScytodesRenderer;
 import erebus.client.render.entity.renderer.VelvetWormRenderer;
 import erebus.client.render.entity.renderer.WaspRenderer;
@@ -71,6 +73,7 @@ public class ModEntityRendering {
 	public static ModelLayerLocation WORKER_BEE = new ModelLayerLocation(Erebus.prefix("worker_bee"), "main");
 	public static ModelLayerLocation BOMBARDIER_BEETLE = new ModelLayerLocation(Erebus.prefix("bombardier_beetle"), "main");
 	public static ModelLayerLocation BLACK_ANT = new ModelLayerLocation(Erebus.prefix("black_ant"), "main");
+	public static ModelLayerLocation PUNCHROOM = new ModelLayerLocation(Erebus.prefix("punchroom"), "main");
 
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
     	event.registerLayerDefinition(WASP, WaspModel::createBodyLayer);
@@ -96,6 +99,7 @@ public class ModEntityRendering {
     	event.registerLayerDefinition(WORKER_BEE, WorkerBeeModel::createBodyLayer);
     	event.registerLayerDefinition(BOMBARDIER_BEETLE, BombardierBeetleModel::createBodyLayer);
     	event.registerLayerDefinition(BLACK_ANT, BlackAntModel::createBodyLayer);
+    	event.registerLayerDefinition(PUNCHROOM, PunchroomModel::createBodyLayer);
     }
 
     public static void registerEntityRender(EntityRenderersEvent.RegisterRenderers event) {
@@ -121,6 +125,7 @@ public class ModEntityRendering {
     	event.registerEntityRenderer(ModEntities.WORKER_BEE.get(), WorkerBeeRenderer::new);
     	event.registerEntityRenderer(ModEntities.BOMBARDIER_BEETLE.get(), BombardierBeetleRenderer::new);
     	event.registerEntityRenderer(ModEntities.BLACK_ANT.get(), BlackAntRenderer::new);
+    	event.registerEntityRenderer(ModEntities.PUNCHROOM.get(), PunchroomRenderer::new);
 
     	event.registerEntityRenderer(ModEntities.THROWN_BLOCK_AS_ITEM.get(), context -> new ThrownItemRenderer<>(context, 3.0F, true));
     	event.registerEntityRenderer(ModEntities.GOO_BALL.get(), context -> new ThrownItemRenderer<>(context, 3.0F, true));

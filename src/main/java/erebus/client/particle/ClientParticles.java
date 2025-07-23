@@ -35,6 +35,10 @@ public class ClientParticles {
 
 			if (particleName.equals("heart"))
 				level.addParticle(ParticleTypes.HEART, false, x, y, z, vecX, vecY, vecZ);
+			
+			if (particleName.equals("spores"))
+				level.addParticle(ParticleTypes.SPORE_BLOSSOM_AIR, false, x, y, z, vecX, vecY, vecZ);
+
 	/*	
 		if (particleName.equals("repellent")) {
 			fx = new ParticleRepellent(world, x, y, z, 0.0F, 0.0F, 0.0F);

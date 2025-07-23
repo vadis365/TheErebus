@@ -63,6 +63,7 @@ public class ModEntityLootTables extends EntityLootSubProvider {
 		this.noLoot(ModEntities.WORKER_BEE);
 		this.noLoot(ModEntities.BOMBARDIER_BEETLE);
 		this.noLoot(ModEntities.BLACK_ANT);
+		this.noLoot(ModEntities.PUNCHROOM);
     }
     
 	public <T extends Entity> void noLoot(DeferredHolder<EntityType<?>, EntityType<T>> type) {
