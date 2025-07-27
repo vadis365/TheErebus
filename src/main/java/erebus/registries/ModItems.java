@@ -199,7 +199,10 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> WAR_HAMMER = registerItem("war_hammer");
     public static final DeferredItem<Item> WEB_SLINGER = registerItem("web_slinger");
     public static final DeferredItem<Item> WEB_SLINGER_WITHER = registerItem("web_slinger_wither");
-    public static final DeferredItem<Item> MAX_SPEED_BOW = registerItem("max_speed_bow", () -> new MaxSpeedBowItem(new Item.Properties().durability(500)));
+    public static final DeferredItem<Item> MAX_SPEED_BOW = registerItem("max_speed_bow", () -> new MaxSpeedBowItem(new Item.Properties()
+            .durability(500)
+            .rarity(Rarity.RARE)
+    ));
 
     // MARK: Shields
     public static final DeferredItem<ErebusShieldItem> BAMBOO_SHIELD = registerShield("bamboo_shield", 256, new BambooShieldType());

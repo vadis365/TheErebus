@@ -134,6 +134,20 @@ public class Erebus {
                         }
                 )
         );
+
+        ItemProperties.register(ModItems.MAX_SPEED_BOW.get(), ResourceLocation.withDefaultNamespace("pull"), (stack, level, entity, p_344166_) -> {
+            if (entity == null) {
+                return 0.0F;
+            } else {
+                return entity.getUseItem() != stack ? 0.0F : (float)(stack.getUseDuration(entity) - entity.getUseItemRemainingTicks()) / 20.0F;
+            }
+        });
+
+        ItemProperties.register(
+                ModItems.MAX_SPEED_BOW.get(),
+                ResourceLocation.withDefaultNamespace("pulling"),
+                (stack, level, entity, p_174633_) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F
+        );
     }
 
 	public static ResourceLocation prefix(String name) {

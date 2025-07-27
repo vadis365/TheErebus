@@ -1,5 +1,6 @@
 package erebus.events;
 
+import erebus.item.MaxSpeedBowItem;
 import erebus.registries.ModItems;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,7 +15,7 @@ public class ComputeFOVModifierEventHandler {
         if(event.getPlayer().isUsingItem() && event.getPlayer().getUseItem().getItem() == ModItems.MAX_SPEED_BOW.get()) {
             float fovModifier = 1;
             int ticksUsingItem = event.getPlayer().getTicksUsingItem();
-            float deltaTicks = ticksUsingItem / 20F;
+            float deltaTicks = ticksUsingItem / MaxSpeedBowItem.DRAW_SPEED;
 
             if(deltaTicks > 1.0F) {
                 deltaTicks = 1.0F;
