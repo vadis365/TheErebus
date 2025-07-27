@@ -1,12 +1,5 @@
 package erebus.block.plants;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.Nullable;
-
 import erebus.registries.blocks.providers.UmberstoneBlocks;
 import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.BlockPos;
@@ -29,6 +22,11 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.IShearable;
+import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class WallPlantsAbstract extends DirectionalBlock implements IShearable {
 	protected static final VoxelShape UP_AABB = Block.box(0D, 0D, 0D, 16D, 3D, 16D);

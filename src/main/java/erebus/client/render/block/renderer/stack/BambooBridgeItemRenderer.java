@@ -1,11 +1,8 @@
 package erebus.client.render.block.renderer.stack;
 
-import javax.annotation.Nonnull;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-
 import erebus.Erebus;
 import erebus.client.render.block.model.BambooBridgeModel;
 import erebus.registries.client.ModBlockEntityRendering;
@@ -19,6 +16,8 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class BambooBridgeItemRenderer extends BlockEntityWithoutLevelRenderer {
 

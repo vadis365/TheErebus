@@ -1,7 +1,5 @@
 package erebus.inventory.server;
 
-import javax.annotation.Nonnull;
-
 import erebus.entity.BlackAnt;
 import erebus.inventory.slot.BlackAntSlot;
 import erebus.registries.client.ModMenuTypes;
@@ -14,6 +12,8 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+
+import javax.annotation.Nonnull;
 
 public class BlackAntMenu extends AbstractContainerMenu {
 

@@ -1,11 +1,6 @@
 package erebus.block;
 
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.serialization.MapCodec;
-
 import erebus.block.entity.SiloTankBlockEntity;
 import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.OtherBlocks;
@@ -32,6 +27,9 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public class SiloTankBlock extends Block implements EntityBlock {
 

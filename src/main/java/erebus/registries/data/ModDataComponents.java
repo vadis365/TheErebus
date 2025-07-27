@@ -1,7 +1,5 @@
 package erebus.registries.data;
 
-import java.util.function.Supplier;
-
 import erebus.Erebus;
 import erebus.network.data.DeathCompassData;
 import erebus.network.data.DeathCompassDataHolder;
@@ -9,6 +7,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 public class ModDataComponents {
 

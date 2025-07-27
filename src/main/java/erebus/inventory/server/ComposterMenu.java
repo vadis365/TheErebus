@@ -1,7 +1,5 @@
 package erebus.inventory.server;
 
-import javax.annotation.Nonnull;
-
 import erebus.registries.client.ModMenuTypes;
 import erebus.registries.data.ModTags;
 import net.minecraft.world.Container;
@@ -13,6 +11,8 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class ComposterMenu extends AbstractContainerMenu {
 	public static final int DATA_MOULD_PROGRESS = 0;

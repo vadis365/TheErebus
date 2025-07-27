@@ -1,12 +1,6 @@
 package erebus.utils;
 
-import java.lang.ref.WeakReference;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
 import com.mojang.authlib.GameProfile;
-
 import erebus.Erebus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,6 +15,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
+
+import javax.annotation.Nullable;
+import java.lang.ref.WeakReference;
+import java.util.UUID;
 
 public class FakePlayerHandler {
 	

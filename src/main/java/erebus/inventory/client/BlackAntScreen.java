@@ -1,21 +1,16 @@
 package erebus.inventory.client;
 
-import javax.annotation.Nonnull;
-
 import com.mojang.blaze3d.systems.RenderSystem;
-
 import erebus.Erebus;
 import erebus.inventory.server.BlackAntMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
 public class BlackAntScreen extends ErebusScreen<BlackAntMenu> {

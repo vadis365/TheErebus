@@ -1,9 +1,6 @@
 package erebus.block.bamboo;
 
-import javax.annotation.Nonnull;
-
 import com.mojang.serialization.MapCodec;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -13,6 +10,8 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import javax.annotation.Nonnull;
 
 public class BambooPole extends Block {
 	public static final MapCodec<BambooPole> CODEC = simpleCodec(BambooPole::new);

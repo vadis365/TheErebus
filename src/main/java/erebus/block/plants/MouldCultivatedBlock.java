@@ -1,14 +1,12 @@
 package erebus.block.plants;
 
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.serialization.MapCodec;
-
 import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public class MouldCultivatedBlock extends WallPlantsAbstract {
 	// REMEMBER TO SET THE CULTIVATED BLOCKS NOT TO RANDOM TICK ON REG!

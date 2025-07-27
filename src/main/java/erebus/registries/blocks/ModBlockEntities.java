@@ -1,28 +1,7 @@
 package erebus.registries.blocks;
 
-import java.util.function.Supplier;
-
 import erebus.Erebus;
-import erebus.block.entity.BambooBridgeBlockEntity;
-import erebus.block.entity.BambooCrateBlockEntity;
-import erebus.block.entity.BambooExtenderBlockEntity;
-import erebus.block.entity.BambooPipeBlockEntity;
-import erebus.block.entity.BambooPipeExtractBlockEntity;
-import erebus.block.entity.BlenderBlockEntity;
-import erebus.block.entity.BlockOfBonesBlockEntity;
-import erebus.block.entity.ComposterBlockEntity;
-import erebus.block.entity.ExperienceAltarBlockEntity;
-import erebus.block.entity.FluidJarBlockEntity;
-import erebus.block.entity.GaeanKeystoneBlockEntity;
-import erebus.block.entity.HealingAltarBlockEntity;
-import erebus.block.entity.HoneyCombBlockEntity;
-import erebus.block.entity.LightningAltarBlockEntity;
-import erebus.block.entity.LiquifierBlockEntity;
-import erebus.block.entity.OfferingAltarBlockEntity;
-import erebus.block.entity.PreservedBlockEntity;
-import erebus.block.entity.RepairAltarBlockEntity;
-import erebus.block.entity.SiloTankBlockEntity;
-import erebus.block.entity.UmberFurnaceBlockEntity;
+import erebus.block.entity.*;
 import erebus.registries.blocks.providers.AmberBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -30,6 +9,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 public class ModBlockEntities {
 
@@ -47,6 +28,7 @@ public class ModBlockEntities {
 	public static final Supplier<BlockEntityType<BlenderBlockEntity>> BLENDER;
 	public static final Supplier<BlockEntityType<BlockOfBonesBlockEntity>> BLOCK_OF_BONES;
 	public static final Supplier<BlockEntityType<FluidJarBlockEntity>> FLUID_JAR;
+	public static final Supplier<BlockEntityType<GlowingJarBlockEntity>> GLOWING_JAR;
 	public static final Supplier<BlockEntityType<GaeanKeystoneBlockEntity>> GAEAN_KEYSTONE;
 	public static final Supplier<BlockEntityType<HoneyCombBlockEntity>> HONEY_COMB;
 	public static final Supplier<BlockEntityType<LiquifierBlockEntity>> LIQUIFIER;
@@ -69,6 +51,7 @@ public class ModBlockEntities {
 		BLENDER = register("blender", BlenderBlockEntity::new, OtherBlocks.BLENDER);
 		BLOCK_OF_BONES = register("block_of_bones", BlockOfBonesBlockEntity::new, OtherBlocks.BLOCK_OF_BONES);
 		FLUID_JAR = register("fluid_jar", FluidJarBlockEntity::new, AmberBlocks.FLUID_JAR);
+		GLOWING_JAR = register("glowing_jar", GlowingJarBlockEntity::new, AmberBlocks.GLOWING_JAR);
 		GAEAN_KEYSTONE = register("gaean_keystone", GaeanKeystoneBlockEntity::new, OtherBlocks.GAEAN_KEYSTONE);
 		HONEY_COMB = register("honey_comb", HoneyCombBlockEntity::new, OtherBlocks.HONEY_COMB);
 		LIQUIFIER = register("liquifier", LiquifierBlockEntity::new, OtherBlocks.LIQUIFIER);

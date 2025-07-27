@@ -1,7 +1,5 @@
 package erebus.item;
 
-import java.util.List;
-
 import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.ChatFormatting;
@@ -18,6 +16,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import java.util.List;
 
 public class AntTamingAmulet extends Item {
 	public AntTamingAmulet(Properties properties) {

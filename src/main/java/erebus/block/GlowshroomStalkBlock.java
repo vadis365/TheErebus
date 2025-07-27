@@ -1,9 +1,6 @@
 package erebus.block;
 
-import javax.annotation.Nonnull;
-
 import com.mojang.serialization.MapCodec;
-
 import erebus.block.types.EnumGlowshroomPart;
 import erebus.registries.blocks.providers.PlantBlocks;
 import net.minecraft.core.BlockPos;
@@ -22,6 +19,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import javax.annotation.Nonnull;
 
 public class GlowshroomStalkBlock extends Block {
 	public static final MapCodec<GlowshroomStalkBlock> CODEC = simpleCodec(GlowshroomStalkBlock::new);

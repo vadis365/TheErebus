@@ -1,12 +1,6 @@
 package erebus.block.bamboo;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.serialization.MapCodec;
-
 import erebus.block.types.EnumTorchBlockHalf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,6 +19,10 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class BambooTorchBlock extends Block {
 	public static final MapCodec<BambooTorchBlock> CODEC = simpleCodec(BambooTorchBlock::new);

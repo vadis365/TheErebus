@@ -1,13 +1,11 @@
 package erebus.block.plants;
 
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.serialization.MapCodec;
-
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public class MouldBlock extends WallPlantsAbstract {
 

@@ -1,7 +1,6 @@
 package erebus.client.render.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-
 import erebus.client.render.entity.model.BlackAntModel;
 import erebus.entity.BlackAnt;
 import erebus.registries.entity.ModEntityRendering;

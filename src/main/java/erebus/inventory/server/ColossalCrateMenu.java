@@ -1,10 +1,5 @@
 package erebus.inventory.server;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import erebus.block.entity.BambooCrateBlockEntity;
 import erebus.registries.client.ModMenuTypes;
 import net.minecraft.core.BlockPos;
@@ -16,6 +11,10 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ColossalCrateMenu extends AbstractContainerMenu {
 

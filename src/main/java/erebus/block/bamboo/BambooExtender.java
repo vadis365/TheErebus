@@ -1,12 +1,6 @@
 package erebus.block.bamboo;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.serialization.MapCodec;
-
 import erebus.block.entity.BambooExtenderBlockEntity;
 import erebus.registries.ModItems;
 import net.minecraft.core.BlockPos;
@@ -29,6 +23,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class BambooExtender extends DirectionalBlock  implements EntityBlock {
 

@@ -1,6 +1,7 @@
 package erebus.registries.blocks.providers;
 
 import erebus.block.FluidJarBlock;
+import erebus.block.GlowingJarBlock;
 import erebus.block.PreservedBlock;
 import erebus.block.util.ConnectedTextureBlock;
 import erebus.block.util.ModBlockSetTypes;
@@ -19,7 +20,7 @@ public class AmberBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> PRESERVED_AMBER;
     public static final DeferredBlock<Block> PRESERVED_AMBER_GLASS;
 
-    public static final DeferredBlock<Block> GLOWING_JAR;
+    public static final DeferredBlock<GlowingJarBlock> GLOWING_JAR;
     public static final DeferredBlock<FluidJarBlock> FLUID_JAR;
 
     public static final DeferredBlock<DoorBlock> AMBER_DOOR;
@@ -30,7 +31,7 @@ public class AmberBlocks extends ModBlockHelpers {
         AMBER_GLASS = registerConnectedTextureBlock("amber_glass", AMBER_PROPERTIES.strength(1.5F));
         PRESERVED_AMBER = registerBlock("preserved_amber", () -> new PreservedBlock(AMBER_PROPERTIES.strength(10)));
         PRESERVED_AMBER_GLASS = registerBlock("preserved_amber_glass", () -> new PreservedBlock(AMBER_PROPERTIES.strength(10)));
-        GLOWING_JAR = registerSimpleBlock("glowing_jar", GLOWING_JAR_PROPERTIES);
+        GLOWING_JAR = registerBlock("glowing_jar", () -> new GlowingJarBlock(GLOWING_JAR_PROPERTIES));
         FLUID_JAR = registerBlockWithoutBlockItem("fluid_jar", () -> new FluidJarBlock(FLUID_JAR_PROPERTIES));
         AMBER_DOOR = registerDoor("amber_door", ModBlockSetTypes.AMBER, AMBER_DOOR_PROPERTIES);
     }

@@ -8,8 +8,8 @@ import com.mojang.math.Axis;
 import erebus.Erebus;
 import erebus.block.entity.LiquifierBlockEntity;
 import erebus.client.render.block.model.LiquifierModel;
+import erebus.client.render.util.FluidRenderHelper;
 import erebus.registries.client.ModBlockEntityRendering;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -17,15 +17,13 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
+import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEntity> {
@@ -39,8 +37,8 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 	}
 
 	@Override
-    public void render(LiquifierBlockEntity tile, float partialTick, PoseStack stack, MultiBufferSource bufferIn, int combinedLight, int combinedOverlay) {
-		if(tile == null || !tile.hasLevel())
+    public void render(@NotNull LiquifierBlockEntity tile, float partialTick, @NotNull PoseStack stack, @NotNull MultiBufferSource bufferIn, int combinedLight, int combinedOverlay) {
+		if(!tile.hasLevel())
 			return;
 
 		if (!tile.tank.getFluid().isEmpty()) {
@@ -48,26 +46,14 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 			if (fluidLevel > 0) {
 				FluidStack fluidStack = new FluidStack(tile.tank.getFluid().getFluidHolder(), 100);
 				float height = (0.375F / tile.tank.getCapacity()) * tile.tank.getFluidAmount();
-				var fluidExtensions = IClientFluidTypeExtensions.of(fluidStack.getFluid());
-				TextureAtlasSprite fluidStillSprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidExtensions.getStillTexture());
-				VertexConsumer buffer = bufferIn.getBuffer(RenderType.CUTOUT);
-				int fluidColor = fluidExtensions.getTintColor();
-				stack.pushPose();
 				
-				stack.translate(0D, 0D, 0D);
-				float xMax, zMax, xMin, zMin, yMin = 0;
-				xMax = 1.984375F;
-				zMax = 1.984375F;
-				xMin = 0.015625F;
-				zMin = 0.015625F;
-				yMin = 0.015625F;
-		
-				float alpha = 1F;
-				float red = (fluidColor >> 16 & 0xFF) / 255.0F;
-				float green = (fluidColor >> 8 & 0xFF) / 255.0F;
-				float blue = (fluidColor & 0xFF) / 255.0F;
-				renderCuboid(buffer, stack, xMax, xMin, yMin, height, zMin, zMax, fluidStillSprite, red, green, blue, alpha, combinedLight);
-				stack.popPose();
+				float xMax = 1.984375F;
+				float zMax = 1.984375F;
+				float xMin = 0.015625F;
+				float zMin = 0.015625F;
+				float yMin = 0.015625F;
+				
+				FluidRenderHelper.renderFluid(fluidStack, stack, bufferIn, xMin, xMax, yMin, height, zMin, zMax, combinedLight);
 			}
 		}
 
@@ -75,7 +61,7 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 
 		stack.pushPose();
 		stack.translate(0.5D, 0.5D, 0.5D);
-		if(!tile.getItems().get(0).isEmpty()) {
+		if(!tile.getItems().getFirst().isEmpty()) {
 			stack.mulPose(Axis.YP.rotationDegrees(ticks));
 			renderItemInSlot(tile, partialTick, stack, bufferIn, combinedLight, combinedOverlay, tile.getItems().get(0), 0D, 0D, 0D, 0.25F);
 		}
@@ -112,54 +98,5 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 		}
 	}
 
-	private void renderCuboid(VertexConsumer buffer, PoseStack stack, float xMax, float xMin, float yMin, float height, float zMin, float zMax, TextureAtlasSprite textureAtlasSprite, float red, float green, float blue, float alpha, int combinedLight) {
-
-		float uMin = textureAtlasSprite.getU0();
-		float uMax = textureAtlasSprite.getU1();
-		float vMin = textureAtlasSprite.getV0();
-		float vMax = textureAtlasSprite.getV1();
-
-		float vHeight = vMax - vMin;
-
-		// top
-		addVertexWithUV(buffer, stack, xMax, height, zMax, uMax, vMin, red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMax, height, zMin, uMin, vMin, red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMin, height, zMin, uMin, vMax, red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMin, height, zMax, uMax, vMax, red, green, blue, alpha, combinedLight);
-
-		// north
-		addVertexWithUV(buffer, stack, xMax, yMin, zMin, uMax, vMin, red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMin, yMin, zMin, uMin, vMin, red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMin, height, zMin, uMin, vMin + (vHeight * height), red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMax, height, zMin, uMax, vMin + (vHeight * height), red, green, blue, alpha, combinedLight);
-
-		// south
-		addVertexWithUV(buffer, stack, xMax, yMin, zMax, uMin, vMin, red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMax, height, zMax, uMin, vMin + (vHeight * height), red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMin, height, zMax, uMax, vMin + (vHeight * height), red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMin, yMin, zMax, uMax, vMin, red, green, blue, alpha, combinedLight);
-
-		// east
-		addVertexWithUV(buffer, stack, xMax, yMin, zMin, uMin, vMin, red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMax, height, zMin, uMin, vMin + (vHeight * height), red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMax, height, zMax, uMax, vMin + (vHeight * height), red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMax, yMin, zMax, uMax, vMin, red, green, blue, alpha, combinedLight);
-
-		// west
-		addVertexWithUV(buffer, stack, xMin, yMin, zMax, uMin, vMin, red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMin, height, zMax, uMin, vMin + (vHeight * height), red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMin, height, zMin, uMax, vMin + (vHeight * height), red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMin, yMin, zMin, uMax, vMin, red, green, blue, alpha, combinedLight);
-
-		// down
-		addVertexWithUV(buffer, stack, xMax, yMin, zMin, uMax, vMin, red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMax, yMin, zMax, uMin, vMin, red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMin, yMin, zMax, uMin, vMax, red, green, blue, alpha, combinedLight);
-		addVertexWithUV(buffer, stack, xMin, yMin, zMin, uMax, vMax, red, green, blue, alpha, combinedLight);
-	}
-
-	private void addVertexWithUV(VertexConsumer buffer, PoseStack stack, float x, float y, float z, float u, float v, float red, float green, float blue, float alpha, int combinedLight) {
-		buffer.addVertex(stack.last().pose(), x / 2f, y, z / 2f).setColor(red, green, blue, alpha).setUv(u, v).setOverlay(OverlayTexture.NO_OVERLAY).setUv2(combinedLight, 240).setNormal(1, 0, 0);
-	}
 
 }

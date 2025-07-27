@@ -1,7 +1,6 @@
 package erebus.world.feature.plant.config;
 
 import erebus.registries.blocks.providers.PlantBlocks;
-import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;

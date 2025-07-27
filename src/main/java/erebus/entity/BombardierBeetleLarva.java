@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import javax.annotation.Nullable;
-
 import erebus.client.particle.ClientParticleTypes.ParticleType;
 import erebus.entity.ai.LarvaEatWoodenBlocksGoal;
 import erebus.network.client.ParticlePacket;
@@ -31,6 +29,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.neoforged.neoforge.network.PacketDistributor;
+
+import javax.annotation.Nullable;
 
 public class BombardierBeetleLarva extends BeetleLarva implements Enemy {
 	private static final EntityDataAccessor<Integer> INFLATE_SIZE = SynchedEntityData.defineId(BombardierBeetleLarva.class, EntityDataSerializers.INT);

@@ -1,14 +1,5 @@
 package erebus.datagen.providers.recipes;
 
-import static net.minecraft.data.recipes.RecipeCategory.BUILDING_BLOCKS;
-import static net.minecraft.data.recipes.RecipeCategory.COMBAT;
-import static net.minecraft.data.recipes.RecipeCategory.FOOD;
-import static net.minecraft.data.recipes.RecipeCategory.MISC;
-
-import java.util.concurrent.CompletableFuture;
-
-import org.jetbrains.annotations.NotNull;
-
 import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.blocks.providers.UmberstoneBlocks;
@@ -21,6 +12,11 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.concurrent.CompletableFuture;
+
+import static net.minecraft.data.recipes.RecipeCategory.*;
 
 /**
  * Provider for shapeless crafting recipes.
