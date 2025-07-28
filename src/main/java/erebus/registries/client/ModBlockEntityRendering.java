@@ -16,6 +16,7 @@ public class ModBlockEntityRendering {
     public static final ModelLayerLocation ALTAR_EXPERIENCE = new ModelLayerLocation(Erebus.prefix("altar_experience"), "main");
     public static final ModelLayerLocation BLENDER = new ModelLayerLocation(Erebus.prefix("blender"), "main");
     public static final ModelLayerLocation LIQUIFIER = new ModelLayerLocation(Erebus.prefix("liquifier"), "main");
+    public static final ModelLayerLocation GLOWING_JAR = new ModelLayerLocation(Erebus.prefix("glowing_jar"), "main");
     public static final ModelLayerLocation BAMBOO_BRIDGE = new ModelLayerLocation(Erebus.prefix("bamboo_bridge"), "main");
     public static final ModelLayerLocation BAMBOO_EXTENDER = new ModelLayerLocation(Erebus.prefix("bamboo_extender"), "main");
 
@@ -28,6 +29,7 @@ public class ModBlockEntityRendering {
         event.registerLayerDefinition(ALTAR_EXPERIENCE, ExperienceAltarModel::createBodyLayer);
         event.registerLayerDefinition(BLENDER, BlenderModel::createBodyLayer);
         event.registerLayerDefinition(LIQUIFIER, LiquifierModel::createBodyLayer);
+        event.registerLayerDefinition(GLOWING_JAR, GlowingJarModel::createBodyLayer);
         event.registerLayerDefinition(BAMBOO_BRIDGE, BambooBridgeModel::createBodyLayer);
         event.registerLayerDefinition(BAMBOO_EXTENDER, BambooExtenderModel::createBodyLayer);
 	}
@@ -43,6 +45,7 @@ public class ModBlockEntityRendering {
         event.registerBlockEntityRenderer(ModBlockEntities.BLENDER.get(), BlenderRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.FLUID_JAR.get(), FluidJarRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.LIQUIFIER.get(), LiquifierRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.GLOWING_JAR.get(), GlowingJarRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_BRIDGE.get(), BambooBridgeRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_EXTENDER.get(), BambooExtenderRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.PRESERVED_BLOCK.get(), PreservedBlockRenderer::new);

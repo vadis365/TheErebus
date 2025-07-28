@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "erebus:block/glowing_jar" }
+        "": { "model": "erebus:block/glowing_jar" }
     }
 }

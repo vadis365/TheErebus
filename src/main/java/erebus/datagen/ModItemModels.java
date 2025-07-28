@@ -281,7 +281,6 @@ public class ModItemModels extends ModItemModelProvider {
         block(AmberBlocks.AMBER_GLASS);
         block(AmberBlocks.PRESERVED_AMBER);
         block(AmberBlocks.PRESERVED_AMBER_GLASS);
-        block(AmberBlocks.GLOWING_JAR);
         block(AmberBlocks.FLUID_JAR);
         blockFlatWithItemTexture(AmberBlocks.AMBER_DOOR, "door_amber");
 

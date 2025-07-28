@@ -173,6 +173,13 @@ public class ModItemRendering {
         event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return new GlowingJarStackItemRenderer(null, null);
+            }
+        }, AmberBlocks.GLOWING_JAR.get().asItem());
+
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new BambooBridgeItemRenderer(null, null);
             }
         }, OtherBlocks.BAMBOO_BRIDGE.get().asItem());

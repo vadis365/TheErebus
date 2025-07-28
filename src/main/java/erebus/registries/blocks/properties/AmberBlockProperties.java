@@ -17,8 +17,10 @@ public class AmberBlockProperties {
     public static final Properties GLOWING_JAR_PROPERTIES = Properties.of()
             .strength(0.5F, 10.0F)
             .sound(SoundType.GLASS)
-            .lightLevel(value -> 1)
+            .lightLevel(value -> 15)
             .noOcclusion()
+            .noTerrainParticles()
+            .randomTicks()
             .isViewBlocking((state, getter, pos) -> false);
 
     public static final Properties FLUID_JAR_PROPERTIES = Properties.ofFullCopy(Blocks.GLASS)

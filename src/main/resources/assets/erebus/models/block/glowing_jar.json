@@ -1,3 +1,6 @@
 {
-    "parent": "minecraft:builtin/entity"
+    "parent": "builtin/entity",
+    "textures": {
+        "particle": "erebus:block/amber"
+    }
 }
