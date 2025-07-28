@@ -1,5 +1,7 @@
 package erebus.entity;
 
+import java.util.EnumSet;
+
 import erebus.client.particle.ClientParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -25,8 +27,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.EnumSet;
-
 public class Punchroom extends Monster {
 	public float squishAmount;
 	public float squishFactor;
@@ -35,14 +35,15 @@ public class Punchroom extends Monster {
 
 	public Punchroom(EntityType<? extends Punchroom> type, Level level) { 
 		super(type, level);
-		this.moveControl = new Punchroom.PunchroomMoveHelper(this);
+		this.moveControl = new PunchroomMoveHelper(this);
 	}
 
-	protected void initEntityAI() {
-		goalSelector.addGoal(0, new Punchroom.AIPunchroomFloat(this));
-		goalSelector.addGoal(1, new Punchroom.AIPunchroomAttack(this));
-		goalSelector.addGoal(2, new Punchroom.AIPunchroomFaceRandom(this));
-		goalSelector.addGoal(3, new Punchroom.AIPunchroomHop(this));
+	@Override
+	protected void registerGoals() {
+		goalSelector.addGoal(0, new AIPunchroomFloat(this));
+		goalSelector.addGoal(1, new AIPunchroomAttack(this));
+		goalSelector.addGoal(2, new AIPunchroomFaceRandom(this));
+		goalSelector.addGoal(3, new AIPunchroomHop(this));
 		targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
 	}
 
@@ -120,13 +121,13 @@ public class Punchroom extends Monster {
 
 	@Override
 	public void knockback(double strength, double xRatio, double zRatio) {
-		float knockback = 0.2F;
+		float knockback = 0.4F;
 		if (!level().isClientSide()) {
 				if (level().getDifficulty().ordinal() > Difficulty.PEACEFUL.ordinal())
 					if (level().getDifficulty() == Difficulty.NORMAL)
-						knockback = 0.4F;
-					else if (level().getDifficulty() == Difficulty.HARD)
 						knockback = 0.6F;
+					else if (level().getDifficulty() == Difficulty.HARD)
+						knockback = 0.8F;
 			}
 			super.knockback(knockback, xRatio, zRatio);
 	}
@@ -176,41 +177,29 @@ public class Punchroom extends Monster {
 
 	static class AIPunchroomAttack extends Goal {
 		private final Punchroom punchroom;
-		private int growTieredTimer;
+		private int growTiredTimer;
 
 		public AIPunchroomAttack(Punchroom punchroomIn) {
 			punchroom = punchroomIn;
-			//setMutexBits(2);
+			setFlags(EnumSet.of(Goal.Flag.LOOK));
 		}
 
 		@Override
 		public boolean canUse() {
 			LivingEntity entitylivingbase = punchroom.getTarget();
-			if (entitylivingbase == null)
-				return false;
-			else if (!entitylivingbase.isAlive())
-				return false;
-			else 
-				return !(entitylivingbase instanceof Player) || !((Player) entitylivingbase).getAbilities().invulnerable;
+			return entitylivingbase == null ? false : entitylivingbase.isAlive() && punchroom.canAttack(entitylivingbase);
 		}
 
 		@Override
 		public void start() {
-			growTieredTimer = 300;
+			growTiredTimer = 300;
 			super.start();
 		}
 
 		@Override
 		public boolean canContinueToUse() {
 			LivingEntity entitylivingbase = punchroom.getTarget();
-			if (entitylivingbase == null)
-				return false;
-			else if (!entitylivingbase.isAlive())
-				return false;
-			else if (entitylivingbase instanceof Player && ((Player) entitylivingbase).getAbilities().invulnerable)
-				return false;
-			else
-				return --growTieredTimer > 0;
+			return entitylivingbase == null ? false : entitylivingbase.isAlive() && punchroom.canAttack(entitylivingbase) && --growTiredTimer > 0;
 		}
 		
 		@Override
@@ -220,8 +209,12 @@ public class Punchroom extends Monster {
 
 		@Override
 		public void tick() {
-			punchroom.lookAt(punchroom.getTarget(), 10.0F, 10.0F);
-			((Punchroom.PunchroomMoveHelper) punchroom.getMoveControl()).setDirection(punchroom.yRotO, true);
+			if (punchroom.getTarget() != null)
+				punchroom.lookAt(punchroom.getTarget(), 10.0F, 10.0F);
+
+			if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
+				control.setDirection(punchroom.getYRot(), true);
+
 		}
 	}
 
@@ -232,7 +225,7 @@ public class Punchroom extends Monster {
 
 		public AIPunchroomFaceRandom(Punchroom punchroomIn) {
 			punchroom = punchroomIn;
-			//setMutexBits(2);
+			setFlags(EnumSet.of(Goal.Flag.LOOK));
 		}
 
 		@Override
@@ -241,17 +234,14 @@ public class Punchroom extends Monster {
 		}
 
 		@Override
-		public boolean requiresUpdateEveryTick() {
-			return true;
-		}
-
-		@Override
 		public void tick() {
 			if (--nextRandomizeTime <= 0) {
 				nextRandomizeTime = 40 + punchroom.getRandom().nextInt(60);
 				chosenDegrees = (float) punchroom.getRandom().nextInt(360);
 			}
-			((Punchroom.PunchroomMoveHelper) punchroom.getMoveControl()).setDirection(chosenDegrees, false);
+			
+			if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
+				control.setDirection(chosenDegrees, false);
 		}
 	}
 
@@ -278,7 +268,9 @@ public class Punchroom extends Monster {
 		public void tick() {
 			if (punchroom.getRandom().nextFloat() < 0.8F)
 				punchroom.getJumpControl().jump();
-			((Punchroom.PunchroomMoveHelper) punchroom.getMoveControl()).setSpeed(1.2D);
+			
+			if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
+				control.setSpeed(1.2D);
 		}
 	}
 
@@ -296,13 +288,9 @@ public class Punchroom extends Monster {
 		}
 
 		@Override
-		public boolean requiresUpdateEveryTick() {
-			return true;
-		}
-
-		@Override
 		public void tick() {
-			((Punchroom.PunchroomMoveHelper) punchroom.getMoveControl()).setSpeed(1.0D);
+			if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
+				control.setSpeed(1.0D);
 		}
 	}
 
