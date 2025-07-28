@@ -1,6 +1,7 @@
 package erebus.client.render.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+
 import erebus.Erebus;
 import erebus.client.render.entity.model.WaspModel;
 import erebus.entity.Wasp;
@@ -13,7 +14,8 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class WaspRenderer extends MobRenderer<Wasp, WaspModel<Wasp>> {
-	public static final ResourceLocation TEXTURE = Erebus.prefix("textures/entity/wasp.png");
+	public static final ResourceLocation WASP = Erebus.prefix("textures/entity/wasp.png");
+	private static final ResourceLocation HORNET = Erebus.prefix("textures/entity/hornet.png");
 
 	public WaspRenderer(EntityRendererProvider.Context context) {
         super(context, new WaspModel<>(context.bakeLayer(ModEntityRendering.WASP)), 0.5F);
@@ -21,13 +23,17 @@ public class WaspRenderer extends MobRenderer<Wasp, WaspModel<Wasp>> {
     }
 
 	@Override
-	protected void scale(Wasp entity, PoseStack matrix, float partialTickTime) {
-		matrix.translate(0F, 0F, -0.25F);
-		matrix.scale(0.5F, 0.5F, 0.5F);
+	protected void scale(Wasp wasp, PoseStack matrix, float partialTickTime) {
+		float size = 0.5F;
+		if (wasp.getIsBoss())
+			size = 1F;
+		shadowRadius = size;
+		matrix.translate(0F, 0F, -size * 0.5F);
+		matrix.scale(size, size, size);
 	}
 
 	@Override
-	public  ResourceLocation getTextureLocation(Wasp entity) {
-		return TEXTURE;
+	public  ResourceLocation getTextureLocation(Wasp wasp) {
+		return wasp.getIsBoss() ? HORNET : WASP;
 	}
 }

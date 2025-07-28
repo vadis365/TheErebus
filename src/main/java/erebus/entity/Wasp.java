@@ -1,20 +1,32 @@
 package erebus.entity;
 
+import javax.annotation.Nullable;
+
+import org.jetbrains.annotations.NotNull;
+
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
@@ -33,12 +45,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-import javax.annotation.Nullable;
-
 public class Wasp extends Monster {
+	private static final EntityDataAccessor<Boolean> IS_BOSS = SynchedEntityData.defineId(Wasp.class, EntityDataSerializers.BOOLEAN);
 	public int animationTicks, prevAnimationTicks;
 
 	public Wasp(EntityType<? extends Wasp> type, Level level) {
@@ -61,6 +73,89 @@ public class Wasp extends Monster {
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
+		builder.define(IS_BOSS, false);
+	}
+
+	@Override
+	public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> key) {
+		if (IS_BOSS.equals(key)) {
+			refreshDimensions();
+			setYRot(this.yHeadRot);
+			yBodyRot = this.yHeadRot;
+		}
+		super.onSyncedDataUpdated(key);
+	}
+
+	@Override
+	public void refreshDimensions() {
+		double x = this.getX();
+		double y = this.getY();
+		double z = this.getZ();
+		super.refreshDimensions();
+		this.setPos(x, y, z);
+	}
+
+	@Override
+	public @NotNull EntityDimensions getDefaultDimensions(@NotNull Pose pose) {
+		return getIsBoss() ? super.getDefaultDimensions(pose).scale(3F, 2.5F) : super.getDefaultDimensions(pose).scale(1F, 1F);
+	}
+
+	public Boolean getIsBoss() {
+		return entityData.get(IS_BOSS);
+	}
+
+	public void setIsBoss(boolean boss, boolean resetHealth) {
+		entityData.set(IS_BOSS, boss);
+		reapplyPosition();
+		refreshDimensions();
+
+		if (boss) {
+			getAttribute(Attributes.MAX_HEALTH).setBaseValue(60D);
+			getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(8D);
+			getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.9D);
+			getAttribute(Attributes.FLYING_SPEED).setBaseValue(1.25D);
+		}
+		else
+		{
+			getAttribute(Attributes.MAX_HEALTH).setBaseValue(25D);
+			getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(4D);
+			getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.75D);
+			getAttribute(Attributes.FLYING_SPEED).setBaseValue(1D);
+		}
+
+		if (resetHealth)
+			setHealth(getMaxHealth());
+
+		if (!hasCustomName())
+			if (random.nextBoolean())
+				if (random.nextBoolean())
+					setCustomName(Component.literal("Livid's Bane"));
+				else
+					setCustomName(Component.literal("Nano's Nemesis"));
+			else
+				setCustomName(Component.literal("Hornet of Despair"));
+	}
+
+	@Nullable
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
+		RandomSource randomsource = level.getRandom();
+		int isBoss = randomsource.nextInt(32);
+		if(isBoss == 0)
+			setIsBoss(true, true);
+		return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
+	}
+
+	@Override
+	  public void addAdditionalSaveData(CompoundTag nbt) {
+		super.addAdditionalSaveData(nbt);
+		nbt.putBoolean("mobType", getIsBoss());
+	}
+
+	@Override
+	public void readAdditionalSaveData(CompoundTag nbt) {
+		super.readAdditionalSaveData(nbt);
+		setIsBoss(nbt.getBoolean("mobType"), false);
 	}
 
 	@Override
@@ -69,15 +164,17 @@ public class Wasp extends Monster {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 15D)
-				.add(Attributes.FOLLOW_RANGE, 32D)
-				.add(Attributes.MOVEMENT_SPEED, 0.75D)
-				.add(Attributes.FLYING_SPEED, 1D)
-				.add(Attributes.ATTACK_DAMAGE, 4D);
+			return Monster.createMonsterAttributes()
+					.add(Attributes.MAX_HEALTH, 25D)
+					.add(Attributes.FOLLOW_RANGE, 32D)
+					.add(Attributes.MOVEMENT_SPEED, 0.75D)
+					.add(Attributes.FLYING_SPEED, 1D)
+					.add(Attributes.ATTACK_DAMAGE, 4D);
 	}
 
 	public static boolean canSpawnHere(EntityType<Wasp> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
-		return level.getDifficulty() != Difficulty.PEACEFUL;
+		float light = level.getLightLevelDependentMagicValue(pos);
+		return light >= 0F;
 	}
 
 	@Override
@@ -87,7 +184,7 @@ public class Wasp extends Monster {
 
 	@Override
 	public int getMaxSpawnClusterSize() {
-		return 3;
+		return 2;
 	}
 
 	@Override
@@ -116,9 +213,16 @@ public class Wasp extends Monster {
 	}
 
 /* TODO - make loot tables and stuff for mob drops
-	@Override
-	protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHitIn) {
+@Override
+	protected void dropFewItems(boolean recentlyHit, int looting) {
+		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
+		int amount;
+		for (amount = 0; amount < chance; ++amount)
+			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.WASP_STING.ordinal()), 0.0F);
+		if (getIsBoss() == 1)
+			entityDropItem(new ItemStack(ModItems.ANTI_VENOM_BOTTLE), 0.0F);
 	}
+
 */
 	public boolean isFlying() {
 		return !onGround();
@@ -159,6 +263,11 @@ public class Wasp extends Monster {
 	public boolean causeFallDamage(float distance, float damageMultiplier, DamageSource damageSource) {
 		return false;
 	}
+
+    @Override
+    public boolean isIgnoringBlockTriggers() {
+        return true;
+    }
 
 	@Override
 	public boolean canAttackType(EntityType<?> typeIn) {
