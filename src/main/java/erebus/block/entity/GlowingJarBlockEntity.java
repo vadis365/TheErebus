@@ -1,12 +1,14 @@
 package erebus.block.entity;
 
-import erebus.registries.blocks.ModBlockEntities;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
+import java.util.Random;
+
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
+import erebus.registries.blocks.ModBlockEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class GlowingJarBlockEntity extends BlockEntity {
 
@@ -20,15 +22,18 @@ public class GlowingJarBlockEntity extends BlockEntity {
         super(ModBlockEntities.GLOWING_JAR.get(), pos, state);
     }
 
-    public void tick() {
-        if (level != null && !level.isClientSide()) {
-            particleSpawnTick++;
-            if (particleSpawnTick <= 5) particleSize = particleSpawnTick / 25;
-            else particleSize = 2 - (particleSpawnTick - 50) / 25;
+	public static <T extends BlockEntity> void clientTick(Level world, BlockPos worldPosition, BlockState blockState, T t) {
+		if (t instanceof GlowingJarBlockEntity tile) {
+			tile.particleSpawnTick++;
+	            if (tile.particleSpawnTick <= 50)
+	            	tile.particleSize = tile.particleSpawnTick / 25;
+	            else
+	            	tile.particleSize = 2 - (tile.particleSpawnTick - 50) / 25;
 
-            if (particleSpawnTick > 100) particleSpawnTick = 0;
-        }
-    }
+	            if (tile.particleSpawnTick > 100)
+	            	tile.particleSpawnTick = 0;
+	        }
+	}
 
     public void setRotation(float xRot, float zRot) {
         this.xRot = xRot;
