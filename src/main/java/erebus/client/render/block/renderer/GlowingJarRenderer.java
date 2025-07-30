@@ -31,7 +31,7 @@ public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEn
 
     @Override
     public void render(@NotNull GlowingJarBlockEntity jar, float partialTick, @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
-		VertexConsumer vertex = buffer.getBuffer(RenderType.entity(WISP));
+		VertexConsumer vertex = buffer.getBuffer(RenderType.entityTranslucent(WISP));
 		poseStack.pushPose();
 		poseStack.translate(0.5F, 0F - jar.particleSize / 4, 0.5F);
 		poseStack.scale(jar.particleSize / 3 + 0.5F, jar.particleSize / 3 + 0.5F, jar.particleSize / 3 + 0.5F);
