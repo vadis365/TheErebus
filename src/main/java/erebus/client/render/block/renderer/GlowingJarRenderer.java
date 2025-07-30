@@ -2,6 +2,8 @@ package erebus.client.render.block.renderer;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
@@ -9,15 +11,12 @@ import erebus.Erebus;
 import erebus.block.entity.GlowingJarBlockEntity;
 import erebus.client.render.block.model.GlowingJarModel;
 import erebus.registries.client.ModBlockEntityRendering;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
 
 public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEntity> {
 
@@ -35,8 +34,10 @@ public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEn
 		poseStack.pushPose();
 		poseStack.translate(0.5F, 0F - jar.particleSize / 4, 0.5F);
 		poseStack.scale(jar.particleSize / 3 + 0.5F, jar.particleSize / 3 + 0.5F, jar.particleSize / 3 + 0.5F);
-		TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(WISP);
-		renderQuads(poseStack, vertex, 0.5F, -0.5F, 0.5F, 1, 0, 0, sprite);
+		RenderSystem.enableBlend();
+		RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		renderQuads(poseStack, vertex, 0.5F, -0.5F, 0.5F, 1, 0, 0);
+		RenderSystem.disableBlend();
 		poseStack.popPose();
 
 		VertexConsumer consumer = buffer.getBuffer(model.renderType(TEXTURE));
@@ -47,11 +48,11 @@ public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEn
 		poseStack.popPose();
     }
 
-    private void renderQuads(PoseStack poseStack, VertexConsumer consumer, float xMax, float xMin, float yMin, float height, float zMin, float zMax, TextureAtlasSprite sprite) {
-        float uMin = sprite.getU0();
-        float uMax = sprite.getU1();
-        float vMin = sprite.getV0();
-        float vMax = sprite.getV1();
+    private void renderQuads(PoseStack poseStack, VertexConsumer consumer, float xMax, float xMin, float yMin, float height, float zMin, float zMax) {
+        float uMin = 0;
+        float uMax = 1;
+        float vMin = 0;
+        float vMax = 1;
         float vHeight = vMax - vMin;
 
         // north
@@ -79,6 +80,6 @@ public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEn
                 .setUv1(0, 0)
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setUv2(240, 240)  // Full brightness
-                .setNormal(0, 1, 0);  // Default upward normal
+                .setNormal(1, 0, 0);  // Default upward normal
     }
 }
