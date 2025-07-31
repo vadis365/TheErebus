@@ -1,7 +1,10 @@
 package erebus.client.render.block.renderer.stack;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+
 import erebus.Erebus;
 import erebus.client.render.block.model.GlowingJarModel;
 import erebus.registries.client.ModBlockEntityRendering;
@@ -14,7 +17,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 public class GlowingJarStackItemRenderer extends BlockEntityWithoutLevelRenderer {
 
@@ -34,6 +36,7 @@ public class GlowingJarStackItemRenderer extends BlockEntityWithoutLevelRenderer
         pose.translate(0.5F, 0.75F, 0.5F);
         pose.scale(0.7125F, -1.069F, -0.7125F);
         model.renderToBuffer(pose, consumer, packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
+        model.renderGlassParts(pose, consumer, packedLight, OverlayTexture.NO_OVERLAY, 0x7FFFFFFF);
         pose.popPose();
     }
 }
