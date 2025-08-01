@@ -122,7 +122,7 @@ public class BeetleModel<T extends Beetle> extends HierarchicalModel<T> {
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float sin = Mth.sin(limbSwing) * 0.8F * limbSwingAmount;
+		float sin = Mth.sin(limbSwing) * 0.8F * limbSwingAmount * 0.8F;
 		float cos = Mth.cos(limbSwing) * 0.2F * limbSwingAmount;
 
 		LeftBackLeg.zRot = -cos;

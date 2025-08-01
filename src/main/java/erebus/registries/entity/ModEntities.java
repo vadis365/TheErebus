@@ -44,6 +44,9 @@ public class ModEntities {
 	public static final DeferredHolder<EntityType<?>, EntityType<BombardierBeetle>> BOMBARDIER_BEETLE = registerWithEgg("bombardier_beetle", EntityType.Builder.of(BombardierBeetle::new, MobCategory.MONSTER).sized(1.9F, 0.9F), 0x232B98, 0xF15800);
 	public static final DeferredHolder<EntityType<?>, EntityType<WorkerBee>> WORKER_BEE = registerWithEgg("worker_bee", EntityType.Builder.of(WorkerBee::new, MobCategory.CREATURE).sized(0.5F, 0.5F), 0xFAAE0E, 0x170F09);
 	public static final DeferredHolder<EntityType<?>, EntityType<BlackAnt>> BLACK_ANT = registerWithEgg("black_ant", EntityType.Builder.of(BlackAnt::new, MobCategory.CREATURE).sized(0.9F, 0.4F), 0x1E1E1E, 0xFF6600);
+	public static final DeferredHolder<EntityType<?>, EntityType<CropWeevil>> CROP_WEEVIL = registerWithEgg("crop_weevil", EntityType.Builder.of(CropWeevil::new, MobCategory.CREATURE).sized(1F, 0.5F), 0x190E07, 0xAD0202);
+	public static final DeferredHolder<EntityType<?>, EntityType<FungalWeevil>> FUNGAL_WEEVIL = registerWithEgg("fungal_weevil", EntityType.Builder.of(FungalWeevil::new, MobCategory.CREATURE).sized(1F, 0.5F), 0x1E2F66, 0xCBCB00);
+	
 	
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownBlockAsItem>> THROWN_BLOCK_AS_ITEM = registerNonMobEntity("thrown_block_as_item", EntityType.Builder.<ThrownBlockAsItem>of(ThrownBlockAsItem::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
     public static final DeferredHolder<EntityType<?>, EntityType<GooBall>> GOO_BALL = registerNonMobEntity("goo_ball", EntityType.Builder.<GooBall>of(GooBall::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
@@ -75,6 +78,8 @@ public class ModEntities {
 		event.register(WORKER_BEE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, WorkerBee::canSpawnHere, null);
 		event.register(BLACK_ANT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, BlackAnt::canSpawnHere, null);
 		event.register(PUNCHROOM.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Punchroom::canSpawnHere, null);
+		event.register(CROP_WEEVIL.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CropWeevil::canSpawnHereAlt, null);
+		event.register(FUNGAL_WEEVIL.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, FungalWeevil::canSpawnHereAlt, null);
 	}
 
 	public static void initializeAttributes(EntityAttributeCreationEvent event) {
@@ -101,6 +106,8 @@ public class ModEntities {
 		event.put(BOMBARDIER_BEETLE.get(), BombardierBeetle.createAttributes().build());
 		event.put(BLACK_ANT.get(), BlackAnt.createAttributes().build());
 		event.put(PUNCHROOM.get(), Punchroom.createAttributes().build());
+		event.put(CROP_WEEVIL.get(), CropWeevil.createAttributes().build());
+		event.put(FUNGAL_WEEVIL.get(), FungalWeevil.createAttributes().build());
 	}
 
 	public static DeferredRegister<EntityType<?>> getEntityTypes() {
