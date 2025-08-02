@@ -30,6 +30,9 @@ public class ModBiomeTags extends BiomeTagsProvider {
                 .add(ModBiomes.UNDERGROUND_JUNGLE.getResourceKey())
                 .add(ModBiomes.VOLCANIC_DESERT.getResourceKey());
 
+        tag(ModTags.IS_FUNGAL_FOREST)
+        .add(ModBiomes.FUNGAL_FOREST.getResourceKey());
+
         tag(ModTags.HAS_ANTLION_DUNGEON)
                 .add(ModBiomes.VOLCANIC_DESERT.getResourceKey());
         tag(ModTags.HAS_ANTLION_LAIR)

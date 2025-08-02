@@ -1,11 +1,17 @@
 package erebus.entity;
 
+import erebus.client.particle.ClientParticles;
+import erebus.registries.blocks.providers.PlantBlocks;
+import erebus.registries.data.ModTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class FungalWeevil extends Weevil {
 
@@ -17,27 +23,36 @@ public class FungalWeevil extends Weevil {
 		float light = level.getLightLevelDependentMagicValue(pos);
 		return light >= 0F;
 	}
-/*
+
 	@Override
-	public void onLivingUpdate() {
-		if (getEntityWorld().isRemote)
-			Erebus.PROXY.spawnCustomParticle("spores", getEntityWorld(), posX + (rand.nextDouble() - 0.5D) * width, posY + rand.nextDouble() * height - 0.25D, posZ + (rand.nextDouble() - 0.5D) * width, 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble(), 1.0D + rand.nextDouble());
-		if (!getEntityWorld().isRemote) {
-			if (rand.nextInt(200) == 0) {
-				if (getEntityWorld().isAirBlock(getPosition()) && getEntityWorld().getBiome(getPosition()) == ModBiomes.FUNGAL_FOREST && Blocks.BROWN_MUSHROOM.canPlaceBlockAt(getEntityWorld(), getPosition())) {
-					int mush = rand.nextInt(3);
-					if (mush == 0)
-						getEntityWorld().setBlockState(getPosition(), Blocks.BROWN_MUSHROOM.getDefaultState());
-					if (mush == 1)
-						getEntityWorld().setBlockState(getPosition(), Blocks.RED_MUSHROOM.getDefaultState());
-					else
-						getEntityWorld().setBlockState(getPosition(), BiomeDecoratorFungalForest.MUSHROOMS[rand.nextInt(BiomeDecoratorFungalForest.MUSHROOMS.length)].getDefaultState(), 3);
+	public void tick() {
+		if (level().isClientSide())
+			ClientParticles.spawnCustomParticle("spores", getX() + (random.nextDouble() - 0.5D) * getBbWidth(), getBoundingBox().minY + random.nextDouble() * getBbHeight() - 0.25D, getZ() + (random.nextDouble() - 0.5D) * getBbWidth(), 1.0D + random.nextDouble(), 1.0D + random.nextDouble(), 1.0D + random.nextDouble());
+		if (!level().isClientSide()) {
+			if (random.nextInt(200) == 0) {
+				BlockState state = level().getBlockState(blockPosition().below());
+				// TODO Add all biomes to Tags as individuals just in case we need them for anything else later
+				if (level().isEmptyBlock(blockPosition()) && level().getBiome(blockPosition()).is(ModTags.IS_FUNGAL_FOREST) && state.is(BlockTags.DIRT)) {
+					// TODO Replace this to pull one of the random mushrooms from its loot table drop and plant it as a block
+					level().setBlockAndUpdate(blockPosition(), getMushroomToPlace());
 				}
 			}
 		}
-		super.onLivingUpdate();
+		super.tick();
 	}
-	*/
+
+    public BlockState getMushroomToPlace() {
+    	switch (random.nextInt(7)) {
+    	case 0 : return Blocks.BROWN_MUSHROOM.defaultBlockState();
+    	case 1 : return Blocks.RED_MUSHROOM.defaultBlockState();
+    	case 2 : return PlantBlocks.DARK_CAPPED_MUSHROOM.get().defaultBlockState();
+    	case 3 : return PlantBlocks.DUTCH_CAP_MUSHROOM.get().defaultBlockState();
+    	case 4 : return PlantBlocks.GRANDMAS_SHOES_MUSHROOM.get().defaultBlockState();
+    	case 5 : return PlantBlocks.KAIZERS_FINGERS_MUSHROOM.get().defaultBlockState();
+    	case 6 : return PlantBlocks.SARCASTIC_CZECH_MUSHROOM.get().defaultBlockState();
+    	default : return Blocks.BROWN_MUSHROOM.defaultBlockState();
+    	}
+    }
 
 	/* TODO LOOT TABLES
 	@Override

@@ -23,6 +23,8 @@ public class ModTags {
     public static final TagKey<Block> BEE_POLLINATION_BLOCKS = TagKey.create(Registries.BLOCK, Erebus.prefix("bee_pollination_blocks"));
     public static final TagKey<Block> EREBUS_CARVER_REPLACEABLES = TagKey.create(Registries.BLOCK, Erebus.prefix("erebus_carver_replaceables"));
 
+    public static final TagKey<Biome> IS_FUNGAL_FOREST = TagKey.create(Registries.BIOME, Erebus.prefix("is_fungal_forest"));
+
     public static final TagKey<Biome> HAS_ANTLION_DUNGEON = TagKey.create(Registries.BIOME, Erebus.prefix("has_antlion_dungeon"));
     public static final TagKey<Biome> HAS_ANTLION_LAIR = TagKey.create(Registries.BIOME, Erebus.prefix("has_antlion_lair"));
     public static final TagKey<Biome> HAS_DRAGONFLY_DUNGEON = TagKey.create(Registries.BIOME, Erebus.prefix("has_dragonfly_dungeon"));
