@@ -7,6 +7,7 @@ import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -66,6 +67,10 @@ public class ModEntityLootTables extends EntityLootSubProvider {
 		this.noLoot(ModEntities.PUNCHROOM);
 		this.noLoot(ModEntities.CROP_WEEVIL);
 		this.noLoot(ModEntities.FUNGAL_WEEVIL);
+		this.add(ModEntities.BED_BUG.get(), LootTable.lootTable()
+				.withPool(LootPool.lootPool()
+						.add(LootItem.lootTableItem(Items.WHITE_WOOL).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+								.apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0, 1))))));
     }
     
 	public <T extends Entity> void noLoot(DeferredHolder<EntityType<?>, EntityType<T>> type) {

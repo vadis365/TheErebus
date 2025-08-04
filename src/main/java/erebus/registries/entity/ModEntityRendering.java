@@ -3,6 +3,7 @@ package erebus.registries.entity;
 import erebus.Erebus;
 import erebus.client.render.entity.model.AnimatedBlockModel;
 import erebus.client.render.entity.model.AntlionModel;
+import erebus.client.render.entity.model.BedBugModel;
 import erebus.client.render.entity.model.BeetleLarvaModel;
 import erebus.client.render.entity.model.BeetleModel;
 import erebus.client.render.entity.model.BlackAntModel;
@@ -25,6 +26,7 @@ import erebus.client.render.entity.model.WeevilModel;
 import erebus.client.render.entity.model.WorkerBeeModel;
 import erebus.client.render.entity.renderer.AnimatedBlockRenderer;
 import erebus.client.render.entity.renderer.AntlionRenderer;
+import erebus.client.render.entity.renderer.BedBugRenderer;
 import erebus.client.render.entity.renderer.BeetleLarvaRenderer;
 import erebus.client.render.entity.renderer.BeetleRenderer;
 import erebus.client.render.entity.renderer.BlackAntRenderer;
@@ -79,6 +81,7 @@ public class ModEntityRendering {
 	public static ModelLayerLocation PUNCHROOM = new ModelLayerLocation(Erebus.prefix("punchroom"), "main");
 	public static ModelLayerLocation CROP_WEEVIL = new ModelLayerLocation(Erebus.prefix("crop_weevil"), "main");
 	public static ModelLayerLocation FUNGAL_WEEVIL = new ModelLayerLocation(Erebus.prefix("fungal_weevil"), "main");
+	public static ModelLayerLocation BED_BUG = new ModelLayerLocation(Erebus.prefix("bed_bug"), "main");
 
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
     	event.registerLayerDefinition(WASP, WaspModel::createBodyLayer);
@@ -107,6 +110,7 @@ public class ModEntityRendering {
     	event.registerLayerDefinition(PUNCHROOM, PunchroomModel::createBodyLayer);
     	event.registerLayerDefinition(CROP_WEEVIL, WeevilModel::createBodyLayer);
     	event.registerLayerDefinition(FUNGAL_WEEVIL, WeevilModel::createBodyLayer);
+    	event.registerLayerDefinition(BED_BUG, BedBugModel::createBodyLayer);
     }
 
     public static void registerEntityRender(EntityRenderersEvent.RegisterRenderers event) {
@@ -135,6 +139,7 @@ public class ModEntityRendering {
     	event.registerEntityRenderer(ModEntities.PUNCHROOM.get(), PunchroomRenderer::new);
     	event.registerEntityRenderer(ModEntities.CROP_WEEVIL.get(), CropWeevilRenderer::new);
     	event.registerEntityRenderer(ModEntities.FUNGAL_WEEVIL.get(), FungalWeevilRenderer::new);
+    	event.registerEntityRenderer(ModEntities.BED_BUG.get(), BedBugRenderer::new);
 
     	event.registerEntityRenderer(ModEntities.THROWN_BLOCK_AS_ITEM.get(), context -> new ThrownItemRenderer<>(context, 3.0F, true));
     	event.registerEntityRenderer(ModEntities.GOO_BALL.get(), context -> new ThrownItemRenderer<>(context, 3.0F, true));

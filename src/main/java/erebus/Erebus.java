@@ -1,8 +1,18 @@
 package erebus;
 
+import java.util.Locale;
+
+import org.slf4j.Logger;
+
 import com.mojang.logging.LogUtils;
+
+import erebus.events.BedPlaceEventHandler;
 import erebus.network.data.DeathCompassData;
-import erebus.registries.*;
+import erebus.registries.ModCustomRecipes;
+import erebus.registries.ModFluids;
+import erebus.registries.ModItems;
+import erebus.registries.ModSounds;
+import erebus.registries.ModTabs;
 import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModBlockEntityRendering;
@@ -41,10 +51,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import org.slf4j.Logger;
-
-import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -53,6 +61,8 @@ public class Erebus {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public Erebus(IEventBus bus, ModContainer container, Dist dist) {
+    	
+    	IEventBus neoBus = NeoForge.EVENT_BUS;
         bus.addListener(this::commonSetup);
         DecorationFeatureConfigs.init();
         PlantFeatureConfigs.init();
@@ -90,6 +100,8 @@ public class Erebus {
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
         bus.addListener(ModNetwork::register);
+
+        neoBus.register(new BedPlaceEventHandler());
 
         NeoForgeMod.enableMilkFluid(); // TEMP - JUST FOR BEETLE MILKING TEST
 

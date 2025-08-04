@@ -1,12 +1,41 @@
 package erebus.registries.entity;
 
 import erebus.Erebus;
-import erebus.entity.*;
+import erebus.entity.AnimatedBlock;
+import erebus.entity.Antlion;
+import erebus.entity.BedBug;
+import erebus.entity.Beetle;
+import erebus.entity.BeetleLarva;
+import erebus.entity.BlackAnt;
+import erebus.entity.BlackWidow;
+import erebus.entity.BombardierBeetle;
+import erebus.entity.BombardierBeetleLarva;
+import erebus.entity.BotFly;
+import erebus.entity.BotFlyLarva;
+import erebus.entity.Centipede;
+import erebus.entity.CropWeevil;
+import erebus.entity.Dragonfly;
+import erebus.entity.Fly;
+import erebus.entity.FungalWeevil;
+import erebus.entity.Grasshopper;
+import erebus.entity.LavaWebSpider;
+import erebus.entity.Locust;
+import erebus.entity.MoneySpider;
+import erebus.entity.Moth;
+import erebus.entity.Punchroom;
+import erebus.entity.Scytodes;
+import erebus.entity.VelvetWorm;
+import erebus.entity.Wasp;
+import erebus.entity.WorkerBee;
 import erebus.entity.projectile.AmberStar;
 import erebus.entity.projectile.GooBall;
 import erebus.entity.projectile.ThrownBlockAsItem;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
@@ -46,8 +75,8 @@ public class ModEntities {
 	public static final DeferredHolder<EntityType<?>, EntityType<BlackAnt>> BLACK_ANT = registerWithEgg("black_ant", EntityType.Builder.of(BlackAnt::new, MobCategory.CREATURE).sized(0.9F, 0.4F), 0x1E1E1E, 0xFF6600);
 	public static final DeferredHolder<EntityType<?>, EntityType<CropWeevil>> CROP_WEEVIL = registerWithEgg("crop_weevil", EntityType.Builder.of(CropWeevil::new, MobCategory.CREATURE).sized(1F, 0.5F), 0x190E07, 0xAD0202);
 	public static final DeferredHolder<EntityType<?>, EntityType<FungalWeevil>> FUNGAL_WEEVIL = registerWithEgg("fungal_weevil", EntityType.Builder.of(FungalWeevil::new, MobCategory.CREATURE).sized(1F, 0.5F), 0x1E2F66, 0xCBCB00);
-	
-	
+	public static final DeferredHolder<EntityType<?>, EntityType<BedBug>> BED_BUG = registerNoEgg("bed_bug", EntityType.Builder.of(BedBug::new, MobCategory.MONSTER).sized(0.75F, 0.6F));
+
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownBlockAsItem>> THROWN_BLOCK_AS_ITEM = registerNonMobEntity("thrown_block_as_item", EntityType.Builder.<ThrownBlockAsItem>of(ThrownBlockAsItem::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
     public static final DeferredHolder<EntityType<?>, EntityType<GooBall>> GOO_BALL = registerNonMobEntity("goo_ball", EntityType.Builder.<GooBall>of(GooBall::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
 	public static final DeferredHolder<EntityType<?>, EntityType<AmberStar>> AMBER_STAR = registerNonMobEntity("amber_star", EntityType.Builder.<AmberStar>of(AmberStar::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
@@ -108,6 +137,7 @@ public class ModEntities {
 		event.put(PUNCHROOM.get(), Punchroom.createAttributes().build());
 		event.put(CROP_WEEVIL.get(), CropWeevil.createAttributes().build());
 		event.put(FUNGAL_WEEVIL.get(), FungalWeevil.createAttributes().build());
+		event.put(BED_BUG.get(), BedBug.createAttributes().build());
 	}
 
 	public static DeferredRegister<EntityType<?>> getEntityTypes() {
