@@ -12,6 +12,7 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
@@ -108,7 +109,7 @@ public class BedBugModel<T extends BedBug> extends HierarchicalModel<T> {
 
 		PartDefinition LFL2 = LeftFrontLeg.addOrReplaceChild("LFL2", CubeListBuilder.create().texOffs(0, 99).addBox(3.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.3491F));
 
-		PartDefinition LFL3 = LeftFrontLeg.addOrReplaceChild("LFL3", CubeListBuilder.create().texOffs(1, 93).addBox(1.5F, 4.5F, -0.5F, 2.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.6981F));
+		PartDefinition LFL3 = LeftFrontLeg.addOrReplaceChild("LFL3", CubeListBuilder.create().texOffs(1, 93).mirror().addBox(1.5F, 4.5F, -0.5F, 2.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.6981F));
 
 		PartDefinition LFL4 = LeftFrontLeg.addOrReplaceChild("LFL4", CubeListBuilder.create().texOffs(0, 112).addBox(0.5F, 8.0F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.8727F));
 
@@ -118,7 +119,7 @@ public class BedBugModel<T extends BedBug> extends HierarchicalModel<T> {
 
 		PartDefinition LML2 = LeftMidLeg.addOrReplaceChild("LML2", CubeListBuilder.create().texOffs(0, 99).addBox(3.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.3491F));
 
-		PartDefinition LML3 = LeftMidLeg.addOrReplaceChild("LML3", CubeListBuilder.create().texOffs(1, 93).addBox(1.5F, 4.5F, -0.5F, 2.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.6981F));
+		PartDefinition LML3 = LeftMidLeg.addOrReplaceChild("LML3", CubeListBuilder.create().texOffs(1, 93).mirror().addBox(1.5F, 4.5F, -0.5F, 2.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.6981F));
 
 		PartDefinition LML4 = LeftMidLeg.addOrReplaceChild("LML4", CubeListBuilder.create().texOffs(0, 112).addBox(0.5F, 8.0F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.8727F));
 
@@ -128,25 +129,25 @@ public class BedBugModel<T extends BedBug> extends HierarchicalModel<T> {
 
 		PartDefinition LBL2 = LeftBackLeg.addOrReplaceChild("LBL2", CubeListBuilder.create().texOffs(0, 99).addBox(5.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.3491F));
 
-		PartDefinition LBL3 = LeftBackLeg.addOrReplaceChild("LBL3", CubeListBuilder.create().texOffs(1, 93).addBox(3.5F, 5.5F, -0.5F, 2.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.6981F));
+		PartDefinition LBL3 = LeftBackLeg.addOrReplaceChild("LBL3", CubeListBuilder.create().texOffs(1, 93).mirror().addBox(3.5F, 5.5F, -0.5F, 2.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.6981F));
 
 		PartDefinition LBL4 = LeftBackLeg.addOrReplaceChild("LBL4", CubeListBuilder.create().texOffs(0, 112).addBox(2.5F, 10.0F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.8727F));
 
 		PartDefinition RightFrontLeg = partdefinition.addOrReplaceChild("RightFrontLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(-6.0F, 18.0F, -9.0F, 0.0F, -0.5236F, 0.0F));
 
-		PartDefinition RFL1 = RightFrontLeg.addOrReplaceChild("RFL1", CubeListBuilder.create().texOffs(0, 107).addBox(-4.0F, -1.0F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
+		PartDefinition RFL1 = RightFrontLeg.addOrReplaceChild("RFL1", CubeListBuilder.create().texOffs(0, 107).mirror().addBox(-4.0F, -1.0F, -1.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.001F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
 
-		PartDefinition RFL2 = RightFrontLeg.addOrReplaceChild("RFL2", CubeListBuilder.create().texOffs(0, 99).addBox(-5.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
+		PartDefinition RFL2 = RightFrontLeg.addOrReplaceChild("RFL2", CubeListBuilder.create().texOffs(0, 99).mirror().addBox(-5.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
 
 		PartDefinition RFL3 = RightFrontLeg.addOrReplaceChild("RFL3", CubeListBuilder.create().texOffs(1, 93).addBox(-3.5F, 4.5F, -0.5F, 2.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.6981F));
 
-		PartDefinition RFL4 = RightFrontLeg.addOrReplaceChild("RFL4", CubeListBuilder.create().texOffs(0, 112).addBox(-1.5F, 8.0F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.8727F));
+		PartDefinition RFL4 = RightFrontLeg.addOrReplaceChild("RFL4", CubeListBuilder.create().texOffs(0, 112).mirror().addBox(-1.5F, 8.0F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(-0.001F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.8727F));
 
 		PartDefinition RightMidLeg = partdefinition.addOrReplaceChild("RightMidLeg", CubeListBuilder.create(), PartPose.offset(-7.0F, 18.0F, -6.0F));
 
-		PartDefinition RML1 = RightMidLeg.addOrReplaceChild("RML1", CubeListBuilder.create().texOffs(48, 121).addBox(-4.0F, -1.0F, -1.0F, 5.0F, 2.0F, 2.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
+		PartDefinition RML1 = RightMidLeg.addOrReplaceChild("RML1", CubeListBuilder.create().texOffs(48, 121).mirror().addBox(-4.0F, -1.0F, -1.0F, 5.0F, 2.0F, 2.0F, new CubeDeformation(-0.001F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
 
-		PartDefinition RML2 = RightMidLeg.addOrReplaceChild("RML2", CubeListBuilder.create().texOffs(0, 99).addBox(-5.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
+		PartDefinition RML2 = RightMidLeg.addOrReplaceChild("RML2", CubeListBuilder.create().texOffs(0, 99).mirror().addBox(-5.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
 
 		PartDefinition RML3 = RightMidLeg.addOrReplaceChild("RML3", CubeListBuilder.create().texOffs(1, 93).addBox(-3.5F, 4.5F, -0.5F, 2.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.6981F));
 
@@ -154,20 +155,34 @@ public class BedBugModel<T extends BedBug> extends HierarchicalModel<T> {
 
 		PartDefinition RightBackLeg = partdefinition.addOrReplaceChild("RightBackLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(-6.0F, 18.0F, -3.0F, 0.0F, 0.4363F, 0.0F));
 
-		PartDefinition RBL1 = RightBackLeg.addOrReplaceChild("RBL1", CubeListBuilder.create().texOffs(0, 124).addBox(-6.0F, -1.0F, -1.0F, 7.0F, 2.0F, 2.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
+		PartDefinition RBL1 = RightBackLeg.addOrReplaceChild("RBL1", CubeListBuilder.create().texOffs(0, 124).mirror().addBox(-6.0F, -1.0F, -1.0F, 7.0F, 2.0F, 2.0F, new CubeDeformation(-0.001F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
 
-		PartDefinition RBL2 = RightBackLeg.addOrReplaceChild("RBL2", CubeListBuilder.create().texOffs(0, 99).addBox(-7.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
+		PartDefinition RBL2 = RightBackLeg.addOrReplaceChild("RBL2", CubeListBuilder.create().texOffs(0, 99).mirror().addBox(-7.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
 
 		PartDefinition RBL3 = RightBackLeg.addOrReplaceChild("RBL3", CubeListBuilder.create().texOffs(1, 93).addBox(-5.5F, 5.5F, -0.5F, 2.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.6981F));
 
 		PartDefinition RBL4 = RightBackLeg.addOrReplaceChild("RBL4", CubeListBuilder.create().texOffs(0, 112).addBox(-3.5F, 10.0F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.8727F));
 
 		return LayerDefinition.create(meshdefinition, 64, 128);
+
 	}
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+		float sin = Mth.sin(limbSwing) * 0.8F * limbSwingAmount;
+		float cos = Mth.cos(limbSwing) * 0.4F * limbSwingAmount;
+		LeftBackLeg.zRot = -cos;
+		LeftMidLeg.zRot = cos;
+		LeftFrontLeg.zRot = -cos;
+		RightBackLeg.zRot = -cos;
+		RightMidLeg.zRot = cos;
+		RightFrontLeg.zRot = -cos;
+		LeftBackLeg.yRot = sin -0.4363F;
+		LeftMidLeg.yRot = -sin;
+		LeftFrontLeg.yRot = sin + 0.5236F;
+		RightBackLeg.yRot = sin + 0.4363F;
+		RightMidLeg.yRot = -sin;
+		RightFrontLeg.yRot = sin -0.5236F;
 	}
 
 	@Override
