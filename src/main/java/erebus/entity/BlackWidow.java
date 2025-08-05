@@ -159,17 +159,6 @@ public class BlackWidow extends Monster {
 		playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
 	}
 
-	/*
-	 * @Override protected Item getDropItem() { return Items.STRING; }
-	 * 
-	 * @Override protected void dropFewItems(boolean attackedByPlayer, int looting)
-	 * { super.dropFewItems(attackedByPlayer, looting); if (attackedByPlayer &&
-	 * (rand.nextInt(3) == 0 || rand.nextInt(1 + looting) > 0))
-	 * dropItem(Items.SPIDER_EYE, 1); entityDropItem(new
-	 * ItemStack(ModItems.MATERIALS, 1,
-	 * EnumErebusMaterialsType.POISON_GLAND.ordinal()), 0.0F); }
-	 */
-
 	@Override
 	public boolean doHurtTarget(@NotNull Entity entity) {
 		if (super.doHurtTarget(entity)) {
