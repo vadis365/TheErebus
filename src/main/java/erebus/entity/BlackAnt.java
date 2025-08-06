@@ -113,12 +113,12 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return ModSounds.FIRE_ANT_SOUND.get();
+		return ModSounds.ANT_SOUND.get();
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return ModSounds.FIRE_ANT_HURT.get();
+		return ModSounds.ANT_HURT.get();
 	}
 
 	@Override

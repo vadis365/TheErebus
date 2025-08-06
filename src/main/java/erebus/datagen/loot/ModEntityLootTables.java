@@ -1,5 +1,10 @@
 package erebus.datagen.loot;
 
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+
+import org.jetbrains.annotations.NotNull;
+
 import erebus.datagen.loot.predicates.DragonflyPredicate;
 import erebus.datagen.loot.predicates.WaspPredicate;
 import erebus.registries.ModItems;
@@ -28,10 +33,6 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public class ModEntityLootTables extends EntityLootSubProvider {
 
@@ -365,6 +366,8 @@ public class ModEntityLootTables extends EntityLootSubProvider {
                 ModEntities.BED_BUG.get(),
                 createSimpleLootTable(Items.WHITE_WOOL, UniformGenerator.between(1, 2))
         );
+
+		add(ModEntities.HONEY_POT_ANT.get(), createSimpleLootTable(ModItems.NECTAR, ConstantValue.exactly(1))); //temp should dropped tamed amount if tamed
 
         // Entities with no loot
         noLoot(ModEntities.BLACK_ANT);

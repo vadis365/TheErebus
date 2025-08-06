@@ -28,8 +28,8 @@ public class ModSounds {
 	public static final DeferredHolder<SoundEvent, SoundEvent> CENTIPEDE_HURT = register("centipede_hurt");
 	public static final DeferredHolder<SoundEvent, SoundEvent> CENTIPEDE_SOUND = register("centipede_sound");
 	public static final DeferredHolder<SoundEvent, SoundEvent> CENTIPEDE_WALK = register("centipede_walk");
-	public static final DeferredHolder<SoundEvent, SoundEvent> FIRE_ANT_HURT = register("fire_ant_hurt");
-	public static final DeferredHolder<SoundEvent, SoundEvent> FIRE_ANT_SOUND = register("fire_ant_sound");
+	public static final DeferredHolder<SoundEvent, SoundEvent> ANT_HURT = register("ant_hurt");
+	public static final DeferredHolder<SoundEvent, SoundEvent> ANT_SOUND = register("ant_sound");
 	public static final DeferredHolder<SoundEvent, SoundEvent> FLY_HURT = register("fly_hurt");
 	public static final DeferredHolder<SoundEvent, SoundEvent> FLY_SOUND = register("fly_sound");
 	public static final DeferredHolder<SoundEvent, SoundEvent> GLOW_WORM_HURT = register("glow_worm_hurt");

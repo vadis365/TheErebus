@@ -101,16 +101,16 @@
             "erebus:centipede_walk"
         ]
     },
-    "fire_ant_hurt": {
+    "ant_hurt": {
         "category": "hostile",
         "sounds": [
-            "erebus:fire_ant_hurt"
+            "erebus:ant_hurt"
         ]
     },
-    "fire_ant_sound": {
+    "ant_sound": {
         "category": "hostile",
         "sounds": [
-            "erebus:fire_ant_sound"
+            "erebus:ant_sound"
         ]
     },
     "fly_hurt": {
