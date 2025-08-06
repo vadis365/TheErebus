@@ -23,7 +23,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -41,9 +40,10 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class HoneyPotAnt extends TamableAnimal {
+public class HoneyPotAnt extends Animal {
 
 	private static final EntityDataAccessor<Float> HONEY_BELLY = SynchedEntityData.defineId(HoneyPotAnt.class, EntityDataSerializers.FLOAT);
+	private static final EntityDataAccessor<Boolean> IS_TAME = SynchedEntityData.defineId(HoneyPotAnt.class, EntityDataSerializers.BOOLEAN);
 
 	public HoneyPotAnt(EntityType<? extends HoneyPotAnt> type, Level level) {
 		super(type, level);
@@ -53,6 +53,7 @@ public class HoneyPotAnt extends TamableAnimal {
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(HONEY_BELLY, 0F);
+		builder.define(IS_TAME, false);
 	}
 
 	@Override
@@ -89,7 +90,7 @@ public class HoneyPotAnt extends TamableAnimal {
 
 	@Override
 	public boolean isPersistenceRequired() {
-        return !isTame();
+        return isTamedAnt();
 	}
 
 	@Override
@@ -113,16 +114,11 @@ public class HoneyPotAnt extends TamableAnimal {
     }
 
 	@Override
-	public void tick() {
-		super.tick();
-	}
-
-	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 
 		if (!stack.isEmpty() && stack.is(Items.SUGAR)) {
-			if (isTame() && getHoneyBelly() < 0.8F) {
+			if (isTamedAnt() && getHoneyBelly() < 0.8F) {
 				if (!level().isClientSide()) {
 					setHoneyBelly(getHoneyBelly() + 0.1F);
 					if (!player.isCreative())
@@ -131,7 +127,7 @@ public class HoneyPotAnt extends TamableAnimal {
 				return InteractionResult.SUCCESS;
 			}
 		} else if (!stack.isEmpty() && stack.is(ModItems.NECTAR_COLLECTOR.get())) {
-			if (getHoneyBelly() > 0 && isTame()) {
+			if (getHoneyBelly() > 0 && isTamedAnt()) {
 				if (!level().isClientSide()) {
 					spawnAtLocation(new ItemStack(ModItems.NECTAR.get(), (int) (getHoneyBelly() * 10)));
 					stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
@@ -141,8 +137,8 @@ public class HoneyPotAnt extends TamableAnimal {
 			}
 		} else if (!stack.isEmpty() && stack.is(ModItems.ANT_TAMING_AMULET.get())) {
 			if (!level().isClientSide()) {
-				if (!isTame())
-					setTame(true, false);
+				if (!isTamedAnt())
+					setTamedAnt(true);
 			}
 			level().broadcastEntityEvent(this, (byte) 18);
 			player.swing(hand);
@@ -150,7 +146,6 @@ public class HoneyPotAnt extends TamableAnimal {
 		}
 		return super.mobInteract(player, hand);
 	}
-
 
 /* TODO LOOT TABLES
 	@Override
@@ -169,14 +164,10 @@ public class HoneyPotAnt extends TamableAnimal {
 	}
 
 	@Override
-	public void spawnChildFromBreeding(ServerLevel level, Animal mate) {
-	}
-
-	@Override
 	public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
 		return null;
 	}
-	
+
 	@Override
 	public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> key) {
 		if (HONEY_BELLY.equals(key)) {
@@ -211,16 +202,26 @@ public class HoneyPotAnt extends TamableAnimal {
 		return entityData.get(HONEY_BELLY);
 	}
 
+    public boolean isTamedAnt() {
+        return entityData.get(IS_TAME);
+    }
+
+    public void setTamedAnt(boolean tame) {
+		entityData.set(IS_TAME, tame);
+    }
+
 	@Override
 	  public void addAdditionalSaveData(CompoundTag nbt) {
 		super.addAdditionalSaveData(nbt);
 		nbt.putFloat("size", getHoneyBelly());
+		nbt.putBoolean("is_tame", isTamedAnt());
 	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
 		setHoneyBelly(nbt.getFloat("size"));
+		setTamedAnt(nbt.getBoolean("is_tame"));
 	}
 
 }

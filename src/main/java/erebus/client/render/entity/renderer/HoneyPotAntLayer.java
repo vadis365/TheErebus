@@ -30,7 +30,7 @@ public class HoneyPotAntLayer extends RenderLayer<HoneyPotAnt, AntModel<HoneyPot
 		antModel.setupAnim(ant, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		stack.pushPose();
 		stack.scale(1F + ant.getHoneyBelly(), 1F + ant.getHoneyBelly(), 1F + ant.getHoneyBelly());
-		stack.translate(0F, -ant.getHoneyBelly() * 0.5F, -ant.getHoneyBelly() * 0.36F);
+		stack.translate(0F, 0F -ant.getHoneyBelly() * 0.625F, 0F - 0.0625F * ant.getHoneyBelly());
 		antModel.renderAbdomen(stack, buffer.getBuffer(RenderType.entityCutout(getTextureLocation(ant))), packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
 	    stack.popPose();
 	}

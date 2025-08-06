@@ -2,6 +2,7 @@ package erebus.client.render.entity.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
+import erebus.entity.HoneyPotAnt;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -186,6 +187,14 @@ public class AntModel<T extends Entity> extends HierarchicalModel<T> {
 		RightBackLeg.yRot = 0.6981F + sin;
 		RightMidLeg.yRot = 0F - sin;
 		RightFrontLeg.yRot = -0.6981F + sin;
+
+		if (entity instanceof HoneyPotAnt ant) {
+			Ab.xRot = ant.getHoneyBelly() * 0.25F;
+			AbF.xRot = ant.getHoneyBelly() * 0.25F;
+			AbSide.xRot = ant.getHoneyBelly() * 0.25F;
+			AbTop.xRot = ant.getHoneyBelly() * 0.25F;
+			AbBack.xRot = ant.getHoneyBelly() * 0.25F;
+		}
 	}
 
 	@Override
