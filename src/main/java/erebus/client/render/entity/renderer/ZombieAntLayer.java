@@ -8,9 +8,9 @@ import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -28,8 +28,9 @@ public class ZombieAntLayer extends RenderLayer<ZombieAnt, AntModel<ZombieAnt>> 
    	public void render(PoseStack stack, MultiBufferSource buffer, int packedLight, ZombieAnt ant, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
     	antModel.prepareMobModel(ant, limbSwing, limbSwingAmount, partialTicks);
 		antModel.setupAnim(ant, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		int overlay = LivingEntityRenderer.getOverlayCoords(ant, 0F);
 		stack.pushPose();
-		antModel.renderAbdomen(stack, buffer.getBuffer(RenderType.entityCutout(getTextureLocation(ant))), packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
+		antModel.renderAbdomen(stack, buffer.getBuffer(RenderType.entityCutout(getTextureLocation(ant))), packedLight, overlay, 0xFFFFFFFF);
 	    stack.popPose();
 	}
 }
