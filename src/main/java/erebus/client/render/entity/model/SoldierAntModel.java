@@ -172,7 +172,7 @@ public class SoldierAntModel<T extends Entity> extends HierarchicalModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		HeadMain.yRot = netHeadYaw / (180F / (float) Math.PI);
-		HeadMain.xRot = headPitch / (180F / (float) Math.PI) - 1F;
+		HeadMain.xRot = headPitch / (180F / (float) Math.PI);
 
 		float sin = Mth.sin(limbSwing) * 0.8F * limbSwingAmount;
 		float cos = Mth.cos(limbSwing) * 0.2F * limbSwingAmount;

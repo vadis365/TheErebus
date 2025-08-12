@@ -690,7 +690,7 @@ public class ModLang extends ModLangProvider {
         addEntity(ModEntities.BED_BUG, "Bed Bug");
         addEntity(ModEntities.HONEY_POT_ANT, "Honey Pot Ant");
         addEntity(ModEntities.ZOMBIE_ANT, "Zombie Ant");
-        addEntity(ModEntities.ZOMBIE_ANT_SOLDIER, "Zome Ant Soldier");
+        addEntity(ModEntities.ZOMBIE_ANT_SOLDIER, "Zombie Ant Soldier");
 
         addEntityNoEgg(ModEntities.THROWN_BLOCK_AS_ITEM, "Mob Projectile"); // needs a better name
         addEntityNoEgg(ModEntities.GOO_BALL, "Goo Ball");
