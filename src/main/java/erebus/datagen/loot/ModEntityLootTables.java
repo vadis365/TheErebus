@@ -369,9 +369,11 @@ public class ModEntityLootTables extends EntityLootSubProvider {
 
 		add(ModEntities.HONEY_POT_ANT.get(), createSimpleLootTable(ModItems.NECTAR, ConstantValue.exactly(1))); //temp should dropped tamed amount if tamed
 
-        // Entities with no loot
+        // Entities with no loot ATM
         noLoot(ModEntities.BLACK_ANT);
         noLoot(ModEntities.BEETLE);
+        noLoot(ModEntities.ZOMBIE_ANT);
+        noLoot(ModEntities.ZOMBIE_ANT_SOLDIER);
     }
     
     /**

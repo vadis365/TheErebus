@@ -21,6 +21,7 @@ import erebus.client.render.entity.model.LocustModel;
 import erebus.client.render.entity.model.MothModel;
 import erebus.client.render.entity.model.PunchroomModel;
 import erebus.client.render.entity.model.ScytodesModel;
+import erebus.client.render.entity.model.SoldierAntModel;
 import erebus.client.render.entity.model.VelvetWormModel;
 import erebus.client.render.entity.model.WaspModel;
 import erebus.client.render.entity.model.WeevilModel;
@@ -51,6 +52,8 @@ import erebus.client.render.entity.renderer.ScytodesRenderer;
 import erebus.client.render.entity.renderer.VelvetWormRenderer;
 import erebus.client.render.entity.renderer.WaspRenderer;
 import erebus.client.render.entity.renderer.WorkerBeeRenderer;
+import erebus.client.render.entity.renderer.ZombieAntRenderer;
+import erebus.client.render.entity.renderer.ZombieAntSoldierRenderer;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -85,6 +88,8 @@ public class ModEntityRendering {
 	public static ModelLayerLocation FUNGAL_WEEVIL = new ModelLayerLocation(Erebus.prefix("fungal_weevil"), "main");
 	public static ModelLayerLocation BED_BUG = new ModelLayerLocation(Erebus.prefix("bed_bug"), "main");
 	public static ModelLayerLocation HONEY_POT_ANT = new ModelLayerLocation(Erebus.prefix("honey_pot_ant"), "main");
+	public static ModelLayerLocation ZOMBIE_ANT = new ModelLayerLocation(Erebus.prefix("zombie_ant"), "main");
+	public static ModelLayerLocation ZOMBIE_ANT_SOLDIER = new ModelLayerLocation(Erebus.prefix("zombie_ant_soldier"), "main");
 
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
     	event.registerLayerDefinition(WASP, WaspModel::createBodyLayer);
@@ -115,6 +120,8 @@ public class ModEntityRendering {
     	event.registerLayerDefinition(FUNGAL_WEEVIL, WeevilModel::createBodyLayer);
     	event.registerLayerDefinition(BED_BUG, BedBugModel::createBodyLayer);
     	event.registerLayerDefinition(HONEY_POT_ANT, AntModel::createBodyLayer);
+    	event.registerLayerDefinition(ZOMBIE_ANT, AntModel::createBodyLayer);
+    	event.registerLayerDefinition(ZOMBIE_ANT_SOLDIER, SoldierAntModel::createBodyLayer);
     }
 
     public static void registerEntityRender(EntityRenderersEvent.RegisterRenderers event) {
@@ -145,6 +152,8 @@ public class ModEntityRendering {
     	event.registerEntityRenderer(ModEntities.FUNGAL_WEEVIL.get(), FungalWeevilRenderer::new);
     	event.registerEntityRenderer(ModEntities.BED_BUG.get(), BedBugRenderer::new);
     	event.registerEntityRenderer(ModEntities.HONEY_POT_ANT.get(), HoneyPotAntRenderer::new);
+    	event.registerEntityRenderer(ModEntities.ZOMBIE_ANT.get(), ZombieAntRenderer::new);
+    	event.registerEntityRenderer(ModEntities.ZOMBIE_ANT_SOLDIER.get(), ZombieAntSoldierRenderer::new);
 
     	event.registerEntityRenderer(ModEntities.THROWN_BLOCK_AS_ITEM.get(), context -> new ThrownItemRenderer<>(context, 3.0F, true));
     	event.registerEntityRenderer(ModEntities.GOO_BALL.get(), context -> new ThrownItemRenderer<>(context, 3.0F, true));

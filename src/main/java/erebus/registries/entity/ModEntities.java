@@ -28,6 +28,8 @@ import erebus.entity.Scytodes;
 import erebus.entity.VelvetWorm;
 import erebus.entity.Wasp;
 import erebus.entity.WorkerBee;
+import erebus.entity.ZombieAnt;
+import erebus.entity.ZombieAntSoldier;
 import erebus.entity.projectile.AmberStar;
 import erebus.entity.projectile.GooBall;
 import erebus.entity.projectile.ThrownBlockAsItem;
@@ -78,7 +80,10 @@ public class ModEntities {
 	public static final DeferredHolder<EntityType<?>, EntityType<FungalWeevil>> FUNGAL_WEEVIL = registerWithEgg("fungal_weevil", EntityType.Builder.of(FungalWeevil::new, MobCategory.CREATURE).sized(1F, 0.5F), 0x1E2F66, 0xCBCB00);
 	public static final DeferredHolder<EntityType<?>, EntityType<BedBug>> BED_BUG = registerNoEgg("bed_bug", EntityType.Builder.of(BedBug::new, MobCategory.MONSTER).sized(0.75F, 0.6F));
 	public static final DeferredHolder<EntityType<?>, EntityType<HoneyPotAnt>> HONEY_POT_ANT = registerWithEgg("honey_pot_ant", EntityType.Builder.of(HoneyPotAnt::new, MobCategory.CREATURE).sized(0.9F, 0.4F), 0x310000, 0xC1902E);
+	public static final DeferredHolder<EntityType<?>, EntityType<ZombieAnt>> ZOMBIE_ANT = registerWithEgg("zombie_ant", EntityType.Builder.of(ZombieAnt::new, MobCategory.MONSTER).sized(1.5F, 0.75F), 0x19370E, 0x00A300);
+	public static final DeferredHolder<EntityType<?>, EntityType<ZombieAntSoldier>> ZOMBIE_ANT_SOLDIER = registerWithEgg("zombie_ant_soldier", EntityType.Builder.of(ZombieAntSoldier::new, MobCategory.MONSTER).sized(1.75F, 0.75F), 0x19370E, 0xC20000);
 
+	
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownBlockAsItem>> THROWN_BLOCK_AS_ITEM = registerNonMobEntity("thrown_block_as_item", EntityType.Builder.<ThrownBlockAsItem>of(ThrownBlockAsItem::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
     public static final DeferredHolder<EntityType<?>, EntityType<GooBall>> GOO_BALL = registerNonMobEntity("goo_ball", EntityType.Builder.<GooBall>of(GooBall::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
 	public static final DeferredHolder<EntityType<?>, EntityType<AmberStar>> AMBER_STAR = registerNonMobEntity("amber_star", EntityType.Builder.<AmberStar>of(AmberStar::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F));
@@ -112,6 +117,8 @@ public class ModEntities {
 		event.register(CROP_WEEVIL.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CropWeevil::canSpawnHereAlt, null);
 		event.register(FUNGAL_WEEVIL.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, FungalWeevil::canSpawnHereAlt, null);
 		event.register(HONEY_POT_ANT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, HoneyPotAnt::canSpawnHere, null);
+		event.register(ZOMBIE_ANT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ZombieAnt::canSpawnHere, null);
+		event.register(ZOMBIE_ANT_SOLDIER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ZombieAntSoldier::canSpawnHere, null);
 	}
 
 	public static void initializeAttributes(EntityAttributeCreationEvent event) {
@@ -142,6 +149,8 @@ public class ModEntities {
 		event.put(FUNGAL_WEEVIL.get(), FungalWeevil.createAttributes().build());
 		event.put(BED_BUG.get(), BedBug.createAttributes().build());
 		event.put(HONEY_POT_ANT.get(), HoneyPotAnt.createAttributes().build());
+		event.put(ZOMBIE_ANT.get(), ZombieAnt.createAttributes().build());
+		event.put(ZOMBIE_ANT_SOLDIER.get(), ZombieAntSoldier.createAttributes().build());
 	}
 
 	public static DeferredRegister<EntityType<?>> getEntityTypes() {
