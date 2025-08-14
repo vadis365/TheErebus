@@ -1,15 +1,53 @@
 package erebus.registries.blocks.providers;
 
-import erebus.block.*;
+import org.jetbrains.annotations.NotNull;
+
+import erebus.block.BlenderBlock;
+import erebus.block.BlockOfBonesBlock;
+import erebus.block.BotFlySpawnerBlock;
+import erebus.block.CandleHoneyTreatBlock;
 import erebus.block.ComposterBlock;
-import erebus.block.altars.*;
-import erebus.block.bamboo.*;
+import erebus.block.GaeanKeystoneBlock;
+import erebus.block.HoneyCombBlock;
+import erebus.block.HoneyTreatBlock;
+import erebus.block.LavaWebBlock;
+import erebus.block.LiquifierBlock;
+import erebus.block.PetrifiedCraftingTableBlock;
+import erebus.block.QuicksandBlock;
+import erebus.block.SiloRoofBlock;
+import erebus.block.SiloSupportsBlock;
+import erebus.block.SiloTankBlock;
+import erebus.block.SwampVentBlock;
+import erebus.block.UmberFurnaceBlock;
+import erebus.block.VelocityBlock;
+import erebus.block.VelocityBlockLightningSpeed;
+import erebus.block.WitherWebBlock;
+import erebus.block.altars.AltarBase;
+import erebus.block.altars.ExperienceAltar;
+import erebus.block.altars.HealingAltar;
+import erebus.block.altars.LightningAltar;
+import erebus.block.altars.OfferingAltar;
+import erebus.block.altars.RepairAltar;
+import erebus.block.bamboo.BambooBridge;
+import erebus.block.bamboo.BambooCrateBlock;
+import erebus.block.bamboo.BambooExtender;
+import erebus.block.bamboo.BambooPipe;
+import erebus.block.bamboo.BambooPipeExtract;
+import erebus.block.bamboo.BambooPole;
+import erebus.block.bamboo.BambooTorchBlock;
 import erebus.block.portal.ErebusPortalBlock;
 import erebus.registries.helpers.ModBlockHelpers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.MudBlock;
+import net.minecraft.world.level.block.RedstoneLampBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -17,7 +55,6 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.registries.DeferredBlock;
-import org.jetbrains.annotations.NotNull;
 
 public class OtherBlocks extends ModBlockHelpers {
 
@@ -46,8 +83,8 @@ public class OtherBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> TEMPLE_TILE;
     public static final DeferredBlock<Block> SILK;
     public static final DeferredBlock<Block> REIN_EXO;
-    public static final DeferredBlock<RotatedPillarBlock> VELOCITY;
-    public static final DeferredBlock<RotatedPillarBlock> LIGHTNING_SPEED;
+    public static final DeferredBlock<VelocityBlock> VELOCITY_BLOCK;
+    public static final DeferredBlock<VelocityBlockLightningSpeed> VELOCITY_BLOCK_LIGHTNING_SPEED;
     public static final DeferredBlock<BlockOfBonesBlock> BLOCK_OF_BONES;
     public static final DeferredBlock<Block> ANTLION_EGG;
     public static final DeferredBlock<Block> TARANTULA_EGG;
@@ -166,8 +203,8 @@ public class OtherBlocks extends ModBlockHelpers {
         TEMPLE_TILE = registerSimpleBlock("temple_tile", Properties.of().mapColor(MapColor.STONE));
         SILK = registerSimpleBlock("silk", Properties.of().mapColor(MapColor.STONE));
         REIN_EXO = registerSimpleBlock("rein_exo", Properties.of().mapColor(MapColor.STONE));
-        VELOCITY = registerBlock("velocity", () -> new RotatedPillarBlock(Properties.of().mapColor(MapColor.STONE)));
-        LIGHTNING_SPEED = registerBlock("lightning_speed", () -> new RotatedPillarBlock(Properties.of().mapColor(MapColor.STONE)));
+        VELOCITY_BLOCK = registerBlock("velocity_block", () -> new VelocityBlock(Properties.of().mapColor(MapColor.STONE).strength(1.5F).explosionResistance(10F).sound(SoundType.STONE)));
+        VELOCITY_BLOCK_LIGHTNING_SPEED = registerBlock("velocity_block_lightning_speed", () -> new VelocityBlockLightningSpeed(Properties.of().mapColor(MapColor.STONE).strength(1.5F).explosionResistance(10F).sound(SoundType.STONE)));
         BLOCK_OF_BONES = registerBlock("block_of_bones", () -> new BlockOfBonesBlock(Properties.ofFullCopy(Blocks.BONE_BLOCK).noCollission()));
         ANTLION_EGG = registerSimpleBlock("antlion_egg", Properties.of().mapColor(MapColor.STONE).noOcclusion());
         TARANTULA_EGG = registerSimpleBlock("tarantula_egg", Properties.of().mapColor(MapColor.STONE).noOcclusion());

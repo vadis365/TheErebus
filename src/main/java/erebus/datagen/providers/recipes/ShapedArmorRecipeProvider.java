@@ -112,11 +112,11 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
                 .define('W', ModItems.ENHANCED_GLIDER_WING)
                 .define('F', ModItems.ELASTIC_FIBER)
                 .define('G', ModItems.GLIDER_CHESTPLATE)
-                .define('V', OtherBlocks.VELOCITY)
+                .define('V', OtherBlocks.VELOCITY_BLOCK)
                 .unlockedBy("has_enhanced_glider_wing", has(ModItems.ENHANCED_GLIDER_WING))
                 .unlockedBy("has_elastic_fiber", has(ModItems.ELASTIC_FIBER))
                 .unlockedBy("has_glider_chestplate", has(ModItems.GLIDER_CHESTPLATE))
-                .unlockedBy("has_velocity_block", has(OtherBlocks.VELOCITY))
+                .unlockedBy("has_velocity_block", has(OtherBlocks.VELOCITY_BLOCK))
                 .save(output);
 
         surround(ModItems.WATER_REPELLENT, ModItems.REIN_EXOSKELETON_BOOTS, ModItems.WATER_STRIDERS);

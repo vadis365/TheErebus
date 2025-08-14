@@ -591,8 +591,8 @@ public class ModItemModels extends ModItemModelProvider {
         block(UmberstoneBlocks.MIR_BRICKS);
         block(UmberstoneBlocks.MUD_BRICKS);
         block(OtherBlocks.REIN_EXO);
-        block(OtherBlocks.VELOCITY);
-        block(OtherBlocks.LIGHTNING_SPEED);
+       // block(OtherBlocks.VELOCITY_BLOCK);
+       // block(OtherBlocks.VELOCITY_BLOCK_LIGHTNING_SPEED);
         block(OtherBlocks.ANTLION_EGG);
         block(OtherBlocks.TARANTULA_EGG);
         block(OtherBlocks.HONEY_TREAT);

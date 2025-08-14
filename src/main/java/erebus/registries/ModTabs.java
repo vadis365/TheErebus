@@ -1,7 +1,17 @@
 package erebus.registries;
 
 import erebus.Erebus;
-import erebus.registries.blocks.providers.*;
+import erebus.registries.blocks.providers.AmberBlocks;
+import erebus.registries.blocks.providers.DoorBlocks;
+import erebus.registries.blocks.providers.FenceBlocks;
+import erebus.registries.blocks.providers.OreBlocks;
+import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.blocks.providers.PlantBlocks;
+import erebus.registries.blocks.providers.SlabBlocks;
+import erebus.registries.blocks.providers.StairBlocks;
+import erebus.registries.blocks.providers.UmberstoneBlocks;
+import erebus.registries.blocks.providers.WallBlocks;
+import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -134,8 +144,8 @@ public class ModTabs {
                         output.accept(OtherBlocks.LIQUIFIER.get());
                         output.accept(OtherBlocks.GLOW_GEM.get());
                         output.accept(OtherBlocks.MUCUS_BOMB.get());
-                        output.accept(OtherBlocks.VELOCITY.get());
-                        output.accept(OtherBlocks.LIGHTNING_SPEED.get());
+                        output.accept(OtherBlocks.VELOCITY_BLOCK.get());
+                        output.accept(OtherBlocks.VELOCITY_BLOCK_LIGHTNING_SPEED.get());
                         output.accept(OtherBlocks.ALTAR_BASE.get());
                         output.accept(OtherBlocks.ALTAR_LIGHTNING.get());
                         output.accept(OtherBlocks.ALTAR_HEALING.get());

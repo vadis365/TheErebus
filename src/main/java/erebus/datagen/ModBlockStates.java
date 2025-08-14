@@ -340,8 +340,8 @@ public class ModBlockStates extends ModBlockStateProvider {
         block(OtherBlocks.TEMPLE_TILE);
         block(OtherBlocks.SILK);
         block(OtherBlocks.REIN_EXO);
-        log(OtherBlocks.VELOCITY);
-        log(OtherBlocks.LIGHTNING_SPEED);
+      //  log(OtherBlocks.VELOCITY_BLOCK);
+       // log(OtherBlocks.VELOCITY_BLOCK_LIGHTNING_SPEED);
         egg(OtherBlocks.ANTLION_EGG);
         egg(OtherBlocks.TARANTULA_EGG);
         cake(OtherBlocks.HONEY_TREAT);

@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:velocity"
+            "items": "erebus:velocity_block"
           }
         ]
       },

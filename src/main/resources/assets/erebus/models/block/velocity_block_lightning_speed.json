@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "erebus:block/velocity_block_lightning_speed_top",
+        "down": "erebus:block/velocity_block_lightning_speed_side",
+        "up": "erebus:block/velocity_block_lightning_speed_top",
+        "north": "erebus:block/velocity_block_lightning_speed_side",
+        "east": "erebus:block/velocity_block_lightning_speed_side",
+        "south": "erebus:block/velocity_block_lightning_speed_side",
+        "west": "erebus:block/velocity_block_lightning_speed_side"
+    }
+}

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "erebus:velocity"
+          "name": "erebus:velocity_block_lightning_speed"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "erebus:blocks/velocity"
+  "random_sequence": "erebus:blocks/velocity_block_lightning_speed"
 }

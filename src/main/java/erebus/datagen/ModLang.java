@@ -590,8 +590,8 @@ public class ModLang extends ModLangProvider {
         addBlock(OtherBlocks.TEMPLE_TILE, "Temple Tile");
         addBlock(OtherBlocks.SILK, "Silk");
         addBlock(OtherBlocks.REIN_EXO, "Reinforced Exo Blocks");
-        addBlock(OtherBlocks.VELOCITY, "Velocity Block");
-        addBlock(OtherBlocks.LIGHTNING_SPEED, "Lightning Velocity Block");
+        addBlock(OtherBlocks.VELOCITY_BLOCK, "Velocity Block");
+        addBlock(OtherBlocks.VELOCITY_BLOCK_LIGHTNING_SPEED, "Lightning Speed Velocity Block");
         addBlock(OtherBlocks.BLOCK_OF_BONES, "Block O' Bones");
         addBlock(OtherBlocks.ANTLION_EGG, "Antlion Egg");
         addBlock(OtherBlocks.TARANTULA_EGG, "Tarantula Egg");

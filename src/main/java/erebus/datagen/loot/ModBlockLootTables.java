@@ -379,8 +379,8 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(OtherBlocks.TEMPLE_TILE);
         dropSelf(OtherBlocks.SILK);
         dropSelf(OtherBlocks.REIN_EXO);
-        dropSelf(OtherBlocks.VELOCITY);
-        dropSelf(OtherBlocks.LIGHTNING_SPEED);
+        dropSelf(OtherBlocks.VELOCITY_BLOCK);
+        dropSelf(OtherBlocks.VELOCITY_BLOCK_LIGHTNING_SPEED);
         dropSelf(OtherBlocks.BLOCK_OF_BONES);
         dropSelf(OtherBlocks.ANTLION_EGG);
         dropSelf(OtherBlocks.TARANTULA_EGG);

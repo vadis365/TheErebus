@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "erebus:velocity"
+      "item": "erebus:velocity_block"
     },
     {
       "item": "erebus:supernatural_velocity"
@@ -32,6 +32,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "erebus:lightning_speed"
+    "id": "erebus:velocity_block_lightning_speed"
   }
 }

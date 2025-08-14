@@ -136,7 +136,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_bio_luminescence", has(ModItems.BIO_LUMINESCENCE))
                 .save(output);
 
-        threeByThree(ModItems.BIO_VELOCITY, OtherBlocks.VELOCITY);
+        threeByThree(ModItems.BIO_VELOCITY, OtherBlocks.VELOCITY_BLOCK);
 
         ShapedRecipeBuilder.shaped(MISC, AmberBlocks.FLUID_JAR)
                 .pattern("PPP")

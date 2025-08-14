@@ -115,10 +115,10 @@ public class ShapelessCraftingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_web_slinger", has(ModItems.WEB_SLINGER))
                 .save(output);
 
-        ShapelessRecipeBuilder.shapeless(MISC, OtherBlocks.LIGHTNING_SPEED)
-                .requires(OtherBlocks.VELOCITY)
+        ShapelessRecipeBuilder.shapeless(MISC, OtherBlocks.VELOCITY_BLOCK_LIGHTNING_SPEED)
+                .requires(OtherBlocks.VELOCITY_BLOCK)
                 .requires(ModItems.SUPERNATURAL_VELOCITY, 8)
-                .unlockedBy("has_velocity_block", has(OtherBlocks.VELOCITY))
+                .unlockedBy("has_velocity_block", has(OtherBlocks.VELOCITY_BLOCK))
                 .save(output);
 
         ShapelessRecipeBuilder.shapeless(MISC, ModItems.REINFORCED_PLATE_EXO)
