@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "erebus:glow_gem"
+          "name": "erebus:glow_gem_inactive"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "erebus:blocks/glow_gem"
+  "random_sequence": "erebus:blocks/glow_gem_active"
 }

@@ -142,7 +142,7 @@ public class ModTabs {
                         output.accept(OtherBlocks.BAMBOO_PIPE.get());
                         output.accept(OtherBlocks.BAMBOO_PIPE_EXTRACT.get());
                         output.accept(OtherBlocks.LIQUIFIER.get());
-                        output.accept(OtherBlocks.GLOW_GEM.get());
+                        output.accept(OtherBlocks.GLOW_GEM_INACTIVE.get());
                         output.accept(OtherBlocks.MUCUS_BOMB.get());
                         output.accept(OtherBlocks.VELOCITY_BLOCK.get());
                         output.accept(OtherBlocks.VELOCITY_BLOCK_LIGHTNING_SPEED.get());

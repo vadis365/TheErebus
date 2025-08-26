@@ -500,7 +500,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "erebus:glow_gem",
+          "name": "erebus:glow_gem_inactive",
           "weight": 5
         },
         {

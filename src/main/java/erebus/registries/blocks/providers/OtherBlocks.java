@@ -8,6 +8,8 @@ import erebus.block.BotFlySpawnerBlock;
 import erebus.block.CandleHoneyTreatBlock;
 import erebus.block.ComposterBlock;
 import erebus.block.GaeanKeystoneBlock;
+import erebus.block.GlowGemActiveBlock;
+import erebus.block.GlowGemInactiveBlock;
 import erebus.block.HoneyCombBlock;
 import erebus.block.HoneyTreatBlock;
 import erebus.block.LavaWebBlock;
@@ -144,7 +146,8 @@ public class OtherBlocks extends ModBlockHelpers {
     public static final DeferredBlock<UmberFurnaceBlock> UMBER_FURNACE;
     public static final DeferredBlock<ButtonBlock> UMBERSTONE_BUTTON;
     public static final DeferredBlock<LiquifierBlock> LIQUIFIER;
-    public static final DeferredBlock<Block> GLOW_GEM;
+    public static final DeferredBlock<GlowGemActiveBlock> GLOW_GEM_ACTIVE;
+    public static final DeferredBlock<GlowGemInactiveBlock> GLOW_GEM_INACTIVE;
     public static final DeferredBlock<Block> MUCUS_BOMB;
     public static final DeferredBlock<Block> UMBER_GOLEM_STATUE;
 
@@ -270,7 +273,8 @@ public class OtherBlocks extends ModBlockHelpers {
         UMBER_FURNACE = registerBlock("umber_furnace", () -> new UmberFurnaceBlock(Properties.ofFullCopy(Blocks.FURNACE)));
         UMBERSTONE_BUTTON = registerBlock("umberstone_button", () -> new ButtonBlock(BlockSetType.STONE, 10, Properties.of().mapColor(MapColor.STONE)));
         LIQUIFIER = registerBlockWithoutBlockItem("liquifier", () -> new LiquifierBlock(Properties.ofFullCopy(Blocks.GLASS).mapColor(MapColor.STONE).strength(1.0F, 2000.0F).sound(SoundType.GLASS).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false)));
-        GLOW_GEM = registerSimpleBlock("glow_gem", Properties.of().mapColor(MapColor.STONE));
+        GLOW_GEM_ACTIVE = registerBlock("glow_gem_active", () -> new GlowGemActiveBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).noCollission().sound(SoundType.GLASS).lightLevel((state) -> 15)));
+        GLOW_GEM_INACTIVE = registerBlock("glow_gem_inactive", () -> new GlowGemInactiveBlock(Properties.of().mapColor(MapColor.COLOR_RED).noCollission().sound(SoundType.GLASS).lightLevel((state) -> 0)));
         MUCUS_BOMB = registerSimpleBlock("mucus_bomb", Properties.of().mapColor(MapColor.STONE));
         UMBER_GOLEM_STATUE = registerSimpleBlock("umber_golem_statue", Properties.of().mapColor(MapColor.STONE));
 

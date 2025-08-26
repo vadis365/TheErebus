@@ -633,7 +633,8 @@ public class ModLang extends ModLangProvider {
         addBlock(OtherBlocks.UMBER_FURNACE, "Umber Furnace");
         addBlock(OtherBlocks.UMBERSTONE_BUTTON, "Umberstone Button");
         addBlock(OtherBlocks.LIQUIFIER, "Honey Liquifier");
-        addBlock(OtherBlocks.GLOW_GEM, "Glowing Gem");
+        addBlock(OtherBlocks.GLOW_GEM_ACTIVE, "Glowing Gem");
+        addBlock(OtherBlocks.GLOW_GEM_INACTIVE, "Glowing Gem");
         addBlock(OtherBlocks.MUCUS_BOMB, "Mucus Bomb");
         addBlock(OtherBlocks.UMBER_GOLEM_STATUE, "Umbergolem Statue");
         addBlock(OtherBlocks.ALTAR_BASE, "Altar Base");

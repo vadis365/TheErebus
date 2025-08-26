@@ -440,7 +440,8 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(OtherBlocks.UMBER_FURNACE);
         dropSelf(OtherBlocks.UMBERSTONE_BUTTON);
         dropSelf(OtherBlocks.LIQUIFIER);
-        dropSelf(OtherBlocks.GLOW_GEM);
+        dropOther(OtherBlocks.GLOW_GEM_ACTIVE, OtherBlocks.GLOW_GEM_INACTIVE);
+        dropSelf(OtherBlocks.GLOW_GEM_INACTIVE);
         dropSelf(OtherBlocks.MUCUS_BOMB);
         dropSelf(OtherBlocks.UMBER_GOLEM_STATUE);
 
