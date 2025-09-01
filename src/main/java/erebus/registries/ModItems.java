@@ -53,7 +53,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> REINFORCED_PLATE_EXO = registerItem("reinforced_plate_exo");
     public static final DeferredItem<Item> GLIDER_WING = registerItem("glider_wing");
     public static final DeferredItem<Item> SCORPION_PINCER = registerItem("scorpion_pincer");
-    public static final DeferredItem<Item> CAMO_POWDER = registerItem("camo_powder");
+    public static final DeferredItem<Item> CAMO_POWDER = registerItem("camo_powder", () -> new CamoPowderItem(new Item.Properties()));
     public static final DeferredItem<Item> NECTAR = registerItem("nectar");
     public static final DeferredItem<Item> HONEY_DRIP = registerItem("honey_drip");
     public static final DeferredItem<Item> POISON_GLAND = registerItem("poison_gland");
