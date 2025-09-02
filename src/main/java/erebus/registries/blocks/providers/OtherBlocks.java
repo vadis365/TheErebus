@@ -1,55 +1,15 @@
 package erebus.registries.blocks.providers;
 
-import org.jetbrains.annotations.NotNull;
-
-import erebus.block.BlenderBlock;
-import erebus.block.BlockOfBonesBlock;
-import erebus.block.BotFlySpawnerBlock;
-import erebus.block.CandleHoneyTreatBlock;
+import erebus.block.*;
 import erebus.block.ComposterBlock;
-import erebus.block.GaeanKeystoneBlock;
-import erebus.block.GlowGemActiveBlock;
-import erebus.block.GlowGemInactiveBlock;
-import erebus.block.HoneyCombBlock;
-import erebus.block.HoneyTreatBlock;
-import erebus.block.LavaWebBlock;
-import erebus.block.LiquifierBlock;
-import erebus.block.PetrifiedCraftingTableBlock;
-import erebus.block.QuicksandBlock;
-import erebus.block.SiloRoofBlock;
-import erebus.block.SiloSupportsBlock;
-import erebus.block.SiloTankBlock;
-import erebus.block.SwampVentBlock;
-import erebus.block.UmberFurnaceBlock;
-import erebus.block.VelocityBlock;
-import erebus.block.VelocityBlockLightningSpeed;
-import erebus.block.WitherWebBlock;
-import erebus.block.altars.AltarBase;
-import erebus.block.altars.ExperienceAltar;
-import erebus.block.altars.HealingAltar;
-import erebus.block.altars.LightningAltar;
-import erebus.block.altars.OfferingAltar;
-import erebus.block.altars.RepairAltar;
-import erebus.block.bamboo.BambooBridge;
-import erebus.block.bamboo.BambooCrateBlock;
-import erebus.block.bamboo.BambooExtender;
-import erebus.block.bamboo.BambooPipe;
-import erebus.block.bamboo.BambooPipeExtract;
-import erebus.block.bamboo.BambooPole;
-import erebus.block.bamboo.BambooTorchBlock;
+import erebus.block.altars.*;
+import erebus.block.bamboo.*;
 import erebus.block.portal.ErebusPortalBlock;
 import erebus.registries.helpers.ModBlockHelpers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.block.LadderBlock;
-import net.minecraft.world.level.block.MudBlock;
-import net.minecraft.world.level.block.RedstoneLampBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -57,6 +17,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import org.jetbrains.annotations.NotNull;
 
 public class OtherBlocks extends ModBlockHelpers {
 
@@ -237,7 +198,11 @@ public class OtherBlocks extends ModBlockHelpers {
                         Properties.of().strength(2.0F)
                 )
         );
-        INSECT_REPELLENT = registerSimpleBlock("insect_repellent", Properties.of().mapColor(MapColor.STONE));
+        INSECT_REPELLENT = registerBlock("insect_repellent", () -> new InsectRepellentBlock(Properties.of()
+                .noCollission()
+                .noOcclusion()
+                .replaceable()
+        ));
 
         // MARK: Spawners
         ANTLION_SPAWNER = registerSimpleBlock("antlion_spawner", Properties.of().mapColor(MapColor.STONE));

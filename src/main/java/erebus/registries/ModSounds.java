@@ -63,21 +63,21 @@ public class ModSounds {
 	public static final DeferredHolder<SoundEvent, SoundEvent> RHINO_BEETLE_SOUND = register("rhino_beetle_sound");
 	public static final DeferredHolder<SoundEvent, SoundEvent> RHINO_BEETLE_HURT = register("rhino_beetle_hurt");
 
-	//Blocks
+	// MARK: Blocks
 	public static final DeferredHolder<SoundEvent, SoundEvent> ALTAR_CHANGE_STATE = register("altar_change_state");
 	public static final DeferredHolder<SoundEvent, SoundEvent> ALTAR_OFFERING = register("altar_offering");
 
-	//Items
+	// MARK: Items
 	public static final DeferredHolder<SoundEvent, SoundEvent> SPRAY_CAN_SOUND = register("spray_can_sound");
 	public static final DeferredHolder<SoundEvent, SoundEvent> WEBSLING_SPLAT = register("websling_splat");
 	public static final DeferredHolder<SoundEvent, SoundEvent> WEBSLING_THROW = register("websling_throw");
 	public static final DeferredHolder<SoundEvent, SoundEvent> CABBAGE_FART = register("cabbage_fart");
 	public static final DeferredHolder<SoundEvent, SoundEvent> HORN_BLOW = register("horn_blow");
 
-	//Misc 
+	// MARK: Misc
 	public static final DeferredHolder<SoundEvent, SoundEvent> BLAM_SOUND = register("blam_sound");
 
-	//World
+	// MARK: World
 	public static final DeferredHolder<SoundEvent, SoundEvent> AMBIENT_BUG_IN_THE_SYSTEM = register("music/ambient_bug_in_the_system");
 	public static final DeferredHolder<SoundEvent, SoundEvent> AMBIENT_FEINT_SLEEPLESS = register("music/ambient_feint_sleepless");
 

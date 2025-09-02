@@ -1,17 +1,7 @@
 package erebus.registries;
 
 import erebus.Erebus;
-import erebus.registries.blocks.providers.AmberBlocks;
-import erebus.registries.blocks.providers.DoorBlocks;
-import erebus.registries.blocks.providers.FenceBlocks;
-import erebus.registries.blocks.providers.OreBlocks;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.PlantBlocks;
-import erebus.registries.blocks.providers.SlabBlocks;
-import erebus.registries.blocks.providers.StairBlocks;
-import erebus.registries.blocks.providers.UmberstoneBlocks;
-import erebus.registries.blocks.providers.WallBlocks;
-import erebus.registries.blocks.providers.WoodBlocks;
+import erebus.registries.blocks.providers.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -484,6 +474,7 @@ public class ModTabs {
                         output.accept(ModItems.HOMING_BEECON_ADVANCED);
                         output.accept(ModItems.WAND_OF_PRESERVATION);
                         output.accept(ModItems.DEATH_COMPASS);
+                        output.accept(ModItems.SPRAY_CAN);
                     })
                     .build()
     );

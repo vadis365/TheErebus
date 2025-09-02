@@ -243,7 +243,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> BAMBUCKET = registerBucket("bambucket");
     public static final DeferredItem<Item> HOMING_BEECON = registerItem("homing_beecon");
     public static final DeferredItem<Item> HOMING_BEECON_ADVANCED = registerItem("homing_beecon_advanced");
-    public static final DeferredItem<Item> SPRAY_CAN = registerItem("spray_can");
+    public static final DeferredItem<Item> SPRAY_CAN = registerItem("spray_can", () -> new InsectRepellentItem(new Item.Properties()));
     public static final DeferredItem<Item> WHETSTONE = registerItem("whetstone");
     public static final DeferredItem<Item> COMPOST = registerItem("compost");
     public static final DeferredItem<Item> PLANTICIDE = registerItem("planticide");
