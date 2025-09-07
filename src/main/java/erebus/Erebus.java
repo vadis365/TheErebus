@@ -1,6 +1,7 @@
 package erebus;
 
 import com.mojang.logging.LogUtils;
+import erebus.client.ModAtlases;
 import erebus.events.BedPlaceEventHandler;
 import erebus.network.data.DeathCompassData;
 import erebus.registries.*;
@@ -92,6 +93,7 @@ public class Erebus {
         ModStructureTypes.STRUCTURE_TYPES.register(bus);
         ModBiomeLayerTypes.BIOME_LAYER_TYPES.register(bus);
         ModPredicates.PREDICATES.register(bus);
+        ModAtlases.registerPetrifiedChestAtlases();
 
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 

@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {
+      "type": "directory",
+      "source": "special/tiles/petrified_chest",
+      "prefix": "special/tiles/petrified_chest/"
+    }
+  ]
+}
