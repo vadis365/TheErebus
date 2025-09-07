@@ -220,7 +220,7 @@ public class OtherBlocks extends ModBlockHelpers {
 
         // MARK: Utility Blocks
         PETRIFIED_CRAFTING_TABLE = registerBlock("petrified_crafting_table", () -> new PetrifiedCraftingTableBlock(Properties.ofFullCopy(Blocks.CRAFTING_TABLE)));
-        PETRIFIED_WOOD_CHEST = registerSimpleBlock("petrified_wood_chest", Properties.of().mapColor(MapColor.STONE));
+        PETRIFIED_WOOD_CHEST = registerBlock("petrified_wood_chest", () -> new PetrifiedChestBlock(Properties.ofFullCopy(Blocks.CHEST)));
         BAMBOO_CRATE = registerBlockWithoutBlockItem("bamboo_crate", () -> new BambooCrateBlock(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER)));
         BAMBOO_BRIDGE = registerBlock("bamboo_bridge", () -> new BambooBridge(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER)));
         BAMBOO_LADDER = registerBlock("bamboo_ladder", () -> new LadderBlock(Properties.ofFullCopy(Blocks.LADDER).sound(SoundType.BAMBOO)));

@@ -1,6 +1,6 @@
 # Project Roadmap
 
-Last updated: 2025-08-13
+Last updated: 2025-09-07
 Owner: Project Maintainers (Erebus Team)
 Status: Living Document
 
@@ -49,6 +49,9 @@ Status: Living Document
 - [X] Worker Bee
 - [X] Zombie Ant
 - [X] Zombie Ant Soldier
+- [X] Camo powder
+- [X] Repellent
+- [X] Velocity Blocks
 
 ## Work in Progress
 - [ ] Smoothie Recipes
@@ -73,9 +76,6 @@ Status: Living Document
 - [ ] Ore Generation
 
 ## Not Started
-- [ ] Camo powder
-- [ ] Repellent
-- [ ] Velocity Blocks
 - [ ] Jump Boots
 - [ ] Flower seeds
 - [ ] Petrified Wood chest

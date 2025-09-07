@@ -13,6 +13,7 @@ public class RegisterMenuScreensEventHandler {
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(ModMenuTypes.PETRIFIED_CRAFTING_MENU.get(), PetrifiedCraftingTableScreen::new);
+        event.register(ModMenuTypes.PETRIFIED_CHEST.get(), PetrifiedChestScreen::new);
         event.register(ModMenuTypes.UMBER_FURNACE_MENU.get(), UmberFurnaceScreen::new);
         event.register(ModMenuTypes.LIQUIFIER.get(), LiquifierScreen::new);
         event.register(ModMenuTypes.HONEY_COMB.get(), HoneyCombScreen::new);

@@ -815,6 +815,7 @@ public class ModLang extends ModLangProvider {
 
     private void addContainerTranslations() {
         addContainer("petrified_crafting_table", "Petrified Crafting Table");
+        addContainer("petrified_wood_chest", "Petrified Wood Chest");
         addContainer("umberfurnace", "Umber Furnace");
         addContainer("liquifier", "Honey Liquifier");
         addContainer("honeycomb_cell", "Honeycomb Cell");
