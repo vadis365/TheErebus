@@ -82,7 +82,7 @@ public class ExplorationAdvancements extends ModAdvancements {
 
         smoothie_blender = createSimpleAdvancementWithParent(root, TASK, OtherBlocks.BLENDER, "smoothie_blender", "has_blender", hasItems(OtherBlocks.BLENDER));
         entomology = save(addEntities(getAdvancedBuilderWithParent(root, CHALLENGE, ModItems.PLATE_EXO, "entomology"), false), "entomology");
-        petrified_wood = createSimpleAdvancementWithParent(root, TASK, OreBlocks.ORE_PETRIFIED_WOOD, "petrified_wood", "has_petrified_wood", hasItems(ModItems.PETRIFIED_WOOD));
+        petrified_wood = createSimpleAdvancementWithParent(root, TASK, OreBlocks.PETRIFIED_WOOD, "petrified_wood", "has_petrified_wood", hasItems(ModItems.PETRIFIED_WOOD));
         quicksand = createSimpleAdvancementWithParent(root, TASK, OtherBlocks.QUICK_SAND, "quicksand", "has_quicksand", EnterBlockTrigger.TriggerInstance.entersBlock(OtherBlocks.QUICK_SAND.get()));
         kill_all = save(addEntities(getAdvancedBuilderWithParent(entomology, CHALLENGE, ModItems.JADE_SWORD, "kill_all"), true), "kill_all");
 
@@ -108,7 +108,7 @@ public class ExplorationAdvancements extends ModAdvancements {
                         ))),
                 "arborist"
         );
-        jade_ore = createSimpleAdvancementWithParent(root, TASK, OreBlocks.ORE_JADE, "jade_ore", "has_jade_ore", hasItems(OreBlocks.ORE_JADE));
+        jade_ore = createSimpleAdvancementWithParent(root, TASK, OreBlocks.JADE, "jade_ore", "has_jade_ore", hasItems(OreBlocks.JADE));
 
         antivenom = save(
                 getAdvancedBuilderWithParent(smoothie_blender, TASK, ModItems.ANTI_VENOM_BOTTLE, "antivenom")

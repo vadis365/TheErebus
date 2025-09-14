@@ -27,19 +27,19 @@ public class SmeltingRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addOreSmeltingRecipes() {
-        ore(OreBlocks.ORE_COAL, Items.COAL, "coal");
-        ore(OreBlocks.ORE_IRON, Items.IRON_INGOT, "iron");
-        ore(OreBlocks.ORE_GOLD, Items.GOLD_INGOT, "gold");
-        ore(OreBlocks.ORE_LAPIS, Items.LAPIS_LAZULI, "lapis");
-        ore(OreBlocks.ORE_DIAMOND, Items.DIAMOND, "diamond");
-        ore(OreBlocks.ORE_EMERALD, Items.EMERALD, "emerald");
-        ore(OreBlocks.ORE_QUARTZ, Items.QUARTZ, "quartz");
-        ore(OreBlocks.ORE_PETRIFIED_QUARTZ, Items.QUARTZ, "quartz");
-        ore(OreBlocks.ORE_JADE, ModItems.JADE, "jade");
-        ore(OreBlocks.ORE_FOSSIL, ModItems.SHARD_BONE, "shard_bone");
-        ore(OreBlocks.ORE_GNEISS, ModItems.GNEISS_ROCK, "gneiss");
-        ore(OreBlocks.ORE_PETRIFIED_WOOD, ModItems.PETRIFIED_WOOD, "petrified_wood");
-        ore(OreBlocks.ORE_ENCRUSTED_DIAMOND, Items.DIAMOND, "diamond");
+        ore(OreBlocks.COAL, Items.COAL, "coal");
+        ore(OreBlocks.IRON, Items.IRON_INGOT, "iron");
+        ore(OreBlocks.GOLD, Items.GOLD_INGOT, "gold");
+        ore(OreBlocks.LAPIS, Items.LAPIS_LAZULI, "lapis");
+        ore(OreBlocks.DIAMOND, Items.DIAMOND, "diamond");
+        ore(OreBlocks.EMERALD, Items.EMERALD, "emerald");
+        ore(OreBlocks.QUARTZ, Items.QUARTZ, "quartz");
+        ore(OreBlocks.PETRIFIED_QUARTZ, Items.QUARTZ, "quartz");
+        ore(OreBlocks.JADE, ModItems.JADE, "jade");
+        ore(OreBlocks.FOSSIL, ModItems.SHARD_BONE, "shard_bone");
+        ore(OreBlocks.GNEISS, ModItems.GNEISS_ROCK, "gneiss");
+        ore(OreBlocks.PETRIFIED_WOOD, ModItems.PETRIFIED_WOOD, "petrified_wood");
+        ore(OreBlocks.ENCRUSTED_DIAMOND, Items.DIAMOND, "diamond");
     }
 
     private void addGenericSmelting() {

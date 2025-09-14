@@ -54,14 +54,14 @@ public class DecorationFeatureConfigs {
                 2,
                 UmberstoneBlocks.PETRIFIED_BARK_BROWN,
                 UmberstoneBlocks.PETRIFIED_LOG_INNER,
-                OreBlocks.ORE_PETRIFIED_QUARTZ
+                OreBlocks.PETRIFIED_QUARTZ
         ));
         PETRIFIED_TREE_BROWN_LARGE_CONFIG = CONFIGS.register("petrified_tree_brown_large", () -> new PetrifiedTreeFeatureConfiguration(
                 16 + random.nextInt(10),
                 3,
                 UmberstoneBlocks.PETRIFIED_BARK_BROWN,
                 UmberstoneBlocks.PETRIFIED_LOG_INNER,
-                OreBlocks.ORE_PETRIFIED_QUARTZ
+                OreBlocks.PETRIFIED_QUARTZ
         ));
 
         PETRIFIED_TREE_RED_SMALL_CONFIG = CONFIGS.register("petrified_tree_red_small", () -> new PetrifiedTreeFeatureConfiguration(
@@ -74,14 +74,14 @@ public class DecorationFeatureConfigs {
                 2,
                 UmberstoneBlocks.PETRIFIED_BARK_RED,
                 UmberstoneBlocks.PETRIFIED_LOG_INNER,
-                OreBlocks.ORE_PETRIFIED_QUARTZ
+                OreBlocks.PETRIFIED_QUARTZ
         ));
         PETRIFIED_TREE_RED_LARGE_CONFIG = CONFIGS.register("petrified_tree_red_large", () -> new PetrifiedTreeFeatureConfiguration(
                 16 + random.nextInt(10),
                 3,
                 UmberstoneBlocks.PETRIFIED_BARK_RED,
                 UmberstoneBlocks.PETRIFIED_LOG_INNER,
-                OreBlocks.ORE_PETRIFIED_QUARTZ
+                OreBlocks.PETRIFIED_QUARTZ
         ));
 
         POND_CONFIG = CONFIGS.register("pond", () -> new PondFeatureConfiguration(10));

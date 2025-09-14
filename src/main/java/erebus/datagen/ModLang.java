@@ -280,25 +280,25 @@ public class ModLang extends ModLangProvider {
         addBlock(AmberBlocks.AMBER_DOOR, "Amber Door");
 
         // MARK: Ores
-        addBlock(OreBlocks.ORE_IRON, "Iron Ore");
-        addBlock(OreBlocks.ORE_GOLD, "Gold Ore");
-        addBlock(OreBlocks.ORE_DIAMOND, "Diamond Ore");
-        addBlock(OreBlocks.ORE_EMERALD, "Emerald Ore");
-        addBlock(OreBlocks.ORE_LAPIS, "Lapis Lazuli Ore");
-        addBlock(OreBlocks.ORE_QUARTZ, "Quartz Ore");
-        addBlock(OreBlocks.ORE_PETRIFIED_QUARTZ, "Petrified Quartz Ore");
-        addBlock(OreBlocks.ORE_COAL, "Coal Ore");
-        addBlock(OreBlocks.ORE_COPPER, "Copper Ore");
-        addBlock(OreBlocks.ORE_TIN, "Tin Ore");
-        addBlock(OreBlocks.ORE_SILVER, "Silver Ore");
-        addBlock(OreBlocks.ORE_ALUMINUM, "Aluminum Ore");
-        addBlock(OreBlocks.ORE_LEAD, "Lead Ore");
-        addBlock(OreBlocks.ORE_JADE, "Jade Ore");
-        addBlock(OreBlocks.ORE_ENCRUSTED_DIAMOND, "Volcanic Diamond Ore");
-        addBlock(OreBlocks.ORE_FOSSIL, "Fossil Ore");
-        addBlock(OreBlocks.ORE_GNEISS, "Gneiss Ore");
-        addBlock(OreBlocks.ORE_TEMPLE, "Temple Ore");
-        addBlock(OreBlocks.ORE_PETRIFIED_WOOD, "Petrified Wood Ore");
+        addBlock(OreBlocks.IRON, "Iron Ore");
+        addBlock(OreBlocks.GOLD, "Gold Ore");
+        addBlock(OreBlocks.DIAMOND, "Diamond Ore");
+        addBlock(OreBlocks.EMERALD, "Emerald Ore");
+        addBlock(OreBlocks.LAPIS, "Lapis Lazuli Ore");
+        addBlock(OreBlocks.QUARTZ, "Quartz Ore");
+        addBlock(OreBlocks.PETRIFIED_QUARTZ, "Petrified Quartz Ore");
+        addBlock(OreBlocks.COAL, "Coal Ore");
+        addBlock(OreBlocks.COPPER, "Copper Ore");
+        addBlock(OreBlocks.TIN, "Tin Ore");
+        addBlock(OreBlocks.SILVER, "Silver Ore");
+        addBlock(OreBlocks.ALUMINUM, "Aluminum Ore");
+        addBlock(OreBlocks.LEAD, "Lead Ore");
+        addBlock(OreBlocks.JADE, "Jade Ore");
+        addBlock(OreBlocks.ENCRUSTED_DIAMOND, "Volcanic Diamond Ore");
+        addBlock(OreBlocks.FOSSIL, "Fossil Ore");
+        addBlock(OreBlocks.GNEISS, "Gneiss Ore");
+        addBlock(OreBlocks.TEMPLE, "Temple Ore");
+        addBlock(OreBlocks.PETRIFIED_WOOD, "Petrified Wood Ore");
 
         // MARK: Logs
         addBlock(WoodBlocks.LOG_BAOBAB, "Baobab Wood");
@@ -416,17 +416,17 @@ public class ModLang extends ModLangProvider {
         addBlock(StairBlocks.STAIRS_MIR_BRICKS, "Mir Brick Stairs");
 
         // MARK: Doors
-        addBlock(DoorBlocks.DOOR_BAOBAB, "Baobab Door");
-        addBlock(DoorBlocks.DOOR_EUCALYPTUS, "Eucalyptus Door");
-        addBlock(DoorBlocks.DOOR_MAHOGANY, "Mahogany Door");
-        addBlock(DoorBlocks.DOOR_MOSSBARK, "Mossbark Door");
-        addBlock(DoorBlocks.DOOR_ASPER, "Asper Door");
-        addBlock(DoorBlocks.DOOR_CYPRESS, "Cypress Door");
-        addBlock(DoorBlocks.DOOR_BALSAM, "Balsam Door");
-        addBlock(DoorBlocks.DOOR_WHITE, "White Door");
-        addBlock(DoorBlocks.DOOR_ROTTEN, "Rotten Door");
-        addBlock(DoorBlocks.DOOR_MARSHWOOD, "Marshwood Door");
-        addBlock(DoorBlocks.DOOR_SCORCHED, "Scorched Door");
+        addBlock(DoorBlocks.BAOBAB, "Baobab Door");
+        addBlock(DoorBlocks.EUCALYPTUS, "Eucalyptus Door");
+        addBlock(DoorBlocks.MAHOGANY, "Mahogany Door");
+        addBlock(DoorBlocks.MOSSBARK, "Mossbark Door");
+        addBlock(DoorBlocks.ASPER, "Asper Door");
+        addBlock(DoorBlocks.CYPRESS, "Cypress Door");
+        addBlock(DoorBlocks.BALSAM, "Balsam Door");
+        addBlock(DoorBlocks.WHITE, "White Door");
+        addBlock(DoorBlocks.ROTTEN, "Rotten Door");
+        addBlock(DoorBlocks.MARSHWOOD, "Marshwood Door");
+        addBlock(DoorBlocks.SCORCHED, "Scorched Door");
 
         // MARK: Fences
         addBlock(FenceBlocks.FENCE_BAOBAB, "Baobab Fence");

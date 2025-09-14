@@ -172,74 +172,74 @@ public class OreFeatures extends ModFeatureHelpers {
 
     public static void initConfiguredFeatures(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         setConfiguredContext(context);
-        registerConfiguredOre(COAL_ORE, OreBlocks.ORE_COAL, COAL_VEIN_SIZE);
-        registerConfiguredOre(IRON_ORE, OreBlocks.ORE_IRON, IRON_VEIN_SIZE);
-        registerConfiguredOre(GOLD_ORE, OreBlocks.ORE_GOLD, GOLD_VEIN_SIZE);
-        registerConfiguredOre(LAPIS_ORE, OreBlocks.ORE_LAPIS, LAPIS_VEIN_SIZE);
-        registerConfiguredOre(EMERALD_ORE, OreBlocks.ORE_EMERALD, EMERALD_VEIN_SIZE);
-        registerConfiguredOre(DIAMOND_ORE, OreBlocks.ORE_DIAMOND, DIAMOND_VEIN_SIZE);
-        registerConfiguredOre(JADE_ORE, OreBlocks.ORE_JADE, JADE_VEIN_SIZE);
-        registerConfiguredOre(PETRIFIED_WOOD_ORE, OreBlocks.ORE_PETRIFIED_WOOD, PETRIFIED_WOOD_VEIN_SIZE);
-        registerConfiguredOre(FOSSIL_ORE, OreBlocks.ORE_FOSSIL, FOSSIL_VEIN_SIZE);
-        registerConfiguredOre(ALUMINUM_ORE, OreBlocks.ORE_ALUMINUM, ALUMINUM_VEIN_SIZE);
-        registerConfiguredOre(COPPER_ORE, OreBlocks.ORE_COPPER, COPPER_VEIN_SIZE);
-        registerConfiguredOre(LEAD_ORE, OreBlocks.ORE_LEAD, LEAD_VEIN_SIZE);
-        registerConfiguredOre(SILVER_ORE, OreBlocks.ORE_SILVER, SILVER_VEIN_SIZE);
-        registerConfiguredOre(TIN_ORE, OreBlocks.ORE_TIN, TIN_VEIN_SIZE);
-        registerConfiguredOre(QUARTZ_ORE, OreBlocks.ORE_QUARTZ, QUARTZ_VEIN_SIZE);
-        registerConfiguredOre(GNEISS_ORE, OreBlocks.ORE_GNEISS, GNEISS_VEIN_SIZE);
-        registerConfiguredOre(TEMPLE_ORE, OreBlocks.ORE_TEMPLE, TEMPLE_VEIN_SIZE);
+        registerConfiguredOre(COAL_ORE, OreBlocks.COAL, COAL_VEIN_SIZE);
+        registerConfiguredOre(IRON_ORE, OreBlocks.IRON, IRON_VEIN_SIZE);
+        registerConfiguredOre(GOLD_ORE, OreBlocks.GOLD, GOLD_VEIN_SIZE);
+        registerConfiguredOre(LAPIS_ORE, OreBlocks.LAPIS, LAPIS_VEIN_SIZE);
+        registerConfiguredOre(EMERALD_ORE, OreBlocks.EMERALD, EMERALD_VEIN_SIZE);
+        registerConfiguredOre(DIAMOND_ORE, OreBlocks.DIAMOND, DIAMOND_VEIN_SIZE);
+        registerConfiguredOre(JADE_ORE, OreBlocks.JADE, JADE_VEIN_SIZE);
+        registerConfiguredOre(PETRIFIED_WOOD_ORE, OreBlocks.PETRIFIED_WOOD, PETRIFIED_WOOD_VEIN_SIZE);
+        registerConfiguredOre(FOSSIL_ORE, OreBlocks.FOSSIL, FOSSIL_VEIN_SIZE);
+        registerConfiguredOre(ALUMINUM_ORE, OreBlocks.ALUMINUM, ALUMINUM_VEIN_SIZE);
+        registerConfiguredOre(COPPER_ORE, OreBlocks.COPPER, COPPER_VEIN_SIZE);
+        registerConfiguredOre(LEAD_ORE, OreBlocks.LEAD, LEAD_VEIN_SIZE);
+        registerConfiguredOre(SILVER_ORE, OreBlocks.SILVER, SILVER_VEIN_SIZE);
+        registerConfiguredOre(TIN_ORE, OreBlocks.TIN, TIN_VEIN_SIZE);
+        registerConfiguredOre(QUARTZ_ORE, OreBlocks.QUARTZ, QUARTZ_VEIN_SIZE);
+        registerConfiguredOre(GNEISS_ORE, OreBlocks.GNEISS, GNEISS_VEIN_SIZE);
+        registerConfiguredOre(TEMPLE_ORE, OreBlocks.TEMPLE, TEMPLE_VEIN_SIZE);
 
-        registerConfiguredOre(COAL_ORE_ELYSIAN_FIELDS, OreBlocks.ORE_COAL, COAL_VEIN_SIZE);
-        registerConfiguredOre(IRON_ORE_ELYSIAN_FIELDS, OreBlocks.ORE_IRON, IRON_VEIN_SIZE);
-        registerConfiguredOre(GOLD_ORE_ELYSIAN_FIELDS, OreBlocks.ORE_GOLD, GOLD_VEIN_SIZE);
-        registerConfiguredOre(EMERALD_ORE_ELYSIAN_FIELDS, OreBlocks.ORE_EMERALD, EMERALD_VEIN_SIZE);
-        registerConfiguredOre(JADE_ORE_ELYSIAN_FIELDS, OreBlocks.ORE_JADE, JADE_VEIN_SIZE);
-        registerConfiguredOre(FOSSIL_ORE_ELYSIAN_FIELDS, OreBlocks.ORE_FOSSIL, 6);
+        registerConfiguredOre(COAL_ORE_ELYSIAN_FIELDS, OreBlocks.COAL, COAL_VEIN_SIZE);
+        registerConfiguredOre(IRON_ORE_ELYSIAN_FIELDS, OreBlocks.IRON, IRON_VEIN_SIZE);
+        registerConfiguredOre(GOLD_ORE_ELYSIAN_FIELDS, OreBlocks.GOLD, GOLD_VEIN_SIZE);
+        registerConfiguredOre(EMERALD_ORE_ELYSIAN_FIELDS, OreBlocks.EMERALD, EMERALD_VEIN_SIZE);
+        registerConfiguredOre(JADE_ORE_ELYSIAN_FIELDS, OreBlocks.JADE, JADE_VEIN_SIZE);
+        registerConfiguredOre(FOSSIL_ORE_ELYSIAN_FIELDS, OreBlocks.FOSSIL, 6);
 
-        registerConfiguredOre(COAL_ORE_FUNGAL_FOREST, OreBlocks.ORE_COAL, COAL_VEIN_SIZE);
-        registerConfiguredOre(IRON_ORE_FUNGAL_FOREST, OreBlocks.ORE_IRON, IRON_VEIN_SIZE);
-        registerConfiguredOre(GOLD_ORE_FUNGAL_FOREST, OreBlocks.ORE_GOLD, GOLD_VEIN_SIZE);
-        registerConfiguredOre(EMERALD_ORE_FUNGAL_FOREST, OreBlocks.ORE_EMERALD, EMERALD_VEIN_SIZE);
-        registerConfiguredOre(JADE_ORE_FUNGAL_FOREST, OreBlocks.ORE_JADE, JADE_VEIN_SIZE);
-        registerConfiguredOre(FOSSIL_ORE_FUNGAL_FOREST, OreBlocks.ORE_FOSSIL, 6);
+        registerConfiguredOre(COAL_ORE_FUNGAL_FOREST, OreBlocks.COAL, COAL_VEIN_SIZE);
+        registerConfiguredOre(IRON_ORE_FUNGAL_FOREST, OreBlocks.IRON, IRON_VEIN_SIZE);
+        registerConfiguredOre(GOLD_ORE_FUNGAL_FOREST, OreBlocks.GOLD, GOLD_VEIN_SIZE);
+        registerConfiguredOre(EMERALD_ORE_FUNGAL_FOREST, OreBlocks.EMERALD, EMERALD_VEIN_SIZE);
+        registerConfiguredOre(JADE_ORE_FUNGAL_FOREST, OreBlocks.JADE, JADE_VEIN_SIZE);
+        registerConfiguredOre(FOSSIL_ORE_FUNGAL_FOREST, OreBlocks.FOSSIL, 6);
 
-        registerConfiguredOre(GOLD_ORE_PETRIFIED_FOREST, OreBlocks.ORE_GOLD, GOLD_VEIN_SIZE);
-        registerConfiguredOre(ENCRUSTED_DIAMOND_ORE_PETRIFIED_FOREST, OreBlocks.ORE_DIAMOND, 2);
-        registerConfiguredOre(JADE_ORE_PETRIFIED_FOREST, OreBlocks.ORE_JADE, JADE_VEIN_SIZE);
-        registerConfiguredOre(FOSSIL_ORE_PETRIFIED_FOREST, OreBlocks.ORE_FOSSIL, FOSSIL_VEIN_SIZE);
+        registerConfiguredOre(GOLD_ORE_PETRIFIED_FOREST, OreBlocks.GOLD, GOLD_VEIN_SIZE);
+        registerConfiguredOre(ENCRUSTED_DIAMOND_ORE_PETRIFIED_FOREST, OreBlocks.DIAMOND, 2);
+        registerConfiguredOre(JADE_ORE_PETRIFIED_FOREST, OreBlocks.JADE, JADE_VEIN_SIZE);
+        registerConfiguredOre(FOSSIL_ORE_PETRIFIED_FOREST, OreBlocks.FOSSIL, FOSSIL_VEIN_SIZE);
 
-        registerConfiguredOre(COAL_ORE_SUBMERGED_SWAMP, OreBlocks.ORE_COAL, 8);
-        registerConfiguredOre(EMERALD_ORE_SUBMERGED_SWAMP, OreBlocks.ORE_EMERALD, EMERALD_VEIN_SIZE);
-        registerConfiguredOre(DIAMOND_ORE_SUBMERGED_SWAMP, OreBlocks.ORE_DIAMOND, DIAMOND_VEIN_SIZE);
-        registerConfiguredOre(PETRIFIED_WOOD_ORE_SUBMERGED_SWAMP, OreBlocks.ORE_PETRIFIED_WOOD, PETRIFIED_WOOD_VEIN_SIZE);
-        registerConfiguredOre(FOSSIL_ORE_SUBMERGED_SWAMP, OreBlocks.ORE_FOSSIL, FOSSIL_VEIN_SIZE);
+        registerConfiguredOre(COAL_ORE_SUBMERGED_SWAMP, OreBlocks.COAL, 8);
+        registerConfiguredOre(EMERALD_ORE_SUBMERGED_SWAMP, OreBlocks.EMERALD, EMERALD_VEIN_SIZE);
+        registerConfiguredOre(DIAMOND_ORE_SUBMERGED_SWAMP, OreBlocks.DIAMOND, DIAMOND_VEIN_SIZE);
+        registerConfiguredOre(PETRIFIED_WOOD_ORE_SUBMERGED_SWAMP, OreBlocks.PETRIFIED_WOOD, PETRIFIED_WOOD_VEIN_SIZE);
+        registerConfiguredOre(FOSSIL_ORE_SUBMERGED_SWAMP, OreBlocks.FOSSIL, FOSSIL_VEIN_SIZE);
 
-        registerConfiguredOre(GOLD_ORE_SUBTERRANEAN_SAVANNAH_HIGH, OreBlocks.ORE_GOLD, GOLD_VEIN_SIZE);
-        registerConfiguredOre(GOLD_ORE_SUBTERRANEAN_SAVANNAH, OreBlocks.ORE_GOLD, GOLD_VEIN_SIZE);
-        registerConfiguredOre(GOLD_ORE_SUBTERRANEAN_SAVANNAH_LOW, OreBlocks.ORE_GOLD, GOLD_VEIN_SIZE);
-        registerConfiguredOre(EMERALD_ORE_SUBTERRANEAN_SAVANNAH, OreBlocks.ORE_EMERALD, EMERALD_VEIN_SIZE);
-        registerConfiguredOre(DIAMOND_ORE_SUBTERRANEAN_SAVANNAH, OreBlocks.ORE_DIAMOND, 2);
-        registerConfiguredOre(JADE_ORE_SUBTERRANEAN_SAVANNAH, OreBlocks.ORE_JADE, JADE_VEIN_SIZE);
-        registerConfiguredOre(PETRIFIED_WOOD_ORE_SUBTERRANEAN_SAVANNAH, OreBlocks.ORE_PETRIFIED_WOOD, PETRIFIED_WOOD_VEIN_SIZE);
+        registerConfiguredOre(GOLD_ORE_SUBTERRANEAN_SAVANNAH_HIGH, OreBlocks.GOLD, GOLD_VEIN_SIZE);
+        registerConfiguredOre(GOLD_ORE_SUBTERRANEAN_SAVANNAH, OreBlocks.GOLD, GOLD_VEIN_SIZE);
+        registerConfiguredOre(GOLD_ORE_SUBTERRANEAN_SAVANNAH_LOW, OreBlocks.GOLD, GOLD_VEIN_SIZE);
+        registerConfiguredOre(EMERALD_ORE_SUBTERRANEAN_SAVANNAH, OreBlocks.EMERALD, EMERALD_VEIN_SIZE);
+        registerConfiguredOre(DIAMOND_ORE_SUBTERRANEAN_SAVANNAH, OreBlocks.DIAMOND, 2);
+        registerConfiguredOre(JADE_ORE_SUBTERRANEAN_SAVANNAH, OreBlocks.JADE, JADE_VEIN_SIZE);
+        registerConfiguredOre(PETRIFIED_WOOD_ORE_SUBTERRANEAN_SAVANNAH, OreBlocks.PETRIFIED_WOOD, PETRIFIED_WOOD_VEIN_SIZE);
 
-        registerConfiguredOre(COAL_ORE_ULTERIOR_OUTBACK, OreBlocks.ORE_COAL, 8);
-        registerConfiguredOre(EMERALD_ORE_ULTERIOR_OUTBACK, OreBlocks.ORE_EMERALD, EMERALD_VEIN_SIZE);
-        registerConfiguredOre(DIAMOND_ORE_ULTERIOR_OUTBACK, OreBlocks.ORE_DIAMOND, DIAMOND_VEIN_SIZE);
-        registerConfiguredOre(PETRIFIED_WOOD_ORE_ULTERIOR_OUTBACK, OreBlocks.ORE_PETRIFIED_WOOD, PETRIFIED_WOOD_VEIN_SIZE);
-        registerConfiguredOre(FOSSIL_ORE_ULTERIOR_OUTBACK, OreBlocks.ORE_FOSSIL, FOSSIL_VEIN_SIZE);
+        registerConfiguredOre(COAL_ORE_ULTERIOR_OUTBACK, OreBlocks.COAL, 8);
+        registerConfiguredOre(EMERALD_ORE_ULTERIOR_OUTBACK, OreBlocks.EMERALD, EMERALD_VEIN_SIZE);
+        registerConfiguredOre(DIAMOND_ORE_ULTERIOR_OUTBACK, OreBlocks.DIAMOND, DIAMOND_VEIN_SIZE);
+        registerConfiguredOre(PETRIFIED_WOOD_ORE_ULTERIOR_OUTBACK, OreBlocks.PETRIFIED_WOOD, PETRIFIED_WOOD_VEIN_SIZE);
+        registerConfiguredOre(FOSSIL_ORE_ULTERIOR_OUTBACK, OreBlocks.FOSSIL, FOSSIL_VEIN_SIZE);
 
-        registerConfiguredOre(COAL_ORE_UNDERGROUND_JUNGLE, OreBlocks.ORE_COAL, COAL_VEIN_SIZE);
-        registerConfiguredOre(COAL_ORE_UNDERGROUND_JUNGLE_LARGE, OreBlocks.ORE_COAL, 13);
-        registerConfiguredOre(DIAMOND_ORE_UNDERGROUND_JUNGLE, OreBlocks.ORE_DIAMOND, DIAMOND_VEIN_SIZE);
-        registerConfiguredOre(JADE_ORE_UNDERGROUND_JUNGLE, OreBlocks.ORE_JADE, 5);
-        registerConfiguredOre(PETRIFIED_WOOD_ORE_UNDERGROUND_JUNGLE, OreBlocks.ORE_PETRIFIED_WOOD, PETRIFIED_WOOD_VEIN_SIZE);
-        registerConfiguredOre(FOSSIL_ORE_UNDERGROUND_JUNGLE, OreBlocks.ORE_FOSSIL, FOSSIL_VEIN_SIZE);
+        registerConfiguredOre(COAL_ORE_UNDERGROUND_JUNGLE, OreBlocks.COAL, COAL_VEIN_SIZE);
+        registerConfiguredOre(COAL_ORE_UNDERGROUND_JUNGLE_LARGE, OreBlocks.COAL, 13);
+        registerConfiguredOre(DIAMOND_ORE_UNDERGROUND_JUNGLE, OreBlocks.DIAMOND, DIAMOND_VEIN_SIZE);
+        registerConfiguredOre(JADE_ORE_UNDERGROUND_JUNGLE, OreBlocks.JADE, 5);
+        registerConfiguredOre(PETRIFIED_WOOD_ORE_UNDERGROUND_JUNGLE, OreBlocks.PETRIFIED_WOOD, PETRIFIED_WOOD_VEIN_SIZE);
+        registerConfiguredOre(FOSSIL_ORE_UNDERGROUND_JUNGLE, OreBlocks.FOSSIL, FOSSIL_VEIN_SIZE);
 
-        registerConfiguredOre(GOLD_ORE_VOLCANIC_DESERT, OreBlocks.ORE_GOLD, GOLD_VEIN_SIZE);
-        registerConfiguredOre(ENCRUSTED_DIAMOND_ORE_VOLCANIC_DESERT, OreBlocks.ORE_DIAMOND, 2);
-        registerConfiguredOre(JADE_ORE_VOLCANIC_DESERT, OreBlocks.ORE_JADE, JADE_VEIN_SIZE);
-        registerConfiguredOre(FOSSIL_ORE_VOLCANIC_DESERT, OreBlocks.ORE_FOSSIL, FOSSIL_VEIN_SIZE);
+        registerConfiguredOre(GOLD_ORE_VOLCANIC_DESERT, OreBlocks.GOLD, GOLD_VEIN_SIZE);
+        registerConfiguredOre(ENCRUSTED_DIAMOND_ORE_VOLCANIC_DESERT, OreBlocks.DIAMOND, 2);
+        registerConfiguredOre(JADE_ORE_VOLCANIC_DESERT, OreBlocks.JADE, JADE_VEIN_SIZE);
+        registerConfiguredOre(FOSSIL_ORE_VOLCANIC_DESERT, OreBlocks.FOSSIL, FOSSIL_VEIN_SIZE);
     }
 
     public static void initPlacedFeatures(BootstrapContext<PlacedFeature> context) {

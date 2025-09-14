@@ -27,7 +27,7 @@ public class SwampHutPiece extends ScatteredFeaturePiece {
     private final BlockState STAIR = StairBlocks.STAIRS_MOSSBARK.get().defaultBlockState();
     private final BlockState BRICKS = UmberstoneBlocks.UMBERCOBBLE.get().defaultBlockState();
     private final BlockState FENCE = FenceBlocks.FENCE_MOSSBARK.get().defaultBlockState();
-    private final BlockState DOOR = DoorBlocks.DOOR_MOSSBARK.get().defaultBlockState();
+    private final BlockState DOOR = DoorBlocks.MOSSBARK.get().defaultBlockState();
 
     public SwampHutPiece(RandomSource random, int x, int z) {
         super(ModStructurePieces.SWAMP_HUT.get(), x, 64, z, 10, 8, 10, getRandomHorizontalDirection(random));

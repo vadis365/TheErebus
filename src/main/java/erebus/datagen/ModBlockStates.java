@@ -54,25 +54,25 @@ public class ModBlockStates extends ModBlockStateProvider {
         doorBlockWithRenderType(AmberBlocks.AMBER_DOOR.get(), modLoc("block/amber_door_lower"), modLoc("block/amber_door_upper"), "translucent");
 
         // MARK: Ores
-        block(OreBlocks.ORE_IRON);
-        block(OreBlocks.ORE_GOLD);
-        block(OreBlocks.ORE_COAL);
-        block(OreBlocks.ORE_DIAMOND);
-        block(OreBlocks.ORE_EMERALD);
-        block(OreBlocks.ORE_LAPIS);
-        block(OreBlocks.ORE_QUARTZ);
-        block(OreBlocks.ORE_PETRIFIED_QUARTZ);
-        block(OreBlocks.ORE_COPPER);
-        block(OreBlocks.ORE_SILVER);
-        block(OreBlocks.ORE_TIN);
-        block(OreBlocks.ORE_LEAD);
-        block(OreBlocks.ORE_ALUMINUM);
-        block(OreBlocks.ORE_JADE);
-        block(OreBlocks.ORE_ENCRUSTED_DIAMOND);
-        block(OreBlocks.ORE_FOSSIL);
-        block(OreBlocks.ORE_GNEISS);
-        block(OreBlocks.ORE_PETRIFIED_WOOD);
-        block(OreBlocks.ORE_TEMPLE);
+        block(OreBlocks.IRON);
+        block(OreBlocks.GOLD);
+        block(OreBlocks.COAL);
+        block(OreBlocks.DIAMOND);
+        block(OreBlocks.EMERALD);
+        block(OreBlocks.LAPIS);
+        block(OreBlocks.QUARTZ);
+        block(OreBlocks.PETRIFIED_QUARTZ);
+        block(OreBlocks.COPPER);
+        block(OreBlocks.SILVER);
+        block(OreBlocks.TIN);
+        block(OreBlocks.LEAD);
+        block(OreBlocks.ALUMINUM);
+        block(OreBlocks.JADE);
+        block(OreBlocks.ENCRUSTED_DIAMOND);
+        block(OreBlocks.FOSSIL);
+        block(OreBlocks.GNEISS);
+        block(OreBlocks.PETRIFIED_WOOD);
+        block(OreBlocks.TEMPLE);
 
         // MARK: Logs
         log(WoodBlocks.LOG_BAOBAB);
@@ -189,17 +189,17 @@ public class ModBlockStates extends ModBlockStateProvider {
         stairs(StairBlocks.STAIRS_MIR_BRICKS, UmberstoneBlocks.MIR_BRICKS);
 
         // MARK: Doors
-        door(DoorBlocks.DOOR_BAOBAB);
-        door(DoorBlocks.DOOR_EUCALYPTUS);
-        door(DoorBlocks.DOOR_MAHOGANY);
-        door(DoorBlocks.DOOR_MOSSBARK);
-        door(DoorBlocks.DOOR_ASPER);
-        door(DoorBlocks.DOOR_CYPRESS);
-        door(DoorBlocks.DOOR_BALSAM);
-        door(DoorBlocks.DOOR_WHITE);
-        door(DoorBlocks.DOOR_ROTTEN);
-        door(DoorBlocks.DOOR_MARSHWOOD);
-        door(DoorBlocks.DOOR_SCORCHED);
+        door(DoorBlocks.BAOBAB);
+        door(DoorBlocks.EUCALYPTUS);
+        door(DoorBlocks.MAHOGANY);
+        door(DoorBlocks.MOSSBARK);
+        door(DoorBlocks.ASPER);
+        door(DoorBlocks.CYPRESS);
+        door(DoorBlocks.BALSAM);
+        door(DoorBlocks.WHITE);
+        door(DoorBlocks.ROTTEN);
+        door(DoorBlocks.MARSHWOOD);
+        door(DoorBlocks.SCORCHED);
 
         // MARK: Fences
         fence(FenceBlocks.FENCE_BAOBAB, WoodBlocks.PLANKS_BAOBAB);

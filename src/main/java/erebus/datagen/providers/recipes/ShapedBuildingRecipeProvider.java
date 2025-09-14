@@ -156,17 +156,17 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addDoorRecipes() {
-        door(WoodBlocks.PLANKS_BAOBAB, DoorBlocks.DOOR_BAOBAB);
-        door(WoodBlocks.PLANKS_EUCALYPTUS, DoorBlocks.DOOR_EUCALYPTUS);
-        door(WoodBlocks.PLANKS_MAHOGANY, DoorBlocks.DOOR_MAHOGANY);
-        door(WoodBlocks.PLANKS_MOSSBARK, DoorBlocks.DOOR_MOSSBARK);
-        door(WoodBlocks.PLANKS_ASPER, DoorBlocks.DOOR_ASPER);
-        door(WoodBlocks.PLANKS_CYPRESS, DoorBlocks.DOOR_CYPRESS);
-        door(WoodBlocks.PLANKS_BALSAM, DoorBlocks.DOOR_BALSAM);
-        door(WoodBlocks.PLANKS_WHITE, DoorBlocks.DOOR_WHITE);
-        door(WoodBlocks.PLANKS_ROTTEN, DoorBlocks.DOOR_ROTTEN);
-        door(WoodBlocks.PLANKS_MARSHWOOD, DoorBlocks.DOOR_MARSHWOOD);
-        door(WoodBlocks.PLANKS_SCORCHED, DoorBlocks.DOOR_SCORCHED);
+        door(WoodBlocks.PLANKS_BAOBAB, DoorBlocks.BAOBAB);
+        door(WoodBlocks.PLANKS_EUCALYPTUS, DoorBlocks.EUCALYPTUS);
+        door(WoodBlocks.PLANKS_MAHOGANY, DoorBlocks.MAHOGANY);
+        door(WoodBlocks.PLANKS_MOSSBARK, DoorBlocks.MOSSBARK);
+        door(WoodBlocks.PLANKS_ASPER, DoorBlocks.ASPER);
+        door(WoodBlocks.PLANKS_CYPRESS, DoorBlocks.CYPRESS);
+        door(WoodBlocks.PLANKS_BALSAM, DoorBlocks.BALSAM);
+        door(WoodBlocks.PLANKS_WHITE, DoorBlocks.WHITE);
+        door(WoodBlocks.PLANKS_ROTTEN, DoorBlocks.ROTTEN);
+        door(WoodBlocks.PLANKS_MARSHWOOD, DoorBlocks.MARSHWOOD);
+        door(WoodBlocks.PLANKS_SCORCHED, DoorBlocks.SCORCHED);
     }
 
     private void addFenceRecipes() {

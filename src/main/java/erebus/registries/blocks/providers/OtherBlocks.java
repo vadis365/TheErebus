@@ -5,16 +5,14 @@ import erebus.block.ComposterBlock;
 import erebus.block.altars.*;
 import erebus.block.bamboo.*;
 import erebus.block.portal.ErebusPortalBlock;
+import erebus.registries.blocks.properties.OtherBlockProperties;
 import erebus.registries.helpers.ModBlockHelpers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.NotNull;
@@ -138,41 +136,41 @@ public class OtherBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> ANT_HILL_BLOCK;
 
     static {
-        PORTAL = registerBlock("portal", () -> new ErebusPortalBlock(Properties.ofFullCopy(Blocks.NETHER_PORTAL)));
-        GAEAN_KEYSTONE = registerBlock("gaean_keystone", () -> new GaeanKeystoneBlock(Properties.ofFullCopy(Blocks.END_PORTAL_FRAME)));
-        JADE_BLOCK = registerSimpleBlock("jade_block", Properties.of().mapColor(MapColor.STONE));
-        MUD = registerBlock("mud", () -> new MudBlock(Properties.ofFullCopy(Blocks.MUD)) {
+        PORTAL = registerBlock("portal", () -> new ErebusPortalBlock(OtherBlockProperties.PORTAL));
+        GAEAN_KEYSTONE = registerBlock("gaean_keystone", () -> new GaeanKeystoneBlock(OtherBlockProperties.GAEAN_KEYSTONE));
+        JADE_BLOCK = registerSimpleBlock("jade_block", OtherBlockProperties.JADE_BLOCK);
+        MUD = registerBlock("mud", () -> new MudBlock(OtherBlockProperties.MUD) {
             @Override
             public @NotNull TriState canSustainPlant(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos soilPosition, @NotNull Direction facing, @NotNull BlockState plant) {
                 return TriState.TRUE;
             }
         });
-        QUICK_SAND = registerBlock("quick_sand", () -> new QuicksandBlock(Properties.of().strength(28F).sound(SoundType.SAND).mapColor(MapColor.SAND).noCollission()));
-        GHOST_SAND = registerSimpleBlock("ghost_sand", Properties.of().mapColor(MapColor.STONE));
-        SWAMP_VENT = registerBlock("swamp_vent", () -> new SwampVentBlock(Properties.ofFullCopy(Blocks.GRASS_BLOCK)));
-        GNEISS_VENT = registerSimpleBlock("gneiss_vent", Properties.of().mapColor(MapColor.STONE));
-        RED_GEM_BLOCK = registerSimpleBlock("red_gem_block", Properties.of().mapColor(MapColor.STONE));
-        RED_GEM_LAMP = registerBlock("red_gem_lamp", () -> new RedstoneLampBlock(Properties.ofFullCopy(Blocks.REDSTONE_LAMP)));
-        WITHER_WEB = registerBlock("wither_web", () -> new WitherWebBlock(Properties.of().mapColor(MapColor.WOOL).sound(SoundType.COBWEB).forceSolidOn().noCollission().requiresCorrectToolForDrops().strength(4.0F).pushReaction(PushReaction.DESTROY)));
-        LAVA_WEB = registerBlock("lava_web", () -> new LavaWebBlock(Properties.of().mapColor(MapColor.WOOL).sound(SoundType.COBWEB).forceSolidOn().noCollission().requiresCorrectToolForDrops().strength(4.0F).pushReaction(PushReaction.DESTROY)));
-        GNEISS = registerSimpleBlock("gneiss", Properties.of().mapColor(MapColor.STONE));
-        GNEISS_CARVED = registerSimpleBlock("gneiss_carved", Properties.of().mapColor(MapColor.STONE));
-        GNEISS_RELIEF = registerSimpleBlock("gneiss_relief", Properties.of().mapColor(MapColor.STONE));
-        GNEISS_BRICKS = registerSimpleBlock("gneiss_bricks", Properties.of().mapColor(MapColor.STONE));
-        GNEISS_SMOOTH = registerSimpleBlock("gneiss_smooth", Properties.of().mapColor(MapColor.STONE));
-        GNEISS_TILES = registerSimpleBlock("gneiss_tiles", Properties.of().mapColor(MapColor.STONE));
-        GNEISS_TILES_CRACKED = registerSimpleBlock("gneiss_tiles_cracked", Properties.of().mapColor(MapColor.STONE));
-        TEMPLE_BRICK = registerSimpleBlock("temple_brick", Properties.of().mapColor(MapColor.STONE));
-        TEMPLE_PILLAR = registerSimpleBlock("temple_pillar", Properties.of().mapColor(MapColor.STONE));
-        TEMPLE_TILE = registerSimpleBlock("temple_tile", Properties.of().mapColor(MapColor.STONE));
-        SILK = registerSimpleBlock("silk", Properties.of().mapColor(MapColor.STONE));
-        REIN_EXO = registerSimpleBlock("rein_exo", Properties.of().mapColor(MapColor.STONE));
-        VELOCITY_BLOCK = registerBlock("velocity_block", () -> new VelocityBlock(Properties.of().mapColor(MapColor.STONE).strength(1.5F).explosionResistance(10F).sound(SoundType.STONE)));
-        VELOCITY_BLOCK_LIGHTNING_SPEED = registerBlock("velocity_block_lightning_speed", () -> new VelocityBlockLightningSpeed(Properties.of().mapColor(MapColor.STONE).strength(1.5F).explosionResistance(10F).sound(SoundType.STONE)));
-        BLOCK_OF_BONES = registerBlock("block_of_bones", () -> new BlockOfBonesBlock(Properties.ofFullCopy(Blocks.BONE_BLOCK).noCollission()));
-        ANTLION_EGG = registerSimpleBlock("antlion_egg", Properties.of().mapColor(MapColor.STONE).noOcclusion());
-        TARANTULA_EGG = registerSimpleBlock("tarantula_egg", Properties.of().mapColor(MapColor.STONE).noOcclusion());
-        HONEY_TREAT = registerBlock("honey_treat", () -> new HoneyTreatBlock(Properties.of().forceSolidOn().strength(0.5F).sound(SoundType.WOOL).pushReaction(PushReaction.DESTROY)));
+        QUICK_SAND = registerBlock("quick_sand", () -> new QuicksandBlock(OtherBlockProperties.QUICK_SAND));
+        GHOST_SAND = registerSimpleBlock("ghost_sand", OtherBlockProperties.GHOST_SAND);
+        SWAMP_VENT = registerBlock("swamp_vent", () -> new SwampVentBlock(OtherBlockProperties.SWAMP_VENT));
+        GNEISS_VENT = registerSimpleBlock("gneiss_vent", OtherBlockProperties.GNEISS_VENT);
+        RED_GEM_BLOCK = registerSimpleBlock("red_gem_block", OtherBlockProperties.RED_GEM_BLOCK);
+        RED_GEM_LAMP = registerBlock("red_gem_lamp", () -> new RedstoneLampBlock(OtherBlockProperties.RED_GEM_LAMP));
+        WITHER_WEB = registerBlock("wither_web", () -> new WitherWebBlock(OtherBlockProperties.WITHER_WEB));
+        LAVA_WEB = registerBlock("lava_web", () -> new LavaWebBlock(OtherBlockProperties.LAVA_WEB));
+        GNEISS = registerSimpleBlock("gneiss", OtherBlockProperties.GNEISS);
+        GNEISS_CARVED = registerSimpleBlock("gneiss_carved", OtherBlockProperties.GNEISS_CARVED);
+        GNEISS_RELIEF = registerSimpleBlock("gneiss_relief", OtherBlockProperties.GNEISS_RELIEF);
+        GNEISS_BRICKS = registerSimpleBlock("gneiss_bricks", OtherBlockProperties.GNEISS_BRICKS);
+        GNEISS_SMOOTH = registerSimpleBlock("gneiss_smooth", OtherBlockProperties.GNEISS_SMOOTH);
+        GNEISS_TILES = registerSimpleBlock("gneiss_tiles", OtherBlockProperties.GNEISS_TILES);
+        GNEISS_TILES_CRACKED = registerSimpleBlock("gneiss_tiles_cracked", OtherBlockProperties.GNEISS_TILES_CRACKED);
+        TEMPLE_BRICK = registerSimpleBlock("temple_brick", OtherBlockProperties.TEMPLE_BRICK);
+        TEMPLE_PILLAR = registerSimpleBlock("temple_pillar", OtherBlockProperties.TEMPLE_PILLAR);
+        TEMPLE_TILE = registerSimpleBlock("temple_tile", OtherBlockProperties.TEMPLE_TILE);
+        SILK = registerSimpleBlock("silk", OtherBlockProperties.SILK);
+        REIN_EXO = registerSimpleBlock("rein_exo", OtherBlockProperties.REIN_EXO);
+        VELOCITY_BLOCK = registerBlock("velocity_block", () -> new VelocityBlock(OtherBlockProperties.VELOCITY_BLOCK));
+        VELOCITY_BLOCK_LIGHTNING_SPEED = registerBlock("velocity_block_lightning_speed", () -> new VelocityBlockLightningSpeed(OtherBlockProperties.VELOCITY_BLOCK_LIGHTNING_SPEED));
+        BLOCK_OF_BONES = registerBlock("block_of_bones", () -> new BlockOfBonesBlock(OtherBlockProperties.BLOCK_OF_BONES));
+        ANTLION_EGG = registerSimpleBlock("antlion_egg", OtherBlockProperties.ANTLION_EGG);
+        TARANTULA_EGG = registerSimpleBlock("tarantula_egg", OtherBlockProperties.TARANTULA_EGG);
+        HONEY_TREAT = registerBlock("honey_treat", () -> new HoneyTreatBlock(OtherBlockProperties.HONEY_TREAT));
         CANDLE_HONEY_TREAT = registerBlock("candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.CANDLE));
         WHITE_CANDLE_HONEY_TREAT = registerBlock("white_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.WHITE_CANDLE));
         ORANGE_CANDLE_HONEY_TREAT = registerBlock("orange_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.ORANGE_CANDLE));
@@ -190,80 +188,76 @@ public class OtherBlocks extends ModBlockHelpers {
         GREEN_CANDLE_HONEY_TREAT = registerBlock("green_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.GREEN_CANDLE));
         RED_CANDLE_HONEY_TREAT = registerBlock("red_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.RED_CANDLE));
         BLACK_CANDLE_HONEY_TREAT = registerBlock("black_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.BLACK_CANDLE));
-        WASP_NEST = registerSimpleBlock("wasp_nest", Properties.of().mapColor(MapColor.STONE));
+        WASP_NEST = registerSimpleBlock("wasp_nest", OtherBlockProperties.WASP_NEST);
         STAIRS_WASP_NEST = registerBlock(
                 "stairs_wasp_nest",
                 () -> new StairBlock(
                         WASP_NEST.get().defaultBlockState(),
-                        Properties.of().strength(2.0F)
+                        OtherBlockProperties.STAIRS_WASP_NEST
                 )
         );
-        INSECT_REPELLENT = registerBlock("insect_repellent", () -> new InsectRepellentBlock(Properties.of()
-                .noCollission()
-                .noOcclusion()
-                .replaceable()
-        ));
+        INSECT_REPELLENT = registerBlock("insect_repellent", () -> new InsectRepellentBlock(OtherBlockProperties.INSECT_REPELLENT));
 
         // MARK: Spawners
-        ANTLION_SPAWNER = registerSimpleBlock("antlion_spawner", Properties.of().mapColor(MapColor.STONE));
-        DRAGON_FLY_SPAWNER = registerSimpleBlock("dragon_fly_spawner", Properties.of().mapColor(MapColor.STONE));
-        JUMPING_SPIDER_SPAWNER = registerSimpleBlock("jumping_spider_spawner", Properties.of().mapColor(MapColor.STONE));
-        SPIDER_SPAWNER = registerSimpleBlock("spider_spawner", Properties.of().mapColor(MapColor.STONE));
-        TARANTULA_SPAWNER = registerSimpleBlock("tarantula_spawner", Properties.of().mapColor(MapColor.STONE));
-        WASP_SPAWNER = registerSimpleBlock("wasp_spawner", Properties.of().mapColor(MapColor.STONE));
-        ZOMBIE_ANT_SPAWNER = registerSimpleBlock("zombie_ant_spawner", Properties.of().mapColor(MapColor.STONE));
-        ZOMBIE_ANT_SOLDIER_SPAWNER = registerSimpleBlock("zombie_ant_soldier_spawner", Properties.of().mapColor(MapColor.STONE));
-        MAGMA_CRAWLER_SPAWNER = registerSimpleBlock("magma_crawler_spawner", Properties.of().mapColor(MapColor.STONE));
-        DUNG_SPAWNER_FLY = registerSimpleBlock("dung_spawner_fly", Properties.of().mapColor(MapColor.STONE));
-        DUNG_SPAWNER_BOT_FLY = registerBlock("dung_spawner_bot_fly", () -> new BotFlySpawnerBlock(Properties.of().mapColor(MapColor.STONE).noOcclusion()));
-        LOCUST_SPAWNER = registerSimpleBlock("locust_spawner", Properties.of().mapColor(MapColor.STONE));
+        ANTLION_SPAWNER = registerSimpleBlock("antlion_spawner", OtherBlockProperties.ANTLION_SPAWNER);
+        DRAGON_FLY_SPAWNER = registerSimpleBlock("dragon_fly_spawner", OtherBlockProperties.DRAGON_FLY_SPAWNER);
+        JUMPING_SPIDER_SPAWNER = registerSimpleBlock("jumping_spider_spawner", OtherBlockProperties.JUMPING_SPIDER_SPAWNER);
+        SPIDER_SPAWNER = registerSimpleBlock("spider_spawner", OtherBlockProperties.SPIDER_SPAWNER);
+        TARANTULA_SPAWNER = registerSimpleBlock("tarantula_spawner", OtherBlockProperties.TARANTULA_SPAWNER);
+        WASP_SPAWNER = registerSimpleBlock("wasp_spawner", OtherBlockProperties.WASP_SPAWNER);
+        ZOMBIE_ANT_SPAWNER = registerSimpleBlock("zombie_ant_spawner", OtherBlockProperties.ZOMBIE_ANT_SPAWNER);
+        ZOMBIE_ANT_SOLDIER_SPAWNER = registerSimpleBlock("zombie_ant_soldier_spawner", OtherBlockProperties.ZOMBIE_ANT_SOLDIER_SPAWNER);
+        MAGMA_CRAWLER_SPAWNER = registerSimpleBlock("magma_crawler_spawner", OtherBlockProperties.MAGMA_CRAWLER_SPAWNER);
+        DUNG_SPAWNER_FLY = registerSimpleBlock("dung_spawner_fly", OtherBlockProperties.DUNG_SPAWNER_FLY);
+        DUNG_SPAWNER_BOT_FLY = registerBlock("dung_spawner_bot_fly", () -> new BotFlySpawnerBlock(OtherBlockProperties.DUNG_SPAWNER_BOT_FLY));
+        LOCUST_SPAWNER = registerSimpleBlock("locust_spawner", OtherBlockProperties.LOCUST_SPAWNER);
 
         // MARK: Utility Blocks
-        PETRIFIED_CRAFTING_TABLE = registerBlock("petrified_crafting_table", () -> new PetrifiedCraftingTableBlock(Properties.ofFullCopy(Blocks.CRAFTING_TABLE)));
-        PETRIFIED_WOOD_CHEST = registerBlock("petrified_wood_chest", () -> new PetrifiedChestBlock(Properties.ofFullCopy(Blocks.CHEST)));
-        BAMBOO_CRATE = registerBlockWithoutBlockItem("bamboo_crate", () -> new BambooCrateBlock(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER)));
-        BAMBOO_BRIDGE = registerBlock("bamboo_bridge", () -> new BambooBridge(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER)));
-        BAMBOO_LADDER = registerBlock("bamboo_ladder", () -> new LadderBlock(Properties.ofFullCopy(Blocks.LADDER).sound(SoundType.BAMBOO)));
-        BAMBOO_NERD_POLE = registerBlock("bamboo_nerd_pole", () -> new BambooPole(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER)));
-        BAMBOO_EXTENDER = registerBlock("bamboo_extender", () -> new BambooExtender(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER)));
-        BAMBOO_TORCH = registerBlock("bamboo_torch", () -> new BambooTorchBlock(Properties.of().mapColor(MapColor.COLOR_GREEN).noCollission().sound(SoundType.BAMBOO).lightLevel((state) -> 15)));
-        BAMBOO_PIPE = registerBlock("bamboo_pipe", () -> new BambooPipe(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO)));
-        BAMBOO_PIPE_EXTRACT = registerBlock("bamboo_pipe_extract", () -> new BambooPipeExtract(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO)));
-        SILO_ROOF = registerBlock("silo_roof", () -> new SiloRoofBlock(Properties.of().mapColor(MapColor.METAL).strength(3F, 10F).sound(SoundType.METAL).noOcclusion()));
-        SILO_TANK = registerBlock("silo_tank", () -> new SiloTankBlock(Properties.of().mapColor(MapColor.WOOD).strength(3F, 10F).sound(SoundType.METAL).noOcclusion()));
-        SILO_SUPPORTS = registerBlock("silo_supports", () -> new SiloSupportsBlock(Properties.of().mapColor(MapColor.WOOD).noCollission().strength(2F, 10F).sound(SoundType.WOOD).noOcclusion()));
-        HONEY_COMB = registerBlock("honey_comb", () -> new HoneyCombBlock(Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.5F, 10F).lightLevel(value -> 1).sound(SoundType.WOOL)));
-        COMPOSTER = registerBlock("composter", () -> new ComposterBlock(Properties.of().mapColor(MapColor.COLOR_GREEN).strength(2F, 10F).sound(SoundType.WOOD).noOcclusion()));
-        BLENDER = registerBlock("blender", () -> new BlenderBlock(Properties.of().mapColor(MapColor.STONE).noOcclusion()));
-        UMBER_FURNACE = registerBlock("umber_furnace", () -> new UmberFurnaceBlock(Properties.ofFullCopy(Blocks.FURNACE)));
-        UMBERSTONE_BUTTON = registerBlock("umberstone_button", () -> new ButtonBlock(BlockSetType.STONE, 10, Properties.of().mapColor(MapColor.STONE)));
-        LIQUIFIER = registerBlockWithoutBlockItem("liquifier", () -> new LiquifierBlock(Properties.ofFullCopy(Blocks.GLASS).mapColor(MapColor.STONE).strength(1.0F, 2000.0F).sound(SoundType.GLASS).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false)));
-        GLOW_GEM_ACTIVE = registerBlock("glow_gem_active", () -> new GlowGemActiveBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).noCollission().sound(SoundType.GLASS).lightLevel((state) -> 15)));
-        GLOW_GEM_INACTIVE = registerBlock("glow_gem_inactive", () -> new GlowGemInactiveBlock(Properties.of().mapColor(MapColor.COLOR_RED).noCollission().sound(SoundType.GLASS).lightLevel((state) -> 0)));
-        MUCUS_BOMB = registerSimpleBlock("mucus_bomb", Properties.of().mapColor(MapColor.STONE));
-        UMBER_GOLEM_STATUE = registerSimpleBlock("umber_golem_statue", Properties.of().mapColor(MapColor.STONE));
+        PETRIFIED_CRAFTING_TABLE = registerBlock("petrified_crafting_table", () -> new PetrifiedCraftingTableBlock(OtherBlockProperties.PETRIFIED_CRAFTING_TABLE));
+        PETRIFIED_WOOD_CHEST = registerBlock("petrified_wood_chest", () -> new PetrifiedChestBlock(OtherBlockProperties.PETRIFIED_WOOD_CHEST));
+        BAMBOO_CRATE = registerBlockWithoutBlockItem("bamboo_crate", () -> new BambooCrateBlock(OtherBlockProperties.BAMBOO_CRATE));
+        BAMBOO_BRIDGE = registerBlock("bamboo_bridge", () -> new BambooBridge(OtherBlockProperties.BAMBOO_BRIDGE));
+        BAMBOO_LADDER = registerBlock("bamboo_ladder", () -> new LadderBlock(OtherBlockProperties.BAMBOO_LADDER));
+        BAMBOO_NERD_POLE = registerBlock("bamboo_nerd_pole", () -> new BambooPole(OtherBlockProperties.BAMBOO_NERD_POLE));
+        BAMBOO_EXTENDER = registerBlock("bamboo_extender", () -> new BambooExtender(OtherBlockProperties.BAMBOO_EXTENDER));
+        BAMBOO_TORCH = registerBlock("bamboo_torch", () -> new BambooTorchBlock(OtherBlockProperties.BAMBOO_TORCH));
+        BAMBOO_PIPE = registerBlock("bamboo_pipe", () -> new BambooPipe(OtherBlockProperties.BAMBOO_PIPE));
+        BAMBOO_PIPE_EXTRACT = registerBlock("bamboo_pipe_extract", () -> new BambooPipeExtract(OtherBlockProperties.BAMBOO_PIPE_EXTRACT));
+        SILO_ROOF = registerBlock("silo_roof", () -> new SiloRoofBlock(OtherBlockProperties.SILO_ROOF));
+        SILO_TANK = registerBlock("silo_tank", () -> new SiloTankBlock(OtherBlockProperties.SILO_TANK));
+        SILO_SUPPORTS = registerBlock("silo_supports", () -> new SiloSupportsBlock(OtherBlockProperties.SILO_SUPPORTS));
+        HONEY_COMB = registerBlock("honey_comb", () -> new HoneyCombBlock(OtherBlockProperties.HONEY_COMB));
+        COMPOSTER = registerBlock("composter", () -> new ComposterBlock(OtherBlockProperties.COMPOSTER));
+        BLENDER = registerBlock("blender", () -> new BlenderBlock(OtherBlockProperties.BLENDER));
+        UMBER_FURNACE = registerBlock("umber_furnace", () -> new UmberFurnaceBlock(OtherBlockProperties.UMBER_FURNACE));
+        UMBERSTONE_BUTTON = registerBlock("umberstone_button", () -> new ButtonBlock(BlockSetType.STONE, 10, OtherBlockProperties.UMBERSTONE_BUTTON));
+        LIQUIFIER = registerBlockWithoutBlockItem("liquifier", () -> new LiquifierBlock(OtherBlockProperties.LIQUIFIER));
+        GLOW_GEM_ACTIVE = registerBlock("glow_gem_active", () -> new GlowGemActiveBlock(OtherBlockProperties.GLOW_GEM_ACTIVE));
+        GLOW_GEM_INACTIVE = registerBlock("glow_gem_inactive", () -> new GlowGemInactiveBlock(OtherBlockProperties.GLOW_GEM_INACTIVE));
+        MUCUS_BOMB = registerSimpleBlock("mucus_bomb", OtherBlockProperties.MUCUS_BOMB);
+        UMBER_GOLEM_STATUE = registerSimpleBlock("umber_golem_statue", OtherBlockProperties.UMBER_GOLEM_STATUE);
 
-        ALTAR_BASE = registerBlock("altar_base", () -> new AltarBase(Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
-        ALTAR_LIGHTNING = registerBlock("altar_lightning", () -> new LightningAltar(Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
-        ALTAR_HEALING = registerBlock("altar_healing", () -> new HealingAltar(Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
-        ALTAR_EXPERIENCE = registerBlock("altar_experience", () -> new ExperienceAltar(Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
-        ALTAR_REPAIR = registerBlock("altar_repair", () -> new RepairAltar(Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
-        OFFERING_ALTAR = registerBlock("offering_altar", () -> new OfferingAltar(Properties.of().mapColor(MapColor.STONE).strength(2F).noOcclusion()));
-        CAPSTONE = registerSimpleBlock("capstone", Properties.of().mapColor(MapColor.STONE));
-        CAPSTONE_MUD = registerSimpleBlock("capstone_mud", Properties.of().mapColor(MapColor.STONE));
-        CAPSTONE_IRON = registerSimpleBlock("capstone_iron", Properties.of().mapColor(MapColor.STONE));
-        CAPSTONE_GOLD = registerSimpleBlock("capstone_gold", Properties.of().mapColor(MapColor.STONE));
-        CAPSTONE_JADE = registerSimpleBlock("capstone_jade", Properties.of().mapColor(MapColor.STONE));
-        TEMPLE_BRICK_UNBREAKING = registerSimpleBlock("temple_brick_unbreaking", Properties.of().mapColor(MapColor.STONE));
-        TEMPLE_BRICK_UNBREAKING_JADE = registerSimpleBlock("temple_brick_unbreaking_jade", Properties.of().mapColor(MapColor.STONE));
-        TEMPLE_BRICK_UNBREAKING_EXO = registerSimpleBlock("temple_brick_unbreaking_exo", Properties.of().mapColor(MapColor.STONE));
-        TEMPLE_BRICK_UNBREAKING_CREAM = registerSimpleBlock("temple_brick_unbreaking_cream", Properties.of().mapColor(MapColor.STONE));
-        TEMPLE_BRICK_UNBREAKING_EYE = registerSimpleBlock("temple_brick_unbreaking_eye", Properties.of().mapColor(MapColor.STONE));
-        TEMPLE_BRICK_UNBREAKING_STRING = registerSimpleBlock("temple_brick_unbreaking_string", Properties.of().mapColor(MapColor.STONE));
-        TEMPLE_TELEPORTER = registerSimpleBlock("temple_teleporter", Properties.of().mapColor(MapColor.STONE));
-        FORCE_FIELD = registerSimpleBlock("force_field", Properties.of().mapColor(MapColor.STONE));
-        FORCE_LOCK = registerSimpleBlock("force_lock", Properties.of().mapColor(MapColor.STONE));
-        ANT_HILL_BLOCK = registerSimpleBlock("ant_hill_block", Properties.of().mapColor(MapColor.STONE));
+        ALTAR_BASE = registerBlock("altar_base", () -> new AltarBase(OtherBlockProperties.ALTAR));
+        ALTAR_LIGHTNING = registerBlock("altar_lightning", () -> new LightningAltar(OtherBlockProperties.ALTAR));
+        ALTAR_HEALING = registerBlock("altar_healing", () -> new HealingAltar(OtherBlockProperties.ALTAR));
+        ALTAR_EXPERIENCE = registerBlock("altar_experience", () -> new ExperienceAltar(OtherBlockProperties.ALTAR));
+        ALTAR_REPAIR = registerBlock("altar_repair", () -> new RepairAltar(OtherBlockProperties.ALTAR));
+        OFFERING_ALTAR = registerBlock("offering_altar", () -> new OfferingAltar(OtherBlockProperties.ALTAR));
+        CAPSTONE = registerSimpleBlock("capstone", OtherBlockProperties.CAPSTONE);
+        CAPSTONE_MUD = registerSimpleBlock("capstone_mud", OtherBlockProperties.CAPSTONE_MUD);
+        CAPSTONE_IRON = registerSimpleBlock("capstone_iron", OtherBlockProperties.CAPSTONE_IRON);
+        CAPSTONE_GOLD = registerSimpleBlock("capstone_gold", OtherBlockProperties.CAPSTONE_GOLD);
+        CAPSTONE_JADE = registerSimpleBlock("capstone_jade", OtherBlockProperties.CAPSTONE_JADE);
+        TEMPLE_BRICK_UNBREAKING = registerSimpleBlock("temple_brick_unbreaking", OtherBlockProperties.TEMPLE_BRICK_UNBREAKING);
+        TEMPLE_BRICK_UNBREAKING_JADE = registerSimpleBlock("temple_brick_unbreaking_jade", OtherBlockProperties.TEMPLE_BRICK_UNBREAKING_JADE);
+        TEMPLE_BRICK_UNBREAKING_EXO = registerSimpleBlock("temple_brick_unbreaking_exo", OtherBlockProperties.TEMPLE_BRICK_UNBREAKING_EXO);
+        TEMPLE_BRICK_UNBREAKING_CREAM = registerSimpleBlock("temple_brick_unbreaking_cream", OtherBlockProperties.TEMPLE_BRICK_UNBREAKING_CREAM);
+        TEMPLE_BRICK_UNBREAKING_EYE = registerSimpleBlock("temple_brick_unbreaking_eye", OtherBlockProperties.TEMPLE_BRICK_UNBREAKING_EYE);
+        TEMPLE_BRICK_UNBREAKING_STRING = registerSimpleBlock("temple_brick_unbreaking_string", OtherBlockProperties.TEMPLE_BRICK_UNBREAKING_STRING);
+        TEMPLE_TELEPORTER = registerSimpleBlock("temple_teleporter", OtherBlockProperties.TEMPLE_TELEPORTER);
+        FORCE_FIELD = registerSimpleBlock("force_field", OtherBlockProperties.FORCE_FIELD);
+        FORCE_LOCK = registerSimpleBlock("force_lock", OtherBlockProperties.FORCE_LOCK);
+        ANT_HILL_BLOCK = registerSimpleBlock("ant_hill_block", OtherBlockProperties.ANT_HILL_BLOCK);
     }
 
     public static void init() {

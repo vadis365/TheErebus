@@ -51,22 +51,22 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
                         UmberstoneBlocks.UMBERSTONE.get(), UmberstoneBlocks.UMBERSTONE_BRICKS.get(), UmberstoneBlocks.UMBERCOBBLE.get(),
                         UmberstoneBlocks.UMBERCOBBLE_MOSSY.get(), UmberstoneBlocks.UMBERCOBBLE_WEBBED.get(), UmberstoneBlocks.UMBERTILE_SMOOTH.get(),
                         UmberstoneBlocks.UMBERTILE_SMOOTH_SMALL.get(), UmberstoneBlocks.UMBERPAVER.get(), UmberstoneBlocks.UMBERPAVER_MOSSY.get(),
-                        UmberstoneBlocks.UMBERPAVER_WEBBED.get(), UmberstoneBlocks.UMBERSTONE_PILLAR.get(), OreBlocks.ORE_IRON.get(),
-                        OreBlocks.ORE_GOLD.get(), OreBlocks.ORE_COAL.get(), OreBlocks.ORE_DIAMOND.get(), OreBlocks.ORE_EMERALD.get(),
-                        OreBlocks.ORE_LAPIS.get(), OreBlocks.ORE_QUARTZ.get(), OreBlocks.ORE_PETRIFIED_QUARTZ.get(), OreBlocks.ORE_COPPER.get(),
-                        OreBlocks.ORE_SILVER.get(), OreBlocks.ORE_TIN.get(), OreBlocks.ORE_LEAD.get(), OreBlocks.ORE_ALUMINUM.get(), OreBlocks.ORE_JADE.get(),
-                        OreBlocks.ORE_FOSSIL.get(), OreBlocks.ORE_GNEISS.get(), OreBlocks.ORE_PETRIFIED_WOOD.get(), OreBlocks.ORE_TEMPLE.get(),
-                        OreBlocks.ORE_ENCRUSTED_DIAMOND.get()
+                        UmberstoneBlocks.UMBERPAVER_WEBBED.get(), UmberstoneBlocks.UMBERSTONE_PILLAR.get(), OreBlocks.IRON.get(),
+                        OreBlocks.GOLD.get(), OreBlocks.COAL.get(), OreBlocks.DIAMOND.get(), OreBlocks.EMERALD.get(),
+                        OreBlocks.LAPIS.get(), OreBlocks.QUARTZ.get(), OreBlocks.PETRIFIED_QUARTZ.get(), OreBlocks.COPPER.get(),
+                        OreBlocks.SILVER.get(), OreBlocks.TIN.get(), OreBlocks.LEAD.get(), OreBlocks.ALUMINUM.get(), OreBlocks.JADE.get(),
+                        OreBlocks.FOSSIL.get(), OreBlocks.GNEISS.get(), OreBlocks.PETRIFIED_WOOD.get(), OreBlocks.TEMPLE.get(),
+                        OreBlocks.ENCRUSTED_DIAMOND.get()
                 );
 
         // MARK: Ores
-        tag(BlockTags.COAL_ORES).add(OreBlocks.ORE_COAL.get());
-        tag(BlockTags.IRON_ORES).add(OreBlocks.ORE_IRON.get());
-        tag(BlockTags.GOLD_ORES).add(OreBlocks.ORE_GOLD.get());
-        tag(BlockTags.DIAMOND_ORES).add(OreBlocks.ORE_DIAMOND.get(), OreBlocks.ORE_ENCRUSTED_DIAMOND.get());
-        tag(BlockTags.EMERALD_ORES).add(OreBlocks.ORE_EMERALD.get());
-        tag(BlockTags.COPPER_ORES).add(OreBlocks.ORE_COPPER.get());
-        tag(BlockTags.LAPIS_ORES).add(OreBlocks.ORE_LAPIS.get());
+        tag(BlockTags.COAL_ORES).add(OreBlocks.COAL.get());
+        tag(BlockTags.IRON_ORES).add(OreBlocks.IRON.get());
+        tag(BlockTags.GOLD_ORES).add(OreBlocks.GOLD.get());
+        tag(BlockTags.DIAMOND_ORES).add(OreBlocks.DIAMOND.get(), OreBlocks.ENCRUSTED_DIAMOND.get());
+        tag(BlockTags.EMERALD_ORES).add(OreBlocks.EMERALD.get());
+        tag(BlockTags.COPPER_ORES).add(OreBlocks.COPPER.get());
+        tag(BlockTags.LAPIS_ORES).add(OreBlocks.LAPIS.get());
 
         tag(BlockTags.CANDLE_CAKES)
                 .add(

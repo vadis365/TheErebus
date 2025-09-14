@@ -285,25 +285,25 @@ public class ModItemModels extends ModItemModelProvider {
         blockFlatWithItemTexture(AmberBlocks.AMBER_DOOR, "door_amber");
 
         // MARK: Ores
-        block(OreBlocks.ORE_IRON);
-        block(OreBlocks.ORE_GOLD);
-        block(OreBlocks.ORE_COAL);
-        block(OreBlocks.ORE_DIAMOND);
-        block(OreBlocks.ORE_EMERALD);
-        block(OreBlocks.ORE_LAPIS);
-        block(OreBlocks.ORE_QUARTZ);
-        block(OreBlocks.ORE_PETRIFIED_QUARTZ);
-        block(OreBlocks.ORE_COPPER);
-        block(OreBlocks.ORE_SILVER);
-        block(OreBlocks.ORE_TIN);
-        block(OreBlocks.ORE_LEAD);
-        block(OreBlocks.ORE_ALUMINUM);
-        block(OreBlocks.ORE_JADE);
-        block(OreBlocks.ORE_ENCRUSTED_DIAMOND);
-        block(OreBlocks.ORE_FOSSIL);
-        block(OreBlocks.ORE_GNEISS);
-        block(OreBlocks.ORE_PETRIFIED_WOOD);
-        block(OreBlocks.ORE_TEMPLE);
+        block(OreBlocks.IRON);
+        block(OreBlocks.GOLD);
+        block(OreBlocks.COAL);
+        block(OreBlocks.DIAMOND);
+        block(OreBlocks.EMERALD);
+        block(OreBlocks.LAPIS);
+        block(OreBlocks.QUARTZ);
+        block(OreBlocks.PETRIFIED_QUARTZ);
+        block(OreBlocks.COPPER);
+        block(OreBlocks.SILVER);
+        block(OreBlocks.TIN);
+        block(OreBlocks.LEAD);
+        block(OreBlocks.ALUMINUM);
+        block(OreBlocks.JADE);
+        block(OreBlocks.ENCRUSTED_DIAMOND);
+        block(OreBlocks.FOSSIL);
+        block(OreBlocks.GNEISS);
+        block(OreBlocks.PETRIFIED_WOOD);
+        block(OreBlocks.TEMPLE);
 
         // MARK: Logs
         block(WoodBlocks.LOG_BAOBAB);
@@ -420,17 +420,17 @@ public class ModItemModels extends ModItemModelProvider {
         stairs(StairBlocks.STAIRS_MIR_BRICKS, UmberstoneBlocks.MIR_BRICKS);
 
         // MARK: Doors
-        blockFlatWithItemTexture(DoorBlocks.DOOR_BAOBAB, "door_baobab");
-        blockFlatWithItemTexture(DoorBlocks.DOOR_EUCALYPTUS, "door_eucalyptus");
-        blockFlatWithItemTexture(DoorBlocks.DOOR_MAHOGANY, "door_mahogany");
-        blockFlatWithItemTexture(DoorBlocks.DOOR_MOSSBARK, "door_mossbark");
-        blockFlatWithItemTexture(DoorBlocks.DOOR_ASPER, "door_asper");
-        blockFlatWithItemTexture(DoorBlocks.DOOR_CYPRESS, "door_cypress");
-        blockFlatWithItemTexture(DoorBlocks.DOOR_BALSAM, "door_balsam");
-        blockFlatWithItemTexture(DoorBlocks.DOOR_WHITE, "door_white");
-        blockFlatWithItemTexture(DoorBlocks.DOOR_ROTTEN, "door_rotten");
-        blockFlatWithItemTexture(DoorBlocks.DOOR_MARSHWOOD, "door_marshwood");
-        blockFlatWithItemTexture(DoorBlocks.DOOR_SCORCHED, "door_scorched");
+        blockFlatWithItemTexture(DoorBlocks.BAOBAB, "door_baobab");
+        blockFlatWithItemTexture(DoorBlocks.EUCALYPTUS, "door_eucalyptus");
+        blockFlatWithItemTexture(DoorBlocks.MAHOGANY, "door_mahogany");
+        blockFlatWithItemTexture(DoorBlocks.MOSSBARK, "door_mossbark");
+        blockFlatWithItemTexture(DoorBlocks.ASPER, "door_asper");
+        blockFlatWithItemTexture(DoorBlocks.CYPRESS, "door_cypress");
+        blockFlatWithItemTexture(DoorBlocks.BALSAM, "door_balsam");
+        blockFlatWithItemTexture(DoorBlocks.WHITE, "door_white");
+        blockFlatWithItemTexture(DoorBlocks.ROTTEN, "door_rotten");
+        blockFlatWithItemTexture(DoorBlocks.MARSHWOOD, "door_marshwood");
+        blockFlatWithItemTexture(DoorBlocks.SCORCHED, "door_scorched");
 
         // MARK: Fences
         itemFence(FenceBlocks.FENCE_BAOBAB, WoodBlocks.PLANKS_BAOBAB);

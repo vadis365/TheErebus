@@ -62,25 +62,25 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(UmberstoneBlocks.MUD_BRICKS);
 
         // MARK: Ores
-        ore(OreBlocks.ORE_IRON, Items.RAW_IRON);
-        ore(OreBlocks.ORE_GOLD, Items.RAW_GOLD);
-        ore(OreBlocks.ORE_COAL, Items.COAL);
-        ore(OreBlocks.ORE_DIAMOND, Items.DIAMOND);
-        ore(OreBlocks.ORE_EMERALD, Items.EMERALD);
-        ore(OreBlocks.ORE_LAPIS, Items.LAPIS_LAZULI);
-        ore(OreBlocks.ORE_QUARTZ, Items.QUARTZ);
-        ore(OreBlocks.ORE_PETRIFIED_QUARTZ, Items.QUARTZ);
-        ore(OreBlocks.ORE_COPPER, Items.RAW_COPPER);
-        ore(OreBlocks.ORE_SILVER, ModItems.INGOT_SILVER);
-        ore(OreBlocks.ORE_TIN, ModItems.INGOT_TIN);
-        ore(OreBlocks.ORE_LEAD, ModItems.INGOT_LEAD);
-        ore(OreBlocks.ORE_ALUMINUM, ModItems.INGOT_ALUMINUM);
-        ore(OreBlocks.ORE_JADE, ModItems.JADE);
-        ore(OreBlocks.ORE_ENCRUSTED_DIAMOND, Items.DIAMOND);
-        ore(OreBlocks.ORE_FOSSIL, Items.BONE);
-        ore(OreBlocks.ORE_GNEISS, ModItems.GNEISS_ROCK);
-        ore(OreBlocks.ORE_PETRIFIED_WOOD, ModItems.PETRIFIED_WOOD);
-        ore(OreBlocks.ORE_TEMPLE, ModItems.TEMPLE_ROCK);
+        ore(OreBlocks.IRON, Items.RAW_IRON);
+        ore(OreBlocks.GOLD, Items.RAW_GOLD);
+        ore(OreBlocks.COAL, Items.COAL);
+        ore(OreBlocks.DIAMOND, Items.DIAMOND);
+        ore(OreBlocks.EMERALD, Items.EMERALD);
+        ore(OreBlocks.LAPIS, Items.LAPIS_LAZULI);
+        ore(OreBlocks.QUARTZ, Items.QUARTZ);
+        ore(OreBlocks.PETRIFIED_QUARTZ, Items.QUARTZ);
+        ore(OreBlocks.COPPER, Items.RAW_COPPER);
+        ore(OreBlocks.SILVER, ModItems.INGOT_SILVER);
+        ore(OreBlocks.TIN, ModItems.INGOT_TIN);
+        ore(OreBlocks.LEAD, ModItems.INGOT_LEAD);
+        ore(OreBlocks.ALUMINUM, ModItems.INGOT_ALUMINUM);
+        ore(OreBlocks.JADE, ModItems.JADE);
+        ore(OreBlocks.ENCRUSTED_DIAMOND, Items.DIAMOND);
+        ore(OreBlocks.FOSSIL, Items.BONE);
+        ore(OreBlocks.GNEISS, ModItems.GNEISS_ROCK);
+        ore(OreBlocks.PETRIFIED_WOOD, ModItems.PETRIFIED_WOOD);
+        ore(OreBlocks.TEMPLE, ModItems.TEMPLE_ROCK);
 
         // MARK: Logs
         dropSelf(WoodBlocks.LOG_BAOBAB);
@@ -199,17 +199,17 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(OtherBlocks.STAIRS_WASP_NEST);
 
         // MARK: Doors
-        dropSelf(DoorBlocks.DOOR_BAOBAB);
-        dropSelf(DoorBlocks.DOOR_EUCALYPTUS);
-        dropSelf(DoorBlocks.DOOR_MAHOGANY);
-        dropSelf(DoorBlocks.DOOR_MOSSBARK);
-        dropSelf(DoorBlocks.DOOR_ASPER);
-        dropSelf(DoorBlocks.DOOR_CYPRESS);
-        dropSelf(DoorBlocks.DOOR_BALSAM);
-        dropSelf(DoorBlocks.DOOR_WHITE);
-        dropSelf(DoorBlocks.DOOR_ROTTEN);
-        dropSelf(DoorBlocks.DOOR_MARSHWOOD);
-        dropSelf(DoorBlocks.DOOR_SCORCHED);
+        dropSelf(DoorBlocks.BAOBAB);
+        dropSelf(DoorBlocks.EUCALYPTUS);
+        dropSelf(DoorBlocks.MAHOGANY);
+        dropSelf(DoorBlocks.MOSSBARK);
+        dropSelf(DoorBlocks.ASPER);
+        dropSelf(DoorBlocks.CYPRESS);
+        dropSelf(DoorBlocks.BALSAM);
+        dropSelf(DoorBlocks.WHITE);
+        dropSelf(DoorBlocks.ROTTEN);
+        dropSelf(DoorBlocks.MARSHWOOD);
+        dropSelf(DoorBlocks.SCORCHED);
 
         // MARK: Fences
         dropSelf(FenceBlocks.FENCE_BAOBAB);

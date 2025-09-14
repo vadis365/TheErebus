@@ -67,7 +67,7 @@ public class DesertRockGneissFeatureConfiguration extends Feature<NoneFeatureCon
                 state = level.getBlockState(new BlockPos(xAtt, yAtt, zAtt));
 
                 if (state.is(OtherBlocks.GNEISS.get()) || state.is(OtherBlocks.GNEISS_VENT.get())) {
-                    level.setBlock(new BlockPos(xAtt, yAtt, zAtt), OreBlocks.ORE_ENCRUSTED_DIAMOND.get().defaultBlockState(), 2);
+                    level.setBlock(new BlockPos(xAtt, yAtt, zAtt), OreBlocks.ENCRUSTED_DIAMOND.get().defaultBlockState(), 2);
                     ++diamonds;
                 }
             }

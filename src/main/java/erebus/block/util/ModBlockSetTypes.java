@@ -6,6 +6,7 @@ public class ModBlockSetTypes {
 
     public static final BlockSetType AMBER = BlockSetType.register(new BlockSetType("amber"));
     public static final BlockSetType ASPER = BlockSetType.register(new BlockSetType("asper"));
+    public static final BlockSetType BAMBOO = BlockSetType.register(new BlockSetType("bamboo"));
     public static final BlockSetType BALSAM = BlockSetType.register(new BlockSetType("balsam"));
     public static final BlockSetType BAOBAB = BlockSetType.register(new BlockSetType("baobab"));
     public static final BlockSetType CYPRESS = BlockSetType.register(new BlockSetType("cypress"));
@@ -15,5 +16,6 @@ public class ModBlockSetTypes {
     public static final BlockSetType MOSSBARK = BlockSetType.register(new BlockSetType("mossbark"));
     public static final BlockSetType ROTTEN = BlockSetType.register(new BlockSetType("rotten"));
     public static final BlockSetType SCORCHED = BlockSetType.register(new BlockSetType("scorched"));
+    public static final BlockSetType VARNISHED = BlockSetType.register(new BlockSetType("varnished"));
     public static final BlockSetType WHITE = BlockSetType.register(new BlockSetType("white"));
 }

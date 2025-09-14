@@ -171,7 +171,7 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
                     }
 
                     // Place a diamond ore block
-                    setBlock(level, currentPos, OreBlocks.ORE_ENCRUSTED_DIAMOND.get().defaultBlockState());
+                    setBlock(level, currentPos, OreBlocks.ENCRUSTED_DIAMOND.get().defaultBlockState());
                     currentPos = currentPos.below();
                     --oreColumnHeight;
 

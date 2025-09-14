@@ -1,11 +1,8 @@
 package erebus.registries.blocks.providers;
 
+import erebus.registries.blocks.properties.SlabBlockProperties;
 import erebus.registries.helpers.ModBlockHelpers;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class SlabBlocks extends ModBlockHelpers {
@@ -43,35 +40,35 @@ public class SlabBlocks extends ModBlockHelpers {
     public static final DeferredBlock<SlabBlock> SLAB_MIR_BRICKS;
 
     static {
-        SLAB_PLANKS_BAOBAB = registerSlab("slab_planks_baobab", Properties.ofFullCopy(Blocks.OAK_SLAB));
-        SLAB_PLANKS_EUCALYPTUS = registerSlab("slab_planks_eucalyptus", Properties.ofFullCopy(Blocks.OAK_SLAB));
-        SLAB_PLANKS_MAHOGANY = registerSlab("slab_planks_mahogany", Properties.ofFullCopy(Blocks.OAK_SLAB));
-        SLAB_PLANKS_MOSSBARK = registerSlab("slab_planks_mossbark", Properties.ofFullCopy(Blocks.OAK_SLAB));
-        SLAB_PLANKS_ASPER = registerSlab("slab_planks_asper", Properties.ofFullCopy(Blocks.OAK_SLAB));
-        SLAB_PLANKS_CYPRESS = registerSlab("slab_planks_cypress", Properties.ofFullCopy(Blocks.OAK_SLAB));
-        SLAB_PLANKS_BALSAM = registerSlab("slab_planks_balsam", Properties.ofFullCopy(Blocks.OAK_SLAB));
-        SLAB_PLANKS_WHITE = registerSlab("slab_planks_white", Properties.ofFullCopy(Blocks.OAK_SLAB));
-        SLAB_PLANKS_BAMBOO = registerSlab("slab_planks_bamboo", Properties.ofFullCopy(Blocks.OAK_SLAB));
-        SLAB_PLANKS_ROTTEN = registerSlab("slab_planks_rotten", Properties.ofFullCopy(Blocks.OAK_SLAB));
-        SLAB_PLANKS_MARSHWOOD = registerSlab("slab_planks_marshwood", Properties.ofFullCopy(Blocks.OAK_SLAB));
-        SLAB_PLANKS_SCORCHED = registerSlab("slab_planks_scorched", Properties.ofFullCopy(Blocks.OAK_SLAB));
-        SLAB_PLANKS_VARNISHED = registerSlab("slab_planks_varnished", Properties.ofFullCopy(Blocks.OAK_SLAB));
-        SLAB_PLANKS_PETRIFIED = registerSlab("slab_planks_petrified", Properties.ofFullCopy(Blocks.OAK_SLAB));
+        SLAB_PLANKS_BAOBAB = registerSlab("slab_planks_baobab", SlabBlockProperties.SLAB_PLANKS);
+        SLAB_PLANKS_EUCALYPTUS = registerSlab("slab_planks_eucalyptus", SlabBlockProperties.SLAB_PLANKS);
+        SLAB_PLANKS_MAHOGANY = registerSlab("slab_planks_mahogany", SlabBlockProperties.SLAB_PLANKS);
+        SLAB_PLANKS_MOSSBARK = registerSlab("slab_planks_mossbark", SlabBlockProperties.SLAB_PLANKS);
+        SLAB_PLANKS_ASPER = registerSlab("slab_planks_asper", SlabBlockProperties.SLAB_PLANKS);
+        SLAB_PLANKS_CYPRESS = registerSlab("slab_planks_cypress", SlabBlockProperties.SLAB_PLANKS);
+        SLAB_PLANKS_BALSAM = registerSlab("slab_planks_balsam", SlabBlockProperties.SLAB_PLANKS);
+        SLAB_PLANKS_WHITE = registerSlab("slab_planks_white", SlabBlockProperties.SLAB_PLANKS);
+        SLAB_PLANKS_BAMBOO = registerSlab("slab_planks_bamboo", SlabBlockProperties.SLAB_PLANKS);
+        SLAB_PLANKS_ROTTEN = registerSlab("slab_planks_rotten", SlabBlockProperties.SLAB_PLANKS);
+        SLAB_PLANKS_MARSHWOOD = registerSlab("slab_planks_marshwood", SlabBlockProperties.SLAB_PLANKS);
+        SLAB_PLANKS_SCORCHED = registerSlab("slab_planks_scorched", SlabBlockProperties.SLAB_PLANKS);
+        SLAB_PLANKS_VARNISHED = registerSlab("slab_planks_varnished", SlabBlockProperties.SLAB_PLANKS);
+        SLAB_PLANKS_PETRIFIED = registerSlab("slab_planks_petrified", SlabBlockProperties.SLAB_PLANKS);
 
-        SLAB_UMBERSTONE = registerSlab("slab_umberstone", Properties.ofFullCopy(Blocks.STONE_SLAB));
-        SLAB_UMBERCOBBLE = registerSlab("slab_umbercobble", Properties.ofFullCopy(Blocks.STONE_SLAB));
-        SLAB_UMBERCOBBLE_MOSSY = registerSlab("slab_umbercobble_mossy", Properties.ofFullCopy(Blocks.STONE_SLAB));
-        SLAB_UMBERCOBBLE_WEBBED = registerSlab("slab_umbercobble_webbed", Properties.ofFullCopy(Blocks.STONE_SLAB));
-        SLAB_UMBERSTONE_BRICKS = registerSlab("slab_umberstone_bricks", Properties.ofFullCopy(Blocks.STONE_SLAB));
-        SLAB_UMBERTILE_SMOOTH = registerSlab("slab_umberstone_smooth", Properties.ofFullCopy(Blocks.STONE_SLAB));
-        SLAB_UMBERTILE_SMOOTH_SMALL = registerSlab("slab_umberstone_smooth_small", Properties.ofFullCopy(Blocks.STONE_SLAB));
-        SLAB_UMBERPAVER = registerSlab("slab_umberpaver", Properties.ofFullCopy(Blocks.STONE_SLAB));
-        SLAB_UMBERPAVER_MOSSY = registerSlab("slab_umberpaver_mossy", Properties.ofFullCopy(Blocks.STONE_SLAB));
-        SLAB_UMBERPAVER_WEBBED = registerSlab("slab_umberpaver_webbed", Properties.ofFullCopy(Blocks.STONE_SLAB));
-        SLAB_AMBER = registerSlab("slab_amber", Properties.ofFullCopy(Blocks.GLASS).strength(1.5F).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false).sound(SoundType.GLASS).mapColor(MapColor.GOLD));
-        SLAB_AMBER_BRICKS = registerSlab("slab_amber_bricks", Properties.ofFullCopy(Blocks.GLASS).strength(1.5F).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false).sound(SoundType.GLASS).mapColor(MapColor.GOLD));
-        SLAB_MUD_BRICKS = registerSlab("slab_mud_bricks", Properties.ofFullCopy(Blocks.STONE_SLAB));
-        SLAB_MIR_BRICKS = registerSlab("slab_mir_bricks", Properties.ofFullCopy(Blocks.STONE_SLAB));
+        SLAB_UMBERSTONE = registerSlab("slab_umberstone", SlabBlockProperties.SLAB_STONE);
+        SLAB_UMBERCOBBLE = registerSlab("slab_umbercobble", SlabBlockProperties.SLAB_STONE);
+        SLAB_UMBERCOBBLE_MOSSY = registerSlab("slab_umbercobble_mossy", SlabBlockProperties.SLAB_STONE);
+        SLAB_UMBERCOBBLE_WEBBED = registerSlab("slab_umbercobble_webbed", SlabBlockProperties.SLAB_STONE);
+        SLAB_UMBERSTONE_BRICKS = registerSlab("slab_umberstone_bricks", SlabBlockProperties.SLAB_STONE);
+        SLAB_UMBERTILE_SMOOTH = registerSlab("slab_umberstone_smooth", SlabBlockProperties.SLAB_STONE);
+        SLAB_UMBERTILE_SMOOTH_SMALL = registerSlab("slab_umberstone_smooth_small", SlabBlockProperties.SLAB_STONE);
+        SLAB_UMBERPAVER = registerSlab("slab_umberpaver", SlabBlockProperties.SLAB_STONE);
+        SLAB_UMBERPAVER_MOSSY = registerSlab("slab_umberpaver_mossy", SlabBlockProperties.SLAB_STONE);
+        SLAB_UMBERPAVER_WEBBED = registerSlab("slab_umberpaver_webbed", SlabBlockProperties.SLAB_STONE);
+        SLAB_AMBER = registerSlab("slab_amber", SlabBlockProperties.SLAB_AMBER);
+        SLAB_AMBER_BRICKS = registerSlab("slab_amber_bricks", SlabBlockProperties.SLAB_AMBER_BRICKS);
+        SLAB_MUD_BRICKS = registerSlab("slab_mud_bricks", SlabBlockProperties.SLAB_STONE);
+        SLAB_MIR_BRICKS = registerSlab("slab_mir_bricks", SlabBlockProperties.SLAB_STONE);
     }
 
     public static void init() {
