@@ -1,12 +1,31 @@
 package erebus.registries;
 
+import java.util.List;
+import java.util.Map;
+
+import org.jetbrains.annotations.NotNull;
+
 import erebus.Erebus;
-import erebus.item.*;
+import erebus.item.AntTamingAmulet;
+import erebus.item.BambooPipeWrenchItem;
+import erebus.item.BeeTamingAmulet;
+import erebus.item.BeettleJuiceBucketItem;
+import erebus.item.CamoPowderItem;
+import erebus.item.InsectRepellentItem;
+import erebus.item.MaxSpeedBowItem;
+import erebus.item.PaxelItem;
+import erebus.item.SmoothieBookItem;
+import erebus.item.WaspSwordItem;
+import erebus.item.armour.JumpBoots;
 import erebus.item.blocks.BambooCrateItem;
 import erebus.item.blocks.FluidJarBlockItem;
 import erebus.item.blocks.LiquifierBlockItem;
 import erebus.item.shield.ErebusShieldItem;
-import erebus.item.shield.type.*;
+import erebus.item.shield.type.BambooShieldType;
+import erebus.item.shield.type.ExoSkeletonShieldType;
+import erebus.item.shield.type.JadeShieldType;
+import erebus.item.shield.type.ReinforcedShieldType;
+import erebus.item.shield.type.RhinoShieldType;
 import erebus.item.wand.WandOfAnimationItem;
 import erebus.item.wand.WandOfPreservationItem;
 import erebus.network.data.DeathCompassData;
@@ -21,14 +40,23 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-import java.util.Map;
 
 public class ModItems extends ModItemHelpers {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Erebus.MODID);
@@ -191,9 +219,9 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<ArmorItem> MUSHROOM_HELMET = registerHelmet("mushroom_helmet", ModArmorMaterials.MUSHROOM_HELM_ARMOR_MATERIAL);
     public static final DeferredItem<ArmorItem> GLIDER_CHESTPLATE = registerChestplate("glider_chestplate", ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
     public static final DeferredItem<ArmorItem> GLIDER_CHESTPLATE_POWERED = registerChestplate("glider_chestplate_powered",ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
-    public static final DeferredItem<ArmorItem> SPIDER_T_SHIRT = registerChestplate("spider_t_shirt",ModArmorMaterials.SPIDER_T_SHIRT_ARMOR_MATERIAL);
+    public static final DeferredItem<ArmorItem> SPIDER_T_SHIRT = registerChestplate("spider_t_shirt", ModArmorMaterials.SPIDER_T_SHIRT_ARMOR_MATERIAL);
     public static final DeferredItem<ArmorItem> SPRINT_LEGGINGS = registerLeggings("sprint_leggings", ModArmorMaterials.CENTIPEDE_ARMOR_MATERIAL);
-    public static final DeferredItem<ArmorItem> JUMP_BOOTS = registerBoots("jump_boots", ModArmorMaterials.JUMP_BOOTS_ARMOR_MATERIAL);
+    public static final DeferredItem<Item> JUMP_BOOTS = registerItem("jump_boots", () -> new JumpBoots(ModArmorMaterials.JUMP_BOOTS_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,  new Item.Properties().stacksTo(1).durability(256)));
     public static final DeferredItem<ArmorItem> WATER_STRIDERS = registerBoots("water_striders", ModArmorMaterials.WATER_STRIDERS_ARMOR_MATERIAL);
     public static final DeferredItem<Item> ENHANCED_SCORPION_PINCER = registerItem("enhanced_scorpion_pincer");
     public static final DeferredItem<Item> WAR_HAMMER = registerItem("war_hammer");

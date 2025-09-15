@@ -1,6 +1,10 @@
 package erebus.registries.data;
 
+import java.util.EnumMap;
+import java.util.List;
+
 import erebus.Erebus;
+import erebus.registries.ModItems;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,9 +15,6 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.EnumMap;
-import java.util.List;
 
 public class ModArmorMaterials {
 
@@ -255,7 +256,7 @@ public class ModArmorMaterials {
                     }),
                     33,
                     SoundEvents.ARMOR_EQUIP_DIAMOND,
-                    () -> Ingredient.of(Tags.Items.INGOTS_IRON),
+                    () -> Ingredient.of(ModItems.ELASTIC_FIBER),
                     List.of(
                             new ArmorMaterial.Layer(
                                     ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "jump_boots")

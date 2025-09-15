@@ -1,10 +1,20 @@
 package erebus;
 
+import java.util.Locale;
+
+import org.slf4j.Logger;
+
 import com.mojang.logging.LogUtils;
+
 import erebus.client.ModAtlases;
 import erebus.events.BedPlaceEventHandler;
+import erebus.events.OnEntityJumpEventHandler;
 import erebus.network.data.DeathCompassData;
-import erebus.registries.*;
+import erebus.registries.ModCustomRecipes;
+import erebus.registries.ModFluids;
+import erebus.registries.ModItems;
+import erebus.registries.ModSounds;
+import erebus.registries.ModTabs;
 import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModBlockEntityRendering;
@@ -46,9 +56,6 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import org.slf4j.Logger;
-
-import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -100,6 +107,7 @@ public class Erebus {
         bus.addListener(ModNetwork::register);
 
         neoBus.register(new BedPlaceEventHandler());
+        neoBus.register(new OnEntityJumpEventHandler());
 
         NeoForgeMod.enableMilkFluid(); // TEMP - JUST FOR BEETLE MILKING TEST
 
