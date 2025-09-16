@@ -17,6 +17,7 @@ import erebus.item.PaxelItem;
 import erebus.item.SmoothieBookItem;
 import erebus.item.WaspSwordItem;
 import erebus.item.armour.JumpBoots;
+import erebus.item.armour.SprintLeggings;
 import erebus.item.blocks.BambooCrateItem;
 import erebus.item.blocks.FluidJarBlockItem;
 import erebus.item.blocks.LiquifierBlockItem;
@@ -220,7 +221,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<ArmorItem> GLIDER_CHESTPLATE = registerChestplate("glider_chestplate", ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
     public static final DeferredItem<ArmorItem> GLIDER_CHESTPLATE_POWERED = registerChestplate("glider_chestplate_powered",ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
     public static final DeferredItem<ArmorItem> SPIDER_T_SHIRT = registerChestplate("spider_t_shirt", ModArmorMaterials.SPIDER_T_SHIRT_ARMOR_MATERIAL);
-    public static final DeferredItem<ArmorItem> SPRINT_LEGGINGS = registerLeggings("sprint_leggings", ModArmorMaterials.CENTIPEDE_ARMOR_MATERIAL);
+    public static final DeferredItem<Item> SPRINT_LEGGINGS = registerItem("sprint_leggings", () -> new SprintLeggings(ModArmorMaterials.CENTIPEDE_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,  new Item.Properties().stacksTo(1).durability(256)));
     public static final DeferredItem<Item> JUMP_BOOTS = registerItem("jump_boots", () -> new JumpBoots(ModArmorMaterials.JUMP_BOOTS_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,  new Item.Properties().stacksTo(1).durability(256)));
     public static final DeferredItem<ArmorItem> WATER_STRIDERS = registerBoots("water_striders", ModArmorMaterials.WATER_STRIDERS_ARMOR_MATERIAL);
     public static final DeferredItem<Item> ENHANCED_SCORPION_PINCER = registerItem("enhanced_scorpion_pincer");
