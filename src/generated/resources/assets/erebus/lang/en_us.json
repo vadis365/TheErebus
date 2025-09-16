@@ -794,6 +794,7 @@
   "tooltip.erebus.honeycomb_x": "Honeycomb Cell X: %s",
   "tooltip.erebus.honeycomb_y": "Honeycomb Cell Y: %s",
   "tooltip.erebus.honeycomb_z": "Honeycomb Cell Z: %s",
+  "tooltip.erebus.sprint_leggings_tier": "Tier %s",
   "tooltip.erebus.wand_of_animation": "Right click blocks to animate them.",
   "tooltip.shield.damage": "Damage: ",
   "tooltip.shield.repair": "Anvil Repair: "

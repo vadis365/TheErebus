@@ -721,6 +721,7 @@ public class ModLang extends ModLangProvider {
 		add("tooltip.erebus.honeycomb_z", "Honeycomb Cell Z: %s");
 		add("tooltip.erebus.bee_taming_amulet_1", "Click on a Honeycomb Cell to set as target for Bee drops.");
 		add("tooltip.erebus.bee_taming_amulet_2", "Then click on Bee to tame.");
+		add("tooltip.erebus.sprint_leggings_tier", "Tier %s");
 	}
 
     private void addBookTranslations() {

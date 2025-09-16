@@ -1,14 +1,16 @@
 package erebus.registries.data;
 
+import java.util.function.Supplier;
+
 import erebus.Erebus;
 import erebus.network.data.DeathCompassData;
 import erebus.network.data.DeathCompassDataHolder;
+import erebus.network.data.SprintLeggingsData;
+import erebus.network.data.SprintLeggingsDataHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.function.Supplier;
 
 public class ModDataComponents {
 
@@ -31,4 +33,9 @@ public class ModDataComponents {
 	public static final Supplier<DataComponentType<BlockPos>> ANT_TAMING_AMULET = DATA_COMPONENT_REGISTRY.register("ant_taming_amulet",
 			() -> DataComponentType.<BlockPos>builder().persistent(BlockPos.CODEC)
 					.networkSynchronized(BlockPos.STREAM_CODEC).build());
+	
+	public static final Supplier<DataComponentType<SprintLeggingsData>> SPRINT_LEGGINGS = DATA_COMPONENT_REGISTRY.register(
+			"sprint_leggings",
+			() -> DataComponentType.<SprintLeggingsData>builder().persistent(SprintLeggingsDataHolder.CODEC)
+					.networkSynchronized(SprintLeggingsDataHolder.STREAM_CODEC).build());
 }

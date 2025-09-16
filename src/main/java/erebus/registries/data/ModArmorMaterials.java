@@ -277,11 +277,8 @@ public class ModArmorMaterials {
                     }),
                     33,
                     SoundEvents.ARMOR_EQUIP_DIAMOND,
-                    () -> Ingredient.of(Tags.Items.INGOTS_IRON),
-                    List.of(
-                            new ArmorMaterial.Layer(
-                                    ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "centipede")
-                            )
+                    () -> Ingredient.of(ModItems.REINFORCED_PLATE_EXO),
+                    List.of( new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "centipede"))
                     ),
                     3,
                     0
