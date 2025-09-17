@@ -709,9 +709,12 @@ public class ModLang extends ModLangProvider {
     }
 
     private void addToolTipTranslations() {
+    	add("tooltip.erebus.death_compass", "Given to Player after death to find Block o' Bones."); // Death compass needs more work - eg dimension and time of death
+    	add("tooltip.erebus.dimension", "Dimension: %s");
         add("tooltip.death_compass.pos", "Death Pos: ");
-        add("tooltip.shield.damage", "Damage: ");
-        add("tooltip.shield.repair", "Anvil Repair: ");
+        add("tooltip.erebus.time_of_death", "Time of Death: %s");
+        add("tooltip.erebus.shield.damage", "Damage: ");
+        add("tooltip.erebus.shield.repair", "Anvil Repair: ");
 		add("tooltip.erebus.wand_of_animation", "Right click blocks to animate them.");
 		add("tooltip.erebus.bamboo_pipe", "A very basic directional fluid pipe.");
 		add("tooltip.erebus.bamboo_pipe_extract", "Extracts fluids from fluid containers and pushes them in to pipes and fluid containers.");
@@ -722,6 +725,46 @@ public class ModLang extends ModLangProvider {
 		add("tooltip.erebus.bee_taming_amulet_1", "Click on a Honeycomb Cell to set as target for Bee drops.");
 		add("tooltip.erebus.bee_taming_amulet_2", "Then click on Bee to tame.");
 		add("tooltip.erebus.sprint_leggings_tier", "Tier %s");
+		add("tooltip.erebus.jump_boots", "Enables you to Jump 4 blocks high.");
+		add("tooltip.erebus.silo_x", "Silo Block X: %s");
+		add("tooltip.erebus.silo_y", "Silo Block Y: %s");
+		add("tooltip.erebus.silo_z", "Silo Block Z: %s");
+		add("tooltip.erebus.ant_taming_amulet_1", "Click on a Silo Block to set as target for Ants.");
+		add("tooltip.erebus.ant_taming_amulet_2", "Then click on Ant to link it.");
+		add("tooltip.erebus.spray_can", "Use on the top of blocks to keep those pesky critters away.");
+		add("tooltip.erebus.wand_of_preservation", "Shoots Amber stars and captures mobs. Silk touch the block to collect or break to free the mob.");
+		add("tooltip.erebus.liquifier", "Turns Honey Drips in to Fluid Honey. Redstone activated.");
+		add("tooltip.erebus.glow_gem", "Place on ANY side of a solid block as a light source. Right click to turn off and on.");
+
+	//	TODO - NYI, either the thing isn't added yet or it doesn't have the tool-tip added to it yet.
+		add("tooltip.erebus.nectar_collector", "Right click Bees or Honeypot Ants to collect nectar.");
+		add("tooltip.erebus.homingbeecon_advanced_1", "Sneak + Right click on a block to set as target.");
+		add("tooltip.erebus.homingbeecon_advanced_2", "Right click to teleport.");
+		add("tooltip.erebus.homingbeecon", "Sneak + Click on a block to set as target.");
+		add("tooltip.erebus.war_hammer_1", "Hold Right mouse button to charge up.");
+		add("tooltip.erebus.war_hammer_2", "Sneak + Right Click on top of block to use A.O.E. attack.");
+		add("tooltip.erebus.wasp_dagger_1", "One use.");
+		add("tooltip.erebus.wasp_dagger_2", "Can be thrown.");
+		add("tooltip.erebus.whetstone_sharpness", "Sharpness Level %s");
+		add("tooltip.erebus.whetstone_1", "Apply to tools using an Anvil.");
+		add("tooltip.erebus.whetstone_2", "Un-enchanted");
+		add("tooltip.erebus.whetstone_3", "Surround with Whetstone Powder to increase levels.");
+		add("tooltip.erebus.extractor", "Point at blocks and hold down the right mouse button to extract them.");
+		add("tooltip.erebus.scorpion_pincer", "Can Shoot Fire Charges if in your Inventory.");
+		add("tooltip.erebus.heals", "Heals 10 Hearts when consumed. Always Edible.");
+		add("tooltip.erebus.feeds", "Fills Hunger Bar when consumed. Always Edible.");
+		add("tooltip.erebus.powered_glider", "Needs redgem blocks at the cost of fuel to flight.");
+		add("tooltip.erebus.glider_glide_key", "Gliding Key");
+		add("tooltip.erebus.glider_powered_key", "Flying Key");
+		add("tooltip.erebus.mush_helm", "Keeps you fed whilst worn at the cost of durability. Repaired in Anvil with Big Mushroom Blocks.");
+		add("tooltip.erebus.planticide", "Removes Plants, Leaves and Crops in a 5x5x5 area!");
+		add("tooltip.erebus.healing_hearts", "Heals you a small amount when consumed.");
+		add("tooltip.erebus.night_vision", "Enables you to see in the dark.");
+		add("tooltip.erebus.water_striders", "Enables you to Walk on Water.");
+		add("tooltip.erebus.compost", "Works just like bonemeal Mr.");
+		add("tooltip.erebus.horn_summon", "Summons some bees.");
+		add("tooltip.erebus.web_slinger", "Can Shoot Webs if in your Inventory.");
+		add("tooltip.erebus.force_key", "N.Y.I.");
 	}
 
     private void addBookTranslations() {

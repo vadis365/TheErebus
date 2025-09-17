@@ -32,7 +32,7 @@ public class WandOfAnimationItem extends Item {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	   public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, List<Component> tooltip, @NotNull TooltipFlag flagIn) {
-		tooltip.add(Component.translatable("tooltip.erebus.wandofanimation"));
+		tooltip.add(Component.translatable("tooltip.erebus.wand_of_animation"));
 		}
 
 

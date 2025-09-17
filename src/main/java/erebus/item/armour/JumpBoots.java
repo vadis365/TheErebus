@@ -28,7 +28,7 @@ public class JumpBoots extends ArmorItem {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nonnull TooltipContext context, @Nonnull List<Component> list, @Nonnull TooltipFlag flag) {
-		list.add(Component.translatable("tooltip.erebus.jumpboots").withStyle(ChatFormatting.YELLOW));
+		list.add(Component.translatable("tooltip.erebus.jump_boots").withStyle(ChatFormatting.YELLOW));
 	}
 
 	@Override

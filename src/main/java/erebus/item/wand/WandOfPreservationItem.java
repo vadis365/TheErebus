@@ -24,7 +24,7 @@ public class WandOfPreservationItem extends Item {
 
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("tooltip.erebus.wandofpreservation"));
+        tooltipComponents.add(Component.translatable("tooltip.erebus.wand_of_preservation"));
     }
 
     @Override

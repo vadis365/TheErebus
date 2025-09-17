@@ -25,7 +25,7 @@ public class ErebusShieldItem extends ShieldItem {
     public void appendHoverText(ItemStack stack, @NotNull TooltipContext context, List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
         ErebusShieldItem shield = (ErebusShieldItem) stack.getItem();
 
-        tooltipComponents.add(Component.translatable("tooltip.shield.damage").append("%d/%d".formatted(stack.getDamageValue(), stack.getMaxDamage())));
-        tooltipComponents.add(Component.translatable("tooltip.shield.repair").append("%s".formatted(shield.getShieldType().getRepairItem().getDescriptionId())));
+        tooltipComponents.add(Component.translatable("tooltip.erebus.shield.damage").append("%d/%d".formatted(stack.getDamageValue(), stack.getMaxDamage())));
+        tooltipComponents.add(Component.translatable("tooltip.erebus.shield.repair").append("%s".formatted(shield.getShieldType().getRepairItem().getDescriptionId())));
     }
 }
