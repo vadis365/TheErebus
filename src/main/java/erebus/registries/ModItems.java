@@ -14,6 +14,7 @@ import erebus.item.CamoPowderItem;
 import erebus.item.InsectRepellentItem;
 import erebus.item.MaxSpeedBowItem;
 import erebus.item.PaxelItem;
+import erebus.item.PlanticideItem;
 import erebus.item.SmoothieBookItem;
 import erebus.item.WaspSwordItem;
 import erebus.item.armour.JumpBoots;
@@ -275,7 +276,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> SPRAY_CAN = registerItem("spray_can", () -> new InsectRepellentItem(new Item.Properties()));
     public static final DeferredItem<Item> WHETSTONE = registerItem("whetstone");
     public static final DeferredItem<Item> COMPOST = registerItem("compost");
-    public static final DeferredItem<Item> PLANTICIDE = registerItem("planticide");
+    public static final DeferredItem<Item> PLANTICIDE = registerItem("planticide", () -> new PlanticideItem(new Item.Properties().stacksTo(64)));
     public static final DeferredItem<Item> SMOOTHIE_BOOK = registerItem("smoothie_book", () -> new SmoothieBookItem(new Item.Properties()));
     public static final DeferredItem<Item> HORN_OF_SUMMONING = registerItem("horn_of_summoning");
 
