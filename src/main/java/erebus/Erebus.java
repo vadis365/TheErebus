@@ -109,7 +109,7 @@ public class Erebus {
 
         neoBus.register(new BedPlaceEventHandler());
         neoBus.register(new OnEntityJumpEventHandler());
-        neoBus.register(new GogglesClientTickHandler());
+        
 
         NeoForgeMod.enableMilkFluid(); // TEMP - JUST FOR BEETLE MILKING TEST
 
@@ -123,7 +123,7 @@ public class Erebus {
 			bus.addListener(ModBlockEntityRendering::registerBlockEntityLayerDefinitions);
 			bus.addListener(ModBlockEntityRendering::registerBlockEntityRenderers);
             bus.addListener(ModParticles::registerParticleFactories);
-            
+            neoBus.register(new GogglesClientTickHandler());
 		}
     }
 
