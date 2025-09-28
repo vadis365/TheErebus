@@ -185,7 +185,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .pattern("PGP")
                 .pattern("PSP")
                 .define('P', WoodBlocks.PLANKS_VARNISHED)
-                .define('S', SlabBlocks.SLAB_PLANKS_VARNISHED)
+                .define('S', SlabBlocks.PLANKS_VARNISHED)
                 .define('G', Tags.Items.DYES_GREEN)
                 .unlockedBy("has_planks_varnished", has(WoodBlocks.PLANKS_VARNISHED))
                 .save(output);

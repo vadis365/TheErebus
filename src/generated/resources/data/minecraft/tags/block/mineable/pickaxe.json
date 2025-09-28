@@ -29,6 +29,8 @@
     "erebus:ore_gneiss",
     "erebus:ore_petrified_wood",
     "erebus:ore_temple",
-    "erebus:ore_encrusted_diamond"
+    "erebus:ore_encrusted_diamond",
+    "erebus:amber",
+    "erebus:amber_bricks"
   ]
 }

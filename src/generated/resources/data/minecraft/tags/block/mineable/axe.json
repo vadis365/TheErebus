@@ -1,0 +1,29 @@
+{
+  "values": [
+    "erebus:log_asper",
+    "erebus:log_balsam",
+    "erebus:log_balsam_resinless",
+    "erebus:log_baobab",
+    "erebus:log_cypress",
+    "erebus:log_eucalyptus",
+    "erebus:log_mahogany",
+    "erebus:log_marshwood",
+    "erebus:log_mossbark",
+    "erebus:log_rotten",
+    "erebus:log_scorched",
+    "erebus:log_hollow",
+    "erebus:planks_asper",
+    "erebus:planks_bamboo",
+    "erebus:planks_baobab",
+    "erebus:planks_balsam",
+    "erebus:planks_cypress",
+    "erebus:planks_eucalyptus",
+    "erebus:planks_mahogany",
+    "erebus:planks_marshwood",
+    "erebus:planks_mossbark",
+    "erebus:planks_rotten",
+    "erebus:planks_scorched",
+    "erebus:planks_varnished",
+    "erebus:planks_white"
+  ]
+}

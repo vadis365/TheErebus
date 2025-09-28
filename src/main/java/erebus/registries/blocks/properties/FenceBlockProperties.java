@@ -1,7 +1,9 @@
 package erebus.registries.blocks.properties;
 
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 
 public class FenceBlockProperties {
     
@@ -34,34 +36,47 @@ public class FenceBlockProperties {
     public static final Properties FENCE_GATE_SCORCHED;
     public static final Properties FENCE_GATE_VARNISHED;
     public static final Properties FENCE_GATE_WHITE;
+
+    private static final Properties DEFAULT_FENCE = Properties.of()
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(2.0F, 3.0F)
+            .sound(SoundType.WOOD)
+            .ignitedByLava();
+
+    private static final Properties DEFAULT_FENCE_GATE = Properties.of()
+            .forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS)
+            .strength(2.0F, 3.0F)
+            .ignitedByLava();
     
     static {
-        FENCE_ASPER = Properties.ofFullCopy(Blocks.OAK_FENCE);
-        FENCE_BALSAM = Properties.ofFullCopy(Blocks.OAK_FENCE);
-        FENCE_BAMBOO = Properties.ofFullCopy(Blocks.OAK_FENCE);
-        FENCE_BAOBAB = Properties.ofFullCopy(Blocks.OAK_FENCE);
-        FENCE_CYPRESS = Properties.ofFullCopy(Blocks.OAK_FENCE);
-        FENCE_EUCALYPTUS = Properties.ofFullCopy(Blocks.OAK_FENCE);
-        FENCE_MAHOGANY = Properties.ofFullCopy(Blocks.OAK_FENCE);
-        FENCE_MARSHWOOD = Properties.ofFullCopy(Blocks.OAK_FENCE);
-        FENCE_MOSSBARK = Properties.ofFullCopy(Blocks.OAK_FENCE);
-        FENCE_ROTTEN = Properties.ofFullCopy(Blocks.OAK_FENCE);
-        FENCE_SCORCHED = Properties.ofFullCopy(Blocks.OAK_FENCE);
-        FENCE_VARNISHED = Properties.ofFullCopy(Blocks.OAK_FENCE);
-        FENCE_WHITE = Properties.ofFullCopy(Blocks.OAK_FENCE);
+        FENCE_ASPER = DEFAULT_FENCE.mapColor(MapColor.WOOD);
+        FENCE_BALSAM = DEFAULT_FENCE.mapColor(MapColor.TERRACOTTA_PINK);
+        FENCE_BAMBOO = DEFAULT_FENCE.mapColor(MapColor.SAND);
+        FENCE_BAOBAB = DEFAULT_FENCE.mapColor(MapColor.TERRACOTTA_WHITE);
+        FENCE_CYPRESS = DEFAULT_FENCE.mapColor(MapColor.TERRACOTTA_WHITE);
+        FENCE_EUCALYPTUS = DEFAULT_FENCE.mapColor(MapColor.TERRACOTTA_PINK);
+        FENCE_MAHOGANY = DEFAULT_FENCE.mapColor(MapColor.COLOR_BROWN);
+        FENCE_MARSHWOOD = DEFAULT_FENCE.mapColor(MapColor.TERRACOTTA_GREEN);
+        FENCE_MOSSBARK = DEFAULT_FENCE.mapColor(MapColor.COLOR_BROWN);
+        FENCE_ROTTEN = DEFAULT_FENCE.mapColor(MapColor.COLOR_BLACK);
+        FENCE_SCORCHED = DEFAULT_FENCE.mapColor(MapColor.COLOR_BLACK);
+        FENCE_VARNISHED = DEFAULT_FENCE.mapColor(MapColor.WOOD);
+        FENCE_WHITE = DEFAULT_FENCE.mapColor(MapColor.TERRACOTTA_WHITE);
 
-        FENCE_GATE_ASPER = Properties.ofFullCopy(Blocks.OAK_FENCE_GATE);
-        FENCE_GATE_BALSAM = Properties.ofFullCopy(Blocks.OAK_FENCE_GATE);
-        FENCE_GATE_BAMBOO = Properties.ofFullCopy(Blocks.OAK_FENCE_GATE);
-        FENCE_GATE_BAOBAB = Properties.ofFullCopy(Blocks.OAK_FENCE_GATE);
-        FENCE_GATE_CYPRESS = Properties.ofFullCopy(Blocks.OAK_FENCE_GATE);
-        FENCE_GATE_EUCALYPTUS = Properties.ofFullCopy(Blocks.OAK_FENCE_GATE);
-        FENCE_GATE_MAHOGANY = Properties.ofFullCopy(Blocks.OAK_FENCE_GATE);
-        FENCE_GATE_MARSHWOOD = Properties.ofFullCopy(Blocks.OAK_FENCE_GATE);
-        FENCE_GATE_MOSSBARK = Properties.ofFullCopy(Blocks.OAK_FENCE_GATE);
-        FENCE_GATE_ROTTEN = Properties.ofFullCopy(Blocks.OAK_FENCE_GATE);
-        FENCE_GATE_SCORCHED = Properties.ofFullCopy(Blocks.OAK_FENCE_GATE);
-        FENCE_GATE_VARNISHED = Properties.ofFullCopy(Blocks.OAK_FENCE_GATE);
-        FENCE_GATE_WHITE = Properties.ofFullCopy(Blocks.OAK_FENCE_GATE);
+        FENCE_GATE_ASPER = DEFAULT_FENCE_GATE.mapColor(MapColor.WOOD);
+        FENCE_GATE_BALSAM = DEFAULT_FENCE_GATE.mapColor(MapColor.TERRACOTTA_PINK);
+        FENCE_GATE_BAMBOO = DEFAULT_FENCE_GATE.mapColor(MapColor.SAND);
+        FENCE_GATE_BAOBAB = DEFAULT_FENCE_GATE.mapColor(MapColor.TERRACOTTA_WHITE);
+        FENCE_GATE_CYPRESS = DEFAULT_FENCE_GATE.mapColor(MapColor.TERRACOTTA_WHITE);
+        FENCE_GATE_EUCALYPTUS = DEFAULT_FENCE_GATE.mapColor(MapColor.TERRACOTTA_PINK);
+        FENCE_GATE_MAHOGANY = DEFAULT_FENCE_GATE.mapColor(MapColor.COLOR_BROWN);
+        FENCE_GATE_MARSHWOOD = DEFAULT_FENCE_GATE.mapColor(MapColor.TERRACOTTA_GREEN);
+        FENCE_GATE_MOSSBARK = DEFAULT_FENCE_GATE.mapColor(MapColor.COLOR_BROWN);
+        FENCE_GATE_ROTTEN = DEFAULT_FENCE_GATE.mapColor(MapColor.COLOR_BLACK);
+        FENCE_GATE_SCORCHED = DEFAULT_FENCE_GATE.mapColor(MapColor.COLOR_BLACK);
+        FENCE_GATE_VARNISHED = DEFAULT_FENCE_GATE.mapColor(MapColor.WOOD);
+        FENCE_GATE_WHITE = DEFAULT_FENCE_GATE.mapColor(MapColor.TERRACOTTA_WHITE);
     }
 }

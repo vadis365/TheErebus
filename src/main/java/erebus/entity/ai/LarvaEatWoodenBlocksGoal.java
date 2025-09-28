@@ -35,10 +35,10 @@ public class LarvaEatWoodenBlocksGoal extends EatBlockGoal {
 		if (state.is(WoodBlocks.LOG_ROTTEN.get()))
 			return false;
 
-		if (state.is(SlabBlocks.SLAB_PLANKS_BAMBOO.get()))
+		if (state.is(SlabBlocks.PLANKS_BAMBOO.get()))
 			return false;
 
-		if (state.is(StairBlocks.STAIRS_BAMBOO.get()))
+		if (state.is(StairBlocks.BAMBOO.get()))
 			return false;
 
 		if (state.is(WoodBlocks.PLANKS_BAMBOO.get()))

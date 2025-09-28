@@ -1,21 +1,12 @@
 package erebus;
 
-import java.util.Locale;
-
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
 import erebus.client.ModAtlases;
 import erebus.events.BedPlaceEventHandler;
 import erebus.events.GogglesClientTickHandler;
 import erebus.events.OnEntityJumpEventHandler;
 import erebus.network.data.DeathCompassData;
-import erebus.registries.ModCustomRecipes;
-import erebus.registries.ModFluids;
-import erebus.registries.ModItems;
-import erebus.registries.ModSounds;
-import erebus.registries.ModTabs;
+import erebus.registries.*;
 import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModBlockEntityRendering;
@@ -57,6 +48,9 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.NeoForgeMod;
+import org.slf4j.Logger;
+
+import java.util.Locale;
 
 @Mod(Erebus.MODID)
 public class Erebus {
@@ -101,7 +95,6 @@ public class Erebus {
         ModStructureTypes.STRUCTURE_TYPES.register(bus);
         ModBiomeLayerTypes.BIOME_LAYER_TYPES.register(bus);
         ModPredicates.PREDICATES.register(bus);
-        ModAtlases.registerPetrifiedChestAtlases();
 
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
@@ -139,6 +132,7 @@ public class Erebus {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        ModAtlases.registerPetrifiedChestAtlases();
         ItemProperties.register(
                 ModItems.DEATH_COMPASS.get(),
                 ResourceLocation.withDefaultNamespace("angle"),

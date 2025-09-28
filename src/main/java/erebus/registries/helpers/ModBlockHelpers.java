@@ -58,6 +58,10 @@ public class ModBlockHelpers {
         return registerBlock(name, () -> new ModCropBlock(properties, seed));
     }
 
+    protected static DeferredBlock<RotatedPillarBlock> registerLog(String name, Properties properties) {
+        return registerBlock(name, () -> new RotatedPillarBlock(properties));
+    }
+
     protected static DeferredBlock<SaplingBlock> registerSapling(String name, TreeGrower grower) {
         return registerBlock(name, () -> new SaplingBlock(grower, Properties.ofFullCopy(Blocks.SHORT_GRASS)));
     }

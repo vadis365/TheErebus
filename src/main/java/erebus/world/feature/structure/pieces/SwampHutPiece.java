@@ -24,7 +24,7 @@ public class SwampHutPiece extends ScatteredFeaturePiece {
 
     private final BlockState LOG = WoodBlocks.LOG_MOSSBARK.get().defaultBlockState();
     private final BlockState PLANK = WoodBlocks.PLANKS_MOSSBARK.get().defaultBlockState();
-    private final BlockState STAIR = StairBlocks.STAIRS_MOSSBARK.get().defaultBlockState();
+    private final BlockState STAIR = StairBlocks.MOSSBARK.get().defaultBlockState();
     private final BlockState BRICKS = UmberstoneBlocks.UMBERCOBBLE.get().defaultBlockState();
     private final BlockState FENCE = FenceBlocks.FENCE_MOSSBARK.get().defaultBlockState();
     private final BlockState DOOR = DoorBlocks.MOSSBARK.get().defaultBlockState();

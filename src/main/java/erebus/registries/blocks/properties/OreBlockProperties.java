@@ -25,100 +25,30 @@ public class OreBlockProperties {
     public static final Properties PETRIFIED_WOOD;
     public static final Properties TEMPLE;
 
+    private static final Properties ORE = Properties.of()
+            .strength(3.0F)
+            .explosionResistance(5.0F)
+            .sound(SoundType.STONE);
+
     static {
-        IRON = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        GOLD = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        COAL = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        DIAMOND = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        EMERALD = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        LAPIS = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        QUARTZ = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        PETRIFIED_QUARTZ = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        COPPER = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        SILVER = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        TIN = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        LEAD = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        ALUMINUM = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        JADE = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        ENCRUSTED_DIAMOND = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        FOSSIL = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        GNEISS = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        PETRIFIED_WOOD = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
-
-        TEMPLE = Properties.of()
-                .strength(3.0F)
-                .explosionResistance(5.0F)
-                .sound(SoundType.STONE);
+        IRON = ORE;
+        GOLD = ORE;
+        COAL = ORE;
+        DIAMOND = ORE;
+        EMERALD = ORE;
+        LAPIS = ORE;
+        QUARTZ = ORE;
+        PETRIFIED_QUARTZ = ORE;
+        COPPER = ORE;
+        SILVER = ORE;
+        TIN = ORE;
+        LEAD = ORE;
+        ALUMINUM = ORE;
+        JADE = ORE;
+        ENCRUSTED_DIAMOND = ORE;
+        FOSSIL = ORE;
+        GNEISS = ORE;
+        PETRIFIED_WOOD = ORE;
+        TEMPLE = ORE;
     }
 }

@@ -816,7 +816,7 @@
   "tooltip.erebus.mush_helm": "Keeps you fed whilst worn at the cost of durability. Repaired in Anvil with Big Mushroom Blocks.",
   "tooltip.erebus.nectar_collector": "Right click Bees or Honeypot Ants to collect nectar.",
   "tooltip.erebus.night_vision": "Enables you to see in the dark.",
-  "tooltip.erebus.planticide": "Removes Plants, Leaves and Crops in a 5x5x5 area!",
+  "tooltip.erebus.planticide": "Removes Plants, Leaves and Crops in a 4x4x4 area!",
   "tooltip.erebus.powered_glider": "Needs redgem blocks at the cost of fuel to flight.",
   "tooltip.erebus.scorpion_pincer": "Can Shoot Fire Charges if in your Inventory.",
   "tooltip.erebus.shield.damage": "Damage: ",

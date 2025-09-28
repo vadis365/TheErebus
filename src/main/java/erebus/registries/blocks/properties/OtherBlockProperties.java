@@ -1,5 +1,6 @@
 package erebus.registries.blocks.properties;
 
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
@@ -104,8 +105,15 @@ public class OtherBlockProperties {
 
     static {
         PORTAL = Properties.ofFullCopy(Blocks.NETHER_PORTAL);
-        GAEAN_KEYSTONE = Properties.ofFullCopy(Blocks.END_PORTAL_FRAME);
-        JADE_BLOCK = Properties.of().mapColor(MapColor.STONE);
+        GAEAN_KEYSTONE = Properties.of()
+                .strength(3.0F)
+                .sound(SoundType.STONE)
+                .mapColor(MapColor.STONE);
+        JADE_BLOCK = Properties.of()
+                .strength(5.0F, 10.0F)
+                .sound(SoundType.STONE)
+                .mapColor(DyeColor.GREEN);
+
         MUD = Properties.ofFullCopy(Blocks.MUD);
         QUICK_SAND = Properties.of().strength(28F).sound(SoundType.SAND).mapColor(MapColor.SAND).noCollission();
         GHOST_SAND = Properties.of().mapColor(MapColor.STONE);

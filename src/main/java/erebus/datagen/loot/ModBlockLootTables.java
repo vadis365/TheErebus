@@ -134,68 +134,68 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(WoodBlocks.PLANKS_PETRIFIED);
 
         // MARK: Slabs Wood
-        dropSelf(SlabBlocks.SLAB_PLANKS_BAOBAB);
-        dropSelf(SlabBlocks.SLAB_PLANKS_EUCALYPTUS);
-        dropSelf(SlabBlocks.SLAB_PLANKS_MAHOGANY);
-        dropSelf(SlabBlocks.SLAB_PLANKS_MOSSBARK);
-        dropSelf(SlabBlocks.SLAB_PLANKS_ASPER);
-        dropSelf(SlabBlocks.SLAB_PLANKS_CYPRESS);
-        dropSelf(SlabBlocks.SLAB_PLANKS_BALSAM);
-        dropSelf(SlabBlocks.SLAB_PLANKS_WHITE);
-        dropSelf(SlabBlocks.SLAB_PLANKS_BAMBOO);
-        dropSelf(SlabBlocks.SLAB_PLANKS_ROTTEN);
-        dropSelf(SlabBlocks.SLAB_PLANKS_MARSHWOOD);
-        dropSelf(SlabBlocks.SLAB_PLANKS_SCORCHED);
-        dropSelf(SlabBlocks.SLAB_PLANKS_VARNISHED);
-        dropSelf(SlabBlocks.SLAB_PLANKS_PETRIFIED);
+        dropSelf(SlabBlocks.PLANKS_BAOBAB);
+        dropSelf(SlabBlocks.PLANKS_EUCALYPTUS);
+        dropSelf(SlabBlocks.PLANKS_MAHOGANY);
+        dropSelf(SlabBlocks.PLANKS_MOSSBARK);
+        dropSelf(SlabBlocks.PLANKS_ASPER);
+        dropSelf(SlabBlocks.PLANKS_CYPRESS);
+        dropSelf(SlabBlocks.PLANKS_BALSAM);
+        dropSelf(SlabBlocks.PLANKS_WHITE);
+        dropSelf(SlabBlocks.PLANKS_BAMBOO);
+        dropSelf(SlabBlocks.PLANKS_ROTTEN);
+        dropSelf(SlabBlocks.PLANKS_MARSHWOOD);
+        dropSelf(SlabBlocks.PLANKS_SCORCHED);
+        dropSelf(SlabBlocks.PLANKS_VARNISHED);
+        dropSelf(SlabBlocks.PLANKS_PETRIFIED);
 
         // MARK: Slabs Stone
-        dropSelf(SlabBlocks.SLAB_UMBERSTONE);
-        dropSelf(SlabBlocks.SLAB_UMBERCOBBLE);
-        dropSelf(SlabBlocks.SLAB_UMBERCOBBLE_MOSSY);
-        dropSelf(SlabBlocks.SLAB_UMBERCOBBLE_WEBBED);
-        dropSelf(SlabBlocks.SLAB_UMBERSTONE_BRICKS);
-        dropSelf(SlabBlocks.SLAB_UMBERTILE_SMOOTH);
-        dropSelf(SlabBlocks.SLAB_UMBERTILE_SMOOTH_SMALL);
-        dropSelf(SlabBlocks.SLAB_UMBERPAVER);
-        dropSelf(SlabBlocks.SLAB_AMBER);
-        dropSelf(SlabBlocks.SLAB_AMBER_BRICKS);
-        dropSelf(SlabBlocks.SLAB_UMBERPAVER_MOSSY);
-        dropSelf(SlabBlocks.SLAB_UMBERPAVER_WEBBED);
-        dropSelf(SlabBlocks.SLAB_MIR_BRICKS);
-        dropSelf(SlabBlocks.SLAB_MUD_BRICKS);
+        dropSelf(SlabBlocks.UMBERSTONE);
+        dropSelf(SlabBlocks.UMBERCOBBLE);
+        dropSelf(SlabBlocks.UMBERCOBBLE_MOSSY);
+        dropSelf(SlabBlocks.UMBERCOBBLE_WEBBED);
+        dropSelf(SlabBlocks.UMBERSTONE_BRICKS);
+        dropSelf(SlabBlocks.UMBERTILE_SMOOTH);
+        dropSelf(SlabBlocks.UMBERTILE_SMOOTH_SMALL);
+        dropSelf(SlabBlocks.UMBERPAVER);
+        dropSelf(SlabBlocks.AMBER);
+        dropSelf(SlabBlocks.AMBER_BRICKS);
+        dropSelf(SlabBlocks.UMBERPAVER_MOSSY);
+        dropSelf(SlabBlocks.UMBERPAVER_WEBBED);
+        dropSelf(SlabBlocks.MIR_BRICKS);
+        dropSelf(SlabBlocks.MUD_BRICKS);
 
         // MARK: Stairs Wood
-        dropSelf(StairBlocks.STAIRS_BAOBAB);
-        dropSelf(StairBlocks.STAIRS_EUCALYPTUS);
-        dropSelf(StairBlocks.STAIRS_MAHOGANY);
-        dropSelf(StairBlocks.STAIRS_MOSSBARK);
-        dropSelf(StairBlocks.STAIRS_ASPER);
-        dropSelf(StairBlocks.STAIRS_CYPRESS);
-        dropSelf(StairBlocks.STAIRS_BALSAM);
-        dropSelf(StairBlocks.STAIRS_WHITE);
-        dropSelf(StairBlocks.STAIRS_BAMBOO);
-        dropSelf(StairBlocks.STAIRS_ROTTEN);
-        dropSelf(StairBlocks.STAIRS_MARSHWOOD);
-        dropSelf(StairBlocks.STAIRS_SCORCHED);
-        dropSelf(StairBlocks.STAIRS_VARNISHED);
-        dropSelf(StairBlocks.STAIRS_PETRIFIED);
+        dropSelf(StairBlocks.BAOBAB);
+        dropSelf(StairBlocks.EUCALYPTUS);
+        dropSelf(StairBlocks.MAHOGANY);
+        dropSelf(StairBlocks.MOSSBARK);
+        dropSelf(StairBlocks.ASPER);
+        dropSelf(StairBlocks.CYPRESS);
+        dropSelf(StairBlocks.BALSAM);
+        dropSelf(StairBlocks.WHITE);
+        dropSelf(StairBlocks.BAMBOO);
+        dropSelf(StairBlocks.ROTTEN);
+        dropSelf(StairBlocks.MARSHWOOD);
+        dropSelf(StairBlocks.SCORCHED);
+        dropSelf(StairBlocks.VARNISHED);
+        dropSelf(StairBlocks.PETRIFIED);
 
         // MARK: Stairs Stone
-        dropSelf(StairBlocks.STAIRS_UMBERSTONE);
-        dropSelf(StairBlocks.STAIRS_UMBERCOBBLE);
-        dropSelf(StairBlocks.STAIRS_UMBERCOBBLE_MOSSY);
-        dropSelf(StairBlocks.STAIRS_UMBERCOBBLE_WEBBED);
-        dropSelf(StairBlocks.STAIRS_UMBERSTONE_BRICKS);
-        dropSelf(StairBlocks.STAIRS_UMBERTILE_SMOOTH);
-        dropSelf(StairBlocks.STAIRS_UMBERTILE_SMOOTH_SMALL);
-        dropSelf(StairBlocks.STAIRS_UMBERPAVER);
-        dropSelf(StairBlocks.STAIRS_UMBERPAVER_MOSSY);
-        dropSelf(StairBlocks.STAIRS_UMBERPAVER_WEBBED);
-        dropSelf(StairBlocks.STAIRS_AMBER);
-        dropSelf(StairBlocks.STAIRS_AMBER_BRICKS);
-        dropSelf(StairBlocks.STAIRS_MUD_BRICKS);
-        dropSelf(StairBlocks.STAIRS_MIR_BRICKS);
+        dropSelf(StairBlocks.UMBERSTONE);
+        dropSelf(StairBlocks.UMBERCOBBLE);
+        dropSelf(StairBlocks.UMBERCOBBLE_MOSSY);
+        dropSelf(StairBlocks.UMBERCOBBLE_WEBBED);
+        dropSelf(StairBlocks.UMBERSTONE_BRICKS);
+        dropSelf(StairBlocks.UMBERTILE_SMOOTH);
+        dropSelf(StairBlocks.UMBERTILE_SMOOTH_SMALL);
+        dropSelf(StairBlocks.UMBERPAVER);
+        dropSelf(StairBlocks.UMBERPAVER_MOSSY);
+        dropSelf(StairBlocks.UMBERPAVER_WEBBED);
+        dropSelf(StairBlocks.AMBER);
+        dropSelf(StairBlocks.AMBER_BRICKS);
+        dropSelf(StairBlocks.MUD_BRICKS);
+        dropSelf(StairBlocks.MIR_BRICKS);
         dropSelf(OtherBlocks.STAIRS_WASP_NEST);
 
         // MARK: Doors
@@ -451,6 +451,7 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(OtherBlocks.ALTAR_EXPERIENCE);
         dropSelf(OtherBlocks.ALTAR_REPAIR);
         dropSelf(OtherBlocks.OFFERING_ALTAR);
+        dropSelf(OtherBlocks.GAEAN_KEYSTONE);
 
         dropSelf(OtherBlocks.CAPSTONE);
         dropSelf(OtherBlocks.CAPSTONE_MUD);

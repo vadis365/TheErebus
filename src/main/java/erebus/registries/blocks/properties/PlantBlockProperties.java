@@ -60,7 +60,6 @@ public class PlantBlockProperties {
             .offsetType(BlockBehaviour.OffsetType.XZ);
 
     private static final Properties HUGE_MUSHROOM_PROPS = Properties.of()
-            .mapColor(MapColor.DIRT)
             .instrument(NoteBlockInstrument.BASS)
             .strength(0.2F)
             .sound(SoundType.WOOD)
@@ -77,11 +76,12 @@ public class PlantBlockProperties {
     public static final Properties GRANDMAS_SHOES_MUSHROOM_PROPS = MUSHROOM_PROPS.mapColor(MapColor.COLOR_BROWN);
     public static final Properties KAIZERS_FINGERS_MUSHROOM_PROPS = MUSHROOM_PROPS.mapColor(MapColor.COLOR_BROWN);
     public static final Properties SARCASTIC_CZECH_MUSHROOM_PROPS = MUSHROOM_PROPS.mapColor(MapColor.COLOR_BROWN);
-    public static final Properties DARK_CAPPED_MUSHROOM_BLOCK_PROPS = HUGE_MUSHROOM_PROPS.mapColor(MapColor.COLOR_BROWN);
-    public static final Properties DUTCH_CAP_MUSHROOM_BLOCK_PROPS = HUGE_MUSHROOM_PROPS.mapColor(MapColor.COLOR_BROWN);
-    public static final Properties GRANDMAS_SHOES_MUSHROOM_BLOCK_PROPS = HUGE_MUSHROOM_PROPS.mapColor(MapColor.COLOR_BROWN);
+
+    public static final Properties DARK_CAPPED_MUSHROOM_BLOCK_PROPS = HUGE_MUSHROOM_PROPS.mapColor(MapColor.COLOR_BLACK);
+    public static final Properties DUTCH_CAP_MUSHROOM_BLOCK_PROPS = HUGE_MUSHROOM_PROPS.mapColor(MapColor.COLOR_YELLOW);
+    public static final Properties GRANDMAS_SHOES_MUSHROOM_BLOCK_PROPS = HUGE_MUSHROOM_PROPS.mapColor(MapColor.COLOR_GREEN);
     public static final Properties KAIZERS_FINGERS_MUSHROOM_BLOCK_PROPS = HUGE_MUSHROOM_PROPS.mapColor(MapColor.COLOR_BROWN);
-    public static final Properties SARCASTIC_CZECH_MUSHROOM_BLOCK_PROPS = HUGE_MUSHROOM_PROPS.mapColor(MapColor.COLOR_BROWN);
+    public static final Properties SARCASTIC_CZECH_MUSHROOM_BLOCK_PROPS = HUGE_MUSHROOM_PROPS.mapColor(MapColor.COLOR_RED);
 
     public static final Properties FLOWER_BLACK_PROPS = FLOWER_PROPS.mapColor(MapColor.COLOR_BLACK);
     public static final Properties FLOWER_RED_PROPS = FLOWER_PROPS.mapColor(MapColor.COLOR_RED);

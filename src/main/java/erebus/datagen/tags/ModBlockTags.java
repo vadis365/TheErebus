@@ -23,7 +23,6 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-
         // MARK: Paxel
         tag(ModTags.MINEABLE_WITH_PAXEL)
                 .addTags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_SHOVEL);
@@ -56,8 +55,28 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
                         OreBlocks.LAPIS.get(), OreBlocks.QUARTZ.get(), OreBlocks.PETRIFIED_QUARTZ.get(), OreBlocks.COPPER.get(),
                         OreBlocks.SILVER.get(), OreBlocks.TIN.get(), OreBlocks.LEAD.get(), OreBlocks.ALUMINUM.get(), OreBlocks.JADE.get(),
                         OreBlocks.FOSSIL.get(), OreBlocks.GNEISS.get(), OreBlocks.PETRIFIED_WOOD.get(), OreBlocks.TEMPLE.get(),
-                        OreBlocks.ENCRUSTED_DIAMOND.get()
+                        OreBlocks.ENCRUSTED_DIAMOND.get(), AmberBlocks.AMBER.get(), AmberBlocks.AMBER_BRICKS.get()
                 );
+
+        tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(OtherBlocks.QUICK_SAND.get());
+
+        tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(
+                        WoodBlocks.LOG_ASPER.get(), WoodBlocks.LOG_BALSAM.get(), WoodBlocks.LOG_BALSAM_RESINLESS.get(), WoodBlocks.LOG_BAOBAB.get(), WoodBlocks.LOG_CYPRESS.get(), WoodBlocks.LOG_EUCALYPTUS.get(), WoodBlocks.LOG_MAHOGANY.get(), WoodBlocks.LOG_MARSHWOOD.get(), WoodBlocks.LOG_MOSSBARK.get(), WoodBlocks.LOG_ROTTEN.get(), WoodBlocks.LOG_SCORCHED.get(),
+                        WoodBlocks.LOG_HOLLOW.get(),
+                        WoodBlocks.PLANKS_ASPER.get(), WoodBlocks.PLANKS_BAMBOO.get(), WoodBlocks.PLANKS_BAOBAB.get(), WoodBlocks.PLANKS_BALSAM.get(), WoodBlocks.PLANKS_CYPRESS.get(), WoodBlocks.PLANKS_EUCALYPTUS.get(), WoodBlocks.PLANKS_MAHOGANY.get(), WoodBlocks.PLANKS_MARSHWOOD.get(), WoodBlocks.PLANKS_MOSSBARK.get(), WoodBlocks.PLANKS_ROTTEN.get(), WoodBlocks.PLANKS_SCORCHED.get(),
+                        WoodBlocks.PLANKS_VARNISHED.get(), WoodBlocks.PLANKS_WHITE.get()
+                );
+
+        tag(BlockTags.NEEDS_STONE_TOOL)
+                .add(OreBlocks.IRON.get(), OreBlocks.LAPIS.get(), OreBlocks.COPPER.get(), OreBlocks.TIN.get(), OreBlocks.LEAD.get(), OreBlocks.ALUMINUM.get());
+        tag(BlockTags.NEEDS_IRON_TOOL)
+                .add(
+                        OreBlocks.GOLD.get(), OreBlocks.DIAMOND.get(), OreBlocks.EMERALD.get(), OreBlocks.SILVER.get(), OreBlocks.JADE.get(), OreBlocks.ENCRUSTED_DIAMOND.get(),
+                        OtherBlocks.QUICK_SAND.get()
+                );
+
 
         // MARK: Ores
         tag(BlockTags.COAL_ORES).add(OreBlocks.COAL.get());

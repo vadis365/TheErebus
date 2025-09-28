@@ -1,0 +1,11 @@
+{
+  "values": [
+    "erebus:ore_gold",
+    "erebus:ore_diamond",
+    "erebus:ore_emerald",
+    "erebus:ore_silver",
+    "erebus:ore_jade",
+    "erebus:ore_encrusted_diamond",
+    "erebus:quick_sand"
+  ]
+}
