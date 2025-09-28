@@ -736,6 +736,7 @@ public class ModLang extends ModLangProvider {
 		add("tooltip.erebus.liquifier", "Turns Honey Drips in to Fluid Honey. Redstone activated.");
 		add("tooltip.erebus.glow_gem", "Place on ANY side of a solid block as a light source. Right click to turn off and on.");
 		add("tooltip.erebus.planticide", "Removes Plants, Leaves and Crops in a 4x4x4 area!"); // I think this is right - used to be 5x5x5
+		add("tooltip.erebus.night_vision", "Enables you to see in the dark.");
 
 	//	TODO - NYI, either the thing isn't added yet or it doesn't have the tool-tip added to it yet.
 		add("tooltip.erebus.nectar_collector", "Right click Bees or Honeypot Ants to collect nectar.");
@@ -759,7 +760,6 @@ public class ModLang extends ModLangProvider {
 		add("tooltip.erebus.glider_powered_key", "Flying Key");
 		add("tooltip.erebus.mush_helm", "Keeps you fed whilst worn at the cost of durability. Repaired in Anvil with Big Mushroom Blocks.");
 		add("tooltip.erebus.healing_hearts", "Heals you a small amount when consumed.");
-		add("tooltip.erebus.night_vision", "Enables you to see in the dark.");
 		add("tooltip.erebus.water_striders", "Enables you to Walk on Water.");
 		add("tooltip.erebus.compost", "Works just like bonemeal Mr.");
 		add("tooltip.erebus.horn_summon", "Summons some bees.");
