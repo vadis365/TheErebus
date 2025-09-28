@@ -17,6 +17,7 @@ import erebus.item.PaxelItem;
 import erebus.item.PlanticideItem;
 import erebus.item.SmoothieBookItem;
 import erebus.item.WaspSwordItem;
+import erebus.item.armour.CompoundGoggles;
 import erebus.item.armour.JumpBoots;
 import erebus.item.armour.SprintLeggings;
 import erebus.item.blocks.BambooCrateItem;
@@ -216,8 +217,8 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<HoeItem> JADE_HOE = registerHoe("jade_hoe", ModToolMaterials.JADE_TIER,-3.0F, 0.0F);
 
     // MARK: Misc Armor & Weapons
-    public static final DeferredItem<ArmorItem> REIN_COMPOUND_GOGGLES = registerHelmet("rein_compound_goggles", ModArmorMaterials.REIN_COMPOUND_GOGGLES_ARMOR_MATERIAL);
-    public static final DeferredItem<ArmorItem> COMPOUND_GOGGLES = registerHelmet("compound_goggles", ModArmorMaterials.GOGGLES_ARMOR_MATERIAL);
+    public static final DeferredItem<Item> REIN_COMPOUND_GOGGLES = registerItem("rein_compound_goggles", () -> new CompoundGoggles(ModArmorMaterials.REIN_COMPOUND_GOGGLES_ARMOR_MATERIAL, ArmorItem.Type.HELMET,  new Item.Properties().stacksTo(1).durability(256)));
+    public static final DeferredItem<Item> COMPOUND_GOGGLES = registerItem("compound_goggles", () -> new CompoundGoggles(ModArmorMaterials.GOGGLES_ARMOR_MATERIAL, ArmorItem.Type.HELMET,  new Item.Properties().stacksTo(1).durability(256)));
     public static final DeferredItem<ArmorItem> MUSHROOM_HELMET = registerHelmet("mushroom_helmet", ModArmorMaterials.MUSHROOM_HELM_ARMOR_MATERIAL);
     public static final DeferredItem<ArmorItem> GLIDER_CHESTPLATE = registerChestplate("glider_chestplate", ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
     public static final DeferredItem<ArmorItem> GLIDER_CHESTPLATE_POWERED = registerChestplate("glider_chestplate_powered",ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
