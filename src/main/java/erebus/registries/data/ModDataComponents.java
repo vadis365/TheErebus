@@ -5,6 +5,8 @@ import java.util.function.Supplier;
 import erebus.Erebus;
 import erebus.network.data.DeathCompassData;
 import erebus.network.data.DeathCompassDataHolder;
+import erebus.network.data.QuakeHammerData;
+import erebus.network.data.QuakeHammerDataHolder;
 import erebus.network.data.SprintLeggingsData;
 import erebus.network.data.SprintLeggingsDataHolder;
 import net.minecraft.core.BlockPos;
@@ -38,4 +40,9 @@ public class ModDataComponents {
 			"sprint_leggings",
 			() -> DataComponentType.<SprintLeggingsData>builder().persistent(SprintLeggingsDataHolder.CODEC)
 					.networkSynchronized(SprintLeggingsDataHolder.STREAM_CODEC).build());
+	
+	public static final Supplier<DataComponentType<QuakeHammerData>> QUAKE_HAMMER = DATA_COMPONENT_REGISTRY.register(
+			"quake_hammer",
+			() -> DataComponentType.<QuakeHammerData>builder().persistent(QuakeHammerDataHolder.CODEC)
+					.networkSynchronized(QuakeHammerDataHolder.STREAM_CODEC).build());
 }
