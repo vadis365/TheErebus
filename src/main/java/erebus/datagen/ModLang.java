@@ -172,7 +172,7 @@ public class ModLang extends ModLangProvider {
         addItem(ModItems.GLIDER_CHESTPLATE, "Glider Chestplate");
         addItem(ModItems.GLIDER_CHESTPLATE_POWERED, "Powered Glider Chestplate");
         addItem(ModItems.ENHANCED_SCORPION_PINCER, "Augmented Scorpion Pincer");
-        addItem(ModItems.WAR_HAMMER, "Quake Hammer");
+        addItem(ModItems.QUAKE_HAMMER, "Quake Hammer");
         addItem(ModItems.WEB_SLINGER, "Web Slinger");
         addItem(ModItems.WEB_SLINGER_WITHER, "Wither Web Slinger");
         addItem(ModItems.MAX_SPEED_BOW, "Maximum Speed Bow");
@@ -743,8 +743,8 @@ public class ModLang extends ModLangProvider {
 		add("tooltip.erebus.homingbeecon_advanced_1", "Sneak + Right click on a block to set as target.");
 		add("tooltip.erebus.homingbeecon_advanced_2", "Right click to teleport.");
 		add("tooltip.erebus.homingbeecon", "Sneak + Click on a block to set as target.");
-		add("tooltip.erebus.war_hammer_1", "Hold Right mouse button to charge up.");
-		add("tooltip.erebus.war_hammer_2", "Sneak + Right Click on top of block to use A.O.E. attack.");
+		add("tooltip.erebus.quake_hammer_1", "Hold Right mouse button to charge up.");
+		add("tooltip.erebus.quake_hammer_2", "Sneak + Right Click on top of block to use A.O.E. attack.");
 		add("tooltip.erebus.wasp_dagger_1", "One use.");
 		add("tooltip.erebus.wasp_dagger_2", "Can be thrown.");
 		add("tooltip.erebus.whetstone_sharpness", "Sharpness Level %s");

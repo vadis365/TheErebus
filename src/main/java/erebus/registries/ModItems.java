@@ -15,6 +15,7 @@ import erebus.item.InsectRepellentItem;
 import erebus.item.MaxSpeedBowItem;
 import erebus.item.PaxelItem;
 import erebus.item.PlanticideItem;
+import erebus.item.QuakeHammerItem;
 import erebus.item.SmoothieBookItem;
 import erebus.item.WaspSwordItem;
 import erebus.item.armour.CompoundGoggles;
@@ -227,7 +228,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> JUMP_BOOTS = registerItem("jump_boots", () -> new JumpBoots(ModArmorMaterials.JUMP_BOOTS_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,  new Item.Properties().stacksTo(1).durability(256)));
     public static final DeferredItem<ArmorItem> WATER_STRIDERS = registerBoots("water_striders", ModArmorMaterials.WATER_STRIDERS_ARMOR_MATERIAL);
     public static final DeferredItem<Item> ENHANCED_SCORPION_PINCER = registerItem("enhanced_scorpion_pincer");
-    public static final DeferredItem<Item> WAR_HAMMER = registerItem("war_hammer");
+    public static final DeferredItem<Item> QUAKE_HAMMER = registerItem("quake_hammer", () -> new QuakeHammerItem(ModToolMaterials.QUAKE_HAMMER, new Item.Properties().stacksTo(1).attributes(SwordItem.createAttributes(ModToolMaterials.QUAKE_HAMMER, 10, -1))));
     public static final DeferredItem<Item> WEB_SLINGER = registerItem("web_slinger");
     public static final DeferredItem<Item> WEB_SLINGER_WITHER = registerItem("web_slinger_wither");
     public static final DeferredItem<Item> MAX_SPEED_BOW = registerItem("max_speed_bow", () -> new MaxSpeedBowItem(new Item.Properties()

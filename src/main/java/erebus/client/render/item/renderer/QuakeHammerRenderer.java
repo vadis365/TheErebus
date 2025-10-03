@@ -2,11 +2,15 @@
 
 package erebus.client.render.item.renderer;
 
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+
 import erebus.Erebus;
-import erebus.client.render.item.model.WarHammerModel;
+import erebus.client.render.item.model.QuakeHammerModel;
 import erebus.registries.client.ModItemRendering;
+import erebus.registries.data.ModDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -20,27 +24,26 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-import javax.annotation.Nonnull;
-
 @OnlyIn(Dist.CLIENT)
-public class WarHammerRenderer extends BlockEntityWithoutLevelRenderer {
+public class QuakeHammerRenderer extends BlockEntityWithoutLevelRenderer {
 
-    private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/items/war_hammer.png");
-    private final WarHammerModel warHammerModel;
+    private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/items/quake_hammer.png");
+    private final QuakeHammerModel quakeHammerModel;
 
-    public WarHammerRenderer(BlockEntityRenderDispatcher blockEntityRenderDispatcher, EntityModelSet entityModelSet) {
+    public QuakeHammerRenderer(BlockEntityRenderDispatcher blockEntityRenderDispatcher, EntityModelSet entityModelSet) {
         super(blockEntityRenderDispatcher, entityModelSet);
         EntityModelSet EntityModelSetThatIsntNULL = Minecraft.getInstance().getEntityModels();
-        warHammerModel = new WarHammerModel(EntityModelSetThatIsntNULL.bakeLayer(ModItemRendering.WAR_HAMMER));
+        quakeHammerModel = new QuakeHammerModel(EntityModelSetThatIsntNULL.bakeLayer(ModItemRendering.QUAKE_HAMMER));
     }
 
     @Override
     public void renderByItem(ItemStack stack, @Nonnull ItemDisplayContext transformType, PoseStack pose, MultiBufferSource bufferIn, int combinedLight, int combinedOverlayIn) {
         pose.pushPose();
-        pose.scale(2, 2, 2);
         pose.rotateAround(Axis.YN.rotationDegrees(90), 0, 1, 0);
-        pose.translate(0, 0.25 - 1, 0);
-        warHammerModel.renderToBuffer(pose, bufferIn.getBuffer(RenderType.entitySmoothCutout(TEXTURE)), combinedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
+        float scale = (float) (1.75F + (!stack.has(ModDataComponents.QUAKE_HAMMER) ? 0 : stack.get(ModDataComponents.QUAKE_HAMMER).charge()) * 0.03F);
+		pose.translate(0F, 0.25F - scale, 0F);
+		pose.scale(scale, scale, scale);
+        quakeHammerModel.renderToBuffer(pose, bufferIn.getBuffer(RenderType.entitySmoothCutout(TEXTURE)), combinedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
         pose.popPose();
     }
 

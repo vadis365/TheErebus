@@ -28,7 +28,7 @@ public class ModItemRendering {
 	public static final ModelLayerLocation EREBUS_SHIELD_PARTS = new ModelLayerLocation(Erebus.prefix("erebus_shield_parts"), "main");
 	public static final ModelLayerLocation SCORPION_PINCER = new ModelLayerLocation(Erebus.prefix("scorpion_pincer"), "main");
 	public static final ModelLayerLocation WAND_OF_PRESERVATION = new ModelLayerLocation(Erebus.prefix("wand_of_preservation"), "main");
-	public static final ModelLayerLocation WAR_HAMMER = new ModelLayerLocation(Erebus.prefix("war_hammer"), "main");
+	public static final ModelLayerLocation QUAKE_HAMMER = new ModelLayerLocation(Erebus.prefix("quake_hammer"), "main");
 	public static final ModelLayerLocation WASP_DAGGER = new ModelLayerLocation(Erebus.prefix("wasp_dagger"), "main");
 	public static final ModelLayerLocation WASP_SWORD = new ModelLayerLocation(Erebus.prefix("wasp_sword"), "main");
 	public static final ModelLayerLocation WEB_SLINGER = new ModelLayerLocation(Erebus.prefix("web_slinger"), "main");
@@ -46,7 +46,7 @@ public class ModItemRendering {
 		event.registerLayerDefinition(PORTAL_ACTIVATOR, PortalActivatorModel::createBodyLayer);
 		event.registerLayerDefinition(EREBUS_SHIELD_PARTS, ErebusShieldPartsModel::createBodyLayer);
 		event.registerLayerDefinition(SCORPION_PINCER, ScorpionPincerModel::createBodyLayer);
-		event.registerLayerDefinition(WAR_HAMMER, WarHammerModel::createBodyLayer);
+		event.registerLayerDefinition(QUAKE_HAMMER, QuakeHammerModel::createBodyLayer);
 		event.registerLayerDefinition(WASP_DAGGER, WaspDaggerModel::createBodyLayer);
 		event.registerLayerDefinition(WASP_SWORD, WaspSwordModel::createBodyLayer);
 		event.registerLayerDefinition(WEB_SLINGER, WebSlingerModel::createBodyLayer);
@@ -98,9 +98,9 @@ public class ModItemRendering {
         event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return new WarHammerRenderer(null, null);
+                return new QuakeHammerRenderer(null, null);
             }
-        }, ModItems.WAR_HAMMER.get());
+        }, ModItems.QUAKE_HAMMER.get());
 
         event.registerItem(new IClientItemExtensions() {
             @Override

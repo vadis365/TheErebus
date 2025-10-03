@@ -8,7 +8,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
 public class QuakeHammerDataHolder {
-    public static final QuakeHammerData DEFAULT = new QuakeHammerData(1);
+    public static final QuakeHammerData DEFAULT = new QuakeHammerData(0);
 
     public static final Codec<QuakeHammerData> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(

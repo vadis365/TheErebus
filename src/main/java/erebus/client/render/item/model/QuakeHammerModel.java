@@ -8,13 +8,13 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 
-public class WarHammerModel extends Model {
+public class QuakeHammerModel extends Model {
     public final ModelPart head;
     public final ModelPart head2;
     public final ModelPart handle;
     public final ModelPart counterWeight;
 
-    public WarHammerModel(ModelPart root) {
+    public QuakeHammerModel(ModelPart root) {
         super(RenderType::entitySolid);
         head = root.getChild("head");
         head2 = root.getChild("head2");

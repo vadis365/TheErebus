@@ -48,10 +48,10 @@ public class ModToolMaterials {
             () -> Ingredient.of(Items.PAPER)
     );
 
-    public static final Tier WAR_HAMMER = new SimpleTier(
+    public static final Tier QUAKE_HAMMER = new SimpleTier(
             BlockTags.INCORRECT_FOR_IRON_TOOL,
-            64, 1, 0, 0,
-            () -> Ingredient.of(Items.PAPER)
+            512, 1, 0, 18,
+            () -> Ingredient.of(ModItems.REINFORCED_PLATE_EXO.get())
     );
 
     public static void init() {

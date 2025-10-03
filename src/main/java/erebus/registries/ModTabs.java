@@ -460,7 +460,7 @@ public class ModTabs {
                         output.accept(ModItems.ROLLED_NEWSPAPER);
                         output.accept(ModItems.WASP_SWORD);
                         output.accept(ModItems.ENHANCED_SCORPION_PINCER);
-                        output.accept(ModItems.WAR_HAMMER);
+                        output.accept(ModItems.QUAKE_HAMMER);
                         output.accept(ModItems.WEB_SLINGER);
                         output.accept(ModItems.WEB_SLINGER_WITHER);
                         output.accept(ModItems.MAX_SPEED_BOW);
