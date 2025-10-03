@@ -96,7 +96,7 @@ public class QuakeHammerItem extends SwordItem {
 					// (float) player.posX, (float)player.posY, (float)player.posZ));
 					level.playSound(null, pos, ModSounds.BLAM_SOUND.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
 					areaOfEffect(level, stack, player, charge);
-					stack.set(ModDataComponents.QUAKE_HAMMER, QuakeHammerDataHolder.DEFAULT );
+					stack.set(ModDataComponents.QUAKE_HAMMER, QuakeHammerDataHolder.DEFAULT);
 					return InteractionResult.SUCCESS;
 				}
 			}
