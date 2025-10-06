@@ -19,11 +19,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.ChestLidController;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
@@ -33,21 +31,20 @@ import org.jetbrains.annotations.NotNull;
 
 public class PetrifiedChestBlockEntity extends ChestBlockEntity {
 
-    private static final int EVENT_SET_OPEN_COUNT = 1;
     private NonNullList<ItemStack> items = NonNullList.withSize(36, ItemStack.EMPTY);
     private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {
         @Override
-        protected void onOpen(Level level, BlockPos pos, BlockState state) {
+        protected void onOpen(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state) {
             playSound(level, pos, state, SoundEvents.CHEST_OPEN);
         }
 
         @Override
-        protected void onClose(Level level, BlockPos pos, BlockState state) {
+        protected void onClose(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state) {
             playSound(level, pos, state, SoundEvents.CHEST_CLOSE);
         }
 
         @Override
-        protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int count, int openCount) {
+        protected void openerCountChanged(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state, int count, int openCount) {
             signalOpenCount(level, pos, state, count, openCount);
         }
 
@@ -96,7 +93,7 @@ public class PetrifiedChestBlockEntity extends ChestBlockEntity {
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+    protected void loadAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
         super.loadAdditional(tag, registries);
         items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
         if(!tryLoadLootTable(tag)) {
@@ -105,7 +102,7 @@ public class PetrifiedChestBlockEntity extends ChestBlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
         super.saveAdditional(tag, registries);
         if(!trySaveLootTable(tag)) {
             ContainerHelper.saveAllItems(tag, items, registries);
@@ -132,26 +129,26 @@ public class PetrifiedChestBlockEntity extends ChestBlockEntity {
     }
 
     @Override
-    public void startOpen(Player player) {
+    public void startOpen(@NotNull Player player) {
         if(!remove && !player.isSpectator()) {
             openersCounter.incrementOpeners(player, getLevel(), getBlockPos(), getBlockState());
         }
     }
 
     @Override
-    public void stopOpen(Player player) {
+    public void stopOpen(@NotNull Player player) {
         if(!remove && !player.isSpectator()) {
             openersCounter.decrementOpeners(player, getLevel(), getBlockPos(), getBlockState());
         }
     }
 
     @Override
-    protected NonNullList<ItemStack> getItems() {
+    protected @NotNull NonNullList<ItemStack> getItems() {
         return items;
     }
 
     @Override
-    protected void setItems(NonNullList<ItemStack> items) {
+    protected void setItems(@NotNull NonNullList<ItemStack> items) {
         this.items = items;
     }
 
@@ -160,26 +157,8 @@ public class PetrifiedChestBlockEntity extends ChestBlockEntity {
         return lidController.getOpenness(partialTicks);
     }
 
-    public static int getOpenCount(BlockGetter level, BlockPos pos) {
-        BlockState state = level.getBlockState(pos);
-        if(state.hasBlockEntity()) {
-            BlockEntity entity = level.getBlockEntity(pos);
-            if(entity instanceof PetrifiedChestBlockEntity chest) {
-                return chest.openersCounter.getOpenerCount();
-            }
-        }
-
-        return 0;
-    }
-
-    public static void swapContents(PetrifiedChestBlockEntity from, PetrifiedChestBlockEntity to) {
-        NonNullList<ItemStack> fromItems = from.items;
-        from.setItems(to.items);
-        to.setItems(fromItems);
-    }
-
     @Override
-    public void setBlockState(BlockState state) {
+    public void setBlockState(@NotNull BlockState state) {
         var oldState = getBlockState();
         super.setBlockState(state);
         if(oldState.getValue(ChestBlock.FACING) != state.getValue(ChestBlock.FACING) || oldState.getValue(ChestBlock.TYPE) != state.getValue(ChestBlock.TYPE)) {
@@ -193,7 +172,7 @@ public class PetrifiedChestBlockEntity extends ChestBlockEntity {
         }
     }
 
-    public void signalOpenCount(Level level, BlockPos pos, BlockState state, int eventId, int eventParam) {
+    public void signalOpenCount(Level level, @NotNull BlockPos pos, BlockState state, int eventId, int eventParam) {
         Block block = state.getBlock();
         level.blockEvent(pos, block, 1, eventParam);
     }
