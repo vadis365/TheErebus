@@ -1,6 +1,6 @@
 {
   "parent": "builtin/entity",
   "textures": {
-    "particle": "erebus:blocks/planks_petrified_wood"
+    "particle": "erebus:block/planks_petrified"
   }
 }

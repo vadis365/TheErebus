@@ -191,6 +191,13 @@ public class ModItemRendering {
             }
         }, OtherBlocks.BAMBOO_EXTENDER.get().asItem());
 
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return new PetrifiedChestStackItemRenderer(null, null);
+            }
+        }, OtherBlocks.PETRIFIED_WOOD_CHEST.get().asItem());
+
         //Fluids
         event.registerFluidType(new BasicFluidType("beetle_juice"), ModFluids.BEETLE_JUICE_TYPE.get());
         event.registerFluidType(new BasicFluidType("honey"), ModFluids.HONEY_TYPE.get());
