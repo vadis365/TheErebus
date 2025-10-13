@@ -1,7 +1,6 @@
 package erebus;
 
 import com.mojang.logging.LogUtils;
-import erebus.client.ModAtlases;
 import erebus.events.BedPlaceEventHandler;
 import erebus.events.GogglesClientTickHandler;
 import erebus.events.OnEntityJumpEventHandler;
@@ -132,7 +131,6 @@ public class Erebus {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        ModAtlases.registerPetrifiedChestAtlases();
         ItemProperties.register(
                 ModItems.DEATH_COMPASS.get(),
                 ResourceLocation.withDefaultNamespace("angle"),

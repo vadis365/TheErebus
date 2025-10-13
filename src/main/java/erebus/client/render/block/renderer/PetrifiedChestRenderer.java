@@ -1,25 +1,48 @@
 package erebus.client.render.block.renderer;
 
-import erebus.block.entity.PetrifiedChestBlockEntity;
-import erebus.client.ModAtlases;
+import com.google.common.collect.ImmutableMap;
+import erebus.Erebus;
+import erebus.registries.blocks.providers.OtherBlocks;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
 import net.minecraft.client.resources.model.Material;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import org.jetbrains.annotations.NotNull;
 
-public class PetrifiedChestRenderer extends ChestRenderer<PetrifiedChestBlockEntity> {
+import java.util.EnumMap;
+import java.util.Map;
+
+public class PetrifiedChestRenderer<T extends ChestBlockEntity> extends ChestRenderer<T> {
+
+    public static final Map<Block, EnumMap<ChestType, Material>> MATERIALS;
+
+    static {
+        ImmutableMap.Builder<Block, EnumMap<ChestType, Material>> builder = ImmutableMap.builder();
+        builder.put(OtherBlocks.PETRIFIED_WOOD_CHEST.get(), chestMaterials("petrified_chest"));
+        MATERIALS = builder.build();
+    }
 
     public PetrifiedChestRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
     }
 
-    @Override
-    protected @NotNull Material getMaterial(@NotNull PetrifiedChestBlockEntity blockEntity, ChestType chestType) {
-        return switch (chestType) {
-            case LEFT -> ModAtlases.PETRIFIED_CHEST_LEFT;
-            case RIGHT -> ModAtlases.PETRIFIED_CHEST_RIGHT;
-            default -> ModAtlases.PETRIFIED_CHEST;
-        };
+    private static EnumMap<ChestType, Material> chestMaterials(String wood) {
+        EnumMap<ChestType, Material> map = new EnumMap<>(ChestType.class);
+
+        map.put(ChestType.SINGLE, new Material(Sheets.CHEST_SHEET, Erebus.prefix("entity/chest/%s".formatted(wood))));
+        map.put(ChestType.LEFT, new Material(Sheets.CHEST_SHEET, Erebus.prefix("entity/chest/%s_left".formatted(wood))));
+        map.put(ChestType.RIGHT, new Material(Sheets.CHEST_SHEET, Erebus.prefix("entity/chest/%s_right".formatted(wood))));
+        return map;
+    }
+
+    @NotNull
+    protected  Material getMaterial(T entity, ChestType type) {
+        EnumMap<ChestType, Material> materials = MATERIALS.get(entity.getBlockState().getBlock());
+        if (materials == null) return super.getMaterial(entity, type);
+        Material material = materials.get(type);
+        return material != null ? material : super.getMaterial(entity, type);
     }
 }
