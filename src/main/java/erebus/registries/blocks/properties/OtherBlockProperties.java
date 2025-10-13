@@ -106,6 +106,7 @@ public class OtherBlockProperties {
     static {
         PORTAL = Properties.ofFullCopy(Blocks.NETHER_PORTAL);
         GAEAN_KEYSTONE = Properties.of()
+                .noOcclusion()
                 .strength(3.0F)
                 .sound(SoundType.STONE)
                 .mapColor(MapColor.STONE);
