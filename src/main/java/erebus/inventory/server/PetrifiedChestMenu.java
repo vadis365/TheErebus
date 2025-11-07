@@ -22,8 +22,8 @@ public class PetrifiedChestMenu extends ChestMenu {
         container.startOpen(inv.player);
     }
 
-    public static PetrifiedChestMenu fourRows(int containerId, Inventory playerInventory) {
-        return new PetrifiedChestMenu(containerId, playerInventory, 4);
+    public static PetrifiedChestMenu fourRows(int containerId, Inventory playerInventory, Container container) {
+        return new PetrifiedChestMenu(containerId, playerInventory, container, 4);
     }
 
     public static PetrifiedChestMenu eightRows(int containerId, Inventory playerInventory, Container container) {
