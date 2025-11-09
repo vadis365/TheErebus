@@ -3,7 +3,6 @@ package erebus.registries.network;
 import erebus.Erebus;
 import erebus.network.client.*;
 import erebus.network.server.ColossalCratePage;
-import erebus.network.server.ErebusChestOpennessPayload;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 public class ModNetwork {
@@ -16,7 +15,6 @@ public class ModNetwork {
 				 .playToClient(PreservedBlockNBTPacket.TYPE, PreservedBlockNBTPacket.STREAM_CODEC, PreservedBlockNBTPacket::handle)
 				 .playToClient(ParticlePacket.TYPE, ParticlePacket.STREAM_CODEC, ParticlePacket::handle)
 				 .playToClient(AntlionParticlePacket.TYPE, AntlionParticlePacket.STREAM_CODEC, AntlionParticlePacket::handle)
-                 .playToClient(ErebusChestOpennessPayload.TYPE, ErebusChestOpennessPayload.STREAM_CODEC, ErebusChestOpennessPayload::handle)
 				 .playToServer(ColossalCratePage.TYPE, ColossalCratePage.STREAM_CODEC, ColossalCratePage::handle);
 		 // .playToServer(PacketBeetleDig.class, PacketBeetleDig.class, 2, Side.SERVER)
 		 // .playToServer(PacketBeetleRamAttack.class, PacketBeetleRamAttack.class, 3, Side.SERVER)
