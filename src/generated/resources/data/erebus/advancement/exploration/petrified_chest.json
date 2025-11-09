@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:petrified_wood_chest"
+            "items": "erebus:chest_petrified"
           }
         ]
       },
@@ -18,7 +18,7 @@
     },
     "icon": {
       "count": 1,
-      "id": "erebus:petrified_wood_chest"
+      "id": "erebus:chest_petrified"
     },
     "title": {
       "translate": "advancement.erebus.exploration/petrified_chest.title"

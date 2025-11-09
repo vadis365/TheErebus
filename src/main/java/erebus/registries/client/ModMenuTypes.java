@@ -16,7 +16,6 @@ public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(BuiltInRegistries.MENU, Erebus.MODID);
 
     public static final Supplier<MenuType<PetrifiedCraftingMenu>> PETRIFIED_CRAFTING_MENU;
-    public static final Supplier<MenuType<PetrifiedChestMenu>> PETRIFIED_CHEST;
     public static final Supplier<MenuType<UmberFurnaceMenu>> UMBER_FURNACE_MENU;
     public static final DeferredHolder<MenuType<?>, MenuType<LiquifierMenu>> LIQUIFIER;
     public static final DeferredHolder<MenuType<?>, MenuType<HoneyCombMenu>> HONEY_COMB;
@@ -40,6 +39,5 @@ public class ModMenuTypes {
         LIQUIFIER = MENU_TYPES.register("liquifier", () -> IMenuTypeExtension.create(LiquifierMenu::new));
         UMBER_FURNACE_MENU = MENU_TYPES.register("umberfurnace", () -> new MenuType<>(UmberFurnaceMenu::new, FeatureFlags.DEFAULT_FLAGS));
         PETRIFIED_CRAFTING_MENU = MENU_TYPES.register("petrified_crafting_table", () -> new MenuType<>(PetrifiedCraftingMenu::new, FeatureFlags.DEFAULT_FLAGS));
-        PETRIFIED_CHEST = MENU_TYPES.register("petrified_wood_chest", () -> new MenuType<>(PetrifiedChestMenu::new, FeatureFlags.DEFAULT_FLAGS));
     }
 }

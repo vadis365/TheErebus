@@ -3,6 +3,7 @@ package erebus.registries.blocks;
 import erebus.Erebus;
 import erebus.block.entity.*;
 import erebus.registries.blocks.providers.AmberBlocks;
+import erebus.registries.blocks.providers.ChestBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
@@ -37,7 +38,7 @@ public class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<UmberFurnaceBlockEntity>> UMBERFURNACE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ComposterBlockEntity>> COMPOSTER;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SiloTankBlockEntity>> SILO_TANK;
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PetrifiedChestBlockEntity>> PETRIFIED_CHEST;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ErebusChestBlockEntity>> EREBUS_CHEST;
 
     static {
         ALTAR_EXPERIENCE = register("altar_experience", ExperienceAltarBlockEntity::new, OtherBlocks.ALTAR_EXPERIENCE);
@@ -61,7 +62,22 @@ public class ModBlockEntities {
         UMBERFURNACE = register("umberfurnace", UmberFurnaceBlockEntity::new, OtherBlocks.UMBER_FURNACE);
         COMPOSTER = register("composter", ComposterBlockEntity::new, OtherBlocks.COMPOSTER);
         SILO_TANK = register("silo_tank", SiloTankBlockEntity::new, OtherBlocks.SILO_TANK);
-        PETRIFIED_CHEST = register("petrified_chest", PetrifiedChestBlockEntity::new, OtherBlocks.PETRIFIED_WOOD_CHEST);
+        EREBUS_CHEST = register("erebus_chest", ErebusChestBlockEntity::new,
+                ChestBlocks.CHEST_ASPER,
+                ChestBlocks.CHEST_BAOBAB,
+                ChestBlocks.CHEST_BAMBOO,
+                ChestBlocks.CHEST_BALSAM,
+                ChestBlocks.CHEST_CYPRESS,
+                ChestBlocks.CHEST_EUCALYPTUS,
+                ChestBlocks.CHEST_MAHOGANY,
+                ChestBlocks.CHEST_MARSHWOOD,
+                ChestBlocks.CHEST_MOSSBARK,
+                ChestBlocks.CHEST_PETRIFIED,
+                ChestBlocks.CHEST_ROTTEN,
+                ChestBlocks.CHEST_SCORCHED,
+                ChestBlocks.CHEST_VARNISHED,
+                ChestBlocks.CHEST_WHITE
+        );
     }
 
     /**

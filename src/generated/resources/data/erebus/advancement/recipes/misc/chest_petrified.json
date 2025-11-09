@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "erebus:petrified_wood_chest"
+        "recipe": "erebus:chest_petrified"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "erebus:petrified_wood_chest"
+      "erebus:chest_petrified"
     ]
   }
 }

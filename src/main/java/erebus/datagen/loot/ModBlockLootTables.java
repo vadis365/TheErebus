@@ -422,7 +422,6 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
 
         // MARK: Utility Blocks
         dropSelf(OtherBlocks.PETRIFIED_CRAFTING_TABLE);
-        dropSelf(OtherBlocks.PETRIFIED_WOOD_CHEST);
         dropSelf(OtherBlocks.BAMBOO_CRATE);
         dropSelf(OtherBlocks.BAMBOO_BRIDGE);
         dropSelf(OtherBlocks.BAMBOO_LADDER);
@@ -444,6 +443,22 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(OtherBlocks.GLOW_GEM_INACTIVE);
         dropSelf(OtherBlocks.MUCUS_BOMB);
         dropSelf(OtherBlocks.UMBER_GOLEM_STATUE);
+
+        // MARK: Chests
+        dropSelf(ChestBlocks.CHEST_ASPER);
+        dropSelf(ChestBlocks.CHEST_BALSAM);
+        dropSelf(ChestBlocks.CHEST_BAOBAB);
+        dropSelf(ChestBlocks.CHEST_BAMBOO);
+        dropSelf(ChestBlocks.CHEST_CYPRESS);
+        dropSelf(ChestBlocks.CHEST_EUCALYPTUS);
+        dropSelf(ChestBlocks.CHEST_MAHOGANY);
+        dropSelf(ChestBlocks.CHEST_MARSHWOOD);
+        dropSelf(ChestBlocks.CHEST_MOSSBARK);
+        dropSelf(ChestBlocks.CHEST_PETRIFIED);
+        dropSelf(ChestBlocks.CHEST_ROTTEN);
+        dropSelf(ChestBlocks.CHEST_SCORCHED);
+        dropSelf(ChestBlocks.CHEST_VARNISHED);
+        dropSelf(ChestBlocks.CHEST_WHITE);
 
         dropSelf(OtherBlocks.ALTAR_BASE);
         dropSelf(OtherBlocks.ALTAR_LIGHTNING);

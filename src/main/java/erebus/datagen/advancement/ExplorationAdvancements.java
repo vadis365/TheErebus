@@ -2,6 +2,7 @@ package erebus.datagen.advancement;
 
 import erebus.Erebus;
 import erebus.registries.ModItems;
+import erebus.registries.blocks.providers.ChestBlocks;
 import erebus.registries.blocks.providers.OreBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.blocks.providers.WoodBlocks;
@@ -171,7 +172,7 @@ public class ExplorationAdvancements extends ModAdvancements {
                 "whetstone"
         );
         newspaper = createSimpleAdvancementWithParent(whetstone, TASK, ModItems.ROLLED_NEWSPAPER, "newspaper", "has_newspaper", hasItems(ModItems.ROLLED_NEWSPAPER));
-        petrified_chest = createSimpleAdvancementWithParent(petrified_wood, TASK, OtherBlocks.PETRIFIED_WOOD_CHEST, "petrified_chest", "has_petrified_chest", hasItems(OtherBlocks.PETRIFIED_WOOD_CHEST));
+        petrified_chest = createSimpleAdvancementWithParent(petrified_wood, TASK, ChestBlocks.CHEST_PETRIFIED, "petrified_chest", "has_petrified_chest", hasItems(ChestBlocks.CHEST_PETRIFIED));
         poison_sac = createSimpleAdvancementWithParent(entomology, TASK, ModItems.POISON_GLAND, "poison_sac", "has_poison_sac", hasItems(ModItems.POISON_GLAND));
         planticide = createSimpleAdvancementWithParent(poison_sac, TASK, ModItems.PLANTICIDE, "planticide", "has_planticide", hasItems(ModItems.PLANTICIDE));
         reinexo_set = save(

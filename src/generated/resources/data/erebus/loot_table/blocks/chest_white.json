@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "erebus:petrified_wood_chest"
+          "name": "erebus:chest_white"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "erebus:blocks/petrified_wood_chest"
+  "random_sequence": "erebus:blocks/chest_white"
 }

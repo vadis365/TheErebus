@@ -16,6 +16,7 @@ public class ModBlocks {
         AmberBlocks.init();
         OreBlocks.init();
         WoodBlocks.init();
+        ChestBlocks.init();
         SlabBlocks.init();
         StairBlocks.init();
         WallBlocks.init();

@@ -197,8 +197,8 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .define('I', Items.IRON_INGOT)
                 .define('P', WoodBlocks.PLANKS_VARNISHED)
                 .define('B', Blocks.IRON_BLOCK)
-                .define('C', OtherBlocks.PETRIFIED_WOOD_CHEST)
-                .unlockedBy("has_petrified_wood_chest", has(OtherBlocks.PETRIFIED_WOOD_CHEST))
+                .define('C', ChestBlocks.CHEST_PETRIFIED)
+                .unlockedBy("has_petrified_wood_chest", has(ChestBlocks.CHEST_PETRIFIED))
                 .save(output);
 
         ShapedRecipeBuilder.shaped(MISC, OtherBlocks.OFFERING_ALTAR)

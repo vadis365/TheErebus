@@ -1,7 +1,7 @@
 {
   "parent": "builtin/entity",
   "textures": {
-    "particle": "erebus:block/petrified_wood_chest"
+    "particle": "erebus:block/planks_white"
   },
   "display": {
     "gui": {

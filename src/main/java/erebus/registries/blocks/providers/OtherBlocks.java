@@ -87,7 +87,6 @@ public class OtherBlocks extends ModBlockHelpers {
 
     // MARK: Utility Blocks
     public static final DeferredBlock<PetrifiedCraftingTableBlock> PETRIFIED_CRAFTING_TABLE;
-    public static final DeferredBlock<Block> PETRIFIED_WOOD_CHEST;
     public static final DeferredBlock<BambooCrateBlock> BAMBOO_CRATE;
     public static final DeferredBlock<Block> BAMBOO_BRIDGE;
     public static final DeferredBlock<LadderBlock> BAMBOO_LADDER;
@@ -214,7 +213,6 @@ public class OtherBlocks extends ModBlockHelpers {
 
         // MARK: Utility Blocks
         PETRIFIED_CRAFTING_TABLE = registerBlock("petrified_crafting_table", () -> new PetrifiedCraftingTableBlock(OtherBlockProperties.PETRIFIED_CRAFTING_TABLE));
-        PETRIFIED_WOOD_CHEST = registerBlock("petrified_wood_chest", () -> new PetrifiedChestBlock(OtherBlockProperties.PETRIFIED_WOOD_CHEST));
         BAMBOO_CRATE = registerBlockWithoutBlockItem("bamboo_crate", () -> new BambooCrateBlock(OtherBlockProperties.BAMBOO_CRATE));
         BAMBOO_BRIDGE = registerBlock("bamboo_bridge", () -> new BambooBridge(OtherBlockProperties.BAMBOO_BRIDGE));
         BAMBOO_LADDER = registerBlock("bamboo_ladder", () -> new LadderBlock(OtherBlockProperties.BAMBOO_LADDER));

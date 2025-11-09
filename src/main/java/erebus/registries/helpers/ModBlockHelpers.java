@@ -1,5 +1,6 @@
 package erebus.registries.helpers;
 
+import erebus.block.ErebusChestBlock;
 import erebus.block.plants.ModBerryBushBlock;
 import erebus.block.plants.ModCropBlock;
 import erebus.block.util.ConnectedTextureBlock;
@@ -72,6 +73,10 @@ public class ModBlockHelpers {
 
     protected static DeferredBlock<HugeMushroomBlock> registerHugeMushroom(String name, Properties properties) {
         return registerBlock(name, () -> new HugeMushroomBlock(properties));
+    }
+
+    protected static DeferredBlock<ChestBlock> registerChest(String name, Properties properties) {
+        return registerBlock(name, () -> new ErebusChestBlock(properties, name));
     }
 
     protected static DeferredBlock<Block> registerSimpleBlock(String name, Properties properties) {

@@ -213,7 +213,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addSpecialBlockRecipes() {
-        surround(WoodBlocks.PLANKS_PETRIFIED, Items.GOLD_INGOT, OtherBlocks.PETRIFIED_WOOD_CHEST);
+        surround(WoodBlocks.PLANKS_PETRIFIED, Items.GOLD_INGOT, ChestBlocks.CHEST_PETRIFIED);
 
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.BAMBOO_BRIDGE, 3)
                 .pattern("SSS")

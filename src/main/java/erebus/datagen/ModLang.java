@@ -615,7 +615,6 @@ public class ModLang extends ModLangProvider {
 
         // MARK: Utility Blocks
         addBlock(OtherBlocks.PETRIFIED_CRAFTING_TABLE, "Petrified Crafting Table");
-        addBlock(OtherBlocks.PETRIFIED_WOOD_CHEST, "Petrified Wood Chest");
         addBlock(OtherBlocks.BAMBOO_CRATE, "Bamboo Crate");
         addBlock(OtherBlocks.BAMBOO_BRIDGE, "Bamboo Bridge");
         addBlock(OtherBlocks.BAMBOO_LADDER, "Bamboo Ladder");
@@ -643,6 +642,22 @@ public class ModLang extends ModLangProvider {
         addBlock(OtherBlocks.ALTAR_EXPERIENCE, "Altar of Experience");
         addBlock(OtherBlocks.ALTAR_REPAIR, "Altar of Repair");
         addBlock(OtherBlocks.OFFERING_ALTAR, "Offering Altar");
+
+        // MARK: Chests
+        addBlock(ChestBlocks.CHEST_ASPER, "Asper Chest");
+        addBlock(ChestBlocks.CHEST_BAMBOO, "Bamboo Chest");
+        addBlock(ChestBlocks.CHEST_BAOBAB, "Baobab Chest");
+        addBlock(ChestBlocks.CHEST_BALSAM, "Balsam Chest");
+        addBlock(ChestBlocks.CHEST_CYPRESS, "Cypress Chest");
+        addBlock(ChestBlocks.CHEST_EUCALYPTUS, "Eucalyptus Chest");
+        addBlock(ChestBlocks.CHEST_MAHOGANY, "Mahogany Chest");
+        addBlock(ChestBlocks.CHEST_MARSHWOOD, "Marshwood Chest");
+        addBlock(ChestBlocks.CHEST_MOSSBARK, "Mossbark Chest");
+        addBlock(ChestBlocks.CHEST_PETRIFIED, "Petrified Wood Chest");
+        addBlock(ChestBlocks.CHEST_ROTTEN, "Rotten Chest");
+        addBlock(ChestBlocks.CHEST_SCORCHED, "Scorched Chest");
+        addBlock(ChestBlocks.CHEST_VARNISHED, "Varnished Chest");
+        addBlock(ChestBlocks.CHEST_WHITE, "White Chest");
 
         // MARK: Antlion Dungeon
         addBlock(OtherBlocks.CAPSTONE, "Capstone");
@@ -859,8 +874,20 @@ public class ModLang extends ModLangProvider {
 
     private void addContainerTranslations() {
         addContainer("petrified_crafting_table", "Petrified Crafting Table");
-        addContainer("petrified_wood_chest", "Petrified Wood Chest");
-        addContainer("petrified_wood_double_chest", "Petrified Wood Double Chest");
+        addContainer("chest_asper", "Asper Chest");
+        addContainer("chest_bamboo", "Bamboo Chest");
+        addContainer("chest_baobab", "Baobab Chest");
+        addContainer("chest_balsam", "Balsam Chest");
+        addContainer("chest_cypress", "Cypress Chest");
+        addContainer("chest_eucalyptus", "Eucalyptus Chest");
+        addContainer("chest_mahogany", "Mahogany Chest");
+        addContainer("chest_marshwood", "Marshwood Chest");
+        addContainer("chest_mossbark", "Mossbark Chest");
+        addContainer("chest_petrified", "Petrified Wood Chest");
+        addContainer("chest_rotten", "Rotten Chest");
+        addContainer("chest_scorched", "Scorched Chest");
+        addContainer("chest_varnished", "Varnished Chest");
+        addContainer("chest_white", "White Chest");
         addContainer("umberfurnace", "Umber Furnace");
         addContainer("liquifier", "Honey Liquifier");
         addContainer("honeycomb_cell", "Honeycomb Cell");

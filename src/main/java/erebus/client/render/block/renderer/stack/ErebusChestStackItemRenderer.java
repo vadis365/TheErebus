@@ -17,15 +17,16 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class PetrifiedChestStackItemRenderer extends BlockEntityWithoutLevelRenderer {
+public class ErebusChestStackItemRenderer extends BlockEntityWithoutLevelRenderer {
 
-    private final ResourceLocation TEXTURE = Erebus.prefix("textures/entity/chest/petrified_chest.png");
+    private final ResourceLocation TEXTURE;
     private final ModelPart model;
 
-    public PetrifiedChestStackItemRenderer(BlockEntityRenderDispatcher renderer, EntityModelSet modelSet) {
+    public ErebusChestStackItemRenderer(BlockEntityRenderDispatcher renderer, EntityModelSet modelSet, String texture) {
         super(renderer, modelSet);
         EntityModelSet nonNull = Minecraft.getInstance().getEntityModels();
         model = nonNull.bakeLayer(ModelLayers.CHEST);
+        this.TEXTURE = Erebus.prefix("textures/entity/chest/%s.png".formatted(texture));
     }
 
     @Override

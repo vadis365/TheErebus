@@ -95,6 +95,7 @@ public class ModTabs {
                         output.accept(OtherBlocks.SILK.get());
                         output.accept(UmberstoneBlocks.MIR_BRICKS.get());
                         output.accept(WoodBlocks.PLANKS_PETRIFIED.get());
+                        output.accept(ChestBlocks.CHEST_PETRIFIED.get());
                         output.accept(OtherBlocks.REIN_EXO.get());
                         output.accept(UmberstoneBlocks.MUD_BRICKS.get());
                         output.accept(OtherBlocks.TEMPLE_BRICK.get());
@@ -123,7 +124,6 @@ public class ModTabs {
                         output.accept(OtherBlocks.SILO_TANK.get());
                         output.accept(OtherBlocks.SILO_SUPPORTS.get());
                         output.accept(OtherBlocks.HONEY_COMB.get());
-                        output.accept(OtherBlocks.PETRIFIED_WOOD_CHEST.get());
                         output.accept(AmberBlocks.GLOWING_JAR.get());
                         output.accept(AmberBlocks.FLUID_JAR.get());
                         output.accept(OtherBlocks.COMPOSTER.get());
@@ -203,6 +203,7 @@ public class ModTabs {
                         output.accept(DoorBlocks.BAOBAB);
                         output.accept(FenceBlocks.FENCE_BAOBAB);
                         output.accept(FenceBlocks.FENCE_GATE_BAOBAB);
+                        output.accept(ChestBlocks.CHEST_BAOBAB);
                         output.accept(WoodBlocks.LOG_EUCALYPTUS);
                         output.accept(WoodBlocks.LEAVES_EUCALYPTUS);
                         output.accept(StairBlocks.EUCALYPTUS);
@@ -210,6 +211,7 @@ public class ModTabs {
                         output.accept(DoorBlocks.EUCALYPTUS);
                         output.accept(FenceBlocks.FENCE_EUCALYPTUS);
                         output.accept(FenceBlocks.FENCE_GATE_EUCALYPTUS);
+                        output.accept(ChestBlocks.CHEST_EUCALYPTUS);
                         output.accept(WoodBlocks.LOG_MAHOGANY);
                         output.accept(WoodBlocks.LEAVES_MAHOGANY);
                         output.accept(StairBlocks.MAHOGANY);
@@ -217,6 +219,7 @@ public class ModTabs {
                         output.accept(DoorBlocks.MAHOGANY);
                         output.accept(FenceBlocks.FENCE_MAHOGANY);
                         output.accept(FenceBlocks.FENCE_GATE_MAHOGANY);
+                        output.accept(ChestBlocks.CHEST_MAHOGANY);
                         output.accept(WoodBlocks.LOG_MOSSBARK);
                         output.accept(WoodBlocks.LEAVES_MOSSBARK);
                         output.accept(StairBlocks.MOSSBARK);
@@ -224,6 +227,7 @@ public class ModTabs {
                         output.accept(DoorBlocks.MOSSBARK);
                         output.accept(FenceBlocks.FENCE_MOSSBARK);
                         output.accept(FenceBlocks.FENCE_GATE_MOSSBARK);
+                        output.accept(ChestBlocks.CHEST_MOSSBARK);
                         output.accept(WoodBlocks.LOG_ASPER);
                         output.accept(WoodBlocks.LEAVES_ASPER);
                         output.accept(StairBlocks.ASPER);
@@ -231,6 +235,7 @@ public class ModTabs {
                         output.accept(DoorBlocks.ASPER);
                         output.accept(FenceBlocks.FENCE_ASPER);
                         output.accept(FenceBlocks.FENCE_GATE_ASPER);
+                        output.accept(ChestBlocks.CHEST_ASPER);
                         output.accept(WoodBlocks.LOG_CYPRESS);
                         output.accept(WoodBlocks.LEAVES_CYPRESS);
                         output.accept(StairBlocks.CYPRESS);
@@ -238,6 +243,7 @@ public class ModTabs {
                         output.accept(DoorBlocks.CYPRESS);
                         output.accept(FenceBlocks.FENCE_CYPRESS);
                         output.accept(FenceBlocks.FENCE_GATE_CYPRESS);
+                        output.accept(ChestBlocks.CHEST_CYPRESS);
                         output.accept(WoodBlocks.LOG_BALSAM);
                         output.accept(WoodBlocks.LEAVES_BALSAM);
                         output.accept(StairBlocks.BALSAM);
@@ -245,21 +251,25 @@ public class ModTabs {
                         output.accept(DoorBlocks.BALSAM);
                         output.accept(FenceBlocks.FENCE_BALSAM);
                         output.accept(FenceBlocks.FENCE_GATE_BALSAM);
+                        output.accept(ChestBlocks.CHEST_BALSAM);
                         output.accept(StairBlocks.WHITE);
                         output.accept(SlabBlocks.PLANKS_WHITE);
                         output.accept(DoorBlocks.WHITE);
                         output.accept(FenceBlocks.FENCE_WHITE);
                         output.accept(FenceBlocks.FENCE_GATE_WHITE);
+                        output.accept(ChestBlocks.CHEST_WHITE);
                         output.accept(StairBlocks.BAMBOO);
                         output.accept(SlabBlocks.PLANKS_BAMBOO);
                         output.accept(FenceBlocks.FENCE_BAMBOO);
                         output.accept(FenceBlocks.FENCE_GATE_BAMBOO);
+                        output.accept(ChestBlocks.CHEST_BAMBOO);
                         output.accept(WoodBlocks.LOG_ROTTEN);
                         output.accept(StairBlocks.ROTTEN);
                         output.accept(SlabBlocks.PLANKS_ROTTEN);
                         output.accept(DoorBlocks.ROTTEN);
                         output.accept(FenceBlocks.FENCE_ROTTEN);
                         output.accept(FenceBlocks.FENCE_GATE_ROTTEN);
+                        output.accept(ChestBlocks.CHEST_ROTTEN);
                         output.accept(WoodBlocks.LOG_MARSHWOOD);
                         output.accept(WoodBlocks.LEAVES_MARSHWOOD);
                         output.accept(StairBlocks.MARSHWOOD);
@@ -267,16 +277,19 @@ public class ModTabs {
                         output.accept(DoorBlocks.MARSHWOOD);
                         output.accept(FenceBlocks.FENCE_MARSHWOOD);
                         output.accept(FenceBlocks.FENCE_GATE_MARSHWOOD);
+                        output.accept(ChestBlocks.CHEST_MARSHWOOD);
                         output.accept(WoodBlocks.LOG_SCORCHED);
                         output.accept(StairBlocks.SCORCHED);
                         output.accept(SlabBlocks.PLANKS_SCORCHED);
                         output.accept(DoorBlocks.SCORCHED);
                         output.accept(FenceBlocks.FENCE_SCORCHED);
                         output.accept(FenceBlocks.FENCE_GATE_SCORCHED);
+                        output.accept(ChestBlocks.CHEST_SCORCHED);
                         output.accept(StairBlocks.VARNISHED);
                         output.accept(SlabBlocks.PLANKS_VARNISHED);
                         output.accept(FenceBlocks.FENCE_VARNISHED);
                         output.accept(FenceBlocks.FENCE_GATE_VARNISHED);
+                        output.accept(ChestBlocks.CHEST_VARNISHED);
                     })
                     .build()
     );

@@ -8,10 +8,12 @@ import erebus.client.render.item.renderer.*;
 import erebus.registries.ModFluids;
 import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.AmberBlocks;
+import erebus.registries.blocks.providers.ChestBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.level.block.ChestBlock;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
@@ -20,6 +22,8 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.function.Supplier;
 
 public class ModItemRendering {
 
@@ -191,12 +195,20 @@ public class ModItemRendering {
             }
         }, OtherBlocks.BAMBOO_EXTENDER.get().asItem());
 
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return new PetrifiedChestStackItemRenderer(null, null);
-            }
-        }, OtherBlocks.PETRIFIED_WOOD_CHEST.get().asItem());
+        registerChestItem(event, ChestBlocks.CHEST_ASPER, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_BAOBAB, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_BAMBOO, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_BALSAM, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_CYPRESS, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_EUCALYPTUS, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_MAHOGANY, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_MARSHWOOD, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_MOSSBARK, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_PETRIFIED, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_ROTTEN, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_SCORCHED, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_VARNISHED, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_WHITE, "petrified_chest");
 
         //Fluids
         event.registerFluidType(new BasicFluidType("beetle_juice"), ModFluids.BEETLE_JUICE_TYPE.get());
@@ -211,4 +223,13 @@ public class ModItemRendering {
 			return tint == 1 ? IClientFluidTypeExtensions.of(fluid).getTintColor(new FluidStack(fluid, FluidType.BUCKET_VOLUME)) : -1;
 		}, ModItems.FORMIC_ACID_BUCKET, ModItems.HONEY_BUCKET, ModItems.BEETLE_JUICE_BUCKET, ModItems.ANTI_VENOM_BUCKET);
 	}
+
+    private static void registerChestItem(RegisterClientExtensionsEvent event, Supplier<ChestBlock> chest, String texture) {
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return new ErebusChestStackItemRenderer(null, null, texture);
+            }
+        }, chest.get().asItem());
+    }
 }

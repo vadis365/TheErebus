@@ -15,6 +15,7 @@ public class WoodBlockProperties {
     public static final Properties LOG_HOLLOW;
     public static final Properties LEAVES;
     public static final Properties PLANKS;
+    public static final Properties CHEST;
 
     static {
         LOG_HOLLOW = Properties.of()
@@ -40,6 +41,13 @@ public class WoodBlockProperties {
                     .strength(2.0F, 3.0F)
                     .sound(SoundType.WOOD)
                     .ignitedByLava();
+
+        CHEST = Properties.of()
+                .mapColor(MapColor.WOOD)
+                .instrument(NoteBlockInstrument.BASS)
+                .strength(2.5F)
+                .sound(SoundType.WOOD)
+                .ignitedByLava();
     }
 
     public static Properties log(MapColor top, MapColor side) {

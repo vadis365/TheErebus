@@ -19,9 +19,9 @@ public class ModBlockEntityRendering {
     public static final ModelLayerLocation GLOWING_JAR = new ModelLayerLocation(Erebus.prefix("glowing_jar"), "main");
     public static final ModelLayerLocation BAMBOO_BRIDGE = new ModelLayerLocation(Erebus.prefix("bamboo_bridge"), "main");
     public static final ModelLayerLocation BAMBOO_EXTENDER = new ModelLayerLocation(Erebus.prefix("bamboo_extender"), "main");
-    public static final ModelLayerLocation PETRIFIED_CHEST = new ModelLayerLocation(Erebus.prefix("petrified_chest"), "main");
-    public static final ModelLayerLocation PETRIFIED_CHEST_DOUBLE_LEFT = new ModelLayerLocation(Erebus.prefix("petrified_chest_double_left"), "main");
-    public static final ModelLayerLocation PETRIFIED_CHEST_DOUBLE_RIGHT = new ModelLayerLocation(Erebus.prefix("petrified_chest_double_right"), "main");
+    public static final ModelLayerLocation EREBUS_CHEST = new ModelLayerLocation(Erebus.prefix("erebus_chest"), "main");
+    public static final ModelLayerLocation EREBUS_CHEST_DOUBLE_LEFT = new ModelLayerLocation(Erebus.prefix("erebus_chest_double_left"), "main");
+    public static final ModelLayerLocation EREBUS_CHEST_DOUBLE_RIGHT = new ModelLayerLocation(Erebus.prefix("erebus_chest_double_right"), "main");
 
 	public static void registerBlockEntityLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(OFFERING_ALTAR, OfferingAltarModel::createBodyLayer);
@@ -35,9 +35,9 @@ public class ModBlockEntityRendering {
         event.registerLayerDefinition(GLOWING_JAR, GlowingJarModel::createBodyLayer);
         event.registerLayerDefinition(BAMBOO_BRIDGE, BambooBridgeModel::createBodyLayer);
         event.registerLayerDefinition(BAMBOO_EXTENDER, BambooExtenderModel::createBodyLayer);
-        event.registerLayerDefinition(PETRIFIED_CHEST, PetrifiedChestRenderer::createSingleBodyLayer);
-        event.registerLayerDefinition(PETRIFIED_CHEST_DOUBLE_LEFT, PetrifiedChestRenderer::createDoubleBodyLeftLayer);
-        event.registerLayerDefinition(PETRIFIED_CHEST_DOUBLE_RIGHT, PetrifiedChestRenderer::createDoubleBodyRightLayer);
+        event.registerLayerDefinition(EREBUS_CHEST, ErebusChestRenderer::createSingleBodyLayer);
+        event.registerLayerDefinition(EREBUS_CHEST_DOUBLE_LEFT, ErebusChestRenderer::createDoubleBodyLeftLayer);
+        event.registerLayerDefinition(EREBUS_CHEST_DOUBLE_RIGHT, ErebusChestRenderer::createDoubleBodyRightLayer);
 	}
 	
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -55,7 +55,7 @@ public class ModBlockEntityRendering {
         event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_BRIDGE.get(), BambooBridgeRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_EXTENDER.get(), BambooExtenderRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.PRESERVED_BLOCK.get(), PreservedBlockRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntities.PETRIFIED_CHEST.get(), PetrifiedChestRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.EREBUS_CHEST.get(), ErebusChestRenderer::new);
     }
     
 }
