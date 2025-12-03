@@ -195,20 +195,20 @@ public class ModItemRendering {
             }
         }, OtherBlocks.BAMBOO_EXTENDER.get().asItem());
 
-        registerChestItem(event, ChestBlocks.CHEST_ASPER, "petrified_chest");
-        registerChestItem(event, ChestBlocks.CHEST_BAOBAB, "petrified_chest");
-        registerChestItem(event, ChestBlocks.CHEST_BAMBOO, "petrified_chest");
-        registerChestItem(event, ChestBlocks.CHEST_BALSAM, "petrified_chest");
-        registerChestItem(event, ChestBlocks.CHEST_CYPRESS, "petrified_chest");
-        registerChestItem(event, ChestBlocks.CHEST_EUCALYPTUS, "petrified_chest");
-        registerChestItem(event, ChestBlocks.CHEST_MAHOGANY, "petrified_chest");
-        registerChestItem(event, ChestBlocks.CHEST_MARSHWOOD, "petrified_chest");
-        registerChestItem(event, ChestBlocks.CHEST_MOSSBARK, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_ASPER, "asper_chest");
+        registerChestItem(event, ChestBlocks.CHEST_BAOBAB, "baobab_chest");
+        registerChestItem(event, ChestBlocks.CHEST_BAMBOO, "bamboo_chest");
+        registerChestItem(event, ChestBlocks.CHEST_BALSAM, "balsam_chest");
+        registerChestItem(event, ChestBlocks.CHEST_CYPRESS, "cypress_chest");
+        registerChestItem(event, ChestBlocks.CHEST_EUCALYPTUS, "eucalyptus_chest");
+        registerChestItem(event, ChestBlocks.CHEST_MAHOGANY, "mahogany_chest");
+        registerChestItem(event, ChestBlocks.CHEST_MARSHWOOD, "marshwood_chest");
+        registerChestItem(event, ChestBlocks.CHEST_MOSSBARK, "mossbark_chest");
         registerChestItem(event, ChestBlocks.CHEST_PETRIFIED, "petrified_chest");
-        registerChestItem(event, ChestBlocks.CHEST_ROTTEN, "petrified_chest");
-        registerChestItem(event, ChestBlocks.CHEST_SCORCHED, "petrified_chest");
-        registerChestItem(event, ChestBlocks.CHEST_VARNISHED, "petrified_chest");
-        registerChestItem(event, ChestBlocks.CHEST_WHITE, "petrified_chest");
+        registerChestItem(event, ChestBlocks.CHEST_ROTTEN, "rotten_chest");
+        registerChestItem(event, ChestBlocks.CHEST_SCORCHED, "scorched_chest");
+        registerChestItem(event, ChestBlocks.CHEST_VARNISHED, "varnished_chest");
+        registerChestItem(event, ChestBlocks.CHEST_WHITE, "white_chest");
 
         //Fluids
         event.registerFluidType(new BasicFluidType("beetle_juice"), ModFluids.BEETLE_JUICE_TYPE.get());

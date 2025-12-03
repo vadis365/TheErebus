@@ -874,20 +874,20 @@ public class ModLang extends ModLangProvider {
 
     private void addContainerTranslations() {
         addContainer("petrified_crafting_table", "Petrified Crafting Table");
-        addContainer("chest_asper", "Asper Chest");
-        addContainer("chest_bamboo", "Bamboo Chest");
-        addContainer("chest_baobab", "Baobab Chest");
-        addContainer("chest_balsam", "Balsam Chest");
-        addContainer("chest_cypress", "Cypress Chest");
-        addContainer("chest_eucalyptus", "Eucalyptus Chest");
-        addContainer("chest_mahogany", "Mahogany Chest");
-        addContainer("chest_marshwood", "Marshwood Chest");
-        addContainer("chest_mossbark", "Mossbark Chest");
-        addContainer("chest_petrified", "Petrified Wood Chest");
-        addContainer("chest_rotten", "Rotten Chest");
-        addContainer("chest_scorched", "Scorched Chest");
-        addContainer("chest_varnished", "Varnished Chest");
-        addContainer("chest_white", "White Chest");
+        addChest("chest_asper", "Asper Chest", "Large Asper Chest");
+        addChest("chest_bamboo", "Bamboo Chest", "Large Bamboo Chest");
+        addChest("chest_baobab", "Baobab Chest", "Large Baobab Chest");
+        addChest("chest_balsam", "Balsam Chest", "Large Balsam Chest");
+        addChest("chest_cypress", "Cypress Chest", "Large Cypress Chest");
+        addChest("chest_eucalyptus", "Eucalyptus Chest", "Large Eucalyptus Chest");
+        addChest("chest_mahogany", "Mahogany Chest", "Large Mahogany Chest");
+        addChest("chest_marshwood", "Marshwood Chest", "Large Marshwood Chest");
+        addChest("chest_mossbark", "Mossbark Chest", "Large Mossbark Chest");
+        addChest("chest_petrified", "Petrified Wood Chest", "Large Petrified Wood Chest");
+        addChest("chest_rotten", "Rotten Chest", "Large Rotten Chest");
+        addChest("chest_scorched", "Scorched Chest", "Large Scorched Chest");
+        addChest("chest_varnished", "Varnished Chest", "Large Varnished Chest");
+        addChest("chest_white", "White Chest", "Large White Chest");
         addContainer("umberfurnace", "Umber Furnace");
         addContainer("liquifier", "Honey Liquifier");
         addContainer("honeycomb_cell", "Honeycomb Cell");

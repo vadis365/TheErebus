@@ -110,6 +110,11 @@ public abstract class ModLangProvider extends LanguageProvider {
         add("erebus.container.%s".formatted(containerName), name);
     }
 
+    protected void addChest(String containerName, String name, String largeName) {
+        add("erebus.container.%s".formatted(containerName), name);
+        add("erebus.container.large.%s".formatted(containerName), largeName);
+    }
+
     protected void addPage(int page, String content) {
         add("erebus.book.smoothie.%d".formatted(page), content);
     }
