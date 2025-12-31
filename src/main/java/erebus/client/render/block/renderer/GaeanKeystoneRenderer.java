@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import erebus.block.GaeanKeystoneBlock;
 import erebus.block.entity.GaeanKeystoneBlockEntity;
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;

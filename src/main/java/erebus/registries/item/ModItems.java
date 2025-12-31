@@ -1,23 +1,7 @@
-package erebus.registries;
-
-import java.util.List;
-import java.util.Map;
-
-import org.jetbrains.annotations.NotNull;
+package erebus.registries.item;
 
 import erebus.Erebus;
-import erebus.item.AntTamingAmulet;
-import erebus.item.BambooPipeWrenchItem;
-import erebus.item.BeeTamingAmulet;
-import erebus.item.BeettleJuiceBucketItem;
-import erebus.item.CamoPowderItem;
-import erebus.item.InsectRepellentItem;
-import erebus.item.MaxSpeedBowItem;
-import erebus.item.PaxelItem;
-import erebus.item.PlanticideItem;
-import erebus.item.QuakeHammerItem;
-import erebus.item.SmoothieBookItem;
-import erebus.item.WaspSwordItem;
+import erebus.item.*;
 import erebus.item.armour.CompoundGoggles;
 import erebus.item.armour.JumpBoots;
 import erebus.item.armour.SprintLeggings;
@@ -25,14 +9,11 @@ import erebus.item.blocks.BambooCrateItem;
 import erebus.item.blocks.FluidJarBlockItem;
 import erebus.item.blocks.LiquifierBlockItem;
 import erebus.item.shield.ErebusShieldItem;
-import erebus.item.shield.type.BambooShieldType;
-import erebus.item.shield.type.ExoSkeletonShieldType;
-import erebus.item.shield.type.JadeShieldType;
-import erebus.item.shield.type.ReinforcedShieldType;
-import erebus.item.shield.type.RhinoShieldType;
+import erebus.item.shield.type.*;
 import erebus.item.wand.WandOfAnimationItem;
 import erebus.item.wand.WandOfPreservationItem;
 import erebus.network.data.DeathCompassData;
+import erebus.registries.ModFluids;
 import erebus.registries.blocks.providers.AmberBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.blocks.providers.PlantBlocks;
@@ -44,23 +25,14 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Map;
 
 public class ModItems extends ModItemHelpers {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Erebus.MODID);
@@ -180,38 +152,38 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> BRYUFS_BREW = registerBryufsBrew();
 
     // MARK: Bamboo Armor
-    public static final DeferredItem<ArmorItem> BAMBOO_HELMET;
-    public static final DeferredItem<ArmorItem> BAMBOO_CHESTPLATE;
-    public static final DeferredItem<ArmorItem> BAMBOO_LEGGINGS;
-    public static final DeferredItem<ArmorItem> BAMBOO_BOOTS;
+    public static final DeferredItem<Item> BAMBOO_HELMET;
+    public static final DeferredItem<Item> BAMBOO_CHESTPLATE;
+    public static final DeferredItem<Item> BAMBOO_LEGGINGS;
+    public static final DeferredItem<Item> BAMBOO_BOOTS;
 
     // MARK: Exoskeleton Armor
-    public static final DeferredItem<ArmorItem> EXOSKELETON_HELMET;
-    public static final DeferredItem<ArmorItem> EXOSKELETON_CHESTPLATE;
-    public static final DeferredItem<ArmorItem> EXOSKELETON_LEGGINGS;
-    public static final DeferredItem<ArmorItem> EXOSKELETON_BOOTS;
+    public static final DeferredItem<Item> EXOSKELETON_HELMET;
+    public static final DeferredItem<Item> EXOSKELETON_CHESTPLATE;
+    public static final DeferredItem<Item> EXOSKELETON_LEGGINGS;
+    public static final DeferredItem<Item> EXOSKELETON_BOOTS;
 
     // MARK: Reinforced Exoskeleton Armor
-    public static final DeferredItem<ArmorItem> REIN_EXOSKELETON_HELMET;
-    public static final DeferredItem<ArmorItem> REIN_EXOSKELETON_CHESTPLATE;
-    public static final DeferredItem<ArmorItem> REIN_EXOSKELETON_LEGGINGS;
-    public static final DeferredItem<ArmorItem> REIN_EXOSKELETON_BOOTS;
+    public static final DeferredItem<Item> REIN_EXOSKELETON_HELMET;
+    public static final DeferredItem<Item> REIN_EXOSKELETON_CHESTPLATE;
+    public static final DeferredItem<Item> REIN_EXOSKELETON_LEGGINGS;
+    public static final DeferredItem<Item> REIN_EXOSKELETON_BOOTS;
 
     // MARK: Rhino Exoskeleton Armor
-    public static final DeferredItem<ArmorItem> RHINO_EXOSKELETON_HELMET;
-    public static final DeferredItem<ArmorItem> RHINO_EXOSKELETON_CHESTPLATE;
-    public static final DeferredItem<ArmorItem> RHINO_EXOSKELETON_LEGGINGS;
-    public static final DeferredItem<ArmorItem> RHINO_EXOSKELETON_BOOTS;
+    public static final DeferredItem<Item> RHINO_EXOSKELETON_HELMET;
+    public static final DeferredItem<Item> RHINO_EXOSKELETON_CHESTPLATE;
+    public static final DeferredItem<Item> RHINO_EXOSKELETON_LEGGINGS;
+    public static final DeferredItem<Item> RHINO_EXOSKELETON_BOOTS;
 
     // MARK: Jade Armor
-    public static final DeferredItem<ArmorItem> JADE_HELMET;
-    public static final DeferredItem<ArmorItem> JADE_CHESTPLATE;
-    public static final DeferredItem<ArmorItem> JADE_LEGGINGS;
-    public static final DeferredItem<ArmorItem> JADE_BOOTS;
+    public static final DeferredItem<Item> JADE_HELMET;
+    public static final DeferredItem<Item> JADE_CHESTPLATE;
+    public static final DeferredItem<Item> JADE_LEGGINGS;
+    public static final DeferredItem<Item> JADE_BOOTS;
 
     // MARK: Jade Tools
-    public static final DeferredItem<SwordItem> JADE_SWORD = registerSword("jade_sword", ModToolMaterials.JADE_TIER, 3, -2.4F);
-    public static final DeferredItem<PickaxeItem> JADE_PICKAXE = registerPickaxe("jade_pickaxe", ModToolMaterials.JADE_TIER, 1, -2.8F);
+    public static final DeferredItem<Item> JADE_SWORD = registerSword("jade_sword", ModToolMaterials.JADE_TIER, 3, -2.4F);
+    public static final DeferredItem<Item> JADE_PICKAXE = registerPickaxe("jade_pickaxe", ModToolMaterials.JADE_TIER, 1, -2.8F);
     public static final DeferredItem<AxeItem> JADE_AXE = registerAxe("jade_axe", ModToolMaterials.JADE_TIER, 5, -3.0F);
     public static final DeferredItem<ShovelItem> JADE_SHOVEL = registerShovel("jade_shovel", ModToolMaterials.JADE_TIER, 1.5F, -3.0F);
     public static final DeferredItem<PaxelItem> JADE_PAXEL = registerPaxel("jade_paxel", ModToolMaterials.JADE_PAXEL_TIER,1.0F, -2.8F);
@@ -220,13 +192,14 @@ public class ModItems extends ModItemHelpers {
     // MARK: Misc Armor & Weapons
     public static final DeferredItem<Item> REIN_COMPOUND_GOGGLES = registerItem("rein_compound_goggles", () -> new CompoundGoggles(ModArmorMaterials.REIN_COMPOUND_GOGGLES_ARMOR_MATERIAL, ArmorItem.Type.HELMET,  new Item.Properties().stacksTo(1).durability(256)));
     public static final DeferredItem<Item> COMPOUND_GOGGLES = registerItem("compound_goggles", () -> new CompoundGoggles(ModArmorMaterials.GOGGLES_ARMOR_MATERIAL, ArmorItem.Type.HELMET,  new Item.Properties().stacksTo(1).durability(256)));
-    public static final DeferredItem<ArmorItem> MUSHROOM_HELMET = registerHelmet("mushroom_helmet", ModArmorMaterials.MUSHROOM_HELM_ARMOR_MATERIAL);
-    public static final DeferredItem<ArmorItem> GLIDER_CHESTPLATE = registerChestplate("glider_chestplate", ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
-    public static final DeferredItem<ArmorItem> GLIDER_CHESTPLATE_POWERED = registerChestplate("glider_chestplate_powered",ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
-    public static final DeferredItem<ArmorItem> SPIDER_T_SHIRT = registerChestplate("spider_t_shirt", ModArmorMaterials.SPIDER_T_SHIRT_ARMOR_MATERIAL);
-    public static final DeferredItem<Item> SPRINT_LEGGINGS = registerItem("sprint_leggings", () -> new SprintLeggings(ModArmorMaterials.CENTIPEDE_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,  new Item.Properties().stacksTo(1).durability(256)));
+    public static final DeferredItem<Item> MUSHROOM_HELMET = registerHelmet("mushroom_helmet", ModArmorMaterials.MUSHROOM_HELM_ARMOR_MATERIAL);
+    public static final DeferredItem<Item> GLIDER_CHESTPLATE = registerChestplate("glider_chestplate", ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
+    public static final DeferredItem<Item> GLIDER_CHESTPLATE_POWERED = registerChestplate("glider_chestplate_powered",ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
+    public static final DeferredItem<Item> SPIDER_T_SHIRT = registerChestplate("spider_t_shirt", ModArmorMaterials.SPIDER_T_SHIRT_ARMOR_MATERIAL);
+    public static final DeferredItem<Item> SPRINT_LEGGINGS = registerItem("sprint_leggings", () -> new SprintLeggings
+            (ModArmorMaterials.CENTIPEDE_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,  new Item.Properties().stacksTo(1).durability(256)));
     public static final DeferredItem<Item> JUMP_BOOTS = registerItem("jump_boots", () -> new JumpBoots(ModArmorMaterials.JUMP_BOOTS_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,  new Item.Properties().stacksTo(1).durability(256)));
-    public static final DeferredItem<ArmorItem> WATER_STRIDERS = registerBoots("water_striders", ModArmorMaterials.WATER_STRIDERS_ARMOR_MATERIAL);
+    public static final DeferredItem<Item> WATER_STRIDERS = registerBoots("water_striders", ModArmorMaterials.WATER_STRIDERS_ARMOR_MATERIAL);
     public static final DeferredItem<Item> ENHANCED_SCORPION_PINCER = registerItem("enhanced_scorpion_pincer");
     public static final DeferredItem<Item> QUAKE_HAMMER = registerItem("quake_hammer", () -> new QuakeHammerItem(ModToolMaterials.QUAKE_HAMMER, new Item.Properties().stacksTo(1).attributes(SwordItem.createAttributes(ModToolMaterials.QUAKE_HAMMER, 10, -1))));
     public static final DeferredItem<Item> WEB_SLINGER = registerItem("web_slinger");
@@ -253,7 +226,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> BEE_TAMING_AMULET = registerItem("bee_taming_amulet", () -> new BeeTamingAmulet(new Item.Properties().stacksTo(1).durability(16)));
     public static final DeferredItem<Item> WASP_SWORD = registerItem("wasp_sword", () -> new WaspSwordItem(ModToolMaterials.WASP_SWORD, new Item.Properties()
             .stacksTo(1)
-            .attributes(SwordItem.createAttributes(ModToolMaterials.WASP_SWORD, 6, -1)
+            .sword(ModToolMaterials.WASP_SWORD, 6, -1)
     )));
     public static final DeferredItem<Item> WASP_DAGGER = registerItem("wasp_dagger");
     public static final DeferredItem<Item> ANTI_VENOM_BOTTLE = registerItem("anti_venom_bottle");
@@ -326,31 +299,31 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> STAG_HEART_COOKED = registerItem("stag_heart_cooked");
 
     static {
-        Map<String, DeferredItem<ArmorItem>> bambooSet = registerArmorSet("bamboo", ModArmorMaterials.BAMBOO_ARMOR_MATERIAL);
+        Map<String, DeferredItem<Item>> bambooSet = registerArmorSet("bamboo", ModArmorMaterials.BAMBOO_ARMOR_MATERIAL);
         BAMBOO_HELMET = bambooSet.get("helm");
         BAMBOO_CHESTPLATE = bambooSet.get("chest");
         BAMBOO_LEGGINGS = bambooSet.get("legs");
         BAMBOO_BOOTS = bambooSet.get("boots");
 
-        Map<String, DeferredItem<ArmorItem>> exoskeletonSet = registerArmorSet("exoskeleton", ModArmorMaterials.EXOSKELETON_ARMOR_MATERIAL);
+        Map<String, DeferredItem<Item>> exoskeletonSet = registerArmorSet("exoskeleton", ModArmorMaterials.EXOSKELETON_ARMOR_MATERIAL);
         EXOSKELETON_HELMET = exoskeletonSet.get("helm");
         EXOSKELETON_CHESTPLATE = exoskeletonSet.get("chest");
         EXOSKELETON_LEGGINGS = exoskeletonSet.get("legs");
         EXOSKELETON_BOOTS = exoskeletonSet.get("boots");
 
-        Map<String, DeferredItem<ArmorItem>> reinSet = registerArmorSet("rein_exoskeleton", ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
+        Map<String, DeferredItem<Item>> reinSet = registerArmorSet("rein_exoskeleton", ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
         REIN_EXOSKELETON_HELMET = reinSet.get("helm");
         REIN_EXOSKELETON_CHESTPLATE = reinSet.get("chest");
         REIN_EXOSKELETON_LEGGINGS = reinSet.get("legs");
         REIN_EXOSKELETON_BOOTS = reinSet.get("boots");
 
-        Map<String, DeferredItem<ArmorItem>> rhinoSet = registerArmorSet("rhino_exoskeleton", ModArmorMaterials.RHINO_ARMOR_MATERIAL);
+        Map<String, DeferredItem<Item>> rhinoSet = registerArmorSet("rhino_exoskeleton", ModArmorMaterials.RHINO_ARMOR_MATERIAL);
         RHINO_EXOSKELETON_HELMET = rhinoSet.get("helm");
         RHINO_EXOSKELETON_CHESTPLATE = rhinoSet.get("chest");
         RHINO_EXOSKELETON_LEGGINGS = rhinoSet.get("legs");
         RHINO_EXOSKELETON_BOOTS = rhinoSet.get("boots");
 
-        Map<String, DeferredItem<ArmorItem>> jadeSet = registerArmorSet("jade", ModArmorMaterials.JADE_ARMOR_MATERIAL);
+        Map<String, DeferredItem<Item>> jadeSet = registerArmorSet("jade", ModArmorMaterials.JADE_ARMOR_MATERIAL);
         JADE_HELMET = jadeSet.get("helm");
         JADE_CHESTPLATE = jadeSet.get("chest");
         JADE_LEGGINGS = jadeSet.get("legs");

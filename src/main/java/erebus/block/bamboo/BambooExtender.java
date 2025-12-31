@@ -2,12 +2,11 @@ package erebus.block.bamboo;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.BambooExtenderBlockEntity;
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -22,8 +21,10 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -56,7 +57,7 @@ public class BambooExtender extends DirectionalBlock  implements EntityBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? null : BambooExtenderBlockEntity::serverTick;
+		return pLevel.isClientSide() ? null : BambooExtenderBlockEntity::serverTick;
 	}
 
     @Override
@@ -65,20 +66,20 @@ public class BambooExtender extends DirectionalBlock  implements EntityBlock {
 	}
 
     @Override
- 	public ItemInteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+ 	public @NonNull InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
      	BlockEntity blockEntity = level.getBlockEntity(pos);
      	if (level.isClientSide()) {
- 			return ItemInteractionResult.SUCCESS;
+ 			return InteractionResult.SUCCESS;
      	} else if (blockEntity instanceof BambooExtenderBlockEntity extender) {
 			if (!stack.isEmpty() && stack.getItem() == ModItems.BAMBOO_PIPE_WRENCH.get()) {
-				return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+				return InteractionResult.TRY_WITH_EMPTY_HAND;
 			}
 			else {
 				player.openMenu(extender, pos);
-				return ItemInteractionResult.SUCCESS;
+				return InteractionResult.SUCCESS;
 			}
 		}
-    return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    	return InteractionResult.TRY_WITH_EMPTY_HAND;
 	}
 
 	@Override
@@ -95,8 +96,8 @@ public class BambooExtender extends DirectionalBlock  implements EntityBlock {
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Block block, @Nonnull BlockPos fromPos, boolean isMoving) {
-		if (!level.isClientSide()) {
+	protected void neighborChanged(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull Block block, @Nullable Orientation orientation, boolean movedByPiston) {
+		if(!level.isClientSide()) {
 			BambooExtenderBlockEntity tile = (BambooExtenderBlockEntity) level.getBlockEntity(pos);
 			boolean flag = level.hasNeighborSignal(pos);
 			if (flag != state.getValue(POWERED)) {
@@ -107,7 +108,7 @@ public class BambooExtender extends DirectionalBlock  implements EntityBlock {
 		}
 	}
 
-	@Override
+	/*@Override
 	public void onRemove(BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
 			BambooExtenderBlockEntity tile = (BambooExtenderBlockEntity) world.getBlockEntity(pos);
@@ -117,5 +118,5 @@ public class BambooExtender extends DirectionalBlock  implements EntityBlock {
 			}
 			super.onRemove(state, world, pos, newState, isMoving);
 		}
-	}
+	}*/
 }

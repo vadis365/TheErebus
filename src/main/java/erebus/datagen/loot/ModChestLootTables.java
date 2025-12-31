@@ -1,8 +1,8 @@
 package erebus.datagen.loot;
 
 import erebus.Erebus;
-import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableSubProvider;

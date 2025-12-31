@@ -1,6 +1,6 @@
 package erebus.events;
 
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -11,7 +11,7 @@ import net.neoforged.neoforge.client.event.RenderFrameEvent;
 
 	public class GogglesClientTickHandler {
 	
-	private static MobEffectInstance NIGHT_VISION_EFFECT = new MobEffectInstance(MobEffects.NIGHT_VISION, 300, 1, true, false, false);
+	private static final MobEffectInstance NIGHT_VISION_EFFECT = new MobEffectInstance(MobEffects.NIGHT_VISION, 300, 1, true, false, false);
 
 	@SuppressWarnings("resource")
 	@SubscribeEvent

@@ -2,7 +2,7 @@ package erebus.item.shield.type;
 
 import erebus.Erebus;
 import erebus.item.shield.IShieldType;
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;

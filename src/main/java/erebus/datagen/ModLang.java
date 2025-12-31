@@ -1,10 +1,10 @@
 package erebus.datagen;
 
 import erebus.datagen.providers.ModLangProvider;
-import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.*;
 import erebus.registries.data.ModTags;
 import erebus.registries.entity.ModEntities;
+import erebus.registries.item.ModItems;
 import net.minecraft.data.PackOutput;
 
 public class ModLang extends ModLangProvider {

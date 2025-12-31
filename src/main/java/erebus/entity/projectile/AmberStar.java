@@ -1,10 +1,10 @@
 package erebus.entity.projectile;
 
 import erebus.block.entity.PreservedBlockEntity;
-import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.AmberBlocks;
 import erebus.registries.data.ModTags;
 import erebus.registries.entity.ModEntities;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;

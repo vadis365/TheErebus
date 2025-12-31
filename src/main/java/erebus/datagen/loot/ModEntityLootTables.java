@@ -1,15 +1,10 @@
 package erebus.datagen.loot;
 
-import java.util.function.Supplier;
-import java.util.stream.Stream;
-
-import org.jetbrains.annotations.NotNull;
-
 import erebus.datagen.loot.predicates.DragonflyPredicate;
 import erebus.datagen.loot.predicates.WaspPredicate;
-import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.entity.ModEntities;
+import erebus.registries.item.ModItems;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.EntityLootSubProvider;
@@ -33,6 +28,10 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class ModEntityLootTables extends EntityLootSubProvider {
 

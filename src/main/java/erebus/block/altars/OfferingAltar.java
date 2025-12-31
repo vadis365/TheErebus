@@ -3,9 +3,8 @@ package erebus.block.altars;
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.OfferingAltarBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -55,31 +54,32 @@ public class OfferingAltar extends Block implements EntityBlock {
 
     @Nonnull
 	@Override
-    public ItemInteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+    public InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
     	BlockEntity blockEntity = level.getBlockEntity(pos);
     	if (level.isClientSide()) {
-			return ItemInteractionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		}
 		else if (blockEntity instanceof OfferingAltarBlockEntity) {
 			if (stack.isEmpty()) {
 				if (player.isCrouching()) {
 					((OfferingAltarBlockEntity) blockEntity).popStack();
-					return ItemInteractionResult.SUCCESS;
+					return InteractionResult.SUCCESS;
 				}
 			} else if (!player.isCrouching()) {
 				((OfferingAltarBlockEntity) blockEntity).addStack(stack);
-				return ItemInteractionResult.SUCCESS;
+				return InteractionResult.SUCCESS;
 			}
 		}
-		return ItemInteractionResult.FAIL;
+		return InteractionResult.FAIL;
     }
-/*
-    @SideOnly(Side.CLIENT)
-    public boolean addDestroyEffects(World world, BlockPos pos, net.minecraft.client.particle.ParticleManager manager) {
-        return true;
-    }
-*/
-	@Override
+
+	/*
+        @SideOnly(Side.CLIENT)
+        public boolean addDestroyEffects(World world, BlockPos pos, net.minecraft.client.particle.ParticleManager manager) {
+            return true;
+        }
+    */
+	/*@Override
 	public void onRemove(BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
 			OfferingAltarBlockEntity tile = (OfferingAltarBlockEntity) world.getBlockEntity(pos);
@@ -89,6 +89,6 @@ public class OfferingAltar extends Block implements EntityBlock {
 			}
 			super.onRemove(state, world, pos, newState, isMoving);
 		}
-	}
+	}*/
 
 }

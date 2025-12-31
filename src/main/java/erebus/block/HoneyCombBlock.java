@@ -2,11 +2,11 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.HoneyCombBlockEntity;
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -45,16 +45,16 @@ public class HoneyCombBlock extends Block implements EntityBlock {
 	}
 
     @Override
-	public @NotNull ItemInteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+	public @NotNull InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
     	BlockEntity blockEntity = level.getBlockEntity(pos);
     	if (level.isClientSide()) {
-			return ItemInteractionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
     	} else if (blockEntity instanceof HoneyCombBlockEntity honeycomb) {
 			if (!stack.isEmpty() && stack.is(blockEntity.getBlockState().getBlock().asItem()) || !stack.isEmpty() && stack.getItem() == ModItems.BEE_TAMING_AMULET.get())
-				return ItemInteractionResult.FAIL;
+				return InteractionResult.FAIL;
 			player.openMenu(honeycomb, pos);
 		}
-    	return ItemInteractionResult.SUCCESS;
+    	return InteractionResult.SUCCESS;
 	}
 
 	@Override

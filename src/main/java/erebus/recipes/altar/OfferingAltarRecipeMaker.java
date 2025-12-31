@@ -5,7 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import erebus.recipes.util.MultiStackInput;
 import erebus.registries.ModCustomRecipes;
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;

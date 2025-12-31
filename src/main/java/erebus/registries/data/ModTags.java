@@ -17,6 +17,19 @@ public class ModTags {
 
     public static final TagKey<Block> MINEABLE_WITH_PAXEL = TagKey.create(BuiltInRegistries.BLOCK.key(), Erebus.prefix("mineable/paxel"));
 
+    // MARK: Armor Tags
+    public static final TagKey<Item> REPAIRS_JADE_ARMOR = TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix("repairs_jade_armor"));
+    public static final TagKey<Item> REPAIRS_EXOSKELETON_ARMOR = TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix("repairs_exoskeleton_armor"));
+    public static final TagKey<Item> REPAIRS_REINFORCED_EXOSKELETON_ARMOR = TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix("repairs_reinforced_exoskeleton_armor"));
+    public static final TagKey<Item> REPAIRS_RHINO_ARMOR = TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix("repairs_rhino_armor"));
+    public static final TagKey<Item> REPAIRS_BAMBOO_ARMOR = TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix("repairs_bamboo_armor"));
+    public static final TagKey<Item> REPAIRS_REINFORCED_COMPOUND_GOGGLES = TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix("repairs_reinforced_compound_goggles"));
+    public static final TagKey<Item> REPAIRS_MUSHROOM_HELM = TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix("repairs_mushroom_helm"));
+    public static final TagKey<Item> REPAIRS_SPIDER_T_SHIRT = TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix("repairs_spider_t_shirt"));
+    public static final TagKey<Item> REPAIRS_WATER_STRIDERS = TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix("repairs_water_striders"));
+    public static final TagKey<Item> REPAIRS_JUMP_BOOTS = TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix("repairs_jump_boots"));
+    public static final TagKey<Item> REPAIRS_SPRINT_LEGGINGS = TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix("repairs_sprint_leggings"));
+
     // MARK: World Tags
     public static final TagKey<Biome> IS_EREBUS = TagKey.create(Registries.BIOME, Erebus.prefix("is_erebus"));
     public static final TagKey<Block> UMBERSTONE_ORE_REPLACEABLES = TagKey.create(Registries.BLOCK, Erebus.prefix("umberstone_ore_replaceables"));

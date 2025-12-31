@@ -1,3 +1,4 @@
+/*
 package erebus.client.emi;
 
 import dev.emi.emi.api.EmiEntrypoint;
@@ -41,3 +42,4 @@ public class ModEmiPlugin implements EmiPlugin {
         });
     }
 }
+*/

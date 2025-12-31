@@ -1,7 +1,7 @@
 package erebus.events;
 
 import erebus.item.MaxSpeedBowItem;
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

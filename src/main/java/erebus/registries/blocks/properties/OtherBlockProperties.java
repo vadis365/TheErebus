@@ -116,14 +116,14 @@ public class OtherBlockProperties {
                 .mapColor(DyeColor.GREEN);
 
         MUD = Properties.ofFullCopy(Blocks.MUD);
-        QUICK_SAND = Properties.of().strength(28F).sound(SoundType.SAND).mapColor(MapColor.SAND).noCollission();
+        QUICK_SAND = Properties.of().strength(28F).sound(SoundType.SAND).mapColor(MapColor.SAND).noCollision();
         GHOST_SAND = Properties.of().mapColor(MapColor.STONE);
         SWAMP_VENT = Properties.ofFullCopy(Blocks.GRASS_BLOCK);
         GNEISS_VENT = Properties.of().mapColor(MapColor.STONE);
         RED_GEM_BLOCK = Properties.of().mapColor(MapColor.STONE);
         RED_GEM_LAMP = Properties.ofFullCopy(Blocks.REDSTONE_LAMP);
-        WITHER_WEB = Properties.of().mapColor(MapColor.WOOL).sound(SoundType.COBWEB).forceSolidOn().noCollission().requiresCorrectToolForDrops().strength(4.0F).pushReaction(PushReaction.DESTROY);
-        LAVA_WEB = Properties.of().mapColor(MapColor.WOOL).sound(SoundType.COBWEB).forceSolidOn().noCollission().requiresCorrectToolForDrops().strength(4.0F).pushReaction(PushReaction.DESTROY);
+        WITHER_WEB = Properties.of().mapColor(MapColor.WOOL).sound(SoundType.COBWEB).forceSolidOn().noCollision().requiresCorrectToolForDrops().strength(4.0F).pushReaction(PushReaction.DESTROY);
+        LAVA_WEB = Properties.of().mapColor(MapColor.WOOL).sound(SoundType.COBWEB).forceSolidOn().noCollision().requiresCorrectToolForDrops().strength(4.0F).pushReaction(PushReaction.DESTROY);
         GNEISS = Properties.of().mapColor(MapColor.STONE);
         GNEISS_CARVED = Properties.of().mapColor(MapColor.STONE);
         GNEISS_RELIEF = Properties.of().mapColor(MapColor.STONE);
@@ -138,13 +138,13 @@ public class OtherBlockProperties {
         REIN_EXO = Properties.of().mapColor(MapColor.STONE);
         VELOCITY_BLOCK = Properties.of().mapColor(MapColor.STONE).strength(1.5F).explosionResistance(10F).sound(SoundType.STONE);
         VELOCITY_BLOCK_LIGHTNING_SPEED = Properties.of().mapColor(MapColor.STONE).strength(1.5F).explosionResistance(10F).sound(SoundType.STONE);
-        BLOCK_OF_BONES = Properties.ofFullCopy(Blocks.BONE_BLOCK).noCollission();
+        BLOCK_OF_BONES = Properties.ofFullCopy(Blocks.BONE_BLOCK).noCollision();
         ANTLION_EGG = Properties.of().mapColor(MapColor.STONE).noOcclusion();
         TARANTULA_EGG = Properties.of().mapColor(MapColor.STONE).noOcclusion();
         HONEY_TREAT = Properties.of().forceSolidOn().strength(0.5F).sound(SoundType.WOOL).pushReaction(PushReaction.DESTROY);
         WASP_NEST = Properties.of().mapColor(MapColor.STONE);
         STAIRS_WASP_NEST = Properties.of().strength(2.0F);
-        INSECT_REPELLENT = Properties.of().noCollission().noOcclusion().replaceable();
+        INSECT_REPELLENT = Properties.of().noCollision().noOcclusion().replaceable();
 
         // Spawners
         ANTLION_SPAWNER = Properties.of().mapColor(MapColor.STONE);
@@ -168,20 +168,20 @@ public class OtherBlockProperties {
         BAMBOO_LADDER = Properties.ofFullCopy(Blocks.LADDER).sound(SoundType.BAMBOO);
         BAMBOO_NERD_POLE = Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER);
         BAMBOO_EXTENDER = Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER);
-        BAMBOO_TORCH = Properties.of().mapColor(MapColor.COLOR_GREEN).noCollission().sound(SoundType.BAMBOO).lightLevel((state) -> 15);
+        BAMBOO_TORCH = Properties.of().mapColor(MapColor.COLOR_GREEN).noCollision().sound(SoundType.BAMBOO).lightLevel((state) -> 15);
         BAMBOO_PIPE = Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO);
         BAMBOO_PIPE_EXTRACT = Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO);
         SILO_ROOF = Properties.of().mapColor(MapColor.METAL).strength(3F, 10F).sound(SoundType.METAL).noOcclusion();
         SILO_TANK = Properties.of().mapColor(MapColor.WOOD).strength(3F, 10F).sound(SoundType.METAL).noOcclusion();
-        SILO_SUPPORTS = Properties.of().mapColor(MapColor.WOOD).noCollission().strength(2F, 10F).sound(SoundType.WOOD).noOcclusion();
+        SILO_SUPPORTS = Properties.of().mapColor(MapColor.WOOD).noCollision().strength(2F, 10F).sound(SoundType.WOOD).noOcclusion();
         HONEY_COMB = Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.5F, 10F).lightLevel(value -> 1).sound(SoundType.WOOL);
         COMPOSTER = Properties.of().mapColor(MapColor.COLOR_GREEN).strength(2F, 10F).sound(SoundType.WOOD).noOcclusion();
         BLENDER = Properties.of().mapColor(MapColor.STONE).noOcclusion();
         UMBER_FURNACE = Properties.ofFullCopy(Blocks.FURNACE);
         UMBERSTONE_BUTTON = Properties.of().mapColor(MapColor.STONE);
         LIQUIFIER = Properties.ofFullCopy(Blocks.GLASS).mapColor(MapColor.STONE).strength(1.0F, 2000.0F).sound(SoundType.GLASS).noOcclusion().isViewBlocking((blockState, blockGetter, blockPos) -> false);
-        GLOW_GEM_ACTIVE = Properties.of().mapColor(MapColor.COLOR_YELLOW).noCollission().sound(SoundType.GLASS).lightLevel((state) -> 15);
-        GLOW_GEM_INACTIVE = Properties.of().mapColor(MapColor.COLOR_RED).noCollission().sound(SoundType.GLASS).lightLevel((state) -> 0);
+        GLOW_GEM_ACTIVE = Properties.of().mapColor(MapColor.COLOR_YELLOW).noCollision().sound(SoundType.GLASS).lightLevel((state) -> 15);
+        GLOW_GEM_INACTIVE = Properties.of().mapColor(MapColor.COLOR_RED).noCollision().sound(SoundType.GLASS).lightLevel((state) -> 0);
         MUCUS_BOMB = Properties.of().mapColor(MapColor.STONE);
         UMBER_GOLEM_STATUE = Properties.of().mapColor(MapColor.STONE);
 

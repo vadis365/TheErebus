@@ -2,12 +2,12 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.GaeanKeystoneBlockEntity;
-import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.item.ModItems;
 import erebus.utils.AdvancedBlockPos;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -62,19 +62,19 @@ public class GaeanKeystoneBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack, BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
+    protected @NotNull InteractionResult useItemOn(@NotNull ItemStack stack, BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
         if (state.getValue(ACTIVE)) {
             if (!stack.isEmpty()) {
-                return ItemInteractionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
             breakPortal(level, pos);
             level.setBlock(pos, state.setValue(ACTIVE, false), 3);
             player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModItems.PORTAL_ACTIVATOR.get()));
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         if (stack.isEmpty() || stack.getItem() != ModItems.PORTAL_ACTIVATOR.asItem()) {
-            return ItemInteractionResult.FAIL;
+            return InteractionResult.FAIL;
         }
 
         if (makePortal(level, pos)) {
@@ -84,7 +84,7 @@ public class GaeanKeystoneBlock extends BaseEntityBlock {
             level.setBlock(pos, state.setValue(ACTIVE, false), 3);
         }
 
-        return ItemInteractionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     private void breakPortal(Level level, BlockPos pos) {

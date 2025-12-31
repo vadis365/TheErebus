@@ -2,6 +2,7 @@ package erebus.registries;
 
 import erebus.Erebus;
 import erebus.registries.blocks.providers.*;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;

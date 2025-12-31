@@ -4,8 +4,10 @@ import com.mojang.logging.LogUtils;
 import erebus.events.BedPlaceEventHandler;
 import erebus.events.GogglesClientTickHandler;
 import erebus.events.OnEntityJumpEventHandler;
-import erebus.network.data.DeathCompassData;
-import erebus.registries.*;
+import erebus.registries.ModCustomRecipes;
+import erebus.registries.ModFluids;
+import erebus.registries.ModSounds;
+import erebus.registries.ModTabs;
 import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModBlockEntityRendering;
@@ -18,6 +20,7 @@ import erebus.registries.data.ModPredicates;
 import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
+import erebus.registries.item.ModItems;
 import erebus.registries.network.ModNetwork;
 import erebus.registries.world.ModBiomeLayerTypes;
 import erebus.registries.world.ModPOIs;
@@ -33,11 +36,8 @@ import erebus.registries.world.tree.ModFoliagePlacers;
 import erebus.registries.world.tree.ModTreeDecorators;
 import erebus.registries.world.tree.ModTrunkPlacers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -120,18 +120,18 @@ public class Erebus {
     }
 
     private void setFluidRenderTypes(final FMLClientSetupEvent event) {
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_FLOW.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_STILL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY_FLOW.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY_STILL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.ANTI_VENOM_FLOW.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.ANTI_VENOM_STILL.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.FORMIC_ACID_FLOW.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.FORMIC_ACID_STILL.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_STILL.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY_STILL.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.ANTI_VENOM_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.ANTI_VENOM_STILL.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.FORMIC_ACID_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.FORMIC_ACID_STILL.get(), ChunkSectionLayer.TRANSLUCENT);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        ItemProperties.register(
+        /*ItemProperties.register(
                 ModItems.DEATH_COMPASS.get(),
                 ResourceLocation.withDefaultNamespace("angle"),
                 new CompassItemPropertyFunction(
@@ -160,10 +160,10 @@ public class Erebus {
                 ModItems.MAX_SPEED_BOW.get(),
                 ResourceLocation.withDefaultNamespace("pulling"),
                 (stack, level, entity, p_174633_) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F
-        );
+        );*/
     }
 
-	public static ResourceLocation prefix(String name) {
-		return ResourceLocation.fromNamespaceAndPath(MODID, name.toLowerCase(Locale.ROOT));
+	public static Identifier prefix(String name) {
+        return Identifier.fromNamespaceAndPath(MODID, name.toLowerCase(Locale.ROOT));
 	}
 }

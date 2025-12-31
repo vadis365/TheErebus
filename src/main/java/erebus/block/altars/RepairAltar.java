@@ -2,13 +2,13 @@ package erebus.block.altars;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.RepairAltarBlockEntity;
-import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -65,7 +65,7 @@ public class RepairAltar extends AltarAbstract {
 					ItemStack is = ((ItemEntity) entity).getItem();
 					entity.yo = pos.getY() + 1.6D;
 					int repairDamage = is.getDamageValue();
-					if (is.isRepairable() && repairDamage > 0) {
+					if (is.canGrindstoneRepair() || is.isCombineRepairable() && repairDamage > 0) {
 						if (altar.notUsed)
 							altar.setSpawnTicks(160);
 						if (altar.getSpawnTicks() == 60 && altar.getCollisions() == 101) {
@@ -83,27 +83,27 @@ public class RepairAltar extends AltarAbstract {
 		}
 
 	@Override
-	public ItemInteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+	public InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
 		BlockEntity blockEntity = level.getBlockEntity(pos);
 		if (level.isClientSide()) {
-			return ItemInteractionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		} else if (blockEntity instanceof RepairAltarBlockEntity altar) {
 			if (!stack.isEmpty())
 				if (stack.getItem() == ModItems.WAND_OF_ANIMATION.get()) {
-					stack.hurtAndBreak(1, player, Player.getSlotForHand(hand));
+					stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
 					if (!altar.active) {
 						altar.setActive(true);
 						altar.setSpawnTicks(12000);
 						level.playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE.get(), SoundSource.BLOCKS, 1.0F, 1.3F);
-						return ItemInteractionResult.SUCCESS;
+						return InteractionResult.SUCCESS;
 					}
 					if (altar.active) {
 						altar.setActive(false);
 						level.playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE.get(), SoundSource.BLOCKS, 1.0F, 1.3F);
-						return ItemInteractionResult.SUCCESS;
+						return InteractionResult.SUCCESS;
 					}
 				}
 		}
-		return ItemInteractionResult.FAIL;
+		return InteractionResult.FAIL;
 	}
 }

@@ -1,10 +1,10 @@
 package erebus.block.entity;
 
 import erebus.inventory.server.ComposterMenu;
-import erebus.registries.ModItems;
 import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.data.ModTags;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;

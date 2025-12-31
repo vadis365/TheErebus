@@ -10,7 +10,11 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.registries.DeferredItem;
 
@@ -18,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import static erebus.registries.ModItems.ITEMS;
+import static erebus.registries.item.ModItems.ITEMS;
 
 public class ModItemHelpers {
 
@@ -38,11 +42,17 @@ public class ModItemHelpers {
     }
 
     public static DeferredItem<Item> registerFoodItem(String name, int nutrition, float saturation, Holder<MobEffect> effect, int duration, int amplifier) {
-        return ITEMS.register(name, () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
-                .nutrition(nutrition)
-                .saturationModifier(saturation)
-                .effect(() -> new MobEffectInstance(effect, duration, amplifier), 100)
-                .build())));
+        return ITEMS.register(name, () -> new Item(
+                new Item.Properties()
+                        .food(
+                                new FoodProperties.Builder()
+                                        .nutrition(nutrition)
+                                        .saturationModifier(saturation)
+                                        .effect(() -> new MobEffectInstance(effect, duration, amplifier), 100)
+                                        .build()
+                        )
+                )
+        );
     }
 
     public static DeferredItem<Item> registerFoodItem(String name, int nutrition, float saturation, Holder<MobEffect> effect, int duration, int amplifier, ItemLike convertsTo) {
@@ -92,7 +102,7 @@ public class ModItemHelpers {
                 .build())));
     }
 
-    public static Map<String, DeferredItem<ArmorItem>> registerArmorSet(String prefix, Holder<ArmorMaterial> armorMaterial) {
+    public static Map<String, DeferredItem<ArmorItem>> registerArmorSet(String prefix, ArmorMaterial armorMaterial) {
         DeferredItem<ArmorItem> helm = registerHelmet("%s_helmet".formatted(prefix), armorMaterial);
         DeferredItem<ArmorItem> chest = registerChestplate("%s_chestplate".formatted(prefix), armorMaterial);
         DeferredItem<ArmorItem> legs = registerLeggings("%s_leggings".formatted(prefix), armorMaterial);
@@ -106,19 +116,19 @@ public class ModItemHelpers {
         return ret;
     }
 
-    public static DeferredItem<ArmorItem> registerHelmet(String name, Holder<ArmorMaterial> armorMaterial) {
+    public static DeferredItem<ArmorItem> registerHelmet(String name, ArmorMaterial armorMaterial) {
         return ITEMS.register(name, () -> new ArmorItem(armorMaterial, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(11))));
     }
 
-    public static DeferredItem<ArmorItem> registerChestplate(String name, Holder<ArmorMaterial> armorMaterial) {
+    public static DeferredItem<ArmorItem> registerChestplate(String name, ArmorMaterial armorMaterial) {
         return ITEMS.register(name, () -> new ArmorItem(armorMaterial, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(16))));
     }
 
-    public static DeferredItem<ArmorItem> registerLeggings(String name, Holder<ArmorMaterial> armorMaterial) {
+    public static DeferredItem<ArmorItem> registerLeggings(String name, ArmorMaterial armorMaterial) {
         return ITEMS.register(name, () -> new ArmorItem(armorMaterial, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))));
     }
 
-    public static DeferredItem<ArmorItem> registerBoots(String name, Holder<ArmorMaterial> armorMaterial) {
+    public static DeferredItem<ArmorItem> registerBoots(String name, ArmorMaterial armorMaterial) {
         return ITEMS.register(name, () -> new ArmorItem(armorMaterial, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(13))));
     }
 

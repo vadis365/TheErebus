@@ -4,7 +4,7 @@ import erebus.block.ErebusChestBlock;
 import erebus.block.plants.ModBerryBushBlock;
 import erebus.block.plants.ModCropBlock;
 import erebus.block.util.ConnectedTextureBlock;
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;

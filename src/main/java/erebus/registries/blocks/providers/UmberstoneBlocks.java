@@ -37,7 +37,6 @@ public class UmberstoneBlocks extends ModBlockHelpers {
     public static final DeferredBlock<Block> MUD_BRICKS;
 
     static {
-
         UMBERSTONE = registerSimpleBlock("umberstone", UmberstoneBlockProperties.UMBERSTONE);
         UMBERSTONE_BRICKS = registerSimpleBlock("umberstone_bricks", UmberstoneBlockProperties.UMBERSTONE_BRICKS);
         UMBERCOBBLE = registerSimpleBlock("umbercobble", UmberstoneBlockProperties.UMBERCOBBLE);

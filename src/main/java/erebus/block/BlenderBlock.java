@@ -2,12 +2,11 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.BlenderBlockEntity;
-import erebus.registries.ModItems;
-import erebus.utils.CapHelper;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -22,19 +21,17 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.fluids.FluidUtil;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.Optional;
 
 public class BlenderBlock extends BaseEntityBlock {
 
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final Property<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final MapCodec<BlenderBlock> CODEC = simpleCodec(BlenderBlock::new);
 
     public BlenderBlock(Properties properties) {
@@ -66,26 +63,19 @@ public class BlenderBlock extends BaseEntityBlock {
     }
 
     @Override
-    public @NotNull ItemInteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+    public @NotNull InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (level.isClientSide()) {
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         } else if (blockEntity instanceof BlenderBlockEntity blender) {
             if(player.getItemInHand(hand).is(Items.BOOK)) {
                 player.getItemInHand(hand).shrink(1);
                 player.addItem(new ItemStack(ModItems.SMOOTHIE_BOOK.get()));
             }
-
-            Optional<IFluidHandler> optional = CapHelper.getFluidHandler(level, pos, hit.getDirection());
-
-            optional.ifPresent(fluidHandler -> {
-                FluidUtil.interactWithFluidHandler(player, hand, level, pos, hit.getDirection());
-            });
-
-
+            FluidUtil.interactWithFluidHandler(player, hand, level, pos, hit.getDirection());
             player.openMenu(blender, pos);
         }
-        return ItemInteractionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override

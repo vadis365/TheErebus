@@ -1,7 +1,7 @@
 package erebus.item.wand;
 
 import erebus.entity.projectile.AmberStar;
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;

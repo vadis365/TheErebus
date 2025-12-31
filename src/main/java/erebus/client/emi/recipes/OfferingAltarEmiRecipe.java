@@ -1,3 +1,4 @@
+/*
 package erebus.client.emi.recipes;
 
 import dev.emi.emi.api.recipe.EmiRecipe;
@@ -53,3 +54,4 @@ public class OfferingAltarEmiRecipe implements EmiRecipe {
 
     }
 }
+*/

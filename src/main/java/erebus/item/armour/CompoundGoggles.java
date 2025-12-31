@@ -1,13 +1,8 @@
 package erebus.item.armour;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import erebus.Erebus;
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -19,12 +14,15 @@ import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
+import java.util.List;
+
 public class CompoundGoggles extends ArmorItem {
 
-	private ResourceLocation BASIC = Erebus.prefix("textures/models/armor/goggles_layer_1.png");
-	private ResourceLocation REINFORCED = Erebus.prefix("textures/models/armor/rein_goggles_layer_1.png");
+	private final ResourceLocation BASIC = Erebus.prefix("textures/models/armor/goggles_layer_1.png");
+	private final ResourceLocation REINFORCED = Erebus.prefix("textures/models/armor/rein_goggles_layer_1.png");
 
-	public CompoundGoggles(Holder<ArmorMaterial> material, ArmorItem.Type type, Properties properties) {
+	public CompoundGoggles(net.minecraft.world.item.equipment.ArmorMaterial material, ArmorItem.Type type, Properties properties) {
 		super(material, type, properties);
 	}
 

@@ -27,6 +27,7 @@ public class FilterHolderSet<T> implements HolderSet<T> {
     private final HolderSet<T> filter;
     private Set<Holder<T>> set = null;
     private List<Holder<T>> list = null;
+
     public FilterHolderSet(HolderSet<T> base, HolderSet<T> filter) {
         this.base = base;
         this.filter = filter;
@@ -77,6 +78,11 @@ public class FilterHolderSet<T> implements HolderSet<T> {
     @Override
     public int size() {
         return getList().size();
+    }
+
+    @Override
+    public boolean isBound() {
+        return false;
     }
 
     @Override

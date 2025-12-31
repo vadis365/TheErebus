@@ -2,12 +2,12 @@ package erebus.block.altars;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.HealingAltarBlockEntity;
-import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -28,7 +29,7 @@ public class HealingAltar extends AltarAbstract {
 	}
 
     @Override
-    protected MapCodec<HealingAltar> codec() {
+    protected @NonNull MapCodec<HealingAltar> codec() {
         return CODEC;
     }
 
@@ -44,7 +45,7 @@ public class HealingAltar extends AltarAbstract {
 	}
 
 	@Override
-	 protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+	 protected void onPlace(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull BlockState oldState, boolean movedByPiston) {
 		BlockEntity blockEntity =  level.getBlockEntity(pos);
 		if (blockEntity instanceof HealingAltarBlockEntity altar)
 			altar.setActive(false);
@@ -52,27 +53,24 @@ public class HealingAltar extends AltarAbstract {
 
 	@Nonnull
 	@Override
-	public ItemInteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+	public InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
 		BlockEntity blockEntity = level.getBlockEntity(pos);
 		if (level.isClientSide()) {
-			return ItemInteractionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		} else if (blockEntity instanceof HealingAltarBlockEntity altar) {
 			if (!stack.isEmpty())
 				if (stack.getItem() == ModItems.WAND_OF_ANIMATION.get()) {
-					stack.hurtAndBreak(1, player, Player.getSlotForHand(hand));
+					stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
 					if (!altar.active) {
 						altar.setActive(true);
 						altar.setSpawnTicks(12000);
-						level.playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE.get(), SoundSource.BLOCKS, 1.0F, 1.3F);
-						return ItemInteractionResult.SUCCESS;
-					}
-					if (altar.active) {
+                    } else {
 						altar.setActive(false);
-						level.playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE.get(), SoundSource.BLOCKS, 1.0F, 1.3F);
-						return ItemInteractionResult.SUCCESS;
-					}
-				}
+                    }
+                    level.playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE.get(), SoundSource.BLOCKS, 1.0F, 1.3F);
+                    return InteractionResult.SUCCESS;
+                }
 		}
-		return ItemInteractionResult.FAIL;
+		return InteractionResult.FAIL;
 	}
 }

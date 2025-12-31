@@ -1,20 +1,16 @@
 package erebus.client.render.item.model;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.AgeableListModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.LivingEntity;
-import org.jetbrains.annotations.NotNull;
 
-public class ArmorGliderModel<T extends LivingEntity> extends AgeableListModel<T> {
+public class ArmorGliderModel extends EntityModel<HumanoidRenderState> {
 
     private final ModelPart body;
     private final ModelPart rightArm;
@@ -25,6 +21,7 @@ public class ArmorGliderModel<T extends LivingEntity> extends AgeableListModel<T
     private final ModelPart leftWing;
 
     public ArmorGliderModel(ModelPart root) {
+        super(root);
         body = root.getChild("Body");
         rightArm = root.getChild("RightArm");
         leftArm = root.getChild("LeftArm");
@@ -98,32 +95,12 @@ public class ArmorGliderModel<T extends LivingEntity> extends AgeableListModel<T
     }
 
     @Override
-    public void renderToBuffer(@NotNull PoseStack pose, @NotNull VertexConsumer vertex, int packedLight, int packedOverlay, int color) {
-        body.render(pose, vertex, packedLight, packedOverlay, color);
-        rightArm.render(pose, vertex, packedLight, packedOverlay, color);
-        leftArm.render(pose, vertex, packedLight, packedOverlay, color);
-        rightWingBase.render(pose, vertex, packedLight, packedOverlay, color);
-        leftWingBase.render(pose, vertex, packedLight, packedOverlay, color);
-        rightWing.render(pose, vertex, packedLight, packedOverlay, color);
-        leftWing.render(pose, vertex, packedLight, packedOverlay, color);
-    }
-
-    @Override
-    protected @NotNull Iterable<ModelPart> headParts() {
-        return ImmutableList.of();
-    }
-
-    @Override
-    protected @NotNull Iterable<ModelPart> bodyParts() {
-        return ImmutableList.of(body, rightArm, leftArm, rightWingBase, leftWingBase, rightWing, leftWing);
-    }
-
-    @Override
-    public void setupAnim(@NotNull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(HumanoidRenderState state) {
+        super.setupAnim(state);
         rightArm.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.5F * limbSwingAmount * 0.5F;
         leftArm.xRot = Mth.cos(limbSwing * 0.6662F) * 2.5F * limbSwingAmount * 0.5F;
 
-        if (!entity.isFallFlying()) {
+        if (!state.isFallFlying) {
             rightWing.zRot = 0F;
             leftWing.zRot = 0F;
             if (entity.xOld != entity.getX() || entity.zOld != entity.getZ()) {

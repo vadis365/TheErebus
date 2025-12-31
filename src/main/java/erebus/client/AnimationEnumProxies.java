@@ -1,6 +1,6 @@
 package erebus.client;
 
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;

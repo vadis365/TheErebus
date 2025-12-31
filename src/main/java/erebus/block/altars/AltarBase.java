@@ -1,15 +1,15 @@
 package erebus.block.altars;
 
 import com.mojang.serialization.MapCodec;
-import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
 import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -52,10 +52,10 @@ public class AltarBase extends AltarAbstract {
 
 	 @Nonnull
 		@Override
-	    public ItemInteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+	    public InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
 		initMap();
 		if (level.isClientSide())
-			return ItemInteractionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 
 		if (!stack.isEmpty()) {
 			Block altar = ALTAR_TYPES.get(stack.getItem());
@@ -67,15 +67,15 @@ public class AltarBase extends AltarAbstract {
 						player.setItemInHand(hand, ItemStack.EMPTY);
 				} else
 					for (int i = 0; i < 10; i++) {
-						RandomSource rand = level.random;
+						RandomSource rand = level.getRandom();
 						level.addParticle(ParticleTypes.FLAME, pos.getX() + rand.nextDouble(), pos.getY() + 1.1, pos.getZ() + rand.nextDouble(), 0D, 0D, 0D);
 						level.addParticle(ParticleTypes.CLOUD, pos.getX() + rand.nextDouble(), pos.getY() + 1.1, pos.getZ() + rand.nextDouble(), 0D, 0D, 0D);
 					}
-				return ItemInteractionResult.SUCCESS;
+				return InteractionResult.SUCCESS;
 			}
 		}
 
-		return ItemInteractionResult.FAIL;
+		return InteractionResult.FAIL;
 	}
 
 	private void initMap() {

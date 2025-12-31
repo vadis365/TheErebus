@@ -1,7 +1,7 @@
 package erebus.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;

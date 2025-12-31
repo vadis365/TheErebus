@@ -6,11 +6,10 @@ import erebus.entity.ai.BlackAntHarvestCrops;
 import erebus.entity.ai.BlackAntPlantCrops;
 import erebus.inventory.server.BlackAntMenu;
 import erebus.inventory.server.BlackAntSimpleContainer;
-import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
 import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.data.ModDataComponents;
-import erebus.utils.CapHelper;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -23,7 +22,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.*;
+import net.minecraft.world.Container;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -305,11 +307,11 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
         double d0 = this.getX() - x;
         double d1 = this.getY() - y;
         double d2 = this.getZ() - z;
-        return (double)Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
+        return Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
     }
 	
 	public ItemEntity getClosestEntityItem(final Entity entity, double d, ItemStack filter) {
-		List<ItemEntity> list = level().<ItemEntity>getEntitiesOfClass(ItemEntity.class, getBoundingBox().inflate(d, d, d), EntitySelector.ENTITY_STILL_ALIVE);
+		List<ItemEntity> list = level().getEntitiesOfClass(ItemEntity.class, getBoundingBox().inflate(d, d, d), EntitySelector.ENTITY_STILL_ALIVE);
 		if (list.isEmpty())
 			return null;
 
@@ -554,7 +556,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	@Override
 	public void openCustomInventoryScreen(Player player) {
 		if (!level().isClientSide()) {
-			((ServerPlayer) player).openMenu(this, buf -> {
+			player.openMenu(this, buf -> {
 			buf.writeInt(this.getId());
 			buf.writeInt(this.getId());
 		});

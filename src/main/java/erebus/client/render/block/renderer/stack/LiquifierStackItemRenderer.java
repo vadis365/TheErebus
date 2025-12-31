@@ -8,7 +8,6 @@ import erebus.Erebus;
 import erebus.client.render.block.model.LiquifierModel;
 import erebus.client.render.util.FluidRenderHelper;
 import erebus.registries.client.ModBlockEntityRendering;
-import erebus.registries.data.FluidContents;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;

@@ -3,14 +3,14 @@ package erebus.block.entity;
 import erebus.block.LiquifierBlock;
 import erebus.inventory.server.LiquifierMenu;
 import erebus.registries.ModFluids;
-import erebus.registries.ModItems;
 import erebus.registries.blocks.ModBlockEntities;
-import erebus.registries.data.FluidContents;
 import erebus.registries.data.ModDataComponents;
+import erebus.registries.item.ModItems;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -184,10 +184,10 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 		return this.tank;
 	}
 	@Override
-	protected void applyImplicitComponents(@Nonnull DataComponentInput componentInput) {
-		super.applyImplicitComponents(componentInput);
+	protected void applyImplicitComponents(@Nonnull DataComponentGetter getter) {
+		super.applyImplicitComponents(getter);
 
-		tank.setFluid(componentInput.getOrDefault(ModDataComponents.FLUID, FluidContents.EMPTY).get());
+		tank.setFluid(getter.getOrDefault(ModDataComponents.FLUID, FluidContents.EMPTY).get());
 	}
 
 	@Override

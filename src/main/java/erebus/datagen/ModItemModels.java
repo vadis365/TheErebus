@@ -1,9 +1,9 @@
 package erebus.datagen;
 
 import erebus.datagen.providers.ModItemModelProvider;
-import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.*;
 import erebus.registries.entity.ModEntities;
+import erebus.registries.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

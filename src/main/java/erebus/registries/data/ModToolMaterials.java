@@ -1,6 +1,6 @@
 package erebus.registries.data;
 
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;

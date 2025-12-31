@@ -1,8 +1,8 @@
 package erebus.events;
 
 import erebus.block.QuicksandBlock;
-import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.item.ModItems;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

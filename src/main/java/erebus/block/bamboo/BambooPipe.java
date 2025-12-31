@@ -2,7 +2,6 @@ package erebus.block.bamboo;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.BambooPipeBlockEntity;
-import erebus.utils.CapHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

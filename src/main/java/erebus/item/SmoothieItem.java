@@ -1,6 +1,6 @@
 package erebus.item;
 
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

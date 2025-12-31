@@ -1,8 +1,8 @@
 package erebus.inventory.server;
 
 import erebus.block.entity.BlenderBlockEntity;
-import erebus.registries.ModItems;
 import erebus.registries.client.ModMenuTypes;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;

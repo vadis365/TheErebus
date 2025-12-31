@@ -4,10 +4,9 @@ import erebus.block.GlowshroomBlock;
 import erebus.block.GlowshroomStalkBlock;
 import erebus.block.bamboo.BambooBlock;
 import erebus.block.plants.*;
-import erebus.block.plants.MossBlock;
-import erebus.registries.ModItems;
 import erebus.registries.blocks.properties.PlantBlockProperties;
 import erebus.registries.helpers.ModBlockHelpers;
+import erebus.registries.item.ModItems;
 import erebus.registries.world.feature.PlantFeatures;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
@@ -155,10 +154,10 @@ public class PlantBlocks extends ModBlockHelpers {
         FERN = registerSimpleBlock("fern", Properties.ofFullCopy(Blocks.SHORT_GRASS));
         FIDDLE_HEAD = registerSimpleBlock("fiddle_head", Properties.ofFullCopy(Blocks.TALL_GRASS));
         THORNS = registerBlock("thorns", () -> new VineBlock(Properties.ofFullCopy(Blocks.VINE)));
-        MOSS = registerBlock("moss", () -> new MossBlock(Properties.of().strength(0.2F).noCollission().randomTicks().sound(SoundType.VINE).noOcclusion().replaceable()));
-        MOULD = registerBlock("mould", () -> new MouldBlock(Properties.of().strength(0.2F).noCollission().randomTicks().sound(SoundType.VINE).noOcclusion().replaceable()));
-        MOSS_CULTIVATED = registerBlock("moss_cultivated", () -> new MossCultivatedBlock(Properties.of().strength(0.2F).noCollission().sound(SoundType.VINE).noOcclusion().replaceable()));
-        MOULD_CULTIVATED = registerBlock("mould_cultivated", () -> new MouldCultivatedBlock(Properties.of().strength(0.2F).noCollission().sound(SoundType.VINE).noOcclusion().replaceable()));
+        MOSS = registerBlock("moss", () -> new MossBlock(Properties.of().strength(0.2F).noCollision().randomTicks().sound(SoundType.VINE).noOcclusion().replaceable()));
+        MOULD = registerBlock("mould", () -> new MouldBlock(Properties.of().strength(0.2F).noCollision().randomTicks().sound(SoundType.VINE).noOcclusion().replaceable()));
+        MOSS_CULTIVATED = registerBlock("moss_cultivated", () -> new MossCultivatedBlock(Properties.of().strength(0.2F).noCollision().sound(SoundType.VINE).noOcclusion().replaceable()));
+        MOULD_CULTIVATED = registerBlock("mould_cultivated", () -> new MouldCultivatedBlock(Properties.of().strength(0.2F).noCollision().sound(SoundType.VINE).noOcclusion().replaceable()));
         ALGAE = registerBlock(
                 "algae",
                 () -> new WaterlilyBlock(Properties.of()

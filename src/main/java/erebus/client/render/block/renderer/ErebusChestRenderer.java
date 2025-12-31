@@ -6,11 +6,13 @@ import erebus.registries.blocks.providers.ChestBlocks;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
+import net.minecraft.client.renderer.blockentity.state.ChestRenderState;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.properties.ChestType;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -51,11 +53,11 @@ public class ErebusChestRenderer<T extends ChestBlockEntity> extends ChestRender
         return map;
     }
 
-    @NotNull
-    protected  Material getMaterial(T entity, ChestType type) {
+    @Override
+    protected @Nullable Material getCustomMaterial(T entity, @NonNull ChestRenderState type) {
         EnumMap<ChestType, Material> materials = MATERIALS.get(entity.getBlockState().getBlock());
-        if (materials == null) return super.getMaterial(entity, type);
+        if (materials == null) return super.getCustomMaterial(entity, type);
         Material material = materials.get(type);
-        return material != null ? material : super.getMaterial(entity, type);
+        return material != null ? material : super.getCustomMaterial(entity, type);
     }
 }

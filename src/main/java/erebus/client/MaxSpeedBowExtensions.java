@@ -3,7 +3,7 @@ package erebus.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import erebus.item.MaxSpeedBowItem;
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;

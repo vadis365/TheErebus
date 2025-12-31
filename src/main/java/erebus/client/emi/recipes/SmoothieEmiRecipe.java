@@ -1,3 +1,4 @@
+/*
 package erebus.client.emi.recipes;
 
 import dev.emi.emi.api.neoforge.NeoForgeEmiIngredient;
@@ -97,3 +98,4 @@ public class SmoothieEmiRecipe implements EmiRecipe {
         widgets.addSlot(EmiStack.of(recipe.getResult()),134, 15);
     }
 }
+*/

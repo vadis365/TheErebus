@@ -1,7 +1,7 @@
 package erebus.registries.client;
 
 import erebus.Erebus;
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.texture.TextureAtlas;

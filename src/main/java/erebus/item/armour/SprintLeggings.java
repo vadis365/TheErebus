@@ -1,13 +1,8 @@
 package erebus.item.armour;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import erebus.Erebus;
-import erebus.registries.ModItems;
 import erebus.registries.data.ModDataComponents;
+import erebus.registries.item.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -24,14 +19,18 @@ import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+
 public class SprintLeggings extends ArmorItem { 
 
 	public static final byte MAX_TIER = 9;
 
 	private int armtick;
-	private ResourceLocation TEXTURE_1 = Erebus.prefix("textures/models/armor/centipede_layer_1.png");
-	private ResourceLocation TEXTURE_2 = Erebus.prefix("textures/models/armor/centipede_layer_2.png");
-	private ResourceLocation TEXTURE_3 = Erebus.prefix("textures/models/armor/centipede_layer_3.png");
+	private final ResourceLocation TEXTURE_1 = Erebus.prefix("textures/models/armor/centipede_layer_1.png");
+	private final ResourceLocation TEXTURE_2 = Erebus.prefix("textures/models/armor/centipede_layer_2.png");
+	private final ResourceLocation TEXTURE_3 = Erebus.prefix("textures/models/armor/centipede_layer_3.png");
 
 	public SprintLeggings(Holder<ArmorMaterial> material, ArmorItem.Type type, Properties properties) {
 		super(material, type, properties);
@@ -69,7 +68,7 @@ public class SprintLeggings extends ArmorItem {
 			if (player.isSprinting() && player.onGround()) {
 				int tier = 1 + (!stack.has(ModDataComponents.SPRINT_LEGGINGS) ? 0 : stack.get(ModDataComponents.SPRINT_LEGGINGS).tier());
 				float angle = player.getYRot() * ((float) Math.PI / 180F);
-				entity.setDeltaMovement(entity.getDeltaMovement().add((double) (-Mth.sin(angle) * tier * 0.0425D), 0.0D, (double) (Mth.cos(angle) * tier * 0.0425D)));
+				entity.setDeltaMovement(entity.getDeltaMovement().add(-Mth.sin(angle) * tier * 0.0425D, 0.0D, Mth.cos(angle) * tier * 0.0425D));
 			}
 			armtick++;
 			if (armtick > 60 || player.isSprinting())

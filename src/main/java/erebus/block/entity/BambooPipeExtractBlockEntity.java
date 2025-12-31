@@ -2,7 +2,6 @@ package erebus.block.entity;
 
 import erebus.block.bamboo.BambooPipeExtract;
 import erebus.registries.blocks.ModBlockEntities;
-import erebus.utils.CapHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;

@@ -12,7 +12,7 @@ public class PlantBlockProperties {
     private static final Properties BASE = Properties.of().mapColor(MapColor.PLANT);
 
     public static final Properties CROP_PROPS = BASE
-            .noCollission()
+            .noCollision()
             .randomTicks()
             .instabreak()
             .sound(SoundType.CROP)
@@ -20,13 +20,13 @@ public class PlantBlockProperties {
 
     public static final Properties BUSH_PROPS = BASE
             .randomTicks()
-            .noCollission()
+            .noCollision()
             .sound(SoundType.SWEET_BERRY_BUSH)
             .pushReaction(PushReaction.DESTROY);
 
     public static final Properties DARK_FRUIT_VINE_PROPS = BASE
             .replaceable()
-            .noCollission()
+            .noCollision()
             .randomTicks()
             .strength(0.2F)
             .sound(SoundType.VINE)
@@ -50,7 +50,7 @@ public class PlantBlockProperties {
             .noOcclusion();
 
     private static final Properties MUSHROOM_PROPS = Properties.of()
-            .noCollission()
+            .noCollision()
             .randomTicks()
             .instabreak()
             .sound(SoundType.GRASS)
@@ -66,7 +66,7 @@ public class PlantBlockProperties {
             .ignitedByLava();
 
     private static final Properties FLOWER_PROPS = Properties.of()
-            .noCollission()
+            .noCollision()
             .noOcclusion()
             .instabreak()
             .sound(SoundType.AZALEA);

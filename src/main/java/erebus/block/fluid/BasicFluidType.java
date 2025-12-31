@@ -1,8 +1,9 @@
 package erebus.block.fluid;
 
 import erebus.Erebus;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import org.jspecify.annotations.NonNull;
 
 public class BasicFluidType implements IClientFluidTypeExtensions {
 
@@ -13,12 +14,12 @@ public class BasicFluidType implements IClientFluidTypeExtensions {
 	}
 
 	@Override
-	public ResourceLocation getStillTexture() {
+	public @NonNull Identifier getStillTexture() {
 		return Erebus.prefix("block/" + this.fluidName + "_still");
 	}
 
 	@Override
-	public ResourceLocation getFlowingTexture() {
+	public @NonNull Identifier getFlowingTexture() {
 		return Erebus.prefix("block/" + this.fluidName + "_flowing");
 	}
 }

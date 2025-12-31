@@ -2,11 +2,10 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.FluidJarBlockEntity;
-import erebus.utils.CapHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -46,7 +45,7 @@ public class FluidJarBlock extends BaseEntityBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? null : FluidJarBlockEntity::serverTick;
+		return pLevel.isClientSide() ? null : FluidJarBlockEntity::serverTick;
 	}
 
 	@Nonnull
@@ -57,9 +56,9 @@ public class FluidJarBlock extends BaseEntityBlock {
 
 	@Nonnull
 	@Override
-	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (world.isClientSide)
-			return ItemInteractionResult.SUCCESS;
+	public InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (world.isClientSide())
+			return InteractionResult.SUCCESS;
 		BlockEntity tileentity = world.getBlockEntity(pos);
 		if (tileentity instanceof FluidJarBlockEntity) {
 			Optional<IFluidHandler> fluidHandler = CapHelper.getFluidHandler(world, pos, hit.getDirection());
@@ -71,8 +70,8 @@ public class FluidJarBlock extends BaseEntityBlock {
 						player.displayClientMessage(Component.literal("Empty: 0/" + handler.getTankCapacity(0)), true);
 				}
 			});
-			return ItemInteractionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		}
-		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		return InteractionResult.PASS;
 	}
 }

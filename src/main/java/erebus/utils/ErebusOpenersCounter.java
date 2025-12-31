@@ -1,11 +1,13 @@
 package erebus.utils;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.ContainerUser;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -18,7 +20,7 @@ public abstract class ErebusOpenersCounter extends ContainerOpenersCounter {
     }
 
     @Override
-    public void incrementOpeners(Player player, Level level, BlockPos pos, BlockState state) {
+    public void incrementOpeners(@NonNull LivingEntity player, @NonNull Level level, @NonNull BlockPos pos, @NonNull BlockState state, double maxInteractionRange) {
         int count = openCount++;
         if(count == 0) {
             onOpen(level, pos, state);
@@ -29,17 +31,17 @@ public abstract class ErebusOpenersCounter extends ContainerOpenersCounter {
         }
 
         openerCountChanged(level, pos, state, count, openCount);
-        maxInteractionRange = Math.max(player.blockInteractionRange(), maxInteractionRange);
+        this.maxInteractionRange = Math.max(maxInteractionRange, this.maxInteractionRange);
     }
 
     @Override
-    public void recheckOpeners(Level level, BlockPos pos, BlockState state) {
-        List<Player> list = getPlayersWithContainerOpen(level, pos);
+    public void recheckOpeners(@NonNull Level level, @NonNull BlockPos pos, @NonNull BlockState state) {
+        List<ContainerUser> list = getEntitiesWithContainerOpen(level, pos);
         maxInteractionRange = 0.0;
 
-        Player player;
-        for(Iterator<Player> players = list.iterator(); players.hasNext(); maxInteractionRange = Math.max(player.blockInteractionRange(), maxInteractionRange)) {
-            player = players.next();
+        ContainerUser user;
+        for(Iterator<ContainerUser> users = list.iterator(); users.hasNext(); maxInteractionRange = Math.max(user.getContainerInteractionRange(), maxInteractionRange)) {
+            user = users.next();
         }
 
         int playersInteracting = list.size();

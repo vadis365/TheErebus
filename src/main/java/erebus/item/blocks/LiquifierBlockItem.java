@@ -1,7 +1,6 @@
 package erebus.item.blocks;
 
 import erebus.block.LiquifierBlock;
-import erebus.registries.data.FluidContents;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

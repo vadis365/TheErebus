@@ -11,12 +11,12 @@ import it.unimi.dsi.fastutil.doubles.Double2ObjectAVLTreeMap;
 import it.unimi.dsi.fastutil.doubles.Double2ObjectSortedMap;
 import it.unimi.dsi.fastutil.floats.Float2ObjectAVLTreeMap;
 import it.unimi.dsi.fastutil.floats.Float2ObjectSortedMap;
-import net.minecraft.Util;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
+import net.minecraft.util.Util;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -62,8 +62,8 @@ public class Codecs {
             Codec.INT.fieldOf("color").forGetter(o -> o.col)
     ).apply(instance, MapColor::new)).validate(Codecs::validateMapColor);
     public static final Codec<GameProfile> SIMPLE_GAME_PROFILE = RecordCodecBuilder.create(instance -> instance.group(
-            UUIDUtil.AUTHLIB_CODEC.fieldOf("id").forGetter(GameProfile::getId),
-            ExtraCodecs.PLAYER_NAME.fieldOf("name").forGetter(GameProfile::getName)
+            UUIDUtil.AUTHLIB_CODEC.fieldOf("id").forGetter(GameProfile::id),
+            ExtraCodecs.PLAYER_NAME.fieldOf("name").forGetter(GameProfile::name)
     ).apply(instance, GameProfile::new));
 
     public static final Codec<Climate.ParameterList<Holder<Biome>>> CLIMATE_SYSTEM = ExtraCodecs.nonEmptyList(RecordCodecBuilder.<Pair<Climate.ParameterPoint, Holder<Biome>>>create((instance) -> instance.group(Climate.ParameterPoint.CODEC.fieldOf("parameters").forGetter(Pair::getFirst), Biome.CODEC.fieldOf("biome").forGetter(Pair::getSecond)).apply(instance, Pair::of)).listOf()).xmap(Climate.ParameterList::new, Climate.ParameterList::values);

@@ -1,18 +1,14 @@
 package erebus.registries.data;
 
-import java.util.function.Supplier;
-
 import erebus.Erebus;
-import erebus.network.data.DeathCompassData;
-import erebus.network.data.DeathCompassDataHolder;
-import erebus.network.data.QuakeHammerData;
-import erebus.network.data.QuakeHammerDataHolder;
-import erebus.network.data.SprintLeggingsData;
-import erebus.network.data.SprintLeggingsDataHolder;
+import erebus.network.data.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+
+import java.util.function.Supplier;
 
 public class ModDataComponents {
 
@@ -24,9 +20,9 @@ public class ModDataComponents {
 					.networkSynchronized(DeathCompassDataHolder.STREAM_CODEC).build());
     
     
-	public static final Supplier<DataComponentType<FluidContents>> FLUID = DATA_COMPONENT_REGISTRY.register("fluid",
-			() -> DataComponentType.<FluidContents>builder().persistent(FluidContents.CODEC)
-					.networkSynchronized(FluidContents.STREAM_CODEC).build());
+	public static final Supplier<DataComponentType<FluidResource>> FLUID = DATA_COMPONENT_REGISTRY.register("fluid",
+			() -> DataComponentType.<FluidResource>builder().persistent(FluidResource.CODEC)
+					.networkSynchronized(FluidResource.STREAM_CODEC).build());
 	
 	public static final Supplier<DataComponentType<BlockPos>> BEE_TAMING_AMULET = DATA_COMPONENT_REGISTRY.register("bee_taming_amulet",
 			() -> DataComponentType.<BlockPos>builder().persistent(BlockPos.CODEC)

@@ -1,37 +1,21 @@
 package erebus.client.render.item.model;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.PlayerModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.world.entity.LivingEntity;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 
-public class MushroomHelmModel<T extends LivingEntity> extends PlayerModel<T> {
+public class MushroomHelmModel extends EntityModel<HumanoidRenderState> {
 
     private final ModelPart top;
-    private final ModelPart middle;
-    private final ModelPart front;
-    private final ModelPart back;
-    private final ModelPart right;
-    private final ModelPart left;
-    private final ModelPart mainHead;
 
-    public MushroomHelmModel(ModelPart playerModel, boolean isSlim, ModelPart root) {
-        super(playerModel, isSlim);
+    public MushroomHelmModel(ModelPart playerModel, ModelPart root) {
+        super(playerModel);
         top = root.getChild("Top");
-        middle = top.getChild("Middle");
-        front = top.getChild("Front");
-        back = top.getChild("Back");
-        right = top.getChild("Right");
-        left = top.getChild("Left");
-        mainHead = top.getChild("MainHead");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -98,22 +82,6 @@ public class MushroomHelmModel<T extends LivingEntity> extends PlayerModel<T> {
     }
 
     @Override
-    public void renderToBuffer(@NotNull PoseStack pose, @NotNull VertexConsumer vertex, int packedLight, int packedOverlay, int color) {
-        top.render(pose, vertex, packedLight, packedOverlay, color);
-    }
-
-    @Override
-    protected @NotNull Iterable<ModelPart> headParts() {
-        return ImmutableList.of(top, middle, front, back, right, left, mainHead);
-    }
-
-    @Override
-    protected @NotNull Iterable<ModelPart> bodyParts() {
-        return ImmutableList.of();
-    }
-
-    @Override
-    public void setupAnim(@NotNull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        top.copyFrom(head);
+    public void setupAnim(HumanoidRenderState state) {
     }
 }

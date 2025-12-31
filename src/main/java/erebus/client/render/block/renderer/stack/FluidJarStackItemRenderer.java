@@ -2,7 +2,6 @@ package erebus.client.render.block.renderer.stack;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.client.render.util.FluidRenderHelper;
-import erebus.registries.data.FluidContents;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;

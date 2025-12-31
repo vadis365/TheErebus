@@ -1,7 +1,7 @@
 package erebus.block.plants;
 
 import com.mojang.serialization.MapCodec;
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -69,7 +69,7 @@ public class DarkFruitVineBlock extends BushBlock {
 
     private boolean isValidBlock(BlockState state) {
         //noinspection SuspiciousMethodCalls
-        return !state.getProperties().contains(BlockBehaviour.Properties.of().noCollission()) || state.is(this);
+        return !state.getProperties().contains(BlockBehaviour.Properties.of().noCollision()) || state.is(this);
     }
 
     @Override

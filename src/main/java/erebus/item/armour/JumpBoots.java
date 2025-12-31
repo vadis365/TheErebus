@@ -1,10 +1,6 @@
 package erebus.item.armour;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -18,6 +14,9 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class JumpBoots extends ArmorItem {
 

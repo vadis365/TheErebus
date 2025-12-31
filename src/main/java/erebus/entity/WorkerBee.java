@@ -2,10 +2,9 @@ package erebus.entity;
 
 import erebus.block.entity.HoneyCombBlockEntity;
 import erebus.entity.ai.BeePollinateGoal;
-import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
 import erebus.registries.data.ModDataComponents;
-import erebus.utils.CapHelper;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -19,7 +18,10 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
@@ -238,7 +240,7 @@ public class WorkerBee extends Animal {
 				setDropPoint(dataBlockPos);
 				setTameState(true);
 				goalSelector.removeGoal(aiFlyingWander);
-				setTarget((LivingEntity) null);
+				setTarget(null);
 			}
 			level().broadcastEntityEvent(this, (byte)18);
 			player.swing(hand);

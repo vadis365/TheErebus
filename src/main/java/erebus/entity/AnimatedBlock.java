@@ -1,8 +1,8 @@
 package erebus.entity;
 
-import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
 import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;

@@ -2,13 +2,13 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.SiloTankBlockEntity;
-import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -70,10 +70,8 @@ public class SiloTankBlock extends Block implements EntityBlock {
 
 	@Override
 	protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
-		boolean canSurvive = false;
-		if (canSurvive(state, level, pos))
-			canSurvive = true;
-		return !canSurvive ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, pos, facingPos);
+		boolean canSurvive = canSurvive(state, level, pos);
+        return !canSurvive ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, pos, facingPos);
 	}
 
 	@Override
@@ -107,17 +105,17 @@ public class SiloTankBlock extends Block implements EntityBlock {
 	}
 
     @Override
-	public @NotNull ItemInteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+	public @NotNull InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
     	BlockEntity blockEntity = level.getBlockEntity(pos);
     	if (level.isClientSide()) {
-			return ItemInteractionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
     	} else if (blockEntity instanceof SiloTankBlockEntity siloTank) {
 			if (!stack.isEmpty() && stack.is(OtherBlocks.SILO_ROOF.asItem()) || !stack.isEmpty() && stack.getItem() == ModItems.ANT_TAMING_AMULET.get())
-				return ItemInteractionResult.FAIL;
+				return InteractionResult.FAIL;
 			if(isSiloComplete(level, pos))
 				player.openMenu(siloTank, pos);
 		}
-    	return ItemInteractionResult.SUCCESS;
+    	return InteractionResult.SUCCESS;
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package erebus.block;
 
-import erebus.registries.ModItems;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;

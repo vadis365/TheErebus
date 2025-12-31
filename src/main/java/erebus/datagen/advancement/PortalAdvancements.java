@@ -1,7 +1,7 @@
 package erebus.datagen.advancement;
 
-import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.OtherBlocks;
+import erebus.registries.item.ModItems;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.critereon.BlockPredicate;

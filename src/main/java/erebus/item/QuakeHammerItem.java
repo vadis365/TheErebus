@@ -1,14 +1,10 @@
 package erebus.item;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import erebus.network.data.QuakeHammerData;
 import erebus.network.data.QuakeHammerDataHolder;
-import erebus.registries.ModItems;
 import erebus.registries.ModSounds;
 import erebus.registries.data.ModDataComponents;
+import erebus.registries.item.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -21,17 +17,16 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class QuakeHammerItem extends SwordItem {
 
@@ -71,7 +66,7 @@ public class QuakeHammerItem extends SwordItem {
 	@Override
 	 public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
 		ItemStack stack = player.getItemInHand(usedHand);
-		int charge = 0 + (!stack.has(ModDataComponents.QUAKE_HAMMER) ? 0 : stack.get(ModDataComponents.QUAKE_HAMMER).charge());
+		int charge = (!stack.has(ModDataComponents.QUAKE_HAMMER) ? 0 : stack.get(ModDataComponents.QUAKE_HAMMER).charge());
 		if (charge < 25)
 			stack.set(ModDataComponents.QUAKE_HAMMER, new QuakeHammerData(charge + 1));
 		return InteractionResultHolder.pass(player.getItemInHand(usedHand));
@@ -90,7 +85,7 @@ public class QuakeHammerItem extends SwordItem {
 		else {
 			BlockState state = level.getBlockState(pos);
 			if (!level.isClientSide && !state.isAir()) {
-				int charge = 0 + (!stack.has(ModDataComponents.QUAKE_HAMMER) ? 0 : stack.get(ModDataComponents.QUAKE_HAMMER).charge());
+				int charge = (!stack.has(ModDataComponents.QUAKE_HAMMER) ? 0 : stack.get(ModDataComponents.QUAKE_HAMMER).charge());
 				if (player.isCrouching() && charge > 0) {
 					// Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.HAMMER_BLAM,
 					// (float) player.posX, (float)player.posY, (float)player.posZ));

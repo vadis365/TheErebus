@@ -6,13 +6,14 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,7 +23,8 @@ import org.jetbrains.annotations.Nullable;
  * This block can be placed in various orientations and creates negative status effects when broken.
  */
 public class BotFlySpawnerBlock extends Block {
-    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+    public static final Property<Direction>
+            FACING = BlockStateProperties.FACING;
 
     public BotFlySpawnerBlock(Properties properties) {
         super(properties);
@@ -51,7 +53,7 @@ public class BotFlySpawnerBlock extends Block {
      * The cloud applies Mining Fatigue and Nausea effects to entities in the area.
      */
     @Override
-    public boolean onDestroyedByPlayer(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, boolean willHarvest, @NotNull FluidState fluid) {
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, ItemStack toolStack, boolean willHarvest, FluidState fluid) {
         if (!level.isClientSide()) {
             // Create an area effect cloud at the block's position
             AreaEffectCloud cloud = new AreaEffectCloud(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D);
@@ -62,11 +64,11 @@ public class BotFlySpawnerBlock extends Block {
             cloud.setRadiusPerTick(-cloud.getRadius() / cloud.getDuration());
 
             // Add negative status effects to the cloud
-            cloud.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 140)); // Mining Fatigue effect
-            cloud.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200));    // Nausea effect
+            cloud.addEffect(new MobEffectInstance(MobEffects.MINING_FATIGUE, 140));
+            cloud.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 200));
             level.addFreshEntity(cloud);
         }
 
-        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+        return super.onDestroyedByPlayer(state, level, pos, player, toolStack, willHarvest, fluid);
     }
 }

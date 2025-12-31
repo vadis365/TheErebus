@@ -1,26 +1,29 @@
 package erebus.block.entity;
 
 import erebus.registries.blocks.ModBlockEntities;
-import erebus.registries.data.FluidContents;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class FluidJarBlockEntity extends BlockEntity {
-	public FluidTank tank = new FluidTank(FluidType.BUCKET_VOLUME * 32);
+	public static final int MAX_CAPACITY  = FluidType.BUCKET_VOLUME * 32;
+	public FluidStacksResourceHandler tank = new FluidStacksResourceHandler(1, MAX_CAPACITY);
 	public int prevTankAmount;
 
 	public FluidJarBlockEntity(BlockPos pos, BlockState state) {
@@ -29,11 +32,11 @@ public class FluidJarBlockEntity extends BlockEntity {
 
 	public static <T extends BlockEntity> void serverTick(Level world, BlockPos worldPosition, BlockState blockState, T t) {
 		if (t instanceof FluidJarBlockEntity tile) {
-			if(tile.prevTankAmount != tile.tank.getFluidAmount()) {
+			if(tile.prevTankAmount != tile.tank.getAmountAsInt(0)) {
 				tile.updateBlock();
 				tile.setChanged();
 			}
-			tile.prevTankAmount = tile.tank.getFluidAmount();
+			tile.prevTankAmount = tile.tank.getAmountAsInt(0);
 		}
 	}
 
@@ -42,62 +45,45 @@ public class FluidJarBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet, @Nonnull HolderLookup.Provider registries) {
-		super.onDataPacket(net, packet, registries);
-		loadAdditional(packet.getTag(), registries);
+	public void onDataPacket(Connection net, ValueInput input) {
+		super.onDataPacket(net, input);
+		loadAdditional(input);
 	}
 
 	@Override
-	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, level.registryAccess());
-		return ClientboundBlockEntityDataPacket.create(this);
-	}
-
-	@Nonnull
-	@Override
-	public CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider registries) {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, registries);
-		return nbt;
+	protected void loadAdditional(@NonNull ValueInput input) {
+		super.loadAdditional(input);
+		tank.deserialize(input);
 	}
 
 	@Override
-	public void loadAdditional(@Nonnull CompoundTag nbt, @Nonnull HolderLookup.Provider registries) {
-		super.loadAdditional(nbt, registries);
-		tank.readFromNBT(registries, nbt);
+	protected void saveAdditional(ValueOutput output) {
+		super.saveAdditional(output);
+		tank.serialize(output);
 	}
 
-	@Override
-	public void saveAdditional(@Nonnull CompoundTag nbt, @Nonnull HolderLookup.Provider registries) {
-		super.saveAdditional(nbt, registries);
-		tank.writeToNBT(registries, nbt);
-	}
-
-	public FluidTank getTank() {
+	public FluidStacksResourceHandler getTank() {
 		return this.tank;
 	}
 
-	public FluidTank getTank(@Nullable Direction ignoredDirection) {
+	public FluidStacksResourceHandler getTank(@Nullable Direction ignoredDirection) {
 		return this.tank;
 	}
 
-	public int getScaledFluid(int scale) {
-		return tank.getFluid() != null ? (int) ((float) tank.getFluidAmount() / (float) tank.getCapacity() * scale) : 0;
-	}
-
 	@Override
-	protected void applyImplicitComponents(@Nonnull DataComponentInput componentInput) {
-		super.applyImplicitComponents(componentInput);
-
-		tank.setFluid(componentInput.getOrDefault(ModDataComponents.FLUID, FluidContents.EMPTY).get());
+	protected void applyImplicitComponents(@Nonnull DataComponentGetter getter) {
+		super.applyImplicitComponents(getter);
+		try(Transaction transaction = Transaction.openRoot()) {
+			if(tank.insert(FluidResource.EMPTY, 0, transaction) == 0) {
+				transaction.commit();
+			}
+		}
 	}
 
 	@Override
 	protected void collectImplicitComponents(@Nonnull DataComponentMap.Builder builder) {
 		super.collectImplicitComponents(builder);
-
-		builder.set(ModDataComponents.FLUID, FluidContents.of(tank.getFluid()));
+		builder.set(ModDataComponents.FLUID, tank.getResource(0));
 	}
 
 }

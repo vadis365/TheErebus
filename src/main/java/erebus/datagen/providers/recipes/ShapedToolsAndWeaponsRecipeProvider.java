@@ -1,7 +1,7 @@
 package erebus.datagen.providers.recipes;
 
-import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.UmberstoneBlocks;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;

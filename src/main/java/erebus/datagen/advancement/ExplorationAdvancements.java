@@ -1,12 +1,12 @@
 package erebus.datagen.advancement;
 
 import erebus.Erebus;
-import erebus.registries.ModItems;
 import erebus.registries.blocks.providers.ChestBlocks;
 import erebus.registries.blocks.providers.OreBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.registries.entity.ModEntities;
+import erebus.registries.item.ModItems;
 import erebus.registries.world.ModDimensionRegistries;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;

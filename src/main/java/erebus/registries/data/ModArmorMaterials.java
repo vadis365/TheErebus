@@ -1,287 +1,192 @@
 package erebus.registries.data;
 
-import java.util.EnumMap;
-import java.util.List;
-
-import erebus.Erebus;
-import erebus.registries.ModItems;
-import net.minecraft.Util;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import com.google.common.collect.Maps;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
+
+import java.util.Map;
 
 public class ModArmorMaterials {
 
-    public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS = DeferredRegister.create(BuiltInRegistries.ARMOR_MATERIAL, Erebus.MODID);
-
     // MARK: Jade Armor Material
-    public static final Holder<ArmorMaterial> JADE_ARMOR_MATERIAL = ARMOR_MATERIALS.register(
-            "jade",
-            () -> new ArmorMaterial(
-                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                        map.put(ArmorItem.Type.BOOTS, 3);
-                        map.put(ArmorItem.Type.LEGGINGS, 5);
-                        map.put(ArmorItem.Type.CHESTPLATE, 7);
-                        map.put(ArmorItem.Type.HELMET, 2);
-                        // map.put(ArmorItem.Type.BODY, 4); Horse Armor
-                    }),
-                    15,
-                    SoundEvents.ARMOR_EQUIP_IRON,
-                    () -> Ingredient.of(Tags.Items.INGOTS_IRON),
-                    List.of(
-                            new ArmorMaterial.Layer(
-                                    ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "jade")
-                            )
-                    ),
-                    2,
-                    0
-            )
+    public static final ArmorMaterial JADE_ARMOR_MATERIAL = new ArmorMaterial(
+            25,
+            makeDefense(
+                    3, 5, 7, 2, 4
+            ),
+            5,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            2.0F,
+            0.0F,
+            ModTags.REPAIRS_JADE_ARMOR,
+            ModEquipmentAssets.JADE
     );
 
     // MARK: Exoskeleton Armor Material
-    public static final Holder<ArmorMaterial> EXOSKELETON_ARMOR_MATERIAL = ARMOR_MATERIALS.register(
-            "exoskeleton",
-            () -> new ArmorMaterial(
-                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                        map.put(ArmorItem.Type.BOOTS, 2);
-                        map.put(ArmorItem.Type.LEGGINGS, 2);
-                        map.put(ArmorItem.Type.CHESTPLATE, 3);
-                        map.put(ArmorItem.Type.HELMET, 2);
-                        // map.put(ArmorItem.Type.BODY, 4); Horse Armor
-                    }),
-                    15,
-                    SoundEvents.ARMOR_EQUIP_CHAIN,
-                    () -> Ingredient.of(Tags.Items.INGOTS_IRON),
-                    List.of(
-                            new ArmorMaterial.Layer(
-                                    ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "exoskeleton")
-                            )
-                    ),
-                    0,
-                    0
-            )
+    public static final ArmorMaterial EXOSKELETON_ARMOR_MATERIAL = new ArmorMaterial(
+            25,
+            makeDefense(
+                    2, 2, 3, 2, 4
+            ),
+            5,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            0.0F,
+            0.0F,
+            ModTags.REPAIRS_EXOSKELETON_ARMOR,
+            ModEquipmentAssets.EXOSKELETON
     );
 
     // MARK: Reinforced Exoskeleton Armor Material
-    public static final Holder<ArmorMaterial> REIN_EXOSKELETON_ARMOR_MATERIAL = ARMOR_MATERIALS.register(
-            "rein_exoskeleton",
-            () -> new ArmorMaterial(
-                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                        map.put(ArmorItem.Type.BOOTS, 3);
-                        map.put(ArmorItem.Type.LEGGINGS, 6);
-                        map.put(ArmorItem.Type.CHESTPLATE, 8);
-                        map.put(ArmorItem.Type.HELMET, 3);
-                        // map.put(ArmorItem.Type.BODY, 4); Horse Armor
-                    }),
-                    33,
-                    SoundEvents.ARMOR_EQUIP_DIAMOND,
-                    () -> Ingredient.of(Tags.Items.INGOTS_IRON),
-                    List.of(
-                            new ArmorMaterial.Layer(
-                                    ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "rein_exoskeleton")
-                            )
-                    ),
-                    3,
-                    0
-            )
+    public static final ArmorMaterial REIN_EXOSKELETON_ARMOR_MATERIAL = new ArmorMaterial(
+            25,
+            makeDefense(
+                    3, 6, 8, 3, 4
+            ),
+            5,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            3.0F,
+            0.0F,
+            ModTags.REPAIRS_REINFORCED_EXOSKELETON_ARMOR,
+            ModEquipmentAssets.REINFORCED_EXOSKELETON
     );
 
     // MARK: Rhino Armor Material
-    public static final Holder<ArmorMaterial> RHINO_ARMOR_MATERIAL = ARMOR_MATERIALS.register(
-            "rhino",
-            () -> new ArmorMaterial(
-                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                        map.put(ArmorItem.Type.BOOTS, 3);
-                        map.put(ArmorItem.Type.LEGGINGS, 5);
-                        map.put(ArmorItem.Type.CHESTPLATE, 7);
-                        map.put(ArmorItem.Type.HELMET, 2);
-                        // map.put(ArmorItem.Type.BODY, 4); Horse Armor
-                    }),
-                    10,
-                    SoundEvents.ARMOR_EQUIP_DIAMOND,
-                    () -> Ingredient.of(Tags.Items.INGOTS_IRON),
-                    List.of(
-                            new ArmorMaterial.Layer(
-                                    ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "rhino")
-                            )
-                    ),
-                    4,
-                    0
-            )
+    public static final ArmorMaterial RHINO_ARMOR_MATERIAL = new ArmorMaterial(
+            25,
+            makeDefense(
+                    3, 5, 7, 2, 4
+            ),
+            5,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            4.0F,
+            0.0F,
+            ModTags.REPAIRS_RHINO_ARMOR,
+            ModEquipmentAssets.RHINO
     );
 
     // MARK: Bamboo Armor Material
-    public static final Holder<ArmorMaterial> BAMBOO_ARMOR_MATERIAL = ARMOR_MATERIALS.register(
-            "bamboo",
-            () -> new ArmorMaterial(
-                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                        map.put(ArmorItem.Type.BOOTS, 2);
-                        map.put(ArmorItem.Type.LEGGINGS, 3);
-                        map.put(ArmorItem.Type.CHESTPLATE, 4);
-                        map.put(ArmorItem.Type.HELMET, 2);
-                        // map.put(ArmorItem.Type.BODY, 4); Horse Armor
-                    }),
-                    15,
-                    SoundEvents.ARMOR_EQUIP_GENERIC,
-                    () -> Ingredient.of(Tags.Items.INGOTS_IRON),
-                    List.of(
-                            new ArmorMaterial.Layer(
-                                    ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "bamboo")
-                            )
-                    ),
-                    2,
-                    0
-            )
+    public static final ArmorMaterial BAMBOO_ARMOR_MATERIAL = new ArmorMaterial(
+            15,
+            makeDefense(
+                    2, 3, 4, 2, 4
+            ),
+            2,
+            SoundEvents.ARMOR_EQUIP_GENERIC,
+            0.0F,
+            0.0F,
+            ModTags.REPAIRS_BAMBOO_ARMOR,
+            ModEquipmentAssets.BAMBOO
     );
 
     // MARK: Reinforced Compound Goggles
 
-    public static final Holder<ArmorMaterial> REIN_COMPOUND_GOGGLES_ARMOR_MATERIAL = ARMOR_MATERIALS.register(
-            "rein_goggles",
-            () -> new ArmorMaterial(
-                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                        map.put(ArmorItem.Type.HELMET, 3);
-                    }),
-                    33,
-                    SoundEvents.ARMOR_EQUIP_DIAMOND,
-                    () -> Ingredient.of(Tags.Items.INGOTS_IRON),
-                    List.of(
-                            new ArmorMaterial.Layer(
-                                    ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "rein_goggles")
-                            )
-                    ),
-                    3,
-                    0
-            )
+    public static final ArmorMaterial REIN_COMPOUND_GOGGLES_ARMOR_MATERIAL = new ArmorMaterial(
+            33,
+            makeDefense(
+                    0, 0, 0, 3, 0
+            ),
+            3,
+            SoundEvents.ARMOR_EQUIP_DIAMOND,
+            0.0F,
+            0.0F,
+            ModTags.REPAIRS_REINFORCED_COMPOUND_GOGGLES,
+            ModEquipmentAssets.REINFORCED_COMPOUND_GOGGLES
     );
 
     // MARK: Compound Goggles
 
-    public static final Holder<ArmorMaterial> GOGGLES_ARMOR_MATERIAL = ARMOR_MATERIALS.register(
-            "goggles",
-            () -> new ArmorMaterial(
-                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                        map.put(ArmorItem.Type.HELMET, 3);
-                        // map.put(ArmorItem.Type.BODY, 4); Horse Armor
-                    }),
-                    33,
-                    SoundEvents.ARMOR_EQUIP_DIAMOND,
-                    () -> Ingredient.of(Tags.Items.INGOTS_IRON),
-                    List.of(
-                            new ArmorMaterial.Layer(
-                                    ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "goggles")
-                            )
-                    ),
-                    3,
-                    0
-            )
+    public static final ArmorMaterial GOGGLES_ARMOR_MATERIAL = new ArmorMaterial(
+            33,
+            makeDefense(
+                    0, 0, 0, 3, 0
+            ),
+            3,
+            SoundEvents.ARMOR_EQUIP_DIAMOND,
+            0.0F,
+            0.0F,
+            ModTags.REPAIRS_REINFORCED_COMPOUND_GOGGLES,
+            ModEquipmentAssets.REINFORCED_COMPOUND_GOGGLES
     );
 
     // MARK: Mushroom Helm
 
-    public static final Holder<ArmorMaterial> MUSHROOM_HELM_ARMOR_MATERIAL = ARMOR_MATERIALS.register(
-            "mushroom_helm",
-            () -> new ArmorMaterial(
-                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                        map.put(ArmorItem.Type.HELMET, 3);
-                    }),
-                    33,
-                    SoundEvents.ARMOR_EQUIP_DIAMOND,
-                    () -> Ingredient.of(Tags.Items.INGOTS_IRON),
-                    List.of(
-                            new ArmorMaterial.Layer(
-                                    ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "mushroom_helm")
-                            )
-                    ),
-                    3,
-                    0
-            )
+    public static final ArmorMaterial MUSHROOM_HELM_ARMOR_MATERIAL = new ArmorMaterial(
+            33,
+            makeDefense(
+                    0, 0, 0, 3, 0
+            ),
+            3,
+            SoundEvents.ARMOR_EQUIP_DIAMOND,
+            3.0F,
+            0.0F,
+            ModTags.REPAIRS_MUSHROOM_HELM,
+            ModEquipmentAssets.MUSHROOM_HELM
     );
 
     // MARK: Spider T-Shirt
 
-    public static final Holder<ArmorMaterial> SPIDER_T_SHIRT_ARMOR_MATERIAL = ARMOR_MATERIALS.register(
-            "spider_t_shirt",
-            () -> new ArmorMaterial(
-                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                        map.put(ArmorItem.Type.CHESTPLATE, 8);
-                    }),
-                    33,
-                    SoundEvents.ARMOR_EQUIP_DIAMOND,
-                    () -> Ingredient.of(Tags.Items.INGOTS_IRON),
-                    List.of(
-                            new ArmorMaterial.Layer(
-                                    ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "spider_t_shirt")
-                            )
-                    ),
-                    3,
-                    0
-            )
+    public static final ArmorMaterial SPIDER_T_SHIRT_ARMOR_MATERIAL = new ArmorMaterial(
+            33,
+            makeDefense(
+                    0, 0, 8, 0, 0
+            ),
+            3,
+            SoundEvents.ARMOR_EQUIP_DIAMOND,
+            3.0F,
+            0.0F,
+            ModTags.REPAIRS_SPIDER_T_SHIRT,
+            ModEquipmentAssets.SPIDER_T_SHIRT
     );
 
     // MARK: Water Striders
 
-    public static final Holder<ArmorMaterial> WATER_STRIDERS_ARMOR_MATERIAL = ARMOR_MATERIALS.register(
-            "water_striders",
-            () -> new ArmorMaterial(
-                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                        map.put(ArmorItem.Type.BOOTS, 3);
-                    }),
-                    33,
-                    SoundEvents.ARMOR_EQUIP_DIAMOND,
-                    () -> Ingredient.of(Tags.Items.INGOTS_IRON),
-                    List.of(
-                            new ArmorMaterial.Layer(
-                                    ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "striders")
-                            )
-                    ),
-                    3,
-                    0
-            )
+    public static final ArmorMaterial WATER_STRIDERS_ARMOR_MATERIAL = new ArmorMaterial(
+            33,
+            makeDefense(
+                    3, 0, 0, 0, 0
+            ),
+            3,
+            SoundEvents.ARMOR_EQUIP_DIAMOND,
+            3.0F,
+            0.0F,
+            ModTags.REPAIRS_WATER_STRIDERS,
+            ModEquipmentAssets.WATER_STRIDERS
     );
 
     // MARK: Jump Boots
 
-    public static final Holder<ArmorMaterial> JUMP_BOOTS_ARMOR_MATERIAL = ARMOR_MATERIALS.register(
-            "jump_boots",
-            () -> new ArmorMaterial(
-                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                        map.put(ArmorItem.Type.BOOTS, 3);
-                    }),
-                    33,
-                    SoundEvents.ARMOR_EQUIP_DIAMOND,
-                    () -> Ingredient.of(ModItems.ELASTIC_FIBER),
-                    List.of(
-                            new ArmorMaterial.Layer(
-                                    ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "jump_boots")
-                            )
-                    ),
-                    3,
-                    0
-            )
+    public static final ArmorMaterial JUMP_BOOTS_ARMOR_MATERIAL = new ArmorMaterial(
+            33,
+            makeDefense(
+                    3, 0, 0, 0, 0
+            ),
+            3,
+            SoundEvents.ARMOR_EQUIP_DIAMOND,
+            3.0F,
+            0.0F,
+            ModTags.REPAIRS_JUMP_BOOTS,
+            ModEquipmentAssets.JUMP_BOOTS
     );
 
     // MARK: Sprint Leggings
 
-    public static final Holder<ArmorMaterial> CENTIPEDE_ARMOR_MATERIAL = ARMOR_MATERIALS.register(
-            "centipede",
-            () -> new ArmorMaterial(
-                    Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                        map.put(ArmorItem.Type.LEGGINGS, 6);
-                    }),
-                    33,
-                    SoundEvents.ARMOR_EQUIP_DIAMOND,
-                    () -> Ingredient.of(ModItems.REINFORCED_PLATE_EXO),
-                    List.of( new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "centipede"))
-                    ),
-                    3,
-                    0
-            )
+    public static final ArmorMaterial CENTIPEDE_ARMOR_MATERIAL = new ArmorMaterial(
+            33,
+            makeDefense(
+                    0, 6, 0, 0, 0
+            ),
+            3,
+            SoundEvents.ARMOR_EQUIP_DIAMOND,
+            3.0F,
+            0.0F,
+            ModTags.REPAIRS_SPRINT_LEGGINGS,
+            ModEquipmentAssets.SPRINT_LEGGINGS
     );
+
+    private static Map<ArmorType, Integer> makeDefense(int boots, int legs, int chest, int helm, int body) {
+        return Maps.newEnumMap(
+                Map.of(ArmorType.BOOTS, boots, ArmorType.LEGGINGS, legs, ArmorType.CHESTPLATE, chest, ArmorType.HELMET, helm, ArmorType.BODY, body)
+        );
+    }
 }

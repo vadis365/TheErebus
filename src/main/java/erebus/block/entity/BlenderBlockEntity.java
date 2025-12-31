@@ -5,14 +5,13 @@ import erebus.recipes.smoothie.SmoothieRecipe;
 import erebus.recipes.smoothie.SmoothieRecipeInput;
 import erebus.registries.ModCustomRecipes;
 import erebus.registries.blocks.ModBlockEntities;
-import erebus.registries.data.FluidContents;
 import erebus.registries.data.ModDataComponents;
-import erebus.utils.NamedFluidTank;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -216,11 +215,11 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
     }
 
     @Override
-    protected void applyImplicitComponents(@Nonnull DataComponentInput componentInput) {
-        super.applyImplicitComponents(componentInput);
+    protected void applyImplicitComponents(@Nonnull DataComponentGetter getter) {
+        super.applyImplicitComponents(getter);
 
         for (NamedFluidTank tank : tanks) {
-            tank.setFluid(componentInput.getOrDefault(ModDataComponents.FLUID, FluidContents.EMPTY).get());
+            tank.setFluid(getter.getOrDefault(ModDataComponents.FLUID, FluidContents.EMPTY).get());
         }
     }
 

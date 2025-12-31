@@ -2,6 +2,7 @@ package erebus.registries;
 
 import erebus.Erebus;
 import erebus.registries.blocks.providers.FluidBlocks;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
