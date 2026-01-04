@@ -5,14 +5,9 @@ import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.CompletableFuture;
 
 import static net.minecraft.data.recipes.RecipeCategory.COMBAT;
 
@@ -21,13 +16,12 @@ import static net.minecraft.data.recipes.RecipeCategory.COMBAT;
  */
 public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
 
-    public ShapedArmorRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> registries) {
-        super(packOutput, registries);
+    public ShapedArmorRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
+        super(registries, output);
     }
 
     @Override
-    public void buildRecipes(@NotNull RecipeOutput output) {
-        this.output = output;
+    public void buildRecipes() {
         addJadeArmorRecipes();
         addExoskeletonArmorRecipes();
         addReinforcedExoskeletonArmorRecipes();
@@ -67,7 +61,7 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
     private void addSpecialArmorRecipes() {
         surround(ModItems.COMPOUND_EYES, AmberBlocks.AMBER, ModItems.COMPOUND_LENS);
 
-        ShapedRecipeBuilder.shaped(COMBAT, ModItems.COMPOUND_GOGGLES)
+        shaped(COMBAT, ModItems.COMPOUND_GOGGLES)
                 .pattern("EEE")
                 .pattern("LEL")
                 .define('E', ModItems.PLATE_EXO)
@@ -75,7 +69,7 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_compound_lens", has(ModItems.COMPOUND_LENS))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(COMBAT, ModItems.REIN_COMPOUND_GOGGLES)
+        shaped(COMBAT, ModItems.REIN_COMPOUND_GOGGLES)
                 .pattern("RRR")
                 .pattern("RGR")
                 .define('R', ModItems.REINFORCED_PLATE_EXO)
@@ -83,7 +77,7 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_compound_goggles", has(ModItems.COMPOUND_GOGGLES))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(COMBAT, ModItems.JUMP_BOOTS)
+        shaped(COMBAT, ModItems.JUMP_BOOTS)
                 .pattern("W W")
                 .pattern("FBF")
                 .pattern("F F")
@@ -97,7 +91,7 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
 
         surround(ModItems.BIO_VELOCITY, ModItems.REIN_EXOSKELETON_LEGGINGS, ModItems.SPRINT_LEGGINGS);
 
-        ShapedRecipeBuilder.shaped(COMBAT, ModItems.GLIDER_CHESTPLATE)
+        shaped(COMBAT, ModItems.GLIDER_CHESTPLATE)
                 .pattern("WCW")
                 .define('W', ModItems.GLIDER_WING)
                 .define('C', ModItems.REIN_EXOSKELETON_CHESTPLATE)
@@ -105,7 +99,7 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_rein_exo_chest", has(ModItems.REIN_EXOSKELETON_CHESTPLATE))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(COMBAT, ModItems.GLIDER_CHESTPLATE_POWERED)
+        shaped(COMBAT, ModItems.GLIDER_CHESTPLATE_POWERED)
                 .pattern("W W")
                 .pattern("FGF")
                 .pattern(" V ")
@@ -121,7 +115,7 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
 
         surround(ModItems.WATER_REPELLENT, ModItems.REIN_EXOSKELETON_BOOTS, ModItems.WATER_STRIDERS);
 
-        ShapedRecipeBuilder.shaped(COMBAT, ModItems.MUSHROOM_HELMET)
+        shaped(COMBAT, ModItems.MUSHROOM_HELMET)
                 .pattern("HHH")
                 .pattern("HPH")
                 .define('H', ModItems.HIDE_SHROOM)
@@ -136,7 +130,7 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
         leggings(WoodBlocks.PLANKS_BAMBOO, ModItems.BAMBOO_LEGGINGS);
         boots(WoodBlocks.PLANKS_BAMBOO, ModItems.BAMBOO_BOOTS);
 
-        ShapedRecipeBuilder.shaped(COMBAT, ModItems.BAMBOO_SHIELD)
+        shaped(COMBAT, ModItems.BAMBOO_SHIELD)
                 .pattern("BIB")
                 .pattern("BBB")
                 .pattern(" B ")

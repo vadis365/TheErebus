@@ -10,7 +10,7 @@ import java.util.Map;
 public class ModArmorMaterials {
 
     // MARK: Jade Armor Material
-    public static final ArmorMaterial JADE_ARMOR_MATERIAL = new ArmorMaterial(
+    public static final ArmorMaterial JADE = new ArmorMaterial(
             25,
             makeDefense(
                     3, 5, 7, 2, 4
@@ -24,7 +24,7 @@ public class ModArmorMaterials {
     );
 
     // MARK: Exoskeleton Armor Material
-    public static final ArmorMaterial EXOSKELETON_ARMOR_MATERIAL = new ArmorMaterial(
+    public static final ArmorMaterial EXOSKELETON = new ArmorMaterial(
             25,
             makeDefense(
                     2, 2, 3, 2, 4
@@ -38,7 +38,7 @@ public class ModArmorMaterials {
     );
 
     // MARK: Reinforced Exoskeleton Armor Material
-    public static final ArmorMaterial REIN_EXOSKELETON_ARMOR_MATERIAL = new ArmorMaterial(
+    public static final ArmorMaterial REIN_EXOSKELETON = new ArmorMaterial(
             25,
             makeDefense(
                     3, 6, 8, 3, 4
@@ -52,7 +52,7 @@ public class ModArmorMaterials {
     );
 
     // MARK: Rhino Armor Material
-    public static final ArmorMaterial RHINO_ARMOR_MATERIAL = new ArmorMaterial(
+    public static final ArmorMaterial RHINO = new ArmorMaterial(
             25,
             makeDefense(
                     3, 5, 7, 2, 4
@@ -66,7 +66,7 @@ public class ModArmorMaterials {
     );
 
     // MARK: Bamboo Armor Material
-    public static final ArmorMaterial BAMBOO_ARMOR_MATERIAL = new ArmorMaterial(
+    public static final ArmorMaterial BAMBOO = new ArmorMaterial(
             15,
             makeDefense(
                     2, 3, 4, 2, 4
@@ -81,7 +81,7 @@ public class ModArmorMaterials {
 
     // MARK: Reinforced Compound Goggles
 
-    public static final ArmorMaterial REIN_COMPOUND_GOGGLES_ARMOR_MATERIAL = new ArmorMaterial(
+    public static final ArmorMaterial REIN_COMPOUND_GOGGLES = new ArmorMaterial(
             33,
             makeDefense(
                     0, 0, 0, 3, 0
@@ -96,7 +96,7 @@ public class ModArmorMaterials {
 
     // MARK: Compound Goggles
 
-    public static final ArmorMaterial GOGGLES_ARMOR_MATERIAL = new ArmorMaterial(
+    public static final ArmorMaterial GOGGLES = new ArmorMaterial(
             33,
             makeDefense(
                     0, 0, 0, 3, 0
@@ -111,7 +111,7 @@ public class ModArmorMaterials {
 
     // MARK: Mushroom Helm
 
-    public static final ArmorMaterial MUSHROOM_HELM_ARMOR_MATERIAL = new ArmorMaterial(
+    public static final ArmorMaterial MUSHROOM_HELM = new ArmorMaterial(
             33,
             makeDefense(
                     0, 0, 0, 3, 0
@@ -126,7 +126,7 @@ public class ModArmorMaterials {
 
     // MARK: Spider T-Shirt
 
-    public static final ArmorMaterial SPIDER_T_SHIRT_ARMOR_MATERIAL = new ArmorMaterial(
+    public static final ArmorMaterial SPIDER_T_SHIRT = new ArmorMaterial(
             33,
             makeDefense(
                     0, 0, 8, 0, 0
@@ -141,7 +141,7 @@ public class ModArmorMaterials {
 
     // MARK: Water Striders
 
-    public static final ArmorMaterial WATER_STRIDERS_ARMOR_MATERIAL = new ArmorMaterial(
+    public static final ArmorMaterial WATER_STRIDERS = new ArmorMaterial(
             33,
             makeDefense(
                     3, 0, 0, 0, 0
@@ -156,7 +156,7 @@ public class ModArmorMaterials {
 
     // MARK: Jump Boots
 
-    public static final ArmorMaterial JUMP_BOOTS_ARMOR_MATERIAL = new ArmorMaterial(
+    public static final ArmorMaterial JUMP_BOOTS = new ArmorMaterial(
             33,
             makeDefense(
                     3, 0, 0, 0, 0
@@ -171,7 +171,7 @@ public class ModArmorMaterials {
 
     // MARK: Sprint Leggings
 
-    public static final ArmorMaterial CENTIPEDE_ARMOR_MATERIAL = new ArmorMaterial(
+    public static final ArmorMaterial SPRINT = new ArmorMaterial(
             33,
             makeDefense(
                     0, 6, 0, 0, 0

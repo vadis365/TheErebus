@@ -1,57 +1,73 @@
 package erebus.registries.data;
 
-import erebus.registries.item.ModItems;
+import erebus.registries.data.tags.ModBlockTags;
+import erebus.registries.data.tags.ModItemTags;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.common.SimpleTier;
+import net.minecraft.world.item.ToolMaterial;
 
 public class ModToolMaterials {
 
-    // Old info
-    // Name, harvest level, max uses, efficiency, damage, enchanting
-
-    public static final Tier JADE_TIER = new SimpleTier(
-            BlockTags.INCORRECT_FOR_IRON_TOOL,
-            863, 10.0F, 2.0F, 18,
-            () -> Ingredient.of(ModItems.JADE)
+    public static final ToolMaterial JADE = new ToolMaterial(
+            ModBlockTags.INCORRECT_FOR_JADE_TOOL,
+            863,
+            10.0F,
+            2.0F,
+            18,
+            ModItemTags.JADE_TOOL_MATERIALS
     );
 
-    public static final Tier JADE_PAXEL_TIER = new SimpleTier(
+    public static final ToolMaterial JADE_PAXEL_TIER = new ToolMaterial(
             BlockTags.INCORRECT_FOR_IRON_TOOL,
-            1079, 8.0F, 4.0F, 14,
-            () -> Ingredient.of(ModItems.JADE)
+            1079,
+            8.0F,
+            4.0F,
+            14,
+            ModItemTags.JADE_TOOL_MATERIALS
     );
 
-    public static final Tier WASP_SWORD = new SimpleTier(
+    public static final ToolMaterial WASP_SWORD = new ToolMaterial(
             BlockTags.INCORRECT_FOR_IRON_TOOL,
-            863, 1.0F, 4.0F, 18,
-            () -> Ingredient.of(ModItems.WASP_STING)
+            863,
+            1.0F,
+            4.0F,
+            18,
+            ModItemTags.WASP_SWORD_TOOL_MATERIALS
     );
 
-    public static final Tier WASP_DAGGER = new SimpleTier(
+    public static final ToolMaterial WASP_DAGGER = new ToolMaterial(
             BlockTags.INCORRECT_FOR_IRON_TOOL,
-            1, 1, 0, 12,
-            () -> Ingredient.of(ModItems.WASP_STING)
+            1,
+            1,
+            0,
+            12,
+            ModItemTags.WASP_DAGGER_TOOL_MATERIALS
     );
 
-    public static final Tier ROLLED_NEWSPAPER = new SimpleTier(
+    public static final ToolMaterial ROLLED_NEWSPAPER = new ToolMaterial(
             BlockTags.INCORRECT_FOR_IRON_TOOL,
-            64, 1, 0, 0,
-            () -> Ingredient.of(Items.PAPER)
+            64,
+            1,
+            0,
+            0,
+            ModItemTags.ROLLED_NEWSPAPER_TOOL_MATERIALS
     );
 
-    public static final Tier SCORPION_PINCER =  new SimpleTier(
+    public static final ToolMaterial SCORPION_PINCER =  new ToolMaterial(
             BlockTags.INCORRECT_FOR_IRON_TOOL,
-            863, 1, 6, 18,
-            () -> Ingredient.of(Items.PAPER)
+            863,
+            1,
+            6,
+            18,
+            ModItemTags.SCORPION_PINCER_TOOL_MATERIALS
     );
 
-    public static final Tier QUAKE_HAMMER = new SimpleTier(
+    public static final ToolMaterial QUAKE_HAMMER = new ToolMaterial(
             BlockTags.INCORRECT_FOR_IRON_TOOL,
-            512, 1, 0, 18,
-            () -> Ingredient.of(ModItems.REINFORCED_PLATE_EXO.get())
+            512,
+            1,
+            0,
+            18,
+            ModItemTags.QUAKE_HAMMER_TOOL_MATERIALS
     );
 
     public static void init() {

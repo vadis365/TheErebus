@@ -9,20 +9,20 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 public class SlabBlocks extends ModBlockHelpers {
 
     // MARK: Slabs Wood
-    public static final DeferredBlock<SlabBlock> PLANKS_ASPER;
-    public static final DeferredBlock<SlabBlock> PLANKS_BAOBAB;
-    public static final DeferredBlock<SlabBlock> PLANKS_BALSAM;
-    public static final DeferredBlock<SlabBlock> PLANKS_BAMBOO;
-    public static final DeferredBlock<SlabBlock> PLANKS_CYPRESS;
-    public static final DeferredBlock<SlabBlock> PLANKS_EUCALYPTUS;
-    public static final DeferredBlock<SlabBlock> PLANKS_MAHOGANY;
-    public static final DeferredBlock<SlabBlock> PLANKS_MARSHWOOD;
-    public static final DeferredBlock<SlabBlock> PLANKS_MOSSBARK;
-    public static final DeferredBlock<SlabBlock> PLANKS_PETRIFIED;
-    public static final DeferredBlock<SlabBlock> PLANKS_ROTTEN;
-    public static final DeferredBlock<SlabBlock> PLANKS_SCORCHED;
-    public static final DeferredBlock<SlabBlock> PLANKS_VARNISHED;
-    public static final DeferredBlock<SlabBlock> PLANKS_WHITE;
+    public static final DeferredBlock<SlabBlock> ASPER;
+    public static final DeferredBlock<SlabBlock> BAOBAB;
+    public static final DeferredBlock<SlabBlock> BALSAM;
+    public static final DeferredBlock<SlabBlock> BAMBOO;
+    public static final DeferredBlock<SlabBlock> CYPRESS;
+    public static final DeferredBlock<SlabBlock> EUCALYPTUS;
+    public static final DeferredBlock<SlabBlock> MAHOGANY;
+    public static final DeferredBlock<SlabBlock> MARSHWOOD;
+    public static final DeferredBlock<SlabBlock> MOSSBARK;
+    public static final DeferredBlock<SlabBlock> PETRIFIED;
+    public static final DeferredBlock<SlabBlock> ROTTEN;
+    public static final DeferredBlock<SlabBlock> SCORCHED;
+    public static final DeferredBlock<SlabBlock> VARNISHED;
+    public static final DeferredBlock<SlabBlock> WHITE;
 
     // MARK: Slabs Stone
     public static final DeferredBlock<SlabBlock> AMBER;
@@ -41,20 +41,20 @@ public class SlabBlocks extends ModBlockHelpers {
     public static final DeferredBlock<SlabBlock> UMBERTILE_SMOOTH_SMALL;
 
     static {
-        PLANKS_ASPER = registerSlab("slab_planks_asper", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.WOOD));
-        PLANKS_BAOBAB = registerSlab("slab_planks_baobab", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_WHITE));
-        PLANKS_BALSAM = registerSlab("slab_planks_balsam", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_PINK));
-        PLANKS_BAMBOO = registerSlab("slab_planks_bamboo", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.SAND));
-        PLANKS_CYPRESS = registerSlab("slab_planks_cypress", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_WHITE));
-        PLANKS_EUCALYPTUS = registerSlab("slab_planks_eucalyptus", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_PINK));
-        PLANKS_MAHOGANY = registerSlab("slab_planks_mahogany", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.COLOR_BROWN));
-        PLANKS_MARSHWOOD = registerSlab("slab_planks_marshwood", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_GREEN));
-        PLANKS_MOSSBARK = registerSlab("slab_planks_mossbark", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.COLOR_BROWN));
-        PLANKS_PETRIFIED = registerSlab("slab_planks_petrified", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_BROWN));
-        PLANKS_ROTTEN = registerSlab("slab_planks_rotten", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.COLOR_BLACK));
-        PLANKS_SCORCHED = registerSlab("slab_planks_scorched", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.COLOR_BLACK));
-        PLANKS_VARNISHED = registerSlab("slab_planks_varnished", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.WOOD));
-        PLANKS_WHITE = registerSlab("slab_planks_white", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_WHITE));
+        ASPER = registerSlab("slab_planks_asper", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.WOOD));
+        BAOBAB = registerSlab("slab_planks_baobab", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_WHITE));
+        BALSAM = registerSlab("slab_planks_balsam", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_PINK));
+        BAMBOO = registerSlab("slab_planks_bamboo", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.SAND));
+        CYPRESS = registerSlab("slab_planks_cypress", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_WHITE));
+        EUCALYPTUS = registerSlab("slab_planks_eucalyptus", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_PINK));
+        MAHOGANY = registerSlab("slab_planks_mahogany", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.COLOR_BROWN));
+        MARSHWOOD = registerSlab("slab_planks_marshwood", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_GREEN));
+        MOSSBARK = registerSlab("slab_planks_mossbark", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.COLOR_BROWN));
+        PETRIFIED = registerSlab("slab_planks_petrified", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_BROWN));
+        ROTTEN = registerSlab("slab_planks_rotten", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.COLOR_BLACK));
+        SCORCHED = registerSlab("slab_planks_scorched", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.COLOR_BLACK));
+        VARNISHED = registerSlab("slab_planks_varnished", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.WOOD));
+        WHITE = registerSlab("slab_planks_white", SlabBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_WHITE));
 
         AMBER = registerSlab("slab_amber", SlabBlockProperties.SLAB_AMBER);
         AMBER_BRICKS = registerSlab("slab_amber_bricks", SlabBlockProperties.SLAB_AMBER_BRICKS);

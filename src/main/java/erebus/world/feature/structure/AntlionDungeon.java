@@ -1,7 +1,6 @@
 package erebus.world.feature.structure;
 
 import com.mojang.serialization.MapCodec;
-import erebus.registries.data.ModTags;
 import erebus.registries.world.structure.ModStructureTypes;
 import erebus.world.feature.structure.pieces.LocustShrinePiece;
 import net.minecraft.core.registries.Registries;

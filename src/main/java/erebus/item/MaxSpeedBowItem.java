@@ -9,9 +9,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.EventHooks;
 import org.jetbrains.annotations.NotNull;
@@ -24,8 +22,10 @@ public class MaxSpeedBowItem extends ProjectileWeaponItem {
 
     public static final float DRAW_SPEED = 20.0F;
 
-    public MaxSpeedBowItem(Properties properties) {
-        super(properties);
+    public MaxSpeedBowItem() {
+        super(new Item.Properties()
+                .durability(500)
+                .rarity(Rarity.RARE));
     }
 
     @Override

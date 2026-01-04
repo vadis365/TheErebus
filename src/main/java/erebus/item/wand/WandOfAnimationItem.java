@@ -13,27 +13,26 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 public class WandOfAnimationItem extends Item {
-	public WandOfAnimationItem(Properties properties) {
-		super(properties);
+	public WandOfAnimationItem() {
+		super(new Item.Properties()
+				.stacksTo(1)
+				.durability(64)
+				.setNoCombineRepair()
+		);
 	}
-	
+
+	@NotNull
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	   public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, List<Component> tooltip, @NotNull TooltipFlag flagIn) {
-		tooltip.add(Component.translatable("tooltip.erebus.wand_of_animation"));
-		}
+	public Component getHighlightTip(@NotNull ItemStack item, @NotNull Component displayName) {
+		return Component.translatable("tooltip.erebus.wand_of_animation");
+	}
 
 
 	@Override
@@ -47,7 +46,7 @@ public class WandOfAnimationItem extends Item {
 			return InteractionResult.FAIL;
 		else {
 			BlockState state = level.getBlockState(pos);
-			if (!level.isClientSide && !state.isAir() && canAnimate(state, level, pos)) {
+			if (!level.isClientSide() && !state.isAir() && canAnimate(state, level, pos)) {
 				AnimatedBlock entity = new AnimatedBlock(ModEntities.ANIMATED_BLOCK.get(), level);
 				if (state.getBlock() == Blocks.CHEST) {
 					System.out.println("Spawn Chester");

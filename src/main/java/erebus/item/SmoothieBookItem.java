@@ -6,14 +6,16 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.network.Filterable;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.WritableBookItem;
 import net.minecraft.world.item.component.WrittenBookContent;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +23,15 @@ import java.util.Optional;
 
 public class SmoothieBookItem extends WritableBookItem {
 
-    public SmoothieBookItem(Properties properties) {
-        super(properties);
+    public SmoothieBookItem() {
+        super(new Item.Properties());
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
+    public @NonNull InteractionResult onItemUseFirst(@NonNull ItemStack stack, UseOnContext context) {
+        Level level = context.getLevel();
+        Player player = context.getPlayer();
+        InteractionHand hand = context.getHand();
         ItemStack book = new ItemStack(Items.WRITTEN_BOOK);
         List<Filterable<Component>> pages = new ArrayList<>();
 
@@ -48,11 +53,11 @@ public class SmoothieBookItem extends WritableBookItem {
         book.set(DataComponents.WRITTEN_BOOK_CONTENT, content);
         player.openItemGui(book, hand);
         player.awardStat(Stats.ITEM_USED.get(this));
-        return InteractionResultHolder.sidedSuccess(book, level.isClientSide());
+        return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
     }
 
     @Override
-    public boolean isFoil(@NotNull ItemStack stack) {
+    public boolean isFoil(@NonNull ItemStack stack) {
         return true;
     }
 }

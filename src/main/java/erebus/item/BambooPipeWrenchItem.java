@@ -6,7 +6,6 @@ import erebus.block.bamboo.BambooPipeExtract;
 import erebus.block.entity.BambooExtenderBlockEntity;
 import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -29,9 +28,11 @@ import net.neoforged.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static jdk.jpackage.internal.WixFragmentBuilder.WixNamespace.Util;
+
 public class BambooPipeWrenchItem extends Item {
-	public BambooPipeWrenchItem(Properties properties) {
-		super(properties);
+	public BambooPipeWrenchItem() {
+		super(new Item.Properties().stacksTo(1));
 	}
 
 	@Override

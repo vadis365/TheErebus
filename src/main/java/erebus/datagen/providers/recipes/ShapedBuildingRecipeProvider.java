@@ -3,17 +3,12 @@ package erebus.datagen.providers.recipes;
 import erebus.registries.blocks.providers.*;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.CompletableFuture;
 
 import static net.minecraft.data.recipes.RecipeCategory.BUILDING_BLOCKS;
 
@@ -22,12 +17,12 @@ import static net.minecraft.data.recipes.RecipeCategory.BUILDING_BLOCKS;
  */
 public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
 
-    public ShapedBuildingRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> registries) {
-        super(packOutput, registries);
+    public ShapedBuildingRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
+        super(registries, output);
     }
 
     @Override
-    public void buildRecipes(@NotNull RecipeOutput output) {
+    public void buildRecipes() {
         this.output = output;
         addBasicBlockRecipes();
         addSlabRecipes();
@@ -58,14 +53,14 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
         threeByThree(Blocks.RED_MUSHROOM, Blocks.RED_MUSHROOM_BLOCK);
         threeByThree(Blocks.BROWN_MUSHROOM, Blocks.BROWN_MUSHROOM_BLOCK);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, UmberstoneBlocks.UMBERSTONE_PILLAR, 2)
+        shaped(BUILDING_BLOCKS, UmberstoneBlocks.UMBERSTONE_PILLAR, 2)
                 .pattern("#")
                 .pattern("#")
                 .define('#', UmberstoneBlocks.UMBERSTONE)
                 .unlockedBy("has_umberstone", has(UmberstoneBlocks.UMBERSTONE))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, OtherBlocks.UMBER_FURNACE)
+        shaped(RecipeCategory.DECORATIONS, OtherBlocks.UMBER_FURNACE)
                 .pattern("SSS")
                 .pattern("SBS")
                 .pattern("SSS")
@@ -74,7 +69,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_umbercobble", has(UmberstoneBlocks.UMBERCOBBLE))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, UmberstoneBlocks.MIR_BRICKS, 4)
+        shaped(BUILDING_BLOCKS, UmberstoneBlocks.MIR_BRICKS, 4)
                 .pattern("AB")
                 .pattern("BA")
                 .define('A', UmberstoneBlocks.MUD_BRICKS)
@@ -82,7 +77,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_mud_bricks", has(UmberstoneBlocks.MUD_BRICKS))
                 .save(output, "mir_bricks_bulk");
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, UmberstoneBlocks.MIR_BRICKS, 4)
+        shaped(BUILDING_BLOCKS, UmberstoneBlocks.MIR_BRICKS, 4)
                 .pattern("AB")
                 .pattern("BA")
                 .define('A', ModItems.MUD_BRICK)
@@ -92,20 +87,20 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addSlabRecipes() {
-        slab(WoodBlocks.PLANKS_BAOBAB, SlabBlocks.PLANKS_BAOBAB);
-        slab(WoodBlocks.PLANKS_EUCALYPTUS, SlabBlocks.PLANKS_EUCALYPTUS);
-        slab(WoodBlocks.PLANKS_MAHOGANY, SlabBlocks.PLANKS_MAHOGANY);
-        slab(WoodBlocks.PLANKS_MOSSBARK, SlabBlocks.PLANKS_MOSSBARK);
-        slab(WoodBlocks.PLANKS_ASPER, SlabBlocks.PLANKS_ASPER);
-        slab(WoodBlocks.PLANKS_CYPRESS, SlabBlocks.PLANKS_CYPRESS);
-        slab(WoodBlocks.PLANKS_BALSAM, SlabBlocks.PLANKS_BALSAM);
-        slab(WoodBlocks.PLANKS_WHITE, SlabBlocks.PLANKS_WHITE);
-        slab(WoodBlocks.PLANKS_BAMBOO, SlabBlocks.PLANKS_BAMBOO);
-        slab(WoodBlocks.PLANKS_ROTTEN, SlabBlocks.PLANKS_ROTTEN);
-        slab(WoodBlocks.PLANKS_MARSHWOOD, SlabBlocks.PLANKS_MARSHWOOD);
-        slab(WoodBlocks.PLANKS_SCORCHED, SlabBlocks.PLANKS_SCORCHED);
-        slab(WoodBlocks.PLANKS_VARNISHED, SlabBlocks.PLANKS_VARNISHED);
-        slab(WoodBlocks.PLANKS_PETRIFIED, SlabBlocks.PLANKS_PETRIFIED);
+        slab(WoodBlocks.PLANKS_BAOBAB, SlabBlocks.BAOBAB);
+        slab(WoodBlocks.PLANKS_EUCALYPTUS, SlabBlocks.EUCALYPTUS);
+        slab(WoodBlocks.PLANKS_MAHOGANY, SlabBlocks.MAHOGANY);
+        slab(WoodBlocks.PLANKS_MOSSBARK, SlabBlocks.MOSSBARK);
+        slab(WoodBlocks.PLANKS_ASPER, SlabBlocks.ASPER);
+        slab(WoodBlocks.PLANKS_CYPRESS, SlabBlocks.CYPRESS);
+        slab(WoodBlocks.PLANKS_BALSAM, SlabBlocks.BALSAM);
+        slab(WoodBlocks.PLANKS_WHITE, SlabBlocks.WHITE);
+        slab(WoodBlocks.PLANKS_BAMBOO, SlabBlocks.BAMBOO);
+        slab(WoodBlocks.PLANKS_ROTTEN, SlabBlocks.ROTTEN);
+        slab(WoodBlocks.PLANKS_MARSHWOOD, SlabBlocks.MARSHWOOD);
+        slab(WoodBlocks.PLANKS_SCORCHED, SlabBlocks.SCORCHED);
+        slab(WoodBlocks.PLANKS_VARNISHED, SlabBlocks.VARNISHED);
+        slab(WoodBlocks.PLANKS_PETRIFIED, SlabBlocks.PETRIFIED);
 
         slab(UmberstoneBlocks.UMBERSTONE, SlabBlocks.UMBERSTONE);
         slab(UmberstoneBlocks.UMBERCOBBLE, SlabBlocks.UMBERCOBBLE);
@@ -215,7 +210,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
     private void addSpecialBlockRecipes() {
         surround(WoodBlocks.PLANKS_PETRIFIED, Items.GOLD_INGOT, ChestBlocks.CHEST_PETRIFIED);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.BAMBOO_BRIDGE, 3)
+        shaped(BUILDING_BLOCKS, OtherBlocks.BAMBOO_BRIDGE, 3)
                 .pattern("SSS")
                 .pattern("B B")
                 .pattern("LLL")
@@ -225,7 +220,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_bamboo_ladder", has(OtherBlocks.BAMBOO_LADDER))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.BAMBOO_LADDER, 3)
+        shaped(BUILDING_BLOCKS, OtherBlocks.BAMBOO_LADDER, 3)
                 .pattern("BBB")
                 .pattern("S S")
                 .pattern("BBB")
@@ -234,7 +229,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_bamboo", has(ModItems.BAMBOO))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.BAMBOO_NERD_POLE, 4)
+        shaped(BUILDING_BLOCKS, OtherBlocks.BAMBOO_NERD_POLE, 4)
                 .pattern("S")
                 .pattern("B")
                 .pattern("B")
@@ -243,7 +238,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_bamboo", has(ModItems.BAMBOO))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.SILO_SUPPORTS)
+        shaped(BUILDING_BLOCKS, OtherBlocks.SILO_SUPPORTS)
                 .pattern("SSS")
                 .pattern("F F")
                 .pattern("F F")
@@ -252,14 +247,14 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_fence", has(ItemTags.FENCES))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.SILO_ROOF)
+        shaped(BUILDING_BLOCKS, OtherBlocks.SILO_ROOF)
                 .pattern(" P ")
                 .pattern("PPP")
                 .define('P', WoodBlocks.PLANKS_VARNISHED)
                 .unlockedBy("has_planks_varnished", has(WoodBlocks.PLANKS_VARNISHED))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OtherBlocks.TEMPLE_PILLAR)
+        shaped(BUILDING_BLOCKS, OtherBlocks.TEMPLE_PILLAR)
                 .pattern("T")
                 .pattern("T")
                 .define('T', OtherBlocks.TEMPLE_TILE)

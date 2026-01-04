@@ -2,7 +2,6 @@ package erebus.entity;
 
 import erebus.client.particle.ClientParticles;
 import erebus.registries.blocks.providers.PlantBlocks;
-import erebus.registries.data.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;

@@ -6,7 +6,6 @@ import erebus.registries.ModFluids;
 import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -17,17 +16,14 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.CompletableFuture;
 
 public class CustomRecipeProvider extends ErebusRecipeProvider {
 
-	public CustomRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> registries) {
-		super(packOutput, registries);
+	public CustomRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
+		super(registries, output);
 	}
 
-	public void buildRecipes(@NotNull RecipeOutput output) {
+	public void buildRecipes() {
 		OfferingAltarRecipeBuilder.assembly(ModItems.GAEAN_GEM)
 			.requires(Items.DIAMOND)
 			.requires(Items.EMERALD)

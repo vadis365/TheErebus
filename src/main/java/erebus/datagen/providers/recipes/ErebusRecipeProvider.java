@@ -1,19 +1,17 @@
 package erebus.datagen.providers.recipes;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SmokingRecipe;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.conditions.IConditionBuilder;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.CompletableFuture;
 
 import static net.minecraft.data.recipes.RecipeCategory.*;
 
@@ -21,38 +19,36 @@ import static net.minecraft.data.recipes.RecipeCategory.*;
  * Base class for all Erebus recipe providers.
  * Contains common utility methods used by multiple recipe providers.
  */
-public abstract class ErebusRecipeProvider extends RecipeProvider implements IConditionBuilder {
+public abstract class ErebusRecipeProvider extends RecipeProvider {
     protected RecipeOutput output;
 
-    public ErebusRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> registries) {
-        super(packOutput, registries);
+    protected ErebusRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
+        super(registries, output);
+        this.output = output;
     }
 
     /**
      * Generate recipes for this provider.
      */
-    public void buildRecipes(@NotNull RecipeOutput output) {
-        this.output = output;
-    }
 
     // Utility methods shared across recipe providers
 
     protected void smelting(ItemLike ingredient, ItemLike result) {
-        smeltingResultFromBase(output, ingredient, result);
+        smeltingResultFromBase(result, ingredient);
     }
 
     protected void cook(ItemLike ingredient, ItemLike result) {
-        simpleCookingRecipe(output, "smoking", RecipeSerializer.SMOKING_RECIPE, SmokingRecipe::new, 100, ingredient, result, 0.35F);
-        simpleCookingRecipe(output, "campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, CampfireCookingRecipe::new, 600, ingredient, result, 0.35F);
+        simpleCookingRecipe("smoking", RecipeSerializer.SMOKING_RECIPE, SmokingRecipe::new, 100, ingredient, result, 0.35F);
+        simpleCookingRecipe("campfire_cooking", RecipeSerializer.CAMPFIRE_COOKING_RECIPE, CampfireCookingRecipe::new, 600, ingredient, result, 0.35F);
     }
 
     protected void ore(ItemLike ore, ItemLike ingot, String group) {
-        oreSmelting(output, List.of(ore), MISC, ingot, 0.25F, 200, group);
-        oreBlasting(output, List.of(ore), MISC, ingot, 0.25F, 100, group);
+        oreSmelting(List.of(ore), MISC, ingot, 0.25F, 200, group);
+        oreBlasting(List.of(ore), MISC, ingot, 0.25F, 100, group);
     }
 
     protected void shapeless(RecipeCategory category, ItemLike ingredient, ItemLike result, int amount) {
-        ShapelessRecipeBuilder.shapeless(category, result, amount)
+        shapeless(category, result.asItem().getDefaultInstance().copyWithCount(amount))
                 .requires(ingredient)
                 .unlockedBy("has_%s".formatted(ingredient.asItem().getDescriptionId().toLowerCase(Locale.ROOT)), has(ingredient))
                 .save(output);
@@ -99,7 +95,7 @@ public abstract class ErebusRecipeProvider extends RecipeProvider implements ICo
     }
 
     protected void twoByTwo(ItemLike material, ItemLike result, int amount) {
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, amount)
+        shaped(BUILDING_BLOCKS, result, amount)
                 .pattern("##")
                 .pattern("##")
                 .define('#', material)
@@ -113,7 +109,7 @@ public abstract class ErebusRecipeProvider extends RecipeProvider implements ICo
 
     @SuppressWarnings("SameParameterValue")
     protected void threeByThree(ItemLike material, ItemLike result, int amount) {
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, amount)
+        shaped(BUILDING_BLOCKS, result, amount)
                 .pattern("###")
                 .pattern("###")
                 .pattern("###")
@@ -123,7 +119,7 @@ public abstract class ErebusRecipeProvider extends RecipeProvider implements ICo
     }
 
     protected void helmet(ItemLike material, ItemLike result) {
-        ShapedRecipeBuilder.shaped(COMBAT, result)
+        shaped(COMBAT, result)
                 .pattern("MMM")
                 .pattern("M M")
                 .define('M', material)
@@ -132,7 +128,7 @@ public abstract class ErebusRecipeProvider extends RecipeProvider implements ICo
     }
 
     protected void chestplate(ItemLike material, ItemLike result) {
-        ShapedRecipeBuilder.shaped(COMBAT, result)
+        shaped(COMBAT, result)
                 .pattern("M M")
                 .pattern("MMM")
                 .pattern("MMM")
@@ -142,7 +138,7 @@ public abstract class ErebusRecipeProvider extends RecipeProvider implements ICo
     }
 
     protected void leggings(ItemLike material, ItemLike result) {
-        ShapedRecipeBuilder.shaped(COMBAT, result)
+        shaped(COMBAT, result)
                 .pattern("MMM")
                 .pattern("M M")
                 .pattern("M M")
@@ -152,7 +148,7 @@ public abstract class ErebusRecipeProvider extends RecipeProvider implements ICo
     }
 
     protected void boots(ItemLike material, ItemLike result) {
-        ShapedRecipeBuilder.shaped(COMBAT, result)
+        shaped(COMBAT, result)
                 .pattern("M M")
                 .pattern("M M")
                 .define('M', material)
@@ -161,7 +157,7 @@ public abstract class ErebusRecipeProvider extends RecipeProvider implements ICo
     }
 
     protected void surround(ItemLike outer, ItemLike inner, ItemLike result) {
-        ShapedRecipeBuilder.shaped(MISC, result)
+        shaped(MISC, result)
                 .pattern("OOO")
                 .pattern("OIO")
                 .pattern("OOO")

@@ -12,27 +12,20 @@ import erebus.item.shield.ErebusShieldItem;
 import erebus.item.shield.type.*;
 import erebus.item.wand.WandOfAnimationItem;
 import erebus.item.wand.WandOfPreservationItem;
-import erebus.network.data.DeathCompassData;
 import erebus.registries.ModFluids;
 import erebus.registries.blocks.providers.AmberBlocks;
 import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.data.ModArmorMaterials;
-import erebus.registries.data.ModDataComponents;
 import erebus.registries.data.ModToolMaterials;
 import erebus.registries.helpers.ModItemHelpers;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-import java.util.Map;
 
 public class ModItems extends ModItemHelpers {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Erebus.MODID);
@@ -57,7 +50,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> REINFORCED_PLATE_EXO = registerItem("reinforced_plate_exo");
     public static final DeferredItem<Item> GLIDER_WING = registerItem("glider_wing");
     public static final DeferredItem<Item> SCORPION_PINCER = registerItem("scorpion_pincer");
-    public static final DeferredItem<Item> CAMO_POWDER = registerItem("camo_powder", () -> new CamoPowderItem(new Item.Properties()));
+    public static final DeferredItem<Item> CAMO_POWDER = registerItem("camo_powder", CamoPowderItem::new);
     public static final DeferredItem<Item> NECTAR = registerItem("nectar");
     public static final DeferredItem<Item> HONEY_DRIP = registerItem("honey_drip");
     public static final DeferredItem<Item> POISON_GLAND = registerItem("poison_gland");
@@ -93,11 +86,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> UMBERGOLEM_HEAD = registerItem("umbergolem_head");
     public static final DeferredItem<Item> UMBERGOLEM_CLAW = registerItem("umbergolem_claw");
     public static final DeferredItem<Item> UMBERGOLEM_LEGS = registerItem("umbergolem_legs");
-    public static final DeferredItem<Item> JADE_BERRIES = registerItem("jade_berries", () -> new ItemNameBlockItem(PlantBlocks.JADE_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
-            .nutrition(1)
-            .saturationModifier(0.1F)
-            .build()
-    )));
+    public static final DeferredItem<Item> JADE_BERRIES = registerItem("jade_berries", () -> new BlockItem(PlantBlocks.JADE_BERRY_BUSH.get(), new Item.Properties().food(ModFoods.JADE_BERRIES)));
     public static final DeferredItem<Item> BOGMAW_ROOT = registerItem("bogmaw_root");
     public static final DeferredItem<Item> HYDROFUGE = registerItem("hydrofuge");
     public static final DeferredItem<Item> WATER_REPELLENT = registerItem("water_repellent");
@@ -110,104 +99,96 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> PLATE_ZOMBIE_ANT = registerItem("plate_zombie_ant");
     public static final DeferredItem<Item> STAG_BEETLE_MANDIBLES = registerItem("stag_beetle_mandibles");
     public static final DeferredItem<Item> TERPSISHROOM = registerItem("terpsishroom");
-    public static final DeferredItem<BambooPipeWrenchItem> BAMBOO_PIPE_WRENCH = ITEMS.register("bamboo_pipe_wrench", () -> new BambooPipeWrenchItem(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> BAMBOO_PIPE_WRENCH = registerItem("bamboo_pipe_wrench", BambooPipeWrenchItem::new);
     public static final DeferredItem<Item> TEMPLE_ROCK = registerItem("temple_rock");
 
     // MARK: Food
-    public static final DeferredItem<Item> BEETLE_LARVA_RAW = registerFoodItem("beetle_larva_raw", 1, 0.1F, MobEffects.HUNGER, 300, 2);
-    public static final DeferredItem<Item> BEETLE_LARVA_COOKED = registerFoodItem("beetle_larva_cooked", 3, 0.4F);
-    public static final DeferredItem<Item> GRASSHOPPER_LEG_RAW = registerFoodItem("grasshopper_leg_raw", 1, 0.1F);
-    public static final DeferredItem<Item> GRASSHOPPER_LEG_COOKED = registerFoodItem("grasshopper_leg_cooked", 4, 0.4F);
-    public static final DeferredItem<Item> TARANTULA_LEG_RAW = registerFoodItem("tarantula_leg_raw", 1, 0.1F);
-    public static final DeferredItem<Item> TARANTULA_LEG_COOKED = registerFoodItem("tarantula_leg_cooked", 5, 0.4F);
-    public static final DeferredItem<Item> BAMBOO_SOUP = registerFoodItem("bamboo_soup", 3, 0.2F, Items.BOWL);
-    public static final DeferredItem<Item> MELONADE = registerFoodItem("melonade", 3, 0.2F, SMOOTHIE_GLASS);
-    public static final DeferredItem<Item> MELONADE_SPARKLY = registerFoodItem("melonade_sparkly", 5, 0.4F, MobEffects.REGENERATION, 200, 0, SMOOTHIE_GLASS);
-    public static final DeferredItem<Item> LARVAE_ON_STICK = registerFoodItem("larvae_on_stick", 9, 0.5F, MobEffects.HUNGER, 100, 1, Items.STICK);
-    public static final DeferredItem<Item> HONEY_SANDWICH = registerFoodItem("honey_sandwich", 6, 0.5F);
-    public static final DeferredItem<Item> DARK_FRUIT = registerFoodItem("dark_fruit", 2, 0.3F);
-    public static final DeferredItem<Item> TITAN_CHOP_RAW = registerFoodItem("titan_chop_raw", 4, 0.3F);
-    public static final DeferredItem<Item> TITAN_CHOP_COOKED = registerFoodItem("titan_chop_cooked", 8, 0.8F, MobEffects.DAMAGE_BOOST, 600, 1);
-    public static final DeferredItem<Item> SWAMP_BERRIES = ITEMS.register("swamp_berries", () -> new ItemNameBlockItem(PlantBlocks.SWAMP_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
-            .nutrition(1)
-            .saturationModifier(0.1F)
-            .build()
-    )));
-    public static final DeferredItem<Item> CABBAGE = registerFoodItem("cabbage", 1, 0.3F);
-    public static final DeferredItem<Item> TITAN_STEW_COOKED = registerFoodItem("titan_stew_cooked", 20, 4.0F, STEW_POT);
-    public static final DeferredItem<Item> PRICKLY_PEAR_RAW = registerFoodItem("prickly_pear_raw", 3, 0.3F, MobEffects.HARM, 1, 1);
-    public static final DeferredItem<Item> PRICKLY_PEAR_COOKED = registerFoodItem("prickly_pear_cooked", 4, 0.5F, MobEffects.HARM, 1, 1);
-    public static final DeferredItem<Item> DARK_FRUIT_PIE = registerFoodItem("dark_fruit_pie", 8, 0.3F);
+    public static final DeferredItem<Item> BEETLE_LARVA_RAW = registerFoodItem("beetle_larva_raw", ModFoods.BEETLE_LARVA_RAW, ModConsumables.BEETLE_LARVA_RAW);
+    public static final DeferredItem<Item> BEETLE_LARVA_COOKED = registerFoodItem("beetle_larva_cooked", ModFoods.BEETLE_LARVA_COOKED, ModConsumables.food().build());
+    public static final DeferredItem<Item> GRASSHOPPER_LEG_RAW = registerFoodItem("grasshopper_leg_raw", ModFoods.GRASSHOPPER_LEG_RAW, ModConsumables.food().build());
+    public static final DeferredItem<Item> GRASSHOPPER_LEG_COOKED = registerFoodItem("grasshopper_leg_cooked", ModFoods.GRASSHOPPER_LEG_COOKED, ModConsumables.food().build());
+    public static final DeferredItem<Item> TARANTULA_LEG_RAW = registerFoodItem("tarantula_leg_raw", ModFoods.TARANTULA_LEG_RAW, ModConsumables.food().build());
+    public static final DeferredItem<Item> TARANTULA_LEG_COOKED = registerFoodItem("tarantula_leg_cooked", ModFoods.TARANTULA_LEG_COOKED, ModConsumables.food().build());
+    public static final DeferredItem<Item> BAMBOO_SOUP = registerFoodItem("bamboo_soup", ModFoods.BAMBOO_SOUP, ModConsumables.food().build(), Items.BOWL);
+    public static final DeferredItem<Item> MELONADE = registerFoodItem("melonade", ModFoods.MELONADE, ModConsumables.smoothie().build(), SMOOTHIE_GLASS);
+    public static final DeferredItem<Item> MELONADE_SPARKLY = registerFoodItem("melonade_sparkly", ModFoods.MELONADE_SPARKLY, ModConsumables.MELONADE_SPARKLY, SMOOTHIE_GLASS);
+    public static final DeferredItem<Item> LARVAE_ON_STICK = registerFoodItem("larvae_on_stick", ModFoods.LARVAE_ON_STICK, ModConsumables.food().build(), Items.STICK);
+    public static final DeferredItem<Item> HONEY_SANDWICH = registerFoodItem("honey_sandwich", ModFoods.HONEY_SANDWICH, ModConsumables.food().build());
+    public static final DeferredItem<Item> DARK_FRUIT = registerFoodItem("dark_fruit", ModFoods.DARK_FRUIT, ModConsumables.food().build());
+    public static final DeferredItem<Item> TITAN_CHOP_RAW = registerFoodItem("titan_chop_raw", ModFoods.TITAN_CHOP_RAW, ModConsumables.food().build());
+    public static final DeferredItem<Item> TITAN_CHOP_COOKED = registerFoodItem("titan_chop_cooked", ModFoods.TITAN_CHOP_COOKED, ModConsumables.TITAN_CHOP_COOKED);
+    public static final DeferredItem<Item> SWAMP_BERRIES = ITEMS.register("swamp_berries", () -> new BlockItem(PlantBlocks.SWAMP_BERRY_BUSH.get(), new Item.Properties().food(ModFoods.SWAMP_BERRIES)));
+    public static final DeferredItem<Item> CABBAGE = registerFoodItem("cabbage", ModFoods.CABBAGE, ModConsumables.food().build());
+    public static final DeferredItem<Item> TITAN_STEW_COOKED = registerFoodItem("titan_stew_cooked", ModFoods.TITAN_STEW_COOKED, ModConsumables.food().build(), STEW_POT);
+    public static final DeferredItem<Item> PRICKLY_PEAR_RAW = registerFoodItem("prickly_pear_raw", ModFoods.PRICKLY_PEAR_RAW, ModConsumables.PRICKLY_PEAR);
+    public static final DeferredItem<Item> PRICKLY_PEAR_COOKED = registerFoodItem("prickly_pear_cooked", ModFoods.PRICKLY_PEAR_COOKED, ModConsumables.PRICKLY_PEAR);
+    public static final DeferredItem<Item> DARK_FRUIT_PIE = registerFoodItem("dark_fruit_pie", ModFoods.DARK_FRUIT_PIE, ModConsumables.food().build());
 
     // MARK: Smoothies
-    public static final DeferredItem<Item> GREEN_TEA_GRASSHOPPER = registerSmoothieItem("green_tea_grasshopper", 5, 0.4F, MobEffects.JUMP, 1000, 2);
-    public static final DeferredItem<Item> MONEY_HONEY = registerSmoothieItem("money_honey", 3, 0.2F, MobEffects.REGENERATION, 200, 2);
-    public static final DeferredItem<Item> NOTHING_IN_THE_MIDDLE = registerSmoothieItem("nothing_in_the_middle", 1, 0.0F, MobEffects.INVISIBILITY, 500, 1);
-    public static final DeferredItem<Item> GREEN_GIANT = registerSmoothieItem("green_giant", 2, 0.1F);
-    public static final DeferredItem<Item> SEEDY_GOODNESS = registerSmoothieItem("seedy_goodness", 1, 1.1F, MobEffects.DIG_SPEED, 500, 1);
-    public static final DeferredItem<Item> GIVIN_ME_THE_BLUES = registerSmoothieItem("givin_me_the_blues", 3, 0.2F, MobEffects.MOVEMENT_SLOWDOWN, 500, 2);
-    public static final DeferredItem<Item> HOT_HOT_BABY = registerSmoothieItem("hot_hot_baby", 2, 0.1F, MobEffects.DAMAGE_BOOST, 1000, 1);
-    public static final DeferredItem<Item> DONT_MEDDLE_WITH_THE_NETTLE = registerSmoothieItem("dont_meddle_with_the_nettle", 2, 0.1F, MobEffects.DAMAGE_RESISTANCE, 1000, 1);
-    public static final DeferredItem<Item> LIQUID_GOLD = registerSmoothieItem("liquid_gold", 0, 0.0F, MobEffects.REGENERATION, 1000, 1);
-    public static final DeferredItem<Item> BRYUFS_BREW = registerBryufsBrew();
+    public static final DeferredItem<Item> GREEN_TEA_GRASSHOPPER = registerFoodItem("green_tea_grasshopper", ModFoods.GREEN_TEA_GRASSHOPPER, ModConsumables.GREEN_TEA_GRASSHOPPER);
+    public static final DeferredItem<Item> MONEY_HONEY = registerFoodItem("money_honey", ModFoods.MONEY_HONEY, ModConsumables.MONEY_HONEY);
+    public static final DeferredItem<Item> NOTHING_IN_THE_MIDDLE = registerFoodItem("nothing_in_the_middle", ModFoods.NOTHING_IN_THE_MIDDLE, ModConsumables.NOTHING_IN_THE_MIDDLE);
+    public static final DeferredItem<Item> GREEN_GIANT = registerFoodItem("green_giant", ModFoods.GREEN_GIANT, ModConsumables.GREEN_GIANT);
+    public static final DeferredItem<Item> SEEDY_GOODNESS = registerFoodItem("seedy_goodness", ModFoods.SEEDY_GOODNESS, ModConsumables.SEEDY_GOODNESS);
+    public static final DeferredItem<Item> GIVIN_ME_THE_BLUES = registerFoodItem("givin_me_the_blues", ModFoods.GIVIN_ME_THE_BLUES, ModConsumables.GIVIN_ME_THE_BLUES);
+    public static final DeferredItem<Item> HOT_HOT_BABY = registerFoodItem("hot_hot_baby", ModFoods.HOT_HOT_BABY, ModConsumables.HOT_HOT_BABY);
+    public static final DeferredItem<Item> DONT_MEDDLE_WITH_THE_NETTLE = registerFoodItem("dont_meddle_with_the_nettle", ModFoods.DONT_MEDDLE_WITH_THE_NETTLE, ModConsumables.DONT_MEDDLE_WITH_THE_NETTLE);
+    public static final DeferredItem<Item> LIQUID_GOLD = registerFoodItem("liquid_gold", ModFoods.LIQUID_GOLD, ModConsumables.LIQUID_GOLD);
+    public static final DeferredItem<Item> BRYUFS_BREW = registerFoodItem("bryufs_brew", ModFoods.BRYUFS_BREW, ModConsumables.BRYUFS_BREW);
 
     // MARK: Bamboo Armor
-    public static final DeferredItem<Item> BAMBOO_HELMET;
-    public static final DeferredItem<Item> BAMBOO_CHESTPLATE;
-    public static final DeferredItem<Item> BAMBOO_LEGGINGS;
-    public static final DeferredItem<Item> BAMBOO_BOOTS;
+    public static final DeferredItem<Item> BAMBOO_HELMET = registerArmor("bamboo_helmet", ModArmorMaterials.BAMBOO, ArmorType.HELMET);
+    public static final DeferredItem<Item> BAMBOO_CHESTPLATE = registerArmor("bamboo_chest", ModArmorMaterials.BAMBOO, ArmorType.CHESTPLATE);
+    public static final DeferredItem<Item> BAMBOO_LEGGINGS = registerArmor("bamboo_legs", ModArmorMaterials.BAMBOO, ArmorType.LEGGINGS);
+    public static final DeferredItem<Item> BAMBOO_BOOTS = registerArmor("bamboo_boots", ModArmorMaterials.BAMBOO, ArmorType.BOOTS);
 
     // MARK: Exoskeleton Armor
-    public static final DeferredItem<Item> EXOSKELETON_HELMET;
-    public static final DeferredItem<Item> EXOSKELETON_CHESTPLATE;
-    public static final DeferredItem<Item> EXOSKELETON_LEGGINGS;
-    public static final DeferredItem<Item> EXOSKELETON_BOOTS;
+    public static final DeferredItem<Item> EXOSKELETON_HELMET = registerArmor("exoskeleton_helmet", ModArmorMaterials.EXOSKELETON, ArmorType.HELMET);
+    public static final DeferredItem<Item> EXOSKELETON_CHESTPLATE = registerArmor("exoskeleton_chest", ModArmorMaterials.EXOSKELETON, ArmorType.CHESTPLATE);
+    public static final DeferredItem<Item> EXOSKELETON_LEGGINGS = registerArmor("exoskeleton_legs", ModArmorMaterials.EXOSKELETON, ArmorType.LEGGINGS);
+    public static final DeferredItem<Item> EXOSKELETON_BOOTS = registerArmor("exoskeleton_boots", ModArmorMaterials.EXOSKELETON, ArmorType.BOOTS);
 
     // MARK: Reinforced Exoskeleton Armor
-    public static final DeferredItem<Item> REIN_EXOSKELETON_HELMET;
-    public static final DeferredItem<Item> REIN_EXOSKELETON_CHESTPLATE;
-    public static final DeferredItem<Item> REIN_EXOSKELETON_LEGGINGS;
-    public static final DeferredItem<Item> REIN_EXOSKELETON_BOOTS;
+    public static final DeferredItem<Item> REIN_EXOSKELETON_HELMET = registerArmor("rein_exoskeleton_helmet", ModArmorMaterials.REIN_EXOSKELETON, ArmorType.HELMET);
+    public static final DeferredItem<Item> REIN_EXOSKELETON_CHESTPLATE = registerArmor("rein_exoskeleton_chest", ModArmorMaterials.REIN_EXOSKELETON, ArmorType.CHESTPLATE);
+    public static final DeferredItem<Item> REIN_EXOSKELETON_LEGGINGS = registerArmor("rein_exoskeleton_legs", ModArmorMaterials.REIN_EXOSKELETON, ArmorType.LEGGINGS);
+    public static final DeferredItem<Item> REIN_EXOSKELETON_BOOTS = registerArmor("rein_exoskeleton_boots", ModArmorMaterials.REIN_EXOSKELETON, ArmorType.BOOTS);
 
     // MARK: Rhino Exoskeleton Armor
-    public static final DeferredItem<Item> RHINO_EXOSKELETON_HELMET;
-    public static final DeferredItem<Item> RHINO_EXOSKELETON_CHESTPLATE;
-    public static final DeferredItem<Item> RHINO_EXOSKELETON_LEGGINGS;
-    public static final DeferredItem<Item> RHINO_EXOSKELETON_BOOTS;
+    public static final DeferredItem<Item> RHINO_EXOSKELETON_HELMET = registerArmor("rhino_exoskeleton_helmet", ModArmorMaterials.RHINO, ArmorType.HELMET)  ;
+    public static final DeferredItem<Item> RHINO_EXOSKELETON_CHESTPLATE = registerArmor("rhino_exoskeleton_chest", ModArmorMaterials.RHINO, ArmorType.CHESTPLATE);
+    public static final DeferredItem<Item> RHINO_EXOSKELETON_LEGGINGS = registerArmor("rhino_exoskeleton_legs", ModArmorMaterials.RHINO, ArmorType.LEGGINGS);
+    public static final DeferredItem<Item> RHINO_EXOSKELETON_BOOTS = registerArmor("rhino_exoskeleton_boots", ModArmorMaterials.RHINO, ArmorType.BOOTS);
 
     // MARK: Jade Armor
-    public static final DeferredItem<Item> JADE_HELMET;
-    public static final DeferredItem<Item> JADE_CHESTPLATE;
-    public static final DeferredItem<Item> JADE_LEGGINGS;
-    public static final DeferredItem<Item> JADE_BOOTS;
+    public static final DeferredItem<Item> JADE_HELMET = registerArmor("jade_helmet", ModArmorMaterials.JADE, ArmorType.HELMET);
+    public static final DeferredItem<Item> JADE_CHESTPLATE = registerArmor("jade_chest", ModArmorMaterials.JADE, ArmorType.CHESTPLATE);
+    public static final DeferredItem<Item> JADE_LEGGINGS = registerArmor("jade_legs", ModArmorMaterials.JADE, ArmorType.LEGGINGS);
+    public static final DeferredItem<Item> JADE_BOOTS = registerArmor("jade_boots", ModArmorMaterials.JADE, ArmorType.BOOTS);
 
     // MARK: Jade Tools
-    public static final DeferredItem<Item> JADE_SWORD = registerSword("jade_sword", ModToolMaterials.JADE_TIER, 3, -2.4F);
-    public static final DeferredItem<Item> JADE_PICKAXE = registerPickaxe("jade_pickaxe", ModToolMaterials.JADE_TIER, 1, -2.8F);
-    public static final DeferredItem<AxeItem> JADE_AXE = registerAxe("jade_axe", ModToolMaterials.JADE_TIER, 5, -3.0F);
-    public static final DeferredItem<ShovelItem> JADE_SHOVEL = registerShovel("jade_shovel", ModToolMaterials.JADE_TIER, 1.5F, -3.0F);
+    public static final DeferredItem<Item> JADE_SWORD = registerSword("jade_sword", ModToolMaterials.JADE, 3, -2.4F);
+    public static final DeferredItem<Item> JADE_PICKAXE = registerPickaxe("jade_pickaxe", ModToolMaterials.JADE, 1, -2.8F);
+    public static final DeferredItem<AxeItem> JADE_AXE = registerAxe("jade_axe", ModToolMaterials.JADE, 5, -3.0F);
+    public static final DeferredItem<ShovelItem> JADE_SHOVEL = registerShovel("jade_shovel", ModToolMaterials.JADE, 1.5F, -3.0F);
     public static final DeferredItem<PaxelItem> JADE_PAXEL = registerPaxel("jade_paxel", ModToolMaterials.JADE_PAXEL_TIER,1.0F, -2.8F);
-    public static final DeferredItem<HoeItem> JADE_HOE = registerHoe("jade_hoe", ModToolMaterials.JADE_TIER,-3.0F, 0.0F);
+    public static final DeferredItem<HoeItem> JADE_HOE = registerHoe("jade_hoe", ModToolMaterials.JADE,-3.0F, 0.0F);
 
     // MARK: Misc Armor & Weapons
-    public static final DeferredItem<Item> REIN_COMPOUND_GOGGLES = registerItem("rein_compound_goggles", () -> new CompoundGoggles(ModArmorMaterials.REIN_COMPOUND_GOGGLES_ARMOR_MATERIAL, ArmorItem.Type.HELMET,  new Item.Properties().stacksTo(1).durability(256)));
-    public static final DeferredItem<Item> COMPOUND_GOGGLES = registerItem("compound_goggles", () -> new CompoundGoggles(ModArmorMaterials.GOGGLES_ARMOR_MATERIAL, ArmorItem.Type.HELMET,  new Item.Properties().stacksTo(1).durability(256)));
-    public static final DeferredItem<Item> MUSHROOM_HELMET = registerHelmet("mushroom_helmet", ModArmorMaterials.MUSHROOM_HELM_ARMOR_MATERIAL);
-    public static final DeferredItem<Item> GLIDER_CHESTPLATE = registerChestplate("glider_chestplate", ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
-    public static final DeferredItem<Item> GLIDER_CHESTPLATE_POWERED = registerChestplate("glider_chestplate_powered",ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
-    public static final DeferredItem<Item> SPIDER_T_SHIRT = registerChestplate("spider_t_shirt", ModArmorMaterials.SPIDER_T_SHIRT_ARMOR_MATERIAL);
-    public static final DeferredItem<Item> SPRINT_LEGGINGS = registerItem("sprint_leggings", () -> new SprintLeggings
-            (ModArmorMaterials.CENTIPEDE_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,  new Item.Properties().stacksTo(1).durability(256)));
-    public static final DeferredItem<Item> JUMP_BOOTS = registerItem("jump_boots", () -> new JumpBoots(ModArmorMaterials.JUMP_BOOTS_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,  new Item.Properties().stacksTo(1).durability(256)));
-    public static final DeferredItem<Item> WATER_STRIDERS = registerBoots("water_striders", ModArmorMaterials.WATER_STRIDERS_ARMOR_MATERIAL);
+    public static final DeferredItem<Item> REIN_COMPOUND_GOGGLES = registerItem("rein_compound_goggles", () -> new CompoundGoggles(ModArmorMaterials.REIN_COMPOUND_GOGGLES));
+    public static final DeferredItem<Item> COMPOUND_GOGGLES = registerItem("compound_goggles", () -> new CompoundGoggles(ModArmorMaterials.GOGGLES));
+    public static final DeferredItem<Item> MUSHROOM_HELMET = registerArmor("mushroom_helmet", ModArmorMaterials.MUSHROOM_HELM, ArmorType.HELMET);
+    public static final DeferredItem<Item> GLIDER_CHESTPLATE = registerArmor("glider_chestplate", ModArmorMaterials.REIN_EXOSKELETON, ArmorType.CHESTPLATE);
+    public static final DeferredItem<Item> GLIDER_CHESTPLATE_POWERED = registerArmor("glider_chestplate_powered",ModArmorMaterials.REIN_EXOSKELETON, ArmorType.CHESTPLATE);
+    public static final DeferredItem<Item> SPIDER_T_SHIRT = registerArmor("spider_t_shirt", ModArmorMaterials.SPIDER_T_SHIRT, ArmorType.CHESTPLATE);
+    public static final DeferredItem<Item> SPRINT_LEGGINGS = registerItem("sprint_leggings", SprintLeggings::new);
+    public static final DeferredItem<Item> JUMP_BOOTS = registerItem("jump_boots", JumpBoots::new);
+    public static final DeferredItem<Item> WATER_STRIDERS = registerArmor("water_striders", ModArmorMaterials.WATER_STRIDERS, ArmorType.BOOTS);
     public static final DeferredItem<Item> ENHANCED_SCORPION_PINCER = registerItem("enhanced_scorpion_pincer");
-    public static final DeferredItem<Item> QUAKE_HAMMER = registerItem("quake_hammer", () -> new QuakeHammerItem(ModToolMaterials.QUAKE_HAMMER, new Item.Properties().stacksTo(1).attributes(SwordItem.createAttributes(ModToolMaterials.QUAKE_HAMMER, 10, -1))));
+    public static final DeferredItem<Item> QUAKE_HAMMER = registerItem("quake_hammer", QuakeHammerItem::new);
     public static final DeferredItem<Item> WEB_SLINGER = registerItem("web_slinger");
     public static final DeferredItem<Item> WEB_SLINGER_WITHER = registerItem("web_slinger_wither");
-    public static final DeferredItem<Item> MAX_SPEED_BOW = registerItem("max_speed_bow", () -> new MaxSpeedBowItem(new Item.Properties()
-            .durability(500)
-            .rarity(Rarity.RARE)
-    ));
+    public static final DeferredItem<Item> MAX_SPEED_BOW = registerItem("max_speed_bow", MaxSpeedBowItem::new);
 
     // MARK: Shields
     public static final DeferredItem<ErebusShieldItem> BAMBOO_SHIELD = registerShield("bamboo_shield", 256, new BambooShieldType());
@@ -217,42 +198,26 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<ErebusShieldItem> RHINO_EXOSKELETON_SHIELD = registerShield("rhino_exoskeleton_shield", 1056, new RhinoShieldType());
 
     // MARK: Misc
-    public static final DeferredItem<Item> WAND_OF_ANIMATION = registerItem("wand_of_animation", () -> new WandOfAnimationItem(new Item.Properties().stacksTo(1).durability(64).setNoRepair()));
-    public static final DeferredItem<Item> WAND_OF_PRESERVATION = registerItem("wand_of_preservation", () -> new WandOfPreservationItem(new Item.Properties().stacksTo(1).durability(64).setNoRepair()));
+    public static final DeferredItem<Item> WAND_OF_ANIMATION = registerItem("wand_of_animation", WandOfAnimationItem::new);
+    public static final DeferredItem<Item> WAND_OF_PRESERVATION = registerItem("wand_of_preservation", WandOfPreservationItem::new);
     public static final DeferredItem<Item> PORTAL_ACTIVATOR = registerItem("portal_activator");
     public static final DeferredItem<Item> WOODLOUSE_BALL = registerItem("woodlouse_ball");
     public static final DeferredItem<Item> NECTAR_COLLECTOR = registerItem("nectar_collector", () -> new Item((new Item.Properties().stacksTo(1).durability(16))));
-    public static final DeferredItem<Item> ANT_TAMING_AMULET = registerItem("ant_taming_amulet", () -> new AntTamingAmulet(new Item.Properties().stacksTo(1).durability(16)));
-    public static final DeferredItem<Item> BEE_TAMING_AMULET = registerItem("bee_taming_amulet", () -> new BeeTamingAmulet(new Item.Properties().stacksTo(1).durability(16)));
-    public static final DeferredItem<Item> WASP_SWORD = registerItem("wasp_sword", () -> new WaspSwordItem(ModToolMaterials.WASP_SWORD, new Item.Properties()
-            .stacksTo(1)
-            .sword(ModToolMaterials.WASP_SWORD, 6, -1)
-    )));
+    public static final DeferredItem<Item> ANT_TAMING_AMULET = registerItem("ant_taming_amulet", AntTamingAmulet::new);
+    public static final DeferredItem<Item> BEE_TAMING_AMULET = registerItem("bee_taming_amulet", BeeTamingAmulet::new);
+    public static final DeferredItem<Item> WASP_SWORD = registerItem("wasp_sword", WaspSwordItem::new);
     public static final DeferredItem<Item> WASP_DAGGER = registerItem("wasp_dagger");
     public static final DeferredItem<Item> ANTI_VENOM_BOTTLE = registerItem("anti_venom_bottle");
-    public static final DeferredItem<Item> DEATH_COMPASS = registerItem("death_compass", () -> new Item(new Item.Properties()) {
-        @Override
-        public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
-            DeathCompassData data = stack.getComponents().get(ModDataComponents.DEATH_COMPASS.get());
-            if (data != null) {
-                components.add(
-                        Component
-                                .translatable("tooltip.death_compass.pos")
-                                .append("%d, %d, %d".formatted(data.x(), data.y(), data.z()))
-                                .withStyle(ChatFormatting.YELLOW)
-                );
-            }
-        }
-    });
+    public static final DeferredItem<Item> DEATH_COMPASS = registerItem("death_compass", DeathCompass::new);
     public static final DeferredItem<Item> ROLLED_NEWSPAPER = registerItem("rolled_newspaper");
-    public static final DeferredItem<Item> BAMBUCKET = registerBucket("bambucket");
+    public static final DeferredItem<Item> BAMBUCKET = registerItem("bambucket", () -> new BucketItem(Fluids.EMPTY, new Item.Properties()));
     public static final DeferredItem<Item> HOMING_BEECON = registerItem("homing_beecon");
     public static final DeferredItem<Item> HOMING_BEECON_ADVANCED = registerItem("homing_beecon_advanced");
-    public static final DeferredItem<Item> SPRAY_CAN = registerItem("spray_can", () -> new InsectRepellentItem(new Item.Properties()));
+    public static final DeferredItem<Item> SPRAY_CAN = registerItem("spray_can", InsectRepellentItem::new);
     public static final DeferredItem<Item> WHETSTONE = registerItem("whetstone");
     public static final DeferredItem<Item> COMPOST = registerItem("compost");
-    public static final DeferredItem<Item> PLANTICIDE = registerItem("planticide", () -> new PlanticideItem(new Item.Properties().stacksTo(64)));
-    public static final DeferredItem<Item> SMOOTHIE_BOOK = registerItem("smoothie_book", () -> new SmoothieBookItem(new Item.Properties()));
+    public static final DeferredItem<Item> PLANTICIDE = registerItem("planticide", PlanticideItem::new);
+    public static final DeferredItem<Item> SMOOTHIE_BOOK = registerItem("smoothie_book", SmoothieBookItem::new);
     public static final DeferredItem<Item> HORN_OF_SUMMONING = registerItem("horn_of_summoning");
 
     // MARK: Idols
@@ -270,9 +235,9 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> EREBUS_MAP_FILLED = registerItem("erebus_map_filled");
 
     // MARK: Plants
-    public static final DeferredItem<Item> TURNIP = registerItem("turnip", () -> new ItemNameBlockItem(PlantBlocks.CROP_TURNIP.get(), new Item.Properties()));
-    public static final DeferredItem<Item> CABBAGE_SEEDS = registerItem("cabbage_seeds", () -> new ItemNameBlockItem(PlantBlocks.CROP_CABBAGE.get(), new Item.Properties()));
-    public static final DeferredItem<Item> MANDRAKE_ROOT = registerItem("mandrake_root", () -> new ItemNameBlockItem(PlantBlocks.CROP_MANDRAKE.get(), new Item.Properties()));
+    public static final DeferredItem<Item> TURNIP = registerItem("turnip", () -> new BlockItem(PlantBlocks.CROP_TURNIP.get(), new Item.Properties()));
+    public static final DeferredItem<Item> CABBAGE_SEEDS = registerItem("cabbage_seeds", () -> new BlockItem(PlantBlocks.CROP_CABBAGE.get(), new Item.Properties()));
+    public static final DeferredItem<Item> MANDRAKE_ROOT = registerItem("mandrake_root", () -> new BlockItem(PlantBlocks.CROP_MANDRAKE.get(), new Item.Properties()));
     public static final DeferredItem<Item> SEED_BLACK = registerItem("seed_black");
     public static final DeferredItem<Item> SEED_RED = registerItem("seed_red");
     public static final DeferredItem<Item> SEED_BROWN = registerItem("seed_brown");
@@ -290,45 +255,13 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> SEED_RAINBOW = registerItem("seed_rainbow");
 
     public static final DeferredItem<Item> LIFE_BLOOD = registerItem("life_blood");
-    public static final DeferredItem<Item> HEART_BERRIES = registerItem("heart_berries", () -> new ItemNameBlockItem(PlantBlocks.HEART_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
+    public static final DeferredItem<Item> HEART_BERRIES = registerItem("heart_berries", () -> new BlockItem(PlantBlocks.HEART_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
             .nutrition(1)
             .saturationModifier(0.1F)
             .build()
     )));
     public static final DeferredItem<Item> STAG_HEART_RAW = registerItem("stag_heart_raw");
     public static final DeferredItem<Item> STAG_HEART_COOKED = registerItem("stag_heart_cooked");
-
-    static {
-        Map<String, DeferredItem<Item>> bambooSet = registerArmorSet("bamboo", ModArmorMaterials.BAMBOO_ARMOR_MATERIAL);
-        BAMBOO_HELMET = bambooSet.get("helm");
-        BAMBOO_CHESTPLATE = bambooSet.get("chest");
-        BAMBOO_LEGGINGS = bambooSet.get("legs");
-        BAMBOO_BOOTS = bambooSet.get("boots");
-
-        Map<String, DeferredItem<Item>> exoskeletonSet = registerArmorSet("exoskeleton", ModArmorMaterials.EXOSKELETON_ARMOR_MATERIAL);
-        EXOSKELETON_HELMET = exoskeletonSet.get("helm");
-        EXOSKELETON_CHESTPLATE = exoskeletonSet.get("chest");
-        EXOSKELETON_LEGGINGS = exoskeletonSet.get("legs");
-        EXOSKELETON_BOOTS = exoskeletonSet.get("boots");
-
-        Map<String, DeferredItem<Item>> reinSet = registerArmorSet("rein_exoskeleton", ModArmorMaterials.REIN_EXOSKELETON_ARMOR_MATERIAL);
-        REIN_EXOSKELETON_HELMET = reinSet.get("helm");
-        REIN_EXOSKELETON_CHESTPLATE = reinSet.get("chest");
-        REIN_EXOSKELETON_LEGGINGS = reinSet.get("legs");
-        REIN_EXOSKELETON_BOOTS = reinSet.get("boots");
-
-        Map<String, DeferredItem<Item>> rhinoSet = registerArmorSet("rhino_exoskeleton", ModArmorMaterials.RHINO_ARMOR_MATERIAL);
-        RHINO_EXOSKELETON_HELMET = rhinoSet.get("helm");
-        RHINO_EXOSKELETON_CHESTPLATE = rhinoSet.get("chest");
-        RHINO_EXOSKELETON_LEGGINGS = rhinoSet.get("legs");
-        RHINO_EXOSKELETON_BOOTS = rhinoSet.get("boots");
-
-        Map<String, DeferredItem<Item>> jadeSet = registerArmorSet("jade", ModArmorMaterials.JADE_ARMOR_MATERIAL);
-        JADE_HELMET = jadeSet.get("helm");
-        JADE_CHESTPLATE = jadeSet.get("chest");
-        JADE_LEGGINGS = jadeSet.get("legs");
-        JADE_BOOTS = jadeSet.get("boots");
-    }
 
     // buckets
     public static final DeferredItem<BucketItem> FORMIC_ACID_BUCKET = ITEMS.register("formic_acid_bucket", () -> new BucketItem(ModFluids.FORMIC_ACID_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));

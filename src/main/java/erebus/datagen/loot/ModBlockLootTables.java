@@ -134,20 +134,20 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(WoodBlocks.PLANKS_PETRIFIED);
 
         // MARK: Slabs Wood
-        dropSelf(SlabBlocks.PLANKS_BAOBAB);
-        dropSelf(SlabBlocks.PLANKS_EUCALYPTUS);
-        dropSelf(SlabBlocks.PLANKS_MAHOGANY);
-        dropSelf(SlabBlocks.PLANKS_MOSSBARK);
-        dropSelf(SlabBlocks.PLANKS_ASPER);
-        dropSelf(SlabBlocks.PLANKS_CYPRESS);
-        dropSelf(SlabBlocks.PLANKS_BALSAM);
-        dropSelf(SlabBlocks.PLANKS_WHITE);
-        dropSelf(SlabBlocks.PLANKS_BAMBOO);
-        dropSelf(SlabBlocks.PLANKS_ROTTEN);
-        dropSelf(SlabBlocks.PLANKS_MARSHWOOD);
-        dropSelf(SlabBlocks.PLANKS_SCORCHED);
-        dropSelf(SlabBlocks.PLANKS_VARNISHED);
-        dropSelf(SlabBlocks.PLANKS_PETRIFIED);
+        dropSelf(SlabBlocks.BAOBAB);
+        dropSelf(SlabBlocks.EUCALYPTUS);
+        dropSelf(SlabBlocks.MAHOGANY);
+        dropSelf(SlabBlocks.MOSSBARK);
+        dropSelf(SlabBlocks.ASPER);
+        dropSelf(SlabBlocks.CYPRESS);
+        dropSelf(SlabBlocks.BALSAM);
+        dropSelf(SlabBlocks.WHITE);
+        dropSelf(SlabBlocks.BAMBOO);
+        dropSelf(SlabBlocks.ROTTEN);
+        dropSelf(SlabBlocks.MARSHWOOD);
+        dropSelf(SlabBlocks.SCORCHED);
+        dropSelf(SlabBlocks.VARNISHED);
+        dropSelf(SlabBlocks.PETRIFIED);
 
         // MARK: Slabs Stone
         dropSelf(SlabBlocks.UMBERSTONE);

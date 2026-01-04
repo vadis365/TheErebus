@@ -4,76 +4,59 @@ import erebus.network.data.QuakeHammerData;
 import erebus.network.data.QuakeHammerDataHolder;
 import erebus.registries.ModSounds;
 import erebus.registries.data.ModDataComponents;
-import erebus.registries.item.ModItems;
+import erebus.registries.data.ModToolMaterials;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import org.jspecify.annotations.NonNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
-public class QuakeHammerItem extends SwordItem {
+public class QuakeHammerItem extends Item {
 
-	public QuakeHammerItem(Tier tier, Item.Properties properties) {
-		 super(tier, properties.component(DataComponents.TOOL, createToolProperties()));
+	public QuakeHammerItem() {
+		super(new Item.Properties().sword(ModToolMaterials.QUAKE_HAMMER, 10, -1));
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void appendHoverText(ItemStack stack, @Nonnull TooltipContext context, @Nonnull List<Component> list, @Nonnull TooltipFlag flag) {
-		list.add(Component.translatable("tooltip.erebus.quake_hammer_1").withStyle(ChatFormatting.YELLOW));
-		list.add(Component.translatable("tooltip.erebus.quake_hammer_2").withStyle(ChatFormatting.YELLOW));
-	}
-
-	@Override
-	public boolean isValidRepairItem(ItemStack armour, ItemStack material) {
-		return material.getItem() == ModItems.REINFORCED_PLATE_EXO.get();
+	public @NonNull Component getHighlightTip(@NonNull ItemStack item, @NonNull Component displayName) {
+		return Component.translatable("tooltip.erebus.quake_hammer_1").withStyle(ChatFormatting.YELLOW).append(Component.translatable("tooltip.erebus.quake_hammer_2").withStyle(ChatFormatting.YELLOW));
 	}
 
     @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        return true;
-    }
-
-    @Override
-    public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    public void postHurtEnemy(ItemStack stack, @NonNull LivingEntity target, @NonNull LivingEntity attacker) {
         stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
     }
 
     @Override
-    public int getUseDuration(ItemStack stack, LivingEntity entity) {
+    public int getUseDuration(@NonNull ItemStack stack, @NonNull LivingEntity entity) {
 		return 1000;
 	}
 
     // TODO - going to change this now to be something different - old stuff will be new stuff soon(tm)
-
 	@Override
-	 public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-		ItemStack stack = player.getItemInHand(usedHand);
+	public @NonNull InteractionResult onItemUseFirst(ItemStack stack, @NonNull UseOnContext context) {
 		int charge = (!stack.has(ModDataComponents.QUAKE_HAMMER) ? 0 : stack.get(ModDataComponents.QUAKE_HAMMER).charge());
 		if (charge < 25)
 			stack.set(ModDataComponents.QUAKE_HAMMER, new QuakeHammerData(charge + 1));
-		return InteractionResultHolder.pass(player.getItemInHand(usedHand));
+		return InteractionResult.PASS;
 	}
 
 	@Override
-	public InteractionResult useOn(UseOnContext context) {
+	public @NonNull InteractionResult useOn(UseOnContext context) {
 		Level level = context.getLevel();
 		Player player = context.getPlayer();
 		InteractionHand hand = context.getHand();
@@ -84,7 +67,7 @@ public class QuakeHammerItem extends SwordItem {
 			return InteractionResult.FAIL;
 		else {
 			BlockState state = level.getBlockState(pos);
-			if (!level.isClientSide && !state.isAir()) {
+			if (!level.isClientSide() && !state.isAir()) {
 				int charge = (!stack.has(ModDataComponents.QUAKE_HAMMER) ? 0 : stack.get(ModDataComponents.QUAKE_HAMMER).charge());
 				if (player.isCrouching() && charge > 0) {
 					// Erebus.NETWORK_WRAPPER.sendToAll(new PacketParticle(ParticleType.HAMMER_BLAM,

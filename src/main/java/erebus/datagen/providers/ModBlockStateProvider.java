@@ -4,29 +4,28 @@ import erebus.Erebus;
 import erebus.block.CandleHoneyTreatBlock;
 import erebus.block.HoneyTreatBlock;
 import erebus.block.plants.ModCropBlock;
+import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.function.Supplier;
 
-public abstract class ModBlockStateProvider extends BlockStateProvider {
+public abstract class ModBlockStateProvider extends ModelProvider {
 
-    public ModBlockStateProvider(PackOutput output, ExistingFileHelper helper) {
-        super(output, Erebus.MODID, helper);
+    public ModBlockStateProvider() {
+        super();
     }
 
-    protected ResourceLocation texture(String name) {
+    protected Identifier texture(String name) {
         return modLoc("block/%s".formatted(name));
     }
 

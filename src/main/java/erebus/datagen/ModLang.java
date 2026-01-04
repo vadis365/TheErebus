@@ -2,7 +2,6 @@ package erebus.datagen;
 
 import erebus.datagen.providers.ModLangProvider;
 import erebus.registries.blocks.providers.*;
-import erebus.registries.data.ModTags;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
 import net.minecraft.data.PackOutput;
@@ -352,20 +351,20 @@ public class ModLang extends ModLangProvider {
         addBlock(WoodBlocks.PLANKS_PETRIFIED, "Petrified Wood Planks");
 
         // MARK: Slabs Wood
-        addBlock(SlabBlocks.PLANKS_BAOBAB, "Baobab Slab");
-        addBlock(SlabBlocks.PLANKS_EUCALYPTUS, "Eucalyptus Slab");
-        addBlock(SlabBlocks.PLANKS_MAHOGANY, "Mahogany Slab");
-        addBlock(SlabBlocks.PLANKS_MOSSBARK, "Mossbark Slab");
-        addBlock(SlabBlocks.PLANKS_ASPER, "Asper Slab");
-        addBlock(SlabBlocks.PLANKS_CYPRESS, "Cypress Slab");
-        addBlock(SlabBlocks.PLANKS_BALSAM, "Balsam Slab");
-        addBlock(SlabBlocks.PLANKS_WHITE, "White Slab");
-        addBlock(SlabBlocks.PLANKS_BAMBOO, "Bamboo Slab");
-        addBlock(SlabBlocks.PLANKS_ROTTEN, "Rotten Slab");
-        addBlock(SlabBlocks.PLANKS_MARSHWOOD, "Marshwood Slab");
-        addBlock(SlabBlocks.PLANKS_SCORCHED, "Scorched Slab");
-        addBlock(SlabBlocks.PLANKS_VARNISHED, "Varnished Slab");
-        addBlock(SlabBlocks.PLANKS_PETRIFIED, "Petrified Wood Slab");
+        addBlock(SlabBlocks.BAOBAB, "Baobab Slab");
+        addBlock(SlabBlocks.EUCALYPTUS, "Eucalyptus Slab");
+        addBlock(SlabBlocks.MAHOGANY, "Mahogany Slab");
+        addBlock(SlabBlocks.MOSSBARK, "Mossbark Slab");
+        addBlock(SlabBlocks.ASPER, "Asper Slab");
+        addBlock(SlabBlocks.CYPRESS, "Cypress Slab");
+        addBlock(SlabBlocks.BALSAM, "Balsam Slab");
+        addBlock(SlabBlocks.WHITE, "White Slab");
+        addBlock(SlabBlocks.BAMBOO, "Bamboo Slab");
+        addBlock(SlabBlocks.ROTTEN, "Rotten Slab");
+        addBlock(SlabBlocks.MARSHWOOD, "Marshwood Slab");
+        addBlock(SlabBlocks.SCORCHED, "Scorched Slab");
+        addBlock(SlabBlocks.VARNISHED, "Varnished Slab");
+        addBlock(SlabBlocks.PETRIFIED, "Petrified Wood Slab");
 
         // MARK: Slabs Stone
         addBlock(SlabBlocks.UMBERSTONE, "Umberstone Slab");

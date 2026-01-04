@@ -1,7 +1,6 @@
 package erebus.inventory.server;
 
 import erebus.registries.client.ModMenuTypes;
-import erebus.registries.data.ModTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;

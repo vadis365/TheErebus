@@ -1,6 +1,5 @@
 package erebus.registries.helpers;
 
-import erebus.registries.data.ModTags;
 import erebus.world.feature.ErebusFeature;
 import erebus.world.feature.bush.ErebusBushFeature;
 import erebus.world.feature.tree.ErebusTree;

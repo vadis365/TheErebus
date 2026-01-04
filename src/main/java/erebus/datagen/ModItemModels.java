@@ -356,20 +356,20 @@ public class ModItemModels extends ModItemModelProvider {
         block(WoodBlocks.PLANKS_PETRIFIED);
 
         // MARK: Slabs Wood
-        slab(SlabBlocks.PLANKS_BAOBAB, WoodBlocks.PLANKS_BAOBAB);
-        slab(SlabBlocks.PLANKS_EUCALYPTUS, WoodBlocks.PLANKS_EUCALYPTUS);
-        slab(SlabBlocks.PLANKS_MAHOGANY, WoodBlocks.PLANKS_MAHOGANY);
-        slab(SlabBlocks.PLANKS_MOSSBARK, WoodBlocks.PLANKS_MOSSBARK);
-        slab(SlabBlocks.PLANKS_ASPER, WoodBlocks.PLANKS_ASPER);
-        slab(SlabBlocks.PLANKS_CYPRESS, WoodBlocks.PLANKS_CYPRESS);
-        slab(SlabBlocks.PLANKS_BALSAM, WoodBlocks.PLANKS_BALSAM);
-        slab(SlabBlocks.PLANKS_WHITE, WoodBlocks.PLANKS_WHITE);
-        slab(SlabBlocks.PLANKS_BAMBOO, WoodBlocks.PLANKS_BAMBOO);
-        slab(SlabBlocks.PLANKS_ROTTEN, WoodBlocks.PLANKS_ROTTEN);
-        slab(SlabBlocks.PLANKS_MARSHWOOD, WoodBlocks.PLANKS_MARSHWOOD);
-        slab(SlabBlocks.PLANKS_SCORCHED, WoodBlocks.PLANKS_SCORCHED);
-        slab(SlabBlocks.PLANKS_VARNISHED, WoodBlocks.PLANKS_VARNISHED);
-        slab(SlabBlocks.PLANKS_PETRIFIED, WoodBlocks.PLANKS_PETRIFIED);
+        slab(SlabBlocks.BAOBAB, WoodBlocks.PLANKS_BAOBAB);
+        slab(SlabBlocks.EUCALYPTUS, WoodBlocks.PLANKS_EUCALYPTUS);
+        slab(SlabBlocks.MAHOGANY, WoodBlocks.PLANKS_MAHOGANY);
+        slab(SlabBlocks.MOSSBARK, WoodBlocks.PLANKS_MOSSBARK);
+        slab(SlabBlocks.ASPER, WoodBlocks.PLANKS_ASPER);
+        slab(SlabBlocks.CYPRESS, WoodBlocks.PLANKS_CYPRESS);
+        slab(SlabBlocks.BALSAM, WoodBlocks.PLANKS_BALSAM);
+        slab(SlabBlocks.WHITE, WoodBlocks.PLANKS_WHITE);
+        slab(SlabBlocks.BAMBOO, WoodBlocks.PLANKS_BAMBOO);
+        slab(SlabBlocks.ROTTEN, WoodBlocks.PLANKS_ROTTEN);
+        slab(SlabBlocks.MARSHWOOD, WoodBlocks.PLANKS_MARSHWOOD);
+        slab(SlabBlocks.SCORCHED, WoodBlocks.PLANKS_SCORCHED);
+        slab(SlabBlocks.VARNISHED, WoodBlocks.PLANKS_VARNISHED);
+        slab(SlabBlocks.PETRIFIED, WoodBlocks.PLANKS_PETRIFIED);
 
         // MARK: Slabs Stone
         slab(SlabBlocks.UMBERSTONE, UmberstoneBlocks.UMBERSTONE);

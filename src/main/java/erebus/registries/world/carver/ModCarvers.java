@@ -1,7 +1,6 @@
 package erebus.registries.world.carver;
 
 import erebus.Erebus;
-import erebus.registries.data.ModTags;
 import erebus.world.carver.ErebusCanyonCarverConfiguration;
 import erebus.world.carver.ErebusCaveCarverConfiguration;
 import net.minecraft.core.HolderGetter;

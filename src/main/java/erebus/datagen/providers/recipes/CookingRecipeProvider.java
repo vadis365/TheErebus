@@ -2,24 +2,19 @@ package erebus.datagen.providers.recipes;
 
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.CompletableFuture;
 
 /**
  * Provider for cooking recipes (smoking, campfire cooking).
  */
 public class CookingRecipeProvider extends ErebusRecipeProvider {
 
-    public CookingRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> registries) {
-        super(packOutput, registries);
+    public CookingRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
+        super(registries, output);
     }
 
     @Override
-    public void buildRecipes(@NotNull RecipeOutput output) {
-        this.output = output;
+    public void buildRecipes() {
         cook(ModItems.BEETLE_LARVA_RAW, ModItems.BEETLE_LARVA_COOKED);
         cook(ModItems.GRASSHOPPER_LEG_RAW, ModItems.GRASSHOPPER_LEG_COOKED);
         cook(ModItems.TARANTULA_LEG_RAW, ModItems.TARANTULA_LEG_COOKED);

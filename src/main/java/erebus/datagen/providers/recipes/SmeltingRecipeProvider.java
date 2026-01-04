@@ -3,25 +3,20 @@ package erebus.datagen.providers.recipes;
 import erebus.registries.blocks.providers.*;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.Items;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.CompletableFuture;
 
 /**
  * Provider for smelting recipes (furnace, blast furnace).
  */
 public class SmeltingRecipeProvider extends ErebusRecipeProvider {
 
-    public SmeltingRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> registries) {
-        super(packOutput, registries);
+    public SmeltingRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
+        super(registries, output);
     }
 
     @Override
-    public void buildRecipes(@NotNull RecipeOutput output) {
-        this.output = output;
+    public void buildRecipes() {
         addOreSmeltingRecipes();
         addGenericSmelting();
     }

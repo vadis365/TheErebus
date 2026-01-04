@@ -1,7 +1,6 @@
 package erebus.events;
 
 import erebus.entity.BedBug;
-import erebus.registries.data.ModTags;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.ItemTags;
