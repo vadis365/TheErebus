@@ -1,6 +1,5 @@
 package erebus.registries.world.feature;
 
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.helpers.ModFeatureHelpers;
 import erebus.world.feature.bush.HeartBerryBushFeature;
 import erebus.world.feature.bush.JadeBerryBushFeature;
@@ -106,7 +105,7 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerConfiguredFeatureWithConfig(SWAMP_BUSH, SWAMP_BUSH_CONFIG);
         registerConfiguredFeatureWithConfig(TURNIP, TURNIP_CONFIG);
         registerConfiguredFeatureWithConfig(VINES, VINES_CONFIG);
-        registerSimpleConfiguredPlant(WEEPING_BLUEBELL, PlantBlocks.WEEPING_BLUEBELL, 5);
+        registerSimpleConfiguredPlant(WEEPING_BLUEBELL, ModBlocks.WEEPING_BLUEBELL, 5);
 
         SWAMP_BERRY_BUSH = new SwampBerryBushFeature();
         HEART_BERRY_BUSH = new HeartBerryBushFeature();
@@ -118,14 +117,14 @@ public class PlantFeatures extends ModFeatureHelpers {
 
         registerConfiguredFeature(GRASS.getConfiguredResourceKey(), Feature.RANDOM_PATCH, patch(Blocks.SHORT_GRASS, 105));
 
-        registerSimpleConfiguredPlant(SWAMP_PLANT, PlantBlocks.SWAMP_PLANT, 64);
-        registerSimpleConfiguredPlant(FIRE_BLOOM, PlantBlocks.FIRE_BLOOM, 64);
-        registerSimpleConfiguredPlant(FIDDLE_HEAD, PlantBlocks.FIDDLE_HEAD, 64);
-        registerSimpleConfiguredPlant(BULLRUSH, PlantBlocks.BULLRUSH, 64);
-        registerSimpleConfiguredPlant(SUNDEW, PlantBlocks.SUNDEW, 64);
-        registerSimpleConfiguredPlant(TALL_BLOOM, PlantBlocks.TALL_BLOOM, 64);
-        registerSimpleConfiguredPlant(TANGLED_STALK, PlantBlocks.TANGLED_STALK, 64);
-        registerSimpleConfiguredPlant(HIGH_CAPPED_MUSHROOM, PlantBlocks.HIGH_CAPPED_MUSHROOM, 64);
+        registerSimpleConfiguredPlant(SWAMP_PLANT, ModBlocks.SWAMP_PLANT, 64);
+        registerSimpleConfiguredPlant(FIRE_BLOOM, ModBlocks.FIRE_BLOOM, 64);
+        registerSimpleConfiguredPlant(FIDDLE_HEAD, ModBlocks.FIDDLE_HEAD, 64);
+        registerSimpleConfiguredPlant(BULLRUSH, ModBlocks.BULLRUSH, 64);
+        registerSimpleConfiguredPlant(SUNDEW, ModBlocks.SUNDEW, 64);
+        registerSimpleConfiguredPlant(TALL_BLOOM, ModBlocks.TALL_BLOOM, 64);
+        registerSimpleConfiguredPlant(TANGLED_STALK, ModBlocks.TANGLED_STALK, 64);
+        registerSimpleConfiguredPlant(HIGH_CAPPED_MUSHROOM, ModBlocks.HIGH_CAPPED_MUSHROOM, 64);
     }
 
     public static void initPlacedFeatures(BootstrapContext<PlacedFeature> context) {

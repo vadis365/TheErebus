@@ -1,7 +1,6 @@
 package erebus.block.plants;
 
 import com.mojang.serialization.MapCodec;
-import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +33,6 @@ public class MossCultivatedBlock extends WallPlantsAbstract {
 
     @Override
 	public boolean isValidBlock(BlockState state) {
-		return state.is(WoodBlocks.LOG_ROTTEN.get());
+		return state.is(ModBlocks.LOG_ROTTEN.get());
 	}
 }

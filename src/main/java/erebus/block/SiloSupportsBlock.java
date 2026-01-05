@@ -1,7 +1,6 @@
 package erebus.block;
 
 import com.mojang.serialization.MapCodec;
-import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
@@ -30,7 +29,7 @@ public class SiloSupportsBlock extends Block {
 
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-		return level.getBlockState(pos.below()).is(OtherBlocks.RED_GEM_BLOCK.get());
+		return level.getBlockState(pos.below()).is(ModBlocks.RED_GEM_BLOCK.get());
 	}
 
     @Override
@@ -40,10 +39,8 @@ public class SiloSupportsBlock extends Block {
 
 	@Override
 	protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
-		boolean canSurvive = false;
-		if (canSurvive(state, level, pos))
-			canSurvive = true;
-		return !canSurvive ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, pos, facingPos);
+		boolean canSurvive = canSurvive(state, level, pos);
+        return !canSurvive ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, pos, facingPos);
 	}
 
 	@Nonnull

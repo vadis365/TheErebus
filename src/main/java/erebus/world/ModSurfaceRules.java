@@ -1,8 +1,6 @@
 package erebus.world;
 
 import com.google.common.collect.ImmutableList;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.UmberstoneBlocks;
 import erebus.registries.world.ModBiomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -17,11 +15,11 @@ import static net.minecraft.world.level.levelgen.SurfaceRules.*;
 public class ModSurfaceRules {
 
     // Erebus
-    private static final RuleSource MUD = makeStateRule(OtherBlocks.MUD);
-    private static final RuleSource UMBERSTONE = makeStateRule(UmberstoneBlocks.UMBERSTONE);
-    private static final RuleSource DUST_LAYER = makeStateRule(UmberstoneBlocks.DUST_LAYER);
-    private static final RuleSource DUST = makeStateRule(UmberstoneBlocks.DUST);
-    private static final RuleSource VOLCANIC_ROCK = makeStateRule(UmberstoneBlocks.VOLCANIC_ROCK);
+    private static final RuleSource MUD = makeStateRule(ModBlocks.MUD);
+    private static final RuleSource UMBERSTONE = makeStateRule(ModBlocks.UMBERSTONE);
+    private static final RuleSource DUST_LAYER = makeStateRule(ModBlocks.DUST_LAYER);
+    private static final RuleSource DUST = makeStateRule(ModBlocks.DUST);
+    private static final RuleSource VOLCANIC_ROCK = makeStateRule(ModBlocks.VOLCANIC_ROCK);
 
     // Vanilla
     private static final RuleSource SAND = makeStateRule(Blocks.SAND);

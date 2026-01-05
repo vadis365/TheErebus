@@ -1,8 +1,6 @@
 package erebus.world.feature.plant.config;
 
 import erebus.datagen.loot.ModChestLootTables;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -31,7 +29,7 @@ public class RottenTreeStumpFeatureConfiguration extends Feature<NoneFeatureConf
         WorldGenLevel level = context.level();
         BlockPos pos = context.origin();
         RandomSource random = context.random();
-        BlockState log = WoodBlocks.LOG_ROTTEN.get().defaultBlockState();
+        BlockState log = ModBlocks.LOG_ROTTEN.get().defaultBlockState();
 
         for (int x = -baseRadius; x <= baseRadius; x++) {
             for (int y = 1; y < height; y++) {
@@ -115,7 +113,7 @@ public class RottenTreeStumpFeatureConfiguration extends Feature<NoneFeatureConf
 
     private void generateLowerSpawner(WorldGenLevel level, BlockPos pos) {
         BlockState web = Blocks.COBWEB.defaultBlockState();
-        BlockState spawner = OtherBlocks.JUMPING_SPIDER_SPAWNER.get().defaultBlockState();
+        BlockState spawner = ModBlocks.JUMPING_SPIDER_SPAWNER.get().defaultBlockState();
 
         setBlock(level, pos.above(2).north(), web);
         setBlock(level, pos.above(2).south(), web);
@@ -128,7 +126,7 @@ public class RottenTreeStumpFeatureConfiguration extends Feature<NoneFeatureConf
 
     private void generateUpperSpawner(WorldGenLevel level, BlockPos pos) {
         BlockState web = Blocks.COBWEB.defaultBlockState();
-        BlockState spawner = OtherBlocks.TARANTULA_SPAWNER.get().defaultBlockState();
+        BlockState spawner = ModBlocks.TARANTULA_SPAWNER.get().defaultBlockState();
 
         if (height >= maxHeight - 3) {
             setBlock(level, pos.above(11), web);

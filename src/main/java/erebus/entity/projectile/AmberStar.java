@@ -1,7 +1,6 @@
 package erebus.entity.projectile;
 
 import erebus.block.entity.PreservedBlockEntity;
-import erebus.registries.blocks.providers.AmberBlocks;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -37,7 +36,7 @@ public class AmberStar extends ThrowableProjectile implements ItemSupplier {
     @Override
     protected void onHitBlock(@NotNull BlockHitResult result) {
         BlockPos pos = result.getBlockPos();
-        level().setBlock(pos.relative(result.getDirection()), AmberBlocks.AMBER.get().defaultBlockState(), 2);
+        level().setBlock(pos.relative(result.getDirection()), ModBlocks.AMBER.get().defaultBlockState(), 2);
         remove(RemovalReason.DISCARDED);
     }
 
@@ -51,7 +50,7 @@ public class AmberStar extends ThrowableProjectile implements ItemSupplier {
 
         if (!(entity instanceof Player)) {
             if(canTrap(entity)) {
-                level.setBlock(pos, AmberBlocks.PRESERVED_AMBER_GLASS.get().defaultBlockState(), Block.UPDATE_ALL);
+                level.setBlock(pos, ModBlocks.PRESERVED_AMBER_GLASS.get().defaultBlockState(), Block.UPDATE_ALL);
                 PreservedBlockEntity blockEntity = (PreservedBlockEntity) level.getBlockEntity(pos);
                 if(blockEntity != null)
                     blockEntity.setTrappedEntity(trapEntity(entity));

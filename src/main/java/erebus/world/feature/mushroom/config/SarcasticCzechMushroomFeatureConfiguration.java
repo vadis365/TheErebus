@@ -1,6 +1,5 @@
 package erebus.world.feature.mushroom.config;
 
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.world.util.FeatureUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,10 +17,10 @@ public class SarcasticCzechMushroomFeatureConfiguration extends Feature<NoneFeat
     private final int[] offsetX = {0, -1, 0, 1};
     private final int[] offsetZ = {1, 0, -1, 0};
     private final FeatureUtils Utils = new FeatureUtils();
-    private final BlockState STEM = PlantBlocks.SARCASTIC_CZECH_MUSHROOM_STEM.get().defaultBlockState()
+    private final BlockState STEM = ModBlocks.SARCASTIC_CZECH_MUSHROOM_STEM.get().defaultBlockState()
             .setValue(HugeMushroomBlock.UP, true)
             .setValue(HugeMushroomBlock.DOWN, true);
-    private final BlockState SHROOM = PlantBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK.get().defaultBlockState();
+    private final BlockState SHROOM = ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK.get().defaultBlockState();
     private final Direction[][] DIRECTIONS = {
             new Direction[] {
                     Direction.EAST,

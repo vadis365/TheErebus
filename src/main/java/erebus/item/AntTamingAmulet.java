@@ -1,6 +1,5 @@
 package erebus.item;
 
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -42,7 +41,7 @@ public class AntTamingAmulet extends Item {
 		if (!level.isClientSide() && player != null) {
 			BlockPos pos = context.getClickedPos();
 			BlockState state = level.getBlockState(pos);
-			if (state.getBlock() == OtherBlocks.SILO_TANK.get()) {
+			if (state.getBlock() == ModBlocks.SILO_TANK.get()) {
 				stack.set(ModDataComponents.ANT_TAMING_AMULET, pos);
 				stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
 				return InteractionResult.SUCCESS;

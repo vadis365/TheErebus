@@ -1,8 +1,6 @@
 package erebus.block.portal;
 
 import erebus.Erebus;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.UmberstoneBlocks;
 import erebus.registries.world.ModPOIs;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
@@ -147,7 +145,7 @@ public class ErebusPortalForcer {
                         state = Blocks.AIR.defaultBlockState();
                     }
                 } else {
-                    state = level.random.nextBoolean() ? UmberstoneBlocks.UMBERTILE_SMOOTH.get().defaultBlockState() : UmberstoneBlocks.UMBERTILE_SMOOTH_SMALL.get().defaultBlockState();
+                    state = level.random.nextBoolean() ? ModBlocks.UMBERTILE_SMOOTH.get().defaultBlockState() : ModBlocks.UMBERTILE_SMOOTH_SMALL.get().defaultBlockState();
                 }
                 mutable.setWithOffset(blockPos, dx, dy, dz);
                 level.setBlock(mutable, state, 3);
@@ -166,7 +164,7 @@ public class ErebusPortalForcer {
                 }
 
                 if(level.getBlockState(mutable).isAir()) {
-                    level.setBlockAndUpdate(mutable, UmberstoneBlocks.UMBERSTONE.get().defaultBlockState());
+                    level.setBlockAndUpdate(mutable, ModBlocks.UMBERSTONE.get().defaultBlockState());
                 }
             }
         }
@@ -177,7 +175,7 @@ public class ErebusPortalForcer {
             mutable.setWithOffset(blockPos, 3, 0, 2);
         }
 
-        level.setBlockAndUpdate(mutable, OtherBlocks.GAEAN_KEYSTONE.get().defaultBlockState());
+        level.setBlockAndUpdate(mutable, ModBlocks.GAEAN_KEYSTONE.get().defaultBlockState());
         return Optional.of(new BlockUtil.FoundRectangle(mutable.immutable(), ErebusPortalShape.WIDTH, ErebusPortalShape.HEIGHT));
     }
 

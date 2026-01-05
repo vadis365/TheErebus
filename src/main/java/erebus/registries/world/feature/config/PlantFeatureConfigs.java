@@ -1,7 +1,5 @@
 package erebus.registries.world.feature.config;
 
-import erebus.registries.blocks.providers.PlantBlocks;
-import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.world.feature.mushroom.config.*;
 import erebus.world.feature.plant.config.*;
 import net.minecraft.core.Direction;
@@ -51,8 +49,8 @@ public class PlantFeatureConfigs {
     static {
         ALGAE_CONFIG = CONFIGS.register("algae", AlgaeFeatureConfiguration::new);
         BAMBOO_CONFIG = CONFIGS.register("bamboo", () -> new BambooFeatureConfiguration(false, false));
-        BIG_LOGS_X_CONFIG = CONFIGS.register("big_logs_x", () -> new BigLogsFeatureConfiguration(Direction.NORTH, WoodBlocks.LOG_ROTTEN));
-        BIG_LOGS_Z_CONFIG = CONFIGS.register("big_logs_z", () -> new BigLogsFeatureConfiguration(Direction.EAST, WoodBlocks.LOG_ROTTEN));
+        BIG_LOGS_X_CONFIG = CONFIGS.register("big_logs_x", () -> new BigLogsFeatureConfiguration(Direction.NORTH, ModBlocks.LOG_ROTTEN));
+        BIG_LOGS_Z_CONFIG = CONFIGS.register("big_logs_z", () -> new BigLogsFeatureConfiguration(Direction.EAST, ModBlocks.LOG_ROTTEN));
         FERN_CONFIG = CONFIGS.register("fern", FernFeatureConfiguration::new);
         GIANT_FLOWER_RANDOM_CONFIG = CONFIGS.register("giant_flower_random", () -> new GiantFlowerFeatureConfiguration());
         GIANT_FLOWER_BLACK_CONFIG = CONFIGS.register("giant_flower_black", () -> new GiantFlowerFeatureConfiguration(0));
@@ -75,8 +73,8 @@ public class PlantFeatureConfigs {
         KAIZERS_FINGERS_MUSHROOM_CONFIG = CONFIGS.register("kaizers_fingers_mushroom", KaizersFingersMushroomFeatureConfiguration::new);
         SARCASTIC_CZECH_MUSHROOM_CONFIG = CONFIGS.register("sarcastic_czech_mushroom", SarcasticCzechMushroomFeatureConfiguration::new);
         MELON_CONFIG = CONFIGS.register("melon", MelonFeatureConfiguration::new);
-        MOSS_CONFIG = CONFIGS.register("moss", () -> new MossPatchFeatureConfiguration(PlantBlocks.MOSS));
-        MOULD_CONFIG = CONFIGS.register("mould", () -> new MossPatchFeatureConfiguration(PlantBlocks.MOULD));
+        MOSS_CONFIG = CONFIGS.register("moss", () -> new MossPatchFeatureConfiguration(ModBlocks.MOSS));
+        MOULD_CONFIG = CONFIGS.register("mould", () -> new MossPatchFeatureConfiguration(ModBlocks.MOULD));
         NETTLE_CONFIG = CONFIGS.register("nettle", NettlePatchFeatureConfiguration::new);
         PRICKLY_PEAR_CONFIG = CONFIGS.register("prickly_pear", PricklyPearPatchFeatureConfiguration::new);
         ROTTEN_TREE_STUMP_CONFIG = CONFIGS.register("rotten_tree_stump", () -> new RottenTreeStumpFeatureConfiguration(5, 5));

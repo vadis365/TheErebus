@@ -1,7 +1,6 @@
 package erebus.datagen.loot;
 
 import erebus.Erebus;
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -87,7 +86,7 @@ public record ModChestLootTables(HolderLookup.Provider registries) implements Lo
                         .add(item(ModItems.JADE, 10, 1, 3))
                         .add(item(ModItems.PLATE_EXO, 9, 4, 8))
                         .add(item(Items.ENCHANTED_BOOK, 8))
-                        .add(item(OtherBlocks.UMBER_GOLEM_STATUE, 1))
+                        .add(item(ModBlocks.UMBER_GOLEM_STATUE, 1))
                         .add(item(ModItems.WEB_SLINGER, 1))
                         .add(item(Items.GOLDEN_PICKAXE, 3))
                         .add(item(Items.IRON_PICKAXE, 2))
@@ -125,7 +124,7 @@ public record ModChestLootTables(HolderLookup.Provider registries) implements Lo
                         .add(item(ModItems.ROLLED_NEWSPAPER, 1))
                         .add(item(ModItems.BAMBUCKET, 6))
                         .add(item(ModItems.HOMING_BEECON, 1))
-                        .add(item(OtherBlocks.GLOW_GEM_INACTIVE, 5, 1, 3))
+                        .add(item(ModBlocks.GLOW_GEM_INACTIVE, 5, 1, 3))
                         .add(item(ModItems.GIVIN_ME_THE_BLUES, 3, 1, 3))
                         .add(item(ModItems.BRYUFS_BREW, 1))
                         .add(item(ModItems.WASP_DAGGER, 2, 1, 3))
@@ -165,7 +164,7 @@ public record ModChestLootTables(HolderLookup.Provider registries) implements Lo
                         .add(item(Items.GOLDEN_BOOTS, 1))
                         .add(item(Items.IRON_BOOTS, 2))
                         .add(item(ModItems.JADE_BOOTS, 1))
-                        .add(item(OtherBlocks.UMBER_GOLEM_STATUE, 1))
+                        .add(item(ModBlocks.UMBER_GOLEM_STATUE, 1))
                         .add(item(ModItems.WEB_SLINGER, 1))
                 )
         );
@@ -212,7 +211,7 @@ public record ModChestLootTables(HolderLookup.Provider registries) implements Lo
                         .add(item(ModItems.ROLLED_NEWSPAPER, 1))
                         .add(item(ModItems.BAMBUCKET, 6))
                         .add(item(ModItems.WHETSTONE, 1))
-                        .add(item(OtherBlocks.GLOW_GEM_INACTIVE, 5, 1, 3))
+                        .add(item(ModBlocks.GLOW_GEM_INACTIVE, 5, 1, 3))
                         .add(item(ModItems.NOTHING_IN_THE_MIDDLE, 3, 1, 3))
                         .add(item(ModItems.BRYUFS_BREW, 1))
                         .add(item(ModItems.WASP_DAGGER, 2, 1, 3))
@@ -308,7 +307,7 @@ public record ModChestLootTables(HolderLookup.Provider registries) implements Lo
                         .add(item(ModItems.PLATE_EXO, 8, 3, 6))
                         .add(item(ModItems.COMPOUND_EYES, 7, 2, 6))
                         .add(item(ModItems.COMPOUND_LENS, 2))
-                        .add(item(OtherBlocks.UMBER_GOLEM_STATUE, 1))
+                        .add(item(ModBlocks.UMBER_GOLEM_STATUE, 1))
                         .add(item(ModItems.MAX_SPEED_BOW, 1))
                 )
         );

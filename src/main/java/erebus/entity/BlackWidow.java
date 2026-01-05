@@ -2,7 +2,6 @@ package erebus.entity;
 
 import erebus.entity.ai.ThrowWebAttackGoal;
 import erebus.registries.ModSounds;
-import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -104,7 +103,7 @@ public class BlackWidow extends Monster {
 
 	@Override
 	public void makeStuckInBlock(BlockState state, @NotNull Vec3 motionMultiplier) {
-		if (!state.is(Blocks.COBWEB) && !state.is(OtherBlocks.WITHER_WEB.get()) && !state.is(OtherBlocks.LAVA_WEB.get()))
+		if (!state.is(Blocks.COBWEB) && !state.is(ModBlocks.WITHER_WEB.get()) && !state.is(ModBlocks.LAVA_WEB.get()))
 			super.makeStuckInBlock(state, motionMultiplier);
 	}
 
@@ -213,12 +212,12 @@ public class BlackWidow extends Monster {
 		if (size == 2) {
 			getAttribute(Attributes.MAX_HEALTH).setBaseValue(20D);
 			getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1.5D);
-			goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.9D, OtherBlocks.WITHER_WEB.get().defaultBlockState()));
+			goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.9D, ModBlocks.WITHER_WEB.get().defaultBlockState()));
 		}
 		if (size == 4) {
 			getAttribute(Attributes.MAX_HEALTH).setBaseValue(25D);
 			getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(2D);
-			goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.9D, OtherBlocks.WITHER_WEB.get().defaultBlockState()));
+			goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.9D, ModBlocks.WITHER_WEB.get().defaultBlockState()));
 		}
 
 		if (resetHealth)

@@ -1,7 +1,6 @@
 package erebus.entity;
 
 import erebus.client.particle.ClientParticles;
-import erebus.registries.blocks.providers.PlantBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -44,11 +43,11 @@ public class FungalWeevil extends Weevil {
     	switch (random.nextInt(7)) {
     	case 0 : return Blocks.BROWN_MUSHROOM.defaultBlockState();
     	case 1 : return Blocks.RED_MUSHROOM.defaultBlockState();
-    	case 2 : return PlantBlocks.DARK_CAPPED_MUSHROOM.get().defaultBlockState();
-    	case 3 : return PlantBlocks.DUTCH_CAP_MUSHROOM.get().defaultBlockState();
-    	case 4 : return PlantBlocks.GRANDMAS_SHOES_MUSHROOM.get().defaultBlockState();
-    	case 5 : return PlantBlocks.KAIZERS_FINGERS_MUSHROOM.get().defaultBlockState();
-    	case 6 : return PlantBlocks.SARCASTIC_CZECH_MUSHROOM.get().defaultBlockState();
+    	case 2 : return ModBlocks.DARK_CAPPED_MUSHROOM.get().defaultBlockState();
+    	case 3 : return ModBlocks.DUTCH_CAP_MUSHROOM.get().defaultBlockState();
+    	case 4 : return ModBlocks.GRANDMAS_SHOES_MUSHROOM.get().defaultBlockState();
+    	case 5 : return ModBlocks.KAIZERS_FINGERS_MUSHROOM.get().defaultBlockState();
+    	case 6 : return ModBlocks.SARCASTIC_CZECH_MUSHROOM.get().defaultBlockState();
     	default : return Blocks.BROWN_MUSHROOM.defaultBlockState();
     	}
     }

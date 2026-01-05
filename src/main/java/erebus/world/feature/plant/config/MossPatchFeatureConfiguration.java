@@ -1,7 +1,5 @@
 package erebus.world.feature.plant.config;
 
-import erebus.registries.blocks.providers.UmberstoneBlocks;
-import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -67,6 +65,6 @@ public class MossPatchFeatureConfiguration extends Feature<NoneFeatureConfigurat
     private boolean isValidBlock(WorldGenLevel level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
 
-        return state.is(WoodBlocks.LOG_ROTTEN) || state.is(UmberstoneBlocks.UMBERSTONE);
+        return state.is(ModBlocks.LOG_ROTTEN) || state.is(ModBlocks.UMBERSTONE);
     }
 }

@@ -1,6 +1,5 @@
 package erebus.world.feature.structure.pieces;
 
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,9 +21,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class WaspDungeonPiece extends ScatteredFeaturePiece {
 
-    private final BlockState BLOCK = OtherBlocks.WASP_NEST.get().defaultBlockState();
-    private final BlockState STAIR = OtherBlocks.STAIRS_WASP_NEST.get().defaultBlockState();
-    private final BlockState SPAWNER = OtherBlocks.WASP_SPAWNER.get().defaultBlockState();
+    private final BlockState BLOCK = ModBlocks.WASP_NEST.get().defaultBlockState();
+    private final BlockState STAIR = ModBlocks.STAIRS_WASP_NEST.get().defaultBlockState();
+    private final BlockState SPAWNER = ModBlocks.WASP_SPAWNER.get().defaultBlockState();
 
     public WaspDungeonPiece(RandomSource random, int x, int z) {
         super(ModStructurePieces.WASP_DUNGEON.get(), x, 64, z, 10, 8, 10, getRandomHorizontalDirection(random));

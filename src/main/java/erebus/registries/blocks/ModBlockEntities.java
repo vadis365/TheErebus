@@ -2,9 +2,6 @@ package erebus.registries.blocks;
 
 import erebus.Erebus;
 import erebus.block.entity.*;
-import erebus.registries.blocks.providers.AmberBlocks;
-import erebus.registries.blocks.providers.ChestBlocks;
-import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -42,42 +39,42 @@ public class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ErebusChestBlockEntity>> EREBUS_CHEST;
 
     static {
-        ALTAR_EXPERIENCE = register("altar_experience", ExperienceAltarBlockEntity::new, OtherBlocks.ALTAR_EXPERIENCE);
-        ALTAR_HEALING = register("altar_healing", HealingAltarBlockEntity::new, OtherBlocks.ALTAR_HEALING);
-        ALTAR_LIGHTNING = register("altar_lightning", LightningAltarBlockEntity::new, OtherBlocks.ALTAR_LIGHTNING);
-        ALTAR_REPAIR = register("altar_repair", RepairAltarBlockEntity::new, OtherBlocks.ALTAR_REPAIR);
-        BAMBOO_BRIDGE = register("bamboo_bridge", BambooBridgeBlockEntity::new, OtherBlocks.BAMBOO_BRIDGE);
-        BAMBOO_CRATE = register("bamboo_crate", BambooCrateBlockEntity::new, OtherBlocks.BAMBOO_CRATE);
-        BAMBOO_EXTENDER = register("bamboo_extender", BambooExtenderBlockEntity::new, OtherBlocks.BAMBOO_EXTENDER);
-        BAMBOO_PIPE = register("bamboo_pipe", BambooPipeBlockEntity::new, OtherBlocks.BAMBOO_PIPE);
-        BAMBOO_PIPE_EXTRACT = register("bamboo_pipe_extract", BambooPipeExtractBlockEntity::new, OtherBlocks.BAMBOO_PIPE_EXTRACT);
-        BLENDER = register("blender", BlenderBlockEntity::new, OtherBlocks.BLENDER);
-        BLOCK_OF_BONES = register("block_of_bones", BlockOfBonesBlockEntity::new, OtherBlocks.BLOCK_OF_BONES);
-        FLUID_JAR = register("fluid_jar", FluidJarBlockEntity::new, AmberBlocks.FLUID_JAR);
-        GLOWING_JAR = register("glowing_jar", GlowingJarBlockEntity::new, AmberBlocks.GLOWING_JAR);
-        GAEAN_KEYSTONE = register("gaean_keystone", GaeanKeystoneBlockEntity::new, OtherBlocks.GAEAN_KEYSTONE);
-        HONEY_COMB = register("honey_comb", HoneyCombBlockEntity::new, OtherBlocks.HONEY_COMB);
-        LIQUIFIER = register("liquifier", LiquifierBlockEntity::new, OtherBlocks.LIQUIFIER);
-        OFFERING_ALTAR = register("altar_offering", OfferingAltarBlockEntity::new, OtherBlocks.OFFERING_ALTAR);
-        PRESERVED_BLOCK = register("preserved_block", PreservedBlockEntity::new, AmberBlocks.PRESERVED_AMBER, AmberBlocks.PRESERVED_AMBER_GLASS);
-        UMBERFURNACE = register("umberfurnace", UmberFurnaceBlockEntity::new, OtherBlocks.UMBER_FURNACE);
-        COMPOSTER = register("composter", ComposterBlockEntity::new, OtherBlocks.COMPOSTER);
-        SILO_TANK = register("silo_tank", SiloTankBlockEntity::new, OtherBlocks.SILO_TANK);
+        ALTAR_EXPERIENCE = register("altar_experience", ExperienceAltarBlockEntity::new, ModBlocks.ALTAR_EXPERIENCE);
+        ALTAR_HEALING = register("altar_healing", HealingAltarBlockEntity::new, ModBlocks.ALTAR_HEALING);
+        ALTAR_LIGHTNING = register("altar_lightning", LightningAltarBlockEntity::new, ModBlocks.ALTAR_LIGHTNING);
+        ALTAR_REPAIR = register("altar_repair", RepairAltarBlockEntity::new, ModBlocks.ALTAR_REPAIR);
+        BAMBOO_BRIDGE = register("bamboo_bridge", BambooBridgeBlockEntity::new, ModBlocks.BAMBOO_BRIDGE);
+        BAMBOO_CRATE = register("bamboo_crate", BambooCrateBlockEntity::new, ModBlocks.BAMBOO_CRATE);
+        BAMBOO_EXTENDER = register("bamboo_extender", BambooExtenderBlockEntity::new, ModBlocks.BAMBOO_EXTENDER);
+        BAMBOO_PIPE = register("bamboo_pipe", BambooPipeBlockEntity::new, ModBlocks.BAMBOO_PIPE);
+        BAMBOO_PIPE_EXTRACT = register("bamboo_pipe_extract", BambooPipeExtractBlockEntity::new, ModBlocks.BAMBOO_PIPE_EXTRACT);
+        BLENDER = register("blender", BlenderBlockEntity::new, ModBlocks.BLENDER);
+        BLOCK_OF_BONES = register("block_of_bones", BlockOfBonesBlockEntity::new, ModBlocks.BLOCK_OF_BONES);
+        FLUID_JAR = register("fluid_jar", FluidJarBlockEntity::new, ModBlocks.FLUID_JAR);
+        GLOWING_JAR = register("glowing_jar", GlowingJarBlockEntity::new, ModBlocks.GLOWING_JAR);
+        GAEAN_KEYSTONE = register("gaean_keystone", GaeanKeystoneBlockEntity::new, ModBlocks.GAEAN_KEYSTONE);
+        HONEY_COMB = register("honey_comb", HoneyCombBlockEntity::new, ModBlocks.HONEY_COMB);
+        LIQUIFIER = register("liquifier", LiquifierBlockEntity::new, ModBlocks.LIQUIFIER);
+        OFFERING_ALTAR = register("altar_offering", OfferingAltarBlockEntity::new, ModBlocks.OFFERING_ALTAR);
+        PRESERVED_BLOCK = register("preserved_block", PreservedBlockEntity::new, ModBlocks.PRESERVED_AMBER, ModBlocks.PRESERVED_AMBER_GLASS);
+        UMBERFURNACE = register("umberfurnace", UmberFurnaceBlockEntity::new, ModBlocks.UMBER_FURNACE);
+        COMPOSTER = register("composter", ComposterBlockEntity::new, ModBlocks.COMPOSTER);
+        SILO_TANK = register("silo_tank", SiloTankBlockEntity::new, ModBlocks.SILO_TANK);
         EREBUS_CHEST = register("erebus_chest", ErebusChestBlockEntity::new,
-                ChestBlocks.CHEST_ASPER,
-                ChestBlocks.CHEST_BAOBAB,
-                ChestBlocks.CHEST_BAMBOO,
-                ChestBlocks.CHEST_BALSAM,
-                ChestBlocks.CHEST_CYPRESS,
-                ChestBlocks.CHEST_EUCALYPTUS,
-                ChestBlocks.CHEST_MAHOGANY,
-                ChestBlocks.CHEST_MARSHWOOD,
-                ChestBlocks.CHEST_MOSSBARK,
-                ChestBlocks.CHEST_PETRIFIED,
-                ChestBlocks.CHEST_ROTTEN,
-                ChestBlocks.CHEST_SCORCHED,
-                ChestBlocks.CHEST_VARNISHED,
-                ChestBlocks.CHEST_WHITE
+                ModBlocks.CHEST_CHEST_ASPER,
+                ModBlocks.CHEST_CHEST_BAOBAB,
+                ModBlocks.CHEST_CHEST_BAMBOO,
+                ModBlocks.CHEST_CHEST_BALSAM,
+                ModBlocks.CHEST_CHEST_CYPRESS,
+                ModBlocks.CHEST_CHEST_EUCALYPTUS,
+                ModBlocks.CHEST_CHEST_MAHOGANY,
+                ModBlocks.CHEST_CHEST_MARSHWOOD,
+                ModBlocks.CHEST_CHEST_MOSSBARK,
+                ModBlocks.CHEST_CHEST_PETRIFIED,
+                ModBlocks.CHEST_CHEST_ROTTEN,
+                ModBlocks.CHEST_CHEST_SCORCHED,
+                ModBlocks.CHEST_CHEST_VARNISHED,
+                ModBlocks.CHEST_CHEST_WHITE
         );
     }
 

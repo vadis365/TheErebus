@@ -1,6 +1,5 @@
 package erebus.world.feature.misc.config;
 
-import erebus.registries.blocks.providers.AmberBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -61,9 +60,9 @@ public class AmberGroundFeatureConfiguration extends Feature<NoneFeatureConfigur
 
     protected void setAmberBlock(WorldGenLevel level, BlockPos pos, RandomSource random) {
         if (random.nextFloat() > BUGGED_AMBER_CHANCE) {
-            level.setBlock(pos, AmberBlocks.AMBER.get().defaultBlockState(), 2);
+            level.setBlock(pos, ModBlocks.AMBER.get().defaultBlockState(), 2);
         } else {
-            level.setBlock(pos, AmberBlocks.PRESERVED_AMBER.get().defaultBlockState(), 3);
+            level.setBlock(pos, ModBlocks.PRESERVED_AMBER.get().defaultBlockState(), 3);
             // TODO: Implement Preserved Block Entity
         }
     }

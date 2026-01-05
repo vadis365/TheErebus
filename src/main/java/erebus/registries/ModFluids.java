@@ -1,7 +1,7 @@
 package erebus.registries;
 
 import erebus.Erebus;
-import erebus.registries.blocks.providers.FluidBlocks;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
@@ -84,19 +84,19 @@ public class ModFluids {
 
 	public static final DeferredHolder<Fluid, BaseFlowingFluid> HONEY_STILL = FLUIDS.register("honey_still", () -> new BaseFlowingFluid.Source(ModFluids.HONEY_PROPERTIES));
 	public static final DeferredHolder<Fluid, BaseFlowingFluid> HONEY_FLOW = FLUIDS.register("honey_flowing", () -> new BaseFlowingFluid.Flowing(ModFluids.HONEY_PROPERTIES));
-	public static final BaseFlowingFluid.Properties HONEY_PROPERTIES = new BaseFlowingFluid.Properties(() -> HONEY_TYPE.get(), HONEY_STILL, HONEY_FLOW).block(FluidBlocks.HONEY_BLOCK).bucket(ModItems.HONEY_BUCKET);
+	public static final BaseFlowingFluid.Properties HONEY_PROPERTIES = new BaseFlowingFluid.Properties(() -> HONEY_TYPE.get(), HONEY_STILL, HONEY_FLOW).block(ModBlocks.FLUID_HONEY_BLOCK).bucket(ModItems.HONEY_BUCKET);
 
 	public static final DeferredHolder<Fluid, BaseFlowingFluid> ANTI_VENOM_STILL = FLUIDS.register("anti_venom_still", () -> new BaseFlowingFluid.Source(ModFluids.ANTI_VENOM_PROPERTIES));
 	public static final DeferredHolder<Fluid, BaseFlowingFluid> ANTI_VENOM_FLOW = FLUIDS.register("anti_venom_flowing", () -> new BaseFlowingFluid.Flowing(ModFluids.ANTI_VENOM_PROPERTIES));
-	public static final BaseFlowingFluid.Properties ANTI_VENOM_PROPERTIES = new BaseFlowingFluid.Properties(() -> ANTI_VENOM_TYPE.get(), ANTI_VENOM_STILL, ANTI_VENOM_FLOW).block(FluidBlocks.ANTI_VENOM_BLOCK).bucket(ModItems.ANTI_VENOM_BUCKET);
+	public static final BaseFlowingFluid.Properties ANTI_VENOM_PROPERTIES = new BaseFlowingFluid.Properties(() -> ANTI_VENOM_TYPE.get(), ANTI_VENOM_STILL, ANTI_VENOM_FLOW).block(ModBlocks.FLUID_ANTI_VENOM_BLOCK).bucket(ModItems.ANTI_VENOM_BUCKET);
 
 	public static final DeferredHolder<Fluid, BaseFlowingFluid> BEETLE_JUICE_STILL = FLUIDS.register("beetle_juice_still", () -> new BaseFlowingFluid.Source(ModFluids.BEETLE_JUICE_PROPERTIES));
 	public static final DeferredHolder<Fluid, BaseFlowingFluid> BEETLE_JUICE_FLOW = FLUIDS.register("beetle_juice_flowing", () -> new BaseFlowingFluid.Flowing(ModFluids.BEETLE_JUICE_PROPERTIES));
-	public static final BaseFlowingFluid.Properties BEETLE_JUICE_PROPERTIES = new BaseFlowingFluid.Properties(() -> BEETLE_JUICE_TYPE.get(), BEETLE_JUICE_STILL, BEETLE_JUICE_FLOW).block(FluidBlocks.BEETLE_JUICE_BLOCK).bucket(ModItems.BEETLE_JUICE_BUCKET);
+	public static final BaseFlowingFluid.Properties BEETLE_JUICE_PROPERTIES = new BaseFlowingFluid.Properties(() -> BEETLE_JUICE_TYPE.get(), BEETLE_JUICE_STILL, BEETLE_JUICE_FLOW).block(ModBlocks.FLUID_BEETLE_JUICE_BLOCK).bucket(ModItems.BEETLE_JUICE_BUCKET);
 
 	public static final DeferredHolder<Fluid, BaseFlowingFluid> FORMIC_ACID_STILL = FLUIDS.register("formic_acid_still", () -> new BaseFlowingFluid.Source(ModFluids.FORMIC_ACID_PROPERTIES));
 	public static final DeferredHolder<Fluid, BaseFlowingFluid> FORMIC_ACID_FLOW = FLUIDS.register("formic_acid_flowing", () -> new BaseFlowingFluid.Flowing(ModFluids.FORMIC_ACID_PROPERTIES));
-	public static final BaseFlowingFluid.Properties FORMIC_ACID_PROPERTIES = new BaseFlowingFluid.Properties(() -> FORMIC_ACID_TYPE.get(), FORMIC_ACID_STILL, FORMIC_ACID_FLOW).block(FluidBlocks.FORMIC_ACID_BLOCK).bucket(ModItems.FORMIC_ACID_BUCKET);
+	public static final BaseFlowingFluid.Properties FORMIC_ACID_PROPERTIES = new BaseFlowingFluid.Properties(() -> FORMIC_ACID_TYPE.get(), FORMIC_ACID_STILL, FORMIC_ACID_FLOW).block(ModBlocks.FLUID_FORMIC_ACID_BLOCK).bucket(ModItems.FORMIC_ACID_BUCKET);
 
 	/*	
 	@Nonnull

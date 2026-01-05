@@ -1,6 +1,5 @@
 package erebus.world.feature.structure.pieces;
 
-import erebus.registries.blocks.providers.*;
 import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,12 +21,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class SwampHutPiece extends ScatteredFeaturePiece {
 
-    private final BlockState LOG = WoodBlocks.LOG_MOSSBARK.get().defaultBlockState();
-    private final BlockState PLANK = WoodBlocks.PLANKS_MOSSBARK.get().defaultBlockState();
-    private final BlockState STAIR = StairBlocks.MOSSBARK.get().defaultBlockState();
-    private final BlockState BRICKS = UmberstoneBlocks.UMBERCOBBLE.get().defaultBlockState();
-    private final BlockState FENCE = FenceBlocks.FENCE_MOSSBARK.get().defaultBlockState();
-    private final BlockState DOOR = DoorBlocks.MOSSBARK.get().defaultBlockState();
+    private final BlockState LOG = ModBlocks.LOG_MOSSBARK.get().defaultBlockState();
+    private final BlockState PLANK = ModBlocks.PLANKS_MOSSBARK.get().defaultBlockState();
+    private final BlockState STAIR = ModBlocks.STAIRS_MOSSBARK.get().defaultBlockState();
+    private final BlockState BRICKS = ModBlocks.UMBERCOBBLE.get().defaultBlockState();
+    private final BlockState FENCE = ModBlocks.FENCE_MOSSBARK.get().defaultBlockState();
+    private final BlockState DOOR = ModBlocks.DOOR_MOSSBARK.get().defaultBlockState();
 
     public SwampHutPiece(RandomSource random, int x, int z) {
         super(ModStructurePieces.SWAMP_HUT.get(), x, 64, z, 10, 8, 10, getRandomHorizontalDirection(random));

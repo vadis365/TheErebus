@@ -1,6 +1,5 @@
 package erebus.world.feature.mushroom.config;
 
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.utils.MathUtil;
 import erebus.world.util.FeatureUtils;
 import net.minecraft.core.BlockPos;
@@ -21,10 +20,10 @@ public class KaizersFingersMushroomFeatureConfiguration extends Feature<NoneFeat
     private final int[] offsetX = {0, -1, 0, 1};
     private final int[] offsetZ = {1, 0, -1, 0};
     private final FeatureUtils Utils = new FeatureUtils();
-    private final BlockState STEM = PlantBlocks.KAIZERS_FINGERS_MUSHROOM_STEM.get().defaultBlockState()
+    private final BlockState STEM = ModBlocks.KAIZERS_FINGERS_MUSHROOM_STEM.get().defaultBlockState()
             .setValue(HugeMushroomBlock.UP, true)
             .setValue(HugeMushroomBlock.DOWN, true);
-    private final BlockState SHROOM = PlantBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK.get().defaultBlockState();
+    private final BlockState SHROOM = ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK.get().defaultBlockState();
 
     public KaizersFingersMushroomFeatureConfiguration() {
         super(NoneFeatureConfiguration.CODEC);

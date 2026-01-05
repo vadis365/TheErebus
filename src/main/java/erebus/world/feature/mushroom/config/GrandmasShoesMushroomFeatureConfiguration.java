@@ -1,6 +1,5 @@
 package erebus.world.feature.mushroom.config;
 
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.world.util.FeatureUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -17,10 +16,10 @@ public class GrandmasShoesMushroomFeatureConfiguration extends Feature<NoneFeatu
     private final int[] offsetX = {0, -1, 0, 1};
     private final int[] offsetZ = {1, 0, -1, 0};
     private final FeatureUtils Utils = new FeatureUtils();
-    private final BlockState STEM = PlantBlocks.GRANDMAS_SHOES_MUSHROOM_STEM.get().defaultBlockState()
+    private final BlockState STEM = ModBlocks.GRANDMAS_SHOES_MUSHROOM_STEM.get().defaultBlockState()
             .setValue(HugeMushroomBlock.UP, true)
             .setValue(HugeMushroomBlock.DOWN, true);
-    private final BlockState SHROOM = PlantBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK.get().defaultBlockState();
+    private final BlockState SHROOM = ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK.get().defaultBlockState();
 
     public GrandmasShoesMushroomFeatureConfiguration() {
         super(NoneFeatureConfiguration.CODEC);

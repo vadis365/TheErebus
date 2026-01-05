@@ -2,7 +2,6 @@ package erebus.block.bamboo;
 
 import erebus.block.entity.BambooCrateBlockEntity;
 import erebus.block.types.EnumCrateType;
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -103,7 +102,7 @@ public class BambooCrateBlock extends Block implements EntityBlock {
 				for (int i = -1; i <= 1; i++)
 					for (int j = -1; j <= 1; j++)
 						for (int k = -1; k <= 1; k++)
-							if (level.getBlockState(pos.offset(i, k, j)).is(OtherBlocks.BAMBOO_CRATE.get())) {
+							if (level.getBlockState(pos.offset(i, k, j)).is(ModBlocks.BAMBOO_CRATE.get())) {
 								BlockState crateState = level.getBlockState(pos.offset(i, k, j));
 								if (crateState.getValue(CRATE_TYPE) == EnumCrateType.BTL) {
 									BlockEntity blockEntityOther = level.getBlockEntity(pos.offset(i, k, j));
@@ -137,6 +136,6 @@ public class BambooCrateBlock extends Block implements EntityBlock {
 	}
 
     private boolean isCrate(LevelReader level, BlockPos pos) {
-        return level.getBlockState(pos).is(OtherBlocks.BAMBOO_CRATE.get());
+        return level.getBlockState(pos).is(ModBlocks.BAMBOO_CRATE.get());
     }
 }

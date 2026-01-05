@@ -1,7 +1,6 @@
 
 package erebus.world.feature.plant.config;
 
-import erebus.registries.blocks.providers.PlantBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -22,9 +21,9 @@ public class FernFeatureConfiguration extends Feature<NoneFeatureConfiguration> 
         RandomSource random = context.random();
 
         if (random.nextInt(10) == 0 && level.isEmptyBlock(pos.above(2)) && level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)) {
-            setBlock(level, pos, PlantBlocks.TALL_FERN.get().defaultBlockState());
+            setBlock(level, pos, ModBlocks.TALL_FERN.get().defaultBlockState());
         } else if (level.isEmptyBlock(pos.above()) && level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)) {
-            setBlock(level, pos, PlantBlocks.FERN.get().defaultBlockState());
+            setBlock(level, pos, ModBlocks.FERN.get().defaultBlockState());
         }
 
         return true;

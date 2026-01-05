@@ -140,7 +140,7 @@ public class BambooBridge extends HorizontalDirectionalBlock implements EntityBl
 		BlockState state = level.getBlockState(pos);
 		Block block = state.getBlock();
 		if (block != this)
-			return !level.isEmptyBlock(pos) && state.isCollisionShapeFullBlock(level, pos) ? !state.is(BlockTags.CROPS) : false;
+			return !level.isEmptyBlock(pos) && state.isCollisionShapeFullBlock(level, pos) && !state.is(BlockTags.CROPS);
 		else
 			return true;
 	}

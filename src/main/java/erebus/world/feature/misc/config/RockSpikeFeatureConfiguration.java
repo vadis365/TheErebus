@@ -1,7 +1,5 @@
 package erebus.world.feature.misc.config;
 
-import erebus.registries.blocks.providers.OreBlocks;
-import erebus.registries.blocks.providers.UmberstoneBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.util.Mth;
@@ -34,7 +32,7 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
         BlockPos groundPos = findGroundPosition(level, originPos);
 
         // Only generate on volcanic rock
-        if (!level.getBlockState(groundPos).is(UmberstoneBlocks.VOLCANIC_ROCK)) {
+        if (!level.getBlockState(groundPos).is(ModBlocks.VOLCANIC_ROCK)) {
             return false;
         }
 
@@ -95,7 +93,7 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
                         BlockPos upwardPos = centerPos.offset(xOffset, heightIndex, zOffset);
                         BlockState existingBlockUp = level.getBlockState(upwardPos);
 
-                        if (existingBlockUp.isAir() || existingBlockUp.is(UmberstoneBlocks.VOLCANIC_ROCK)) {
+                        if (existingBlockUp.isAir() || existingBlockUp.is(ModBlocks.VOLCANIC_ROCK)) {
                             placePetrifiedWoodBlock(level, upwardPos, heightIndex);
                         }
 
@@ -104,7 +102,7 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
                             BlockPos downwardPos = centerPos.offset(xOffset, -heightIndex, zOffset);
                             BlockState existingBlockDown = level.getBlockState(downwardPos);
 
-                            if (existingBlockDown.isAir() || existingBlockDown.is(UmberstoneBlocks.VOLCANIC_ROCK)) {
+                            if (existingBlockDown.isAir() || existingBlockDown.is(ModBlocks.VOLCANIC_ROCK)) {
                                 placePetrifiedWoodBlock(level, downwardPos, heightIndex);
                             }
                         }
@@ -122,17 +120,17 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
         BlockState blockState;
 
         if (height <= 3) {
-            blockState = UmberstoneBlocks.PETRIFIED_WOOD_ROCK.get().defaultBlockState();
+            blockState = ModBlocks.PETRIFIED_WOOD_ROCK.get().defaultBlockState();
         } else if (height <= 6) {
-            blockState = UmberstoneBlocks.PETRIFIED_WOOD_ROCK_2.get().defaultBlockState();
+            blockState = ModBlocks.PETRIFIED_WOOD_ROCK_2.get().defaultBlockState();
         } else if (height <= 9) {
-            blockState = UmberstoneBlocks.PETRIFIED_WOOD_ROCK_3.get().defaultBlockState();
+            blockState = ModBlocks.PETRIFIED_WOOD_ROCK_3.get().defaultBlockState();
         } else if (height <= 12) {
-            blockState = UmberstoneBlocks.PETRIFIED_WOOD_ROCK_4.get().defaultBlockState();
+            blockState = ModBlocks.PETRIFIED_WOOD_ROCK_4.get().defaultBlockState();
         } else if (height <= 15) {
-            blockState = UmberstoneBlocks.PETRIFIED_WOOD_ROCK_5.get().defaultBlockState();
+            blockState = ModBlocks.PETRIFIED_WOOD_ROCK_5.get().defaultBlockState();
         } else {
-            blockState = UmberstoneBlocks.PETRIFIED_WOOD_ROCK_6.get().defaultBlockState();
+            blockState = ModBlocks.PETRIFIED_WOOD_ROCK_6.get().defaultBlockState();
         }
 
         setBlock(level, pos, blockState.setValue(BlockStateProperties.AXIS, Axis.Y));
@@ -171,7 +169,7 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
                     }
 
                     // Place a diamond ore block
-                    setBlock(level, currentPos, OreBlocks.ENCRUSTED_DIAMOND.get().defaultBlockState());
+                    setBlock(level, currentPos, ModBlocks.ORE_ENCRUSTED_DIAMOND.get().defaultBlockState());
                     currentPos = currentPos.below();
                     --oreColumnHeight;
 

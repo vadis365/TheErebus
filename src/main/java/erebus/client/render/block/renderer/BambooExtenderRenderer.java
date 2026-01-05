@@ -7,8 +7,6 @@ import erebus.Erebus;
 import erebus.block.bamboo.BambooExtender;
 import erebus.block.entity.BambooExtenderBlockEntity;
 import erebus.client.render.block.model.BambooExtenderModel;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -40,7 +38,7 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 		if(tile == null || !tile.hasLevel())
 			return;
 		BlockState state = tile.getLevel().getBlockState(tile.getBlockPos());
-		if(state == null || state.getBlock() != OtherBlocks.BAMBOO_EXTENDER.get())
+		if(state == null || state.getBlock() != ModBlocks.BAMBOO_EXTENDER.get())
 			return;
 
 		VertexConsumer consumer = buffer.getBuffer(RenderType.entityCutout(TEXTURE));
@@ -58,7 +56,7 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 				stack.pushPose();
 				stack.translate(0F, 0.125F, 0F);
 				stack.scale(1F, 0.875F, 1F);
-				blockRenderDispatcher.renderSingleBlock(WoodBlocks.PLANKS_BAMBOO.get().defaultBlockState(), stack, buffer, packedLight, packedOverlay, ModelData.EMPTY, null);
+				blockRenderDispatcher.renderSingleBlock(ModBlocks.PLANKS_BAMBOO.get().defaultBlockState(), stack, buffer, packedLight, packedOverlay, ModelData.EMPTY, null);
 				stack.popPose();
 				break;
 			case UP:
@@ -70,7 +68,7 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 				stack.popPose();
 				stack.pushPose();
 				stack.scale(1F, 0.875F, 1F);
-				blockRenderDispatcher.renderSingleBlock(WoodBlocks.PLANKS_BAMBOO.get().defaultBlockState(), stack, buffer, packedLight, packedOverlay, ModelData.EMPTY, null);
+				blockRenderDispatcher.renderSingleBlock(ModBlocks.PLANKS_BAMBOO.get().defaultBlockState(), stack, buffer, packedLight, packedOverlay, ModelData.EMPTY, null);
 				stack.popPose();
 				break;
 			case NORTH:

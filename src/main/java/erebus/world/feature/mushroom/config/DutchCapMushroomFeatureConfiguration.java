@@ -1,6 +1,5 @@
 package erebus.world.feature.mushroom.config;
 
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.world.util.FeatureUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -15,10 +14,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class DutchCapMushroomFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
     private final FeatureUtils Utils = new FeatureUtils();
-    private final BlockState STEM = PlantBlocks.DUTCH_CAP_MUSHROOM_STEM.get().defaultBlockState()
+    private final BlockState STEM = ModBlocks.DUTCH_CAP_MUSHROOM_STEM.get().defaultBlockState()
             .setValue(HugeMushroomBlock.UP, true)
             .setValue(HugeMushroomBlock.DOWN, true);
-    private final BlockState SHROOM = PlantBlocks.DUTCH_CAP_MUSHROOM_BLOCK.get().defaultBlockState();
+    private final BlockState SHROOM = ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK.get().defaultBlockState();
 
     public DutchCapMushroomFeatureConfiguration() {
         super(NoneFeatureConfiguration.CODEC);

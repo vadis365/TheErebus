@@ -5,7 +5,6 @@ import erebus.block.bamboo.BambooTorchBlock;
 import erebus.block.plants.ModCropBlock;
 import erebus.block.plants.PricklyPearBlock;
 import erebus.block.types.EnumTorchBlockHalf;
-import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
@@ -97,7 +96,7 @@ public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
 						.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
 								.add(LootItem.lootTableItem(ModItems.BAMBOO)))
 						.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-								.add(LootItem.lootTableItem(WoodBlocks.SAPLING_BAMBOO.get().asItem()).when(condition))));
+								.add(LootItem.lootTableItem(ModBlocks.SAPLING_BAMBOO.get().asItem()).when(condition))));
 	}
 	
 	public void dropSingleBambooTorchCondition(Supplier<? extends Block> blockIn) {

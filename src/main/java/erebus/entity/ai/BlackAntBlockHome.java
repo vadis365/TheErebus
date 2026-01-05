@@ -60,9 +60,9 @@ public abstract class BlackAntBlockHome extends Goal {
     public void tick() {
     	BlackAnt blackAnt = (BlackAnt) entity;
     	BlockPos blockUnderSilo = blackAnt.getDropPoint().below();
-		int xCoord = (int) blockUnderSilo.getX();
-		int yCoord = (int) blockUnderSilo.getY();
-		int zCoord = (int) blockUnderSilo.getZ();
+		int xCoord = blockUnderSilo.getX();
+		int yCoord = blockUnderSilo.getY();
+		int zCoord = blockUnderSilo.getZ();
 
 		for (int i = 0; i < CHECKS_PER_TICK; i++)
 			if (!hasTarget) {

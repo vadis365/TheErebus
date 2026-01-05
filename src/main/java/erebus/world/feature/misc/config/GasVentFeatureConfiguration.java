@@ -1,6 +1,5 @@
 package erebus.world.feature.misc.config;
 
-import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -36,7 +35,7 @@ public class GasVentFeatureConfiguration extends Feature<NoneFeatureConfiguratio
             BlockPos newPos = new BlockPos(xx, yy, zz);
 
             if (level.isEmptyBlock(newPos.above()) && level.getBlockState(newPos).is(Blocks.GRASS_BLOCK)) {
-                level.setBlock(newPos, OtherBlocks.SWAMP_VENT.get().defaultBlockState(), 2);
+                level.setBlock(newPos, ModBlocks.SWAMP_VENT.get().defaultBlockState(), 2);
                 ++placed;
             }
         }

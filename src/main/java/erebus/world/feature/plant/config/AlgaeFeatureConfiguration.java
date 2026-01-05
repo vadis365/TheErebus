@@ -1,6 +1,5 @@
 package erebus.world.feature.plant.config;
 
-import erebus.registries.blocks.providers.PlantBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -28,7 +27,7 @@ public class AlgaeFeatureConfiguration extends Feature<NoneFeatureConfiguration>
             BlockPos check = pos.offset(xOff, yOff, zOff);
 
             if (level.isEmptyBlock(check) && level.getBlockState(check.below()).is(Blocks.WATER)) {
-                setBlock(level, check, PlantBlocks.ALGAE.get().defaultBlockState());
+                setBlock(level, check, ModBlocks.ALGAE.get().defaultBlockState());
             }
         }
 

@@ -3,7 +3,6 @@ package erebus.datagen.providers.recipes;
 import erebus.recipes.altar.OfferingAltarRecipeBuilder;
 import erebus.recipes.smoothie.SmoothieRecipeBuilder;
 import erebus.registries.ModFluids;
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -94,8 +93,8 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.ANTI_VENOM_STILL.get(), FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(ModItems.WASP_STING))
 				.addItemIngredient(Ingredient.of(ModItems.BOGMAW_ROOT))
-				.addItemIngredient(Ingredient.of(PlantBlocks.FIRE_BLOOM))
-				.addItemIngredient(Ingredient.of(PlantBlocks.FIRE_BLOOM))
+				.addItemIngredient(Ingredient.of(ModBlocks.FIRE_BLOOM))
+				.addItemIngredient(Ingredient.of(ModBlocks.FIRE_BLOOM))
 				.unlockedBy("has_smoothie_glass", has(ModItems.SMOOTHIE_GLASS))
 				.save(output);
 

@@ -2,7 +2,6 @@ package erebus.block.bamboo;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.BambooPipeExtractBlockEntity;
-import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -154,7 +153,7 @@ public class BambooPipeExtract extends DirectionalBlock implements EntityBlock {
 		}
 		 else {
 			 if (stack.isEmpty()) {
-				BlockState activeState = OtherBlocks.BAMBOO_PIPE_EXTRACT.get().defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(ACTIVE, !state.getValue(ACTIVE)).setValue(CONNECTED_DOWN, this.isSideConnectable(level, pos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, pos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, pos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, pos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, pos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, pos, Direction.WEST));
+				BlockState activeState = ModBlocks.BAMBOO_PIPE_EXTRACT.get().defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(ACTIVE, !state.getValue(ACTIVE)).setValue(CONNECTED_DOWN, this.isSideConnectable(level, pos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, pos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, pos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, pos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, pos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, pos, Direction.WEST));
 				level.setBlock(pos, activeState, 3);
 				level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, 0.5F);
 				return InteractionResult.SUCCESS;

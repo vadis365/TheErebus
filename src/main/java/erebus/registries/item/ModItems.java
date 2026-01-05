@@ -13,9 +13,6 @@ import erebus.item.shield.type.*;
 import erebus.item.wand.WandOfAnimationItem;
 import erebus.item.wand.WandOfPreservationItem;
 import erebus.registries.ModFluids;
-import erebus.registries.blocks.providers.AmberBlocks;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.data.ModArmorMaterials;
 import erebus.registries.data.ModToolMaterials;
 import erebus.registries.helpers.ModItemHelpers;
@@ -86,7 +83,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> UMBERGOLEM_HEAD = registerItem("umbergolem_head");
     public static final DeferredItem<Item> UMBERGOLEM_CLAW = registerItem("umbergolem_claw");
     public static final DeferredItem<Item> UMBERGOLEM_LEGS = registerItem("umbergolem_legs");
-    public static final DeferredItem<Item> JADE_BERRIES = registerItem("jade_berries", () -> new BlockItem(PlantBlocks.JADE_BERRY_BUSH.get(), new Item.Properties().food(ModFoods.JADE_BERRIES)));
+    public static final DeferredItem<Item> JADE_BERRIES = registerItem("jade_berries", () -> new BlockItem(ModBlocks.JADE_BERRY_BUSH.get(), new Item.Properties().food(ModFoods.JADE_BERRIES)));
     public static final DeferredItem<Item> BOGMAW_ROOT = registerItem("bogmaw_root");
     public static final DeferredItem<Item> HYDROFUGE = registerItem("hydrofuge");
     public static final DeferredItem<Item> WATER_REPELLENT = registerItem("water_repellent");
@@ -117,7 +114,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> DARK_FRUIT = registerFoodItem("dark_fruit", ModFoods.DARK_FRUIT, ModConsumables.food().build());
     public static final DeferredItem<Item> TITAN_CHOP_RAW = registerFoodItem("titan_chop_raw", ModFoods.TITAN_CHOP_RAW, ModConsumables.food().build());
     public static final DeferredItem<Item> TITAN_CHOP_COOKED = registerFoodItem("titan_chop_cooked", ModFoods.TITAN_CHOP_COOKED, ModConsumables.TITAN_CHOP_COOKED);
-    public static final DeferredItem<Item> SWAMP_BERRIES = ITEMS.register("swamp_berries", () -> new BlockItem(PlantBlocks.SWAMP_BERRY_BUSH.get(), new Item.Properties().food(ModFoods.SWAMP_BERRIES)));
+    public static final DeferredItem<Item> SWAMP_BERRIES = ITEMS.register("swamp_berries", () -> new BlockItem(ModBlocks.SWAMP_BERRY_BUSH.get(), new Item.Properties().food(ModFoods.SWAMP_BERRIES)));
     public static final DeferredItem<Item> CABBAGE = registerFoodItem("cabbage", ModFoods.CABBAGE, ModConsumables.food().build());
     public static final DeferredItem<Item> TITAN_STEW_COOKED = registerFoodItem("titan_stew_cooked", ModFoods.TITAN_STEW_COOKED, ModConsumables.food().build(), STEW_POT);
     public static final DeferredItem<Item> PRICKLY_PEAR_RAW = registerFoodItem("prickly_pear_raw", ModFoods.PRICKLY_PEAR_RAW, ModConsumables.PRICKLY_PEAR);
@@ -235,9 +232,9 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> EREBUS_MAP_FILLED = registerItem("erebus_map_filled");
 
     // MARK: Plants
-    public static final DeferredItem<Item> TURNIP = registerItem("turnip", () -> new BlockItem(PlantBlocks.CROP_TURNIP.get(), new Item.Properties()));
-    public static final DeferredItem<Item> CABBAGE_SEEDS = registerItem("cabbage_seeds", () -> new BlockItem(PlantBlocks.CROP_CABBAGE.get(), new Item.Properties()));
-    public static final DeferredItem<Item> MANDRAKE_ROOT = registerItem("mandrake_root", () -> new BlockItem(PlantBlocks.CROP_MANDRAKE.get(), new Item.Properties()));
+    public static final DeferredItem<Item> TURNIP = registerItem("turnip", () -> new BlockItem(ModBlocks.CROP_TURNIP.get(), new Item.Properties()));
+    public static final DeferredItem<Item> CABBAGE_SEEDS = registerItem("cabbage_seeds", () -> new BlockItem(ModBlocks.CROP_CABBAGE.get(), new Item.Properties()));
+    public static final DeferredItem<Item> MANDRAKE_ROOT = registerItem("mandrake_root", () -> new BlockItem(ModBlocks.CROP_MANDRAKE.get(), new Item.Properties()));
     public static final DeferredItem<Item> SEED_BLACK = registerItem("seed_black");
     public static final DeferredItem<Item> SEED_RED = registerItem("seed_red");
     public static final DeferredItem<Item> SEED_BROWN = registerItem("seed_brown");
@@ -255,7 +252,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> SEED_RAINBOW = registerItem("seed_rainbow");
 
     public static final DeferredItem<Item> LIFE_BLOOD = registerItem("life_blood");
-    public static final DeferredItem<Item> HEART_BERRIES = registerItem("heart_berries", () -> new BlockItem(PlantBlocks.HEART_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
+    public static final DeferredItem<Item> HEART_BERRIES = registerItem("heart_berries", () -> new BlockItem(ModBlocks.HEART_BERRY_BUSH.get(), new Item.Properties().food(new FoodProperties.Builder()
             .nutrition(1)
             .saturationModifier(0.1F)
             .build()
@@ -270,7 +267,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<BucketItem> BEETLE_JUICE_BUCKET = ITEMS.register("beetle_juice_bucket", () -> new BeettleJuiceBucketItem(ModFluids.BEETLE_JUICE_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     // Block Items
-    public static final DeferredItem<BlockItem> FLUID_JAR = ITEMS.register("fluid_jar", () -> new FluidJarBlockItem(AmberBlocks.FLUID_JAR.get(), FluidType.BUCKET_VOLUME * 32, new Item.Properties()));
-    public static final DeferredItem<BlockItem> LIQUIFIER = ITEMS.register("liquifier", () -> new LiquifierBlockItem(OtherBlocks.LIQUIFIER.get(), FluidType.BUCKET_VOLUME * 8, new Item.Properties()));
-    public static final DeferredItem<BlockItem> BAMBOO_CRATE = ITEMS.register("bamboo_crate", () -> new BambooCrateItem(OtherBlocks.BAMBOO_CRATE.get(), new Item.Properties()));
+    public static final DeferredItem<BlockItem> FLUID_JAR = ITEMS.register("fluid_jar", () -> new FluidJarBlockItem(ModBlocks.FLUID_JAR.get(), FluidType.BUCKET_VOLUME * 32, new Item.Properties()));
+    public static final DeferredItem<BlockItem> LIQUIFIER = ITEMS.register("liquifier", () -> new LiquifierBlockItem(ModBlocks.LIQUIFIER.get(), FluidType.BUCKET_VOLUME * 8, new Item.Properties()));
+    public static final DeferredItem<BlockItem> BAMBOO_CRATE = ITEMS.register("bamboo_crate", () -> new BambooCrateItem(ModBlocks.BAMBOO_CRATE.get(), new Item.Properties()));
 }

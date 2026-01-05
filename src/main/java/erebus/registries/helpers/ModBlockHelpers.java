@@ -19,11 +19,11 @@ import java.util.function.Supplier;
 import static erebus.registries.blocks.ModBlocks.BLOCKS;
 
 public class ModBlockHelpers {
-    protected static DeferredBlock<TransparentBlock> registerTransparentBlock(String name, Properties properties) {
+    protected static DeferredBlock<Block> registerTransparentBlock(String name, Properties properties) {
         return registerBlock(name, () -> new TransparentBlock(properties));
     }
 
-    protected static DeferredBlock<ConnectedTextureBlock> registerConnectedTextureBlock(String name, Properties properties) {
+    protected static DeferredBlock<Block> registerConnectedTextureBlock(String name, Properties properties) {
         return registerBlock(name, () -> new ConnectedTextureBlock(properties));
     }
 

@@ -7,7 +7,6 @@ import erebus.entity.ai.BlackAntPlantCrops;
 import erebus.inventory.server.BlackAntMenu;
 import erebus.inventory.server.BlackAntSimpleContainer;
 import erebus.registries.ModSounds;
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.data.ModDataComponents;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -18,7 +17,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -269,7 +267,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 				moveToSilo();
 
 				Block block = level().getBlockState(getDropPoint()).getBlock();
-				if (block == OtherBlocks.SILO_TANK.get())
+				if (block == ModBlocks.SILO_TANK.get())
 					if (getDistance(getDropPoint().getX() + 0.5D, getDropPoint().getY() - 1D, getDropPoint().getZ() + 0.5D) < 2D) {
 						addDropToInventory(getDropPoint());
 						if(isAntInvSlotEmpty()) {
@@ -286,7 +284,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 			if (canCollectFromSilo) {
 				moveToSilo();
 				Block block = level().getBlockState(getDropPoint()).getBlock();
-				if (block == OtherBlocks.SILO_TANK.get())
+				if (block == ModBlocks.SILO_TANK.get())
 					if (getDistance(getDropPoint().getX() + 0.5D, getDropPoint().getY() - 1D, getDropPoint().getZ() + 0.5D) < 2D) {
 						getStackFromSilo();
 						canCollectFromSilo = false;

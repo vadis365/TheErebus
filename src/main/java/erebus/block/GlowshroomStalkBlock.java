@@ -2,7 +2,6 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.types.EnumGlowshroomPart;
-import erebus.registries.blocks.providers.PlantBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -217,26 +216,26 @@ public class GlowshroomStalkBlock extends Block {
 					level.setBlock(pos.below(), defaultBlockState().setValue(PART, EnumGlowshroomPart.DOWN_1), 2);
 				break;
 			case 1:
-				if (level.isEmptyBlock(pos.north()) && level.getBlockState(pos.above()).is(PlantBlocks.GLOWSHROOM_STALK.get()))
+				if (level.isEmptyBlock(pos.north()) && level.getBlockState(pos.above()).is(ModBlocks.GLOWSHROOM_STALK.get()))
 					level.setBlock(pos.north(), defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_1), 2);
 				break;
 			case 2:
-				if (level.isEmptyBlock(pos.south()) && level.getBlockState(pos.above()).is(PlantBlocks.GLOWSHROOM_STALK.get()))
+				if (level.isEmptyBlock(pos.south()) && level.getBlockState(pos.above()).is(ModBlocks.GLOWSHROOM_STALK.get()))
 					level.setBlock(pos.south(), defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_1), 2);
 				break;
 			case 3:
-				if (level.isEmptyBlock(pos.west()) && level.getBlockState(pos.above()).is(PlantBlocks.GLOWSHROOM_STALK.get()))
+				if (level.isEmptyBlock(pos.west()) && level.getBlockState(pos.above()).is(ModBlocks.GLOWSHROOM_STALK.get()))
 					level.setBlock(pos.west(), defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_1), 2);
 				break;
 			case 4:
-				if (level.isEmptyBlock(pos.east()) && level.getBlockState(pos.above()).is(PlantBlocks.GLOWSHROOM_STALK.get()))
+				if (level.isEmptyBlock(pos.east()) && level.getBlockState(pos.above()).is(ModBlocks.GLOWSHROOM_STALK.get()))
 					level.setBlock(pos.east(), defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_1), 2);
 				break;
 			}
 
 			if (random.nextInt(10) == 0)
 				if (level.isEmptyBlock(pos.above()))
-					level.setBlock(pos.above(), PlantBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
+					level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
 			break;
 		}
 		case DOWN_1:
@@ -255,7 +254,7 @@ public class GlowshroomStalkBlock extends Block {
 					level.setBlock(pos.east(), defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_1), 2);
 			} else if (level.isEmptyBlock(pos.above())) {
 				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_3), 2);
-				level.setBlock(pos.above(), PlantBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
+				level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
 			}
 			break;
 		case EAST_2:
@@ -272,7 +271,7 @@ public class GlowshroomStalkBlock extends Block {
 					level.setBlock(pos.north(), defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_1), 2);
 			} else if (level.isEmptyBlock(pos.above())) {
 				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_3), 2);
-				level.setBlock(pos.above(), PlantBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
+				level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
 			}
 			break;
 		case NORTH_2:
@@ -289,7 +288,7 @@ public class GlowshroomStalkBlock extends Block {
 					level.setBlock(pos.south(), defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_1), 2);
 			} else if (level.isEmptyBlock(pos.above())) {
 				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_3), 2);
-				level.setBlock(pos.above(), PlantBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
+				level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
 			}
 			break;
 		case SOUTH_2:
@@ -306,7 +305,7 @@ public class GlowshroomStalkBlock extends Block {
 					level.setBlock(pos.west(), defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_1), 2);
 			} else if (level.isEmptyBlock(pos.above())) {
 				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_3), 2);
-				level.setBlock(pos.above(), PlantBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
+				level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
 			}
 			break;
 		case WEST_2:

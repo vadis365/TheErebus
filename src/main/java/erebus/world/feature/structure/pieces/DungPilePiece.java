@@ -1,8 +1,6 @@
 package erebus.world.feature.structure.pieces;
 
 import erebus.datagen.loot.ModChestLootTables;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.UmberstoneBlocks;
 import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -22,9 +20,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class DungPilePiece extends ScatteredFeaturePiece {
 
-    private final BlockState DUNG = UmberstoneBlocks.DUNG.get().defaultBlockState();
-    private final BlockState BOT_FLY = OtherBlocks.DUNG_SPAWNER_BOT_FLY.get().defaultBlockState();
-    private final BlockState FLY = OtherBlocks.DUNG_SPAWNER_FLY.get().defaultBlockState();
+    private final BlockState DUNG = ModBlocks.DUNG.get().defaultBlockState();
+    private final BlockState BOT_FLY = ModBlocks.DUNG_SPAWNER_BOT_FLY.get().defaultBlockState();
+    private final BlockState FLY = ModBlocks.DUNG_SPAWNER_FLY.get().defaultBlockState();
 
     public DungPilePiece(RandomSource random, int x, int z) {
         super(ModStructurePieces.DUNG_PILE.get(), x, 64, z, 10, 8, 10, getRandomHorizontalDirection(random));

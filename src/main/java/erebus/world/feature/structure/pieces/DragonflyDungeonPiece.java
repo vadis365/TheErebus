@@ -1,8 +1,6 @@
 package erebus.world.feature.structure.pieces;
 
 import erebus.datagen.loot.ModChestLootTables;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -23,9 +21,9 @@ import org.jetbrains.annotations.NotNull;
 public class DragonflyDungeonPiece extends ScatteredFeaturePiece {
 
     private final BlockState AIR = Blocks.AIR.defaultBlockState();
-    private final BlockState GIANT_LILY_PAD = PlantBlocks.GIANT_LILY_PAD.get().defaultBlockState();
-    private final BlockState PETAL = PlantBlocks.PETAL_WHITE.get().defaultBlockState();
-    private final BlockState SPAWNER = OtherBlocks.DRAGON_FLY_SPAWNER.get().defaultBlockState();
+    private final BlockState GIANT_LILY_PAD = ModBlocks.GIANT_LILY_PAD.get().defaultBlockState();
+    private final BlockState PETAL = ModBlocks.PETAL_WHITE.get().defaultBlockState();
+    private final BlockState SPAWNER = ModBlocks.DRAGON_FLY_SPAWNER.get().defaultBlockState();
 
     public DragonflyDungeonPiece(RandomSource random, int x, int z) {
         super(ModStructurePieces.DRAGONFLY_DUNGEON.get(), x, 64, z, 10, 8, 10, getRandomHorizontalDirection(random));

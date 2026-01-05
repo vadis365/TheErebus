@@ -1,6 +1,5 @@
 package erebus.world.feature.plant.config;
 
-import erebus.registries.blocks.providers.PlantBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -22,8 +21,8 @@ public class NettlePatchFeatureConfiguration extends Feature<NoneFeatureConfigur
         BlockPos pos = context.origin();
         RandomSource random = context.random();
 
-        BlockState nettle = PlantBlocks.NETTLE.get().defaultBlockState();
-        BlockState nettleFlowered = PlantBlocks.NETTLE_FLOWERED.get().defaultBlockState();
+        BlockState nettle = ModBlocks.NETTLE.get().defaultBlockState();
+        BlockState nettleFlowered = ModBlocks.NETTLE_FLOWERED.get().defaultBlockState();
 
         float angle, length;
         int x, y, z;

@@ -1,6 +1,5 @@
 package erebus.inventory.server;
 
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.client.ModMenuTypes;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -133,7 +132,7 @@ public class PetrifiedCraftingMenu extends RecipeBookMenu<CraftingInput, Craftin
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(access, player, OtherBlocks.PETRIFIED_CRAFTING_TABLE.get());
+        return stillValid(access, player, ModBlocks.PETRIFIED_CRAFTING_TABLE.get());
     }
 
     @Override

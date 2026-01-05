@@ -1,7 +1,5 @@
 package erebus.world.feature.misc.config;
 
-import erebus.registries.blocks.providers.OreBlocks;
-import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -66,8 +64,8 @@ public class DesertRockGneissFeatureConfiguration extends Feature<NoneFeatureCon
                 int zAtt = z + random.nextInt(checkRandZ * 2) - checkRandY;
                 state = level.getBlockState(new BlockPos(xAtt, yAtt, zAtt));
 
-                if (state.is(OtherBlocks.GNEISS.get()) || state.is(OtherBlocks.GNEISS_VENT.get())) {
-                    level.setBlock(new BlockPos(xAtt, yAtt, zAtt), OreBlocks.ENCRUSTED_DIAMOND.get().defaultBlockState(), 2);
+                if (state.is(ModBlocks.GNEISS.get()) || state.is(ModBlocks.GNEISS_VENT.get())) {
+                    level.setBlock(new BlockPos(xAtt, yAtt, zAtt), ModBlocks.ORE_ENCRUSTED_DIAMOND.get().defaultBlockState(), 2);
                     ++diamonds;
                 }
             }
@@ -84,7 +82,7 @@ public class DesertRockGneissFeatureConfiguration extends Feature<NoneFeatureCon
                     double b = Math.pow(yf - y, 2) / Math.pow(randY, 2);
                     double c = Math.pow(zf - z, 2) / Math.pow(randZ, 2);
                     BlockPos pos = new BlockPos((int) Math.floor(xf), (int) Math.floor(yf), (int) Math.floor(zf));
-                    BlockState state = random.nextInt(6) == 0 ? OtherBlocks.GNEISS_VENT.get().defaultBlockState() : OtherBlocks.GNEISS.get().defaultBlockState();
+                    BlockState state = random.nextInt(6) == 0 ? ModBlocks.GNEISS_VENT.get().defaultBlockState() : ModBlocks.GNEISS.get().defaultBlockState();
 
                     if (a + b + c <= 1.1) {
                         level.setBlock(pos, state, 2);

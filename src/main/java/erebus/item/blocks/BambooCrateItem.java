@@ -2,7 +2,6 @@ package erebus.item.blocks;
 
 import erebus.block.bamboo.BambooCrateBlock;
 import erebus.block.types.EnumCrateType;
-import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -45,11 +44,11 @@ public class BambooCrateItem extends BlockItem {
 		BlockPos pos = context.getClickedPos();
 		for (Direction dir : Direction.values()) {
 			BlockState state2 = level.getBlockState(pos.offset(dir.getStepX(), dir.getStepY(), dir.getStepZ()));
-			if (state2.is(OtherBlocks.BAMBOO_CRATE.get())) {
+			if (state2.is(ModBlocks.BAMBOO_CRATE.get())) {
 				EnumCrateType type = state2.getValue(BambooCrateBlock.CRATE_TYPE);
 				if (type != EnumCrateType.DEFAULT)
 					return false;
-				if (level.getBlockState(pos.offset(dir.getOpposite().getStepX(), dir.getOpposite().getStepY(), dir.getOpposite().getStepZ())).is(OtherBlocks.BAMBOO_CRATE.get()))
+				if (level.getBlockState(pos.offset(dir.getOpposite().getStepX(), dir.getOpposite().getStepY(), dir.getOpposite().getStepZ())).is(ModBlocks.BAMBOO_CRATE.get()))
 					return false;
 			}
 		}

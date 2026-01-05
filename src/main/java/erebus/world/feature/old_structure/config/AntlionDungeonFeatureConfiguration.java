@@ -5,7 +5,6 @@ import erebus.block.bamboo.BambooTorchBlock;
 import erebus.block.entity.BlockOfBonesBlockEntity;
 import erebus.block.types.EnumTorchBlockHalf;
 import erebus.datagen.loot.ModChestLootTables;
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.item.ModItems;
 import erebus.registries.world.ModBiomes;
 import erebus.world.util.MazeGenerator;
@@ -46,26 +45,26 @@ import java.util.Map;
 public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
 
     // Block states used throughout the structure
-    private final BlockState GNEISS = OtherBlocks.GNEISS.get().defaultBlockState();
-    private final BlockState GNEISS_RELIEF = OtherBlocks.GNEISS_RELIEF.get().defaultBlockState();
-    private final BlockState GNEISS_CARVED = OtherBlocks.GNEISS_CARVED.get().defaultBlockState();
-    private final BlockState GNEISS_BRICKS = OtherBlocks.GNEISS_BRICKS.get().defaultBlockState();
-    private final BlockState GNEISS_TILES = OtherBlocks.GNEISS_TILES.get().defaultBlockState();
-    private final BlockState GNEISS_VENT = OtherBlocks.GNEISS_VENT.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK = OtherBlocks.TEMPLE_BRICK.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK_UNBREAKING = OtherBlocks.TEMPLE_BRICK_UNBREAKING.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK_UNBREAKING_JADE = OtherBlocks.TEMPLE_BRICK_UNBREAKING_JADE.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK_UNBREAKING_EXO = OtherBlocks.TEMPLE_BRICK_UNBREAKING_EXO.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK_UNBREAKING_CREAM = OtherBlocks.TEMPLE_BRICK_UNBREAKING_CREAM.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK_UNBREAKING_EYE = OtherBlocks.TEMPLE_BRICK_UNBREAKING_EYE.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK_UNBREAKING_STRING = OtherBlocks.TEMPLE_BRICK_UNBREAKING_STRING.get().defaultBlockState();
-    private final BlockState TEMPLE_PILLAR = OtherBlocks.TEMPLE_PILLAR.get().defaultBlockState();
-    private final BlockState CAPSTONE = OtherBlocks.CAPSTONE.get().defaultBlockState();
-    private final BlockState BAMBOO_TORCH_LOWER = OtherBlocks.BAMBOO_TORCH.get().defaultBlockState().setValue(BambooTorchBlock.HALF, EnumTorchBlockHalf.LOWER);
-    private final BlockState BAMBOO_TORCH_UPPER = OtherBlocks.BAMBOO_TORCH.get().defaultBlockState().setValue(BambooTorchBlock.HALF, EnumTorchBlockHalf.UPPER);
-    private final BlockState FORCE_FIELD = OtherBlocks.FORCE_FIELD.get().defaultBlockState();
-    private final BlockState ANTLION_SPAWNER = OtherBlocks.ANTLION_SPAWNER.get().defaultBlockState();
-    private final BlockState MAGMA_CRAWLER_SPAWNER = OtherBlocks.MAGMA_CRAWLER_SPAWNER.get().defaultBlockState();
+    private final BlockState GNEISS = ModBlocks.GNEISS.get().defaultBlockState();
+    private final BlockState GNEISS_RELIEF = ModBlocks.GNEISS_RELIEF.get().defaultBlockState();
+    private final BlockState GNEISS_CARVED = ModBlocks.GNEISS_CARVED.get().defaultBlockState();
+    private final BlockState GNEISS_BRICKS = ModBlocks.GNEISS_BRICKS.get().defaultBlockState();
+    private final BlockState GNEISS_TILES = ModBlocks.GNEISS_TILES.get().defaultBlockState();
+    private final BlockState GNEISS_VENT = ModBlocks.GNEISS_VENT.get().defaultBlockState();
+    private final BlockState TEMPLE_BRICK = ModBlocks.TEMPLE_BRICK.get().defaultBlockState();
+    private final BlockState TEMPLE_BRICK_UNBREAKING = ModBlocks.TEMPLE_BRICK_UNBREAKING.get().defaultBlockState();
+    private final BlockState TEMPLE_BRICK_UNBREAKING_JADE = ModBlocks.TEMPLE_BRICK_UNBREAKING_JADE.get().defaultBlockState();
+    private final BlockState TEMPLE_BRICK_UNBREAKING_EXO = ModBlocks.TEMPLE_BRICK_UNBREAKING_EXO.get().defaultBlockState();
+    private final BlockState TEMPLE_BRICK_UNBREAKING_CREAM = ModBlocks.TEMPLE_BRICK_UNBREAKING_CREAM.get().defaultBlockState();
+    private final BlockState TEMPLE_BRICK_UNBREAKING_EYE = ModBlocks.TEMPLE_BRICK_UNBREAKING_EYE.get().defaultBlockState();
+    private final BlockState TEMPLE_BRICK_UNBREAKING_STRING = ModBlocks.TEMPLE_BRICK_UNBREAKING_STRING.get().defaultBlockState();
+    private final BlockState TEMPLE_PILLAR = ModBlocks.TEMPLE_PILLAR.get().defaultBlockState();
+    private final BlockState CAPSTONE = ModBlocks.CAPSTONE.get().defaultBlockState();
+    private final BlockState BAMBOO_TORCH_LOWER = ModBlocks.BAMBOO_TORCH.get().defaultBlockState().setValue(BambooTorchBlock.HALF, EnumTorchBlockHalf.LOWER);
+    private final BlockState BAMBOO_TORCH_UPPER = ModBlocks.BAMBOO_TORCH.get().defaultBlockState().setValue(BambooTorchBlock.HALF, EnumTorchBlockHalf.UPPER);
+    private final BlockState FORCE_FIELD = ModBlocks.FORCE_FIELD.get().defaultBlockState();
+    private final BlockState ANTLION_SPAWNER = ModBlocks.ANTLION_SPAWNER.get().defaultBlockState();
+    private final BlockState MAGMA_CRAWLER_SPAWNER = ModBlocks.MAGMA_CRAWLER_SPAWNER.get().defaultBlockState();
     private final BlockState TORCH = Blocks.TORCH.defaultBlockState();
     private final BlockState LAVA = Blocks.LAVA.defaultBlockState();
     private final BlockState SAND = Blocks.SAND.defaultBlockState();
@@ -327,7 +326,7 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
      */
     private void setTeleporter(WorldGenLevel level, BlockPos pos, int type, BlockPos target) {
         // TODO: Implement teleporter type and target functionality
-        setBlock(level, pos, OtherBlocks.TEMPLE_TELEPORTER.get().defaultBlockState());
+        setBlock(level, pos, ModBlocks.TEMPLE_TELEPORTER.get().defaultBlockState());
     }
 
     /**
@@ -741,10 +740,10 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
      * @param pos The position to place the capstones
      */
     private void addCapstones(WorldGenLevel level, BlockPos pos) {
-        setBlock(level, pos.north().west(), OtherBlocks.CAPSTONE_MUD.get().defaultBlockState());
-        setBlock(level, pos.north(), OtherBlocks.CAPSTONE_IRON.get().defaultBlockState());
-        setBlock(level, pos.west(), OtherBlocks.CAPSTONE_GOLD.get().defaultBlockState());
-        setBlock(level, pos, OtherBlocks.CAPSTONE_JADE.get().defaultBlockState());
+        setBlock(level, pos.north().west(), ModBlocks.CAPSTONE_MUD.get().defaultBlockState());
+        setBlock(level, pos.north(), ModBlocks.CAPSTONE_IRON.get().defaultBlockState());
+        setBlock(level, pos.west(), ModBlocks.CAPSTONE_GOLD.get().defaultBlockState());
+        setBlock(level, pos, ModBlocks.CAPSTONE_JADE.get().defaultBlockState());
     }
 
     /**
@@ -814,7 +813,7 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
      * @param direction The direction the bones should face
      */
     private void placeBones(WorldGenLevel level, BlockPos pos, Direction direction) {
-        setBlock(level, pos, OtherBlocks.BLOCK_OF_BONES.get().defaultBlockState().setValue(BlockOfBonesBlock.FACING, direction));
+        setBlock(level, pos, ModBlocks.BLOCK_OF_BONES.get().defaultBlockState().setValue(BlockOfBonesBlock.FACING, direction));
         BlockOfBonesBlockEntity bones = (BlockOfBonesBlockEntity) level.getBlockEntity(pos);
         // TODO: Implement loot table for bones if needed
         // if(bones != null) {

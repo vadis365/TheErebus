@@ -91,7 +91,7 @@ public class ColossalCrateMenu extends AbstractContainerMenu {
 	@Override
 	public ItemStack quickMoveStack(@Nonnull Player player, int slotIndex) {
 		ItemStack is = ItemStack.EMPTY;
-		Slot slot = (Slot) slots.get(slotIndex);
+		Slot slot = slots.get(slotIndex);
 
 		if (slot != null && slot.hasItem()) {
 			ItemStack is1 = slot.getItem();

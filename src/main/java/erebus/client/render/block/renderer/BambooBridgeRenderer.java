@@ -7,7 +7,6 @@ import erebus.Erebus;
 import erebus.block.bamboo.BambooBridge;
 import erebus.block.entity.BambooBridgeBlockEntity;
 import erebus.client.render.block.model.BambooBridgeModel;
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -35,7 +34,7 @@ public class BambooBridgeRenderer implements BlockEntityRenderer<BambooBridgeBlo
 		if(tile == null || !tile.hasLevel())
 			return;
 		BlockState state = tile.getLevel().getBlockState(tile.getBlockPos());
-		if(state == null || state.getBlock() != OtherBlocks.BAMBOO_BRIDGE.get())
+		if(state == null || state.getBlock() != ModBlocks.BAMBOO_BRIDGE.get())
 			return;
 
 		Direction facing = state.getValue(BambooBridge.FACING);

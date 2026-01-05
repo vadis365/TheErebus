@@ -1,7 +1,6 @@
 package erebus.item;
 
 import erebus.registries.ModSounds;
-import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -42,7 +41,7 @@ public class InsectRepellentItem extends Item {
         level.playSound(player, clickedPos, ModSounds.SPRAY_CAN_SOUND.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
 
         if(level.getBlockState(clickedPos.above()).isAir()) {
-            level.setBlock(clickedPos.above(), OtherBlocks.INSECT_REPELLENT.get().defaultBlockState(), Block.UPDATE_ALL);
+            level.setBlock(clickedPos.above(), ModBlocks.INSECT_REPELLENT.get().defaultBlockState(), Block.UPDATE_ALL);
 
             return InteractionResult.SUCCESS;
         }

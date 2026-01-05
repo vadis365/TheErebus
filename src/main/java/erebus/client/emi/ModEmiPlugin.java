@@ -10,17 +10,16 @@ import dev.emi.emi.api.stack.EmiStack;
 import erebus.Erebus;
 import erebus.client.emi.recipes.SmoothieEmiRecipe;
 import erebus.registries.ModCustomRecipes;
-import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.world.item.crafting.*;
 
 import java.util.function.Function;
 
 @EmiEntrypoint
 public class ModEmiPlugin implements EmiPlugin {
-    private static final EmiStack BLENDER = EmiStack.of(OtherBlocks.BLENDER);
+    private static final EmiStack BLENDER = EmiStack.of(ModBlocks.BLENDER);
     public static final EmiRecipeCategory BLENDER_CATEGORY = new EmiRecipeCategory(Erebus.prefix("blender"), BLENDER);
 
-    private static final EmiStack OFFERING_ALTAR = EmiStack.of(OtherBlocks.OFFERING_ALTAR);
+    private static final EmiStack OFFERING_ALTAR = EmiStack.of(ModBlocks.OFFERING_ALTAR);
     public static final EmiRecipeCategory OFFERING_ALTAR_CATEGORY = new EmiRecipeCategory(Erebus.prefix("offering_altar"), OFFERING_ALTAR);
 
     @Override

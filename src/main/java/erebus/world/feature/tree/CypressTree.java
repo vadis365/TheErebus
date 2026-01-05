@@ -1,6 +1,5 @@
 package erebus.world.feature.tree;
 
-import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.world.feature.tree.foliage.SingleLeafFoliagePlacer;
 import erebus.world.feature.tree.trunk.CypressTrunkPlacer;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -20,9 +19,9 @@ public class CypressTree extends ErebusTree {
     @Override
     public TreeConfiguration getTreeConfiguration() {
         return new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(WoodBlocks.LOG_CYPRESS.get()),
+                BlockStateProvider.simple(ModBlocks.LOG_CYPRESS.get()),
                 new CypressTrunkPlacer(4, 4, 3),
-                BlockStateProvider.simple(WoodBlocks.LEAVES_CYPRESS.get()),
+                BlockStateProvider.simple(ModBlocks.LEAVES_CYPRESS.get()),
                 new SingleLeafFoliagePlacer(ConstantInt.ZERO, ConstantInt.ZERO),
                 new TwoLayersFeatureSize(1, 0, 2)
         ).build();
@@ -30,6 +29,6 @@ public class CypressTree extends ErebusTree {
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return tree(1, WoodBlocks.SAPLING_CYPRESS);
+        return tree(1, ModBlocks.SAPLING_CYPRESS);
     }
 }

@@ -1,6 +1,5 @@
 package erebus.block.types;
 
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.utils.IErebusEnum;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +19,7 @@ public enum EnumCrateType implements IErebusEnum {
 
     @Override
     public ItemStack createStack(int count) {
-        return new ItemStack(OtherBlocks.BAMBOO_CRATE.get(), count);
+        return new ItemStack(ModBlocks.BAMBOO_CRATE.get(), count);
     }
 
     @Override

@@ -121,7 +121,7 @@ public class Grasshopper extends PathfinderMob {
 				if (vec3.y > getY() + 0.5D)
 					return 0.5F;
 			}
-			return moveControl.getSpeedModifier() <= 0.6D ? 0.5F : 0.5F;
+			return 0.5F;
 		} else {
 			return 0.5F;
 		}

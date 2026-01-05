@@ -2,7 +2,6 @@ package erebus.block.entity;
 
 import erebus.inventory.server.ComposterMenu;
 import erebus.registries.blocks.ModBlockEntities;
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -209,9 +208,9 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 		if (itemStack.isEmpty())
 			return 0;
 		else {
-			if (itemStack.is(PlantBlocks.MOULD.asItem()))
+			if (itemStack.is(ModBlocks.MOULD.asItem()))
 				return 800;
-			if (itemStack.is(PlantBlocks.MOULD_CULTIVATED.asItem()))
+			if (itemStack.is(ModBlocks.MOULD_CULTIVATED.asItem()))
 				return 400;
 		}
 		return 0;

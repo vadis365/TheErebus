@@ -1,10 +1,6 @@
 package erebus.datagen.advancement;
 
 import erebus.Erebus;
-import erebus.registries.blocks.providers.ChestBlocks;
-import erebus.registries.blocks.providers.OreBlocks;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
 import erebus.registries.world.ModDimensionRegistries;
@@ -76,27 +72,27 @@ public class ExplorationAdvancements extends ModAdvancements {
         setExistingFileHelper(existingFileHelper);
 
         root = save(
-                getRootBuilder(TASK, OtherBlocks.PORTAL, "root", Erebus.prefix("textures/block/umberstone.png"))
+                getRootBuilder(TASK, ModBlocks.PORTAL, "root", Erebus.prefix("textures/block/umberstone.png"))
                         .addCriterion("enter_dimension", ChangeDimensionTrigger.TriggerInstance.changedDimension(Level.OVERWORLD, ModDimensionRegistries.DIMENSION_KEY))
                         .requirements(AdvancementRequirements.allOf(List.of("enter_dimension"))),
                 "root");
 
-        smoothie_blender = createSimpleAdvancementWithParent(root, TASK, OtherBlocks.BLENDER, "smoothie_blender", "has_blender", hasItems(OtherBlocks.BLENDER));
+        smoothie_blender = createSimpleAdvancementWithParent(root, TASK, ModBlocks.BLENDER, "smoothie_blender", "has_blender", hasItems(ModBlocks.BLENDER));
         entomology = save(addEntities(getAdvancedBuilderWithParent(root, CHALLENGE, ModItems.PLATE_EXO, "entomology"), false), "entomology");
-        petrified_wood = createSimpleAdvancementWithParent(root, TASK, OreBlocks.PETRIFIED_WOOD, "petrified_wood", "has_petrified_wood", hasItems(ModItems.PETRIFIED_WOOD));
-        quicksand = createSimpleAdvancementWithParent(root, TASK, OtherBlocks.QUICK_SAND, "quicksand", "has_quicksand", EnterBlockTrigger.TriggerInstance.entersBlock(OtherBlocks.QUICK_SAND.get()));
+        petrified_wood = createSimpleAdvancementWithParent(root, TASK, ModBlocks.ORE_PETRIFIED_WOOD, "petrified_wood", "has_petrified_wood", hasItems(ModItems.PETRIFIED_WOOD));
+        quicksand = createSimpleAdvancementWithParent(root, TASK, ModBlocks.QUICK_SAND, "quicksand", "has_quicksand", EnterBlockTrigger.TriggerInstance.entersBlock(ModBlocks.QUICK_SAND.get()));
         kill_all = save(addEntities(getAdvancedBuilderWithParent(entomology, CHALLENGE, ModItems.JADE_SWORD, "kill_all"), true), "kill_all");
 
         arborist = save(
-                getAdvancedBuilderWithParent(root, AdvancementType.CHALLENGE, WoodBlocks.SAPLING_MAHOGANY.get(), "arborist")
-                        .addCriterion("collect_mossbark_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(WoodBlocks.SAPLING_MOSSBARK.get()))
-                        .addCriterion("collect_asper_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(WoodBlocks.SAPLING_ASPER.get()))
-                        .addCriterion("collect_eucalyptus_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(WoodBlocks.SAPLING_EUCALYPTUS.get()))
-                        .addCriterion("collect_mahogany_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(WoodBlocks.SAPLING_MAHOGANY.get()))
-                        .addCriterion("collect_balsam_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(WoodBlocks.SAPLING_BALSAM.get()))
-                        .addCriterion("collect_baobab_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(WoodBlocks.SAPLING_BAOBAB.get()))
-                        .addCriterion("collect_marshwood_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(WoodBlocks.SAPLING_MARSHWOOD.get()))
-                        .addCriterion("collect_cypress_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(WoodBlocks.SAPLING_CYPRESS.get()))
+                getAdvancedBuilderWithParent(root, AdvancementType.CHALLENGE, ModBlocks.SAPLING_MAHOGANY.get(), "arborist")
+                        .addCriterion("collect_mossbark_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.SAPLING_MOSSBARK.get()))
+                        .addCriterion("collect_asper_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.SAPLING_ASPER.get()))
+                        .addCriterion("collect_eucalyptus_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.SAPLING_EUCALYPTUS.get()))
+                        .addCriterion("collect_mahogany_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.SAPLING_MAHOGANY.get()))
+                        .addCriterion("collect_balsam_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.SAPLING_BALSAM.get()))
+                        .addCriterion("collect_baobab_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.SAPLING_BAOBAB.get()))
+                        .addCriterion("collect_marshwood_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.SAPLING_MARSHWOOD.get()))
+                        .addCriterion("collect_cypress_sapling", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.SAPLING_CYPRESS.get()))
                         .requirements(AdvancementRequirements.allOf(List.of(
                                 "collect_mossbark_sapling",
                                 "collect_asper_sapling",
@@ -109,7 +105,7 @@ public class ExplorationAdvancements extends ModAdvancements {
                         ))),
                 "arborist"
         );
-        jade_ore = createSimpleAdvancementWithParent(root, TASK, OreBlocks.JADE, "jade_ore", "has_jade_ore", hasItems(OreBlocks.JADE));
+        jade_ore = createSimpleAdvancementWithParent(root, TASK, ModBlocks.ORE_JADE, "jade_ore", "has_jade_ore", hasItems(ModBlocks.ORE_JADE));
 
         antivenom = save(
                 getAdvancedBuilderWithParent(smoothie_blender, TASK, ModItems.ANTI_VENOM_BOTTLE, "antivenom")
@@ -163,7 +159,7 @@ public class ExplorationAdvancements extends ModAdvancements {
                         .requirements(AdvancementRequirements.allOf(List.of("has_helm", "has_chest", "has_legs", "has_boots", "has_shield"))),
                 "jade_set"
         );
-        woodlouse = createSimpleAdvancementWithParent(entomology, TASK, WoodBlocks.LOG_HOLLOW, "woodlouse", "killed_woodlouse", killed(ModEntities.BEETLE_LARVA));
+        woodlouse = createSimpleAdvancementWithParent(entomology, TASK, ModBlocks.LOG_HOLLOW, "woodlouse", "killed_woodlouse", killed(ModEntities.BEETLE_LARVA));
         whetstone = save(
                 getAdvancedBuilderWithParent(woodlouse, TASK, ModItems.WHETSTONE, "whetstone")
                         .addCriterion("has_powder", hasItems(ModItems.WHETSTONE_POWDER))
@@ -172,7 +168,7 @@ public class ExplorationAdvancements extends ModAdvancements {
                 "whetstone"
         );
         newspaper = createSimpleAdvancementWithParent(whetstone, TASK, ModItems.ROLLED_NEWSPAPER, "newspaper", "has_newspaper", hasItems(ModItems.ROLLED_NEWSPAPER));
-        petrified_chest = createSimpleAdvancementWithParent(petrified_wood, TASK, ChestBlocks.CHEST_PETRIFIED, "petrified_chest", "has_petrified_chest", hasItems(ChestBlocks.CHEST_PETRIFIED));
+        petrified_chest = createSimpleAdvancementWithParent(petrified_wood, TASK, ModBlocks.CHEST_CHEST_PETRIFIED, "petrified_chest", "has_petrified_chest", hasItems(ModBlocks.CHEST_CHEST_PETRIFIED));
         poison_sac = createSimpleAdvancementWithParent(entomology, TASK, ModItems.POISON_GLAND, "poison_sac", "has_poison_sac", hasItems(ModItems.POISON_GLAND));
         planticide = createSimpleAdvancementWithParent(poison_sac, TASK, ModItems.PLANTICIDE, "planticide", "has_planticide", hasItems(ModItems.PLANTICIDE));
         reinexo_set = save(

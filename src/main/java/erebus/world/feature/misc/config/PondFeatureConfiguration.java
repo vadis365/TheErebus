@@ -1,7 +1,5 @@
 package erebus.world.feature.misc.config;
 
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.world.ModBiomes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -157,7 +155,7 @@ public class PondFeatureConfiguration extends Feature<NoneFeatureConfiguration> 
                     // Place mud in jungle/swamp biomes, sand in others
                     if (y < 4 || random.nextBoolean() && level.getBlockState(basePos.offset(x, y, z)).isSolid()) {
                         level.setBlock(basePos.offset(x, y, z),
-                                isJungle || isSwamp ? OtherBlocks.MUD.get().defaultBlockState() : Blocks.SAND.defaultBlockState(), 2);
+                                isJungle || isSwamp ? ModBlocks.MUD.get().defaultBlockState() : Blocks.SAND.defaultBlockState(), 2);
                     }
                 }
             }
@@ -220,7 +218,7 @@ public class PondFeatureConfiguration extends Feature<NoneFeatureConfiguration> 
             BlockState state = level.getBlockState(groundPos);
 
             // Sugar cane can grow on grass, sand, or mud
-            if (state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.SAND) || state.is(OtherBlocks.MUD.get())) {
+            if (state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.SAND) || state.is(ModBlocks.MUD.get())) {
                 // Create a sugar cane plant of random height
                 for (int height = 0; height < 1 + random.nextInt(7); height++) {
                     BlockPos canePos = new BlockPos(x, y + height, z);
@@ -242,11 +240,11 @@ public class PondFeatureConfiguration extends Feature<NoneFeatureConfiguration> 
             BlockState state = level.getBlockState(groundPos);
 
             // Bullrush can only grow on sand or mud
-            if (state.is(Blocks.SAND) || state.is(OtherBlocks.MUD.get())) {
+            if (state.is(Blocks.SAND) || state.is(ModBlocks.MUD.get())) {
                 for (int height = 0; height < 1; height++) {
                     BlockPos rushPos = new BlockPos(x, y + height, z);
                     if (level.getBlockState(rushPos).isAir()) {
-                        level.setBlock(new BlockPos(x, y, z), PlantBlocks.BULLRUSH.get().defaultBlockState(), 2);
+                        level.setBlock(new BlockPos(x, y, z), ModBlocks.BULLRUSH.get().defaultBlockState(), 2);
                     } else {
                         break;
                     }

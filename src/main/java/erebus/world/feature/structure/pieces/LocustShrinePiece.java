@@ -2,9 +2,6 @@ package erebus.world.feature.structure.pieces;
 
 import erebus.block.BlockOfBonesBlock;
 import erebus.block.entity.BlockOfBonesBlockEntity;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.UmberstoneBlocks;
-import erebus.registries.blocks.providers.WallBlocks;
 import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,12 +21,12 @@ import org.jetbrains.annotations.NotNull;
 public class LocustShrinePiece extends ScatteredFeaturePiece {
 
     private final BlockState COARSE_DIRT = Blocks.COARSE_DIRT.defaultBlockState();
-    private final BlockState UMBERGRAVEL = UmberstoneBlocks.UMBERGRAVEL.get().defaultBlockState();
+    private final BlockState UMBERGRAVEL = ModBlocks.UMBERGRAVEL.get().defaultBlockState();
     private final BlockState DEAD_BUSH = Blocks.DEAD_BUSH.defaultBlockState();
-    private final BlockState MOSSY_UMBERCOBBLE = UmberstoneBlocks.UMBERCOBBLE_MOSSY.get().defaultBlockState();
-    private final BlockState MOSSY_UMBERCOBBLE_WALL = WallBlocks.WALL_UMBERCOBBLE_MOSSY.get().defaultBlockState();
-    private final BlockState BONES = OtherBlocks.BLOCK_OF_BONES.get().defaultBlockState();
-    private final BlockState SPAWNER = OtherBlocks.LOCUST_SPAWNER.get().defaultBlockState();
+    private final BlockState MOSSY_UMBERCOBBLE = ModBlocks.UMBERCOBBLE_MOSSY.get().defaultBlockState();
+    private final BlockState MOSSY_UMBERCOBBLE_WALL = ModBlocks.WALL_UMBERCOBBLE_MOSSY.get().defaultBlockState();
+    private final BlockState BONES = ModBlocks.BLOCK_OF_BONES.get().defaultBlockState();
+    private final BlockState SPAWNER = ModBlocks.LOCUST_SPAWNER.get().defaultBlockState();
 
     public LocustShrinePiece(RandomSource random, int x, int z) {
         super(ModStructurePieces.LOCUST_SHRINE.get(), x, 64, z, 10, 8, 10, getRandomHorizontalDirection(random));

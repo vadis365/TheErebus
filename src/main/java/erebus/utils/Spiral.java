@@ -31,9 +31,9 @@ public class Spiral {
 
 			return values()[ordinal];
 		}
-	};
+	}
 
-	private final int width;
+    private final int width;
 	private final int length;
 	private Point point;
 	private Direction direction = Direction.E;

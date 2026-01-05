@@ -3,7 +3,6 @@ package erebus.world.feature.tree.decorator;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import erebus.block.plants.DarkFruitVineBlock;
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.world.tree.ModTreeDecorators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -42,7 +41,7 @@ public class LeaveDarkFruitVineDecorator extends TreeDecorator {
                 for (int yOffset = 0; yOffset < length; yOffset++) {
                     BlockPos check = below.below(yOffset);
                     if (context.isAir(check)) {
-                        context.setBlock(check, PlantBlocks.DARK_FRUIT_VINE.get().defaultBlockState().setValue(DarkFruitVineBlock.AGE, 4));
+                        context.setBlock(check, ModBlocks.DARK_FRUIT_VINE.get().defaultBlockState().setValue(DarkFruitVineBlock.AGE, 4));
                     }
                 }
             }

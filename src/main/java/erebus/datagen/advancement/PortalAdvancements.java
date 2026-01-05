@@ -1,6 +1,5 @@
 package erebus.datagen.advancement;
 
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
@@ -46,13 +45,13 @@ public class PortalAdvancements extends ModAdvancements {
                         .requirements(AdvancementRequirements.allOf(List.of("diamond", "emerald", "obsidian"))),
                 "root");
 
-        altar = createSimpleAdvancementWithParent(root, TASK, OtherBlocks.OFFERING_ALTAR, "altar", "obtain_altar", hasItems(OtherBlocks.OFFERING_ALTAR));
+        altar = createSimpleAdvancementWithParent(root, TASK, ModBlocks.OFFERING_ALTAR, "altar", "obtain_altar", hasItems(ModBlocks.OFFERING_ALTAR));
         gaean_gem = createSimpleAdvancementWithParent(altar, TASK, ModItems.GAEAN_GEM, "gaean_gem", "obtain_gem", hasItems(ModItems.GAEAN_GEM));
 
         portal_activator = save(
                 getAdvancedBuilderWithParent(gaean_gem, TASK, ModItems.PORTAL_ACTIVATOR, "portal_activator")
                         .addCriterion("obtain_activator", hasItems(ModItems.PORTAL_ACTIVATOR))
-                        .addCriterion("obtain_keystone", hasItems(OtherBlocks.GAEAN_KEYSTONE))
+                        .addCriterion("obtain_keystone", hasItems(ModBlocks.GAEAN_KEYSTONE))
                         .requirements(AdvancementRequirements.allOf(List.of("obtain_activator", "obtain_keystone"))),
                 "portal_activator"
         );
@@ -64,7 +63,7 @@ public class PortalAdvancements extends ModAdvancements {
                 "portal",
                 "portal_activate",
                 ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
-                        LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(OtherBlocks.GAEAN_KEYSTONE.get())),
+                        LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.GAEAN_KEYSTONE.get())),
                         ItemPredicate.Builder.item().of(ModItems.PORTAL_ACTIVATOR.get())
                 )
         );

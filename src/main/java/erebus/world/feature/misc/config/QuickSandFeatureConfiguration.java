@@ -1,6 +1,5 @@
 package erebus.world.feature.misc.config;
 
-import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -21,7 +20,7 @@ public class QuickSandFeatureConfiguration extends Feature<NoneFeatureConfigurat
         WorldGenLevel level = context.level();
         BlockPos pos = context.origin();
         RandomSource random = context.random();
-        BlockState quickSand = OtherBlocks.QUICK_SAND.get().defaultBlockState();
+        BlockState quickSand = ModBlocks.QUICK_SAND.get().defaultBlockState();
 
         if (!level.getBlockState(pos).is(Blocks.GRASS_BLOCK)) return false;
 

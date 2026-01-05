@@ -1,6 +1,5 @@
 package erebus.block.bamboo;
 
-import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -112,7 +111,7 @@ public class BambooBlock extends Block {
 		if (stack.is(Items.SHEARS)) {
 			if (state.getValue(AGE) == 15) {
 				level.setBlock(pos, state.setValue(AGE, 0), 4);
-				popResource(level, pos, new ItemStack(WoodBlocks.SAPLING_BAMBOO.asItem()));
+				popResource(level, pos, new ItemStack(ModBlocks.SAPLING_BAMBOO.asItem()));
 				return InteractionResult.SUCCESS;
 			}
 		}

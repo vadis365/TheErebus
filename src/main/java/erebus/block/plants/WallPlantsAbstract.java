@@ -1,7 +1,5 @@
 package erebus.block.plants;
 
-import erebus.registries.blocks.providers.UmberstoneBlocks;
-import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -109,7 +107,7 @@ public abstract class WallPlantsAbstract extends DirectionalBlock implements ISh
 
 	// TODO override this and remove umberstone for cultivated moss and mould or implement a tag.
 	public boolean isValidBlock(BlockState state) {
-		return state.is(WoodBlocks.LOG_ROTTEN.get()) || state.is(UmberstoneBlocks.UMBERSTONE.get());
+		return state.is(ModBlocks.LOG_ROTTEN.get()) || state.is(ModBlocks.UMBERSTONE.get());
 	}
 
 	@Override

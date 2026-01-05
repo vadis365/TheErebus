@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -45,7 +44,7 @@ public class CandleHoneyTreatBlock extends AbstractCandleBlock {
     private final CandleBlock candleBlock;
 
     public CandleHoneyTreatBlock(Block candleBlock) {
-        super(Properties.ofFullCopy(OtherBlocks.HONEY_TREAT.get()));
+        super(Properties.ofFullCopy(ModBlocks.HONEY_TREAT.get()));
         registerDefaultState(getStateDefinition().any().setValue(LIT, false));
         if(candleBlock instanceof CandleBlock candleblock) {
             BY_CANDLE.put(candleblock, this);
@@ -87,7 +86,7 @@ public class CandleHoneyTreatBlock extends AbstractCandleBlock {
 
     @Override
     protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult hitResult) {
-        InteractionResult result = HoneyTreatBlock.eat(level, pos, OtherBlocks.HONEY_TREAT.get().defaultBlockState(), player);
+        InteractionResult result = HoneyTreatBlock.eat(level, pos, ModBlocks.HONEY_TREAT.get().defaultBlockState(), player);
         if(result.consumesAction()) dropResources(state, level, pos);
         return result;
     }
@@ -103,7 +102,7 @@ public class CandleHoneyTreatBlock extends AbstractCandleBlock {
 
     @Override
     public @NotNull ItemStack getCloneItemStack(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state) {
-        return new ItemStack(OtherBlocks.HONEY_TREAT);
+        return new ItemStack(ModBlocks.HONEY_TREAT);
     }
 
     @Override

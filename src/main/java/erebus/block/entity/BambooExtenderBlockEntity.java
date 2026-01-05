@@ -4,7 +4,6 @@ import erebus.block.bamboo.BambooBridge;
 import erebus.block.bamboo.BambooExtender;
 import erebus.inventory.server.BambooExtenderMenu;
 import erebus.registries.blocks.ModBlockEntities;
-import erebus.registries.blocks.providers.OtherBlocks;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -117,22 +116,22 @@ public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implem
 	}
 
 	private BlockState getExtension(Direction facing) {
-		return facing == Direction.UP || facing == Direction.DOWN ? OtherBlocks.BAMBOO_NERD_POLE.get().defaultBlockState() : OtherBlocks.BAMBOO_BRIDGE.get().defaultBlockState() ;
+		return facing == Direction.UP || facing == Direction.DOWN ? ModBlocks.BAMBOO_NERD_POLE.get().defaultBlockState() : ModBlocks.BAMBOO_BRIDGE.get().defaultBlockState() ;
 	}
 
 	private BlockState getStateFromDirection(Direction facing) {
 		switch (facing) {
 			case UP:
-				return OtherBlocks.BAMBOO_NERD_POLE.get().defaultBlockState();
+				return ModBlocks.BAMBOO_NERD_POLE.get().defaultBlockState();
 			case DOWN:
-				return OtherBlocks.BAMBOO_NERD_POLE.get().defaultBlockState();
+				return ModBlocks.BAMBOO_NERD_POLE.get().defaultBlockState();
 			case EAST:
 			case WEST:
 			case NORTH:
 			case SOUTH:
-				return OtherBlocks.BAMBOO_BRIDGE.get().defaultBlockState().setValue(BambooBridge.FACING, facing);
+				return ModBlocks.BAMBOO_BRIDGE.get().defaultBlockState().setValue(BambooBridge.FACING, facing);
 		}
-		return OtherBlocks.BAMBOO_BRIDGE.get().defaultBlockState();
+		return ModBlocks.BAMBOO_BRIDGE.get().defaultBlockState();
 	}
 
 	public void setExtending(boolean extending) {
@@ -188,7 +187,7 @@ public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implem
 	
 	@Override
 	public boolean canPlaceItem(int slot, ItemStack stack) {
-		 return !stack.isEmpty() && (stack.getItem() == Item.byBlock(OtherBlocks.BAMBOO_NERD_POLE.get()) || stack.getItem() == Item.byBlock(OtherBlocks.BAMBOO_BRIDGE.get()));
+		 return !stack.isEmpty() && (stack.getItem() == Item.byBlock(ModBlocks.BAMBOO_NERD_POLE.get()) || stack.getItem() == Item.byBlock(ModBlocks.BAMBOO_BRIDGE.get()));
 	}
 
 	@Override

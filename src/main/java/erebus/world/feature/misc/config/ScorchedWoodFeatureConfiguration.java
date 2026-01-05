@@ -1,6 +1,5 @@
 package erebus.world.feature.misc.config;
 
-import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.util.RandomSource;
@@ -26,7 +25,7 @@ public class ScorchedWoodFeatureConfiguration extends Feature<NoneFeatureConfigu
         WorldGenLevel level = context.level();
         BlockPos origin = context.origin();
         RandomSource random = context.random();
-        BlockState log = WoodBlocks.LOG_SCORCHED.get().defaultBlockState();
+        BlockState log = ModBlocks.LOG_SCORCHED.get().defaultBlockState();
 
         int partAmount = random.nextInt(6) + 2;
         int x = origin.getX(), y = origin.getY(), z = origin.getZ();

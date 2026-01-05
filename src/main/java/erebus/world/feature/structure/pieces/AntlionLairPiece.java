@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 public class AntlionLairPiece extends ScatteredFeaturePiece {
 
     private final BlockState AIR = Blocks.AIR.defaultBlockState();
-    //private final BlockState GHOST_SAND = OtherBlocks.GHOST_SAND.get().defaultBlockState();
+    //private final BlockState GHOST_SAND = ModBlocks.GHOST_SAND.get().defaultBlockState();
     private final BlockState GHOST_SAND = Blocks.PINK_WOOL.defaultBlockState();
     private final BlockState SAND = Blocks.SAND.defaultBlockState();
 

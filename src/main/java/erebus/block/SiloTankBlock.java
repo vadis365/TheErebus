@@ -2,7 +2,6 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.SiloTankBlockEntity;
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -88,14 +87,14 @@ public class SiloTankBlock extends Block implements EntityBlock {
 		BlockState supports = level.getBlockState(pos.below());
 		BlockState redGem = level.getBlockState(pos.below(2));
 		BlockState roof = level.getBlockState(pos.above());
-		return supports.is(OtherBlocks.SILO_SUPPORTS.get()) && redGem.is(OtherBlocks.RED_GEM_BLOCK.get()) && roof.is(OtherBlocks.SILO_ROOF.get());
+		return supports.is(ModBlocks.SILO_SUPPORTS.get()) && redGem.is(ModBlocks.RED_GEM_BLOCK.get()) && roof.is(ModBlocks.SILO_ROOF.get());
 	}
 
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
     	if(level.getBlockState(pos).is(this) && level.getBlockState(pos).getValue(ACTIVE))
     		return isSiloComplete((Level) level, pos);
-		return level.getBlockState(pos.below()).is(OtherBlocks.SILO_SUPPORTS.get());
+		return level.getBlockState(pos.below()).is(ModBlocks.SILO_SUPPORTS.get());
 	}
 
 	@Nonnull
@@ -110,7 +109,7 @@ public class SiloTankBlock extends Block implements EntityBlock {
     	if (level.isClientSide()) {
 			return InteractionResult.SUCCESS;
     	} else if (blockEntity instanceof SiloTankBlockEntity siloTank) {
-			if (!stack.isEmpty() && stack.is(OtherBlocks.SILO_ROOF.asItem()) || !stack.isEmpty() && stack.getItem() == ModItems.ANT_TAMING_AMULET.get())
+			if (!stack.isEmpty() && stack.is(ModBlocks.SILO_ROOF.asItem()) || !stack.isEmpty() && stack.getItem() == ModItems.ANT_TAMING_AMULET.get())
 				return InteractionResult.FAIL;
 			if(isSiloComplete(level, pos))
 				player.openMenu(siloTank, pos);

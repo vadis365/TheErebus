@@ -2,7 +2,6 @@ package erebus.block.portal;
 
 import com.mojang.serialization.MapCodec;
 import erebus.Erebus;
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.world.ModDimensionRegistries;
 import net.minecraft.BlockUtil;
 import net.minecraft.BlockUtil.FoundRectangle;
@@ -91,7 +90,7 @@ public class ErebusPortalBlock extends Block implements Portal {
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private static boolean isSubstrate(BlockState state, boolean portalNotLeaf) {
-        return portalNotLeaf ? state.is(OtherBlocks.PORTAL) : state.is(BlockTags.LEAVES);
+        return portalNotLeaf ? state.is(ModBlocks.PORTAL) : state.is(BlockTags.LEAVES);
     }
 
     @Override

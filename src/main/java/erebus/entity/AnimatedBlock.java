@@ -1,7 +1,6 @@
 package erebus.entity;
 
 import erebus.registries.ModSounds;
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -140,7 +139,7 @@ public class AnimatedBlock extends PathfinderMob {
 			level().setBlock(blockPosition(), getBlockType(), 3);
 			level().playSound(null, blockPosition(), ModSounds.ALTAR_OFFERING.get(), SoundSource.NEUTRAL, 0.2F, 1.0F);
 			return InteractionResult.SUCCESS;
-		} else if (getBlockType() == OtherBlocks.PETRIFIED_CRAFTING_TABLE.get().defaultBlockState() && is.isEmpty()) {
+		} else if (getBlockType() == ModBlocks.PETRIFIED_CRAFTING_TABLE.get().defaultBlockState() && is.isEmpty()) {
 			System.out.println("Open Petrified crafting table Gui Here");
 			player.openMenu(getBlockType().getMenuProvider(level(), blockPosition()));
 			return InteractionResult.SUCCESS;

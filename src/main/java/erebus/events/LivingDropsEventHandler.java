@@ -5,7 +5,6 @@ import erebus.block.BlockOfBonesBlock;
 import erebus.block.entity.BlockOfBonesBlockEntity;
 import erebus.network.data.DeathCompassData;
 import erebus.network.data.DeathCompassDataHolder;
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.data.ModDataComponents;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -28,7 +27,7 @@ public class LivingDropsEventHandler {
             BlockPos pos = player.getOnPos().above();
             Direction facing = player.getDirection();
             Level level = event.getEntity().level();
-            level.setBlockAndUpdate(pos, OtherBlocks.BLOCK_OF_BONES.get().defaultBlockState().setValue(BlockOfBonesBlock.FACING, facing));
+            level.setBlockAndUpdate(pos, ModBlocks.BLOCK_OF_BONES.get().defaultBlockState().setValue(BlockOfBonesBlock.FACING, facing));
 
             BlockOfBonesBlockEntity block = (BlockOfBonesBlockEntity) level.getBlockEntity(pos);
             if (block != null) {

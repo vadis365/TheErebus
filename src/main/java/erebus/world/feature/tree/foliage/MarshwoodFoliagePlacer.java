@@ -2,7 +2,6 @@ package erebus.world.feature.tree.foliage;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.registries.world.tree.ModFoliagePlacers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -40,7 +39,7 @@ public class MarshwoodFoliagePlacer extends FoliagePlacer {
                     long rounded = Math.round(Math.sqrt(dSq));
                     if (rounded <= radius) {
                         if (rounded == 0) {
-                            setter.set(new BlockPos(xOff, yOff, zOff), WoodBlocks.LOG_MARSHWOOD.get().defaultBlockState());
+                            setter.set(new BlockPos(xOff, yOff, zOff), ModBlocks.LOG_MARSHWOOD.get().defaultBlockState());
                         } else {
                             tryPlaceLeaf(level, setter, random, config, new BlockPos(xOff, yOff, zOff));
                         }

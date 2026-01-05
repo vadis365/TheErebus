@@ -6,9 +6,6 @@ import erebus.client.render.block.renderer.stack.*;
 import erebus.client.render.item.model.*;
 import erebus.client.render.item.renderer.*;
 import erebus.registries.ModFluids;
-import erebus.registries.blocks.providers.AmberBlocks;
-import erebus.registries.blocks.providers.ChestBlocks;
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -144,71 +141,71 @@ public class ModItemRendering {
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new OfferingAltarStackItemRenderer(null, null);
             }
-        }, OtherBlocks.OFFERING_ALTAR.get().asItem());
+        }, ModBlocks.OFFERING_ALTAR.get().asItem());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new BlockOfBonesStackItemRenderer(null, null);
             }
-        }, OtherBlocks.BLOCK_OF_BONES.get().asItem());
+        }, ModBlocks.BLOCK_OF_BONES.get().asItem());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new BlenderStackItemRenderer(null, null);
             }
-        }, OtherBlocks.BLENDER.get().asItem());
+        }, ModBlocks.BLENDER.get().asItem());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new FluidJarStackItemRenderer(null, null);
             }
-        }, AmberBlocks.FLUID_JAR.get().asItem());
+        }, ModBlocks.FLUID_JAR.get().asItem());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new LiquifierStackItemRenderer(null, null);
             }
-        }, OtherBlocks.LIQUIFIER.get().asItem());
+        }, ModBlocks.LIQUIFIER.get().asItem());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new GlowingJarStackItemRenderer(null, null);
             }
-        }, AmberBlocks.GLOWING_JAR.get().asItem());
+        }, ModBlocks.GLOWING_JAR.get().asItem());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new BambooBridgeItemRenderer(null, null);
             }
-        }, OtherBlocks.BAMBOO_BRIDGE.get().asItem());
+        }, ModBlocks.BAMBOO_BRIDGE.get().asItem());
 
         event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new BambooExtenderItemRenderer(null, null);
             }
-        }, OtherBlocks.BAMBOO_EXTENDER.get().asItem());
+        }, ModBlocks.BAMBOO_EXTENDER.get().asItem());
 
-        registerChestItem(event, ChestBlocks.CHEST_ASPER, "asper_chest");
-        registerChestItem(event, ChestBlocks.CHEST_BAOBAB, "baobab_chest");
-        registerChestItem(event, ChestBlocks.CHEST_BAMBOO, "bamboo_chest");
-        registerChestItem(event, ChestBlocks.CHEST_BALSAM, "balsam_chest");
-        registerChestItem(event, ChestBlocks.CHEST_CYPRESS, "cypress_chest");
-        registerChestItem(event, ChestBlocks.CHEST_EUCALYPTUS, "eucalyptus_chest");
-        registerChestItem(event, ChestBlocks.CHEST_MAHOGANY, "mahogany_chest");
-        registerChestItem(event, ChestBlocks.CHEST_MARSHWOOD, "marshwood_chest");
-        registerChestItem(event, ChestBlocks.CHEST_MOSSBARK, "mossbark_chest");
-        registerChestItem(event, ChestBlocks.CHEST_PETRIFIED, "petrified_chest");
-        registerChestItem(event, ChestBlocks.CHEST_ROTTEN, "rotten_chest");
-        registerChestItem(event, ChestBlocks.CHEST_SCORCHED, "scorched_chest");
-        registerChestItem(event, ChestBlocks.CHEST_VARNISHED, "varnished_chest");
-        registerChestItem(event, ChestBlocks.CHEST_WHITE, "white_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_ASPER, "asper_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_BAOBAB, "baobab_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_BAMBOO, "bamboo_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_BALSAM, "balsam_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_CYPRESS, "cypress_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_EUCALYPTUS, "eucalyptus_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_MAHOGANY, "mahogany_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_MARSHWOOD, "marshwood_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_MOSSBARK, "mossbark_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_PETRIFIED, "petrified_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_ROTTEN, "rotten_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_SCORCHED, "scorched_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_VARNISHED, "varnished_chest");
+        registerChestItem(event, ModBlocks.CHEST_CHEST_WHITE, "white_chest");
 
         //Fluids
         event.registerFluidType(new BasicFluidType("beetle_juice"), ModFluids.BEETLE_JUICE_TYPE.get());

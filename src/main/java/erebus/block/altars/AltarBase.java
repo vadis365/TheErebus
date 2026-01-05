@@ -2,7 +2,6 @@ package erebus.block.altars;
 
 import com.mojang.serialization.MapCodec;
 import erebus.registries.ModSounds;
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -80,10 +79,10 @@ public class AltarBase extends AltarAbstract {
 
 	private void initMap() {
 		if (ALTAR_TYPES.isEmpty()) {
-			ALTAR_TYPES.put(ModItems.BIO_VELOCITY.get(), OtherBlocks.ALTAR_EXPERIENCE.get());
-			ALTAR_TYPES.put(ModItems.ELASTIC_FIBER.get(), OtherBlocks.ALTAR_REPAIR.get());
-			ALTAR_TYPES.put(ModItems.RED_GEM.get(), OtherBlocks.ALTAR_LIGHTNING.get());
-			ALTAR_TYPES.put(ModItems.BIO_LUMINESCENCE.get(), OtherBlocks.ALTAR_HEALING.get());
+			ALTAR_TYPES.put(ModItems.BIO_VELOCITY.get(), ModBlocks.ALTAR_EXPERIENCE.get());
+			ALTAR_TYPES.put(ModItems.ELASTIC_FIBER.get(), ModBlocks.ALTAR_REPAIR.get());
+			ALTAR_TYPES.put(ModItems.RED_GEM.get(), ModBlocks.ALTAR_LIGHTNING.get());
+			ALTAR_TYPES.put(ModItems.BIO_LUMINESCENCE.get(), ModBlocks.ALTAR_HEALING.get());
 		}
 	}
 }

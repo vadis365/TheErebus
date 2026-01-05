@@ -1,8 +1,5 @@
 package erebus.datagen.providers.recipes;
 
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.UmberstoneBlocks;
-import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -31,19 +28,19 @@ public class ShapelessCraftingRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addPlanksRecipes() {
-        shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_ASPER, WoodBlocks.PLANKS_ASPER, 4);
-        shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_BAOBAB, WoodBlocks.PLANKS_BAOBAB, 4);
-        shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_EUCALYPTUS, WoodBlocks.PLANKS_EUCALYPTUS, 4);
-        shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_MAHOGANY, WoodBlocks.PLANKS_MAHOGANY, 4);
-        shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_MOSSBARK, WoodBlocks.PLANKS_MOSSBARK, 4);
-        shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_CYPRESS, WoodBlocks.PLANKS_CYPRESS, 4);
-        shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_BALSAM, WoodBlocks.PLANKS_BALSAM, 4);
-        shapeless(BUILDING_BLOCKS, ModItems.BAMBOO, WoodBlocks.PLANKS_BAMBOO, 4);
-        shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_ROTTEN, WoodBlocks.PLANKS_ROTTEN, 4);
-        shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_MARSHWOOD, WoodBlocks.PLANKS_MARSHWOOD, 4);
-        shapeless(BUILDING_BLOCKS, WoodBlocks.LOG_SCORCHED, WoodBlocks.PLANKS_SCORCHED, 4);
+        shapeless(BUILDING_BLOCKS, ModBlocks.LOG_ASPER, ModBlocks.PLANKS_ASPER, 4);
+        shapeless(BUILDING_BLOCKS, ModBlocks.LOG_BAOBAB, ModBlocks.PLANKS_BAOBAB, 4);
+        shapeless(BUILDING_BLOCKS, ModBlocks.LOG_EUCALYPTUS, ModBlocks.PLANKS_EUCALYPTUS, 4);
+        shapeless(BUILDING_BLOCKS, ModBlocks.LOG_MAHOGANY, ModBlocks.PLANKS_MAHOGANY, 4);
+        shapeless(BUILDING_BLOCKS, ModBlocks.LOG_MOSSBARK, ModBlocks.PLANKS_MOSSBARK, 4);
+        shapeless(BUILDING_BLOCKS, ModBlocks.LOG_CYPRESS, ModBlocks.PLANKS_CYPRESS, 4);
+        shapeless(BUILDING_BLOCKS, ModBlocks.LOG_BALSAM, ModBlocks.PLANKS_BALSAM, 4);
+        shapeless(BUILDING_BLOCKS, ModItems.BAMBOO, ModBlocks.PLANKS_BAMBOO, 4);
+        shapeless(BUILDING_BLOCKS, ModBlocks.LOG_ROTTEN, ModBlocks.PLANKS_ROTTEN, 4);
+        shapeless(BUILDING_BLOCKS, ModBlocks.LOG_MARSHWOOD, ModBlocks.PLANKS_MARSHWOOD, 4);
+        shapeless(BUILDING_BLOCKS, ModBlocks.LOG_SCORCHED, ModBlocks.PLANKS_SCORCHED, 4);
 
-        shapeless(BUILDING_BLOCKS, WoodBlocks.PLANKS_VARNISHED)
+        shapeless(BUILDING_BLOCKS, ModBlocks.PLANKS_VARNISHED)
                 .requires(ItemTags.PLANKS)
                 .requires(Tags.Items.SLIME_BALLS)
                 .requires(ModItems.REPELLENT)
@@ -53,9 +50,9 @@ public class ShapelessCraftingRecipeProvider extends ErebusRecipeProvider {
 
     private void addMiscShapelessRecipes() {
         shapeless(BUILDING_BLOCKS, ModItems.RED_GEM, Items.REDSTONE, 2);
-        shapeless(MISC, UmberstoneBlocks.UMBERSTONE, OtherBlocks.UMBERSTONE_BUTTON, 1);
+        shapeless(MISC, ModBlocks.UMBERSTONE, ModBlocks.UMBERSTONE_BUTTON, 1);
 
-        shapeless(BUILDING_BLOCKS, OtherBlocks.SILK)
+        shapeless(BUILDING_BLOCKS, ModBlocks.SILK)
                 .requires(Items.STRING, 9)
                 .unlockedBy("has_string", has(Items.STRING))
                 .save(output);
@@ -65,7 +62,7 @@ public class ShapelessCraftingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_shard_bone", has(ModItems.SHARD_BONE))
                 .save(output);
 
-        shapeless(BUILDING_BLOCKS, OtherBlocks.REIN_EXO)
+        shapeless(BUILDING_BLOCKS, ModBlocks.REIN_EXO)
                 .requires(ModItems.REINFORCED_PLATE_EXO, 4)
                 .unlockedBy("has_reinforced_plate_exo", has(ModItems.REINFORCED_PLATE_EXO))
                 .save(output);
@@ -81,7 +78,7 @@ public class ShapelessCraftingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_papyrus", has(ModItems.PAPYRUS))
                 .save(output);
 
-        nineBlockStorageRecipes(MISC, ModItems.JADE, BUILDING_BLOCKS, OtherBlocks.JADE_BLOCK);
+        nineBlockStorageRecipes(MISC, ModItems.JADE, BUILDING_BLOCKS, ModBlocks.JADE_BLOCK);
 
         shapeless(MISC, ModItems.PLANTICIDE, 2)
                 .requires(ModItems.POISON_GLAND)
@@ -105,14 +102,14 @@ public class ShapelessCraftingRecipeProvider extends ErebusRecipeProvider {
                 .requires(ModItems.WEB_SLINGER)
                 .requires(Blocks.SOUL_SAND)
                 .requires(ModItems.POISON_GLAND)
-                .requires(OtherBlocks.WITHER_WEB, 3)
+                .requires(ModBlocks.WITHER_WEB, 3)
                 .unlockedBy("has_web_slinger", has(ModItems.WEB_SLINGER))
                 .save(output);
 
-        shapeless(MISC, OtherBlocks.VELOCITY_BLOCK_LIGHTNING_SPEED)
-                .requires(OtherBlocks.VELOCITY_BLOCK)
+        shapeless(MISC, ModBlocks.VELOCITY_BLOCK_LIGHTNING_SPEED)
+                .requires(ModBlocks.VELOCITY_BLOCK)
                 .requires(ModItems.SUPERNATURAL_VELOCITY, 8)
-                .unlockedBy("has_velocity_block", has(OtherBlocks.VELOCITY_BLOCK))
+                .unlockedBy("has_velocity_block", has(ModBlocks.VELOCITY_BLOCK))
                 .save(output);
 
         shapeless(MISC, ModItems.REINFORCED_PLATE_EXO)
@@ -126,10 +123,10 @@ public class ShapelessCraftingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_wasp_sting", has(ModItems.WASP_STING))
                 .save(output);
 
-        shapeless(MISC, OtherBlocks.BAMBOO_PIPE_EXTRACT)
+        shapeless(MISC, ModBlocks.BAMBOO_PIPE_EXTRACT)
                 .requires(Items.LEVER)
-                .requires(OtherBlocks.BAMBOO_PIPE)
-                .unlockedBy("has_bamboo_pipe", has(OtherBlocks.BAMBOO_PIPE))
+                .requires(ModBlocks.BAMBOO_PIPE)
+                .unlockedBy("has_bamboo_pipe", has(ModBlocks.BAMBOO_PIPE))
                 .save(output);
     }
 

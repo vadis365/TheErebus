@@ -1,6 +1,5 @@
 package erebus.world.feature.plant.config;
 
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.world.feature.plant.config.util.PetalShape;
 import erebus.world.feature.plant.config.util.StemShape;
 import net.minecraft.core.BlockPos;
@@ -39,7 +38,7 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
         WorldGenLevel level = context.level();
         BlockPos pos = context.origin();
         RandomSource random = context.random();
-        BlockState stem = PlantBlocks.STEM.get().defaultBlockState();
+        BlockState stem = ModBlocks.STEM.get().defaultBlockState();
         StemShape stemShape = StemShape.values()[random.nextInt(StemShape.values().length)];
         PetalShape petalShape = PetalShape.values()[random.nextInt(PetalShape.values().length)];
         if (primaryPetalColor == -1) primaryPetalColor = random.nextInt(13);
@@ -158,7 +157,7 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
             setBlock(level, pos.offset(0, top + 2, -1 + c * 2), petal);
         }
 
-        setBlock(level, pos.above(top + 3), random.nextInt(10) == 0 ? PlantBlocks.EXPLODING_STIGMA.get().defaultBlockState() : stigma);
+        setBlock(level, pos.above(top + 3), random.nextInt(10) == 0 ? ModBlocks.EXPLODING_STIGMA.get().defaultBlockState() : stigma);
 
         for (int c = 0; c < 3; c++) {
             for (int d = 0; d < 2; d++) {
@@ -189,7 +188,7 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
 
     private void generateDisperseHemisphere(WorldGenLevel level, BlockPos pos, RandomSource random, int top, BlockState stem, BlockState petal, BlockState stigma) {
         setBlock(level, pos.above(top), stem);
-        setBlock(level, pos.above(top + 1), random.nextInt(10) == 0 ? PlantBlocks.EXPLODING_STIGMA.get().defaultBlockState() : stigma);
+        setBlock(level, pos.above(top + 1), random.nextInt(10) == 0 ? ModBlocks.EXPLODING_STIGMA.get().defaultBlockState() : stigma);
         for (int c = 0; c < 4; c++) {
             for (int d = 1; d <= 3; d++) {
                 setBlock(level, pos.offset(offsetX[c] * d, top + d - 1, offsetZ[c] * d), petal);
@@ -212,7 +211,7 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
         }
 
         setBlock(level, pos.above(top + 1), petal);
-        setBlock(level, pos.above(top + 2), random.nextInt(10) == 0 ? PlantBlocks.EXPLODING_STIGMA.get().defaultBlockState() : stigma);
+        setBlock(level, pos.above(top + 2), random.nextInt(10) == 0 ? ModBlocks.EXPLODING_STIGMA.get().defaultBlockState() : stigma);
 
         for (int c = 0; c < 3; c++) {
             setBlock(level, pos.offset(-3 + c, top + 1, 0), petal);
@@ -235,40 +234,40 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
 
     private BlockState getPetalForColor(int color) {
         return switch (color) {
-            case 0 -> PlantBlocks.PETAL_BLACK.get().defaultBlockState();
-            case 1 -> PlantBlocks.PETAL_RED.get().defaultBlockState();
-            case 2 -> PlantBlocks.PETAL_BROWN.get().defaultBlockState();
-            case 3 -> PlantBlocks.PETAL_BLUE.get().defaultBlockState();
-            case 4 -> PlantBlocks.PETAL_PURPLE.get().defaultBlockState();
-            case 5 -> PlantBlocks.PETAL_CYAN.get().defaultBlockState();
-            case 6 -> PlantBlocks.PETAL_LIGHT_GRAY.get().defaultBlockState();
-            case 7 -> PlantBlocks.PETAL_GRAY.get().defaultBlockState();
-            case 8 -> PlantBlocks.PETAL_PINK.get().defaultBlockState();
-            case 9 -> PlantBlocks.PETAL_YELLOW.get().defaultBlockState();
-            case 10 -> PlantBlocks.PETAL_LIGHT_BLUE.get().defaultBlockState();
-            case 11 -> PlantBlocks.PETAL_MAGENTA.get().defaultBlockState();
-            case 12 -> PlantBlocks.PETAL_ORANGE.get().defaultBlockState();
-            case 13 -> PlantBlocks.PETAL_WHITE.get().defaultBlockState();
+            case 0 -> ModBlocks.PETAL_BLACK.get().defaultBlockState();
+            case 1 -> ModBlocks.PETAL_RED.get().defaultBlockState();
+            case 2 -> ModBlocks.PETAL_BROWN.get().defaultBlockState();
+            case 3 -> ModBlocks.PETAL_BLUE.get().defaultBlockState();
+            case 4 -> ModBlocks.PETAL_PURPLE.get().defaultBlockState();
+            case 5 -> ModBlocks.PETAL_CYAN.get().defaultBlockState();
+            case 6 -> ModBlocks.PETAL_LIGHT_GRAY.get().defaultBlockState();
+            case 7 -> ModBlocks.PETAL_GRAY.get().defaultBlockState();
+            case 8 -> ModBlocks.PETAL_PINK.get().defaultBlockState();
+            case 9 -> ModBlocks.PETAL_YELLOW.get().defaultBlockState();
+            case 10 -> ModBlocks.PETAL_LIGHT_BLUE.get().defaultBlockState();
+            case 11 -> ModBlocks.PETAL_MAGENTA.get().defaultBlockState();
+            case 12 -> ModBlocks.PETAL_ORANGE.get().defaultBlockState();
+            case 13 -> ModBlocks.PETAL_WHITE.get().defaultBlockState();
             default -> throw new IllegalStateException("Unexpected value: " + color);
         };
     }
 
     private BlockState getStigmaForColor(int color) {
         return switch (color) {
-            case 0 -> PlantBlocks.STIGMA_BLACK.get().defaultBlockState();
-            case 1 -> PlantBlocks.STIGMA_RED.get().defaultBlockState();
-            case 2 -> PlantBlocks.STIGMA_BROWN.get().defaultBlockState();
-            case 3 -> PlantBlocks.STIGMA_BLUE.get().defaultBlockState();
-            case 4 -> PlantBlocks.STIGMA_PURPLE.get().defaultBlockState();
-            case 5 -> PlantBlocks.STIGMA_CYAN.get().defaultBlockState();
-            case 6 -> PlantBlocks.STIGMA_LIGHT_GRAY.get().defaultBlockState();
-            case 7 -> PlantBlocks.STIGMA_GRAY.get().defaultBlockState();
-            case 8 -> PlantBlocks.STIGMA_PINK.get().defaultBlockState();
-            case 9 -> PlantBlocks.STIGMA_YELLOW.get().defaultBlockState();
-            case 10 -> PlantBlocks.STIGMA_LIGHT_BLUE.get().defaultBlockState();
-            case 11 -> PlantBlocks.STIGMA_MAGENTA.get().defaultBlockState();
-            case 12 -> PlantBlocks.STIGMA_ORANGE.get().defaultBlockState();
-            case 13 -> PlantBlocks.STIGMA_WHITE.get().defaultBlockState();
+            case 0 -> ModBlocks.STIGMA_BLACK.get().defaultBlockState();
+            case 1 -> ModBlocks.STIGMA_RED.get().defaultBlockState();
+            case 2 -> ModBlocks.STIGMA_BROWN.get().defaultBlockState();
+            case 3 -> ModBlocks.STIGMA_BLUE.get().defaultBlockState();
+            case 4 -> ModBlocks.STIGMA_PURPLE.get().defaultBlockState();
+            case 5 -> ModBlocks.STIGMA_CYAN.get().defaultBlockState();
+            case 6 -> ModBlocks.STIGMA_LIGHT_GRAY.get().defaultBlockState();
+            case 7 -> ModBlocks.STIGMA_GRAY.get().defaultBlockState();
+            case 8 -> ModBlocks.STIGMA_PINK.get().defaultBlockState();
+            case 9 -> ModBlocks.STIGMA_YELLOW.get().defaultBlockState();
+            case 10 -> ModBlocks.STIGMA_LIGHT_BLUE.get().defaultBlockState();
+            case 11 -> ModBlocks.STIGMA_MAGENTA.get().defaultBlockState();
+            case 12 -> ModBlocks.STIGMA_ORANGE.get().defaultBlockState();
+            case 13 -> ModBlocks.STIGMA_WHITE.get().defaultBlockState();
             default -> throw new IllegalStateException("Unexpected value: " + color);
         };
     }

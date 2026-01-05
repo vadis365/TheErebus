@@ -1,8 +1,6 @@
 package erebus.world.feature.structure.pieces;
 
 import erebus.datagen.loot.ModChestLootTables;
-import erebus.registries.blocks.providers.OtherBlocks;
-import erebus.registries.blocks.providers.UmberstoneBlocks;
 import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -47,11 +45,11 @@ public class SpiderDungeonPiece extends ScatteredFeaturePiece {
                         setBlock(level, check, Blocks.AIR.defaultBlockState());
                     } else if(level.getBlockState(check).isSolid()) {
                         if(y == -1 && random.nextInt(4) == 0 || y == height + 1 && random.nextInt(4) == 0) {
-                            setBlock(level, check, UmberstoneBlocks.UMBERCOBBLE_WEBBED.get().defaultBlockState());
+                            setBlock(level, check, ModBlocks.UMBERCOBBLE_WEBBED.get().defaultBlockState());
                         } else if(y == -1 && random.nextInt(4) == 0 || y == height + 1 && random.nextInt(4) == 0) {
-                            setBlock(level, check, UmberstoneBlocks.UMBERCOBBLE_MOSSY.get().defaultBlockState());
+                            setBlock(level, check, ModBlocks.UMBERCOBBLE_MOSSY.get().defaultBlockState());
                         } else {
-                            setBlock(level, check, UmberstoneBlocks.UMBERCOBBLE.get().defaultBlockState());
+                            setBlock(level, check, ModBlocks.UMBERCOBBLE.get().defaultBlockState());
                         }
                     }
                 }
@@ -114,9 +112,9 @@ public class SpiderDungeonPiece extends ScatteredFeaturePiece {
         int type = random.nextInt(3);
 
         return switch(type) {
-            case 1 -> OtherBlocks.JUMPING_SPIDER_SPAWNER.get().defaultBlockState();
-            case 2 -> OtherBlocks.TARANTULA_SPAWNER.get().defaultBlockState();
-            default -> OtherBlocks.SPIDER_SPAWNER.get().defaultBlockState();
+            case 1 -> ModBlocks.JUMPING_SPIDER_SPAWNER.get().defaultBlockState();
+            case 2 -> ModBlocks.TARANTULA_SPAWNER.get().defaultBlockState();
+            default -> ModBlocks.SPIDER_SPAWNER.get().defaultBlockState();
         };
     }
 }

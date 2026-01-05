@@ -90,7 +90,7 @@ public class BlackAntMenu extends AbstractContainerMenu {
 	@Override
 	  public void clicked(int slotId, int button, ClickType clickType, Player player) {
 		if (slotId == BlackAnt.CROP_ID_SLOT) {
-			Slot slot = (Slot) slots.get(slotId);
+			Slot slot = slots.get(slotId);
 			ItemStack slotStack = slot.getItem();
 			ItemStack heldStack = player.containerMenu.getCarried();
 

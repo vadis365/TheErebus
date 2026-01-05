@@ -2,7 +2,6 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.GaeanKeystoneBlockEntity;
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.item.ModItems;
 import erebus.utils.AdvancedBlockPos;
 import net.minecraft.core.BlockPos;
@@ -94,7 +93,7 @@ public class GaeanKeystoneBlock extends BaseEntityBlock {
 
         here.iterateCube(min, max, at -> {
             BlockState state = level.getBlockState(at);
-            if (!state.is(OtherBlocks.PORTAL.get())) {
+            if (!state.is(ModBlocks.PORTAL.get())) {
                 return false;
             }
 
@@ -107,7 +106,7 @@ public class GaeanKeystoneBlock extends BaseEntityBlock {
                 found.add(f);
                 for (AdvancedBlockPos abp : f.neighbors()) {
                     if (found.contains(abp)) continue;
-                    if (level.getBlockState(abp).is(OtherBlocks.PORTAL)) frontier.add(abp);
+                    if (level.getBlockState(abp).is(ModBlocks.PORTAL)) frontier.add(abp);
                 }
             }
 
@@ -147,7 +146,7 @@ public class GaeanKeystoneBlock extends BaseEntityBlock {
         }
 
         for (AdvancedBlockPos at : contig) {
-            level.setBlockAndUpdate(at, OtherBlocks.PORTAL.get().defaultBlockState());
+            level.setBlockAndUpdate(at, ModBlocks.PORTAL.get().defaultBlockState());
         }
         return true;
     }

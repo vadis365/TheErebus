@@ -4,7 +4,6 @@ import erebus.block.bamboo.BambooExtender;
 import erebus.block.bamboo.BambooPipe;
 import erebus.block.bamboo.BambooPipeExtract;
 import erebus.block.entity.BambooExtenderBlockEntity;
-import erebus.registries.blocks.providers.OtherBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -49,7 +48,7 @@ public class BambooPipeWrenchItem extends Item {
 		if (!level.isClientSide() && player != null) {
 			BlockPos pos = context.getClickedPos();
 			BlockState state = level.getBlockState(pos);
-			if (state != null && state.getBlock() == OtherBlocks.BAMBOO_PIPE.get()) {
+			if (state != null && state.getBlock() == ModBlocks.BAMBOO_PIPE.get()) {
 				if (!player.isCrouching()) {
 					BlockState stateNew = cycleState(state, BambooPipe.FACING);
 					level.setBlock(pos, stateNew, Block.UPDATE_ALL);
@@ -57,14 +56,14 @@ public class BambooPipeWrenchItem extends Item {
 				} else {
 					level.removeBlockEntity(pos);
 					level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
-					ItemStack stackDrop = new ItemStack(OtherBlocks.BAMBOO_PIPE.get());
+					ItemStack stackDrop = new ItemStack(ModBlocks.BAMBOO_PIPE.get());
 					Block.popResource(level, pos, stackDrop);
 					level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.5F, 2.0F);
 					return InteractionResult.SUCCESS;
 				}
 			}
 			
-			if (state != null && state.getBlock() == OtherBlocks.BAMBOO_PIPE_EXTRACT.get()) {
+			if (state != null && state.getBlock() == ModBlocks.BAMBOO_PIPE_EXTRACT.get()) {
 				if (!player.isCrouching()) {
 					BlockState stateNew = cycleState(state, BambooPipeExtract.FACING);
 					level.setBlock(pos, stateNew, Block.UPDATE_ALL);
@@ -72,14 +71,14 @@ public class BambooPipeWrenchItem extends Item {
 				} else {
 					level.removeBlockEntity(pos);
 					level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
-					ItemStack stackDrop = new ItemStack(OtherBlocks.BAMBOO_PIPE_EXTRACT.get());
+					ItemStack stackDrop = new ItemStack(ModBlocks.BAMBOO_PIPE_EXTRACT.get());
 					Block.popResource(level, pos, stackDrop);
 					level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.5F, 2.0F);
 					return InteractionResult.SUCCESS;
 				}
 			}
 
-			if (state != null && state.getBlock() == OtherBlocks.BAMBOO_EXTENDER.get()) {
+			if (state != null && state.getBlock() == ModBlocks.BAMBOO_EXTENDER.get()) {
 				BlockEntity blockEntity = level.getBlockEntity(pos);
 				if (blockEntity instanceof BambooExtenderBlockEntity extender) {
 					if (!player.isCrouching()) {

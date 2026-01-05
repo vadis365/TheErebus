@@ -1,7 +1,6 @@
 package erebus.world.feature.misc.config;
 
 import erebus.block.HollowLogBlock;
-import erebus.registries.blocks.providers.WoodBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -35,7 +34,7 @@ public class RottenAcaciaFeatureConfiguration extends Feature<NoneFeatureConfigu
 
         for (int c = 0; c < length; c++) {
             BlockPos pos = origin.offset(offsetX * c, 0, offsetZ * c);
-            setBlock(level, pos, WoodBlocks.LOG_HOLLOW.get().defaultBlockState().setValue(HollowLogBlock.FACING, offsetX == 0 ? Direction.SOUTH : Direction.EAST));
+            setBlock(level, pos, ModBlocks.LOG_HOLLOW.get().defaultBlockState().setValue(HollowLogBlock.FACING, offsetX == 0 ? Direction.SOUTH : Direction.EAST));
         }
 
         return true;

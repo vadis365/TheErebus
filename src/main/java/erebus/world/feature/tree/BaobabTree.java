@@ -1,6 +1,5 @@
 package erebus.world.feature.tree;
 
-import erebus.registries.blocks.providers.WoodBlocks;
 import erebus.world.feature.tree.foliage.BaobabFoliagePlacer;
 import erebus.world.feature.tree.trunk.BaobabTrunkPlacer;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -20,9 +19,9 @@ public class BaobabTree extends ErebusTree {
     @Override
     public TreeConfiguration getTreeConfiguration() {
         return new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(WoodBlocks.LOG_BAOBAB.get()),
+                BlockStateProvider.simple(ModBlocks.LOG_BAOBAB.get()),
                 new BaobabTrunkPlacer(4, 4, 3),
-                BlockStateProvider.simple(WoodBlocks.LEAVES_BAOBAB.get()),
+                BlockStateProvider.simple(ModBlocks.LEAVES_BAOBAB.get()),
                 new BaobabFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0)),
                 new TwoLayersFeatureSize(1, 0, 2)
         ).build();
@@ -30,6 +29,6 @@ public class BaobabTree extends ErebusTree {
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
-        return tree(1, WoodBlocks.SAPLING_BAOBAB);
+        return tree(1, ModBlocks.SAPLING_BAOBAB);
     }
 }

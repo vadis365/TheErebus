@@ -1,7 +1,5 @@
 package erebus.world.feature.misc.config;
 
-import erebus.registries.blocks.providers.AmberBlocks;
-import erebus.registries.blocks.providers.UmberstoneBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -25,7 +23,7 @@ public class AmberUmberstoneFeatureConfiguration extends Feature<NoneFeatureConf
         BlockPos pos = context.origin();
         RandomSource random = context.random();
 
-        if (!level.getBlockState(pos).is(UmberstoneBlocks.UMBERSTONE)) return false;
+        if (!level.getBlockState(pos).is(ModBlocks.UMBERSTONE)) return false;
 
         float rad = random.nextFloat() + 2.6F;
         int ceilRad = 1 + ((int) Math.ceil(rad));
@@ -47,9 +45,9 @@ public class AmberUmberstoneFeatureConfiguration extends Feature<NoneFeatureConf
 
     protected void setAmberBlock(WorldGenLevel level, BlockPos pos, RandomSource random) {
         if (random.nextFloat() > BUGGED_AMBER_CHANCE) {
-            level.setBlock(pos, AmberBlocks.AMBER.get().defaultBlockState(), 2);
+            level.setBlock(pos, ModBlocks.AMBER.get().defaultBlockState(), 2);
         } else {
-            level.setBlock(pos, AmberBlocks.PRESERVED_AMBER.get().defaultBlockState(), 3);
+            level.setBlock(pos, ModBlocks.PRESERVED_AMBER.get().defaultBlockState(), 3);
             // TODO: Implement Preserved Block Entity
         }
     }

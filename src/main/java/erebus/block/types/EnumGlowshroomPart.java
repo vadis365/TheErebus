@@ -1,6 +1,5 @@
 package erebus.block.types;
 
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.utils.IErebusEnum;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +26,7 @@ public enum EnumGlowshroomPart implements IErebusEnum {
 
     @Override
     public ItemStack createStack(int count) {
-        return new ItemStack(PlantBlocks.GLOWSHROOM_STALK, count);
+        return new ItemStack(ModBlocks.GLOWSHROOM_STALK, count);
     }
 
     @Override

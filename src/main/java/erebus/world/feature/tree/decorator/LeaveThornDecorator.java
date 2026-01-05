@@ -2,7 +2,6 @@ package erebus.world.feature.tree.decorator;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import erebus.registries.blocks.providers.PlantBlocks;
 import erebus.registries.world.tree.ModTreeDecorators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -34,7 +33,7 @@ public class LeaveThornDecorator extends TreeDecorator {
     }
 
     public static void placeThorn(Context context, BlockPos pos, BooleanProperty sideProperty) {
-        context.setBlock(pos, PlantBlocks.THORNS.get().defaultBlockState().setValue(sideProperty, true));
+        context.setBlock(pos, ModBlocks.THORNS.get().defaultBlockState().setValue(sideProperty, true));
     }
 
     @Override

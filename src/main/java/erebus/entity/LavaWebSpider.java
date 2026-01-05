@@ -1,7 +1,6 @@
 package erebus.entity;
 
 import erebus.entity.ai.ThrowWebAttackGoal;
-import erebus.registries.blocks.providers.OtherBlocks;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -71,7 +70,7 @@ public class LavaWebSpider extends Monster {
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.8D, OtherBlocks.LAVA_WEB.get().defaultBlockState()));
+		goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.8D, ModBlocks.LAVA_WEB.get().defaultBlockState()));
 		goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0.4F));
 		goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.6D, true));
 		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.6D));
@@ -158,7 +157,7 @@ public class LavaWebSpider extends Monster {
 
     @Override
     public void makeStuckInBlock(BlockState state, Vec3 motionMultiplier) {
-		if (!state.is(Blocks.COBWEB) && !state.is(OtherBlocks.LAVA_WEB.get()))
+		if (!state.is(Blocks.COBWEB) && !state.is(ModBlocks.LAVA_WEB.get()))
             super.makeStuckInBlock(state, motionMultiplier);
     }
 

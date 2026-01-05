@@ -1,6 +1,5 @@
 package erebus.world.feature.misc.config;
 
-import erebus.registries.blocks.providers.UmberstoneBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -47,7 +46,7 @@ public class PetrifiedTreeFeatureConfiguration extends Feature<NoneFeatureConfig
         BlockPos pos = context.origin();
         RandomSource random = context.random();
 
-        if (!level.getBlockState(pos.below()).is(UmberstoneBlocks.VOLCANIC_ROCK)) return false;
+        if (!level.getBlockState(pos.below()).is(ModBlocks.VOLCANIC_ROCK)) return false;
 
         boolean alternate = random.nextBoolean();
         BlockState barkState = bark.get().defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y);

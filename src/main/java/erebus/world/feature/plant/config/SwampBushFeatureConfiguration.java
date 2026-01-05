@@ -1,8 +1,6 @@
 package erebus.world.feature.plant.config;
 
 import erebus.block.plants.ModBerryBushBlock;
-import erebus.registries.blocks.providers.PlantBlocks;
-import erebus.registries.blocks.providers.UmberstoneBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -25,9 +23,9 @@ public class SwampBushFeatureConfiguration extends Feature<NoneFeatureConfigurat
         RandomSource random = context.random();
 
         BlockState[] bushes = {
-                PlantBlocks.HEART_BERRY_BUSH.get().defaultBlockState().setValue(ModBerryBushBlock.AGE, 2),
-                PlantBlocks.SWAMP_BERRY_BUSH.get().defaultBlockState().setValue(ModBerryBushBlock.AGE, 2),
-                PlantBlocks.JADE_BERRY_BUSH.get().defaultBlockState().setValue(ModBerryBushBlock.AGE, 2),
+                ModBlocks.HEART_BERRY_BUSH.get().defaultBlockState().setValue(ModBerryBushBlock.AGE, 2),
+                ModBlocks.SWAMP_BERRY_BUSH.get().defaultBlockState().setValue(ModBerryBushBlock.AGE, 2),
+                ModBlocks.JADE_BERRY_BUSH.get().defaultBlockState().setValue(ModBerryBushBlock.AGE, 2),
         };
 
         float angle, length;
@@ -43,7 +41,7 @@ public class SwampBushFeatureConfiguration extends Feature<NoneFeatureConfigurat
             int z = (int) (0.5F + Math.sin(angle) * length);
             BlockPos check = pos.offset(x, y, z);
 
-            if (level.isEmptyBlock(check) && level.getBlockState(check.below()).is(UmberstoneBlocks.UMBERSTONE)) {
+            if (level.isEmptyBlock(check) && level.getBlockState(check.below()).is(ModBlocks.UMBERSTONE)) {
                 setBlock(level, check.below(), Blocks.DIRT.defaultBlockState());
                 setBlock(level, check, bushes[randomBush]);
                 placed++;
