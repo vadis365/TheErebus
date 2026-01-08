@@ -1,6 +1,7 @@
 package erebus.datagen.loot;
 
 import erebus.Erebus;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -333,6 +334,7 @@ public record ModChestLootTables(HolderLookup.Provider registries) implements Lo
         return LootItem.lootTableItem(item)
                 .setWeight(weight)
                 .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, UniformGenerator.between(1, 10))
-                        .fromOptions(registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(EnchantmentTags.TREASURE)));
+                        .withOptions(registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(EnchantmentTags.TREASURE))
+                );
     }
 }

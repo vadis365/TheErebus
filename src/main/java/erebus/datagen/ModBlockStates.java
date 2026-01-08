@@ -1,5 +1,6 @@
 package erebus.datagen;
 
+import erebus.Erebus;
 import erebus.block.HoneyTreatBlock;
 import erebus.block.plants.DarkFruitVineBlock;
 import erebus.block.plants.ModBerryBushBlock;
@@ -8,17 +9,30 @@ import erebus.registries.ModBlockFamilies;
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.client.color.item.GrassColorSource;
 import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.BlockFamily;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Blocks;
+import org.jspecify.annotations.NonNull;
 
 import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant;
 import static net.minecraft.client.data.models.model.TextureMapping.craftingTable;
 
-public class ModBlockStates {
+public class ModBlockStates extends ModelProvider {
+
+    public ModBlockStates(PackOutput output) {
+        super(output, Erebus.MODID);
+    }
+
+    @Override
+    protected void registerModels(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels) {
+        registerModels(blockModels);
+    }
 
     protected void registerModels(BlockModelGenerators blockModels) {
         ModBlockFamilies.getAllFamilies()

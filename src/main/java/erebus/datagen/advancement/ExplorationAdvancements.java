@@ -1,6 +1,7 @@
 package erebus.datagen.advancement;
 
 import erebus.Erebus;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
 import erebus.registries.world.ModDimensionRegistries;
@@ -8,13 +9,16 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.critereon.ChangeDimensionTrigger;
-import net.minecraft.advancements.critereon.ConsumeItemTrigger;
-import net.minecraft.advancements.critereon.EnterBlockTrigger;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.criterion.ChangeDimensionTrigger;
+import net.minecraft.advancements.criterion.ConsumeItemTrigger;
+import net.minecraft.advancements.criterion.EnterBlockTrigger;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -22,7 +26,7 @@ import java.util.function.Consumer;
 
 import static net.minecraft.advancements.AdvancementType.*;
 
-public class ExplorationAdvancements extends ModAdvancements {
+public class ExplorationAdvancements extends ModAdvancementsHelper {
 
     public AdvancementHolder root;
     public AdvancementHolder antivenom;
@@ -67,9 +71,10 @@ public class ExplorationAdvancements extends ModAdvancements {
     }
 
     @Override
-    public void generate(HolderLookup.@NotNull Provider provider, @NotNull Consumer<AdvancementHolder> consumer, @NotNull ExistingFileHelper existingFileHelper) {
+    public void generate(HolderLookup.@NotNull Provider provider, @NotNull Consumer<AdvancementHolder> consumer) {
+        HolderLookup<Item> items = provider.lookupOrThrow(Registries.ITEM);
+        HolderLookup<EntityType<?>> entities = provider.lookupOrThrow(Registries.ENTITY_TYPE);
         setConsumer(consumer);
-        setExistingFileHelper(existingFileHelper);
 
         root = save(
                 getRootBuilder(TASK, ModBlocks.PORTAL, "root", Erebus.prefix("textures/block/umberstone.png"))
@@ -78,10 +83,10 @@ public class ExplorationAdvancements extends ModAdvancements {
                 "root");
 
         smoothie_blender = createSimpleAdvancementWithParent(root, TASK, ModBlocks.BLENDER, "smoothie_blender", "has_blender", hasItems(ModBlocks.BLENDER));
-        entomology = save(addEntities(getAdvancedBuilderWithParent(root, CHALLENGE, ModItems.PLATE_EXO, "entomology"), false), "entomology");
+        entomology = save(addEntities(entities, getAdvancedBuilderWithParent(root, CHALLENGE, ModItems.PLATE_EXO, "entomology"), false), "entomology");
         petrified_wood = createSimpleAdvancementWithParent(root, TASK, ModBlocks.ORE_PETRIFIED_WOOD, "petrified_wood", "has_petrified_wood", hasItems(ModItems.PETRIFIED_WOOD));
         quicksand = createSimpleAdvancementWithParent(root, TASK, ModBlocks.QUICK_SAND, "quicksand", "has_quicksand", EnterBlockTrigger.TriggerInstance.entersBlock(ModBlocks.QUICK_SAND.get()));
-        kill_all = save(addEntities(getAdvancedBuilderWithParent(entomology, CHALLENGE, ModItems.JADE_SWORD, "kill_all"), true), "kill_all");
+        kill_all = save(addEntities(entities, getAdvancedBuilderWithParent(entomology, CHALLENGE, ModItems.JADE_SWORD, "kill_all"), true), "kill_all");
 
         arborist = save(
                 getAdvancedBuilderWithParent(root, AdvancementType.CHALLENGE, ModBlocks.SAPLING_MAHOGANY.get(), "arborist")
@@ -118,13 +123,13 @@ public class ExplorationAdvancements extends ModAdvancements {
 
         find_beetles = save(
                 getAdvancedBuilderWithParent(entomology, TASK, ModItems.BEETLE_LARVA_RAW, "find_beetles")
-                        .addCriterion("find_rhino", seen(ModEntities.BEETLE))
-                        .addCriterion("find_titan", seen(ModEntities.BEETLE))
-                        .addCriterion("find_stag", seen(ModEntities.BEETLE))
-                        .addCriterion("find_bombardier", seen(ModEntities.BOMBARDIER_BEETLE))
-                        .addCriterion("find_bombardier_larva", seen(ModEntities.BOMBARDIER_BEETLE_LARVA))
-                        .addCriterion("find_beetle", seen(ModEntities.BEETLE))
-                        .addCriterion("find_larva", seen(ModEntities.BEETLE_LARVA))
+                        .addCriterion("find_rhino", seen(entities, ModEntities.BEETLE))
+                        .addCriterion("find_titan", seen(entities, ModEntities.BEETLE))
+                        .addCriterion("find_stag", seen(entities, ModEntities.BEETLE))
+                        .addCriterion("find_bombardier", seen(entities, ModEntities.BOMBARDIER_BEETLE))
+                        .addCriterion("find_bombardier_larva", seen(entities, ModEntities.BOMBARDIER_BEETLE_LARVA))
+                        .addCriterion("find_beetle", seen(entities, ModEntities.BEETLE))
+                        .addCriterion("find_larva", seen(entities, ModEntities.BEETLE_LARVA))
                         .requirements(AdvancementRequirements.allOf(List.of("find_rhino", "find_titan", "find_stag", "find_bombardier", "find_bombardier_larva", "find_beetle", "find_larva"))),
                 "find_beetles"
         );
@@ -136,7 +141,7 @@ public class ExplorationAdvancements extends ModAdvancements {
                         .requirements(AdvancementRequirements.anyOf(List.of("bambucket", "bucket"))),
                 "beetlejuice"
         );
-        beetledrink = createSimpleAdvancementWithParent(beetlejuice, TASK, ModItems.BAMBUCKET, "beetledrink", "drink_juice", ConsumeItemTrigger.TriggerInstance.usedItem(ModItems.BAMBUCKET));
+        beetledrink = createSimpleAdvancementWithParent(beetlejuice, TASK, ModItems.BAMBUCKET, "beetledrink", "drink_juice", ConsumeItemTrigger.TriggerInstance.usedItem(items, ModItems.BAMBUCKET));
 
         exo_set = save(
                 getAdvancedBuilderWithParent(entomology, GOAL, ModItems.EXOSKELETON_CHESTPLATE, "exo_set")
@@ -159,7 +164,7 @@ public class ExplorationAdvancements extends ModAdvancements {
                         .requirements(AdvancementRequirements.allOf(List.of("has_helm", "has_chest", "has_legs", "has_boots", "has_shield"))),
                 "jade_set"
         );
-        woodlouse = createSimpleAdvancementWithParent(entomology, TASK, ModBlocks.LOG_HOLLOW, "woodlouse", "killed_woodlouse", killed(ModEntities.BEETLE_LARVA));
+        woodlouse = createSimpleAdvancementWithParent(entomology, TASK, ModBlocks.LOG_HOLLOW, "woodlouse", "killed_woodlouse", killed(entities, ModEntities.BEETLE_LARVA));
         whetstone = save(
                 getAdvancedBuilderWithParent(woodlouse, TASK, ModItems.WHETSTONE, "whetstone")
                         .addCriterion("has_powder", hasItems(ModItems.WHETSTONE_POWDER))
@@ -168,7 +173,7 @@ public class ExplorationAdvancements extends ModAdvancements {
                 "whetstone"
         );
         newspaper = createSimpleAdvancementWithParent(whetstone, TASK, ModItems.ROLLED_NEWSPAPER, "newspaper", "has_newspaper", hasItems(ModItems.ROLLED_NEWSPAPER));
-        petrified_chest = createSimpleAdvancementWithParent(petrified_wood, TASK, ModBlocks.CHEST_CHEST_PETRIFIED, "petrified_chest", "has_petrified_chest", hasItems(ModBlocks.CHEST_CHEST_PETRIFIED));
+        petrified_chest = createSimpleAdvancementWithParent(petrified_wood, TASK, ModBlocks.CHEST_PETRIFIED, "petrified_chest", "has_petrified_chest", hasItems(ModBlocks.CHEST_PETRIFIED));
         poison_sac = createSimpleAdvancementWithParent(entomology, TASK, ModItems.POISON_GLAND, "poison_sac", "has_poison_sac", hasItems(ModItems.POISON_GLAND));
         planticide = createSimpleAdvancementWithParent(poison_sac, TASK, ModItems.PLANTICIDE, "planticide", "has_planticide", hasItems(ModItems.PLANTICIDE));
         reinexo_set = save(
@@ -184,7 +189,7 @@ public class ExplorationAdvancements extends ModAdvancements {
         repellent = createSimpleAdvancementWithParent(entomology, TASK, ModItems.REPELLENT, "repellent", "has_repellent", hasItems(ModItems.REPELLENT));
         rhino_beetle = save(
                 getAdvancedBuilderWithParent(find_beetles, TASK, ModItems.PLATE_EXO_RHINO, "rhino_beetle")
-                        .addCriterion("kill_rhino", killed(ModEntities.BEETLE))
+                        .addCriterion("kill_rhino", killed(entities, ModEntities.BEETLE))
                         .addCriterion("has_plate", hasItems(ModItems.PLATE_EXO_RHINO))
                         .addCriterion("has_horn", hasItems(ModItems.RHINO_BEETLE_HORN))
                         .requirements(AdvancementRequirements.allOf(List.of("kill_rhino", "has_plate", "has_horn"))),
@@ -230,7 +235,7 @@ public class ExplorationAdvancements extends ModAdvancements {
         spray_can = createSimpleAdvancementWithParent(repellent, TASK, ModItems.SPRAY_CAN, "spray_can", "has_spray_can", hasItems(ModItems.SPRAY_CAN));
     }
 
-    private Advancement.Builder addEntities(Advancement.Builder builder, boolean isAll) {
+    private Advancement.Builder addEntities(HolderGetter<EntityType<?>> holderGetter, Advancement.Builder builder, boolean isAll) {
         List<String> entities = List.of(
                 "kill_beetle_larva" ,
                 "kill_beetle" ,
@@ -286,58 +291,58 @@ public class ExplorationAdvancements extends ModAdvancements {
                 "kill_crushroom"
         );
         builder
-                .addCriterion("kill_beetle_larva", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_beetle", killed(ModEntities.BEETLE))
-                .addCriterion("kill_titan", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_rhino", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_stag", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_fly", killed(ModEntities.FLY))
-                .addCriterion("kill_bot_fly", killed(ModEntities.BOT_FLY))
-                .addCriterion("kill_mosquito", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_centipede", killed(ModEntities.CENTIPEDE))
-                .addCriterion("kill_wasp", killed(ModEntities.WASP))
-                .addCriterion("kill_scorpion", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_tarantula", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_solifuge", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_solifuge_small", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_grasshopper", killed(ModEntities.GRASSHOPPER))
-                .addCriterion("kill_locust", killed(ModEntities.LOCUST))
-                .addCriterion("kill_moth", killed(ModEntities.MOTH))
-                .addCriterion("kill_antlion", killed(ModEntities.ANTLION))
-                .addCriterion("kill_black_widow", killed(ModEntities.BLACK_WIDOW))
-                .addCriterion("kill_glow_worm", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_bombardier_beetle", killed(ModEntities.BOMBARDIER_BEETLE))
-                .addCriterion("kill_scytodes", killed(ModEntities.SCYTODES))
-                .addCriterion("kill_money_spider", killed(ModEntities.MONEY_SPIDER))
-                .addCriterion("kill_praying_mantis", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_jumping_spider", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_fire_ant", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_fire_ant_soldier", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_worker_bee", killed(ModEntities.WORKER_BEE))
-                .addCriterion("kill_velvet_worm", killed(ModEntities.VELVET_WORM))
-                .addCriterion("kill_dragonfly", killed(ModEntities.DRAGON_FLY))
-                .addCriterion("kill_fungal_weevil", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_crop_weevil", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_woodlouse", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_cicada", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_lava_web_spider", killed(ModEntities.LAVA_WEB_SPIDER))
-                .addCriterion("kill_chameleon_tick", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_midge_swarm", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_punchroom", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_black_ant", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_zombie_ant", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_zombie_ant_soldier", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_pond_skater", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_magma_crawler", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_bog_maw", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_honey_pot_ant", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_bed_bug", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_antlion_boss", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_tarantula_baby", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_tarantula_boss", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_bf_larva", killed(ModEntities.BEETLE_LARVA))
-                .addCriterion("kill_bombardier_beetle_larva", killed(ModEntities.BOMBARDIER_BEETLE_LARVA))
-                .addCriterion("kill_crushroom", killed(ModEntities.BEETLE_LARVA));
+                .addCriterion("kill_beetle_larva", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_beetle", killed(holderGetter, ModEntities.BEETLE))
+                .addCriterion("kill_titan", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_rhino", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_stag", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_fly", killed(holderGetter, ModEntities.FLY))
+                .addCriterion("kill_bot_fly", killed(holderGetter, ModEntities.BOT_FLY))
+                .addCriterion("kill_mosquito", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_centipede", killed(holderGetter, ModEntities.CENTIPEDE))
+                .addCriterion("kill_wasp", killed(holderGetter, ModEntities.WASP))
+                .addCriterion("kill_scorpion", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_tarantula", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_solifuge", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_solifuge_small", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_grasshopper", killed(holderGetter, ModEntities.GRASSHOPPER))
+                .addCriterion("kill_locust", killed(holderGetter, ModEntities.LOCUST))
+                .addCriterion("kill_moth", killed(holderGetter, ModEntities.MOTH))
+                .addCriterion("kill_antlion", killed(holderGetter, ModEntities.ANTLION))
+                .addCriterion("kill_black_widow", killed(holderGetter, ModEntities.BLACK_WIDOW))
+                .addCriterion("kill_glow_worm", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_bombardier_beetle", killed(holderGetter, ModEntities.BOMBARDIER_BEETLE))
+                .addCriterion("kill_scytodes", killed(holderGetter, ModEntities.SCYTODES))
+                .addCriterion("kill_money_spider", killed(holderGetter, ModEntities.MONEY_SPIDER))
+                .addCriterion("kill_praying_mantis", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_jumping_spider", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_fire_ant", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_fire_ant_soldier", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_worker_bee", killed(holderGetter, ModEntities.WORKER_BEE))
+                .addCriterion("kill_velvet_worm", killed(holderGetter, ModEntities.VELVET_WORM))
+                .addCriterion("kill_dragonfly", killed(holderGetter, ModEntities.DRAGON_FLY))
+                .addCriterion("kill_fungal_weevil", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_crop_weevil", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_woodlouse", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_cicada", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_lava_web_spider", killed(holderGetter, ModEntities.LAVA_WEB_SPIDER))
+                .addCriterion("kill_chameleon_tick", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_midge_swarm", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_punchroom", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_black_ant", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_zombie_ant", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_zombie_ant_soldier", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_pond_skater", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_magma_crawler", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_bog_maw", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_honey_pot_ant", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_bed_bug", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_antlion_boss", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_tarantula_baby", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_tarantula_boss", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_bf_larva", killed(holderGetter, ModEntities.BEETLE_LARVA))
+                .addCriterion("kill_bombardier_beetle_larva", killed(holderGetter, ModEntities.BOMBARDIER_BEETLE_LARVA))
+                .addCriterion("kill_crushroom", killed(holderGetter, ModEntities.BEETLE_LARVA));
 
         if(isAll) return builder.requirements(AdvancementRequirements.allOf(entities));
         return builder.requirements(AdvancementRequirements.anyOf(entities));

@@ -17,6 +17,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.biome.Biome;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,18 +36,18 @@ public abstract class ModLangProvider extends LanguageProvider {
     }
 
     @Override
-    public void add(String key, String value) {
+    public void add(@NonNull String key, @NonNull String value) {
         super.add(key, value);
         List<LangFormatSplitter.Component> splitEnglish = LangFormatSplitter.split(value);
         upsideDownEntries.put(key, LangConversionHelper.convertComponents(splitEnglish));
     }
 
-    protected void addEntity(Supplier<? extends EntityType> entity, String name) {
+    protected void addEntity(Supplier<? extends EntityType<?>> entity, String name) {
         add(entity.get().getDescriptionId(), name);
         add("item.erebus.%s_spawn_egg".formatted(entity.get().getDescriptionId().replaceFirst("entity.erebus.", "")), "%s Spawn Egg".formatted(name));
     }
     
-    protected void addEntityNoEgg(Supplier<? extends EntityType> entity, String name) {
+    protected void addEntityNoEgg(Supplier<? extends EntityType<?>> entity, String name) {
         add(entity.get().getDescriptionId(), name);
     }
 
@@ -79,8 +80,8 @@ public abstract class ModLangProvider extends LanguageProvider {
         add("subtitles.%s.%s".formatted(category, subtitleName), name);
     }
 
-    protected void addBiome(ResourceKey<Biome> biomeKey, String name) {
-        add("biome.%s.%s".formatted(Erebus.MODID, biomeKey.location().getPath()), name);
+    public void addBiome(ResourceKey<Biome> biomeKey, @NonNull String name) {
+        add("biome.%s.%s".formatted(Erebus.MODID, biomeKey.identifier().getPath()), name);
     }
 
     protected void addDeath(String deathName, String name) {
@@ -99,11 +100,11 @@ public abstract class ModLangProvider extends LanguageProvider {
     }
 
     protected void addEnchantment(ResourceKey<Enchantment> enchantment, String name) {
-        add("enchantment.%s.%s".formatted(Erebus.MODID, enchantment.location().getPath()), name);
+        add("enchantment.%s.%s".formatted(Erebus.MODID, enchantment.identifier().getPath()), name);
     }
 
     protected void addJukeboxSong(ResourceKey<JukeboxSong> song, String name) {
-        add("jukebox_song.%s.%s".formatted(Erebus.MODID, song.location().getPath()), name);
+        add("jukebox_song.%s.%s".formatted(Erebus.MODID, song.identifier().getPath()), name);
     }
 
     protected void addContainer(String containerName, String name) {

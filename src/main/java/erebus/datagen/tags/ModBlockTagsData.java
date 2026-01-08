@@ -1,28 +1,26 @@
 package erebus.datagen.tags;
 
 import erebus.Erebus;
+import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.tags.ModBlockTags;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
+public class ModBlockTagsData extends BlockTagsProvider {
 
-    public ModBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, Registries.BLOCK, lookupProvider, block -> block.builtInRegistryHolder().key(), Erebus.MODID, existingFileHelper);
+    public ModBlockTagsData(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, lookupProvider, Erebus.MODID);
     }
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         // MARK: Paxel
-        tag(ModTags.MINEABLE_WITH_PAXEL)
+        tag(ModBlockTags.MINEABLE_WITH_PAXEL)
                 .addTags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_SHOVEL);
 
         // MARK: Walls
@@ -180,14 +178,14 @@ public class ModBlockTags extends IntrinsicHolderTagsProvider<Block> {
                         ModBlocks.LEAVES_MOSSBARK.get()
                 );
 
-        tag(ModTags.UMBERSTONE_ORE_REPLACEABLES)
+        tag(ModBlockTags.UMBERSTONE_ORE_REPLACEABLES)
                 .add(ModBlocks.UMBERSTONE.get());
 
-        tag(ModTags.EREBUS_CARVER_REPLACEABLES)
+        tag(ModBlockTags.EREBUS_CARVER_REPLACEABLES)
                 .add(ModBlocks.UMBERSTONE.get());
         
         // Stigma Blocks for Bees
-        tag(ModTags.BEE_POLLINATION_BLOCKS)
+        tag(ModBlockTags.BEE_POLLINATION_BLOCKS)
         .add(
                 ModBlocks.STIGMA_BLACK.get(),
                 ModBlocks.STIGMA_BLUE.get(),

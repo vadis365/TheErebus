@@ -1,5 +1,6 @@
 package erebus.registries.world.feature.config;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.world.feature.mushroom.config.*;
 import erebus.world.feature.plant.config.*;
 import net.minecraft.core.Direction;

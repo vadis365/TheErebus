@@ -1,25 +1,21 @@
 package erebus.datagen.tags;
 
 import erebus.Erebus;
+import erebus.registries.data.tags.ModItemTags;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModItemTags extends IntrinsicHolderTagsProvider<Item> {
+public class ModItemTagsData extends ItemTagsProvider {
 
-    @SuppressWarnings("deprecation")
-	public ModItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, Registries.ITEM, lookupProvider, item -> item.builtInRegistryHolder().key(), Erebus.MODID, existingFileHelper);
+	public ModItemTagsData(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, lookupProvider, Erebus.MODID);
     }
 
     @SuppressWarnings("unchecked")
@@ -40,7 +36,7 @@ public class ModItemTags extends IntrinsicHolderTagsProvider<Item> {
     	*/
     	
         // MARK: Composter 'fuels'
-        tag(ModTags.COMPOSTABLE).addTags(
+        tag(ModItemTags.COMPOSTABLE).addTags(
         		ItemTags.BAMBOO_BLOCKS,
         		ItemTags.LOGS,
         		ItemTags.LEAVES,

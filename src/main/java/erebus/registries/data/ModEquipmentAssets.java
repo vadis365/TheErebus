@@ -7,6 +7,7 @@ import net.minecraft.world.item.equipment.EquipmentAsset;
 
 public class ModEquipmentAssets {
     public static ResourceKey<? extends Registry<EquipmentAsset>> ROOT_ID = ResourceKey.createRegistryKey(Erebus.prefix("equipment_assets"));
+
     public static ResourceKey<EquipmentAsset> JADE = register("jade");
     public static ResourceKey<EquipmentAsset> EXOSKELETON = register("exoskeleton");
     public static ResourceKey<EquipmentAsset> REINFORCED_EXOSKELETON = register("reinforced_exoskeleton");

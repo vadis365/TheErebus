@@ -3,6 +3,7 @@ package erebus.datagen.providers.recipes;
 import erebus.recipes.altar.OfferingAltarRecipeBuilder;
 import erebus.recipes.smoothie.SmoothieRecipeBuilder;
 import erebus.registries.ModFluids;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -11,9 +12,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 public class CustomRecipeProvider extends ErebusRecipeProvider {
@@ -145,7 +144,7 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 				.unlockedBy("has_smoothie_glass", has(ModItems.SMOOTHIE_GLASS))
 				.save(output);
 
-		new SmoothieRecipeBuilder(FluidUtil.getFilledBucket(new FluidStack(ModFluids.ANTI_VENOM_STILL.get().getSource(), 1000)).getItem())
+		new SmoothieRecipeBuilder(ModItems.ANTI_VENOM_BUCKET)
 				.addItemIngredient(Ingredient.of(Items.BUCKET))
 				.addFluidIngredient(SizedFluidIngredient.of(ModFluids.BEETLE_JUICE_STILL.get(), FluidType.BUCKET_VOLUME))
 				.addItemIngredient(Ingredient.of(ModItems.POISON_GLAND))

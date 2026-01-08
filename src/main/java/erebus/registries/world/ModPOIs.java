@@ -2,6 +2,7 @@ package erebus.registries.world;
 
 import com.google.common.collect.ImmutableSet;
 import erebus.Erebus;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.neoforged.neoforge.registries.DeferredHolder;

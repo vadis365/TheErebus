@@ -14,7 +14,6 @@ import erebus.registries.client.ModBlockEntityRendering;
 import erebus.registries.client.ModItemRendering;
 import erebus.registries.client.ModMenuTypes;
 import erebus.registries.client.ModParticles;
-import erebus.registries.data.ModArmorMaterials;
 import erebus.registries.data.ModDataComponents;
 import erebus.registries.data.ModPredicates;
 import erebus.registries.data.ModToolMaterials;
@@ -65,7 +64,6 @@ public class Erebus {
         PlantFeatureConfigs.init();
         StructureFeatureConfigs.init();
 
-        ModArmorMaterials.ARMOR_MATERIALS.register(bus);
         ModBlocks.register(bus);
         ModItems.ITEMS.register(bus);
 		ModFluids.FLUIDS.register(bus);
@@ -111,7 +109,6 @@ public class Erebus {
 			bus.addListener(ModEntityRendering::registerEntityRender);
 			bus.addListener(ModItemRendering::registerItemLayerDefinitions);
 			bus.addListener(ModItemRendering::registerItemRender);
-			bus.addListener(ModItemRendering::registerItemColors);
 			bus.addListener(ModBlockEntityRendering::registerBlockEntityLayerDefinitions);
 			bus.addListener(ModBlockEntityRendering::registerBlockEntityRenderers);
             bus.addListener(ModParticles::registerParticleFactories);

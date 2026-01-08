@@ -2,37 +2,33 @@ package erebus.datagen.advancement;
 
 import erebus.Erebus;
 import net.minecraft.advancements.*;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.KilledTrigger;
-import net.minecraft.advancements.critereon.PlayerTrigger;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.advancements.criterion.KilledTrigger;
+import net.minecraft.advancements.criterion.PlayerTrigger;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.data.AdvancementProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public abstract class ModAdvancements implements AdvancementProvider.AdvancementGenerator {
+public abstract class ModAdvancementsHelper implements AdvancementSubProvider {
 
     private Consumer<AdvancementHolder> consumer;
-    private ExistingFileHelper existingFileHelper;
     private final String prefix;
 
-    public ModAdvancements(String prefix) {
+    public ModAdvancementsHelper(String prefix) {
         this.prefix = prefix;
     }
 
     protected void setConsumer(Consumer<AdvancementHolder> consumer) {
         this.consumer = consumer;
-    }
-
-    protected void setExistingFileHelper(ExistingFileHelper existingFileHelper) {
-        this.existingFileHelper = existingFileHelper;
     }
 
     /**
@@ -72,13 +68,13 @@ public abstract class ModAdvancements implements AdvancementProvider.Advancement
                 .requirements(AdvancementRequirements.allOf(List.of(criterionName)));
     }
 
-    protected Advancement.Builder getRootBuilder(AdvancementType type, ItemLike displayItem, String name, ResourceLocation background) {
+    protected Advancement.Builder getRootBuilder(AdvancementType type, ItemLike displayItem, String name, Identifier background) {
         return Advancement.Builder.advancement()
                 .display(displayItem, getTitle(name), getDescription(name), background, type, true, true, false);
     }
 
     protected AdvancementHolder save(Advancement.Builder builder, String name) {
-        return builder.save(consumer, Erebus.prefix(getName(name)), existingFileHelper);
+        return builder.save(consumer, Erebus.prefix(getName(name)));
     }
 
     protected Component getTitle(String name) {
@@ -93,12 +89,12 @@ public abstract class ModAdvancements implements AdvancementProvider.Advancement
         return InventoryChangeTrigger.TriggerInstance.hasItems(items);
     }
 
-    protected Criterion<?> killed(Supplier<? extends EntityType<?>> entity) {
-        return KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entity.get()));
+    protected Criterion<?> killed(HolderGetter<EntityType<? extends Entity>> lookup, Supplier<? extends EntityType<?>> entity) {
+        return KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(lookup, entity.get()));
     }
 
-    protected Criterion<?> seen(Supplier<? extends EntityType<?>> entity) {
-        return PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().of(entity.get()));
+    protected Criterion<?> seen(HolderGetter<EntityType<? extends Entity>> lookup, Supplier<? extends EntityType<?>> entity) {
+        return PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().of(lookup, entity.get()));
     }
 
     private String getName(String name) {

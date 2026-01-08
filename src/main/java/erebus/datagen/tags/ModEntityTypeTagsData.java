@@ -1,23 +1,22 @@
 package erebus.datagen.tags;
 
+import erebus.Erebus;
+import erebus.registries.data.tags.ModEntityTypeTags;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
+import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModEntityTags extends IntrinsicHolderTagsProvider<EntityType<?>> {
+public class ModEntityTypeTagsData extends EntityTypeTagsProvider {
 	
-    public ModEntityTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String modId, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, Registries.ENTITY_TYPE, provider, entity -> entity.builtInRegistryHolder().key(), modId, existingFileHelper);
+    public ModEntityTypeTagsData(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+        super(output, provider, Erebus.MODID);
     }
 
 	@Override
@@ -43,7 +42,7 @@ public class ModEntityTags extends IntrinsicHolderTagsProvider<EntityType<?>> {
 			.add(ModEntities.WORKER_BEE.get())
 			.add(ModEntities.BOMBARDIER_BEETLE.get());
 
-		tag(ModTags.CAN_BE_PRESERVED)
+		tag(ModEntityTypeTags.CAN_BE_PRESERVED)
 				.add(EntityType.ARMADILLO)
 				.add(EntityType.AXOLOTL)
 				.add(EntityType.BAT)

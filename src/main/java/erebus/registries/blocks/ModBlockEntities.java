@@ -61,20 +61,20 @@ public class ModBlockEntities {
         COMPOSTER = register("composter", ComposterBlockEntity::new, ModBlocks.COMPOSTER);
         SILO_TANK = register("silo_tank", SiloTankBlockEntity::new, ModBlocks.SILO_TANK);
         EREBUS_CHEST = register("erebus_chest", ErebusChestBlockEntity::new,
-                ModBlocks.CHEST_CHEST_ASPER,
-                ModBlocks.CHEST_CHEST_BAOBAB,
-                ModBlocks.CHEST_CHEST_BAMBOO,
-                ModBlocks.CHEST_CHEST_BALSAM,
-                ModBlocks.CHEST_CHEST_CYPRESS,
-                ModBlocks.CHEST_CHEST_EUCALYPTUS,
-                ModBlocks.CHEST_CHEST_MAHOGANY,
-                ModBlocks.CHEST_CHEST_MARSHWOOD,
-                ModBlocks.CHEST_CHEST_MOSSBARK,
-                ModBlocks.CHEST_CHEST_PETRIFIED,
-                ModBlocks.CHEST_CHEST_ROTTEN,
-                ModBlocks.CHEST_CHEST_SCORCHED,
-                ModBlocks.CHEST_CHEST_VARNISHED,
-                ModBlocks.CHEST_CHEST_WHITE
+                ModBlocks.CHEST_ASPER,
+                ModBlocks.CHEST_BAOBAB,
+                ModBlocks.CHEST_BAMBOO,
+                ModBlocks.CHEST_BALSAM,
+                ModBlocks.CHEST_CYPRESS,
+                ModBlocks.CHEST_EUCALYPTUS,
+                ModBlocks.CHEST_MAHOGANY,
+                ModBlocks.CHEST_MARSHWOOD,
+                ModBlocks.CHEST_MOSSBARK,
+                ModBlocks.CHEST_PETRIFIED,
+                ModBlocks.CHEST_ROTTEN,
+                ModBlocks.CHEST_SCORCHED,
+                ModBlocks.CHEST_VARNISHED,
+                ModBlocks.CHEST_WHITE
         );
     }
 

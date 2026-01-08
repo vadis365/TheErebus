@@ -1,17 +1,20 @@
 package erebus.datagen.advancement;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
-import net.minecraft.advancements.critereon.BlockPredicate;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
-import net.minecraft.advancements.critereon.LocationPredicate;
+import net.minecraft.advancements.criterion.BlockPredicate;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.ItemUsedOnLocationTrigger;
+import net.minecraft.advancements.criterion.LocationPredicate;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -20,7 +23,7 @@ import java.util.function.Consumer;
 import static net.minecraft.advancements.AdvancementType.GOAL;
 import static net.minecraft.advancements.AdvancementType.TASK;
 
-public class PortalAdvancements extends ModAdvancements {
+public class PortalAdvancements extends ModAdvancementsHelper {
 
     public AdvancementHolder root;
     public AdvancementHolder altar;
@@ -33,12 +36,13 @@ public class PortalAdvancements extends ModAdvancements {
     }
 
     @Override
-    public void generate(HolderLookup.@NotNull Provider provider, @NotNull Consumer<AdvancementHolder> consumer, @NotNull ExistingFileHelper existingFileHelper) {
+    public void generate(HolderLookup.@NotNull Provider provider, @NotNull Consumer<AdvancementHolder> consumer) {
+        HolderLookup<Block> blocks = provider.lookupOrThrow(Registries.BLOCK);
+        HolderLookup<Item> items = provider.lookupOrThrow(Registries.ITEM);
         setConsumer(consumer);
-        setExistingFileHelper(existingFileHelper);
 
         root = save(
-                getRootBuilder(TASK, Blocks.STONE_BRICKS, "root", ResourceLocation.withDefaultNamespace("textures/block/mossy_stone_bricks.png"))
+                getRootBuilder(TASK, Blocks.STONE_BRICKS, "root", Identifier.withDefaultNamespace("textures/block/mossy_stone_bricks.png"))
                         .addCriterion("diamond", hasItems(Items.DIAMOND))
                         .addCriterion("emerald", hasItems(Items.EMERALD))
                         .addCriterion("obsidian", hasItems(Blocks.OBSIDIAN))
@@ -63,8 +67,8 @@ public class PortalAdvancements extends ModAdvancements {
                 "portal",
                 "portal_activate",
                 ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(
-                        LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(ModBlocks.GAEAN_KEYSTONE.get())),
-                        ItemPredicate.Builder.item().of(ModItems.PORTAL_ACTIVATOR.get())
+                        LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(blocks, ModBlocks.GAEAN_KEYSTONE.get())),
+                        ItemPredicate.Builder.item().of(items, ModItems.PORTAL_ACTIVATOR.get())
                 )
         );
     }

@@ -1,6 +1,8 @@
 package erebus.datagen;
 
 import erebus.datagen.providers.ModLangProvider;
+import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.tags.ModItemTags;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
 import net.minecraft.data.PackOutput;
@@ -642,20 +644,20 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.OFFERING_ALTAR, "Offering Altar");
 
         // MARK: Chests
-        addBlock(ModBlocks.CHEST_CHEST_ASPER, "Asper Chest");
-        addBlock(ModBlocks.CHEST_CHEST_BAMBOO, "Bamboo Chest");
-        addBlock(ModBlocks.CHEST_CHEST_BAOBAB, "Baobab Chest");
-        addBlock(ModBlocks.CHEST_CHEST_BALSAM, "Balsam Chest");
-        addBlock(ModBlocks.CHEST_CHEST_CYPRESS, "Cypress Chest");
-        addBlock(ModBlocks.CHEST_CHEST_EUCALYPTUS, "Eucalyptus Chest");
-        addBlock(ModBlocks.CHEST_CHEST_MAHOGANY, "Mahogany Chest");
-        addBlock(ModBlocks.CHEST_CHEST_MARSHWOOD, "Marshwood Chest");
-        addBlock(ModBlocks.CHEST_CHEST_MOSSBARK, "Mossbark Chest");
-        addBlock(ModBlocks.CHEST_CHEST_PETRIFIED, "Petrified Wood Chest");
-        addBlock(ModBlocks.CHEST_CHEST_ROTTEN, "Rotten Chest");
-        addBlock(ModBlocks.CHEST_CHEST_SCORCHED, "Scorched Chest");
-        addBlock(ModBlocks.CHEST_CHEST_VARNISHED, "Varnished Chest");
-        addBlock(ModBlocks.CHEST_CHEST_WHITE, "White Chest");
+        addBlock(ModBlocks.CHEST_ASPER, "Asper Chest");
+        addBlock(ModBlocks.CHEST_BAMBOO, "Bamboo Chest");
+        addBlock(ModBlocks.CHEST_BAOBAB, "Baobab Chest");
+        addBlock(ModBlocks.CHEST_BALSAM, "Balsam Chest");
+        addBlock(ModBlocks.CHEST_CYPRESS, "Cypress Chest");
+        addBlock(ModBlocks.CHEST_EUCALYPTUS, "Eucalyptus Chest");
+        addBlock(ModBlocks.CHEST_MAHOGANY, "Mahogany Chest");
+        addBlock(ModBlocks.CHEST_MARSHWOOD, "Marshwood Chest");
+        addBlock(ModBlocks.CHEST_MOSSBARK, "Mossbark Chest");
+        addBlock(ModBlocks.CHEST_PETRIFIED, "Petrified Wood Chest");
+        addBlock(ModBlocks.CHEST_ROTTEN, "Rotten Chest");
+        addBlock(ModBlocks.CHEST_SCORCHED, "Scorched Chest");
+        addBlock(ModBlocks.CHEST_VARNISHED, "Varnished Chest");
+        addBlock(ModBlocks.CHEST_WHITE, "White Chest");
 
         // MARK: Antlion Dungeon
         addBlock(ModBlocks.CAPSTONE, "Capstone");
@@ -898,7 +900,7 @@ public class ModLang extends ModLangProvider {
     }
 
     private void addTagTranslations() {
-        add(ModTags.COMPOSTABLE, "Compostable");
+        add(ModItemTags.COMPOSTABLE, "Compostable");
     }
 
     private void addEMITranslations() {

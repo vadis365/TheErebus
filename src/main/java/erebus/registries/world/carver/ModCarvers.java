@@ -1,6 +1,7 @@
 package erebus.registries.world.carver;
 
 import erebus.Erebus;
+import erebus.registries.data.tags.ModBlockTags;
 import erebus.world.carver.ErebusCanyonCarverConfiguration;
 import erebus.world.carver.ErebusCaveCarverConfiguration;
 import net.minecraft.core.HolderGetter;
@@ -39,7 +40,7 @@ public class ModCarvers {
                                         UniformHeight.of(VerticalAnchor.absolute(0), VerticalAnchor.belowTop(1)),
                                         ConstantFloat.of(0.5F),
                                         VerticalAnchor.aboveBottom(10),
-                                        blockRegistry.getOrThrow(ModTags.EREBUS_CARVER_REPLACEABLES),
+                                        blockRegistry.getOrThrow(ModBlockTags.EREBUS_CARVER_REPLACEABLES),
                                         ConstantFloat.of(1.0F),
                                         ConstantFloat.of(1.0F),
                                         ConstantFloat.of(-0.7F)
@@ -57,7 +58,7 @@ public class ModCarvers {
                                         ConstantFloat.of(3.0F),
                                         VerticalAnchor.aboveBottom(8),
                                         CarverDebugSettings.of(false, Blocks.WARPED_BUTTON.defaultBlockState()),
-                                        blockRegistry.getOrThrow(ModTags.EREBUS_CARVER_REPLACEABLES),
+                                        blockRegistry.getOrThrow(ModBlockTags.EREBUS_CARVER_REPLACEABLES),
                                         UniformFloat.of(-0.125F, 0.125F),
                                         new CanyonCarverConfiguration.CanyonShapeConfiguration(
                                                 UniformFloat.of(0.75F, 1.0F), TrapezoidFloat.of(0.0F, 6.0F, 2.0F), 3, UniformFloat.of(0.75F, 1.0F), 1.0F, 0.0F

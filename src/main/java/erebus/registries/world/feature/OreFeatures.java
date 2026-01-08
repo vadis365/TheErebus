@@ -1,5 +1,6 @@
 package erebus.registries.world.feature;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.helpers.ModFeatureHelpers;
 import erebus.world.feature.ErebusOre;
 import net.minecraft.data.worldgen.BootstrapContext;

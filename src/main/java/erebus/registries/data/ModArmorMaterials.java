@@ -1,6 +1,7 @@
 package erebus.registries.data;
 
 import com.google.common.collect.Maps;
+import erebus.registries.data.tags.ModItemTags;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -19,7 +20,7 @@ public class ModArmorMaterials {
             SoundEvents.ARMOR_EQUIP_IRON,
             2.0F,
             0.0F,
-            ModTags.REPAIRS_JADE_ARMOR,
+            ModItemTags.REPAIRS_JADE_ARMOR,
             ModEquipmentAssets.JADE
     );
 
@@ -33,7 +34,7 @@ public class ModArmorMaterials {
             SoundEvents.ARMOR_EQUIP_IRON,
             0.0F,
             0.0F,
-            ModTags.REPAIRS_EXOSKELETON_ARMOR,
+            ModItemTags.REPAIRS_EXOSKELETON_ARMOR,
             ModEquipmentAssets.EXOSKELETON
     );
 
@@ -47,7 +48,7 @@ public class ModArmorMaterials {
             SoundEvents.ARMOR_EQUIP_IRON,
             3.0F,
             0.0F,
-            ModTags.REPAIRS_REINFORCED_EXOSKELETON_ARMOR,
+            ModItemTags.REPAIRS_REINFORCED_EXOSKELETON_ARMOR,
             ModEquipmentAssets.REINFORCED_EXOSKELETON
     );
 
@@ -61,7 +62,7 @@ public class ModArmorMaterials {
             SoundEvents.ARMOR_EQUIP_IRON,
             4.0F,
             0.0F,
-            ModTags.REPAIRS_RHINO_ARMOR,
+            ModItemTags.REPAIRS_RHINO_ARMOR,
             ModEquipmentAssets.RHINO
     );
 
@@ -75,7 +76,7 @@ public class ModArmorMaterials {
             SoundEvents.ARMOR_EQUIP_GENERIC,
             0.0F,
             0.0F,
-            ModTags.REPAIRS_BAMBOO_ARMOR,
+            ModItemTags.REPAIRS_BAMBOO_ARMOR,
             ModEquipmentAssets.BAMBOO
     );
 
@@ -90,7 +91,7 @@ public class ModArmorMaterials {
             SoundEvents.ARMOR_EQUIP_DIAMOND,
             0.0F,
             0.0F,
-            ModTags.REPAIRS_REINFORCED_COMPOUND_GOGGLES,
+            ModItemTags.REPAIRS_REINFORCED_COMPOUND_GOGGLES,
             ModEquipmentAssets.REINFORCED_COMPOUND_GOGGLES
     );
 
@@ -105,7 +106,7 @@ public class ModArmorMaterials {
             SoundEvents.ARMOR_EQUIP_DIAMOND,
             0.0F,
             0.0F,
-            ModTags.REPAIRS_REINFORCED_COMPOUND_GOGGLES,
+            ModItemTags.REPAIRS_REINFORCED_COMPOUND_GOGGLES,
             ModEquipmentAssets.REINFORCED_COMPOUND_GOGGLES
     );
 
@@ -120,7 +121,7 @@ public class ModArmorMaterials {
             SoundEvents.ARMOR_EQUIP_DIAMOND,
             3.0F,
             0.0F,
-            ModTags.REPAIRS_MUSHROOM_HELM,
+            ModItemTags.REPAIRS_MUSHROOM_HELM,
             ModEquipmentAssets.MUSHROOM_HELM
     );
 
@@ -135,7 +136,7 @@ public class ModArmorMaterials {
             SoundEvents.ARMOR_EQUIP_DIAMOND,
             3.0F,
             0.0F,
-            ModTags.REPAIRS_SPIDER_T_SHIRT,
+            ModItemTags.REPAIRS_SPIDER_T_SHIRT,
             ModEquipmentAssets.SPIDER_T_SHIRT
     );
 
@@ -150,7 +151,7 @@ public class ModArmorMaterials {
             SoundEvents.ARMOR_EQUIP_DIAMOND,
             3.0F,
             0.0F,
-            ModTags.REPAIRS_WATER_STRIDERS,
+            ModItemTags.REPAIRS_WATER_STRIDERS,
             ModEquipmentAssets.WATER_STRIDERS
     );
 
@@ -165,7 +166,7 @@ public class ModArmorMaterials {
             SoundEvents.ARMOR_EQUIP_DIAMOND,
             3.0F,
             0.0F,
-            ModTags.REPAIRS_JUMP_BOOTS,
+            ModItemTags.REPAIRS_JUMP_BOOTS,
             ModEquipmentAssets.JUMP_BOOTS
     );
 
@@ -180,7 +181,7 @@ public class ModArmorMaterials {
             SoundEvents.ARMOR_EQUIP_DIAMOND,
             3.0F,
             0.0F,
-            ModTags.REPAIRS_SPRINT_LEGGINGS,
+            ModItemTags.REPAIRS_SPRINT_LEGGINGS,
             ModEquipmentAssets.SPRINT_LEGGINGS
     );
 

@@ -2,6 +2,7 @@ package erebus.client.render.block.renderer;
 
 import com.google.common.collect.ImmutableMap;
 import erebus.Erebus;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.ChestRenderer;
@@ -22,20 +23,20 @@ public class ErebusChestRenderer<T extends ChestBlockEntity> extends ChestRender
 
     static {
         ImmutableMap.Builder<Block, EnumMap<ChestType, Material>> builder = ImmutableMap.builder();
-        builder.put(ModBlocks.CHEST_CHEST_ASPER.get(), chestMaterials("asper_chest"));
-        builder.put(ModBlocks.CHEST_CHEST_BAOBAB.get(), chestMaterials("baobab_chest"));
-        builder.put(ModBlocks.CHEST_CHEST_BAMBOO.get(), chestMaterials("bamboo_chest"));
-        builder.put(ModBlocks.CHEST_CHEST_BALSAM.get(), chestMaterials("balsam_chest"));
-        builder.put(ModBlocks.CHEST_CHEST_CYPRESS.get(), chestMaterials("cypress_chest"));
-        builder.put(ModBlocks.CHEST_CHEST_EUCALYPTUS.get(), chestMaterials("eucalyptus_chest"));
-        builder.put(ModBlocks.CHEST_CHEST_MAHOGANY.get(), chestMaterials("mahogany_chest"));
-        builder.put(ModBlocks.CHEST_CHEST_MARSHWOOD.get(), chestMaterials("marshwood_chest"));
-        builder.put(ModBlocks.CHEST_CHEST_MOSSBARK.get(), chestMaterials("mossbark_chest"));
-        builder.put(ModBlocks.CHEST_CHEST_PETRIFIED.get(), chestMaterials("petrified_chest"));
-        builder.put(ModBlocks.CHEST_CHEST_ROTTEN.get(), chestMaterials("rotten_chest"));
-        builder.put(ModBlocks.CHEST_CHEST_SCORCHED.get(), chestMaterials("scorched_chest"));
-        builder.put(ModBlocks.CHEST_CHEST_VARNISHED.get(), chestMaterials("varnished_chest"));
-        builder.put(ModBlocks.CHEST_CHEST_WHITE.get(), chestMaterials("white_chest"));
+        builder.put(ModBlocks.CHEST_ASPER.get(), chestMaterials("asper_chest"));
+        builder.put(ModBlocks.CHEST_BAOBAB.get(), chestMaterials("baobab_chest"));
+        builder.put(ModBlocks.CHEST_BAMBOO.get(), chestMaterials("bamboo_chest"));
+        builder.put(ModBlocks.CHEST_BALSAM.get(), chestMaterials("balsam_chest"));
+        builder.put(ModBlocks.CHEST_CYPRESS.get(), chestMaterials("cypress_chest"));
+        builder.put(ModBlocks.CHEST_EUCALYPTUS.get(), chestMaterials("eucalyptus_chest"));
+        builder.put(ModBlocks.CHEST_MAHOGANY.get(), chestMaterials("mahogany_chest"));
+        builder.put(ModBlocks.CHEST_MARSHWOOD.get(), chestMaterials("marshwood_chest"));
+        builder.put(ModBlocks.CHEST_MOSSBARK.get(), chestMaterials("mossbark_chest"));
+        builder.put(ModBlocks.CHEST_PETRIFIED.get(), chestMaterials("petrified_chest"));
+        builder.put(ModBlocks.CHEST_ROTTEN.get(), chestMaterials("rotten_chest"));
+        builder.put(ModBlocks.CHEST_SCORCHED.get(), chestMaterials("scorched_chest"));
+        builder.put(ModBlocks.CHEST_VARNISHED.get(), chestMaterials("varnished_chest"));
+        builder.put(ModBlocks.CHEST_WHITE.get(), chestMaterials("white_chest"));
         MATERIALS = builder.build();
     }
 

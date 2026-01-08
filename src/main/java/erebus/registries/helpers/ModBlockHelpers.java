@@ -79,16 +79,16 @@ public class ModBlockHelpers {
         return registerBlock(name, () -> new ErebusChestBlock(properties, name));
     }
 
-    protected static DeferredBlock<Block> registerSimpleBlock(String name, Properties properties) {
-        DeferredBlock<Block> deferredBlock = BLOCKS.registerSimpleBlock(name, properties);
-        registerBlockItem(name, deferredBlock);
-        return deferredBlock;
-    }
-
     protected static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> deferredBlock = BLOCKS.register(name, block);
         registerBlockItem(name, deferredBlock);
         return deferredBlock;
+    }
+
+    protected static DeferredBlock<Block> registerSimpleBlock(String name, Properties properties) {
+        DeferredBlock<Block> block = BLOCKS.register(name, () -> new Block(properties));
+        registerBlockItem(name, block);
+        return block;
     }
     
     protected static <T extends Block> DeferredBlock<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {

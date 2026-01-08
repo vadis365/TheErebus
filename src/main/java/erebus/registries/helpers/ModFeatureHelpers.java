@@ -1,5 +1,6 @@
 package erebus.registries.helpers;
 
+import erebus.registries.data.tags.ModBlockTags;
 import erebus.world.feature.ErebusFeature;
 import erebus.world.feature.bush.ErebusBushFeature;
 import erebus.world.feature.tree.ErebusTree;
@@ -27,7 +28,7 @@ public class ModFeatureHelpers {
     private static BootstrapContext<ConfiguredFeature<?, ?>> configuredContext;
     private static BootstrapContext<PlacedFeature> placedContext;
 
-    private static final RuleTest umberstoneReplaceables = new TagMatchTest(ModTags.UMBERSTONE_ORE_REPLACEABLES);
+    private static final RuleTest umberstoneReplaceables = new TagMatchTest(ModBlockTags.UMBERSTONE_ORE_REPLACEABLES);
 
     protected static void setConfiguredContext(BootstrapContext<ConfiguredFeature<?, ?>> configuredContext) {
         ModFeatureHelpers.configuredContext = configuredContext;

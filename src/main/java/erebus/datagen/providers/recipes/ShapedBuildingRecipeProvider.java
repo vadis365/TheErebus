@@ -1,5 +1,6 @@
 package erebus.datagen.providers.recipes;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -207,7 +208,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addSpecialBlockRecipes() {
-        surround(ModBlocks.PLANKS_PETRIFIED, Items.GOLD_INGOT, ModBlocks.CHEST_CHEST_PETRIFIED);
+        surround(ModBlocks.PLANKS_PETRIFIED, Items.GOLD_INGOT, ModBlocks.CHEST_PETRIFIED);
 
         shaped(BUILDING_BLOCKS, ModBlocks.BAMBOO_BRIDGE, 3)
                 .pattern("SSS")

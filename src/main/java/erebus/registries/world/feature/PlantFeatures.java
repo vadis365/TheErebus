@@ -1,5 +1,6 @@
 package erebus.registries.world.feature;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.helpers.ModFeatureHelpers;
 import erebus.world.feature.bush.HeartBerryBushFeature;
 import erebus.world.feature.bush.JadeBerryBushFeature;

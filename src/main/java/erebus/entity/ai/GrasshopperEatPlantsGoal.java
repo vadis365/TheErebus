@@ -3,10 +3,12 @@ package erebus.entity.ai;
 import erebus.entity.Grasshopper;
 import erebus.entity.Locust;
 import erebus.registries.ModSounds;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
@@ -28,7 +30,7 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 	@Override
 	protected boolean canEatBlock(BlockState state) {
 		Block block = state.getBlock();
-		if (state.isAir() || block == null)
+		if (state.isAir())
 			return false;
 		else return state.is(Blocks.SHORT_GRASS) || state.is(ModBlocks.FERN.get()) || block instanceof CropBlock && ((CropBlock) block).isMaxAge(state);
     }
@@ -65,7 +67,7 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 		plantsEaten++;
 		if (plantsEaten == 6)
 			if (grasshopper.level().getEntitiesOfClass(Grasshopper.class, grasshopper.getBoundingBox().inflate(16)).size() < 10) {
-				Grasshopper newGrasshopper = ModEntities.GRASSHOPPER.get().create(grasshopper.level());
+				Grasshopper newGrasshopper = ModEntities.GRASSHOPPER.get().create(grasshopper.level(), EntitySpawnReason.BREEDING);
 				if (newGrasshopper != null) {
 					newGrasshopper.copyPosition(grasshopper);
 					grasshopper.level().addFreshEntity(newGrasshopper);
@@ -73,7 +75,7 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 			}
 		if (plantsEaten >= 12) {
 			if (grasshopper.level().getEntitiesOfClass(Locust.class, grasshopper.getBoundingBox().inflate(16)).size() < 5) {
-				Locust locust = ModEntities.LOCUST.get().create(grasshopper.level());
+				Locust locust = ModEntities.LOCUST.get().create(grasshopper.level(), EntitySpawnReason.BREEDING);
 				if (locust != null) {
 					locust.copyPosition(grasshopper);
 					grasshopper.remove(Entity.RemovalReason.DISCARDED);

@@ -5,12 +5,11 @@ import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.JumpControl;
@@ -20,13 +19,13 @@ import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.jspecify.annotations.NonNull;
 
 public class Grasshopper extends PathfinderMob {
 
@@ -39,7 +38,7 @@ public class Grasshopper extends PathfinderMob {
 
 	public Grasshopper(EntityType<? extends Grasshopper> type, Level level ) {
 		super(type, level);
-		jumpControl = new Grasshopper.GrasshopperJumpControl(this);
+		jumpControl = new GrasshopperJumpControl(this);
 		moveControl = new Grasshopper.GrasshopperMoveControl(this);
 		setSpeedModifier(0.5D);
 	}
@@ -60,9 +59,8 @@ public class Grasshopper extends PathfinderMob {
 			.add(Attributes.STEP_HEIGHT, 1.0D);
 	}
 
-	public static boolean canSpawnHere(EntityType<Grasshopper> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
-		float light = level.getLightLevelDependentMagicValue(pos);
-		return light >= 0F;
+	public static SpawnPlacements.SpawnPredicate<Grasshopper> canSpawnHere() {
+		return (_, level, _, pos, _) -> level.getLightLevelDependentMagicValue(pos) >= 0F;
 	}
 	
 	@Override
@@ -81,7 +79,7 @@ public class Grasshopper extends PathfinderMob {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.GRASSHOPPER_HURT.get();
 	}
 
@@ -91,7 +89,7 @@ public class Grasshopper extends PathfinderMob {
 	}
 
     @Override
-    protected void playStepSound(BlockPos pos, BlockState block) {
+    protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
         playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
 /*
@@ -163,7 +161,7 @@ public class Grasshopper extends PathfinderMob {
 		jumpTicks = 0;
 	}
 
-    @Override
+    /*@Override
     public void customServerAiStep() {
 		if (currentMoveTypeDuration > 0) {
 			--currentMoveTypeDuration;
@@ -188,7 +186,7 @@ public class Grasshopper extends PathfinderMob {
 				enableJumpControl();
 		}
 		wasOnGround = onGround();
-	}
+	}*/
 
 	public void spawnRunningParticles() {
 	}
@@ -255,7 +253,7 @@ public class Grasshopper extends PathfinderMob {
         }
     }
 
-	public class GrasshopperJumpControl extends JumpControl {
+	public static class GrasshopperJumpControl extends JumpControl {
 		private final Grasshopper grasshopper;
 		private boolean canJump;
 

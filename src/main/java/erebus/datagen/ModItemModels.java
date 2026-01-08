@@ -1,28 +1,26 @@
 package erebus.datagen;
 
-import erebus.datagen.providers.ModItemModelProvider;
+import erebus.Erebus;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import org.jspecify.annotations.NonNull;
 
-public class ModItemModels extends ModItemModelProvider {
+public class ModItemModels extends ModelProvider {
 
-    public ModItemModels(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, existingFileHelper);
+    public ModItemModels(PackOutput output) {
+        super(output, Erebus.MODID);
     }
 
     @Override
-    protected void registerModels() {
-        registerItemModels();
-        registerBlockItemModels();
-    }
-
-    private void registerItemModels() {
+    public void registerModels(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels) {
 
     	// Mob Spawn Eggs
 		for (DeferredHolder<Item, ?> item : ModEntities.SPAWN_EGGS.getEntries()) {

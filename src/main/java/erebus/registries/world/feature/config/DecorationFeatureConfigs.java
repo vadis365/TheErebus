@@ -1,5 +1,6 @@
 package erebus.registries.world.feature.config;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.world.feature.misc.config.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.Feature;

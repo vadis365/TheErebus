@@ -1,5 +1,6 @@
 package erebus.datagen.providers.recipes;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -190,8 +191,8 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .define('I', Items.IRON_INGOT)
                 .define('P', ModBlocks.PLANKS_VARNISHED)
                 .define('B', Blocks.IRON_BLOCK)
-                .define('C', ModBlocks.CHEST_CHEST_PETRIFIED)
-                .unlockedBy("has_petrified_wood_chest", has(ModBlocks.CHEST_CHEST_PETRIFIED))
+                .define('C', ModBlocks.CHEST_PETRIFIED)
+                .unlockedBy("has_petrified_wood_chest", has(ModBlocks.CHEST_PETRIFIED))
                 .save(output);
 
         shaped(MISC, ModBlocks.OFFERING_ALTAR)

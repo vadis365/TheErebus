@@ -1,5 +1,6 @@
 package erebus.datagen.providers.recipes;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;

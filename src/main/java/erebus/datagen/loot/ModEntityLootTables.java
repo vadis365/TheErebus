@@ -2,9 +2,10 @@ package erebus.datagen.loot;
 
 import erebus.datagen.loot.predicates.DragonflyPredicate;
 import erebus.datagen.loot.predicates.WaspPredicate;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
-import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.world.entity.Entity;

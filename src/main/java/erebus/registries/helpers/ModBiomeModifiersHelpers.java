@@ -14,7 +14,7 @@ import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifiers;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
-public class ModBiomeModifersHelpers {
+public class ModBiomeModifiersHelpers {
 
     protected static HolderGetter<PlacedFeature> placedFeatures;
     protected static HolderGetter<Biome> biomes;

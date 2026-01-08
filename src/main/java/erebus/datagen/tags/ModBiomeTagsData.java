@@ -1,24 +1,23 @@
 package erebus.datagen.tags;
 
 import erebus.Erebus;
+import erebus.registries.data.tags.ModBiomeTags;
 import erebus.registries.world.ModBiomes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModBiomeTags extends BiomeTagsProvider {
-    public ModBiomeTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, provider, Erebus.MODID, existingFileHelper);
+public class ModBiomeTagsData extends BiomeTagsProvider {
+    public ModBiomeTagsData(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+        super(output, provider, Erebus.MODID);
     }
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(ModTags.IS_EREBUS)
+        tag(ModBiomeTags.IS_EREBUS)
                 .add(ModBiomes.ELYSIAN_FIELDS.getResourceKey())
                 .add(ModBiomes.ELYSIAN_FOREST.getResourceKey())
                 .add(ModBiomes.FUNGAL_FOREST.getResourceKey())
@@ -29,30 +28,30 @@ public class ModBiomeTags extends BiomeTagsProvider {
                 .add(ModBiomes.UNDERGROUND_JUNGLE.getResourceKey())
                 .add(ModBiomes.VOLCANIC_DESERT.getResourceKey());
 
-        tag(ModTags.IS_FUNGAL_FOREST)
+        tag(ModBiomeTags.IS_FUNGAL_FOREST)
         .add(ModBiomes.FUNGAL_FOREST.getResourceKey());
 
-        tag(ModTags.HAS_ANTLION_DUNGEON)
+        tag(ModBiomeTags.HAS_ANTLION_DUNGEON)
                 .add(ModBiomes.VOLCANIC_DESERT.getResourceKey());
-        tag(ModTags.HAS_ANTLION_LAIR)
+        tag(ModBiomeTags.HAS_ANTLION_LAIR)
                 .add(ModBiomes.VOLCANIC_DESERT.getResourceKey());
-        tag(ModTags.HAS_DRAGONFLY_DUNGEON)
+        tag(ModBiomeTags.HAS_DRAGONFLY_DUNGEON)
                 .add(ModBiomes.SUBMERGED_SWAMP.getResourceKey());
-        tag(ModTags.HAS_DUNG_PILE)
+        tag(ModBiomeTags.HAS_DUNG_PILE)
                 .add(ModBiomes.ULTERIOR_OUTBACK.getResourceKey());
-        tag(ModTags.HAS_LOCUST_SHRINE)
+        tag(ModBiomeTags.HAS_LOCUST_SHRINE)
                 .add(ModBiomes.SUBTERRANEAN_SAVANNAH.getResourceKey());
-        tag(ModTags.HAS_SPIDER_DUNGEON);
-        tag(ModTags.HAS_SWAMP_HUT)
+        tag(ModBiomeTags.HAS_SPIDER_DUNGEON);
+        tag(ModBiomeTags.HAS_SWAMP_HUT)
                 .add(ModBiomes.SUBMERGED_SWAMP.getResourceKey());
-        tag(ModTags.HAS_WASP_DUNGEON)
+        tag(ModBiomeTags.HAS_WASP_DUNGEON)
                 .add(ModBiomes.UNDERGROUND_JUNGLE.getResourceKey());
-        tag(ModTags.HAS_GIANT_FLOWERS)
+        tag(ModBiomeTags.HAS_GIANT_FLOWERS)
                 .add(ModBiomes.ELYSIAN_FIELDS.getResourceKey())
                 .add(ModBiomes.ELYSIAN_FOREST.getResourceKey());
-        tag(ModTags.HAS_ROTTEN_STUMPS)
+        tag(ModBiomeTags.HAS_ROTTEN_STUMPS)
                 .add(ModBiomes.FUNGAL_FOREST.getResourceKey());
-        tag(ModTags.HAS_BIG_LOGS)
+        tag(ModBiomeTags.HAS_BIG_LOGS)
                 .add(ModBiomes.FUNGAL_FOREST.getResourceKey());
     }
 }

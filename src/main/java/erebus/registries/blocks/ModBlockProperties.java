@@ -18,24 +18,24 @@ public class ModBlockProperties {
     public static final Properties AMBER_PROPERTIES = Properties.of()
             .noOcclusion()
             .strength(1.5F, 10.0F)
-            .isViewBlocking((blockState, blockGetter, blockPos) -> false)
+            .isViewBlocking((_, _, _) -> false)
             .mapColor(MapColor.GOLD)
             .sound(SoundType.GLASS);
 
     public static final Properties GLOWING_JAR_PROPERTIES = Properties.of()
             .strength(0.5F, 10.0F)
             .sound(SoundType.GLASS)
-            .lightLevel(value -> 15)
+            .lightLevel(_ -> 15)
             .noOcclusion()
             .noTerrainParticles()
             .randomTicks()
-            .isViewBlocking((state, getter, pos) -> false);
+            .isViewBlocking((_, _, _) -> false);
 
     public static final Properties FLUID_JAR_PROPERTIES = Properties.ofFullCopy(Blocks.GLASS)
             .strength(1.0F, 2000.0F)
             .sound(SoundType.GLASS)
             .noOcclusion()
-            .isViewBlocking((state, getter, pos) -> false);
+            .isViewBlocking((_, _, _) -> false);
 
     public static final Properties AMBER_DOOR_PROPERTIES = Properties.of()
             .mapColor(MapColor.GOLD)
@@ -220,7 +220,7 @@ public class ModBlockProperties {
             .randomTicks()
             .instabreak()
             .sound(SoundType.GRASS)
-            .lightLevel((state) -> 1)
+            .lightLevel((_) -> 1)
             .hasPostProcess(BlockPropUtils::always)
             .pushReaction(PushReaction.DESTROY)
             .offsetType(BlockBehaviour.OffsetType.XZ);
@@ -271,14 +271,14 @@ public class ModBlockProperties {
     public static final Properties SLAB_AMBER = Properties.ofFullCopy(Blocks.GLASS)
             .strength(1.5F)
             .noOcclusion()
-            .isViewBlocking((blockState, blockGetter, blockPos) -> false)
+            .isViewBlocking((_, _, _) -> false)
             .sound(SoundType.GLASS)
             .mapColor(MapColor.GOLD);
 
     public static final Properties SLAB_AMBER_BRICKS = Properties.ofFullCopy(Blocks.GLASS)
             .strength(1.5F)
             .noOcclusion()
-            .isViewBlocking((blockState, blockGetter, blockPos) -> false)
+            .isViewBlocking((_, _, _) -> false)
             .sound(SoundType.GLASS)
             .mapColor(MapColor.GOLD);
 
@@ -471,19 +471,18 @@ public class ModBlockProperties {
 
     // Utility Blocks
     public static final Properties PETRIFIED_CRAFTING_TABLE = Properties.ofFullCopy(Blocks.CRAFTING_TABLE);
-    public static final Properties PETRIFIED_WOOD_CHEST = Properties.ofFullCopy(Blocks.CHEST);
     public static final Properties BAMBOO_CRATE = Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER);
     public static final Properties BAMBOO_BRIDGE = Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER);
     public static final Properties BAMBOO_LADDER = Properties.ofFullCopy(Blocks.LADDER).sound(SoundType.BAMBOO);
     public static final Properties BAMBOO_NERD_POLE = Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER);
     public static final Properties BAMBOO_EXTENDER = Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.4F).noOcclusion().sound(SoundType.LADDER);
-    public static final Properties BAMBOO_TORCH = Properties.of().mapColor(MapColor.COLOR_GREEN).noCollision().sound(SoundType.BAMBOO).lightLevel((state) -> 15);
+    public static final Properties BAMBOO_TORCH = Properties.of().mapColor(MapColor.COLOR_GREEN).noCollision().sound(SoundType.BAMBOO).lightLevel((_) -> 15);
     public static final Properties BAMBOO_PIPE = Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO);
     public static final Properties BAMBOO_PIPE_EXTRACT = Properties.of().mapColor(MapColor.COLOR_GREEN).strength(1.5F).noOcclusion().sound(SoundType.BAMBOO);
     public static final Properties SILO_ROOF = Properties.of().mapColor(MapColor.METAL).strength(3F, 10F).sound(SoundType.METAL).noOcclusion();
     public static final Properties SILO_TANK = Properties.of().mapColor(MapColor.WOOD).strength(3F, 10F).sound(SoundType.METAL).noOcclusion();
     public static final Properties SILO_SUPPORTS = Properties.of().mapColor(MapColor.WOOD).noCollision().strength(2F, 10F).sound(SoundType.WOOD).noOcclusion();
-    public static final Properties HONEY_COMB = Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.5F, 10F).lightLevel(value -> 1).sound(SoundType.WOOL);
+    public static final Properties HONEY_COMB = Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(0.5F, 10F).lightLevel(_ -> 1).sound(SoundType.WOOL);
     public static final Properties COMPOSTER = Properties.of().mapColor(MapColor.COLOR_GREEN).strength(2F, 10F).sound(SoundType.WOOD).noOcclusion();
     public static final Properties BLENDER = Properties.of().mapColor(MapColor.STONE).noOcclusion();
     public static final Properties UMBER_FURNACE = Properties.ofFullCopy(Blocks.FURNACE);
@@ -493,9 +492,9 @@ public class ModBlockProperties {
             .strength(1.0F, 2000.0F)
             .sound(SoundType.GLASS)
             .noOcclusion()
-            .isViewBlocking((blockState, blockGetter, blockPos) -> false);
-    public static final Properties GLOW_GEM_ACTIVE = Properties.of().mapColor(MapColor.COLOR_YELLOW).noCollision().sound(SoundType.GLASS).lightLevel((state) -> 15);
-    public static final Properties GLOW_GEM_INACTIVE = Properties.of().mapColor(MapColor.COLOR_RED).noCollision().sound(SoundType.GLASS).lightLevel((state) -> 0);
+            .isViewBlocking((_, _, _) -> false);
+    public static final Properties GLOW_GEM_ACTIVE = Properties.of().mapColor(MapColor.COLOR_YELLOW).noCollision().sound(SoundType.GLASS).lightLevel((_) -> 15);
+    public static final Properties GLOW_GEM_INACTIVE = Properties.of().mapColor(MapColor.COLOR_RED).noCollision().sound(SoundType.GLASS).lightLevel((_) -> 0);
     public static final Properties MUCUS_BOMB = Properties.of().mapColor(MapColor.STONE);
     public static final Properties UMBER_GOLEM_STATUE = Properties.of().mapColor(MapColor.STONE);
 

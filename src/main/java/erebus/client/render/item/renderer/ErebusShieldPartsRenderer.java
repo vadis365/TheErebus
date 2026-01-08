@@ -6,7 +6,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import erebus.client.render.item.model.ErebusShieldPartsModel;
 import erebus.registries.client.ModItemRendering;
-import erebus.registries.client.ModShieldMaterials;
 import erebus.registries.item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;

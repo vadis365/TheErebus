@@ -13,6 +13,7 @@ import erebus.item.shield.type.*;
 import erebus.item.wand.WandOfAnimationItem;
 import erebus.item.wand.WandOfPreservationItem;
 import erebus.registries.ModFluids;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.data.ModArmorMaterials;
 import erebus.registries.data.ModToolMaterials;
 import erebus.registries.helpers.ModItemHelpers;

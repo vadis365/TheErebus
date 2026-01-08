@@ -19,11 +19,9 @@ public class ModBlockEntityRendering {
     public static final ModelLayerLocation GLOWING_JAR = new ModelLayerLocation(Erebus.prefix("glowing_jar"), "main");
     public static final ModelLayerLocation BAMBOO_BRIDGE = new ModelLayerLocation(Erebus.prefix("bamboo_bridge"), "main");
     public static final ModelLayerLocation BAMBOO_EXTENDER = new ModelLayerLocation(Erebus.prefix("bamboo_extender"), "main");
-    public static final ModelLayerLocation EREBUS_CHEST = new ModelLayerLocation(Erebus.prefix("erebus_chest"), "main");
-    public static final ModelLayerLocation EREBUS_CHEST_DOUBLE_LEFT = new ModelLayerLocation(Erebus.prefix("erebus_chest_double_left"), "main");
-    public static final ModelLayerLocation EREBUS_CHEST_DOUBLE_RIGHT = new ModelLayerLocation(Erebus.prefix("erebus_chest_double_right"), "main");
 
-	public static void registerBlockEntityLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+	@SuppressWarnings("DuplicatedCode")
+    public static void registerBlockEntityLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(OFFERING_ALTAR, OfferingAltarModel::createBodyLayer);
         event.registerLayerDefinition(BLOCK_OF_BONES, BlockOfBonesModel::createBodyLayer);
         event.registerLayerDefinition(ALTAR_HEALING, HealingAltarModel::createBodyLayer);
@@ -35,9 +33,6 @@ public class ModBlockEntityRendering {
         event.registerLayerDefinition(GLOWING_JAR, GlowingJarModel::createBodyLayer);
         event.registerLayerDefinition(BAMBOO_BRIDGE, BambooBridgeModel::createBodyLayer);
         event.registerLayerDefinition(BAMBOO_EXTENDER, BambooExtenderModel::createBodyLayer);
-        event.registerLayerDefinition(EREBUS_CHEST, ErebusChestRenderer::createSingleBodyLayer);
-        event.registerLayerDefinition(EREBUS_CHEST_DOUBLE_LEFT, ErebusChestRenderer::createDoubleBodyLeftLayer);
-        event.registerLayerDefinition(EREBUS_CHEST_DOUBLE_RIGHT, ErebusChestRenderer::createDoubleBodyRightLayer);
 	}
 	
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {

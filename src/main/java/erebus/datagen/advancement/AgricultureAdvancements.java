@@ -6,15 +6,14 @@ import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 import static net.minecraft.advancements.AdvancementType.TASK;
 
-public class AgricultureAdvancements extends ModAdvancements {
+public class AgricultureAdvancements extends ModAdvancementsHelper {
 
     public AdvancementHolder root;
     public AdvancementHolder ant_amulet;
@@ -43,10 +42,8 @@ public class AgricultureAdvancements extends ModAdvancements {
     }
 
     @Override
-    public void generate(HolderLookup.@NotNull Provider provider, @NotNull Consumer<AdvancementHolder> consumer, @NotNull ExistingFileHelper existingFileHelper) {
+    public void generate(HolderLookup.@NonNull Provider provider, @NonNull Consumer<AdvancementHolder> consumer) {
         setConsumer(consumer);
-        setExistingFileHelper(existingFileHelper);
-
         root = save(
                 getRootBuilder(TASK, Blocks.STONE_BRICKS, "root", Erebus.prefix("textures/block/planks_varnished.png"))
                         .addCriterion("diamond", hasItems(Items.DIAMOND))
@@ -54,6 +51,5 @@ public class AgricultureAdvancements extends ModAdvancements {
                         .addCriterion("obsidian", hasItems(Blocks.OBSIDIAN))
                         .requirements(AdvancementRequirements.allOf(List.of("diamond", "emerald", "obsidian"))),
                 "root");
-
     }
 }

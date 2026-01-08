@@ -10,6 +10,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import org.jetbrains.annotations.NotNull;
 
 public class ModBlockLootTables extends ModBlockLootTableProvider {
@@ -444,20 +445,20 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ModBlocks.UMBER_GOLEM_STATUE);
 
         // MARK: Chests
-        dropSelf(ModBlocks.CHEST_CHEST_ASPER);
-        dropSelf(ModBlocks.CHEST_CHEST_BALSAM);
-        dropSelf(ModBlocks.CHEST_CHEST_BAOBAB);
-        dropSelf(ModBlocks.CHEST_CHEST_BAMBOO);
-        dropSelf(ModBlocks.CHEST_CHEST_CYPRESS);
-        dropSelf(ModBlocks.CHEST_CHEST_EUCALYPTUS);
-        dropSelf(ModBlocks.CHEST_CHEST_MAHOGANY);
-        dropSelf(ModBlocks.CHEST_CHEST_MARSHWOOD);
-        dropSelf(ModBlocks.CHEST_CHEST_MOSSBARK);
-        dropSelf(ModBlocks.CHEST_CHEST_PETRIFIED);
-        dropSelf(ModBlocks.CHEST_CHEST_ROTTEN);
-        dropSelf(ModBlocks.CHEST_CHEST_SCORCHED);
-        dropSelf(ModBlocks.CHEST_CHEST_VARNISHED);
-        dropSelf(ModBlocks.CHEST_CHEST_WHITE);
+        dropSelf(ModBlocks.CHEST_ASPER);
+        dropSelf(ModBlocks.CHEST_BALSAM);
+        dropSelf(ModBlocks.CHEST_BAOBAB);
+        dropSelf(ModBlocks.CHEST_BAMBOO);
+        dropSelf(ModBlocks.CHEST_CYPRESS);
+        dropSelf(ModBlocks.CHEST_EUCALYPTUS);
+        dropSelf(ModBlocks.CHEST_MAHOGANY);
+        dropSelf(ModBlocks.CHEST_MARSHWOOD);
+        dropSelf(ModBlocks.CHEST_MOSSBARK);
+        dropSelf(ModBlocks.CHEST_PETRIFIED);
+        dropSelf(ModBlocks.CHEST_ROTTEN);
+        dropSelf(ModBlocks.CHEST_SCORCHED);
+        dropSelf(ModBlocks.CHEST_VARNISHED);
+        dropSelf(ModBlocks.CHEST_WHITE);
 
         dropSelf(ModBlocks.ALTAR_BASE);
         dropSelf(ModBlocks.ALTAR_LIGHTNING);
@@ -488,11 +489,11 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         add(ModBlocks.LAVA_WEB.get(), createSilkTouchOrShearsDispatchTable(ModBlocks.LAVA_WEB.get(), applyExplosionCondition(ModBlocks.WITHER_WEB, LootItem.lootTableItem(Items.STRING))));
     
         // Fluid Tank Blocks
-        CopyComponentsFunction.Builder copyFluid = CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+        CopyComponentsFunction.Builder copyFluid = CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
                 .include(ModDataComponents.FLUID.get());
         
       // Portable Inventory Storage Blocks
-        CopyComponentsFunction.Builder copyItems = CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+        CopyComponentsFunction.Builder copyItems = CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
                 .include(DataComponents.CONTAINER);
 
         dropComponents(ModBlocks.FLUID_JAR, $ -> $.apply(copyFluid));

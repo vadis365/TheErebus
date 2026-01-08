@@ -2,23 +2,13 @@ package erebus.registries.client;
 
 import erebus.Erebus;
 import erebus.block.fluid.BasicFluidType;
-import erebus.client.render.block.renderer.stack.*;
 import erebus.client.render.item.model.*;
-import erebus.client.render.item.renderer.*;
 import erebus.registries.ModFluids;
-import erebus.registries.item.ModItems;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.level.block.ChestBlock;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.FluidType;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
@@ -61,7 +51,7 @@ public class ModItemRendering {
 	}
 
 	public static void registerItemRender(RegisterClientExtensionsEvent event) {
-        event.registerItem(new IClientItemExtensions() {
+        /*event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new WandOfAnimationItemRenderer(null, null);
@@ -190,22 +180,22 @@ public class ModItemRendering {
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new BambooExtenderItemRenderer(null, null);
             }
-        }, ModBlocks.BAMBOO_EXTENDER.get().asItem());
+        }, ModBlocks.BAMBOO_EXTENDER.get().asItem());*/
 
-        registerChestItem(event, ModBlocks.CHEST_CHEST_ASPER, "asper_chest");
-        registerChestItem(event, ModBlocks.CHEST_CHEST_BAOBAB, "baobab_chest");
-        registerChestItem(event, ModBlocks.CHEST_CHEST_BAMBOO, "bamboo_chest");
-        registerChestItem(event, ModBlocks.CHEST_CHEST_BALSAM, "balsam_chest");
-        registerChestItem(event, ModBlocks.CHEST_CHEST_CYPRESS, "cypress_chest");
-        registerChestItem(event, ModBlocks.CHEST_CHEST_EUCALYPTUS, "eucalyptus_chest");
-        registerChestItem(event, ModBlocks.CHEST_CHEST_MAHOGANY, "mahogany_chest");
-        registerChestItem(event, ModBlocks.CHEST_CHEST_MARSHWOOD, "marshwood_chest");
-        registerChestItem(event, ModBlocks.CHEST_CHEST_MOSSBARK, "mossbark_chest");
-        registerChestItem(event, ModBlocks.CHEST_CHEST_PETRIFIED, "petrified_chest");
-        registerChestItem(event, ModBlocks.CHEST_CHEST_ROTTEN, "rotten_chest");
-        registerChestItem(event, ModBlocks.CHEST_CHEST_SCORCHED, "scorched_chest");
-        registerChestItem(event, ModBlocks.CHEST_CHEST_VARNISHED, "varnished_chest");
-        registerChestItem(event, ModBlocks.CHEST_CHEST_WHITE, "white_chest");
+        registerChestItem(event, ModBlocks.CHEST_ASPER, "asper_chest");
+        registerChestItem(event, ModBlocks.CHEST_BAOBAB, "baobab_chest");
+        registerChestItem(event, ModBlocks.CHEST_BAMBOO, "bamboo_chest");
+        registerChestItem(event, ModBlocks.CHEST_BALSAM, "balsam_chest");
+        registerChestItem(event, ModBlocks.CHEST_CYPRESS, "cypress_chest");
+        registerChestItem(event, ModBlocks.CHEST_EUCALYPTUS, "eucalyptus_chest");
+        registerChestItem(event, ModBlocks.CHEST_MAHOGANY, "mahogany_chest");
+        registerChestItem(event, ModBlocks.CHEST_MARSHWOOD, "marshwood_chest");
+        registerChestItem(event, ModBlocks.CHEST_MOSSBARK, "mossbark_chest");
+        registerChestItem(event, ModBlocks.CHEST_PETRIFIED, "petrified_chest");
+        registerChestItem(event, ModBlocks.CHEST_ROTTEN, "rotten_chest");
+        registerChestItem(event, ModBlocks.CHEST_SCORCHED, "scorched_chest");
+        registerChestItem(event, ModBlocks.CHEST_VARNISHED, "varnished_chest");
+        registerChestItem(event, ModBlocks.CHEST_WHITE, "white_chest");
 
         //Fluids
         event.registerFluidType(new BasicFluidType("beetle_juice"), ModFluids.BEETLE_JUICE_TYPE.get());
@@ -214,19 +204,12 @@ public class ModItemRendering {
         event.registerFluidType(new BasicFluidType("formic_acid"), ModFluids.FORMIC_ACID_TYPE.get());
 	}
 
-	public static void registerItemColors(final RegisterColorHandlersEvent.Item event) {
-		event.register((stack, tint) -> {
-			var fluid = ((BucketItem) stack.getItem()).content;
-			return tint == 1 ? IClientFluidTypeExtensions.of(fluid).getTintColor(new FluidStack(fluid, FluidType.BUCKET_VOLUME)) : -1;
-		}, ModItems.FORMIC_ACID_BUCKET, ModItems.HONEY_BUCKET, ModItems.BEETLE_JUICE_BUCKET, ModItems.ANTI_VENOM_BUCKET);
-	}
-
     private static void registerChestItem(RegisterClientExtensionsEvent event, Supplier<ChestBlock> chest, String texture) {
-        event.registerItem(new IClientItemExtensions() {
+        /*event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new ErebusChestStackItemRenderer(null, null, texture);
             }
-        }, chest.get().asItem());
+        }, chest.get().asItem());*/
     }
 }
