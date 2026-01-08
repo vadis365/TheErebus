@@ -9,8 +9,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -61,7 +62,7 @@ public class BambooTorchBlock extends Block {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockPos blockpos = context.getClickedPos();
         Level level = context.getLevel();
-        return blockpos.getY() < level.getMaxBuildHeight() - 1 && level.getBlockState(blockpos.above()).canBeReplaced(context) ? super.getStateForPlacement(context) : null;
+        return blockpos.getY() < level.getMaxY() - 1 && level.getBlockState(blockpos.above()).canBeReplaced(context) ? super.getStateForPlacement(context) : null;
     }
 
 	@Override
@@ -72,21 +73,21 @@ public class BambooTorchBlock extends Block {
     }
 
 	@Override
-	protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
+	protected @NonNull BlockState updateShape(BlockState state, @NonNull LevelReader level, @NonNull ScheduledTickAccess ticks, @NonNull BlockPos currentPos, Direction directionToNeighbour, @NonNull BlockPos neighbourPos, @NonNull BlockState neighbourState, @NonNull RandomSource random) {
 		EnumTorchBlockHalf doubleblockhalf = state.getValue(HALF);
-        if (facing.getAxis() != Direction.Axis.Y
-            || doubleblockhalf == EnumTorchBlockHalf.LOWER != (facing == Direction.UP)
-            || facingState.is(this) && facingState.getValue(HALF) != doubleblockhalf) {
-            return doubleblockhalf == EnumTorchBlockHalf.LOWER && facing == Direction.DOWN && !canSurvive(state, level, pos)
+        if (directionToNeighbour.getAxis() != Direction.Axis.Y
+            || doubleblockhalf == EnumTorchBlockHalf.LOWER != (directionToNeighbour == Direction.UP)
+            || neighbourState.is(this) && neighbourState.getValue(HALF) != doubleblockhalf) {
+            return doubleblockhalf == EnumTorchBlockHalf.LOWER && directionToNeighbour == Direction.DOWN && !canSurvive(state, level, currentPos)
                 ? Blocks.AIR.defaultBlockState()
-                : super.updateShape(state, facing, facingState, level, pos, facingPos);
+                : super.updateShape(state, level, ticks, currentPos, directionToNeighbour, neighbourPos, neighbourState, random);
         } else {
             return Blocks.AIR.defaultBlockState();
         }
 	}
 
     @Override
-    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    protected boolean canSurvive(BlockState state, @NonNull LevelReader level, @NonNull BlockPos pos) {
         if (state.getValue(HALF) != EnumTorchBlockHalf.UPPER) {
             return canSupportCenter(level, pos.below(), Direction.UP);
         } else {
@@ -96,7 +97,7 @@ public class BambooTorchBlock extends Block {
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+    public void animateTick(BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull RandomSource random) {
 		if (state.getValue(HALF) == EnumTorchBlockHalf.UPPER) {
 			double d0 = pos.getX() + 0.4375F;
 			double d1 = pos.getY() + 1.0625F;

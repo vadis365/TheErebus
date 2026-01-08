@@ -21,9 +21,6 @@ public abstract class AltarAbstract extends HorizontalDirectionalBlock implement
 
 	public AltarAbstract(Properties properties) {
 		super(properties);
-		//super(Material.ROCK);
-	//	setHardness(20.0F);
-	//	setCreativeTab(ModTabs.BLOCKS);
 	}
 
 	@Nonnull

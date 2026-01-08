@@ -1,15 +1,14 @@
 package erebus.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import javax.annotation.Nonnull;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import org.jspecify.annotations.NonNull;
 
 public abstract class AltarAbstractBlockEntity extends BlockEntity {
 
@@ -17,43 +16,33 @@ public abstract class AltarAbstractBlockEntity extends BlockEntity {
 		super(type, pos, blockState);
 	}
 
-	protected abstract void writeTileToNBT(CompoundTag nbt);
+	protected abstract void writeTileToNBT(ValueOutput output);
 
-	protected abstract void readTileFromNBT(CompoundTag nbt);
+	protected abstract void readTileFromNBT(ValueInput input);
 
 	public int animationTicks, prevAnimationTicks;
 
 	@Override
-	public void saveAdditional(CompoundTag nbt, HolderLookup.Provider registries) {
-		super.saveAdditional(nbt, registries);
-		writeTileToNBT(nbt);
+	protected void saveAdditional(@NonNull ValueOutput output) {
+		super.saveAdditional(output);
+		writeTileToNBT(output);
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registries) {
-		super.loadAdditional(nbt, registries);
-		readTileFromNBT(nbt);
-	}
-
-	@Nonnull
-	@Override
-	public CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider registries) {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, registries);
-		return nbt;
+	protected void loadAdditional(@NonNull ValueInput input) {
+		super.loadAdditional(input);
+		readTileFromNBT(input);
 	}
 
 	@Override
 	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, level.registryAccess());
 		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@Override
-	public void onDataPacket(@Nonnull Connection net, ClientboundBlockEntityDataPacket packet, @Nonnull HolderLookup.Provider registries) {
-		super.onDataPacket(net, packet, registries);
-		loadAdditional(packet.getTag(), registries);
+	public void onDataPacket(@NonNull Connection net, @NonNull ValueInput valueInput) {
+		super.onDataPacket(net, valueInput);
+		loadAdditional(valueInput);
 	}
 
 }

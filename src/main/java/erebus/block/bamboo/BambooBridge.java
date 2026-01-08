@@ -5,10 +5,11 @@ import erebus.block.entity.BambooBridgeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -20,6 +21,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 
@@ -60,14 +62,7 @@ public class BambooBridge extends HorizontalDirectionalBlock implements EntityBl
 	}
 
 	@Override
-	protected void onPlace(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState newState, boolean movedByPiston) {
-		BlockEntity te = level.getBlockEntity(pos);
-		if (te instanceof BambooBridgeBlockEntity bridge)
-			updateShape(state, state.getValue(FACING), newState, level, pos, pos);
-	}
-
-	@Override
-	protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
+	protected @NonNull BlockState updateShape(@NonNull BlockState state, LevelReader level, @NonNull ScheduledTickAccess ticks, @NonNull BlockPos pos, @NonNull Direction directionToNeighbour, @NonNull BlockPos neighbourPos, @NonNull BlockState neighbourState, @NonNull RandomSource random) {
 		BlockEntity te = level.getBlockEntity(pos);
 		if (te instanceof BambooBridgeBlockEntity bridge) {
 			boolean front = canConnectBridgeTo(level, pos.offset(0, 0, -1));
@@ -107,7 +102,7 @@ public class BambooBridge extends HorizontalDirectionalBlock implements EntityBl
 
 	@Nonnull
 	@Override
-	public VoxelShape getShape(BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+	public VoxelShape getShape(@NonNull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
 		BlockEntity te = level.getBlockEntity(pos);
 		VoxelShape side_1 = Shapes.empty();
 		VoxelShape side_2 = Shapes.empty();
@@ -136,7 +131,7 @@ public class BambooBridge extends HorizontalDirectionalBlock implements EntityBl
 		return Shapes.or(BASE, side_1, side_2);
 	}
 
-	public boolean canConnectBridgeTo(LevelAccessor level, BlockPos pos) {
+	public boolean canConnectBridgeTo(LevelReader level, BlockPos pos) {
 		BlockState state = level.getBlockState(pos);
 		Block block = state.getBlock();
 		if (block != this)

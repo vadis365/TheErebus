@@ -6,9 +6,9 @@ import erebus.network.client.AltarAnimatonTimerPacket;
 import erebus.network.client.LightningAltarRenderPacket;
 import erebus.registries.ModSounds;
 import erebus.registries.blocks.ModBlockEntities;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EntityTypeTags;
@@ -17,6 +17,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector3f;
@@ -63,10 +65,10 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 	
 			if (level.isClientSide()) {
 				if (altar.animationTicks == 20 && level.getGameTime()%2 == 0) {
-					float vx = (level.random.nextFloat() * 0.5f - 0.25f);
-					float vy = (level.random.nextFloat() * 0.5f - 0.25f);
-					float vz = (level.random.nextFloat() * 0.5f - 0.25f);
-					level.addParticle(ParticleTypes.ELECTRIC_SPARK, false, pos.getX() + 0.5D, pos.getY() + 1.6D, pos.getZ() + 0.5D, vx, vy, vz);
+					float vx = (level.getRandom().nextFloat() * 0.5f - 0.25f);
+					float vy = (level.getRandom().nextFloat() * 0.5f - 0.25f);
+					float vz = (level.getRandom().nextFloat() * 0.5f - 0.25f);
+					level.addParticle(ParticleTypes.ELECTRIC_SPARK, pos.getX() + 0.5D, pos.getY() + 1.6D, pos.getZ() + 0.5D, vx, vy, vz);
 				}
 
 				if (altar.animationTicks == 6)
@@ -108,43 +110,41 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 	protected void findEnemyToAttack() {
 		List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(getBlockPos()).inflate(6D, 2D, 6D));
 		if (active)
-			for (int i = 0; i < list.size(); i++) {
-				Entity entity = list.get(i);
-				if (entity != null)
-					if (entity instanceof LivingEntity target)
-						if (target.getType().is(EntityTypeTags.ARTHROPOD) && entity.invulnerableTime == 0) {
-							float a = (float) entity.getX();
-							float b = (float) (entity.getY() + entity.getBbHeight() * 0.5F);
-							float c = (float) entity.getZ();
+            for (Entity entity : list) {
+                if (entity != null)
+                    if (entity instanceof LivingEntity target)
+                        if (target.is(EntityTypeTags.ARTHROPOD) && entity.invulnerableTime == 0) {
+                            float a = (float) entity.getX();
+                            float b = (float) (entity.getY() + entity.getBbHeight() * 0.5F);
+                            float c = (float) entity.getZ();
 
-							targetVector = new Vector3f().add(a - getBlockPos().getX() - 0.5F, b - getBlockPos().getY() - 1.6F, c - getBlockPos().getZ() - 0.5F);
-							
-							PacketDistributor.sendToPlayersNear((ServerLevel) level, null, getBlockPos().getX(),
-									getBlockPos().getY() + 1D, getBlockPos().getZ(), 30,
-									new LightningAltarRenderPacket(
-											getBlockPos().getX(),
-											getBlockPos().getY(),
-											getBlockPos().getZ(),
-											targetVector));
+                            targetVector = new Vector3f().add(a - getBlockPos().getX() - 0.5F, b - getBlockPos().getY() - 1.6F, c - getBlockPos().getZ() - 0.5F);
 
-							target.hurt(target.damageSources().lightningBolt(), 1.0F); // just a test amount
+                            PacketDistributor.sendToPlayersNear((ServerLevel) level, null, getBlockPos().getX(),
+                                    getBlockPos().getY() + 1D, getBlockPos().getZ(), 30,
+                                    new LightningAltarRenderPacket(
+                                            getBlockPos().getX(),
+                                            getBlockPos().getY(),
+                                            getBlockPos().getZ(),
+                                            targetVector));
 
-						}
-			}
+                            target.hurt(target.damageSources().lightningBolt(), 1.0F); // just a test amount
+                        }
+            }
 	}
 
 	@Override
-	protected void writeTileToNBT(CompoundTag nbt) {
-		nbt.putInt("animationTicks", animationTicks);
-		nbt.putInt("spawnTicks", spawnTicks);
-		nbt.putBoolean("active", active);
+	protected void writeTileToNBT(ValueOutput output) {
+		output.putInt("animationTicks", animationTicks);
+		output.putInt("spawnTicks", spawnTicks);
+		output.putBoolean("active", active);
 	}
 
 	@Override
-	protected void readTileFromNBT(CompoundTag nbt) {
-		animationTicks = nbt.getInt("animationTicks");
-		spawnTicks = nbt.getInt("spawnTicks");
-		active = nbt.getBoolean("active");
+	protected void readTileFromNBT(ValueInput input) {
+		animationTicks = input.getIntOr("animationTicks", 0);
+		spawnTicks = input.getIntOr("spawnTicks", 0);
+		active = input.getBooleanOr("active", false);
 	}
 
 }

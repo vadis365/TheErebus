@@ -5,17 +5,18 @@ import erebus.client.particle.ClientParticles;
 import erebus.network.client.AltarAnimatonTimerPacket;
 import erebus.registries.ModSounds;
 import erebus.registries.blocks.ModBlockEntities;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -91,25 +92,23 @@ public class HealingAltarBlockEntity extends AltarAbstractBlockEntity {
 	public void findPlayerToHeal() {
 		List<Player> list = level.getEntitiesOfClass(Player.class, new AABB(getBlockPos()).inflate(4D, 2D, 4D));
 		if (active)
-			for (int i = 0; i < list.size(); i++) {
-				Entity entity = list.get(i);
-				if (!(entity instanceof FakePlayer))
-					((Player) entity).addEffect(new MobEffectInstance(MobEffects.HEAL, 20, 0));
-			}
+            for (Player entity : list) {
+                if (!(entity instanceof FakePlayer))
+                    entity.addEffect(new MobEffectInstance(MobEffects.INSTANT_HEALTH, 20, 0));
+            }
 	}
 
 	@Override
-	protected void writeTileToNBT(CompoundTag nbt) {
-		nbt.putInt("animationTicks", animationTicks);
-		nbt.putInt("spawnTicks", spawnTicks);
-		nbt.putBoolean("active", active);
+	protected void writeTileToNBT(ValueOutput output) {
+		output.putInt("animationTicks", animationTicks);
+		output.putInt("spawnTicks", spawnTicks);
+		output.putBoolean("active", active);
 	}
 
 	@Override
-	protected void readTileFromNBT(CompoundTag nbt) {
-		animationTicks = nbt.getInt("animationTicks");
-		spawnTicks = nbt.getInt("spawnTicks");
-		active = nbt.getBoolean("active");
+	protected void readTileFromNBT(ValueInput input) {
+		animationTicks = input.getIntOr("animationTicks", 0);
+		spawnTicks = input.getIntOr("spawnTicks", 0);
+		active = input.getBooleanOr("active", false);
 	}
-
 }

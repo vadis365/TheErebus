@@ -7,8 +7,6 @@ import erebus.registries.ModCustomRecipes;
 import erebus.registries.blocks.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -20,6 +18,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -98,7 +98,7 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 					altar.time = 0;
 			} else {
 				MultiStackInput input = new MultiStackInput(altar.getItems().subList(0, 3));
-				RecipeHolder<OfferingAltarRecipe> recipe = altar.quickCheck.getRecipeFor(input, level).orElse(null);
+				RecipeHolder<OfferingAltarRecipe> recipe = altar.quickCheck.getRecipeFor(input, level.getServer().getLevel(level.dimension())).orElse(null);
 				if (recipe != null && !altar.isCrafting) {
 					altar.output = recipe.value().assemble(input, level.registryAccess());
 					altar.isCrafting = true;
@@ -135,34 +135,20 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 			}
 		}
 	}
-
-	@Nonnull
-	@Override
-	public CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider registries) {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, registries);
-		return nbt;
-	}
-
 	@Override
 	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, level.registryAccess());
 		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@Override
-	public void onDataPacket(@Nonnull Connection net, ClientboundBlockEntityDataPacket packet, @Nonnull HolderLookup.Provider registries) {
-		super.onDataPacket(net, packet, registries);
-		loadAdditional(packet.getTag(), registries);
+	public void onDataPacket(Connection net, ValueInput valueInput) {
+		super.onDataPacket(net, valueInput);
 		updateBlockWhenChanged();
 	}
 
 	public void updateBlockWhenChanged() {
 		if (!getLevel().isClientSide()) {
-			CompoundTag nbt = new CompoundTag();
-			saveAdditional(nbt, level.registryAccess());
-			PacketDistributor.sendToPlayersNear((ServerLevel) getLevel(), null, getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ(), 30, new OfferingAltarNBTPacket(getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ(), nbt));
+			PacketDistributor.sendToPlayersNear((ServerLevel) getLevel(), null, getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ(), 30, new OfferingAltarNBTPacket(getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ()));
 			final BlockState state = getLevel().getBlockState(getBlockPos());
 			getLevel().sendBlockUpdated(getBlockPos(), state, state, 8);
 			setChanged();
@@ -174,17 +160,17 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 	}
 
 	@Override
-	public void loadAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider registries) {
-		super.loadAdditional(nbt, registries);
-		time = nbt.getInt("time");
-		isCrafting = nbt.getBoolean("isCrafting");
+	protected void loadAdditional(ValueInput input) {
+		super.loadAdditional(input);
+		time = input.getIntOr("time", 0);
+		isCrafting = input.getBooleanOr("isCrafting", false);
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag nbt, HolderLookup.@NotNull Provider registries) {
-		super.saveAdditional(nbt, registries);
-		nbt.putInt("time", time);
-		nbt.putBoolean("isCrafting", isCrafting);
+	protected void saveAdditional(ValueOutput output) {
+		super.saveAdditional(output);
+		output.putInt("time", time);
+		output.putBoolean("isCrafting", isCrafting);
 	}
 
 	@Override

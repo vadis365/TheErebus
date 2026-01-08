@@ -2,14 +2,13 @@ package erebus.block.entity;
 
 import erebus.registries.blocks.ModBlockEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-
-import javax.annotation.Nonnull;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import org.jspecify.annotations.NonNull;
 
 public class BambooBridgeBlockEntity extends BlockEntity {
 
@@ -36,37 +35,27 @@ public class BambooBridgeBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	public void saveAdditional(@Nonnull CompoundTag nbt, @Nonnull HolderLookup.Provider registries) {
-		super.saveAdditional(nbt, registries);
-		nbt.putBoolean("renderSide1", renderSide1);
-		nbt.putBoolean("renderSide2", renderSide2);
+	protected void saveAdditional(@NonNull ValueOutput output) {
+		super.saveAdditional(output);
+		output.putBoolean("renderSide1", renderSide1);
+		output.putBoolean("renderSide2", renderSide2);
 	}
 
 	@Override
-	public void loadAdditional(@Nonnull CompoundTag nbt, @Nonnull HolderLookup.Provider registries) {
-		super.loadAdditional(nbt, registries);
-		renderSide1 = nbt.getBoolean("renderSide1");
-		renderSide2 = nbt.getBoolean("renderSide2");
-	}
-
-	@Nonnull
-	@Override
-	public CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider registries) {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, registries);
-		return nbt;
+	protected void loadAdditional(@NonNull ValueInput input) {
+		super.loadAdditional(input);
+		renderSide1 = input.getBooleanOr("renderSide1", false);
+		renderSide2 = input.getBooleanOr("renderSide2", false);
 	}
 
 	@Override
 	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, level.registryAccess());
 		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@Override
-	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet, @Nonnull HolderLookup.Provider registries) {
-		super.onDataPacket(net, packet, registries);
-		loadAdditional(packet.getTag(), registries);
+	public void onDataPacket(@NonNull Connection net, @NonNull ValueInput valueInput) {
+		super.onDataPacket(net, valueInput);
+		loadAdditional(valueInput);
 	}
 }

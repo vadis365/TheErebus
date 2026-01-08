@@ -2,6 +2,7 @@ package erebus.block.bamboo;
 
 import erebus.block.entity.BambooCrateBlockEntity;
 import erebus.block.types.EnumCrateType;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

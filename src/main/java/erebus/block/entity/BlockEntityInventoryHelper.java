@@ -2,9 +2,7 @@ package erebus.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
@@ -12,13 +10,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
 public abstract class BlockEntityInventoryHelper extends BlockEntity implements WorldlyContainer {
 
-	private NonNullList<ItemStack> inventory;
+	private final NonNullList<ItemStack> inventory;
 
 	public BlockEntityInventoryHelper(BlockEntityType<?> tileEntityTypeIn, int invtSize, BlockPos pos, BlockState state) {
 		super(tileEntityTypeIn, pos, state);
@@ -85,25 +85,15 @@ public abstract class BlockEntityInventoryHelper extends BlockEntity implements 
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag compound, HolderLookup.@NotNull Provider registries) {
-		super.saveAdditional(compound, registries);
-		ContainerHelper.saveAllItems(compound, inventory, false, registries);
+	protected void saveAdditional(ValueOutput output) {
+		super.saveAdditional(output);
+		ContainerHelper.saveAllItems(output, inventory, false);
 	}
 
 	@Override
-	public void loadAdditional(@NotNull CompoundTag compound, HolderLookup.@NotNull Provider registries) {
-		super.loadAdditional(compound, registries);
-		inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-		if (compound.contains("Items", 9))
-			ContainerHelper.loadAllItems(compound, inventory, registries);
-	}
-
-	@Override
-	public void startOpen(@NotNull Player playerIn) {
-	}
-
-	@Override
-	public void stopOpen(@NotNull Player playerIn) {
+	protected void loadAdditional(ValueInput input) {
+		super.loadAdditional(input);
+		ContainerHelper.loadAllItems(input, inventory);
 	}
 
 	@Override

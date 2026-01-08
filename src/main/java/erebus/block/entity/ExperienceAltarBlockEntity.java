@@ -4,12 +4,14 @@ import erebus.block.altars.AltarAbstract;
 import erebus.client.particle.ClientParticles;
 import erebus.network.client.AltarAnimatonTimerPacket;
 import erebus.registries.blocks.ModBlockEntities;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class ExperienceAltarBlockEntity extends AltarAbstractBlockEntity {
@@ -88,18 +90,18 @@ public class ExperienceAltarBlockEntity extends AltarAbstractBlockEntity {
 	}
 
 	@Override
-	protected void writeTileToNBT(CompoundTag nbt) {
-		nbt.putInt("animationTicks", animationTicks);
-		nbt.putInt("spawnTicks", spawnTicks);
-		nbt.putBoolean("active", active);
-		nbt.putInt("uses", uses);
+	protected void writeTileToNBT(ValueOutput output) {
+		output.putInt("animationTicks", animationTicks);
+		output.putInt("spawnTicks", spawnTicks);
+		output.putBoolean("active", active);
+		output.putInt("uses", uses);
 	}
 
 	@Override
-	protected void readTileFromNBT(CompoundTag nbt) {
-		animationTicks = nbt.getInt("animationTicks");
-		spawnTicks = nbt.getInt("spawnTicks");
-		active = nbt.getBoolean("active");
-		uses = nbt.getInt("uses");
+	protected void readTileFromNBT(ValueInput input) {
+		animationTicks = input.getIntOr("animationTicks", 0);
+		spawnTicks = input.getIntOr("spawnTicks", 0);
+		active = input.getBooleanOr("active", false);
+		uses = input.getIntOr("uses", 0);
 	}
 }

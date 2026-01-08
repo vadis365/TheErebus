@@ -2,17 +2,14 @@ package erebus.block.bamboo;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.BambooPipeBlockEntity;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item.TooltipContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.EntityBlock;
@@ -28,7 +25,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
 
 public class BambooPipe extends DirectionalBlock implements EntityBlock {
 	public static final MapCodec<BambooPipe> CODEC = simpleCodec(BambooPipe::new);
@@ -52,13 +48,14 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? null : BambooPipeBlockEntity::serverTick;
+		return pLevel.isClientSide() ? null : BambooPipeBlockEntity::serverTick;
 	}
 
-	@Override
+	// TODO: This will have to be part of the Item
+	/*@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
 		tooltipComponents.add(Component.translatable("tooltip.erebus.bamboo_pipe").withStyle(ChatFormatting.YELLOW));
-	}
+	}*/
 
 	@Nonnull
 	@Override
@@ -128,14 +125,15 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
 		builder.add(FACING, CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST);
 	}
 
-    @Override
-    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-    	return state.setValue(CONNECTED_DOWN, this.isSideConnectable(level, currentPos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, currentPos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, currentPos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, currentPos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, currentPos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, currentPos, Direction.WEST));
+	@Override
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
+    	return state.setValue(CONNECTED_DOWN, this.isSideConnectable(level, pos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, pos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, pos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, pos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, pos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, pos, Direction.WEST));
     }
 
-    private boolean isSideConnectable (LevelAccessor level, BlockPos pos, Direction side) {
+    private boolean isSideConnectable (LevelReader level, BlockPos pos, Direction side) {
+		BlockPos offsetPos = pos.relative(side);
     	BlockEntity blockEntity = level.getBlockEntity(pos.relative(side));
-        return blockEntity != null && blockEntity.getLevel() != null && CapHelper.getFluidHandler(blockEntity.getLevel(), pos.relative(side), side.getOpposite()).isPresent();
+        return blockEntity != null && blockEntity.getLevel() != null;
     }
 
     @Override

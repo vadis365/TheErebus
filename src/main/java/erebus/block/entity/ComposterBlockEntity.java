@@ -2,12 +2,11 @@ package erebus.block.entity;
 
 import erebus.inventory.server.ComposterMenu;
 import erebus.registries.blocks.ModBlockEntities;
+import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.tags.ModItemTags;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Container;
@@ -20,9 +19,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 public class ComposterBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 	public static final int DATA_MOULD_PROGRESS = 0;
@@ -69,42 +69,25 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 	            }
 	        };
 	}
-	
-	@Nonnull
-	@Override
-	public CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider registries) {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, registries);
-		return nbt;
-	}
 
 	@Override
 	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, level.registryAccess());
 		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@Override
-	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet, @Nonnull HolderLookup.Provider registries) {
-		super.onDataPacket(net, packet, registries);
-		loadAdditional(packet.getTag(), registries);
-	}
-
-	@Override
-	public void loadAdditional(@Nonnull CompoundTag nbt, @Nonnull HolderLookup.Provider registries) {
-		super.loadAdditional(nbt, registries);
-
-		mouldDurationTicks = nbt.getShort("MouldDuration");
-		compostingProgressTicks = nbt.getShort("CompostProgress");
+	protected void loadAdditional(ValueInput input) {
+		super.loadAdditional(input);
+		mouldDurationTicks = input.getIntOr("MouldDuration", 0);
+		compostingProgressTicks = input.getIntOr("CompostProgress", 0);
 		mouldMaxTime = getMouldUseTime(getItems().get(1));
 	}
 
 	@Override
-	public void saveAdditional(@Nonnull CompoundTag nbt, @Nonnull HolderLookup.Provider registries) {
-		super.saveAdditional(nbt, registries);
-		nbt.putShort("MouldDuration", (short) mouldDurationTicks);
-		nbt.putShort("CompostProgress", (short) compostingProgressTicks);
+	protected void saveAdditional(ValueOutput output) {
+		super.saveAdditional(output);
+		output.putInt("MouldDuration", mouldDurationTicks);
+		output.putInt("CompostProgress", compostingProgressTicks);
 	}
 
 	public int getCompostingProgressScaled(int cookTime) {
@@ -141,7 +124,7 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 							tile.getItems().get(1).shrink(1);
 
 							if (tile.getItems().get(1).getCount() == 0)
-								tile.getItems().set(1, tile.getItems().get(1).getItem().getCraftingRemainingItem(tile.getItems().get(1)));
+								tile.getItems().set(1, tile.getItems().get(1).getItem().getCraftingRemainder(tile.getItems().get(1)));
 						}
 					}
 				}
@@ -201,7 +184,7 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 	}
 	
 	public ItemStack isCompostable(ItemStack itemStack) {
-		return itemStack.is(ModTags.COMPOSTABLE) ? new ItemStack(ModItems.COMPOST.get()) : ItemStack.EMPTY;
+		return itemStack.is(ModItemTags.COMPOSTABLE) ? new ItemStack(ModItems.COMPOST.get()) : ItemStack.EMPTY;
 	}
 
 	public static int getMouldUseTime(ItemStack itemStack) {
@@ -221,11 +204,11 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 	}
 
 	public boolean isItemValidForSlot(int slot, ItemStack is) {
-		return slot != RESULT_SLOT && (slot == FUEL_SLOT ? isItemMould(is) : slot == SMELT_SLOT && is.is(ModTags.COMPOSTABLE));
+		return slot != RESULT_SLOT && (slot == FUEL_SLOT ? isItemMould(is) : slot == SMELT_SLOT && is.is(ModItemTags.COMPOSTABLE));
 	}
 
 	@Override
-	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+	public AbstractContainerMenu createMenu(int containerId, @NonNull Inventory playerInventory, @NonNull Player player) {
 		return new ComposterMenu(containerId, playerInventory, this, this.dataAccess);
 	}
 
@@ -235,32 +218,32 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 	}
 
 	@Override
-	public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, Direction direction) {
+	public boolean canPlaceItemThroughFace(int index, @NonNull ItemStack itemStack, Direction direction) {
 		return isItemValidForSlot(index, itemStack);
 	}
 
 	@Override
-	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
+	public boolean canTakeItemThroughFace(int index, @NonNull ItemStack stack, @NonNull Direction direction) {
 		return direction == Direction.DOWN && index == RESULT_SLOT && stack.is(ModItems.COMPOST.get());
 	}
 	
 	@Override
-	public boolean canPlaceItem(int slot, ItemStack stack) {
+	public boolean canPlaceItem(int slot, @NonNull ItemStack stack) {
         return isItemValidForSlot(slot, stack);
     }
 	
 	@Override
-	public boolean canTakeItem(Container target, int slot, ItemStack stack) {
+	public boolean canTakeItem(@NonNull Container target, int slot, @NonNull ItemStack stack) {
         return target != null && slot == RESULT_SLOT && stack.is(ModItems.COMPOST.get());
     }
 
 	@Override
-	public ItemStack removeItemNoUpdate(int slot) {
+	public @NonNull ItemStack removeItemNoUpdate(int slot) {
 		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public Component getDisplayName() {
+	public @NonNull Component getDisplayName() {
 		return Component.translatable("erebus.container.composter");
 	}
 

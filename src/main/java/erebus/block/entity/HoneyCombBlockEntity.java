@@ -15,6 +15,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class HoneyCombBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 	
@@ -23,7 +24,7 @@ public class HoneyCombBlockEntity extends BlockEntityInventoryHelper implements 
 	}
 
 	@Override
-	public Component getDisplayName() {
+	public @NonNull Component getDisplayName() {
 		return Component.translatable("erebus.container.honeycomb_cell").append(Component.literal(" X:" + getBlockPos().getX() + " Y:" + getBlockPos().getY() + " Z:" + getBlockPos().getZ()));
 	}
 
@@ -36,27 +37,27 @@ public class HoneyCombBlockEntity extends BlockEntityInventoryHelper implements 
 	}
 
 	@Override
-	public boolean canPlaceItem(int slot, ItemStack stack) {
+	public boolean canPlaceItem(int slot, @NonNull ItemStack stack) {
 		return true;
 	}
 	
 	@Override
-	public boolean canPlaceItemThroughFace(int index, ItemStack stack, Direction direction) {
+	public boolean canPlaceItemThroughFace(int index, @NonNull ItemStack stack, Direction direction) {
 		return true;
 	}
 
 	@Override
-	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
+	public boolean canTakeItemThroughFace(int index, @NonNull ItemStack stack, @NonNull Direction direction) {
 		return true;
 	}
 
 	@Override
-	public ItemStack removeItemNoUpdate(int slot) {
+	public @NonNull ItemStack removeItemNoUpdate(int slot) {
 		return ContainerHelper.takeItem(getItems(), slot);
 	}
 
 	@Override
-	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+	public AbstractContainerMenu createMenu(int containerId, @NonNull Inventory playerInventory, @NonNull Player player) {
 		return new HoneyCombMenu(containerId, playerInventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
 	}
 

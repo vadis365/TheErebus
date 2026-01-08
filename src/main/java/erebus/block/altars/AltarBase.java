@@ -2,6 +2,7 @@ package erebus.block.altars;
 
 import com.mojang.serialization.MapCodec;
 import erebus.registries.ModSounds;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;

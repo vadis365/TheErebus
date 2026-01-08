@@ -4,12 +4,12 @@ import erebus.block.bamboo.BambooBridge;
 import erebus.block.bamboo.BambooExtender;
 import erebus.inventory.server.BambooExtenderMenu;
 import erebus.registries.blocks.ModBlockEntities;
+import erebus.registries.blocks.ModBlocks;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 
@@ -120,19 +120,12 @@ public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implem
 	}
 
 	private BlockState getStateFromDirection(Direction facing) {
-		switch (facing) {
-			case UP:
-				return ModBlocks.BAMBOO_NERD_POLE.get().defaultBlockState();
-			case DOWN:
-				return ModBlocks.BAMBOO_NERD_POLE.get().defaultBlockState();
-			case EAST:
-			case WEST:
-			case NORTH:
-			case SOUTH:
-				return ModBlocks.BAMBOO_BRIDGE.get().defaultBlockState().setValue(BambooBridge.FACING, facing);
-		}
-		return ModBlocks.BAMBOO_BRIDGE.get().defaultBlockState();
-	}
+        return switch (facing) {
+            case UP, DOWN -> ModBlocks.BAMBOO_NERD_POLE.get().defaultBlockState();
+            case EAST, WEST, NORTH, SOUTH ->
+                    ModBlocks.BAMBOO_BRIDGE.get().defaultBlockState().setValue(BambooBridge.FACING, facing);
+        };
+    }
 
 	public void setExtending(boolean extending) {
 		this.extending = extending;
@@ -148,7 +141,7 @@ public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implem
 	@Override
 	public void loadAdditional(@Nonnull CompoundTag nbt, @Nonnull HolderLookup.Provider registries) {
 		super.loadAdditional(nbt, registries);
-		extending = nbt.getBoolean("extending");
+		extending = nbt.getBooleanOr("extending", false);
 	}
 
 	@Nonnull
@@ -166,52 +159,33 @@ public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implem
 		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
-	@Override
-	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet, @Nonnull HolderLookup.Provider registries) {
-		super.onDataPacket(net, packet, registries);
-		loadAdditional(packet.getTag(), registries);
-	}
-
-	@Override
-	public int getMaxStackSize() {
-		return 64;
-	}
-
-	@Override
-	public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
-		int[] SLOTS = new int[getContainerSize()];
-		for (int index = 0; index < SLOTS.length; index++)
-			SLOTS[index] = index;
-		return SLOTS;
-	}
-	
-	@Override
+    @Override
 	public boolean canPlaceItem(int slot, ItemStack stack) {
 		 return !stack.isEmpty() && (stack.getItem() == Item.byBlock(ModBlocks.BAMBOO_NERD_POLE.get()) || stack.getItem() == Item.byBlock(ModBlocks.BAMBOO_BRIDGE.get()));
 	}
 
 	@Override
-	public boolean canPlaceItemThroughFace(int index,ItemStack itemStack, Direction direction) {
+	public boolean canPlaceItemThroughFace(int index, @NonNull ItemStack itemStack, Direction direction) {
 		return true;
 	}
 
 	@Override
-	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
+	public boolean canTakeItemThroughFace(int index, @NonNull ItemStack stack, @NonNull Direction direction) {
 		return true;
 	}
 
 	@Override
-	public ItemStack removeItemNoUpdate(int slot) {
+	public @NonNull ItemStack removeItemNoUpdate(int slot) {
 		return null;
 	}
 
 	@Override
-	public Component getDisplayName() {
+	public @NonNull Component getDisplayName() {
 		return Component.translatable("erebus.container.bamboo_extender");
 	}	
 
 	@Override
-	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+	public AbstractContainerMenu createMenu(int containerId, @NonNull Inventory playerInventory, @NonNull Player player) {
 		return new BambooExtenderMenu(containerId, playerInventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
 	}
 

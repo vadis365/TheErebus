@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -32,7 +33,7 @@ public class RepairAltar extends AltarAbstract {
 	}
 	
     @Override
-    protected MapCodec<RepairAltar> codec() {
+    protected @NonNull MapCodec<RepairAltar> codec() {
         return CODEC;
     }
 

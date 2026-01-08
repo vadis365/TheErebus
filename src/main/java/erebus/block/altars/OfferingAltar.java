@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -31,7 +32,7 @@ public class OfferingAltar extends Block implements EntityBlock {
 	}
 	
     @Override
-    protected MapCodec<OfferingAltar> codec() {
+    protected @NonNull MapCodec<OfferingAltar> codec() {
         return CODEC;
     }
 
