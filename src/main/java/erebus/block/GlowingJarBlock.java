@@ -1,14 +1,7 @@
 package erebus.block;
 
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import com.mojang.serialization.MapCodec;
-
 import erebus.block.entity.GlowingJarBlockEntity;
-import erebus.registries.client.ModParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
@@ -22,6 +15,10 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
 
 public class GlowingJarBlock extends BaseEntityBlock {
 
@@ -54,7 +51,7 @@ public class GlowingJarBlock extends BaseEntityBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? GlowingJarBlockEntity::clientTick : null;
+		return pLevel.isClientSide() ? GlowingJarBlockEntity::clientTick : null;
 	}
 
     @Override

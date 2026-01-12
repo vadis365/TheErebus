@@ -3,8 +3,10 @@ package erebus.block.fluid;
 import erebus.client.particle.ClientParticles;
 import erebus.registries.client.ModParticles;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -12,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 
@@ -22,10 +25,10 @@ public class FormicAcidFluidBlock extends LiquidBlock  {
 	}
 
 	@Override
-	public void entityInside(@Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Entity entity) {
-		if (!level.isClientSide)
+	public void entityInside(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull Entity entity, @NonNull InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+		if (!level.isClientSide())
 			if (entity instanceof LivingEntity)
-				entity.hurt(entity.damageSources().generic(), 2F);
+				entity.hurtServer((ServerLevel) level, entity.damageSources().generic(), 2F);
 	}
 
 	@Override

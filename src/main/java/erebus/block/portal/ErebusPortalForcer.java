@@ -1,8 +1,8 @@
 package erebus.block.portal;
 
 import erebus.Erebus;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.world.ModPOIs;
-import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -10,6 +10,7 @@ import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.AxisDirection;
 import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.BlockUtil;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
@@ -56,7 +57,7 @@ public class ErebusPortalForcer {
         double d1 = -1;
         BlockPos blockPos = null, blockPos1 = null;
         WorldBorder border = level.getWorldBorder();
-        int minHeight = Math.min(level.getMaxBuildHeight(), level.getLogicalHeight() - 1);
+        int minHeight = Math.min(level.getMaxY(), level.getLogicalHeight() - 1);
         MutableBlockPos mutable = pos.mutable();
 
         for(MutableBlockPos mut : BlockPos.spiralAround(pos, 16, Direction.EAST, Direction.SOUTH)) {
@@ -70,7 +71,7 @@ public class ErebusPortalForcer {
                     if(canPortalReplaceBlock(level, mut)) {
                         int y1 = y;
 
-                        while(y > level.getMinBuildHeight() && canPortalReplaceBlock(level, mut.move(Direction.DOWN))) {
+                        while(y > level.getMinY() && canPortalReplaceBlock(level, mut.move(Direction.DOWN))) {
                             y--;
                         }
 
@@ -145,7 +146,7 @@ public class ErebusPortalForcer {
                         state = Blocks.AIR.defaultBlockState();
                     }
                 } else {
-                    state = level.random.nextBoolean() ? ModBlocks.UMBERTILE_SMOOTH.get().defaultBlockState() : ModBlocks.UMBERTILE_SMOOTH_SMALL.get().defaultBlockState();
+                    state = level.getRandom().nextBoolean() ? ModBlocks.UMBERTILE_SMOOTH.get().defaultBlockState() : ModBlocks.UMBERTILE_SMOOTH_SMALL.get().defaultBlockState();
                 }
                 mutable.setWithOffset(blockPos, dx, dy, dz);
                 level.setBlock(mutable, state, 3);

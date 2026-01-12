@@ -1,5 +1,6 @@
 package erebus.block;
 
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,7 +24,7 @@ public class GlowGemInactiveBlock extends GlowGemActiveBlock {
 	@Nonnull
 	@Override
 	public InteractionResult useWithoutItem(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull BlockHitResult hitResult) {
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			BlockState activeState = ModBlocks.GLOW_GEM_ACTIVE.get().defaultBlockState().setValue(GlowGemActiveBlock.TYPE, state.getValue(TYPE));
 			world.setBlock(pos, activeState, 3);
 			world.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, 0.6F);

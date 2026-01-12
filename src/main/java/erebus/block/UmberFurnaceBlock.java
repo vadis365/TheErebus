@@ -6,12 +6,10 @@ import erebus.registries.blocks.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
@@ -26,14 +24,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
-public class UmberFurnaceBlock extends BaseEntityBlock {
+public class UmberFurnaceBlock extends AbstractFurnaceBlock {
     public static final MapCodec<UmberFurnaceBlock> CODEC = simpleCodec(UmberFurnaceBlock::new);
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
     public UmberFurnaceBlock(Properties properties) {
@@ -45,12 +43,12 @@ public class UmberFurnaceBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected MapCodec<UmberFurnaceBlock> codec() {
+    protected @NonNull MapCodec<UmberFurnaceBlock> codec() {
         return CODEC;
     }
 
     @Override
-    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
+    public @NonNull BlockState getStateForPlacement(BlockPlaceContext context) {
         return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
@@ -60,54 +58,38 @@ public class UmberFurnaceBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected BlockState rotate(BlockState state, Rotation rotation) {
+    protected @NonNull BlockState rotate(BlockState state, Rotation rotation) {
         return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
-    protected BlockState mirror(BlockState state, Mirror mirror) {
+    protected @NonNull BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
     @Override
-    protected RenderShape getRenderShape(BlockState state) {
+    protected @NonNull RenderShape getRenderShape(@NonNull BlockState state) {
         return RenderShape.MODEL;
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+    protected int getAnalogOutputSignal(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull Direction direction) {
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
     }
 
     @Override
-    protected boolean hasAnalogOutputSignal(BlockState state) {
+    protected boolean hasAnalogOutputSignal(@NonNull BlockState state) {
         return true;
     }
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock())) {
-            BlockEntity entity = level.getBlockEntity(pos);
-            if (entity instanceof UmberFurnaceBlockEntity container) {
-                Containers.dropContents(level, pos, container);
-                container.getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(pos));
-            }
-
-            super.onRemove(state, level, pos, newState, movedByPiston);
-            level.updateNeighbourForOutputSignal(pos, this);
-        }
-
-        super.onRemove(state, level, pos, newState, movedByPiston);
-    }
-
-    @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (level.isClientSide) return InteractionResult.SUCCESS;
+    protected @NonNull InteractionResult useWithoutItem(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull Player player, @NonNull BlockHitResult hitResult) {
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
         openContainer(level, pos, player);
         return InteractionResult.CONSUME;
     }
 
-    protected void openContainer(Level level, BlockPos pos, Player player) {
+    protected void openContainer(Level level, @NonNull BlockPos pos, @NonNull Player player) {
         BlockEntity entity = level.getBlockEntity(pos);
         if(entity instanceof UmberFurnaceBlockEntity) {
             player.openMenu((MenuProvider) entity);
@@ -116,17 +98,17 @@ public class UmberFurnaceBlock extends BaseEntityBlock {
     }
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public @Nullable BlockEntity newBlockEntity(@NonNull BlockPos pos, @NonNull BlockState state) {
         return new UmberFurnaceBlockEntity(pos, state);
     }
 
     @Override
-    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : createTickerHelper(type, ModBlockEntities.UMBERFURNACE.get(), UmberFurnaceBlockEntity::serverTick);
+    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NonNull Level level, @NonNull BlockState state, @NonNull BlockEntityType<T> type) {
+        return createFurnaceTicker(level, type, ModBlockEntities.UMBERFURNACE.get());
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+    public void animateTick(BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull RandomSource random) {
         if (state.getValue(LIT)) {
             double x = pos.getX() + 0.5;
             double y = pos.getY();

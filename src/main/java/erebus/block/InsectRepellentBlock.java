@@ -6,6 +6,7 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -15,6 +16,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class InsectRepellentBlock extends Block {
 
@@ -74,8 +76,8 @@ public class InsectRepellentBlock extends Block {
     }
 
     @Override
-    protected void entityInside(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Entity entity) {
-        if(entity.getType().is(EntityTypeTags.ARTHROPOD)) {
+    protected void entityInside(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, Entity entity, @NonNull InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+        if(entity.is(EntityTypeTags.ARTHROPOD)) {
             entity.push(new Vec3(
                     Mth.sin((float) (entity.getYRot() * Math.PI / 180.0F)) * 0.1F,
                     0.1F,

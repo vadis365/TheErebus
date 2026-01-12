@@ -4,7 +4,6 @@ import com.mojang.serialization.MapCodec;
 import erebus.block.entity.HoneyCombBlockEntity;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -57,12 +56,12 @@ public class HoneyCombBlock extends Block implements EntityBlock {
     	return InteractionResult.SUCCESS;
 	}
 
-	@Override
+	/*@Override
 	public void onRemove(@NotNull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
 		HoneyCombBlockEntity tile = (HoneyCombBlockEntity) level.getBlockEntity(pos);
 		if (tile != null)
 			Containers.dropContents(level, pos, tile);
 		level.levelEvent(2001, pos, Block.getId(state));
 		super.onRemove(state, level, pos, newState, isMoving);
-	}
+	}*/
 }

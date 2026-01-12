@@ -1,7 +1,5 @@
 package erebus.entity;
 
-import java.util.EnumSet;
-
 import erebus.client.particle.ClientParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -26,6 +24,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.EnumSet;
 
 public class Punchroom extends Monster {
 	public float squishAmount;
@@ -95,7 +95,7 @@ public class Punchroom extends Monster {
 		super.tick();
 		if (onGround() && !wasOnGround) {
 			for (int j = 0; j < 8; ++j) {
-				float f = random.nextFloat() * (float) Mth.PI * 2.0F;
+				float f = random.nextFloat() * Mth.PI * 2.0F;
 				float f1 = random.nextFloat() * 0.5F + 0.5F;
 				float f2 = Mth.sin(f) * 0.5F * f1;
 				float f3 = Mth.cos(f) * 0.5F * f1;
@@ -187,7 +187,7 @@ public class Punchroom extends Monster {
 		@Override
 		public boolean canUse() {
 			LivingEntity entitylivingbase = punchroom.getTarget();
-			return entitylivingbase == null ? false : entitylivingbase.isAlive() && punchroom.canAttack(entitylivingbase);
+			return entitylivingbase != null && entitylivingbase.isAlive() && punchroom.canAttack(entitylivingbase);
 		}
 
 		@Override
@@ -199,7 +199,7 @@ public class Punchroom extends Monster {
 		@Override
 		public boolean canContinueToUse() {
 			LivingEntity entitylivingbase = punchroom.getTarget();
-			return entitylivingbase == null ? false : entitylivingbase.isAlive() && punchroom.canAttack(entitylivingbase) && --growTiredTimer > 0;
+			return entitylivingbase != null && entitylivingbase.isAlive() && punchroom.canAttack(entitylivingbase) && --growTiredTimer > 0;
 		}
 		
 		@Override
@@ -303,7 +303,7 @@ public class Punchroom extends Monster {
 		public PunchroomMoveHelper(Punchroom punchroomIn) {
 			super(punchroomIn);
 			punchroom = punchroomIn;
-			yRot = 180.0F * punchroomIn.getYRot() / (float) Mth.PI;
+			yRot = 180.0F * punchroomIn.getYRot() / Mth.PI;
 		}
 
 		public void setDirection(float rotationY, boolean aggressive) {

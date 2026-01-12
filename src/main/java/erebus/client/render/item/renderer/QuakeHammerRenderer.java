@@ -2,11 +2,8 @@
 
 package erebus.client.render.item.renderer;
 
-import javax.annotation.Nonnull;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-
 import erebus.Erebus;
 import erebus.client.render.item.model.QuakeHammerModel;
 import erebus.registries.client.ModItemRendering;
@@ -24,6 +21,8 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
+
 @OnlyIn(Dist.CLIENT)
 public class QuakeHammerRenderer extends BlockEntityWithoutLevelRenderer {
 
@@ -40,7 +39,7 @@ public class QuakeHammerRenderer extends BlockEntityWithoutLevelRenderer {
     public void renderByItem(ItemStack stack, @Nonnull ItemDisplayContext transformType, PoseStack pose, MultiBufferSource bufferIn, int combinedLight, int combinedOverlayIn) {
         pose.pushPose();
         pose.rotateAround(Axis.YN.rotationDegrees(90), 0, 1, 0);
-        float scale = (float) (1.75F + (!stack.has(ModDataComponents.QUAKE_HAMMER) ? 0 : stack.get(ModDataComponents.QUAKE_HAMMER).charge()) * 0.03F);
+        float scale = 1.75F + (!stack.has(ModDataComponents.QUAKE_HAMMER) ? 0 : stack.get(ModDataComponents.QUAKE_HAMMER).charge()) * 0.03F;
 		pose.translate(0F, 0.25F - scale, 0F);
 		pose.scale(scale, scale, scale);
         quakeHammerModel.renderToBuffer(pose, bufferIn.getBuffer(RenderType.entitySmoothCutout(TEXTURE)), combinedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);

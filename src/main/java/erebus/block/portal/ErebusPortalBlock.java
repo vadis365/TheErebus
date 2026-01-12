@@ -2,9 +2,8 @@ package erebus.block.portal;
 
 import com.mojang.serialization.MapCodec;
 import erebus.Erebus;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.world.ModDimensionRegistries;
-import net.minecraft.BlockUtil;
-import net.minecraft.BlockUtil.FoundRectangle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -13,13 +12,15 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.BlockUtil;
+import net.minecraft.util.BlockUtil.FoundRectangle;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Portal;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -27,11 +28,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraft.world.level.dimension.DimensionType;
-import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.level.portal.PortalShape;
+import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Optional;
 
@@ -94,19 +95,19 @@ public class ErebusPortalBlock extends Block implements Portal {
     }
 
     @Override
-    protected void neighborChanged(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Block neighborBlock, @NotNull BlockPos neighborPos, boolean movedByPiston) {
-        if (!obeysPortalRule(level, pos, true)) level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+    protected void neighborChanged(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Block block, @org.jspecify.annotations.Nullable Orientation orientation, boolean movedByPiston) {
+        super.neighborChanged(state, level, pos, block, orientation, movedByPiston);
     }
 
     @Override
-    protected void entityInside(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Entity entity) {
+    protected void entityInside(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, Entity entity, @NonNull InsideBlockEffectApplier effectApplier, boolean isPrecise) {
         if (entity.canUsePortal(false)) {
             entity.setAsInsidePortal(this, entity.blockPosition());
         }
     }
 
     @Override
-    public @Nullable DimensionTransition getPortalDestination(ServerLevel level, @NotNull Entity entity, @NotNull BlockPos pos) {
+    public TeleportTransition getPortalDestination(ServerLevel level, @NonNull Entity entity, @NonNull BlockPos pos) {
         ResourceKey<Level> dimension = level.dimension() != ModDimensionRegistries.DIMENSION_KEY ? ModDimensionRegistries.DIMENSION_KEY : Level.OVERWORLD;
         ServerLevel server = level.getServer().getLevel(dimension);
 
@@ -120,10 +121,10 @@ public class ErebusPortalBlock extends Block implements Portal {
         return getExitPortal(server, entity, pos, exitPos, level.dimension() == ModDimensionRegistries.DIMENSION_KEY, border);
     }
 
-    private DimensionTransition getExitPortal(ServerLevel level, Entity entity, BlockPos pos, BlockPos exitPos, boolean isErebus, WorldBorder border) {
+    private TeleportTransition getExitPortal(ServerLevel level, Entity entity, BlockPos pos, BlockPos exitPos, boolean isErebus, WorldBorder border) {
         Optional<BlockPos> optional = ErebusPortalForcer.findClosestPortalPosition(level, exitPos, isErebus, border);
-        FoundRectangle foundRectangle;
-        DimensionTransition.PostDimensionTransition postDimensionTransition;
+        BlockUtil.FoundRectangle foundRectangle;
+        TeleportTransition.PostTeleportTransition postDimensionTransition;
 
         if (optional.isPresent()) {
             BlockPos blockPos = optional.get();
@@ -136,22 +137,22 @@ public class ErebusPortalBlock extends Block implements Portal {
                     ErebusPortalShape.HEIGHT,
                     check -> level.getBlockState(check) == state
             );
-            postDimensionTransition = DimensionTransition.PLAY_PORTAL_SOUND.then(player -> player.placePortalTicket(blockPos));
+            postDimensionTransition = TeleportTransition.PLAY_PORTAL_SOUND.then(player -> player.placePortalTicket(blockPos));
         } else {
-            Optional<FoundRectangle> optionalPortal = ErebusPortalForcer.createPortal(level, pos, Direction.Axis.X);
+            Optional<BlockUtil.FoundRectangle> optionalPortal = ErebusPortalForcer.createPortal(level, pos, Direction.Axis.X);
             if (optionalPortal.isEmpty()) {
                 Erebus.LOGGER.error("Unable to create a portal, likely target out of world border");
                 return null;
             }
 
             foundRectangle = optionalPortal.get();
-            postDimensionTransition = DimensionTransition.PLAY_PORTAL_SOUND.then(DimensionTransition.PLACE_PORTAL_TICKET);
+            postDimensionTransition = TeleportTransition.PLAY_PORTAL_SOUND.then(TeleportTransition.PLACE_PORTAL_TICKET);
         }
 
         return createDimensionTransitionFromExit(entity, pos, foundRectangle, level, postDimensionTransition);
     }
 
-    private DimensionTransition createDimensionTransitionFromExit(Entity entity, BlockPos pos, FoundRectangle rectangle, ServerLevel level, DimensionTransition.PostDimensionTransition postDimensionTransition) {
+    private TeleportTransition createDimensionTransitionFromExit(Entity entity, BlockPos pos, FoundRectangle rectangle, ServerLevel level, TeleportTransition.PostTeleportTransition postDimensionTransition) {
         BlockState state = entity.level().getBlockState(pos);
         Direction.Axis axis;
         Vec3 vec3;
@@ -168,7 +169,7 @@ public class ErebusPortalBlock extends Block implements Portal {
         return createDimensionTransition(level, rectangle, axis, vec3, entity, entity.getDeltaMovement(), entity.getYRot(), entity.getXRot(), postDimensionTransition);
     }
 
-    private static DimensionTransition createDimensionTransition(ServerLevel level, FoundRectangle rectangle, Direction.Axis axis, Vec3 offset, Entity entity, Vec3 speed, float yRot, float xRot, DimensionTransition.PostDimensionTransition postDimensionTransition) {
+    private static TeleportTransition createDimensionTransition(ServerLevel level, FoundRectangle rectangle, Direction.Axis axis, Vec3 offset, Entity entity, Vec3 speed, float yRot, float xRot, TeleportTransition.PostTeleportTransition postDimensionTransition) {
         BlockPos blockpos = rectangle.minCorner;
         BlockState blockstate = level.getBlockState(blockpos);
         Direction.Axis direction$axis = blockstate.getOptionalValue(BlockStateProperties.HORIZONTAL_AXIS).orElse(Direction.Axis.X);
@@ -183,21 +184,21 @@ public class ErebusPortalBlock extends Block implements Portal {
         boolean flag = direction$axis == Direction.Axis.X;
         Vec3 vec31 = new Vec3((double)blockpos.getX() + (flag ? d2 : d4), (double)blockpos.getY() + d3, (double)blockpos.getZ() + (flag ? d4 : d2));
         Vec3 vec32 = PortalShape.findCollisionFreePosition(vec31, level, entity, entitydimensions);
-        return new DimensionTransition(level, vec32, vec3, yRot + (float)i, xRot, postDimensionTransition);
+        return new TeleportTransition(level, vec32, vec3, yRot + (float)i, xRot, postDimensionTransition);
     }
 
     @Override
-    public int getPortalTransitionTime(@NotNull ServerLevel level, @NotNull Entity entity) {
+    public int getPortalTransitionTime(@NonNull ServerLevel level, @NonNull Entity entity) {
         return entity instanceof Player player ? player.getAbilities().invulnerable ? 1 : 80 : 0;
     }
 
     @Override
-    public @NotNull Transition getLocalTransition() {
+    public @NonNull Transition getLocalTransition() {
         return Transition.CONFUSION;
     }
 
     @Override
-    public void animateTick(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+    public void animateTick(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull RandomSource random) {
         for (int i = 0; i < 4; i++) {
             double particleX = pos.getX() + random.nextFloat();
             double particleY = pos.getY() + random.nextFloat();

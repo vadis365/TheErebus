@@ -2,10 +2,11 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.SiloTankBlockEntity;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.Containers;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -13,8 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
@@ -23,12 +24,12 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public class SiloTankBlock extends Block implements EntityBlock {
 
@@ -42,23 +43,22 @@ public class SiloTankBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	protected @NotNull MapCodec<SiloTankBlock> codec() {
+	protected @NonNull MapCodec<SiloTankBlock> codec() {
 		return CODEC;
 	}
 
-	@Nonnull
 	@Override
-	public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+	public @NonNull VoxelShape getShape(@NonNull BlockState state, @NonNull BlockGetter worldIn, @NonNull BlockPos pos, @NonNull CollisionContext context) {
 		return SILO_TANK_AABB;
 	}
 
     @Override
-	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+	public BlockEntity newBlockEntity(@NonNull BlockPos pos, @NonNull BlockState state) {
 		return new SiloTankBlockEntity(pos, state);
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext context) {
+	public BlockState getStateForPlacement(@NonNull BlockPlaceContext context) {
 		return this.defaultBlockState().setValue(ACTIVE, false);
 	}
 
@@ -68,13 +68,13 @@ public class SiloTankBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
+	protected @NonNull BlockState updateShape(@NonNull BlockState state, @NonNull LevelReader level, @NonNull ScheduledTickAccess ticks, @NonNull BlockPos pos, @NonNull Direction directionToNeighbour, @NonNull BlockPos neighbourPos, @NonNull BlockState neighbourState, @NonNull RandomSource random) {
 		boolean canSurvive = canSurvive(state, level, pos);
-        return !canSurvive ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, pos, facingPos);
+        return !canSurvive ? Blocks.AIR.defaultBlockState() : super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
 	}
 
 	@Override
-	public void neighborChanged(@NotNull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Block block, @Nonnull BlockPos fromPos, boolean isMoving) {
+	public void neighborChanged(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull Block block, @Nullable Orientation orientation, boolean movedByPiston) {
 		if (!level.isClientSide()) {
 			if (isSiloComplete(level, pos))
 				level.setBlock(pos, this.defaultBlockState().setValue(ACTIVE, true), 3);
@@ -91,20 +91,19 @@ public class SiloTankBlock extends Block implements EntityBlock {
 	}
 
     @Override
-    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    protected boolean canSurvive(@NonNull BlockState state, LevelReader level, @NonNull BlockPos pos) {
     	if(level.getBlockState(pos).is(this) && level.getBlockState(pos).getValue(ACTIVE))
     		return isSiloComplete((Level) level, pos);
 		return level.getBlockState(pos.below()).is(ModBlocks.SILO_SUPPORTS.get());
 	}
 
-	@Nonnull
 	@Override
-	public RenderShape getRenderShape(@Nonnull BlockState state) {
+	public @NonNull RenderShape getRenderShape(@NonNull BlockState state) {
 		return RenderShape.MODEL;
 	}
 
     @Override
-	public @NotNull InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+	public @NonNull InteractionResult useItemOn(@NonNull ItemStack stack, @NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull Player player, @NonNull InteractionHand hand, @NonNull BlockHitResult hit) {
     	BlockEntity blockEntity = level.getBlockEntity(pos);
     	if (level.isClientSide()) {
 			return InteractionResult.SUCCESS;
@@ -116,13 +115,13 @@ public class SiloTankBlock extends Block implements EntityBlock {
 		}
     	return InteractionResult.SUCCESS;
 	}
-
+	/*
 	@Override
-	public void onRemove(@NotNull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
+	public void onRemove(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull BlockState newState, boolean isMoving) {
 		SiloTankBlockEntity tile = (SiloTankBlockEntity) level.getBlockEntity(pos);
 		if (tile != null)
 			Containers.dropContents(level, pos, tile);
 		level.levelEvent(2001, pos, Block.getId(state));
 		super.onRemove(state, level, pos, newState, isMoving);
-	}
+	}*/
 }

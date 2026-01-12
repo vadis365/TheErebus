@@ -1,14 +1,13 @@
 package erebus.block.entity;
 
-import java.util.Random;
-
-import org.jetbrains.annotations.NotNull;
-
 import erebus.registries.blocks.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Random;
 
 public class GlowingJarBlockEntity extends BlockEntity {
 

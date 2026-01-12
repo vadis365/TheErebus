@@ -2,14 +2,15 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.types.EnumGlowshroomPart;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
@@ -18,8 +19,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 public class GlowshroomStalkBlock extends Block {
 	public static final MapCodec<GlowshroomStalkBlock> CODEC = simpleCodec(GlowshroomStalkBlock::new);
@@ -30,9 +30,8 @@ public class GlowshroomStalkBlock extends Block {
         registerDefaultState(getStateDefinition().any().setValue(PART, EnumGlowshroomPart.MAIN));
     }
 
-	@Nonnull
 	@Override
-	protected MapCodec<GlowshroomStalkBlock> codec() {
+	protected @NonNull MapCodec<GlowshroomStalkBlock> codec() {
 		return CODEC;
 	}
 
@@ -42,18 +41,17 @@ public class GlowshroomStalkBlock extends Block {
     }
 
 	@Override
-	 public BlockState getStateForPlacement(BlockPlaceContext context) {
+	 public BlockState getStateForPlacement(@NonNull BlockPlaceContext context) {
 		return this.defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN);
 	}
 
-	@Nonnull
 	@Override
-	public RenderShape getRenderShape(@Nonnull BlockState state) {
+	public @NonNull RenderShape getRenderShape(@NonNull BlockState state) {
 		return RenderShape.MODEL;
 	}
 
     @Override
-    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    protected boolean canSurvive(@NonNull BlockState state, LevelReader level, BlockPos pos) {
 		return isValidBlock(level.getBlockState(pos.below())) || isValidBlock(level.getBlockState(pos.above())) || isValidBlock(level.getBlockState(pos.north())) || isValidBlock(level.getBlockState(pos.south())) || isValidBlock(level.getBlockState(pos.west())) || isValidBlock(level.getBlockState(pos.east()));
 	}
 
@@ -62,9 +60,8 @@ public class GlowshroomStalkBlock extends Block {
 		 return state.isSolid() || state.is(this);
 	}
 
-	@Nonnull
 	@Override
-	public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+	public @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter worldIn, @NonNull BlockPos pos, @NonNull CollisionContext context) {
 		EnumGlowshroomPart part = state.getValue(PART);
 		float widthMin = 0, heightMin = 0, depthMin = 0;
 		float widthMax = 16F, heightMax = 16F, depthMax = 16F;
@@ -106,7 +103,7 @@ public class GlowshroomStalkBlock extends Block {
 				heightMax = 11F;
 				depthMax = 16F;
 				break;
-			case NORTH_2:
+			case NORTH_2, SOUTH_2:
 				widthMin = 3F;
 				heightMin = 3F;
 				depthMin = 0F;
@@ -132,15 +129,7 @@ public class GlowshroomStalkBlock extends Block {
 				heightMax = 11F;
 				depthMax = 11F;
 				break;
-			case SOUTH_2:
-				widthMin = 3F;
-				heightMin = 3F;
-				depthMin = 0F;
-				widthMax = 13F;
-				heightMax = 13F;
-				depthMax = 16F;
-				break;
-			case SOUTH_3:
+            case SOUTH_3:
 				widthMin = 5F;
 				heightMin = 5F;
 				depthMin = 0F;
@@ -157,7 +146,7 @@ public class GlowshroomStalkBlock extends Block {
 				heightMax = 11F;
 				depthMax = 11F;
 				break;
-			case WEST_2:
+			case WEST_2, EAST_2:
 				widthMin = 0F;
 				heightMin = 3F;
 				depthMin = 3F;
@@ -182,15 +171,7 @@ public class GlowshroomStalkBlock extends Block {
 				heightMax = 11F;
 				depthMax = 11F;
 				break;
-			case EAST_2:
-				widthMin = 0F;
-				heightMin = 3F;
-				depthMin = 3F;
-				widthMax = 16F;
-				heightMax = 13F;
-				depthMax = 13F;
-				break;
-			case EAST_3:
+            case EAST_3:
 				widthMin = 0F;
 				heightMin = 5F;
 				depthMin = 5F;
@@ -200,133 +181,127 @@ public class GlowshroomStalkBlock extends Block {
 				break;		
 		}
 
-		VoxelShape voxelshape = Block.box(widthMin, heightMin, depthMin, widthMax, heightMax, depthMax);
-		return voxelshape;
+        return Block.box(widthMin, heightMin, depthMin, widthMax, heightMax, depthMax);
 	}
 
 	@Override
-	 protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+	 protected void randomTick(BlockState state, @NonNull ServerLevel level, @NonNull BlockPos pos, @NonNull RandomSource random) {
 		EnumGlowshroomPart part = state.getValue(PART);
 
 		switch (part) {
-		case MAIN: {
-			switch (random.nextInt(5)) {
-			case 0:
-				if (level.isEmptyBlock(pos.below()))
-					level.setBlock(pos.below(), defaultBlockState().setValue(PART, EnumGlowshroomPart.DOWN_1), 2);
-				break;
-			case 1:
-				if (level.isEmptyBlock(pos.north()) && level.getBlockState(pos.above()).is(ModBlocks.GLOWSHROOM_STALK.get()))
-					level.setBlock(pos.north(), defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_1), 2);
-				break;
-			case 2:
-				if (level.isEmptyBlock(pos.south()) && level.getBlockState(pos.above()).is(ModBlocks.GLOWSHROOM_STALK.get()))
-					level.setBlock(pos.south(), defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_1), 2);
-				break;
-			case 3:
-				if (level.isEmptyBlock(pos.west()) && level.getBlockState(pos.above()).is(ModBlocks.GLOWSHROOM_STALK.get()))
-					level.setBlock(pos.west(), defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_1), 2);
-				break;
-			case 4:
-				if (level.isEmptyBlock(pos.east()) && level.getBlockState(pos.above()).is(ModBlocks.GLOWSHROOM_STALK.get()))
-					level.setBlock(pos.east(), defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_1), 2);
-				break;
-			}
+			case MAIN: {
+				switch (random.nextInt(5)) {
+					case 0:
+						if (level.isEmptyBlock(pos.below()))
+							level.setBlock(pos.below(), defaultBlockState().setValue(PART, EnumGlowshroomPart.DOWN_1), 2);
+						break;
+					case 1:
+						if (level.isEmptyBlock(pos.north()) && level.getBlockState(pos.above()).is(ModBlocks.GLOWSHROOM_STALK.get()))
+							level.setBlock(pos.north(), defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_1), 2);
+						break;
+					case 2:
+						if (level.isEmptyBlock(pos.south()) && level.getBlockState(pos.above()).is(ModBlocks.GLOWSHROOM_STALK.get()))
+							level.setBlock(pos.south(), defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_1), 2);
+						break;
+					case 3:
+						if (level.isEmptyBlock(pos.west()) && level.getBlockState(pos.above()).is(ModBlocks.GLOWSHROOM_STALK.get()))
+							level.setBlock(pos.west(), defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_1), 2);
+						break;
+					case 4:
+						if (level.isEmptyBlock(pos.east()) && level.getBlockState(pos.above()).is(ModBlocks.GLOWSHROOM_STALK.get()))
+							level.setBlock(pos.east(), defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_1), 2);
+						break;
+				}
 
-			if (random.nextInt(10) == 0)
-				if (level.isEmptyBlock(pos.above()))
+				if (random.nextInt(10) == 0)
+					if (level.isEmptyBlock(pos.above()))
+						level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
+				break;
+			}
+			case DOWN_1:
+				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.DOWN_2), 2);
+				break;
+			case DOWN_2:
+				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.DOWN_3), 2);
+				break;
+			case DOWN_3:
+				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN), 2);
+				break;
+			case EAST_1:
+				if (random.nextBoolean()) {
+					level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_2), 2);
+					if (level.isEmptyBlock(pos.east()))
+						level.setBlock(pos.east(), defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_1), 2);
+				} else if (level.isEmptyBlock(pos.above())) {
+					level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_3), 2);
 					level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
-			break;
-		}
-		case DOWN_1:
-			level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.DOWN_2), 2);
-			break;
-		case DOWN_2:
-			level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.DOWN_3), 2);
-			break;
-		case DOWN_3:
-			level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN), 2);
-			break;
-		case EAST_1:
-			if (random.nextBoolean()) {
-				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_2), 2);
-				if (level.isEmptyBlock(pos.east()))
-					level.setBlock(pos.east(), defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_1), 2);
-			} else if (level.isEmptyBlock(pos.above())) {
-				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_3), 2);
-				level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
-			}
-			break;
-		case EAST_2:
-			if (level.getBlockState(pos.west()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN) && level.getBlockState(pos.east()) != defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_3)) {
-				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN), 2);
-				if (level.getBlockState(pos.east()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_1))
-					level.setBlock(pos.east(), defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_2), 2);
-			}
-			break;
-		case NORTH_1:
-			if (random.nextBoolean()) {
-				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_2), 2);
-				if (level.isEmptyBlock(pos.north()))
-					level.setBlock(pos.north(), defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_1), 2);
-			} else if (level.isEmptyBlock(pos.above())) {
-				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_3), 2);
-				level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
-			}
-			break;
-		case NORTH_2:
-			if (level.getBlockState(pos.south()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN) && level.getBlockState(pos.north()) != defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_3)) {
-				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN), 2);
-				if (level.getBlockState(pos.north()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_1))
-					level.setBlock(pos.north(), defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_2), 2);
-			}
-			break;
-		case SOUTH_1:
-			if (random.nextBoolean()) {
-				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_2), 2);
-				if (level.isEmptyBlock(pos.south()))
-					level.setBlock(pos.south(), defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_1), 2);
-			} else if (level.isEmptyBlock(pos.above())) {
-				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_3), 2);
-				level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
-			}
-			break;
-		case SOUTH_2:
-			if (level.getBlockState(pos.north()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN) && level.getBlockState(pos.south()) != defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_3)) {
-				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN), 2);
-				if (level.getBlockState(pos.south()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_1))
-					level.setBlock(pos.south(), defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_2), 2);
-			}
-			break;
-		case WEST_1:
-			if (random.nextBoolean()) {
-				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_2), 2);
-				if (level.isEmptyBlock(pos.west()))
-					level.setBlock(pos.west(), defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_1), 2);
-			} else if (level.isEmptyBlock(pos.above())) {
-				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_3), 2);
-				level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
-			}
-			break;
-		case WEST_2:
-			if (level.getBlockState(pos.east()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN) && level.getBlockState(pos.west()) != defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_3)) {
-				level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN), 2);
-				if (level.getBlockState(pos.west()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_1))
-					level.setBlock(pos.west(), defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_2), 2);
-			}
-			break;
-		case EAST_3:
-		case NORTH_3:
-		case SOUTH_3:
-		case WEST_3:
-			break;
-		default:
-			break;
+				}
+				break;
+			case EAST_2:
+				if (level.getBlockState(pos.west()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN) && level.getBlockState(pos.east()) != defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_3)) {
+					level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN), 2);
+					if (level.getBlockState(pos.east()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_1))
+						level.setBlock(pos.east(), defaultBlockState().setValue(PART, EnumGlowshroomPart.EAST_2), 2);
+				}
+				break;
+			case NORTH_1:
+				if (random.nextBoolean()) {
+					level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_2), 2);
+					if (level.isEmptyBlock(pos.north()))
+						level.setBlock(pos.north(), defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_1), 2);
+				} else if (level.isEmptyBlock(pos.above())) {
+					level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_3), 2);
+					level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
+				}
+				break;
+			case NORTH_2:
+				if (level.getBlockState(pos.south()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN) && level.getBlockState(pos.north()) != defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_3)) {
+					level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN), 2);
+					if (level.getBlockState(pos.north()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_1))
+						level.setBlock(pos.north(), defaultBlockState().setValue(PART, EnumGlowshroomPart.NORTH_2), 2);
+				}
+				break;
+			case SOUTH_1:
+				if (random.nextBoolean()) {
+					level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_2), 2);
+					if (level.isEmptyBlock(pos.south()))
+						level.setBlock(pos.south(), defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_1), 2);
+				} else if (level.isEmptyBlock(pos.above())) {
+					level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_3), 2);
+					level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
+				}
+				break;
+			case SOUTH_2:
+				if (level.getBlockState(pos.north()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN) && level.getBlockState(pos.south()) != defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_3)) {
+					level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN), 2);
+					if (level.getBlockState(pos.south()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_1))
+						level.setBlock(pos.south(), defaultBlockState().setValue(PART, EnumGlowshroomPart.SOUTH_2), 2);
+				}
+				break;
+			case WEST_1:
+				if (random.nextBoolean()) {
+					level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_2), 2);
+					if (level.isEmptyBlock(pos.west()))
+						level.setBlock(pos.west(), defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_1), 2);
+				} else if (level.isEmptyBlock(pos.above())) {
+					level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_3), 2);
+					level.setBlock(pos.above(), ModBlocks.GLOWSHROOM_BLOCK.get().defaultBlockState(), 2);
+				}
+				break;
+			case WEST_2:
+				if (level.getBlockState(pos.east()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN) && level.getBlockState(pos.west()) != defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_3)) {
+					level.setBlock(pos, defaultBlockState().setValue(PART, EnumGlowshroomPart.MAIN), 2);
+					if (level.getBlockState(pos.west()) == defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_1))
+						level.setBlock(pos.west(), defaultBlockState().setValue(PART, EnumGlowshroomPart.WEST_2), 2);
+				}
+				break;
+			default:
+				break;
 		}
 	}
 	
 	@Override
-	protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
+	protected @NonNull BlockState updateShape(@NonNull BlockState state, @NonNull LevelReader level, @NonNull ScheduledTickAccess ticks, @NonNull BlockPos pos, @NonNull Direction directionToNeighbour, @NonNull BlockPos neighbourPos, @NonNull BlockState neighbourState, @NonNull RandomSource random) {
 		EnumGlowshroomPart part = state.getValue(PART);
 		boolean flag = true;
 		if (part == EnumGlowshroomPart.MAIN)
@@ -348,6 +323,6 @@ public class GlowshroomStalkBlock extends Block {
 			if (!isValidBlock(level.getBlockState(pos.east())))
 				flag = false;
 
-		return !flag ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, pos, facingPos);
+		return !flag ? Blocks.AIR.defaultBlockState() : super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
 	}
 }

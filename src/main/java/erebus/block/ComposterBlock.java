@@ -5,7 +5,6 @@ import erebus.block.entity.ComposterBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -68,14 +67,14 @@ public class ComposterBlock extends Block implements EntityBlock {
 		return new ComposterBlockEntity(pos, state);
 	}
 
-	@Override
+	/*@Override
 	public void onRemove(@NotNull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
 		ComposterBlockEntity composter = (ComposterBlockEntity) level.getBlockEntity(pos);
 		if (composter != null)
 			Containers.dropContents(level, pos, composter);
 		level.levelEvent(2001, pos, Block.getId(state));
 		super.onRemove(state, level, pos, newState, isMoving);
-	}
+	}*/
 
 	@Override
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {

@@ -2,6 +2,7 @@ package erebus.block;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.GaeanKeystoneBlockEntity;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import erebus.utils.AdvancedBlockPos;
 import net.minecraft.core.BlockPos;

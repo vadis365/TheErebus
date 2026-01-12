@@ -1,13 +1,10 @@
 package erebus.client.render.block.renderer;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-
 import erebus.Erebus;
 import erebus.block.entity.GlowingJarBlockEntity;
 import erebus.client.render.block.model.GlowingJarModel;
@@ -19,6 +16,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEntity> {
 
