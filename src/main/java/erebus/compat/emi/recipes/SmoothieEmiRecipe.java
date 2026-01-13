@@ -1,5 +1,5 @@
 /*
-package erebus.client.emi.recipes;
+package erebus.compat.emi.recipes;
 
 import dev.emi.emi.api.neoforge.NeoForgeEmiIngredient;
 import dev.emi.emi.api.recipe.EmiRecipe;
@@ -8,7 +8,7 @@ import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-import erebus.client.emi.ModEmiPlugin;
+import erebus.compat.emi.ModEmiPlugin;
 import erebus.recipes.smoothie.SmoothieRecipe;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.network.chat.Component;

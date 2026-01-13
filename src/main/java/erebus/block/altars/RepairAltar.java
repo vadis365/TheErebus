@@ -2,8 +2,6 @@ package erebus.block.altars;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.RepairAltarBlockEntity;
-import erebus.registries.ModSounds;
-import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -49,7 +47,7 @@ public class RepairAltar extends AltarAbstract {
 	}
 
 	@Override
-	 protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+	 protected void onPlace(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull BlockState oldState, boolean movedByPiston) {
 		BlockEntity blockEntity =  level.getBlockEntity(pos);
 		if (blockEntity instanceof RepairAltarBlockEntity altar) {
 			altar.setActive(false);
@@ -58,7 +56,7 @@ public class RepairAltar extends AltarAbstract {
 	}
 
 	@Override
-	 public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+	 public void stepOn(Level level, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull Entity entity) {
 			BlockEntity blockEntity = level.getBlockEntity(pos);
 			if (blockEntity instanceof RepairAltarBlockEntity altar) {
 				if (entity instanceof ItemEntity && altar.active) {
@@ -84,26 +82,12 @@ public class RepairAltar extends AltarAbstract {
 		}
 
 	@Override
-	public InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+	public @NonNull InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
 		BlockEntity blockEntity = level.getBlockEntity(pos);
 		if (level.isClientSide()) {
 			return InteractionResult.SUCCESS;
 		} else if (blockEntity instanceof RepairAltarBlockEntity altar) {
-			if (!stack.isEmpty())
-				if (stack.getItem() == ModItems.WAND_OF_ANIMATION.get()) {
-					stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
-					if (!altar.active) {
-						altar.setActive(true);
-						altar.setSpawnTicks(12000);
-						level.playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE.get(), SoundSource.BLOCKS, 1.0F, 1.3F);
-						return InteractionResult.SUCCESS;
-					}
-					if (altar.active) {
-						altar.setActive(false);
-						level.playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE.get(), SoundSource.BLOCKS, 1.0F, 1.3F);
-						return InteractionResult.SUCCESS;
-					}
-				}
+			activateAltar(level, stack, player, altar, pos);
 		}
 		return InteractionResult.FAIL;
 	}

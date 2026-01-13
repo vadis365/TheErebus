@@ -1,35 +1,25 @@
 package erebus.client.render.block.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import erebus.client.render.block.state.OfferingAltarBlockEntityRenderState;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-public class OfferingAltarModel extends Model {
+public class OfferingAltarModel extends Model<OfferingAltarBlockEntityRenderState> {
 
-	private final ModelPart boxes0;
-	private final ModelPart boxes1;
-	private final ModelPart boxes2;
-	private final ModelPart boxes3;
-	private final ModelPart boxes4;
-	private final ModelPart boxes5;
-	private final ModelPart boxes6;
-	private final ModelPart boxes7;
-
-	public OfferingAltarModel(ModelPart root) {
-		super(RenderType::entitySolid);
-		this.boxes0 = root.getChild("boxes0");
-		this.boxes1 = root.getChild("boxes1");
-		this.boxes2 = root.getChild("boxes2");
-		this.boxes3 = root.getChild("boxes3");
-		this.boxes4 = root.getChild("boxes4");
-		this.boxes5 = root.getChild("boxes5");
-		this.boxes6 = root.getChild("boxes6");
-		this.boxes7 = root.getChild("boxes7");
-	}
+    public OfferingAltarModel(ModelPart root) {
+		super(root, RenderTypes::entitySolid);
+        root.getChild("boxes0");
+        root.getChild("boxes1");
+        root.getChild("boxes2");
+        root.getChild("boxes3");
+        root.getChild("boxes4");
+        root.getChild("boxes5");
+        root.getChild("boxes6");
+        root.getChild("boxes7");
+    }
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
@@ -53,17 +43,4 @@ public class OfferingAltarModel extends Model {
 
         return LayerDefinition.create(meshdefinition, 128, 64);
 	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		boxes0.render(stack, consumer, light, overlay, colour);
-		boxes1.render(stack, consumer, light, overlay, colour);
-		boxes2.render(stack, consumer, light, overlay, colour);
-		boxes3.render(stack, consumer, light, overlay, colour);
-		boxes4.render(stack, consumer, light, overlay, colour);
-		boxes5.render(stack, consumer, light, overlay, colour);
-		boxes6.render(stack, consumer, light, overlay, colour);
-		boxes7.render(stack, consumer, light, overlay, colour);
-	}
-
 }

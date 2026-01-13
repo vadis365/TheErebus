@@ -1,5 +1,5 @@
 /*
-package erebus.client.emi.recipes;
+package erebus.compat.emi.recipes;
 
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;

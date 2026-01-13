@@ -1,58 +1,37 @@
 package erebus.client.render.block.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import erebus.client.render.block.state.BlenderBlockEntityRenderState;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-public class BlenderModel extends Model {
+public class BlenderModel extends Model<BlenderBlockEntityRenderState> {
 
     private static final CubeDeformation ZERO = new CubeDeformation(0);
-    private final ModelPart base;
-    private final ModelPart top;
-    private final ModelPart bottomBlender;
-    private final ModelPart middleBlender;
-    private final ModelPart lid;
-    private final ModelPart honeyJar;
-    private final ModelPart honeyJarLiquid;
-    private final ModelPart honeyJarLid;
-    private final ModelPart milkJar;
-    private final ModelPart milkJarLiquid;
-    private final ModelPart milkJarLid;
-    private final ModelPart antivenomJar;
-    private final ModelPart antivenomJarLiquid;
-    private final ModelPart antivenomJarLid;
-    private final ModelPart beetleJuiceJar;
-    private final ModelPart beetleJuiceJarLiquid;
-    private final ModelPart beetleJuiceJarLid;
-    private final ModelPart handleTop;
-    private final ModelPart handleSide;
 
     public BlenderModel(ModelPart root) {
-        super(RenderType::entitySolid);
-        base = root.getChild("Base");
-        top = root.getChild("Top");
-        bottomBlender = root.getChild("BottomBlender");
-        middleBlender = root.getChild("MiddleBlender");
-        lid = root.getChild("Lid");
-        honeyJar = root.getChild("HoneyJar");
-        honeyJarLiquid = root.getChild("HoneyJarLiquid");
-        honeyJarLid = root.getChild("HoneyJarLid");
-        milkJar = root.getChild("MilkJar");
-        milkJarLiquid = root.getChild("MilkJarLiquid");
-        milkJarLid = root.getChild("MilkJarLid");
-        antivenomJar = root.getChild("AntivenomJar");
-        antivenomJarLiquid = root.getChild("AntivenomJarLiquid");
-        antivenomJarLid = root.getChild("AntivenomJarLid");
-        beetleJuiceJar = root.getChild("BeetleJuiceJar");
-        beetleJuiceJarLiquid = root.getChild("BeetleJuiceJarLiquid");
-        beetleJuiceJarLid = root.getChild("BeetleJuiceJarLid");
-        handleTop = root.getChild("HandleTop");
-        handleSide = root.getChild("HandleSide");
+        super(root, RenderTypes::entitySolid);
+        root.getChild("Base");
+        root.getChild("Top");
+        root.getChild("BottomBlender");
+        root.getChild("MiddleBlender");
+        root.getChild("Lid");
+        root.getChild("HoneyJar");
+        root.getChild("HoneyJarLiquid");
+        root.getChild("HoneyJarLid");
+        root.getChild("MilkJar");
+        root.getChild("MilkJarLiquid");
+        root.getChild("MilkJarLid");
+        root.getChild("AntivenomJar");
+        root.getChild("AntivenomJarLiquid");
+        root.getChild("AntivenomJarLid");
+        root.getChild("BeetleJuiceJar");
+        root.getChild("BeetleJuiceJarLiquid");
+        root.getChild("BeetleJuiceJarLid");
+        root.getChild("HandleTop");
+        root.getChild("HandleSide");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -212,28 +191,5 @@ public class BlenderModel extends Model {
         );
 
         return LayerDefinition.create(mesh, 256, 128);
-    }
-
-    @Override
-    public void renderToBuffer(@NotNull PoseStack stack, @NotNull VertexConsumer consumer, int light, int overlay, int color) {
-        base.render(stack, consumer, light, overlay, color);
-        top.render(stack, consumer, light, overlay, color);
-        bottomBlender.render(stack, consumer, light, overlay, color);
-        middleBlender.render(stack, consumer, light, overlay, color);
-        lid.render(stack, consumer, light, overlay, color);
-        honeyJar.render(stack, consumer, light, overlay, color);
-        honeyJarLiquid.render(stack, consumer, light, overlay, color);
-        honeyJarLid.render(stack, consumer, light, overlay, color);
-        milkJar.render(stack, consumer, light, overlay, color);
-        milkJarLiquid.render(stack, consumer, light, overlay, color);
-        milkJarLid.render(stack, consumer, light, overlay, color);
-        antivenomJar.render(stack, consumer, light, overlay, color);
-        antivenomJarLiquid.render(stack, consumer, light, overlay, color);
-        antivenomJarLid.render(stack, consumer, light, overlay, color);
-        beetleJuiceJar.render(stack, consumer, light, overlay, color);
-        beetleJuiceJarLiquid.render(stack, consumer, light, overlay, color);
-        beetleJuiceJarLid.render(stack, consumer, light, overlay, color);
-        handleTop.render(stack, consumer, light, overlay, color);
-        handleSide.render(stack, consumer, light, overlay, color);
     }
 }

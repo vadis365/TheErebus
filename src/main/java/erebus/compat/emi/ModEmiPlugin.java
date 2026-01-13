@@ -1,5 +1,5 @@
 /*
-package erebus.client.emi;
+package erebus.compat.emi;
 
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
@@ -8,7 +8,7 @@ import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiStack;
 import erebus.Erebus;
-import erebus.client.emi.recipes.SmoothieEmiRecipe;
+import erebus.compat.emi.recipes.SmoothieEmiRecipe;
 import erebus.registries.ModCustomRecipes;
 import net.minecraft.world.item.crafting.*;
 

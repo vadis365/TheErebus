@@ -1,7 +1,6 @@
 package erebus.client.render.block.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import erebus.client.render.block.state.GlowingJarBlockEntityRenderState;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -9,18 +8,15 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.client.renderer.RenderType;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-public class GlowingJarModel extends Model {
-
-    private final ModelPart jar, lid, neck;
+public class GlowingJarModel extends Model<GlowingJarBlockEntityRenderState> {
 
     public GlowingJarModel(ModelPart root) {
-        super(RenderType::entityTranslucent);
-        jar = root.getChild("jar");
-        lid = root.getChild("lid");
-        neck = root.getChild("neck");
+        super(root, RenderTypes::entityTranslucent);
+        root.getChild("jar");
+        root.getChild("lid");
+        root.getChild("neck");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -52,15 +48,5 @@ public class GlowingJarModel extends Model {
         );
 
         return LayerDefinition.create(mesh, 128, 64);
-    }
-
-    @Override
-    public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer vertex, int light, int overlay, int colour) {
-		lid.render(poseStack, vertex, light, overlay, colour);
-    }
-
-    public void renderGlassParts(@NotNull PoseStack poseStack, @NotNull VertexConsumer vertex, int light, int overlay, int colour) {
-        neck.render(poseStack, vertex, light, overlay, colour);
-        jar.render(poseStack, vertex, light, overlay, colour);
     }
 }

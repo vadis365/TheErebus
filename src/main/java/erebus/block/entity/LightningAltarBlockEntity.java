@@ -26,9 +26,6 @@ import org.joml.Vector3f;
 import java.util.List;
 
 public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
-
-	public boolean active;
-	private int spawnTicks;
 	public Vector3f targetVector;
 	
 	public LightningAltarBlockEntity(BlockPos pos, BlockState state) {
@@ -97,14 +94,6 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 			ClientParticles.spawnCustomParticle("smoke", x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
 			ClientParticles.spawnCustomParticle("flame", x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
 		}
-	}
-
-	public void setActive(boolean isActive) {
-		active = isActive;
-	}
-
-	public void setSpawnTicks(int i) {
-		spawnTicks = i;
 	}
 
 	protected void findEnemyToAttack() {

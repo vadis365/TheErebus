@@ -58,18 +58,7 @@ public class HealingAltar extends AltarAbstract {
 		if (level.isClientSide()) {
 			return InteractionResult.SUCCESS;
 		} else if (blockEntity instanceof HealingAltarBlockEntity altar) {
-			if (!stack.isEmpty())
-				if (stack.getItem() == ModItems.WAND_OF_ANIMATION.get()) {
-					stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
-					if (!altar.active) {
-						altar.setActive(true);
-						altar.setSpawnTicks(12000);
-                    } else {
-						altar.setActive(false);
-                    }
-                    level.playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE.get(), SoundSource.BLOCKS, 1.0F, 1.3F);
-                    return InteractionResult.SUCCESS;
-                }
+			return activateAltar(level, stack, player, altar, pos);
 		}
 		return InteractionResult.FAIL;
 	}

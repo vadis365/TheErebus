@@ -21,6 +21,17 @@ public abstract class AltarAbstractBlockEntity extends BlockEntity {
 	protected abstract void readTileFromNBT(ValueInput input);
 
 	public int animationTicks, prevAnimationTicks;
+	public boolean active;
+	protected int spawnTicks;
+
+
+	public void setActive(boolean isActive) {
+		active = isActive;
+	}
+
+	public void setSpawnTicks(int i) {
+		spawnTicks = i;
+	}
 
 	@Override
 	protected void saveAdditional(@NonNull ValueOutput output) {
