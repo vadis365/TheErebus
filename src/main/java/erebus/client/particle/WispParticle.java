@@ -3,21 +3,22 @@ package erebus.client.particle;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
-import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.util.RandomSource;
+import org.jspecify.annotations.NonNull;
 
-public class WispParticle extends TextureSheetParticle {
+public class WispParticle extends SingleQuadParticle {
 
-    public WispParticle(ClientLevel level, double x, double y, double z) {
-        super(level, x, y, z);
+    public WispParticle(ClientLevel level, double x, double y, double z, TextureAtlasSprite sprite) {
+        super(level, x, y, z, sprite);
     }
 
     @Override
-    public @NotNull ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
+    protected @NonNull Layer getLayer() {
+        return Layer.OPAQUE;
     }
 
     public static class Provider implements ParticleProvider<SimpleParticleType> {
@@ -28,17 +29,8 @@ public class WispParticle extends TextureSheetParticle {
         }
 
         @Override
-        public @Nullable Particle createParticle(@NotNull SimpleParticleType type,
-                                                 @NotNull ClientLevel level,
-                                                 double x,
-                                                 double y,
-                                                 double z,
-                                                 double xSpeed,
-                                                 double ySpeed,
-                                                 double zSpeed) {
-            WispParticle particle = new WispParticle(level, x, y, z);
-            particle.pickSprite(sprite);
-            return particle;
+        public Particle createParticle(SimpleParticleType type, @NonNull ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, @NonNull RandomSource random) {
+            return new WispParticle(level, x, y, z, sprite.first());
         }
     }
 }

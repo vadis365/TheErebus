@@ -5,18 +5,24 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import erebus.Erebus;
 import erebus.block.entity.HealingAltarBlockEntity;
 import erebus.client.render.block.model.HealingAltarModel;
+import erebus.client.render.block.state.HealingAltarBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.jspecify.annotations.Nullable;
 
 @OnlyIn(Dist.CLIENT)
-public class HealingAltarRenderer implements BlockEntityRenderer<HealingAltarBlockEntity> {
+public class HealingAltarRenderer implements BlockEntityRenderer<HealingAltarBlockEntity, HealingAltarBlockEntityRenderState> {
 	private static final ResourceLocation[] TEXTURE = new ResourceLocation[] {
 			Erebus.prefix("textures/special/tiles/altar_healing_1.png"),
 			Erebus.prefix("textures/special/tiles/altar_healing_2.png"),
@@ -56,5 +62,21 @@ public class HealingAltarRenderer implements BlockEntityRenderer<HealingAltarBlo
 			return TEXTURE[4];
 		else
 			return TEXTURE[0];
+	}
+
+	@Override
+	public HealingAltarBlockEntityRenderState createRenderState() {
+		return new HealingAltarBlockEntityRenderState();
+	}
+
+	@Override
+	public void extractRenderState(HealingAltarBlockEntity blockEntity, HealingAltarBlockEntityRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+		BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+
+	}
+
+	@Override
+	public void submit(HealingAltarBlockEntityRenderState healingAltarBlockEntityRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
+
 	}
 }

@@ -1,57 +1,37 @@
 package erebus.client.render.block.renderer;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.opengl.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import erebus.Erebus;
 import erebus.block.entity.GlowingJarBlockEntity;
 import erebus.client.render.block.model.GlowingJarModel;
+import erebus.client.render.block.state.GlowingJarBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
-public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEntity> {
+public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEntity, GlowingJarBlockEntityRenderState> {
 
-    private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/glowing_jar.png");
-    private final ResourceLocation WISP = Erebus.prefix("textures/particle/wisp.png");
+    private final Material TEXTURE = Sheets.BLOCK_ENTITIES_MAPPER.apply(Erebus.prefix("textures/special/tiles/glowing_jar.png"));
+    private final Material WISP = Sheets.BLOCK_ENTITIES_MAPPER.apply(Erebus.prefix("textures/particle/wisp.png"));
     private final GlowingJarModel model;
-    protected final BlockEntityRenderDispatcher renderDispatcher;
+    private final MaterialSet materials;
 
     public GlowingJarRenderer(BlockEntityRendererProvider.Context context) {
         model = new GlowingJarModel(context.bakeLayer(ModBlockEntityRendering.GLOWING_JAR));
-        renderDispatcher = context.getBlockEntityRenderDispatcher();
-    }
-
-    @Override
-    public void render(@NotNull GlowingJarBlockEntity jar, float partialTick, @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
-    	VertexConsumer vertex = buffer.getBuffer(RenderType.entityTranslucentEmissive(WISP, true));
-		poseStack.pushPose();
-		poseStack.translate(0.5F, 0F - jar.particleSize / 4, 0.5F);
-		poseStack.scale(jar.particleSize / 3 + 0.5F, jar.particleSize / 3 + 0.5F, jar.particleSize / 3 + 0.5F);
-		RenderSystem.enableBlend();
-		RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-		poseStack.mulPose(Axis.YN.rotationDegrees(renderDispatcher.camera.getYRot()));
-		renderQuads(poseStack, vertex, 0.5F, -0.5F, 0.5F, 1, 0, 0, combinedLight);
-		RenderSystem.disableBlend();
-		poseStack.popPose();
-
-		VertexConsumer consumer = buffer.getBuffer(model.renderType(TEXTURE));
-		poseStack.pushPose();
-		poseStack.translate(0.5F, 0.75F, 0.5F);
-		poseStack.scale(0.7125F, -0.9999F, -0.7125F);
-		RenderSystem.disableCull();
-		model.renderToBuffer(poseStack, consumer, combinedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
-		model.renderGlassParts(poseStack, consumer, combinedLight, OverlayTexture.NO_OVERLAY, 0x7FFFFFFF);
-		RenderSystem.enableCull();
-		poseStack.popPose();
+        materials = context.materials();
     }
 
     private void renderQuads(PoseStack poseStack, VertexConsumer consumer, float xMax, float xMin, float yMin, float height, float zMin, float zMax, int combinedLight) {
@@ -86,5 +66,38 @@ public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEn
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setUv2(combinedLight, 240)
                 .setNormal(1, 0, 0);
+    }
+
+    @Override
+    public GlowingJarBlockEntityRenderState createRenderState() {
+        return new GlowingJarBlockEntityRenderState();
+    }
+
+    @Override
+    public void extractRenderState(GlowingJarBlockEntity blockEntity, GlowingJarBlockEntityRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+        BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+        state.particleSize = blockEntity.particleSize;
+    }
+
+    @Override
+    public void submit(GlowingJarBlockEntityRenderState renderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0F - renderState.particleSize / 4, 0.5F);
+        poseStack.scale(renderState.particleSize / 3 + 0.5F, renderState.particleSize / 3 + 0.5F, renderState.particleSize / 3 + 0.5F);
+        GlStateManager._enableBlend();
+        poseStack.mulPose(Axis.YN.rotationDegrees(camera.orientation.y));
+
+        //renderQuads(poseStack, vertex, 0.5F, -0.5F, 0.5F, 1, 0, 0, renderState.lightCoords);
+        GlStateManager._disableBlend();
+        poseStack.popPose();
+
+        poseStack.pushPose();
+        poseStack.translate(0.5F, 0.75F, 0.5F);
+        poseStack.scale(0.7125F, -0.9999F, -0.7125F);
+
+        GlStateManager._disableCull();
+        submitNodeCollector.submitModel(model, renderState, poseStack, TEXTURE.renderType(RenderTypes::entityTranslucent), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(TEXTURE), 0, renderState.breakProgress);
+        GlStateManager._enableCull();
+        poseStack.popPose();
     }
 }

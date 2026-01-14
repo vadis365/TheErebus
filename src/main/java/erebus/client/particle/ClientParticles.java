@@ -4,40 +4,37 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-@OnlyIn(Dist.CLIENT)
+
 public class ClientParticles {
  // TODO THIS IS A TEMP CLASS UNTIL ALL THE PARTICLE STUFF IS SORTED
-	@SuppressWarnings("resource")
 	public static void spawnCustomParticle(String particleName, double x, double y, double z, double vecX, double vecY, double vecZ) {
 		Level level = Minecraft.getInstance().level;
 		if (level != null) {
 			Particle fx = null;
 			if (particleName.equals("lava"))
-				level.addParticle(ParticleTypes.LAVA, false, x, y, z, vecX, vecY, vecZ);
+				level.addParticle(ParticleTypes.LAVA, x, y, z, vecX, vecY, vecZ);
 
 			if (particleName.equals("smoke"))
-				level.addParticle(ParticleTypes.LARGE_SMOKE, false, x, y, z, vecX, vecY, vecZ);
+				level.addParticle(ParticleTypes.LARGE_SMOKE, x, y, z, vecX, vecY, vecZ);
 
 			if (particleName.equals("flame"))
-				level.addParticle(ParticleTypes.FLAME, false, x, y, z, vecX, vecY, vecZ);
+				level.addParticle(ParticleTypes.FLAME, x, y, z, vecX, vecY, vecZ);
 
 			if (particleName.equals("swampflame")) {
-				level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, false, x, y, z, vecX, vecY, vecZ);
+				level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, x, y, z, vecX, vecY, vecZ);
 			}
 
 			if (particleName.equals("swampflame_green")) {
-				level.addParticle(ParticleTypes.SMALL_FLAME, false, x, y, z, vecX, vecY, vecZ);
+				level.addParticle(ParticleTypes.SMALL_FLAME, x, y, z, vecX, vecY, vecZ);
 				//fx.setParticleTextureIndex(96);
 				//fx.setRBGColorF(1F, 1F, 0F);
 			}
 
 			if (particleName.equals("heart"))
-				level.addParticle(ParticleTypes.HEART, false, x, y, z, vecX, vecY, vecZ);
+				level.addParticle(ParticleTypes.HEART, x, y, z, vecX, vecY, vecZ);
 			
 			if (particleName.equals("spores"))
-				level.addParticle(ParticleTypes.SPORE_BLOSSOM_AIR, false, x, y, z, vecX, vecY, vecZ);
+				level.addParticle(ParticleTypes.SPORE_BLOSSOM_AIR, x, y, z, vecX, vecY, vecZ);
 
 	/*	
 		if (particleName.equals("repellent")) {

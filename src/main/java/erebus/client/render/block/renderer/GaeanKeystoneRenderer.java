@@ -4,53 +4,64 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import erebus.block.GaeanKeystoneBlock;
 import erebus.block.entity.GaeanKeystoneBlockEntity;
+import erebus.client.render.block.state.GaeanKeystoneBlockEntityRenderState;
 import erebus.registries.item.ModItems;
-import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
-public class GaeanKeystoneRenderer implements BlockEntityRenderer<GaeanKeystoneBlockEntity> {
+public class GaeanKeystoneRenderer implements BlockEntityRenderer<GaeanKeystoneBlockEntity, GaeanKeystoneBlockEntityRenderState> {
 
-    private final ItemRenderer itemRenderer;
+    private final ItemModelResolver itemModelResolver;
 
-    public GaeanKeystoneRenderer(BlockEntityRendererProvider.Context context) {
-        itemRenderer = context.getItemRenderer();
+    public GaeanKeystoneRenderer(Context context) {
+        itemModelResolver = context.itemModelResolver();
     }
 
     @Override
-    public void render(GaeanKeystoneBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay) {
-        if (entity.getBlockState().getValue(GaeanKeystoneBlock.ACTIVE)) {
-            ItemStack stack = new ItemStack(ModItems.PORTAL_ACTIVATOR.get());
+    public GaeanKeystoneBlockEntityRenderState createRenderState() {
+        return new GaeanKeystoneBlockEntityRenderState();
+    }
 
-            double now = (entity.getLevel().getGameTime() % Short.MAX_VALUE) + partialTick;
-            double hover = (Math.sin(now / 40) + 1) / 16;
-            float scale = 1.25F;
+    @Override
+    public void extractRenderState(GaeanKeystoneBlockEntity blockEntity, GaeanKeystoneBlockEntityRenderState state, float partialTicks, @NonNull Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+        BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+        state.now = (blockEntity.getLevel().getGameTime() & Short.MAX_VALUE) + partialTicks;
+        state.rotation = blockEntity.getRenderingRotation();
+        itemModelResolver.updateForTopItem(
+                state.itemStackRenderState,
+                blockEntity.getBlockState().getValue(GaeanKeystoneBlock.ACTIVE) ? new ItemStack(ModItems.PORTAL_ACTIVATOR.get()) : ItemStack.EMPTY,
+                ItemDisplayContext.FIXED,
+                blockEntity.getLevel(),
+                null,
+                0
+        );
+    }
 
-            double x = 0.5F;
-            double y = scale + 12F / 18F + hover;
-            double z = 0.5F;
+    @Override
+    public void submit(GaeanKeystoneBlockEntityRenderState renderState, PoseStack poseStack, @NonNull SubmitNodeCollector submitNodeCollector, @NonNull CameraRenderState cameraRenderState) {
+        double hover = (Math.sin(renderState.now / 40) + 1) / 16;
+        float scale = 1.25F;
 
-            poseStack.pushPose();
-            poseStack.translate(x, y, z);
-            poseStack.rotateAround(Axis.YP.rotationDegrees(entity.getRenderingRotation()), 0, 0, 0);
-            poseStack.rotateAround(Axis.ZN.rotationDegrees(45), 0, 0, 0);
-            poseStack.scale(scale, scale, scale);
-            itemRenderer.renderStatic(
-                    stack,
-                    ItemDisplayContext.FIXED,
-                    LightTexture.FULL_BRIGHT,
-                    OverlayTexture.NO_OVERLAY,
-                    poseStack,
-                    multiBufferSource,
-                    entity.getLevel(),
-                    1
-            );
-            poseStack.popPose();
-        }
+        double x = 0.5F;
+        double y = scale + 12F / 18F + hover;
+        double z = 0.5F;
+
+        poseStack.pushPose();
+        poseStack.translate(x, y, z);
+        poseStack.rotateAround(Axis.YP.rotationDegrees(renderState.rotation), 0, 0, 0);
+        poseStack.rotateAround(Axis.ZN.rotationDegrees(45), 0, 0, 0);
+        poseStack.scale(scale, scale, scale);
+        renderState.itemStackRenderState.submit(poseStack, submitNodeCollector, renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+        poseStack.popPose();
     }
 }

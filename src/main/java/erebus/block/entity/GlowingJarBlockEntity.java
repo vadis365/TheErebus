@@ -14,14 +14,12 @@ public class GlowingJarBlockEntity extends BlockEntity {
     private final Random random = new Random();
     private float particleSpawnTick = random.nextInt(100);
     public float particleSize;
-    public float xRot;
-    public float zRot;
 
     public GlowingJarBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         super(ModBlockEntities.GLOWING_JAR.get(), pos, state);
     }
 
-	public static <T extends BlockEntity> void clientTick(Level world, BlockPos worldPosition, BlockState blockState, T t) {
+	public static <T extends BlockEntity> void clientTick(Level ignoredWorld, BlockPos ignoredWorldPosition, BlockState ignoredBlockState, T t) {
 		if (t instanceof GlowingJarBlockEntity tile) {
 			tile.particleSpawnTick++;
 	            if (tile.particleSpawnTick <= 50)
@@ -33,13 +31,4 @@ public class GlowingJarBlockEntity extends BlockEntity {
 	            	tile.particleSpawnTick = 0;
 	        }
 	}
-
-    public void setRotation(float xRot, float zRot) {
-        this.xRot = xRot;
-        this.zRot = zRot;
-
-        if (level != null && !level.isClientSide()) {
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
-        }
-    }
 }

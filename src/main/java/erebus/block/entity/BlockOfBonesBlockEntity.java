@@ -4,16 +4,18 @@ import erebus.registries.blocks.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Collection;
 
 public class BlockOfBonesBlockEntity extends BlockEntityInventoryHelper {
 
+    public Component displayName;
     private final NonNullList<ItemStack> inventory;
 
     public BlockOfBonesBlockEntity(BlockPos pos, BlockState blockState) {
@@ -30,7 +32,7 @@ public class BlockOfBonesBlockEntity extends BlockEntityInventoryHelper {
     }
 
     @Override
-    public @NotNull ItemStack getItem(int slot) {
+    public @NonNull ItemStack getItem(int slot) {
         return inventory.get(slot);
     }
 
@@ -40,22 +42,22 @@ public class BlockOfBonesBlockEntity extends BlockEntityInventoryHelper {
     }
 
     @Override
-    public int @NotNull [] getSlotsForFace(@NotNull Direction direction) {
+    public int @NonNull [] getSlotsForFace(@NonNull Direction direction) {
         return new int[0];
     }
 
     @Override
-    public boolean canPlaceItemThroughFace(int i, ItemStack itemStack, @Nullable Direction direction) {
+    public boolean canPlaceItemThroughFace(int i, @NonNull ItemStack itemStack, @Nullable Direction direction) {
         return false;
     }
 
     @Override
-    public boolean canTakeItemThroughFace(int i, ItemStack itemStack, Direction direction) {
+    public boolean canTakeItemThroughFace(int i, @NonNull ItemStack itemStack, @NonNull Direction direction) {
         return false;
     }
 
     @Override
-    public ItemStack removeItemNoUpdate(int i) {
+    public @NonNull ItemStack removeItemNoUpdate(int i) {
         return null;
     }
 }
