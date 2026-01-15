@@ -21,11 +21,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.PlayerModelPart;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-@OnlyIn(Dist.CLIENT)
 public class GliderLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
 
     private static final ResourceLocation WINGS = Erebus.prefix("textures/models/armor/glider_layer_1.png");

@@ -1,5 +1,6 @@
 package erebus.world.feature.structure.pieces;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.block.BlockOfBonesBlock;
 import erebus.block.entity.BlockOfBonesBlockEntity;
 import erebus.registries.world.structure.ModStructurePieces;

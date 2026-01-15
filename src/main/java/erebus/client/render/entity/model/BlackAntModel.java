@@ -8,10 +8,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-	@OnlyIn(Dist.CLIENT)
 	public class BlackAntModel<T extends BlackAnt> extends HierarchicalModel<T> {
 	public ModelPart root;
 	private final ModelPart Thx;

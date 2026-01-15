@@ -12,8 +12,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
@@ -32,7 +30,6 @@ public class FormicAcidFluidBlock extends LiquidBlock  {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
 	public void animateTick(@Nonnull BlockState stateIn, Level level, BlockPos pos, @Nonnull RandomSource rand) {
 		if (level.isEmptyBlock(pos.above())) {
 

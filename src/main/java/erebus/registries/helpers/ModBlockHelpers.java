@@ -1,5 +1,6 @@
 package erebus.registries.helpers;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.block.ErebusChestBlock;
 import erebus.block.plants.ModBerryBushBlock;
 import erebus.block.plants.ModCropBlock;

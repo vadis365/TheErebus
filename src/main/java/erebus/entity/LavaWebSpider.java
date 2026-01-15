@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.entity.ai.ThrowWebAttackGoal;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
@@ -44,8 +45,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
@@ -130,7 +129,6 @@ public class LavaWebSpider extends Monster {
 			lavaParticles(level(), getX(), getY() + 1.3D, getZ(), random);
     }
 
-	@OnlyIn(Dist.CLIENT)
 	public void lavaParticles(Level level, double x, double y, double z, RandomSource random) {
 		level.addParticle(ParticleTypes.LAVA, false, x, y, z, 0F, 0F, 0F);
 	}

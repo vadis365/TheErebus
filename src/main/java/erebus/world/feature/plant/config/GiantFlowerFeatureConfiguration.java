@@ -1,5 +1,6 @@
 package erebus.world.feature.plant.config;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.world.feature.plant.config.util.PetalShape;
 import erebus.world.feature.plant.config.util.StemShape;
 import net.minecraft.core.BlockPos;

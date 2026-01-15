@@ -1,5 +1,6 @@
 package erebus.world.feature.tree.foliage;
 
+import erebus.registries.blocks.ModBlocks;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import erebus.registries.world.tree.ModFoliagePlacers;

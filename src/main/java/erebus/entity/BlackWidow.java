@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.entity.ai.ThrowWebAttackGoal;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;

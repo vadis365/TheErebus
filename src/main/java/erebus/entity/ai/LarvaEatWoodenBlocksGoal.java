@@ -1,5 +1,6 @@
 package erebus.entity.ai;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.entity.BeetleLarva;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;

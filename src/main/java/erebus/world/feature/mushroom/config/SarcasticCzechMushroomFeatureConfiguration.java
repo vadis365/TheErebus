@@ -1,5 +1,6 @@
 package erebus.world.feature.mushroom.config;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.world.util.FeatureUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

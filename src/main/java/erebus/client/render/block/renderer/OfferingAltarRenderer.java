@@ -21,10 +21,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarBlockEntity> {
 	private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/offering_altar.png");
 	private final OfferingAltarModel model;

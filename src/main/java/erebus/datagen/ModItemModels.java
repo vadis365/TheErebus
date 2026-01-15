@@ -1,5 +1,6 @@
 package erebus.datagen;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.Erebus;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;

@@ -1,5 +1,6 @@
 package erebus.world.feature.tree.trunk;
 
+import erebus.registries.blocks.ModBlocks;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import erebus.block.bamboo.BambooBlock;

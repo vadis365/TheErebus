@@ -1,5 +1,6 @@
 package erebus.world.feature.tree;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.world.feature.tree.foliage.BaobabFoliagePlacer;
 import erebus.world.feature.tree.trunk.BaobabTrunkPlacer;
 import net.minecraft.util.valueproviders.ConstantInt;

@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.block.entity.SiloTankBlockEntity;
 import erebus.entity.ai.BlackAntBonemealCrops;
 import erebus.entity.ai.BlackAntHarvestCrops;

@@ -1,5 +1,6 @@
 package erebus.world.feature.plant.config;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.block.plants.ModCropBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;

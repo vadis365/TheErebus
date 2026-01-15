@@ -20,6 +20,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -33,8 +34,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,7 +46,6 @@ import java.util.Optional;
 public class BlenderBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 
     public final RecipeManager.CachedCheck<SmoothieRecipeInput, SmoothieRecipe> quickCheck = RecipeManager.createCheck(ModCustomRecipes.SMOOTHIE_RECIPE.get());
-    public static NamedFluidTank[] tanks = new NamedFluidTank[4];
     private static final int MAX_TIME = 432;
     private static int progress = 0;
     private static int prevProgress = 0;
@@ -74,15 +74,15 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
 
             NonNullList<SizedFluidIngredient> fluidInputs = NonNullList.create();
             for(int c = 0; c < 4; c++) {
-                FluidStack fluid = blender.getTank(c).getFluid();
+                FluidStack fluid = blender.getTank(c).getFluidStack();
                 if(!fluid.isEmpty()) {
-                    fluidInputs.add(SizedFluidIngredient.of(fluid));
+                    fluidInputs.add(SizedFluidIngredient.of(fluid.getFluid(), FluidType.BUCKET_VOLUME));
                 }
             }
 
             SmoothieRecipeInput input = new SmoothieRecipeInput(fluidInputs, itemInputs);
 
-            Optional<RecipeHolder<SmoothieRecipe>> optional = blender.quickCheck.getRecipeFor(input, level);
+            Optional<RecipeHolder<SmoothieRecipe>> optional = blender.quickCheck.getRecipeFor(input, (ServerLevel) level);
 
             if(optional.isPresent()) {
                 SmoothieRecipe recipe = optional.get().value();
@@ -106,10 +106,13 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
     }
 
     private static void extractFluids(SmoothieRecipe recipe) {
-        for(SizedFluidIngredient fluid : recipe.getFluidIngredients()) {
-            for(NamedFluidTank tank : tanks) {
-                if(tank.getFluid().is(fluid.getFluids()[0].getFluid())) {
-                    tank.drain(fluid.amount(), IFluidHandler.FluidAction.EXECUTE);
+        try(Transaction tx = Transaction.openRoot()) {
+            for (SizedFluidIngredient fluid : recipe.getFluidIngredients()) {
+                for (NamedFluidTank tank : tanks) {
+                    if (fluid.test(tank.getFluidStack())) {
+
+                        tank.drain(fluid.amount(), IFluidHandler.FluidAction.EXECUTE);
+                    }
                 }
             }
         }
@@ -138,30 +141,6 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
     @Override
     public @Nullable AbstractContainerMenu createMenu(int containerId, @NotNull Inventory inventory, @NotNull Player player) {
         return new BlenderMenu(containerId, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
-    }
-
-    public NamedFluidTank getTank0(@Nullable Direction ignoredDirection) {
-        return tanks[0];
-    }
-
-    public NamedFluidTank getTank1(@Nullable Direction ignoredDirection) {
-        return tanks[1];
-    }
-
-    public NamedFluidTank getTank2(@Nullable Direction ignoredDirection) {
-        return tanks[2];
-    }
-
-    public NamedFluidTank getTank3(@Nullable Direction ignoredDirection) {
-        return tanks[3];
-    }
-
-    public NamedFluidTank getTank(int tank) {
-        return tanks[tank];
-    }
-
-    public NamedFluidTank[] getTanks(@Nullable Direction ignoredDirection) {
-        return tanks;
     }
 
     public float getBlendProgress() {

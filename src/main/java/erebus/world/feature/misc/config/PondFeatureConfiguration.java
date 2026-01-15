@@ -1,5 +1,6 @@
 package erebus.world.feature.misc.config;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.world.ModBiomes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;

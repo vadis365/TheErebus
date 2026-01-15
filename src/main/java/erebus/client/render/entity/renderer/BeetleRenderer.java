@@ -7,10 +7,7 @@ import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class BeetleRenderer extends MobRenderer<Beetle, BeetleModel<Beetle>> {
 	private static final ResourceLocation[] TEXTURE = new ResourceLocation[] {
 			Erebus.prefix("textures/entity/beetle_rare_spawn.png"),

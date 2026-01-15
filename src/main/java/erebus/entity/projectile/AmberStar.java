@@ -1,5 +1,6 @@
 package erebus.entity.projectile;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.block.entity.PreservedBlockEntity;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;

@@ -1,6 +1,7 @@
 package erebus.world;
 
 import com.google.common.collect.ImmutableList;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.world.ModBiomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;

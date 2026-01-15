@@ -1,5 +1,6 @@
 package erebus.item.wand;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.entity.AnimatedBlock;
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;

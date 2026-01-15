@@ -1,5 +1,6 @@
 package erebus.events;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.Erebus;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;

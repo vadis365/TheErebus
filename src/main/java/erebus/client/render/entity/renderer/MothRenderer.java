@@ -8,10 +8,7 @@ import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class MothRenderer extends MobRenderer<Moth, MothModel<Moth>> {
 	public static final ResourceLocation TEXTURE_1 = Erebus.prefix("textures/entity/moth_1.png");
 	public static final ResourceLocation TEXTURE_2 = Erebus.prefix("textures/entity/moth_2.png");

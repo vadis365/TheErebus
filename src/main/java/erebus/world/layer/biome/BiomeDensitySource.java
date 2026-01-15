@@ -6,11 +6,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import erebus.world.chunk.terrain.TerrainColumn;
 import erebus.world.layer.area.LazyArea;
 import erebus.world.layer.context.LazyAreaContext;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.QuartPos;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.DensityFunction;
@@ -76,28 +74,7 @@ public class BiomeDensitySource {
         return this.biomeList.values().stream().flatMap(TerrainColumn::getBiomes);
     }
 
-    public void addDebugInfo(List<String> info, BlockPos cameraPos) {
-        ResourceKey<Biome> biomeKey = this.genBiomes.get().getBiome(cameraPos.getX() >> 2, cameraPos.getZ() >> 2);
-        TerrainColumn biomeColumn = this.biomeList.get(biomeKey);
-        Holder<Biome> biomeAtY = biomeColumn.getBiome(cameraPos.getY() >> 2);
-        info.add("BiomeDensitySource at " + cameraPos + ":");
-        info.add("Twilight Biome Column:");
-        biomeColumn.getBiomesDebug(info::add);
-        info.add("Primary Biome: " + biomeKey.location());
-        info.add("Biome at elevation: " + biomeAtY.unwrapKey().map(ResourceKey::location).map(ResourceLocation::toString).orElse("NOT REFERENCED"));
-    }
-
-    public static final class DensityData {
-        public final double depth;
-        public final double scale;
-
-        public DensityData(double depth, double scale) {
-            this.depth = depth;
-            this.scale = scale;
-        }
-    }
-
-    // Thanks k.jpg!
+    public record DensityData(double depth, double scale) {}
 
     private static final double BLEND_RADIUS = 8.75;
     private static final int BLEND_RADIUS_INT = Mth.floor(BLEND_RADIUS + 1.0);

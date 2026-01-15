@@ -1,5 +1,6 @@
 package erebus.item;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.ModSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;

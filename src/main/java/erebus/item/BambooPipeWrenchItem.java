@@ -1,5 +1,6 @@
 package erebus.item;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.block.bamboo.BambooExtender;
 import erebus.block.bamboo.BambooPipe;
 import erebus.block.bamboo.BambooPipeExtract;
@@ -21,8 +22,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -35,7 +34,6 @@ public class BambooPipeWrenchItem extends Item {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
 		tooltip.add(Component.translatable("tooltip.erebus.bamboo_pipe_wrench").withStyle(ChatFormatting.YELLOW));
 	}

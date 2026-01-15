@@ -20,8 +20,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,7 +40,6 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 		output = ItemStack.EMPTY;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public ItemStack getItemForRendering(int slot) {
 		if (getItems().get(slot).isEmpty())
 			return ItemStack.EMPTY;

@@ -23,8 +23,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 public class GooBall extends ThrowableProjectile implements ItemSupplier {
 
@@ -89,7 +87,6 @@ public class GooBall extends ThrowableProjectile implements ItemSupplier {
 		return false;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public void trailParticles(Level level, double x, double y, double z, RandomSource rand) {
 		for (int count = 0; count < 20; ++count) {
 			double velX;

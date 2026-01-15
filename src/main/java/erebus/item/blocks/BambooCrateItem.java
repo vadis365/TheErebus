@@ -1,5 +1,6 @@
 package erebus.item.blocks;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.block.bamboo.BambooCrateBlock;
 import erebus.block.types.EnumCrateType;
 import net.minecraft.ChatFormatting;
@@ -14,8 +15,6 @@ import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -27,7 +26,6 @@ public class BambooCrateItem extends BlockItem {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, @Nonnull TooltipContext context, @Nonnull List<Component> list, @Nonnull TooltipFlag flag) {
 		list.add(Component.literal("Stores Items When Broken"));
 		if (stack.has(DataComponents.CONTAINER)) {

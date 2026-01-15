@@ -1,6 +1,7 @@
 package erebus.world;
 
 import erebus.Erebus;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;

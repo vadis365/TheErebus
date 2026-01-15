@@ -1,5 +1,6 @@
 package erebus.datagen.providers;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.block.bamboo.BambooBlock;
 import erebus.block.bamboo.BambooTorchBlock;
 import erebus.block.plants.ModCropBlock;

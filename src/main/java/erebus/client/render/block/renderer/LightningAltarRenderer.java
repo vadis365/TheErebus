@@ -12,11 +12,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-@OnlyIn(Dist.CLIENT)
 public class LightningAltarRenderer implements BlockEntityRenderer<LightningAltarBlockEntity> {
 	private static final ResourceLocation[] TEXTURE = new ResourceLocation[] {
 			Erebus.prefix("textures/special/tiles/altar_lightning_1.png"),

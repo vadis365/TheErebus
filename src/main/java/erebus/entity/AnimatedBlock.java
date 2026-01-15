@@ -1,11 +1,9 @@
 package erebus.entity;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.ModSounds;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -14,8 +12,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -32,8 +30,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -48,7 +47,7 @@ public class AnimatedBlock extends PathfinderMob {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(BLOCK_TYPE, Blocks.STONE.defaultBlockState());
 	}
@@ -94,7 +93,6 @@ public class AnimatedBlock extends PathfinderMob {
 		return state.getLightEmission() > 0;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private void lightUp(Level level, BlockPos pos) {
 	//TODO  work out wtf this is in the Lighting code!!!
 		//level.setLightFor(LightLayer.BLOCK, pos, 9);
@@ -110,29 +108,18 @@ public class AnimatedBlock extends PathfinderMob {
 					}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private void switchOff() {
 		level().getChunkSource().getLightEngine().checkBlock(new BlockPos(lastX, lastY, lastZ));
 		level().getChunkSource().getLightEngine().checkBlock(blockPosition());
 	}
 
 	@Override
-    protected void playStepSound(BlockPos pos, BlockState state) {
+    protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState state) {
         this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public void kill() {
-		super.kill();
-	//	spawnAtLocation(Item.byBlock(getBlockType().getBlock()), 1);
-	/*	if (level().isClientSide() && isGlowingBlock(getBlockType()))
-			switchOff();
-	*/
-	}
 	
 	@Override
-    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+    public @NonNull InteractionResult mobInteract(Player player, @NonNull InteractionHand hand) {
 		ItemStack is = player.getItemInHand(hand);
 		if (!level().isClientSide && !is.isEmpty() && is.getItem() == ModItems.WAND_OF_ANIMATION.get()) {
 			remove(RemovalReason.DISCARDED);
@@ -149,26 +136,27 @@ public class AnimatedBlock extends PathfinderMob {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
-		if (spawnType == MobSpawnType.COMMAND || spawnType == MobSpawnType.SPAWN_EGG || spawnType == MobSpawnType.SPAWNER || spawnType == MobSpawnType.DISPENSER)
+	public SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnReason, @Nullable SpawnGroupData groupData) {
+		if (spawnReason == EntitySpawnReason.COMMAND || spawnReason == EntitySpawnReason.SPAWN_ITEM_USE || spawnReason == EntitySpawnReason.SPAWNER || spawnReason == EntitySpawnReason.DISPENSER)
 			setBlockType(level.getBlockState(blockPosition().below()));
-		return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
+		return super.finalizeSpawn(level, difficulty, spawnReason, groupData);
 	}
 
 	@Override
-	  public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
+	protected void addAdditionalSaveData(@NonNull ValueOutput output) {
+		super.addAdditionalSaveData(output);
 		if(!getBlockType().isEmpty())
-			nbt.put("tempBlockTypes", NbtUtils.writeBlockState(getBlockType()));
+			output.putString("tempBlockTypes", getBlockType().toString());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		if (nbt.contains("tempBlockTypes", 10)) {
-			BlockState item = NbtUtils.readBlockState(this.level().holderLookup(Registries.BLOCK), nbt.getCompound("tempBlockTypes"));
+	public void readAdditionalSaveData(@NonNull ValueInput input) {
+		super.readAdditionalSaveData(input);
+
+		/*if (input.contains("tempBlockTypes", 10)) {
+			BlockState item = NbtUtils.readBlockState(this.level().holderLookup(Registries.BLOCK), input.getCompound("tempBlockTypes"));
 			setBlockType(item);
-		}
+		}*/
 	}
 
 }

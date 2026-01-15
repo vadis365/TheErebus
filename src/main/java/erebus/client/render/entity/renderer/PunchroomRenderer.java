@@ -8,10 +8,7 @@ import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class PunchroomRenderer extends MobRenderer<Punchroom, PunchroomModel<Punchroom>> {
 	private static final ResourceLocation TEXTURE = Erebus.prefix("textures/entity/punchroom.png");
 	private static final ResourceLocation TEXTURE_SPECIAL = Erebus.prefix("textures/entity/punchroom_rubby.png");

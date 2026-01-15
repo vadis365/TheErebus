@@ -13,10 +13,10 @@ import erebus.world.layer.context.LazyAreaContext;
 import erebus.world.layer.context.RandomContext;
 import erebus.world.layer.trait.AreaTransformer1;
 import erebus.world.util.LevelUtils;
-import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Util;
 import net.minecraft.world.level.biome.Biome;
 
 import java.util.List;

@@ -1,6 +1,7 @@
 /*
 package erebus.compat.emi;
 
+import erebus.registries.blocks.ModBlocks;
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;

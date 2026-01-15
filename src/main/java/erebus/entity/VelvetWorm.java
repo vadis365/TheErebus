@@ -33,8 +33,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.entity.PartEntity;
 
 import javax.annotation.Nullable;
@@ -167,7 +165,6 @@ public class VelvetWorm extends Monster {
 		return distance < aabbSize * aabbSize;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public void spawnParticles(Level level, double x, double y, double z, RandomSource rand) {
 		for (int count = 0; count < 1 + level.getRandom().nextInt(4); ++count) {
 			double a = Math.toRadians(this.yBodyRot);

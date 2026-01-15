@@ -1,5 +1,6 @@
 package erebus.inventory.server;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModMenuTypes;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;

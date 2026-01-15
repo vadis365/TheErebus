@@ -5,12 +5,9 @@ import erebus.inventory.server.ComposterMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 
-@OnlyIn(Dist.CLIENT)
 public class ComposterScreen extends ErebusScreen<ComposterMenu> {
 
 	protected final ComposterMenu container;

@@ -1,5 +1,6 @@
 package erebus.world.feature.old_structure.config;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.block.BlockOfBonesBlock;
 import erebus.block.bamboo.BambooTorchBlock;
 import erebus.block.entity.BlockOfBonesBlockEntity;

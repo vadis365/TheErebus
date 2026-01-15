@@ -17,11 +17,8 @@ import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jspecify.annotations.Nullable;
 
-@OnlyIn(Dist.CLIENT)
 public class HealingAltarRenderer implements BlockEntityRenderer<HealingAltarBlockEntity, HealingAltarBlockEntityRenderState> {
 	private static final ResourceLocation[] TEXTURE = new ResourceLocation[] {
 			Erebus.prefix("textures/special/tiles/altar_healing_1.png"),

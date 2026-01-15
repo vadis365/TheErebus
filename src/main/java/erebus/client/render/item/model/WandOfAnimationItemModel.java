@@ -8,9 +8,6 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-@OnlyIn(Dist.CLIENT)
 public class WandOfAnimationItemModel extends Model {
 
 	public final ModelPart Jewel1;

@@ -19,10 +19,7 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class LavaWebSpiderLayer extends RenderLayer<LavaWebSpider, LavaWebSpiderModel<LavaWebSpider>> {
     private static final ResourceLocation LIGHTING_TEXTURE = Erebus.prefix("textures/entity/lava_web_spider_flow.png");
     private final LavaWebSpiderModel<LavaWebSpider> lava_web_spiderModel;

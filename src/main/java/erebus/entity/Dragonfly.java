@@ -35,8 +35,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -219,7 +217,6 @@ public class Dragonfly extends Monster {
         return !this.getPassengers().isEmpty();
     }
 
-    @OnlyIn(Dist.CLIENT)
 	public void spawnParticles(Level level, double x, double y, double z, RandomSource rand) {
 		for (int count = 0; count < 20; ++count) {
 			double velX = 0.0D;

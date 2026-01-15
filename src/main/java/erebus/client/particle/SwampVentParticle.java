@@ -8,11 +8,8 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jspecify.annotations.NonNull;
 
-@OnlyIn(Dist.CLIENT)
 public class SwampVentParticle extends SingleQuadParticle {
 
     public SwampVentParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, TextureAtlasSprite sprite) {
@@ -46,7 +43,6 @@ public class SwampVentParticle extends SingleQuadParticle {
         zd *= 0.8500000238418579D;
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static class Provider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprite;
 

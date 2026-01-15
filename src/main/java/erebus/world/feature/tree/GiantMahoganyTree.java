@@ -2,6 +2,7 @@
 package erebus.world.feature.tree;
 
 import com.google.common.collect.ImmutableList;
+import erebus.registries.blocks.ModBlocks;
 import erebus.world.feature.tree.decorator.LeaveThornDecorator;
 import erebus.world.feature.tree.decorator.TrunkThornDecorator;
 import net.minecraft.util.valueproviders.ConstantInt;

@@ -11,12 +11,9 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.Arrays;
 
-@OnlyIn(Dist.CLIENT)
 public class BotFlyLarvaModel<T extends Entity> extends HierarchicalModel<T> {
 
 	private final ModelPart[] larvaBodyParts = new ModelPart[7];

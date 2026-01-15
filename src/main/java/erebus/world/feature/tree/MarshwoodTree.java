@@ -1,5 +1,6 @@
 package erebus.world.feature.tree;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.world.feature.tree.decorator.LeaveDarkFruitVineDecorator;
 import erebus.world.feature.tree.foliage.MarshwoodFoliagePlacer;
 import erebus.world.feature.tree.trunk.MarshwoodTrunkPlacer;

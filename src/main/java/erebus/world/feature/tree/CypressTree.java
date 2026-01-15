@@ -1,5 +1,6 @@
 package erebus.world.feature.tree;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.world.feature.tree.foliage.SingleLeafFoliagePlacer;
 import erebus.world.feature.tree.trunk.CypressTrunkPlacer;
 import net.minecraft.util.valueproviders.ConstantInt;

@@ -12,12 +12,9 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
-@OnlyIn(Dist.CLIENT)
 public class BotFlyLarvaRenderer extends MobRenderer<BotFlyLarva, BotFlyLarvaModel<BotFlyLarva>> {
 
 	private static final ResourceLocation TEXTURE = Erebus.prefix("textures/entity/bot_fly_larva.png");

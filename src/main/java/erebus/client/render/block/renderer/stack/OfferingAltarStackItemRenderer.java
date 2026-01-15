@@ -15,12 +15,9 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 
-@OnlyIn(Dist.CLIENT)
 public class OfferingAltarStackItemRenderer extends BlockEntityWithoutLevelRenderer {
 	private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/offering_altar.png");
 	private final OfferingAltarModel model;

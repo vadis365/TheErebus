@@ -42,8 +42,8 @@ public class TerrainDensityRouter implements DensityFunction.SimpleFunction {
     @Override
     public double compute(@NotNull FunctionContext context) {
         BiomeDensitySource.DensityData data = computeTerrain(context);
-        double depth = baseOffset.compute(context) + data.depth * baseFactor.compute(context);
-        return depth + data.depth;
+        double depth = baseOffset.compute(context) + data.depth() * baseFactor.compute(context);
+        return depth + data.depth();
     }
 
     public BiomeDensitySource.DensityData computeTerrain(FunctionContext context) {

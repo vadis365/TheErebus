@@ -17,14 +17,11 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.MaterialSet;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
-@OnlyIn(Dist.CLIENT)
 public class ExperienceAltarRenderer implements BlockEntityRenderer<ExperienceAltarBlockEntity, ExperienceAltarBlockEntityRenderState> {
 
 	private final MaterialMapper MAPPER = new MaterialMapper(Erebus.prefix("textures/atlas/xp_altars.png"), "special/tiles/altar_xp");

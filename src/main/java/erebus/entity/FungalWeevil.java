@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.client.particle.ClientParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;

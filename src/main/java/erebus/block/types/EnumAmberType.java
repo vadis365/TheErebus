@@ -1,5 +1,6 @@
 package erebus.block.types;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.utils.IErebusEnum;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;

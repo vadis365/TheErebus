@@ -3,10 +3,10 @@ package erebus.entity;
 import erebus.entity.ai.FlyingMoveControlLessSpin;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -14,7 +14,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -26,12 +25,10 @@ import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -55,8 +52,8 @@ public class Locust extends Monster {
 		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.75D, true));
 		goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		goalSelector.addGoal(3, new RandomLookAroundGoal(this));
-		goalSelector.addGoal(4, new Locust.AIRandomJumpWhenIdle(this));
-		goalSelector.addGoal(5, new Locust.AIFlyingWander(this, 0.75D, 10));
+		goalSelector.addGoal(4, new AIRandomJumpWhenIdle(this));
+		goalSelector.addGoal(5, new AIFlyingWander(this, 0.75D, 10));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this).setAlertOthers(Locust.class));
 		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
 	}
@@ -73,17 +70,13 @@ public class Locust extends Monster {
 	}
 
 	@Override
-	public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+	public float getWalkTargetValue(@NonNull BlockPos pos, LevelReader level) {
 		return level.getBlockState(pos).isAir() ? 10.0F : 0.0F;
 	}
 
 	@Override
-    protected PathNavigation createNavigation(Level level){
+    protected @NonNull PathNavigation createNavigation(@NonNull Level level){
 		return new FlyingPathNavigation(this, level);
-	}
-	
-	public static boolean canSpawnHere(EntityType<Locust> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
-		return level.getDifficulty() != Difficulty.PEACEFUL;
 	}
 
 	@Override
@@ -97,7 +90,7 @@ public class Locust extends Monster {
     }
 
     @Override
-    protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
+    protected void checkFallDamage(double y, boolean onGround, @NonNull BlockState state, @NonNull BlockPos pos) {
     }
 
 
@@ -107,17 +100,17 @@ public class Locust extends Monster {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.LOCUST_HURT.get();
 	}
 
 	@Override
-	protected SoundEvent getDeathSound() {
+	protected @NonNull SoundEvent getDeathSound() {
 		return ModSounds.SQUISH.get();
 	}
 
     @Override
-    protected void playStepSound(BlockPos pos, BlockState block) {
+    protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
         playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
 /*
@@ -183,12 +176,10 @@ public class Locust extends Monster {
         return this.getJumpPower(1.5F);
     }
 
-	@OnlyIn(Dist.CLIENT)
 	 public float getJumpPose(float partialTick) {
 		return jumpDuration == 0 ? 0.0F : ((float) jumpTicks + partialTick) / (float) jumpDuration;
 	}
 	
-	@OnlyIn(Dist.CLIENT)
     public float getFlyingPose(float partialTick) {
         return flyingTicks == 0 ? 0.0F : (float) flyingTicks + (flyingTicks - prevflyingTicks) * partialTick;
     }
@@ -261,9 +252,9 @@ public class Locust extends Monster {
 	}
 
 	@Override
-	public boolean doHurtTarget(Entity entity) {
+	public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity entity) {
 		if (hasLineOfSight(entity)) {
-			if (super.doHurtTarget(entity)) {
+			if (super.doHurtTarget(level, entity)) {
 				if (entity instanceof LivingEntity) {
 					byte duration = 0;
 
@@ -282,7 +273,7 @@ public class Locust extends Monster {
 			return false;
 	}
 	
-	public class AIFlyingWander extends WaterAvoidingRandomStrollGoal {
+	public static class AIFlyingWander extends WaterAvoidingRandomStrollGoal {
 
 		private final Locust locust;
 
@@ -304,7 +295,7 @@ public class Locust extends Monster {
 		}
 	}
 
-	public class AIRandomJumpWhenIdle extends Goal {
+	public static class AIRandomJumpWhenIdle extends Goal {
 
 		private final Locust locust;
 		private int idleTime;

@@ -12,10 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class PetrifiedCraftingTableScreen extends AbstractContainerScreen<PetrifiedCraftingMenu> implements RecipeUpdateListener {
     private static final ResourceLocation GUI = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "textures/gui/container/petrified_crafting.png");
     private final RecipeBookComponent recipeBookComponent = new RecipeBookComponent();

@@ -20,12 +20,9 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
 
-@OnlyIn(Dist.CLIENT)
 public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEntity> {
 	private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/liquifier.png");
 	private final LiquifierModel model;

@@ -33,7 +33,7 @@ public class NoiseDensityRouter implements DensityFunction.SimpleFunction {
     }
     @Override
     public double compute(@NotNull FunctionContext context) {
-        return computeTerrain(context).scale;
+        return computeTerrain(context).scale();
     }
 
     @NotNull

@@ -19,10 +19,7 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBlockModel<AnimatedBlock>> {
 
 	private final ItemRenderer itemRenderer;

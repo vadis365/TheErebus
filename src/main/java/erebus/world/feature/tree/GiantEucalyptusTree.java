@@ -1,5 +1,6 @@
 package erebus.world.feature.tree;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.world.feature.tree.trunk.GiantEucalyptusTrunkPlacer;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;

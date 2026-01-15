@@ -23,8 +23,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jspecify.annotations.NonNull;
 
 public class Grasshopper extends PathfinderMob {
@@ -139,7 +137,6 @@ public class Grasshopper extends PathfinderMob {
         }
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	 public float getJumpCompletion(float partialTick) {
 		return jumpDuration == 0 ? 0.0F : ((float) jumpTicks + partialTick) / (float) jumpDuration;
 	}

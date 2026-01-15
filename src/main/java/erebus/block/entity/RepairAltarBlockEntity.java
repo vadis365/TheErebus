@@ -1,5 +1,6 @@
 package erebus.block.entity;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.block.altars.AltarAbstract;
 import erebus.client.particle.ClientParticles;
 import erebus.network.client.AltarAnimatonTimerPacket;
