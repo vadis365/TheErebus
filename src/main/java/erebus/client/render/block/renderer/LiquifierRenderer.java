@@ -1,39 +1,41 @@
 package erebus.client.render.block.renderer;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import erebus.Erebus;
 import erebus.block.entity.LiquifierBlockEntity;
 import erebus.client.render.block.model.LiquifierModel;
-import erebus.client.render.util.FluidRenderHelper;
+import erebus.client.render.block.renderer.state.LiquifierBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
-import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.fluids.FluidStack;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
-public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEntity> {
-	private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/liquifier.png");
+public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEntity, LiquifierBlockEntityRenderState> {
+	private final Identifier TEXTURE = Erebus.prefix("textures/special/tiles/liquifier.png");
 	private final LiquifierModel model;
-	private final ItemRenderer itemRenderer;
+	private final ItemModelResolver itemModelResolver;
+	private final MaterialSet materials;
 	
 	public LiquifierRenderer(Context context) {
 		model = new LiquifierModel(context.bakeLayer(ModBlockEntityRendering.LIQUIFIER));
-		itemRenderer = context.getItemRenderer();
+		itemModelResolver = context.itemModelResolver();
+		materials = context.materials();
 	}
 
-	@Override
+	/*@Override
     public void render(@NotNull LiquifierBlockEntity tile, float partialTick, @NotNull PoseStack stack, @NotNull MultiBufferSource bufferIn, int combinedLight, int combinedOverlay) {
 		if(!tile.hasLevel())
 			return;
@@ -43,13 +45,13 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 			if (fluidLevel > 0) {
 				FluidStack fluidStack = new FluidStack(tile.tank.getFluid().getFluidHolder(), 100);
 				float height = (0.375F / tile.tank.getCapacity()) * tile.tank.getFluidAmount();
-				
+
 				float xMax = 1.984375F;
 				float zMax = 1.984375F;
 				float xMin = 0.015625F;
 				float zMin = 0.015625F;
 				float yMin = 0.015625F;
-				
+
 				FluidRenderHelper.renderFluid(fluidStack, stack, bufferIn, xMin, xMax, yMin, height, zMin, zMax, combinedLight);
 			}
 		}
@@ -81,19 +83,51 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 		RenderSystem.disableBlend();
 		RenderSystem.depthMask(true);
 		stack.popPose();
+	}*/
+
+	@Override
+	public void submit(LiquifierBlockEntityRenderState renderState, PoseStack pose, @NonNull SubmitNodeCollector submitNodeCollector, @NonNull CameraRenderState cameraRenderState) {
+		Material material = new Material(TEXTURE, TEXTURE);
+
+		pose.pushPose();
+		pose.translate(0.5, 0.5, 0.5);
+		renderState.itemStackRenderState.submit(pose, submitNodeCollector, renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+		pose.popPose();
+
+		pose.pushPose();
+		pose.translate(0.5, 1.5, 0.5);
+		pose.scale(-1, -1, 1);
+		pose.mulPose(Axis.YP.rotationDegrees(renderState.partialTicks));
+		submitNodeCollector.submitModel(
+				model,
+				renderState,
+				pose,
+				material.renderType(RenderTypes::entityCutout),
+				renderState.lightCoords,
+				OverlayTexture.NO_OVERLAY,
+				-1,
+				materials.get(material),
+				0,
+				renderState.breakProgress
+		);
 	}
 
-	public void renderItemInSlot(LiquifierBlockEntity tile, float partialTick, PoseStack stack, MultiBufferSource bufferIn, int packedLight, int packedOverlay, ItemStack itemStack, double x, double y, double z, float scale) {
-		if (!itemStack.isEmpty()) {
-			stack.pushPose();
-			stack.translate(x, y, z);
-			stack.scale(-scale, -scale, scale);
-			stack.mulPose(Axis.YP.rotationDegrees(180));
-			stack.mulPose(Axis.XP.rotationDegrees(180));
-			itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, stack, bufferIn, tile.getLevel(), 1);
-			stack.popPose();
-		}
+	@Override
+	public LiquifierBlockEntityRenderState createRenderState() {
+		return new LiquifierBlockEntityRenderState();
 	}
 
-
+	@Override
+	public void extractRenderState(LiquifierBlockEntity blockEntity, LiquifierBlockEntityRenderState state, float partialTicks, @NonNull Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+		BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+		state.partialTicks = partialTicks;
+		itemModelResolver.updateForTopItem(
+				state.itemStackRenderState,
+				blockEntity.getSlot(0).get(),
+				ItemDisplayContext.FIXED,
+				blockEntity.getLevel(),
+				null,
+				0
+		);
+	}
 }

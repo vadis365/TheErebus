@@ -5,7 +5,7 @@ import com.mojang.math.Axis;
 import erebus.Erebus;
 import erebus.block.entity.BambooExtenderBlockEntity;
 import erebus.client.render.block.model.BambooExtenderModel;
-import erebus.client.render.block.state.BambooExtenderBlockEntityRenderState;
+import erebus.client.render.block.renderer.state.BambooExtenderBlockEntityRenderState;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.Sheets;

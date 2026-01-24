@@ -6,7 +6,7 @@ import erebus.Erebus;
 import erebus.block.BlenderBlock;
 import erebus.block.entity.BlenderBlockEntity;
 import erebus.client.render.block.model.BlenderModel;
-import erebus.client.render.block.state.BlenderBlockEntityRenderState;
+import erebus.client.render.block.renderer.state.BlenderBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;

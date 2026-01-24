@@ -1,6 +1,6 @@
 package erebus.client.render.block.model;
 
-import erebus.client.render.block.state.LiquifierBlockEntityRenderState;
+import erebus.client.render.block.renderer.state.LiquifierBlockEntityRenderState;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

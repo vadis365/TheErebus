@@ -97,13 +97,14 @@ public class ArmorGliderModel extends EntityModel<HumanoidRenderState> {
     @Override
     public void setupAnim(HumanoidRenderState state) {
         super.setupAnim(state);
-        rightArm.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.5F * limbSwingAmount * 0.5F;
-        leftArm.xRot = Mth.cos(limbSwing * 0.6662F) * 2.5F * limbSwingAmount * 0.5F;
+
+        rightArm.xRot = Mth.cos(state.speedValue * 0.6662F + (float) Math.PI) * 2.5F * state.speedValue * 0.5F;
+        leftArm.xRot = Mth.cos(state.speedValue * 0.6662F) * 2.5F * state.speedValue * 0.5F;
 
         if (!state.isFallFlying) {
             rightWing.zRot = 0F;
             leftWing.zRot = 0F;
-            if (entity.xOld != entity.getX() || entity.zOld != entity.getZ()) {
+            if (state.speedValue > 0.0F) {
                 rightWing.xRot = 0.7F;
                 leftWing.xRot = 0.7F;
             } else {
@@ -111,17 +112,17 @@ public class ArmorGliderModel extends EntityModel<HumanoidRenderState> {
                 leftWing.xRot = 0.0F;
             }
         }
-        if (entity.isFallFlying() && !entity.onGround()) {
+        if (state.isFallFlying) {
             rightWing.zRot = 1.570796F;
             leftWing.zRot = -1.570796F;
         }
-        if (entity.isCrouching()) {
+        if (state.isCrouching) {
             body.xRot = 0.5F;
             rightArm.xRot += 0.4F;
             leftArm.xRot += 0.4F;
             rightWingBase.xRot = 0.5F;
             leftWingBase.xRot = 0.5F;
-            if (!entity.isFallFlying()) {
+            if (!state.isFallFlying) {
                 rightWing.xRot = 0.5F;
                 leftWing.xRot = 0.5F;
             }

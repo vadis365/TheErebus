@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.Erebus;
 import erebus.block.entity.ExperienceAltarBlockEntity;
 import erebus.client.render.block.model.ExperienceAltarModel;
-import erebus.client.render.block.state.ExperienceAltarBlockEntityRenderState;
+import erebus.client.render.block.renderer.state.ExperienceAltarBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.MaterialMapper;
 import net.minecraft.client.renderer.SubmitNodeCollector;

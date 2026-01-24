@@ -2,7 +2,7 @@ package erebus.client.render.block.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.block.entity.FluidJarBlockEntity;
-import erebus.client.render.block.state.FluidJarBlockEntityRenderState;
+import erebus.client.render.block.renderer.state.FluidJarBlockEntityRenderState;
 import erebus.client.render.util.FluidRenderHelper;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;

@@ -7,7 +7,7 @@ import com.mojang.math.Axis;
 import erebus.Erebus;
 import erebus.block.entity.GlowingJarBlockEntity;
 import erebus.client.render.block.model.GlowingJarModel;
-import erebus.client.render.block.state.GlowingJarBlockEntityRenderState;
+import erebus.client.render.block.renderer.state.GlowingJarBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;

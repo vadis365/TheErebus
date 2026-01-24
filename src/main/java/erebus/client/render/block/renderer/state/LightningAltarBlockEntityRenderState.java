@@ -1,8 +1,8 @@
-package erebus.client.render.block.state;
+package erebus.client.render.block.renderer.state;
 
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 
-public class ExperienceAltarBlockEntityRenderState extends BlockEntityRenderState {
+public class LightningAltarBlockEntityRenderState extends BlockEntityRenderState {
     public int animationTicks;
 
     public int getStep() {

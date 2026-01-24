@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import erebus.block.GaeanKeystoneBlock;
 import erebus.block.entity.GaeanKeystoneBlockEntity;
-import erebus.client.render.block.state.GaeanKeystoneBlockEntityRenderState;
+import erebus.client.render.block.renderer.state.GaeanKeystoneBlockEntityRenderState;
 import erebus.registries.item.ModItems;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -52,12 +52,10 @@ public class GaeanKeystoneRenderer implements BlockEntityRenderer<GaeanKeystoneB
         double hover = (Math.sin(renderState.now / 40) + 1) / 16;
         float scale = 1.25F;
 
-        double x = 0.5F;
         double y = scale + 12F / 18F + hover;
-        double z = 0.5F;
 
         poseStack.pushPose();
-        poseStack.translate(x, y, z);
+        poseStack.translate(0.5, y, 0.5);
         poseStack.rotateAround(Axis.YP.rotationDegrees(renderState.rotation), 0, 0, 0);
         poseStack.rotateAround(Axis.ZN.rotationDegrees(45), 0, 0, 0);
         poseStack.scale(scale, scale, scale);

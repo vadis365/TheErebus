@@ -1,6 +1,6 @@
 package erebus.client.render.block.model;
 
-import erebus.client.render.block.state.OfferingAltarBlockEntityRenderState;
+import erebus.client.render.block.renderer.state.OfferingAltarBlockEntityRenderState;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

@@ -6,7 +6,7 @@ import erebus.Erebus;
 import erebus.block.bamboo.BambooBridge;
 import erebus.block.entity.BambooBridgeBlockEntity;
 import erebus.client.render.block.model.BambooBridgeModel;
-import erebus.client.render.block.state.BambooBridgeBlockEntityRenderState;
+import erebus.client.render.block.renderer.state.BambooBridgeBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;

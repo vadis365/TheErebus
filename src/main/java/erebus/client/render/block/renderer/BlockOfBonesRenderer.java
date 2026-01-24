@@ -6,7 +6,7 @@ import erebus.Erebus;
 import erebus.block.BlockOfBonesBlock;
 import erebus.block.entity.BlockOfBonesBlockEntity;
 import erebus.client.render.block.model.BlockOfBonesModel;
-import erebus.client.render.block.state.BlockOfBonesBlockEntityRenderState;
+import erebus.client.render.block.renderer.state.BlockOfBonesBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;

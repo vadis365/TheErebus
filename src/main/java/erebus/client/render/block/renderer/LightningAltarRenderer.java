@@ -1,58 +1,73 @@
 package erebus.client.render.block.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import erebus.Erebus;
 import erebus.block.entity.LightningAltarBlockEntity;
 import erebus.client.render.block.model.LightningAltarModel;
+import erebus.client.render.block.renderer.state.LightningAltarBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.MaterialMapper;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
-public class LightningAltarRenderer implements BlockEntityRenderer<LightningAltarBlockEntity> {
-	private static final ResourceLocation[] TEXTURE = new ResourceLocation[] {
-			Erebus.prefix("textures/special/tiles/altar_lightning_1.png"),
-			Erebus.prefix("textures/special/tiles/altar_lightning_2.png"),
-			Erebus.prefix("textures/special/tiles/altar_lightning_3.png"),
-			Erebus.prefix("textures/special/tiles/altar_lightning_4.png"),
-			Erebus.prefix("textures/special/tiles/altar_lightning_5.png")
-			};
+import java.util.List;
 
+public class LightningAltarRenderer implements BlockEntityRenderer<LightningAltarBlockEntity, LightningAltarBlockEntityRenderState> {
+	private final MaterialMapper MAPPER = new MaterialMapper(Erebus.prefix("textures/atlas/lightning_altars.png"), "special/tiles/altar_lightning");
+	private final Material STEP1 = MAPPER.apply(Erebus.prefix("1.png"));
+	private final Material STEP2 = MAPPER.apply(Erebus.prefix("2.png"));
+	private final Material STEP3 = MAPPER.apply(Erebus.prefix("3.png"));
+	private final Material STEP4 = MAPPER.apply(Erebus.prefix("4.png"));
+	private final Material STEP5 = MAPPER.apply(Erebus.prefix("5.png"));
+
+	private final List<Material> steps = List.of(STEP1, STEP2, STEP3, STEP4, STEP5);
 	private final LightningAltarModel model;
+	private final MaterialSet materials;
 
 	public LightningAltarRenderer(Context context) {
 		model = new LightningAltarModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_LIGHTNING));
+		materials = context.materials();
 	}
 
 	@Override
-    public void render(@NotNull LightningAltarBlockEntity tile, float partialTick, @NotNull PoseStack stack, @NotNull MultiBufferSource buffer, int packedLight, int packedOverlay) {
-		if(tile == null || !tile.hasLevel())
-			return;
-		VertexConsumer consumer = buffer.getBuffer(RenderType.entitySolid(getAltarTexture(tile)));
+	public void extractRenderState(LightningAltarBlockEntity blockEntity, LightningAltarBlockEntityRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+		BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+		state.animationTicks = blockEntity.animationTicks;
+	}
+
+	@Override
+	public LightningAltarBlockEntityRenderState createRenderState() {
+		return new LightningAltarBlockEntityRenderState();
+	}
+
+	@Override
+	public void submit(LightningAltarBlockEntityRenderState renderState, PoseStack stack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
+		Material material = steps.get(renderState.getStep());
+
 		stack.pushPose();
 		stack.translate(0.5D, 0.75D, 0.5D);
 		stack.scale(-0.5F, -0.5F, 0.5F);
-		model.renderWithTile(stack, consumer, packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF, tile, partialTick);
+		submitNodeCollector.submitModel(
+				model,
+				renderState,
+				stack,
+				material.renderType(RenderTypes::entityCutout),
+				renderState.lightCoords,
+				OverlayTexture.NO_OVERLAY,
+				-1,
+				materials.get(material),
+				0,
+				renderState.breakProgress
+		);
 		stack.popPose();
-	}
-
-	protected ResourceLocation getAltarTexture(LightningAltarBlockEntity tile) {
-		if (tile.animationTicks <= 4)
-			return TEXTURE[0];
-		else if (tile.animationTicks > 4 && tile.animationTicks <= 8)
-			return TEXTURE[1];
-		else if (tile.animationTicks > 8 && tile.animationTicks <= 12)
-			return TEXTURE[2];
-		else if (tile.animationTicks > 12 && tile.animationTicks <= 16)
-			return TEXTURE[3];
-		else if (tile.animationTicks > 16 && tile.animationTicks <= 20)
-			return TEXTURE[4];
-		else
-			return TEXTURE[0];
 	}
 }

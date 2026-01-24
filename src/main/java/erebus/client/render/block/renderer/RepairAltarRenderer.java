@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.Erebus;
 import erebus.block.entity.RepairAltarBlockEntity;
 import erebus.client.render.block.model.RepairAltarModel;
-import erebus.client.render.block.state.RepairAltarBlockEntityRenderState;
+import erebus.client.render.block.renderer.state.RepairAltarBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.MaterialMapper;
 import net.minecraft.client.renderer.SubmitNodeCollector;

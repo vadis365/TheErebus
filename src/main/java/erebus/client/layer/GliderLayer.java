@@ -1,71 +1,72 @@
 package erebus.client.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import erebus.Erebus;
 import erebus.client.render.item.model.ArmorGliderModel;
 import erebus.registries.client.ModItemRendering;
-import erebus.registries.item.ModItems;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.EquipmentLayerRenderer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.PlayerSkin;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.PlayerModelPart;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.client.resources.model.EquipmentClientInfo;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.player.PlayerSkin;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.item.equipment.Equippable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
-public class GliderLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
+public class GliderLayer<S extends HumanoidRenderState, M extends EntityModel<S>> extends RenderLayer<S, M> {
 
-    private static final ResourceLocation WINGS = Erebus.prefix("textures/models/armor/glider_layer_1.png");
-    private final ArmorGliderModel<T> armorModel;
+    private static final Identifier  WINGS = Erebus.prefix("textures/models/armor/glider_layer_1.png");
+    private final ArmorGliderModel armorModel;
+    private final EquipmentLayerRenderer equipmentRenderer;
 
-    public GliderLayer(RenderLayerParent<T, M> renderer, EntityModelSet modelSet) {
+    public GliderLayer(RenderLayerParent<S, M> renderer, EntityModelSet modelSet, EquipmentLayerRenderer equipmentRenderer) {
         super(renderer);
-        armorModel = new ArmorGliderModel<>(modelSet.bakeLayer(ModItemRendering.ARMOR_GLIDER));
+        armorModel = new ArmorGliderModel(modelSet.bakeLayer(ModItemRendering.ARMOR_GLIDER));
+        this.equipmentRenderer = equipmentRenderer;
     }
 
     @Override
-    public void render(@NotNull PoseStack pose, @NotNull MultiBufferSource buffer, int packedLight, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        ItemStack stack = entity.getItemBySlot(EquipmentSlot.CHEST);
-        if(shouldRender(stack)) {
-            ResourceLocation texture;
-
-            if(entity instanceof AbstractClientPlayer player) {
-                PlayerSkin skin = player.getSkin();
-
-                if(skin.elytraTexture() != null) {
-                    texture = skin.elytraTexture();
-                } else if(skin.capeTexture() != null && player.isModelPartShown(PlayerModelPart.CAPE)) {
-                    texture = skin.capeTexture();
-                } else {
-                    texture = getWingTexture();
-                }
-
-                pose.pushPose();
-                pose.translate(0, 0, 0.125F);
-                getParentModel().copyPropertiesTo(armorModel);
-                armorModel.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-                VertexConsumer vertex = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
-                armorModel.renderToBuffer(pose, vertex, packedLight, OverlayTexture.NO_OVERLAY);
-                pose.popPose();
-            }
+    public void submit(@NonNull PoseStack poseStack, @NonNull SubmitNodeCollector submitNodeCollector, int lightCoords, S state, float yRot, float xRot) {
+        ItemStack itemStack = state.chestEquipment;
+        Equippable equippable = itemStack.get(DataComponents.EQUIPPABLE);
+        if (equippable != null && equippable.assetId().isPresent()) {
+            poseStack.pushPose();
+            poseStack.translate(0.0F, 0.0F, 0.125F);
+            this.equipmentRenderer
+                    .renderLayers(
+                            EquipmentClientInfo.LayerType.WINGS,
+                            equippable.assetId().get(),
+                            armorModel,
+                            state,
+                            itemStack,
+                            poseStack,
+                            submitNodeCollector,
+                            lightCoords,
+                            getPlayerWingTexture(state),
+                            state.outlineColor,
+                            0
+                    );
+            poseStack.popPose();
         }
     }
 
-    public boolean shouldRender(ItemStack stack) {
-        return stack.is(ModItems.GLIDER_CHESTPLATE);
-    }
+    @Nullable
+    public static Identifier getPlayerWingTexture(HumanoidRenderState state) {
+        if(state instanceof AvatarRenderState playerState) {
+            PlayerSkin skin = playerState.skin;
+            if(skin.cape() != null && playerState.showCape) {
+                return skin.cape().texturePath();
+            }
+        }
 
-    public ResourceLocation getWingTexture() {
         return WINGS;
     }
 }

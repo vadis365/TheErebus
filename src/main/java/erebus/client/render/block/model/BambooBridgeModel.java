@@ -1,7 +1,7 @@
 package erebus.client.render.block.model;
 
 
-import erebus.client.render.block.state.BambooBridgeBlockEntityRenderState;
+import erebus.client.render.block.renderer.state.BambooBridgeBlockEntityRenderState;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

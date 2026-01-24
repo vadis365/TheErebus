@@ -97,7 +97,7 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 				MultiStackInput input = new MultiStackInput(altar.getItems().subList(0, 3));
 				RecipeHolder<OfferingAltarRecipe> recipe = altar.quickCheck.getRecipeFor(input, level.getServer().getLevel(level.dimension())).orElse(null);
 				if (recipe != null && !altar.isCrafting) {
-					altar.output = recipe.value().assemble(input, level.registryAccess());
+					altar.output = recipe.value().assemble(input);
 					altar.isCrafting = true;
 					altar.updateBlockWhenChanged();
 				}

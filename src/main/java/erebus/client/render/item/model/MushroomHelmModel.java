@@ -11,11 +11,8 @@ import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 
 public class MushroomHelmModel extends EntityModel<HumanoidRenderState> {
 
-    private final ModelPart top;
-
-    public MushroomHelmModel(ModelPart playerModel, ModelPart root) {
-        super(playerModel);
-        top = root.getChild("Top");
+    public MushroomHelmModel(ModelPart root) {
+        super(root);
     }
 
     public static LayerDefinition createBodyLayer() {
