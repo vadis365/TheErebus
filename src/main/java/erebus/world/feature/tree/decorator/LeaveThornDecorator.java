@@ -1,8 +1,8 @@
 package erebus.world.feature.tree.decorator;
 
-import erebus.registries.blocks.ModBlocks;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.world.tree.ModTreeDecorators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;

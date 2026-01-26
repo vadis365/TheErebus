@@ -1,0 +1,74 @@
+package erebus.client.render.block.renderer.stack;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.model.object.chest.ChestModel;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.special.ChestSpecialRenderer;
+import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
+import net.minecraft.client.renderer.special.SpecialModelRenderer;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.ItemDisplayContext;
+import org.joml.Vector3fc;
+import org.jspecify.annotations.NonNull;
+
+import java.util.function.Consumer;
+
+public final class ErebusChestSpecialRenderer implements NoDataSpecialModelRenderer {
+    private final MaterialSet materials;
+    private final ChestModel model;
+    private final Material material;
+    private final float openness;
+
+    public ErebusChestSpecialRenderer(MaterialSet materials, ChestModel model, Material material, float openness) {
+        this.materials = materials;
+        this.model = model;
+        this.material = material;
+        this.openness = openness;
+    }
+
+    @Override
+    public void submit(@NonNull ItemDisplayContext context, PoseStack pose, SubmitNodeCollector submit, int lightCoords, int overlayCoords, boolean hasFoil, int outlineColor) {
+        submit.submitModel(model, openness, pose, material.renderType(RenderTypes::entitySolid), lightCoords, overlayCoords, -1, materials.get(material), outlineColor, null);
+    }
+
+    @Override
+    public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
+        PoseStack poseStack = new PoseStack();
+        model.setupAnim(openness);
+        model.root().getExtentsForGui(poseStack, consumer);
+    }
+
+    public record Unbaked(Identifier texture, float openness) implements SpecialModelRenderer.Unbaked {
+        public static final MapCodec<ErebusChestSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
+                (i) -> i.group(
+                        Identifier.CODEC
+                                .fieldOf("texture")
+                                .forGetter(ErebusChestSpecialRenderer.Unbaked::texture),
+                        Codec.FLOAT
+                                .optionalFieldOf("openness", 0.0F)
+                                .forGetter(ErebusChestSpecialRenderer.Unbaked::openness)
+                ).apply(i, ErebusChestSpecialRenderer.Unbaked::new));
+
+        public Unbaked(Identifier texture) {
+            this(texture, 0.0F);
+        }
+
+        public @NonNull MapCodec<ErebusChestSpecialRenderer.Unbaked> type() {
+            return MAP_CODEC;
+        }
+
+        public SpecialModelRenderer<?> bake(SpecialModelRenderer.BakingContext context) {
+            ChestModel model = new ChestModel(context.entityModelSet().bakeLayer(ModelLayers.CHEST));
+            Material fullTexture = Sheets.CHEST_MAPPER.apply(this.texture);
+            return new ChestSpecialRenderer(context.materials(), model, fullTexture, this.openness);
+        }
+    }
+}

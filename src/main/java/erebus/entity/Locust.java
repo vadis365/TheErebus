@@ -7,11 +7,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -25,6 +27,7 @@ import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -113,6 +116,11 @@ public class Locust extends Monster {
     protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
         playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
+
+	public static boolean canSpawnHere(EntityType<Locust> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
+		float light = level.getLightLevelDependentMagicValue(pos);
+		return light >= 0F;
+	}
 /*
 	@Override
 	protected void dropFewItems(boolean recentlyHit, int looting) {

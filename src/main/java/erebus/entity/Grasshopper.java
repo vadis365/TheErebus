@@ -5,11 +5,12 @@ import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.JumpControl;
@@ -19,6 +20,7 @@ import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Path;
@@ -57,8 +59,9 @@ public class Grasshopper extends PathfinderMob {
 			.add(Attributes.STEP_HEIGHT, 1.0D);
 	}
 
-	public static SpawnPlacements.SpawnPredicate<Grasshopper> canSpawnHere() {
-		return (_, level, _, pos, _) -> level.getLightLevelDependentMagicValue(pos) >= 0F;
+	public static boolean canSpawnHere(EntityType<Grasshopper> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
+		float light = level.getLightLevelDependentMagicValue(pos);
+		return light >= 0F;
 	}
 	
 	@Override

@@ -1,6 +1,5 @@
 package erebus.world.feature.structure.pieces;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.datagen.loot.ModChestLootTables;
 import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;

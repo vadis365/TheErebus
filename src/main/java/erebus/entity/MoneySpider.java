@@ -9,8 +9,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -59,7 +59,7 @@ public class MoneySpider extends Scytodes {
 				.add(Attributes.ATTACK_DAMAGE, 1D);
 	}
 
-	public static boolean canSpawnHere(EntityType<Scytodes> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<Scytodes> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		float light = level.getLightLevelDependentMagicValue(pos);
 		return light >= 0F;
 	}
@@ -96,7 +96,7 @@ public class MoneySpider extends Scytodes {
 	 */
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		setSkin(level.getRandom().nextInt(3));
 		return spawnGroupData;
 	}

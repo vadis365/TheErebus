@@ -61,7 +61,7 @@ public class HoneyPotAnt extends Animal {
 				.add(Attributes.MOVEMENT_SPEED, 0.5D);
 	}
 
-	public static boolean canSpawnHere(EntityType<HoneyPotAnt> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<HoneyPotAnt> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		float light = level.getLightLevelDependentMagicValue(pos);
 		return light >= 0F;
 	}

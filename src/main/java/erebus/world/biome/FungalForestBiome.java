@@ -1,6 +1,5 @@
 package erebus.world.biome;
 
-import erebus.registries.ModSounds;
 import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
@@ -13,7 +12,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -41,19 +39,14 @@ public class FungalForestBiome extends ErebusBiome {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(COLOR)
                         .foliageColorOverride(COLOR)
-                        .skyColor(COLOR)
-                        .grassColorOverride(COLOR)
-                        .fogColor(FOG_COLOR)
-                        .waterFogColor(FOG_COLOR)
-                        .ambientLoopSound(ModSounds.AMBIENT_BUG_IN_THE_SYSTEM)
                         .build()
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
-                        .addCarver(GenerationStep.Carving.AIR, ModCarvers.CAVE)
-                        .addCarver(GenerationStep.Carving.AIR, ModCarvers.CANYON)
+                        .addCarver(ModCarvers.CAVE)
+                        .addCarver(ModCarvers.CANYON)
                         .addFeature(SURFACE_STRUCTURES, PlantFeatures.BIG_LOGS_X.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, PlantFeatures.BIG_LOGS_Z.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, PlantFeatures.ROTTEN_TREE_STUMP.getPlacedResourceKey())

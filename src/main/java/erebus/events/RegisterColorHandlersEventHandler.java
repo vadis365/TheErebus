@@ -1,7 +1,7 @@
 package erebus.events;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.Erebus;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.renderer.BiomeColors;
@@ -10,7 +10,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = Erebus.MODID)
+@EventBusSubscriber(modid = Erebus.MODID)
 public class RegisterColorHandlersEventHandler {
 
     private static final BlockColor foliageColor = (state, tint, pos, tintIndex) -> {

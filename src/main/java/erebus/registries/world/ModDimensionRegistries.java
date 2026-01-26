@@ -15,12 +15,16 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TimelineTags;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.attribute.*;
+import net.minecraft.world.clock.WorldClock;
+import net.minecraft.world.clock.WorldClocks;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.minecraft.world.timeline.Timeline;
+
+import java.util.Optional;
 
 public class ModDimensionRegistries {
     public static final ResourceKey<Level> DIMENSION_KEY = ResourceKey.create(Registries.DIMENSION, Erebus.prefix(Erebus.MODID));
@@ -29,7 +33,7 @@ public class ModDimensionRegistries {
 
     public static void bootstrapType(BootstrapContext<DimensionType> context) {
         HolderGetter<Timeline> timelines = context.lookup(Registries.TIMELINE);
-
+        HolderGetter<WorldClock> clocks = context.lookup(Registries.WORLD_CLOCK);
         context.register(DIMENSION_TYPE_KEY, new DimensionType(
                 false,
                 true,
@@ -52,7 +56,8 @@ public class ModDimensionRegistries {
                         .set(EnvironmentAttributes.RESPAWN_ANCHOR_WORKS, false)
                         .set(EnvironmentAttributes.AMBIENT_SOUNDS, AmbientSounds.LEGACY_CAVE_SETTINGS)
                         .build(),
-                timelines.getOrThrow(TimelineTags.IN_OVERWORLD)
+                timelines.getOrThrow(TimelineTags.IN_OVERWORLD),
+                Optional.of(clocks.getOrThrow(WorldClocks.OVERWORLD))
         ));
     }
 

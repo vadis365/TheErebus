@@ -2,6 +2,7 @@ package erebus.client.render.entity.renderer;
 
 import erebus.Erebus;
 import erebus.client.render.entity.model.BotFlyModel;
+import erebus.client.render.entity.renderer.layer.BotFlyLayer;
 import erebus.entity.BotFly;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

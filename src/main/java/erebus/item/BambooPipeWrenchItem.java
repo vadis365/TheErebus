@@ -1,10 +1,10 @@
 package erebus.item;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.block.bamboo.BambooExtender;
 import erebus.block.bamboo.BambooPipe;
 import erebus.block.bamboo.BambooPipeExtract;
 import erebus.block.entity.BambooExtenderBlockEntity;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

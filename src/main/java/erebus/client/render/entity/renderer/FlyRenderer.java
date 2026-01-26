@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import erebus.Erebus;
 import erebus.client.render.entity.model.FlyModel;
+import erebus.client.render.entity.renderer.layer.FlyLayer;
 import erebus.entity.Fly;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

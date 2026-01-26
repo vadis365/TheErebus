@@ -1,4 +1,4 @@
-package erebus.client.render.entity.renderer;
+package erebus.client.render.entity.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.client.render.entity.model.BeetleLarvaModel;

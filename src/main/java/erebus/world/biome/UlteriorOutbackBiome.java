@@ -1,6 +1,5 @@
 package erebus.world.biome;
 
-import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
@@ -15,7 +14,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -42,25 +40,20 @@ public class UlteriorOutbackBiome extends ErebusBiome {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(COLOR)
                         .foliageColorOverride(COLOR)
-                        .skyColor(COLOR)
-                        .grassColorOverride(COLOR)
-                        .fogColor(FOG_COLOR)
-                        .waterFogColor(FOG_COLOR)
-                        .ambientLoopSound(ModSounds.AMBIENT_BUG_IN_THE_SYSTEM)
                         .build()
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()
-                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE_LARVA.get(), 15, 2, 4))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.FLY.get(), 10, 2, 2))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.CENTIPEDE.get(), 10, 1, 4))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.BLACK_WIDOW.get(), 5, 1, 1))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.BOT_FLY.get(), 10, 2, 3))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.SCYTODES.get(), 20, 1, 4))
+                        .addSpawn(MobCategory.CREATURE, 15, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE_LARVA.get(), 2, 4))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.FLY.get(), 2, 2))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.CENTIPEDE.get(), 1, 4))
+                        .addSpawn(MobCategory.MONSTER, 5, new MobSpawnSettings.SpawnerData(ModEntities.BLACK_WIDOW.get(), 1, 1))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.BOT_FLY.get(), 2, 3))
+                        .addSpawn(MobCategory.MONSTER, 20, new MobSpawnSettings.SpawnerData(ModEntities.SCYTODES.get(), 1, 4))
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
-                        .addCarver(GenerationStep.Carving.AIR, ModCarvers.CAVE)
-                        .addCarver(GenerationStep.Carving.AIR, ModCarvers.CANYON)
+                        .addCarver(ModCarvers.CAVE)
+                        .addCarver(ModCarvers.CANYON)
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ROTTEN_ACACIA.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_SAVANNA)
                         .addFeature(VEGETAL_DECORATION, VegetationPlacements.TREES_SAVANNA)

@@ -1,6 +1,5 @@
 package erebus.world.biome;
 
-import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
@@ -14,7 +13,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -41,24 +39,20 @@ public class VolcanicDesertBiome extends ErebusBiome {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(COLOR)
                         .foliageColorOverride(0x91A922)
-                        .skyColor(COLOR)
                         .grassColorOverride(COLOR)
-                        .fogColor(FOG_COLOR)
-                        .waterFogColor(FOG_COLOR)
-                        .ambientLoopSound(ModSounds.AMBIENT_FEINT_SLEEPLESS)
                         .build()
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.FLY.get(), 10, 8, 8))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.BOT_FLY.get(), 10, 2, 3))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.BLACK_WIDOW.get(), 5, 1, 1))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.ANTLION.get(), 200, 1, 3))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.LAVA_WEB_SPIDER.get(), 300, 1, 1))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.FLY.get(), 8, 8))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.BOT_FLY.get(), 2, 3))
+                        .addSpawn(MobCategory.MONSTER, 5, new MobSpawnSettings.SpawnerData(ModEntities.BLACK_WIDOW.get(), 1, 1))
+                        .addSpawn(MobCategory.MONSTER, 200, new MobSpawnSettings.SpawnerData(ModEntities.ANTLION.get(), 3, 3))
+                        .addSpawn(MobCategory.MONSTER, 300, new MobSpawnSettings.SpawnerData(ModEntities.LAVA_WEB_SPIDER.get(), 1, 1))
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
-                        .addCarver(GenerationStep.Carving.AIR, ModCarvers.CAVE)
-                        .addCarver(GenerationStep.Carving.AIR, ModCarvers.CANYON)
+                        .addCarver(ModCarvers.CAVE)
+                        .addCarver(ModCarvers.CANYON)
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.SCORCHED_WOOD.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.LAVA_LAKE.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.DESERT_ROCK_GNEISS.getPlacedResourceKey())

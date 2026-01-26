@@ -1,7 +1,7 @@
 package erebus.entity;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.registries.ModSounds;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;

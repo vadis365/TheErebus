@@ -3,6 +3,7 @@ package erebus.client.render.entity.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.Erebus;
 import erebus.client.render.entity.model.BlackAntModel;
+import erebus.client.render.entity.renderer.layer.BlackAntLayer;
 import erebus.entity.BlackAnt;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

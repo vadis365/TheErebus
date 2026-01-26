@@ -10,10 +10,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ambient.AmbientCreature;
@@ -119,7 +116,7 @@ public class Moth extends AmbientCreature {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		setSkin(level.getRandom().nextInt(3));
 		return spawnGroupData;
 	}
@@ -144,7 +141,7 @@ public class Moth extends AmbientCreature {
 		setSkin(nbt.getInt("skin"));
 	}
 
-	public static boolean canSpawnHere(EntityType<Moth> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<Moth> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		if (pos.getY() >= 120 || pos.getY() <= 0)
 			return false;
 		else {

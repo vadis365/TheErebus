@@ -1,8 +1,8 @@
 package erebus.item.wand;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.entity.AnimatedBlock;
 import erebus.registries.ModSounds;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

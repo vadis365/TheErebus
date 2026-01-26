@@ -1,10 +1,9 @@
 package erebus.entity;
 
-import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
@@ -14,7 +13,7 @@ public class CropWeevil extends Weevil{
 		super(type, level);
 	}
 
-	public static boolean canSpawnHereAlt(EntityType<CropWeevil> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHereAlt(EntityType<CropWeevil> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		float light = level.getLightLevelDependentMagicValue(pos);
 		return light >= 0F;
 	}

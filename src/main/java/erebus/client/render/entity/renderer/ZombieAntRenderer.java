@@ -2,6 +2,7 @@ package erebus.client.render.entity.renderer;
 
 import erebus.Erebus;
 import erebus.client.render.entity.model.AntModel;
+import erebus.client.render.entity.renderer.layer.ZombieAntLayer;
 import erebus.entity.ZombieAnt;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

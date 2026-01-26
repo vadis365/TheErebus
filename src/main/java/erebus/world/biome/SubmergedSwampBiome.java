@@ -1,6 +1,5 @@
 package erebus.world.biome;
 
-import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
@@ -15,7 +14,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -43,23 +41,18 @@ public class SubmergedSwampBiome extends ErebusBiome {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(COLOR)
                         .foliageColorOverride(COLOR)
-                        .skyColor(COLOR)
-                        .grassColorOverride(COLOR)
-                        .fogColor(FOG_COLOR)
-                        .waterFogColor(FOG_COLOR)
-                        .ambientLoopSound(ModSounds.AMBIENT_BUG_IN_THE_SYSTEM)
                         .build()
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()
-                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE.get(), 20, 1, 2))
-                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE_LARVA.get(), 25, 2, 4))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.DRAGON_FLY.get(), 20, 1, 3))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.CENTIPEDE.get(), 10, 4, 8))
+                        .addSpawn(MobCategory.CREATURE, 20, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 25, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE_LARVA.get(), 2, 4))
+                        .addSpawn(MobCategory.MONSTER, 20, new MobSpawnSettings.SpawnerData(ModEntities.DRAGON_FLY.get(), 1, 3))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.CENTIPEDE.get(), 4, 8))
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
-                        .addCarver(GenerationStep.Carving.AIR, ModCarvers.CAVE)
-                        .addCarver(GenerationStep.Carving.AIR, ModCarvers.CANYON)
+                        .addCarver(ModCarvers.CAVE)
+                        .addCarver(ModCarvers.CANYON)
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.QUICK_SAND.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ROTTEN_ACACIA.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.GAS_VENT.getPlacedResourceKey())

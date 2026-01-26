@@ -4,6 +4,7 @@ import erebus.item.PaxelItem;
 import erebus.item.shield.ErebusShieldItem;
 import erebus.item.shield.IShieldType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Consumable;
@@ -27,6 +28,10 @@ public class ModItemHelpers {
         return ITEMS.register(name, item);
     }
 
+    public static DeferredItem<Item> registerSpawnEgg(String name, Supplier<? extends EntityType<?>> entityType) {
+        return ITEMS.register("%s_spawn_egg".formatted(name), () -> new SpawnEggItem(new Item.Properties().spawnEgg(entityType.get())));
+    }
+
     public static DeferredItem<Item> registerFoodItem(String name, FoodProperties foodProperties, Consumable consumable) {
         return registerItem(name, () -> new Item(new Item.Properties().food(foodProperties, consumable)));
     }
@@ -34,7 +39,7 @@ public class ModItemHelpers {
     public static DeferredItem<Item> registerFoodItem(String name, FoodProperties foodProperties, Consumable consumable, ItemLike convertsTo) {
         return registerItem(name, () -> new Item(new Item.Properties()
                 .food(foodProperties, consumable)
-                .component(DataComponents.USE_REMAINDER, new UseRemainder(new ItemStack(convertsTo)))
+                .component(DataComponents.USE_REMAINDER, new UseRemainder(ItemStackTemplate.fromNonEmptyStack(new ItemStack(convertsTo))))
         ));
     }
 
@@ -59,7 +64,7 @@ public class ModItemHelpers {
     }
 
     public static DeferredItem<PaxelItem> registerPaxel(String name, ToolMaterial material, float attackDamageBaseline, float attackSpeedBaseline) {
-        return ITEMS.register(name, () -> new PaxelItem(material, new Item.Properties().sword(material, attackDamageBaseline, attackSpeedBaseline)));
+        return ITEMS.register(name, () -> new PaxelItem(new Item.Properties().sword(material, attackDamageBaseline, attackSpeedBaseline)));
     }
 
     public static DeferredItem<HoeItem> registerHoe(String name, ToolMaterial material, float attackDamageBaseline, float attackSpeedBaseline) {

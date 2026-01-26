@@ -1,6 +1,5 @@
 package erebus.world.biome;
 
-import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
@@ -16,7 +15,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -45,34 +43,29 @@ public class ElysianForestBiome extends ErebusBiome {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(COLOR)
                         .foliageColorOverride(COLOR)
-                        .skyColor(COLOR)
-                        .grassColorOverride(COLOR)
-                        .fogColor(FOG_COLOR)
-                        .waterFogColor(FOG_COLOR)
-                        .ambientLoopSound(ModSounds.AMBIENT_BUG_IN_THE_SYSTEM)
                         .build()
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()
-                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE.get(), 20, 3, 5))
-                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE_LARVA.get(), 10, 2, 3))
-                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.GRASSHOPPER.get(), 10, 1, 3))
+                        .addSpawn(MobCategory.CREATURE, 20, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE.get(), 3, 5))
+                        .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE_LARVA.get(), 2, 3))
+                        .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.GRASSHOPPER.get(), 1, 3))
                         //.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.FLY.get(), 10, 1, 2)) Worker Bee
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.FLY.get(), 10, 1, 2))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.DRAGON_FLY.get(), 10, 8, 8))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.BOT_FLY.get(), 10, 2, 3))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 15, 2, 3))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.FLY.get(), 1, 2))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.DRAGON_FLY.get(), 8, 8))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.BOT_FLY.get(), 2, 3))
+                        .addSpawn(MobCategory.MONSTER, 15, new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 2, 3))
                         //.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 10, 1, 2)) Crop Weevil
                         //.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 10, 1, 2)) Chameleon Tick
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 10, 1, 2))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 1, 2))
                         //.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 10, 1, 2)) Cicada
-                        //.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 10, 1, 2)) Glow Worm
-                        //.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 10, 1, 2)) Titan Beetle
+                        //.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 1, 2)) Glow Worm
+                        //.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 1, 2)) Titan Beetle
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
-                        .addCarver(GenerationStep.Carving.AIR, ModCarvers.CAVE)
-                        .addCarver(GenerationStep.Carving.AIR, ModCarvers.CANYON)
-                        .addFeature(VEGETAL_DECORATION, VegetationPlacements.TREES_BIRCH_AND_OAK)
+                        .addCarver(ModCarvers.CAVE)
+                        .addCarver(ModCarvers.CANYON)
+                        .addFeature(VEGETAL_DECORATION, VegetationPlacements.TREES_BIRCH_AND_OAK_LEAF_LITTER)
                         .addFeature(VEGETAL_DECORATION, TreeFeatures.CYPRESS_TREE.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.NETTLE.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.TALL_BLOOM.getPlacedResourceKey())

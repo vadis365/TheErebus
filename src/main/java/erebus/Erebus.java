@@ -16,7 +16,6 @@ import erebus.registries.client.ModMenuTypes;
 import erebus.registries.client.ModParticles;
 import erebus.registries.data.ModDataComponents;
 import erebus.registries.data.ModPredicates;
-import erebus.registries.data.ModToolMaterials;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.entity.ModEntityRendering;
 import erebus.registries.item.ModItems;
@@ -64,16 +63,12 @@ public class Erebus {
         PlantFeatureConfigs.init();
         StructureFeatureConfigs.init();
 
-        ModBlocks.register(bus);
+        ModBlocks.BLOCKS.register(bus);
         ModItems.ITEMS.register(bus);
 		ModFluids.FLUIDS.register(bus);
 		ModFluids.FLUID_TYPES.register(bus);
-        ModToolMaterials.init();
         ModTabs.CREATIVE_MODE_TABS.register(bus);
-        ModEntities.getEntityTypes().register(bus);
-        bus.addListener(ModEntities::registerSpawnPlacements);
-        bus.addListener(ModEntities::initializeAttributes);
-        ModEntities.SPAWN_EGGS.register(bus);
+        ModEntities.ENTITY_TYPES.register(bus);
         ModSounds.SOUNDS.register(bus);
         ModMenuTypes.MENU_TYPES.register(bus);
         ModTrunkPlacers.TRUNK_PLACERS.register(bus);

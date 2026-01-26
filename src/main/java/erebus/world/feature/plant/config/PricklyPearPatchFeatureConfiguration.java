@@ -1,7 +1,7 @@
 package erebus.world.feature.plant.config;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.block.plants.PricklyPearBlock;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;

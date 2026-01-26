@@ -13,8 +13,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -118,15 +118,15 @@ public class Antlion extends Monster {
 	 * EnumErebusMaterialsType.PLATE_EXO.ordinal()), 0.0F); } }
 	 */
 
-	public static boolean canSpawnHere(EntityType<Antlion> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<Antlion> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		float light = level.getLightLevelDependentMagicValue(pos);
 		return light >= 0F;
 	}
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
-		if (spawnType == MobSpawnType.COMMAND || spawnType== MobSpawnType.SPAWN_EGG || spawnType == MobSpawnType.SPAWNER || spawnType == MobSpawnType.DISPENSER)
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+		if (spawnType == EntitySpawnReason.COMMAND || spawnType== EntitySpawnReason.SPAWN_EGG || spawnType == EntitySpawnReason.SPAWNER || spawnType == EntitySpawnReason.DISPENSER)
 			setActive(true);
 		return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
 	}

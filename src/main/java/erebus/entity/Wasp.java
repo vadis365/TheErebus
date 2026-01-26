@@ -131,7 +131,7 @@ public class Wasp extends Monster {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		RandomSource randomsource = level.getRandom();
 		int isBoss = randomsource.nextInt(32);
 		if(isBoss == 0)
@@ -165,7 +165,7 @@ public class Wasp extends Monster {
 					.add(Attributes.ATTACK_DAMAGE, 4D);
 	}
 
-	public static boolean canSpawnHere(EntityType<Wasp> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<Wasp> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		float light = level.getLightLevelDependentMagicValue(pos);
 		return light >= 0F;
 	}

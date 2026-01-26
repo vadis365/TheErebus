@@ -4,13 +4,12 @@ import erebus.block.LiquifierBlock;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.fluids.FluidStack;
-
-import javax.annotation.Nonnull;
-import java.util.List;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import org.jspecify.annotations.NonNull;
 
 public class LiquifierBlockItem extends BlockItem {
 	private final int capacity;
@@ -21,16 +20,19 @@ public class LiquifierBlockItem extends BlockItem {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nonnull TooltipContext context, @Nonnull List<Component> list, @Nonnull TooltipFlag flag) {
+	public @NonNull Component getHighlightTip(@NonNull ItemStack stack, @NonNull Component displayName) {
+		MutableComponent component = Component.empty();
+
 		if (stack.has(ModDataComponents.FLUID)) {
-			FluidStack fluid = stack.getOrDefault(ModDataComponents.FLUID, FluidContents.EMPTY).get();
+			FluidStack fluid = stack.getOrDefault(ModDataComponents.FLUID, FluidResource.EMPTY).toStack(1000);
 			if (!fluid.isEmpty()) {
-				list.add(Component.literal("Contains: " + fluid.getHoverName().getString()).withStyle(ChatFormatting.GREEN));
-				list.add(Component.literal(String.format("%dMb/%dMb", fluid.getAmount(),capacity)).withStyle(ChatFormatting.BLUE));
+				component.append(Component.literal("Contains: " + fluid.getHoverName().getString()).withStyle(ChatFormatting.GREEN));
+				component.append(Component.literal(String.format("%dMb/%dMb", fluid.getAmount(),capacity)).withStyle(ChatFormatting.BLUE));
 			}
 		}
 		else
-			list.add(Component.literal(String.format("Holds %dMb (%d Buckets)", capacity, capacity / 1000)).withStyle(ChatFormatting.BLUE));
-	}
+			component.append(Component.literal(String.format("Holds %dMb (%d Buckets)", capacity, capacity / 1000)).withStyle(ChatFormatting.BLUE));
 
+		return component;
+	}
 }

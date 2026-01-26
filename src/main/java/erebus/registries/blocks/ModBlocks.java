@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
@@ -411,9 +410,9 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> MOULD = registerBlock("mould", () -> new MouldBlock(BlockBehaviour.Properties.of().strength(0.2F).noCollision().randomTicks().sound(SoundType.VINE).noOcclusion().replaceable()));
     public static final DeferredBlock<Block> MOSS_CULTIVATED = registerBlock("moss_cultivated", () -> new MossCultivatedBlock(BlockBehaviour.Properties.of().strength(0.2F).noCollision().sound(SoundType.VINE).noOcclusion().replaceable()));
     public static final DeferredBlock<Block> MOULD_CULTIVATED = registerBlock("mould_cultivated", () -> new MouldCultivatedBlock(BlockBehaviour.Properties.of().strength(0.2F).noCollision().sound(SoundType.VINE).noOcclusion().replaceable()));
-    public static final DeferredBlock<WaterlilyBlock> ALGAE = registerBlock(
+    public static final DeferredBlock<LilyPadBlock> ALGAE = registerBlock(
             "algae",
-            () -> new WaterlilyBlock(BlockBehaviour.Properties.of()
+            () -> new LilyPadBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.PLANT)
                     .instabreak()
                     .sound(SoundType.LILY_PAD)
@@ -532,8 +531,4 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> FORCE_LOCK = registerSimpleBlock("force_lock", ModBlockProperties.FORCE_LOCK);
 
     public static final DeferredBlock<Block> ANT_HILL_BLOCK = registerSimpleBlock("ant_hill_block", ModBlockProperties.ANT_HILL_BLOCK);
-
-    public static void register(IEventBus bus) {
-        BLOCKS.register(bus);
-    }
 }

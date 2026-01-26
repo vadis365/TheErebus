@@ -285,7 +285,7 @@ public class Dragonfly extends Monster {
 			return false;
 	}
 
-	public static boolean canSpawnHere(EntityType<Dragonfly> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<Dragonfly> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		if (pos.getY() > 100)
 			return false;
 		else {
@@ -311,7 +311,7 @@ public class Dragonfly extends Monster {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		setSkin(level.getRandom().nextInt(1)); //51
 		return spawnGroupData;
 	}

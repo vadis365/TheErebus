@@ -1,7 +1,7 @@
 package erebus.entity;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.entity.ai.ThrowWebAttackGoal;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -23,8 +23,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -92,7 +92,7 @@ public class LavaWebSpider extends Monster {
         return new WallClimberNavigation(this, level);
     }
 
-	public static boolean canSpawnHere(EntityType<LavaWebSpider> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<LavaWebSpider> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		BlockPos.MutableBlockPos blockPosMutable = pos.mutable();
 		do {
 			blockPosMutable.move(Direction.UP);
@@ -212,7 +212,7 @@ public class LavaWebSpider extends Monster {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
 		RandomSource randomsource = level.getRandom();
 

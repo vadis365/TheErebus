@@ -69,7 +69,4 @@ public class ModToolMaterials {
             18,
             ModItemTags.QUAKE_HAMMER_TOOL_MATERIALS
     );
-
-    public static void init() {
-    }
 }

@@ -1,9 +1,9 @@
 package erebus.world.feature.tree.trunk;
 
-import erebus.registries.blocks.ModBlocks;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import erebus.block.bamboo.BambooBlock;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.world.tree.ModTrunkPlacers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;

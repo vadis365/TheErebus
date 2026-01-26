@@ -1,7 +1,7 @@
 package erebus.world.feature.plant.config;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.datagen.loot.ModChestLootTables;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;

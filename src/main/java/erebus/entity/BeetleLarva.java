@@ -78,7 +78,7 @@ public class BeetleLarva extends PathfinderMob {
 				.add(Attributes.STEP_HEIGHT, 1D);
 	}
 
-	public static boolean canSpawnHere(EntityType<BeetleLarva> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<BeetleLarva> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		float light = level.getLightLevelDependentMagicValue(pos);
 		return light >= 0F;
 	}
@@ -148,7 +148,7 @@ public class BeetleLarva extends PathfinderMob {
 		if (getLarvaType() == 0) {
 			Beetle entityBeetle = ModEntities.BEETLE.get().create(this.level());
 			if(entityBeetle != null) {
-				entityBeetle.finalizeSpawn((ServerLevel)level(), level().getCurrentDifficultyAt(blockPosition()), MobSpawnType.CONVERSION, null);
+				entityBeetle.finalizeSpawn((ServerLevel)level(), level().getCurrentDifficultyAt(blockPosition()), EntitySpawnReason.CONVERSION, null);
 				level().addFreshEntity(entityBeetle);
 				entityBeetle.copyPosition(this);
 			}
@@ -157,7 +157,7 @@ public class BeetleLarva extends PathfinderMob {
 			Beetle entityBeetle = ModEntities.BEETLE.get().create(this.level());
 			if (entityBeetle != null) {
 				entityBeetle.setTame(true);
-				entityBeetle.finalizeSpawn((ServerLevel)level(), level().getCurrentDifficultyAt(blockPosition()), MobSpawnType.CONVERSION, null);
+				entityBeetle.finalizeSpawn((ServerLevel)level(), level().getCurrentDifficultyAt(blockPosition()), EntitySpawnReason.CONVERSION, null);
 				level().addFreshEntity(entityBeetle);
 				entityBeetle.copyPosition(this);
 			}
@@ -174,7 +174,7 @@ public class BeetleLarva extends PathfinderMob {
 			level().spawnEntity(entityTitanBeetle);
 		}*/ else if (getLarvaType() == 4) {
 			BombardierBeetle entityBombardierBeetle = ModEntities.BOMBARDIER_BEETLE.get().create(this.level());
-			//entityBombardierBeetle.finalizeSpawn((ServerLevel)level(), level().getCurrentDifficultyAt(blockPosition()), MobSpawnType.CONVERSION, null);
+			//entityBombardierBeetle.finalizeSpawn((ServerLevel)level(), level().getCurrentDifficultyAt(blockPosition()), EntitySpawnReason.CONVERSION, null);
 			level().addFreshEntity(entityBombardierBeetle);
 			entityBombardierBeetle.copyPosition(this);
 		} /*else if (getLarvaType() == 5) {

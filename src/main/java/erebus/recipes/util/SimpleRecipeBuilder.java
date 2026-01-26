@@ -2,7 +2,6 @@ package erebus.recipes.util;
 
 import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.RecipeBuilder;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,10 +29,5 @@ public abstract class SimpleRecipeBuilder implements RecipeBuilder {
     public @NotNull SimpleRecipeBuilder group(@Nullable String group) {
         this.group = group;
         return this;
-    }
-
-    @Override
-    public @NotNull Item getResult() {
-        return this.result.asItem();
     }
 }

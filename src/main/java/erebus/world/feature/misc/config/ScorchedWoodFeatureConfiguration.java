@@ -32,7 +32,7 @@ public class ScorchedWoodFeatureConfiguration extends Feature<NoneFeatureConfigu
         int x = origin.getX(), y = origin.getY(), z = origin.getZ();
         int height = partAmount * 2;
 
-        if (y <= 0 || y + height > level.getMaxBuildHeight()) return false;
+        if (level.isOutsideBuildHeight(y)) return false;
 
         for (int testY = y + 1; testY <= y + height; testY++) {
             for (int testX = x - 1; testX <= x + 1; testX++) {

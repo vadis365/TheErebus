@@ -1,8 +1,8 @@
 package erebus.item.blocks;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.block.bamboo.BambooCrateBlock;
 import erebus.block.types.EnumCrateType;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

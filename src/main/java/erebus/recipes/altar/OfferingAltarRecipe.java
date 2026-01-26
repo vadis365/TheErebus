@@ -13,7 +13,7 @@ public interface OfferingAltarRecipe extends Recipe<MultiStackInput> {
 	}
 
 	@Override
-	default RecipeType<?> getType() {
+	default RecipeType<? extends Recipe<MultiStackInput>> getType() {
 		return ModCustomRecipes.OFFERING_ALTAR_RECIPE.get();
 	}
 

@@ -1,7 +1,7 @@
 package erebus.events;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.block.QuicksandBlock;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;

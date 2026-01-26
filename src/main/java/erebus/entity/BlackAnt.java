@@ -1,6 +1,5 @@
 package erebus.entity;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.block.entity.SiloTankBlockEntity;
 import erebus.entity.ai.BlackAntBonemealCrops;
 import erebus.entity.ai.BlackAntHarvestCrops;
@@ -8,6 +7,7 @@ import erebus.entity.ai.BlackAntPlantCrops;
 import erebus.inventory.server.BlackAntMenu;
 import erebus.inventory.server.BlackAntSimpleContainer;
 import erebus.registries.ModSounds;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.data.ModDataComponents;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -142,7 +142,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 		return isTamedAnt();
 	}
 
-	public static boolean canSpawnHere(EntityType<BlackAnt> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<BlackAnt> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		float light = level.getLightLevelDependentMagicValue(pos);
 		return light >= 0F;
 	}

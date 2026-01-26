@@ -1,7 +1,7 @@
 package erebus.block.plants;
 
-import erebus.registries.blocks.ModBlocks;
 import com.mojang.serialization.MapCodec;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;

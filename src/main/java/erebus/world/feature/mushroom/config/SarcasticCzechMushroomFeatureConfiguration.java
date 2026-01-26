@@ -67,17 +67,17 @@ public class SarcasticCzechMushroomFeatureConfiguration extends Feature<NoneFeat
         pos = pos.above(height);
 
         for(Direction[] dirs : DIRECTIONS) {
-            int x = pos.getX() + dirs[0].getNormal().getX();
+            int x = pos.getX() + dirs[0].getUnitVec3i().getX();
             int y = pos.getY();
-            int z = pos.getZ() + dirs[0].getNormal().getZ();
+            int z = pos.getZ() + dirs[0].getUnitVec3i().getZ();
 
             for(int c = 0; c < armLength; c++) {
                 if(c % 2 == 0) {
                     y++;
                 } else {
                     Direction direction = dirs[random.nextInt(dirs.length)];
-                    x += direction.getNormal().getX();
-                    z += direction.getNormal().getZ();
+                    x += direction.getUnitVec3i().getX();
+                    z += direction.getUnitVec3i().getZ();
                 }
                 setBlock(level, new BlockPos(x, y, z), STEM);
             }

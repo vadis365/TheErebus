@@ -1,11 +1,11 @@
 package erebus.datagen.providers;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.block.bamboo.BambooBlock;
 import erebus.block.bamboo.BambooTorchBlock;
 import erebus.block.plants.ModCropBlock;
 import erebus.block.plants.PricklyPearBlock;
 import erebus.block.types.EnumTorchBlockHalf;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;

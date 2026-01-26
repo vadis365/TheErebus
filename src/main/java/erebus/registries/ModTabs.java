@@ -608,4 +608,41 @@ public class ModTabs {
                     })
                     .build()
     );
+
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> SPAWN_EGGS = CREATIVE_MODE_TABS.register(
+            "spawn_eggs",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable(String.format("%s.spawn_eggs", Erebus.MODID)))
+                    .icon(() -> ModItems.ANTLION_SPAWN_EGG.get().getDefaultInstance())
+                    .displayItems((_, output) -> {
+                        output.accept(ModItems.BEETLE_LARVA_SPAWN_EGG);
+                        output.accept(ModItems.WASP_SPAWN_EGG);
+                        output.accept(ModItems.CENTIPEDE_SPAWN_EGG);
+                        output.accept(ModItems.BEETLE_SPAWN_EGG);
+                        output.accept(ModItems.FLY_SPAWN_EGG);
+                        output.accept(ModItems.BOT_FLY_SPAWN_EGG);
+                        output.accept(ModItems.GRASSHOPPER_SPAWN_EGG);
+                        output.accept(ModItems.LOCUST_SPAWN_EGG);
+                        output.accept(ModItems.MOTH_SPAWN_EGG);
+                        output.accept(ModItems.BLACK_WIDOW_SPAWN_EGG);
+                        output.accept(ModItems.BOMBARDIER_BEETLE_SPAWN_EGG);
+                        output.accept(ModItems.SCYTODES_SPAWN_EGG);
+                        output.accept(ModItems.MONEY_SPIDER_SPAWN_EGG);
+                        output.accept(ModItems.WORKER_BEE_SPAWN_EGG);
+                        output.accept(ModItems.VELVET_WORM_SPAWN_EGG);
+                        output.accept(ModItems.DRAGON_FLY_SPAWN_EGG);
+                        output.accept(ModItems.BOT_FLY_LARVA_SPAWN_EGG);
+                        output.accept(ModItems.FUNGAL_WEEVIL_SPAWN_EGG);
+                        output.accept(ModItems.CROP_WEEVIL_SPAWN_EGG);
+                        output.accept(ModItems.LAVA_WEB_SPIDER_SPAWN_EGG);
+                        output.accept(ModItems.PUNCHROOM_SPAWN_EGG);
+                        output.accept(ModItems.BLACK_ANT_SPAWN_EGG);
+                        output.accept(ModItems.ZOMBIE_ANT_SPAWN_EGG);
+                        output.accept(ModItems.HONEY_POT_ANT_SPAWN_EGG);
+                        output.accept(ModItems.BOMBARDIER_BEETLE_LARVA_SPAWN_EGG);
+                        output.accept(ModItems.ZOMBIE_ANT_SOLDIER_SPAWN_EGG);
+                        output.accept(ModItems.BED_BUG_SPAWN_EGG);
+                    })
+                    .build()
+    );
 }

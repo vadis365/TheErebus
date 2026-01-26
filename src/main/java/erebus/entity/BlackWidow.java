@@ -1,8 +1,8 @@
 package erebus.entity;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.entity.ai.ThrowWebAttackGoal;
 import erebus.registries.ModSounds;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -87,7 +87,7 @@ public class BlackWidow extends Monster {
 			setClimbing(horizontalCollision);
 	}
 
-	public static boolean canSpawnHere(EntityType<BlackWidow> entity, LevelAccessor level, MobSpawnType spawn, BlockPos pos, RandomSource random) {
+	public static boolean canSpawnHere(EntityType<BlackWidow> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		float light = level.getLightLevelDependentMagicValue(pos);
 		return light >= 0F;
 	}
@@ -232,7 +232,7 @@ public class BlackWidow extends Monster {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		RandomSource randomsource = level.getRandom();
 		int randomSize = randomsource.nextInt(3);
 

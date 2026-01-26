@@ -1,11 +1,11 @@
 package erebus.world.feature.old_structure.config;
 
-import erebus.registries.blocks.ModBlocks;
 import erebus.block.BlockOfBonesBlock;
 import erebus.block.bamboo.BambooTorchBlock;
 import erebus.block.entity.BlockOfBonesBlockEntity;
 import erebus.block.types.EnumTorchBlockHalf;
 import erebus.datagen.loot.ModChestLootTables;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import erebus.registries.world.ModBiomes;
 import erebus.world.util.MazeGenerator;
