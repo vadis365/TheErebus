@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -19,11 +20,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.jspecify.annotations.NonNull;
 
 public class ThrownBlockAsItem  extends ThrowableProjectile implements ItemSupplier {
 	private static final EntityDataAccessor<BlockState> TYPE = SynchedEntityData.defineId(ThrownBlockAsItem.class, EntityDataSerializers.BLOCK_STATE);
-	private float damage; // not needed but will leave for now - just in case...
-	private SoundEvent placedSound;
+    private SoundEvent placedSound;
 	public ThrownBlockAsItem(Level level) {
 		super(ModEntities.THROWN_BLOCK_AS_ITEM.get(), level);
 	}
@@ -38,8 +39,7 @@ public class ThrownBlockAsItem  extends ThrowableProjectile implements ItemSuppl
 		setXRot(owner.getXRot());
 		setYRot(owner.getYRot());
 		setBlockType(state);
-		damage = damageCaused;
-		placedSound = placedSoundIn;
+        placedSound = placedSoundIn;
 	}
 	
 	public ThrownBlockAsItem(double x, double y, double z, Level level) {
@@ -72,14 +72,14 @@ public class ThrownBlockAsItem  extends ThrowableProjectile implements ItemSuppl
 				else
 					level().levelEvent(null, 2001, blockPosition(), Block.getId(getBlockType()));
 			}
-			kill();
+			kill((ServerLevel) level());
 			
 			level().playSound(null, blockPosition(), getPlacedSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
 		}
 	}
 
 	@Override
-	public boolean canBeCollidedWith() {
+	public boolean canBeCollidedWith(Entity other) {
 		return false;
 	}
 
@@ -96,7 +96,7 @@ public class ThrownBlockAsItem  extends ThrowableProjectile implements ItemSuppl
 	}
 
 	@Override
-	public ItemStack getItem() {
+	public @NonNull ItemStack getItem() {
 		return new ItemStack(getBlockType().getBlock());
 	}
 }

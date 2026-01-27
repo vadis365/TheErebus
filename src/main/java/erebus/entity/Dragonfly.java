@@ -4,11 +4,11 @@ import erebus.entity.ai.FlyingMoveControlLessSpin;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -34,7 +34,10 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Path;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -56,7 +59,7 @@ public class Dragonfly extends Monster {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(SKIN_TYPE, 1);
 	}
@@ -71,7 +74,7 @@ public class Dragonfly extends Monster {
 	}
 
 	@Override
-	public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+	public float getWalkTargetValue(@NonNull BlockPos pos, LevelReader level) {
 		return level.getBlockState(pos).isAir() ? 10.0F : 0.0F;
 	}
 
@@ -85,7 +88,7 @@ public class Dragonfly extends Monster {
 	}
 
 	@Override
-    protected PathNavigation createNavigation(Level level){
+    protected @NonNull PathNavigation createNavigation(@NonNull Level level){
 		return new FlyingPathNavigation(this, level);
 	}
 
@@ -100,7 +103,7 @@ public class Dragonfly extends Monster {
     }
 
     @Override
-    protected void doPush(Entity entity) {
+    protected void doPush(@NonNull Entity entity) {
     }
 
 	@Override
@@ -114,7 +117,7 @@ public class Dragonfly extends Monster {
     }
 
     @Override
-    protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
+    protected void checkFallDamage(double y, boolean onGround, @NonNull BlockState state, @NonNull BlockPos pos) {
     }
 
 	public boolean captured() {
@@ -149,12 +152,12 @@ public class Dragonfly extends Monster {
 	}
 
 	@Override
-    protected SoundEvent getHurtSound(DamageSource source) {
+    protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.FLY_HURT.get();
 	}
 
 	@Override
-    protected SoundEvent getDeathSound() {
+    protected @NonNull SoundEvent getDeathSound() {
 		return ModSounds.SQUISH.get();
 	}
 
@@ -212,7 +215,6 @@ public class Dragonfly extends Monster {
 			getNavigation().moveTo(getX(), getY() + 1D, getZ(), 0.5D);
 	}
 	
-    @Nullable
     public boolean isBeingRidden()  {
         return !this.getPassengers().isEmpty();
     }
@@ -232,12 +234,12 @@ public class Dragonfly extends Monster {
 	}
 
 	@Override
-	public void playerTouch(Player player) {
+	public void playerTouch(@NonNull Player player) {
 		super.playerTouch(player);
 		if (!level().isClientSide() && !player.isCreative() && !captured() && random.nextInt(20) == 0 && !getDropped()) {
 			pickupHeight = getY();
 			setPos(getX(), player.getY() + player.getBbHeight() + getBbHeight(), getZ());
-			player.startRiding(this, true);
+			player.startRiding(this);
 			setCountdown(60);
 		}
 		if (player.isCrouching())
@@ -259,7 +261,7 @@ public class Dragonfly extends Monster {
 	}
 
 	@Override
-	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
+	public void positionRider(@NonNull Entity entity, Entity.@NonNull MoveFunction moveFunction) {
 		if (entity instanceof LivingEntity || entity instanceof Player) {
 			double a = Math.toRadians(yBodyRot);
 			double offSetX = -Math.sin(a) * -0.6D;
@@ -271,10 +273,10 @@ public class Dragonfly extends Monster {
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float damage) {
-		if (isInvulnerableTo(source))
+	public boolean hurtServer(@NonNull ServerLevel level, @NonNull DamageSource source, float damage) {
+		if (isInvulnerableTo(level, source))
 			return false;
-		else if (super.hurt(source, damage)) {
+		else if (super.hurtServer(level, source, damage)) {
 			if (isBeingRidden() && getCapturedPlayer() != null) {
 				setDropped(true);
 				ejectPassengers();
@@ -311,7 +313,7 @@ public class Dragonfly extends Monster {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		setSkin(level.getRandom().nextInt(1)); //51
 		return spawnGroupData;
 	}
@@ -325,15 +327,15 @@ public class Dragonfly extends Monster {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putInt("skin", getSkin());
+	public void addAdditionalSaveData(@NonNull ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putInt("skin", getSkin());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		setSkin(nbt.getInt("skin"));
+	public void readAdditionalSaveData(@NonNull ValueInput input) {
+		super.readAdditionalSaveData(input);
+		setSkin(input.getIntOr("skin", 0));
 	}
 
 	class AIFlyingWander extends WaterAvoidingRandomStrollGoal {
@@ -411,7 +413,7 @@ public class Dragonfly extends Monster {
 		        } else if (!this.followingTargetEvenIfNotSeen) {
 		            return !this.mob.getNavigation().isDone();
 		        } else {
-		            return this.mob.isWithinRestriction(livingentity.blockPosition()) && (!(livingentity instanceof Player) || !livingentity.isSpectator() && !((Player) livingentity).isCreative());
+		            return this.mob.isWithinHome(livingentity.blockPosition()) && (!(livingentity instanceof Player) || !livingentity.isSpectator() && !((Player) livingentity).isCreative());
 		        }
 		    }
 
@@ -491,7 +493,7 @@ public class Dragonfly extends Monster {
 		        if (this.canPerformAttack(target)) {
 		            this.resetAttackCooldown();
 		            this.mob.swing(InteractionHand.MAIN_HAND);
-		            this.mob.doHurtTarget(target);
+		            this.mob.doHurtTarget((ServerLevel) level(), target);
 		        }
 		    }
 

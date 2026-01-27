@@ -46,7 +46,7 @@ public class ThrowWebAttackGoal extends Goal {
 		if (distance < 4.0D) {
 			if (attackTime <= 0) {
 				attackTime = 20;
-				mob.doHurtTarget(livingentity);
+				mob.doHurtTarget(getServerLevel(mob.level()), livingentity);
 			}
 
 			mob.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), speedModifier);

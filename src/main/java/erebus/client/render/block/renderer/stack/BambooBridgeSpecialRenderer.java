@@ -18,7 +18,7 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public record BambooBridgeItemRenderer(BambooBridgeModel model, Identifier texture) implements NoDataSpecialModelRenderer {
+public record BambooBridgeSpecialRenderer(BambooBridgeModel model, Identifier texture) implements NoDataSpecialModelRenderer {
 
     @Override
     public void submit(@NonNull ItemDisplayContext itemDisplayContext, @NonNull PoseStack pose, SubmitNodeCollector submit, int packedLight, int packedOverlay, boolean hasFoil, int outlineColor) {
@@ -43,13 +43,13 @@ public record BambooBridgeItemRenderer(BambooBridgeModel model, Identifier textu
 
         public static final MapCodec<Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
                 i -> i.group(
-                        Identifier.CODEC.fieldOf("texture").forGetter(BambooBridgeItemRenderer.Unbaked::texture)
-                ).apply(i, BambooBridgeItemRenderer.Unbaked::new)
+                        Identifier.CODEC.fieldOf("texture").forGetter(BambooBridgeSpecialRenderer.Unbaked::texture)
+                ).apply(i, BambooBridgeSpecialRenderer.Unbaked::new)
         );
 
         @Override
         public @Nullable SpecialModelRenderer<?> bake(BakingContext bakingContext) {
-            return new BambooBridgeItemRenderer(new BambooBridgeModel(bakingContext.entityModelSet().bakeLayer(ModBlockEntityRendering.BAMBOO_BRIDGE)), texture);
+            return new BambooBridgeSpecialRenderer(new BambooBridgeModel(bakingContext.entityModelSet().bakeLayer(ModBlockEntityRendering.BAMBOO_BRIDGE)), texture);
         }
 
         @Override

@@ -2,12 +2,12 @@ package erebus.entity;
 
 import erebus.block.entity.HoneyCombBlockEntity;
 import erebus.entity.ai.BeePollinateGoal;
+import erebus.entity.ai.EntityAIFlyingWander;
 import erebus.registries.ModSounds;
 import erebus.registries.data.ModDataComponents;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
+import net.minecraft.core.Direction;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -18,17 +18,21 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
-import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -37,11 +41,16 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandlerUtil;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
+import org.jspecify.annotations.NonNull;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class WorkerBee extends Animal {
@@ -59,7 +68,7 @@ public class WorkerBee extends Animal {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
         builder.define(DROP_POINT, this.blockPosition());
         builder.define(NECTAR_POINTS, 0);
@@ -130,7 +139,7 @@ public class WorkerBee extends Animal {
 			
 				if (distanceToSqr(getDropPoint().getX() + 0.5D, getDropPoint().getY() + 0.5D, getDropPoint().getZ() + 1D) <= 1D) {
 					if(getNectarPoints() > 0)
-						addHoneyToInventory(getDropPoint().getX(), getDropPoint().getY(), getDropPoint().getZ());
+						addHoneyToInventory(getDropPoint());
 					setBeeCollecting(false);
 					//getNavigation().stop();
 				}
@@ -141,26 +150,19 @@ public class WorkerBee extends Animal {
 		}
 	}
 
-	private void addHoneyToInventory(int x, int y, int z) {
-		BlockEntity tile = level().getBlockEntity(new BlockPos(x, y, z));
-		if (tile instanceof HoneyCombBlockEntity honeycomb) {
-			Optional<IItemHandler> handlerOptional = CapHelper.getItemHandler(level(), new BlockPos(x, y, z), null);
-			if (handlerOptional.isPresent()) {
-				handlerOptional.ifPresent((handler) -> {
-					ItemStack stack = new ItemStack(ModItems.NECTAR.get(), getNectarPoints());
-					ItemStack stack1 = ItemHandlerHelper.insertItem(handler, stack, true);
-					if (stack1.isEmpty()) {
-						ItemHandlerHelper.insertItem(handler, stack, false);
-						honeycomb.setChanged();
-						setNectarPoints(0);
-					} else {
-						spawnAtLocation(new ItemStack(ModItems.NECTAR.get(), getNectarPoints()), 0.0F);
-						setNectarPoints(0);
-					}
-				});
-			} else {
-				spawnAtLocation(new ItemStack(ModItems.NECTAR.get(), getNectarPoints()), 0.0F); // just in case
-				setNectarPoints(0);
+	private void addHoneyToInventory(BlockPos pos) {
+		BlockEntity tile = level().getBlockEntity(pos);
+		ResourceHandler<ItemResource> target = level().getCapability(Capabilities.Item.BLOCK, pos, Direction.UP);
+		ResourceHandler<ItemResource> source = getCapability(Capabilities.Item.ENTITY_AUTOMATION, Direction.DOWN);
+
+		if(tile instanceof HoneyCombBlockEntity) {
+			try (Transaction transaction = Transaction.openRoot()) {
+				ItemStack nectar = new ItemStack(ModItems.NECTAR.get(), getNectarPoints());
+
+				int nectarMoved = ResourceHandlerUtil.move(source, target, filter -> filter.is(ModItems.NECTAR.get()), getNectarPoints(), transaction);
+				nectar.shrink(nectarMoved);
+				setNectarPoints(nectar.getCount());
+				transaction.commit();
 			}
 		}
 	}
@@ -178,12 +180,12 @@ public class WorkerBee extends Animal {
 	}
 
 	@Override
-    protected PathNavigation createNavigation(Level level){
+    protected @NonNull PathNavigation createNavigation(@NonNull Level level){
 		return new FlyingPathNavigation(this, level);
 	}
 
 	@Override
-	public boolean causeFallDamage(float distance, float damageMultiplier, DamageSource damageSource) {
+	public boolean causeFallDamage(double fallDistance, float damageModifier, @NonNull DamageSource damageSource) {
 		return false;
 	}
 	
@@ -198,7 +200,7 @@ public class WorkerBee extends Animal {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.WASP_HURT.get();
 	}
 
@@ -215,18 +217,18 @@ public class WorkerBee extends Animal {
 	}
 */
 	@Override
-    protected void playStepSound(BlockPos pos, BlockState blockIn) {
+    protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState blockIn) {
         this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
 
 	@Override
-	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+	public @NonNull InteractionResult mobInteract(Player player, @NonNull InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!level().isClientSide() && !stack.isEmpty() && stack.getItem() ==  ModItems.NECTAR_COLLECTOR.get())
 			if (getNectarPoints() > 0) {
-				spawnAtLocation(new ItemStack(ModItems.NECTAR.get(), 2), 0.0F);
+				spawnAtLocation((ServerLevel) level(), new ItemStack(ModItems.NECTAR.get(), 2), 0.0F);
 				stack.getItem().damageItem(stack, 1, player, null);
-				stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+				stack.hurtAndBreak(1, player, hand.asEquipmentSlot());
 				setNectarPoints(getNectarPoints() - 2);
 				return InteractionResult.SUCCESS;
 			}
@@ -271,43 +273,29 @@ public class WorkerBee extends Animal {
 	}
 
 	@Override
-	public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
+	public AgeableMob getBreedOffspring(@NonNull ServerLevel level, @NonNull AgeableMob otherParent) {
 		return null;
 	}
 
 	@Override
-	  public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putInt("nectarPoints", getNectarPoints());
-		nbt.putBoolean("tameState", isTamedBee());
-		nbt.put("dropPoint", NbtUtils.writeBlockPos(getDropPoint()));
+	protected void addAdditionalSaveData(@NonNull ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putInt("nectarPoints", getNectarPoints());
+		output.putBoolean("tameState", isTamedBee());
+		output.store("dropPoint", BlockPos.CODEC, getDropPoint());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		setNectarPoints(nbt.getInt("nectarPoints"));
-		setTameState(nbt.getBoolean("tameState"));
-		Optional<BlockPos> optional = NbtUtils.readBlockPos(nbt, "dropPoint");
-		if(!optional.isEmpty())
-			setDropPoint(optional.get());
+	protected void readAdditionalSaveData(@NonNull ValueInput input) {
+		super.readAdditionalSaveData(input);
+		setNectarPoints(input.getIntOr("nectarPoints", 0));
+		setTameState(input.getBooleanOr("tameState", false));
+		Optional<BlockPos> dropPoint = input.	read("dropPoint", BlockPos.CODEC);
+		setDropPoint(dropPoint.orElse(BlockPos.ZERO));
 	}
 
 	@Override
-	public boolean isFood(ItemStack stack) {
+	public boolean isFood(@NonNull ItemStack stack) {
 		return false;
-	}
-
-	class EntityAIFlyingWander extends WaterAvoidingRandomStrollGoal {
-		public EntityAIFlyingWander(WorkerBee creatureIn, double speedIn, float chance) {
-			super(creatureIn, speedIn, chance);
-		}
-
-		@Nullable
-		protected Vec3 getPosition() {
-			Vec3 vec3 = this.mob.getViewVector(0.0F);
-			Vec3 vec31 = HoverRandomPos.getPos(this.mob, 8, 7, vec3.x, vec3.z, ((float) Math.PI / 2F), 2, 1);
-			return vec31 != null ? vec31 : AirAndWaterRandomPos.getPos(this.mob, 8, 4, -2, vec3.x, vec3.z, (float) Math.PI / 2F);
-		}
 	}
 }

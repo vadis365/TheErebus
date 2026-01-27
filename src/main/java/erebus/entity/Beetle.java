@@ -4,7 +4,7 @@ import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.Direction;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -24,21 +24,22 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.fluids.FluidUtil;
-import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.transfer.fluid.FluidUtil;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class Beetle extends Animal {
 
-	private static final EntityDataAccessor<Integer>  SKIN_TYPE = SynchedEntityData.defineId(Beetle.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(Beetle.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> TAMED = SynchedEntityData.defineId(Beetle.class, EntityDataSerializers.BOOLEAN);
 
 	public Beetle(EntityType<? extends Beetle> type, Level level) {
@@ -46,7 +47,7 @@ public class Beetle extends Animal {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(SKIN_TYPE, 0);
 		builder.define(TAMED, false);
@@ -92,7 +93,7 @@ public class Beetle extends Animal {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.BEETLE_HURT.get();
 	}
 
@@ -101,10 +102,10 @@ public class Beetle extends Animal {
 		return ModSounds.SQUISH.get();
 	}
 
-    @Override
-    protected void playStepSound(BlockPos pos, BlockState block) {
-        this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
-    }
+	@Override
+	protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
+		this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
+	}
 
 	@Override
 	public void tick() {
@@ -112,25 +113,15 @@ public class Beetle extends Animal {
 	}
 
 	@Override
-	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+	public @NonNull InteractionResult mobInteract(Player player, @NonNull InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		Optional<IFluidHandlerItem> fluidHandler = FluidUtil.getFluidHandler(stack);
-		if (fluidHandler.isPresent()) {
-			if (!stack.isEmpty() && stack.is(Items.BUCKET)/* && !player.isCreative()*/) {
-				stack.shrink(1);
-				ItemStack newStack = new ItemStack(ModItems.BEETLE_JUICE_BUCKET.get());
-				player.playSound(SoundEvents.BUCKET_FILL, 1.0F, 1.0F);
-				if (!player.getInventory().add(newStack))
-					player.drop(newStack, false);
-				return InteractionResult.SUCCESS;
-			}
-		}
-		
+		FluidUtil.interactWithFluidHandler(player, hand, getOnPos(), getCapability(Capabilities.Fluid.ENTITY, Direction.DOWN));
+
 		if (!stack.isEmpty() && stack.is(ModItems.TURNIP.get()) && !isInLove()) {
 			stack.shrink(1);
-			if(!getIsTame())
+			if (!getIsTame())
 				setTame(true);
-			if(getHealth() < getMaxHealth())
+			if (getHealth() < getMaxHealth())
 				heal(1);
 			setInLoveTime(600);
 			level().playSound(null, blockPosition(), ModSounds.BEETLE_LARVA_MUNCH.get(), SoundSource.NEUTRAL, 1.0F, 0.75F);
@@ -138,7 +129,7 @@ public class Beetle extends Animal {
 		}
 		if (!stack.isEmpty() && stack.is(ModItems.BEETLE_TAMING_AMULET.get())) {
 			stack.shrink(1);
-			if(!getIsTame())
+			if (!getIsTame())
 				setTame(true);
 			return InteractionResult.SUCCESS;
 		}
@@ -146,34 +137,17 @@ public class Beetle extends Animal {
 		return super.mobInteract(player, hand);
 	}
 
-/*	@Nullable
-	public FluidStack getFluid(final ItemStack container) {
-		return FluidUtil.getFluidContained(container);
-	}
-*/
-
-/* TODO LOOT TABLES
-	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		if (recentlyHit) {
-			int chance = rand.nextInt(3) + rand.nextInt(1 + looting);
-			int amount;
-			for (amount = 0; amount < chance; ++amount)
-				entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.PLATE_EXO.ordinal()), 0.0F);
-		}
-	}
-*/	
 	@Override
 	public boolean isFood(ItemStack stack) {
 		return !stack.isEmpty() && stack.is(ModItems.TURNIP.get());
 	}
 
 	@Override
-	public void spawnChildFromBreeding(ServerLevel level, Animal mate) {
-		BeetleLarva entityBeetleLarva = ModEntities.BEETLE_LARVA.get().create(this.level());
+	public void spawnChildFromBreeding(@NonNull ServerLevel level, @NonNull Animal mate) {
+		BeetleLarva entityBeetleLarva = ModEntities.BEETLE_LARVA.get().create(level(), EntitySpawnReason.BREEDING);
 		if (entityBeetleLarva != null) {
 			entityBeetleLarva.setLarvaType((byte) 1);
-			entityBeetleLarva.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
+			entityBeetleLarva.setPos(getX(), getY(), getZ());
 			level.addFreshEntity(entityBeetleLarva);
 		}
 		resetLove();
@@ -184,11 +158,11 @@ public class Beetle extends Animal {
 
 	@Override
 	public boolean isPersistenceRequired() {
-        return !getIsTame();
+		return !getIsTame();
 	}
 
 	@Override
-	public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
+	public AgeableMob getBreedOffspring(@NonNull ServerLevel level, @NonNull AgeableMob otherParent) {
 		return null;
 	}
 
@@ -197,7 +171,7 @@ public class Beetle extends Animal {
 	}
 
 	public int getSkin() {
-		return entityData.get(SKIN_TYPE).intValue();
+		return entityData.get(SKIN_TYPE);
 	}
 
 	public void setTame(boolean hasMated) {
@@ -210,7 +184,7 @@ public class Beetle extends Animal {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+	public SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
 		RandomSource randomsource = level.getRandom();
 		setSkin(randomsource.nextInt(51));
@@ -218,17 +192,16 @@ public class Beetle extends Animal {
 	}
 
 	@Override
-	  public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putInt("beetleSkin", getSkin());
-		nbt.putBoolean("isTamed", getIsTame());
+	public void addAdditionalSaveData(@NonNull ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putInt("beetleSkin", getSkin());
+		output.putBoolean("isTamed", getIsTame());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		setSkin(nbt.getInt("beetleSkin"));
-		setTame(nbt.getBoolean("isTamed"));
+	public void readAdditionalSaveData(@NonNull ValueInput input) {
+		super.readAdditionalSaveData(input);
+		setSkin(input.getIntOr("beetleSkin", 0));
+		setTame(input.getBooleanOr("isTamed", false));
 	}
-
 }

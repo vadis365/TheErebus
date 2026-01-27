@@ -35,39 +35,39 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 	private final int FUEL_SLOT = 1;
 	private final int RESULT_SLOT = 2;
 	protected final ContainerData dataAccess;
-	
+
 	public ComposterBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntities.COMPOSTER.get(), 3,  pos, state);
-		
-		 this.dataAccess = new ContainerData() {
-	            @Override
-	            public int get(int i) {
-	                switch (i) {
-                    case DATA_MOULD_PROGRESS:
-                        return getMouldProgressScaled(13);
-                    case DATA_COMPOSTING_PROGRESS:
-                        return getCompostingProgressScaled(32);
-                    case DATA_MOULD_MAX_TIME:
-                        return mouldMaxTime;
-                    default:
-                        return 0;
-	                }
-	            }
+		super(ModBlockEntities.COMPOSTER.get(), 3, pos, state);
 
-	            @Override
-	            public void set(int key, int value) {
-	                switch (key) {
-	                    case DATA_MOULD_PROGRESS -> mouldDurationTicks = value;
-	                    case DATA_COMPOSTING_PROGRESS -> compostingProgressTicks = value;
-	                    case DATA_MOULD_MAX_TIME -> mouldMaxTime = value;
-	                }
-	            }
+		this.dataAccess = new ContainerData() {
+			@Override
+			public int get(int i) {
+				switch (i) {
+					case DATA_MOULD_PROGRESS:
+						return getMouldProgressScaled(13);
+					case DATA_COMPOSTING_PROGRESS:
+						return getCompostingProgressScaled(32);
+					case DATA_MOULD_MAX_TIME:
+						return mouldMaxTime;
+					default:
+						return 0;
+				}
+			}
 
-	            @Override
-	            public int getCount() {
-	                return 3;
-	            }
-	        };
+			@Override
+			public void set(int key, int value) {
+				switch (key) {
+					case DATA_MOULD_PROGRESS -> mouldDurationTicks = value;
+					case DATA_COMPOSTING_PROGRESS -> compostingProgressTicks = value;
+					case DATA_MOULD_MAX_TIME -> mouldMaxTime = value;
+				}
+			}
+
+			@Override
+			public int getCount() {
+				return 3;
+			}
+		};
 	}
 
 	@Override
@@ -107,11 +107,11 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 
 	public static <T extends BlockEntity> void serverTick(Level level, BlockPos pos, BlockState state, T t) {
 		if (t instanceof ComposterBlockEntity tile) {
-		boolean shouldUpdate = tile.mouldDurationTicks > 0;
-		boolean isDirty = false;
+			boolean shouldUpdate = tile.mouldDurationTicks > 0;
+			boolean isDirty = false;
 
-		if (tile.mouldDurationTicks > 0)
-			tile.mouldDurationTicks--;
+			if (tile.mouldDurationTicks > 0)
+				tile.mouldDurationTicks--;
 
 			if (tile.mouldDurationTicks != 0 || !tile.getItems().get(1).isEmpty() && !tile.getItems().get(0).isEmpty()) {
 				if (tile.mouldDurationTicks == 0 && tile.canCompost()) {
@@ -124,7 +124,7 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 							tile.getItems().get(1).shrink(1);
 
 							if (tile.getItems().get(1).getCount() == 0)
-								tile.getItems().set(1, tile.getItems().get(1).getItem().getCraftingRemainder(tile.getItems().get(1)));
+								tile.getItems().set(1, tile.getItems().get(1).getItem().getCraftingRemainder(tile.getItems().get(1)).create());
 						}
 					}
 				}
@@ -145,11 +145,11 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 				isDirty = true;
 			}
 
-		if (isDirty)
-			tile.updateBlock();
+			if (isDirty)
+				tile.updateBlock();
 		}
 	}
-	
+
 	public void updateBlock() {
 		getLevel().sendBlockUpdated(worldPosition, getLevel().getBlockState(worldPosition), getLevel().getBlockState(worldPosition), 3);
 	}
@@ -182,7 +182,7 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 				getItems().set(0, ItemStack.EMPTY);
 		}
 	}
-	
+
 	public ItemStack isCompostable(ItemStack itemStack) {
 		return itemStack.is(ModItemTags.COMPOSTABLE) ? new ItemStack(ModItems.COMPOST.get()) : ItemStack.EMPTY;
 	}
@@ -214,7 +214,7 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 
 	@Override
 	public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
-		return side == Direction.DOWN ? new int[] { RESULT_SLOT} : new int[] {FUEL_SLOT, SMELT_SLOT };
+		return side == Direction.DOWN ? new int[]{RESULT_SLOT} : new int[]{FUEL_SLOT, SMELT_SLOT};
 	}
 
 	@Override
@@ -226,16 +226,16 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 	public boolean canTakeItemThroughFace(int index, @NonNull ItemStack stack, @NonNull Direction direction) {
 		return direction == Direction.DOWN && index == RESULT_SLOT && stack.is(ModItems.COMPOST.get());
 	}
-	
+
 	@Override
 	public boolean canPlaceItem(int slot, @NonNull ItemStack stack) {
-        return isItemValidForSlot(slot, stack);
-    }
-	
+		return isItemValidForSlot(slot, stack);
+	}
+
 	@Override
 	public boolean canTakeItem(@NonNull Container target, int slot, @NonNull ItemStack stack) {
-        return target != null && slot == RESULT_SLOT && stack.is(ModItems.COMPOST.get());
-    }
+		return slot == RESULT_SLOT && stack.is(ModItems.COMPOST.get());
+	}
 
 	@Override
 	public @NonNull ItemStack removeItemNoUpdate(int slot) {
@@ -246,5 +246,4 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 	public @NonNull Component getDisplayName() {
 		return Component.translatable("erebus.container.composter");
 	}
-
 }

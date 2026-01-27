@@ -2,6 +2,7 @@ package erebus.entity;
 
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -17,11 +18,12 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gamerules.GameRules;
+import org.jspecify.annotations.NonNull;
 
 public class BombardierBeetle extends Monster {
 	private final float explosionRadius = 2;
@@ -84,52 +86,43 @@ public class BombardierBeetle extends Monster {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.BOMBARDIER_BEETLE_HURT.get();
 	}
 
 	@Override
-	protected SoundEvent getDeathSound() {
+	protected @NonNull SoundEvent getDeathSound() {
 		return ModSounds.SQUISH.get();
 	}
 
     @Override
-    protected void playStepSound(BlockPos pos, BlockState block) {
+    protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
         playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
-/*
+
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		dropItem(Items.GUNPOWDER, 1);
-		dropItem(Items.BLAZE_POWDER, 1);
-		int var3 = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
-		for (int a = 0; a < var3; ++a)
-			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.PLATE_EXO.ordinal()), 0.0F);
-	}
-*/
-	@Override
-	public boolean doHurtTarget(Entity entity) {
+	public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity entity) {
 		if (hasLineOfSight(entity)) {
-			if (super.doHurtTarget(entity)) {
-				if (level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING))
-					level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), 1.0F, Level.ExplosionInteraction.NONE).finalizeExplosion(true);
+			if (super.doHurtTarget(level, entity)) {
+				if (level.getGameRules().get(GameRules.MOB_GRIEFING))
+					level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), 1.0F, Level.ExplosionInteraction.NONE);
 			}
 		}
 		return false;
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float damage) {
+	public boolean hurtServer(@NonNull ServerLevel level, DamageSource source, float damage) {
 		if (source.is(DamageTypes.EXPLOSION) || source.is(DamageTypes.PLAYER_EXPLOSION))
 			return false;
-		return super.hurt(source, damage);
+		return super.hurtServer(level, source, damage);
 	}
 
 	private void clearpath() {
 		BlockPos infront = blockPosition().relative(this.getDirection(), 1);
 		//boolean rule = level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
 		//if (ConfigHandler.INSTANCE.bombardierBlockDestroy == true)
-		level().explode(this, infront.getX(), infront.getY() + 1, infront.getZ(), explosionRadius, Level.ExplosionInteraction.BLOCK).finalizeExplosion(true);
+		level().explode(this, infront.getX(), infront.getY() + 1, infront.getZ(), explosionRadius, Level.ExplosionInteraction.BLOCK);
 	}
 
 }

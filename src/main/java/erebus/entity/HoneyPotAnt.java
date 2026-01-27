@@ -3,7 +3,6 @@ package erebus.entity;
 import erebus.registries.ModSounds;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -26,7 +25,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import org.jspecify.annotations.NonNull;
 
 public class HoneyPotAnt extends Animal {
 
@@ -38,7 +39,7 @@ public class HoneyPotAnt extends Animal {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(HONEY_BELLY, 0F);
 		builder.define(IS_TAME, false);
@@ -87,7 +88,7 @@ public class HoneyPotAnt extends Animal {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.ANT_HURT.get();
 	}
 
@@ -97,12 +98,12 @@ public class HoneyPotAnt extends Animal {
 	}
 
     @Override
-    protected void playStepSound(BlockPos pos, BlockState block) {
+    protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
         this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
 
 	@Override
-	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+	public @NonNull InteractionResult mobInteract(Player player, @NonNull InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 
 		if (!stack.isEmpty() && stack.is(Items.SUGAR)) {
@@ -117,8 +118,8 @@ public class HoneyPotAnt extends Animal {
 		} else if (!stack.isEmpty() && stack.is(ModItems.NECTAR_COLLECTOR.get())) {
 			if (getHoneyBelly() > 0 && isTamedAnt()) {
 				if (!level().isClientSide()) {
-					spawnAtLocation(new ItemStack(ModItems.NECTAR.get(), (int) (getHoneyBelly() * 10)));
-					stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+					spawnAtLocation((ServerLevel) level(), new ItemStack(ModItems.NECTAR.get(), (int) (getHoneyBelly() * 10)));
+					stack.hurtAndBreak(1, player, hand.asEquipmentSlot());
 					setHoneyBelly(0);
 				}
 				return InteractionResult.SUCCESS;
@@ -135,29 +136,18 @@ public class HoneyPotAnt extends Animal {
 		return super.mobInteract(player, hand);
 	}
 
-/* TODO LOOT TABLES
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		if (isTamed()) {
-			if (getHoneyBelly() > 0)
-				entityDropItem(new ItemStack(ModItems.MATERIALS, (int) (getHoneyBelly() * 10), ItemMaterials.EnumErebusMaterialsType.NECTAR.ordinal()), 0.0F);
-		} else
-			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, ItemMaterials.EnumErebusMaterialsType.NECTAR.ordinal()), 0.0F);
-	}
-*/
-
-	@Override
-	public boolean isFood(ItemStack stack) {
+	public boolean isFood(@NonNull ItemStack stack) {
 		return false;
 	}
 
 	@Override
-	public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
+	public AgeableMob getBreedOffspring(@NonNull ServerLevel level, @NonNull AgeableMob otherParent) {
 		return null;
 	}
 
 	@Override
-	public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> key) {
+	public void onSyncedDataUpdated(@NonNull EntityDataAccessor<?> key) {
 		if (HONEY_BELLY.equals(key)) {
 			refreshDimensions();
 			setYRot(this.yHeadRot);
@@ -176,7 +166,7 @@ public class HoneyPotAnt extends Animal {
 	}
 
 	@Override
-	public @NotNull EntityDimensions getDefaultDimensions(@NotNull Pose pose) {
+	public @NonNull EntityDimensions getDefaultDimensions(@NonNull Pose pose) {
 		return super.getDefaultDimensions(pose).scale(1F + getHoneyBelly() * 0.1F, 1F);
 	}
 
@@ -199,17 +189,17 @@ public class HoneyPotAnt extends Animal {
     }
 
 	@Override
-	  public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putFloat("size", getHoneyBelly());
-		nbt.putBoolean("is_tame", isTamedAnt());
+	  public void addAdditionalSaveData(@NonNull ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putFloat("size", getHoneyBelly());
+		output.putBoolean("is_tame", isTamedAnt());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		setHoneyBelly(nbt.getFloat("size"));
-		setTamedAnt(nbt.getBoolean("is_tame"));
+	public void readAdditionalSaveData(@NonNull ValueInput input) {
+		super.readAdditionalSaveData(input);
+		setHoneyBelly(input.getFloatOr("size", 0));
+		setTamedAnt(input.getBooleanOr("is_tame", false));
 	}
 
 }

@@ -22,7 +22,7 @@ public class BlackAntHarvestCrops extends BlackAntBlockHome {
 
 	@Override
 	public boolean canUse() {
-		return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.HARVESTER ? !blackAnt.getMoveControl().hasWanted() && super.canUse() : false;
+		return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.HARVESTER && !blackAnt.getMoveControl().hasWanted() && super.canUse();
 	}
 
 	@Override

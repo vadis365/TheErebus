@@ -1,14 +1,12 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.AnimatedBlock;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.AnimatedBlockRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class AnimatedBlockModel<T extends AnimatedBlock> extends HierarchicalModel<T> {
+public class AnimatedBlockModel extends EntityModel<AnimatedBlockRenderState> {
 	public ModelPart root;
 	public ModelPart LBL1;
 	public ModelPart LBL2;
@@ -36,7 +34,8 @@ public class AnimatedBlockModel<T extends AnimatedBlock> extends HierarchicalMod
 	public ModelPart RFL4;
 
 	public AnimatedBlockModel(ModelPart root) {
-		this.root = root;
+        super(root);
+        this.root = root;
 		LBL1 = root.getChild("root").getChild("LBL1");
 		LBL2 = root.getChild("root").getChild("LBL2");
 		LBL3 = root.getChild("root").getChild("LBL3");
@@ -183,40 +182,31 @@ public class AnimatedBlockModel<T extends AnimatedBlock> extends HierarchicalMod
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		root().render(stack, consumer, light, overlay, colour);
-	}
-
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		LBL1.xRot = (float) (Math.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAmount + 0.25F);
-		LBL2.xRot = (float) (Math.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAmount + 0.25F);
-		LBL3.xRot = (float) (Math.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAmount + 0.3F);
-		LBL4.xRot = (float) (Math.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAmount + 0.334F);
-		LML1.xRot = (float) (Math.cos(limbSwing * 2.0F) * 0.7F * limbSwingAmount);
-		LML2.xRot = (float) (Math.cos(limbSwing * 2.0F) * 0.7F * limbSwingAmount);
-		LML3.xRot = (float) (Math.cos(limbSwing * 2.0F) * 0.7F * limbSwingAmount);
-		LML4.xRot = (float) (Math.cos(limbSwing * 2.0F) * 0.7F * limbSwingAmount);
-		LFL1.xRot = (float) (Math.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAmount - 0.25F);
-		LFL2.xRot = (float) (Math.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAmount - 0.25F);
-		LFL3.xRot = (float) (Math.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAmount - 0.3F);
-		LFL4.xRot = (float) (Math.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAmount - 0.334F);
-		RBL1.xRot = (float) (Math.cos(limbSwing * 2.0F) * 0.7F * limbSwingAmount + 0.25F);
-		RBL2.xRot = (float) (Math.cos(limbSwing * 2.0F) * 0.7F * limbSwingAmount + 0.25F);
-		RBL3.xRot = (float) (Math.cos(limbSwing * 2.0F) * 0.7F * limbSwingAmount + 0.3F);
-		RBL4.xRot = (float) (Math.cos(limbSwing * 2.0F) * 0.7F * limbSwingAmount + 0.334F);
-		RML1.xRot = (float) (Math.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAmount);
-		RML2.xRot = (float) (Math.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAmount);
-		RML3.xRot = (float) (Math.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAmount);
-		RML4.xRot = (float) (Math.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAmount);
-		RFL1.xRot = (float) (Math.cos(limbSwing * 2.0F) * 0.7F * limbSwingAmount - 0.25F);
-		RFL2.xRot = (float) (Math.cos(limbSwing * 2.0F) * 0.7F * limbSwingAmount - 0.25F);
-		RFL3.xRot = (float) (Math.cos(limbSwing * 2.0F) * 0.7F * limbSwingAmount - 0.3F);
-		RFL4.xRot = (float) (Math.cos(limbSwing * 2.0F) * 0.7F * limbSwingAmount - 0.334F);
-	}
-
-	@Override
-	public ModelPart root() {
-		return root;
+	public void setupAnim(AnimatedBlockRenderState state) {
+		super.setupAnim(state);
+		LBL1.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed + 0.25F);
+		LBL2.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed + 0.25F);
+		LBL3.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed + 0.3F);
+		LBL4.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed + 0.334F);
+		LML1.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed);
+		LML2.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed);
+		LML3.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed);
+		LML4.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed);
+		LFL1.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed - 0.25F);
+		LFL2.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed - 0.25F);
+		LFL3.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed - 0.3F);
+		LFL4.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed - 0.334F);
+		RBL1.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed + 0.25F);
+		RBL2.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed + 0.25F);
+		RBL3.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed + 0.3F);
+		RBL4.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed + 0.334F);
+		RML1.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed);
+		RML2.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed);
+		RML3.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed);
+		RML4.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed);
+		RFL1.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed - 0.25F);
+		RFL2.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed - 0.25F);
+		RFL3.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed - 0.3F);
+		RFL4.xRot = (float) (Math.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed - 0.334F);
 	}
 }

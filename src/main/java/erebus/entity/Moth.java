@@ -2,10 +2,10 @@ package erebus.entity;
 
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -19,7 +19,10 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -33,7 +36,7 @@ public class Moth extends AmbientCreature {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(SKIN_TYPE, 0);
 	}
@@ -65,11 +68,11 @@ public class Moth extends AmbientCreature {
 		setDeltaMovement(this.getDeltaMovement().multiply(1.0, 0.6, 1.0));
 	}
 
-    @Override
-    protected void customServerAiStep() {
-        super.customServerAiStep();
+	@Override
+    protected void customServerAiStep(@NonNull ServerLevel level) {
+        super.customServerAiStep(level);
 
-		if (this.targetPosition != null && (!this.level().isEmptyBlock(this.targetPosition) || this.targetPosition.getY() <= this.level().getMinBuildHeight())) {
+		if (this.targetPosition != null && (!this.level().isEmptyBlock(this.targetPosition) || this.targetPosition.getY() <= this.level().getMinY())) {
 			this.targetPosition = null;
 		}
 
@@ -98,7 +101,7 @@ public class Moth extends AmbientCreature {
     }
 
     @Override
-    protected void doPush(Entity entity) {
+    protected void doPush(@NonNull Entity entity) {
     }
 
     @Override
@@ -106,7 +109,7 @@ public class Moth extends AmbientCreature {
     }
 
     @Override
-    protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
+    protected void checkFallDamage(double y, boolean onGround, @NonNull BlockState state, @NonNull BlockPos pos) {
     }
 
     @Override
@@ -116,7 +119,7 @@ public class Moth extends AmbientCreature {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		setSkin(level.getRandom().nextInt(3));
 		return spawnGroupData;
 	}
@@ -130,15 +133,15 @@ public class Moth extends AmbientCreature {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putInt("skin", getSkin());
+	public void addAdditionalSaveData(@NonNull ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putInt("skin", getSkin());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		setSkin(nbt.getInt("skin"));
+	public void readAdditionalSaveData(@NonNull ValueInput input) {
+		super.readAdditionalSaveData(input);
+		setSkin(input.getIntOr("skin", 0));
 	}
 
 	public static boolean canSpawnHere(EntityType<Moth> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {

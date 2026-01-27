@@ -1,18 +1,17 @@
 package erebus.entity;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.entity.PartEntity;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public class GenericPartEntity<T extends Entity> extends PartEntity<T> {
 
@@ -25,17 +24,22 @@ public class GenericPartEntity<T extends Entity> extends PartEntity<T> {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 
 	}
 
 	@Override
-	protected void readAdditionalSaveData(CompoundTag compound) {
+	public boolean hurtServer(@NonNull ServerLevel serverLevel, @NonNull DamageSource damageSource, float damage) {
+		return damage > 0;
+	}
+
+	@Override
+	protected void readAdditionalSaveData(@NonNull ValueInput input) {
 
 	}
 
 	@Override
-	protected void addAdditionalSaveData(CompoundTag compound) {
+	protected void addAdditionalSaveData(@NonNull ValueOutput output) {
 
 	}
 
@@ -55,17 +59,7 @@ public class GenericPartEntity<T extends Entity> extends PartEntity<T> {
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float amount) {
-		return this.getParent().hurt(source, amount);
-	}
-
-	@Override
-	public InteractionResult interact(Player player, InteractionHand hand) {
-		return this.getParent().interact(player, hand);
-	}
-
-	@Override
-	public boolean is(Entity entity) {
+	public boolean is(@NonNull Entity entity) {
 		return this == entity || this.getParent() == entity;
 	}
 
@@ -75,17 +69,12 @@ public class GenericPartEntity<T extends Entity> extends PartEntity<T> {
 	}
 
 	@Override
-	public @Nullable ItemStack getPickedResult(HitResult target) {
-		return this.getParent().getPickedResult(target);
-	}
-
-	@Override
 	public boolean shouldBeSaved() {
 		return false;
 	}
 
 	@Override
-	public EntityDimensions getDimensions(Pose pose) {
+	public @NonNull EntityDimensions getDimensions(@NonNull Pose pose) {
 		return this.size;
 	}
 

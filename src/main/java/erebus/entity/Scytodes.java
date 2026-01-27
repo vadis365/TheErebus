@@ -4,10 +4,10 @@ import erebus.entity.ai.ThrowWebAttackGoal;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -30,8 +30,8 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Spider;
-import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.monster.spider.Spider;
+import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -39,7 +39,10 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -53,7 +56,7 @@ public class Scytodes extends Monster {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(SKIN_TYPE, 0);
 		builder.define(CLIMBING, (byte)0);
@@ -69,8 +72,8 @@ public class Scytodes extends Monster {
 		goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		goalSelector.addGoal(6,  new RandomLookAroundGoal(this));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this));
-		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true, true));
-		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Villager>(this, Villager.class, true, true));
+		targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
+		targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Villager.class, true, true));
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -82,7 +85,7 @@ public class Scytodes extends Monster {
 	}
 
     @Override
-    protected PathNavigation createNavigation(Level level) {
+    protected @NonNull PathNavigation createNavigation(@NonNull Level level) {
         return new WallClimberNavigation(this, level);
     }
 
@@ -109,12 +112,12 @@ public class Scytodes extends Monster {
     }
 
 	@Override
-	public boolean causeFallDamage(float distance, float damageMultiplier, DamageSource damageSource) {
+	public boolean causeFallDamage(double fallDistance, float damageModifier, @NonNull DamageSource damageSource) {
 		return false;
 	}
 
     @Override
-    public void makeStuckInBlock(BlockState state, Vec3 motionMultiplier) {
+    public void makeStuckInBlock(BlockState state, @NonNull Vec3 motionMultiplier) {
         if (!state.is(Blocks.COBWEB))
             super.makeStuckInBlock(state, motionMultiplier);
     }
@@ -138,16 +141,16 @@ public class Scytodes extends Monster {
     }
 
     @Override
-    public boolean canBeAffected(MobEffectInstance potioneffect) {
-		 return (!potioneffect.is(MobEffects.POISON) && !potioneffect.is(MobEffects.WITHER) && super.canBeAffected(potioneffect));
+    public boolean canBeAffected(MobEffectInstance potionEffect) {
+		 return (!potionEffect.is(MobEffects.POISON) && !potionEffect.is(MobEffects.WITHER) && super.canBeAffected(potionEffect));
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float damage) {
+	public boolean hurtServer(@NonNull ServerLevel level, DamageSource source, float damage) {
 		if (source.is(DamageTypes.IN_WALL)) {
 			return false;
 		}
-		return super.hurt(source, damage);
+		return super.hurtServer(level, source, damage);
 	}
 
     @Override
@@ -156,31 +159,31 @@ public class Scytodes extends Monster {
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource) {
+    protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource damageSource) {
         return SoundEvents.SPIDER_HURT;
     }
 
     @Override
-    protected SoundEvent getDeathSound() {
+    protected @NonNull SoundEvent getDeathSound() {
         return SoundEvents.SPIDER_DEATH;
     }
 
     @Override
-    protected void playStepSound(BlockPos pos, BlockState block) {
+    protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
         playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+	public SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
 		RandomSource randomsource = level.getRandom();
 		setSkin(level.getRandom().nextInt(4));
 
 		if (randomsource.nextInt(100) == 0) {
-			MoneySpider moneyspider = ModEntities.MONEY_SPIDER.get().create(this.level());
+			MoneySpider moneyspider = ModEntities.MONEY_SPIDER.get().create((Level) level, EntitySpawnReason.NATURAL);
 			if (moneyspider != null) {
-				moneyspider.moveTo(getX(), getY(), getZ(), getYRot(), 0.0F);
+				moneyspider.moveTowardsClosestSpace(getX(), getY(), getZ());
 				moneyspider.finalizeSpawn(level, difficulty, spawnType, null);
 				moneyspider.startRiding(this);
 			}
@@ -201,7 +204,7 @@ public class Scytodes extends Monster {
 	}
 
 	@Override
-	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
+	public void positionRider(@NonNull Entity entity, Entity.@NonNull MoveFunction moveFunction) {
 		super.positionRider(entity, moveFunction);
 		if (entity instanceof MoneySpider) {
 			double a = Math.toRadians(yBodyRot);
@@ -220,14 +223,14 @@ public class Scytodes extends Monster {
 	}
 
 	@Override
-	  public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putInt("skin", getSkin());
+	  public void addAdditionalSaveData(ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putInt("skin", getSkin());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		setSkin(nbt.getInt("skin"));
+	public void readAdditionalSaveData(ValueInput input) {
+		super.readAdditionalSaveData(input);
+		setSkin(input.getIntOr("skin", 0));
 	}
 }

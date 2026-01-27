@@ -5,10 +5,10 @@ import erebus.utils.Spiral;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.phys.AABB;
 
 import java.awt.*;
@@ -44,7 +44,7 @@ public abstract class BlackAntBlockHome extends Goal {
 
 	@Override
 	public boolean canUse() {
-		return entity.level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) && eatTicks == 0;
+		return getServerLevel(entity.level()).getGameRules().get(GameRules.MOB_GRIEFING) && eatTicks == 0;
 	}
 
 	@Override

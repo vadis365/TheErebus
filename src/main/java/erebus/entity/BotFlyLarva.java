@@ -1,11 +1,12 @@
 package erebus.entity;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,9 +14,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
@@ -24,22 +23,27 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.stream.Stream;
 
 public class BotFlyLarva extends Mob {
 	private static final EntityDataAccessor<Byte> PARASITE_COUNT = SynchedEntityData.defineId(BotFlyLarva.class, EntityDataSerializers.BYTE);
-	private static final EntityDataAccessor<Optional<UUID>> INFESTED_PLAYER = SynchedEntityData.defineId(BotFlyLarva.class, EntityDataSerializers.OPTIONAL_UUID);
-	
+	private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> INFESTED_PLAYER = SynchedEntityData.defineId(BotFlyLarva.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
+	private static final Codec<List<EntityReference<LivingEntity>>> INFESTED_PLAYER_CODEC = EntityReference.<LivingEntity>codec().listOf();
+
 	public BotFlyLarva(EntityType<? extends BotFlyLarva> type, Level level) {
 		super(type, level);
 		//tasks.addTask(0, new EntityAIWander(this, 0.3D));
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(PARASITE_COUNT, (byte) 1);
 		builder.define(INFESTED_PLAYER, Optional.empty());
@@ -54,7 +58,7 @@ public class BotFlyLarva extends Mob {
 	}
 
 	@Override
-	public boolean canBeCollidedWith() {
+	public boolean canBeCollidedWith(Entity other) {
 		return true;
 	}
 
@@ -64,7 +68,7 @@ public class BotFlyLarva extends Mob {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
+	protected SoundEvent getHurtSound(@NonNull DamageSource p_184601_1_) {
 		return SoundEvents.SILVERFISH_HURT;
 	}
 
@@ -74,20 +78,20 @@ public class BotFlyLarva extends Mob {
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, BlockState block) {
+	protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
 		this.playSound(SoundEvents.SILVERFISH_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
-	public void playerTouch(Player player) {
+	public void playerTouch(@NonNull Player player) {
 		super.playerTouch(player);
 		if (!level().isClientSide())
 			if (player.getPassengers().isEmpty()) {
-				startRiding(player, true);
-				setPlayerUUID(player.getUUID()); // may not work
+				startRiding(player, true, true);
+				infectPlayer(EntityReference.of(player));
 			}
 	}
-		
+
 	@Override
 	public void tick() {
 		super.tick();
@@ -95,20 +99,20 @@ public class BotFlyLarva extends Mob {
 			setRot(getVehicle().getYRot(), 0F);
 			if (!level().isClientSide()) {
 				//TODO
-			//	if(getVehicle().isCrouching()) //remove after test
+				//	if(getVehicle().isCrouching()) //remove after test
 				//	setABitDead();
 				//
 				if (getParasiteCount() > 0 && random.nextInt(180 / getParasiteCount()) == 0) {
 					byte duration = (byte) (getParasiteCount() * 5);
 					((LivingEntity) getVehicle()).addEffect(new MobEffectInstance(MobEffects.WEAKNESS, duration * 20, 0));
-					((LivingEntity) getVehicle()).addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, duration * 20, 0));
+					((LivingEntity) getVehicle()).addEffect(new MobEffectInstance(MobEffects.MINING_FATIGUE, duration * 20, 0));
 					((LivingEntity) getVehicle()).addEffect(new MobEffectInstance(MobEffects.HUNGER, duration * 20, 0));
 				}
 				if (getParasiteCount() == 0)
-					kill();
+					kill((ServerLevel) level());
 			}
 		}
-		
+
 	}
 
 	public void setABitDead() {
@@ -116,15 +120,15 @@ public class BotFlyLarva extends Mob {
 		if (level().isClientSide())
 			level().addParticle(ParticleTypes.SMOKE, getX(), getY(), getZ(), 0.0D, 0.0D, 0.0D);
 		if (!level().isClientSide())
-			spawnAtLocation(new ItemStack(Items.SLIME_BALL), 0.0F);
+			spawnAtLocation((ServerLevel) level(), new ItemStack(Items.SLIME_BALL), 0.0F);
 		setParasiteCount((byte) (getParasiteCount() - 1));
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float damage) {
+	public boolean hurtServer(@NonNull ServerLevel level, DamageSource source, float damage) {
 		if (source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.DROWN))
 			return false;
-		return super.hurt(source, damage);
+		return super.hurtServer(level, source, damage);
 	}
 
 	public void setParasiteCount(byte parasites) {
@@ -135,38 +139,35 @@ public class BotFlyLarva extends Mob {
 		return entityData.get(PARASITE_COUNT);
 	}
 
-	private void setPlayerUUID(@Nullable UUID uuidIn) {
-		entityData.set(INFESTED_PLAYER, Optional.ofNullable(uuidIn));
-	}
-	
-    @Nullable
-	public UUID getPlayerUUID() {
-		return entityData.get(INFESTED_PLAYER).orElse(null);
+	private void infectPlayer(EntityReference<LivingEntity> player) {
+		entityData.set(INFESTED_PLAYER, Optional.of(player));
 	}
 
- @Nullable
-	public Player playerName() {
-		return level().getPlayerByUUID(getPlayerUUID());
+	private Stream<EntityReference<LivingEntity>> getInfectedPlayerStream() {
+		return entityData.get(INFESTED_PLAYER).stream();
 	}
 
-	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		setParasiteCount(nbt.getByte("parasites"));
-		if (nbt.hasUUID("playerName")) {
-			setPlayerUUID(nbt.getUUID("playerName"));
-			if (!level().isClientSide())
-				if (!playerName().isVehicle()) {
-					startRiding(playerName(), true);
-				}
-		}
+	@Nullable
+	public Player getPlayer() {
+		if(entityData.get(INFESTED_PLAYER).isEmpty()) return null;
+		return level().getPlayerByUUID(entityData.get(INFESTED_PLAYER).get().getUUID());
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putByte("parasites", getParasiteCount());
-		 if (getPlayerUUID() != null)
-			 nbt.putUUID("playerName", getPlayerUUID());
+	public void readAdditionalSaveData(@NonNull ValueInput input) {
+		super.readAdditionalSaveData(input);
+		setParasiteCount(input.getByteOr("parasites", (byte) 0));
+		input.read("playerName", INFESTED_PLAYER_CODEC).orElse(List.of()).forEach(this::infectPlayer);
+		if (!level().isClientSide())
+			if (!getPlayer().isVehicle()) {
+				startRiding(getPlayer(), true, true);
+			}
+	}
+
+	@Override
+	public void addAdditionalSaveData(@NonNull ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.store("playerName", INFESTED_PLAYER_CODEC, getInfectedPlayerStream().toList());
+		output.putByte("parasites", getParasiteCount());
 	}
 }

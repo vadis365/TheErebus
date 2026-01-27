@@ -38,7 +38,7 @@ public class WandOfPreservationItem extends Item {
             stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
             level.playSound(player, player.blockPosition(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 0.5F, 0.4F / level.getRandom().nextFloat() * 0.4F + 0.8F);
 
-            AmberStar star = new AmberStar(level, player);
+            AmberStar star = new AmberStar(level);
             star.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
             level.addFreshEntity(star);
         }

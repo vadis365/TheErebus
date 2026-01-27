@@ -23,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.NonNull;
 
 public class ZombieAnt extends Monster {
 
@@ -55,31 +56,19 @@ public class ZombieAnt extends Monster {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.ANT_HURT.get();
 	}
 
 	@Override
-	protected SoundEvent getDeathSound() {
+	protected @NonNull SoundEvent getDeathSound() {
 		return ModSounds.SQUISH.get();
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, BlockState block) {
+	protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
 		this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
 	}
-
-	//TODO Loot tables
-	/*
-		@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		int amount = 1 + rand.nextInt(3) + rand.nextInt(1 + looting);
-		for (int a = 0; a < amount; ++a)
-			entityDropItem(ItemMaterials.EnumErebusMaterialsType.PLATE_ZOMBIE_ANT.createStack(), 0.0F);
-		if (rand.nextInt(5) == 0)
-			entityDropItem(ItemMaterials.EnumErebusMaterialsType.ANT_PHEROMONES.createStack(), 0.0F);
-	}
-	 */
 
 	public static boolean canSpawnHere(EntityType<ZombieAnt> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		float light = level.getLightLevelDependentMagicValue(pos);

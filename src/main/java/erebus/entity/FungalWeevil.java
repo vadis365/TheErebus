@@ -2,6 +2,7 @@ package erebus.entity;
 
 import erebus.client.particle.ClientParticles;
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.tags.ModBiomeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -31,7 +32,7 @@ public class FungalWeevil extends Weevil {
 			if (random.nextInt(200) == 0) {
 				BlockState state = level().getBlockState(blockPosition().below());
 				// TODO Add all biomes to Tags as individuals just in case we need them for anything else later
-				if (level().isEmptyBlock(blockPosition()) && level().getBiome(blockPosition()).is(ModTags.IS_FUNGAL_FOREST) && state.is(BlockTags.DIRT)) {
+				if (level().isEmptyBlock(blockPosition()) && level().getBiome(blockPosition()).is(ModBiomeTags.IS_FUNGAL_FOREST) && state.is(BlockTags.DIRT)) {
 					// TODO Replace this to pull one of the random mushrooms from its loot table drop and plant it as a block
 					level().setBlockAndUpdate(blockPosition(), getMushroomToPlace());
 				}
@@ -52,18 +53,4 @@ public class FungalWeevil extends Weevil {
     	default : return Blocks.BROWN_MUSHROOM.defaultBlockState();
     	}
     }
-
-	/* TODO LOOT TABLES
-	@Override
-	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		int mush = rand.nextInt(7);
-		if (mush == 0)
-			entityDropItem(new ItemStack(Blocks.BROWN_MUSHROOM), 0F);
-		if (mush == 1)
-			entityDropItem(new ItemStack(Blocks.RED_MUSHROOM), 0F);
-		else
-			entityDropItem(new ItemStack(BiomeDecoratorFungalForest.MUSHROOMS[rand.nextInt(BiomeDecoratorFungalForest.MUSHROOMS.length)]), 0F);
-	}
-*/
 }

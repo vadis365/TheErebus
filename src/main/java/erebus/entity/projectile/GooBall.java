@@ -4,6 +4,7 @@ import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.SynchedEntityData.Builder;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -23,10 +24,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.jspecify.annotations.NonNull;
 
 public class GooBall extends ThrowableProjectile implements ItemSupplier {
-
-	private float damage;
 
 	public GooBall(EntityType<GooBall> type, Level level) {
 		super(type, level);
@@ -37,7 +37,6 @@ public class GooBall extends ThrowableProjectile implements ItemSupplier {
 		this.setOwner(owner);
 		setXRot(owner.getXRot());
 		setYRot(owner.getYRot());
-		damage = damageCaused;
 	}
 
 	public GooBall(double x, double y, double z, Level level) {
@@ -63,14 +62,14 @@ public class GooBall extends ThrowableProjectile implements ItemSupplier {
 			Entity entity = entityhitresult.getEntity();
 			if (entity instanceof Player) {
 				if (!level().isClientSide()) {
-					((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5 * 20, 3));
-					kill();
+					((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 5 * 20, 3));
+					kill((ServerLevel) level());
 				}
 			}
 		}
 
 		if (typeOfHit == HitResult.Type.BLOCK)
-			kill();
+			kill((ServerLevel) level());
 
 		if (level().isClientSide())
 			level().levelEvent(null, 2001, blockPosition(), Block.getId(Blocks.SLIME_BLOCK.defaultBlockState()));
@@ -79,7 +78,7 @@ public class GooBall extends ThrowableProjectile implements ItemSupplier {
 	}
 
 	@Override
-	public boolean canBeCollidedWith() {
+	public boolean canBeCollidedWith(Entity other) {
 		return false;
 	}
 
@@ -97,16 +96,16 @@ public class GooBall extends ThrowableProjectile implements ItemSupplier {
 			velY = (rand.nextFloat() - 0.5D) * 0.125D;
 			velZ = rand.nextFloat() * 1.0F * motionZ;
 			velX = rand.nextFloat() * 1.0F * motionX;
-			level.addParticle(ParticleTypes.ITEM_SLIME, false, x + 0.5D, y, z + 0.5D, velX, velY, velZ);
+			level.addParticle(ParticleTypes.ITEM_SLIME, x + 0.5D, y, z + 0.5D, velX, velY, velZ);
 		}
 	}
 
 	@Override
-	public ItemStack getItem() {
+	public @NonNull ItemStack getItem() {
 		return new ItemStack(Items.SLIME_BALL);
 	}
 
 	@Override
-	protected void defineSynchedData(Builder builder) {
+	protected void defineSynchedData(@NonNull Builder builder) {
 	}
 }

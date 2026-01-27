@@ -15,11 +15,12 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.NonNull;
 
 public class BedBug extends Monster {
 
@@ -59,27 +60,19 @@ public class BedBug extends Monster {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.BEETLE_HURT.get();
 	}
 
 	@Override
-	protected SoundEvent getDeathSound() {
+	protected @NonNull SoundEvent getDeathSound() {
 		return ModSounds.SQUISH.get();
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, BlockState block) {
+	protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
 		this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
 	}
-
-	//TODO Loot tables
-	/*
-	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(Blocks.WOOL, 1, 0), 0F);
-	}
-	 */
 
 	@Override
 	public boolean checkSpawnObstruction(LevelReader world) {

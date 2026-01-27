@@ -1,10 +1,10 @@
 package erebus.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -23,6 +23,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -34,7 +37,7 @@ public class MoneySpider extends Scytodes {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(SKIN_TYPE, 0);
 	}
@@ -80,23 +83,16 @@ public class MoneySpider extends Scytodes {
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float damage) {
+	public boolean hurtServer(@NonNull ServerLevel level, DamageSource source, float damage) {
 		if (source.is(DamageTypes.IN_WALL)) {
 			return false;
 		}
-		return super.hurt(source, damage);
+		return super.hurtServer(level, source, damage);
 	}
 
-	/*
-	 * @Override protected Item getDropItem() { return Items.GOLD_NUGGET; }
-	 * 
-	 * @Override protected void dropFewItems(boolean recentlyHit, int looting) { if
-	 * (recentlyHit && (rand.nextInt(10) == 0 || rand.nextInt(1 + looting) > 0))
-	 * dropItem(Items.GOLD_INGOT, 1); }
-	 */
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		setSkin(level.getRandom().nextInt(3));
 		return spawnGroupData;
 	}
@@ -110,14 +106,14 @@ public class MoneySpider extends Scytodes {
 	}
 	
 	@Override
-	public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putInt("skin", getSkin());
+	public void addAdditionalSaveData(ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putInt("skin", getSkin());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		setSkin(nbt.getInt("skin"));
+	public void readAdditionalSaveData(ValueInput input) {
+		super.readAdditionalSaveData(input);
+		setSkin(input.getIntOr("skin", 0));
 	}
 }

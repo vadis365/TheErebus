@@ -1,8 +1,10 @@
 package erebus.entity;
 
+import erebus.entity.ai.EntityAIFlyingWander;
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -12,13 +14,14 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
-import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -26,6 +29,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -47,7 +51,7 @@ public class BotFly extends Monster {
 		goalSelector.addGoal(1, new MeleeAttackGoal(this, 1D, false));
 		goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		goalSelector.addGoal(3, new RandomLookAroundGoal(this));
-		goalSelector.addGoal(4, new AIFlyingWander(this, 0.75D, 0.01F));
+		goalSelector.addGoal(4, new EntityAIFlyingWander(this, 0.75D, 0.01F));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this).setAlertOthers(BotFly.class));
 		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
 	}
@@ -62,12 +66,12 @@ public class BotFly extends Monster {
 	}
 
 	@Override
-	public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+	public float getWalkTargetValue(@NonNull BlockPos pos, LevelReader level) {
 		return level.getBlockState(pos).isAir() ? 10.0F : 0.0F;
 	}
 
 	@Override
-    protected PathNavigation createNavigation(Level level){
+    protected @NonNull PathNavigation createNavigation(@NonNull Level level){
 		return new FlyingPathNavigation(this, level);
 	}
 
@@ -82,12 +86,12 @@ public class BotFly extends Monster {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.FLY_HURT.get();
 	}
 
 	@Override
-	protected SoundEvent getDeathSound() {
+	protected @NonNull SoundEvent getDeathSound() {
 		return ModSounds.SQUISH.get();
 	}
 
@@ -102,7 +106,7 @@ public class BotFly extends Monster {
     }
 
     @Override
-    protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
+    protected void checkFallDamage(double y, boolean onGround, @NonNull BlockState state, @NonNull BlockPos pos) {
     }
 
 	@Override
@@ -149,29 +153,18 @@ public class BotFly extends Monster {
 	public int getMaxSpawnClusterSize() {
 		return 2;
 	}
-/*
+
 	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		int chance = random.nextInt(4) + random.nextInt(1 + looting);
-		int amount;
-		for (amount = 0; amount < chance; ++amount) {
-			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.FLY_WING.ordinal()), 0.0F);
-			if (random.nextInt(5) == 0)
-				entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.COMPOUND_EYES.ordinal()), 0.0F);
-		}
-	}
-*/
-	@Override
-	public boolean doHurtTarget(Entity entity) {
+	public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity entity) {
 		if (hasLineOfSight(entity)) {
-			if (super.doHurtTarget(entity)) {
+			if (super.doHurtTarget(level, entity)) {
 				if (entity instanceof Player player) {
                     if (random.nextInt(1) == 0 && getParasite(player) == null) {
-						BotFlyLarva entityBotFlyLarva = ModEntities.BOT_FLY_LARVA.get().create(this.level());
+						BotFlyLarva entityBotFlyLarva = ModEntities.BOT_FLY_LARVA.get().create(level, EntitySpawnReason.JOCKEY);
 						if (entityBotFlyLarva != null) {
 							entityBotFlyLarva.setPos(entity.getX(), entity.getY() + 1, entity.getZ());
 							entityBotFlyLarva.setParasiteCount((byte) 1);
-							entityBotFlyLarva.startRiding(entity, true);
+							entityBotFlyLarva.startRiding(entity, true, true);
 							level().addFreshEntity(entityBotFlyLarva);
 						}
 					} else if (random.nextInt(1) == 0 && getParasite(player) != null) {
@@ -192,18 +185,5 @@ public class BotFly extends Monster {
 			if (entity instanceof BotFlyLarva)
 				return entity;
 		return null;
-	}
-
-	class AIFlyingWander extends WaterAvoidingRandomStrollGoal {
-		public AIFlyingWander(BotFly creatureIn, double speedIn, float chance) {
-			super(creatureIn, speedIn, chance);
-		}
-	
-		@Nullable
-		protected Vec3 getPosition() {
-			Vec3 vec3 = this.mob.getViewVector(0.0F);
-			Vec3 vec31 = HoverRandomPos.getPos(this.mob, 8, 7, vec3.x, vec3.z, ((float) Math.PI / 2F), 2, 1);
-			return vec31 != null ? vec31 : AirAndWaterRandomPos.getPos(this.mob, 8, 4, -2, vec3.x, vec3.z, (float) Math.PI / 2F);
-		}
 	}
 }

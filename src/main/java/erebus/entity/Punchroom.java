@@ -2,7 +2,6 @@ package erebus.entity;
 
 import erebus.client.particle.ClientParticles;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -24,6 +23,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 import java.util.EnumSet;
 
@@ -33,7 +34,7 @@ public class Punchroom extends Monster {
 	public float prevSquishFactor;
 	private boolean wasOnGround;
 
-	public Punchroom(EntityType<? extends Punchroom> type, Level level) { 
+	public Punchroom(EntityType<? extends Punchroom> type, Level level) {
 		super(type, level);
 		this.moveControl = new PunchroomMoveHelper(this);
 	}
@@ -49,18 +50,12 @@ public class Punchroom extends Monster {
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Monster.createMonsterAttributes()
-				.add(Attributes.MOVEMENT_SPEED,0.5D)
+				.add(Attributes.MOVEMENT_SPEED, 0.5D)
 				.add(Attributes.MAX_HEALTH, 20D)
 				.add(Attributes.ATTACK_DAMAGE, 2D)
 				.add(Attributes.FOLLOW_RANGE, 16.0D);
 	}
-/*
-	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		if (rand.nextInt(5) == 0)
-			entityDropItem(ItemMaterials.EnumErebusMaterialsType.ELASTIC_FIBRE.createStack(1 + looting), 0.0F);
-	}
-*/
+
 	public static boolean canSpawnHere(EntityType<Punchroom> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		float light = level.getLightLevelDependentMagicValue(pos);
 		return light >= 0F;
@@ -77,19 +72,19 @@ public class Punchroom extends Monster {
 	}
 
 	@Override
-	  public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putBoolean("wasOnGround", wasOnGround);
+	public void addAdditionalSaveData(ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putBoolean("wasOnGround", wasOnGround);
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		wasOnGround = nbt.getBoolean("wasOnGround");
+	public void readAdditionalSaveData(ValueInput input) {
+		super.readAdditionalSaveData(input);
+		wasOnGround = input.getBooleanOr("wasOnGround", false);
 	}
 
-    @Override
-    public void tick() {
+	@Override
+	public void tick() {
 		squishFactor += (squishAmount - squishFactor) * 0.5F;
 		prevSquishFactor = squishFactor;
 		super.tick();
@@ -123,13 +118,13 @@ public class Punchroom extends Monster {
 	public void knockback(double strength, double xRatio, double zRatio) {
 		float knockback = 0.4F;
 		if (!level().isClientSide()) {
-				if (level().getDifficulty().ordinal() > Difficulty.PEACEFUL.ordinal())
-					if (level().getDifficulty() == Difficulty.NORMAL)
-						knockback = 0.6F;
-					else if (level().getDifficulty() == Difficulty.HARD)
-						knockback = 0.8F;
-			}
-			super.knockback(knockback, xRatio, zRatio);
+			if (level().getDifficulty().ordinal() > Difficulty.PEACEFUL.ordinal())
+				if (level().getDifficulty() == Difficulty.NORMAL)
+					knockback = 0.6F;
+				else if (level().getDifficulty() == Difficulty.HARD)
+					knockback = 0.8F;
+		}
+		super.knockback(knockback, xRatio, zRatio);
 	}
 
 	@Override
@@ -163,17 +158,16 @@ public class Punchroom extends Monster {
 	@Override
 	public void jumpFromGround() {
 		this.setDeltaMovement(this.getDeltaMovement().x(), 0.5D, this.getDeltaMovement().z());
-		this.hasImpulse = true;
 	}
 
-    @Override
-    protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
-    }
+	@Override
+	protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
+	}
 
 	protected SoundEvent getJumpSound() {
 		return SoundEvents.SLIME_JUMP;
 	}
-	
+
 
 	static class AIPunchroomAttack extends Goal {
 		private final Punchroom punchroom;
@@ -201,7 +195,7 @@ public class Punchroom extends Monster {
 			LivingEntity entitylivingbase = punchroom.getTarget();
 			return entitylivingbase != null && entitylivingbase.isAlive() && punchroom.canAttack(entitylivingbase) && --growTiredTimer > 0;
 		}
-		
+
 		@Override
 		public boolean requiresUpdateEveryTick() {
 			return true;
@@ -239,7 +233,7 @@ public class Punchroom extends Monster {
 				nextRandomizeTime = 40 + punchroom.getRandom().nextInt(60);
 				chosenDegrees = (float) punchroom.getRandom().nextInt(360);
 			}
-			
+
 			if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
 				control.setDirection(chosenDegrees, false);
 		}
@@ -268,7 +262,7 @@ public class Punchroom extends Monster {
 		public void tick() {
 			if (punchroom.getRandom().nextFloat() < 0.8F)
 				punchroom.getJumpControl().jump();
-			
+
 			if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
 				control.setSpeed(1.2D);
 		}

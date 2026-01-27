@@ -93,20 +93,7 @@ public class Grasshopper extends PathfinderMob {
     protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
         playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
-/*
-	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		if(recentlyHit) {
-			int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
-			int amount;
-			for (amount = 0; amount < chance; ++amount)
-				if (isBurning())
-					entityDropItem(new ItemStack(ModItems.EREBUS_FOOD, 1, EnumFoodType.GRASSHOPPER_LEG_COOKED.ordinal()), 0.0F);
-				else
-					entityDropItem(new ItemStack(ModItems.EREBUS_FOOD, 1, EnumFoodType.GRASSHOPPER_LEG_RAW.ordinal()), 0.0F);
-		}
-	}
-*/
+
 	public void setIsEating(boolean isEating) {
 		this.isEating = isEating;
 	}

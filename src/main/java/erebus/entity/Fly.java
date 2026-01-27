@@ -2,10 +2,10 @@ package erebus.entity;
 
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -16,12 +16,14 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.ambient.AmbientCreature;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -29,7 +31,6 @@ public class Fly extends AmbientCreature {
 	@Nullable
     private BlockPos targetPosition;
 	private static final EntityDataAccessor<Byte> HANGING = SynchedEntityData.defineId(Fly.class, EntityDataSerializers.BYTE);
-	private static final TargetingConditions FLY_RESTING_TARGETING = TargetingConditions.forNonCombat().range(4.0);
 	public int animationTicks, prevAnimationTicks;
 
 	public Fly(EntityType<? extends Fly> type, Level level) { 
@@ -38,7 +39,7 @@ public class Fly extends AmbientCreature {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(HANGING, (byte)0);
 	}
@@ -65,7 +66,7 @@ public class Fly extends AmbientCreature {
 	}
 
 	@Override
-    protected SoundEvent getHurtSound(DamageSource source) {
+    protected SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.FLY_HURT.get();
 	}
 
@@ -80,7 +81,7 @@ public class Fly extends AmbientCreature {
     }
 
     @Override
-    protected void doPush(Entity entity) {
+    protected void doPush(@NonNull Entity entity) {
     }
 
     @Override
@@ -122,8 +123,8 @@ public class Fly extends AmbientCreature {
 	}
 
 	@Override
-    protected void customServerAiStep() {
-        super.customServerAiStep();
+    protected void customServerAiStep(@NonNull ServerLevel level) {
+        super.customServerAiStep(level);
         BlockPos blockpos = this.blockPosition();
         BlockPos blockpos1 = blockpos.above();
         if (this.getIsFlyHanging()) {
@@ -133,7 +134,7 @@ public class Fly extends AmbientCreature {
                     this.yHeadRot = (float)this.random.nextInt(360);
                 }
 
-                if (this.level().getNearestPlayer(FLY_RESTING_TARGETING, this) != null) {
+                if (this.level().getNearestPlayer(self(), 4) != null) {
                     this.setIsFlyHanging(false);
                     if (!flag) {
                         this.level().levelEvent(null, 1025, blockpos, 0);
@@ -147,7 +148,7 @@ public class Fly extends AmbientCreature {
             }
         } else {
             if (this.targetPosition != null
-                && (!this.level().isEmptyBlock(this.targetPosition) || this.targetPosition.getY() <= this.level().getMinBuildHeight())) {
+                && (!this.level().isEmptyBlock(this.targetPosition) || this.targetPosition.getY() <= this.level().getMinY())) {
                 this.targetPosition = null;
             }
 
@@ -176,7 +177,7 @@ public class Fly extends AmbientCreature {
     }
 
     @Override
-    protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
+    protected void checkFallDamage(double y, boolean onGround, @NonNull BlockState state, @NonNull BlockPos pos) {
     }
 
     @Override
@@ -185,24 +186,24 @@ public class Fly extends AmbientCreature {
     }
 
 	@Override
-	public boolean hurt(DamageSource source, float amount) {
-		if (isInvulnerableTo(source))
+	public boolean hurtServer(@NonNull ServerLevel level, @NonNull DamageSource source, float amount) {
+		if (isInvulnerableTo(level, source))
 			return false;
 		else if (!level().isClientSide() && getIsFlyHanging())
 			setIsFlyHanging(false);
-		return super.hurt(source, amount);
+		return super.hurtServer(level, source, amount);
 	}
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
-		entityData.set(HANGING, compound.getByte("fly_hanging"));
+    public void readAdditionalSaveData(@NonNull ValueInput input) {
+        super.readAdditionalSaveData(input);
+		entityData.set(HANGING, input.getByteOr("fly_hanging", (byte) 0));
 	}
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
-		compound.putByte("fly_hanging", (entityData.get(HANGING)));
+    public void addAdditionalSaveData(@NonNull ValueOutput output) {
+        super.addAdditionalSaveData(output);
+		output.putByte("fly_hanging", (entityData.get(HANGING)));
 	}
 
 	public static boolean canSpawnHere(EntityType<Fly> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
@@ -220,14 +221,4 @@ public class Fly extends AmbientCreature {
 	public int getMaxSpawnClusterSize() {
 		return 5;
 	}
-
-	/* TODO loot Tables
-	@Override
-	protected void dropFewItems(boolean par1, int par2) {
-		if (random.nextInt(10) == 0)
-			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.FLY_WING.ordinal()), 0.0F);
-		if (random.nextInt(20) == 0)
-			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.COMPOUND_EYES.ordinal()), 0.0F);
-	}
-	*/
 }

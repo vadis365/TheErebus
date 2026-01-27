@@ -1,11 +1,10 @@
 package erebus.client.render.block.renderer.stack;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import erebus.client.render.block.model.BlockOfBonesModel;
-import erebus.client.render.block.renderer.state.BlockOfBonesBlockEntityRenderState;
+import erebus.client.render.block.model.GlowingJarModel;
+import erebus.client.render.block.renderer.state.GlowingJarBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
@@ -19,13 +18,11 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public final class BlockOfBonesItemRenderer implements NoDataSpecialModelRenderer {
-    private final BlockOfBonesModel model;
+public final class GlowingJarSpecialRenderer implements NoDataSpecialModelRenderer {
+    private final GlowingJarModel model;
     private final Identifier texture;
 
-    //private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/bone_block.png");
-
-    public BlockOfBonesItemRenderer(BlockOfBonesModel model, Identifier texture) {
+    public GlowingJarSpecialRenderer(GlowingJarModel model, Identifier texture) {
         this.model = model;
         this.texture = texture;
     }
@@ -33,14 +30,11 @@ public final class BlockOfBonesItemRenderer implements NoDataSpecialModelRendere
     @Override
     public void submit(@NonNull ItemDisplayContext context, PoseStack pose, SubmitNodeCollector submit, int lightCoords, int overlayCoords, boolean hasFoil, int outlineColor) {
         pose.pushPose();
-        pose.pushPose();
-        pose.translate(0.5D, 0.89D, 0.5D);
-        pose.scale(1, -1, -1);
-        pose.scale(0.5F, 0.5F, 0.5F);
-        pose.rotateAround(Axis.YN.rotationDegrees(90), 0, 1, 0);
+        pose.translate(0.5F, 0.75F, 0.5F);
+        pose.scale(0.7125F, -1.069F, -0.7125F);
         submit.submitModel(
                 model,
-                new BlockOfBonesBlockEntityRenderState(),
+                new GlowingJarBlockEntityRenderState(),
                 pose,
                 RenderTypes.entitySolid(texture),
                 lightCoords,
@@ -54,7 +48,7 @@ public final class BlockOfBonesItemRenderer implements NoDataSpecialModelRendere
     @Override
     public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
         PoseStack poseStack = new PoseStack();
-        model.setupAnim(new BlockOfBonesBlockEntityRenderState());
+        model.setupAnim(new GlowingJarBlockEntityRenderState());
         model.root().getExtentsForGui(poseStack, consumer);
     }
 
@@ -62,17 +56,17 @@ public final class BlockOfBonesItemRenderer implements NoDataSpecialModelRendere
 
         public static final MapCodec<Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
                 i -> i.group(
-                        Identifier.CODEC.fieldOf("texture").forGetter(BlockOfBonesItemRenderer.Unbaked::texture)
-                ).apply(i, BlockOfBonesItemRenderer.Unbaked::new)
+                        Identifier.CODEC.fieldOf("texture").forGetter(GlowingJarSpecialRenderer.Unbaked::texture)
+                ).apply(i, GlowingJarSpecialRenderer.Unbaked::new)
         );
 
         @Override
         public @Nullable SpecialModelRenderer<?> bake(BakingContext bakingContext) {
-            return new BlockOfBonesItemRenderer(
-                    new BlockOfBonesModel(
+            return new GlowingJarSpecialRenderer(
+                    new GlowingJarModel(
                             bakingContext
                                     .entityModelSet()
-                                    .bakeLayer(ModBlockEntityRendering.BLOCK_OF_BONES)
+                                    .bakeLayer(ModBlockEntityRendering.GLOWING_JAR)
                     ),
                     texture
             );

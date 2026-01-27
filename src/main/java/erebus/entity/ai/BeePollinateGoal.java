@@ -2,6 +2,7 @@ package erebus.entity.ai;
 
 
 import erebus.entity.WorkerBee;
+import erebus.registries.data.tags.ModBlockTags;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
@@ -18,7 +19,7 @@ public class BeePollinateGoal extends FindFlowerGoal {
 	protected boolean canPolinate(BlockState state) {
 		if (state == null)
 			return false;
-		else return state.is(ModTags.BEE_POLLINATION_BLOCKS);
+		else return state.is(ModBlockTags.BEE_POLLINATION_BLOCKS);
     }
 
 	@Override

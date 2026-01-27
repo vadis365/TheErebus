@@ -30,10 +30,7 @@ public class HoneyCombBlockEntity extends BlockEntityInventoryHelper implements 
 
 	@Override
 	public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
-		int[] SLOTS = new int[getContainerSize()];
-		//for (int index = 0; index < SLOTS.length; index++)
-		//	SLOTS[index] = index;
-		return SLOTS;
+		return new int[getContainerSize()];
 	}
 
 	@Override

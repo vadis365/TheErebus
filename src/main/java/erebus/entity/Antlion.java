@@ -25,7 +25,7 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -36,6 +36,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -72,7 +73,7 @@ public class Antlion extends Monster {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(IS_ACTIVE, true);
 	}
@@ -92,17 +93,17 @@ public class Antlion extends Monster {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.ANTLION_GROWL.get();
 	}
 
 	@Override
-	protected SoundEvent getDeathSound() {
+	protected @NonNull SoundEvent getDeathSound() {
 		return ModSounds.SQUISH.get();
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, BlockState block) {
+	protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
 		this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
 	}
 
@@ -125,8 +126,8 @@ public class Antlion extends Monster {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
-		if (spawnType == EntitySpawnReason.COMMAND || spawnType== EntitySpawnReason.SPAWN_EGG || spawnType == EntitySpawnReason.SPAWNER || spawnType == EntitySpawnReason.DISPENSER)
+	public SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+		if (spawnType == EntitySpawnReason.COMMAND || spawnType== EntitySpawnReason.SPAWN_ITEM_USE || spawnType == EntitySpawnReason.SPAWNER || spawnType == EntitySpawnReason.DISPENSER)
 			setActive(true);
 		return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
 	}
@@ -145,17 +146,15 @@ public class Antlion extends Monster {
 					if (isHiding()) {
 				      Vec3 vec3 = getDeltaMovement();
 				      setDeltaMovement(vec3.x, getJumpPower(), vec3.z);
-				      hasImpulse = true;
 				      PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(), getY() + 1D, getZ(), 30, new AntlionParticlePacket(Block.getId(level().getBlockState(blockPosition())), getX(), getY() + 1D, getZ(), 0.75D, false));
 					}
 				}
 			}
 
 			if (isActive()) {
-				if (getTarget() == null && !isInWater() && !isHiding() && canHideIn(level(), blockPosition().below())) {
+				if (getTarget() == null && !isInWater() && !isHiding() && canHideIn(level())) {
 					setActive(false);
 				    setPos(getX(), getY() -1D, getZ());
-				    hasImpulse = false;
 				    PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, getX(), getY(), getZ(), 30, new AntlionParticlePacket(Block.getId(level().getBlockState(getOnPos())), getX(), getY() + 1D, getZ(), 1.25D, true));
 				}
 			}
@@ -170,7 +169,7 @@ public class Antlion extends Monster {
 		entityData.set(IS_ACTIVE, active);
 	}
 
-	protected boolean canHideIn(Level level, BlockPos blockPos) {
+	protected boolean canHideIn(Level level) {
 		if (!level.isClientSide()) {
 			int minX = (int) Math.floor(getBoundingBox().minX);
 			int minY = (int) Math.floor(getBoundingBox().minY);
@@ -191,14 +190,14 @@ public class Antlion extends Monster {
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float damage) {
+	public boolean hurtServer(@NonNull ServerLevel level, DamageSource source, float damage) {
 		if (source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.DROWN)) {
 			return false;
 		}
-		return super.hurt(source, damage);
+		return super.hurtServer(level, source, damage);
 	}
 
-	public class AIWander extends WaterAvoidingRandomStrollGoal {
+	public static class AIWander extends WaterAvoidingRandomStrollGoal {
 
 		private final Antlion antlion;
 

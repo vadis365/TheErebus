@@ -4,10 +4,10 @@ import erebus.entity.ai.ThrowWebAttackGoal;
 import erebus.registries.ModSounds;
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -32,10 +32,10 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public class BlackWidow extends Monster {
 	private static final EntityDataAccessor<Integer> SIZE = SynchedEntityData.defineId(BlackWidow.class, EntityDataSerializers.INT);
@@ -46,7 +46,7 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(SIZE, 1);
 		builder.define(CLIMBING, (byte) 0);
@@ -76,7 +76,7 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	protected @NotNull PathNavigation createNavigation(@NotNull Level level) {
+	protected @NonNull PathNavigation createNavigation(@NonNull Level level) {
 		return new WallClimberNavigation(this, level);
 	}
 
@@ -98,12 +98,12 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	public boolean causeFallDamage(float distance, float damageMultiplier, @NotNull DamageSource damageSource) {
+	public boolean causeFallDamage(double fallDistance, float damageModifier, @NonNull DamageSource damageSource) {
 		return false;
 	}
 
 	@Override
-	public void makeStuckInBlock(BlockState state, @NotNull Vec3 motionMultiplier) {
+	public void makeStuckInBlock(BlockState state, @NonNull Vec3 motionMultiplier) {
 		if (!state.is(Blocks.COBWEB) && !state.is(ModBlocks.WITHER_WEB.get()) && !state.is(ModBlocks.LAVA_WEB.get()))
 			super.makeStuckInBlock(state, motionMultiplier);
 	}
@@ -127,16 +127,16 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	public boolean canBeAffected(MobEffectInstance potioneffect) {
-		return (!potioneffect.is(MobEffects.POISON) && !potioneffect.is(MobEffects.WITHER) && super.canBeAffected(potioneffect));
+	public boolean canBeAffected(MobEffectInstance potionEffect) {
+		return (!potionEffect.is(MobEffects.POISON) && !potionEffect.is(MobEffects.WITHER) && super.canBeAffected(potionEffect));
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float damage) {
+	public boolean hurtServer(@NonNull ServerLevel level, DamageSource source, float damage) {
 		if (source.is(DamageTypes.IN_WALL)) {
 			return false;
 		}
-		return super.hurt(source, damage);
+		return super.hurtServer(level, source, damage);
 	}
 
 	@Override
@@ -145,23 +145,23 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	protected @NotNull SoundEvent getHurtSound(@NotNull DamageSource source) {
+	protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.BLACK_WIDOW_HURT.get();
 	}
 
 	@Override
-	protected @NotNull SoundEvent getDeathSound() {
+	protected @NonNull SoundEvent getDeathSound() {
 		return ModSounds.SQUISH.get();
 	}
 
 	@Override
-	protected void playStepSound(@NotNull BlockPos pos, @NotNull BlockState block) {
+	protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
 		playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
-	public boolean doHurtTarget(@NotNull Entity entity) {
-		if (super.doHurtTarget(entity)) {
+	public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity entity) {
+		if (super.doHurtTarget(level, entity)) {
 			if (entity instanceof LivingEntity) {
 				byte duration = 0;
 				if (level().getDifficulty() == Difficulty.NORMAL)
@@ -178,7 +178,7 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> key) {
+	public void onSyncedDataUpdated(@NonNull EntityDataAccessor<?> key) {
 		if (SIZE.equals(key)) {
 			refreshDimensions();
 			setYRot(this.yHeadRot);
@@ -197,7 +197,7 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	public @NotNull EntityDimensions getDefaultDimensions(@NotNull Pose pose) {
+	public @NonNull EntityDimensions getDefaultDimensions(@NonNull Pose pose) {
 		return super.getDefaultDimensions(pose).scale((float) this.getWidowSize(), (float) this.getWidowSize());
 	}
 
@@ -230,9 +230,8 @@ public class BlackWidow extends Monster {
 		return entityData.get(SIZE);
 	}
 
-	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnType, SpawnGroupData spawnGroupData) {
 		RandomSource randomsource = level.getRandom();
 		int randomSize = randomsource.nextInt(3);
 
@@ -245,15 +244,15 @@ public class BlackWidow extends Monster {
 	}
 
 	@Override
-	public void addAdditionalSaveData(@NotNull CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putInt("widowSize", getWidowSize() - 1);
+	public void addAdditionalSaveData(@NonNull ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putInt("widowSize", getWidowSize() - 1);
 	}
 
 	@Override
-	public void readAdditionalSaveData(@NotNull CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		int size = nbt.getInt("widowSize");
+	public void readAdditionalSaveData(@NonNull ValueInput input) {
+		super.readAdditionalSaveData(input);
+		int size = input.getIntOr("widowSize", 0);
 		if (size < 0)
 			size = 0;
 		setWidowSize(size + 1, false);

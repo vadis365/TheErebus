@@ -2,10 +2,10 @@ package erebus.entity;
 
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
@@ -30,9 +30,12 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -65,7 +68,7 @@ public class Centipede extends Monster {
 		}
 
 		@Override
-		public PartEntity<?>[] getParts() {
+		public PartEntity<?> @NonNull [] getParts() {
 			return parts;
 		}
 
@@ -75,7 +78,7 @@ public class Centipede extends Monster {
 		}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(SKIN_TYPE, 0);
 	}
@@ -183,14 +186,14 @@ public class Centipede extends Monster {
 			targetPart.yo += 0.02D;
 		targetPart.setPos(targetPart.xo, targetPart.yo, targetPart.zo);
 	}
-	
-    @Override
-    public AABB getBoundingBoxForCulling() {
-    	AABB newBox = getBoundingBox();
+
+	@Override
+	public @NonNull AABB getHitbox() {
+		AABB newBox = getBoundingBox();
 		for(CentipedeMultipart part : this.parts)
 			newBox = getBoundingBox().minmax(part.getBoundingBox());
 		return newBox;
-    }
+	}
 
 	@Override
 	public boolean shouldRenderAtSqrDistance(double distance) {
@@ -217,16 +220,7 @@ public class Centipede extends Monster {
 	}
 
 	public double getAttackStrength() {
-		switch (level().getDifficulty()) {
-			default:
-				return 2.0D;
-			case EASY:
-				return 2.0D;
-			case NORMAL:
-				return 2.0D;
-			case HARD:
-				return 4.0D;
-		}
+		return level().getDifficulty() == Difficulty.HARD ? 4D : 2D;
 	}
 
 	@Override
@@ -235,17 +229,17 @@ public class Centipede extends Monster {
 	}
 
 	@Override
-    protected SoundEvent getHurtSound(DamageSource source) {
+    protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.CENTIPEDE_HURT.get();
 	}
 
 	@Override
-    protected SoundEvent getDeathSound() {
+    protected @NonNull SoundEvent getDeathSound() {
 		return ModSounds.SQUISH.get();
 	}
 
     @Override
-    protected void playStepSound(BlockPos pos, BlockState block) {
+    protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
         this.playSound(ModSounds.CENTIPEDE_WALK.get(), 0.5F, 1.0F);
     }
 
@@ -273,9 +267,9 @@ public class Centipede extends Monster {
 	}
 */
 	@Override
-	public boolean doHurtTarget(Entity entity) {
+	public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity entity) {
 		if (hasLineOfSight(entity)) {
-			if (super.doHurtTarget(entity)) {
+			if (super.doHurtTarget(level, entity)) {
 				if (entity instanceof LivingEntity) {
 					byte duration = 0;
 
@@ -304,7 +298,7 @@ public class Centipede extends Monster {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason type, @Nullable SpawnGroupData data) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason type, @Nullable SpawnGroupData data) {
 		setSkin(level.getRandom().nextInt(3));
 		for (CentipedeMultipart part : this.parts) {
 			part.setPos(this.xo, this.yo, this.zo);
@@ -314,14 +308,14 @@ public class Centipede extends Monster {
 	}
 
 	@Override
-	  public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putInt("skin", getSkin());
+	  public void addAdditionalSaveData(ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putInt("skin", getSkin());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		setSkin(nbt.getInt("skin"));
+	public void readAdditionalSaveData(ValueInput input) {
+		super.readAdditionalSaveData(input);
+		setSkin(input.getIntOr("skin", 0));
 	}
 }

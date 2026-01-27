@@ -7,19 +7,16 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
-
 public class PreservedBlockEntity extends BlockEntity {
 
-    private CompoundTag entityTag;
     private Entity trappedEntity;
     public byte rotation = 0;
 
@@ -27,12 +24,8 @@ public class PreservedBlockEntity extends BlockEntity {
         super(ModBlockEntities.PRESERVED_BLOCK.get(), pos, state);
     }
 
-    public void setTrappedEntity(CompoundTag tag) {
-        this.entityTag = tag;
-        if (getLevel() != null) {
-            Optional<Entity> optional = EntityType.create(entityTag, getLevel());
-            optional.ifPresent(entity -> trappedEntity = entity);
-        }
+    public void setTrappedEntity(Entity entity) {
+        trappedEntity = entity;
     }
 
     public Entity getTrappedEntity() {
@@ -40,21 +33,15 @@ public class PreservedBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
-        super.saveAdditional(tag, registries);
-        if(entityTag != null) {
-            tag.put("TrappedEntity", entityTag);
-        }
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        trappedEntity.save(output);
     }
 
     @Override
-    protected void loadAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
-        super.loadAdditional(tag, registries);
-        entityTag = tag.getCompound("TrappedEntity");
-        if (getLevel() != null) {
-            Optional<Entity> optional = EntityType.create(entityTag, getLevel());
-            optional.ifPresent(entity -> trappedEntity = entity);
-        }
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        trappedEntity.load(input);
     }
 
     @Override
@@ -68,7 +55,7 @@ public class PreservedBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void onDataPacket(@NotNull Connection net, @NotNull ClientboundBlockEntityDataPacket pkt, HolderLookup.@NotNull Provider lookupProvider) {
-        super.onDataPacket(net, pkt, lookupProvider);
+    public void onDataPacket(Connection net, ValueInput valueInput) {
+        super.onDataPacket(net, valueInput);
     }
 }

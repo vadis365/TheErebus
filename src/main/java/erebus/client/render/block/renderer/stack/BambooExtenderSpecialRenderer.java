@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import erebus.client.render.block.model.BlenderModel;
-import erebus.client.render.block.renderer.state.BlenderBlockEntityRenderState;
+import erebus.client.render.block.model.BambooExtenderModel;
+import erebus.client.render.block.renderer.state.BambooExtenderBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
@@ -19,13 +19,14 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public final class BlenderItemRenderer implements NoDataSpecialModelRenderer {
-    private final BlenderModel model;
+
+public final class BambooExtenderSpecialRenderer implements NoDataSpecialModelRenderer {
+    private final BambooExtenderModel model;
     private final Identifier texture;
 
-    //private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/blender.png");
+    //private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/bamboo_extender.png");
 
-    public BlenderItemRenderer(BlenderModel model, Identifier texture) {
+    public BambooExtenderSpecialRenderer(BambooExtenderModel model, Identifier texture) {
         this.model = model;
         this.texture = texture;
     }
@@ -33,14 +34,13 @@ public final class BlenderItemRenderer implements NoDataSpecialModelRenderer {
     @Override
     public void submit(@NonNull ItemDisplayContext context, PoseStack pose, SubmitNodeCollector submit, int lightCoords, int overlayCoords, boolean hasFoil, int outlineColor) {
         pose.pushPose();
-        pose.pushPose();
-        pose.translate(0.5D, 0.89D, 0.5D);
-        pose.scale(1, -1, -1);
-        pose.scale(0.5F, 0.5F, 0.5F);
+        pose.translate(0.5D, 1.5D, 0.5D);
+        pose.scale(-1, -1, 1);
+        pose.scale(1F, 1F, 1F);
         pose.rotateAround(Axis.YN.rotationDegrees(90), 0, 1, 0);
         submit.submitModel(
                 model,
-                new BlenderBlockEntityRenderState(),
+                new BambooExtenderBlockEntityRenderState(),
                 pose,
                 RenderTypes.entitySolid(texture),
                 lightCoords,
@@ -54,25 +54,25 @@ public final class BlenderItemRenderer implements NoDataSpecialModelRenderer {
     @Override
     public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
         PoseStack poseStack = new PoseStack();
-        model.setupAnim(new BlenderBlockEntityRenderState());
+        model.setupAnim(new BambooExtenderBlockEntityRenderState());
         model.root().getExtentsForGui(poseStack, consumer);
     }
 
     public record Unbaked(Identifier texture) implements SpecialModelRenderer.Unbaked {
 
-        public static final MapCodec<Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
+        public static final MapCodec<BambooExtenderSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
                 i -> i.group(
-                        Identifier.CODEC.fieldOf("texture").forGetter(BlenderItemRenderer.Unbaked::texture)
-                ).apply(i, BlenderItemRenderer.Unbaked::new)
+                        Identifier.CODEC.fieldOf("texture").forGetter(BambooExtenderSpecialRenderer.Unbaked::texture)
+                ).apply(i, BambooExtenderSpecialRenderer.Unbaked::new)
         );
 
         @Override
         public @Nullable SpecialModelRenderer<?> bake(BakingContext bakingContext) {
-            return new BlenderItemRenderer(
-                    new BlenderModel(
+            return new BambooExtenderSpecialRenderer(
+                    new BambooExtenderModel(
                             bakingContext
                                     .entityModelSet()
-                                    .bakeLayer(ModBlockEntityRendering.BLENDER)
+                                    .bakeLayer(ModBlockEntityRendering.BAMBOO_EXTENDER)
                     ),
                     texture
             );

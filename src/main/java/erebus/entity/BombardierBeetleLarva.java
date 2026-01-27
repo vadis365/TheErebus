@@ -55,7 +55,7 @@ public class BombardierBeetleLarva extends BeetleLarva implements Enemy {
 		targetSelector.addGoal(0, new HurtByTargetGoal(this));
 		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true, true));
 	}
-	
+
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 8D)
@@ -87,7 +87,7 @@ public class BombardierBeetleLarva extends BeetleLarva implements Enemy {
 
 	private void explode() {
 		if (!level().isClientSide()) {
-			level().explode(this, getX(), getY(), getZ(), 1.5F, Level.ExplosionInteraction.NONE).finalizeExplosion(false);
+			level().explode(this, getX(), getY(), getZ(), 1.5F, Level.ExplosionInteraction.NONE);
 			PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, blockPosition().getX(),
 					blockPosition().getY(), blockPosition().getZ(), 30,
 					new ParticlePacket((byte) ParticleType.BEETLE_LARVA_SQUISH.ordinal(), blockPosition().getX() + 0.5D,
@@ -98,14 +98,6 @@ public class BombardierBeetleLarva extends BeetleLarva implements Enemy {
 		}
 	}
 
-/*
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		if (entity != null && getDistance(entity) <= 1.5F && entity.getEntityBoundingBox().maxY > getEntityBoundingBox().minY && entity.getEntityBoundingBox().minY < getEntityBoundingBox().maxY)
-			entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float) (ConfigHandler.INSTANCE.mobAttackDamageMultiplier < 2 ? 1D : 1D * ConfigHandler.INSTANCE.mobAttackDamageMultiplier));
-		return super.attackEntityAsMob(entity);
-	}
-*/
 	public void setInflateSize(int size) {
 		entityData.set(INFLATE_SIZE, size);
 	}

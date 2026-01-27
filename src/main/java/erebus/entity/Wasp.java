@@ -1,17 +1,17 @@
 package erebus.entity;
 
+import erebus.entity.ai.EntityAIFlyingWander;
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -23,13 +23,10 @@ import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.ai.util.AirAndWaterRandomPos;
-import net.minecraft.world.entity.ai.util.HoverRandomPos;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -37,8 +34,11 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -56,7 +56,7 @@ public class Wasp extends Monster {
 		goalSelector.addGoal(1, new MeleeAttackGoal(this, 1D, true));
 		goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		goalSelector.addGoal(3, new RandomLookAroundGoal(this));
-		goalSelector.addGoal(4, new Wasp.EntityAIFlyingWander(this, 0.75D, 0.01F));
+		goalSelector.addGoal(4, new EntityAIFlyingWander(this, 0.75D, 0.01F));
 		targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
 //		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Monster>(this, Monster.class, 0, true, false, p -> Config.HORNET_ATTACK_MOBS.get()));
 //		targetSelector.addGoal(2, new NearestAttackableTargetGoal<LivingEntity>(this, LivingEntity.class, 0, true, false, p -> Config.HORNET_ATTACK_CREATURES.get()));
@@ -64,7 +64,7 @@ public class Wasp extends Monster {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(IS_BOSS, false);
 	}
@@ -140,19 +140,19 @@ public class Wasp extends Monster {
 	}
 
 	@Override
-	  public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putBoolean("mobType", getIsBoss());
+	  public void addAdditionalSaveData(ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putBoolean("mobType", getIsBoss());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		setIsBoss(nbt.getBoolean("mobType"), false);
+	public void readAdditionalSaveData(ValueInput input) {
+		super.readAdditionalSaveData(input);
+		setIsBoss(input.getBooleanOr("mobType", false), false);
 	}
 
 	@Override
-	public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+	public float getWalkTargetValue(@NonNull BlockPos pos, LevelReader level) {
 		return level.getBlockState(pos).isAir() ? 10.0F : 0.0F;
 	}
 
@@ -186,17 +186,17 @@ public class Wasp extends Monster {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.WASP_HURT.get();
 	}
 
 	@Override
-	protected SoundEvent getDeathSound() {
+	protected @NonNull SoundEvent getDeathSound() {
 		return ModSounds.SQUISH.get();
 	}
 
 	@Override
-    protected void playStepSound(BlockPos pos, BlockState blockIn) {
+    protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState blockIn) {
         this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
 
@@ -205,18 +205,6 @@ public class Wasp extends Monster {
 		return 0.5F;
 	}
 
-/* TODO - make loot tables and stuff for mob drops
-@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
-		int amount;
-		for (amount = 0; amount < chance; ++amount)
-			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.WASP_STING.ordinal()), 0.0F);
-		if (getIsBoss() == 1)
-			entityDropItem(new ItemStack(ModItems.ANTI_VENOM_BOTTLE), 0.0F);
-	}
-
-*/
 	public boolean isFlying() {
 		return !onGround();
 	}
@@ -248,12 +236,12 @@ public class Wasp extends Monster {
 	}
 
 	@Override
-    protected PathNavigation createNavigation(Level level){
+    protected @NonNull PathNavigation createNavigation(@NonNull Level level){
 		return new FlyingPathNavigation(this, level);
 	}
 
 	@Override
-	public boolean causeFallDamage(float distance, float damageMultiplier, DamageSource damageSource) {
+	public boolean causeFallDamage(double fallDistance, float damageModifier, @NonNull DamageSource damageSource) {
 		return false;
 	}
 
@@ -263,22 +251,22 @@ public class Wasp extends Monster {
     }
 
 	@Override
-	public boolean canAttackType(EntityType<?> typeIn) {
-		return typeIn != ModEntities.WASP.get();
+	public boolean canAttack(LivingEntity target) {
+		return !target.is(ModEntities.WASP.get());
 	}
 
 	@Override
-	public boolean doHurtTarget(Entity entity) {
+	public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity entity) {
 		if (hasLineOfSight(entity)) {
-			if (super.doHurtTarget(entity)) {
+			if (super.doHurtTarget(level, entity)) {
 				if (entity instanceof LivingEntity) {
-					byte duration = 0;
+					byte duration;
 
-					if (level().getDifficulty().ordinal() > Difficulty.EASY.ordinal())
-						if (level().getDifficulty() == Difficulty.NORMAL)
-							duration = 3;
-						else if (level().getDifficulty() == Difficulty.HARD)
-							duration = 5;
+					switch(level.getDifficulty()) {
+                        case NORMAL-> duration = 3;
+						case HARD-> duration = 5;
+                        default -> duration = 0;
+                    }
 
 					if (duration > 0)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.POISON, duration * 20, 0));
@@ -288,18 +276,4 @@ public class Wasp extends Monster {
 		} else
 			return false;
 	}
-
-	class EntityAIFlyingWander extends WaterAvoidingRandomStrollGoal {
-		public EntityAIFlyingWander(Wasp creatureIn, double speedIn, float chance) {
-			super(creatureIn, speedIn, chance);
-		}
-
-		@Nullable
-		protected Vec3 getPosition() {
-			Vec3 vec3 = this.mob.getViewVector(0.0F);
-			Vec3 vec31 = HoverRandomPos.getPos(this.mob, 8, 7, vec3.x, vec3.z, ((float) Math.PI / 2F), 2, 1);
-			return vec31 != null ? vec31 : AirAndWaterRandomPos.getPos(this.mob, 8, 4, -2, vec3.x, vec3.z, (float) Math.PI / 2F);
-		}
-	}
-
 }

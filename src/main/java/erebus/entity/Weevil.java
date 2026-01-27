@@ -22,6 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.NonNull;
 
 public class Weevil extends Animal {
 
@@ -30,7 +31,7 @@ public class Weevil extends Animal {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 
 	}
@@ -73,7 +74,7 @@ public class Weevil extends Animal {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.BEETLE_HURT.get();
 	}
 
@@ -83,17 +84,17 @@ public class Weevil extends Animal {
 	}
 
     @Override
-    protected void playStepSound(BlockPos pos, BlockState block) {
+    protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
         this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
 	
 	@Override
-	public boolean isFood(ItemStack stack) {
+	public boolean isFood(@NonNull ItemStack stack) {
 		return false;
 	}
 
 	@Override
-	public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
+	public AgeableMob getBreedOffspring(@NonNull ServerLevel level, @NonNull AgeableMob otherParent) {
 		return null;
 	}
 

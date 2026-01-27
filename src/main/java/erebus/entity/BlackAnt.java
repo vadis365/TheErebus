@@ -11,8 +11,7 @@ import erebus.registries.blocks.ModBlocks;
 import erebus.registries.data.ModDataComponents;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -21,7 +20,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
@@ -45,13 +43,22 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandlerUtil;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
+import org.jspecify.annotations.NonNull;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-public class BlackAnt extends Animal implements ContainerListener, HasCustomInventoryScreen, MenuProvider {
-	private static final EntityDataAccessor<BlockPos> DROP_POINT= SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BLOCK_POS);
+public class BlackAnt extends Animal implements HasCustomInventoryScreen, MenuProvider {
+	private static final EntityDataAccessor<BlockPos> DROP_POINT = SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BLOCK_POS);
 	private static final EntityDataAccessor<Boolean> TAME_STATE = SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Byte> ANT_ROLE = SynchedEntityData.defineId(BlackAnt.class, EntityDataSerializers.BYTE);
 	private UUID playerOwner = null;
@@ -60,7 +67,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 //	public EntityAIAntBonemealCrops aiBonemealCrops;
 //	public EntityAIWander aiWander;
 
-//	public boolean setAttributes;
+	//	public boolean setAttributes;
 	public boolean canPickupItems;
 	public boolean canCollectFromSilo;
 	public boolean canAddToSilo;
@@ -68,7 +75,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	public static final int TOOL_SLOT = 0;
 	public static final int CROP_ID_SLOT = 1;
 	public static final int INVENTORY_SLOT = 2;
-	
+
 	public byte NONE = 0;
 	public byte PLANTER = 1;
 	public byte HARVESTER = 2;
@@ -85,13 +92,13 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(DROP_POINT, this.blockPosition());
 		builder.define(TAME_STATE, false);
 		builder.define(ANT_ROLE, NONE);
 	}
-	
+
 	@Override
 	protected void registerGoals() {
 		goalSelector.addGoal(0, new FloatGoal(this));
@@ -118,7 +125,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected SoundEvent getHurtSound(@NonNull DamageSource source) {
 		return ModSounds.ANT_HURT.get();
 	}
 
@@ -127,10 +134,10 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 		return ModSounds.SQUISH.get();
 	}
 
-    @Override
-    protected void playStepSound(BlockPos pos, BlockState block) {
-        this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
-    }
+	@Override
+	protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
+		this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
+	}
 
 	@Override
 	public int getMaxSpawnClusterSize() {
@@ -156,7 +163,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 		return entityData.get(TAME_STATE);
 	}
 
-	private static final String[] names = { "Antwan", "George", "Geoff", "Alberto", "Jose", "Linda", "Chantelle", "Dave", "Basil", "Gertrude", "Herbert", "Russel", "Adam", "Gwen", "Billy Bob Joe Bob Joe Harrison Jr.", "Sid", "Dylan", "Jade" };
+	private static final String[] names = {"Antwan", "George", "Geoff", "Alberto", "Jose", "Linda", "Chantelle", "Dave", "Basil", "Gertrude", "Herbert", "Russel", "Adam", "Gwen", "Billy Bob Joe Bob Joe Harrison Jr.", "Sid", "Dylan", "Jade"};
 
 	public void setTameState(boolean state) {
 		entityData.set(TAME_STATE, state);
@@ -165,7 +172,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	}
 
 	@Override
-	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+	public @NonNull InteractionResult mobInteract(Player player, @NonNull InteractionHand hand) {
 		ItemStack is = player.getItemInHand(hand);
 
 		if (!is.isEmpty() && is.getItem() == ModItems.ANT_TAMING_AMULET.get() && is.has(ModDataComponents.ANT_TAMING_AMULET)) {
@@ -175,7 +182,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 				setTameState(true);
 				setPlayerOwner(player);
 			}
-			level().broadcastEntityEvent(this, (byte)18);
+			level().broadcastEntityEvent(this, (byte) 18);
 			player.swing(hand);
 			return InteractionResult.SUCCESS;
 		}
@@ -186,10 +193,10 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 		return super.mobInteract(player, hand);
 	}
 
-    @Override 
-    public boolean isPushable() {
-        return getAntRole() != PLANTER && getAntRole() != FERTILIZER;
-    }
+	@Override
+	public boolean isPushable() {
+		return getAntRole() != PLANTER && getAntRole() != FERTILIZER;
+	}
 
 	public void setDropPoint(BlockPos pos) {
 		entityData.set(DROP_POINT, pos);
@@ -215,44 +222,44 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 		return playerOwner;
 	}
 
-    @Override
-    public boolean isIgnoringBlockTriggers() {
-        return true;
-    }
-  
 	@Override
-	public boolean isFood(ItemStack stack) {
+	public boolean isIgnoringBlockTriggers() {
+		return true;
+	}
+
+	@Override
+	public boolean isFood(@NonNull ItemStack stack) {
 		return false;
 	}
 
 	@Override
-	public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
+	public AgeableMob getBreedOffspring(@NonNull ServerLevel level, @NonNull AgeableMob otherParent) {
 		return null;
 	}
-	
+
 	@Override
-    protected void customServerAiStep() {
-        super.customServerAiStep();
+	protected void customServerAiStep(@NonNull ServerLevel level) {
+		super.customServerAiStep(level);
 
 		// Don't pick up items unless the filter is defined and the inventory is not full
 		if (isTamedAnt()) {
 			if (canPickupItems && !isFilterSlotEmpty() && (getAntInvSlotStack().isEmpty() || getAntInvSlotStack().getCount() < getAntInvSlotStack().getMaxStackSize())) {
-				ItemEntity entityitem = getClosestEntityItem(this, 16.0D, getFilterSlotStack());
-				if (entityitem != null) {
-					float distance = entityitem.distanceTo(this);
-					if (distance >= 2F && entityitem.isAlive()) {
-						double x = entityitem.getX();
-						double y = entityitem.getY();
-						double z = entityitem.getZ();
+				ItemEntity entityItem = getClosestEntityItem(this, 16.0D, getFilterSlotStack());
+				if (entityItem != null) {
+					float distance = entityItem.distanceTo(this);
+					if (distance >= 2F && entityItem.isAlive()) {
+						double x = entityItem.getX();
+						double y = entityItem.getY();
+						double z = entityItem.getZ();
 						getLookControl().setLookAt(x, y, z, 20.0F, 8.0F);
-						moveToItem(entityitem);
+						moveToItem(entityItem);
 						return;
 					}
 					if (distance < 2F) {
-						getMoveControl().setWantedPosition(entityitem.getX(), entityitem.getY(), entityitem.getZ(), 0.5D);
-						addToInventory(entityitem.getItem());
-						if (entityitem.getItem().getCount() <= 0)
-							entityitem.remove(RemovalReason.DISCARDED);
+						getMoveControl().setWantedPosition(entityItem.getX(), entityItem.getY(), entityItem.getZ(), 0.5D);
+						addToInventory(entityItem.getItem());
+						if (entityItem.getItem().getCount() <= 0)
+							entityItem.remove(RemovalReason.DISCARDED);
 						return;
 					}
 				}
@@ -271,7 +278,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 				if (block == ModBlocks.SILO_TANK.get())
 					if (getDistance(getDropPoint().getX() + 0.5D, getDropPoint().getY() - 1D, getDropPoint().getZ() + 0.5D) < 2D) {
 						addDropToInventory(getDropPoint());
-						if(isAntInvSlotEmpty()) {
+						if (isAntInvSlotEmpty()) {
 							canAddToSilo = false;
 							canPickupItems = true;
 						}
@@ -293,7 +300,7 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 			}
 		}
 	}
-	
+
 	public void moveToItem(Entity entity) {
 		getMoveControl().setWantedPosition(entity.getX(), entity.getY(), entity.getZ(), 0.5D);
 	}
@@ -301,91 +308,68 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	public void moveToSilo() {
 		getMoveControl().setWantedPosition(getDropPoint().getX() + 0.5D, getDropPoint().getY() - 1D, getDropPoint().getZ() + 0.5D, 0.5D);
 	}
-	
-    public double getDistance(double x, double y, double z) {
-        double d0 = this.getX() - x;
-        double d1 = this.getY() - y;
-        double d2 = this.getZ() - z;
-        return Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-    }
-	
+
+	public double getDistance(double x, double y, double z) {
+		double d0 = this.getX() - x;
+		double d1 = this.getY() - y;
+		double d2 = this.getZ() - z;
+		return Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
+	}
+
 	public ItemEntity getClosestEntityItem(final Entity entity, double d, ItemStack filter) {
 		List<ItemEntity> list = level().getEntitiesOfClass(ItemEntity.class, getBoundingBox().inflate(d, d, d), EntitySelector.ENTITY_STILL_ALIVE);
 		if (list.isEmpty())
 			return null;
 
-		for (Iterator<ItemEntity> iterator = list.iterator(); iterator.hasNext();) {
-			ItemEntity item = iterator.next();
-			if (!ItemStack.isSameItem(filter, item.getItem()))
-				iterator.remove();
-		}
+		list.removeIf(item -> !ItemStack.isSameItem(filter, item.getItem()));
 
 		if (list.isEmpty())
 			return null;
 
-		Collections.sort(list, new Comparator<ItemEntity>() {
+		list.sort(Comparator.comparingDouble(e -> e.distanceToSqr(entity)));
 
-			@Override
-			public int compare(ItemEntity e1, ItemEntity e2) {
-				return Double.compare(e1.distanceToSqr(entity), e2.distanceToSqr(entity));
-			}
-
-		});
-
-		return list.get(0);
+		return list.getFirst();
 	}
 
 	@Override
-	  public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putBoolean("tameState", isTamedAnt());
-		nbt.putByte("antRole", getAntRole());
-		nbt.put("dropPoint", NbtUtils.writeBlockPos(getDropPoint()));
+	public void addAdditionalSaveData(@NonNull ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putBoolean("tameState", isTamedAnt());
+		output.putByte("antRole", getAntRole());
+		output.store("dropPoint", BlockPos.CODEC, getDropPoint());
 
 		// TODO handling individual slots rather than iterating here, may change later
 		if (!this.inventory.getItem(TOOL_SLOT).isEmpty())
-        	nbt.put("toolSlot", this.inventory.getItem(TOOL_SLOT).save(registryAccess()));
+			output.store("toolSlot", ItemStack.CODEC, this.inventory.getItem(TOOL_SLOT));
 		if (!this.inventory.getItem(CROP_ID_SLOT).isEmpty())
-        	nbt.put("cropIdSlot", this.inventory.getItem(CROP_ID_SLOT).save(registryAccess()));
+			output.store("cropIdSlot", ItemStack.CODEC, this.inventory.getItem(CROP_ID_SLOT));
 		if (!this.inventory.getItem(INVENTORY_SLOT).isEmpty())
-        	nbt.put("inventorySlot", this.inventory.getItem(INVENTORY_SLOT).save(registryAccess()));
+			output.store("inventorySlot", ItemStack.CODEC, this.inventory.getItem(INVENTORY_SLOT));
 
-		if (playerOwner != null) nbt.putUUID("playerOwner", playerOwner);
+		if (playerOwner != null) output.putString("playerOwner", playerOwner.toString());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		setTameState(nbt.getBoolean("tameState"));
-		setAntRole(nbt.getByte("antRole"));
-		Optional<BlockPos> optional = NbtUtils.readBlockPos(nbt, "dropPoint");
+	public void readAdditionalSaveData(@NonNull ValueInput input) {
+		super.readAdditionalSaveData(input);
+		setTameState(input.getBooleanOr("tameState", false));
+		setAntRole(input.getByteOr("antRole", (byte) 0));
+		Optional<BlockPos> dropPoint = input.read("dropPoint", BlockPos.CODEC);
+		setDropPoint(dropPoint.orElse(BlockPos.ZERO));
 
-		if(!optional.isEmpty())
-			setDropPoint(optional.get());
+		ItemStack toolSlot = input.read("toolSlot", ItemStack.CODEC).orElse(ItemStack.EMPTY);
+		ItemStack cropIdSlot = input.read("cropIdSlot", ItemStack.CODEC).orElse(ItemStack.EMPTY);
+		ItemStack inventorySlot = input.read("inventorySlot", ItemStack.CODEC).orElse(ItemStack.EMPTY);
 
-		if (nbt.contains("toolSlot", 10)) {
-			ItemStack stack1 = ItemStack.parse(this.registryAccess(), nbt.getCompound("toolSlot")).orElse(ItemStack.EMPTY);
-			 if (!stack1.isEmpty())
-				 this.inventory.setItem(TOOL_SLOT, stack1);
-		}
+		inventory.setItem(TOOL_SLOT, toolSlot);
+		inventory.setItem(CROP_ID_SLOT, cropIdSlot);
+		inventory.setItem(INVENTORY_SLOT, inventorySlot);
 
-		if (nbt.contains("cropIdSlot", 10)) {
-			ItemStack stack2 = ItemStack.parse(this.registryAccess(), nbt.getCompound("cropIdSlot")).orElse(ItemStack.EMPTY);
-			if (!stack2.isEmpty())
-				this.inventory.setItem(CROP_ID_SLOT, stack2);
-		}
-
-		if (nbt.contains("inventorySlot", 10)) {
-			ItemStack stack3 = ItemStack.parse(this.registryAccess(), nbt.getCompound("inventorySlot")).orElse(ItemStack.EMPTY);
-			if (!stack3.isEmpty())
-				this.inventory.setItem(INVENTORY_SLOT, stack3);
-		}
-
-		playerOwner = nbt.hasUUID("playerOwner") ? nbt.getUUID("playerOwner") : null;
+		playerOwner = input.getString("playerOwner").map(UUID::fromString).orElse(null);
 	}
 
 	// INVENTORY SHIT
-	
+
 	private void addToInventory(ItemStack stack) {
 		if (stack.isEmpty())
 			return;
@@ -406,124 +390,93 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	private void addDropToInventory(BlockPos pos) {
 		BlockEntity tile = level().getBlockEntity(pos);
 		ItemStack stack = getAntInvSlotStack();
+		ResourceHandler<ItemResource> silo = level().getCapability(Capabilities.Item.BLOCK, getDropPoint(), Direction.UP);
+		ResourceHandler<ItemResource> ant = getCapability(Capabilities.Item.ENTITY_AUTOMATION, Direction.DOWN);
 		if (!isAntInvSlotEmpty()) {
-		if (tile instanceof SiloTankBlockEntity silo) {
-			Optional<IItemHandler> handlerOptional = CapHelper.getItemHandler(level(), pos, null);
-			if (handlerOptional.isPresent()) {
-				handlerOptional.ifPresent((handler) -> {
-					ItemStack stack1 = ItemHandlerHelper.insertItem(handler, stack, true);
-					if (stack1.isEmpty()) {
-						ItemHandlerHelper.insertItem(handler, decrStackSize(INVENTORY_SLOT, 1), false);
-						silo.setChanged();
-					}
-				});
-			} else {
-				spawnAtLocation(stack, 0.0F); // just in case
-				inventory.setItem(INVENTORY_SLOT, ItemStack.EMPTY); // not nice atm but stops insane behaviours
+			try(Transaction transaction = Transaction.openRoot()) {
+				int amountInserted = ResourceHandlerUtil.moveStacking(ant, silo, filter -> filter.is(stack.getItem()), stack.getCount(), transaction);
+				if(amountInserted > 0) {
+					inventory.setItem(INVENTORY_SLOT, new ItemStack(stack.getItem(), stack.getCount() - amountInserted));
+					transaction.commit();
+				} else {
+					transaction.close();
+				}
 			}
 		}
-		}
-	}
-	
-	public ItemStack decrStackSize(int slot, int size) {
-		if (!inventory.getItem(slot).isEmpty()) {
-			ItemStack itemstack;
-			if (inventory.getItem(slot).getCount() <= size) {
-				itemstack = inventory.getItem(slot);
-				inventory.setItem(slot, ItemStack.EMPTY);
-				return itemstack;
-			} else {
-				itemstack = inventory.getItem(slot).split(size);
-				if (inventory.getItem(slot).getCount() == 0)
-					inventory.setItem(slot, ItemStack.EMPTY);
-				return itemstack;
-			}
-		} else
-			return ItemStack.EMPTY;
 	}
 
 	private void getStackFromSilo() {
 		BlockEntity tile = level().getBlockEntity(getDropPoint());
-		if (tile instanceof SiloTankBlockEntity silo) {
-			Optional<IItemHandler> handlerOptional = CapHelper.getItemHandler(level(), getDropPoint(), null);
-			if (handlerOptional.isPresent()) {
-				handlerOptional.ifPresent((handler) -> {
-					int sizeInventory = handler.getSlots();
-					for (int i = 0; i < sizeInventory; i++)
-						if (!handler.getStackInSlot(i).isEmpty())
-							if (ItemStack.isSameItem(handler.getStackInSlot(i), inventory.getItem(CROP_ID_SLOT)))
-								if (isAntInvSlotEmpty()) {
-									int collectStackSize = handler.getStackInSlot(i).getCount();
-									inventory.setItem(INVENTORY_SLOT, new ItemStack(handler.getStackInSlot(i).getItem(), collectStackSize));
-									handler.getStackInSlot(i).shrink(collectStackSize);
-									return;
-								}
-				});
+		ResourceHandler<ItemResource> silo = level().getCapability(Capabilities.Item.BLOCK, getDropPoint(), Direction.UP);
+		ResourceHandler<ItemResource> ant = getCapability(Capabilities.Item.ENTITY_AUTOMATION, Direction.DOWN);
+
+		if(tile instanceof SiloTankBlockEntity) {
+			try(Transaction transaction = Transaction.openRoot()) {
+				int cropCollected = ResourceHandlerUtil.moveStacking(silo, ant, filter -> filter.is(inventory.getItem(CROP_ID_SLOT).getItem()), 64, transaction);
+				if(isAntInvSlotEmpty()) {
+					inventory.setItem(INVENTORY_SLOT, new ItemStack(inventory.getItem(CROP_ID_SLOT).getItem(), cropCollected));
+					transaction.commit();
+				} else {
+					transaction.close();
+				}
 			}
 		}
 	}
 
 	protected void updateInventory() {
-        BlackAntSimpleContainer previousInventory = this.inventory;
-        this.inventory = new BlackAntSimpleContainer(this.getInventorySize());
-        if (previousInventory != null) {
-            previousInventory.removeListener(this);
-            int maxSize = Math.min(previousInventory.getContainerSize(), this.inventory.getContainerSize());
+		BlackAntSimpleContainer previousInventory = this.inventory;
+		this.inventory = new BlackAntSimpleContainer(this.getInventorySize());
+		if (previousInventory != null) {
+			int maxSize = Math.min(previousInventory.getContainerSize(), this.inventory.getContainerSize());
 
-            for (int slot = 0; slot < maxSize; ++slot) {
-                ItemStack stack = previousInventory.getItem(slot);
-                if (!stack.isEmpty()) {
-                    this.inventory.setItem(slot, stack.copy());
-                }
-            }
-        }
+			for (int slot = 0; slot < maxSize; ++slot) {
+				ItemStack stack = previousInventory.getItem(slot);
+				if (!stack.isEmpty()) {
+					this.inventory.setItem(slot, stack.copy());
+				}
+			}
+		}
 
-        this.inventory.addListener(this);
-        this.syncInventoryToFlags();
-    }
+		this.syncInventoryToFlags();
+	}
 
-    public void syncInventoryToFlags() {
-        if (!this.level().isClientSide()) {
-        	canPickupItems = false;
-    		canAddToSilo = false;
-    		canCollectFromSilo = false;
-        	
-        	if (isTaskSlotEmpty() && isTamedAnt())
-    			entityData.set(ANT_ROLE, NONE);
+	public void syncInventoryToFlags() {
+		if (!this.level().isClientSide()) {
+			canPickupItems = false;
+			canAddToSilo = false;
+			canCollectFromSilo = false;
 
-    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof HoeItem)
-    			entityData.set(ANT_ROLE, PLANTER);
+			if (isTaskSlotEmpty() && isTamedAnt())
+				entityData.set(ANT_ROLE, NONE);
 
-    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof BucketItem) {
-    			canPickupItems = true;
-    			entityData.set(ANT_ROLE, COLLECTOR);
-    		}
+			if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof HoeItem)
+				entityData.set(ANT_ROLE, PLANTER);
 
-    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ShearsItem)
-    			entityData.set(ANT_ROLE, HARVESTER);
+			if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof BucketItem) {
+				canPickupItems = true;
+				entityData.set(ANT_ROLE, COLLECTOR);
+			}
 
-    		if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.BONE)
-    			entityData.set(ANT_ROLE, FERTILIZER);
-        }
-    }
+			if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() instanceof ShearsItem)
+				entityData.set(ANT_ROLE, HARVESTER);
 
-    @Override
-    public void containerChanged(Container Container) {
-        this.syncInventoryToFlags();
-    }
-	
-    public int getInventorySize() {
-        return 3;
-    }
-	
-    public BlackAntSimpleContainer getInventory() {
-        if(this.inventory == null){
-            return new BlackAntSimpleContainer(getInventorySize());
-        }
-        return this.inventory;
-    }
-    
-    public boolean isTaskSlotEmpty() {
+			if (!isTaskSlotEmpty() && getTaskSlotStack().getItem() == Items.BONE)
+				entityData.set(ANT_ROLE, FERTILIZER);
+		}
+	}
+
+	public int getInventorySize() {
+		return 3;
+	}
+
+	public BlackAntSimpleContainer getInventory() {
+		if (this.inventory == null) {
+			return new BlackAntSimpleContainer(getInventorySize());
+		}
+		return this.inventory;
+	}
+
+	public boolean isTaskSlotEmpty() {
 		return getTaskSlotStack().isEmpty();
 	}
 
@@ -548,17 +501,17 @@ public class BlackAnt extends Animal implements ContainerListener, HasCustomInve
 	}
 
 	@Override
-	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+	public AbstractContainerMenu createMenu(int containerId, @NonNull Inventory playerInventory, @NonNull Player player) {
 		return new BlackAntMenu(containerId, playerInventory, this);
 	}
 
 	@Override
-	public void openCustomInventoryScreen(Player player) {
+	public void openCustomInventoryScreen(@NonNull Player player) {
 		if (!level().isClientSide()) {
 			player.openMenu(this, buf -> {
-			buf.writeInt(this.getId());
-			buf.writeInt(this.getId());
-		});
+				buf.writeInt(this.getId());
+				buf.writeInt(this.getId());
+			});
 		}
 	}
 }

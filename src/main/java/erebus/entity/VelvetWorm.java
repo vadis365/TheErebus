@@ -3,10 +3,10 @@ package erebus.entity;
 import erebus.entity.ai.ShootGooBallAttackGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -31,9 +31,12 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -70,7 +73,7 @@ public class VelvetWorm extends Monster {
 	}
 
 	@Override
-	public PartEntity<?>[] getParts() {
+	public PartEntity<?> @NonNull [] getParts() {
 		return parts;
 	}
 
@@ -80,7 +83,7 @@ public class VelvetWorm extends Monster {
 	}
 
 	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(SKIN_TYPE, 0);
 	}
@@ -148,13 +151,13 @@ public class VelvetWorm extends Monster {
 		this.setDeltaMovement(vec3.multiply(1.0D, this.getHeadMotionYMultiplier(), 1.0D));
 	}
 
-    @Override
-    public AABB getBoundingBoxForCulling() {
-    	AABB newBox = getBoundingBox();
+	@Override
+	public @NonNull AABB getHitbox() {
+		AABB newBox = getBoundingBox();
 		for(VelvetWormMultipart part : this.parts)
 			newBox = getBoundingBox().minmax(part.getBoundingBox());
 		return newBox;
-    }
+	}
 
 	@Override
 	public boolean shouldRenderAtSqrDistance(double distance) {
@@ -170,12 +173,12 @@ public class VelvetWorm extends Monster {
 			double a = Math.toRadians(this.yBodyRot);
 			double offSetX = -Math.sin(a) * 0D + rand.nextDouble() * 0.5D - rand.nextDouble() * 0.5D;
 			double offSetZ = Math.cos(a) * 0D + rand.nextDouble() * 0.5D - rand.nextDouble() * 0.5D;
-			level.addParticle(ParticleTypes.ITEM_SLIME, false, x + offSetX, y, z + offSetZ, 0, 0, 0);
+			level.addParticle(ParticleTypes.ITEM_SLIME, x + offSetX, y, z + offSetZ, 0, 0, 0);
 		}
 	}
 
 	@Override
-	public void makeStuckInBlock(BlockState state, Vec3 motionMultiplier) {
+	public void makeStuckInBlock(BlockState state, @NonNull Vec3 motionMultiplier) {
 		if (!state.is(Blocks.COBWEB))
 			super.makeStuckInBlock(state, motionMultiplier);
 	}
@@ -194,10 +197,10 @@ public class VelvetWorm extends Monster {
 	}
 
 	@Override
-	public boolean hurt(DamageSource source, float amount) {
-		if (source.is(DamageTypes.IN_WALL) && this.wallInvulnerabilityTicks > 0)
+	public boolean hurtServer(@NonNull ServerLevel level, DamageSource source, float damage) {
+		if(source.is(DamageTypes.IN_WALL) && this.wallInvulnerabilityTicks > 0)
 			return false;
-		return super.hurt(source, amount);
+		return super.hurtServer(level, source, damage);
 	}
 
 	private void setHitBoxes() {
@@ -281,7 +284,7 @@ public class VelvetWorm extends Monster {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason type, @Nullable SpawnGroupData data) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason type, @Nullable SpawnGroupData data) {
 		setSkin(level.getRandom().nextInt(5));
 		for (VelvetWormMultipart part : this.parts) {
 			part.setPos(this.xo, this.yo, this.zo);
@@ -299,15 +302,15 @@ public class VelvetWorm extends Monster {
 	}
 
 	@Override
-	  public void addAdditionalSaveData(CompoundTag nbt) {
-		super.addAdditionalSaveData(nbt);
-		nbt.putInt("skin", getSkin());
+	  public void addAdditionalSaveData(@NonNull ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		output.putInt("skin", getSkin());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
-		super.readAdditionalSaveData(nbt);
-		setSkin(nbt.getInt("skin"));
+	public void readAdditionalSaveData(@NonNull ValueInput input) {
+		super.readAdditionalSaveData(input);
+		setSkin(input.getIntOr("skin", 0));
 	}
 
 }

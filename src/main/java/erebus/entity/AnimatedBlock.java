@@ -76,7 +76,6 @@ public class AnimatedBlock extends PathfinderMob {
 				.add(Attributes.ATTACK_DAMAGE, 2D);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void tick() {
 		super.tick();
@@ -121,13 +120,12 @@ public class AnimatedBlock extends PathfinderMob {
 	@Override
     public @NonNull InteractionResult mobInteract(Player player, @NonNull InteractionHand hand) {
 		ItemStack is = player.getItemInHand(hand);
-		if (!level().isClientSide && !is.isEmpty() && is.getItem() == ModItems.WAND_OF_ANIMATION.get()) {
+		if (!level().isClientSide() && !is.isEmpty() && is.getItem() == ModItems.WAND_OF_ANIMATION.get()) {
 			remove(RemovalReason.DISCARDED);
 			level().setBlock(blockPosition(), getBlockType(), 3);
 			level().playSound(null, blockPosition(), ModSounds.ALTAR_OFFERING.get(), SoundSource.NEUTRAL, 0.2F, 1.0F);
 			return InteractionResult.SUCCESS;
 		} else if (getBlockType() == ModBlocks.PETRIFIED_CRAFTING_TABLE.get().defaultBlockState() && is.isEmpty()) {
-			System.out.println("Open Petrified crafting table Gui Here");
 			player.openMenu(getBlockType().getMenuProvider(level(), blockPosition()));
 			return InteractionResult.SUCCESS;
 		} else
