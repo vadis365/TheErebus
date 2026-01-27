@@ -1,12 +1,14 @@
 package erebus.world.feature.structure;
 
 import com.mojang.serialization.MapCodec;
+import erebus.registries.data.tags.ModBiomeTags;
 import erebus.registries.world.structure.ModStructureTypes;
 import erebus.world.feature.structure.pieces.DungPilePiece;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.util.random.WeightedRandomList;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -38,13 +40,13 @@ public class DungPile extends Structure {
 
     public static DungPile buildConfig(BootstrapContext<Structure> context) {
         return new DungPile(
-                new StructureSettings.Builder(context.lookup(Registries.BIOME).getOrThrow(ModTags.HAS_DUNG_PILE))
+                new StructureSettings.Builder(context.lookup(Registries.BIOME).getOrThrow(ModBiomeTags.HAS_DUNG_PILE))
                         .spawnOverrides(
                                 Map.of(
                                         MobCategory.MONSTER,
                                         new StructureSpawnOverride(
                                                 StructureSpawnOverride.BoundingBoxType.STRUCTURE,
-                                                WeightedRandomList.create()
+                                                WeightedList.<MobSpawnSettings.SpawnerData>builder().build()
                                         )
                                 )
                         )

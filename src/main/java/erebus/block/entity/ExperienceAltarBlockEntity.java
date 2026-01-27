@@ -2,7 +2,7 @@ package erebus.block.entity;
 
 import erebus.block.altars.AltarAbstract;
 import erebus.client.particle.ClientParticles;
-import erebus.network.client.AltarAnimatonTimerPacket;
+import erebus.network.client.AltarAnimationTimerPacket;
 import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -43,7 +43,7 @@ public class ExperienceAltarBlockEntity extends AltarAbstractBlockEntity {
 			if (altar.prevAnimationTicks != altar.animationTicks)
 				PacketDistributor.sendToPlayersNear((ServerLevel) altar.getLevel(), null, altar.getBlockPos().getX(),
 						altar.getBlockPos().getY(), altar.getBlockPos().getZ(), 30,
-						new AltarAnimatonTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(),
+						new AltarAnimationTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(),
 								altar.getBlockPos().getZ(), altar.animationTicks));
 		}
 

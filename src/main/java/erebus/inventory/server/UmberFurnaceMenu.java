@@ -3,21 +3,23 @@ package erebus.inventory.server;
 import erebus.inventory.slot.FluidContainerSlot;
 import erebus.inventory.slot.UmberFurnaceFuelSlot;
 import erebus.registries.client.ModMenuTypes;
+import net.minecraft.recipebook.ServerPlaceRecipe;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.AbstractCookingRecipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import org.jspecify.annotations.NonNull;
 
-public class UmberFurnaceMenu extends RecipeBookMenu<SingleRecipeInput, AbstractCookingRecipe> {
+import java.util.List;
+
+public class UmberFurnaceMenu extends RecipeBookMenu {
 
     public static final int BUCKET_SLOT = 0;
     public static final int INGREDIENT_SLOT = 1;
@@ -38,151 +40,41 @@ public class UmberFurnaceMenu extends RecipeBookMenu<SingleRecipeInput, Abstract
     private final ContainerData data;
     protected final Level level;
     private final RecipeType<? extends AbstractCookingRecipe> recipeType;
+    private final RecipePropertySet acceptedInputs;
     private final RecipeBookType recipeBookType;
 
-    public UmberFurnaceMenu(int id, Inventory inv) {
-        this(id, inv, new SimpleContainer(SLOT_COUNT), new SimpleContainerData(DATA_COUNT));
+    public UmberFurnaceMenu(int containerId, Inventory inventory) {
+        this(containerId, inventory, new SimpleContainer(SLOT_COUNT), new SimpleContainerData(DATA_COUNT));
     }
 
-    public UmberFurnaceMenu(int id, Inventory inv, Container container, ContainerData data) {
-        super(ModMenuTypes.UMBER_FURNACE_MENU.get(), id);
+    public UmberFurnaceMenu(int containerId, Inventory inventory, Container container, ContainerData data) {
+        super(ModMenuTypes.UMBER_FURNACE_MENU.get(), containerId);
         recipeType = RecipeType.SMELTING;
         recipeBookType = RecipeBookType.FURNACE;
-        checkContainerSize(container, SLOT_COUNT);
-        checkContainerDataCount(data, DATA_COUNT);
+        checkContainerSize(container, 3);
+        checkContainerDataCount(data, 4);
         this.container = container;
         this.data = data;
-        this.level = inv.player.level();
+        level = inventory.player.level();
+        acceptedInputs = level.recipeAccess().propertySet(RecipePropertySet.FURNACE_INPUT);
         addSlot(new Slot(container, INGREDIENT_SLOT, 56, 17));
         addSlot(new UmberFurnaceFuelSlot(this, container, FUEL_SLOT, 56, 53));
-        addSlot(new FurnaceResultSlot(inv.player, container, RESULT_SLOT, 116, 35));
+        addSlot(new FurnaceResultSlot(inventory.player, container, RESULT_SLOT, 116, 35));
         addSlot(new FluidContainerSlot(container, BUCKET_SLOT, 31, 35));
-        addInventorySlots(inv);
-        addHotbarSlots(inv);
+        addStandardInventorySlots(inventory, 8, 84);
         addDataSlots(data);
     }
 
-    private void addInventorySlots(Inventory inv) {
-        for(int c = 0; c < 3; c++) {
-            for(int d = 0; d < 9; d++) {
-                addSlot(new Slot(inv, d + c * 9 + 9, 8 + d * 18, 84 + c * 18));
-            }
-        }
+    protected boolean canSmelt(ItemStack stack) {
+        return acceptedInputs.test(stack);
     }
 
-    private void addHotbarSlots(Inventory inv) {
-        for(int c = 0; c < 9; c++) {
-            addSlot(new Slot(inv, c, 8 + c * 18, 142));
-        }
+    protected boolean isFuel(ItemStack stack) {
+        return stack.getBurnTime(recipeType, level.fuelValues()) > 0;
     }
 
-    @Override
-    public void fillCraftSlotsStackedContents(StackedContents contents) {
-        if(contents instanceof StackedContentsCompatible) {
-            ((StackedContentsCompatible) contents).fillStackedContents(contents);
-        }
-    }
-
-    @Override
-    public void clearCraftingContent() {
-        getSlot(INGREDIENT_SLOT).set(ItemStack.EMPTY);
-        getSlot(RESULT_SLOT).set(ItemStack.EMPTY);
-    }
-
-    @Override
-    public boolean recipeMatches(RecipeHolder<AbstractCookingRecipe> recipe) {
-        return recipe.value().matches(new SingleRecipeInput(container.getItem(INGREDIENT_SLOT)), level);
-    }
-
-    @Override
-    public int getResultSlotIndex() {
-        return RESULT_SLOT;
-    }
-
-    @Override
-    public int getGridWidth() {
-        return 1;
-    }
-
-    @Override
-    public int getGridHeight() {
-        return 1;
-    }
-
-    @Override
-    public int getSize() {
-        return SLOT_COUNT;
-    }
-
-    @Override
-    public RecipeBookType getRecipeBookType() {
-        return recipeBookType;
-    }
-
-    @Override
-    public boolean shouldMoveToInventory(int index) {
-        return index != FUEL_SLOT;
-    }
-
-    @Override
-    public ItemStack quickMoveStack(Player player, int index) {
-        ItemStack stack = ItemStack.EMPTY;
-        Slot slot = slots.get(index);
-        if(slot != null && slot.hasItem()) {
-            ItemStack stackInSlot = slot.getItem();
-            stack = stackInSlot.copy();
-
-            if(index == RESULT_SLOT) {
-                if(!moveItemStackTo(stackInSlot, INV_SLOT_START, HOTBAR_SLOT_END, true)) {
-                    return ItemStack.EMPTY;
-                }
-            }
-
-            if(index != FUEL_SLOT && index != INGREDIENT_SLOT) {
-                if(canSmelt(stackInSlot)) {
-                    if (!moveItemStackTo(stackInSlot, INGREDIENT_SLOT, FUEL_SLOT, false)) return ItemStack.EMPTY;
-                }
-
-                if(isFuel(stackInSlot)) {
-                    if (!moveItemStackTo(stackInSlot, FUEL_SLOT, RESULT_SLOT, false)) return ItemStack.EMPTY;
-                }
-
-                if(index >= INV_SLOT_START && index < INV_SLOT_END) {
-                    if (!moveItemStackTo(stackInSlot, HOTBAR_SLOT_START, HOTBAR_SLOT_END, false)) return ItemStack.EMPTY;
-                }
-
-                if(index >= HOTBAR_SLOT_START && index < HOTBAR_SLOT_END) {
-                    if (!moveItemStackTo(stackInSlot, INV_SLOT_START, INV_SLOT_END, false)) return ItemStack.EMPTY;
-                }
-            }
-
-            if (!moveItemStackTo(stackInSlot, INV_SLOT_START, HOTBAR_SLOT_END, false)) return ItemStack.EMPTY;
-
-            if(stackInSlot.isEmpty()) {
-                slot.setByPlayer(ItemStack.EMPTY);
-            } else {
-                slot.setChanged();
-            }
-
-            if(stackInSlot.getCount() == stack.getCount()) return ItemStack.EMPTY;
-
-            slot.onTake(player, stack);
-        }
-
-        return stack;
-    }
-
-    @Override
-    public boolean stillValid(Player player) {
-        return container.stillValid(player);
-    }
-
-    public boolean isLit() {
-        return data.get(DATA_LIT_TIME) > 0;
-    }
-
-    public float getLitProgress() {
-        return data.get(DATA_LIT_DURATION) == 0 ? 200 : Mth.clamp((float) data.get(DATA_LIT_TIME) / data.get(DATA_LIT_DURATION), 0.0F, 1.0F);
+    public Slot getResultSlot() {
+        return this.slots.get(RESULT_SLOT);
     }
 
     public float getBurnProgress() {
@@ -191,15 +83,52 @@ public class UmberFurnaceMenu extends RecipeBookMenu<SingleRecipeInput, Abstract
         return totalTime != 0 && progress != 0 ? Mth.clamp((float) progress / totalTime, 0.0F, 1.0F) : 0.0F;
     }
 
-    protected boolean canSmelt(ItemStack stack) {
-        return level.getRecipeManager().getRecipeFor(recipeType, new SingleRecipeInput(stack), level).isPresent();
+    public float getLitProgress() {
+        return data.get(DATA_LIT_DURATION) == 0 ? 200 : Mth.clamp((float) data.get(DATA_LIT_TIME) / data.get(DATA_LIT_DURATION), 0.0F, 1.0F);
     }
 
-    public boolean isFuel(ItemStack stack) {
-        return stack.getBurnTime(recipeType) > 0;
+    public boolean isLit() {
+        return data.get(DATA_LIT_TIME) > 0;
     }
 
-    public int getScaledFluidAmount() {
-        return data.get(DATA_TANK_AMOUNT);
+    @Override
+    @SuppressWarnings("unchecked")
+    public @NonNull PostPlaceAction handlePlacement(boolean useMaxItems, boolean allowDroppingItemsToClear, @NonNull RecipeHolder<?> recipe, final @NonNull ServerLevel level, @NonNull Inventory inventory) {
+        final List<Slot> slotsToClear = List.of(getSlot(0), getSlot(2));
+        return ServerPlaceRecipe.placeRecipe(new ServerPlaceRecipe.CraftingMenuAccess<>() {
+            public void fillCraftSlotsStackedContents(@NonNull StackedItemContents stackedContents) {
+                UmberFurnaceMenu.this.fillCraftSlotsStackedContents(stackedContents);
+            }
+
+            public void clearCraftingContent() {
+                slotsToClear.forEach((s) -> s.set(ItemStack.EMPTY));
+            }
+
+            public boolean recipeMatches(@NonNull RecipeHolder<AbstractCookingRecipe> recipeHolder) {
+                return recipeHolder.value().matches(new SingleRecipeInput(UmberFurnaceMenu.this.container.getItem(INGREDIENT_SLOT)), level);
+            }
+        }, 1, 1, List.of(getSlot(0)), slotsToClear, inventory, (RecipeHolder<AbstractCookingRecipe>) recipe, useMaxItems, allowDroppingItemsToClear);
+    }
+
+    @Override
+    public void fillCraftSlotsStackedContents(@NonNull StackedItemContents contents) {
+        if(container instanceof StackedContentsCompatible) {
+            ((StackedContentsCompatible) container).fillStackedContents(contents);
+        }
+    }
+
+    @Override
+    public @NonNull RecipeBookType getRecipeBookType() {
+        return recipeBookType;
+    }
+
+    @Override
+    public @NonNull ItemStack quickMoveStack(@NonNull Player player, int index) {
+        return null;
+    }
+
+    @Override
+    public boolean stillValid(@NonNull Player player) {
+        return container.stillValid(player);
     }
 }

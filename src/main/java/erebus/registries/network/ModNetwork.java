@@ -9,7 +9,7 @@ public class ModNetwork {
 	 public static void register(final RegisterPayloadHandlersEvent event) {
 		 event.registrar(Erebus.MODID)
 				 .playToClient(LightningAltarRenderPacket.TYPE, LightningAltarRenderPacket.STREAM_CODEC, LightningAltarRenderPacket::handle)
-				 .playToClient(AltarAnimatonTimerPacket.TYPE, AltarAnimatonTimerPacket.STREAM_CODEC, AltarAnimatonTimerPacket::handle)
+				 .playToClient(AltarAnimationTimerPacket.TYPE, AltarAnimationTimerPacket.STREAM_CODEC, AltarAnimationTimerPacket::handle)
 				 .playToClient(OfferingAltarTimerPacket.TYPE, OfferingAltarTimerPacket.STREAM_CODEC, OfferingAltarTimerPacket::handle)
 				 .playToClient(OfferingAltarNBTPacket.TYPE, OfferingAltarNBTPacket.STREAM_CODEC, OfferingAltarNBTPacket::handle)
 				 .playToClient(PreservedBlockNBTPacket.TYPE, PreservedBlockNBTPacket.STREAM_CODEC, PreservedBlockNBTPacket::handle)

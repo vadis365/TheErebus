@@ -3,104 +3,81 @@ package erebus.inventory.server;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModMenuTypes;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
+import org.jspecify.annotations.NonNull;
 
-import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Optional;
 
-public class PetrifiedCraftingMenu extends RecipeBookMenu<CraftingInput, CraftingRecipe> {
-    public static final int RESULT_SLOT = 0;
+public class PetrifiedCraftingMenu extends AbstractCraftingMenu {
+
+    private static final int CRAFTING_GRID_WIDTH = 3;
+    private static final int CRAFTING_GRID_HEIGHT = 3;
+    private static final int RESULT_SLOT = 0;
     private static final int CRAFT_SLOT_START = 1;
     private static final int CRAFT_SLOT_END = 10;
     private static final int INV_SLOT_START = 10;
     private static final int INV_SLOT_END = 37;
     private static final int USE_ROW_SLOT_START = 37;
     private static final int USE_ROW_SLOT_END = 46;
-    private final CraftingContainer craftSlots;
-    private final ResultContainer resultSlots;
     private final ContainerLevelAccess access;
     private final Player player;
     private boolean placingRecipe;
 
-    public PetrifiedCraftingMenu(int id, Inventory inv) {
-        this(id, inv, ContainerLevelAccess.NULL);
+    public PetrifiedCraftingMenu(int containerID, Inventory inventory) {
+        this(containerID, inventory, ContainerLevelAccess.NULL);
     }
 
-    public PetrifiedCraftingMenu(int containerId, Inventory inv, ContainerLevelAccess access) {
-        super(ModMenuTypes.PETRIFIED_CRAFTING_MENU.get(), containerId);
-        craftSlots = new TransientCraftingContainer(this, 3, 3);
-        resultSlots = new ResultContainer();
+    public PetrifiedCraftingMenu(int containerID, Inventory inventory, ContainerLevelAccess access) {
+        super(ModMenuTypes.PETRIFIED_CRAFTING_MENU.get(), containerID, CRAFTING_GRID_WIDTH, CRAFTING_GRID_HEIGHT);
         this.access = access;
-        player = inv.player;
-        addSlot(new ResultSlot(player, craftSlots, resultSlots, 0, 124, 35));
-
-        addCraftingGridSlots(inv);
-        addInventorySlots(inv);
-        addHotbarSlots(inv);
+        this.player = inventory.player;
+        this.addResultSlot(player, 124, 35);
+        this.addCraftingGridSlots(30, 17);
+        this.addStandardInventorySlots(inventory, 8, 84);
     }
 
-    private void addCraftingGridSlots(Inventory inv) {
-        for(int c = 0; c < 3; ++c) {
-            for(int d = 0; d < 3; ++d) {
-                addSlot(new Slot(craftSlots, d + c * 3, 30 + d * 18, 17 + c * 18));
-            }
-        }
-    }
+    protected static void slotChangedCraftingGrid(AbstractContainerMenu menu, ServerLevel level, Player player, CraftingContainer container, ResultContainer resultSlots, RecipeHolder<CraftingRecipe> recipeHint) {
+        CraftingInput input = container.asCraftInput();
+        ServerPlayer serverPlayer = (ServerPlayer) player;
+        ItemStack result = ItemStack.EMPTY;
+        Optional<RecipeHolder<CraftingRecipe>> recipeLookup = level.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, input, level, recipeHint);
 
-    private void addInventorySlots(Inventory inv) {
-        for (int c = 0; c < 3; c++) {
-            for (int d = 0; d < 9; d++) {
-                addSlot(new Slot(inv, d + c * 9 + 9, 8 + d * 18, 84 + c * 18));
-            }
-        }
-    }
+        if(recipeLookup.isPresent()) {
+            RecipeHolder<CraftingRecipe> recipeHolder = recipeLookup.get();
+            CraftingRecipe recipe = recipeHolder.value();
 
-    private void addHotbarSlots(Inventory inv) {
-        for (int c = 0; c < 9; c++) {
-            addSlot(new Slot(inv, c, 8 + c * 18, 142));
-        }
-    }
-
-    protected static void slotChangedCraftingGrid(AbstractContainerMenu menu, Level level, Player player, CraftingContainer craftSlots, ResultContainer resultSlots, @Nullable RecipeHolder<CraftingRecipe> recipe) {
-        if(!level.isClientSide) {
-            CraftingInput craftingInput = craftSlots.asCraftInput();
-            ServerPlayer serverPlayer = (ServerPlayer) player;
-            ItemStack result = ItemStack.EMPTY;
-            Optional<RecipeHolder<CraftingRecipe>> optional = level.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, craftingInput, level, recipe);
-
-            if(optional.isPresent()) {
-                RecipeHolder<CraftingRecipe> holder = optional.get();
-                CraftingRecipe craftingRecipe = holder.value();
-
-                if(resultSlots.setRecipeUsed(level, serverPlayer, holder)) {
-                    ItemStack stack = craftingRecipe.assemble(craftingInput, level.registryAccess());
-                    if(stack.isItemEnabled(level.enabledFeatures())) {
-                        result = stack;
-                    }
+            if(resultSlots.setRecipeUsed(serverPlayer, recipeHolder)) {
+                ItemStack recipeResult = recipe.assemble(input, level.registryAccess());
+                if(recipeResult.isItemEnabled(level.enabledFeatures())) {
+                    result = recipeResult;
                 }
             }
-
-            resultSlots.setItem(0, result);
-            menu.setRemoteSlot(0, result);
-            serverPlayer.connection.send(new ClientboundContainerSetSlotPacket(menu.containerId, menu.incrementStateId(), 0, result));
         }
+
+        resultSlots.setItem(RESULT_SLOT, result);
+        menu.setRemoteSlot(RESULT_SLOT, result);
+        serverPlayer.connection.send(new ClientboundContainerSetSlotPacket(menu.containerId, menu.incrementStateId(), RESULT_SLOT, result));
     }
 
     @Override
-    public void slotsChanged(Container container) {
+    public void slotsChanged(@NonNull Container container) {
         if(!placingRecipe) {
-            access.execute(((level, pos) -> slotChangedCraftingGrid(this, level, player, craftSlots, resultSlots, null)));
+            access.execute((level, _) -> {
+                if(level instanceof ServerLevel serverLevel) {
+                    slotChangedCraftingGrid(this, serverLevel, player, craftSlots, resultSlots, null);
+                }
+            });
         }
     }
 
@@ -108,110 +85,93 @@ public class PetrifiedCraftingMenu extends RecipeBookMenu<CraftingInput, Craftin
         placingRecipe = true;
     }
 
-    public void finishPlacingRecipe(RecipeHolder<CraftingRecipe> recipe) {
+    public void finishPlacingRecipe(@NonNull ServerLevel level, @NonNull RecipeHolder<CraftingRecipe> recipe) {
         placingRecipe = false;
-        access.execute((level, pos) -> slotChangedCraftingGrid(this, level, player, craftSlots, resultSlots, recipe));
+        slotChangedCraftingGrid(this, level, player, craftSlots, resultSlots, recipe);
     }
 
-    public void fillCraftSlotsStackedContents(StackedContents stackedContents) {
-        craftSlots.fillStackedContents(stackedContents);
+    public boolean canTakeItemForPickAll(@NonNull ItemStack carried, Slot target) {
+        return target.container != resultSlots && super.canTakeItemForPickAll(carried, target);
     }
 
-    public void clearCraftingContent() {
-        craftSlots.clearContent();
-        resultSlots.clearContent();
-    }
-
-    public boolean recipeMatches(RecipeHolder<CraftingRecipe> recipe) {
-        return recipe.value().matches(craftSlots.asCraftInput(), player.level());
-    }
-
-    public void removed(Player player) {
+    @Override
+    public void removed(@NonNull Player player) {
         super.removed(player);
-        access.execute(((level, blockPos) -> clearContainer(player, craftSlots)));
+        access.execute((_, _) -> clearContainer(player, craftSlots));
     }
 
     @Override
-    public boolean stillValid(Player player) {
-        return stillValid(access, player, ModBlocks.PETRIFIED_CRAFTING_TABLE.get());
+    public @NonNull Slot getResultSlot() {
+        return this.slots.get(RESULT_SLOT);
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int i) {
-        ItemStack stack = ItemStack.EMPTY;
-        Slot slot = slots.get(i);
+    public @NonNull List<Slot> getInputGridSlots() {
+        return slots.subList(CRAFT_SLOT_START, CRAFT_SLOT_END);
+    }
 
-        if(slot != null && slot.hasItem()) {
-            ItemStack item = slot.getItem();
-            stack = item.copy();
+    @Override
+    protected @NonNull Player owner() {
+        return player;
+    }
 
-            if(i == 0) {
-                access.execute(((level, blockPos) -> item.getItem().onCraftedBy(item, level, player)));
-                if(!moveItemStackTo(item, INV_SLOT_START, USE_ROW_SLOT_END, true)) {
+    @Override
+    public @NonNull RecipeBookType getRecipeBookType() {
+        return RecipeBookType.CRAFTING;
+    }
+
+    @Override
+    public @NonNull ItemStack quickMoveStack(@NonNull Player player, int index) {
+        ItemStack clicked = ItemStack.EMPTY;
+        Slot slot = slots.get(index);
+
+        if(slot.hasItem()) {
+            ItemStack stack = slot.getItem();
+            clicked = stack.copy();
+
+            if(index == RESULT_SLOT) {
+                stack.getItem().onCraftedBy(stack, player);
+                if(!moveItemStackTo(stack, INV_SLOT_START, USE_ROW_SLOT_END, true)) {
                     return ItemStack.EMPTY;
                 }
 
-                slot.onQuickCraft(item, stack);
-            } else if(i >= INV_SLOT_START && i < USE_ROW_SLOT_END) {
-                if(!moveItemStackTo(item, CRAFT_SLOT_START, CRAFT_SLOT_END, false)) {
-                    if(i < USE_ROW_SLOT_START) {
-                        if(!moveItemStackTo(item, USE_ROW_SLOT_START, USE_ROW_SLOT_END, false)) {
+                slot.onQuickCraft(stack, clicked);
+            } else if(index >= INV_SLOT_START && index < USE_ROW_SLOT_END) {
+                if (!moveItemStackTo(stack, CRAFT_SLOT_START, CRAFT_SLOT_END, false)) {
+                    if(index < INV_SLOT_END) {
+                        if(!moveItemStackTo(stack, USE_ROW_SLOT_START, USE_ROW_SLOT_END, false)) {
                             return ItemStack.EMPTY;
                         }
-                    } else if(!moveItemStackTo(item, INV_SLOT_START, INV_SLOT_END, false)) {
+                    } else if(!moveItemStackTo(stack, INV_SLOT_START, INV_SLOT_END, false)) {
                         return ItemStack.EMPTY;
                     }
                 }
-            } else if(!moveItemStackTo(item, INV_SLOT_START, USE_ROW_SLOT_END, false)) {
+            } else if (!moveItemStackTo(stack, INV_SLOT_START, USE_ROW_SLOT_END, false)) {
                 return ItemStack.EMPTY;
             }
 
-            if(item.isEmpty()) {
+            if(stack.isEmpty()) {
                 slot.setByPlayer(ItemStack.EMPTY);
             } else {
                 slot.setChanged();
             }
 
-            if(item.getCount() == stack.getCount()) {
+            if(stack.getCount() == clicked.getCount()) {
                 return ItemStack.EMPTY;
             }
 
-            slot.onTake(player, item);
+            slot.onTake(player, stack);
 
-            if(i == 0) {
-                player.drop(item, false);
+            if(index == RESULT_SLOT) {
+                player.drop(stack, false);
             }
         }
 
-        return stack;
+        return clicked;
     }
 
     @Override
-    public boolean canTakeItemForPickAll(ItemStack stack, Slot slot) {
-        return slot.container != resultSlots && super.canTakeItemForPickAll(stack, slot);
-    }
-
-    public int getResultSlotIndex() {
-        return RESULT_SLOT;
-    }
-
-    public int getGridWidth() {
-        return craftSlots.getWidth();
-    }
-
-    public int getGridHeight() {
-        return craftSlots.getHeight();
-    }
-
-    public int getSize() {
-        return 10;
-    }
-
-    public RecipeBookType getRecipeBookType() {
-        return RecipeBookType.CRAFTING;
-    }
-
-    public boolean shouldMoveToInventory(int index) {
-        return index != getResultSlotIndex();
+    public boolean stillValid(@NonNull Player player) {
+        return stillValid(access, player, ModBlocks.PETRIFIED_CRAFTING_TABLE.get());
     }
 }

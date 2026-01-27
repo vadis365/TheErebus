@@ -1,6 +1,6 @@
 package erebus.item.shield;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.ItemStack;
 
@@ -9,7 +9,7 @@ public interface IShieldType {
 
     ItemStack getRepairItem();
 
-    ResourceLocation getTexture();
+    Identifier getTexture();
 
     SoundEvent getHitSound();
 
