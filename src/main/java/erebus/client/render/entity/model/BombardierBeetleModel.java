@@ -2,16 +2,14 @@
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.BombardierBeetle;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.BombardierBeetleRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class BombardierBeetleModel<T extends BombardierBeetle> extends HierarchicalModel<T> {
+public class BombardierBeetleModel extends EntityModel<BombardierBeetleRenderState> {
 	public ModelPart root;
 	private final ModelPart Thx;
 	private final ModelPart ThxS;
@@ -27,6 +25,7 @@ public class BombardierBeetleModel<T extends BombardierBeetle> extends Hierarchi
 	private final ModelPart Head;
 
 	public BombardierBeetleModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.Thx = root.getChild("Thx");
 		this.ThxS = root.getChild("ThxS");
@@ -136,11 +135,11 @@ public class BombardierBeetleModel<T extends BombardierBeetle> extends Hierarchi
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		Head.yRot = netHeadYaw / (180F / (float) Math.PI);
+	public void setupAnim(BombardierBeetleRenderState state) {
+		Head.yRot = state.yRot / (180F / (float) Math.PI);
 		
-		float sin = Mth.sin(limbSwing) * 0.8F * limbSwingAmount;
-		float cos = Mth.cos(limbSwing) * 0.2F * limbSwingAmount;
+		float sin = Mth.sin(state.walkAnimationPos) * 0.8F * state.walkAnimationSpeed;
+		float cos = Mth.cos(state.walkAnimationPos) * 0.2F * state.walkAnimationSpeed;
 
 		LeftBackLeg.zRot = -cos;
 		LeftMidLeg.zRot = cos;
@@ -154,27 +153,5 @@ public class BombardierBeetleModel<T extends BombardierBeetle> extends Hierarchi
 		RightBackLeg.yRot = -2.4435F + sin;
 		RightMidLeg.yRot = 3.1416F - sin;
 		RightFrontLeg.yRot = 2.4435F + sin;
-
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		Thx.render(stack, consumer, light, overlay, colour);
-		ThxS.render(stack, consumer, light, overlay, colour);
-		Ab.render(stack, consumer, light, overlay, colour);
-		AbSide.render(stack, consumer, light, overlay, colour);
-		AbBack.render(stack, consumer, light, overlay, colour);
-		LeftBackLeg.render(stack, consumer, light, overlay, colour);
-		LeftMidLeg.render(stack, consumer, light, overlay, colour);
-		LeftFrontLeg.render(stack, consumer, light, overlay, colour);
-		RightBackLeg.render(stack, consumer, light, overlay, colour);
-		RightMidLeg.render(stack, consumer, light, overlay, colour);
-		RightFrontLeg.render(stack, consumer, light, overlay, colour);
-		Head.render(stack, consumer, light, overlay, colour);
-	}
-
-	@Override
-	public ModelPart root() {
-		return root;
 	}
 }

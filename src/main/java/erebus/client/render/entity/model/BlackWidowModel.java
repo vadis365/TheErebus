@@ -1,14 +1,12 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.BlackWidow;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.BlackWidowRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> {
+public class BlackWidowModel extends EntityModel<BlackWidowRenderState> {
 	public ModelPart root;
 	private final ModelPart Ab2;
 	private final ModelPart Ab1;
@@ -43,6 +41,7 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 	private final ModelPart LegBR1Child_3;
 
 	public BlackWidowModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.Ab2 = root.getChild("Ab2");
 		this.Ab1 = root.getChild("Ab1");
@@ -235,26 +234,26 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float sizeModifier = 1F / entity.getWidowSize();
-		float sin = (float) (Math.sin(limbSwing * (0.4F + sizeModifier)) * 0.4F * limbSwingAmount);
-		float cos = (float) (Math.cos(limbSwing * (0.4F + sizeModifier)) * 0.4F * limbSwingAmount);
+	public void setupAnim(BlackWidowRenderState state) {
+		float sizeModifier = 1F / state.size;
+		float sin = (float) (Math.sin(state.walkAnimationPos * (0.4F + sizeModifier)) * 0.4F * state.walkAnimationSpeed);
+		float cos = (float) (Math.cos(state.walkAnimationPos * (0.4F + sizeModifier)) * 0.4F * state.walkAnimationSpeed);
 		
-		Head.yRot = netHeadYaw / (180F / (float) Math.PI);
-		MandibleR.yRot = netHeadYaw / (180F / (float) Math.PI);
-		MandibleL.yRot = netHeadYaw / (180F / (float) Math.PI);
-		Rant1.yRot = netHeadYaw / (180F / (float) Math.PI) - 0.349F;
-		Rant2.yRot = netHeadYaw / (180F / (float) Math.PI) + 0.349F;
-		Lant1.yRot = netHeadYaw / (180F / (float) Math.PI) + 0.349F;
-		Lant2.yRot = netHeadYaw / (180F / (float) Math.PI) - 0.349F;
+		Head.yRot = state.yRot / (180F / (float) Math.PI);
+		MandibleR.yRot = state.yRot / (180F / (float) Math.PI);
+		MandibleL.yRot = state.yRot / (180F / (float) Math.PI);
+		Rant1.yRot = state.yRot / (180F / (float) Math.PI) - 0.349F;
+		Rant2.yRot = state.yRot / (180F / (float) Math.PI) + 0.349F;
+		Lant1.yRot = state.yRot / (180F / (float) Math.PI) + 0.349F;
+		Lant2.yRot = state.yRot / (180F / (float) Math.PI) - 0.349F;
 
-		Head.xRot = headPitch / (180F / (float) Math.PI);
-		MandibleR.xRot = headPitch / (180F / (float) Math.PI) + 0.698F;
-		MandibleL.xRot = headPitch / (180F / (float) Math.PI) + 0.698F;
-		Rant1.xRot = headPitch / (180F / (float) Math.PI);
-		Rant2.xRot = headPitch / (180F / (float) Math.PI);
-		Lant1.xRot = headPitch / (180F / (float) Math.PI);
-		Lant2.xRot = headPitch / (180F / (float) Math.PI);
+		Head.xRot = state.xRot / (180F / (float) Math.PI);
+		MandibleR.xRot = state.xRot / (180F / (float) Math.PI) + 0.698F;
+		MandibleL.xRot = state.xRot / (180F / (float) Math.PI) + 0.698F;
+		Rant1.xRot = state.xRot / (180F / (float) Math.PI);
+		Rant2.xRot = state.xRot / (180F / (float) Math.PI);
+		Lant1.xRot = state.xRot / (180F / (float) Math.PI);
+		Lant2.xRot = state.xRot / (180F / (float) Math.PI);
 		
 		BackLegLeft.zRot = 0F + cos;
 		LegBL1Child_3.zRot = -1.5708F - cos * 1.25F;
@@ -289,37 +288,5 @@ public class BlackWidowModel<T extends BlackWidow> extends HierarchicalModel<T> 
 		BackMidLegRight.yRot = -0.2618F - sin;
 		FrontMidLegRight.yRot = 0.2618F + cos;
 		FrontLegRight.yRot = 0.7854F - sin;
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		Ab2.render(stack, consumer, light, overlay, colour);
-		Ab1.render(stack, consumer, light, overlay, colour);
-		Ab4.render(stack, consumer, light, overlay, colour);
-		Ab3.render(stack, consumer, light, overlay, colour);
-		Ab6.render(stack, consumer, light, overlay, colour);
-		Ab5.render(stack, consumer, light, overlay, colour);
-		Head.render(stack, consumer, light, overlay, colour);
-		Lant1.render(stack, consumer, light, overlay, colour);
-		Lant2.render(stack, consumer, light, overlay, colour);
-		Rant2.render(stack, consumer, light, overlay, colour);
-		Rant1.render(stack, consumer, light, overlay, colour);
-		Thorax2.render(stack, consumer, light, overlay, colour);
-		Thorax1.render(stack, consumer, light, overlay, colour);
-		MandibleR.render(stack, consumer, light, overlay, colour);
-		MandibleL.render(stack, consumer, light, overlay, colour);
-		FrontLegLeft.render(stack, consumer, light, overlay, colour);
-		FrontMidLegLeft.render(stack, consumer, light, overlay, colour);
-		BackMidLegLeft.render(stack, consumer, light, overlay, colour);
-		BackLegLeft.render(stack, consumer, light, overlay, colour);
-		FrontLegRight.render(stack, consumer, light, overlay, colour);
-		FrontMidLegRight.render(stack, consumer, light, overlay, colour);
-		BackMidLegRight.render(stack, consumer, light, overlay, colour);
-		BackLegRight.render(stack, consumer, light, overlay, colour);
-	}
-
-	@Override
-	public ModelPart root() {
-		return root;
 	}
 }

@@ -7,7 +7,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = Erebus.MODID)
+@EventBusSubscriber(modid = Erebus.MODID)
 public class RegisterClientExtensionsEventHandler {
 
     @SubscribeEvent

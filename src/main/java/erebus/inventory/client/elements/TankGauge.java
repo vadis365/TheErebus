@@ -9,12 +9,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
@@ -46,16 +47,16 @@ public class TankGauge extends AbstractWidget {
         if (fluidLevel > 0) {
             IClientFluidTypeExtensions fluidTypeExtension = IClientFluidTypeExtensions.of(stack.getFluid());
             int color = fluidTypeExtension.getTintColor(stack);
-            float red = (float)(FastColor.ARGB32.red(color) / 255.0);
-            float green = (float)(FastColor.ARGB32.green(color) / 255.0);
-            float blue = (float)(FastColor.ARGB32.blue(color) / 255.0);
-            float alpha = (float)(FastColor.ARGB32.alpha(color) / 255.0);
-            ResourceLocation stillTexture = fluidTypeExtension.getStillTexture();
+            float red = (float)(ARGB.red(color) / 255.0);
+            float green = (float)(ARGB.green(color) / 255.0);
+            float blue = (float)(ARGB.blue(color) / 255.0);
+            float alpha = (float)(ARGB.alpha(color) / 255.0);
+            Identifier stillTexture = fluidTypeExtension.getStillTexture();
 
             if (this.sprite == null || this.oldFluid != stack.getFluid()) {
                 this.oldFluid = stack.getFluid();
 
-                AbstractTexture texture = Minecraft.getInstance().getTextureManager().getTexture(InventoryMenu.BLOCK_ATLAS);
+                AbstractTexture texture = Minecraft.getInstance().getTextureManager().getTexture(Sheets.BLOCKS_MAPPER.sheet());
                 if (texture instanceof TextureAtlas) {
                     TextureAtlasSprite sprite = ((TextureAtlas) texture).getSprite(stillTexture);
                     if (sprite != null) {

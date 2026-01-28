@@ -1,65 +1,57 @@
 package erebus.client.render.entity.renderer;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import erebus.client.render.entity.model.AnimatedBlockModel;
+import erebus.client.render.entity.renderer.state.AnimatedBlockRenderState;
 import erebus.entity.AnimatedBlock;
 import erebus.registries.entity.ModEntityRendering;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
+import org.jspecify.annotations.NonNull;
 
-public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBlockModel<AnimatedBlock>> {
+public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBlockRenderState, AnimatedBlockModel> {
 
-	private final ItemRenderer itemRenderer;
-	public ItemStack stackRenderer = new ItemStack(Blocks.STONE.defaultBlockState().getBlock());
+	private final ItemModelResolver itemModelResolver;
 
-	
-	public AnimatedBlockRenderer(EntityRendererProvider.Context renderContext) {
-        super(renderContext, new AnimatedBlockModel<>(renderContext.bakeLayer(ModEntityRendering.ANIMATED_BLOCK)), 0.75F);
-		this.itemRenderer = renderContext.getItemRenderer();
+    public AnimatedBlockRenderer(Context context) {
+        super(context, new AnimatedBlockModel(context.bakeLayer(ModEntityRendering.ANIMATED_BLOCK)), 0.75F);
+		itemModelResolver = context.getItemModelResolver();
+    }
+
+	@Override
+	public void extractRenderState(AnimatedBlock entity, AnimatedBlockRenderState state, float partialTicks) {
+		state.blockState = entity.getBlockType();
+		itemModelResolver.updateForTopItem(state.itemStackRenderState, new ItemStack(entity.getBlockType().getBlock()), ItemDisplayContext.FIXED, entity.level(), null, 0);
 	}
 
 	@Override
-	public void render(AnimatedBlock entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-		stackRenderer = new ItemStack(entity.getBlockType().getBlock());
-		poseStack.pushPose();
-		RenderSystem.enableBlend();
-		RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-		poseStack.translate(0F, 0F, 0F);
-		poseStack.pushPose();
-		poseStack.mulPose(Axis.YN.rotationDegrees(entity.yBodyRot));
-		poseStack.scale(4F, 4F, 4F); 
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-		this.itemRenderer.renderStatic(stackRenderer, ItemDisplayContext.GROUND, packedLight, OverlayTexture.NO_OVERLAY, poseStack, buffer, null, entity.getId());
-		poseStack.popPose();
-		RenderSystem.disableBlend();
-		poseStack.popPose();
-		super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
+	public AnimatedBlockRenderState createRenderState() {
+		return new AnimatedBlockRenderState();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
-	public ResourceLocation getTextureLocation(AnimatedBlock animatedblock) {
-		String blockPath = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getParticleIcon(animatedblock.getBlockType()).contents().name().toString();
-		String modName = "minecraft";
-		if (blockPath.contains(":")) {
-			modName = blockPath.split(":")[0];
-			blockPath = blockPath.split(":")[1];
-		}
-		return ResourceLocation.fromNamespaceAndPath(modName, "textures/" + blockPath + ".png");
+	public void submit(AnimatedBlockRenderState state, @NonNull PoseStack pose, @NonNull SubmitNodeCollector node, @NonNull CameraRenderState camera) {
+		pose.pushPose();
+		pose.translate(0F, 0F, 0F);
+		pose.pushPose();
+		pose.mulPose(Axis.YN.rotationDegrees(state.bodyRot));
+		pose.scale(4F, 4F, 4F);
+		state.itemStackRenderState.submit(pose, node, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+		pose.popPose();
+		pose.popPose();
+	}
+
+	@Override
+	public @NonNull Identifier getTextureLocation(AnimatedBlockRenderState state) {
+		return BuiltInRegistries.BLOCK.getKey(state.blockState.getBlock());
 	}
 }

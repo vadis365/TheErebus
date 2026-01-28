@@ -3,27 +3,33 @@ package erebus.client.render.entity.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.Erebus;
 import erebus.client.render.entity.model.BedBugModel;
+import erebus.client.render.entity.renderer.state.BedBugRenderState;
 import erebus.entity.BedBug;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import org.jspecify.annotations.NonNull;
 
-public class BedBugRenderer extends MobRenderer<BedBug, BedBugModel<BedBug>> {
-
-	private static final ResourceLocation TEXTURE = Erebus.prefix("textures/entity/bed_bug.png");
+public class BedBugRenderer extends MobRenderer<BedBug, BedBugRenderState, BedBugModel> {
 
 	public BedBugRenderer(EntityRendererProvider.Context context) {
-		super(context, new BedBugModel<>(context.bakeLayer(ModEntityRendering.BED_BUG)), 0.5F);
+		super(context, new BedBugModel(context.bakeLayer(ModEntityRendering.BED_BUG)), 0.5F);
+		this.model = new BedBugModel(context.bakeLayer(ModEntityRendering.BED_BUG));
 	}
 
 	@Override
-	protected void scale(BedBug bed_bug, PoseStack matrix, float partialTickTime) {
-		matrix.scale(0.5F, 0.5F, 0.5F);
+	public BedBugRenderState createRenderState() {
+		return new BedBugRenderState();
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(BedBug bed_bug) {
-		return TEXTURE;
+	protected void scale(BedBugRenderState state, PoseStack pose) {
+		pose.scale(0.5F, 0.5F, 0.5F);
+	}
+
+	@Override
+	public @NonNull Identifier getTextureLocation(BedBugRenderState state) {
+		return Erebus.prefix("textures/entity/bed_bug.png");
 	}
 }

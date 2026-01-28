@@ -1,23 +1,15 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.Beetle;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.BeetleRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
 
-public class BeetleModel<T extends Beetle> extends HierarchicalModel<T> {
+public class BeetleModel extends EntityModel<BeetleRenderState> {
 	public ModelPart root;
-	private final ModelPart backbody;
-	private final ModelPart body;
-	private final ModelPart head;
-	private final ModelPart bum;
-	private final ModelPart head2;
-	private final ModelPart LeftFrontLeg;
+    private final ModelPart LeftFrontLeg;
 	private final ModelPart LeftMidLeg;
 	private final ModelPart LeftBackLeg;
 	private final ModelPart RightFrontLeg;
@@ -25,14 +17,14 @@ public class BeetleModel<T extends Beetle> extends HierarchicalModel<T> {
 	private final ModelPart RightBackLeg;
 
 	public BeetleModel(ModelPart root) {
-		super(RenderType::entityCutout);
+		super(root);
 		this.root = root;
-		this.backbody = root.getChild("backbody");
-		this.body = root.getChild("body");
-		this.head = root.getChild("head");
-		this.bum = root.getChild("bum");
-		this.head2 = root.getChild("head2");
-		this.LeftFrontLeg = root.getChild("LeftFrontLeg");
+        root.getChild("backbody");
+        root.getChild("body");
+        root.getChild("head");
+        root.getChild("bum");
+        root.getChild("head2");
+        this.LeftFrontLeg = root.getChild("LeftFrontLeg");
 		this.LeftMidLeg = root.getChild("LeftMidLeg");
 		this.LeftBackLeg = root.getChild("LeftBackLeg");
 		this.RightFrontLeg = root.getChild("RightFrontLeg");
@@ -44,17 +36,17 @@ public class BeetleModel<T extends Beetle> extends HierarchicalModel<T> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition root = meshdefinition.getRoot();
 
-		PartDefinition backbody = root.addOrReplaceChild("backbody", CubeListBuilder.create().texOffs(35, 0).addBox(-6.0F, -1.0F, -6.0F, 14.0F, 9.0F, 17.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, 15.0F, 0.0F));
+        root.addOrReplaceChild("backbody", CubeListBuilder.create().texOffs(35, 0).addBox(-6.0F, -1.0F, -6.0F, 14.0F, 9.0F, 17.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, 15.0F, 0.0F));
 
-		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 20).addBox(-3.0F, 1.0F, -11.0F, 12.0F, 8.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, 14.0F, 0.0F));
+        root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 20).addBox(-3.0F, 1.0F, -11.0F, 12.0F, 8.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, 14.0F, 0.0F));
 
-		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(1, 10).addBox(-1.0F, 2.0F, -8.0F, 6.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 15.0F, -6.0F));
+        root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(1, 10).addBox(-1.0F, 2.0F, -8.0F, 6.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 15.0F, -6.0F));
 
-		PartDefinition bum = root.addOrReplaceChild("bum", CubeListBuilder.create().texOffs(35, 27).addBox(-5.0F, 1.0F, -6.0F, 12.0F, 6.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, 15.0F, 17.0F));
+        root.addOrReplaceChild("bum", CubeListBuilder.create().texOffs(35, 27).addBox(-5.0F, 1.0F, -6.0F, 12.0F, 6.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.0F, 15.0F, 17.0F));
 
-		PartDefinition head2 = root.addOrReplaceChild("head2", CubeListBuilder.create().texOffs(2, 6).addBox(-4.0F, 4.0F, -11.0F, 12.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 15.0F, -6.0F));
+        root.addOrReplaceChild("head2", CubeListBuilder.create().texOffs(2, 6).addBox(-4.0F, 4.0F, -11.0F, 12.0F, 0.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 15.0F, -6.0F));
 
-		PartDefinition LeftFrontLeg = root.addOrReplaceChild("LeftFrontLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(6.0F, 20.0F, -4.0F, 0.0F, 0.5236F, 0.0F));
+        PartDefinition LeftFrontLeg = root.addOrReplaceChild("LeftFrontLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(6.0F, 20.0F, -4.0F, 0.0F, 0.5236F, 0.0F));
 
 		PartDefinition LFL1 = LeftFrontLeg.addOrReplaceChild("LFL1", CubeListBuilder.create().texOffs(0, 95).addBox(-4.9397F, -0.658F, -2.0F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(-1.0F, 0.0F, -1.0F, 0.0F, 3.1416F, -0.3491F));
 
@@ -118,9 +110,9 @@ public class BeetleModel<T extends Beetle> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float sin = Mth.sin(limbSwing) * 0.8F * limbSwingAmount * 0.8F;
-		float cos = Mth.cos(limbSwing) * 0.2F * limbSwingAmount;
+	public void setupAnim(BeetleRenderState state) {
+		float sin = Mth.sin(state.walkAnimationPos) * 0.8F * state.walkAnimationSpeed * 0.8F;
+		float cos = Mth.cos(state.walkAnimationPos) * 0.2F * state.walkAnimationSpeed;
 
 		LeftBackLeg.zRot = -cos;
 		LeftMidLeg.zRot = cos;
@@ -134,25 +126,5 @@ public class BeetleModel<T extends Beetle> extends HierarchicalModel<T> {
 		RightBackLeg.yRot = 0.5236F + sin;
 		RightMidLeg.yRot = 0F - sin;
 		RightFrontLeg.yRot = -0.5236F + sin;
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		backbody.render(stack, consumer, light, overlay, colour);
-		body.render(stack, consumer, light, overlay, colour);
-		head.render(stack, consumer, light, overlay, colour);
-		bum.render(stack, consumer, light, overlay, colour);
-		head2.render(stack, consumer, light, overlay, colour);
-		LeftFrontLeg.render(stack, consumer, light, overlay, colour);
-		LeftMidLeg.render(stack, consumer, light, overlay, colour);
-		LeftBackLeg.render(stack, consumer, light, overlay, colour);
-		RightFrontLeg.render(stack, consumer, light, overlay, colour);
-		RightMidLeg.render(stack, consumer, light, overlay, colour);
-		RightBackLeg.render(stack, consumer, light, overlay, colour);
-	}
-	
-	@Override
-	public ModelPart root() {
-		return root;
 	}
 }

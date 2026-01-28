@@ -1,8 +1,7 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.BotFlyLarvaRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -10,20 +9,18 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 
 import java.util.Arrays;
 
-public class BotFlyLarvaModel<T extends Entity> extends HierarchicalModel<T> {
+public class BotFlyLarvaModel extends EntityModel<BotFlyLarvaRenderState> {
 
 	private final ModelPart[] larvaBodyParts = new ModelPart[7];
-	private final ModelPart root;
-	private static final int[][] LAVA_BOX_LENGTH = new int[][] { { 3, 2, 2 }, { 4, 3, 2 }, { 6, 4, 3 }, { 3, 3, 3 }, { 2, 2, 3 }, { 2, 1, 2 }, { 1, 1, 2 } };
+    private static final int[][] LAVA_BOX_LENGTH = new int[][] { { 3, 2, 2 }, { 4, 3, 2 }, { 6, 4, 3 }, { 3, 3, 3 }, { 2, 2, 3 }, { 2, 1, 2 }, { 1, 1, 2 } };
 	private static final int[][] LAVA_TEXTURE_POS = new int[][] { { 0, 0 }, { 0, 4 }, { 0, 9 }, { 0, 16 }, { 0, 22 }, { 11, 0 }, { 13, 4 } };
 
 	public BotFlyLarvaModel(ModelPart root) {
-		this.root = root;
-		Arrays.setAll(this.larvaBodyParts, parts -> root.getChild(getSegmentName(parts)));
+		super(root);
+        Arrays.setAll(this.larvaBodyParts, parts -> root.getChild(getSegmentName(parts)));
 	}
 
     private static String getSegmentName(int index) {
@@ -54,21 +51,10 @@ public class BotFlyLarvaModel<T extends Entity> extends HierarchicalModel<T> {
 	}
 
     @Override
-    public ModelPart root() {
-        return this.root;
-    }
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		for (int i = 0; i < larvaBodyParts.length; ++i)
-			larvaBodyParts[i].render(stack, consumer, light, overlay, colour);
-	}
-
-    @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(BotFlyLarvaRenderState state) {
 		for (int i = 0; i < larvaBodyParts.length; ++i) {
-			larvaBodyParts[i].yRot = Mth.cos(ageInTicks * 0.9F + (float)i * 0.15F * (float) Math.PI) * (float) Math.PI * 0.05F * (1 + Math.abs((float)i - 2));
-			larvaBodyParts[i].x = Mth.sin(ageInTicks * 0.9F + (float)i * 0.15F * (float) Math.PI) * (float) Math.PI * 0.2F * Math.abs((float)i - 2);
+			larvaBodyParts[i].yRot = Mth.cos(state.ageInTicks * 0.9F + (float)i * 0.15F * (float) Math.PI) * (float) Math.PI * 0.05F * (1 + Math.abs((float)i - 2));
+			larvaBodyParts[i].x = Mth.sin(state.ageInTicks * 0.9F + (float)i * 0.15F * (float) Math.PI) * (float) Math.PI * 0.2F * Math.abs((float)i - 2);
 		}
 	}
 }

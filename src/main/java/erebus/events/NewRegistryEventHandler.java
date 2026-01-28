@@ -14,7 +14,7 @@ import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = Erebus.MODID)
+@EventBusSubscriber(modid = Erebus.MODID)
 public class NewRegistryEventHandler {
 
     @SubscribeEvent
