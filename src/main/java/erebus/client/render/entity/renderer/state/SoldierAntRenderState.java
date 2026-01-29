@@ -2,5 +2,5 @@ package erebus.client.render.entity.renderer.state;
 
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 
-public class DragonFlyRenderState extends LivingEntityRenderState {
+public class SoldierAntRenderState extends LivingEntityRenderState {
 }

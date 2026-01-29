@@ -24,7 +24,7 @@ public final class BambooExtenderSpecialRenderer implements NoDataSpecialModelRe
     private final BambooExtenderModel model;
     private final Identifier texture;
 
-    //private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/bamboo_extender.png");
+    //private final Identifier TEXTURE = Erebus.prefix("textures/special/tiles/bamboo_extender.png");
 
     public BambooExtenderSpecialRenderer(BambooExtenderModel model, Identifier texture) {
         this.model = model;

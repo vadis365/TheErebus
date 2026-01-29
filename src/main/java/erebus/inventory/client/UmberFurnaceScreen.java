@@ -10,7 +10,7 @@ import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.client.gui.screens.recipebook.SmeltingRecipeBookComponent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ClickType;
@@ -22,10 +22,10 @@ public class UmberFurnaceScreen extends AbstractContainerScreen<UmberFurnaceMenu
     private boolean widthTooNarrow;
     private final UmberFurnaceMenu menu;
 
-    private static final ResourceLocation LIT_PROGRESS_SPRITE = Erebus.prefix("umberfurnace/lit_progress");
-    private static final ResourceLocation BURN_PROGRESS_SPRITE = Erebus.prefix("umberfurnace/burn_progress");
-    private static final ResourceLocation TANK_LEVEL_SPRITE = Erebus.prefix("umberfurnace/tank");
-    private static final ResourceLocation TEXTURE = Erebus.prefix("textures/gui/container/umber_furnace.png");
+    private static final Identifier LIT_PROGRESS_SPRITE = Erebus.prefix("umberfurnace/lit_progress");
+    private static final Identifier BURN_PROGRESS_SPRITE = Erebus.prefix("umberfurnace/burn_progress");
+    private static final Identifier TANK_LEVEL_SPRITE = Erebus.prefix("umberfurnace/tank");
+    private static final Identifier TEXTURE = Erebus.prefix("textures/gui/container/umber_furnace.png");
 
     public UmberFurnaceScreen(UmberFurnaceMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

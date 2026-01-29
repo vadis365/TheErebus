@@ -8,7 +8,7 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -38,7 +38,7 @@ public class SmoothieRecipeBuilder extends SimpleRecipeBuilder {
     }
 
     @Override
-    public void save(@NotNull RecipeOutput output, @NotNull ResourceLocation id) {
+    public void save(@NotNull RecipeOutput output, @NotNull Identifier id) {
         Advancement.Builder advancement = output.advancement()
                 .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
                 .rewards(AdvancementRewards.Builder.recipe(id))

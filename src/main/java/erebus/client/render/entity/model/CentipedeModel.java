@@ -1,15 +1,12 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.Centipede;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.CentipedeRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.Mth;
 
-public class CentipedeModel<T extends Centipede> extends HierarchicalModel<T> {
+public class CentipedeModel extends EntityModel<CentipedeRenderState> {
 	public ModelPart root;
 	private final ModelPart Head1;
 	private final ModelPart Neck;
@@ -24,6 +21,7 @@ public class CentipedeModel<T extends Centipede> extends HierarchicalModel<T> {
 	private final ModelPart LAnt;
 
 	public CentipedeModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.Head1 = root.getChild("Head1");
 		this.RAnt = Head1.getChild("RAnt");
@@ -116,55 +114,7 @@ public class CentipedeModel<T extends Centipede> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(CentipedeRenderState state) {
 
-	}
-	
-	public void renderHead(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, Centipede centipede, float partialTicks) {
-		float smoothedTicks = centipede.tickCount + (centipede.tickCount - (centipede.tickCount - 1)) * partialTicks;
-		float ant_wibbleSin = (float) (Math.sin(smoothedTicks * 0.25F) * 0.25F);
-		float ant_wibbleCos = (float) (Math.cos(smoothedTicks * 0.25F) * 0.25F);
-		Head1.xRot = centipede.getXRot() / Mth.RAD_TO_DEG;
-		LAnt.xRot = 0F + ant_wibbleSin;
-		RAnt.xRot = 0F + ant_wibbleCos;
-		LAnt.yRot = -0.1745F  - ant_wibbleCos;
-		RAnt.yRot = 0.1745F + ant_wibbleSin;
-		Head1.render(stack, consumer, light, overlay, colour); 
-	}
-
-	public void renderBody(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, Centipede centipede, int frame, float partialTicks, boolean isPartA) {
-		float limbSwing = centipede.walkAnimation.position(partialTicks);
-		float limbSwingAmount = centipede.walkAnimation.speed(partialTicks);
-		float legsSin = (float) (Math.sin(limbSwing + frame * 0.75F) * 0.35F * limbSwingAmount);
-		float legsCos = (float) (Math.cos(limbSwing + frame * 0.75F) * 0.35F * limbSwingAmount);
-
-		BodA1.render(stack, consumer, light, overlay, colour);
-
-		if(isPartA) {
-			RightLeg1.yRot = 3.142F + legsSin;
-			RightLeg1.zRot = legsCos;
-			RightLeg1.render(stack, consumer, light, overlay, colour);
-			LeftLeg1.yRot = legsSin;
-			LeftLeg1.zRot = legsCos;
-			LeftLeg1.render(stack, consumer, light, overlay, colour);
-		}
-		else {
-			RightLeg2.yRot = 3.142F - legsSin;
-			RightLeg2.zRot = -legsCos;
-			RightLeg2.render(stack, consumer, light, overlay, colour);
-			LeftLeg2.yRot = - legsSin;
-			LeftLeg2.zRot = - legsCos;
-			LeftLeg2.render(stack, consumer, light, overlay, colour);
-		}
-
-	}
-	
-	public void renderTail(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		Tail.render(stack, consumer, light, overlay, colour);
-	}
-	
-	@Override
-	public ModelPart root() {
-		return root;
 	}
 }

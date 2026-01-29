@@ -1,37 +1,43 @@
 package erebus.client.render.entity.renderer.layer;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.client.render.entity.model.DragonflyModel;
-import erebus.entity.Dragonfly;
+import erebus.client.render.entity.renderer.state.DragonflyRenderState;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import org.jspecify.annotations.NonNull;
 
-public class DragonflyLayer extends RenderLayer<Dragonfly, DragonflyModel<Dragonfly>> {
+public class DragonflyLayer extends RenderLayer<DragonflyRenderState, DragonflyModel> {
 
-	private final DragonflyModel<Dragonfly> dragonflyModel;
+	private final DragonflyModel model;
 
-    public DragonflyLayer(RenderLayerParent<Dragonfly, DragonflyModel<Dragonfly>> entity, EntityModelSet modelSet) {
+    public DragonflyLayer(RenderLayerParent<DragonflyRenderState, DragonflyModel> entity, EntityModelSet modelSet) {
     	super(entity);
-    	this.dragonflyModel = new DragonflyModel<>(modelSet.bakeLayer(ModEntityRendering.DRAGON_FLY));
+    	this.model = new DragonflyModel(modelSet.bakeLayer(ModEntityRendering.DRAGON_FLY));
     }
 
-    @Override
-   	public void render(PoseStack matrix, MultiBufferSource buffer, int packedLight, Dragonfly entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		dragonflyModel.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-		dragonflyModel.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		matrix.pushPose();
-		RenderSystem.enableBlend();
-		RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-		dragonflyModel.renderWings(matrix, buffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(entity))), packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
-		RenderSystem.disableBlend();
-	    RenderSystem.defaultBlendFunc();
-	    matrix.popPose();
+	@Override
+	public void submit(PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, DragonflyRenderState state, float xRot, float yRot) {
+		model.setupAnim(state);
+		pose.pushPose();
+		//TODO: Setup Wings Model
+		/*submit.submitModel(
+				model,
+				state,
+				pose,
+				renderType,
+				state.lightCoords,
+				OverlayTexture.NO_OVERLAY,
+				colour,
+				null,
+				state.outlineColor,
+				null
+		);*/
+		pose.popPose();
+
+
 	}
 }

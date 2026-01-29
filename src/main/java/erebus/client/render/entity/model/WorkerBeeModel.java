@@ -1,15 +1,12 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.WorkerBee;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.WorkerBeeRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.Mth;
 
-public class WorkerBeeModel<T extends WorkerBee> extends HierarchicalModel<T> {
+public class WorkerBeeModel extends EntityModel<WorkerBeeRenderState> {
 	public ModelPart root;
 	public ModelPart Thx;
 	public ModelPart ThxS;
@@ -31,6 +28,7 @@ public class WorkerBeeModel<T extends WorkerBee> extends HierarchicalModel<T> {
 	public ModelPart RightBackLeg;
 
 	public WorkerBeeModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.Thx = root.getChild("Thx");
 		this.ThxS = root.getChild("ThxS");
@@ -179,83 +177,7 @@ public class WorkerBeeModel<T extends WorkerBee> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float heady = netHeadYaw / (180F / (float) Math.PI);
-		Head1.yRot = heady;
-	}
-	
-	@Override
-	public void prepareMobModel(T bee, float limbSwing, float limbSwingAngle, float partialRenderTicks) {
-		float smoothedTicks = bee.tickCount + (bee.tickCount - (bee.tickCount - 1)) * partialRenderTicks;
-		float flap = Mth.sin((smoothedTicks) * 1.2F) * 0.5F;
-		if (bee.onGround()) {
-			float legMovement = Mth.cos(limbSwing * 2.0F) * 0.7F * limbSwingAngle;
-			LeftBackLeg.xRot = -legMovement;
-			LeftMidLeg.xRot = legMovement;
-			LeftFrontLeg.xRot = -legMovement;
-			RightBackLeg.xRot = legMovement;
-			RightMIdLeg.xRot = -legMovement;
-			RightFrontLeg.xRot = legMovement;
-			ThxRW.xRot = 0F;
-			ThxLW.xRot = 0F;
-			ThxRW.yRot = 0F;
-			ThxLW.yRot = 0F;
-			ThxRW.zRot = -0.7853982F;
-			ThxLW.zRot = 0.7853982F;
-			Ab.xRot = -0.2F;
-			AbF.xRot = -0.2F;
-			AbSide.xRot = -0.2F;
-			AbTop.xRot = -0.2F;
-			AbBack.xRot = -0.2F;
-			Sting.xRot = -0.2F;
-		}
-
-		if (bee.isFlying()) {
-			LeftBackLeg.xRot = +0.25F;
-			LeftMidLeg.xRot = 0F;
-			LeftFrontLeg.xRot = -0.25F;
-			RightBackLeg.xRot = +0.25F;
-			RightMIdLeg.xRot = 0F;
-			RightFrontLeg.xRot = -0.25F;
-			ThxRW.xRot = flap;
-			ThxLW.xRot = flap;
-			ThxRW.yRot = -1.5F;
-			ThxLW.yRot = 1.5F;
-			ThxRW.zRot = 0F;
-			ThxLW.zRot = 0F;
-			Ab.xRot = -0.8F;
-			AbF.xRot = -0.8F;
-			AbSide.xRot = -0.8F;
-			AbTop.xRot = -0.8F;
-			AbBack.xRot = -0.8F;
-			Sting.xRot = -0.8F;
-		}	
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		Thx.render(stack, consumer, light, overlay, colour);
-		ThxS.render(stack, consumer, light, overlay, colour);
-		Ab.render(stack, consumer, light, overlay, colour);
-		AbF.render(stack, consumer, light, overlay, colour);
-		AbSide.render(stack, consumer, light, overlay, colour);
-		AbTop.render(stack, consumer, light, overlay, colour);
-		AbBack.render(stack, consumer, light, overlay, colour);
-		Head1.render(stack, consumer, light, overlay, colour);
-		Sting.render(stack, consumer, light, overlay, colour);
-		ThxTop.render(stack, consumer, light, overlay, colour);
-		ThxRW.render(stack, consumer, light, overlay, colour);
-		ThxLW.render(stack, consumer, light, overlay, colour);
-		LeftFrontLeg.render(stack, consumer, light, overlay, colour);
-		LeftMidLeg.render(stack, consumer, light, overlay, colour);
-		LeftBackLeg.render(stack, consumer, light, overlay, colour);
-		RightFrontLeg.render(stack, consumer, light, overlay, colour);
-		RightMIdLeg.render(stack, consumer, light, overlay, colour);
-		RightBackLeg.render(stack, consumer, light, overlay, colour);
-	}
-
-	@Override
-	public ModelPart root() {
-		return root;
+	public void setupAnim(WorkerBeeRenderState state) {
+		Head1.yRot = state.yRot / (180F / (float) Math.PI);
 	}
 }

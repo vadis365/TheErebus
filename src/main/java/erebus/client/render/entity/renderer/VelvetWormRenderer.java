@@ -13,13 +13,13 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 
 import javax.annotation.Nullable;
 
 public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<VelvetWorm>> {
-	private static final ResourceLocation[] TEXTURES = new ResourceLocation[] {
+	private static final Identifier[] TEXTURES = new Identifier[] {
 			Erebus.prefix("textures/entity/velvetworm_1.png"),
 			Erebus.prefix("textures/entity/velvetworm_2.png"),
 			Erebus.prefix("textures/entity/velvetworm_3.png"),
@@ -142,7 +142,7 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormModel<
 	}
 
 	@Override
-	public  ResourceLocation getTextureLocation(VelvetWorm velvetworm) {
+	public  Identifier getTextureLocation(VelvetWorm velvetworm) {
 		return TEXTURES[velvetworm.getSkin()];
 	}
 }

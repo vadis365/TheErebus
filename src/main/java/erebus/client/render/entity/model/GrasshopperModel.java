@@ -1,15 +1,12 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.Grasshopper;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.GrasshopperRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.Mth;
 
-public class GrasshopperModel<T extends Grasshopper> extends HierarchicalModel<T> {
+public class GrasshopperModel extends EntityModel<GrasshopperRenderState> {
 	public ModelPart root;
 	private final ModelPart HeadMain;
 	private final ModelPart RAnt;
@@ -29,6 +26,7 @@ public class GrasshopperModel<T extends Grasshopper> extends HierarchicalModel<T
 	private final ModelPart LBL6;
 
 	public GrasshopperModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.HeadMain = root.getChild("HeadMain");
 		this.RAnt = HeadMain.getChild("RAnt");
@@ -156,59 +154,7 @@ public class GrasshopperModel<T extends Grasshopper> extends HierarchicalModel<T
 	}
 
 	@Override
-	public void setupAnim(T grasshopper, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		HeadMain.yRot = netHeadYaw / (180F / (float) Math.PI);
-	}
-
-	@Override
-	public void prepareMobModel(T grasshopper, float limbSwing, float limbSwingAngle, float partialRenderTicks) {
-		float smoothedTicks = grasshopper.animationTicks + (grasshopper.animationTicks - grasshopper.prevAnimationTicks)  * partialRenderTicks;
-		float antSin = Mth.sin((smoothedTicks) * 0.25F) * 0.125F;
-		float antCos = Mth.cos((smoothedTicks) * 0.25F) * 0.125F;
-		float jumpAngle = Mth.sin(grasshopper.getJumpCompletion(partialRenderTicks) * (float) Math.PI);
-
-		LeftFrontLeg.xRot = -jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		LeftMidLeg.xRot = jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		RightFrontLeg.xRot = -jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		RightMidLeg.xRot = jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		LeftBackLeg.xRot = -jumpAngle * 75.0F * (float) (Math.PI / 180.0);
-		RightBackLeg.xRot = -jumpAngle * 75.0F * (float) (Math.PI / 180.0);
-		RBL4.xRot = 0.5236F - RightBackLeg.xRot + jumpAngle * 75.0F * (float) (Math.PI / 180.0);
-		RBL5.xRot = -0.6981F + RightBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		RBL6.xRot = 0.1745F + RightBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		LBL4.xRot = 0.5236F - LeftBackLeg.xRot + jumpAngle * 75.0F * (float) (Math.PI / 180.0);
-		LBL5.xRot = -0.6981F + LeftBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		LBL6.xRot = 0.1745F + LeftBackLeg.xRot + jumpAngle * 50.0F * (float) (Math.PI / 180.0);
-		HeadMain.xRot = -0.1745F + jumpAngle * 20.0F * (float) (Math.PI / 180.0);
-
-		if (grasshopper.onGround()) {
-			LAnt.zRot = 0F + antSin;
-			LAnt.yRot = 0F + antCos;
-			RAnt.zRot = 0F - antCos;
-			RAnt.yRot = 0F - antSin;
-		}
-		else {
-			LAnt.zRot = 0F;
-			LAnt.yRot = 0F;
-			RAnt.zRot = 0F;
-			RAnt.yRot = 0F;
-		}
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		HeadMain.render(stack, consumer, light, overlay, colour);
-		LeftFrontLeg.render(stack, consumer, light, overlay, colour);
-		LeftMidLeg.render(stack, consumer, light, overlay, colour);
-		LeftBackLeg.render(stack, consumer, light, overlay, colour);
-		RightFrontLeg.render(stack, consumer, light, overlay, colour);
-		RightMidLeg.render(stack, consumer, light, overlay, colour);
-		RightBackLeg.render(stack, consumer, light, overlay, colour);
-		Body.render(stack, consumer, light, overlay, colour);
-	}
-	
-	@Override
-	public ModelPart root() {
-		return root;
+	public void setupAnim(GrasshopperRenderState state) {
+		HeadMain.yRot = state.yRot / (180F / (float) Math.PI);
 	}
 }

@@ -18,10 +18,10 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class LavaWebSpiderLayer extends RenderLayer<LavaWebSpider, LavaWebSpiderModel<LavaWebSpider>> {
-    private static final ResourceLocation LIGHTING_TEXTURE = Erebus.prefix("textures/entity/lava_web_spider_flow.png");
+    private static final Identifier LIGHTING_TEXTURE = Erebus.prefix("textures/entity/lava_web_spider_flow.png");
     private final LavaWebSpiderModel<LavaWebSpider> lava_web_spiderModel;
 
     public LavaWebSpiderLayer(RenderLayerParent<LavaWebSpider, LavaWebSpiderModel<LavaWebSpider>> entity, EntityModelSet modelSet) {
@@ -38,7 +38,7 @@ public class LavaWebSpiderLayer extends RenderLayer<LavaWebSpider, LavaWebSpider
 		lava_web_spiderModel.renderBody(matrix, buffer.getBuffer(getLavaOverlay(LIGHTING_TEXTURE, 0, f * 0.004F)), packedLight, OverlayTexture.NO_OVERLAY, colour);
 	}
     
-	public static RenderType getLavaOverlay(ResourceLocation locationIn, float uIn, float vIn) {
+	public static RenderType getLavaOverlay(Identifier locationIn, float uIn, float vIn) {
 		RenderType.CompositeState renderTypeState = RenderType.CompositeState.builder()
 				.setShaderState(new RenderStateShard.ShaderStateShard(GameRenderer::getRendertypeEnergySwirlShader))
 				.setTextureState(new RenderStateShard.TextureStateShard(locationIn, false, false))

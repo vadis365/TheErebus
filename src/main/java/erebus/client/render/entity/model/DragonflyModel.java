@@ -1,14 +1,12 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.Dragonfly;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.DragonflyRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class DragonflyModel<T extends Dragonfly> extends HierarchicalModel<T> {
+public class DragonflyModel extends EntityModel<DragonflyRenderState> {
 	public ModelPart root;
 	private final ModelPart REye;
 	private final ModelPart LEye;
@@ -47,6 +45,7 @@ public class DragonflyModel<T extends Dragonfly> extends HierarchicalModel<T> {
 	private final ModelPart LBLeg2;
 
 	public DragonflyModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.REye = root.getChild("REye");
 		this.LEye = root.getChild("LEye");
@@ -163,64 +162,6 @@ public class DragonflyModel<T extends Dragonfly> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-	}
-
-	@Override
-	public void prepareMobModel(T dragonfly, float limbSwing, float limbSwingAngle, float partialRenderTicks) {
-		float smoothedTicks = dragonfly.animationTicks + (dragonfly.animationTicks - dragonfly.prevAnimationTicks)  * partialRenderTicks;
-		float flapFront = (float) (Math.sin((smoothedTicks) * 1.8F) * 0.35F);
-		float flapBack = (float) (Math.cos((smoothedTicks) * 1.8F) * 0.35F);
-		RFWing.zRot = flapFront;
-		LFWing.zRot = -flapFront;
-		RBWing.zRot = flapBack;
-		LBWing.zRot = -flapBack;
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		REye.render(stack, consumer, light, overlay, colour);
-		LEye.render(stack, consumer, light, overlay, colour);
-		HeadFront.render(stack, consumer, light, overlay, colour);
-		HeadTop.render(stack, consumer, light, overlay, colour);
-		HeadMain.render(stack, consumer, light, overlay, colour);
-		Neck.render(stack, consumer, light, overlay, colour);
-		ThoraxFront.render(stack, consumer, light, overlay, colour);
-		ThoraxBottom.render(stack, consumer, light, overlay, colour);
-		ThoraxBack.render(stack, consumer, light, overlay, colour);
-		Tail1.render(stack, consumer, light, overlay, colour);
-		Tail2.render(stack, consumer, light, overlay, colour);
-		Tail3.render(stack, consumer, light, overlay, colour);
-		Tail4.render(stack, consumer, light, overlay, colour);
-		Tail5.render(stack, consumer, light, overlay, colour);
-		Tail6.render(stack, consumer, light, overlay, colour);
-		Tail7.render(stack, consumer, light, overlay, colour);
-		Tail8.render(stack, consumer, light, overlay, colour);
-		Tail9R.render(stack, consumer, light, overlay, colour);
-		Tail9L.render(stack, consumer, light, overlay, colour);
-		RFLeg1.render(stack, consumer, light, overlay, colour);
-		RFLeg2.render(stack, consumer, light, overlay, colour);
-		RMLeg1.render(stack, consumer, light, overlay, colour);
-		RMLeg2.render(stack, consumer, light, overlay, colour);
-		RBLeg1.render(stack, consumer, light, overlay, colour);
-		RBLeg2.render(stack, consumer, light, overlay, colour);
-		LFLeg1.render(stack, consumer, light, overlay, colour);
-		LFLeg2.render(stack, consumer, light, overlay, colour);
-		LMLeg1.render(stack, consumer, light, overlay, colour);
-		LMLeg2.render(stack, consumer, light, overlay, colour);
-		LBLeg1.render(stack, consumer, light, overlay, colour);
-		LBLeg2.render(stack, consumer, light, overlay, colour);
-	}
-	
-	@Override
-	public ModelPart root() {
-		return root;
-	}
-
-	public void renderWings(PoseStack stack, VertexConsumer buffer, int light, int overlay, int colour) {
-		RFWing.render(stack, buffer, light, overlay, colour);
-		RBWing.render(stack, buffer, light, overlay, colour);
-		LFWing.render(stack, buffer, light, overlay, colour);
-		LBWing.render(stack, buffer, light, overlay, colour);
+	public void setupAnim(DragonflyRenderState state) {
 	}
 }

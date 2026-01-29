@@ -1,14 +1,12 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.BotFly;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.BotFlyRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class BotFlyModel<T extends BotFly> extends HierarchicalModel<T> {
+public class BotFlyModel extends EntityModel<BotFlyRenderState> {
 	public ModelPart root;
 	private final ModelPart Head;
 	private final ModelPart HeadFront;
@@ -47,6 +45,7 @@ public class BotFlyModel<T extends BotFly> extends HierarchicalModel<T> {
 	private final ModelPart LegLB3;
 
 	public BotFlyModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.Head = root.getChild("Head");
 		this.HeadFront = root.getChild("HeadFront");
@@ -163,67 +162,5 @@ public class BotFlyModel<T extends BotFly> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
-	}
-
-	@Override
-	public void prepareMobModel(T botfly, float limbSwing, float limbSwingAmount, float partialRenderTicks) {
-		float smoothedTicks = botfly.animationTicks + (botfly.animationTicks - botfly.prevAnimationTicks)  * partialRenderTicks;
-		float flap = (float) (Math.sin((smoothedTicks) * 1.2F) * 0.5F);
-		if (botfly.onGround())
-			flap = 0;
-		RWing1.xRot = flap;
-		RWing2.xRot = flap;
-		LWing1.xRot = flap;
-		LWing2.xRot = flap;
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		Head.render(stack, consumer, light, overlay, colour);
-		HeadFront.render(stack, consumer, light, overlay, colour);
-		HeadTop.render(stack, consumer, light, overlay, colour);
-		HeadBottom.render(stack, consumer, light, overlay, colour);
-		EyeR.render(stack, consumer, light, overlay, colour);
-		EveL.render(stack, consumer, light, overlay, colour);
-		Thorax1.render(stack, consumer, light, overlay, colour);
-		Thorax2.render(stack, consumer, light, overlay, colour);
-		Thorax3.render(stack, consumer, light, overlay, colour);
-		Ab1.render(stack, consumer, light, overlay, colour);
-		Ab2.render(stack, consumer, light, overlay, colour);
-		Ab3.render(stack, consumer, light, overlay, colour);
-		Ab4.render(stack, consumer, light, overlay, colour);
-		LegRF1.render(stack, consumer, light, overlay, colour);
-		LegRF2.render(stack, consumer, light, overlay, colour);
-		LegRF3.render(stack, consumer, light, overlay, colour);
-		LegLF1.render(stack, consumer, light, overlay, colour);
-		LegLF2.render(stack, consumer, light, overlay, colour);
-		LegLF3.render(stack, consumer, light, overlay, colour);
-		LegRM1.render(stack, consumer, light, overlay, colour);
-		LegRM2.render(stack, consumer, light, overlay, colour);
-		LegRM3.render(stack, consumer, light, overlay, colour);
-		LegLM1.render(stack, consumer, light, overlay, colour);
-		LegLM2.render(stack, consumer, light, overlay, colour);
-		LegLM3.render(stack, consumer, light, overlay, colour);
-		LegRB1.render(stack, consumer, light, overlay, colour);
-		LegRB2.render(stack, consumer, light, overlay, colour);
-		LegRB3.render(stack, consumer, light, overlay, colour);
-		LegLB1.render(stack, consumer, light, overlay, colour);
-		LegLB2.render(stack, consumer, light, overlay, colour);
-		LegLB3.render(stack, consumer, light, overlay, colour);
-	}
-
-	@Override
-	public ModelPart root() {
-		return root;
-	}
-
-	public void renderWings(PoseStack stack, VertexConsumer buffer, int light, int overlay, int colour) {
-		RWing1.render(stack, buffer, light, overlay, colour);
-		RWing2.render(stack, buffer, light, overlay, colour);
-		LWing1.render(stack, buffer, light, overlay, colour);
-		LWing2.render(stack, buffer, light, overlay, colour);
-		
-	}
+	public void setupAnim(BotFlyRenderState state) {}
 }

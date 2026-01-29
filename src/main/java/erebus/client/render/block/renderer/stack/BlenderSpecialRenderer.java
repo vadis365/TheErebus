@@ -23,7 +23,7 @@ public final class BlenderSpecialRenderer implements NoDataSpecialModelRenderer 
     private final BlenderModel model;
     private final Identifier texture;
 
-    //private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/blender.png");
+    //private final Identifier TEXTURE = Erebus.prefix("textures/special/tiles/blender.png");
 
     public BlenderSpecialRenderer(BlenderModel model, Identifier texture) {
         this.model = model;

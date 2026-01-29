@@ -7,11 +7,11 @@ import erebus.entity.ZombieAntSoldier;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ZombieAntSoldierRenderer extends MobRenderer<ZombieAntSoldier, SoldierAntModel<ZombieAntSoldier>> {
 
-	private static final ResourceLocation TEXTURE = Erebus.prefix("textures/entity/zombie_ant_soldier.png");
+	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/zombie_ant_soldier.png");
 
 	public ZombieAntSoldierRenderer(EntityRendererProvider.Context context) {
 		super(context, new SoldierAntModel<>(context.bakeLayer(ModEntityRendering.ZOMBIE_ANT_SOLDIER)), 1.5F);
@@ -23,7 +23,7 @@ public class ZombieAntSoldierRenderer extends MobRenderer<ZombieAntSoldier, Sold
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(ZombieAntSoldier ant) {
+	public Identifier getTextureLocation(ZombieAntSoldier ant) {
 		return TEXTURE;
 	}
 }

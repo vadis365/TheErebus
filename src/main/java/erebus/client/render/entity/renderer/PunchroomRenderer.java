@@ -7,11 +7,11 @@ import erebus.entity.Punchroom;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class PunchroomRenderer extends MobRenderer<Punchroom, PunchroomModel<Punchroom>> {
-	private static final ResourceLocation TEXTURE = Erebus.prefix("textures/entity/punchroom.png");
-	private static final ResourceLocation TEXTURE_SPECIAL = Erebus.prefix("textures/entity/punchroom_rubby.png");
+	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/punchroom.png");
+	private static final Identifier TEXTURE_SPECIAL = Erebus.prefix("textures/entity/punchroom_rubby.png");
 
 	public PunchroomRenderer(EntityRendererProvider.Context context) {
 		super(context, new PunchroomModel<>(context.bakeLayer(ModEntityRendering.PUNCHROOM)), 1.0F);
@@ -27,7 +27,7 @@ public class PunchroomRenderer extends MobRenderer<Punchroom, PunchroomModel<Pun
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(Punchroom punchroom) {
+	public Identifier getTextureLocation(Punchroom punchroom) {
 		if (punchroom.hasCustomName())
 			if (punchroom.getCustomName().equals("Bryuf"))
 				return TEXTURE_SPECIAL;

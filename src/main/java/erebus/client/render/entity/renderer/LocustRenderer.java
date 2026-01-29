@@ -9,11 +9,11 @@ import erebus.entity.Locust;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 public class LocustRenderer extends MobRenderer<Locust, LocustModel<Locust>> {
-	private static final ResourceLocation TEXTURE = Erebus.prefix("textures/entity/locust.png");
+	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/locust.png");
 
 	public LocustRenderer(EntityRendererProvider.Context context) {
 		super(context, new LocustModel<>(context.bakeLayer(ModEntityRendering.LOCUST)), 0.75F);
@@ -32,7 +32,7 @@ public class LocustRenderer extends MobRenderer<Locust, LocustModel<Locust>> {
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(Locust locust) {
+	public Identifier getTextureLocation(Locust locust) {
 		return TEXTURE;
 	}
 

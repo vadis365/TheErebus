@@ -1,15 +1,12 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.Moth;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.MothRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.Mth;
 
-public class MothModel<T extends Moth> extends HierarchicalModel<T> {
+public class MothModel extends EntityModel<MothRenderState> {
 	public ModelPart root;
 	public ModelPart body;
 	public ModelPart head;
@@ -19,6 +16,7 @@ public class MothModel<T extends Moth> extends HierarchicalModel<T> {
 	public ModelPart leftwing;
 
 	public MothModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.body = root.getChild("body");
 		this.head = root.getChild("head");
@@ -49,30 +47,7 @@ public class MothModel<T extends Moth> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(MothRenderState state) {
 
-	}
-
-	@Override
-	public void prepareMobModel(T entity, float limbSwing, float limbSwingAngle, float partialRenderTicks) {
-		float smoothedTicks = entity.tickCount + (entity.tickCount - (entity.tickCount - 1)) * partialRenderTicks;
-		float flap = Mth.sin((smoothedTicks) * 1.2F) * 0.5F;
-		rightwing.zRot= flap;
-		leftwing.zRot = -flap;
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		body.render(stack, consumer, light, overlay, colour);
-		head.render(stack, consumer, light, overlay, colour);
-		rearend.render(stack, consumer, light, overlay, colour);
-		head2.render(stack, consumer, light, overlay, colour);
-		rightwing.render(stack, consumer, light, overlay, colour);
-		leftwing.render(stack, consumer, light, overlay, colour);
-	}
-	
-	@Override
-	public ModelPart root() {
-		return root;
 	}
 }

@@ -1,17 +1,13 @@
 package erebus.client.render.entity.model;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.Wasp;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.WaspRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.Mth;
 
 
-public class WaspModel<T extends Wasp> extends HierarchicalModel<T> {
+public class WaspModel extends EntityModel<WaspRenderState> {
 	public ModelPart root;
 	public ModelPart Thx;
 	public ModelPart ThxS;
@@ -69,6 +65,7 @@ public class WaspModel<T extends Wasp> extends HierarchicalModel<T> {
 	public ModelPart LWingFront;
 
 	public WaspModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.Thx = root.getChild("Thx");
 		this.ThxS = root.getChild("Thx").getChild("ThxS");
@@ -198,116 +195,8 @@ public class WaspModel<T extends Wasp> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		ImmutableList.of(Thx, AbF, Head1, ThxRW, ThxLW,
-				LBL1, LBL2, LBL3, LBL4, LML1, LML2, LML3, LML4, LFL1, LFL2, LFL3, LFL4,
-				RFL1, RFL2, RFL3, RFL4, RML1, RML2, RML3, RML4, RBL1, RBL2, RBL3, RBL4)
-				.forEach((modelParts) -> {
-					modelParts.render(stack, consumer, light, overlay, colour);
-				});
-	}
-
-	public void renderWings(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		ImmutableList.of(RWingMid, LWingMid)
-		.forEach((modelParts) -> {
-			modelParts.render(stack, consumer, light, overlay, colour);
-		});
-		
-	}
-
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float heady = netHeadYaw / (180F / (float) Math.PI);
-		float headx = headPitch / (180F / (float) Math.PI) - 1.0F;
-		Head1.yRot = heady;
-		Head1.xRot = headx;
-	
-	}
-
-	@Override
-	public void prepareMobModel(T entity, float limbSwing, float limbSwingAngle, float partialRenderTicks) {
-		Wasp wasp = entity;
-		float smoothedTicks = entity.animationTicks + (entity.animationTicks - entity.prevAnimationTicks)  * partialRenderTicks;
-		float flap = Mth.sin((smoothedTicks) * 1.2F) * 0.5F;
-		float flap2 = Mth.sin((smoothedTicks) * 0.5F) * 0.25F;
-		float flap3 = Mth.cos((smoothedTicks) * 0.5F) * 0.25F;
-		AntLS.zRot = -0.8727F + flap2;
-		AntLE.yRot = -0.1745F + flap3;
-		AntRS.zRot = 0.9878F - flap3;
-		AntRE.yRot = 0.1745F - flap2;
-		
-		if (wasp.onGround()) {
-			float legx1 = Mth.cos(limbSwing * 2.0F + (float) Math.PI) * 0.7F * limbSwingAngle;
-			float legx2 = Mth.cos(limbSwing * 2.0F) * 0.7F * limbSwingAngle;
-			LBL1.xRot = legx1 + 0.25F;
-			LBL2.xRot = legx1 + 0.25F;
-			LBL3.xRot = legx1 + 0.5F;
-			LBL4.xRot = legx1 + 0.61F;
-			LML1.xRot = legx2;
-			LML2.xRot = legx2;
-			LML3.xRot = legx2;
-			LML4.xRot = legx2;
-			LFL1.xRot = legx1 - 0.25F;
-			LFL2.xRot = legx1 - 0.25F;
-			LFL3.xRot = legx1 - 0.5F;
-			LFL4.xRot = legx1 - 0.64F;
-			RBL1.xRot = legx2 + 0.25F;
-			RBL2.xRot = legx2 + 0.25F;
-			RBL3.xRot = legx2 + 0.5F;
-			RBL4.xRot = legx2 + 0.61F;
-			RML1.xRot = legx1;
-			RML2.xRot = legx1;
-			RML3.xRot = legx1;
-			RML4.xRot = legx1;
-			RFL1.xRot = legx2 - 0.25F;
-			RFL2.xRot = legx2 - 0.25F;
-			RFL3.xRot = legx2 - 0.5F;
-			RFL4.xRot = legx2 - 0.64F;
-
-			RWingMid.yRot = 0.25F;
-			LWingMid.yRot = -0.25F;
-			RWingMid.xRot = 0F;
-			LWingMid.xRot = 0F;
-
-			AbF.xRot = -0.2F;
-		}
-		if (wasp.isFlying()) {
-			LBL1.xRot = +0.25F;
-			LBL2.xRot = +0.25F;
-			LBL3.xRot = +0.5F;
-			LBL4.xRot = +0.61F;
-			LML1.xRot = 0F;
-			LML2.xRot = 0F;
-			LML3.xRot = 0F;
-			LML4.xRot = 0F;
-			LFL1.xRot = -0.25F;
-			LFL2.xRot = -0.25F;
-			LFL3.xRot = -0.5F;
-			LFL4.xRot = -0.64F;
-			RBL1.xRot = +0.25F;
-			RBL2.xRot = +0.25F;
-			RBL3.xRot = +0.5F;
-			RBL4.xRot = +0.61F;
-			RML1.xRot = 0F;
-			RML2.xRot = 0F;
-			RML3.xRot = 0F;
-			RML4.xRot = 0F;
-			RFL1.xRot = -0.25F;
-			RFL2.xRot = -0.25F;
-			RFL3.xRot = -0.5F;
-			RFL4.xRot = -0.64F;
-
-			RWingMid.yRot = 1.5F;
-			LWingMid.yRot = -1.5F;
-			RWingMid.xRot = flap;
-			LWingMid.xRot = flap;
-
-			AbF.xRot = -0.8F;
-		}
-	}
-
-	@Override
-	public ModelPart root() {
-		return root;
+	public void setupAnim(WaspRenderState state) {
+		Head1.yRot = state.yRot / (180F / (float) Math.PI);
+		Head1.xRot = state.xRot / (180F / (float) Math.PI) - 1.0F;
 	}
 }

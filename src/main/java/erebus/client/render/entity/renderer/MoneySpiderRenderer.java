@@ -7,11 +7,11 @@ import erebus.entity.MoneySpider;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class MoneySpiderRenderer extends MobRenderer<MoneySpider, ScytodesModel<MoneySpider>> {
 
-	private static final ResourceLocation[] TEXTURES = new ResourceLocation[] {
+	private static final Identifier[] TEXTURES = new Identifier[] {
 			Erebus.prefix("textures/entity/money_spider.png"),
 			Erebus.prefix("textures/entity/money_spider_euro.png"),
 			Erebus.prefix("textures/entity/money_spider_pound.png") };
@@ -26,7 +26,7 @@ public class MoneySpiderRenderer extends MobRenderer<MoneySpider, ScytodesModel<
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(MoneySpider spider) {
+	public Identifier getTextureLocation(MoneySpider spider) {
 		return TEXTURES[spider.getSkin()];
 	}
 }

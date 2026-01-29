@@ -125,7 +125,7 @@ public class Erebus {
     private void commonSetup(final FMLCommonSetupEvent event) {
         /*ItemProperties.register(
                 ModItems.DEATH_COMPASS.get(),
-                ResourceLocation.withDefaultNamespace("angle"),
+                Identifier.withDefaultNamespace("angle"),
                 new CompassItemPropertyFunction(
                         (level, stack, entity) -> {
                             DeathCompassData data = stack.get(ModDataComponents.DEATH_COMPASS);
@@ -140,7 +140,7 @@ public class Erebus {
                 )
         );
 
-        ItemProperties.register(ModItems.MAX_SPEED_BOW.get(), ResourceLocation.withDefaultNamespace("pull"), (stack, level, entity, p_344166_) -> {
+        ItemProperties.register(ModItems.MAX_SPEED_BOW.get(), Identifier.withDefaultNamespace("pull"), (stack, level, entity, p_344166_) -> {
             if (entity == null) {
                 return 0.0F;
             } else {
@@ -150,7 +150,7 @@ public class Erebus {
 
         ItemProperties.register(
                 ModItems.MAX_SPEED_BOW.get(),
-                ResourceLocation.withDefaultNamespace("pulling"),
+                Identifier.withDefaultNamespace("pulling"),
                 (stack, level, entity, p_174633_) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F
         );*/
     }

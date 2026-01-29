@@ -6,13 +6,13 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ColossalCratePage(int page) implements CustomPacketPayload {
 	
-	public static final Type<ColossalCratePage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "colossal_crate_page"));
+	public static final Type<ColossalCratePage> TYPE = new Type<>(Identifier.fromNamespaceAndPath(Erebus.MODID, "colossal_crate_page"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, ColossalCratePage> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.INT,
 			ColossalCratePage::page,

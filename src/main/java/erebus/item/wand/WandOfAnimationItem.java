@@ -73,7 +73,7 @@ public class WandOfAnimationItem extends Item {
 		List<Block> blockList = new ArrayList<Block>();
 		for (int blocks = 0; blocks < ConfigHandler.WOA_BLACKLISTED_BLOCKS.length; blocks++) {
 			String entry = ConfigHandler.WOA_BLACKLISTED_BLOCKS[blocks].trim();
-			Block outBlock = Block.REGISTRY.getObject(new ResourceLocation(entry));
+			Block outBlock = Block.REGISTRY.getObject(new Identifier(entry));
 			blockList.add(outBlock);
 		}
 		if(blockList.contains(block))

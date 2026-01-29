@@ -7,12 +7,12 @@ import erebus.entity.Moth;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class MothRenderer extends MobRenderer<Moth, MothModel<Moth>> {
-	public static final ResourceLocation TEXTURE_1 = Erebus.prefix("textures/entity/moth_1.png");
-	public static final ResourceLocation TEXTURE_2 = Erebus.prefix("textures/entity/moth_2.png");
-	public static final ResourceLocation TEXTURE_3 = Erebus.prefix("textures/entity/moth_3.png");
+	public static final Identifier TEXTURE_1 = Erebus.prefix("textures/entity/moth_1.png");
+	public static final Identifier TEXTURE_2 = Erebus.prefix("textures/entity/moth_2.png");
+	public static final Identifier TEXTURE_3 = Erebus.prefix("textures/entity/moth_3.png");
 
 	public MothRenderer(EntityRendererProvider.Context context) {
         super(context, new MothModel<>(context.bakeLayer(ModEntityRendering.MOTH)), 0.3F);
@@ -24,7 +24,7 @@ public class MothRenderer extends MobRenderer<Moth, MothModel<Moth>> {
 	}
 
 	@Override
-	public  ResourceLocation getTextureLocation(Moth moth) {
+	public  Identifier getTextureLocation(Moth moth) {
 		switch (moth.getSkin()) {
 			case 0:
 				return TEXTURE_1;

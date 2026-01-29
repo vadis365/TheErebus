@@ -7,7 +7,7 @@ import erebus.network.server.ColossalCratePage;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 
 public class ColossalCrateScreen extends AbstractContainerScreen<ColossalCrateMenu> {
 
-	private static final ResourceLocation GUI_BAMBOO_CRATE = Erebus.prefix("textures/gui/container/bamboo_collosal_crate.png");
+	private static final Identifier GUI_BAMBOO_CRATE = Erebus.prefix("textures/gui/container/bamboo_collosal_crate.png");
 
 	public ColossalCrateScreen(ColossalCrateMenu handler, Inventory playerInventory, Component text) {
 		super(handler, playerInventory, text);

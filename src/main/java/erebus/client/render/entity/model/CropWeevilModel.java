@@ -1,16 +1,13 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.Weevil;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.CropWeevilRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
 
-public class WeevilModel<T extends Weevil> extends HierarchicalModel<T> {
+public class CropWeevilModel extends EntityModel<CropWeevilRenderState> {
 
 	public ModelPart root;
 	private final ModelPart HeadMain;
@@ -26,8 +23,8 @@ public class WeevilModel<T extends Weevil> extends HierarchicalModel<T> {
 	private final ModelPart RightMidLeg;
 	private final ModelPart RightBackLeg;
 
-	public WeevilModel(ModelPart root) {
-		super(RenderType::entityCutout);
+	public CropWeevilModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.HeadMain = root.getChild("HeadMain");
 		this.Ab = root.getChild("Ab");
@@ -139,10 +136,10 @@ public class WeevilModel<T extends Weevil> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(CropWeevilRenderState state) {
 		float correction = 0.3490659F;
-		float sin = Mth.sin(limbSwing) * 0.8F * limbSwingAmount;
-		float cos = Mth.cos(limbSwing) * 0.4F * limbSwingAmount;
+		float sin = Mth.sin(state.walkAnimationPos) * 0.8F * state.walkAnimationSpeed;
+		float cos = Mth.cos(state.walkAnimationPos) * 0.4F * state.walkAnimationSpeed;
 		LeftBackLeg.zRot = -cos;
 		LeftMidLeg.zRot = cos;
 		LeftFrontLeg.zRot = -cos;
@@ -155,27 +152,5 @@ public class WeevilModel<T extends Weevil> extends HierarchicalModel<T> {
 		RightBackLeg.yRot = sin + correction;
 		RightMidLeg.yRot = -sin;
 		RightFrontLeg.yRot = sin - correction;
-
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		HeadMain.render(stack, consumer, light, overlay, colour);
-		Ab.render(stack, consumer, light, overlay, colour);
-		AbSideR.render(stack, consumer, light, overlay, colour);
-		AbSideL.render(stack, consumer, light, overlay, colour);
-		AbTop.render(stack, consumer, light, overlay, colour);
-		AbBack.render(stack, consumer, light, overlay, colour);
-		LeftFrontLeg.render(stack, consumer, light, overlay, colour);
-		LeftMidLeg.render(stack, consumer, light, overlay, colour);
-		LeftBackLeg.render(stack, consumer, light, overlay, colour);
-		RightFrontLeg.render(stack, consumer, light, overlay, colour);
-		RightMidLeg.render(stack, consumer, light, overlay, colour);
-		RightBackLeg.render(stack, consumer, light, overlay, colour);
-	}
-
-	@Override
-	public ModelPart root() {
-		return root;
 	}
 }

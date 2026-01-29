@@ -2,19 +2,19 @@ package erebus.client.render.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.Erebus;
-import erebus.client.render.entity.model.WeevilModel;
+import erebus.client.render.entity.model.CropWeevilModel;
 import erebus.entity.FungalWeevil;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
-public class FungalWeevilRenderer extends MobRenderer<FungalWeevil, WeevilModel<FungalWeevil>> {
+public class FungalWeevilRenderer extends MobRenderer<FungalWeevil, CropWeevilModel<FungalWeevil>> {
 
-	private static final ResourceLocation TEXTURE = Erebus.prefix("textures/entity/fungal_weevil.png");
+	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/fungal_weevil.png");
 
 	public FungalWeevilRenderer(EntityRendererProvider.Context context) {
-		super(context, new WeevilModel<>(context.bakeLayer(ModEntityRendering.FUNGAL_WEEVIL)), 0.5F);
+		super(context, new CropWeevilModel<>(context.bakeLayer(ModEntityRendering.FUNGAL_WEEVIL)), 0.5F);
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class FungalWeevilRenderer extends MobRenderer<FungalWeevil, WeevilModel<
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(FungalWeevil weevil) {
+	public Identifier getTextureLocation(FungalWeevil weevil) {
 		return TEXTURE;
 	}
 }

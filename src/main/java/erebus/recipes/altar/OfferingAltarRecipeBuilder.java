@@ -4,7 +4,7 @@ import net.minecraft.advancements.Criterion;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -80,7 +80,7 @@ public class OfferingAltarRecipeBuilder implements RecipeBuilder {
 	}
 
 	@Override
-	public void save(RecipeOutput recipeOutput, ResourceLocation id) {
+	public void save(RecipeOutput recipeOutput, Identifier id) {
 		OfferingAltarRecipe recipe = null;
 		if (this.resultStack != null)
 			recipe = new OfferingAltarRecipeMaker(this.ingredients, this.resultStack);

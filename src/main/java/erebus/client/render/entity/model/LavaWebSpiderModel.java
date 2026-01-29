@@ -1,14 +1,12 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.LavaWebSpider;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.LavaWebSpiderRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class LavaWebSpiderModel<T extends LavaWebSpider> extends HierarchicalModel<T> {
+public class LavaWebSpiderModel extends EntityModel<LavaWebSpiderRenderState> {
 	public ModelPart root;
 	private final ModelPart ThxTop;
 	private final ModelPart ThxS;
@@ -57,6 +55,7 @@ public class LavaWebSpiderModel<T extends LavaWebSpider> extends HierarchicalMod
 	private final ModelPart HeadBotB;
 
 	public LavaWebSpiderModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.ThxTop = root.getChild("ThxTop");
 		this.ThxS = root.getChild("ThxS");
@@ -252,9 +251,9 @@ public class LavaWebSpiderModel<T extends LavaWebSpider> extends HierarchicalMod
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float sin = (float) (Math.sin(limbSwing * 0.6F) * 0.4F * limbSwingAmount);
-		float cos = (float) (Math.cos(limbSwing * 0.6F) * 0.4F * limbSwingAmount);
+	public void setupAnim(LavaWebSpiderRenderState state) {
+		float sin = (float) (Math.sin(state.walkAnimationPos * 0.6F) * 0.4F * state.walkAnimationSpeed);
+		float cos = (float) (Math.cos(state.walkAnimationPos * 0.6F) * 0.4F * state.walkAnimationSpeed);
 
 		BackLegLeft.zRot = 0F + cos;
 		LBL4.zRot = 0.1396F - cos;
@@ -297,43 +296,5 @@ public class LavaWebSpiderModel<T extends LavaWebSpider> extends HierarchicalMod
 		BackMidLegRight.yRot = 0.2618F - sin;
 		FrontMidLegRight.yRot = -0.2182F + cos;
 		FrontLegRight.yRot = -0.7854F - sin;
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		Lmand.render(stack, consumer, light, overlay, colour);
-		Rmand.render(stack, consumer, light, overlay, colour);
-		FrontLegLeft.render(stack, consumer, light, overlay, colour);
-		BackLegLeft.render(stack, consumer, light, overlay, colour);
-		FrontMidLegLeft.render(stack, consumer, light, overlay, colour);
-		BackMidLegLeft.render(stack, consumer, light, overlay, colour);
-		FrontLegRight.render(stack, consumer, light, overlay, colour);
-		FrontMidLegRight.render(stack, consumer, light, overlay, colour);
-		BackMidLegRight.render(stack, consumer, light, overlay, colour);
-		BackLegRight.render(stack, consumer, light, overlay, colour);
-		HeadMain.render(stack, consumer, light, overlay, colour); // may add a layer for eyes later
-		ThxTop.render(stack, consumer, light, overlay, colour);
-	}
-
-	@Override
-	public ModelPart root() {
-		return root;
-	}
-
-	public void renderBody(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		ThxS.render(stack, consumer, light, overlay, colour);
-		AbTop1.render(stack, consumer, light, overlay, colour);
-		AbTop2.render(stack, consumer, light, overlay, colour);
-		ABot1.render(stack, consumer, light, overlay, colour);
-		AbBack.render(stack, consumer, light, overlay, colour);
-		AbCore1.render(stack, consumer, light, overlay, colour);
-		AbCore2.render(stack, consumer, light, overlay, colour);
-		AbCore3.render(stack, consumer, light, overlay, colour);
-		stack.pushPose();
-		stack.translate(0F, 0.001F, 0F);
-		HeadMain.render(stack, consumer, light, overlay, colour);
-		ThxTop.render(stack, consumer, light, overlay, colour);
-		stack.popPose();
-		HeadBotB.render(stack, consumer, light, overlay, colour);
 	}
 }

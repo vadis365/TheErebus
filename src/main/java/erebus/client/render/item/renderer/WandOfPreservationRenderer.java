@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 
 public class WandOfPreservationRenderer extends BlockEntityWithoutLevelRenderer {
 
-    private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/items/wand_of_preservation.png");
+    private final Identifier TEXTURE = Erebus.prefix("textures/special/items/wand_of_preservation.png");
     private final WandOfPreservationModel wandOfPreservationModel;
 
     public WandOfPreservationRenderer(BlockEntityRenderDispatcher blockEntityRenderDispatcher, EntityModelSet entityModelSet) {

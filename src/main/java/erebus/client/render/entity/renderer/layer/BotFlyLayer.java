@@ -1,37 +1,43 @@
 package erebus.client.render.entity.renderer.layer;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.client.render.entity.model.BotFlyModel;
-import erebus.entity.BotFly;
+import erebus.client.render.entity.renderer.state.BotFlyRenderState;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import org.jspecify.annotations.NonNull;
 
-public class BotFlyLayer extends RenderLayer<BotFly, BotFlyModel<BotFly>> {
+public class BotFlyLayer extends RenderLayer<BotFlyRenderState, BotFlyModel> {
 
-    private final BotFlyModel<BotFly> botflyModel;
+    private final BotFlyModel model;
 
-    public BotFlyLayer(RenderLayerParent<BotFly, BotFlyModel<BotFly>> entity, EntityModelSet modelSet) {
+    public BotFlyLayer(RenderLayerParent<BotFlyRenderState, BotFlyModel> entity, EntityModelSet modelSet) {
     	super(entity);
-    	this.botflyModel = new BotFlyModel<>(modelSet.bakeLayer(ModEntityRendering.BOT_FLY));
+    	this.model = new BotFlyModel(modelSet.bakeLayer(ModEntityRendering.BOT_FLY));
     }
 
-    @Override
+	@Override
+	public void submit(PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, BotFlyRenderState state, float xRot, float yRot) {
+		model.setupAnim(state);
+		pose.pushPose();
+		//TODO: Make wings their own model
+		pose.popPose();
+	}
+
+	 /*
+	@Override
    	public void render(PoseStack matrix, MultiBufferSource buffer, int packedLight, BotFly entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-    	botflyModel.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-		botflyModel.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+    	model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
+		model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		matrix.pushPose();
 		RenderSystem.enableBlend();
 		RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-		botflyModel.renderWings(matrix, buffer.getBuffer(RenderType.entityTranslucentCull(getTextureLocation(entity))), packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
+		model.renderWings(matrix, buffer.getBuffer(RenderType.entityTranslucentCull(getTextureLocation(entity))), packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
 		RenderSystem.disableBlend();
 	    RenderSystem.defaultBlendFunc();
 	    matrix.popPose();
-	}
+	}*/
 }

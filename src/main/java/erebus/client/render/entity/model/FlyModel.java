@@ -1,14 +1,12 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.Fly;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.FlyRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class FlyModel<T extends Fly> extends HierarchicalModel<T> {
+public class FlyModel extends EntityModel<FlyRenderState> {
 	public ModelPart root;
 	private final ModelPart thorax;
 	private final ModelPart abdomen;
@@ -25,6 +23,7 @@ public class FlyModel<T extends Fly> extends HierarchicalModel<T> {
 	private final ModelPart wing_left;
 
 	public FlyModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.thorax = root.getChild("thorax");
 		this.abdomen = root.getChild("abdomen");
@@ -75,55 +74,7 @@ public class FlyModel<T extends Fly> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(FlyRenderState state) {
 
-	}
-
-	@Override
-	public void prepareMobModel(T fly, float limbSwing, float limbSwingAmount, float partialRenderTicks) {
-		float smoothedTicks = fly.animationTicks + (fly.animationTicks - (fly.prevAnimationTicks)) * partialRenderTicks;
-		float flap = (float) (Math.sin((smoothedTicks) * 0.95F) * 1F);
-		if (!fly.getIsFlyHanging()) {
-			wing_left.xRot = 0.5235988F + flap * 0.2F;
-			wing_right.xRot = 0.5235988F + flap * 0.2F;
-			wing_left.zRot = 0F + flap * 0.5F;
-			wing_right.zRot = 0F - flap * 0.5F;
-			wing_left.yRot = 0.5235988F;
-			wing_right.yRot = -0.5235988F;
-		} else {
-			wing_left.xRot = 0.25235988F;
-			wing_right.xRot = 0.25235988F;
-			wing_left.zRot = 0F;
-			wing_right.zRot = 0F;
-			wing_left.yRot = -0.1745329F;
-			wing_right.yRot = 0.1745329F;
-		}
-
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		thorax.render(stack, consumer, light, overlay, colour);
-		abdomen.render(stack, consumer, light, overlay, colour);
-		right_eye.render(stack, consumer, light, overlay, colour);
-		left_eye.render(stack, consumer, light, overlay, colour);
-		leg_left_back.render(stack, consumer, light, overlay, colour);
-		head.render(stack, consumer, light, overlay, colour);
-		leg_left_front.render(stack, consumer, light, overlay, colour);
-		leg_left_mid.render(stack, consumer, light, overlay, colour);
-		leg_right_back.render(stack, consumer, light, overlay, colour);
-		leg_right_front.render(stack, consumer, light, overlay, colour);
-		leg_right_mid.render(stack, consumer, light, overlay, colour);
-		
-	}
-
-	@Override
-	public ModelPart root() {
-		return root;
-	}
-
-	public void renderWings(PoseStack stack, VertexConsumer buffer, int light, int overlay, int colour) {
-		wing_right.render(stack, buffer, light, overlay, colour);
-		wing_left.render(stack, buffer, light, overlay, colour);
 	}
 }

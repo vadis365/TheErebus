@@ -8,11 +8,11 @@ import erebus.entity.Wasp;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class WaspRenderer extends MobRenderer<Wasp, WaspModel<Wasp>> {
-	public static final ResourceLocation WASP = Erebus.prefix("textures/entity/wasp.png");
-	private static final ResourceLocation HORNET = Erebus.prefix("textures/entity/hornet.png");
+	public static final Identifier WASP = Erebus.prefix("textures/entity/wasp.png");
+	private static final Identifier HORNET = Erebus.prefix("textures/entity/hornet.png");
 
 	public WaspRenderer(EntityRendererProvider.Context context) {
         super(context, new WaspModel<>(context.bakeLayer(ModEntityRendering.WASP)), 0.5F);
@@ -30,7 +30,7 @@ public class WaspRenderer extends MobRenderer<Wasp, WaspModel<Wasp>> {
 	}
 
 	@Override
-	public  ResourceLocation getTextureLocation(Wasp wasp) {
+	public  Identifier getTextureLocation(Wasp wasp) {
 		return wasp.getIsBoss() ? HORNET : WASP;
 	}
 }

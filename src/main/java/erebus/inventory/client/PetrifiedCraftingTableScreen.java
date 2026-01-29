@@ -8,13 +8,13 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 
 public class PetrifiedCraftingTableScreen extends AbstractContainerScreen<PetrifiedCraftingMenu> implements RecipeUpdateListener {
-    private static final ResourceLocation GUI = ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "textures/gui/container/petrified_crafting.png");
+    private static final Identifier GUI = Identifier.fromNamespaceAndPath(Erebus.MODID, "textures/gui/container/petrified_crafting.png");
     private final RecipeBookComponent recipeBookComponent = new RecipeBookComponent();
     private boolean widthTooNarrow;
 

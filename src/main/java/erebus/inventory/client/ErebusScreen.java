@@ -3,15 +3,15 @@ package erebus.inventory.client;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 
 import javax.annotation.Nonnull;
 
 public class ErebusScreen<T extends AbstractContainerMenu> extends AbstractContainerScreen<T> {
-    protected final ResourceLocation TEXTURE;
-    public ErebusScreen(T container, Inventory inventory, Component title, ResourceLocation texture) {
+    protected final Identifier TEXTURE;
+    public ErebusScreen(T container, Inventory inventory, Component title, Identifier texture) {
         super(container, inventory, title);
         TEXTURE = texture;
     }

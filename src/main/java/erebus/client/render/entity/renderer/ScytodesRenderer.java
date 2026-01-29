@@ -6,11 +6,11 @@ import erebus.entity.Scytodes;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ScytodesRenderer extends MobRenderer<Scytodes, ScytodesModel<Scytodes>> {
 
-	private static final ResourceLocation[] TEXTURES = new ResourceLocation[] {
+	private static final Identifier[] TEXTURES = new Identifier[] {
 			Erebus.prefix("textures/entity/scytodes_1.png"),
 			Erebus.prefix("textures/entity/scytodes_2.png"),
 			Erebus.prefix("textures/entity/scytodes_3.png"),
@@ -21,7 +21,7 @@ public class ScytodesRenderer extends MobRenderer<Scytodes, ScytodesModel<Scytod
 	}
 
 	@Override
-	public  ResourceLocation getTextureLocation(Scytodes scytodes) {
+	public  Identifier getTextureLocation(Scytodes scytodes) {
 		return TEXTURES[scytodes.getSkin()];
 	}
 }

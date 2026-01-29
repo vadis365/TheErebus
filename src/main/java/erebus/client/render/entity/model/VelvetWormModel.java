@@ -1,15 +1,12 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.VelvetWorm;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.VelvetWormRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.Mth;
 
-public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> {
+public class VelvetWormModel extends EntityModel<VelvetWormRenderState> {
 	public ModelPart root;
 	private final ModelPart Head1;
 	private final ModelPart Body1;
@@ -24,6 +21,7 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 	private final ModelPart RAnt;
 
 	public VelvetWormModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.Head1 = root.getChild("Head1");
 		this.Body1 = root.getChild("Body1");
@@ -73,87 +71,6 @@ public class VelvetWormModel<T extends VelvetWorm> extends HierarchicalModel<T> 
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-	}
-
-	@Override
-	public ModelPart root() {
-		return root;
-	}
-
-	public void renderHead(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm worm, int frame, float wibbleStrength, float partialTicks) {
-		float smoothedTicks = worm.tickCount + frame + (worm.tickCount + frame - (worm.tickCount + frame - 1)) * partialTicks;
-		float wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.125F * wibbleStrength);
-		float ant_wibbleSin = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.25F);
-		float ant_wibbleCos = (float) (Math.cos(1F + (smoothedTicks) * 0.25F) * 0.25F);
-		stack.translate(0F, 0F - wibble * 2F, 0F + wibble * 2F);
-		stack.scale(1F + wibble * 2F, 1F + wibble, 1.5F - wibble * 1.25F);
-		Head1.xRot = worm.getXRot() / Mth.RAD_TO_DEG;
-		LAnt.xRot = 0F + ant_wibbleSin;
-		RAnt.xRot = 0F + ant_wibbleCos;
-		LAnt.yRot = -0.1745F  - ant_wibbleCos;
-		RAnt.yRot = 0.1745F + ant_wibbleSin;
-		Head1.render(stack, consumer, light, overlay, colour); 
-	}
-
-	public void renderBody(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm worm, int frame, float wibbleStrength, float partialTicks, boolean isPartA) {
-		float limbSwing = worm.walkAnimation.position(partialTicks);
-		float limbSwingAmount = worm.walkAnimation.speed(partialTicks);
-		float smoothedTicks = worm.tickCount + frame + (worm.tickCount + frame - (worm.tickCount + frame - 1)) * partialTicks;
-		float wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.125F * wibbleStrength);
-		float legsSin = (float) (Math.sin(limbSwing + frame * 0.3F) * 0.75F * limbSwingAmount * wibbleStrength);
-		float legsCos = (float) (Math.cos(limbSwing + frame * 0.3F) * 0.5F * limbSwingAmount);
-
-		stack.translate(0F, 0F - wibble, 0F - wibble * 2F);
-
-		stack.pushPose();
-		stack.scale(1F + wibble * 2F, 1F + wibble, 1.5F - wibble * 1.25F);
-		stack.translate(0F,  0F - wibble, 0F);
-		Body1.render(stack, consumer, light, overlay, colour);
-		stack.popPose();
-		if(isPartA) {
-			stack.pushPose();
-			stack.scale(1F, 1F, 1F);
-			stack.translate(0F - wibble * 0.5F, 0F + wibble * 0.5F, 0F);
-			Body1RightLeg.yRot = -legsSin;
-			Body1RightLeg.zRot = -0.4363F - legsCos;
-			Body1RightLeg.render(stack, consumer, light, overlay, colour);
-			stack.popPose();
-
-			stack.pushPose();
-			stack.scale(1F, 1F, 1F);
-			stack.translate(0F + wibble * 0.5F, 0F + wibble * 0.5F, 0F);
-			Body1LeftLeg.yRot = legsSin;
-			Body1LeftLeg.zRot = 0.4363F + legsCos;
-			Body1LeftLeg.render(stack, consumer, light, overlay, colour);
-			stack.popPose();
-		}
-		else {
-			stack.pushPose();
-			stack.scale(1F, 1F, 1F);
-			stack.translate(0F - wibble * 0.5F, 0F + wibble * 0.5F, 0F);
-			Body2RightLeg.yRot = legsSin;
-			Body2RightLeg.zRot = -0.4363F + legsCos;
-			Body2RightLeg.render(stack, consumer, light, overlay, colour);
-			stack.popPose();
-
-			stack.pushPose();
-			stack.scale(1F, 1F, 1F);
-			stack.translate(0F + wibble * 0.5F, 0F + wibble * 0.5F, 0F);
-			Body2LeftLeg.yRot = -legsSin;
-			Body2LeftLeg.zRot = 0.4363F - legsCos;
-			Body2LeftLeg.render(stack, consumer, light, overlay, colour);
-			stack.popPose();
-		}
-	}
-
-	public void renderTail(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWorm worm, int frame, float wibbleStrength, float partialTicks) {
-		float smoothedTicks = worm.tickCount + frame + (worm.tickCount + frame - (worm.tickCount + frame - 1)) * partialTicks;
-		float wibble = (float) (Math.sin(1F + (smoothedTicks) * 0.25F) * 0.125F * wibbleStrength);
-
-		stack.translate(0F, 0F - wibble * 2F, 0F + wibble * 2F);
-		stack.scale(1F + wibble * 2F, 1F + wibble, 1.625F - wibble * 1.25F);
-		Tail.render(stack, consumer, light, overlay, colour);
-		TailFin.render(stack, consumer, light, overlay, colour);
+	public void setupAnim(VelvetWormRenderState state) {
 	}
 }

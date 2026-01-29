@@ -23,7 +23,7 @@ public final class BlockOfBonesSpecialRenderer implements NoDataSpecialModelRend
     private final BlockOfBonesModel model;
     private final Identifier texture;
 
-    //private final ResourceLocation TEXTURE = Erebus.prefix("textures/special/tiles/bone_block.png");
+    //private final Identifier TEXTURE = Erebus.prefix("textures/special/tiles/bone_block.png");
 
     public BlockOfBonesSpecialRenderer(BlockOfBonesModel model, Identifier texture) {
         this.model = model;

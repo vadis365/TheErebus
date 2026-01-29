@@ -1,37 +1,38 @@
 package erebus.client.render.entity.renderer.layer;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.client.render.entity.model.FlyModel;
-import erebus.entity.Fly;
+import erebus.client.render.entity.renderer.state.FlyRenderState;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 
-public class FlyLayer extends RenderLayer<Fly, FlyModel<Fly>> {
+public class FlyLayer extends RenderLayer<FlyRenderState, FlyModel> {
 
-    private final FlyModel<Fly> flyModel;
+    private final FlyModel model;
 
-    public FlyLayer(RenderLayerParent<Fly, FlyModel<Fly>> entity, EntityModelSet modelSet) {
+    public FlyLayer(RenderLayerParent<FlyRenderState, FlyModel> entity, EntityModelSet modelSet) {
     	super(entity);
-    	this.flyModel = new FlyModel<>(modelSet.bakeLayer(ModEntityRendering.FLY));
+    	this.model = new FlyModel(modelSet.bakeLayer(ModEntityRendering.FLY));
     }
 
-    @Override
-   	public void render(PoseStack matrix, MultiBufferSource buffer, int packedLight, Fly entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-    	flyModel.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-		flyModel.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		matrix.pushPose();
-		RenderSystem.enableBlend();
-		RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-		flyModel.renderWings(matrix, buffer.getBuffer(RenderType.entityTranslucentCull(getTextureLocation(entity))), packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
-		RenderSystem.disableBlend();
-	    RenderSystem.defaultBlendFunc();
-	    matrix.popPose();
+	@Override
+	public void submit(PoseStack pose, SubmitNodeCollector submit, int lightCoords, FlyRenderState state, float xRot, float yRot) {
+		pose.pushPose();
+		/*submit.submitModel(
+				model,
+				state,
+				pose,
+				renderType,
+				state.lightCoords,
+				OverlayTexture.NO_OVERLAY,
+				colour,
+				null,
+				state.outlineColor,
+				null
+		);*/
+		pose.popPose();
 	}
 }

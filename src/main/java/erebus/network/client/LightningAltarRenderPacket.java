@@ -9,7 +9,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -17,7 +17,7 @@ import org.joml.Vector3f;
 
 public record LightningAltarRenderPacket(int xPos, int yPos, int zPos, Vector3f targetVector) implements CustomPacketPayload {
 
-	public static final Type<LightningAltarRenderPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Erebus.MODID, "altar_lightning_render"));
+	public static final Type<LightningAltarRenderPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(Erebus.MODID, "altar_lightning_render"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, LightningAltarRenderPacket> STREAM_CODEC = StreamCodec.composite(
 					ByteBufCodecs.INT,
 					LightningAltarRenderPacket::xPos,

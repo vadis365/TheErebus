@@ -8,11 +8,11 @@ import erebus.entity.HoneyPotAnt;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class HoneyPotAntRenderer extends MobRenderer<HoneyPotAnt, AntModel<HoneyPotAnt>> {
 
-	private static final ResourceLocation TEXTURE = Erebus.prefix("textures/entity/honey_pot_ant.png");
+	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/honey_pot_ant.png");
 
 	public HoneyPotAntRenderer(EntityRendererProvider.Context context) {
 		super(context, new AntModel<>(context.bakeLayer(ModEntityRendering.HONEY_POT_ANT)), 0.5F);
@@ -25,7 +25,7 @@ public class HoneyPotAntRenderer extends MobRenderer<HoneyPotAnt, AntModel<Honey
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(HoneyPotAnt ant) {
+	public Identifier getTextureLocation(HoneyPotAnt ant) {
 		return TEXTURE;
 	}
 }

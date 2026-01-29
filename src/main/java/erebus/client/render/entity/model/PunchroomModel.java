@@ -1,15 +1,12 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import erebus.entity.Punchroom;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.PunchroomRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
 
-public class PunchroomModel<T extends Punchroom> extends HierarchicalModel<T> {
+public class PunchroomModel extends EntityModel<PunchroomRenderState> {
 	public ModelPart root;
 	private final ModelPart mushBase;
 	private final ModelPart mushBase2;
@@ -20,7 +17,7 @@ public class PunchroomModel<T extends Punchroom> extends HierarchicalModel<T> {
 	private final ModelPart mushCap3;
 
 	public PunchroomModel(ModelPart root) {
-		super(RenderType::entityCutout);
+		super(root);
 		this.root = root;
 		this.mushBase = root.getChild("mushBase");
 		this.mushBase2 = root.getChild("mushBase2");
@@ -45,23 +42,7 @@ public class PunchroomModel<T extends Punchroom> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(PunchroomRenderState state) {
 
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		mushBase.render(stack, consumer, light, overlay, colour);
-		mushBase2.render(stack, consumer, light, overlay, colour);
-		mushBase3.render(stack, consumer, light, overlay, colour);
-		mushSpores.render(stack, consumer, light, overlay, colour);
-		mushCap1.render(stack, consumer, light, overlay, colour);
-		mushCap2.render(stack, consumer, light, overlay, colour);
-		mushCap3.render(stack, consumer, light, overlay, colour);
-	}
-
-	@Override
-	public ModelPart root() {
-		return root;
 	}
 }

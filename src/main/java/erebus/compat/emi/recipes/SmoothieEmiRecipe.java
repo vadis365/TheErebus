@@ -12,7 +12,7 @@ import erebus.compat.emi.ModEmiPlugin;
 import erebus.recipes.smoothie.SmoothieRecipe;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
@@ -23,7 +23,7 @@ import java.util.List;
 
 public class SmoothieEmiRecipe implements EmiRecipe {
 
-    private final ResourceLocation id;
+    private final Identifier id;
     private final List<EmiIngredient> inputs = new ArrayList<>();
     private final List<EmiStack> output = new ArrayList<>();
     private final SmoothieRecipe recipe;
@@ -49,7 +49,7 @@ public class SmoothieEmiRecipe implements EmiRecipe {
     }
 
     @Override
-    public @Nullable ResourceLocation getId() {
+    public @Nullable Identifier getId() {
         return id;
     }
 

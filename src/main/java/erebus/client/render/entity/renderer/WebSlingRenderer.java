@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.data.ModelData;
 
@@ -40,7 +40,7 @@ public class WebSlingRenderer extends EntityRenderer<ThrownBlockAsItem> {
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(ThrownBlockAsItem entity) {
+	public Identifier getTextureLocation(ThrownBlockAsItem entity) {
 		return null;
 	}
 }

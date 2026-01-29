@@ -1,15 +1,13 @@
 package erebus.client.render.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.HierarchicalModel;
+import erebus.client.render.entity.renderer.state.SoldierAntRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 
-public class SoldierAntModel<T extends Entity> extends HierarchicalModel<T> {
+public class SoldierAntModel extends EntityModel<SoldierAntRenderState> {
 	public ModelPart root;
 	private final ModelPart Thx;
 	private final ModelPart ThxTop;
@@ -30,6 +28,7 @@ public class SoldierAntModel<T extends Entity> extends HierarchicalModel<T> {
 	private final ModelPart HeadMain;
 
 	public SoldierAntModel(ModelPart root) {
+		super(root);
 		this.root = root;
 		this.Thx = root.getChild("Thx");
 		this.ThxTop = root.getChild("ThxTop");
@@ -162,12 +161,12 @@ public class SoldierAntModel<T extends Entity> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		HeadMain.yRot = netHeadYaw / (180F / (float) Math.PI);
-		HeadMain.xRot = headPitch / (180F / (float) Math.PI);
+	public void setupAnim(SoldierAntRenderState state) {
+		HeadMain.yRot = state.yRot / (180F / (float) Math.PI);
+		HeadMain.xRot = state.xRot / (180F / (float) Math.PI);
 
-		float sin = Mth.sin(limbSwing) * 0.8F * limbSwingAmount;
-		float cos = Mth.cos(limbSwing) * 0.2F * limbSwingAmount;
+		float sin = Mth.sin(state.walkAnimationPos) * 0.8F * state.walkAnimationSpeed;
+		float cos = Mth.cos(state.walkAnimationPos) * 0.2F * state.walkAnimationSpeed;
 
 		LeftBackLeg.zRot = -cos;
 		LeftMidLeg.zRot = cos;
@@ -181,31 +180,5 @@ public class SoldierAntModel<T extends Entity> extends HierarchicalModel<T> {
 		RightBackLeg.yRot = 0.6981F + sin;
 		RightMidLeg.yRot = 0F - sin;
 		RightFrontLeg.yRot = -0.6981F + sin;
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour) {
-		Thx.render(stack, consumer, light, overlay, colour);
-		ThxTop.render(stack, consumer, light, overlay, colour);
-		ThxS.render(stack, consumer, light, overlay, colour);
-		ThxToAb.render(stack, consumer, light, overlay, colour);
-		Ab.render(stack, consumer, light, overlay, colour);
-		AbF.render(stack, consumer, light, overlay, colour);
-		AbSide.render(stack, consumer, light, overlay, colour);
-		AbTop.render(stack, consumer, light, overlay, colour);
-		AbBack.render(stack, consumer, light, overlay, colour);
-		Neck.render(stack, consumer, light, overlay, colour);
-		RightFrontLeg.render(stack, consumer, light, overlay, colour);
-		RightMidLeg.render(stack, consumer, light, overlay, colour);
-		RightBackLeg.render(stack, consumer, light, overlay, colour);
-		LeftFrontLeg.render(stack, consumer, light, overlay, colour);
-		LeftMidLeg.render(stack, consumer, light, overlay, colour);
-		LeftBackLeg.render(stack, consumer, light, overlay, colour);
-		HeadMain.render(stack, consumer, light, overlay, colour);
-	}
-
-	@Override
-	public ModelPart root() {
-		return root;
 	}
 }
