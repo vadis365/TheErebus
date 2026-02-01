@@ -1,5 +1,7 @@
 package erebus.client.render.entity.model;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import erebus.client.render.entity.renderer.state.VelvetWormRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -72,5 +74,42 @@ public class VelvetWormModel extends EntityModel<VelvetWormRenderState> {
 
 	@Override
 	public void setupAnim(VelvetWormRenderState state) {
+	}
+
+	public void renderHead(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWormRenderState state, float partialTicks) {
+		root.getAllParts().forEach(part -> part.visible = false);
+		Head1.visible = true;
+		RAnt.yRot = (float) (Math.sin(state.ageInTicks * 0.1F) * 0.2F + 0.1745F);
+		LAnt.yRot = (float) (-Math.sin(state.ageInTicks * 0.1F) * 0.2F - 0.1745F);
+		// TODO use state.head.wibbleStrength etc.
+		root.render(stack, consumer, light, overlay, colour);
+	}
+
+	public void renderBody(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWormRenderState state, int frame, float wibbleStrength, float partialTicks, boolean isPartA) {
+		root.getAllParts().forEach(part -> part.visible = false);
+		Body1.visible = !isPartA;
+		Body1RightLeg.visible = !isPartA;
+		Body1LeftLeg.visible = !isPartA;
+		Body2.visible = isPartA;
+		Body2RightLeg.visible = isPartA;
+		Body2LeftLeg.visible = isPartA;
+		
+		float legRotation = (float) (Math.sin(state.ageInTicks * 0.4F + frame) * 0.5F);
+		if (isPartA) {
+			Body2RightLeg.xRot = legRotation;
+			Body2LeftLeg.xRot = -legRotation;
+		} else {
+			Body1RightLeg.xRot = legRotation;
+			Body1LeftLeg.xRot = -legRotation;
+		}
+
+		root.render(stack, consumer, light, overlay, colour);
+	}
+
+	public void renderTail(PoseStack stack, VertexConsumer consumer, int light, int overlay, int colour, VelvetWormRenderState state, float partialTicks) {
+		root.getAllParts().forEach(part -> part.visible = false);
+		Tail.visible = true;
+		TailFin.visible = true;
+		root.render(stack, consumer, light, overlay, colour);
 	}
 }

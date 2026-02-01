@@ -65,8 +65,8 @@ public class ModEntityRendering {
     	event.registerLayerDefinition(BOMBARDIER_BEETLE, BombardierBeetleModel::createBodyLayer);
     	event.registerLayerDefinition(BLACK_ANT, BlackAntModel::createBodyLayer);
     	event.registerLayerDefinition(PUNCHROOM, PunchroomModel::createBodyLayer);
-    	event.registerLayerDefinition(CROP_WEEVIL, CropWeevilModel::createBodyLayer);
-    	event.registerLayerDefinition(FUNGAL_WEEVIL, CropWeevilModel::createBodyLayer);
+    	event.registerLayerDefinition(CROP_WEEVIL, WeevilModel::createBodyLayer);
+    	event.registerLayerDefinition(FUNGAL_WEEVIL, WeevilModel::createBodyLayer);
     	event.registerLayerDefinition(BED_BUG, BedBugModel::createBodyLayer);
     	event.registerLayerDefinition(HONEY_POT_ANT, AntModel::createBodyLayer);
     	event.registerLayerDefinition(ZOMBIE_ANT, AntModel::createBodyLayer);

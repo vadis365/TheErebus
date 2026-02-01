@@ -39,6 +39,7 @@ public class DragonflyRenderer extends MobRenderer<Dragonfly, DragonflyRenderSta
 
 	@Override
 	public void extractRenderState(Dragonfly entity, DragonflyRenderState state, float partialTicks) {
+		super.extractRenderState(entity, state, partialTicks);
 		state.skin = entity.getSkin();
 	}
 

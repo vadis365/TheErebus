@@ -24,6 +24,11 @@ public class BedBugRenderer extends MobRenderer<BedBug, BedBugRenderState, BedBu
 	}
 
 	@Override
+	public void extractRenderState(BedBug entity, BedBugRenderState state, float partialTicks) {
+		super.extractRenderState(entity, state, partialTicks);
+	}
+
+	@Override
 	protected void scale(BedBugRenderState state, PoseStack pose) {
 		pose.scale(0.5F, 0.5F, 0.5F);
 	}

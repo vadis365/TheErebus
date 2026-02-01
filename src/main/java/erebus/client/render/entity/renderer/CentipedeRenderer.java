@@ -57,6 +57,7 @@ public class CentipedeRenderer extends MobRenderer<Centipede, CentipedeRenderSta
 
 	@Override
 	public void extractRenderState(Centipede entity, CentipedeRenderState state, float partialTicks) {
+		super.extractRenderState(entity, state, partialTicks);
 		state.skin = entity.getSkin();
 	}
 

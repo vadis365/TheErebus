@@ -29,6 +29,11 @@ public class AntlionRenderer extends MobRenderer<Antlion, AntlionRenderState, An
 	}
 
 	@Override
+	public void extractRenderState(Antlion entity, AntlionRenderState state, float partialTicks) {
+		super.extractRenderState(entity, state, partialTicks);
+	}
+
+	@Override
 	public @NonNull Identifier getTextureLocation(AntlionRenderState state) {
 		return Erebus.prefix("textures/entity/antlion.png");
 	}

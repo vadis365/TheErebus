@@ -5,34 +5,49 @@ import com.mojang.math.Axis;
 import erebus.Erebus;
 import erebus.client.render.entity.model.LocustModel;
 import erebus.client.render.entity.renderer.layer.LocustLayer;
+import erebus.client.render.entity.renderer.state.LocustRenderState;
 import erebus.entity.Locust;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
+import org.jspecify.annotations.NonNull;
 
-public class LocustRenderer extends MobRenderer<Locust, LocustModel<Locust>> {
+public class LocustRenderer extends MobRenderer<Locust, LocustRenderState, LocustModel> {
 	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/locust.png");
 
 	public LocustRenderer(EntityRendererProvider.Context context) {
-		super(context, new LocustModel<>(context.bakeLayer(ModEntityRendering.LOCUST)), 0.75F);
+		super(context, new LocustModel(context.bakeLayer(ModEntityRendering.LOCUST)), 0.75F);
 		addLayer(new LocustLayer(this, context.getModelSet()));
 	}
 
 	@Override
-	protected void scale(Locust locust, PoseStack stack, float partialTickTime) {
+	public LocustRenderState createRenderState() {
+		return new LocustRenderState();
+	}
+
+	@Override
+	public void extractRenderState(Locust entity, LocustRenderState state, float partialTicks) {
+		super.extractRenderState(entity, state, partialTicks);
+		state.jumpPose = entity.getJumpPose(partialTicks);
+		state.flyingPose = entity.getFlyingPose(partialTicks);
+		state.isFlying = entity.flying;
+	}
+
+	@Override
+	protected void scale(LocustRenderState state, PoseStack stack) {
 		stack.scale(1.5F, 1.5F, 1.5F);
-		float jumpAngle = Mth.sin(locust.getJumpPose(partialTickTime) * (float) Math.PI);
-		float flightAngle = locust.getFlyingPose(partialTickTime) * 0.001F;
+		float jumpAngle = Mth.sin(state.jumpPose * (float) Math.PI);
+		float flightAngle = state.flyingPose * 0.001F;
 		stack.mulPose(Axis.XP.rotation(-jumpAngle * 10.0F * (float) (Math.PI / 180.0)));
-		if(locust.flying) {
+		if(state.isFlying) {
 			stack.mulPose(Axis.XP.rotation(-flightAngle * 10F));
 		}
 	}
 
 	@Override
-	public Identifier getTextureLocation(Locust locust) {
+	public @NonNull Identifier getTextureLocation(LocustRenderState state) {
 		return TEXTURE;
 	}
 
