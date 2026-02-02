@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "erebus:bamboo"
-    },
-    "C": {
-      "tag": "minecraft:coals"
-    }
+    "B": "erebus:bamboo",
+    "C": "#minecraft:coals"
   },
   "pattern": [
     "C",

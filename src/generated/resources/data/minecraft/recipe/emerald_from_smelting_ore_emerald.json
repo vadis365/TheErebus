@@ -1,14 +1,11 @@
 {
   "type": "minecraft:smelting",
-  "category": "misc",
+  "category": "blocks",
   "cookingtime": 200,
   "experience": 0.25,
   "group": "emerald",
-  "ingredient": {
-    "item": "erebus:ore_emerald"
-  },
+  "ingredient": "erebus:ore_emerald",
   "result": {
-    "count": 1,
     "id": "minecraft:emerald"
   }
 }

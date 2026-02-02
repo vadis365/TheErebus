@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_wall_post",
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "wall": "erebus:block/amber_bricks"
-  }
-}

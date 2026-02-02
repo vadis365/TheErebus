@@ -1,10 +1,10 @@
 {
   "variants": {
     "half=lower": {
-      "model": "erebus:block/weeping_bluebell_lower"
+      "model": "erebus:block/weeping_bluebell_bottom"
     },
     "half=upper": {
-      "model": "erebus:block/weeping_bluebell_upper"
+      "model": "erebus:block/weeping_bluebell_top"
     }
   }
 }

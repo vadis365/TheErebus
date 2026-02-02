@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "down": "erebus:block/petrified_crafting_table_bottom",
+    "down": "erebus:block/planks_petrified",
     "east": "erebus:block/petrified_crafting_table_side",
-    "north": "erebus:block/petrified_crafting_table_side",
-    "particle": "erebus:block/petrified_crafting_table_side",
+    "north": "erebus:block/petrified_crafting_table_front",
+    "particle": "erebus:block/petrified_crafting_table_front",
     "south": "erebus:block/petrified_crafting_table_side",
     "up": "erebus:block/petrified_crafting_table_top",
-    "west": "erebus:block/petrified_crafting_table_side"
+    "west": "erebus:block/petrified_crafting_table_front"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "erebus:block/jade_berry_bush_stage0"
+  }
+}

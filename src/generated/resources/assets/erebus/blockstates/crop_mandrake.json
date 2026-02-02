@@ -1,16 +1,16 @@
 {
   "variants": {
     "age=0": {
-      "model": "erebus:block/crop_mandrake_0"
+      "model": "erebus:block/crop_mandrake_stage0"
     },
     "age=1": {
-      "model": "erebus:block/crop_mandrake_1"
+      "model": "erebus:block/crop_mandrake_stage1"
     },
     "age=2": {
-      "model": "erebus:block/crop_mandrake_2"
+      "model": "erebus:block/crop_mandrake_stage2"
     },
     "age=3": {
-      "model": "erebus:block/crop_mandrake_3"
+      "model": "erebus:block/crop_mandrake_stage3"
     }
   }
 }

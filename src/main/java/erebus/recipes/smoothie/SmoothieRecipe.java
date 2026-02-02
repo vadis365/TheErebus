@@ -2,16 +2,13 @@ package erebus.recipes.smoothie;
 
 import erebus.recipes.util.SmoothieIngredientCounts;
 import erebus.registries.ModCustomRecipes;
-import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class SmoothieRecipe implements Recipe<SmoothieRecipeInput> {
 
@@ -32,18 +29,18 @@ public class SmoothieRecipe implements Recipe<SmoothieRecipeInput> {
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
-    }
-
-    @Override
-    public @NotNull RecipeType<?> getType() {
+    public @NonNull RecipeType<? extends Recipe<SmoothieRecipeInput>> getType() {
         return ModCustomRecipes.SMOOTHIE_RECIPE.get();
     }
 
     @Override
-    public boolean isIncomplete() {
-        return true;
+    public @NonNull PlacementInfo placementInfo() {
+        return PlacementInfo.NOT_PLACEABLE;
+    }
+
+    @Override
+    public @NonNull RecipeBookCategory recipeBookCategory() {
+        return RecipeBookCategories.CRAFTING_MISC;
     }
 
     @Override
@@ -52,13 +49,8 @@ public class SmoothieRecipe implements Recipe<SmoothieRecipeInput> {
     }
 
     @Override
-    public @NotNull ItemStack assemble(@NotNull SmoothieRecipeInput input, @NotNull Provider provider) {
+    public @NonNull ItemStack assemble(SmoothieRecipeInput input) {
         return result.copy();
-    }
-
-    @Override
-    public @NotNull ItemStack getResultItem(@NotNull Provider provider) {
-        return result;
     }
 
     public ItemStack getResult() {
@@ -66,7 +58,7 @@ public class SmoothieRecipe implements Recipe<SmoothieRecipeInput> {
     }
 
     @Override
-    public @NotNull RecipeSerializer<?> getSerializer() {
+    public @NonNull RecipeSerializer<? extends Recipe<SmoothieRecipeInput>> getSerializer() {
         return ModCustomRecipes.SMOOTHIE_RECIPE_SERIALIZER.get();
     }
 

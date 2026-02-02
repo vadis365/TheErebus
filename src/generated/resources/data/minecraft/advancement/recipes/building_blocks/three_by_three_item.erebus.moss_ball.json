@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.erebus.moss": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:moss"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:three_by_three_item.erebus.moss_ball"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.erebus.moss"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:three_by_three_item.erebus.moss_ball"
+    ]
+  }
+}

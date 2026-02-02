@@ -19,35 +19,33 @@ public class LiquifierScreen extends ErebusScreen<LiquifierMenu> {
 	private TankGauge tankGauge;
 
 	public LiquifierScreen(LiquifierMenu container, Inventory playerInventory, Component name) {
-		super(container, playerInventory, name, Erebus.prefix("textures/gui/container/liquifier.png"));
+		super(container, playerInventory, name, Erebus.prefix("textures/gui/container/liquifier.png"), 176, 166);
 		this.container = container;
 		this.liquifier = this.container.liquifier;
-		imageHeight = 166;
-		imageWidth = 176;
 	}
 	
 	@Override
 	public void init() {
 		super.init();
 		clearWidgets();
-		tankGauge = new TankGauge(leftPos + 108, topPos + 24, 30, 39, liquifier.tank);
+		tankGauge = new TankGauge(leftPos + 108, topPos + 24, 30, 39, liquifier.tank, 0, net.neoforged.neoforge.fluids.FluidType.BUCKET_VOLUME * 8);
 		addRenderableWidget(tankGauge);
 	}
 
 	@Override
 	protected void renderLabels(@Nonnull GuiGraphics gg, int mouseX, int mouseY) {
-		gg.drawString(font, title, 8, 6, 16777215, true);
-		gg.drawString(font, Component.translatable("container.inventory"), 8, this.imageHeight - 94, 16777215, true);
+		gg.drawString(font, title, 8, 6, 16777215);
+		gg.drawString(font, Component.translatable("container.inventory"), 8, this.imageHeight - 94, 16777215);
 	}
 
 	@Override
 	protected void renderBg(GuiGraphics gg, float partialTicks, int mouseX, int mouseY) {
-        gg.blit(TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
+		gg.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
         
 		int operationProgress = liquifier.getOperationProgressScaled(22);
-		gg.blit(TEXTURE, leftPos + 69, topPos + 35, 176, 0, operationProgress, 16);
+		gg.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos + 69, topPos + 35, 176, 0, operationProgress, 16, 256, 256);
 		
-		gg.blit(TEXTURE, leftPos + 105, topPos + 23, 176, 16, 36, 41);
+		gg.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos + 105, topPos + 23, 176, 16, 36, 41, 256, 256);
 	}
 
 	@Override
@@ -55,9 +53,17 @@ public class LiquifierScreen extends ErebusScreen<LiquifierMenu> {
 		super.renderTooltip(gg, x, y);
 		if (tankGauge.isHovered()) {
 			List<Component> tooltip = new ArrayList<>();
-			tooltip.add(liquifier.tank.getFluid().getHoverName());
-			tooltip.add(Component.literal(liquifier.tank.getFluidAmount() + "/" + liquifier.tank.getCapacity()));
-			gg.renderComponentTooltip(font, tooltip, x, y);
+			net.neoforged.neoforge.transfer.fluid.FluidResource resource = liquifier.tank.getResource(0);
+			int amount = liquifier.tank.getAmountAsInt(0);
+			int capacity = net.neoforged.neoforge.fluids.FluidType.BUCKET_VOLUME * 8;
+			if (!resource.isEmpty()) {
+				tooltip.add(resource.toStack(amount).getHoverName());
+				tooltip.add(Component.literal(amount + "/" + capacity));
+			} else {
+				tooltip.add(Component.literal("Empty"));
+				tooltip.add(Component.literal("0/" + capacity));
+			}
+			gg.renderTooltip(font, tooltip.stream().map(Component::getVisualOrderText).map(net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent::create).toList(), x, y, net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner.INSTANCE, null);
 		}
 	}
 }

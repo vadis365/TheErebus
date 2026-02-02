@@ -1,6 +1,7 @@
 package erebus.recipes.util;
 
 import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +11,7 @@ import java.util.List;
 public class MultiStackInput implements RecipeInput {
 
 	private final List<ItemStack> items;
-	private final StackedContents stackedContents = new StackedContents();
+	private final StackedContents<Item> stackedContents = new StackedContents<>();
 	private final int ingredientCount;
 
 	public MultiStackInput(List<ItemStack> item) {
@@ -20,7 +21,7 @@ public class MultiStackInput implements RecipeInput {
 		for (ItemStack itemstack : item) {
 			if (!itemstack.isEmpty()) {
 				i++;
-				this.stackedContents.accountStack(itemstack, 1);
+				this.stackedContents.account(itemstack.getItem(), itemstack.getCount());
 			}
 		}
 
@@ -42,7 +43,7 @@ public class MultiStackInput implements RecipeInput {
 		return this.ingredientCount == 0;
 	}
 
-	public StackedContents stackedContents() {
+	public StackedContents<Item> stackedContents() {
 		return this.stackedContents;
 	}
 

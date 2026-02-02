@@ -1,0 +1,4 @@
+{
+  "type": "minecraft:entity",
+  "random_sequence": "erebus:entities/thrown_block_as_item"
+}

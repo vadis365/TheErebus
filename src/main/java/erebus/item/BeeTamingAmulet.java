@@ -1,10 +1,13 @@
 package erebus.item;
 
+import erebus.Erebus;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -16,7 +19,7 @@ import org.jspecify.annotations.NonNull;
 
 public class BeeTamingAmulet extends Item {
 	public BeeTamingAmulet() {
-		super(new Item.Properties().stacksTo(1).durability(16));
+		super(new Item.Properties().stacksTo(1).durability(16).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("bee_taming_amulet"))));
 	}
 
 	@Override

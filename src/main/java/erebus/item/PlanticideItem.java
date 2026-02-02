@@ -1,8 +1,11 @@
 package erebus.item;
 
+import erebus.Erebus;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -18,9 +21,8 @@ import net.neoforged.neoforge.common.Tags;
 import org.jspecify.annotations.NonNull;
 
 public class PlanticideItem extends Item {
-
 	public PlanticideItem() {
-		super(new Item.Properties().stacksTo(64));
+		super(new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("planticide"))));
 	}
 
 	@Override

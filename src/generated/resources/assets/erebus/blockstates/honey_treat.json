@@ -4,22 +4,22 @@
       "model": "erebus:block/honey_treat"
     },
     "bites=1": {
-      "model": "erebus:block/honey_treat_slice_1"
+      "model": "erebus:block/honey_treat_slice1"
     },
     "bites=2": {
-      "model": "erebus:block/honey_treat_slice_2"
+      "model": "erebus:block/honey_treat_slice2"
     },
     "bites=3": {
-      "model": "erebus:block/honey_treat_slice_3"
+      "model": "erebus:block/honey_treat_slice3"
     },
     "bites=4": {
-      "model": "erebus:block/honey_treat_slice_4"
+      "model": "erebus:block/honey_treat_slice4"
     },
     "bites=5": {
-      "model": "erebus:block/honey_treat_slice_5"
+      "model": "erebus:block/honey_treat_slice5"
     },
     "bites=6": {
-      "model": "erebus:block/honey_treat_slice_6"
+      "model": "erebus:block/honey_treat_slice6"
     }
   }
 }

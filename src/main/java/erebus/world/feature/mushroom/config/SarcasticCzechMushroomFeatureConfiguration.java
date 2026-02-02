@@ -18,10 +18,6 @@ public class SarcasticCzechMushroomFeatureConfiguration extends Feature<NoneFeat
     private final int[] offsetX = {0, -1, 0, 1};
     private final int[] offsetZ = {1, 0, -1, 0};
     private final FeatureUtils Utils = new FeatureUtils();
-    private final BlockState STEM = ModBlocks.SARCASTIC_CZECH_MUSHROOM_STEM.get().defaultBlockState()
-            .setValue(HugeMushroomBlock.UP, true)
-            .setValue(HugeMushroomBlock.DOWN, true);
-    private final BlockState SHROOM = ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK.get().defaultBlockState();
     private final Direction[][] DIRECTIONS = {
             new Direction[] {
                     Direction.EAST,
@@ -52,6 +48,11 @@ public class SarcasticCzechMushroomFeatureConfiguration extends Feature<NoneFeat
         RandomSource random = context.random();
         int height = 2 + random.nextInt(3);
         int armLength = 4 + random.nextInt(3);
+
+        BlockState STEM = ModBlocks.SARCASTIC_CZECH_MUSHROOM_STEM.get().defaultBlockState()
+                .setValue(HugeMushroomBlock.UP, true)
+                .setValue(HugeMushroomBlock.DOWN, true);
+        BlockState SHROOM = ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK.get().defaultBlockState();
 
         if(!level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)) return false;
 

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "erebus:block/planks_mossbark",
-    "side": "erebus:block/planks_mossbark",
-    "top": "erebus:block/planks_mossbark"
-  }
-}

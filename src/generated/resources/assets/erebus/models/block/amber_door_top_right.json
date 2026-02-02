@@ -1,8 +1,7 @@
 {
   "parent": "minecraft:block/door_top_right",
-  "render_type": "minecraft:translucent",
   "textures": {
-    "bottom": "erebus:block/amber_door_lower",
-    "top": "erebus:block/amber_door_upper"
+    "bottom": "erebus:block/amber_door_bottom",
+    "top": "erebus:block/amber_door_top"
   }
 }

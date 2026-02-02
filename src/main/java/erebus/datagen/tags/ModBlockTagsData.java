@@ -20,6 +20,7 @@ public class ModBlockTagsData extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         // MARK: Paxel
+        //noinspection unchecked
         tag(ModBlockTags.MINEABLE_WITH_PAXEL)
                 .addTags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_SHOVEL);
 

@@ -27,7 +27,6 @@
       "translate": "advancement.erebus.exploration/whetstone.desc"
     },
     "icon": {
-      "count": 1,
       "id": "erebus:whetstone"
     },
     "title": {

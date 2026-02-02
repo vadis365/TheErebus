@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "erebus:block/tall_bloom_bottom"
+  }
+}

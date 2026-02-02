@@ -76,7 +76,7 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 	}
 
 	@Override
-	protected void loadAdditional(ValueInput input) {
+	protected void loadAdditional(@NonNull ValueInput input) {
 		super.loadAdditional(input);
 		mouldDurationTicks = input.getIntOr("MouldDuration", 0);
 		compostingProgressTicks = input.getIntOr("CompostProgress", 0);
@@ -84,7 +84,7 @@ public class ComposterBlockEntity extends BlockEntityInventoryHelper implements 
 	}
 
 	@Override
-	protected void saveAdditional(ValueOutput output) {
+	protected void saveAdditional(@NonNull ValueOutput output) {
 		super.saveAdditional(output);
 		output.putInt("MouldDuration", mouldDurationTicks);
 		output.putInt("CompostProgress", compostingProgressTicks);

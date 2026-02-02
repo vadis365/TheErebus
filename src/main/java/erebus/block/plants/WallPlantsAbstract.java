@@ -10,8 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DirectionalBlock;
@@ -22,6 +22,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.IShearable;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -52,27 +53,13 @@ public abstract class WallPlantsAbstract extends DirectionalBlock implements ISh
 	@Nonnull
 	@Override
 	public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
-		return switch (state.getValue(FACING)) {
-		case EAST -> EAST_AABB;
-		case WEST -> WEST_AABB;
-		case SOUTH -> SOUTH_AABB;
-		case NORTH -> NORTH_AABB;
-		case UP -> UP_AABB;
-		case DOWN -> DOWN_AABB;
-		};
+		return getVoxelShape(state);
 	}
 
 	@Nonnull
 	@Override
 	public VoxelShape getInteractionShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos) {
-		return switch (state.getValue(FACING)) {
-		case EAST -> EAST_AABB;
-		case WEST -> WEST_AABB;
-		case SOUTH -> SOUTH_AABB;
-		case NORTH -> NORTH_AABB;
-		case UP -> UP_AABB;
-		case DOWN -> DOWN_AABB;
-		};
+		return getVoxelShape(state);
 	}
 
 	@Nonnull
@@ -93,7 +80,7 @@ public abstract class WallPlantsAbstract extends DirectionalBlock implements ISh
 	}
 
     @Override
-    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+    protected void onPlace(BlockState state, @NonNull Level level, @NonNull BlockPos pos, BlockState oldState, boolean isMoving) {
         if (!state.is(oldState.getBlock())) {
             if (!level.isClientSide() && shouldScheduleTick() && !level.getBlockTicks().hasScheduledTick(pos, this)) {
             	level.scheduleTick(pos, this, getScheduledTickRate());
@@ -112,20 +99,20 @@ public abstract class WallPlantsAbstract extends DirectionalBlock implements ISh
 	}
 
 	@Override
-	protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+	protected @NonNull BlockState updateShape(@NonNull BlockState state, @NonNull LevelReader level, @NonNull ScheduledTickAccess ticks, @NonNull BlockPos pos, @NonNull Direction directionToNeighbour, @NonNull BlockPos neighbourPos, @NonNull BlockState neighbourState, @NonNull RandomSource random) {
 		if (shouldScheduleTick())
-			if(!level.getBlockTicks().hasScheduledTick(pos, this))
-				level.scheduleTick(pos, this, getScheduledTickRate());
-		return canSurvive(state, level, pos) ? super.updateShape(state, direction, neighborState, level, pos, neighborPos) : Blocks.AIR.defaultBlockState();
+			if(!((ServerLevel)level).getBlockTicks().hasScheduledTick(pos, this))
+				((ServerLevel)level).scheduleTick(pos, this, getScheduledTickRate());
+		return canSurvive(state, level, pos) ? super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random) : Blocks.AIR.defaultBlockState();
 	}
 
 	@Override
-    public boolean isShearable(@Nullable Player player, ItemStack item, Level level, BlockPos pos) {
+    public boolean isShearable(@Nullable Player player, @NonNull ItemStack item, @NonNull Level level, @NonNull BlockPos pos) {
 		return true;
 	}
 
 	@Override
-	public List<ItemStack> onSheared(@Nullable Player player, ItemStack item, Level level, BlockPos pos) {
+	public @NonNull List<ItemStack> onSheared(@Nullable Player player, @NonNull ItemStack item, Level level, @NonNull BlockPos pos) {
 		Direction type = level.getBlockState(pos).getValue(FACING);
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		switch (type) {
@@ -142,12 +129,12 @@ public abstract class WallPlantsAbstract extends DirectionalBlock implements ISh
 	}
 
 	@Override
-	 protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+	 protected void randomTick(@NonNull BlockState state, @NonNull ServerLevel level, @NonNull BlockPos pos, @NonNull RandomSource random) {
 		this.tick(state, level, pos, random);
 	}
 
 	@Override
-	protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+	protected void tick(@NonNull BlockState state, @NonNull ServerLevel level, @NonNull BlockPos pos, @NonNull RandomSource random) {
 		if (shouldScheduleTick())
 			if(!level.getBlockTicks().hasScheduledTick(pos, this))
 				level.scheduleTick(pos, this, getScheduledTickRate());
@@ -181,5 +168,17 @@ public abstract class WallPlantsAbstract extends DirectionalBlock implements ISh
 						level.setBlockAndUpdate(blockToGrowOnPos.relative(randomiseSide), this.defaultBlockState().setValue(FACING, randomiseSide));
 				}
 			}
+	}
+
+	@NonNull
+	private VoxelShape getVoxelShape(@Nonnull BlockState state) {
+		return switch (state.getValue(FACING)) {
+			case EAST -> EAST_AABB;
+			case WEST -> WEST_AABB;
+			case SOUTH -> SOUTH_AABB;
+			case NORTH -> NORTH_AABB;
+			case UP -> UP_AABB;
+			case DOWN -> DOWN_AABB;
+		};
 	}
 }

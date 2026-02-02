@@ -21,6 +21,8 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
@@ -46,6 +48,10 @@ public class UmberFurnaceBlockEntity extends AbstractFurnaceBlockEntity {
     private static final int[] SLOTS_FOR_DOWN = new int[]{RESULT_SLOT, BUCKET_SLOT};
     private static final int[] SLOTS_FOR_SIDES = new int[]{BUCKET_SLOT, FUEL_SLOT, INGREDIENT_SLOT};
     protected final FluidStacksResourceHandler TANK;
+
+    public FluidStacksResourceHandler getTank() {
+        return TANK;
+    }
     protected final ContainerData dataAccess;
     private final RecipeManager.CachedCheck<SingleRecipeInput, ? extends AbstractCookingRecipe> quickCheck;
     protected NonNullList<ItemStack> items;
@@ -104,6 +110,18 @@ public class UmberFurnaceBlockEntity extends AbstractFurnaceBlockEntity {
         Object2IntOpenHashMap<Identifier> recipesUsed = new Object2IntOpenHashMap<>();
         this.quickCheck = RecipeManager.createCheck(RecipeType.SMELTING);
         RecipeType<? extends AbstractCookingRecipe> recipeType = RecipeType.SMELTING;
+    }
+
+    @Override
+    protected void saveAdditional(@NonNull ValueOutput output) {
+        super.saveAdditional(output);
+        TANK.serialize(output);
+    }
+
+    @Override
+    protected void loadAdditional(@NonNull ValueInput input) {
+        super.loadAdditional(input);
+        TANK.deserialize(input);
     }
 
     @Override

@@ -1,3 +1,6 @@
 {
-  "parent": "erebus:block/honey_treat"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "erebus:item/honey_treat"
+  }
 }

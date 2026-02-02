@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "erebus:bamboo"
-    },
-    "H": {
-      "item": "erebus:hydrofuge"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "B": "erebus:bamboo",
+    "H": "erebus:hydrofuge",
+    "S": "minecraft:string"
   },
   "pattern": [
     "  B",
@@ -18,7 +12,6 @@
     "B  "
   ],
   "result": {
-    "count": 1,
     "id": "erebus:bamboo_pipe"
   }
 }

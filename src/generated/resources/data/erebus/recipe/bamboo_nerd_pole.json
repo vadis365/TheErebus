@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {
-      "item": "erebus:bamboo"
-    },
-    "S": {
-      "tag": "c:slime_balls"
-    }
+    "B": "erebus:bamboo",
+    "S": "#c:slime_balls"
   },
   "pattern": [
     "S",

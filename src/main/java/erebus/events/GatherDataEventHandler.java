@@ -1,9 +1,8 @@
 package erebus.events;
 
 import erebus.Erebus;
-import erebus.datagen.ModBlockStates;
-import erebus.datagen.ModItemModels;
 import erebus.datagen.ModLang;
+import erebus.datagen.ModModelProvider;
 import erebus.datagen.advancement.AgricultureAdvancements;
 import erebus.datagen.advancement.ExplorationAdvancements;
 import erebus.datagen.advancement.PortalAdvancements;
@@ -24,16 +23,11 @@ import java.util.List;
 public class GatherDataEventHandler {
 
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        event.createProvider(ModRecipeProvider.Runner::new);
-        event.createProvider(ModBlockStates::new);
-        event.createProvider(ModItemModels::new);
-        event.createProvider(ModBlockTagsData::new);
-        event.createProvider(ModBiomeTagsData::new);
-        event.createProvider(ModEntityTypeTagsData::new);
-        event.createProvider(ModItemTagsData::new);
-        event.createProvider(ModLootTableProvider::new);
+    public static void gatherData(GatherDataEvent.Client event) {
+        event.createProvider(ModModelProvider::new);
         event.createProvider(ModLang::new);
+
+        //Server
 
         event.createProvider((output, lookupProvider) -> new AdvancementProvider(
                 output, lookupProvider,
@@ -43,5 +37,15 @@ public class GatherDataEventHandler {
                         new PortalAdvancements()
                 )
         ));
+        event.createProvider(ModLootTableProvider::new);
+        event.createProvider(ModRecipeProvider.Runner::new);
+        event.createProvider(ModBlockTagsData::new);
+        event.createProvider(ModBiomeTagsData::new);
+        event.createProvider(ModEntityTypeTagsData::new);
+        event.createProvider(ModItemTagsData::new);
+    }
+
+    @SubscribeEvent
+    public static void gatherDataServer(GatherDataEvent.Server event) {
     }
 }

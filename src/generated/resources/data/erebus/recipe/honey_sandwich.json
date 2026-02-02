@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "minecraft:bread"
-    },
-    "H": {
-      "item": "erebus:honey_drip"
-    }
+    "B": "minecraft:bread",
+    "H": "erebus:honey_drip"
   },
   "pattern": [
     " B ",

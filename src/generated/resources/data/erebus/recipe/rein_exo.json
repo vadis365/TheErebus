@@ -2,21 +2,12 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "erebus:reinforced_plate_exo"
-    },
-    {
-      "item": "erebus:reinforced_plate_exo"
-    },
-    {
-      "item": "erebus:reinforced_plate_exo"
-    },
-    {
-      "item": "erebus:reinforced_plate_exo"
-    }
+    "erebus:reinforced_plate_exo",
+    "erebus:reinforced_plate_exo",
+    "erebus:reinforced_plate_exo",
+    "erebus:reinforced_plate_exo"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:rein_exo"
   }
 }

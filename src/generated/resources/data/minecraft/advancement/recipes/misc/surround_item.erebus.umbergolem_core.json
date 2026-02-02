@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_inner": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:red_gem"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_outer": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:altar_fragment"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:surround_item.erebus.umbergolem_core"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_outer",
+      "has_inner"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:surround_item.erebus.umbergolem_core"
+    ]
+  }
+}

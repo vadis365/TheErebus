@@ -1,14 +1,13 @@
 package erebus.client.render.item.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Unit;
 
-public class WandOfPreservationModel extends Model {
+public class WandOfPreservationModel extends Model<Unit> {
 
     public final ModelPart topMid;
     public final ModelPart topMain;
@@ -19,7 +18,7 @@ public class WandOfPreservationModel extends Model {
     public final ModelPart pommel2;
 
     public WandOfPreservationModel(ModelPart root) {
-        super(RenderType::entitySolid);
+        super(root, RenderTypes::entitySolid);
         topMid = root.getChild("topMid");
         topMain = root.getChild("topMain");
         topBase = root.getChild("topBase");
@@ -146,16 +145,5 @@ public class WandOfPreservationModel extends Model {
         );
 
         return LayerDefinition.create(meshdefinition, 64, 32);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-        topMid.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        topMain.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        topBase.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        shaft1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        shaft2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        pommel1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        pommel2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

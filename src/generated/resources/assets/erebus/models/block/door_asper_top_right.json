@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "textures": {
+    "bottom": "erebus:block/door_asper_bottom",
+    "top": "erebus:block/door_asper_top"
+  }
+}

@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:jade_chestplate"
+            "items": "erebus:jade_chest"
           }
         ]
       },
@@ -35,7 +35,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:jade_leggings"
+            "items": "erebus:jade_legs"
           }
         ]
       },
@@ -58,8 +58,7 @@
     },
     "frame": "goal",
     "icon": {
-      "count": 1,
-      "id": "erebus:jade_chestplate"
+      "id": "erebus:jade_chest"
     },
     "title": {
       "translate": "advancement.erebus.exploration/jade_set.title"

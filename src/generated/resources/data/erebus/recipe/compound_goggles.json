@@ -2,19 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "E": {
-      "item": "erebus:plate_exo"
-    },
-    "L": {
-      "item": "erebus:compound_lens"
-    }
+    "E": "erebus:plate_exo",
+    "L": "erebus:compound_lens"
   },
   "pattern": [
     "EEE",
     "LEL"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:compound_goggles"
   }
 }

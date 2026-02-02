@@ -1,20 +1,19 @@
 package erebus.client.render.item.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Unit;
 
-public class ScorpionPincerModel extends Model {
+public class ScorpionPincerModel extends Model<Unit> {
     public final ModelPart clawR4;
     public final ModelPart clawR5Top;
     public final ModelPart clawR5Bot;
 
     public ScorpionPincerModel(ModelPart root) {
-        super(RenderType::entitySolid);
+        super(root, RenderTypes::entitySolid);
         clawR4 = root.getChild("ClawR4");
         clawR5Top = root.getChild("ClawR5Top");
         clawR5Bot = root.getChild("ClawR5Bot");
@@ -73,12 +72,5 @@ public class ScorpionPincerModel extends Model {
         );
 
         return LayerDefinition.create(meshdefinition, 16, 16);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-        clawR4.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        clawR5Top.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        clawR5Bot.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

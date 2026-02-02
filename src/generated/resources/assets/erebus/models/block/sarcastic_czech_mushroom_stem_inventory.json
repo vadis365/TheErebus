@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "erebus:block/sarcastic_czech_mushroom_stem"
+  }
+}

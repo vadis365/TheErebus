@@ -1,14 +1,11 @@
 {
   "type": "minecraft:smelting",
-  "category": "misc",
+  "category": "blocks",
   "cookingtime": 200,
   "experience": 0.25,
   "group": "iron",
-  "ingredient": {
-    "item": "erebus:ore_iron"
-  },
+  "ingredient": "erebus:ore_iron",
   "result": {
-    "count": 1,
     "id": "minecraft:iron_ingot"
   }
 }

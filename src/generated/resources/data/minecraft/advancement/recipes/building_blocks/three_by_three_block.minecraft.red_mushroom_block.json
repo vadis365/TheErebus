@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.minecraft.red_mushroom": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:red_mushroom"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:three_by_three_block.minecraft.red_mushroom_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.minecraft.red_mushroom"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:three_by_three_block.minecraft.red_mushroom_block"
+    ]
+  }
+}

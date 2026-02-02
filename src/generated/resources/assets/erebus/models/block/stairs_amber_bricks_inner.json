@@ -1,6 +1,5 @@
 {
   "parent": "minecraft:block/inner_stairs",
-  "render_type": "minecraft:translucent",
   "textures": {
     "bottom": "erebus:block/amber_bricks",
     "side": "erebus:block/amber_bricks",

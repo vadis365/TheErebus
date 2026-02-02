@@ -21,10 +21,6 @@ public class KaizersFingersMushroomFeatureConfiguration extends Feature<NoneFeat
     private final int[] offsetX = {0, -1, 0, 1};
     private final int[] offsetZ = {1, 0, -1, 0};
     private final FeatureUtils Utils = new FeatureUtils();
-    private final BlockState STEM = ModBlocks.KAIZERS_FINGERS_MUSHROOM_STEM.get().defaultBlockState()
-            .setValue(HugeMushroomBlock.UP, true)
-            .setValue(HugeMushroomBlock.DOWN, true);
-    private final BlockState SHROOM = ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK.get().defaultBlockState();
 
     public KaizersFingersMushroomFeatureConfiguration() {
         super(NoneFeatureConfiguration.CODEC);
@@ -36,6 +32,11 @@ public class KaizersFingersMushroomFeatureConfiguration extends Feature<NoneFeat
         BlockPos pos = context.origin();
         RandomSource random = context.random();
         int height = 4 + random.nextInt(4);
+
+        BlockState STEM = ModBlocks.KAIZERS_FINGERS_MUSHROOM_STEM.get().defaultBlockState()
+                .setValue(HugeMushroomBlock.UP, true)
+                .setValue(HugeMushroomBlock.DOWN, true);
+        BlockState SHROOM = ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK.get().defaultBlockState();
 
         if(!level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)) return false;
 

@@ -21,13 +21,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class LocustShrinePiece extends ScatteredFeaturePiece {
 
-    private final BlockState COARSE_DIRT = Blocks.COARSE_DIRT.defaultBlockState();
-    private final BlockState UMBERGRAVEL = ModBlocks.UMBERGRAVEL.get().defaultBlockState();
-    private final BlockState DEAD_BUSH = Blocks.DEAD_BUSH.defaultBlockState();
-    private final BlockState MOSSY_UMBERCOBBLE = ModBlocks.UMBERCOBBLE_MOSSY.get().defaultBlockState();
-    private final BlockState MOSSY_UMBERCOBBLE_WALL = ModBlocks.WALL_UMBERCOBBLE_MOSSY.get().defaultBlockState();
-    private final BlockState BONES = ModBlocks.BLOCK_OF_BONES.get().defaultBlockState();
-    private final BlockState SPAWNER = ModBlocks.LOCUST_SPAWNER.get().defaultBlockState();
+    private BlockState COARSE_DIRT;
+    private BlockState UMBERGRAVEL;
+    private BlockState DEAD_BUSH;
+    private BlockState MOSSY_UMBERCOBBLE;
+    private BlockState MOSSY_UMBERCOBBLE_WALL;
+    private BlockState BONES;
+    private BlockState SPAWNER;
 
     public LocustShrinePiece(RandomSource random, int x, int z) {
         super(ModStructurePieces.LOCUST_SHRINE.get(), x, 64, z, 10, 8, 10, getRandomHorizontalDirection(random));
@@ -37,8 +37,19 @@ public class LocustShrinePiece extends ScatteredFeaturePiece {
         super(ModStructurePieces.LOCUST_SHRINE.get(), tag);
     }
 
+    private void setupBlockStates() {
+        COARSE_DIRT = Blocks.COARSE_DIRT.defaultBlockState();
+        UMBERGRAVEL = ModBlocks.UMBERGRAVEL.get().defaultBlockState();
+        DEAD_BUSH = Blocks.DEAD_BUSH.defaultBlockState();
+        MOSSY_UMBERCOBBLE = ModBlocks.UMBERCOBBLE_MOSSY.get().defaultBlockState();
+        MOSSY_UMBERCOBBLE_WALL = ModBlocks.WALL_UMBERCOBBLE_MOSSY.get().defaultBlockState();
+        BONES = ModBlocks.BLOCK_OF_BONES.get().defaultBlockState();
+        SPAWNER = ModBlocks.LOCUST_SPAWNER.get().defaultBlockState();
+    }
+
     @Override
     public void postProcess(@NotNull WorldGenLevel level, @NotNull StructureManager manager, @NotNull ChunkGenerator generator, @NotNull RandomSource random, @NotNull BoundingBox boundingBox, @NotNull ChunkPos chunkPos, @NotNull BlockPos pos) {
+        setupBlockStates();
         for (int x = -4; x <= 4; x++) {
             for (int z = -4; z <= 4; z++) {
                 double circle = Math.pow(x, 2.0D) + Math.pow(z, 2.0D);

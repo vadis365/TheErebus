@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "erebus:block/planks_asper",
-    "side": "erebus:block/planks_asper",
-    "top": "erebus:block/planks_asper"
-  }
-}

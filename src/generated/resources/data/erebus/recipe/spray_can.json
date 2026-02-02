@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "tag": "minecraft:buttons"
-    },
-    "I": {
-      "item": "minecraft:iron_ingot"
-    },
-    "R": {
-      "item": "erebus:repellent"
-    }
+    "B": "#minecraft:buttons",
+    "I": "minecraft:iron_ingot",
+    "R": "erebus:repellent"
   },
   "pattern": [
     " B ",

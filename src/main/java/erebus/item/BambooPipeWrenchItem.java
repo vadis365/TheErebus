@@ -1,5 +1,6 @@
 package erebus.item;
 
+import erebus.Erebus;
 import erebus.block.bamboo.BambooExtender;
 import erebus.block.bamboo.BambooPipe;
 import erebus.block.bamboo.BambooPipeExtract;
@@ -7,14 +8,18 @@ import erebus.block.entity.BambooExtenderBlockEntity;
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Util;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -22,20 +27,19 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
-import java.util.List;
-
-import static jdk.jpackage.internal.WixFragmentBuilder.WixNamespace.Util;
+import java.util.function.Consumer;
 
 public class BambooPipeWrenchItem extends Item {
 	public BambooPipeWrenchItem() {
-		super(new Item.Properties().stacksTo(1));
+		super(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("bamboo_pipe_wrench"))));
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
-		tooltip.add(Component.translatable("tooltip.erebus.bamboo_pipe_wrench").withStyle(ChatFormatting.YELLOW));
+	public void appendHoverText(ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay display, Consumer<Component> builder, @NonNull TooltipFlag tooltipFlag) {
+		builder.accept(Component.translatable("tooltip.erebus.bamboo_pipe_wrench").withStyle(ChatFormatting.YELLOW));
 	}
 
 	// TODO make this nicer for use on all the pipe types
@@ -89,7 +93,7 @@ public class BambooPipeWrenchItem extends Item {
 			}
 		}
 
-		return InteractionResult.sidedSuccess(level.isClientSide);
+		return InteractionResult.SUCCESS;
 	}
 
 	private static <T extends Comparable<T>> BlockState cycleState(BlockState state, Property<T> property) {

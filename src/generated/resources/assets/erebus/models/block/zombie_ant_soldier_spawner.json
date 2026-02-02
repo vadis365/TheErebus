@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "erebus:block/zombie_ant_spawner"
+    "all": "erebus:block/zombie_ant_soldier_spawner"
   }
 }

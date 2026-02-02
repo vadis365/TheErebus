@@ -1,14 +1,13 @@
 package erebus.client.render.item.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Unit;
 
-public class WaspDaggerModel extends Model {
+public class WaspDaggerModel extends Model<Unit> {
     public final ModelPart point;
     public final ModelPart blade;
     public final ModelPart tang;
@@ -17,7 +16,7 @@ public class WaspDaggerModel extends Model {
     public final ModelPart jewel;
 
     public WaspDaggerModel(ModelPart root) {
-        super(RenderType::entitySolid);
+        super(root, RenderTypes::entitySolid);
         point = root.getChild("Point");
         blade = root.getChild("Blade");
         tang = root.getChild("Tang");
@@ -127,15 +126,5 @@ public class WaspDaggerModel extends Model {
         );
 
         return LayerDefinition.create(meshdefinition, 32, 64);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-        point.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        blade.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        tang.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        hilt.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        pommel.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        jewel.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

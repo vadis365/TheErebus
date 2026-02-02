@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "erebus:block/crop_cabbage_stage0"
+  }
+}

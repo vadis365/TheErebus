@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/vine",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "particle": "erebus:block/thorns",
-    "vine": "erebus:block/thorns"
-  }
-}

@@ -60,7 +60,7 @@
     },
     {
       "apply": {
-        "model": "erebus:block/dark_capped_mushroom_block_inside"
+        "model": "minecraft:block/mushroom_block_inside"
       },
       "when": {
         "north": "false"
@@ -68,8 +68,7 @@
     },
     {
       "apply": {
-        "model": "erebus:block/dark_capped_mushroom_block_inside",
-        "uvlock": true,
+        "model": "minecraft:block/mushroom_block_inside",
         "y": 90
       },
       "when": {
@@ -78,8 +77,7 @@
     },
     {
       "apply": {
-        "model": "erebus:block/dark_capped_mushroom_block_inside",
-        "uvlock": true,
+        "model": "minecraft:block/mushroom_block_inside",
         "y": 180
       },
       "when": {
@@ -88,8 +86,7 @@
     },
     {
       "apply": {
-        "model": "erebus:block/dark_capped_mushroom_block_inside",
-        "uvlock": true,
+        "model": "minecraft:block/mushroom_block_inside",
         "y": 270
       },
       "when": {
@@ -98,8 +95,7 @@
     },
     {
       "apply": {
-        "model": "erebus:block/dark_capped_mushroom_block_inside",
-        "uvlock": true,
+        "model": "minecraft:block/mushroom_block_inside",
         "x": 270
       },
       "when": {
@@ -108,8 +104,7 @@
     },
     {
       "apply": {
-        "model": "erebus:block/dark_capped_mushroom_block_inside",
-        "uvlock": true,
+        "model": "minecraft:block/mushroom_block_inside",
         "x": 90
       },
       "when": {

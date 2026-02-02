@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:exoskeleton_chestplate"
+            "items": "erebus:exoskeleton_chest"
           }
         ]
       },
@@ -35,7 +35,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:exoskeleton_leggings"
+            "items": "erebus:exoskeleton_legs"
           }
         ]
       },
@@ -58,8 +58,7 @@
     },
     "frame": "goal",
     "icon": {
-      "count": 1,
-      "id": "erebus:exoskeleton_chestplate"
+      "id": "erebus:exoskeleton_chest"
     },
     "title": {
       "translate": "advancement.erebus.exploration/exo_set.title"

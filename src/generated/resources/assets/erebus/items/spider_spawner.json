@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "erebus:block/spider_spawner"
+  }
+}

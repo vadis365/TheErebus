@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "erebus:block/log_mahogany_end",
-    "side": "erebus:block/log_mahogany_side"
+    "end": "erebus:block/log_mahogany_top",
+    "side": "erebus:block/log_mahogany"
   }
 }

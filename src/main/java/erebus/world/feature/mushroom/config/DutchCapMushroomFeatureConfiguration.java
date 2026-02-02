@@ -15,10 +15,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class DutchCapMushroomFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
     private final FeatureUtils Utils = new FeatureUtils();
-    private final BlockState STEM = ModBlocks.DUTCH_CAP_MUSHROOM_STEM.get().defaultBlockState()
-            .setValue(HugeMushroomBlock.UP, true)
-            .setValue(HugeMushroomBlock.DOWN, true);
-    private final BlockState SHROOM = ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK.get().defaultBlockState();
 
     public DutchCapMushroomFeatureConfiguration() {
         super(NoneFeatureConfiguration.CODEC);
@@ -30,6 +26,11 @@ public class DutchCapMushroomFeatureConfiguration extends Feature<NoneFeatureCon
         BlockPos pos = context.origin().west();
         RandomSource random = context.random();
         int height = 9 + random.nextInt(8);
+
+        BlockState STEM = ModBlocks.DUTCH_CAP_MUSHROOM_STEM.get().defaultBlockState()
+                .setValue(HugeMushroomBlock.UP, true)
+                .setValue(HugeMushroomBlock.DOWN, true);
+        BlockState SHROOM = ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK.get().defaultBlockState();
 
         if(!level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)) return false;
 

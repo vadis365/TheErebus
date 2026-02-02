@@ -38,7 +38,6 @@ public record OfferingAltarRecipeMaker(NonNullList<Ingredient> items, ItemStack 
 		return this.result.copy();
 	}
 
-	@Override
 	public boolean canCraftInDimensions(int width, int height) {
 		return width * height >= this.items.size();
 	}
@@ -50,7 +49,7 @@ public record OfferingAltarRecipeMaker(NonNullList<Ingredient> items, ItemStack 
 
 	@Override
 	public @NonNull PlacementInfo placementInfo() {
-		return PlacementInfo.create(items);
+		return PlacementInfo.NOT_PLACEABLE;
 	}
 
 	@Override

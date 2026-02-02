@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "G": {
-      "item": "erebus:gaean_gem"
-    },
-    "I": {
-      "item": "minecraft:gold_ingot"
-    },
-    "S": {
-      "tag": "c:rods/wooden"
-    },
-    "V": {
-      "item": "minecraft:vine"
-    }
+    "G": "erebus:gaean_gem",
+    "I": "minecraft:gold_ingot",
+    "S": "#c:rods/wooden",
+    "V": "minecraft:vine"
   },
   "pattern": [
     "VSG",
@@ -21,7 +13,6 @@
     "IVV"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:portal_activator"
   }
 }

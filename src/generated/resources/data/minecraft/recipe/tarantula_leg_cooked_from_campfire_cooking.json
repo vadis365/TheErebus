@@ -3,11 +3,8 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.35,
-  "ingredient": {
-    "item": "erebus:tarantula_leg_raw"
-  },
+  "ingredient": "erebus:tarantula_leg_raw",
   "result": {
-    "count": 1,
     "id": "erebus:tarantula_leg_cooked"
   }
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.erebus.planks_mahogany": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:planks_mahogany"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:door_block.erebus.door_mahogany"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.erebus.planks_mahogany"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:door_block.erebus.door_mahogany"
+    ]
+  }
+}

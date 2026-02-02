@@ -13,7 +13,6 @@
       "translate": "advancement.erebus.exploration/quicksand.desc"
     },
     "icon": {
-      "count": 1,
       "id": "erebus:quick_sand"
     },
     "title": {

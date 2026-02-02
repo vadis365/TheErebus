@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/dragon_egg",
-  "textures": {
-    "all": "erebus:block/tarantula_egg",
-    "particle": "erebus:block/tarantula_egg"
-  }
-}

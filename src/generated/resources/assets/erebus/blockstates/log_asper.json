@@ -1,7 +1,7 @@
 {
   "variants": {
     "axis=x": {
-      "model": "erebus:block/log_asper_horizontal",
+      "model": "erebus:block/log_asper",
       "x": 90,
       "y": 90
     },
@@ -9,7 +9,7 @@
       "model": "erebus:block/log_asper"
     },
     "axis=z": {
-      "model": "erebus:block/log_asper_horizontal",
+      "model": "erebus:block/log_asper",
       "x": 90
     }
   }

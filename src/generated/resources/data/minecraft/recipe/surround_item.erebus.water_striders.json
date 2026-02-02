@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": "erebus:rein_exoskeleton_boots",
+    "O": "erebus:water_repellent"
+  },
+  "pattern": [
+    "OOO",
+    "OIO",
+    "OOO"
+  ],
+  "result": {
+    "id": "erebus:water_striders"
+  }
+}

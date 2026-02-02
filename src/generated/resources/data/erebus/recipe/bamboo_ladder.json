@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {
-      "item": "erebus:bamboo"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "B": "erebus:bamboo",
+    "S": "minecraft:string"
   },
   "pattern": [
     "BBB",

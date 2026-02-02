@@ -10,6 +10,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 
@@ -20,7 +21,7 @@ public class BambooCrateMenu extends AbstractContainerMenu {
 	public BambooCrateMenu(final int windowId, final Inventory playerInventory, FriendlyByteBuf extra) {
 		super(ModMenuTypes.BAMBOO_CRATE.get(), windowId);
 		BlockPos tilePos = extra.readBlockPos();
-		BlockEntity tile = playerInventory.player.getCommandSenderWorld().getBlockEntity(tilePos);
+		BlockEntity tile = playerInventory.player.level().getBlockEntity(tilePos);
 
 		if (!(tile instanceof BambooCrateBlockEntity))
 			return;
@@ -49,11 +50,11 @@ public class BambooCrateMenu extends AbstractContainerMenu {
 	}
 
 	@Override
-	public ItemStack quickMoveStack(@Nonnull Player player, int slotIndex) {
+	public @NonNull ItemStack quickMoveStack(@Nonnull Player player, int slotIndex) {
 		ItemStack is = ItemStack.EMPTY;
 		Slot slot = slots.get(slotIndex);
 
-		if (slot != null && slot.hasItem()) {
+		if (slot.hasItem()) {
 			ItemStack is1 = slot.getItem();
 			is = is1.copy();
 

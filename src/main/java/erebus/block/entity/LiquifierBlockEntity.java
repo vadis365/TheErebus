@@ -9,10 +9,8 @@ import erebus.registries.item.ModItems;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -26,17 +24,20 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.fluids.FluidStack;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
-	public FluidTank tank = new FluidTank(FluidType.BUCKET_VOLUME * 8);
+	public FluidStacksResourceHandler tank = new FluidStacksResourceHandler(1, FluidType.BUCKET_VOLUME * 8);
 	public boolean active;
 	public int operatingTime;
 	public int animationTicks, prevAnimationTicks;
@@ -67,12 +68,12 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 		if (t instanceof LiquifierBlockEntity tile) {
 			boolean isDirty = false;
 
-			if(tile.prevTankAmount != tile.tank.getFluidAmount()) {
+			if(tile.prevTankAmount != tile.tank.getAmountAsInt(0)) {
 				isDirty = true;
 				tile.setChanged();
 			}
 
-			tile.prevTankAmount = tile.tank.getFluidAmount();
+			tile.prevTankAmount = tile.tank.getAmountAsInt(0);
 
 			if (level.getBlockState(pos).getValue(LiquifierBlock.POWERED)) {
 				if (tile.canOperate()) {
@@ -105,20 +106,23 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 		else {
 			ItemStack stack = getItems().get(0);
 			if (stack.getItem() == ModItems.HONEY_DRIP.get()) {
-				if(tank.isEmpty() || tank.getFluid().getAmount() <= tank.getCapacity() - 50 && tank.getFluid().is(ModFluids.HONEY_TYPE.get()));
-				return true;
+                return tank.getAmountAsInt(0) <= FluidType.BUCKET_VOLUME * 8 - 50 && (tank.getResource(0).isEmpty() || tank.getResource(0).is(ModFluids.HONEY_STILL.get()));
 			}
 			return false;
-		}	
+		}
 	}
 
 	public void liquifyItem() {
 		if (canOperate()) {
-			if (tank.isEmpty() || tank.getFluid().getAmount() <= tank.getCapacity() - 50 && tank.getFluid().is(ModFluids.HONEY_TYPE.get())) {
-				tank.fill(new FluidStack(ModFluids.HONEY_STILL.get(), 50), IFluidHandler.FluidAction.EXECUTE);
-				getItems().get(0).shrink(1);
-				if (getItems().get(0).getCount() <= 0)
-					getItems().set(0, ItemStack.EMPTY);
+			if (tank.getAmountAsInt(0) <= FluidType.BUCKET_VOLUME * 8 - 50 && (tank.getResource(0).isEmpty() || tank.getResource(0).is(ModFluids.HONEY_STILL.get()))) {
+				try(Transaction tx = Transaction.openRoot()) {
+					if(tank.insert(FluidResource.of(ModFluids.HONEY_STILL.get()), 50, tx) == 50) {
+						tx.commit();
+						getItems().get(0).shrink(1);
+						if (getItems().get(0).getCount() <= 0)
+							getItems().set(0, ItemStack.EMPTY);
+					}
+				}
 			}
 		}
 	}
@@ -133,40 +137,30 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 	}
 
 	@Override
-	public void saveAdditional(@Nonnull CompoundTag nbt, @Nonnull HolderLookup.Provider registries) {
-		super.saveAdditional(nbt, registries);
-		nbt.putBoolean("active", active);
-		tank.writeToNBT(registries, nbt);
-		nbt.putShort("operatingTime", (short) operatingTime);
+	public void saveAdditional(@NonNull ValueOutput output) {
+		super.saveAdditional(output);
+		tank.serialize(output);
+		output.putInt("operatingTime", operatingTime);
+		output.putBoolean("active", active);
 	}
 
 	@Override
-	public void loadAdditional(@Nonnull CompoundTag nbt, @Nonnull HolderLookup.Provider registries) {
-		super.loadAdditional(nbt, registries);
-		active = nbt.getBoolean("active");
-		tank.readFromNBT(registries, nbt);
-		operatingTime = nbt.getShort("operatingTime");
-	}
-
-	@Nonnull
-	@Override
-	public CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider registries) {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, registries);
-		return nbt;
+	public void loadAdditional(@NonNull ValueInput input) {
+		super.loadAdditional(input);
+		tank.deserialize(input);
+		operatingTime = input.getIntOr("operatingTime", 0);
+		active = input.getBooleanOr("active", false);
 	}
 
 	@Override
 	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, level.registryAccess());
 		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@Override
-	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet, @Nonnull HolderLookup.Provider registries) {
-		super.onDataPacket(net, packet, registries);
-		loadAdditional(packet.getTag(), registries);
+	public void onDataPacket(@NonNull Connection net, @NonNull ValueInput input) {
+		super.onDataPacket(net, input);
+		loadAdditional(input);
 	}
 
 	@Override
@@ -174,29 +168,32 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 		return 64;
 	}
 
-	public FluidTank getTank() {
+	public FluidStacksResourceHandler getTank() {
 		return this.tank;
 	}
 
-	public FluidTank getTank(@Nullable Direction direction) {
+	public FluidStacksResourceHandler getTank(@Nullable Direction direction) {
 		return this.tank;
 	}
+
 	@Override
 	protected void applyImplicitComponents(@Nonnull DataComponentGetter getter) {
 		super.applyImplicitComponents(getter);
-
-		tank.setFluid(getter.getOrDefault(ModDataComponents.FLUID, FluidContents.EMPTY).get());
+		try(Transaction tx = Transaction.openRoot()) {
+			if(tank.insert(getter.getOrDefault(ModDataComponents.FLUID, FluidResource.EMPTY), FluidType.BUCKET_VOLUME, tx) == FluidType.BUCKET_VOLUME) {
+				tx.commit();
+			}
+		}
 	}
 
 	@Override
 	protected void collectImplicitComponents(@Nonnull DataComponentMap.Builder builder) {
 		super.collectImplicitComponents(builder);
-
-		builder.set(ModDataComponents.FLUID, FluidContents.of(tank.getFluid()));
+		builder.set(ModDataComponents.FLUID, tank.getResource(0));
 	}
 
 	public int getScaledFluid(int scale) {
-		return tank.getFluid() != null ? (int) ((float) tank.getFluidAmount() / (float) tank.getCapacity() * scale) : 0;
+		return (int) ((float) tank.getAmountAsInt(0) / (float) (FluidType.BUCKET_VOLUME * 8) * scale);
 	}
 
 	public int getOperationProgressScaled(int time) {
@@ -207,34 +204,34 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 	public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
 		return SLOTS;
 	}
-	
+
 	@Override
-	public boolean canPlaceItem(int slot, ItemStack stack) {
+	public boolean canPlaceItem(int slot, @NotNull ItemStack stack) {
 		return stack.getItem() == ModItems.HONEY_DRIP.get();
 	}
 
 	@Override
-	public boolean canPlaceItemThroughFace(int index, ItemStack stack, Direction direction) {
+	public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
+		return canPlaceItem(index, stack);
+	}
+
+	@Override
+	public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
 		return stack.getItem() == ModItems.HONEY_DRIP.get();
 	}
 
 	@Override
-	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-		return stack.getItem() == ModItems.HONEY_DRIP.get();
-	}
-
-	@Override
-	public ItemStack removeItemNoUpdate(int slot) {
+	public @NotNull ItemStack removeItemNoUpdate(int slot) {
 		return ContainerHelper.takeItem(getItems(), slot);
 	}
 
 	@Override
-	public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+	public @NotNull AbstractContainerMenu createMenu(int containerId, @NotNull Inventory playerInventory, @NotNull Player player) {
 		return new LiquifierMenu(containerId, playerInventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
 	}
 
 	@Override
-	public Component getDisplayName() {
+	public @NotNull Component getDisplayName() {
 		return Component.translatable("erebus.container.liquifier");
 	}
 }

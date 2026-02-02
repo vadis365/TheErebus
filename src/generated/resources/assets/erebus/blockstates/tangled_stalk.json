@@ -1,10 +1,10 @@
 {
   "variants": {
     "half=lower": {
-      "model": "erebus:block/tangled_stalk_lower"
+      "model": "erebus:block/tangled_stalk_bottom"
     },
     "half=upper": {
-      "model": "erebus:block/tangled_stalk_upper"
+      "model": "erebus:block/tangled_stalk_top"
     }
   }
 }

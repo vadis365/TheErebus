@@ -2,8 +2,7 @@
   "parent": "minecraft:block/template_cake_with_candle",
   "textures": {
     "bottom": "erebus:block/honey_treat_bottom",
-    "candle_lit": "minecraft:block/cyan_candle_lit",
-    "inside": "erebus:block/honey_treat_inner",
+    "candle": "minecraft:block/cyan_candle_lit",
     "particle": "erebus:block/honey_treat_side",
     "side": "erebus:block/honey_treat_side",
     "top": "erebus:block/honey_treat_top"

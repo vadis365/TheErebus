@@ -1,26 +1,17 @@
 package erebus.datagen;
 
-import erebus.Erebus;
 import erebus.registries.item.ModItems;
-import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jspecify.annotations.NonNull;
 
-public class ModItemModels extends ModelProvider {
+public class ModItemModels {
 
     private ItemModelGenerators itemModels;
 
-    public ModItemModels(PackOutput output) {
-        super(output, Erebus.MODID);
-    }
-
-    @Override
-    public void registerModels(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels) {
+    public void registerModels(@NonNull ItemModelGenerators itemModels) {
 
         this.itemModels = itemModels;
 

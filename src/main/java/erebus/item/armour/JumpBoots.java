@@ -1,8 +1,11 @@
 package erebus.item.armour;
 
+import erebus.Erebus;
 import erebus.registries.data.ModArmorMaterials;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -14,9 +17,8 @@ import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class JumpBoots extends Item {
-
 	public JumpBoots() {
-		super(new Item.Properties().humanoidArmor(ModArmorMaterials.JUMP_BOOTS, ArmorType.BOOTS));
+		super(new Item.Properties().humanoidArmor(ModArmorMaterials.JUMP_BOOTS, ArmorType.BOOTS).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("jump_boots"))));
 	}
 
 	@Override

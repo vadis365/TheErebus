@@ -1,9 +1,6 @@
 {
   "variants": {
-    "stage=0": {
-      "model": "erebus:block/sapling_eucalyptus"
-    },
-    "stage=1": {
+    "": {
       "model": "erebus:block/sapling_eucalyptus"
     }
   }

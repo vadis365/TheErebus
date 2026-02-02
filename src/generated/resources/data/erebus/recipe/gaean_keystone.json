@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "O": {
-      "item": "minecraft:obsidian"
-    },
-    "S": {
-      "tag": "minecraft:stone_bricks"
-    },
-    "V": {
-      "item": "minecraft:vine"
-    }
+    "O": "minecraft:obsidian",
+    "S": "#minecraft:stone_bricks",
+    "V": "minecraft:vine"
   },
   "pattern": [
     "V V",
@@ -18,7 +12,6 @@
     "SSS"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:gaean_keystone"
   }
 }

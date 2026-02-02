@@ -51,8 +51,8 @@ public class UmberFurnaceMenu extends RecipeBookMenu {
         super(ModMenuTypes.UMBER_FURNACE_MENU.get(), containerId);
         recipeType = RecipeType.SMELTING;
         recipeBookType = RecipeBookType.FURNACE;
-        checkContainerSize(container, 3);
-        checkContainerDataCount(data, 4);
+        checkContainerSize(container, SLOT_COUNT);
+        checkContainerDataCount(data, DATA_COUNT);
         this.container = container;
         this.data = data;
         level = inventory.player.level();
@@ -69,7 +69,7 @@ public class UmberFurnaceMenu extends RecipeBookMenu {
         return acceptedInputs.test(stack);
     }
 
-    protected boolean isFuel(ItemStack stack) {
+    public boolean isFuel(ItemStack stack) {
         return stack.getBurnTime(recipeType, level.fuelValues()) > 0;
     }
 
@@ -89,6 +89,10 @@ public class UmberFurnaceMenu extends RecipeBookMenu {
 
     public boolean isLit() {
         return data.get(DATA_LIT_TIME) > 0;
+    }
+
+    public int getTankAmount() {
+        return data.get(DATA_TANK_AMOUNT);
     }
 
     @Override

@@ -36,7 +36,7 @@ import org.jspecify.annotations.NonNull;
 import java.util.Map;
 
 public class CandleHoneyTreatBlock extends AbstractCandleBlock {
-    public static final MapCodec<CandleHoneyTreatBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("candle").forGetter((candleHoneyTreatBlock) -> candleHoneyTreatBlock.candleBlock)).apply(instance, CandleHoneyTreatBlock::new));
+    public static final MapCodec<CandleHoneyTreatBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("candle").forGetter((candleHoneyTreatBlock) -> candleHoneyTreatBlock.candleBlock), propertiesCodec()).apply(instance, CandleHoneyTreatBlock::new));
     public static final BooleanProperty LIT = AbstractCandleBlock.LIT;
     protected static final VoxelShape HONEY_TREAT_SHAPE = Block.box(1.0F, 0.0F, 1.0F, 15.0F, 8.0F, 15.0F);
     protected static final VoxelShape CANDLE_SHAPE = Block.box(7.0F, 8.0F, 7.0F, 9.0F, 14.0F, 9.0F);
@@ -45,8 +45,8 @@ public class CandleHoneyTreatBlock extends AbstractCandleBlock {
     private static final Iterable<Vec3> PARTICLE_OFFSETS = ImmutableList.of(new Vec3(0.5F, 1.0F, 0.5F));
     private final CandleBlock candleBlock;
 
-    public CandleHoneyTreatBlock(Block candleBlock) {
-        super(Properties.ofFullCopy(ModBlocks.HONEY_TREAT.get()));
+    public CandleHoneyTreatBlock(Block candleBlock, Properties properties) {
+        super(properties);
         registerDefaultState(getStateDefinition().any().setValue(LIT, false));
         if(candleBlock instanceof CandleBlock candleblock) {
             BY_CANDLE.put(candleblock, this);

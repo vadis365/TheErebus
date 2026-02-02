@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item.erebus.mud_brick": {
+    "has_mud": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:mud_brick"
+            "items": "erebus:mud"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_item.erebus.mud_brick"
+      "has_mud"
     ]
   ],
   "rewards": {

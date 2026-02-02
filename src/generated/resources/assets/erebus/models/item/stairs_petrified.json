@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "erebus:block/planks_petrified",
-    "side": "erebus:block/planks_petrified",
-    "top": "erebus:block/planks_petrified"
-  }
-}

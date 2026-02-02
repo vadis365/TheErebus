@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "erebus:poison_gland"
-    },
-    {
-      "tag": "c:slime_balls"
-    },
-    {
-      "tag": "c:dyes/white"
-    }
+    "erebus:poison_gland",
+    "#c:slime_balls",
+    "#c:dyes/white"
   ],
   "result": {
     "count": 2,

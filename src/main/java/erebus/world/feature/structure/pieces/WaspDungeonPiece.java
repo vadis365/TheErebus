@@ -22,9 +22,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class WaspDungeonPiece extends ScatteredFeaturePiece {
 
-    private final BlockState BLOCK = ModBlocks.WASP_NEST.get().defaultBlockState();
-    private final BlockState STAIR = ModBlocks.STAIRS_WASP_NEST.get().defaultBlockState();
-    private final BlockState SPAWNER = ModBlocks.WASP_SPAWNER.get().defaultBlockState();
+    private BlockState BLOCK;
+    private BlockState STAIR;
+    private BlockState SPAWNER;
 
     public WaspDungeonPiece(RandomSource random, int x, int z) {
         super(ModStructurePieces.WASP_DUNGEON.get(), x, 64, z, 10, 8, 10, getRandomHorizontalDirection(random));
@@ -34,8 +34,15 @@ public class WaspDungeonPiece extends ScatteredFeaturePiece {
         super(ModStructurePieces.WASP_DUNGEON.get(), tag);
     }
 
+    private void setupBlockStates() {
+        BLOCK = ModBlocks.WASP_NEST.get().defaultBlockState();
+        STAIR = ModBlocks.STAIRS_WASP_NEST.get().defaultBlockState();
+        SPAWNER = ModBlocks.WASP_SPAWNER.get().defaultBlockState();
+    }
+
     @Override
     public void postProcess(@NotNull WorldGenLevel level, @NotNull StructureManager manager, @NotNull ChunkGenerator generator, @NotNull RandomSource random, @NotNull BoundingBox boundingBox, @NotNull ChunkPos chunkPos, @NotNull BlockPos pos) {
+        setupBlockStates();
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();

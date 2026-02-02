@@ -36,7 +36,7 @@ public class ErebusPortalShape {
     }
 
     private BlockPos calculateBottomLeft(BlockPos pos) {
-        int i = Math.max(level.getMinBuildHeight(), pos.getY() - HEIGHT);
+        int i = Math.max(level.getMinY(), pos.getY() - HEIGHT);
 
         while (pos.getY() > i && isEmpty(level.getBlockState(pos.below()))) {
             pos = pos.below();

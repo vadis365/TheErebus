@@ -21,7 +21,7 @@ public class LiquifierMenu extends AbstractContainerMenu {
 	public LiquifierMenu(final int windowId, final Inventory playerInventory, FriendlyByteBuf extra) {
 		super(ModMenuTypes.LIQUIFIER.get(), windowId);
 		BlockPos tilePos = extra.readBlockPos();
-		BlockEntity tile = playerInventory.player.getCommandSenderWorld().getBlockEntity(tilePos);
+		BlockEntity tile = playerInventory.player.level().getBlockEntity(tilePos);
 		if (!(tile instanceof LiquifierBlockEntity))
 			return;
 		liquifier = (LiquifierBlockEntity) tile;

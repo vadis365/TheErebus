@@ -1,14 +1,13 @@
 package erebus.client.render.item.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
-public class WandOfAnimationItemModel extends Model {
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Unit;
+
+public class WandOfAnimationItemModel extends Model<Unit> {
 
 	public final ModelPart Jewel1;
 	public final ModelPart TopR3;
@@ -16,7 +15,7 @@ public class WandOfAnimationItemModel extends Model {
 	boolean up;
 
 	public WandOfAnimationItemModel(ModelPart root) {
-		super(RenderType::entitySolid);
+		super(root, RenderTypes::entitySolid);
 		this.Jewel1 = root.getChild("Jewel1");
 		this.TopR3 = root.getChild("TopR3");
 		this.Shaft = root.getChild("Shaft");
@@ -45,30 +44,4 @@ public class WandOfAnimationItemModel extends Model {
 
 		return LayerDefinition.create(meshdefinition, 32, 64);
 	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-		float tick = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
-		if (tick <= 360)
-			up = true;
-		if (tick >= 361)
-			up = false;
-
-		Shaft.render(poseStack, buffer, packedLight, packedOverlay, color);
-		poseStack.mulPose(Axis.YP.rotationDegrees(tick));
-		TopR3.render(poseStack, buffer, packedLight, packedOverlay, color);
-
-		poseStack.pushPose();
-		poseStack.mulPose(Axis.YP.rotationDegrees(90F));
-		TopR3.render(poseStack, buffer, packedLight, packedOverlay, color);
-		poseStack.mulPose(Axis.YP.rotationDegrees(180F));
-		TopR3.render(poseStack, buffer, packedLight, packedOverlay, color);
-		poseStack.mulPose(Axis.YP.rotationDegrees(270F));
-		TopR3.render(poseStack, buffer, packedLight, packedOverlay, color);
-		poseStack.translate(0f, -0.29f + (up ? tick / 360 : 1 + 1 - tick / 360) / 10f, 0f);
-		poseStack.mulPose(Axis.YN.rotationDegrees(tick * 2));
-		Jewel1.render(poseStack, buffer, packedLight, packedOverlay, color);
-		poseStack.popPose();
-	}
-
 }

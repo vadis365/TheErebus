@@ -1,11 +1,14 @@
 package erebus.item.wand;
 
+import erebus.Erebus;
 import erebus.entity.AnimatedBlock;
 import erebus.registries.ModSounds;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
@@ -25,6 +28,7 @@ public class WandOfAnimationItem extends Item {
 				.stacksTo(1)
 				.durability(64)
 				.setNoCombineRepair()
+				.setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("wand_of_animation")))
 		);
 	}
 

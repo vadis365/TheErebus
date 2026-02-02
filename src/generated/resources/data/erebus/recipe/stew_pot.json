@@ -2,15 +2,10 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:cauldron"
-    },
-    {
-      "tag": "c:rods/wooden"
-    }
+    "minecraft:cauldron",
+    "#c:rods/wooden"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:stew_pot"
   }
 }

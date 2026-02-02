@@ -20,7 +20,7 @@ public class BlenderMenu extends AbstractContainerMenu {
     public BlenderMenu(int containerId, Inventory inventory, FriendlyByteBuf extra) {
         super(ModMenuTypes.BLENDER.get(), containerId);
         BlockPos tilePos = extra.readBlockPos();
-        BlockEntity tile = inventory.player.getCommandSenderWorld().getBlockEntity(tilePos);
+        BlockEntity tile = inventory.player.level().getBlockEntity(tilePos);
         if (!(tile instanceof BlenderBlockEntity)) {
             return;
         }

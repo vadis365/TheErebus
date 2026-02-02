@@ -103,7 +103,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "erebus:bamboo_chestplate",
+          "name": "erebus:bamboo_chest",
           "weight": 2
         },
         {
@@ -115,7 +115,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "erebus:jade_chestplate"
+          "name": "erebus:jade_chest"
         },
         {
           "type": "minecraft:item",
@@ -149,7 +149,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "erebus:bamboo_leggings",
+          "name": "erebus:bamboo_legs",
           "weight": 2
         },
         {
@@ -161,7 +161,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "erebus:jade_leggings"
+          "name": "erebus:jade_legs"
         },
         {
           "type": "minecraft:item",

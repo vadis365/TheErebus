@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "erebus:block/magma_crawler_spawner"
+  }
+}

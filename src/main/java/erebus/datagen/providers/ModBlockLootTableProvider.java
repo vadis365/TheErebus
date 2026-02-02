@@ -7,7 +7,7 @@ import erebus.block.plants.PricklyPearBlock;
 import erebus.block.types.EnumTorchBlockHalf;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -29,7 +29,6 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import java.util.HashMap;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -37,7 +36,7 @@ import java.util.function.Supplier;
 public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     protected ModBlockLootTableProvider(HolderLookup.Provider provider) {
-        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), new HashMap<>(), provider);
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), provider);
     }
 
     public void dropSelf(Supplier<? extends Block> block) {

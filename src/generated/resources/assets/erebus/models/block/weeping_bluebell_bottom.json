@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "erebus:block/weeping_bluebell_bottom"
+  }
+}

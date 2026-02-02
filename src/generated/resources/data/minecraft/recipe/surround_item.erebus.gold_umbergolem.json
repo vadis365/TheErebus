@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": "erebus:umber_golem_statue",
+    "O": "minecraft:gold_block"
+  },
+  "pattern": [
+    "OOO",
+    "OIO",
+    "OOO"
+  ],
+  "result": {
+    "id": "erebus:gold_umbergolem"
+  }
+}

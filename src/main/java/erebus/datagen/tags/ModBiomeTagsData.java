@@ -1,8 +1,6 @@
 package erebus.datagen.tags;
 
 import erebus.Erebus;
-import erebus.registries.data.tags.ModBiomeTags;
-import erebus.registries.world.ModBiomes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;
@@ -17,7 +15,8 @@ public class ModBiomeTagsData extends BiomeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(ModBiomeTags.IS_EREBUS)
+        //TODO: Move resource keys out of biomes
+        /*tag(ModBiomeTags.IS_EREBUS)
                 .add(ModBiomes.ELYSIAN_FIELDS.getResourceKey())
                 .add(ModBiomes.ELYSIAN_FOREST.getResourceKey())
                 .add(ModBiomes.FUNGAL_FOREST.getResourceKey())
@@ -52,6 +51,6 @@ public class ModBiomeTagsData extends BiomeTagsProvider {
         tag(ModBiomeTags.HAS_ROTTEN_STUMPS)
                 .add(ModBiomes.FUNGAL_FOREST.getResourceKey());
         tag(ModBiomeTags.HAS_BIG_LOGS)
-                .add(ModBiomes.FUNGAL_FOREST.getResourceKey());
+                .add(ModBiomes.FUNGAL_FOREST.getResourceKey());*/
     }
 }

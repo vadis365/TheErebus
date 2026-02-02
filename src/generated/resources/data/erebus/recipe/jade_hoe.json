@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "J": {
-      "item": "erebus:jade"
-    },
-    "S": {
-      "tag": "c:rods/wooden"
-    }
+    "J": "erebus:jade",
+    "S": "#c:rods/wooden"
   },
   "pattern": [
     "JJ ",
@@ -15,7 +11,6 @@
     " S "
   ],
   "result": {
-    "count": 1,
     "id": "erebus:jade_hoe"
   }
 }

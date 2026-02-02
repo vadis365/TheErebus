@@ -1,21 +1,20 @@
 package erebus.client.render.item.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Unit;
 
-public class QuakeHammerModel extends Model {
+public class QuakeHammerModel extends Model<Unit> {
     public final ModelPart head;
     public final ModelPart head2;
     public final ModelPart handle;
     public final ModelPart counterWeight;
 
     public QuakeHammerModel(ModelPart root) {
-        super(RenderType::entitySolid);
+        super(root, RenderTypes::entitySolid);
         head = root.getChild("head");
         head2 = root.getChild("head2");
         handle = root.getChild("handle");
@@ -91,13 +90,5 @@ public class QuakeHammerModel extends Model {
         );
 
         return LayerDefinition.create(meshdefinition, 64, 32);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-        head.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        head2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        handle.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        counterWeight.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "E": {
-      "item": "erebus:reinforced_plate_exo"
-    },
-    "I": {
-      "item": "minecraft:iron_ingot"
-    },
-    "P": {
-      "item": "erebus:scorpion_pincer"
-    }
+    "E": "erebus:reinforced_plate_exo",
+    "I": "minecraft:iron_ingot",
+    "P": "erebus:scorpion_pincer"
   },
   "pattern": [
     "I I",
@@ -18,7 +12,6 @@
     "EPE"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:enhanced_scorpion_pincer"
   }
 }

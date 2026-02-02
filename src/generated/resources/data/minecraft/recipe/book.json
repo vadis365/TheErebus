@@ -2,21 +2,12 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "erebus:plate_exo"
-    },
-    {
-      "item": "minecraft:paper"
-    },
-    {
-      "item": "minecraft:paper"
-    },
-    {
-      "item": "minecraft:paper"
-    }
+    "erebus:plate_exo",
+    "minecraft:paper",
+    "minecraft:paper",
+    "minecraft:paper"
   ],
   "result": {
-    "count": 1,
     "id": "minecraft:book"
   }
 }

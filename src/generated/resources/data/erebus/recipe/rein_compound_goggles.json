@@ -2,19 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "G": {
-      "item": "erebus:compound_goggles"
-    },
-    "R": {
-      "item": "erebus:reinforced_plate_exo"
-    }
+    "G": "erebus:compound_goggles",
+    "R": "erebus:reinforced_plate_exo"
   },
   "pattern": [
     "RRR",
     "RGR"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:rein_compound_goggles"
   }
 }

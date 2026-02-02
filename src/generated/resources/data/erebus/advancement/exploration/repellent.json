@@ -17,7 +17,6 @@
       "translate": "advancement.erebus.exploration/repellent.desc"
     },
     "icon": {
-      "count": 1,
       "id": "erebus:repellent"
     },
     "title": {

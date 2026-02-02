@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "erebus:block/umbertile_smooth",
-    "side": "erebus:block/umbertile_smooth",
-    "top": "erebus:block/umbertile_smooth"
-  }
-}

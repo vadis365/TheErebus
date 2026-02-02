@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "P": {
-      "item": "erebus:petrified_wood"
-    },
-    "S": {
-      "tag": "minecraft:sand"
-    },
-    "U": {
-      "item": "erebus:umberstone"
-    }
+    "P": "erebus:petrified_wood",
+    "S": "#minecraft:sand",
+    "U": "erebus:umberstone"
   },
   "pattern": [
     "SSS",
@@ -18,7 +12,6 @@
     "UUU"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:whetstone"
   }
 }

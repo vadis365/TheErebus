@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "erebus:block/zombie_ant_soldier_spawner"
+  }
+}

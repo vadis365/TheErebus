@@ -1,9 +1,12 @@
 package erebus.item.armour;
 
+import erebus.Erebus;
 import erebus.registries.data.ModArmorMaterials;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -18,7 +21,7 @@ public class SprintLeggings extends Item {
 	private int armTick;
 
 	public SprintLeggings() {
-		super(new Item.Properties().humanoidArmor(ModArmorMaterials.SPRINT, ArmorType.LEGGINGS));
+		super(new Item.Properties().humanoidArmor(ModArmorMaterials.SPRINT, ArmorType.LEGGINGS).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("sprint_leggings"))));
 	}
 
 	@Override

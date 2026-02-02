@@ -377,7 +377,7 @@
               "options": "#minecraft:treasure"
             }
           ],
-          "name": "erebus:jade_chestplate"
+          "name": "erebus:jade_chest"
         },
         {
           "type": "minecraft:item",
@@ -469,7 +469,7 @@
               "options": "#minecraft:treasure"
             }
           ],
-          "name": "erebus:jade_leggings"
+          "name": "erebus:jade_legs"
         },
         {
           "type": "minecraft:item",

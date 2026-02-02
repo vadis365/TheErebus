@@ -20,7 +20,7 @@ public class HoneyCombMenu extends AbstractContainerMenu {
 	public HoneyCombMenu(final int windowId, final Inventory playerInventory, FriendlyByteBuf extra) {
 		super(ModMenuTypes.HONEY_COMB.get(), windowId);
 		BlockPos tilePos = extra.readBlockPos();
-		BlockEntity tile = playerInventory.player.getCommandSenderWorld().getBlockEntity(tilePos);
+		BlockEntity tile = playerInventory.player.level().getBlockEntity(tilePos);
 
 		if (!(tile instanceof HoneyCombBlockEntity))
 			return;

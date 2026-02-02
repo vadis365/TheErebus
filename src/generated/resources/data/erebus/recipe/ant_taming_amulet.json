@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "G": {
-      "item": "minecraft:gold_ingot"
-    },
-    "O": {
-      "item": "minecraft:obsidian"
-    },
-    "P": {
-      "item": "erebus:ant_pheromones"
-    }
+    "G": "minecraft:gold_ingot",
+    "O": "minecraft:obsidian",
+    "P": "erebus:ant_pheromones"
   },
   "pattern": [
     "PGP",
@@ -18,7 +12,6 @@
     "PGP"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:ant_taming_amulet"
   }
 }

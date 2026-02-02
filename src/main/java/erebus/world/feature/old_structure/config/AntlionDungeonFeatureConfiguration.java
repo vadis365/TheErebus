@@ -46,30 +46,30 @@ import java.util.Map;
 public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
 
     // Block states used throughout the structure
-    private final BlockState GNEISS = ModBlocks.GNEISS.get().defaultBlockState();
-    private final BlockState GNEISS_RELIEF = ModBlocks.GNEISS_RELIEF.get().defaultBlockState();
-    private final BlockState GNEISS_CARVED = ModBlocks.GNEISS_CARVED.get().defaultBlockState();
-    private final BlockState GNEISS_BRICKS = ModBlocks.GNEISS_BRICKS.get().defaultBlockState();
-    private final BlockState GNEISS_TILES = ModBlocks.GNEISS_TILES.get().defaultBlockState();
-    private final BlockState GNEISS_VENT = ModBlocks.GNEISS_VENT.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK = ModBlocks.TEMPLE_BRICK.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK_UNBREAKING = ModBlocks.TEMPLE_BRICK_UNBREAKING.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK_UNBREAKING_JADE = ModBlocks.TEMPLE_BRICK_UNBREAKING_JADE.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK_UNBREAKING_EXO = ModBlocks.TEMPLE_BRICK_UNBREAKING_EXO.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK_UNBREAKING_CREAM = ModBlocks.TEMPLE_BRICK_UNBREAKING_CREAM.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK_UNBREAKING_EYE = ModBlocks.TEMPLE_BRICK_UNBREAKING_EYE.get().defaultBlockState();
-    private final BlockState TEMPLE_BRICK_UNBREAKING_STRING = ModBlocks.TEMPLE_BRICK_UNBREAKING_STRING.get().defaultBlockState();
-    private final BlockState TEMPLE_PILLAR = ModBlocks.TEMPLE_PILLAR.get().defaultBlockState();
-    private final BlockState CAPSTONE = ModBlocks.CAPSTONE.get().defaultBlockState();
-    private final BlockState BAMBOO_TORCH_LOWER = ModBlocks.BAMBOO_TORCH.get().defaultBlockState().setValue(BambooTorchBlock.HALF, EnumTorchBlockHalf.LOWER);
-    private final BlockState BAMBOO_TORCH_UPPER = ModBlocks.BAMBOO_TORCH.get().defaultBlockState().setValue(BambooTorchBlock.HALF, EnumTorchBlockHalf.UPPER);
-    private final BlockState FORCE_FIELD = ModBlocks.FORCE_FIELD.get().defaultBlockState();
-    private final BlockState ANTLION_SPAWNER = ModBlocks.ANTLION_SPAWNER.get().defaultBlockState();
-    private final BlockState MAGMA_CRAWLER_SPAWNER = ModBlocks.MAGMA_CRAWLER_SPAWNER.get().defaultBlockState();
-    private final BlockState TORCH = Blocks.TORCH.defaultBlockState();
-    private final BlockState LAVA = Blocks.LAVA.defaultBlockState();
-    private final BlockState SAND = Blocks.SAND.defaultBlockState();
-    private final BlockState AIR = Blocks.AIR.defaultBlockState();
+    private BlockState GNEISS;
+    private BlockState GNEISS_RELIEF;
+    private BlockState GNEISS_CARVED;
+    private BlockState GNEISS_BRICKS;
+    private BlockState GNEISS_TILES;
+    private BlockState GNEISS_VENT;
+    private BlockState TEMPLE_BRICK;
+    private BlockState TEMPLE_BRICK_UNBREAKING;
+    private BlockState TEMPLE_BRICK_UNBREAKING_JADE;
+    private BlockState TEMPLE_BRICK_UNBREAKING_EXO;
+    private BlockState TEMPLE_BRICK_UNBREAKING_CREAM;
+    private BlockState TEMPLE_BRICK_UNBREAKING_EYE;
+    private BlockState TEMPLE_BRICK_UNBREAKING_STRING;
+    private BlockState TEMPLE_PILLAR;
+    private BlockState CAPSTONE;
+    private BlockState BAMBOO_TORCH_LOWER;
+    private BlockState BAMBOO_TORCH_UPPER;
+    private BlockState FORCE_FIELD;
+    private BlockState ANTLION_SPAWNER;
+    private BlockState MAGMA_CRAWLER_SPAWNER;
+    private BlockState TORCH;
+    private BlockState LAVA;
+    private BlockState SAND;
+    private BlockState AIR;
 
     // Map to track which blocks are considered part of the structure
     private final Map<BlockState, Boolean> STRUCTURE_BLOCKS = new HashMap<>();
@@ -81,7 +81,35 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
      */
     public AntlionDungeonFeatureConfiguration() {
         super(NoneFeatureConfiguration.CODEC);
-        if(STRUCTURE_BLOCKS.isEmpty()) {
+    }
+
+    private void setupBlockStates() {
+        GNEISS = ModBlocks.GNEISS.get().defaultBlockState();
+        GNEISS_RELIEF = ModBlocks.GNEISS_RELIEF.get().defaultBlockState();
+        GNEISS_CARVED = ModBlocks.GNEISS_CARVED.get().defaultBlockState();
+        GNEISS_BRICKS = ModBlocks.GNEISS_BRICKS.get().defaultBlockState();
+        GNEISS_TILES = ModBlocks.GNEISS_TILES.get().defaultBlockState();
+        GNEISS_VENT = ModBlocks.GNEISS_VENT.get().defaultBlockState();
+        TEMPLE_BRICK = ModBlocks.TEMPLE_BRICK.get().defaultBlockState();
+        TEMPLE_BRICK_UNBREAKING = ModBlocks.TEMPLE_BRICK_UNBREAKING.get().defaultBlockState();
+        TEMPLE_BRICK_UNBREAKING_JADE = ModBlocks.TEMPLE_BRICK_UNBREAKING_JADE.get().defaultBlockState();
+        TEMPLE_BRICK_UNBREAKING_EXO = ModBlocks.TEMPLE_BRICK_UNBREAKING_EXO.get().defaultBlockState();
+        TEMPLE_BRICK_UNBREAKING_CREAM = ModBlocks.TEMPLE_BRICK_UNBREAKING_CREAM.get().defaultBlockState();
+        TEMPLE_BRICK_UNBREAKING_EYE = ModBlocks.TEMPLE_BRICK_UNBREAKING_EYE.get().defaultBlockState();
+        TEMPLE_BRICK_UNBREAKING_STRING = ModBlocks.TEMPLE_BRICK_UNBREAKING_STRING.get().defaultBlockState();
+        TEMPLE_PILLAR = ModBlocks.TEMPLE_PILLAR.get().defaultBlockState();
+        CAPSTONE = ModBlocks.CAPSTONE.get().defaultBlockState();
+        BAMBOO_TORCH_LOWER = ModBlocks.BAMBOO_TORCH.get().defaultBlockState().setValue(BambooTorchBlock.HALF, EnumTorchBlockHalf.LOWER);
+        BAMBOO_TORCH_UPPER = ModBlocks.BAMBOO_TORCH.get().defaultBlockState().setValue(BambooTorchBlock.HALF, EnumTorchBlockHalf.UPPER);
+        FORCE_FIELD = ModBlocks.FORCE_FIELD.get().defaultBlockState();
+        ANTLION_SPAWNER = ModBlocks.ANTLION_SPAWNER.get().defaultBlockState();
+        MAGMA_CRAWLER_SPAWNER = ModBlocks.MAGMA_CRAWLER_SPAWNER.get().defaultBlockState();
+        TORCH = Blocks.TORCH.defaultBlockState();
+        LAVA = Blocks.LAVA.defaultBlockState();
+        SAND = Blocks.SAND.defaultBlockState();
+        AIR = Blocks.AIR.defaultBlockState();
+
+        if (STRUCTURE_BLOCKS.isEmpty()) {
             STRUCTURE_BLOCKS.put(GNEISS, true);
             STRUCTURE_BLOCKS.put(GNEISS_RELIEF, true);
             STRUCTURE_BLOCKS.put(GNEISS_CARVED, true);
@@ -121,6 +149,7 @@ public class AntlionDungeonFeatureConfiguration extends Feature<NoneFeatureConfi
      */
     @Override
     public boolean place(@NotNull FeaturePlaceContext<NoneFeatureConfiguration> context) {
+        setupBlockStates();
         WorldGenLevel level = context.level();
         BlockPos pos = context.origin();
         RandomSource random = context.random();

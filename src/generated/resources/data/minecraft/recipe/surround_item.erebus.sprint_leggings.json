@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": "erebus:rein_exoskeleton_legs",
+    "O": "erebus:bio_velocity"
+  },
+  "pattern": [
+    "OOO",
+    "OIO",
+    "OOO"
+  ],
+  "result": {
+    "id": "erebus:sprint_leggings"
+  }
+}

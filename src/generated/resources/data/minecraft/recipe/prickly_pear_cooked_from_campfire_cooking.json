@@ -3,11 +3,8 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.35,
-  "ingredient": {
-    "item": "erebus:prickly_pear_raw"
-  },
+  "ingredient": "erebus:prickly_pear_raw",
   "result": {
-    "count": 1,
     "id": "erebus:prickly_pear_cooked"
   }
 }

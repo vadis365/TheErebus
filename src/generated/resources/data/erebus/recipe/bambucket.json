@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "erebus:bamboo"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "B": "erebus:bamboo",
+    "S": "minecraft:string"
   },
   "pattern": [
     " S ",
@@ -15,7 +11,6 @@
     " B "
   ],
   "result": {
-    "count": 1,
     "id": "erebus:bambucket"
   }
 }

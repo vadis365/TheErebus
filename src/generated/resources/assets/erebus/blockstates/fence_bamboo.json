@@ -18,44 +18,10 @@
       "apply": {
         "model": "erebus:block/fence_bamboo_side",
         "uvlock": true,
-        "y": 180
-      },
-      "when": {
-        "south": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "erebus:block/fence_bamboo_side",
-        "uvlock": true,
-        "y": 270
-      },
-      "when": {
-        "west": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "erebus:block/fence_bamboo_side",
-        "uvlock": true,
         "y": 90
       },
       "when": {
         "east": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "erebus:block/fence_bamboo_post"
-      }
-    },
-    {
-      "apply": {
-        "model": "erebus:block/fence_bamboo_side",
-        "uvlock": true
-      },
-      "when": {
-        "north": "true"
       }
     },
     {
@@ -76,16 +42,6 @@
       },
       "when": {
         "west": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "erebus:block/fence_bamboo_side",
-        "uvlock": true,
-        "y": 90
-      },
-      "when": {
-        "east": "true"
       }
     }
   ]

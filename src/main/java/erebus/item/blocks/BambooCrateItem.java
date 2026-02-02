@@ -12,12 +12,13 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.NonNull;
 
-import javax.annotation.Nonnull;
-import java.util.List;
+import java.util.function.Consumer;
 
 public class BambooCrateItem extends BlockItem {
 	
@@ -26,18 +27,18 @@ public class BambooCrateItem extends BlockItem {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nonnull TooltipContext context, @Nonnull List<Component> list, @Nonnull TooltipFlag flag) {
-		list.add(Component.literal("Stores Items When Broken"));
+	public void appendHoverText(ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay display, Consumer<Component> builder, @NonNull TooltipFlag tooltipFlag) {
+		builder.accept(Component.literal("Stores Items When Broken"));
 		if (stack.has(DataComponents.CONTAINER)) {
 			ItemContainerContents contents = stack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
 			for (int i = 0; i < contents.getSlots(); i++)
 				if (!contents.getStackInSlot(i).isEmpty())
-					list.add(Component.literal("Slot " + (i + 1) + ": " + contents.getStackInSlot(i).getHoverName().getString() + " x " + contents.getStackInSlot(i).getCount()).withStyle(ChatFormatting.GREEN));
+					builder.accept(Component.literal("Slot " + (i + 1) + ": " + contents.getStackInSlot(i).getHoverName().getString() + " x " + contents.getStackInSlot(i).getCount()).withStyle(ChatFormatting.GREEN));
 		}
 	}
 
     @Override
-    protected boolean canPlace(BlockPlaceContext context, BlockState state) {
+    protected boolean canPlace(BlockPlaceContext context, @NonNull BlockState state) {
 		Level level = context.getLevel();
 		BlockPos pos = context.getClickedPos();
 		for (Direction dir : Direction.values()) {

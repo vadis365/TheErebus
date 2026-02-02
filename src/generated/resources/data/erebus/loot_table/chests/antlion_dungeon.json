@@ -290,7 +290,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "erebus:jade_chestplate"
+          "name": "erebus:jade_chest"
         },
         {
           "type": "minecraft:item",
@@ -358,7 +358,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "erebus:jade_leggings"
+          "name": "erebus:jade_legs"
         },
         {
           "type": "minecraft:item",

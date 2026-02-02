@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "erebus:block/mud_bricks",
-    "side": "erebus:block/mud_bricks",
-    "top": "erebus:block/mud_bricks"
-  }
-}

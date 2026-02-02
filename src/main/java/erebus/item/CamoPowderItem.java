@@ -1,6 +1,9 @@
 package erebus.item;
 
+import erebus.Erebus;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -15,7 +18,7 @@ import org.jspecify.annotations.NonNull;
 public class CamoPowderItem extends Item {
 
     public CamoPowderItem() {
-        super(new Item.Properties());
+        super(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("camo_powder"))));
     }
 
     @Override

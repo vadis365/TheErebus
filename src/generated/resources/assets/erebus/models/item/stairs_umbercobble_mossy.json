@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "erebus:block/umbercobble_mossy",
-    "side": "erebus:block/umbercobble_mossy",
-    "top": "erebus:block/umbercobble_mossy"
-  }
-}

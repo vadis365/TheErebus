@@ -9,8 +9,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.level.redstone.Orientation;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public class ConnectedTextureBlock extends Block {
 
@@ -53,7 +54,7 @@ public class ConnectedTextureBlock extends Block {
     }
 
     @Override
-    protected boolean skipRendering(@NotNull BlockState state, BlockState adjacentState, @NotNull Direction direction) {
+    protected boolean skipRendering(@NonNull BlockState state, BlockState adjacentState, @NonNull Direction direction) {
         return adjacentState.is(this) || super.skipRendering(state, adjacentState, direction);
     }
 
@@ -68,12 +69,12 @@ public class ConnectedTextureBlock extends Block {
     }
 
     @Override
-    protected void neighborChanged(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Block neighborBlock, @NotNull BlockPos neighborPos, boolean movedByPiston) {
+    protected void neighborChanged(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull Block block, @Nullable Orientation orientation, boolean movedByPiston) {
         level.setBlock(pos, getConnectableSides(level, pos), Block.UPDATE_ALL);
     }
 
     @Override
-    protected float getShadeBrightness(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos) {
+    protected float getShadeBrightness(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos) {
         return 3;
     }
 }

@@ -3,11 +3,8 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.35,
-  "ingredient": {
-    "item": "erebus:beetle_larva_raw"
-  },
+  "ingredient": "erebus:beetle_larva_raw",
   "result": {
-    "count": 1,
     "id": "erebus:beetle_larva_cooked"
   }
 }

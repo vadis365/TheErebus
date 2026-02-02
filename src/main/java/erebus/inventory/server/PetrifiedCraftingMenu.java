@@ -58,7 +58,7 @@ public class PetrifiedCraftingMenu extends AbstractCraftingMenu {
             CraftingRecipe recipe = recipeHolder.value();
 
             if(resultSlots.setRecipeUsed(serverPlayer, recipeHolder)) {
-                ItemStack recipeResult = recipe.assemble(input, level.registryAccess());
+                ItemStack recipeResult = recipe.assemble(input);
                 if(recipeResult.isItemEnabled(level.enabledFeatures())) {
                     result = recipeResult;
                 }

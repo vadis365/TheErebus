@@ -17,10 +17,6 @@ public class GrandmasShoesMushroomFeatureConfiguration extends Feature<NoneFeatu
     private final int[] offsetX = {0, -1, 0, 1};
     private final int[] offsetZ = {1, 0, -1, 0};
     private final FeatureUtils Utils = new FeatureUtils();
-    private final BlockState STEM = ModBlocks.GRANDMAS_SHOES_MUSHROOM_STEM.get().defaultBlockState()
-            .setValue(HugeMushroomBlock.UP, true)
-            .setValue(HugeMushroomBlock.DOWN, true);
-    private final BlockState SHROOM = ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK.get().defaultBlockState();
 
     public GrandmasShoesMushroomFeatureConfiguration() {
         super(NoneFeatureConfiguration.CODEC);
@@ -37,6 +33,11 @@ public class GrandmasShoesMushroomFeatureConfiguration extends Feature<NoneFeatu
         int splitDir = splits != 0 ? random.nextInt(4) : -1;
         int splitOffsetX = splitDir == -1 ? 0 : offsetX[splitDir];
         int splitOffsetZ = splitDir == -1 ? 0 : offsetZ[splitDir];
+
+        BlockState STEM = ModBlocks.GRANDMAS_SHOES_MUSHROOM_STEM.get().defaultBlockState()
+                .setValue(HugeMushroomBlock.UP, true)
+                .setValue(HugeMushroomBlock.DOWN, true);
+        BlockState SHROOM = ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK.get().defaultBlockState();
 
         if(!level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)) return false;
 

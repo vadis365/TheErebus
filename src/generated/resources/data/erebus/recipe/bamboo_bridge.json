@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {
-      "item": "erebus:bamboo"
-    },
-    "L": {
-      "item": "erebus:bamboo_ladder"
-    },
-    "S": {
-      "item": "minecraft:string"
-    }
+    "B": "erebus:bamboo",
+    "L": "erebus:bamboo_ladder",
+    "S": "minecraft:string"
   },
   "pattern": [
     "SSS",

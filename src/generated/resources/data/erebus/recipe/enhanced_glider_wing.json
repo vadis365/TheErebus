@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "erebus:bamboo"
-    },
-    "W": {
-      "item": "erebus:dragonfly_wing"
-    }
+    "B": "erebus:bamboo",
+    "W": "erebus:dragonfly_wing"
   },
   "pattern": [
     "BBB",
@@ -15,7 +11,6 @@
     "WWW"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:enhanced_glider_wing"
   }
 }

@@ -21,9 +21,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class DungPilePiece extends ScatteredFeaturePiece {
 
-    private final BlockState DUNG = ModBlocks.DUNG.get().defaultBlockState();
-    private final BlockState BOT_FLY = ModBlocks.DUNG_SPAWNER_BOT_FLY.get().defaultBlockState();
-    private final BlockState FLY = ModBlocks.DUNG_SPAWNER_FLY.get().defaultBlockState();
+    private BlockState DUNG;
+    private BlockState BOT_FLY;
+    private BlockState FLY;
 
     public DungPilePiece(RandomSource random, int x, int z) {
         super(ModStructurePieces.DUNG_PILE.get(), x, 64, z, 10, 8, 10, getRandomHorizontalDirection(random));
@@ -33,8 +33,15 @@ public class DungPilePiece extends ScatteredFeaturePiece {
         super(ModStructurePieces.DUNG_PILE.get(), tag);
     }
 
+    private void setupBlockStates() {
+        DUNG = ModBlocks.DUNG.get().defaultBlockState();
+        BOT_FLY = ModBlocks.DUNG_SPAWNER_BOT_FLY.get().defaultBlockState();
+        FLY = ModBlocks.DUNG_SPAWNER_FLY.get().defaultBlockState();
+    }
+
     @Override
     public void postProcess(@NotNull WorldGenLevel level, @NotNull StructureManager manager, @NotNull ChunkGenerator generator, @NotNull RandomSource random, @NotNull BoundingBox boundingBox, @NotNull ChunkPos chunkPos, @NotNull BlockPos pos) {
+        setupBlockStates();
         int radius = 5;
         int height = 5;
         for(int x = -radius; x <= radius; x++) {

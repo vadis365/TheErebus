@@ -8,8 +8,6 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import org.jspecify.annotations.NonNull;
 
 public class BlackAntLayer extends RenderLayer<BlackAntRenderState, BlackAntModel> {
@@ -24,7 +22,7 @@ public class BlackAntLayer extends RenderLayer<BlackAntRenderState, BlackAntMode
 	@Override
 	public void submit(PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, BlackAntRenderState state, float xRot, float yRot) {
 		pose.pushPose();
-		submit.submitModel(blackAntModel, state, pose, RenderTypes::entitySolid, lightCoords, OverlayTexture.NO_OVERLAY, -1, null, state.outlineColor, null);
+		//submit.submitModel(blackAntModel, state, pose, RenderTypes::entitySolid, lightCoords, OverlayTexture.NO_OVERLAY, -1, null, state.outlineColor, null);
 		pose.popPose();
 	}
 

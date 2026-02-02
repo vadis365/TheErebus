@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "G": {
-      "tag": "c:dyes/green"
-    },
-    "M": {
-      "item": "erebus:moss"
-    },
-    "S": {
-      "item": "erebus:supernatural_velocity"
-    }
+    "G": "#c:dyes/green",
+    "M": "erebus:moss",
+    "S": "erebus:supernatural_velocity"
   },
   "pattern": [
     "GSG",
@@ -18,7 +12,6 @@
     "GSG"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:moss_cultivated"
   }
 }

@@ -105,7 +105,6 @@
       "translate": "advancement.erebus.exploration/find_beetles.desc"
     },
     "icon": {
-      "count": 1,
       "id": "erebus:beetle_larva_raw"
     },
     "title": {

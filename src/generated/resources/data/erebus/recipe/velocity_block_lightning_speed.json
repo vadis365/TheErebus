@@ -2,36 +2,17 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "erebus:velocity_block"
-    },
-    {
-      "item": "erebus:supernatural_velocity"
-    },
-    {
-      "item": "erebus:supernatural_velocity"
-    },
-    {
-      "item": "erebus:supernatural_velocity"
-    },
-    {
-      "item": "erebus:supernatural_velocity"
-    },
-    {
-      "item": "erebus:supernatural_velocity"
-    },
-    {
-      "item": "erebus:supernatural_velocity"
-    },
-    {
-      "item": "erebus:supernatural_velocity"
-    },
-    {
-      "item": "erebus:supernatural_velocity"
-    }
+    "erebus:velocity_block",
+    "erebus:supernatural_velocity",
+    "erebus:supernatural_velocity",
+    "erebus:supernatural_velocity",
+    "erebus:supernatural_velocity",
+    "erebus:supernatural_velocity",
+    "erebus:supernatural_velocity",
+    "erebus:supernatural_velocity",
+    "erebus:supernatural_velocity"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:velocity_block_lightning_speed"
   }
 }

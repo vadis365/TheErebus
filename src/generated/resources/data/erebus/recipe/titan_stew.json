@@ -2,30 +2,15 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "erebus:stew_pot"
-    },
-    {
-      "item": "erebus:titan_chop_raw"
-    },
-    {
-      "item": "minecraft:potato"
-    },
-    {
-      "item": "minecraft:carrot"
-    },
-    {
-      "item": "erebus:cabbage"
-    },
-    {
-      "tag": "c:mushrooms"
-    },
-    {
-      "tag": "c:mushrooms"
-    }
+    "erebus:stew_pot",
+    "erebus:titan_chop_raw",
+    "minecraft:potato",
+    "minecraft:carrot",
+    "erebus:cabbage",
+    "#c:mushrooms",
+    "#c:mushrooms"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:titan_stew"
   }
 }

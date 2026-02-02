@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "erebus:block/log_cypress_end",
-    "side": "erebus:block/log_cypress_side"
+    "end": "erebus:block/log_cypress_top",
+    "side": "erebus:block/log_cypress"
   }
 }

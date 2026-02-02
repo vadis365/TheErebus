@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.erebus.umbercobble": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:umbercobble"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:two_by_two_block.erebus.umberpaver"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.erebus.umbercobble"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:two_by_two_block.erebus.umberpaver"
+    ]
+  }
+}

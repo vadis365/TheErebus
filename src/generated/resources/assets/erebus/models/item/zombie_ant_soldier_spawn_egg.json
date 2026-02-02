@@ -1,3 +1,6 @@
 {
-  "parent": "minecraft:item/template_spawn_egg"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "erebus:item/zombie_ant_soldier_spawn_egg"
+  }
 }

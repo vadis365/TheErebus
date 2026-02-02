@@ -21,18 +21,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class DarkFruitVineBlock extends BushBlock {
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 6);
     public static final MapCodec<DarkFruitVineBlock> CODEC = simpleCodec(DarkFruitVineBlock::new);
-    /*private static final VoxelShape AGE_0 = Block.box(0.375D, 0.875D, 0.375D, 0.625D, 1.0D, 0.625D);
-    private static final VoxelShape AGE_1 = Block.box(0.1875D, 0.625D, 0.1875D, 0.8125D, 1.0D, 0.8125D);
-    private static final VoxelShape AGE_2 = Block.box(0.1875D, 0.375D, 0.1875D, 0.8125D, 1.0D, 0.8125D);
-    private static final VoxelShape AGE_3 = Block.box(0.1875D, 0.1875D, 0.1875D, 0.8125D, 1.0D, 0.8125D);
-    private static final VoxelShape AGE_4 = Block.box(0.1875D, 0.0D, 0.1875D, 0.8125D, 1.0D, 0.8125D);
-    private static final VoxelShape AGE_5 = Block.box(0.0625D, 0.0D, 0.0625D, 0.9375D, 1.0D, 0.9375D);
-    private static final VoxelShape AGE_6 = Block.box(0.125D, 0.0D, 0.125D, 0.875D, 1.0D, 0.875D);*/
 
     public DarkFruitVineBlock(Properties properties) {
         super(properties);
@@ -40,7 +33,7 @@ public class DarkFruitVineBlock extends BushBlock {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    protected @NonNull InteractionResult useWithoutItem(BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Player player, @NonNull BlockHitResult hitResult) {
         int age = state.getValue(AGE);
 
         if (age == 5) {
@@ -63,7 +56,7 @@ public class DarkFruitVineBlock extends BushBlock {
     }
 
     @Override
-    protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+    protected boolean mayPlaceOn(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos) {
         return isValidBlock(state) && canSurvive(state, (LevelReader) level, pos);
     }
 
@@ -73,12 +66,12 @@ public class DarkFruitVineBlock extends BushBlock {
     }
 
     @Override
-    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+    protected boolean canSurvive(@NonNull BlockState state, LevelReader level, BlockPos pos) {
         return isValidBlock(level.getBlockState(pos.above()));
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, @NonNull RandomSource random) {
         int age = state.getValue(AGE);
 
         if (level.getBlockState(pos.below()).is(Blocks.AIR) && canSurvive(state, level, pos.below())) {
@@ -95,30 +88,8 @@ public class DarkFruitVineBlock extends BushBlock {
         if (age == 6 && random.nextInt(10) == 0) level.setBlockAndUpdate(pos, state.setValue(AGE, 4));
     }
 
-    /*@Override
-    protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
-        VoxelShape shape = Shapes.empty();
-        shape = switch (state.getValue(AGE)) {
-            case 0 -> AGE_0;
-            case 1 -> AGE_1;
-            case 2 -> AGE_2;
-            case 3 -> AGE_3;
-            case 4 -> AGE_4;
-            case 5 -> AGE_5;
-            case 6 -> AGE_6;
-            default -> shape;
-        };
-
-        return shape.isEmpty() ? Shapes.block() : shape;
-    }*/
-
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AGE);
-    }
-
-    @Override
-    protected @NotNull MapCodec<? extends BushBlock> codec() {
-        return CODEC;
     }
 }

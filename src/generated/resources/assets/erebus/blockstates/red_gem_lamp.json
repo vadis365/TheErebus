@@ -1,7 +1,7 @@
 {
   "variants": {
     "lit=false": {
-      "model": "erebus:block/red_gem_lamp_off"
+      "model": "erebus:block/red_gem_lamp"
     },
     "lit=true": {
       "model": "erebus:block/red_gem_lamp_on"

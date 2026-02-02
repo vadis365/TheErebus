@@ -3,7 +3,7 @@ package erebus.inventory.slot;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.capabilities.Capabilities;
 
 public class FluidContainerSlot extends Slot {
 
@@ -13,6 +13,7 @@ public class FluidContainerSlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return FluidUtil.getFluidHandler(stack).isPresent();
+        var fluidCap = stack.getCapability(Capabilities.Fluid.ITEM, null);
+        return fluidCap != null;
     }
 }

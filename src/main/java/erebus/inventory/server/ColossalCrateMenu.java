@@ -35,7 +35,7 @@ public class ColossalCrateMenu extends AbstractContainerMenu {
 	public ColossalCrateMenu(final int windowId, final Inventory playerInventory, FriendlyByteBuf extra) {
 		super(ModMenuTypes.COLOSSAL_CRATE.get(), windowId);
 		BlockPos pos = extra.readBlockPos();
-		Level level = playerInventory.player.getCommandSenderWorld();
+		Level level = playerInventory.player.level();
 
 		List<BambooCrateBlockEntity> list = new ArrayList<BambooCrateBlockEntity>();
 		for (int[] place : places) {

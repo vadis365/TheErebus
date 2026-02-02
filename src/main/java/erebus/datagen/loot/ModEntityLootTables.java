@@ -41,8 +41,10 @@ public class ModEntityLootTables extends EntityLootSubProvider {
 
     @Override
     public void generate() {
-        //TODO work out how TF this all works now
-        //this.noLoot(ModEntities.ANIMATED_BLOCK);
+        noLoot(ModEntities.ANIMATED_BLOCK);
+        noLoot(ModEntities.THROWN_BLOCK_AS_ITEM);
+        noLoot(ModEntities.GOO_BALL);
+        noLoot(ModEntities.AMBER_STAR);
 
         add(
                 ModEntities.BLACK_WIDOW.get(),

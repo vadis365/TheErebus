@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "erebus:block/log_rotten_end",
-    "side": "erebus:block/log_rotten_side"
+    "end": "erebus:block/log_rotten_top",
+    "side": "erebus:block/log_rotten"
   }
 }

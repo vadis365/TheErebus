@@ -34,8 +34,9 @@ public record PreservedBlockNBTPacket(int x, int y, int z, CompoundTag tag) impl
             Level level = Minecraft.getInstance().level;
             if(level != null) {
                 BlockEntity entity = level.getBlockEntity(new BlockPos(message.x, message.y, message.z));
-                if(entity instanceof PreservedBlockEntity preserved)
-                    preserved.saveAdditional(message.tag, level.registryAccess());
+                if(entity instanceof PreservedBlockEntity preserved) {
+                    //preserved.saveAdditional(message.tag, level.registryAccess());
+                }
             }
         });
     }

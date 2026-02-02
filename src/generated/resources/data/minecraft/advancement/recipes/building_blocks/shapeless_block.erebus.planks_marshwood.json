@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.erebus.log_marshwood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:log_marshwood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:shapeless_block.erebus.planks_marshwood"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.erebus.log_marshwood"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:shapeless_block.erebus.planks_marshwood"
+    ]
+  }
+}

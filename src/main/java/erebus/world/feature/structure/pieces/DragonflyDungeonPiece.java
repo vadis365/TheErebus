@@ -21,10 +21,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class DragonflyDungeonPiece extends ScatteredFeaturePiece {
 
-    private final BlockState AIR = Blocks.AIR.defaultBlockState();
-    private final BlockState GIANT_LILY_PAD = ModBlocks.GIANT_LILY_PAD.get().defaultBlockState();
-    private final BlockState PETAL = ModBlocks.PETAL_WHITE.get().defaultBlockState();
-    private final BlockState SPAWNER = ModBlocks.DRAGON_FLY_SPAWNER.get().defaultBlockState();
+    private BlockState AIR;
+    private BlockState GIANT_LILY_PAD;
+    private BlockState PETAL;
+    private BlockState SPAWNER;
 
     public DragonflyDungeonPiece(RandomSource random, int x, int z) {
         super(ModStructurePieces.DRAGONFLY_DUNGEON.get(), x, 64, z, 10, 8, 10, getRandomHorizontalDirection(random));
@@ -34,8 +34,16 @@ public class DragonflyDungeonPiece extends ScatteredFeaturePiece {
         super(ModStructurePieces.DRAGONFLY_DUNGEON.get(), tag);
     }
 
+    private void setupBlockStates() {
+        AIR = Blocks.AIR.defaultBlockState();
+        GIANT_LILY_PAD = ModBlocks.GIANT_LILY_PAD.get().defaultBlockState();
+        PETAL = ModBlocks.PETAL_WHITE.get().defaultBlockState();
+        SPAWNER = ModBlocks.DRAGON_FLY_SPAWNER.get().defaultBlockState();
+    }
+
     @Override
     public void postProcess(@NotNull WorldGenLevel level, @NotNull StructureManager manager, @NotNull ChunkGenerator generator, @NotNull RandomSource random, @NotNull BoundingBox boundingBox, @NotNull ChunkPos chunkPos, @NotNull BlockPos pos) {
+        setupBlockStates();
         generateMainLilyPad(level, pos);
         Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
         switch (direction) {

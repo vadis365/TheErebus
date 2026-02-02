@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": "erebus:plate_exo"
+  },
+  "pattern": [
+    "M M",
+    "M M"
+  ],
+  "result": {
+    "id": "erebus:exoskeleton_boots"
+  }
+}

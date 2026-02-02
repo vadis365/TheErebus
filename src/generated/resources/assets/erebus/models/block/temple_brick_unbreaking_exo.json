@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "erebus:block/temple_brick_exo"
+    "all": "erebus:block/temple_brick_unbreaking_exo"
   }
 }

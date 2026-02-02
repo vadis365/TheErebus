@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "erebus:block/crop_turnip_stage2"
+  }
+}

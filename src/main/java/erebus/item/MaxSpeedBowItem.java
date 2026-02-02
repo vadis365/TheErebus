@@ -1,18 +1,18 @@
 package erebus.item;
 
+import erebus.Erebus;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.EventHooks;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +28,8 @@ public class MaxSpeedBowItem extends ProjectileWeaponItem {
     public MaxSpeedBowItem() {
         super(new Item.Properties()
                 .durability(500)
-                .rarity(Rarity.RARE));
+                .rarity(Rarity.RARE)
+                .setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("max_speed_bow"))));
     }
 
     @Override
@@ -47,18 +48,10 @@ public class MaxSpeedBowItem extends ProjectileWeaponItem {
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
+    public @NotNull InteractionResult use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         boolean hasProjectile = !player.getProjectile(itemstack).isEmpty();
-        InteractionResultHolder<ItemStack> arrowNockResult = EventHooks.onArrowNock(itemstack, level, player, hand, hasProjectile);
-        if (arrowNockResult != null) {
-            return arrowNockResult;
-        } else if (!player.hasInfiniteMaterials() && !hasProjectile) {
-            return InteractionResultHolder.fail(itemstack);
-        } else {
-            player.startUsingItem(hand);
-            return InteractionResultHolder.consume(itemstack);
-        }
+        return EventHooks.onArrowNock(itemstack, level, player, hand, hasProjectile);
     }
 
     @Override
@@ -114,8 +107,8 @@ public class MaxSpeedBowItem extends ProjectileWeaponItem {
     }
 
     @Override
-    public @NotNull UseAnim getUseAnimation(@NotNull ItemStack stack) {
-        return UseAnim.NONE;
+    public @NotNull ItemUseAnimation getUseAnimation(@NotNull ItemStack stack) {
+        return ItemUseAnimation.BOW;
     }
 
     @Override

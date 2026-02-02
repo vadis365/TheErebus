@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "B": {
-      "item": "erebus:rein_exoskeleton_boots"
-    },
-    "F": {
-      "item": "erebus:elastic_fiber"
-    },
-    "W": {
-      "item": "erebus:fly_wing"
-    }
+    "B": "erebus:rein_exoskeleton_boots",
+    "F": "erebus:elastic_fiber",
+    "W": "erebus:fly_wing"
   },
   "pattern": [
     "W W",
@@ -18,7 +12,6 @@
     "F F"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:jump_boots"
   }
 }

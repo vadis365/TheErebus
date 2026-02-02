@@ -3,11 +3,8 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.35,
-  "ingredient": {
-    "item": "erebus:stag_heart_raw"
-  },
+  "ingredient": "erebus:stag_heart_raw",
   "result": {
-    "count": 1,
     "id": "erebus:stag_heart_cooked"
   }
 }

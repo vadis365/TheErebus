@@ -1,14 +1,13 @@
 package erebus.client.render.item.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Unit;
 
-public class WaspSwordModel extends Model {
+public class WaspSwordModel extends Model<Unit> {
     public final ModelPart point;
     public final ModelPart blade;
     public final ModelPart spikeTop1;
@@ -31,7 +30,7 @@ public class WaspSwordModel extends Model {
     public final ModelPart pommel;
 
     public WaspSwordModel(ModelPart root) {
-        super(RenderType::entitySolid);
+        super(root, RenderTypes::entitySolid);
         point = root.getChild("Point");
         blade = root.getChild("Blade");
         spikeTop1 = root.getChild("SpikeTop1");
@@ -379,29 +378,5 @@ public class WaspSwordModel extends Model {
         );
 
         return LayerDefinition.create(meshdefinition, 32, 64);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-        point.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        blade.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        spikeTop1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        spikeTop2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        spikeMid1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        spikeMid2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        spikeBot1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        spikeBot2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        Decl4.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        Decl3.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        Decl2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        Decl1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        DecR1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        DecR2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        DecR3.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        DecR4.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        tang.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        tangJewel.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        hilt.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        pommel.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

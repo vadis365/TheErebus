@@ -22,6 +22,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 
@@ -157,14 +158,14 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 	}
 
 	@Override
-	protected void loadAdditional(ValueInput input) {
+	protected void loadAdditional(@NonNull ValueInput input) {
 		super.loadAdditional(input);
 		time = input.getIntOr("time", 0);
 		isCrafting = input.getBooleanOr("isCrafting", false);
 	}
 
 	@Override
-	protected void saveAdditional(ValueOutput output) {
+	protected void saveAdditional(@NonNull ValueOutput output) {
 		super.saveAdditional(output);
 		output.putInt("time", time);
 		output.putBoolean("isCrafting", isCrafting);

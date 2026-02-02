@@ -1,14 +1,11 @@
 {
   "type": "minecraft:blasting",
-  "category": "misc",
+  "category": "blocks",
   "cookingtime": 100,
   "experience": 0.25,
   "group": "jade",
-  "ingredient": {
-    "item": "erebus:ore_jade"
-  },
+  "ingredient": "erebus:ore_jade",
   "result": {
-    "count": 1,
     "id": "erebus:jade"
   }
 }

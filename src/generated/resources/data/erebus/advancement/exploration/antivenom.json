@@ -37,7 +37,6 @@
       "translate": "advancement.erebus.exploration/antivenom.desc"
     },
     "icon": {
-      "count": 1,
       "id": "erebus:anti_venom_bottle"
     },
     "title": {

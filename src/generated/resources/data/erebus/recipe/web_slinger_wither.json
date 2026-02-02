@@ -2,27 +2,14 @@
   "type": "minecraft:crafting_shapeless",
   "category": "equipment",
   "ingredients": [
-    {
-      "item": "erebus:web_slinger"
-    },
-    {
-      "item": "minecraft:soul_sand"
-    },
-    {
-      "item": "erebus:poison_gland"
-    },
-    {
-      "item": "erebus:wither_web"
-    },
-    {
-      "item": "erebus:wither_web"
-    },
-    {
-      "item": "erebus:wither_web"
-    }
+    "erebus:web_slinger",
+    "minecraft:soul_sand",
+    "erebus:poison_gland",
+    "erebus:wither_web",
+    "erebus:wither_web",
+    "erebus:wither_web"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:web_slinger_wither"
   }
 }

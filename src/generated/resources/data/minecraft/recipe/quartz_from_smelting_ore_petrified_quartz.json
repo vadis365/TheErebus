@@ -1,14 +1,11 @@
 {
   "type": "minecraft:smelting",
-  "category": "misc",
+  "category": "blocks",
   "cookingtime": 200,
   "experience": 0.25,
   "group": "quartz",
-  "ingredient": {
-    "item": "erebus:ore_petrified_quartz"
-  },
+  "ingredient": "erebus:ore_petrified_quartz",
   "result": {
-    "count": 1,
     "id": "minecraft:quartz"
   }
 }

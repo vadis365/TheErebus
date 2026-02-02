@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "A": {
-      "item": "erebus:mud_brick"
-    },
-    "B": {
-      "item": "minecraft:clay_ball"
-    }
+    "A": "erebus:mud_brick",
+    "B": "minecraft:clay_ball"
   },
   "pattern": [
     "AB",

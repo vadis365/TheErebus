@@ -1,21 +1,19 @@
 package erebus.client.render.item.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Unit;
 
-public class ErebusShieldPartsModel extends Model {
+public class ErebusShieldPartsModel extends Model<Unit> {
     public final ModelPart handle;
     public final ModelPart boss1;
     public final ModelPart boss2;
 
     public ErebusShieldPartsModel(ModelPart root) {
-        super(RenderType::entitySolid);
+        super(root, RenderTypes::entitySolid);
         handle = root.getChild("handle");
         boss1 = root.getChild("boss1");
         boss2 = root.getChild("boss2");
@@ -50,12 +48,5 @@ public class ErebusShieldPartsModel extends Model {
         );
 
         return LayerDefinition.create(mesh, 64, 64);
-    }
-
-    @Override
-    public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-        handle.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        boss1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        boss2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

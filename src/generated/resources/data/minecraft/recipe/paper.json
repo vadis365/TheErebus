@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "erebus:papyrus"
-    },
-    {
-      "item": "erebus:papyrus"
-    }
+    "erebus:papyrus",
+    "erebus:papyrus"
   ],
   "result": {
     "count": 4,

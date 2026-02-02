@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.erebus.planks_rotten": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:planks_rotten"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:fence_gate_block.erebus.fence_gate_rotten"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.erebus.planks_rotten"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:fence_gate_block.erebus.fence_gate_rotten"
+    ]
+  }
+}

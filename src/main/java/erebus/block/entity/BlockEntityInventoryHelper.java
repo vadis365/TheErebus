@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -20,9 +21,9 @@ public abstract class BlockEntityInventoryHelper extends BlockEntity implements 
 
 	private final NonNullList<ItemStack> inventory;
 
-	public BlockEntityInventoryHelper(BlockEntityType<?> tileEntityTypeIn, int invtSize, BlockPos pos, BlockState state) {
+	public BlockEntityInventoryHelper(BlockEntityType<?> tileEntityTypeIn, int invSize, BlockPos pos, BlockState state) {
 		super(tileEntityTypeIn, pos, state);
-		inventory = NonNullList.withSize(invtSize, ItemStack.EMPTY);
+		inventory = NonNullList.withSize(invSize, ItemStack.EMPTY);
 	}
 
 	@Override
@@ -85,13 +86,13 @@ public abstract class BlockEntityInventoryHelper extends BlockEntity implements 
 	}
 
 	@Override
-	protected void saveAdditional(ValueOutput output) {
+	protected void saveAdditional(@NonNull ValueOutput output) {
 		super.saveAdditional(output);
 		ContainerHelper.saveAllItems(output, inventory, false);
 	}
 
 	@Override
-	protected void loadAdditional(ValueInput input) {
+	protected void loadAdditional(@NonNull ValueInput input) {
 		super.loadAdditional(input);
 		ContainerHelper.loadAllItems(input, inventory);
 	}

@@ -9,11 +9,6 @@ import net.minecraft.util.Mth;
 
 public class AntModel extends EntityModel<AntRenderState> {
 	public ModelPart root;
-    private final ModelPart Ab;
-	private final ModelPart AbF;
-	private final ModelPart AbSide;
-	private final ModelPart AbTop;
-	private final ModelPart AbBack;
     private final ModelPart Head1;
 	private final ModelPart RightFrontLeg;
 	private final ModelPart RightMidLeg;
@@ -29,11 +24,11 @@ public class AntModel extends EntityModel<AntRenderState> {
         root.getChild("ThxTop");
         root.getChild("ThxS");
         root.getChild("Thx2Ab");
-        this.Ab = root.getChild("Ab");
-		this.AbF = root.getChild("AbF");
-		this.AbSide = root.getChild("AbSide");
-		this.AbTop = root.getChild("AbTop");
-		this.AbBack = root.getChild("AbBack");
+        root.getChild("Ab");
+        root.getChild("AbF");
+        root.getChild("AbSide");
+        root.getChild("AbTop");
+        root.getChild("AbBack");
         root.getChild("Neck");
         this.Head1 = root.getChild("Head1");
 		this.RightFrontLeg = root.getChild("RightFrontLeg");
@@ -173,13 +168,5 @@ public class AntModel extends EntityModel<AntRenderState> {
 		RightBackLeg.yRot = 0.6981F + sin;
 		RightMidLeg.yRot = 0F - sin;
 		RightFrontLeg.yRot = -0.6981F + sin;
-
-		if (state.isHoneyPotAnt) {
-			Ab.xRot = state.honeyPotBelly * 0.25F;
-			AbF.xRot = state.honeyPotBelly * 0.25F;
-			AbSide.xRot = state.honeyPotBelly * 0.25F;
-			AbTop.xRot = state.honeyPotBelly * 0.25F;
-			AbBack.xRot = state.honeyPotBelly * 0.25F;
-		}
 	}
 }

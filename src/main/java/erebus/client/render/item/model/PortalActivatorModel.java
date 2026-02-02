@@ -1,19 +1,18 @@
 package erebus.client.render.item.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Unit;
 
-public class PortalActivatorModel extends Model {
+public class PortalActivatorModel extends Model<Unit> {
 
     public final ModelPart[] boxes = new ModelPart[8];
 
     public PortalActivatorModel(ModelPart root) {
-        super(RenderType::entitySolid);
+        super(root, RenderTypes::entitySolid);
         for (int c = 0; c < boxes.length; c++) {
             ModelPart box = root.getChild("box" + c);
             boxes[c] = box;
@@ -137,12 +136,5 @@ public class PortalActivatorModel extends Model {
         );
 
         return LayerDefinition.create(meshdefinition, 64, 32);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        for (ModelPart box : boxes) {
-            box.render(poseStack, buffer, packedLight, packedOverlay, color);
-        }
     }
 }

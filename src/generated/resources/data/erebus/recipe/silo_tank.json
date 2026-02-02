@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {
-      "item": "minecraft:iron_block"
-    },
-    "C": {
-      "item": "erebus:chest_petrified"
-    },
-    "I": {
-      "item": "minecraft:iron_ingot"
-    },
-    "P": {
-      "item": "erebus:planks_varnished"
-    }
+    "B": "minecraft:iron_block",
+    "C": "erebus:chest_petrified",
+    "I": "minecraft:iron_ingot",
+    "P": "erebus:planks_varnished"
   },
   "pattern": [
     "IPI",
@@ -21,7 +13,6 @@
     "IPI"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:silo_tank"
   }
 }

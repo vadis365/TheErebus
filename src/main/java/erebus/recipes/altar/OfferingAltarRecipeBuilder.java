@@ -4,13 +4,14 @@ import net.minecraft.advancements.Criterion;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.Identifier;
-import net.minecraft.tags.TagKey;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -34,10 +35,6 @@ public class OfferingAltarRecipeBuilder implements RecipeBuilder {
 
 	public static OfferingAltarRecipeBuilder reversion() {
 		return new OfferingAltarRecipeBuilder(null);
-	}
-
-	public OfferingAltarRecipeBuilder requires(TagKey<Item> tag) {
-		return this.requires(Ingredient.of(tag));
 	}
 
 	public OfferingAltarRecipeBuilder requires(ItemLike item) {
@@ -65,25 +62,29 @@ public class OfferingAltarRecipeBuilder implements RecipeBuilder {
 	}
 
 	@Override
-	public RecipeBuilder unlockedBy(String name, Criterion<?> criterion) {
+	public @NonNull RecipeBuilder unlockedBy(@NonNull String name, @NonNull Criterion<?> criterion) {
 		return this;
 	}
 
 	@Override
-	public RecipeBuilder group(@Nullable String groupName) {
+	public @NonNull RecipeBuilder group(@Nullable String groupName) {
 		return this;
 	}
 
 	@Override
+	public @NonNull ResourceKey<Recipe<?>> defaultId() {
+		return null;
+	}
+
 	public Item getResult() {
 		return this.resultStack != null ? this.resultStack.getItem() : Items.AIR;
 	}
 
 	@Override
-	public void save(RecipeOutput recipeOutput, Identifier id) {
+	public void save(@NonNull RecipeOutput output, @NonNull ResourceKey<Recipe<?>> key) {
 		OfferingAltarRecipe recipe = null;
 		if (this.resultStack != null)
 			recipe = new OfferingAltarRecipeMaker(this.ingredients, this.resultStack);
-		recipeOutput.accept(id.withPrefix("offering_altar/"), recipe, null);
+		output.accept(key, recipe, null);
 	}
 }

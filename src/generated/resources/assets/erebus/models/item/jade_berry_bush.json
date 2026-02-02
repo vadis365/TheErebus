@@ -1,7 +1,6 @@
 {
   "parent": "minecraft:item/generated",
-  "render_type": "minecraft:translucent",
   "textures": {
-    "layer0": "erebus:block/jade_berry_bush_3"
+    "layer0": "erebus:item/jade_berry_bush"
   }
 }

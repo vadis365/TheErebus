@@ -16,12 +16,13 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.fluids.FluidUtil;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.fluid.FluidUtil;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class FluidJarBlock extends BaseEntityBlock {
 	
@@ -61,15 +62,16 @@ public class FluidJarBlock extends BaseEntityBlock {
 			return InteractionResult.SUCCESS;
 		BlockEntity tileentity = world.getBlockEntity(pos);
 		if (tileentity instanceof FluidJarBlockEntity) {
-			Optional<IFluidHandler> fluidHandler = CapHelper.getFluidHandler(world, pos, hit.getDirection());
-			fluidHandler.ifPresent((handler) -> {
+			ResourceHandler<FluidResource> handler = world.getCapability(Capabilities.Fluid.BLOCK, pos, hit.getDirection());
+			if (handler != null) {
 				if (player.getItemInHand(hand).isEmpty() || !FluidUtil.interactWithFluidHandler(player, hand, world, pos, hit.getDirection())) {
-					if (!handler.getFluidInTank(0).isEmpty())
-						player.displayClientMessage(Component.literal(handler.getFluidInTank(0).getHoverName().getString() + ": " + handler.getFluidInTank(0).getAmount() + "/" + handler.getTankCapacity(0)), true);
+					FluidResource resource = handler.getResource(0);
+					if (!resource.isEmpty())
+						player.displayClientMessage(Component.literal(resource.getHoverName().getString() + ": " + handler.getAmountAsInt(0) + "/" + FluidJarBlockEntity.MAX_CAPACITY), true);
 					else
-						player.displayClientMessage(Component.literal("Empty: 0/" + handler.getTankCapacity(0)), true);
+						player.displayClientMessage(Component.literal("Empty: 0/" + FluidJarBlockEntity.MAX_CAPACITY), true);
 				}
-			});
+			}
 			return InteractionResult.SUCCESS;
 		}
 		return InteractionResult.PASS;

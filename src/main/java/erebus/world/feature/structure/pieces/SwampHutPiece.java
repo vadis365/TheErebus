@@ -22,12 +22,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class SwampHutPiece extends ScatteredFeaturePiece {
 
-    private final BlockState LOG = ModBlocks.LOG_MOSSBARK.get().defaultBlockState();
-    private final BlockState PLANK = ModBlocks.PLANKS_MOSSBARK.get().defaultBlockState();
-    private final BlockState STAIR = ModBlocks.STAIRS_MOSSBARK.get().defaultBlockState();
-    private final BlockState BRICKS = ModBlocks.UMBERCOBBLE.get().defaultBlockState();
-    private final BlockState FENCE = ModBlocks.FENCE_MOSSBARK.get().defaultBlockState();
-    private final BlockState DOOR = ModBlocks.DOOR_MOSSBARK.get().defaultBlockState();
+    private BlockState LOG;
+    private BlockState PLANK;
+    private BlockState STAIR;
+    private BlockState BRICKS;
+    private BlockState FENCE;
+    private BlockState DOOR;
 
     public SwampHutPiece(RandomSource random, int x, int z) {
         super(ModStructurePieces.SWAMP_HUT.get(), x, 64, z, 10, 8, 10, getRandomHorizontalDirection(random));
@@ -37,8 +37,18 @@ public class SwampHutPiece extends ScatteredFeaturePiece {
         super(ModStructurePieces.SWAMP_HUT.get(), tag);
     }
 
+    private void setupBlockStates() {
+        LOG = ModBlocks.LOG_MOSSBARK.get().defaultBlockState();
+        PLANK = ModBlocks.PLANKS_MOSSBARK.get().defaultBlockState();
+        STAIR = ModBlocks.STAIRS_MOSSBARK.get().defaultBlockState();
+        BRICKS = ModBlocks.UMBERCOBBLE.get().defaultBlockState();
+        FENCE = ModBlocks.FENCE_MOSSBARK.get().defaultBlockState();
+        DOOR = ModBlocks.DOOR_MOSSBARK.get().defaultBlockState();
+    }
+
     @Override
     public void postProcess(@NotNull WorldGenLevel level, @NotNull StructureManager manager, @NotNull ChunkGenerator generator, @NotNull RandomSource random, @NotNull BoundingBox boundingBox, @NotNull ChunkPos chunkPos, @NotNull BlockPos pos) {
+        setupBlockStates();
         verticalBeam(level, pos.offset(5, 0, 5), LOG, 4);
         verticalBeam(level, pos.offset(10, 0, 5), LOG, 4);
         verticalBeam(level, pos.offset(5, 0, 10), LOG, 4);

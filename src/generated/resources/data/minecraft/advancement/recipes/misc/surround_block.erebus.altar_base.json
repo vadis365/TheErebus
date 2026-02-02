@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_inner": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:obsidian"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_outer": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:altar_fragment"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:surround_block.erebus.altar_base"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_outer",
+      "has_inner"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:surround_block.erebus.altar_base"
+    ]
+  }
+}

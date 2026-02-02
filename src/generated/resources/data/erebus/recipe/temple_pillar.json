@@ -2,16 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "T": {
-      "item": "erebus:temple_tile"
-    }
+    "T": "erebus:temple_tile"
   },
   "pattern": [
     "T",
     "T"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:temple_pillar"
   }
 }

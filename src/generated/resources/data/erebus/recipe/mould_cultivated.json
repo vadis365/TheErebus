@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "L": {
-      "item": "minecraft:lapis_lazuli"
-    },
-    "M": {
-      "item": "erebus:mould"
-    },
-    "S": {
-      "item": "erebus:supernatural_velocity"
-    }
+    "L": "minecraft:lapis_lazuli",
+    "M": "erebus:mould",
+    "S": "erebus:supernatural_velocity"
   },
   "pattern": [
     "LSL",
@@ -18,7 +12,6 @@
     "LSL"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:mould_cultivated"
   }
 }

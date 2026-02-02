@@ -1,11 +1,14 @@
 package erebus.item;
 
+import erebus.Erebus;
 import erebus.registries.ModSounds;
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -17,9 +20,9 @@ import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NonNull;
 
 public class InsectRepellentItem extends Item {
-    public InsectRepellentItem() {
-        super(new Item.Properties());
-    }
+	public InsectRepellentItem() {
+		super(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("insect_repellent"))));
+	}
 
     @Override
     public @NonNull Component getHighlightTip(@NonNull ItemStack item, @NonNull Component displayName) {

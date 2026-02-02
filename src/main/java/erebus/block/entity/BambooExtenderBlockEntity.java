@@ -8,27 +8,23 @@ import erebus.registries.blocks.ModBlocks;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jspecify.annotations.NonNull;
-
-import javax.annotation.Nonnull;
 
 public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 
@@ -80,7 +76,8 @@ public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implem
 			blockIndex = getBlockPos().relative(direction, index);
 		}
 		BlockState state = getLevel().getBlockState(blockIndex);
-		if (state.getBlock() == null || state.is(BlockTags.REPLACEABLE) || !extending)
+        state.getBlock();
+        if (state.is(BlockTags.REPLACEABLE) || !extending)
 			return index;
 
 		return index - 1;
@@ -133,35 +130,20 @@ public class BambooExtenderBlockEntity extends BlockEntityInventoryHelper implem
 	}
 
 	@Override
-	public void saveAdditional(@Nonnull CompoundTag nbt, @Nonnull HolderLookup.Provider registries) {
-		super.saveAdditional(nbt, registries);
-		nbt.putBoolean("extending", extending);
+	public void saveAdditional(@NonNull ValueOutput output) {
+		super.saveAdditional(output);
+		output.putBoolean("extending", extending);
 	}
 
 	@Override
-	public void loadAdditional(@Nonnull CompoundTag nbt, @Nonnull HolderLookup.Provider registries) {
-		super.loadAdditional(nbt, registries);
-		extending = nbt.getBooleanOr("extending", false);
-	}
-
-	@Nonnull
-	@Override
-	public CompoundTag getUpdateTag(@Nonnull HolderLookup.Provider registries) {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, registries);
-		return nbt;
-	}
-
-	@Override
-	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		CompoundTag nbt = new CompoundTag();
-		saveAdditional(nbt, level.registryAccess());
-		return ClientboundBlockEntityDataPacket.create(this);
+	public void loadAdditional(@NonNull ValueInput input) {
+		super.loadAdditional(input);
+		extending = input.getBooleanOr("extending", false);
 	}
 
     @Override
 	public boolean canPlaceItem(int slot, ItemStack stack) {
-		 return !stack.isEmpty() && (stack.getItem() == Item.byBlock(ModBlocks.BAMBOO_NERD_POLE.get()) || stack.getItem() == Item.byBlock(ModBlocks.BAMBOO_BRIDGE.get()));
+		 return !stack.isEmpty() && (stack.is(ModBlocks.BAMBOO_NERD_POLE.asItem()) || stack.is(ModBlocks.BAMBOO_BRIDGE.asItem()));
 	}
 
 	@Override

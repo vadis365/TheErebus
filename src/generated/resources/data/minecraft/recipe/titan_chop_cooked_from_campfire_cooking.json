@@ -3,11 +3,8 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.35,
-  "ingredient": {
-    "item": "erebus:titan_chop_raw"
-  },
+  "ingredient": "erebus:titan_chop_raw",
   "result": {
-    "count": 1,
     "id": "erebus:titan_chop_cooked"
   }
 }

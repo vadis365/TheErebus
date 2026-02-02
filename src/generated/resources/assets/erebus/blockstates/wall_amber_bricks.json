@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "erebus:block/amber_bricks_post"
+        "model": "erebus:block/wall_amber_bricks_post"
       },
       "when": {
         "up": "true"
@@ -10,7 +10,16 @@
     },
     {
       "apply": {
-        "model": "erebus:block/amber_bricks_side",
+        "model": "erebus:block/wall_amber_bricks_side",
+        "uvlock": true
+      },
+      "when": {
+        "north": "low"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/wall_amber_bricks_side",
         "uvlock": true,
         "y": 90
       },
@@ -20,35 +29,7 @@
     },
     {
       "apply": {
-        "model": "erebus:block/amber_bricks_side_tall",
-        "uvlock": true,
-        "y": 90
-      },
-      "when": {
-        "east": "tall"
-      }
-    },
-    {
-      "apply": {
-        "model": "erebus:block/amber_bricks_side",
-        "uvlock": true
-      },
-      "when": {
-        "north": "low"
-      }
-    },
-    {
-      "apply": {
-        "model": "erebus:block/amber_bricks_side_tall",
-        "uvlock": true
-      },
-      "when": {
-        "north": "tall"
-      }
-    },
-    {
-      "apply": {
-        "model": "erebus:block/amber_bricks_side",
+        "model": "erebus:block/wall_amber_bricks_side",
         "uvlock": true,
         "y": 180
       },
@@ -58,17 +39,7 @@
     },
     {
       "apply": {
-        "model": "erebus:block/amber_bricks_side_tall",
-        "uvlock": true,
-        "y": 180
-      },
-      "when": {
-        "south": "tall"
-      }
-    },
-    {
-      "apply": {
-        "model": "erebus:block/amber_bricks_side",
+        "model": "erebus:block/wall_amber_bricks_side",
         "uvlock": true,
         "y": 270
       },
@@ -78,7 +49,36 @@
     },
     {
       "apply": {
-        "model": "erebus:block/amber_bricks_side_tall",
+        "model": "erebus:block/wall_amber_bricks_side_tall",
+        "uvlock": true
+      },
+      "when": {
+        "north": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/wall_amber_bricks_side_tall",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/wall_amber_bricks_side_tall",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "tall"
+      }
+    },
+    {
+      "apply": {
+        "model": "erebus:block/wall_amber_bricks_side_tall",
         "uvlock": true,
         "y": 270
       },

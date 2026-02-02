@@ -89,6 +89,18 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 	public void submit(LiquifierBlockEntityRenderState renderState, PoseStack pose, @NonNull SubmitNodeCollector submitNodeCollector, @NonNull CameraRenderState cameraRenderState) {
 		Material material = new Material(TEXTURE, TEXTURE);
 
+		if (!renderState.tankResource.isEmpty() && renderState.tankAmount > 0) {
+			float height = (0.375F / renderState.tankCapacity) * renderState.tankAmount;
+
+			float xMax = 0.9921875F;
+			float zMax = 0.9921875F;
+			float xMin = 0.0078125F;
+			float zMin = 0.0078125F;
+			float yMin = 0.0078125F;
+
+			// FluidRenderHelper.renderFluid(renderState.tankResource.toStack(renderState.tankAmount), pose, submitNodeCollector, xMin, xMax, yMin, height, zMin, zMax, renderState.lightCoords);
+		}
+
 		pose.pushPose();
 		pose.translate(0.5, 0.5, 0.5);
 		renderState.itemStackRenderState.submit(pose, submitNodeCollector, renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
@@ -121,6 +133,9 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 	public void extractRenderState(LiquifierBlockEntity blockEntity, LiquifierBlockEntityRenderState state, float partialTicks, @NonNull Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
 		BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
 		state.partialTicks = partialTicks;
+		state.tankResource = blockEntity.tank.getResource(0);
+		state.tankAmount = blockEntity.tank.getAmountAsInt(0);
+		state.tankCapacity = net.neoforged.neoforge.fluids.FluidType.BUCKET_VOLUME * 8;
 		itemModelResolver.updateForTopItem(
 				state.itemStackRenderState,
 				blockEntity.getSlot(0).get(),

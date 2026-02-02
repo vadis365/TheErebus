@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "minecraft:bucket"
-    },
-    "G": {
-      "item": "erebus:amber_glass"
-    },
-    "P": {
-      "item": "erebus:planks_varnished"
-    }
+    "B": "minecraft:bucket",
+    "G": "erebus:amber_glass",
+    "P": "erebus:planks_varnished"
   },
   "pattern": [
     "PPP",
@@ -18,7 +12,6 @@
     "GGG"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:fluid_jar"
   }
 }

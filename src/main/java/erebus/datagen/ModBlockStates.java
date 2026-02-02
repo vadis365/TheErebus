@@ -1,61 +1,36 @@
 package erebus.datagen;
 
-import erebus.Erebus;
+import erebus.block.CandleHoneyTreatBlock;
 import erebus.block.HoneyTreatBlock;
-import erebus.block.plants.DarkFruitVineBlock;
 import erebus.block.plants.ModBerryBushBlock;
 import erebus.block.plants.ModCropBlock;
 import erebus.registries.ModBlockFamilies;
 import erebus.registries.blocks.ModBlocks;
-import net.minecraft.client.color.item.GrassColorSource;
 import net.minecraft.client.data.models.BlockModelGenerators;
-import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
-import net.minecraft.client.data.models.model.ModelLocationUtils;
-import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.data.BlockFamily;
-import net.minecraft.data.PackOutput;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import org.jspecify.annotations.NonNull;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant;
 import static net.minecraft.client.data.models.model.TextureMapping.craftingTable;
 
-public class ModBlockStates extends ModelProvider {
-
-    public ModBlockStates(PackOutput output) {
-        super(output, Erebus.MODID);
-    }
-
-    @Override
-    protected void registerModels(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels) {
-        registerModels(blockModels);
-    }
+public class ModBlockStates {
 
     protected void registerModels(BlockModelGenerators blockModels) {
         ModBlockFamilies.getAllFamilies()
                 .filter(BlockFamily::shouldGenerateModel)
-                        .forEach(family -> blockModels.family(family.getBaseBlock()).generateFor(family));
-
+                .forEach(family -> blockModels.family(family.getBaseBlock()).generateFor(family));
 
         // MARK: Umberstone
-        blockModels.createTrivialCube(ModBlocks.UMBERSTONE.get());
-        blockModels.createTrivialCube(ModBlocks.UMBERSTONE_BRICKS.get());
-        blockModels.createTrivialCube(ModBlocks.UMBERCOBBLE.get());
-        blockModels.createTrivialCube(ModBlocks.UMBERCOBBLE_MOSSY.get());
-        blockModels.createTrivialCube(ModBlocks.UMBERCOBBLE_WEBBED.get());
-        blockModels.createTrivialCube(ModBlocks.UMBERTILE_SMOOTH.get());
-        blockModels.createTrivialCube(ModBlocks.UMBERTILE_SMOOTH_SMALL.get());
         blockModels.createTrivialCube(ModBlocks.UMBERGRAVEL.get());
-        blockModels.createTrivialCube(ModBlocks.UMBERPAVER.get());
-        blockModels.createTrivialCube(ModBlocks.UMBERPAVER_MOSSY.get());
-        blockModels.createTrivialCube(ModBlocks.UMBERPAVER_WEBBED.get());
         blockModels.createRotatedPillarWithHorizontalVariant(ModBlocks.UMBERSTONE_PILLAR.get(), TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT);
         blockModels.createTrivialCube(ModBlocks.VOLCANIC_ROCK.get());
         blockModels.createTrivialCube(ModBlocks.DUST.get());
-        blockModels.createTrivialCube(ModBlocks.DUST_LAYER.get());
         blockModels.createTrivialCube(ModBlocks.PETRIFIED_WOOD_ROCK.get());
         blockModels.createTrivialCube(ModBlocks.PETRIFIED_WOOD_ROCK_2.get());
         blockModels.createTrivialCube(ModBlocks.PETRIFIED_WOOD_ROCK_3.get());
@@ -67,15 +42,9 @@ public class ModBlockStates extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.PETRIFIED_LOG_INNER.get());
         blockModels.createTrivialCube(ModBlocks.DUNG.get());
 
-        blockModels.createTrivialCube(ModBlocks.MIR_BRICKS.get());
-        blockModels.createTrivialCube(ModBlocks.MUD_BRICKS.get());
-
         // MARK: Amber
-        blockModels.createTrivialCube(ModBlocks.AMBER.get());
-        blockModels.createTrivialCube(ModBlocks.AMBER_BRICKS.get());
         blockModels.createTrivialCube(ModBlocks.PRESERVED_AMBER.get());
         blockModels.createTrivialCube(ModBlocks.PRESERVED_AMBER_GLASS.get());
-        blockModels.createDoor(ModBlocks.AMBER_DOOR.get());
 
         // MARK: Ores
         blockModels.createTrivialCube(ModBlocks.ORE_IRON.get());
@@ -132,20 +101,6 @@ public class ModBlockStates extends ModelProvider {
         blockModels.createTintedLeaves(ModBlocks.LEAVES_BALSAM.get(), TexturedModel.LEAVES, -50000);
         blockModels.createTintedLeaves(ModBlocks.LEAVES_MARSHWOOD.get(), TexturedModel.LEAVES, -50000);
 
-        // MARK: Walls
-        wall(ModBlocks.WALL_UMBERSTONE, ModBlocks.UMBERSTONE);
-        wall(ModBlocks.WALL_UMBERCOBBLE, ModBlocks.UMBERCOBBLE);
-        wall(ModBlocks.WALL_UMBERCOBBLE_MOSSY, ModBlocks.UMBERCOBBLE_MOSSY);
-        wall(ModBlocks.WALL_UMBERCOBBLE_WEBBED, ModBlocks.UMBERCOBBLE_WEBBED);
-        wall(ModBlocks.WALL_UMBERSTONE_BRICKS, ModBlocks.UMBERSTONE_BRICKS);
-        wall(ModBlocks.WALL_UMBERTILE_SMOOTH, ModBlocks.UMBERTILE_SMOOTH);
-        wall(ModBlocks.WALL_UMBERTILE_SMOOTH_SMALL, ModBlocks.UMBERTILE_SMOOTH_SMALL);
-        wall(ModBlocks.WALL_UMBERPAVER, ModBlocks.UMBERPAVER);
-        wall(ModBlocks.WALL_UMBERPAVER_MOSSY, ModBlocks.UMBERPAVER_MOSSY);
-        wall(ModBlocks.WALL_UMBERPAVER_WEBBED, ModBlocks.UMBERPAVER_WEBBED);
-        wallTranslucent(ModBlocks.WALL_AMBER, ModBlocks.AMBER);
-        wallTranslucent(ModBlocks.WALL_AMBER_BRICKS, ModBlocks.AMBER_BRICKS);
-
         // MARK: Plants
         blockModels.createCropBlock(ModBlocks.CROP_TURNIP.get(), ModCropBlock.AGE, 0, 1, 2, 3);
         blockModels.createCropBlock(ModBlocks.CROP_CABBAGE.get(), ModCropBlock.AGE, 0, 1, 2, 3);
@@ -153,26 +108,23 @@ public class ModBlockStates extends ModelProvider {
         blockModels.createCropBlock(ModBlocks.JADE_BERRY_BUSH.get(), ModBerryBushBlock.AGE, 0, 1, 2, 3);
         blockModels.createCropBlock(ModBlocks.HEART_BERRY_BUSH.get(), ModBerryBushBlock.AGE, 0, 1, 2, 3);
         blockModels.createCropBlock(ModBlocks.SWAMP_BERRY_BUSH.get(), ModBerryBushBlock.AGE, 0, 1, 2, 3);
-        blockModels.createCropBlock(ModBlocks.DARK_FRUIT_VINE.get(), DarkFruitVineBlock.AGE, 0, 1, 2, 3);
-        //crossBlock(MIRE_CORAL); // TODO: I don't think this is implemented
         blockModels.createCrossBlock(ModBlocks.NETTLE.get(), BlockModelGenerators.PlantType.TINTED);
         blockModels.createCrossBlock(ModBlocks.NETTLE_FLOWERED.get(), BlockModelGenerators.PlantType.TINTED);
         blockModels.createCrossBlock(ModBlocks.SWAMP_PLANT.get(), BlockModelGenerators.PlantType.TINTED);
         blockModels.createCrossBlock(ModBlocks.FIRE_BLOOM.get(), BlockModelGenerators.PlantType.TINTED);
         blockModels.createCrossBlock(ModBlocks.FIDDLE_HEAD.get(), BlockModelGenerators.PlantType.TINTED);
-        blockModels.registerSimpleTintedItemModel(ModBlocks.THORNS.get(), blockModels.createFlatItemModelWithBlockTexture(ModBlocks.THORNS.get().asItem(), ModBlocks.THORNS.get()), new GrassColorSource());
-        simpleBlock(ModBlocks.ALGAE.get(), models().getExistingFile(modLoc("block/algae")));
-        crossBlock(ModBlocks.HANGING_WEB.get());
-        hugeMushroom(ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK.get());
-        hugeMushroom(ModBlocks.DARK_CAPPED_MUSHROOM_STEM.get());
-        hugeMushroom(ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK.get());
-        hugeMushroom(ModBlocks.SARCASTIC_CZECH_MUSHROOM_STEM.get());
-        hugeMushroom(ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK.get());
-        hugeMushroom(ModBlocks.GRANDMAS_SHOES_MUSHROOM_STEM.get());
-        hugeMushroom(ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK.get());
-        hugeMushroom(ModBlocks.DUTCH_CAP_MUSHROOM_STEM.get());
-        hugeMushroom(ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK.get());
-        hugeMushroom(ModBlocks.KAIZERS_FINGERS_MUSHROOM_STEM.get());
+
+        blockModels.createCrossBlock(ModBlocks.HANGING_WEB.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createMushroomBlock(ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK.get());
+        blockModels.createMushroomBlock(ModBlocks.DARK_CAPPED_MUSHROOM_STEM.get());
+        blockModels.createMushroomBlock(ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK.get());
+        blockModels.createMushroomBlock(ModBlocks.SARCASTIC_CZECH_MUSHROOM_STEM.get());
+        blockModels.createMushroomBlock(ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK.get());
+        blockModels.createMushroomBlock(ModBlocks.GRANDMAS_SHOES_MUSHROOM_STEM.get());
+        blockModels.createMushroomBlock(ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK.get());
+        blockModels.createMushroomBlock(ModBlocks.DUTCH_CAP_MUSHROOM_STEM.get());
+        blockModels.createMushroomBlock(ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK.get());
+        blockModels.createMushroomBlock(ModBlocks.KAIZERS_FINGERS_MUSHROOM_STEM.get());
         blockModels.createTrivialCube(ModBlocks.GIANT_LILY_PAD.get());
 
         blockModels.createTrivialCube(ModBlocks.PETAL_BLACK.get());
@@ -190,29 +142,29 @@ public class ModBlockStates extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.PETAL_ORANGE.get());
         blockModels.createTrivialCube(ModBlocks.PETAL_WHITE.get());
 
-        stigma(ModBlocks.EXPLODING_STIGMA.get());
+        blockModels.createTrivialCube(ModBlocks.EXPLODING_STIGMA.get());
         blockModels.createTrivialCube(ModBlocks.STEM.get());
-        stigma(ModBlocks.STIGMA_BLACK.get());
-        stigma(ModBlocks.STIGMA_RED.get());
-        stigma(ModBlocks.STIGMA_BROWN.get());
-        stigma(ModBlocks.STIGMA_BLUE.get());
-        stigma(ModBlocks.STIGMA_PURPLE.get());
-        stigma(ModBlocks.STIGMA_CYAN.get());
-        stigma(ModBlocks.STIGMA_LIGHT_GRAY.get());
-        stigma(ModBlocks.STIGMA_GRAY.get());
-        stigma(ModBlocks.STIGMA_PINK.get());
-        stigma(ModBlocks.STIGMA_YELLOW.get());
-        stigma(ModBlocks.STIGMA_LIGHT_BLUE.get());
-        stigma(ModBlocks.STIGMA_MAGENTA.get());
-        stigma(ModBlocks.STIGMA_ORANGE.get());
-        stigma(ModBlocks.STIGMA_WHITE.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_BLACK.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_RED.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_BROWN.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_BLUE.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_PURPLE.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_CYAN.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_LIGHT_GRAY.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_GRAY.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_PINK.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_YELLOW.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_LIGHT_BLUE.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_MAGENTA.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_ORANGE.get());
+        blockModels.createTrivialCube(ModBlocks.STIGMA_WHITE.get());
 
-        doubleCrossBlock(ModBlocks.BULLRUSH.get());
-        doubleCrossBlock(ModBlocks.WEEPING_BLUEBELL.get());
-        doubleCrossBlock(ModBlocks.SUNDEW.get());
-        doubleCrossBlock(ModBlocks.TALL_BLOOM.get());
-        doubleCrossBlock(ModBlocks.TANGLED_STALK.get());
-        doubleCrossBlock(ModBlocks.HIGH_CAPPED_MUSHROOM.get());
+        blockModels.createDoublePlant(ModBlocks.BULLRUSH.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createDoublePlant(ModBlocks.WEEPING_BLUEBELL.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createDoublePlant(ModBlocks.SUNDEW.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createDoublePlant(ModBlocks.TALL_BLOOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createDoublePlant(ModBlocks.TANGLED_STALK.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createDoublePlant(ModBlocks.HIGH_CAPPED_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
         // MARK: Other
         blockModels.createTrivialCube(ModBlocks.PORTAL.get());
@@ -221,9 +173,13 @@ public class ModBlockStates extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.QUICK_SAND.get());
         blockModels.createTrivialCube(ModBlocks.GHOST_SAND.get());
         blockModels.createTrivialCube(ModBlocks.RED_GEM_BLOCK.get());
-        lamp(ModBlocks.RED_GEM_LAMP);
-        crossBlock(ModBlocks.WITHER_WEB);
-        crossBlock(ModBlocks.LAVA_WEB);
+
+        MultiVariant off = plainVariant(TexturedModel.CUBE.create(ModBlocks.RED_GEM_LAMP.get(), blockModels.modelOutput));
+        MultiVariant on = plainVariant(blockModels.createSuffixedVariant(ModBlocks.RED_GEM_LAMP.get(), "_on", ModelTemplates.CUBE_ALL, TextureMapping::cube));
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(ModBlocks.RED_GEM_LAMP.get()).with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.LIT, on, off)));
+
+        blockModels.createCrossBlock(ModBlocks.WITHER_WEB.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createCrossBlock(ModBlocks.LAVA_WEB.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createTrivialCube(ModBlocks.GNEISS.get());
         blockModels.createTrivialCube(ModBlocks.GNEISS_CARVED.get());
         blockModels.createTrivialCube(ModBlocks.GNEISS_RELIEF.get());
@@ -236,28 +192,25 @@ public class ModBlockStates extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.TEMPLE_TILE.get());
         blockModels.createTrivialCube(ModBlocks.SILK.get());
         blockModels.createTrivialCube(ModBlocks.REIN_EXO.get());
-      //  log(ModBlocks.VELOCITY_BLOCK);
-       // log(ModBlocks.VELOCITY_BLOCK_LIGHTNING_SPEED);
+
         createHoneyTreat(blockModels);
-        blockModels.createCandleAndCandleCake(Blocks.CANDLE, ModBlocks.CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.WHITE_CANDLE, ModBlocks.WHITE_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.ORANGE_CANDLE, ModBlocks.ORANGE_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.MAGENTA_CANDLE, ModBlocks.MAGENTA_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.LIGHT_BLUE_CANDLE, ModBlocks.LIGHT_BLUE_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.YELLOW_CANDLE, ModBlocks.YELLOW_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.LIME_CANDLE, ModBlocks.LIME_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.PINK_CANDLE, ModBlocks.PINK_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.GRAY_CANDLE, ModBlocks.GRAY_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.LIGHT_GRAY_CANDLE, ModBlocks.LIGHT_GRAY_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.CYAN_CANDLE, ModBlocks.CYAN_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.PURPLE_CANDLE, ModBlocks.PURPLE_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.BLUE_CANDLE, ModBlocks.BLUE_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.BROWN_CANDLE, ModBlocks.BROWN_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.GREEN_CANDLE, ModBlocks.GREEN_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.RED_CANDLE, ModBlocks.RED_CANDLE_HONEY_TREAT.get());
-        blockModels.createCandleAndCandleCake(Blocks.BLACK_CANDLE, ModBlocks.BLACK_CANDLE_HONEY_TREAT.get());
-        blockModels.createTrivialCube(ModBlocks.WASP_NEST.get());
-        stairs(ModBlocks.STAIRS_WASP_NEST, ModBlocks.WASP_NEST);
+        createCandleHoneyTreat(blockModels, Blocks.CANDLE, ModBlocks.CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.WHITE_CANDLE, ModBlocks.WHITE_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.ORANGE_CANDLE, ModBlocks.ORANGE_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.MAGENTA_CANDLE, ModBlocks.MAGENTA_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.LIGHT_BLUE_CANDLE, ModBlocks.LIGHT_BLUE_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.YELLOW_CANDLE, ModBlocks.YELLOW_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.LIME_CANDLE, ModBlocks.LIME_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.PINK_CANDLE, ModBlocks.PINK_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.GRAY_CANDLE, ModBlocks.GRAY_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.LIGHT_GRAY_CANDLE, ModBlocks.LIGHT_GRAY_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.CYAN_CANDLE, ModBlocks.CYAN_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.PURPLE_CANDLE, ModBlocks.PURPLE_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.BLUE_CANDLE, ModBlocks.BLUE_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.BROWN_CANDLE, ModBlocks.BROWN_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.GREEN_CANDLE, ModBlocks.GREEN_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.RED_CANDLE, ModBlocks.RED_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(blockModels, Blocks.BLACK_CANDLE, ModBlocks.BLACK_CANDLE_HONEY_TREAT.get());
 
         // MARK: Spawners
         blockModels.createTrivialCube(ModBlocks.ANTLION_SPAWNER.get());
@@ -272,9 +225,8 @@ public class ModBlockStates extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.LOCUST_SPAWNER.get());
 
         // MARK: Utility Blocks
-        craftingTable(ModBlocks.PETRIFIED_CRAFTING_TABLE.get());
-        furnace(ModBlocks.UMBER_FURNACE.get());
-        button(ModBlocks.UMBERSTONE_BUTTON.get(), ModBlocks.UMBERSTONE.get());
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(ModBlocks.PETRIFIED_CRAFTING_TABLE.get(), plainVariant(ModelTemplates.CUBE.create(ModBlocks.PETRIFIED_CRAFTING_TABLE.get(), craftingTable(ModBlocks.PETRIFIED_CRAFTING_TABLE.get(), ModBlocks.PLANKS_PETRIFIED.get()), blockModels.modelOutput))));
+        blockModels.createFurnace(ModBlocks.UMBER_FURNACE.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
 
         // MARK: Antlion Dungeon
         blockModels.createTrivialCube(ModBlocks.CAPSTONE.get());
@@ -309,5 +261,38 @@ public class ModBlockStates extends ModelProvider {
                         .select(6, plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.HONEY_TREAT.get(), "_slice6")))
                 )
         );
+    }
+
+    public void createCandleHoneyTreat(BlockModelGenerators blockModels, Block candleBlock, CandleHoneyTreatBlock candleCakeBlock) {
+        MultiVariant candleCake = plainVariant(
+                ModelTemplates.CANDLE_CAKE.create(
+                        candleCakeBlock,
+                        candleHoneyTreat(candleBlock, false),
+                        blockModels.modelOutput
+                )
+        );
+        MultiVariant litCandleCake = plainVariant(
+                ModelTemplates.CANDLE_CAKE.createWithSuffix(
+                        candleCakeBlock,
+                        "_lit",
+                        candleHoneyTreat(candleBlock, true),
+                        blockModels.modelOutput
+                )
+        );
+
+        blockModels.blockStateOutput.accept(
+                MultiVariantGenerator
+                        .dispatch(candleCakeBlock)
+                        .with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.LIT, litCandleCake, candleCake))
+        );
+    }
+
+    public static TextureMapping candleHoneyTreat(Block block, boolean lit) {
+        return (new TextureMapping())
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_side"))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_bottom"))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_top"))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_side"))
+                .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(block, lit ? "_lit" : ""));
     }
 }

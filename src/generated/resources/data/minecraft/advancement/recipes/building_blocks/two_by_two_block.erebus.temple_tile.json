@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block.erebus.temple_brick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:temple_brick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:two_by_two_block.erebus.temple_tile"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block.erebus.temple_brick"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:two_by_two_block.erebus.temple_tile"
+    ]
+  }
+}

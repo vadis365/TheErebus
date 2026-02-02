@@ -8,10 +8,11 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 
@@ -28,7 +29,7 @@ public class BlackAntMenu extends AbstractContainerMenu {
 		this.entity = (BlackAnt) playerInventory.player.level().getEntity(entityId);
 		this.container.startOpen(playerInventory.player);
 	}
-	
+
 	public BlackAntMenu(int windowId, Inventory playerInventory, BlackAnt entity) {
 		super(ModMenuTypes.BLACK_ANT.get(), windowId);
 		BlackAntSimpleContainer entityInventory = entity.getInventory();
@@ -53,7 +54,7 @@ public class BlackAntMenu extends AbstractContainerMenu {
 	}
 
 	@Override
-	public ItemStack quickMoveStack(Player player, int slotIndex) {
+	public @NonNull ItemStack quickMoveStack(@NonNull Player player, int slotIndex) {
 		ItemStack stack = ItemStack.EMPTY;
 		Slot slot = slots.get(slotIndex);
 
@@ -82,15 +83,15 @@ public class BlackAntMenu extends AbstractContainerMenu {
 	}
 
 	@Override
-	public void removed(Player player) {
+	public void removed(@NonNull Player player) {
 		super.removed(player);
 		this.container.stopOpen(player);
 	}
 
 	@Override
-	  public void clicked(int slotId, int button, ClickType clickType, Player player) {
-		if (slotId == BlackAnt.CROP_ID_SLOT) {
-			Slot slot = slots.get(slotId);
+	public void clicked(int slotIndex, int buttonNum, @NonNull ContainerInput containerInput, @NonNull Player player) {
+		if (slotIndex == BlackAnt.CROP_ID_SLOT) {
+			Slot slot = slots.get(slotIndex);
 			ItemStack slotStack = slot.getItem();
 			ItemStack heldStack = player.containerMenu.getCarried();
 
@@ -100,7 +101,6 @@ public class BlackAntMenu extends AbstractContainerMenu {
 				slot.set(copy);
 			} else if (!slotStack.isEmpty())
 				slot.set(ItemStack.EMPTY);
-		}
-		else super.clicked(slotId, button, clickType, player);
+		} else super.clicked(slotIndex, buttonNum, containerInput, player);
 	}
 }

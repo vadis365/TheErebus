@@ -1,10 +1,10 @@
 {
   "variants": {
     "half=lower": {
-      "model": "erebus:block/sundew_lower"
+      "model": "erebus:block/sundew_bottom"
     },
     "half=upper": {
-      "model": "erebus:block/sundew_upper"
+      "model": "erebus:block/sundew_top"
     }
   }
 }

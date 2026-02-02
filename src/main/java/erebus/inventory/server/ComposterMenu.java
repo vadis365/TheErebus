@@ -1,6 +1,7 @@
 package erebus.inventory.server;
 
 import erebus.registries.client.ModMenuTypes;
+import erebus.registries.data.tags.ModItemTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -64,10 +65,10 @@ public class ComposterMenu extends AbstractContainerMenu {
                     return ItemStack.EMPTY;
                 slot.setByPlayer(itemstack1, itemstack);
 			} else if (slotIndex != 1 && slotIndex != 0) {
-				if (!itemstack1.isEmpty() && itemstack1.is(ModTags.COMPOSTABLE)) {
+				if (!itemstack1.isEmpty() && itemstack1.is(ModItemTags.COMPOSTABLE)) {
 					if (!moveItemStackTo(itemstack1, 0, 1, false))
 						return ItemStack.EMPTY;
-				} else if (itemstack1.is(ModTags.COMPOSTABLE)) {
+				} else if (itemstack1.is(ModItemTags.COMPOSTABLE)) {
 					if (!moveItemStackTo(itemstack1, 1, 2, false))
 						return ItemStack.EMPTY;
 				} else if (slotIndex >= 3 && slotIndex < 30) {

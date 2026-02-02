@@ -1,8 +1,11 @@
 package erebus.item.wand;
 
+import erebus.Erebus;
 import erebus.entity.projectile.AmberStar;
 import erebus.registries.item.ModItems;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -17,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 public class WandOfPreservationItem extends Item {
 
     public WandOfPreservationItem() {
-        super(new Item.Properties().stacksTo(1).durability(64).setNoCombineRepair());
+        super(new Item.Properties().stacksTo(1).durability(64).setNoCombineRepair().setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("wand_of_preservation"))));
     }
 
     @NotNull

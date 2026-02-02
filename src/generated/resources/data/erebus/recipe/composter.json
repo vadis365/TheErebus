@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "G": {
-      "tag": "c:dyes/green"
-    },
-    "P": {
-      "item": "erebus:planks_varnished"
-    },
-    "S": {
-      "item": "erebus:slab_planks_varnished"
-    }
+    "G": "#c:dyes/green",
+    "P": "erebus:planks_varnished",
+    "S": "erebus:slab_planks_varnished"
   },
   "pattern": [
     "PSP",
@@ -18,7 +12,6 @@
     "PSP"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:composter"
   }
 }

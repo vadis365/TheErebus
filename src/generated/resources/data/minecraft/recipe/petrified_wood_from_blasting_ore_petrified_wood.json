@@ -1,14 +1,11 @@
 {
   "type": "minecraft:blasting",
-  "category": "misc",
+  "category": "blocks",
   "cookingtime": 100,
   "experience": 0.25,
   "group": "petrified_wood",
-  "ingredient": {
-    "item": "erebus:ore_petrified_wood"
-  },
+  "ingredient": "erebus:ore_petrified_wood",
   "result": {
-    "count": 1,
     "id": "erebus:petrified_wood"
   }
 }

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "G": {
-      "item": "erebus:amber_glass"
-    },
-    "R": {
-      "item": "erebus:resin"
-    }
+    "G": "erebus:amber_glass",
+    "R": "erebus:resin"
   },
   "pattern": [
     " R ",
@@ -15,7 +11,6 @@
     " R "
   ],
   "result": {
-    "count": 1,
     "id": "erebus:amber_star"
   }
 }

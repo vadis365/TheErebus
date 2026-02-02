@@ -1,46 +1,48 @@
 package erebus.client.render.entity.renderer;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import erebus.client.render.entity.renderer.state.ThrownBlockAsItemRenderState;
 import erebus.entity.projectile.ThrownBlockAsItem;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.data.ModelData;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import org.jspecify.annotations.NonNull;
 
-public class WebSlingRenderer extends EntityRenderer<ThrownBlockAsItem> {
+public class WebSlingRenderer extends EntityRenderer<ThrownBlockAsItem, ThrownBlockAsItemRenderState> {
 
-	private final BlockRenderDispatcher blockRenderer;
-	private BlockState blockState;
+	private final ItemModelResolver itemModelResolver;
 
 	public WebSlingRenderer(EntityRendererProvider.Context renderContext) {
 		super(renderContext);
-		this.blockRenderer = renderContext.getBlockRenderDispatcher();
+		this.itemModelResolver = renderContext.getItemModelResolver();
 	}
 
 	@Override
-	public void render(ThrownBlockAsItem entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-		poseStack.pushPose();
-		RenderSystem.enableBlend();
-		RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-		poseStack.translate(0.5F, 0.625F, 0.5F);
-		poseStack.mulPose(Axis.XP.rotationDegrees(180F));
-		poseStack.mulPose(Axis.YN.rotationDegrees(90F));
-		poseStack.scale(1F, 1F, 1F);
-		blockState = entity.getBlockType();
-		blockRenderer.renderSingleBlock(blockState, poseStack, buffer, packedLight, packedLight, ModelData.EMPTY, RenderType.CUTOUT);
-		RenderSystem.disableBlend();
-		poseStack.popPose();
+	public ThrownBlockAsItemRenderState createRenderState() {
+		return new ThrownBlockAsItemRenderState();
 	}
 
 	@Override
-	public Identifier getTextureLocation(ThrownBlockAsItem entity) {
-		return null;
+	public void extractRenderState(ThrownBlockAsItem entity, ThrownBlockAsItemRenderState state, float partialTicks) {
+		super.extractRenderState(entity, state, partialTicks);
+		state.blockState = entity.getBlockType();
+		itemModelResolver.updateForTopItem(state.itemStackRenderState, new ItemStack(state.blockState.getBlock()), ItemDisplayContext.FIXED, entity.level(), null, 0);
+	}
+
+	@Override
+	public void submit(ThrownBlockAsItemRenderState state, @NonNull PoseStack stack, @NonNull SubmitNodeCollector submit, @NonNull CameraRenderState camera) {
+		stack.pushPose();
+		stack.translate(0.5F, 0.625F, 0.5F);
+		stack.mulPose(Axis.XP.rotationDegrees(180F));
+		stack.mulPose(Axis.YN.rotationDegrees(90F));
+		stack.scale(1F, 1F, 1F);
+		state.itemStackRenderState.submit(stack, submit, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+		stack.popPose();
 	}
 }

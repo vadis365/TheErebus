@@ -1,19 +1,7 @@
 package erebus.datagen.providers.recipes;
 
-import erebus.recipes.altar.OfferingAltarRecipeBuilder;
-import erebus.recipes.smoothie.SmoothieRecipeBuilder;
-import erebus.registries.ModFluids;
-import erebus.registries.blocks.ModBlocks;
-import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 public class CustomRecipeProvider extends ErebusRecipeProvider {
 
@@ -22,13 +10,13 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 	}
 
 	public void buildRecipes() {
-		OfferingAltarRecipeBuilder.assembly(ModItems.GAEAN_GEM)
+		/*OfferingAltarRecipeBuilder.assembly(ModItems.GAEAN_GEM)
 			.requires(Items.DIAMOND)
 			.requires(Items.EMERALD)
 			.requires(Blocks.OBSIDIAN)
-			.save(output);
+			.save(output);*/
 
-		new SmoothieRecipeBuilder(ModItems.GREEN_TEA_GRASSHOPPER)
+		/*new SmoothieRecipeBuilder(ModItems.GREEN_TEA_GRASSHOPPER)
 				.addItemIngredient(Ingredient.of(ModItems.SMOOTHIE_GLASS))
 				.addItemIngredient(Ingredient.of(ModItems.GRASSHOPPER_LEG_RAW))
 				.addItemIngredient(Ingredient.of(ModItems.GRASSHOPPER_LEG_RAW))
@@ -160,6 +148,6 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
 				.addItemIngredient(Ingredient.of(ModItems.POISON_GLAND))
 				.addItemIngredient(Ingredient.of(ModItems.NETTLE_LEAVES))
 				.unlockedBy("has_poison_gland", has(ModItems.POISON_GLAND))
-				.save(output);
+				.save(output);*/
 	}
 }

@@ -1,6 +1,9 @@
 package erebus.item;
 
+import erebus.Erebus;
 import erebus.registries.data.ModToolMaterials;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -10,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class WaspSwordItem extends Item {
     public WaspSwordItem() {
-        super(new Item.Properties().sword(ModToolMaterials.WASP_SWORD, 6, -1));
+        super(new Item.Properties().sword(ModToolMaterials.WASP_SWORD, 6, -1).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("wasp_sword"))));
     }
 
     @Override

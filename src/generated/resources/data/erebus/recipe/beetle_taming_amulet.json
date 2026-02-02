@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "item": "erebus:altar_fragment"
-    },
-    "J": {
-      "item": "erebus:jade"
-    },
-    "N": {
-      "tag": "c:nuggets/gold"
-    }
+    "A": "erebus:altar_fragment",
+    "J": "erebus:jade",
+    "N": "#c:nuggets/gold"
   },
   "pattern": [
     " N ",
@@ -18,7 +12,6 @@
     " A "
   ],
   "result": {
-    "count": 1,
     "id": "erebus:beetle_taming_amulet"
   }
 }

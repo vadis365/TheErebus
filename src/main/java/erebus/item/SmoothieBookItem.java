@@ -2,7 +2,9 @@ package erebus.item;
 
 import erebus.Erebus;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.network.Filterable;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -24,7 +26,7 @@ import java.util.Optional;
 public class SmoothieBookItem extends WritableBookItem {
 
     public SmoothieBookItem() {
-        super(new Item.Properties());
+        super(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("smoothie_book"))));
     }
 
     @Override

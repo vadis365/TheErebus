@@ -15,10 +15,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class DarkCappedMushroomFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
     private final FeatureUtils Utils = new FeatureUtils();
-    private final BlockState STEM = ModBlocks.DARK_CAPPED_MUSHROOM_STEM.get().defaultBlockState()
-            .setValue(HugeMushroomBlock.UP, true)
-            .setValue(HugeMushroomBlock.DOWN, true);
-    private final BlockState SHROOM = ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK.get().defaultBlockState();
 
     public DarkCappedMushroomFeatureConfiguration() {
         super(NoneFeatureConfiguration.CODEC);
@@ -31,6 +27,11 @@ public class DarkCappedMushroomFeatureConfiguration extends Feature<NoneFeatureC
         RandomSource random = context.random();
         int stalkHeight = 3 + random.nextInt(3 + random.nextInt(2));
         int sideHeight = 1 + random.nextInt(stalkHeight > 3 ? 3 : 2);
+
+        BlockState STEM = ModBlocks.DARK_CAPPED_MUSHROOM_STEM.get().defaultBlockState()
+                .setValue(HugeMushroomBlock.UP, true)
+                .setValue(HugeMushroomBlock.DOWN, true);
+        BlockState SHROOM = ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK.get().defaultBlockState();
 
         if(!level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)) return false;
 

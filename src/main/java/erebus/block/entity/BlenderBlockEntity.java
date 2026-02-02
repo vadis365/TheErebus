@@ -9,16 +9,12 @@ import erebus.registries.data.ModDataComponents;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.ContainerHelper;
@@ -32,19 +28,23 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.Objects;
 import java.util.Optional;
 
 public class BlenderBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 
+    public final FluidStacksResourceHandler tanks = new FluidStacksResourceHandler(4, FluidType.BUCKET_VOLUME * 8);
     public final RecipeManager.CachedCheck<SmoothieRecipeInput, SmoothieRecipe> quickCheck = RecipeManager.createCheck(ModCustomRecipes.SMOOTHIE_RECIPE.get());
     private static final int MAX_TIME = 432;
     private static int progress = 0;
@@ -53,15 +53,11 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
 
     public BlenderBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.BLENDER.get(), 5, pos, state);
-
-        for(int c = 0; c < tanks.length; c++) {
-            tanks[c] = new NamedFluidTank("tank_%d".formatted(c), FluidType.BUCKET_VOLUME * 8);
-        }
     }
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState blockState, T entity) {
         if (entity instanceof BlenderBlockEntity blender) {
-            if(!level.isClientSide()) {
+            if(level.isClientSide()) {
                 prevProgress = progress;
                 return;
             }
@@ -74,7 +70,7 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
 
             NonNullList<SizedFluidIngredient> fluidInputs = NonNullList.create();
             for(int c = 0; c < 4; c++) {
-                FluidStack fluid = blender.getTank(c).getFluidStack();
+                FluidResource fluid = blender.tanks.getResource(c);
                 if(!fluid.isEmpty()) {
                     fluidInputs.add(SizedFluidIngredient.of(fluid.getFluid(), FluidType.BUCKET_VOLUME));
                 }
@@ -86,7 +82,7 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
 
             if(optional.isPresent()) {
                 SmoothieRecipe recipe = optional.get().value();
-                blender.output = recipe.assemble(input, level.registryAccess());
+                blender.output = recipe.assemble(input);
                 progress++;
 
                 if(progress >= MAX_TIME) {
@@ -96,7 +92,7 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
                         }
                     }
 
-                    extractFluids(recipe);
+                    blender.extractFluids(recipe);
                     blender.setItem(4, blender.output.copy());
                     progress = 0;
                     setChanged(level, pos, blockState);
@@ -105,16 +101,18 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
         }
     }
 
-    private static void extractFluids(SmoothieRecipe recipe) {
+    private void extractFluids(SmoothieRecipe recipe) {
         try(Transaction tx = Transaction.openRoot()) {
-            for (SizedFluidIngredient fluid : recipe.getFluidIngredients()) {
-                for (NamedFluidTank tank : tanks) {
-                    if (fluid.test(tank.getFluidStack())) {
-
-                        tank.drain(fluid.amount(), IFluidHandler.FluidAction.EXECUTE);
+            for (SizedFluidIngredient fluidIngredient : recipe.getFluidIngredients()) {
+                for (int c = 0; c < 4; c++) {
+                    FluidResource resource = tanks.getResource(c);
+                    if (fluidIngredient.test(new FluidStack(resource.getFluid(), tanks.getAmountAsInt(c)))) {
+                        tanks.extract(resource, fluidIngredient.amount(), tx);
+                        break;
                     }
                 }
             }
+            tx.commit();
         }
     }
 
@@ -156,58 +154,43 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
     }
 
     @Override
-    public void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
-        super.saveAdditional(tag, registries);
-        for (NamedFluidTank tank : tanks) {
-            tank.writeToNBT(registries, tag);
-        }
-        tag.putInt("progress", progress);
+    public void saveAdditional(@NotNull ValueOutput output) {
+        super.saveAdditional(output);
+        tanks.serialize(output);
+        output.putInt("progress", progress);
     }
 
     @Override
-    public void loadAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
-        super.loadAdditional(tag, registries);
-        for (NamedFluidTank tank : tanks) {
-            tank.readFromNBT(registries, tag);
-        }
-        progress = tag.getInt("progress");
+    public void loadAdditional(@NotNull ValueInput input) {
+        super.loadAdditional(input);
+        tanks.deserialize(input);
+        progress = input.getIntOr("progress", 0);
     }
 
     @Override
-    public @NotNull CompoundTag getUpdateTag(HolderLookup.@NotNull Provider registries) {
-        CompoundTag tag = new CompoundTag();
-        saveAdditional(tag, registries);
-        return tag;
-    }
-
-    @Override
-    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
-        CompoundTag tag = new CompoundTag();
-        saveAdditional(tag, Objects.requireNonNull(level).registryAccess());
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
-    public void onDataPacket(@NotNull Connection net, @NotNull ClientboundBlockEntityDataPacket pkt, HolderLookup.@NotNull Provider lookupProvider) {
-        super.onDataPacket(net, pkt, lookupProvider);
-        loadAdditional(pkt.getTag(), lookupProvider);
+    public void onDataPacket(@NotNull Connection net, @NotNull ValueInput input) {
+        super.onDataPacket(net, input);
+        loadAdditional(input);
     }
 
     @Override
     protected void applyImplicitComponents(@Nonnull DataComponentGetter getter) {
         super.applyImplicitComponents(getter);
-
-        for (NamedFluidTank tank : tanks) {
-            tank.setFluid(getter.getOrDefault(ModDataComponents.FLUID, FluidContents.EMPTY).get());
+        try(Transaction transaction = Transaction.openRoot()) {
+            if(tanks.insert(getter.getOrDefault(ModDataComponents.FLUID, FluidResource.EMPTY), FluidType.BUCKET_VOLUME, transaction) == FluidType.BUCKET_VOLUME) {
+                transaction.commit();
+            }
         }
     }
 
     @Override
     protected void collectImplicitComponents(@Nonnull DataComponentMap.Builder builder) {
         super.collectImplicitComponents(builder);
-
-        for (NamedFluidTank tank : tanks) {
-            builder.set(ModDataComponents.FLUID, FluidContents.of(tank.getFluid()));
-        }
+        builder.set(ModDataComponents.FLUID, tanks.getResource(0));
     }
 }

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "erebus:umberstone"
-    }
+    "#": "erebus:umberstone"
   },
   "pattern": [
     "#",

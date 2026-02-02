@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item.erebus.bio_velocity": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:bio_velocity"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:three_by_three_block.erebus.velocity_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_item.erebus.bio_velocity"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:three_by_three_block.erebus.velocity_block"
+    ]
+  }
+}

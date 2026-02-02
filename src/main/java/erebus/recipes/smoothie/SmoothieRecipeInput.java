@@ -1,6 +1,7 @@
 package erebus.recipes.smoothie;
 
 import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
@@ -13,14 +14,14 @@ public class SmoothieRecipeInput implements RecipeInput {
 
     private final List<SizedFluidIngredient> fluidIngredients;
     private final List<ItemStack> itemIngredients;
-    private final StackedContents stackedContents = new StackedContents();
+    private final StackedContents<Item> stackedContents = new StackedContents<>();
     private final int ingredientCount;
 
     public SmoothieRecipeInput(List<SizedFluidIngredient> fluidIngredients, List<ItemStack> items) {
         this.fluidIngredients = fluidIngredients;
         this.itemIngredients = items;
         ingredientCount = fluidIngredients.size() + items.size();
-        items.forEach(this.stackedContents::accountStack);
+        items.forEach((item) -> stackedContents.account(item.getItem(), item.count()));
     }
 
     @Override
@@ -51,7 +52,7 @@ public class SmoothieRecipeInput implements RecipeInput {
         return ingredientCount;
     }
 
-    public StackedContents getStackedContents() {
+    public StackedContents<Item> getStackedContents() {
         return stackedContents;
     }
 }

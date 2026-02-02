@@ -27,7 +27,6 @@
       "translate": "advancement.erebus.portal/portal_activator.desc"
     },
     "icon": {
-      "count": 1,
       "id": "erebus:portal_activator"
     },
     "title": {

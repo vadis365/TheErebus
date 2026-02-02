@@ -1,15 +1,14 @@
 package erebus.events;
 
 import erebus.Erebus;
+import erebus.block.entity.*;
 import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.item.ModItems;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.transfer.fluid.BucketResourceHandler;
-import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
 import net.neoforged.neoforge.transfer.item.WorldlyContainerWrapper;
 
 @EventBusSubscriber(modid = Erebus.MODID)
@@ -20,31 +19,55 @@ public class RegisterCapabilitiesEventHandler {
         event.registerBlockEntity(
                 Capabilities.Fluid.BLOCK,
                 ModBlockEntities.FLUID_JAR.get(),
-                (_, _) -> new FluidStacksResourceHandler(1, FluidType.BUCKET_VOLUME * 32)
+                (tile, _) -> tile.getTank()
         );
 
         event.registerBlockEntity(
                 Capabilities.Fluid.BLOCK,
                 ModBlockEntities.BAMBOO_PIPE.get(),
-                (_, _) -> new FluidStacksResourceHandler(1, 100)
+                (tile, _) -> tile.getTank()
         );
 
         event.registerBlockEntity(
                 Capabilities.Fluid.BLOCK,
                 ModBlockEntities.BAMBOO_PIPE_EXTRACT.get(),
-                (_, _) -> new FluidStacksResourceHandler(1, 100)
+                (tile, _) -> tile.getTank()
         );
 
         event.registerBlockEntity(
                 Capabilities.Fluid.BLOCK,
                 ModBlockEntities.LIQUIFIER.get(),
-                (_, _) -> new FluidStacksResourceHandler(1, FluidType.BUCKET_VOLUME * 8)
+                (tile, _) -> tile.getTank()
         );
 
         event.registerBlockEntity(
                 Capabilities.Fluid.BLOCK,
                 ModBlockEntities.BLENDER.get(),
-                (_, _) -> new FluidStacksResourceHandler(4, FluidType.BUCKET_VOLUME * 8)
+                (tile, _) -> tile.tanks
+        );
+
+        event.registerBlockEntity(
+                Capabilities.Fluid.BLOCK,
+                ModBlockEntities.UMBERFURNACE.get(),
+                (tile, _) -> tile.getTank()
+        );
+
+        event.registerBlockEntity(
+                Capabilities.Item.BLOCK,
+                ModBlockEntities.UMBERFURNACE.get(),
+                WorldlyContainerWrapper::new
+        );
+
+        event.registerBlockEntity(
+                Capabilities.Item.BLOCK,
+                ModBlockEntities.BLENDER.get(),
+                WorldlyContainerWrapper::new
+        );
+
+        event.registerBlockEntity(
+                Capabilities.Item.BLOCK,
+                ModBlockEntities.OFFERING_ALTAR.get(),
+                WorldlyContainerWrapper::new
         );
 
         event.registerBlockEntity(

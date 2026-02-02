@@ -5,15 +5,17 @@ import erebus.recipes.util.SmoothieIngredientCounts;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +40,10 @@ public class SmoothieRecipeBuilder extends SimpleRecipeBuilder {
     }
 
     @Override
-    public void save(@NotNull RecipeOutput output, @NotNull Identifier id) {
+    public void save(@NotNull RecipeOutput output, @NonNull ResourceKey<Recipe<?>> key) {
         Advancement.Builder advancement = output.advancement()
-                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
-                .rewards(AdvancementRewards.Builder.recipe(id))
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(key))
+                .rewards(AdvancementRewards.Builder.recipe(key))
                 .requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(advancement::addCriterion);
 
@@ -51,6 +53,12 @@ public class SmoothieRecipeBuilder extends SimpleRecipeBuilder {
                 new SmoothieIngredientCounts(fluids.size(), items.size()),
                 new ItemStack(this.result, 1)
         );
-        output.accept(id.withPrefix("smoothie/"), recipe, advancement.build(id.withPrefix("smoothie/")));
+
+        output.accept(key, recipe, advancement.build(key.identifier().withPath("smoothie/")));
+    }
+
+    @Override
+    public @NonNull ResourceKey<Recipe<?>> defaultId() {
+        return null;
     }
 }

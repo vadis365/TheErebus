@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "erebus:soul_crystal"
-    },
-    "G": {
-      "tag": "c:ingots/gold"
-    },
-    "S": {
-      "tag": "c:rods/wooden"
-    }
+    "C": "erebus:soul_crystal",
+    "G": "#c:ingots/gold",
+    "S": "#c:rods/wooden"
   },
   "pattern": [
     " GC",
@@ -18,7 +12,6 @@
     "G  "
   ],
   "result": {
-    "count": 1,
     "id": "erebus:wand_of_animation"
   }
 }

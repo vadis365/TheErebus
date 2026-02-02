@@ -1,10 +1,10 @@
 {
   "variants": {
     "half=lower": {
-      "model": "erebus:block/bullrush_lower"
+      "model": "erebus:block/bullrush_bottom"
     },
     "half=upper": {
-      "model": "erebus:block/bullrush_upper"
+      "model": "erebus:block/bullrush_top"
     }
   }
 }

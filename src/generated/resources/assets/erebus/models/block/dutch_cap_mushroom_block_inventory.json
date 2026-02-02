@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "erebus:block/dutch_cap_mushroom_block"
+  }
+}

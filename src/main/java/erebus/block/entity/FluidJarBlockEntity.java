@@ -4,7 +4,6 @@ import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.network.Connection;
 import net.minecraft.world.level.Level;
@@ -13,9 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
-import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
@@ -68,16 +65,6 @@ public class FluidJarBlockEntity extends BlockEntity {
 
 	public FluidStacksResourceHandler getTank(@Nullable Direction ignoredDirection) {
 		return this.tank;
-	}
-
-	@Override
-	protected void applyImplicitComponents(@Nonnull DataComponentGetter getter) {
-		super.applyImplicitComponents(getter);
-		try(Transaction transaction = Transaction.openRoot()) {
-			if(tank.insert(FluidResource.EMPTY, 0, transaction) == 0) {
-				transaction.commit();
-			}
-		}
 	}
 
 	@Override

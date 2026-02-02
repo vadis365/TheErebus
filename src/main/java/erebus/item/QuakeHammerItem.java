@@ -1,5 +1,6 @@
 package erebus.item;
 
+import erebus.Erebus;
 import erebus.network.data.QuakeHammerData;
 import erebus.network.data.QuakeHammerDataHolder;
 import erebus.registries.ModSounds;
@@ -7,7 +8,9 @@ import erebus.registries.data.ModDataComponents;
 import erebus.registries.data.ModToolMaterials;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -28,7 +31,7 @@ import java.util.List;
 public class QuakeHammerItem extends Item {
 
 	public QuakeHammerItem() {
-		super(new Item.Properties().sword(ModToolMaterials.QUAKE_HAMMER, 10, -1));
+		super(new Item.Properties().sword(ModToolMaterials.QUAKE_HAMMER, 10, -1).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("quake_hammer"))));
 	}
 
 	@Override

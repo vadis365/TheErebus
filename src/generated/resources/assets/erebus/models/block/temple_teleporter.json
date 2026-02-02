@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "erebus:block/temple_teleport_0"
+    "all": "erebus:block/temple_teleporter"
   }
 }

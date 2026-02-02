@@ -3,11 +3,8 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.35,
-  "ingredient": {
-    "item": "erebus:titan_stew"
-  },
+  "ingredient": "erebus:titan_stew",
   "result": {
-    "count": 1,
     "id": "erebus:titan_stew_cooked"
   }
 }

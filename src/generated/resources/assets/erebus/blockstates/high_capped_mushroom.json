@@ -1,10 +1,10 @@
 {
   "variants": {
     "half=lower": {
-      "model": "erebus:block/high_capped_mushroom_lower"
+      "model": "erebus:block/high_capped_mushroom_bottom"
     },
     "half=upper": {
-      "model": "erebus:block/high_capped_mushroom_upper"
+      "model": "erebus:block/high_capped_mushroom_top"
     }
   }
 }

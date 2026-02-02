@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "F": {
-      "tag": "minecraft:fences"
-    },
-    "S": {
-      "tag": "minecraft:wooden_slabs"
-    }
+    "F": "#minecraft:fences",
+    "S": "#minecraft:wooden_slabs"
   },
   "pattern": [
     "SSS",
@@ -15,7 +11,6 @@
     "F F"
   ],
   "result": {
-    "count": 1,
     "id": "erebus:silo_supports"
   }
 }

@@ -1,14 +1,13 @@
 package erebus.client.render.item.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Unit;
 
-public class WebSlingerModel extends Model {
+public class WebSlingerModel extends Model<Unit> {
     public final ModelPart ShapeA;
     public final ModelPart ShapeB;
     public final ModelPart ShapeC;
@@ -42,7 +41,7 @@ public class WebSlingerModel extends Model {
     public final ModelPart Greeble3;
 
     public WebSlingerModel(ModelPart root) {
-        super(RenderType::entitySolid);
+        super(root, RenderTypes::entitySolid);
         ShapeA = root.getChild("ShapeA");
         ShapeB = root.getChild("ShapeB");
         ShapeC = root.getChild("ShapeC");
@@ -236,40 +235,5 @@ public class WebSlingerModel extends Model {
                 PartPose.offsetAndRotation(-1.5F, 7.5F, 12F, -0.5585054F, -0.5585054F, 0F));
 
         return LayerDefinition.create(meshdefinition, 64, 32);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-        ShapeA.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeB.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeC.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeD.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeE.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeF.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeG.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeH.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeI.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeJ.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeK.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeL.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeM.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeN.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeO.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeP.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeQ.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeR.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeS.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeT.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeU.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeV.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeW.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        ShapeX.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        Back.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        BarrelDeco.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        Barrel.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        Grip.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        Greeble1.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        Greeble2.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
-        Greeble3.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

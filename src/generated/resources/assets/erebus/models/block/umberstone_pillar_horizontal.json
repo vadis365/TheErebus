@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column_horizontal",
   "textures": {
-    "end": "erebus:block/umberstone_pillar_end",
-    "side": "erebus:block/umberstone_pillar_side"
+    "end": "erebus:block/umberstone_pillar_top",
+    "side": "erebus:block/umberstone_pillar"
   }
 }

@@ -1,17 +1,10 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {
-    "#": {
-      "item": "erebus:umbercobble"
-    }
-  },
-  "pattern": [
-    "##",
-    "##"
-  ],
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": "erebus:umberstone",
   "result": {
-    "count": 4,
     "id": "erebus:umberpaver"
   }
 }

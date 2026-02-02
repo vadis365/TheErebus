@@ -17,7 +17,6 @@
       "translate": "advancement.erebus.exploration/jade_ore.desc"
     },
     "icon": {
-      "count": 1,
       "id": "erebus:ore_jade"
     },
     "title": {

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "erebus:log_asper"
+  ],
+  "result": {
+    "count": 4,
+    "id": "erebus:planks_asper"
+  }
+}

@@ -20,7 +20,7 @@ public class SiloTankMenu extends AbstractContainerMenu {
 	public SiloTankMenu(final int windowId, final Inventory playerInventory, FriendlyByteBuf extra) {
 		super(ModMenuTypes.SILO_TANK.get(), windowId);
 		BlockPos tilePos = extra.readBlockPos();
-		BlockEntity tile = playerInventory.player.getCommandSenderWorld().getBlockEntity(tilePos);
+		BlockEntity tile = playerInventory.player.level().getBlockEntity(tilePos);
 
 		if (!(tile instanceof SiloTankBlockEntity))
 			return;

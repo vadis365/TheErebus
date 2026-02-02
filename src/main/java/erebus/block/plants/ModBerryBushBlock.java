@@ -39,16 +39,12 @@ public class ModBerryBushBlock extends BushBlock implements BonemealableBlock {
     public ModBerryBushBlock(Supplier<? extends Item> berry, Properties properties) {
         super(properties);
         this.berry = berry;
+        registerDefaultState(getStateDefinition().any().setValue(AGE, 0));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AGE);
-    }
-
-    @Override
-    protected @NotNull MapCodec<? extends BushBlock> codec() {
-        return CODEC;
     }
 
 
@@ -88,9 +84,9 @@ public class ModBerryBushBlock extends BushBlock implements BonemealableBlock {
         int age = state.getValue(AGE);
 
         if (age > 1) {
-            int amount = 1 + level.random.nextInt(2);
+            int amount = 1 + level.getRandom().nextInt(2);
             popResource(level, pos, new ItemStack(berry.get(), amount));
-            level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+            level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.4F);
             BlockState newState = state.setValue(AGE, 1);
             level.setBlock(pos, newState, 2);
             level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(newState));
