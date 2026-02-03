@@ -29,6 +29,7 @@ public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBl
 
 	@Override
 	public void extractRenderState(AnimatedBlock entity, AnimatedBlockRenderState state, float partialTicks) {
+		super.extractRenderState(entity, state, partialTicks);
 		state.blockState = entity.getBlockType();
 		itemModelResolver.updateForTopItem(state.itemStackRenderState, new ItemStack(entity.getBlockType().getBlock()), ItemDisplayContext.FIXED, entity.level(), null, 0);
 	}

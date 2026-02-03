@@ -76,6 +76,7 @@ public class BeetleLarva extends PathfinderMob {
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 8D)
 				.add(Attributes.FOLLOW_RANGE, 16D)
+				.add(Attributes.TEMPT_RANGE, 16.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.35D)
 				.add(Attributes.STEP_HEIGHT, 1D);
 	}

@@ -19,6 +19,11 @@ public class BotFlyRenderer extends MobRenderer<BotFly, BotFlyRenderState, BotFl
 	}
 
 	@Override
+	public void extractRenderState(BotFly entity, BotFlyRenderState state, float partialTicks) {
+		super.extractRenderState(entity, state, partialTicks);
+	}
+
+	@Override
 	public BotFlyRenderState createRenderState() {
 		return new BotFlyRenderState();
 	}

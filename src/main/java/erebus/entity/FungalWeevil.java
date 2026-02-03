@@ -42,15 +42,14 @@ public class FungalWeevil extends Weevil {
 	}
 
     public BlockState getMushroomToPlace() {
-    	switch (random.nextInt(7)) {
-    	case 0 : return Blocks.BROWN_MUSHROOM.defaultBlockState();
-    	case 1 : return Blocks.RED_MUSHROOM.defaultBlockState();
-    	case 2 : return ModBlocks.DARK_CAPPED_MUSHROOM.get().defaultBlockState();
-    	case 3 : return ModBlocks.DUTCH_CAP_MUSHROOM.get().defaultBlockState();
-    	case 4 : return ModBlocks.GRANDMAS_SHOES_MUSHROOM.get().defaultBlockState();
-    	case 5 : return ModBlocks.KAIZERS_FINGERS_MUSHROOM.get().defaultBlockState();
-    	case 6 : return ModBlocks.SARCASTIC_CZECH_MUSHROOM.get().defaultBlockState();
-    	default : return Blocks.BROWN_MUSHROOM.defaultBlockState();
-    	}
+        return switch (random.nextInt(7)) {
+            case 1 -> Blocks.RED_MUSHROOM.defaultBlockState();
+            case 2 -> ModBlocks.DARK_CAPPED_MUSHROOM.get().defaultBlockState();
+            case 3 -> ModBlocks.DUTCH_CAP_MUSHROOM.get().defaultBlockState();
+            case 4 -> ModBlocks.GRANDMAS_SHOES_MUSHROOM.get().defaultBlockState();
+            case 5 -> ModBlocks.KAIZERS_FINGERS_MUSHROOM.get().defaultBlockState();
+            case 6 -> ModBlocks.SARCASTIC_CZECH_MUSHROOM.get().defaultBlockState();
+            default -> Blocks.BROWN_MUSHROOM.defaultBlockState();
+        };
     }
 }

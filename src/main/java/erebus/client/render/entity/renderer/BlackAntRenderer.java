@@ -32,6 +32,11 @@ public class BlackAntRenderer extends MobRenderer<BlackAnt, BlackAntRenderState,
 	}
 
 	@Override
+	public void extractRenderState(BlackAnt entity, BlackAntRenderState state, float partialTicks) {
+		super.extractRenderState(entity, state, partialTicks);
+	}
+
+	@Override
 	public @NonNull Identifier getTextureLocation(BlackAntRenderState state) {
 		return TEXTURE;
 	}

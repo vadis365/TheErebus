@@ -31,6 +31,7 @@ public class BlackWidowRenderer extends  MobRenderer<BlackWidow, BlackWidowRende
 
 	@Override
 	public void extractRenderState(BlackWidow entity, BlackWidowRenderState state, float partialTicks) {
+		super.extractRenderState(entity, state, partialTicks);
 		state.size = entity.getWidowSize();
 	}
 

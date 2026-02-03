@@ -69,6 +69,7 @@ public class Beetle extends Animal {
 				.add(Attributes.MAX_HEALTH, 15D)
 				.add(Attributes.MOVEMENT_SPEED, 0.5D)
 				.add(Attributes.ARMOR, 4D)
+				.add(Attributes.TEMPT_RANGE, 16.0D)
 				.add(Attributes.STEP_HEIGHT, 1D);
 	}
 

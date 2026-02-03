@@ -66,7 +66,7 @@ public class AnimatedBlock extends PathfinderMob {
 		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, false));
 		goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.5D, 1));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this));
-		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Monster>(this, Monster.class, true, true));
+		targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Monster.class, true, true));
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

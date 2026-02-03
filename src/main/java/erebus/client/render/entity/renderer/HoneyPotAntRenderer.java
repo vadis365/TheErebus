@@ -26,6 +26,7 @@ public class HoneyPotAntRenderer extends MobRenderer<HoneyPotAnt, HoneyPotAntRen
 
 	@Override
 	public void extractRenderState(HoneyPotAnt entity, HoneyPotAntRenderState state, float partialTicks) {
+		super.extractRenderState(entity, state, partialTicks);
 		state.belly = entity.getHoneyBelly();
 	}
 

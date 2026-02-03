@@ -18,7 +18,6 @@ import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.MaterialSet;
 import net.minecraft.core.BlockPos;
@@ -93,12 +92,12 @@ public class ErebusChestRenderer implements BlockEntityRenderer<ErebusChestBlock
         open = 1.0F - open * open * open;
         Material material = ModSheets.chooseMaterial(state.material, state.type);
         RenderType renderType = material.renderType(RenderTypes::entityCutout);
-        TextureAtlasSprite sprite = materials.get(material);
 
         switch(state.type) {
-            case LEFT: submit.submitModel(doubleLeftModel, open, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, state.breakProgress);
-            case RIGHT: submit.submitModel(doubleRightModel, open, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, state.breakProgress);
-            case SINGLE: submit.submitModel(model, open, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, state.breakProgress);
+            case LEFT -> submit.submitModel(doubleLeftModel, open, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, state.breakProgress);
+            case RIGHT -> submit.submitModel(doubleRightModel, open, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, state.breakProgress);
+            case SINGLE -> submit.submitModel(model, open, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, state.breakProgress);
+            default -> {}
         }
 
         pose.popPose();

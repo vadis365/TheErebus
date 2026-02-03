@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.MaterialSet;
 import net.minecraft.world.phys.Vec3;
@@ -24,7 +25,7 @@ import java.util.List;
 
 public class ExperienceAltarRenderer implements BlockEntityRenderer<ExperienceAltarBlockEntity, ExperienceAltarBlockEntityRenderState> {
 
-	private final MaterialMapper MAPPER = new MaterialMapper(Erebus.prefix("textures/atlas/xp_altars.png"), "special/tiles/altar_xp");
+	private final MaterialMapper MAPPER = new MaterialMapper(TextureAtlas.LOCATION_BLOCKS, "special/tiles/altar_xp");
 	private final Material STEP1 = MAPPER.apply(Erebus.prefix("1.png"));
 	private final Material STEP2 = MAPPER.apply(Erebus.prefix("2.png"));
 	private final Material STEP3 = MAPPER.apply(Erebus.prefix("3.png"));

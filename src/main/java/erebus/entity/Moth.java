@@ -164,13 +164,4 @@ public class Moth extends AmbientCreature {
 	public int getMaxSpawnClusterSize() {
 		return 5;
 	}
-
-/* TODO
-	@Override
-	protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
-		if (rand.nextInt(5) == 0)
-			entityDropItem(new ItemStack(Items.GLOWSTONE_DUST, 1, 0), 0.0F);
-			
-	}
-*/
 }

@@ -69,7 +69,7 @@ public class BotFlyLarvaRenderer extends MobRenderer<BotFlyLarva, BotFlyLarvaRen
 				);
 				pose.popPose();
 			}
-			if (state.parasiteCount > 1) {
+			if (state.parasiteCount > 2) {
 				pose.pushPose();
 				pose.translate(-0.5F, -0.4F, 0.0F);
 				submit.submitModel(
@@ -97,6 +97,7 @@ public class BotFlyLarvaRenderer extends MobRenderer<BotFlyLarva, BotFlyLarvaRen
 
 	@Override
 	public void extractRenderState(BotFlyLarva entity, BotFlyLarvaRenderState state, float partialTicks) {
+		super.extractRenderState(entity, state, partialTicks);
 		state.parasiteCount = entity.getParasiteCount();
 	}
 

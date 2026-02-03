@@ -116,6 +116,7 @@ public class BlackAnt extends Animal implements HasCustomInventoryScreen, MenuPr
 		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 15D)
 				.add(Attributes.MOVEMENT_SPEED, 0.6D)
+				.add(Attributes.TEMPT_RANGE, 16.0D)
 				.add(Attributes.FOLLOW_RANGE, 16.0D);
 	}
 

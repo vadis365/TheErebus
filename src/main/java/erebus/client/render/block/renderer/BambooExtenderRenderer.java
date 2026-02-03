@@ -18,6 +18,7 @@ import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.core.Direction;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -41,7 +42,7 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 	@Override
 	public void extractRenderState(BambooExtenderBlockEntity blockEntity, BambooExtenderBlockEntityRenderState state, float partialTicks, @NonNull Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
 		BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
-		state.facing = blockEntity.direction;
+		state.facing = blockEntity.direction == null ? Direction.DOWN : blockEntity.direction;
 	}
 
 	@Override

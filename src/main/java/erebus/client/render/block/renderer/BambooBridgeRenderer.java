@@ -65,7 +65,6 @@ public class BambooBridgeRenderer implements BlockEntityRenderer<BambooBridgeBlo
 				pose.mulPose(Axis.YP.rotationDegrees(90F));
 				break;
 		}
-		pose.popPose();
 
 		nodeCollector.submitModel(
 				model,
@@ -79,5 +78,6 @@ public class BambooBridgeRenderer implements BlockEntityRenderer<BambooBridgeBlo
 				0,
 				renderState.breakProgress
 		);
+		pose.popPose();
 	}
 }

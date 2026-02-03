@@ -7,6 +7,7 @@ import erebus.block.entity.LiquifierBlockEntity;
 import erebus.client.render.block.model.LiquifierModel;
 import erebus.client.render.block.renderer.state.LiquifierBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
@@ -87,7 +88,7 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 
 	@Override
 	public void submit(LiquifierBlockEntityRenderState renderState, PoseStack pose, @NonNull SubmitNodeCollector submitNodeCollector, @NonNull CameraRenderState cameraRenderState) {
-		Material material = new Material(TEXTURE, TEXTURE);
+		Material material = Sheets.BLOCK_ENTITIES_MAPPER.apply(TEXTURE);
 
 		if (!renderState.tankResource.isEmpty() && renderState.tankAmount > 0) {
 			float height = (0.375F / renderState.tankCapacity) * renderState.tankAmount;
@@ -122,6 +123,7 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 				0,
 				renderState.breakProgress
 		);
+		pose.popPose();
 	}
 
 	@Override

@@ -68,7 +68,9 @@ public class BlockOfBonesRenderer implements BlockEntityRenderer<BlockOfBonesBlo
                 break;
         }
         submitNodeCollector.submitModel(model, renderState, pose, TEXTURE.renderType(RenderTypes::entitySolid), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(TEXTURE), 0, renderState.breakProgress);
-        submitNodeCollector.submitNameTag(pose, renderState.nametagAttachment, 0, renderState.nametag, false, renderState.lightCoords, renderState.distanceToCameraSq, camera);
+        if (renderState.nametag != null) {
+            submitNodeCollector.submitNameTag(pose, renderState.nametagAttachment, 0, renderState.nametag, false, renderState.lightCoords, renderState.distanceToCameraSq, camera);
+        }
         pose.popPose();
     }
 }

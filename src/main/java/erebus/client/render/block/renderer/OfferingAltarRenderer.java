@@ -8,6 +8,7 @@ import erebus.client.particle.ClientParticles;
 import erebus.client.render.block.model.OfferingAltarModel;
 import erebus.client.render.block.renderer.state.OfferingAltarBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
@@ -50,16 +51,19 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 		state.random = blockEntity.getLevel().getRandom();
 
 		for(int c = 0; c < 4; c++ ) {
-			itemModelResolver.updateForTopItem(
-					state.itemStackRenderStates[c],
-					blockEntity.getSlot(c).get(),
-					ItemDisplayContext.FIXED,
-					blockEntity.getLevel(),
-					null,
-					0
-			);
+			if(blockEntity.getSlot(c).get() != ItemStack.EMPTY) {
 
-			state.stacks[c] = blockEntity.getSlot(c).get();
+				itemModelResolver.updateForTopItem(
+						state.itemStackRenderStates[c],
+						blockEntity.getSlot(c).get(),
+						ItemDisplayContext.FIXED,
+						blockEntity.getLevel(),
+						null,
+						0
+				);
+
+				state.stacks[c] = blockEntity.getSlot(c).get();
+			}
 		}
 
 		state.canCraft = blockEntity.getItems().get(3).isEmpty();
@@ -73,7 +77,7 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 
 	@Override
 	public void submit(OfferingAltarBlockEntityRenderState renderState, PoseStack pose, SubmitNodeCollector submit, @NonNull CameraRenderState camera) {
-		Material material = new Material(TEXTURE, TEXTURE);
+		Material material = Sheets.BLOCK_ENTITIES_MAPPER.apply(TEXTURE);
 
 		pose.pushPose();
 		pose.translate(0.5D, 1.5D, 0.5D);
@@ -105,23 +109,25 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 			pose.translate(0F, 0.75, 0F);
 			for (int c = 0; c < 3; c++) {
 				ItemStack item = state.stacks[c];
-				if (!item.isEmpty()) {
-					pose.pushPose();
-					pose.mulPose(Axis.YP.rotationDegrees((float)120 * (c + 1) + renderRotation));
-					pose.translate(Math.cos(Math.toRadians(angle)), 0, 0);
-					pose.scale(0.5F, 0.5F, 0.5F);
-					pose.pushPose();
-					pose.mulPose(Axis.XN.rotationDegrees((float)120 * (c + 1) + renderRotation + angle));
-					pose.mulPose(Axis.YN.rotationDegrees((float)120 * (c + 1) + renderRotation * 2F + angle));
-					pose.mulPose(Axis.ZN.rotationDegrees((float)120 * (c + 1) + renderRotation + angle));
-					state.itemStackRenderStates[c].submit(pose, submit, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
-					pose.popPose();
-					pose.popPose();
-					double a = -Math.toRadians((float)120 * (c + 1) + renderRotation -90);
-					double offSetX = -Math.sin(a) * Math.cos(Math.toRadians(angle));
-					double offSetZ = Math.cos(a) * Math.cos(Math.toRadians(angle));
-					if(state.shouldSpawnParticles)
-						ClientParticles.spawnCustomParticle(getParticleType(item), state.blockPos.getX() + 0.5F - offSetX , state.blockPos.getY() + 1.5F + (state.random.nextFloat() - state.random.nextFloat()) *0.1F, state.blockPos.getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
+				if (item != null) {
+					if (!item.isEmpty()) {
+						pose.pushPose();
+						pose.mulPose(Axis.YP.rotationDegrees((float) 120 * (c + 1) + renderRotation));
+						pose.translate(Math.cos(Math.toRadians(angle)), 0, 0);
+						pose.scale(0.5F, 0.5F, 0.5F);
+						pose.pushPose();
+						pose.mulPose(Axis.XN.rotationDegrees((float) 120 * (c + 1) + renderRotation + angle));
+						pose.mulPose(Axis.YN.rotationDegrees((float) 120 * (c + 1) + renderRotation * 2F + angle));
+						pose.mulPose(Axis.ZN.rotationDegrees((float) 120 * (c + 1) + renderRotation + angle));
+						state.itemStackRenderStates[c].submit(pose, submit, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+						pose.popPose();
+						pose.popPose();
+						double a = -Math.toRadians((float) 120 * (c + 1) + renderRotation - 90);
+						double offSetX = -Math.sin(a) * Math.cos(Math.toRadians(angle));
+						double offSetZ = Math.cos(a) * Math.cos(Math.toRadians(angle));
+						if (state.shouldSpawnParticles)
+							ClientParticles.spawnCustomParticle(getParticleType(item), state.blockPos.getX() + 0.5F - offSetX, state.blockPos.getY() + 1.5F + (state.random.nextFloat() - state.random.nextFloat()) * 0.1F, state.blockPos.getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
+					}
 				}
 			}
 		} else {

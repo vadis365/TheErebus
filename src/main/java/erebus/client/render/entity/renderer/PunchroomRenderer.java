@@ -26,6 +26,7 @@ public class PunchroomRenderer extends MobRenderer<Punchroom, PunchroomRenderSta
 
 	@Override
 	public void extractRenderState(Punchroom entity, PunchroomRenderState state, float partialTicks) {
+		super.extractRenderState(entity, state, partialTicks);
 		state.hasCustomName = entity.hasCustomName();
 		state.name = entity.getCustomName();
 		state.squishFactor = entity.squishFactor;

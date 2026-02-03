@@ -3,13 +3,12 @@ package erebus.registries.client;
 import erebus.Erebus;
 import erebus.client.render.block.renderer.state.ErebusChestRenderState;
 import net.minecraft.client.renderer.MaterialMapper;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.state.properties.ChestType;
 
 public class ModSheets {
-    private static final Identifier EREBUS_CHEST_SHEET = Erebus.prefix("textures/atlas/chests.png");
-    private static final MaterialMapper CHEST_MAPPER = new MaterialMapper(EREBUS_CHEST_SHEET, "entity/chest");
+    private static final MaterialMapper CHEST_MAPPER = new MaterialMapper(TextureAtlas.LOCATION_BLOCKS, "entity");
 
     private static final Material CHEST_ASPER = CHEST_MAPPER.apply(Erebus.prefix("asper_chest"));
     private static final Material CHEST_ASPER_LEFT = CHEST_MAPPER.apply(Erebus.prefix("asper_chest_left"));

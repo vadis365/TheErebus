@@ -139,7 +139,7 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 	}
 
 	@Override
-	public void onDataPacket(Connection net, ValueInput valueInput) {
+	public void onDataPacket(@NonNull Connection net, @NonNull ValueInput valueInput) {
 		super.onDataPacket(net, valueInput);
 		updateBlockWhenChanged();
 	}
@@ -177,7 +177,7 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 	}
 
 	@Override
-	public boolean canPlaceItem(int slot, ItemStack stack) {
+	public boolean canPlaceItem(int slot, @NonNull ItemStack stack) {
 		return slot != 3;
 	}
 

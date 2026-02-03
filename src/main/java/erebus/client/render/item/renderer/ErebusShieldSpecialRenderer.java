@@ -42,6 +42,7 @@ public class ErebusShieldSpecialRenderer implements NoDataSpecialModelRenderer {
                 null,
                 outlineColor
         );
+        pose.popPose();
     }
 
     @Override
