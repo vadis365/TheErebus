@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "erebus:block/umbertile_smooth_small"
+  }
+}

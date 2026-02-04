@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/wall_umbertile_smooth"
+    "model": "erebus:block/wall_umbertile_smooth_inventory"
   }
 }

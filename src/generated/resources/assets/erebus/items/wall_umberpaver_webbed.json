@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/wall_umberpaver_webbed"
+    "model": "erebus:block/wall_umberpaver_webbed_inventory"
   }
 }

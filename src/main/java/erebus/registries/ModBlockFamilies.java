@@ -145,38 +145,47 @@ public class ModBlockFamilies {
 
     public static final BlockFamily UMBERCOBBLE = register(familyBuilder(ModBlocks.UMBERCOBBLE)
             .slab(ModBlocks.SLAB_UMBERCOBBLE.get())
+            .wall(ModBlocks.WALL_UMBERCOBBLE.get())
             .stairs(ModBlocks.STAIRS_UMBERCOBBLE.get()));
 
     public static final BlockFamily UMBERCOBBLE_MOSSY = register(familyBuilder(ModBlocks.UMBERCOBBLE_MOSSY)
             .slab(ModBlocks.SLAB_UMBERCOBBLE_MOSSY.get())
+            .wall(ModBlocks.WALL_UMBERCOBBLE_MOSSY.get())
             .stairs(ModBlocks.STAIRS_UMBERCOBBLE_MOSSY.get()));
 
     public static final BlockFamily UMBERCOBBLE_WEBBED = register(familyBuilder(ModBlocks.UMBERCOBBLE_WEBBED)
             .slab(ModBlocks.SLAB_UMBERCOBBLE_WEBBED.get())
+            .wall(ModBlocks.WALL_UMBERCOBBLE_WEBBED.get())
             .stairs(ModBlocks.STAIRS_UMBERCOBBLE_WEBBED.get()));
 
     public static final BlockFamily UMBERSTONE_BRICKS = register(familyBuilder(ModBlocks.UMBERSTONE_BRICKS)
             .slab(ModBlocks.SLAB_UMBERSTONE_BRICKS.get())
+            .wall(ModBlocks.WALL_UMBERSTONE_BRICKS.get())
             .stairs(ModBlocks.STAIRS_UMBERSTONE_BRICKS.get()));
 
     public static final BlockFamily UMBERTILE_SMOOTH = register(familyBuilder(ModBlocks.UMBERTILE_SMOOTH)
             .slab(ModBlocks.SLAB_UMBERTILE_SMOOTH.get())
+            .wall(ModBlocks.WALL_UMBERTILE_SMOOTH.get())
             .stairs(ModBlocks.STAIRS_UMBERTILE_SMOOTH.get()));
 
     public static final BlockFamily UMBERTILE_SMOOTH_SMALL = register(familyBuilder(ModBlocks.UMBERTILE_SMOOTH_SMALL)
             .slab(ModBlocks.SLAB_UMBERTILE_SMOOTH_SMALL.get())
+            .wall(ModBlocks.WALL_UMBERTILE_SMOOTH_SMALL.get())
             .stairs(ModBlocks.STAIRS_UMBERTILE_SMOOTH_SMALL.get()));
 
     public static final BlockFamily UMBERPAVER = register(familyBuilder(ModBlocks.UMBERPAVER)
             .slab(ModBlocks.SLAB_UMBERPAVER.get())
+            .wall(ModBlocks.WALL_UMBERPAVER.get())
             .stairs(ModBlocks.STAIRS_UMBERPAVER.get()));
 
     public static final BlockFamily UMBERPAVER_MOSSY = register(familyBuilder(ModBlocks.UMBERPAVER_MOSSY)
             .slab(ModBlocks.SLAB_UMBERPAVER_MOSSY.get())
+            .wall(ModBlocks.WALL_UMBERPAVER_MOSSY.get())
             .stairs(ModBlocks.STAIRS_UMBERPAVER_MOSSY.get()));
 
     public static final BlockFamily UMBERPAVER_WEBBED = register(familyBuilder(ModBlocks.UMBERPAVER_WEBBED)
             .slab(ModBlocks.SLAB_UMBERPAVER_WEBBED.get())
+            .wall(ModBlocks.WALL_UMBERPAVER_WEBBED.get())
             .stairs(ModBlocks.STAIRS_UMBERPAVER_WEBBED.get()));
 
     public static final BlockFamily AMBER = register(familyBuilder(ModBlocks.AMBER)
