@@ -1,6 +1,7 @@
 package erebus.world.biome;
 
 import erebus.registries.entity.ModEntities;
+import erebus.registries.world.ModBiomes;
 import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
@@ -19,7 +20,6 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.*;
 
 public class VolcanicDesertBiome extends ErebusBiome {
-    public static final ResourceKey<Biome> RESOURCE_KEY = makeKey("volcanic_desert");
 
     public VolcanicDesertBiome(int color, int fogColor) {
         super(color, fogColor);
@@ -27,7 +27,7 @@ public class VolcanicDesertBiome extends ErebusBiome {
 
     @Override
     public ResourceKey<Biome> getResourceKey() {
-        return RESOURCE_KEY;
+        return ModBiomes.VOLCANIC_DESERT_KEY;
     }
 
     @Override

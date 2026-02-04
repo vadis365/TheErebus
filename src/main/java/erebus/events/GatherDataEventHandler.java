@@ -28,8 +28,6 @@ public class GatherDataEventHandler {
         event.createProvider(ModModelProvider::new);
         event.createProvider(ModLang::new);
 
-        //Server
-
         event.createProvider((output, lookupProvider) -> new AdvancementProvider(
                 output, lookupProvider,
                 List.of(

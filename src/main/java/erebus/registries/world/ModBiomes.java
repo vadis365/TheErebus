@@ -1,14 +1,26 @@
 package erebus.registries.world;
 
+import erebus.Erebus;
 import erebus.world.biome.*;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class ModBiomes {
+
+    public static final ResourceKey<Biome> ELYSIAN_FIELDS_KEY = registerKey("elysian_fields");
+    public static final ResourceKey<Biome> ELYSIAN_FOREST_KEY = registerKey("elysian_forest");
+    public static final ResourceKey<Biome> FUNGAL_FOREST_KEY = registerKey("fungal_forest");
+    public static final ResourceKey<Biome> PETRIFIED_FOREST_KEY = registerKey("petrified_forest");
+    public static final ResourceKey<Biome> SUBMERGED_SWAMP_KEY = registerKey("submerged_swamp");
+    public static final ResourceKey<Biome> SUBTERRANEAN_SAVANNAH_KEY = registerKey("subterranean_savannah");
+    public static final ResourceKey<Biome> ULTERIOR_OUTBACK_KEY = registerKey("ulterior_outback");
+    public static final ResourceKey<Biome> UNDERGROUND_JUNGLE_KEY = registerKey("underground_jungle");
+    public static final ResourceKey<Biome> VOLCANIC_DESERT_KEY = registerKey("volcanic_desert");
 
     // Biomes
     public static final ElysianFieldsBiome ELYSIAN_FIELDS = new ElysianFieldsBiome(0xC6FF54, 0xD5E47F);
@@ -34,5 +46,9 @@ public class ModBiomes {
         context.register(ULTERIOR_OUTBACK.getResourceKey(), ULTERIOR_OUTBACK.getBiome(featureGetter, carverGetter));
         context.register(UNDERGROUND_JUNGLE.getResourceKey(), UNDERGROUND_JUNGLE.getBiome(featureGetter, carverGetter));
         context.register(VOLCANIC_DESERT.getResourceKey(), VOLCANIC_DESERT.getBiome(featureGetter, carverGetter));
+    }
+
+    private static ResourceKey<Biome> registerKey(String name) {
+        return ResourceKey.create(Registries.BIOME, Erebus.prefix(name));
     }
 }

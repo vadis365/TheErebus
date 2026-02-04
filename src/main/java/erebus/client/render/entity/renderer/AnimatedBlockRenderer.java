@@ -45,7 +45,7 @@ public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBl
 		pose.translate(0F, 0F, 0F);
 		pose.pushPose();
 		pose.mulPose(Axis.YN.rotationDegrees(state.bodyRot));
-		pose.scale(4F, 4F, 4F);
+		pose.scale(1F, 1F, 1F);
 		state.itemStackRenderState.submit(pose, node, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
 		pose.popPose();
 		pose.popPose();

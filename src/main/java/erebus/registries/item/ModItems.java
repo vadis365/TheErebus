@@ -294,7 +294,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> VELVET_WORM_SPAWN_EGG = registerSpawnEgg("velvet_worm", ModEntities.VELVET_WORM);
     public static final DeferredItem<Item> DRAGON_FLY_SPAWN_EGG = registerSpawnEgg("dragonfly", ModEntities.DRAGON_FLY);
     //public static final DeferredItem<Item> TITAN_BEETLE_SPAWN_EGG = registerSpawnEgg("titan_beetle", ModEntities.TITAN_BEETLE);
-    public static final DeferredItem<Item> BOT_FLY_LARVA_SPAWN_EGG = registerSpawnEgg("", ModEntities.BOT_FLY_LARVA);
+    public static final DeferredItem<Item> BOT_FLY_LARVA_SPAWN_EGG = registerSpawnEgg("bot_fly_larva", ModEntities.BOT_FLY_LARVA);
     public static final DeferredItem<Item> FUNGAL_WEEVIL_SPAWN_EGG = registerSpawnEgg("fungal_weevil", ModEntities.FUNGAL_WEEVIL);
     public static final DeferredItem<Item> CROP_WEEVIL_SPAWN_EGG = registerSpawnEgg("crop_weevil", ModEntities.CROP_WEEVIL);
     //public static final DeferredItem<Item> WOODLOUSE_SPAWN_EGG = registerSpawnEgg("woodlouse", ModEntities.WOODLOUSE);

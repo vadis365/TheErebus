@@ -1,5 +1,6 @@
 package erebus.world.biome;
 
+import erebus.registries.world.ModBiomes;
 import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
@@ -19,15 +20,13 @@ import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.*;
 
 public class FungalForestBiome extends ErebusBiome {
 
-    public static final ResourceKey<Biome> RESOURCE_KEY = makeKey("fungal_forest");
-
     public FungalForestBiome(int color, int fogColor) {
         super(color, fogColor);
     }
 
     @Override
     public ResourceKey<Biome> getResourceKey() {
-        return RESOURCE_KEY;
+        return ModBiomes.FUNGAL_FOREST_KEY;
     }
 
     @Override

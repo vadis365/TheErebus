@@ -1,6 +1,7 @@
 package erebus.world.biome;
 
 import erebus.registries.entity.ModEntities;
+import erebus.registries.world.ModBiomes;
 import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
@@ -21,7 +22,6 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.*;
 
 public class SubterraneanSavannahBiome extends ErebusBiome {
-    public static final ResourceKey<Biome> RESOURCE_KEY = makeKey("subterranean_savannah");
 
     public SubterraneanSavannahBiome(int color, int fogColor) {
         super(color, fogColor);
@@ -29,7 +29,7 @@ public class SubterraneanSavannahBiome extends ErebusBiome {
 
     @Override
     public ResourceKey<Biome> getResourceKey() {
-        return RESOURCE_KEY;
+        return ModBiomes.SUBTERRANEAN_SAVANNAH_KEY;
     }
 
     @Override

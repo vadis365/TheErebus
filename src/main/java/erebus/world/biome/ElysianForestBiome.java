@@ -1,6 +1,7 @@
 package erebus.world.biome;
 
 import erebus.registries.entity.ModEntities;
+import erebus.registries.world.ModBiomes;
 import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
@@ -23,15 +24,13 @@ import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.VEGET
 
 public class ElysianForestBiome extends ErebusBiome {
 
-    public static final ResourceKey<Biome> RESOURCE_KEY = makeKey("elysian_forest");
-
     public ElysianForestBiome(int color, int fogColor) {
         super(color, fogColor);
     }
 
     @Override
     public ResourceKey<Biome> getResourceKey() {
-        return RESOURCE_KEY;
+        return ModBiomes.ELYSIAN_FOREST_KEY;
     }
 
     @Override

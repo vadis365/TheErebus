@@ -1,6 +1,7 @@
 package erebus.world.biome;
 
 import erebus.registries.entity.ModEntities;
+import erebus.registries.world.ModBiomes;
 import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
@@ -20,15 +21,13 @@ import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.UNDER
 
 public class PetrifiedForestBiome extends ErebusBiome {
 
-    public static final ResourceKey<Biome> RESOURCE_KEY = makeKey("petrified_forest");
-
     public PetrifiedForestBiome(int color, int fogColor) {
         super(color, fogColor);
     }
 
     @Override
     public ResourceKey<Biome> getResourceKey() {
-        return RESOURCE_KEY;
+        return ModBiomes.PETRIFIED_FOREST_KEY;
     }
 
     @Override
