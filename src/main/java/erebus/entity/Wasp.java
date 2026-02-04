@@ -140,13 +140,13 @@ public class Wasp extends Monster {
 	}
 
 	@Override
-	  public void addAdditionalSaveData(ValueOutput output) {
+	  public void addAdditionalSaveData(@NonNull ValueOutput output) {
 		super.addAdditionalSaveData(output);
 		output.putBoolean("mobType", getIsBoss());
 	}
 
 	@Override
-	public void readAdditionalSaveData(ValueInput input) {
+	public void readAdditionalSaveData(@NonNull ValueInput input) {
 		super.readAdditionalSaveData(input);
 		setIsBoss(input.getBooleanOr("mobType", false), false);
 	}

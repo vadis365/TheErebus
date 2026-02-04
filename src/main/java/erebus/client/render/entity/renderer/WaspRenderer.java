@@ -3,6 +3,7 @@ package erebus.client.render.entity.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.Erebus;
 import erebus.client.render.entity.model.WaspModel;
+import erebus.client.render.entity.model.layer.WaspWingsModel;
 import erebus.client.render.entity.renderer.layer.WaspLayer;
 import erebus.client.render.entity.renderer.state.WaspRenderState;
 import erebus.entity.Wasp;
@@ -18,7 +19,7 @@ public class WaspRenderer extends MobRenderer<Wasp, WaspRenderState, WaspModel> 
 
 	public WaspRenderer(EntityRendererProvider.Context context) {
 		super(context, new WaspModel(context.bakeLayer(ModEntityRendering.WASP)), 0.5F);
-		addLayer(new WaspLayer(this, context.getModelSet()));
+		addLayer(new WaspLayer(this, new WaspWingsModel(context.bakeLayer(ModEntityRendering.WASP_WINGS))));
 	}
 
 	@Override
@@ -30,6 +31,9 @@ public class WaspRenderer extends MobRenderer<Wasp, WaspRenderState, WaspModel> 
 	public void extractRenderState(Wasp entity, WaspRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
 		state.isBoss = entity.getIsBoss();
+		state.animationTicks = entity.animationTicks;
+		state.prevAnimationTicks = entity.prevAnimationTicks;
+		state.isFlying = entity.isFlying();
 	}
 
 	@Override

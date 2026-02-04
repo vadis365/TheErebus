@@ -5,7 +5,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-
+import net.minecraft.util.Mth;
 
 public class WaspModel extends EntityModel<WaspRenderState> {
 	public ModelPart root;
@@ -57,12 +57,6 @@ public class WaspModel extends EntityModel<WaspRenderState> {
 	public ModelPart Sting;
 	public ModelPart ThxRW;
 	public ModelPart ThxLW;
-	public ModelPart RWingBack;
-	public ModelPart RWingMid;
-	public ModelPart RWingFront;
-	public ModelPart LWingBack;
-	public ModelPart LWingMid;
-	public ModelPart LWingFront;
 
 	public WaspModel(ModelPart root) {
 		super(root);
@@ -115,12 +109,6 @@ public class WaspModel extends EntityModel<WaspRenderState> {
 		this.RBL2 = root.getChild("RBL2");
 		this.RBL3 = root.getChild("RBL3");
 		this.RBL4 = root.getChild("RBL4");
-		this.RWingBack = root.getChild("RWingMid").getChild("RWingBack");
-		this.RWingMid = root.getChild("RWingMid");
-		this.RWingFront = root.getChild("RWingMid").getChild("RWingFront");
-		this.LWingBack = root.getChild("LWingMid").getChild("LWingBack");
-		this.LWingMid = root.getChild("LWingMid");
-		this.LWingFront = root.getChild("LWingMid").getChild("LWingFront");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -184,19 +172,79 @@ public class WaspModel extends EntityModel<WaspRenderState> {
 		root.addOrReplaceChild("ThxRW", CubeListBuilder.create().texOffs(0, 52).addBox(-1.5F, -1.5F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, 13.0F, 4.0F));
 		root.addOrReplaceChild("ThxLW", CubeListBuilder.create().texOffs(0, 52).addBox(-1.5F, -1.5F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, 13.0F, 4.0F));
 
-		PartDefinition RWingMid = root.addOrReplaceChild("RWingMid", CubeListBuilder.create().texOffs(16, 44).addBox(-1.5F, -0.5F, 0.0F, 3.0F, 1.0F, 20.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 13.0F, 4.0F, 0.0F, 0.1745F, 0.0F));
-		RWingMid.addOrReplaceChild("RWingFront", CubeListBuilder.create().texOffs(36, 28).addBox(1.5F, -0.5F, 6.0F, 1.0F, 1.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
-		RWingMid.addOrReplaceChild("RWingBack", CubeListBuilder.create().texOffs(36, 28).addBox(-2.5F, -0.5F, 6.0F, 1.0F, 1.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
-
-		PartDefinition LWingMid = root.addOrReplaceChild("LWingMid", CubeListBuilder.create().texOffs(16, 44).addBox(-1.5F, -0.5F, 0.0F, 3.0F, 1.0F, 20.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 13.0F, 4.0F, 0.0F, -0.1745F, 0.0F));
-		LWingMid.addOrReplaceChild("LWingBack", CubeListBuilder.create().texOffs(36, 28).addBox(1.5F, -0.5F, 6.0F, 1.0F, 1.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
-		LWingMid.addOrReplaceChild("LWingFront", CubeListBuilder.create().texOffs(36, 28).addBox(-2.5F, -0.5F, 6.0F, 1.0F, 1.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 		return LayerDefinition.create(meshdefinition, 64, 128);
 	}
 
 	@Override
 	public void setupAnim(WaspRenderState state) {
+		super.setupAnim(state);
+		float smoothedTicks = state.animationTicks + (state.animationTicks - state.prevAnimationTicks) * state.partialTick;
+		float flap2 = Mth.sin(smoothedTicks * 0.5F) * 0.25F;
+		float flap3 = Mth.cos(smoothedTicks * 0.5F) * 0.25F;
+		AntLS.zRot = -0.8727F + flap2;
+		AntLE.yRot = -0.1745F + flap3;
+		AntRS.zRot = 0.9878F - flap3;
+		AntRE.yRot = 0.1745F - flap2;
+
 		Head1.yRot = state.yRot / (180F / (float) Math.PI);
 		Head1.xRot = state.xRot / (180F / (float) Math.PI) - 1.0F;
+
+		if(state.isFlying) {
+			LBL1.xRot = +0.25F;
+			LBL2.xRot = +0.25F;
+			LBL3.xRot = +0.5F;
+			LBL4.xRot = +0.61F;
+			LML1.xRot = 0F;
+			LML2.xRot = 0F;
+			LML3.xRot = 0F;
+			LML4.xRot = 0F;
+			LFL1.xRot = -0.25F;
+			LFL2.xRot = -0.25F;
+			LFL3.xRot = -0.5F;
+			LFL4.xRot = -0.64F;
+			RBL1.xRot = +0.25F;
+			RBL2.xRot = +0.25F;
+			RBL3.xRot = +0.5F;
+			RBL4.xRot = +0.61F;
+			RML1.xRot = 0F;
+			RML2.xRot = 0F;
+			RML3.xRot = 0F;
+			RML4.xRot = 0F;
+			RFL1.xRot = -0.25F;
+			RFL2.xRot = -0.25F;
+			RFL3.xRot = -0.5F;
+			RFL4.xRot = -0.64F;
+
+			AbF.xRot = -0.8F;
+		} else {
+			float legX = Mth.cos(state.walkAnimationPos * 2.0F + Mth.PI) * 0.7F * state.walkAnimationSpeed;
+			float legX2 = Mth.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed;
+			LBL1.xRot = legX + 0.25F;
+			LBL2.xRot = legX + 0.25F;
+			LBL3.xRot = legX + 0.5F;
+			LBL4.xRot = legX + 0.61F;
+			LML1.xRot = legX2;
+			LML2.xRot = legX2;
+			LML3.xRot = legX2;
+			LML4.xRot = legX2;
+			LFL1.xRot = legX - 0.25F;
+			LFL2.xRot = legX - 0.25F;
+			LFL3.xRot = legX - 0.5F;
+			LFL4.xRot = legX - 0.64F;
+			RBL1.xRot = legX2 + 0.25F;
+			RBL2.xRot = legX2 + 0.25F;
+			RBL3.xRot = legX2 + 0.5F;
+			RBL4.xRot = legX2 + 0.61F;
+			RML1.xRot = legX;
+			RML2.xRot = legX;
+			RML3.xRot = legX;
+			RML4.xRot = legX;
+			RFL1.xRot = legX2 - 0.25F;
+			RFL2.xRot = legX2 - 0.25F;
+			RFL3.xRot = legX2 - 0.5F;
+			RFL4.xRot = legX2 - 0.64F;
+
+			AbF.xRot = -0.2F;
+		}
 	}
 }

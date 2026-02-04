@@ -2,6 +2,7 @@ package erebus.registries.entity;
 
 import erebus.Erebus;
 import erebus.client.render.entity.model.*;
+import erebus.client.render.entity.model.layer.WaspWingsModel;
 import erebus.client.render.entity.renderer.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -9,39 +10,49 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 public class ModEntityRendering {
 
-    public static ModelLayerLocation WASP = new ModelLayerLocation(Erebus.prefix("wasp"), "main");
-    public static ModelLayerLocation ANIMATED_BLOCK = new ModelLayerLocation(Erebus.prefix("animated_block"), "main");
-	public static ModelLayerLocation SCYTODES = new ModelLayerLocation(Erebus.prefix("scytodes"), "main");
-	public static ModelLayerLocation MONEY_SPIDER = new ModelLayerLocation(Erebus.prefix("money_spider"), "main");
-	public static ModelLayerLocation BLACK_WIDOW = new ModelLayerLocation(Erebus.prefix("black_widow"), "main");
-	public static ModelLayerLocation LAVA_WEB_SPIDER = new ModelLayerLocation(Erebus.prefix("lava_web_spider"), "main");
-	public static ModelLayerLocation LAVA_WEB_SPIDER_FLOW = new ModelLayerLocation(Erebus.prefix("lava_web_spider_flow"), "main");
-	public static ModelLayerLocation MOTH = new ModelLayerLocation(Erebus.prefix("moth"), "main");
-	public static ModelLayerLocation VELVET_WORM = new ModelLayerLocation(Erebus.prefix("velvet_worm"), "main");
-	public static ModelLayerLocation ANTLION = new ModelLayerLocation(Erebus.prefix("antlion"), "main");
-	public static ModelLayerLocation BOT_FLY = new ModelLayerLocation(Erebus.prefix("bot_fly"), "main");
-	public static ModelLayerLocation BOT_FLY_LARVA = new ModelLayerLocation(Erebus.prefix("bot_fly_larva"), "main");
-	public static ModelLayerLocation FLY = new ModelLayerLocation(Erebus.prefix("fly"), "main");
-	public static ModelLayerLocation DRAGON_FLY = new ModelLayerLocation(Erebus.prefix("dragon_fly"), "main");
-	public static ModelLayerLocation CENTIPEDE = new ModelLayerLocation(Erebus.prefix("centipede"), "main");
-	public static ModelLayerLocation GRASSHOPPER = new ModelLayerLocation(Erebus.prefix("grasshopper"), "main");
-	public static ModelLayerLocation LOCUST = new ModelLayerLocation(Erebus.prefix("locust"), "main");
-	public static ModelLayerLocation BEETLE_LARVA = new ModelLayerLocation(Erebus.prefix("beetle_larva"), "main");
-	public static ModelLayerLocation BOMBARDIER_BEETLE_LARVA = new ModelLayerLocation(Erebus.prefix("bombardier_beetle_larva"), "main");
-	public static ModelLayerLocation BEETLE = new ModelLayerLocation(Erebus.prefix("beetle"), "main");
-	public static ModelLayerLocation WORKER_BEE = new ModelLayerLocation(Erebus.prefix("worker_bee"), "main");
-	public static ModelLayerLocation BOMBARDIER_BEETLE = new ModelLayerLocation(Erebus.prefix("bombardier_beetle"), "main");
-	public static ModelLayerLocation BLACK_ANT = new ModelLayerLocation(Erebus.prefix("black_ant"), "main");
-	public static ModelLayerLocation PUNCHROOM = new ModelLayerLocation(Erebus.prefix("punchroom"), "main");
-	public static ModelLayerLocation CROP_WEEVIL = new ModelLayerLocation(Erebus.prefix("crop_weevil"), "main");
-	public static ModelLayerLocation FUNGAL_WEEVIL = new ModelLayerLocation(Erebus.prefix("fungal_weevil"), "main");
-	public static ModelLayerLocation BED_BUG = new ModelLayerLocation(Erebus.prefix("bed_bug"), "main");
-	public static ModelLayerLocation HONEY_POT_ANT = new ModelLayerLocation(Erebus.prefix("honey_pot_ant"), "main");
-	public static ModelLayerLocation ZOMBIE_ANT = new ModelLayerLocation(Erebus.prefix("zombie_ant"), "main");
-	public static ModelLayerLocation ZOMBIE_ANT_SOLDIER = new ModelLayerLocation(Erebus.prefix("zombie_ant_soldier"), "main");
+    public static ModelLayerLocation WASP = register("wasp");
+    public static ModelLayerLocation WASP_WINGS = registerLayer("wasp", "wings");
+    public static ModelLayerLocation ANIMATED_BLOCK = register("animated_block");
+	public static ModelLayerLocation SCYTODES = register("scytodes");
+	public static ModelLayerLocation MONEY_SPIDER = register("money_spider");
+	public static ModelLayerLocation BLACK_WIDOW = register("black_widow");
+	public static ModelLayerLocation LAVA_WEB_SPIDER = register("lava_web_spider");
+	public static ModelLayerLocation LAVA_WEB_SPIDER_FLOW = register("lava_web_spider_flow");
+	public static ModelLayerLocation MOTH = register("moth");
+	public static ModelLayerLocation VELVET_WORM = register("velvet_worm");
+	public static ModelLayerLocation ANTLION = register("antlion");
+	public static ModelLayerLocation BOT_FLY = register("bot_fly");
+	public static ModelLayerLocation BOT_FLY_LARVA = register("bot_fly_larva");
+	public static ModelLayerLocation FLY = register("fly");
+	public static ModelLayerLocation DRAGON_FLY = register("dragon_fly");
+	public static ModelLayerLocation CENTIPEDE = register("centipede");
+	public static ModelLayerLocation GRASSHOPPER = register("grasshopper");
+	public static ModelLayerLocation LOCUST = register("locust");
+	public static ModelLayerLocation BEETLE_LARVA = register("beetle_larva");
+	public static ModelLayerLocation BOMBARDIER_BEETLE_LARVA = register("bombardier_beetle_larva");
+	public static ModelLayerLocation BEETLE = register("beetle");
+	public static ModelLayerLocation WORKER_BEE = register("worker_bee");
+	public static ModelLayerLocation BOMBARDIER_BEETLE = register("bombardier_beetle");
+	public static ModelLayerLocation BLACK_ANT = register("black_ant");
+	public static ModelLayerLocation PUNCHROOM = register("punchroom");
+	public static ModelLayerLocation CROP_WEEVIL = register("crop_weevil");
+	public static ModelLayerLocation FUNGAL_WEEVIL = register("fungal_weevil");
+	public static ModelLayerLocation BED_BUG = register("bed_bug");
+	public static ModelLayerLocation HONEY_POT_ANT = register("honey_pot_ant");
+	public static ModelLayerLocation ZOMBIE_ANT = register("zombie_ant");
+	public static ModelLayerLocation ZOMBIE_ANT_SOLDIER = register("zombie_ant_soldier");
+
+	private static ModelLayerLocation register(String name) {
+		return new ModelLayerLocation(Erebus.prefix(name), "main");
+	}
+
+	private static ModelLayerLocation registerLayer(String name, String layer) {
+		return new ModelLayerLocation(Erebus.prefix(name), layer);
+	}
 
     public static void registerEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
     	event.registerLayerDefinition(WASP, WaspModel::createBodyLayer);
+		event.registerLayerDefinition(WASP_WINGS, WaspWingsModel::createBodyLayer);
     	event.registerLayerDefinition(ANIMATED_BLOCK, AnimatedBlockModel::createBodyLayer);
     	event.registerLayerDefinition(SCYTODES, ScytodesModel::createBodyLayer);
     	event.registerLayerDefinition(MONEY_SPIDER, ScytodesModel::createBodyLayer);
