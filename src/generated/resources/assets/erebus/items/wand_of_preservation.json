@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "erebus:item/wand_of_preservation",
+    "model": {
+      "type": "erebus:wand_of_preservation_special"
+    }
+  }
+}

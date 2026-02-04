@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "erebus:item/wasp_dagger",
+    "model": {
+      "type": "erebus:wasp_dagger_special"
+    }
+  }
+}

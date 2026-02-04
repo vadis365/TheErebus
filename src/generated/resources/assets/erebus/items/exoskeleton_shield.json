@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "erebus:item/exoskeleton_shield",
+    "model": {
+      "type": "erebus:shield_special"
+    }
+  }
+}

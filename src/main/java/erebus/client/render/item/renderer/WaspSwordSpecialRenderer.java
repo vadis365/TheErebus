@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -28,7 +27,7 @@ public class WaspSwordSpecialRenderer implements NoDataSpecialModelRenderer {
     @Override
     public void submit(@NonNull ItemDisplayContext context, PoseStack pose, SubmitNodeCollector submit, int lightCoords, int overlayCoords, boolean hasFoil, int outlineColor) {
         pose.pushPose();
-        pose.scale(1, -1, -1);
+        pose.scale(1, 1, 1);
         submit.submitModelPart(
                 model.root(),
                 pose,
@@ -48,7 +47,7 @@ public class WaspSwordSpecialRenderer implements NoDataSpecialModelRenderer {
     @Override
     public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
         PoseStack pose = new PoseStack();
-        pose.scale(1, -1, -1);
+        pose.scale(1, 1, 1);
         model.root().getExtentsForGui(pose, consumer);
     }
 
@@ -57,7 +56,7 @@ public class WaspSwordSpecialRenderer implements NoDataSpecialModelRenderer {
         public static final MapCodec<Unbaked> MAP_CODEC = MapCodec.unit(new Unbaked());
 
         @Override
-        public @Nullable SpecialModelRenderer<?> bake(BakingContext context) {
+        public @NonNull SpecialModelRenderer<?> bake(BakingContext context) {
             return new WaspSwordSpecialRenderer(new WaspSwordModel(context.entityModelSet().bakeLayer(ModItemRendering.WASP_SWORD)));
         }
 

@@ -1,13 +1,16 @@
 package erebus.client.render.item.model;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.util.Unit;
+import net.neoforged.neoforge.client.renderstate.BaseRenderState;
 
-public class WandOfAnimationItemModel extends Model<Unit> {
+public class WandOfAnimationItemModel extends Model<WandOfAnimationItemModel.State> {
 
 	public final ModelPart Jewel1;
 	public final ModelPart TopR3;
@@ -43,5 +46,30 @@ public class WandOfAnimationItemModel extends Model<Unit> {
 		Shaft.addOrReplaceChild("Pommel3", CubeListBuilder.create().texOffs(0, 55).addBox(-1.5F, 23.5F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.7854F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 32, 64);
+	}
+
+	@Override
+	public void setupAnim(State state) {
+		// TODO: Fix animation on this
+
+		super.setupAnim(state);
+		PoseStack pose = new PoseStack();
+		if(state.animationTick <= 360) up = true;
+		if(state.animationTick >= 361) up = false;
+
+		pose.mulPose(Axis.YP.rotationDegrees(state.animationTick));
+
+
+        pose.pushPose();
+        pose.mulPose(Axis.YP.rotationDegrees(90F));
+        pose.mulPose(Axis.YP.rotationDegrees(180F));
+        pose.mulPose(Axis.YP.rotationDegrees(270F));
+        pose.translate(0f, -0.29f + (up ? state.animationTick / 360 : 1 + 1 - state.animationTick / 360) / 10f, 0f);
+        pose.mulPose(Axis.YN.rotationDegrees(state.animationTick * 2));
+        pose.popPose();
+	}
+
+	public static class State extends BaseRenderState {
+		public float animationTick;
 	}
 }

@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "erebus:item/portal_activator",
+    "model": {
+      "type": "erebus:portal_activator_special"
+    }
+  }
+}

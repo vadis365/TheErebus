@@ -34,7 +34,7 @@ public class QuakeHammerSpecialRenderer implements SpecialModelRenderer<QuakeHam
         float scale = 1.75F + data.charge * 0.03F;
         pose.translate(0F, 0.25F - scale, 0F);
         pose.scale(scale, scale, scale);
-        pose.scale(1, -1, -1);
+        pose.scale(1, 1, 1);
         submit.submitModelPart(
                 model.root(),
                 pose,
@@ -54,7 +54,7 @@ public class QuakeHammerSpecialRenderer implements SpecialModelRenderer<QuakeHam
     @Override
     public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
         PoseStack pose = new PoseStack();
-        pose.scale(1, -1, -1);
+        pose.scale(1, 1, 1);
         model.root().getExtentsForGui(pose, consumer);
     }
 
@@ -72,7 +72,7 @@ public class QuakeHammerSpecialRenderer implements SpecialModelRenderer<QuakeHam
         public static final MapCodec<Unbaked> MAP_CODEC = MapCodec.unit(new Unbaked());
 
         @Override
-        public @Nullable SpecialModelRenderer<?> bake(BakingContext context) {
+        public @NonNull SpecialModelRenderer<?> bake(BakingContext context) {
             return new QuakeHammerSpecialRenderer(new QuakeHammerModel(context.entityModelSet().bakeLayer(ModItemRendering.QUAKE_HAMMER)));
         }
 

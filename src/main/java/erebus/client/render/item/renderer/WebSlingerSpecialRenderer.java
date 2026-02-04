@@ -17,7 +17,6 @@ import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -34,7 +33,8 @@ public class WebSlingerSpecialRenderer implements NoDataSpecialModelRenderer {
     @Override
     public void submit(@NonNull ItemDisplayContext context, PoseStack pose, SubmitNodeCollector submit, int lightCoords, int overlayCoords, boolean hasFoil, int outlineColor) {
         pose.pushPose();
-        pose.scale(1.5F, -1.5F, -1.5F);
+        pose.scale(1.5F, 1.5F, 1.5F);
+        pose.rotateAround(Axis.ZP.rotationDegrees(180), 0, 0, 1);
         pose.rotateAround(Axis.YN.rotationDegrees(45), 0, 1, 0);
         pose.rotateAround(Axis.XP.rotationDegrees(80), 1, 0, 0);
         pose.translate(0, 0, -0.25F);
@@ -57,7 +57,8 @@ public class WebSlingerSpecialRenderer implements NoDataSpecialModelRenderer {
     @Override
     public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
         PoseStack pose = new PoseStack();
-        pose.scale(1.5F, -1.5F, -1.5F);
+        pose.scale(1.5F, 1.5F, 1.5F);
+        pose.rotateAround(Axis.ZP.rotationDegrees(180), 0, 0, 1);
         pose.rotateAround(Axis.YN.rotationDegrees(45), 0, 1, 0);
         pose.rotateAround(Axis.XP.rotationDegrees(80), 1, 0, 0);
         pose.translate(0, 0, -0.25F);
@@ -72,7 +73,7 @@ public class WebSlingerSpecialRenderer implements NoDataSpecialModelRenderer {
                 ).apply(i, Unbaked::new));
 
         @Override
-        public @Nullable SpecialModelRenderer<?> bake(BakingContext context) {
+        public @NonNull SpecialModelRenderer<?> bake(BakingContext context) {
             return new WebSlingerSpecialRenderer(new WebSlingerModel(context.entityModelSet().bakeLayer(ModItemRendering.WEB_SLINGER)), isWither);
         }
 

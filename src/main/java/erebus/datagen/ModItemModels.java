@@ -1,8 +1,11 @@
 package erebus.datagen;
 
+import erebus.Erebus;
+import erebus.client.render.item.renderer.*;
 import erebus.registries.item.ModItems;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.renderer.item.SpecialModelWrapper;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jspecify.annotations.NonNull;
@@ -34,7 +37,13 @@ public class ModItemModels {
         normalItem(ModItems.ALTAR_FRAGMENT);
         normalItem(ModItems.REINFORCED_PLATE_EXO);
         normalItem(ModItems.GLIDER_WING);
-        normalItem(ModItems.SCORPION_PINCER);
+        itemModels.itemModelOutput.accept(
+                ModItems.SCORPION_PINCER.get(),
+                new SpecialModelWrapper.Unbaked(
+                        Erebus.prefix("item/enhanced_scoprion_pincer"),
+                        new ScorpionPincerSpecialRenderer.Unbaked()
+                )
+        );
         normalItem(ModItems.CAMO_POWDER);
         normalItem(ModItems.NECTAR);
         itemModels.generateFlatItem(ModItems.HONEY_DRIP.get(), ModelTemplates.FLAT_HANDHELD_ITEM.extend().renderType("cutout").build());
@@ -171,8 +180,56 @@ public class ModItemModels {
         normalItem(ModItems.WATER_STRIDERS);
         //normalItem(ModItems.MAX_SPEED_BOW);
 
+        itemModels.itemModelOutput.accept(
+                ModItems.QUAKE_HAMMER.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/quake_hammer"), new QuakeHammerSpecialRenderer.Unbaked())
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.WEB_SLINGER.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/web_slinger"), new WebSlingerSpecialRenderer.Unbaked(false))
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.WEB_SLINGER_WITHER.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/web_slinger_wither"), new WebSlingerSpecialRenderer.Unbaked(true))
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.BAMBOO_SHIELD.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/bamboo_shield"), new ErebusShieldSpecialRenderer.Unbaked())
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.EXOSKELETON_SHIELD.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/exoskeleton_shield"), new ErebusShieldSpecialRenderer.Unbaked())
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.JADE_SHIELD.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/jade_shield"), new ErebusShieldSpecialRenderer.Unbaked())
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.REIN_EXOSKELETON_SHIELD.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/rein_exoskeleton_shield"), new ErebusShieldSpecialRenderer.Unbaked())
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.WAND_OF_ANIMATION.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/wand_of_animation"), new WandOfAnimationItemSpecialRenderer.Unbaked())
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.WAND_OF_PRESERVATION.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/wand_of_preservation"), new WandOfPreservationSpecialRenderer.Unbaked())
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.WASP_SWORD.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/wasp_sword"), new WaspSwordSpecialRenderer.Unbaked())
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.WASP_DAGGER.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/wasp_dagger"), new WaspDaggerSpecialRenderer.Unbaked())
+        );
+
         // MARK: Misc
-        //normalItem(ModItems.PORTAL_ACTIVATOR);
+        itemModels.itemModelOutput.accept(
+                ModItems.PORTAL_ACTIVATOR.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/portal_activator"), new PortalActivatorSpecialRenderer.Unbaked())
+        );
         //normalItem(ModItems.WOODLOUSE_BALL);
         normalItem(ModItems.NECTAR_COLLECTOR);
         normalItem(ModItems.ANT_TAMING_AMULET);

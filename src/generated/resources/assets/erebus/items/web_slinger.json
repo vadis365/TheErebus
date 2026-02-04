@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "erebus:item/web_slinger",
+    "model": {
+      "type": "erebus:web_slinger_special"
+    }
+  }
+}

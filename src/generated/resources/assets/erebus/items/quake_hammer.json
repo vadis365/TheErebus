@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "erebus:item/quake_hammer",
+    "model": {
+      "type": "erebus:quake_hammer_special"
+    }
+  }
+}
