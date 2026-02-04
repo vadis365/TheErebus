@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "erebus:block/log_cypress_top",
+    "side": "erebus:block/log_cypress"
+  }
+}

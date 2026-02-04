@@ -68,17 +68,17 @@ public class ModBlockStates {
         blockModels.createTrivialCube(ModBlocks.ORE_TEMPLE.get());
 
         // MARK: Logs
-        blockModels.woodProvider(ModBlocks.LOG_BAOBAB.get()).log(ModBlocks.LOG_BAOBAB.get());
-        blockModels.woodProvider(ModBlocks.LOG_EUCALYPTUS.get()).log(ModBlocks.LOG_EUCALYPTUS.get());
-        blockModels.woodProvider(ModBlocks.LOG_MAHOGANY.get()).log(ModBlocks.LOG_MAHOGANY.get());
-        blockModels.woodProvider(ModBlocks.LOG_MOSSBARK.get()).log(ModBlocks.LOG_MOSSBARK.get());
-        blockModels.woodProvider(ModBlocks.LOG_ASPER.get()).log(ModBlocks.LOG_ASPER.get());
-        blockModels.woodProvider(ModBlocks.LOG_CYPRESS.get()).log(ModBlocks.LOG_CYPRESS.get());
-        blockModels.woodProvider(ModBlocks.LOG_BALSAM.get()).log(ModBlocks.LOG_BALSAM.get());
-        blockModels.woodProvider(ModBlocks.LOG_BALSAM_RESINLESS.get()).log(ModBlocks.LOG_BALSAM_RESINLESS.get());
-        blockModels.woodProvider(ModBlocks.LOG_ROTTEN.get()).log(ModBlocks.LOG_ROTTEN.get());
-        blockModels.woodProvider(ModBlocks.LOG_MARSHWOOD.get()).log(ModBlocks.LOG_MARSHWOOD.get());
-        blockModels.woodProvider(ModBlocks.LOG_SCORCHED.get()).log(ModBlocks.LOG_SCORCHED.get());
+        blockModels.woodProvider(ModBlocks.LOG_BAOBAB.get()).logWithHorizontal(ModBlocks.LOG_BAOBAB.get());
+        blockModels.woodProvider(ModBlocks.LOG_EUCALYPTUS.get()).logWithHorizontal(ModBlocks.LOG_EUCALYPTUS.get());
+        blockModels.woodProvider(ModBlocks.LOG_MAHOGANY.get()).logWithHorizontal(ModBlocks.LOG_MAHOGANY.get());
+        blockModels.woodProvider(ModBlocks.LOG_MOSSBARK.get()).logWithHorizontal(ModBlocks.LOG_MOSSBARK.get());
+        blockModels.woodProvider(ModBlocks.LOG_ASPER.get()).logWithHorizontal(ModBlocks.LOG_ASPER.get());
+        blockModels.woodProvider(ModBlocks.LOG_CYPRESS.get()).logWithHorizontal(ModBlocks.LOG_CYPRESS.get());
+        blockModels.woodProvider(ModBlocks.LOG_BALSAM.get()).logWithHorizontal(ModBlocks.LOG_BALSAM.get());
+        blockModels.woodProvider(ModBlocks.LOG_BALSAM_RESINLESS.get()).logWithHorizontal(ModBlocks.LOG_BALSAM_RESINLESS.get());
+        blockModels.woodProvider(ModBlocks.LOG_ROTTEN.get()).logWithHorizontal(ModBlocks.LOG_ROTTEN.get());
+        blockModels.woodProvider(ModBlocks.LOG_MARSHWOOD.get()).logWithHorizontal(ModBlocks.LOG_MARSHWOOD.get());
+        blockModels.woodProvider(ModBlocks.LOG_SCORCHED.get()).logWithHorizontal(ModBlocks.LOG_SCORCHED.get());
 
         // MARK: Saplings
         blockModels.createCrossBlock(ModBlocks.SAPLING_BAOBAB.get(), BlockModelGenerators.PlantType.NOT_TINTED);
