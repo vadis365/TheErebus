@@ -1,0 +1,91 @@
+{
+  "carvers": [
+    "erebus:cave",
+    "erebus:canyon"
+  ],
+  "downfall": 0.0,
+  "effects": {
+    "foliage_color": "#c1b668",
+    "water_color": "#c1b668"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "erebus:petrified_tree_brown_small",
+      "erebus:petrified_tree_brown_medium",
+      "erebus:petrified_tree_brown_large",
+      "erebus:petrified_tree_red_small",
+      "erebus:petrified_tree_red_medium",
+      "erebus:petrified_tree_red_large",
+      "erebus:lava_lake",
+      "erebus:rock_spike"
+    ],
+    [],
+    [
+      "erebus:red_gem",
+      "erebus:iron_ore",
+      "erebus:lapis_ore",
+      "erebus:emerald_ore",
+      "erebus:petrified_wood_ore",
+      "erebus:aluminum_ore",
+      "erebus:copper_ore",
+      "erebus:lead_ore",
+      "erebus:silver_ore",
+      "erebus:tin_ore",
+      "erebus:quartz_ore",
+      "erebus:gneiss_ore",
+      "erebus:temple_ore",
+      "erebus:gold_ore_petrified_forest",
+      "erebus:encrusted_diamond_ore_petrified_forest",
+      "erebus:jade_ore_petrified_forest",
+      "erebus:fossil_ore_petrified_forest"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "erebus:fly",
+        "maxCount": 8,
+        "minCount": 8,
+        "weight": 10
+      },
+      {
+        "type": "erebus:bot_fly",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 10
+      },
+      {
+        "type": "erebus:black_widow",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "erebus:moth",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 15
+      },
+      {
+        "type": "erebus:scytodes",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 20
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 1.1
+}

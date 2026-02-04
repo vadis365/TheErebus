@@ -1,0 +1,100 @@
+{
+  "carvers": [
+    "erebus:cave",
+    "erebus:canyon"
+  ],
+  "downfall": 0.0,
+  "effects": {
+    "foliage_color": "#c1b668",
+    "water_color": "#c1b668"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "erebus:rotten_acacia"
+    ],
+    [],
+    [
+      "erebus:red_gem",
+      "erebus:iron_ore",
+      "erebus:gold_ore",
+      "erebus:lapis_ore",
+      "erebus:jade_ore",
+      "erebus:aluminum_ore",
+      "erebus:copper_ore",
+      "erebus:lead_ore",
+      "erebus:silver_ore",
+      "erebus:tin_ore",
+      "erebus:quartz_ore",
+      "erebus:gneiss_ore",
+      "erebus:temple_ore",
+      "erebus:coal_ore_ulterior_outback",
+      "erebus:emerald_ore_ulterior_outback",
+      "erebus:diamond_ore_ulterior_outback",
+      "erebus:petrified_wood_ore_ulterior_outback",
+      "erebus:fossil_ore_ulterior_outback"
+    ],
+    [],
+    [],
+    [
+      "minecraft:patch_grass_savanna",
+      "minecraft:trees_savanna",
+      "erebus:balsam",
+      "erebus:eucalyptus"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
+      {
+        "type": "erebus:beetle_larva",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 15
+      }
+    ],
+    "misc": [],
+    "monster": [
+      {
+        "type": "erebus:fly",
+        "maxCount": 2,
+        "minCount": 2,
+        "weight": 10
+      },
+      {
+        "type": "erebus:centipede",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:black_widow",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "erebus:bot_fly",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 10
+      },
+      {
+        "type": "erebus:scytodes",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 20
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 2.0
+}

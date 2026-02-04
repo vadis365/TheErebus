@@ -1,0 +1,92 @@
+{
+  "carvers": [
+    "erebus:cave",
+    "erebus:canyon"
+  ],
+  "downfall": 0.0,
+  "effects": {
+    "foliage_color": "#91a922",
+    "grass_color": "#a6bb4e",
+    "water_color": "#a6bb4e"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "erebus:scorched_wood",
+      "erebus:lava_lake",
+      "erebus:desert_rock_gneiss"
+    ],
+    [],
+    [
+      "erebus:red_gem",
+      "erebus:iron_ore",
+      "erebus:lapis_ore",
+      "erebus:emerald_ore",
+      "erebus:petrified_wood_ore",
+      "erebus:aluminum_ore",
+      "erebus:copper_ore",
+      "erebus:lead_ore",
+      "erebus:silver_ore",
+      "erebus:tin_ore",
+      "erebus:quartz_ore",
+      "erebus:gneiss_ore",
+      "erebus:temple_ore",
+      "erebus:gold_ore_volcanic_desert",
+      "erebus:encrusted_diamond_ore_volcanic_desert",
+      "erebus:jade_ore_volcanic_desert",
+      "erebus:fossil_ore_volcanic_desert"
+    ],
+    [],
+    [],
+    [
+      "erebus:prickly_pear"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "erebus:fly",
+        "maxCount": 8,
+        "minCount": 8,
+        "weight": 10
+      },
+      {
+        "type": "erebus:bot_fly",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 10
+      },
+      {
+        "type": "erebus:black_widow",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "erebus:antlion",
+        "maxCount": 3,
+        "minCount": 3,
+        "weight": 200
+      },
+      {
+        "type": "erebus:lava_web_spider",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 300
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 2.0
+}

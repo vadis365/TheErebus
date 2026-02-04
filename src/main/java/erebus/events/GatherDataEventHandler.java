@@ -3,6 +3,7 @@ package erebus.events;
 import erebus.Erebus;
 import erebus.datagen.ModLang;
 import erebus.datagen.ModModelProvider;
+import erebus.datagen.ModRegistries;
 import erebus.datagen.advancement.AgricultureAdvancements;
 import erebus.datagen.advancement.ExplorationAdvancements;
 import erebus.datagen.advancement.PortalAdvancements;
@@ -43,6 +44,7 @@ public class GatherDataEventHandler {
         event.createProvider(ModBiomeTagsData::new);
         event.createProvider(ModEntityTypeTagsData::new);
         event.createProvider(ModItemTagsData::new);
+        event.createProvider(ModRegistries::new);
     }
 
     @SubscribeEvent

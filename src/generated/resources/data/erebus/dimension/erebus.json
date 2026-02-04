@@ -1,0 +1,11 @@
+{
+  "type": "erebus:erebus",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "erebus:erebus_biomes",
+      "terrain_data": "erebus:biome_grid"
+    },
+    "settings": "erebus:erebus"
+  }
+}

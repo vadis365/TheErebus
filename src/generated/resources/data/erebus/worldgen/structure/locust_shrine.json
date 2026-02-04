@@ -1,0 +1,11 @@
+{
+  "type": "erebus:locust_shrine",
+  "biomes": "#erebus:has_locust_shrine",
+  "spawn_overrides": {
+    "monster": {
+      "bounding_box": "full",
+      "spawns": []
+    }
+  },
+  "step": "surface_structures"
+}

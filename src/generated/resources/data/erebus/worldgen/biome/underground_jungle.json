@@ -1,0 +1,132 @@
+{
+  "carvers": [
+    "erebus:cave",
+    "erebus:canyon"
+  ],
+  "downfall": 0.0,
+  "effects": {
+    "foliage_color": "#29bc05",
+    "water_color": "#53ca37"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "erebus:quick_sand",
+      "erebus:pond",
+      "erebus:amber_ground",
+      "erebus:amber_umberstone"
+    ],
+    [],
+    [
+      "erebus:red_gem",
+      "erebus:iron_ore",
+      "erebus:gold_ore",
+      "erebus:lapis_ore",
+      "erebus:emerald_ore",
+      "erebus:aluminum_ore",
+      "erebus:copper_ore",
+      "erebus:lead_ore",
+      "erebus:silver_ore",
+      "erebus:tin_ore",
+      "erebus:quartz_ore",
+      "erebus:gneiss_ore",
+      "erebus:temple_ore",
+      "erebus:coal_ore_underground_jungle",
+      "erebus:coal_ore_underground_jungle_large",
+      "erebus:diamond_ore_underground_jungle",
+      "erebus:jade_ore_underground_jungle",
+      "erebus:petrified_wood_ore_underground_jungle",
+      "erebus:fossil_ore_underground_jungle"
+    ],
+    [],
+    [],
+    [
+      "erebus:asper",
+      "erebus:eucalyptus",
+      "erebus:mahogany",
+      "erebus:giant_mahogany",
+      "erebus:mossbark",
+      "erebus:dark_capped_mushroom",
+      "erebus:dutch_cap_mushroom",
+      "erebus:grandmas_shoes_mushroom",
+      "erebus:kaizers_fingers_mushroom",
+      "erebus:sarcastic_czech_mushroom",
+      "erebus:bamboo",
+      "erebus:turnip",
+      "erebus:melon",
+      "erebus:fern"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
+      {
+        "type": "erebus:beetle_larva",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 20
+      },
+      {
+        "type": "erebus:beetle",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 15
+      }
+    ],
+    "misc": [],
+    "monster": [
+      {
+        "type": "erebus:fly",
+        "maxCount": 8,
+        "minCount": 8,
+        "weight": 10
+      },
+      {
+        "type": "erebus:wasp",
+        "maxCount": 8,
+        "minCount": 4,
+        "weight": 20
+      },
+      {
+        "type": "erebus:centipede",
+        "maxCount": 8,
+        "minCount": 4,
+        "weight": 10
+      },
+      {
+        "type": "erebus:bot_fly",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 10
+      },
+      {
+        "type": "erebus:bombardier_beetle_larva",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 20
+      },
+      {
+        "type": "erebus:scytodes",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 20
+      },
+      {
+        "type": "erebus:velvet_worm",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.95
+}

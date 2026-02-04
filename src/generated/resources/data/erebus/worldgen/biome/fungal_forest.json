@@ -1,0 +1,70 @@
+{
+  "carvers": [
+    "erebus:cave",
+    "erebus:canyon"
+  ],
+  "downfall": 0.0,
+  "effects": {
+    "foliage_color": "#4e8833",
+    "water_color": "#4e8833"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "erebus:big_logs_x",
+      "erebus:big_logs_z",
+      "erebus:rotten_tree_stump",
+      "erebus:rotten_acacia"
+    ],
+    [],
+    [
+      "erebus:red_gem",
+      "erebus:lapis_ore",
+      "erebus:diamond_ore",
+      "erebus:aluminum_ore",
+      "erebus:copper_ore",
+      "erebus:lead_ore",
+      "erebus:silver_ore",
+      "erebus:tin_ore",
+      "erebus:quartz_ore",
+      "erebus:gneiss_ore",
+      "erebus:temple_ore",
+      "erebus:coal_ore_fungal_forest",
+      "erebus:iron_ore_fungal_forest",
+      "erebus:gold_ore_fungal_forest",
+      "erebus:emerald_ore_fungal_forest",
+      "erebus:jade_ore_fungal_forest",
+      "erebus:fossil_ore_fungal_forest"
+    ],
+    [],
+    [],
+    [
+      "erebus:cypress",
+      "erebus:dark_capped_mushroom",
+      "erebus:dutch_cap_mushroom",
+      "erebus:grandmas_shoes_mushroom",
+      "erebus:kaizers_fingers_mushroom",
+      "erebus:sarcastic_czech_mushroom",
+      "erebus:tangled_stalk",
+      "erebus:high_capped_mushroom",
+      "erebus:fern",
+      "erebus:moss"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.7
+}
