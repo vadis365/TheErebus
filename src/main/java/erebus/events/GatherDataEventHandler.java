@@ -39,10 +39,11 @@ public class GatherDataEventHandler {
         event.createProvider(ModLootTableProvider::new);
         event.createProvider(ModRecipeProvider.Runner::new);
         event.createProvider(ModBlockTagsData::new);
-        event.createProvider(ModBiomeTagsData::new);
+        var registries = event.createProvider(ModRegistries::new);
+        var lookup = registries.getRegistryProvider();
+        event.createProvider((output, _) -> new ModBiomeTagsData(output, lookup));
         event.createProvider(ModEntityTypeTagsData::new);
         event.createProvider(ModItemTagsData::new);
-        event.createProvider(ModRegistries::new);
     }
 
     @SubscribeEvent
