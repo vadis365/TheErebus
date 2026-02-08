@@ -24,7 +24,7 @@ import org.jspecify.annotations.Nullable;
 
 public class BlockOfBonesRenderer implements BlockEntityRenderer<BlockOfBonesBlockEntity, BlockOfBonesBlockEntityRenderState> {
 
-    private final Material TEXTURE = Sheets.BLOCK_ENTITIES_MAPPER.apply(Erebus.prefix("textures/special/tiles/bone_block.png"));
+    private final Material TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bone_block"));
     private final BlockOfBonesModel model;
     private final MaterialSet materials;
 

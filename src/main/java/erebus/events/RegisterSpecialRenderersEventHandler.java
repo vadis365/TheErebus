@@ -1,6 +1,7 @@
 package erebus.events;
 
 import erebus.Erebus;
+import erebus.client.render.block.renderer.stack.BlockOfBonesSpecialRenderer;
 import erebus.client.render.block.renderer.stack.ErebusChestSpecialRenderer;
 import erebus.client.render.item.renderer.*;
 import erebus.registries.blocks.ModBlocks;
@@ -24,6 +25,8 @@ public class RegisterSpecialRenderersEventHandler {
         event.register(Erebus.prefix("wasp_sword_special"), WaspSwordSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Erebus.prefix("web_slinger_special"), WebSlingerSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Erebus.prefix("chest_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
+
+        event.register(Erebus.prefix("block_of_bones_special"), BlockOfBonesSpecialRenderer.Unbaked.MAP_CODEC);
     }
 
     @SubscribeEvent
@@ -42,5 +45,7 @@ public class RegisterSpecialRenderersEventHandler {
         event.register(ModBlocks.CHEST_SCORCHED.get(), new ErebusChestSpecialRenderer.Unbaked(ErebusChestSpecialRenderer.SCORCHED_TEXTURE));
         event.register(ModBlocks.CHEST_VARNISHED.get(), new ErebusChestSpecialRenderer.Unbaked(ErebusChestSpecialRenderer.VARNISHED_TEXTURE));
         event.register(ModBlocks.CHEST_WHITE.get(), new ErebusChestSpecialRenderer.Unbaked(ErebusChestSpecialRenderer.WHITE_TEXTURE));
+
+        event.register(ModBlocks.BLOCK_OF_BONES.get(), new BlockOfBonesSpecialRenderer.Unbaked(Erebus.prefix("bone_block")));
     }
 }

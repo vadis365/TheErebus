@@ -1,12 +1,15 @@
 package erebus.datagen;
 
+import erebus.Erebus;
 import erebus.block.GaeanKeystoneBlock;
 import erebus.block.HoneyTreatBlock;
 import erebus.block.plants.ModBerryBushBlock;
 import erebus.block.plants.ModCropBlock;
+import erebus.client.render.block.renderer.stack.BlockOfBonesSpecialRenderer;
 import erebus.client.render.block.renderer.stack.ErebusChestSpecialRenderer;
 import erebus.registries.ModBlockFamilies;
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.item.ModItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
@@ -292,7 +295,6 @@ public class ModBlockStates {
         createCustomBlock(ModBlocks.BAMBOO_NERD_POLE);
         createCustomHorizontalBlock(ModBlocks.BAMBOO_LADDER);
         createCustomHorizontalBlock(ModBlocks.BLENDER);
-        createCustomHorizontalBlock(ModBlocks.BLOCK_OF_BONES);
         createCustomBlock(ModBlocks.COMPOSTER);
         createCustomBlock(ModBlocks.DESERT_SHRUB);
         createCustomBlock(ModBlocks.FERN);
@@ -301,6 +303,8 @@ public class ModBlockStates {
         createCustomBlock(ModBlocks.GLOWSHROOM_BLOCK);
         createCustomBlock(ModBlocks.HONEY_COMB);
         createCustomBlock(ModBlocks.SWAMP_VENT);
+
+        createBlockOfBones();
     }
 
     private void createBlock(DeferredBlock<Block> block) {
@@ -378,7 +382,16 @@ public class ModBlockStates {
                 .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(block, lit ? "_lit" : ""));
     }
 
+    private void createBlockOfBones() {
+        createCustomHorizontalBlock(ModBlocks.BLOCK_OF_BONES);
+        Item boneBlockItem = ModBlocks.BLOCK_OF_BONES.get().asItem();
+        Identifier base = ModelTemplates
+                .createItem("block_of_bones_special", TextureSlot.TEXTURE)
+                .create(boneBlockItem, TextureMapping.defaultTexture(ModBlocks.BLOCK_OF_BONES.get()), blockModels.modelOutput);
+        ItemModel.Unbaked plainModel = ItemModelUtils.specialModel(base, new BlockOfBonesSpecialRenderer.Unbaked(Erebus.prefix("bone_block")));
 
+        itemModels.itemModelOutput.accept(boneBlockItem, plainModel);
+    }
 
     public void createChest(Supplier<Block> block, Supplier<Block> particle, Identifier texture) {
         blockModels.createParticleOnlyBlock(block.get(), particle.get());

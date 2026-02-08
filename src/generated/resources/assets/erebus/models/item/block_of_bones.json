@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/block_of_bones_special",
+  "textures": {
+    "texture": "erebus:block/block_of_bones"
+  }
+}

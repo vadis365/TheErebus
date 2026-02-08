@@ -23,8 +23,6 @@ public final class BlockOfBonesSpecialRenderer implements NoDataSpecialModelRend
     private final BlockOfBonesModel model;
     private final Identifier texture;
 
-    //private final Identifier TEXTURE = Erebus.prefix("textures/special/tiles/bone_block.png");
-
     public BlockOfBonesSpecialRenderer(BlockOfBonesModel model, Identifier texture) {
         this.model = model;
         this.texture = texture;
@@ -33,10 +31,10 @@ public final class BlockOfBonesSpecialRenderer implements NoDataSpecialModelRend
     @Override
     public void submit(@NonNull ItemDisplayContext context, PoseStack pose, SubmitNodeCollector submit, int lightCoords, int overlayCoords, boolean hasFoil, int outlineColor) {
         pose.pushPose();
-        pose.translate(0.5D, 0.89D, 0.5D);
-        pose.scale(1, -1, -1);
+        pose.translate(0.5D, 1.2D, 0.5D);
+        pose.scale(1, -1F, -1);
         pose.scale(0.5F, 0.5F, 0.5F);
-        pose.rotateAround(Axis.YN.rotationDegrees(90), 0, 1, 0);
+        pose.rotateAround(Axis.YN.rotationDegrees(180), 0, 1, 0);
         submit.submitModel(
                 model,
                 new BlockOfBonesBlockEntityRenderState(),
