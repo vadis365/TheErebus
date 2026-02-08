@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "erebus:block/altar_repair",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "erebus:block/altar_repair"
+    },
+    "facing=south": {
+      "model": "erebus:block/altar_repair",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "erebus:block/altar_repair",
+      "y": 270
+    }
+  }
+}

@@ -108,8 +108,8 @@ public class ModBlockStates {
         blockModels.createCropBlock(ModBlocks.JADE_BERRY_BUSH.get(), ModBerryBushBlock.AGE, 0, 1, 2, 3);
         blockModels.createCropBlock(ModBlocks.HEART_BERRY_BUSH.get(), ModBerryBushBlock.AGE, 0, 1, 2, 3);
         blockModels.createCropBlock(ModBlocks.SWAMP_BERRY_BUSH.get(), ModBerryBushBlock.AGE, 0, 1, 2, 3);
-        blockModels.createCrossBlock(ModBlocks.NETTLE.get(), BlockModelGenerators.PlantType.TINTED);
-        blockModels.createCrossBlock(ModBlocks.NETTLE_FLOWERED.get(), BlockModelGenerators.PlantType.TINTED);
+        blockModels.createCrossBlock(ModBlocks.NETTLE.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createCrossBlock(ModBlocks.NETTLE_FLOWERED.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createCrossBlock(ModBlocks.SWAMP_PLANT.get(), BlockModelGenerators.PlantType.TINTED);
         blockModels.createCrossBlock(ModBlocks.FIRE_BLOOM.get(), BlockModelGenerators.PlantType.TINTED);
         blockModels.createCrossBlock(ModBlocks.FIDDLE_HEAD.get(), BlockModelGenerators.PlantType.TINTED);
@@ -244,6 +244,30 @@ public class ModBlockStates {
         blockModels.createTrivialCube(ModBlocks.FORCE_FIELD.get());
         blockModels.createTrivialCube(ModBlocks.FORCE_LOCK.get());
         blockModels.createTrivialCube(ModBlocks.ANT_HILL_BLOCK.get());
+
+        // MARK: Custom
+        blockModels.createNonTemplateModelBlock(ModBlocks.ANTLION_EGG.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.TARANTULA_EGG.get());
+        blockModels.createNonTemplateHorizontalBlock(ModBlocks.ALTAR_BASE.get());
+        blockModels.createNonTemplateHorizontalBlock(ModBlocks.ALTAR_EXPERIENCE.get());
+        blockModels.createNonTemplateHorizontalBlock(ModBlocks.ALTAR_HEALING.get());
+        blockModels.createNonTemplateHorizontalBlock(ModBlocks.ALTAR_LIGHTNING.get());
+        blockModels.createNonTemplateHorizontalBlock(ModBlocks.ALTAR_REPAIR.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_BLACK.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_BLUE.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_BROWN.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_CYAN.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_GRAY.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_LIGHT_BLUE.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_LIGHT_GRAY.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_MAGENTA.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_ORANGE.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_PINK.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_PURPLE.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_RED.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_WHITE.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_YELLOW.get());
+        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_RAINBOW.get());
     }
 
     public void createHoneyTreat(BlockModelGenerators blockModels) {

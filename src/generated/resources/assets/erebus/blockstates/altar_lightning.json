@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "erebus:block/altar_lightning",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "erebus:block/altar_lightning"
+    },
+    "facing=south": {
+      "model": "erebus:block/altar_lightning",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "erebus:block/altar_lightning",
+      "y": 270
+    }
+  }
+}

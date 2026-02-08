@@ -178,7 +178,7 @@ public class ModItemModels {
         normalItem(ModItems.SPRINT_LEGGINGS);
         normalItem(ModItems.JUMP_BOOTS);
         normalItem(ModItems.WATER_STRIDERS);
-        //normalItem(ModItems.MAX_SPEED_BOW);
+        itemModels.generateBow(ModItems.MAX_SPEED_BOW.get());
 
         itemModels.itemModelOutput.accept(
                 ModItems.QUAKE_HAMMER.get(),
@@ -235,11 +235,11 @@ public class ModItemModels {
         normalItem(ModItems.ANT_TAMING_AMULET);
         normalItem(ModItems.BEE_TAMING_AMULET);
         normalItem(ModItems.ANTI_VENOM_BOTTLE);
-        //normalItem(ModItems.DEATH_COMPASS);
+        itemModels.generateRecoveryCompassItem(ModItems.DEATH_COMPASS.get());
         normalItem(ModItems.ROLLED_NEWSPAPER);
-        //bucket(ModItems.BAMBUCKET);
-        //normalItem(ModItems.HOMING_BEECON);
-        //normalItem(ModItems.HOMING_BEECON_ADVANCED);
+        normalItem(ModItems.BAMBUCKET);
+        itemModels.generateStandardCompassItem(ModItems.HOMING_BEECON.get());
+        itemModels.generateStandardCompassItem(ModItems.HOMING_BEECON_ADVANCED.get());
         normalItem(ModItems.SPRAY_CAN);
         normalItem(ModItems.WHETSTONE);
         normalItem(ModItems.COMPOST);

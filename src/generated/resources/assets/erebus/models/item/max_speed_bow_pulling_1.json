@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/bow",
+  "textures": {
+    "layer0": "erebus:item/max_speed_bow_pulling_1"
+  }
+}

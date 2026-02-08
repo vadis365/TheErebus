@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "erebus:block/altar_base"},
-        "facing=south": { "model": "erebus:block/altar_base"},
-        "facing=west":  { "model": "erebus:block/altar_base"},
-        "facing=east":  { "model": "erebus:block/altar_base"}
-    }
-}

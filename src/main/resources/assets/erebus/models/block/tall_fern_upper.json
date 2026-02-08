@@ -2,8 +2,8 @@
     "ambientocclusion": false,
     "render_type": "cutout",
     "textures": {
-        "0": "erebus:block/tall_fern_upper",
-        "particle": "erebus:block/tall_fern_upper"
+        "0": "erebus:block/tall_fern_top",
+        "particle": "erebus:block/tall_fern_top"
     },
     "elements": [
         {

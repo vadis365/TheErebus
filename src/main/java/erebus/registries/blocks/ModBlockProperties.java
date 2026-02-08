@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -430,7 +431,12 @@ public class ModBlockProperties {
     public static final Properties SWAMP_VENT = Properties.ofFullCopy(Blocks.GRASS_BLOCK);
     public static final Properties GNEISS_VENT = Properties.of().mapColor(MapColor.STONE);
     public static final Properties RED_GEM_BLOCK = Properties.of().mapColor(MapColor.STONE);
-    public static final Properties RED_GEM_LAMP = Properties.ofFullCopy(Blocks.REDSTONE_LAMP);
+    public static final Properties RED_GEM_LAMP = Properties.of()
+            .mapColor(MapColor.COLOR_RED)
+            .lightLevel((state) -> state.getValue(BlockStateProperties.LIT) ? 15 : 0)
+            .strength(0.3F)
+            .sound(SoundType.GLASS)
+            .isValidSpawn(Blocks::always);
     public static final Properties WITHER_WEB = Properties.of().mapColor(MapColor.WOOL).sound(SoundType.COBWEB).forceSolidOn().noCollision().requiresCorrectToolForDrops().strength(4.0F).pushReaction(PushReaction.DESTROY);
     public static final Properties LAVA_WEB = Properties.of().mapColor(MapColor.WOOL).sound(SoundType.COBWEB).forceSolidOn().noCollision().requiresCorrectToolForDrops().strength(4.0F).pushReaction(PushReaction.DESTROY);
     public static final Properties GNEISS = Properties.of().mapColor(MapColor.STONE);
