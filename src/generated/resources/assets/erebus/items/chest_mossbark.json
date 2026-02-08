@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/chest_mossbark"
+    "type": "minecraft:special",
+    "base": "erebus:item/chest_mossbark",
+    "model": {
+      "type": "erebus:chest_special",
+      "texture": "erebus:mossbark_chest"
+    }
   }
 }

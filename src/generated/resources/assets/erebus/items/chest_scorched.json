@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/chest_scorched"
+    "type": "minecraft:special",
+    "base": "erebus:item/chest_scorched",
+    "model": {
+      "type": "erebus:chest_special",
+      "texture": "erebus:scorched_chest"
+    }
   }
 }

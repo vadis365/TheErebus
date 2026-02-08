@@ -1,7 +1,6 @@
 package erebus.events;
 
 import erebus.Erebus;
-import erebus.block.entity.*;
 import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.item.ModItems;
 import net.neoforged.bus.api.SubscribeEvent;

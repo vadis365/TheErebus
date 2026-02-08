@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/chest_mahogany"
+    "type": "minecraft:special",
+    "base": "erebus:item/chest_mahogany",
+    "model": {
+      "type": "erebus:chest_special",
+      "texture": "erebus:mahogany_chest"
+    }
   }
 }

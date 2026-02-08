@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import erebus.Erebus;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.object.chest.ChestModel;
 import net.minecraft.client.renderer.Sheets;
@@ -22,6 +23,21 @@ import org.jspecify.annotations.NonNull;
 import java.util.function.Consumer;
 
 public final class ErebusChestSpecialRenderer implements NoDataSpecialModelRenderer {
+    public static final Identifier ASPER_TEXTURE = Erebus.prefix("asper_chest");
+    public static final Identifier BAMBOO_TEXTURE = Erebus.prefix("bamboo_chest");
+    public static final Identifier BALSAM_TEXTURE = Erebus.prefix("balsam_chest");
+    public static final Identifier BAOBAB_TEXTURE = Erebus.prefix("baobab_chest");
+    public static final Identifier CYPRESS_TEXTURE = Erebus.prefix("cypress_chest");
+    public static final Identifier EUCALYPTUS_TEXTURE = Erebus.prefix("eucalyptus_chest");
+    public static final Identifier MAHOGANY_TEXTURE = Erebus.prefix("mahogany_chest");
+    public static final Identifier MARSHWOOD_TEXTURE = Erebus.prefix("marshwood_chest");
+    public static final Identifier MOSSBARK_TEXTURE = Erebus.prefix("mossbark_chest");
+    public static final Identifier PETRIFIED_TEXTURE = Erebus.prefix("petrified_chest");
+    public static final Identifier ROTTEN_TEXTURE = Erebus.prefix("rotten_chest");
+    public static final Identifier SCORCHED_TEXTURE = Erebus.prefix("scorched_chest");
+    public static final Identifier VARNISHED_TEXTURE = Erebus.prefix("varnished_chest");
+    public static final Identifier WHITE_TEXTURE = Erebus.prefix("white_chest");
+
     private final MaterialSet materials;
     private final ChestModel model;
     private final Material material;

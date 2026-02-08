@@ -1,12 +1,12 @@
 package erebus.item.blocks;
 
-import erebus.block.LiquifierBlock;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import org.jspecify.annotations.NonNull;
@@ -14,7 +14,7 @@ import org.jspecify.annotations.NonNull;
 public class LiquifierBlockItem extends BlockItem {
 	private final int capacity;
 
-	public LiquifierBlockItem(LiquifierBlock blockIn, int capacity, Properties builder) {
+	public LiquifierBlockItem(Block blockIn, int capacity, Properties builder) {
 		super(blockIn, builder);
 		this.capacity = capacity;
 	}

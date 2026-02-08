@@ -8,8 +8,6 @@ import erebus.registries.client.ModItemRendering;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.util.Unit;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.NonNull;

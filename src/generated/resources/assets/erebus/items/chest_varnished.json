@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/chest_varnished"
+    "type": "minecraft:special",
+    "base": "erebus:item/chest_varnished",
+    "model": {
+      "type": "erebus:chest_special",
+      "texture": "erebus:varnished_chest"
+    }
   }
 }

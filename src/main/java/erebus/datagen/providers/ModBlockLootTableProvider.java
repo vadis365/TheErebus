@@ -17,7 +17,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -39,7 +38,7 @@ public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), provider);
     }
 
-    public void dropSelf(Supplier<? extends Block> block) {
+    public void dropSelf(Supplier<Block> block) {
         dropSelf(block.get());
     }
 
@@ -47,38 +46,38 @@ public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(slab.get(), this::createSlabItemTable);
     }
 
-    public void dropOther(Supplier<? extends Block> brokenBlock, ItemLike droppedBlock) {
+    public void dropOther(Supplier<Block> brokenBlock, ItemLike droppedBlock) {
         dropOther(brokenBlock.get(), droppedBlock);
     }
 
-    public void dropAsSilk(Supplier<? extends Block> block) {
+    public void dropAsSilk(Supplier<Block> block) {
         dropWhenSilkTouch(block.get());
     }
 
-    public void dropWithSilk(Supplier<? extends Block> block, Supplier<? extends ItemLike> drop) {
+    public void dropWithSilk(Supplier<Block> block, Supplier<? extends ItemLike> drop) {
         add(block.get(), (result) -> createSingleItemTableWithSilkTouch(result, drop.get()));
     }
 
-    public void ore(Supplier<? extends Block> block, Supplier<? extends Item> drop) {
+    public void ore(Supplier<Block> block, Supplier<? extends Item> drop) {
         add(block.get(), (result) -> createOreDrop(result, drop.get()));
     }
 
-    public void ore(Supplier<? extends Block> block, Item drop) {
+    public void ore(Supplier<Block> block, Item drop) {
         add(block.get(), (result) -> createOreDrop(result, drop));
     }
 
-    public void nuggetOre(Supplier<? extends Block> block, Item drop) {
+    public void nuggetOre(Supplier<Block> block, Item drop) {
         HolderLookup.RegistryLookup<Enchantment> registryLookup = registries.lookupOrThrow(Registries.ENCHANTMENT);
         add(block.get(), (ore) -> createSilkTouchDispatchTable(ore, applyExplosionDecay(ore, LootItem.lootTableItem(drop).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 6.0F))).apply(ApplyBonusCount.addOreBonusCount(registryLookup.getOrThrow(Enchantments.FORTUNE))))));
     }
 
-    public void dropCropBasedOffCondition(Supplier<? extends CropBlock> crop, Supplier<? extends Item> grownDrop, Supplier<? extends Item> seed) {
+    public void dropCropBasedOffCondition(Supplier<Block> crop, Supplier<? extends Item> grownDrop, Supplier<? extends Item> seed) {
         LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(crop.get())
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ModCropBlock.AGE, 3));
         add(crop.get(), createCropDrops(crop.get(), grownDrop.get(), seed.get(), condition));
     }
 
-	public void dropPricklyPearBasedOffCondition(Supplier<? extends Block> blockIn) {
+	public void dropPricklyPearBasedOffCondition(Supplier<Block> blockIn) {
 		LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(blockIn.get())
 				.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PricklyPearBlock.AGE, 11));
 		add(blockIn.get(),
@@ -88,7 +87,7 @@ public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
 										.otherwise(LootItem.lootTableItem(blockIn.get().asItem())))));
 	}
 
-	public void dropColossalBambooBasedOffCondition(Supplier<? extends Block> blockIn) {
+	public void dropColossalBambooBasedOffCondition(Supplier<Block> blockIn) {
 		LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(blockIn.get())
 				.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BambooBlock.AGE, 15));
 		add(blockIn.get(),
@@ -99,7 +98,7 @@ public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
 								.add(LootItem.lootTableItem(ModBlocks.SAPLING_BAMBOO.get().asItem()).when(condition))));
 	}
 	
-	public void dropSingleBambooTorchCondition(Supplier<? extends Block> blockIn) {
+	public void dropSingleBambooTorchCondition(Supplier<Block> blockIn) {
 		LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(blockIn.get())
 				.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BambooTorchBlock.HALF, EnumTorchBlockHalf.UPPER));
 		add(blockIn.get(),
@@ -108,7 +107,7 @@ public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
 						.add(LootItem.lootTableItem(blockIn.get().asItem()).when(condition))));
 	}
 
-    public void dropComponents(Supplier<? extends Block> blockSupplier, Consumer<LootPool.Builder> lootFunctionSupplier) {
+    public void dropComponents(Supplier<Block> blockSupplier, Consumer<LootPool.Builder> lootFunctionSupplier) {
         LootPool.Builder lootPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(LootItem.lootTableItem(blockSupplier.get()));
         lootFunctionSupplier.accept(lootPool);

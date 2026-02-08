@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/chest_eucalyptus"
+    "type": "minecraft:special",
+    "base": "erebus:item/chest_eucalyptus",
+    "model": {
+      "type": "erebus:chest_special",
+      "texture": "erebus:eucalyptus_chest"
+    }
   }
 }

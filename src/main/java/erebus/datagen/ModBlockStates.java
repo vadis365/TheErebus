@@ -1,71 +1,84 @@
 package erebus.datagen;
 
-import erebus.block.CandleHoneyTreatBlock;
+import erebus.block.GaeanKeystoneBlock;
 import erebus.block.HoneyTreatBlock;
 import erebus.block.plants.ModBerryBushBlock;
 import erebus.block.plants.ModCropBlock;
+import erebus.client.render.block.renderer.stack.ErebusChestSpecialRenderer;
 import erebus.registries.ModBlockFamilies;
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.data.BlockFamily;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.neoforged.neoforge.registries.DeferredBlock;
+
+import java.util.function.Supplier;
 
 import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant;
 import static net.minecraft.client.data.models.model.TextureMapping.craftingTable;
 
 public class ModBlockStates {
 
+    private BlockModelGenerators blockModels;
+    protected ItemModelGenerators itemModels;
+
     protected void registerModels(BlockModelGenerators blockModels) {
+        this.blockModels = blockModels;
+
         ModBlockFamilies.getAllFamilies()
                 .filter(BlockFamily::shouldGenerateModel)
                 .forEach(family -> blockModels.family(family.getBaseBlock()).generateFor(family));
 
         // MARK: Umberstone
-        blockModels.createTrivialCube(ModBlocks.UMBERGRAVEL.get());
+        createBlock(ModBlocks.UMBERGRAVEL);
         blockModels.createRotatedPillarWithHorizontalVariant(ModBlocks.UMBERSTONE_PILLAR.get(), TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT);
-        blockModels.createTrivialCube(ModBlocks.VOLCANIC_ROCK.get());
-        blockModels.createTrivialCube(ModBlocks.DUST.get());
-        blockModels.createTrivialCube(ModBlocks.PETRIFIED_WOOD_ROCK.get());
-        blockModels.createTrivialCube(ModBlocks.PETRIFIED_WOOD_ROCK_2.get());
-        blockModels.createTrivialCube(ModBlocks.PETRIFIED_WOOD_ROCK_3.get());
-        blockModels.createTrivialCube(ModBlocks.PETRIFIED_WOOD_ROCK_4.get());
-        blockModels.createTrivialCube(ModBlocks.PETRIFIED_WOOD_ROCK_5.get());
-        blockModels.createTrivialCube(ModBlocks.PETRIFIED_WOOD_ROCK_6.get());
-        blockModels.createTrivialCube(ModBlocks.PETRIFIED_BARK_RED.get());
-        blockModels.createTrivialCube(ModBlocks.PETRIFIED_BARK_BROWN.get());
-        blockModels.createTrivialCube(ModBlocks.PETRIFIED_LOG_INNER.get());
-        blockModels.createTrivialCube(ModBlocks.DUNG.get());
+        createBlock(ModBlocks.VOLCANIC_ROCK);
+        createBlock(ModBlocks.DUST);
+        createBlock(ModBlocks.PETRIFIED_WOOD_ROCK);
+        createBlock(ModBlocks.PETRIFIED_WOOD_ROCK_2);
+        createBlock(ModBlocks.PETRIFIED_WOOD_ROCK_3);
+        createBlock(ModBlocks.PETRIFIED_WOOD_ROCK_4);
+        createBlock(ModBlocks.PETRIFIED_WOOD_ROCK_5);
+        createBlock(ModBlocks.PETRIFIED_WOOD_ROCK_6);
+        createBlock(ModBlocks.PETRIFIED_BARK_RED);
+        createBlock(ModBlocks.PETRIFIED_BARK_BROWN);
+        createBlock(ModBlocks.PETRIFIED_LOG_INNER);
+        createBlock(ModBlocks.DUNG);
 
         // MARK: Amber
-        blockModels.createTrivialCube(ModBlocks.PRESERVED_AMBER.get());
-        blockModels.createTrivialCube(ModBlocks.PRESERVED_AMBER_GLASS.get());
+        createBlock(ModBlocks.PRESERVED_AMBER);
+        createBlock(ModBlocks.PRESERVED_AMBER_GLASS);
 
         // MARK: Ores
-        blockModels.createTrivialCube(ModBlocks.ORE_IRON.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_GOLD.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_COAL.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_DIAMOND.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_EMERALD.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_LAPIS.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_QUARTZ.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_PETRIFIED_QUARTZ.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_COPPER.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_SILVER.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_TIN.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_LEAD.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_ALUMINUM.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_JADE.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_ENCRUSTED_DIAMOND.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_FOSSIL.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_GNEISS.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_PETRIFIED_WOOD.get());
-        blockModels.createTrivialCube(ModBlocks.ORE_TEMPLE.get());
+        createBlock(ModBlocks.ORE_IRON);
+        createBlock(ModBlocks.ORE_GOLD);
+        createBlock(ModBlocks.ORE_COAL);
+        createBlock(ModBlocks.ORE_DIAMOND);
+        createBlock(ModBlocks.ORE_EMERALD);
+        createBlock(ModBlocks.ORE_LAPIS);
+        createBlock(ModBlocks.ORE_QUARTZ);
+        createBlock(ModBlocks.ORE_PETRIFIED_QUARTZ);
+        createBlock(ModBlocks.ORE_COPPER);
+        createBlock(ModBlocks.ORE_SILVER);
+        createBlock(ModBlocks.ORE_TIN);
+        createBlock(ModBlocks.ORE_LEAD);
+        createBlock(ModBlocks.ORE_ALUMINUM);
+        createBlock(ModBlocks.ORE_JADE);
+        createBlock(ModBlocks.ORE_ENCRUSTED_DIAMOND);
+        createBlock(ModBlocks.ORE_FOSSIL);
+        createBlock(ModBlocks.ORE_GNEISS);
+        createBlock(ModBlocks.ORE_PETRIFIED_WOOD);
+        createBlock(ModBlocks.ORE_TEMPLE);
 
         // MARK: Logs
         blockModels.woodProvider(ModBlocks.LOG_BAOBAB.get()).logWithHorizontal(ModBlocks.LOG_BAOBAB.get());
@@ -125,39 +138,39 @@ public class ModBlockStates {
         blockModels.createMushroomBlock(ModBlocks.DUTCH_CAP_MUSHROOM_STEM.get());
         blockModels.createMushroomBlock(ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK.get());
         blockModels.createMushroomBlock(ModBlocks.KAIZERS_FINGERS_MUSHROOM_STEM.get());
-        blockModels.createTrivialCube(ModBlocks.GIANT_LILY_PAD.get());
+        createBlock(ModBlocks.GIANT_LILY_PAD);
 
-        blockModels.createTrivialCube(ModBlocks.PETAL_BLACK.get());
-        blockModels.createTrivialCube(ModBlocks.PETAL_RED.get());
-        blockModels.createTrivialCube(ModBlocks.PETAL_BROWN.get());
-        blockModels.createTrivialCube(ModBlocks.PETAL_BLUE.get());
-        blockModels.createTrivialCube(ModBlocks.PETAL_PURPLE.get());
-        blockModels.createTrivialCube(ModBlocks.PETAL_CYAN.get());
-        blockModels.createTrivialCube(ModBlocks.PETAL_LIGHT_GRAY.get());
-        blockModels.createTrivialCube(ModBlocks.PETAL_GRAY.get());
-        blockModels.createTrivialCube(ModBlocks.PETAL_PINK.get());
-        blockModels.createTrivialCube(ModBlocks.PETAL_YELLOW.get());
-        blockModels.createTrivialCube(ModBlocks.PETAL_LIGHT_BLUE.get());
-        blockModels.createTrivialCube(ModBlocks.PETAL_MAGENTA.get());
-        blockModels.createTrivialCube(ModBlocks.PETAL_ORANGE.get());
-        blockModels.createTrivialCube(ModBlocks.PETAL_WHITE.get());
+        createBlock(ModBlocks.PETAL_BLACK);
+        createBlock(ModBlocks.PETAL_RED);
+        createBlock(ModBlocks.PETAL_BROWN);
+        createBlock(ModBlocks.PETAL_BLUE);
+        createBlock(ModBlocks.PETAL_PURPLE);
+        createBlock(ModBlocks.PETAL_CYAN);
+        createBlock(ModBlocks.PETAL_LIGHT_GRAY);
+        createBlock(ModBlocks.PETAL_GRAY);
+        createBlock(ModBlocks.PETAL_PINK);
+        createBlock(ModBlocks.PETAL_YELLOW);
+        createBlock(ModBlocks.PETAL_LIGHT_BLUE);
+        createBlock(ModBlocks.PETAL_MAGENTA);
+        createBlock(ModBlocks.PETAL_ORANGE);
+        createBlock(ModBlocks.PETAL_WHITE);
 
-        blockModels.createTrivialCube(ModBlocks.EXPLODING_STIGMA.get());
-        blockModels.createTrivialCube(ModBlocks.STEM.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_BLACK.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_RED.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_BROWN.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_BLUE.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_PURPLE.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_CYAN.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_LIGHT_GRAY.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_GRAY.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_PINK.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_YELLOW.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_LIGHT_BLUE.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_MAGENTA.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_ORANGE.get());
-        blockModels.createTrivialCube(ModBlocks.STIGMA_WHITE.get());
+        createBlock(ModBlocks.EXPLODING_STIGMA);
+        createBlock(ModBlocks.STEM);
+        createBlock(ModBlocks.STIGMA_BLACK);
+        createBlock(ModBlocks.STIGMA_RED);
+        createBlock(ModBlocks.STIGMA_BROWN);
+        createBlock(ModBlocks.STIGMA_BLUE);
+        createBlock(ModBlocks.STIGMA_PURPLE);
+        createBlock(ModBlocks.STIGMA_CYAN);
+        createBlock(ModBlocks.STIGMA_LIGHT_GRAY);
+        createBlock(ModBlocks.STIGMA_GRAY);
+        createBlock(ModBlocks.STIGMA_PINK);
+        createBlock(ModBlocks.STIGMA_YELLOW);
+        createBlock(ModBlocks.STIGMA_LIGHT_BLUE);
+        createBlock(ModBlocks.STIGMA_MAGENTA);
+        createBlock(ModBlocks.STIGMA_ORANGE);
+        createBlock(ModBlocks.STIGMA_WHITE);
 
         blockModels.createDoublePlant(ModBlocks.BULLRUSH.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createDoublePlant(ModBlocks.WEEPING_BLUEBELL.get(), BlockModelGenerators.PlantType.NOT_TINTED);
@@ -167,12 +180,14 @@ public class ModBlockStates {
         blockModels.createDoublePlant(ModBlocks.HIGH_CAPPED_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
         // MARK: Other
-        blockModels.createTrivialCube(ModBlocks.PORTAL.get());
-        blockModels.createTrivialCube(ModBlocks.JADE_BLOCK.get());
-        blockModels.createTrivialCube(ModBlocks.MUD.get());
-        blockModels.createTrivialCube(ModBlocks.QUICK_SAND.get());
-        blockModels.createTrivialCube(ModBlocks.GHOST_SAND.get());
-        blockModels.createTrivialCube(ModBlocks.RED_GEM_BLOCK.get());
+        createGaeanKeystone();
+        createChests();
+        createBlock(ModBlocks.PORTAL);
+        createBlock(ModBlocks.JADE_BLOCK);
+        createBlock(ModBlocks.MUD);
+        createBlock(ModBlocks.QUICK_SAND);
+        createBlock(ModBlocks.GHOST_SAND);
+        createBlock(ModBlocks.RED_GEM_BLOCK);
 
         MultiVariant off = plainVariant(TexturedModel.CUBE.create(ModBlocks.RED_GEM_LAMP.get(), blockModels.modelOutput));
         MultiVariant on = plainVariant(blockModels.createSuffixedVariant(ModBlocks.RED_GEM_LAMP.get(), "_on", ModelTemplates.CUBE_ALL, TextureMapping::cube));
@@ -180,97 +195,140 @@ public class ModBlockStates {
 
         blockModels.createCrossBlock(ModBlocks.WITHER_WEB.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createCrossBlock(ModBlocks.LAVA_WEB.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createTrivialCube(ModBlocks.GNEISS.get());
-        blockModels.createTrivialCube(ModBlocks.GNEISS_CARVED.get());
-        blockModels.createTrivialCube(ModBlocks.GNEISS_RELIEF.get());
-        blockModels.createTrivialCube(ModBlocks.GNEISS_BRICKS.get());
-        blockModels.createTrivialCube(ModBlocks.GNEISS_SMOOTH.get());
-        blockModels.createTrivialCube(ModBlocks.GNEISS_TILES.get());
-        blockModels.createTrivialCube(ModBlocks.GNEISS_TILES_CRACKED.get());
-        blockModels.createTrivialCube(ModBlocks.TEMPLE_BRICK.get());
-        blockModels.createTrivialCube(ModBlocks.TEMPLE_PILLAR.get());
-        blockModels.createTrivialCube(ModBlocks.TEMPLE_TILE.get());
-        blockModels.createTrivialCube(ModBlocks.SILK.get());
-        blockModels.createTrivialCube(ModBlocks.REIN_EXO.get());
+        createBlock(ModBlocks.GNEISS);
+        createBlock(ModBlocks.GNEISS_CARVED);
+        createBlock(ModBlocks.GNEISS_RELIEF);
+        createBlock(ModBlocks.GNEISS_BRICKS);
+        createBlock(ModBlocks.GNEISS_SMOOTH);
+        createBlock(ModBlocks.GNEISS_TILES);
+        createBlock(ModBlocks.GNEISS_TILES_CRACKED);
+        createBlock(ModBlocks.TEMPLE_BRICK);
+        createBlock(ModBlocks.TEMPLE_PILLAR);
+        createBlock(ModBlocks.TEMPLE_TILE);
+        createBlock(ModBlocks.SILK);
+        createBlock(ModBlocks.REIN_EXO);
 
-        createHoneyTreat(blockModels);
-        createCandleHoneyTreat(blockModels, Blocks.CANDLE, ModBlocks.CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.WHITE_CANDLE, ModBlocks.WHITE_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.ORANGE_CANDLE, ModBlocks.ORANGE_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.MAGENTA_CANDLE, ModBlocks.MAGENTA_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.LIGHT_BLUE_CANDLE, ModBlocks.LIGHT_BLUE_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.YELLOW_CANDLE, ModBlocks.YELLOW_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.LIME_CANDLE, ModBlocks.LIME_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.PINK_CANDLE, ModBlocks.PINK_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.GRAY_CANDLE, ModBlocks.GRAY_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.LIGHT_GRAY_CANDLE, ModBlocks.LIGHT_GRAY_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.CYAN_CANDLE, ModBlocks.CYAN_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.PURPLE_CANDLE, ModBlocks.PURPLE_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.BLUE_CANDLE, ModBlocks.BLUE_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.BROWN_CANDLE, ModBlocks.BROWN_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.GREEN_CANDLE, ModBlocks.GREEN_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.RED_CANDLE, ModBlocks.RED_CANDLE_HONEY_TREAT.get());
-        createCandleHoneyTreat(blockModels, Blocks.BLACK_CANDLE, ModBlocks.BLACK_CANDLE_HONEY_TREAT.get());
+        createHoneyTreat();
+        createCandleHoneyTreat(Blocks.CANDLE, ModBlocks.CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.WHITE_CANDLE, ModBlocks.WHITE_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.ORANGE_CANDLE, ModBlocks.ORANGE_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.MAGENTA_CANDLE, ModBlocks.MAGENTA_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.LIGHT_BLUE_CANDLE, ModBlocks.LIGHT_BLUE_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.YELLOW_CANDLE, ModBlocks.YELLOW_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.LIME_CANDLE, ModBlocks.LIME_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.PINK_CANDLE, ModBlocks.PINK_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.GRAY_CANDLE, ModBlocks.GRAY_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.LIGHT_GRAY_CANDLE, ModBlocks.LIGHT_GRAY_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.CYAN_CANDLE, ModBlocks.CYAN_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.PURPLE_CANDLE, ModBlocks.PURPLE_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.BLUE_CANDLE, ModBlocks.BLUE_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.BROWN_CANDLE, ModBlocks.BROWN_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.GREEN_CANDLE, ModBlocks.GREEN_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.RED_CANDLE, ModBlocks.RED_CANDLE_HONEY_TREAT.get());
+        createCandleHoneyTreat(Blocks.BLACK_CANDLE, ModBlocks.BLACK_CANDLE_HONEY_TREAT.get());
 
         // MARK: Spawners
-        blockModels.createTrivialCube(ModBlocks.ANTLION_SPAWNER.get());
-        blockModels.createTrivialCube(ModBlocks.DRAGON_FLY_SPAWNER.get());
-        blockModels.createTrivialCube(ModBlocks.JUMPING_SPIDER_SPAWNER.get());
-        blockModels.createTrivialCube(ModBlocks.SPIDER_SPAWNER.get());
-        blockModels.createTrivialCube(ModBlocks.TARANTULA_SPAWNER.get());
-        blockModels.createTrivialCube(ModBlocks.WASP_SPAWNER.get());
-        blockModels.createTrivialCube(ModBlocks.ZOMBIE_ANT_SPAWNER.get());
-        blockModels.createTrivialCube(ModBlocks.ZOMBIE_ANT_SOLDIER_SPAWNER.get());
-        blockModels.createTrivialCube(ModBlocks.MAGMA_CRAWLER_SPAWNER.get());
-        blockModels.createTrivialCube(ModBlocks.LOCUST_SPAWNER.get());
+        createBlock(ModBlocks.ANTLION_SPAWNER);
+        createBlock(ModBlocks.DRAGON_FLY_SPAWNER);
+        createBlock(ModBlocks.JUMPING_SPIDER_SPAWNER);
+        createBlock(ModBlocks.SPIDER_SPAWNER);
+        createBlock(ModBlocks.TARANTULA_SPAWNER);
+        createBlock(ModBlocks.WASP_SPAWNER);
+        createBlock(ModBlocks.ZOMBIE_ANT_SPAWNER);
+        createBlock(ModBlocks.ZOMBIE_ANT_SOLDIER_SPAWNER);
+        createBlock(ModBlocks.MAGMA_CRAWLER_SPAWNER);
+        createBlock(ModBlocks.LOCUST_SPAWNER);
 
         // MARK: Utility Blocks
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(ModBlocks.PETRIFIED_CRAFTING_TABLE.get(), plainVariant(ModelTemplates.CUBE.create(ModBlocks.PETRIFIED_CRAFTING_TABLE.get(), craftingTable(ModBlocks.PETRIFIED_CRAFTING_TABLE.get(), ModBlocks.PLANKS_PETRIFIED.get()), blockModels.modelOutput))));
         blockModels.createFurnace(ModBlocks.UMBER_FURNACE.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
 
         // MARK: Antlion Dungeon
-        blockModels.createTrivialCube(ModBlocks.CAPSTONE.get());
-        blockModels.createTrivialCube(ModBlocks.CAPSTONE_MUD.get());
-        blockModels.createTrivialCube(ModBlocks.CAPSTONE_IRON.get());
-        blockModels.createTrivialCube(ModBlocks.CAPSTONE_GOLD.get());
-        blockModels.createTrivialCube(ModBlocks.CAPSTONE_JADE.get());
-        blockModels.createTrivialCube(ModBlocks.TEMPLE_BRICK_UNBREAKING.get());
-        blockModels.createTrivialCube(ModBlocks.TEMPLE_BRICK_UNBREAKING_JADE.get());
-        blockModels.createTrivialCube(ModBlocks.TEMPLE_BRICK_UNBREAKING_EXO.get());
-        blockModels.createTrivialCube(ModBlocks.TEMPLE_BRICK_UNBREAKING_CREAM.get());
-        blockModels.createTrivialCube(ModBlocks.TEMPLE_BRICK_UNBREAKING_EYE.get());
-        blockModels.createTrivialCube(ModBlocks.TEMPLE_BRICK_UNBREAKING_STRING.get());
-        blockModels.createTrivialCube(ModBlocks.TEMPLE_TELEPORTER.get());
-        blockModels.createTrivialCube(ModBlocks.FORCE_FIELD.get());
-        blockModels.createTrivialCube(ModBlocks.FORCE_LOCK.get());
-        blockModels.createTrivialCube(ModBlocks.ANT_HILL_BLOCK.get());
+        createBlock(ModBlocks.CAPSTONE);
+        createBlock(ModBlocks.CAPSTONE_MUD);
+        createBlock(ModBlocks.CAPSTONE_IRON);
+        createBlock(ModBlocks.CAPSTONE_GOLD);
+        createBlock(ModBlocks.CAPSTONE_JADE);
+        createBlock(ModBlocks.TEMPLE_BRICK_UNBREAKING);
+        createBlock(ModBlocks.TEMPLE_BRICK_UNBREAKING_JADE);
+        createBlock(ModBlocks.TEMPLE_BRICK_UNBREAKING_EXO);
+        createBlock(ModBlocks.TEMPLE_BRICK_UNBREAKING_CREAM);
+        createBlock(ModBlocks.TEMPLE_BRICK_UNBREAKING_EYE);
+        createBlock(ModBlocks.TEMPLE_BRICK_UNBREAKING_STRING);
+        createBlock(ModBlocks.TEMPLE_TELEPORTER);
+        createBlock(ModBlocks.FORCE_FIELD);
+        createBlock(ModBlocks.FORCE_LOCK);
+        createBlock(ModBlocks.ANT_HILL_BLOCK);
 
         // MARK: Custom
-        blockModels.createNonTemplateModelBlock(ModBlocks.ANTLION_EGG.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.TARANTULA_EGG.get());
-        blockModels.createNonTemplateHorizontalBlock(ModBlocks.ALTAR_BASE.get());
-        blockModels.createNonTemplateHorizontalBlock(ModBlocks.ALTAR_EXPERIENCE.get());
-        blockModels.createNonTemplateHorizontalBlock(ModBlocks.ALTAR_HEALING.get());
-        blockModels.createNonTemplateHorizontalBlock(ModBlocks.ALTAR_LIGHTNING.get());
-        blockModels.createNonTemplateHorizontalBlock(ModBlocks.ALTAR_REPAIR.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_BLACK.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_BLUE.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_BROWN.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_CYAN.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_GRAY.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_LIGHT_BLUE.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_LIGHT_GRAY.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_MAGENTA.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_ORANGE.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_PINK.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_PURPLE.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_RED.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_WHITE.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_YELLOW.get());
-        blockModels.createNonTemplateModelBlock(ModBlocks.FLOWER_RAINBOW.get());
+        createCustomBlock(ModBlocks.ANTLION_EGG);
+        createCustomBlock(ModBlocks.TARANTULA_EGG);
+        createCustomHorizontalBlock(ModBlocks.ALTAR_BASE);
+        createCustomHorizontalBlock(ModBlocks.ALTAR_EXPERIENCE);
+        createCustomHorizontalBlock(ModBlocks.ALTAR_HEALING);
+        createCustomHorizontalBlock(ModBlocks.ALTAR_LIGHTNING);
+        createCustomHorizontalBlock(ModBlocks.ALTAR_REPAIR);
+        createCustomHorizontalBlock(ModBlocks.BAMBOO_BRIDGE);
+        createCustomBlock(ModBlocks.OFFERING_ALTAR);
+        createCustomBlock(ModBlocks.FLOWER_BLACK);
+        createCustomBlock(ModBlocks.FLOWER_BLUE);
+        createCustomBlock(ModBlocks.FLOWER_BROWN);
+        createCustomBlock(ModBlocks.FLOWER_CYAN);
+        createCustomBlock(ModBlocks.FLOWER_GRAY);
+        createCustomBlock(ModBlocks.FLOWER_LIGHT_BLUE);
+        createCustomBlock(ModBlocks.FLOWER_LIGHT_GRAY);
+        createCustomBlock(ModBlocks.FLOWER_MAGENTA);
+        createCustomBlock(ModBlocks.FLOWER_ORANGE);
+        createCustomBlock(ModBlocks.FLOWER_PINK);
+        createCustomBlock(ModBlocks.FLOWER_PURPLE);
+        createCustomBlock(ModBlocks.FLOWER_RED);
+        createCustomBlock(ModBlocks.FLOWER_WHITE);
+        createCustomBlock(ModBlocks.FLOWER_YELLOW);
+        createCustomBlock(ModBlocks.FLOWER_RAINBOW);
+        createCustomBlock(ModBlocks.FLUID_ANTI_VENOM_BLOCK);
+        createCustomBlock(ModBlocks.FLUID_BEETLE_JUICE_BLOCK);
+        createCustomBlock(ModBlocks.FLUID_FORMIC_ACID_BLOCK);
+        createCustomBlock(ModBlocks.FLUID_HONEY_BLOCK);
+        createCustomBlock(ModBlocks.BAMBOO_NERD_POLE);
+        createCustomHorizontalBlock(ModBlocks.BAMBOO_LADDER);
+        createCustomHorizontalBlock(ModBlocks.BLENDER);
+        createCustomHorizontalBlock(ModBlocks.BLOCK_OF_BONES);
+        createCustomBlock(ModBlocks.COMPOSTER);
+        createCustomBlock(ModBlocks.DESERT_SHRUB);
+        createCustomBlock(ModBlocks.FERN);
+        createCustomBlock(ModBlocks.FLUID_JAR);
+        createCustomBlock(ModBlocks.GLOWING_JAR);
+        createCustomBlock(ModBlocks.GLOWSHROOM_BLOCK);
+        createCustomBlock(ModBlocks.HONEY_COMB);
+        createCustomBlock(ModBlocks.SWAMP_VENT);
     }
 
-    public void createHoneyTreat(BlockModelGenerators blockModels) {
+    private void createBlock(DeferredBlock<Block> block) {
+        blockModels.createTrivialCube(block.get());
+    }
+
+    private void createCustomBlock(Supplier<? extends Block> block) {
+        blockModels.createNonTemplateModelBlock(block.get());
+    }
+
+    private void createCustomHorizontalBlock(DeferredBlock<Block> block) {
+        blockModels.createNonTemplateHorizontalBlock(block.get());
+    }
+
+    private void createGaeanKeystone() {
+        blockModels.blockStateOutput.accept(
+                MultiVariantGenerator
+                        .dispatch(ModBlocks.GAEAN_KEYSTONE.get())
+                        .with(
+                                PropertyDispatch
+                                        .initial(GaeanKeystoneBlock.ACTIVE)
+                                        .select(false, plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.GAEAN_KEYSTONE.get())))
+                                        .select(true, plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.GAEAN_KEYSTONE.get())))
+                        )
+        );
+    }
+
+    private void createHoneyTreat() {
         blockModels.registerSimpleFlatItemModel(ModBlocks.HONEY_TREAT.get().asItem());
         blockModels.blockStateOutput.accept(MultiVariantGenerator
                 .dispatch(ModBlocks.HONEY_TREAT.get())
@@ -287,7 +345,7 @@ public class ModBlockStates {
         );
     }
 
-    public void createCandleHoneyTreat(BlockModelGenerators blockModels, Block candleBlock, CandleHoneyTreatBlock candleCakeBlock) {
+    private void createCandleHoneyTreat(Block candleBlock, Block candleCakeBlock) {
         MultiVariant candleCake = plainVariant(
                 ModelTemplates.CANDLE_CAKE.create(
                         candleCakeBlock,
@@ -311,12 +369,40 @@ public class ModBlockStates {
         );
     }
 
-    public static TextureMapping candleHoneyTreat(Block block, boolean lit) {
+    private static TextureMapping candleHoneyTreat(Block block, boolean lit) {
         return (new TextureMapping())
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_side"))
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_bottom"))
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_top"))
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_side"))
                 .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(block, lit ? "_lit" : ""));
+    }
+
+
+
+    public void createChest(Supplier<Block> block, Supplier<Block> particle, Identifier texture) {
+        blockModels.createParticleOnlyBlock(block.get(), particle.get());
+        Item chestItem = block.get().asItem();
+        Identifier itemModelBase = ModelTemplates.CHEST_INVENTORY.create(chestItem, TextureMapping.particle(particle.get()), blockModels.modelOutput);
+        ItemModel.Unbaked plainModel = ItemModelUtils.specialModel(itemModelBase, new ErebusChestSpecialRenderer.Unbaked(texture));
+
+        itemModels.itemModelOutput.accept(chestItem, plainModel);
+    }
+
+    public void createChests() {
+        createChest(ModBlocks.CHEST_ASPER, ModBlocks.PLANKS_ASPER, ErebusChestSpecialRenderer.ASPER_TEXTURE);
+        createChest(ModBlocks.CHEST_BAMBOO, ModBlocks.PLANKS_BAMBOO, ErebusChestSpecialRenderer.BAMBOO_TEXTURE);
+        createChest(ModBlocks.CHEST_BALSAM, ModBlocks.PLANKS_BALSAM, ErebusChestSpecialRenderer.BALSAM_TEXTURE);
+        createChest(ModBlocks.CHEST_BAOBAB, ModBlocks.PLANKS_BAOBAB, ErebusChestSpecialRenderer.BAOBAB_TEXTURE);
+        createChest(ModBlocks.CHEST_CYPRESS, ModBlocks.PLANKS_CYPRESS, ErebusChestSpecialRenderer.CYPRESS_TEXTURE);
+        createChest(ModBlocks.CHEST_EUCALYPTUS, ModBlocks.PLANKS_EUCALYPTUS, ErebusChestSpecialRenderer.EUCALYPTUS_TEXTURE);
+        createChest(ModBlocks.CHEST_MAHOGANY, ModBlocks.PLANKS_MAHOGANY, ErebusChestSpecialRenderer.MAHOGANY_TEXTURE);
+        createChest(ModBlocks.CHEST_MARSHWOOD, ModBlocks.PLANKS_MARSHWOOD, ErebusChestSpecialRenderer.MARSHWOOD_TEXTURE);
+        createChest(ModBlocks.CHEST_MOSSBARK, ModBlocks.PLANKS_MOSSBARK, ErebusChestSpecialRenderer.MOSSBARK_TEXTURE);
+        createChest(ModBlocks.CHEST_PETRIFIED, ModBlocks.PLANKS_PETRIFIED, ErebusChestSpecialRenderer.PETRIFIED_TEXTURE);
+        createChest(ModBlocks.CHEST_ROTTEN, ModBlocks.PLANKS_ROTTEN, ErebusChestSpecialRenderer.ROTTEN_TEXTURE);
+        createChest(ModBlocks.CHEST_SCORCHED, ModBlocks.PLANKS_SCORCHED, ErebusChestSpecialRenderer.SCORCHED_TEXTURE);
+        createChest(ModBlocks.CHEST_VARNISHED, ModBlocks.PLANKS_VARNISHED, ErebusChestSpecialRenderer.VARNISHED_TEXTURE);
+        createChest(ModBlocks.CHEST_WHITE, ModBlocks.PLANKS_WHITE, ErebusChestSpecialRenderer.WHITE_TEXTURE);
     }
 }

@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "erebus:block/bamboo_bridge"},
-        "facing=south": { "model": "erebus:block/bamboo_bridge"},
-        "facing=west":  { "model": "erebus:block/bamboo_bridge"},
-        "facing=east":  { "model": "erebus:block/bamboo_bridge"}
-    }
-}

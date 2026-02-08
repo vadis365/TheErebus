@@ -29,55 +29,55 @@ public class ModBlockHelpers {
         return registerBlock(name, () -> new ConnectedTextureBlock(properties.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name)))));
     }
 
-    protected static DeferredBlock<StairBlock> registerStairs(String name, Supplier<? extends Block> baseTexture, Properties properties) {
+    protected static DeferredBlock<Block> registerStairs(String name, Supplier<? extends Block> baseTexture, Properties properties) {
         return registerBlock(name, () -> new StairBlock(baseTexture.get().defaultBlockState(), properties.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name)))));
     }
 
-    protected static DeferredBlock<DoorBlock> registerDoor(String name, BlockSetType type, Properties properties) {
+    protected static DeferredBlock<Block> registerDoor(String name, BlockSetType type, Properties properties) {
         return registerBlock(name, () -> new DoorBlock(type, properties.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name)))));
     }
 
-    protected static DeferredBlock<SlabBlock> registerSlab(String name, Properties properties) {
+    protected static DeferredBlock<Block> registerSlab(String name, Properties properties) {
         return registerBlock(name, () -> new SlabBlock(properties.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name)))));
     }
 
-    protected static DeferredBlock<FenceBlock> registerFence(String name, Properties properties) {
+    protected static DeferredBlock<Block> registerFence(String name, Properties properties) {
         return registerBlock(name, () -> new FenceBlock(properties.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name)))));
     }
 
-    protected static DeferredBlock<FenceGateBlock> registerSimpleFenceGate(String name) {
+    protected static DeferredBlock<Block> registerSimpleFenceGate(String name) {
         return registerFenceGate(name, WoodType.OAK, Properties.ofFullCopy(Blocks.OAK_FENCE_GATE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name))));
     }
 
-    protected static DeferredBlock<FenceGateBlock> registerFenceGate(String name, WoodType type, Properties properties) {
+    protected static DeferredBlock<Block> registerFenceGate(String name, WoodType type, Properties properties) {
         return registerBlock(name, () -> new FenceGateBlock(type, properties.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name)))));
     }
 
-    protected static DeferredBlock<ModBerryBushBlock> registerBush(String name, Supplier<? extends Item> berry, Properties properties) {
+    protected static DeferredBlock<Block> registerBush(String name, Supplier<? extends Item> berry, Properties properties) {
         return registerBlock(name, () -> new ModBerryBushBlock(berry, properties.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name)))));
     }
 
-    protected static DeferredBlock<ModCropBlock> registerCrop(String name, Supplier<? extends Item> seed, Properties properties) {
+    protected static DeferredBlock<Block> registerCrop(String name, Supplier<? extends Item> seed, Properties properties) {
         return registerBlock(name, () -> new ModCropBlock(properties.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name))), seed));
     }
 
-    protected static DeferredBlock<RotatedPillarBlock> registerLog(String name, Properties properties) {
+    protected static DeferredBlock<Block> registerLog(String name, Properties properties) {
         return registerBlock(name, () -> new RotatedPillarBlock(properties.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name)))));
     }
 
-    protected static DeferredBlock<SaplingBlock> registerSapling(String name, TreeGrower grower) {
+    protected static DeferredBlock<Block> registerSapling(String name, TreeGrower grower) {
         return registerBlock(name, () -> new SaplingBlock(grower, Properties.ofFullCopy(Blocks.SHORT_GRASS).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name)))));
     }
 
-    protected static DeferredBlock<DoublePlantBlock> registerDoublePlant(String name, Properties properties) {
+    protected static DeferredBlock<Block> registerDoublePlant(String name, Properties properties) {
         return registerBlock(name, () -> new DoublePlantBlock(properties.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name)))));
     }
 
-    protected static DeferredBlock<HugeMushroomBlock> registerHugeMushroom(String name, Properties properties) {
+    protected static DeferredBlock<Block> registerHugeMushroom(String name, Properties properties) {
         return registerBlock(name, () -> new HugeMushroomBlock(properties.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name)))));
     }
 
-    protected static DeferredBlock<ChestBlock> registerChest(String name, Properties properties) {
+    protected static DeferredBlock<Block> registerChest(String name, Properties properties) {
         return registerBlock(name, () -> new ErebusChestBlock(properties.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name))), name));
     }
 

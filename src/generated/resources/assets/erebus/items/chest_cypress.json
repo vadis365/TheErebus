@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/chest_cypress"
+    "type": "minecraft:special",
+    "base": "erebus:item/chest_cypress",
+    "model": {
+      "type": "erebus:chest_special",
+      "texture": "erebus:cypress_chest"
+    }
   }
 }

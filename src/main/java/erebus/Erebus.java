@@ -94,7 +94,6 @@ public class Erebus {
 
         neoBus.register(new BedPlaceEventHandler());
         neoBus.register(new OnEntityJumpEventHandler());
-        
 
         NeoForgeMod.enableMilkFluid(); // TEMP - JUST FOR BEETLE MILKING TEST
 

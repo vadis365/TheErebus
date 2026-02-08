@@ -1,6 +1,5 @@
 package erebus.item.blocks;
 
-import erebus.block.FluidJarBlock;
 import erebus.registries.data.ModDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -8,6 +7,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import org.jspecify.annotations.NonNull;
@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 public class FluidJarBlockItem extends BlockItem {
 	private final int capacity;
 
-	public FluidJarBlockItem(FluidJarBlock blockIn, int capacity, Properties builder) {
+	public FluidJarBlockItem(Block blockIn, int capacity, Properties builder) {
 		super(blockIn, builder);
 		this.capacity = capacity;
 	}

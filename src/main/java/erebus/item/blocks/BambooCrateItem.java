@@ -15,6 +15,7 @@ import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NonNull;
 
@@ -22,7 +23,7 @@ import java.util.function.Consumer;
 
 public class BambooCrateItem extends BlockItem {
 	
-	public BambooCrateItem(BambooCrateBlock blockIn, Properties builder) {
+	public BambooCrateItem(Block blockIn, Properties builder) {
 		super(blockIn, builder);
 	}
 

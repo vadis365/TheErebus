@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/chest_baobab"
+    "type": "minecraft:special",
+    "base": "erebus:item/chest_baobab",
+    "model": {
+      "type": "erebus:chest_special",
+      "texture": "erebus:baobab_chest"
+    }
   }
 }

@@ -5,7 +5,6 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.fml.common.asm.enumextension.EnumProxy;
 import net.neoforged.neoforge.client.IArmPoseTransformer;
 

@@ -14,9 +14,9 @@ import java.util.function.Supplier;
 
 public class ErebusBushFeature extends ErebusFeature {
 
-    private final Supplier<? extends ModBerryBushBlock> BUSH;
+    private final Supplier<Block> BUSH;
 
-    public ErebusBushFeature(String key, Supplier<? extends ModBerryBushBlock> bush) {
+    public ErebusBushFeature(String key, Supplier<Block> bush) {
         super(key);
         this.BUSH = bush;
     }

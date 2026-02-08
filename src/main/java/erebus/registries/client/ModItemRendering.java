@@ -6,7 +6,7 @@ import erebus.client.render.item.model.*;
 import erebus.registries.ModFluids;
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
@@ -204,7 +204,7 @@ public class ModItemRendering {
         event.registerFluidType(new BasicFluidType("formic_acid"), ModFluids.FORMIC_ACID_TYPE.get());
 	}
 
-    private static void registerChestItem(RegisterClientExtensionsEvent event, Supplier<ChestBlock> chest, String texture) {
+    private static void registerChestItem(RegisterClientExtensionsEvent event, Supplier<Block> chest, String texture) {
         /*event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
