@@ -1,0 +1,19 @@
+{
+  "type": "erebus:smoothie",
+  "category": "misc",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": "erebus:honey_still"
+    }
+  ],
+  "ingredients": [
+    "erebus:honey_drip",
+    "erebus:honey_drip",
+    "erebus:nectar",
+    "minecraft:gold_nugget"
+  ],
+  "result": {
+    "id": "erebus:money_honey"
+  }
+}

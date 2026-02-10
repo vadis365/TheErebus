@@ -1,0 +1,20 @@
+{
+  "type": "erebus:smoothie",
+  "category": "misc",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": "erebus:beetle_juice_still"
+    }
+  ],
+  "ingredients": [
+    "minecraft:bucket",
+    "erebus:poison_gland",
+    "erebus:poison_gland",
+    "erebus:nettle_leaves",
+    "erebus:nettle_leaves"
+  ],
+  "result": {
+    "id": "erebus:anti_venom_bucket"
+  }
+}

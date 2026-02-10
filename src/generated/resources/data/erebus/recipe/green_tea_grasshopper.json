@@ -1,0 +1,21 @@
+{
+  "type": "erebus:smoothie",
+  "category": "misc",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": "erebus:beetle_juice_still"
+    }
+  ],
+  "ingredients": [
+    "erebus:smoothie_glass",
+    "erebus:grasshopper_leg_raw",
+    "erebus:grasshopper_leg_raw",
+    "erebus:elastic_fiber",
+    "erebus:fly_wing",
+    "erebus:nectar"
+  ],
+  "result": {
+    "id": "erebus:green_tea_grasshopper"
+  }
+}

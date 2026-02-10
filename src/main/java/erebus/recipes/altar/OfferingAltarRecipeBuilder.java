@@ -1,90 +1,100 @@
 package erebus.recipes.altar;
 
 import net.minecraft.advancements.Criterion;
-import net.minecraft.core.NonNullList;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
-import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OfferingAltarRecipeBuilder implements RecipeBuilder {
 
-	@Nullable
-	private final ItemStack resultStack;
-	private final NonNullList<Ingredient> ingredients = NonNullList.create();
+	private final HolderGetter<Item> items;
+	private final ItemStackTemplate result;
+	private final List<Ingredient> ingredients = new ArrayList<>();
+	private final RecipeUnlockAdvancementBuilder advancementBuilder = new RecipeUnlockAdvancementBuilder();
+	private String group;
 
-	private OfferingAltarRecipeBuilder(@Nullable ItemStack result) {
-		this.resultStack = result;
+	private OfferingAltarRecipeBuilder(HolderGetter<Item> items, ItemStackTemplate result) {
+		this.items = items;
+		this.result = result;
 	}
 
-	public static OfferingAltarRecipeBuilder assembly(ItemLike result) {
-		return new OfferingAltarRecipeBuilder(new ItemStack(result, 1));
+	public static OfferingAltarRecipeBuilder altarRecipe(HolderGetter<Item> items, ItemStackTemplate result) {
+		return new OfferingAltarRecipeBuilder(items, result);
 	}
 
-	public static OfferingAltarRecipeBuilder assembly(ItemStack result) {
-		return new OfferingAltarRecipeBuilder(result);
+	public static OfferingAltarRecipeBuilder altarRecipe(HolderGetter<Item> items, ItemLike result) {
+		return altarRecipe(items, result, 1);
 	}
 
-	public static OfferingAltarRecipeBuilder reversion() {
-		return new OfferingAltarRecipeBuilder(null);
+	public static OfferingAltarRecipeBuilder altarRecipe(HolderGetter<Item> items, ItemLike result, int count) {
+		return new OfferingAltarRecipeBuilder(items, new ItemStackTemplate(result.asItem(), count));
+	}
+
+	public OfferingAltarRecipeBuilder requires(TagKey<Item> tag) {
+		return requires(Ingredient.of(items.getOrThrow(tag)));
 	}
 
 	public OfferingAltarRecipeBuilder requires(ItemLike item) {
-		return this.requires(item, 1);
+		return requires(item, 1);
 	}
 
-	public OfferingAltarRecipeBuilder requires(ItemLike item, int quantity) {
-		for (int i = 0; i < quantity; i++) {
-			this.requires(Ingredient.of(item));
+	public OfferingAltarRecipeBuilder requires(ItemLike item, int count) {
+		for (int i = 0; i < count; i++) {
+			requires(Ingredient.of(item));
 		}
 
 		return this;
 	}
 
 	public OfferingAltarRecipeBuilder requires(Ingredient ingredient) {
-		return this.requires(ingredient, 1);
+		return requires(ingredient, 1);
 	}
 
-	public OfferingAltarRecipeBuilder requires(Ingredient ingredient, int quantity) {
-		for (int i = 0; i < quantity; i++) {
-			this.ingredients.add(ingredient);
+	public OfferingAltarRecipeBuilder requires(Ingredient ingredient, int count) {
+		for (int i = 0; i < count; i++) {
+			ingredients.add(ingredient);
 		}
 
 		return this;
 	}
 
-	@Override
-	public @NonNull RecipeBuilder unlockedBy(@NonNull String name, @NonNull Criterion<?> criterion) {
+	public @NonNull OfferingAltarRecipeBuilder unlockedBy(@NonNull String name, @NonNull Criterion<?> criterion) {
+		advancementBuilder.unlockedBy(name, criterion);
 		return this;
 	}
 
-	@Override
-	public @NonNull RecipeBuilder group(@Nullable String groupName) {
+	public @NonNull OfferingAltarRecipeBuilder group(@Nullable String group) {
+		this.group = group;
 		return this;
 	}
 
 	@Override
 	public @NonNull ResourceKey<Recipe<?>> defaultId() {
-		return null;
-	}
-
-	public Item getResult() {
-		return this.resultStack != null ? this.resultStack.getItem() : Items.AIR;
+		return RecipeBuilder.getDefaultRecipeId(result);
 	}
 
 	@Override
-	public void save(@NonNull RecipeOutput output, @NonNull ResourceKey<Recipe<?>> key) {
-		OfferingAltarRecipe recipe = null;
-		if (this.resultStack != null)
-			recipe = new OfferingAltarRecipeMaker(this.ingredients, this.resultStack);
-		output.accept(key, recipe, null);
+	public void save(RecipeOutput output, @NonNull ResourceKey<Recipe<?>> id) {
+		OfferingAltarRecipe recipe = new OfferingAltarRecipe(
+				RecipeBuilder.createCraftingCommonInfo(true),
+				RecipeBuilder.createCraftingBookInfo(RecipeCategory.MISC, group),
+				result,
+				ingredients
+		);
+		output.accept(id, recipe, advancementBuilder.build(output, id, RecipeCategory.MISC));
 	}
 }

@@ -1,0 +1,20 @@
+{
+  "type": "erebus:smoothie",
+  "category": "misc",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": "erebus:beetle_juice_still"
+    }
+  ],
+  "ingredients": [
+    "erebus:smoothie_glass",
+    "erebus:bio_velocity",
+    "erebus:dark_fruit_seeds",
+    "minecraft:melon_seeds",
+    "minecraft:pumpkin_seeds"
+  ],
+  "result": {
+    "id": "erebus:seedy_goodness"
+  }
+}

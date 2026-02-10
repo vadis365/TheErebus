@@ -1,0 +1,20 @@
+{
+  "type": "erebus:smoothie",
+  "category": "misc",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": "erebus:honey_still"
+    }
+  ],
+  "ingredients": [
+    "erebus:smoothie_glass",
+    "erebus:nettle_flowers",
+    "erebus:nettle_flowers",
+    "erebus:jade_berries",
+    "erebus:plate_exo"
+  ],
+  "result": {
+    "id": "erebus:dont_meddle_with_the_nettle"
+  }
+}

@@ -70,7 +70,7 @@ public class BambooBridgeRenderer implements BlockEntityRenderer<BambooBridgeBlo
 				model,
 				renderState,
 				pose,
-				TEXTURE.renderType(RenderTypes::entityCutoutNoCull),
+				TEXTURE.renderType(RenderTypes::entityCutout),
 				renderState.lightCoords,
 				OverlayTexture.NO_OVERLAY,
 				-1,

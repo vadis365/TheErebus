@@ -1,18 +1,20 @@
 package erebus.recipes.smoothie;
 
-import erebus.recipes.util.SimpleRecipeBuilder;
-import erebus.recipes.util.SmoothieIngredientCounts;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementRequirements;
-import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
-import net.minecraft.core.NonNullList;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
@@ -20,45 +22,94 @@ import org.jspecify.annotations.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SmoothieRecipeBuilder extends SimpleRecipeBuilder {
+public class SmoothieRecipeBuilder implements RecipeBuilder {
 
-    private final List<SizedFluidIngredient> fluids = new ArrayList<>();
-    private final List<Ingredient> items = new ArrayList<>();
+    private final HolderGetter<Item> items;
+    private final ItemStackTemplate result;
+    private final List<SizedFluidIngredient> fluidIngredients = new ArrayList<>();
+    private final List<Ingredient> ingredients = new ArrayList<>();
+    private final RecipeUnlockAdvancementBuilder advancementBuilder = new RecipeUnlockAdvancementBuilder();
+    private String group;
 
-    public SmoothieRecipeBuilder(ItemLike result) {
-        super(result);
+    private SmoothieRecipeBuilder(HolderGetter<Item> items, ItemStackTemplate result) {
+        this.items = items;
+        this.result = result;
     }
 
-    public SmoothieRecipeBuilder addFluidIngredient(SizedFluidIngredient fluid) {
-        this.fluids.add(fluid);
+    public static SmoothieRecipeBuilder smoothieRecipe(HolderGetter<Item> items, ItemStackTemplate result) {
+        return new SmoothieRecipeBuilder(items, result);
+    }
+
+    public static SmoothieRecipeBuilder smoothieRecipe(HolderGetter<Item> items, ItemLike result) {
+        return smoothieRecipe(items, result, 1);
+    }
+
+    public static SmoothieRecipeBuilder smoothieRecipe(HolderGetter<Item> items, ItemLike result, int count) {
+        return new SmoothieRecipeBuilder(items, new ItemStackTemplate(result.asItem(), count));
+    }
+
+    public SmoothieRecipeBuilder requires(TagKey<Item> tag) {
+        return requires(Ingredient.of(items.getOrThrow(tag)));
+    }
+
+    public SmoothieRecipeBuilder requires(ItemLike item) {
+        return requires(item, 1);
+    }
+
+    public SmoothieRecipeBuilder requires(ItemLike item, int count) {
+        for (int i = 0; i < count; i++) {
+            requires(Ingredient.of(item));
+        }
+
         return this;
     }
 
-    public SmoothieRecipeBuilder addItemIngredient(Ingredient item) {
-        this.items.add(item);
+    public SmoothieRecipeBuilder requires(Ingredient ingredient) {
+        return requires(ingredient, 1);
+    }
+
+    public SmoothieRecipeBuilder requires(Ingredient ingredient, int count) {
+        for (int i = 0; i < count; i++) {
+            ingredients.add(ingredient);
+        }
+
         return this;
     }
 
-    @Override
-    public void save(@NotNull RecipeOutput output, @NonNull ResourceKey<Recipe<?>> key) {
-        Advancement.Builder advancement = output.advancement()
-                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(key))
-                .rewards(AdvancementRewards.Builder.recipe(key))
-                .requirements(AdvancementRequirements.Strategy.OR);
-        this.criteria.forEach(advancement::addCriterion);
+    public SmoothieRecipeBuilder requires(Fluid fluid) {
+        return requires(SizedFluidIngredient.of(fluid, FluidType.BUCKET_VOLUME));
+    }
 
-        SmoothieRecipe recipe = new SmoothieRecipe(
-                NonNullList.copyOf(fluids),
-                NonNullList.copyOf(items),
-                new SmoothieIngredientCounts(fluids.size(), items.size()),
-                new ItemStack(this.result, 1)
-        );
+    public SmoothieRecipeBuilder requires(SizedFluidIngredient ingredient) {
+        fluidIngredients.add(ingredient);
+        return this;
+    }
 
-        output.accept(key, recipe, advancement.build(key.identifier().withPath("smoothie/")));
+    public @NonNull SmoothieRecipeBuilder unlockedBy(@NonNull String name, @NonNull Criterion<?> criterion) {
+        advancementBuilder.unlockedBy(name, criterion);
+        return this;
+    }
+
+    public @NonNull SmoothieRecipeBuilder group(String group) {
+        this.group = group;
+        return this;
     }
 
     @Override
     public @NonNull ResourceKey<Recipe<?>> defaultId() {
-        return null;
+        return RecipeBuilder.getDefaultRecipeId(result);
+    }
+
+    @Override
+    public void save(@NotNull RecipeOutput output, @NonNull ResourceKey<Recipe<?>> id) {
+        SmoothieRecipe recipe = new SmoothieRecipe(
+                RecipeBuilder.createCraftingCommonInfo(true),
+                RecipeBuilder.createCraftingBookInfo(RecipeCategory.MISC, group),
+                result,
+                ingredients,
+                fluidIngredients
+        );
+
+        output.accept(id, recipe, advancementBuilder.build(output, id, RecipeCategory.MISC));
     }
 }

@@ -1,0 +1,20 @@
+{
+  "type": "erebus:smoothie",
+  "category": "misc",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": "erebus:anti_venom_still"
+    }
+  ],
+  "ingredients": [
+    "erebus:smoothie_glass",
+    "erebus:repellent",
+    "erebus:poison_gland",
+    "erebus:poison_gland",
+    "erebus:wasp_sting"
+  ],
+  "result": {
+    "id": "erebus:green_giant"
+  }
+}

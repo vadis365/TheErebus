@@ -7,7 +7,7 @@ import erebus.registries.world.tree.ModTrunkPlacers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import org.apache.commons.compress.utils.Lists;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -24,7 +25,7 @@ import java.util.function.Function;
 public class MarshwoodTrunkPlacer extends TrunkPlacer {
 
     private final List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
-    private LevelSimulatedReader level;
+    private WorldGenLevel level;
     private BiConsumer<BlockPos, BlockState> setter;
     private RandomSource random;
     private TreeConfiguration config;
@@ -42,23 +43,22 @@ public class MarshwoodTrunkPlacer extends TrunkPlacer {
     }
 
     @Override
-    protected TrunkPlacerType<?> type() {
+    protected @NonNull TrunkPlacerType<?> type() {
         return ModTrunkPlacers.MARSHWOOD_TRUNK_PLACER.get();
     }
 
     @Override
-    public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> setter, RandomSource random, int freeTreeHeight, BlockPos pos, TreeConfiguration config) {
-        setDirtAt(level, setter, random, pos.below(), config);
+    public @NonNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NonNull WorldGenLevel level, @NonNull BiConsumer<BlockPos, BlockState> trunkSetter, RandomSource random, int treeHeight, BlockPos origin, @NonNull TreeConfiguration config) {
         int radius = random.nextInt(heightRandA) + heightRandB;
         int height = random.nextInt(radius) + baseHeight;
         this.level = level;
-        this.setter = setter;
+        this.setter = trunkSetter;
         this.config = config;
         this.random = random;
 
-        int x = pos.getX();
-        int y = pos.getY();
-        int z = pos.getZ();
+        int x = origin.getX();
+        int y = origin.getY();
+        int z = origin.getZ();
 
         for (int yy = y; yy < height; yy++) {
             if (yy % 5 == 0 && radius != 1) --radius;

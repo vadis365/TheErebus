@@ -36,6 +36,7 @@
   "coordinate_scale": 4.0,
   "default_clock": "minecraft:overworld",
   "has_ceiling": true,
+  "has_ender_dragon_fight": false,
   "has_skylight": true,
   "height": 128,
   "infiniburn": "#minecraft:infiniburn_overworld",

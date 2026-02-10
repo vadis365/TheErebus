@@ -1,0 +1,20 @@
+{
+  "type": "erebus:smoothie",
+  "category": "misc",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": "erebus:anti_venom_still"
+    }
+  ],
+  "ingredients": [
+    "erebus:smoothie_glass",
+    "erebus:wasp_sting",
+    "erebus:bogmaw_root",
+    "erebus:fire_bloom",
+    "erebus:fire_bloom"
+  ],
+  "result": {
+    "id": "erebus:hot_hot_baby"
+  }
+}

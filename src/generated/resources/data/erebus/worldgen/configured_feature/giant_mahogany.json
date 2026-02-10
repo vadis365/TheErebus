@@ -10,12 +10,6 @@
         "probability": 0.25
       }
     ],
-    "dirt_provider": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "minecraft:dirt"
-      }
-    },
     "foliage_placer": {
       "type": "minecraft:jungle_foliage_placer",
       "height": 2,
@@ -28,7 +22,6 @@
         "Name": "erebus:leaves_mahogany"
       }
     },
-    "force_dirt": false,
     "ignore_vines": false,
     "minimum_size": {
       "type": "minecraft:two_layers_feature_size",

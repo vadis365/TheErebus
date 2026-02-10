@@ -1,0 +1,17 @@
+{
+  "type": "erebus:smoothie",
+  "category": "misc",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": "minecraft:water"
+    }
+  ],
+  "ingredients": [
+    "erebus:smoothie_glass",
+    "minecraft:glistering_melon_slice"
+  ],
+  "result": {
+    "id": "erebus:melonade_sparkly"
+  }
+}

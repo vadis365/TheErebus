@@ -1,0 +1,12 @@
+{
+  "type": "erebus:offering_altar",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:diamond",
+    "minecraft:emerald",
+    "minecraft:obsidian"
+  ],
+  "result": {
+    "id": "erebus:gaean_gem"
+  }
+}

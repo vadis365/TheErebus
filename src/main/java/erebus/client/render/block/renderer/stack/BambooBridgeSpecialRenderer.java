@@ -26,7 +26,7 @@ public record BambooBridgeSpecialRenderer(BambooBridgeModel model, Identifier te
                 model,
                 new BambooBridgeBlockEntityRenderState(),
                 pose,
-                RenderTypes.entityCutoutNoCull(texture),
+                RenderTypes.entityCutout(texture),
                 packedLight,
                 packedOverlay,
                 outlineColor,

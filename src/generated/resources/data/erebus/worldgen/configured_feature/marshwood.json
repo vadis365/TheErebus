@@ -7,12 +7,6 @@
         "probability": 0.125
       }
     ],
-    "dirt_provider": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "minecraft:dirt"
-      }
-    },
     "foliage_placer": {
       "type": "erebus:marshwood_foliage_placer",
       "offset": 2,
@@ -24,7 +18,6 @@
         "Name": "erebus:leaves_marshwood"
       }
     },
-    "force_dirt": false,
     "ignore_vines": false,
     "minimum_size": {
       "type": "minecraft:two_layers_feature_size",

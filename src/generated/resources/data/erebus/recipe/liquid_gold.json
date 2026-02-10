@@ -1,0 +1,20 @@
+{
+  "type": "erebus:smoothie",
+  "category": "misc",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": "minecraft:milk"
+    }
+  ],
+  "ingredients": [
+    "erebus:smoothie_glass",
+    "erebus:life_blood",
+    "erebus:life_blood",
+    "erebus:bamboo",
+    "minecraft:glistering_melon_slice"
+  ],
+  "result": {
+    "id": "erebus:liquid_gold"
+  }
+}

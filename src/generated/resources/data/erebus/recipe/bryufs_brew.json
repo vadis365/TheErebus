@@ -1,0 +1,32 @@
+{
+  "type": "erebus:smoothie",
+  "category": "misc",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": "erebus:beetle_juice_still"
+    },
+    {
+      "amount": 1000,
+      "ingredient": "erebus:honey_still"
+    },
+    {
+      "amount": 1000,
+      "ingredient": "erebus:anti_venom_still"
+    },
+    {
+      "amount": 1000,
+      "ingredient": "minecraft:milk"
+    }
+  ],
+  "ingredients": [
+    "erebus:smoothie_glass",
+    "erebus:compound_eyes",
+    "erebus:terpsishroom",
+    "erebus:turnip",
+    "erebus:heart_berries"
+  ],
+  "result": {
+    "id": "erebus:bryufs_brew"
+  }
+}

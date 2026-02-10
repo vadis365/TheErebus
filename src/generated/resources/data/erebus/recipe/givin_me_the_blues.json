@@ -1,0 +1,20 @@
+{
+  "type": "erebus:smoothie",
+  "category": "misc",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": "minecraft:milk"
+    }
+  ],
+  "ingredients": [
+    "erebus:smoothie_glass",
+    "erebus:bluebell_petal",
+    "erebus:bluebell_petal",
+    "minecraft:lapis_lazuli",
+    "minecraft:lapis_lazuli"
+  ],
+  "result": {
+    "id": "erebus:givin_me_the_blues"
+  }
+}

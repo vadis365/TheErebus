@@ -7,6 +7,7 @@ import erebus.registries.world.tree.ModTrunkPlacers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -14,7 +15,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import org.apache.commons.compress.utils.Lists;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -39,22 +40,21 @@ public class CypressTrunkPlacer extends TrunkPlacer {
     }
 
     @Override
-    protected @NotNull TrunkPlacerType<?> type() {
+    protected @NonNull TrunkPlacerType<?> type() {
         return ModTrunkPlacers.CYPRESS_TRUNK_PLACER.get();
     }
 
     @Override
-    public @NotNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NotNull LevelSimulatedReader level, @NotNull BiConsumer<BlockPos, BlockState> blockSetter, @NotNull RandomSource random, int freeTreeHeight, BlockPos pos, @NotNull TreeConfiguration config) {
-        setDirtAt(level, blockSetter, random, pos.below(), config);
+    public @NonNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NonNull WorldGenLevel level, @NonNull BiConsumer<BlockPos, BlockState> trunkSetter, RandomSource random, int treeHeight, @NonNull BlockPos origin, @NonNull TreeConfiguration config) {
         list = Lists.newArrayList();
         float chance =  random.nextFloat();
 
         if(chance >= 0.5F) {
-            generateMediumTree(level, blockSetter, random, pos, config);
+            generateMediumTree(level, trunkSetter, random, origin, config);
         } else if(chance >= 0.3F) {
-            generateLargeTree(level, blockSetter, random, pos, config);
+            generateLargeTree(level, trunkSetter, random, origin, config);
         } else {
-            generateSmallTree(level, blockSetter, random, pos, config);
+            generateSmallTree(level, trunkSetter, random, origin, config);
         }
 
         return list;
@@ -83,7 +83,7 @@ public class CypressTrunkPlacer extends TrunkPlacer {
         if(!canSkip || random.nextInt(10) != 0) placeLeaf(pos.offset(-1 + 2 * x, y, -2 + 4 * z));
     }
 
-    private void generateSmallTree(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> setter, RandomSource random, BlockPos pos, TreeConfiguration config) {
+    private void generateSmallTree(WorldGenLevel level, BiConsumer<BlockPos, BlockState> setter, RandomSource random, BlockPos pos, TreeConfiguration config) {
         int height = random.nextInt(4) + 5;
         int trunkHeight = random.nextInt(2) + 1;
         int leafHeight = height - trunkHeight;
@@ -116,7 +116,7 @@ public class CypressTrunkPlacer extends TrunkPlacer {
         }
     }
 
-    private void generateMediumTree(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> setter, RandomSource random, BlockPos pos, TreeConfiguration config) {
+    private void generateMediumTree(WorldGenLevel level, BiConsumer<BlockPos, BlockState> setter, RandomSource random, BlockPos pos, TreeConfiguration config) {
         int height = random.nextInt(5) + 8;
         int trunkHeight = random.nextInt(3) + 1;
         int leafHeight = height - trunkHeight;
@@ -155,7 +155,7 @@ public class CypressTrunkPlacer extends TrunkPlacer {
         }
     }
 
-    private void generateLargeTree(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> setter, RandomSource random, BlockPos pos, TreeConfiguration config) {
+    private void generateLargeTree(WorldGenLevel level, BiConsumer<BlockPos, BlockState> setter, RandomSource random, BlockPos pos, TreeConfiguration config) {
         int height = random.nextInt(6) + 12;
         int trunkHeight = random.nextInt(3) + 2;
         int leafHeight = height - trunkHeight;

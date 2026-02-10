@@ -38,6 +38,7 @@ public class ModDimensionRegistries {
                 false,
                 true,
                 true,
+                false,
                 4.0,
                 0,
                 128,

@@ -6,14 +6,14 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import erebus.registries.world.tree.ModTrunkPlacers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import org.apache.commons.compress.utils.Lists;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -36,18 +36,17 @@ public class EucalyptusTrunkPlacer extends TrunkPlacer {
     }
 
     @Override
-    protected @NotNull TrunkPlacerType<?> type() {
+    protected @NonNull TrunkPlacerType<?> type() {
         return ModTrunkPlacers.EUCALYPTUS_TRUNK_PLACER.get();
     }
 
     @Override
-    public @NotNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NotNull LevelSimulatedReader level, @NotNull BiConsumer<BlockPos, BlockState> blockSetter, @NotNull RandomSource random, int freeTreeHeight, BlockPos pos, @NotNull TreeConfiguration config) {
-        setDirtAt(level, blockSetter, random, pos.below(), config);
+    public @NonNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NonNull WorldGenLevel level, @NonNull BiConsumer<BlockPos, BlockState> trunkSetter, RandomSource random, int treeHeight, BlockPos origin, @NonNull TreeConfiguration config) {
         List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
         int height = baseHeight + random.nextInt(heightRandA);
-        int x = pos.getX();
-        int y = pos.getY();
-        int z = pos.getZ();
+        int x = origin.getX();
+        int y = origin.getY();
+        int z = origin.getZ();
 
         for (int c = -2; c < 3; c++) {
             for (int d = -1; d < 2; d++) {
@@ -85,14 +84,14 @@ public class EucalyptusTrunkPlacer extends TrunkPlacer {
                 int yy = disY * (d + 1) / SPAN;
                 int zz = disZ * (d + 1) / SPAN;
 
-                placeLog(level, blockSetter, random, pos.offset(xx, height - 1 + yy, zz), config);
+                placeLog(level, trunkSetter, random, origin.offset(xx, height - 1 + yy, zz), config);
             }
 
-            placeLog(level, blockSetter, random, new BlockPos(posX, posY, posZ), config);
+            placeLog(level, trunkSetter, random, origin.offset(posX, posY, posZ), config);
         }
 
         for (int c = 0; c < height + SPAN + 2; ++c) {
-            placeLog(level, blockSetter, random, pos.above(c), config);
+            placeLog(level, trunkSetter, random, origin.above(c), config);
         }
 
         return list;

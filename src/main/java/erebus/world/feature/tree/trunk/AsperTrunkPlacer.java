@@ -7,7 +7,7 @@ import erebus.registries.world.tree.ModTrunkPlacers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -15,6 +15,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import org.apache.commons.compress.utils.Lists;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -46,26 +47,25 @@ public class AsperTrunkPlacer extends TrunkPlacer {
     }
 
     @Override
-    protected TrunkPlacerType<?> type() {
+    protected @NonNull TrunkPlacerType<?> type() {
         return ModTrunkPlacers.ASPER_TRUNK_PLACER.get();
     }
 
     @Override
-    public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos pos, TreeConfiguration config) {
-        setDirtAt(level, blockSetter, random, pos.below(), config);
+    public @NonNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NonNull WorldGenLevel level, @NonNull BiConsumer<BlockPos, BlockState> trunkSetter, RandomSource random, int treeHeight, @NonNull BlockPos origin, @NonNull TreeConfiguration config) {
         List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
         int height = random.nextInt(heightRandA) + baseHeight;
 
         for (int y = 0; y < height; y++) {
-            placeLog(level, blockSetter, random, pos.above(y), config);
+            placeLog(level, trunkSetter, random, origin.above(y), config);
 
             if (random.nextBoolean()) {
                 for (int extraWood = 0, extraWoodAttempt = 0; extraWoodAttempt < 5 && extraWood < 3; ++extraWoodAttempt) {
                     int dir = random.nextInt(4);
 
                     if (random.nextInt(4) != 3) {
-                        if (placeLog(level, blockSetter, random, pos.above(y).relative(directions[dir], 1), config, state -> state.setValue(BlockStateProperties.AXIS, directions[dir].getAxis()))) {
-                            list.add(new FoliagePlacer.FoliageAttachment(pos.above(y).relative(directions[dir], 1), 0, false));
+                        if (placeLog(level, trunkSetter, random, origin.above(y).relative(directions[dir], 1), config, state -> state.setValue(BlockStateProperties.AXIS, directions[dir].getAxis()))) {
+                            list.add(new FoliagePlacer.FoliageAttachment(origin.above(y).relative(directions[dir], 1), 0, false));
                         }
 
                     }
@@ -74,7 +74,7 @@ public class AsperTrunkPlacer extends TrunkPlacer {
             }
         }
 
-        list.add(new FoliagePlacer.FoliageAttachment(pos.above(height), 0, false));
+        list.add(new FoliagePlacer.FoliageAttachment(origin.above(height), 0, false));
 
         return list;
     }

@@ -7,7 +7,7 @@ import erebus.registries.world.tree.ModTrunkPlacers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -15,6 +15,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import org.apache.commons.compress.utils.Lists;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -41,38 +42,37 @@ public class BalsamTrunkPlacer extends TrunkPlacer {
     }
 
     @Override
-    protected TrunkPlacerType<?> type() {
+    protected @NonNull TrunkPlacerType<?> type() {
         return ModTrunkPlacers.BALSAM_TRUNK_PLACER.get();
     }
 
     @Override
-    public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos pos, TreeConfiguration config) {
-        setDirtAt(level, blockSetter, random, pos.below(), config);
+    public @NonNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NonNull WorldGenLevel level, @NonNull BiConsumer<BlockPos, BlockState> trunkSetter, RandomSource random, int treeHeight, @NonNull BlockPos origin, @NonNull TreeConfiguration config) {
         List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
 
         int height = random.nextInt(heightRandA) + baseHeight;
         boolean alternate = random.nextBoolean();
 
         for (int y = 0; y < height; y++) {
-            BlockPos posToPlace = pos.above(y);
+            BlockPos posToPlace = origin.above(y);
 
-            placeLog(level, blockSetter, random, posToPlace, config);
+            placeLog(level, trunkSetter, random, posToPlace, config);
 
-            if (posToPlace.getY() == pos.getY() + height - 7 || posToPlace.getY() == pos.getY() + height - 10) {
-                alternate = alternatePlacingBranches(level, blockSetter, random, config, alternate, posToPlace, list);
+            if (posToPlace.getY() == origin.getY() + height - 7 || posToPlace.getY() == origin.getY() + height - 10) {
+                alternate = alternatePlacingBranches(level, trunkSetter, random, config, alternate, posToPlace, list);
             }
 
-            if (posToPlace.getY() == pos.getY() + height - 4) {
-                alternate = alternatePlacingBranches(level, blockSetter, random, config, alternate, posToPlace, list);
+            if (posToPlace.getY() == origin.getY() + height - 4) {
+                alternate = alternatePlacingBranches(level, trunkSetter, random, config, alternate, posToPlace, list);
             }
         }
 
-        list.add(new FoliagePlacer.FoliageAttachment(pos.above(height), 0, false));
+        list.add(new FoliagePlacer.FoliageAttachment(origin.above(height), 0, false));
 
         return list;
     }
 
-    private boolean alternatePlacingBranches(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, TreeConfiguration config, boolean alternate, BlockPos posToPlace, List<FoliagePlacer.FoliageAttachment> list) {
+    private boolean alternatePlacingBranches(WorldGenLevel level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, TreeConfiguration config, boolean alternate, BlockPos posToPlace, List<FoliagePlacer.FoliageAttachment> list) {
         if (alternate) {
             createBranch(level, blockSetter, random, posToPlace.relative(Direction.Axis.X, 1), config, Direction.Axis.X, list, true);
             createBranch(level, blockSetter, random, posToPlace.relative(Direction.Axis.X, -1), config, Direction.Axis.X, list, false);
@@ -85,7 +85,7 @@ public class BalsamTrunkPlacer extends TrunkPlacer {
         return alternate;
     }
 
-    private void createBranch(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, BlockPos pos, TreeConfiguration config, Direction.Axis axis, List<FoliagePlacer.FoliageAttachment> list, boolean positive) {
+    private void createBranch(WorldGenLevel level, BiConsumer<BlockPos, BlockState> trunkSetter, RandomSource random, BlockPos pos, TreeConfiguration config, Direction.Axis axis, List<FoliagePlacer.FoliageAttachment> list, boolean positive) {
         int y = 0;
         for (int c = 0; c < 2; c++) {
             if (c == 1) y++;
@@ -100,7 +100,7 @@ public class BalsamTrunkPlacer extends TrunkPlacer {
 
             placeLog(
                     level,
-                    blockSetter,
+                    trunkSetter,
                     random,
                     place,
                     config,

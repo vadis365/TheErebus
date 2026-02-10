@@ -1,0 +1,20 @@
+{
+  "type": "erebus:smoothie",
+  "category": "misc",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": "erebus:beetle_juice_still"
+    }
+  ],
+  "ingredients": [
+    "erebus:smoothie_glass",
+    "erebus:camo_powder",
+    "erebus:camo_powder",
+    "erebus:dark_fruit",
+    "erebus:swamp_berries"
+  ],
+  "result": {
+    "id": "erebus:nothing_in_the_middle"
+  }
+}

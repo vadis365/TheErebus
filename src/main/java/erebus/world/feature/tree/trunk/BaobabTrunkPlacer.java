@@ -8,7 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -16,7 +16,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import org.apache.commons.compress.utils.Lists;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -36,13 +36,12 @@ public class BaobabTrunkPlacer extends TrunkPlacer {
     }
 
     @Override
-    protected @NotNull TrunkPlacerType<?> type() {
+    protected @NonNull TrunkPlacerType<?> type() {
         return ModTrunkPlacers.BAOBAB_TRUNK_PLACER.get();
     }
 
     @Override
-    public @NotNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NotNull LevelSimulatedReader level, @NotNull BiConsumer<BlockPos, BlockState> blockSetter, @NotNull RandomSource random, int freeTreeHeight, BlockPos pos, @NotNull TreeConfiguration config) {
-        setDirtAt(level, blockSetter, random, pos.below(), config);
+    public @NonNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NonNull WorldGenLevel level, @NonNull BiConsumer<BlockPos, BlockState> trunkSetter, RandomSource random, int treeHeight, @NonNull BlockPos origin, @NonNull TreeConfiguration config) {
         List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
 
         int radius = random.nextInt(2) + 3;
@@ -55,28 +54,28 @@ public class BaobabTrunkPlacer extends TrunkPlacer {
                 for (int zOffset = -radius; zOffset <= radius; zOffset++) {
                     double sqrd = Mth.square(xOffset) + Mth.square(zOffset);
                     double roundedRoot = Math.round(Math.sqrt(sqrd));
-                    int topBuffer = pos.getY() + height - 2;
+                    int topBuffer = origin.getY() + height - 2;
 
-                    if (roundedRoot <= radius && pos.getY() + yOffset <= topBuffer) {
-                        placeLog(level, blockSetter, random, pos.mutable().move(xOffset, yOffset, zOffset), config);
+                    if (roundedRoot <= radius && origin.getY() + yOffset <= topBuffer) {
+                        placeLog(level, trunkSetter, random, origin.mutable().move(xOffset, yOffset, zOffset), config);
                     }
                 }
             }
 
             if (yOffset == height - 2) {
-                createBranch(level, blockSetter, config, list, random, pos.mutable().move(radius + 1, yOffset - random.nextInt(3), 0), Direction.Axis.X, true);
-                createBranch(level, blockSetter, config, list, random, pos.mutable().move(-radius - 1, yOffset - random.nextInt(3), 0), Direction.Axis.X, false);
-                createBranch(level, blockSetter, config, list, random, pos.mutable().move(0, yOffset - random.nextInt(3), radius + 1), Direction.Axis.Z, true);
-                createBranch(level, blockSetter, config, list, random, pos.mutable().move(0, yOffset - random.nextInt(3), -radius - 1), Direction.Axis.Z, false);
+                createBranch(level, trunkSetter, config, list, random, origin.mutable().move(radius + 1, yOffset - random.nextInt(3), 0), Direction.Axis.X, true);
+                createBranch(level, trunkSetter, config, list, random, origin.mutable().move(-radius - 1, yOffset - random.nextInt(3), 0), Direction.Axis.X, false);
+                createBranch(level, trunkSetter, config, list, random, origin.mutable().move(0, yOffset - random.nextInt(3), radius + 1), Direction.Axis.Z, true);
+                createBranch(level, trunkSetter, config, list, random, origin.mutable().move(0, yOffset - random.nextInt(3), -radius - 1), Direction.Axis.Z, false);
             }
         }
 
-        list.add(new FoliagePlacer.FoliageAttachment(pos.above(height), 0, false));
+        list.add(new FoliagePlacer.FoliageAttachment(origin.above(height), 0, false));
 
         return list;
     }
 
-    private void createBranch(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> setter, @NotNull TreeConfiguration config, List<FoliagePlacer.FoliageAttachment> list, RandomSource random, BlockPos pos, Direction.Axis axis, boolean positive) {
+    private void createBranch(WorldGenLevel level, BiConsumer<BlockPos, BlockState> setter, TreeConfiguration config, List<FoliagePlacer.FoliageAttachment> list, RandomSource random, BlockPos pos, Direction.Axis axis, boolean positive) {
         int branchLength = random.nextInt(2) + 2;
         int y = 0;
 

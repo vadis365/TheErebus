@@ -78,6 +78,7 @@ public class Erebus {
         ModPOIs.POI.register(bus);
     	ModCustomRecipes.RECIPE_TYPES.register(bus);
     	ModCustomRecipes.RECIPE_SERIALIZERS.register(bus);
+        ModCustomRecipes.RECIPE_BOOK_CATEGORIES.register(bus);
         ModParticles.PARTICLES.register(bus);
         ModDataComponents.DATA_COMPONENT_REGISTRY.register(bus);
         ModFeatures.CONFIGS.register(bus);
