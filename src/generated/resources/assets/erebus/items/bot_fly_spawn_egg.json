@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:item/botfly_spawn_egg"
+    "model": "erebus:item/bot_fly_spawn_egg"
   }
 }

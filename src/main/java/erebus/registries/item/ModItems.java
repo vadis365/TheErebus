@@ -274,7 +274,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> FLY_SPAWN_EGG = registerSpawnEgg("fly", ModEntities.FLY);
     //public static final DeferredItem<Item> MOSQUITO_SPAWN_EGG = registerSpawnEgg("mosquito", ModEntities.MOSQUITO);
     //public static final DeferredItem<Item> TARANTULA_SPAWN_EGG = registerSpawnEgg("tarantula", ModEntities.TARANTULA);
-    public static final DeferredItem<Item> BOT_FLY_SPAWN_EGG = registerSpawnEgg("botfly", ModEntities.BOT_FLY);
+    public static final DeferredItem<Item> BOT_FLY_SPAWN_EGG = registerSpawnEgg("bot_fly", ModEntities.BOT_FLY);
     //public static final DeferredItem<Item> SCORPION_SPAWN_EGG = registerSpawnEgg("scorpion", ModEntities.SCORPION);
     //public static final DeferredItem<Item> SOLIFUGE_SPAWN_EGG = registerSpawnEgg("solifuge", ModEntities.SOLIFUGE);
     public static final DeferredItem<Item> GRASSHOPPER_SPAWN_EGG = registerSpawnEgg("grasshopper", ModEntities.GRASSHOPPER);
@@ -292,7 +292,7 @@ public class ModItems extends ModItemHelpers {
     //public static final DeferredItem<Item> FIRE_ANT_SPAWN_EGG = registerSpawnEgg("fire_ant", ModEntities.FIRE_ANT);
     public static final DeferredItem<Item> WORKER_BEE_SPAWN_EGG = registerSpawnEgg("worker_bee", ModEntities.WORKER_BEE);
     public static final DeferredItem<Item> VELVET_WORM_SPAWN_EGG = registerSpawnEgg("velvet_worm", ModEntities.VELVET_WORM);
-    public static final DeferredItem<Item> DRAGON_FLY_SPAWN_EGG = registerSpawnEgg("dragonfly", ModEntities.DRAGON_FLY);
+    public static final DeferredItem<Item> DRAGON_FLY_SPAWN_EGG = registerSpawnEgg("dragon_fly", ModEntities.DRAGON_FLY);
     //public static final DeferredItem<Item> TITAN_BEETLE_SPAWN_EGG = registerSpawnEgg("titan_beetle", ModEntities.TITAN_BEETLE);
     public static final DeferredItem<Item> BOT_FLY_LARVA_SPAWN_EGG = registerSpawnEgg("bot_fly_larva", ModEntities.BOT_FLY_LARVA);
     public static final DeferredItem<Item> FUNGAL_WEEVIL_SPAWN_EGG = registerSpawnEgg("fungal_weevil", ModEntities.FUNGAL_WEEVIL);

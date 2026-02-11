@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "erebus:item/dragonfly_spawn_egg"
+    "layer0": "erebus:item/bot_fly_spawn_egg"
   }
 }

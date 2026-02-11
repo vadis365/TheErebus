@@ -721,6 +721,7 @@ public class ModLang extends ModLangProvider {
         add("erebus.gear", "Erebus Gear");
         add("erebus.items", "Erebus Items");
         add("erebus.plants", "Erebus Plants");
+        add("erebus.spawn_eggs", "Erebus Spawn Eggs");
     }
 
     private void addToolTipTranslations() {
