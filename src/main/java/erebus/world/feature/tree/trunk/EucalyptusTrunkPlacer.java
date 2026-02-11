@@ -87,7 +87,7 @@ public class EucalyptusTrunkPlacer extends TrunkPlacer {
                 placeLog(level, trunkSetter, random, origin.offset(xx, height - 1 + yy, zz), config);
             }
 
-            placeLog(level, trunkSetter, random, origin.offset(posX, posY, posZ), config);
+            placeLog(level, trunkSetter, random, origin.offset(disX, height - 1 + disY, disZ), config);
         }
 
         for (int c = 0; c < height + SPAN + 2; ++c) {

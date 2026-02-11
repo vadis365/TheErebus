@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:item/heart_berry_bush"
+    "model": "erebus:block/heart_berry_bush"
   }
 }

@@ -123,14 +123,14 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> SAPLING_MOSSBARK = registerSapling("sapling_mossbark", ModTreeGrowers.MOSSBARK);
 
     // MARK: Wood Leaves
-    public static final DeferredBlock<Block> LEAVES_ASPER = registerSimpleBlock("leaves_asper", ModBlockProperties.LEAVES.mapColor(MapColor.PLANT));
-    public static final DeferredBlock<Block> LEAVES_BAOBAB = registerSimpleBlock("leaves_baobab", ModBlockProperties.LEAVES.mapColor(MapColor.PLANT));
-    public static final DeferredBlock<Block> LEAVES_BALSAM = registerSimpleBlock("leaves_balsam", ModBlockProperties.LEAVES.mapColor(MapColor.PLANT));
-    public static final DeferredBlock<Block> LEAVES_CYPRESS = registerSimpleBlock("leaves_cypress", ModBlockProperties.LEAVES.mapColor(MapColor.PLANT));
-    public static final DeferredBlock<Block> LEAVES_EUCALYPTUS = registerSimpleBlock("leaves_eucalyptus", ModBlockProperties.LEAVES.mapColor(MapColor.PLANT));
-    public static final DeferredBlock<Block> LEAVES_MAHOGANY = registerSimpleBlock("leaves_mahogany", ModBlockProperties.LEAVES.mapColor(MapColor.PLANT));
-    public static final DeferredBlock<Block> LEAVES_MARSHWOOD = registerSimpleBlock("leaves_marshwood", ModBlockProperties.LEAVES.mapColor(MapColor.PLANT));
-    public static final DeferredBlock<Block> LEAVES_MOSSBARK = registerSimpleBlock("leaves_mossbark", ModBlockProperties.LEAVES.mapColor(MapColor.PLANT));
+    public static final DeferredBlock<Block> LEAVES_ASPER = registerBlock("leaves_asper", () -> new TintedParticleLeavesBlock(0.1F, ModBlockProperties.LEAVES.mapColor(MapColor.PLANT).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("leaves_asper")))));
+    public static final DeferredBlock<Block> LEAVES_BAOBAB = registerBlock("leaves_baobab", () -> new TintedParticleLeavesBlock(0.1F, ModBlockProperties.LEAVES.mapColor(MapColor.PLANT).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("leaves_baobab")))));
+    public static final DeferredBlock<Block> LEAVES_BALSAM = registerBlock("leaves_balsam", () -> new TintedParticleLeavesBlock(0.1F, ModBlockProperties.LEAVES.mapColor(MapColor.PLANT).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("leaves_balsam")))));
+    public static final DeferredBlock<Block> LEAVES_CYPRESS = registerBlock("leaves_cypress", () -> new TintedParticleLeavesBlock(0.1F, ModBlockProperties.LEAVES.mapColor(MapColor.PLANT).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("leaves_cypress")))));
+    public static final DeferredBlock<Block> LEAVES_EUCALYPTUS = registerBlock("leaves_eucalyptus", () -> new TintedParticleLeavesBlock(0.1F, ModBlockProperties.LEAVES.mapColor(MapColor.PLANT).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("leaves_eucalyptus")))));
+    public static final DeferredBlock<Block> LEAVES_MAHOGANY = registerBlock("leaves_mahogany", () -> new TintedParticleLeavesBlock(0.1F, ModBlockProperties.LEAVES.mapColor(MapColor.PLANT).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("leaves_mahogany")))));
+    public static final DeferredBlock<Block> LEAVES_MARSHWOOD = registerBlock("leaves_marshwood", () -> new TintedParticleLeavesBlock(0.1F, ModBlockProperties.LEAVES.mapColor(MapColor.PLANT).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("leaves_marshwood")))));
+    public static final DeferredBlock<Block> LEAVES_MOSSBARK = registerBlock("leaves_mossbark", () -> new TintedParticleLeavesBlock(0.1F, ModBlockProperties.LEAVES.mapColor(MapColor.PLANT).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("leaves_mossbark")))));
 
     // MARK: Wood Planks
     public static final DeferredBlock<Block> PLANKS_ASPER = registerSimpleBlock("planks_asper", ModBlockProperties.PLANKS.mapColor(MapColor.WOOD));

@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/leaves",
+  "render_type": "minecraft:cutout",
   "textures": {
     "all": "erebus:block/leaves_eucalyptus"
   }

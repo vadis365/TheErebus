@@ -1,12 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/leaves_mossbark",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -50000
-      }
-    ]
+    "model": "erebus:block/leaves_mossbark"
   }
 }

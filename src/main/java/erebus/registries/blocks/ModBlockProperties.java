@@ -430,7 +430,7 @@ public class ModBlockProperties {
     public static final Properties GHOST_SAND = Properties.of().mapColor(MapColor.STONE);
     public static final Properties SWAMP_VENT = Properties.ofFullCopy(Blocks.GRASS_BLOCK);
     public static final Properties GNEISS_VENT = Properties.of().mapColor(MapColor.STONE);
-    public static final Properties RED_GEM_BLOCK = Properties.of().mapColor(MapColor.STONE);
+    public static final Properties RED_GEM_BLOCK = Properties.of().mapColor(MapColor.COLOR_RED).lightLevel((_) -> 15).sound(SoundType.GLASS).strength(0.3F);
     public static final Properties RED_GEM_LAMP = Properties.of()
             .mapColor(MapColor.COLOR_RED)
             .lightLevel((state) -> state.getValue(BlockStateProperties.LIT) ? 15 : 0)

@@ -14,6 +14,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public class PreservedBlockEntity extends BlockEntity {
 
@@ -33,15 +34,18 @@ public class PreservedBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(ValueOutput output) {
+    protected void saveAdditional(@NonNull ValueOutput output) {
         super.saveAdditional(output);
-        trappedEntity.save(output);
+        if(trappedEntity != null)
+            trappedEntity.save(output);
     }
 
     @Override
-    protected void loadAdditional(ValueInput input) {
+    protected void loadAdditional(@NonNull ValueInput input) {
         super.loadAdditional(input);
-        trappedEntity.load(input);
+        if (trappedEntity != null) {
+            trappedEntity.load(input);
+        }
     }
 
     @Override
@@ -55,7 +59,7 @@ public class PreservedBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void onDataPacket(Connection net, ValueInput valueInput) {
+    public void onDataPacket(@NonNull Connection net, @NonNull ValueInput valueInput) {
         super.onDataPacket(net, valueInput);
     }
 }

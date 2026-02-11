@@ -29,8 +29,10 @@ public class PreservedBlockRenderer implements BlockEntityRenderer <PreservedBlo
     @Override
     public void extractRenderState(PreservedBlockEntity blockEntity, PreservedBlockEntityRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
         BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
-        state.displayEntity = entityRenderer.extractEntity(blockEntity.getTrappedEntity(), partialTicks);
-        state.displayEntity.lightCoords = state.lightCoords;
+        if(blockEntity.getTrappedEntity() != null) {
+            state.displayEntity = entityRenderer.extractEntity(blockEntity.getTrappedEntity(), partialTicks);
+            state.displayEntity.lightCoords = state.lightCoords;
+        }
     }
 
     @Override

@@ -80,7 +80,6 @@ public class ModItemModels {
         normalItem(ModItems.UMBERGOLEM_HEAD);
         normalItem(ModItems.UMBERGOLEM_CLAW);
         normalItem(ModItems.UMBERGOLEM_LEGS);
-        normalItem(ModItems.JADE_BERRIES);
         normalItem(ModItems.BOGMAW_ROOT);
         normalItem(ModItems.HYDROFUGE);
         normalItem(ModItems.WATER_REPELLENT);
@@ -111,7 +110,6 @@ public class ModItemModels {
         normalItem(ModItems.DARK_FRUIT);
         normalItem(ModItems.TITAN_CHOP_RAW);
         normalItem(ModItems.TITAN_CHOP_COOKED);
-        normalItem(ModItems.SWAMP_BERRIES);
         normalItem(ModItems.CABBAGE);
         normalItem(ModItems.TITAN_STEW_COOKED);
         normalItem(ModItems.PRICKLY_PEAR_RAW);
@@ -282,7 +280,6 @@ public class ModItemModels {
         normalItem(ModItems.SEED_RAINBOW);
 
         normalItem(ModItems.LIFE_BLOOD);
-        normalItem(ModItems.HEART_BERRIES);
         normalItem(ModItems.STAG_HEART_RAW);
         normalItem(ModItems.STAG_HEART_COOKED);
 

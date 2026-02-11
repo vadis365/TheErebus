@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/crop",
+  "parent": "minecraft:block/cross",
+  "render_type": "minecraft:cutout",
   "textures": {
-    "crop": "erebus:block/heart_berry_bush_stage0"
+    "cross": "erebus:block/heart_berry_bush_stage0"
   }
 }

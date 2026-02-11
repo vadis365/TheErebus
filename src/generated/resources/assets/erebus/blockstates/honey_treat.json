@@ -1,7 +1,7 @@
 {
   "variants": {
     "bites=0": {
-      "model": "erebus:block/honey_treat"
+      "model": "erebus:block/honey_treat_slice0"
     },
     "bites=1": {
       "model": "erebus:block/honey_treat_slice1"

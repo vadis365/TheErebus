@@ -35,6 +35,9 @@ public class ModBlockStates {
     private BlockModelGenerators blockModels;
     protected ItemModelGenerators itemModels;
 
+    private final TexturedModel.Provider CUTOUT_CROSS = TexturedModel.createDefault(TextureMapping::cross, ModelTemplates.CROSS.extend().renderType("cutout").build());
+    private final TexturedModel.Provider LEAVES = TexturedModel.createDefault(TextureMapping::cube, ModelTemplates.LEAVES.extend().renderType("cutout").build());
+
     protected void registerModels(BlockModelGenerators blockModels) {
         this.blockModels = blockModels;
 
@@ -97,40 +100,40 @@ public class ModBlockStates {
         blockModels.woodProvider(ModBlocks.LOG_SCORCHED.get()).logWithHorizontal(ModBlocks.LOG_SCORCHED.get());
 
         // MARK: Saplings
-        blockModels.createCrossBlock(ModBlocks.SAPLING_BAOBAB.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(ModBlocks.SAPLING_EUCALYPTUS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(ModBlocks.SAPLING_MAHOGANY.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(ModBlocks.SAPLING_MOSSBARK.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(ModBlocks.SAPLING_ASPER.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(ModBlocks.SAPLING_CYPRESS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(ModBlocks.SAPLING_BALSAM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(ModBlocks.SAPLING_MARSHWOOD.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(ModBlocks.SAPLING_BAMBOO.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        createBlock(ModBlocks.SAPLING_ASPER, CUTOUT_CROSS);
+        createBlock(ModBlocks.SAPLING_BALSAM, CUTOUT_CROSS);
+        createBlock(ModBlocks.SAPLING_BAMBOO, CUTOUT_CROSS);
+        createBlock(ModBlocks.SAPLING_BAOBAB, CUTOUT_CROSS);
+        createBlock(ModBlocks.SAPLING_CYPRESS, CUTOUT_CROSS);
+        createBlock(ModBlocks.SAPLING_EUCALYPTUS, CUTOUT_CROSS);
+        createBlock(ModBlocks.SAPLING_MAHOGANY, CUTOUT_CROSS);
+        createBlock(ModBlocks.SAPLING_MARSHWOOD, CUTOUT_CROSS);
+        createBlock(ModBlocks.SAPLING_MOSSBARK, CUTOUT_CROSS);
 
         // MARK: Leaves
-        blockModels.createTintedLeaves(ModBlocks.LEAVES_BAOBAB.get(), TexturedModel.LEAVES, -50000);
-        blockModels.createTintedLeaves(ModBlocks.LEAVES_EUCALYPTUS.get(), TexturedModel.LEAVES, -50000);
-        blockModels.createTintedLeaves(ModBlocks.LEAVES_MAHOGANY.get(), TexturedModel.LEAVES, -50000);
-        blockModels.createTintedLeaves(ModBlocks.LEAVES_MOSSBARK.get(), TexturedModel.LEAVES, -50000);
-        blockModels.createTintedLeaves(ModBlocks.LEAVES_ASPER.get(), TexturedModel.LEAVES, -50000);
-        blockModels.createTintedLeaves(ModBlocks.LEAVES_CYPRESS.get(), TexturedModel.LEAVES, -50000);
-        blockModels.createTintedLeaves(ModBlocks.LEAVES_BALSAM.get(), TexturedModel.LEAVES, -50000);
-        blockModels.createTintedLeaves(ModBlocks.LEAVES_MARSHWOOD.get(), TexturedModel.LEAVES, -50000);
+        createBlock(ModBlocks.LEAVES_ASPER, LEAVES);
+        createBlock(ModBlocks.LEAVES_BALSAM, LEAVES);
+        createBlock(ModBlocks.LEAVES_BAOBAB, LEAVES);
+        createBlock(ModBlocks.LEAVES_CYPRESS, LEAVES);
+        createBlock(ModBlocks.LEAVES_EUCALYPTUS, LEAVES);
+        createBlock(ModBlocks.LEAVES_MAHOGANY, LEAVES);
+        createBlock(ModBlocks.LEAVES_MARSHWOOD, LEAVES);
+        createBlock(ModBlocks.LEAVES_MOSSBARK, LEAVES);
 
         // MARK: Plants
         blockModels.createCropBlock(ModBlocks.CROP_TURNIP.get(), ModCropBlock.AGE, 0, 1, 2, 3);
         blockModels.createCropBlock(ModBlocks.CROP_CABBAGE.get(), ModCropBlock.AGE, 0, 1, 2, 3);
         blockModels.createCropBlock(ModBlocks.CROP_MANDRAKE.get(), ModCropBlock.AGE, 0, 1, 2, 3);
-        blockModels.createCropBlock(ModBlocks.JADE_BERRY_BUSH.get(), ModBerryBushBlock.AGE, 0, 1, 2, 3);
-        blockModels.createCropBlock(ModBlocks.HEART_BERRY_BUSH.get(), ModBerryBushBlock.AGE, 0, 1, 2, 3);
-        blockModels.createCropBlock(ModBlocks.SWAMP_BERRY_BUSH.get(), ModBerryBushBlock.AGE, 0, 1, 2, 3);
-        blockModels.createCrossBlock(ModBlocks.NETTLE.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(ModBlocks.NETTLE_FLOWERED.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(ModBlocks.SWAMP_PLANT.get(), BlockModelGenerators.PlantType.TINTED);
-        blockModels.createCrossBlock(ModBlocks.FIRE_BLOOM.get(), BlockModelGenerators.PlantType.TINTED);
-        blockModels.createCrossBlock(ModBlocks.FIDDLE_HEAD.get(), BlockModelGenerators.PlantType.TINTED);
+        createBush(ModBlocks.JADE_BERRY_BUSH, ModItems.JADE_BERRIES);
+        createBush(ModBlocks.HEART_BERRY_BUSH, ModItems.HEART_BERRIES);
+        createBush(ModBlocks.SWAMP_BERRY_BUSH, ModItems.SWAMP_BERRIES);
+        createBlock(ModBlocks.NETTLE, CUTOUT_CROSS);
+        createBlock(ModBlocks.NETTLE_FLOWERED, CUTOUT_CROSS);
+        createBlock(ModBlocks.SWAMP_PLANT, CUTOUT_CROSS);
+        createBlock(ModBlocks.FIRE_BLOOM, CUTOUT_CROSS);
+        createBlock(ModBlocks.FIDDLE_HEAD, CUTOUT_CROSS);
 
-        blockModels.createCrossBlock(ModBlocks.HANGING_WEB.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        createBlock(ModBlocks.HANGING_WEB, CUTOUT_CROSS);
         blockModels.createMushroomBlock(ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK.get());
         blockModels.createMushroomBlock(ModBlocks.DARK_CAPPED_MUSHROOM_STEM.get());
         blockModels.createMushroomBlock(ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK.get());
@@ -175,12 +178,12 @@ public class ModBlockStates {
         createBlock(ModBlocks.STIGMA_ORANGE);
         createBlock(ModBlocks.STIGMA_WHITE);
 
-        blockModels.createDoublePlant(ModBlocks.BULLRUSH.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createDoublePlant(ModBlocks.WEEPING_BLUEBELL.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createDoublePlant(ModBlocks.SUNDEW.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createDoublePlant(ModBlocks.TALL_BLOOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createDoublePlant(ModBlocks.TANGLED_STALK.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createDoublePlant(ModBlocks.HIGH_CAPPED_MUSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        createDoublePlant(ModBlocks.BULLRUSH);
+        createDoublePlant(ModBlocks.WEEPING_BLUEBELL);
+        createDoublePlant(ModBlocks.SUNDEW);
+        createDoublePlant(ModBlocks.TALL_BLOOM);
+        createDoublePlant(ModBlocks.TANGLED_STALK);
+        createDoublePlant(ModBlocks.HIGH_CAPPED_MUSHROOM);
 
         // MARK: Other
         createGaeanKeystone();
@@ -196,8 +199,8 @@ public class ModBlockStates {
         MultiVariant on = plainVariant(blockModels.createSuffixedVariant(ModBlocks.RED_GEM_LAMP.get(), "_on", ModelTemplates.CUBE_ALL, TextureMapping::cube));
         blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(ModBlocks.RED_GEM_LAMP.get()).with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.LIT, on, off)));
 
-        blockModels.createCrossBlock(ModBlocks.WITHER_WEB.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(ModBlocks.LAVA_WEB.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        createBlock(ModBlocks.WITHER_WEB, CUTOUT_CROSS);
+        createBlock(ModBlocks.LAVA_WEB, CUTOUT_CROSS);
         createBlock(ModBlocks.GNEISS);
         createBlock(ModBlocks.GNEISS_CARVED);
         createBlock(ModBlocks.GNEISS_RELIEF);
@@ -311,6 +314,10 @@ public class ModBlockStates {
         blockModels.createTrivialCube(block.get());
     }
 
+    private void createBlock(DeferredBlock<Block> block, TexturedModel.Provider model) {
+        blockModels.createTrivialBlock(block.get(), model);
+    }
+
     private void createCustomBlock(Supplier<? extends Block> block) {
         blockModels.createNonTemplateModelBlock(block.get());
     }
@@ -338,13 +345,7 @@ public class ModBlockStates {
                 .dispatch(ModBlocks.HONEY_TREAT.get())
                 .with(PropertyDispatch
                         .initial(HoneyTreatBlock.BITES)
-                        .select(0, plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.HONEY_TREAT.get())))
-                        .select(1, plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.HONEY_TREAT.get(), "_slice1")))
-                        .select(2, plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.HONEY_TREAT.get(), "_slice2")))
-                        .select(3, plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.HONEY_TREAT.get(), "_slice3")))
-                        .select(4, plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.HONEY_TREAT.get(), "_slice4")))
-                        .select(5, plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.HONEY_TREAT.get(), "_slice5")))
-                        .select(6, plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.HONEY_TREAT.get(), "_slice6")))
+                        .generate(bite -> plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.HONEY_TREAT.get(), "_slice" + bite)))
                 )
         );
     }
@@ -417,5 +418,27 @@ public class ModBlockStates {
         createChest(ModBlocks.CHEST_SCORCHED, ModBlocks.PLANKS_SCORCHED, ErebusChestSpecialRenderer.SCORCHED_TEXTURE);
         createChest(ModBlocks.CHEST_VARNISHED, ModBlocks.PLANKS_VARNISHED, ErebusChestSpecialRenderer.VARNISHED_TEXTURE);
         createChest(ModBlocks.CHEST_WHITE, ModBlocks.PLANKS_WHITE, ErebusChestSpecialRenderer.WHITE_TEXTURE);
+    }
+
+    public void createDoublePlant(Supplier<Block> block) {
+        MultiVariant topModel = plainVariant(blockModels.createSuffixedVariant(block.get(), "_top", ModelTemplates.CROSS.extend().renderType("cutout").build(), TextureMapping::cross));
+        MultiVariant bottomModel = plainVariant(blockModels.createSuffixedVariant(block.get(), "_bottom", ModelTemplates.CROSS.extend().renderType("cutout").build(), TextureMapping::cross));
+        blockModels.createDoubleBlock(block.get(), topModel, bottomModel);
+    }
+
+    public void createBush(Supplier<Block> bush, Supplier<Item> item) {
+        blockModels.registerSimpleFlatItemModel(item.get());
+        blockModels.blockStateOutput
+                .accept(
+                        MultiVariantGenerator.dispatch(bush.get())
+                                .with(
+                                        PropertyDispatch.initial(ModBerryBushBlock.AGE)
+                                                .generate(
+                                                        age -> plainVariant(
+                                                                blockModels.createSuffixedVariant(bush.get(), "_stage" + age, ModelTemplates.CROSS.extend().renderType("cutout").build(), TextureMapping::cross)
+                                                        )
+                                                )
+                                )
+                );
     }
 }
