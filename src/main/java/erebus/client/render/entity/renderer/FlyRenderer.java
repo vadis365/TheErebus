@@ -31,6 +31,8 @@ public class FlyRenderer extends MobRenderer<Fly, FlyRenderState, FlyModel> {
 	public void extractRenderState(Fly entity, FlyRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
 		state.isHanging = entity.getIsFlyHanging();
+		state.animationTicks = entity.animationTicks;
+		state.prevAnimationTicks = entity.prevAnimationTicks;
 	}
 
 	@Override

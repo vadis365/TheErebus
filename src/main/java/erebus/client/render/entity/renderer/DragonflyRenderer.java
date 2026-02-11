@@ -41,6 +41,9 @@ public class DragonflyRenderer extends MobRenderer<Dragonfly, DragonflyRenderSta
 	public void extractRenderState(Dragonfly entity, DragonflyRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
 		state.skin = entity.getSkin();
+		float smoothedTicks = entity.animationTicks + (entity.animationTicks - entity.prevAnimationTicks)  * partialTicks;
+		state.flapFront = (float) (Math.sin((smoothedTicks) * 1.8F) * 0.35F);
+		state.flapBack = (float) (Math.cos((smoothedTicks) * 1.8F) * 0.35F);
 	}
 
 	@Override

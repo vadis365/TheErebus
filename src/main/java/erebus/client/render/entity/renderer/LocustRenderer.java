@@ -33,6 +33,15 @@ public class LocustRenderer extends MobRenderer<Locust, LocustRenderState, Locus
 		state.jumpPose = entity.getJumpPose(partialTicks);
 		state.flyingPose = entity.getFlyingPose(partialTicks);
 		state.isFlying = entity.flying;
+
+		float smoothedTicks = entity.animationTicks + (entity.animationTicks - entity.prevAnimationTicks) * partialTicks;
+		state.flapSin = (float) (Math.sin((smoothedTicks) * 0.85F) * 0.5F);
+		state.flapCos = (float) (Math.cos((smoothedTicks) * 0.85F) * 0.5F);
+		state.antSin = Mth.sin((smoothedTicks) * 0.25F) * 0.125F;
+		state.antCos = Mth.cos((smoothedTicks) * 0.25F) * 0.125F;
+		state.jumpAngle = Mth.sin(entity.getJumpPose(partialTicks) * (float) Math.PI);
+		state.flightAngle = entity.getFlyingPose(partialTicks) * 0.001F;
+		state.isOnGround = entity.onGround();
 	}
 
 	@Override

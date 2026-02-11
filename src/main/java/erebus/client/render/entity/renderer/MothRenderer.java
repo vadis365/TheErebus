@@ -9,6 +9,7 @@ import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 import org.jspecify.annotations.NonNull;
 
 public class MothRenderer extends MobRenderer<Moth, MothRenderState, MothModel> {
@@ -29,6 +30,9 @@ public class MothRenderer extends MobRenderer<Moth, MothRenderState, MothModel> 
 	public void extractRenderState(Moth entity, MothRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
 		state.skin = entity.getSkin();
+
+		float smoothedTicks = entity.tickCount + (entity.tickCount - (entity.tickCount - 1)) * partialTicks;
+		state.flap = Mth.sin((smoothedTicks) * 1.2F) * 0.5F;
 	}
 
 	@Override

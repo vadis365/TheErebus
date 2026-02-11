@@ -48,6 +48,7 @@ public class MothModel extends EntityModel<MothRenderState> {
 
 	@Override
 	public void setupAnim(MothRenderState state) {
-
+		rightwing.zRot= state.flap;
+		leftwing.zRot = -state.flap;
 	}
 }

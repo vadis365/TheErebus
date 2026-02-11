@@ -96,9 +96,9 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormRender
 		super.extractRenderState(entity, state, partialTicks);
 		state.skin = entity.getSkin();
 
-		double ex = entity.xOld + (entity.getX() - entity.xOld) * (double)partialTicks;
-		double ey = entity.yOld + (entity.getY() - entity.yOld) * (double)partialTicks;
-		double ez = entity.zOld + (entity.getZ() - entity.zOld) * (double)partialTicks;
+		double ex = entity.xOld + (entity.getX() - entity.xOld) * partialTicks;
+		double ey = entity.yOld + (entity.getY() - entity.yOld) * partialTicks;
+		double ez = entity.zOld + (entity.getZ() - entity.zOld) * partialTicks;
 
 		float totalAngleDiff = 0.0f;
 		for(int i = 0; i < entity.parts.length; i++) {
@@ -134,9 +134,9 @@ public class VelvetWormRenderer extends MobRenderer<VelvetWorm, VelvetWormRender
 
 	private VelvetWormRenderState.PartState extractPartState(VelvetWormMultipart part, Entity prevPart, double ex, double ey, double ez, int frame, float avgWibbleStrength, float partialTicks, boolean isPartA) {
 		VelvetWormRenderState.PartState ps = new VelvetWormRenderState.PartState();
-		ps.x = part.xOld + (part.getX() - part.xOld) * (double)partialTicks - ex;
-		ps.y = part.yOld + (part.getY() - part.yOld) * (double)partialTicks - ey;
-		ps.z = part.zOld + (part.getZ() - part.zOld) * (double)partialTicks - ez;
+		ps.x = part.xOld + (part.getX() - part.xOld) * partialTicks - ex;
+		ps.y = part.yOld + (part.getY() - part.yOld) * partialTicks - ey;
+		ps.z = part.zOld + (part.getZ() - part.zOld) * partialTicks - ez;
 		ps.yaw = part.yRotO + (part.getYRot() - part.yRotO) * partialTicks;
 		double yawDiff = (prevPart.getYRot() - part.getYRot()) % 360.0F;
 		double yawInterpolant = 2 * yawDiff % 360.0F - yawDiff;

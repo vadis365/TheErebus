@@ -75,6 +75,23 @@ public class FlyModel extends EntityModel<FlyRenderState> {
 
 	@Override
 	public void setupAnim(FlyRenderState state) {
+		float smoothedTicks = state.animationTicks + (state.animationTicks - state.prevAnimationTicks) * state.partialTick;
+		float flap = (float) (Math.sin(smoothedTicks) * 0.95F);
 
+		if(!state.isHanging) {
+			wing_left.xRot = 0.5235988F + flap * 0.2F;
+			wing_right.xRot = 0.5235988F - flap * 0.2F;
+			wing_left.zRot = 0F + flap * 0.5F;
+			wing_right.zRot = 0F - flap * 0.5F;
+			wing_left.yRot = 0.5235988F;
+			wing_right.yRot = -0.5235988F;
+		} else {
+			wing_left.xRot = 0.25235988F;
+			wing_right.xRot = 0.25235988F;
+			wing_left.zRot = 0F;
+			wing_right.zRot = 0F;
+			wing_left.yRot = -0.1745329F;
+			wing_right.yRot = 0.1745329F;
+		}
 	}
 }

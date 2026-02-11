@@ -5,6 +5,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 
 public class WorkerBeeModel extends EntityModel<WorkerBeeRenderState> {
 	public ModelPart root;
@@ -179,5 +180,48 @@ public class WorkerBeeModel extends EntityModel<WorkerBeeRenderState> {
 	@Override
 	public void setupAnim(WorkerBeeRenderState state) {
 		Head1.yRot = state.yRot / (180F / (float) Math.PI);
+
+		if (state.isOnGround) {
+			float legMovement = Mth.cos(state.walkAnimationPos * 2.0F) * 0.7F * state.walkAnimationSpeed;
+			LeftBackLeg.xRot = -legMovement;
+			LeftMidLeg.xRot = legMovement;
+			LeftFrontLeg.xRot = -legMovement;
+			RightBackLeg.xRot = legMovement;
+			RightMIdLeg.xRot = -legMovement;
+			RightFrontLeg.xRot = legMovement;
+			ThxRW.xRot = 0F;
+			ThxLW.xRot = 0F;
+			ThxRW.yRot = 0F;
+			ThxLW.yRot = 0F;
+			ThxRW.zRot = -0.7853982F;
+			ThxLW.zRot = 0.7853982F;
+			Ab.xRot = -0.2F;
+			AbF.xRot = -0.2F;
+			AbSide.xRot = -0.2F;
+			AbTop.xRot = -0.2F;
+			AbBack.xRot = -0.2F;
+			Sting.xRot = -0.2F;
+		}
+
+		if (state.isFlying) {
+			LeftBackLeg.xRot = +0.25F;
+			LeftMidLeg.xRot = 0F;
+			LeftFrontLeg.xRot = -0.25F;
+			RightBackLeg.xRot = +0.25F;
+			RightMIdLeg.xRot = 0F;
+			RightFrontLeg.xRot = -0.25F;
+			ThxRW.xRot = state.flap;
+			ThxLW.xRot = state.flap;
+			ThxRW.yRot = -1.5F;
+			ThxLW.yRot = 1.5F;
+			ThxRW.zRot = 0F;
+			ThxLW.zRot = 0F;
+			Ab.xRot = -0.8F;
+			AbF.xRot = -0.8F;
+			AbSide.xRot = -0.8F;
+			AbTop.xRot = -0.8F;
+			AbBack.xRot = -0.8F;
+			Sting.xRot = -0.8F;
+		}
 	}
 }

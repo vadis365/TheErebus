@@ -159,8 +159,10 @@ public class BotFlyLarva extends Mob {
 		setParasiteCount(input.getByteOr("parasites", (byte) 0));
 		input.read("playerName", INFESTED_PLAYER_CODEC).orElse(List.of()).forEach(this::infectPlayer);
 		if (!level().isClientSide())
-			if (!getPlayer().isVehicle()) {
-				startRiding(getPlayer(), true, true);
+			if(getPlayer() != null) {
+				if (!getPlayer().isVehicle()) {
+					startRiding(getPlayer(), true, true);
+				}
 			}
 	}
 

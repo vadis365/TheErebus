@@ -37,53 +37,20 @@ public class BotFlyLarvaRenderer extends MobRenderer<BotFlyLarva, BotFlyLarvaRen
 			pose.pushPose();
 			pose.mulPose(Axis.YN.rotationDegrees(state.yRot));
 			pose.scale(-0.6F, -0.6F, 0.6F);
-			pose.translate(0F, 0F, 0.2F);
+			pose.translate(0F, -1.6F, -0.2F);
 
 			if (state.parasiteCount > 0)
-				submit.submitModel(
-						model,
-						state,
-						pose,
-						renderType,
-						state.lightCoords,
-						OverlayTexture.NO_OVERLAY,
-						colour,
-						null,
-						state.outlineColor,
-						null
-				);
+				submit.submitModel(model, state, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, colour, null, state.outlineColor, null);
 			if (state.parasiteCount > 1) {
 				pose.pushPose();
 				pose.translate(0.5F, -0.4F, 0.0F);
-				submit.submitModel(
-						model,
-						state,
-						pose,
-						renderType,
-						state.lightCoords,
-						OverlayTexture.NO_OVERLAY,
-						colour,
-						null,
-						state.outlineColor,
-						null
-				);
+				submit.submitModel(model, state, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, colour, null, state.outlineColor, null);
 				pose.popPose();
 			}
 			if (state.parasiteCount > 2) {
 				pose.pushPose();
 				pose.translate(-0.5F, -0.4F, 0.0F);
-				submit.submitModel(
-						model,
-						state,
-						pose,
-						renderType,
-						state.lightCoords,
-						OverlayTexture.NO_OVERLAY,
-						colour,
-						null,
-						state.outlineColor,
-						null
-				);
+				submit.submitModel(model, state, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, colour, null, state.outlineColor, null);
 				pose.popPose();
 			}
 			pose.popPose();

@@ -58,19 +58,7 @@ public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBl
 		pose.pushPose();
 		pose.scale(-1.0F, -1.0F, 1.0F);
 		pose.translate(0.0F, -1.501F, 0.0F);
-		node.submitModelPart(
-				model.root,
-				pose,
-				rt,
-				state.lightCoords,
-				OverlayTexture.NO_OVERLAY,
-				state.sprite,
-				false,
-				false,
-				-1,
-				null,
-				state.outlineColor
-		);
+		node.submitModelPart(model.root, pose, rt, state.lightCoords, OverlayTexture.NO_OVERLAY, state.sprite, false, false, -1, null, state.outlineColor);
 		pose.popPose();
 	}
 

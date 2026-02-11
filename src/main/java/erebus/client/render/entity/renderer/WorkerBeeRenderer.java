@@ -9,6 +9,7 @@ import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 import org.jspecify.annotations.NonNull;
 
 public class WorkerBeeRenderer extends MobRenderer<WorkerBee, WorkerBeeRenderState, WorkerBeeModel> {
@@ -26,6 +27,10 @@ public class WorkerBeeRenderer extends MobRenderer<WorkerBee, WorkerBeeRenderSta
 	@Override
 	public void extractRenderState(WorkerBee entity, WorkerBeeRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
+		float smoothedTicks = entity.tickCount + (entity.tickCount - (entity.tickCount - 1)) * partialTicks;
+		state.flap = Mth.sin((smoothedTicks) * 1.2F) * 0.5F;
+		state.isOnGround = entity.onGround();
+		state.isFlying = entity.isFlying();
 	}
 
 	@Override

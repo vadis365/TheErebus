@@ -163,5 +163,9 @@ public class DragonflyModel extends EntityModel<DragonflyRenderState> {
 
 	@Override
 	public void setupAnim(DragonflyRenderState state) {
+		RFWing.zRot = state.flapFront;
+		LFWing.zRot = -state.flapFront;
+		RBWing.zRot = state.flapBack;
+		LBWing.zRot = -state.flapBack;
 	}
 }

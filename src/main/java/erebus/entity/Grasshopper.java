@@ -3,6 +3,7 @@ package erebus.entity;
 import erebus.entity.ai.GrasshopperEatPlantsGoal;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -148,8 +149,9 @@ public class Grasshopper extends PathfinderMob {
 		jumpTicks = 0;
 	}
 
-    /*@Override
-    public void customServerAiStep() {
+	@Override
+	protected void customServerAiStep(@NonNull ServerLevel level) {
+		super.customServerAiStep(level);
 		if (currentMoveTypeDuration > 0) {
 			--currentMoveTypeDuration;
 		}
@@ -173,9 +175,6 @@ public class Grasshopper extends PathfinderMob {
 				enableJumpControl();
 		}
 		wasOnGround = onGround();
-	}*/
-
-	public void spawnRunningParticles() {
 	}
 
 	private void calculateRotationYaw(double x, double z) {

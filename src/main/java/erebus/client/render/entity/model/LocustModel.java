@@ -147,7 +147,7 @@ public class LocustModel extends EntityModel<LocustRenderState> {
 		PartDefinition RBL5 = RBL4.addOrReplaceChild("RBL5", CubeListBuilder.create().texOffs(52, 5).addBox(-0.5F, -1.0326F, 0.3521F, 1.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 10.5263F, -0.2321F, -0.6981F, 0.0F, 0.0F));
 
 		PartDefinition RBL6 = RBL5.addOrReplaceChild("RBL6", CubeListBuilder.create().texOffs(41, 18).addBox(-0.5F, -0.7821F, 0.131F, 1.0F, 1.0F, 4.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(0.0F, -0.0326F, 3.3521F, 0.1745F, 0.0F, 0.0F));
-		
+
 		PartDefinition Body = root.addOrReplaceChild("Body", CubeListBuilder.create(), PartPose.offset(0.0F, 16.0F, -9.0F));
 
 		Body.addOrReplaceChild("Thorax1", CubeListBuilder.create().texOffs(18, 28).addBox(-3.0F, -3.5F, 0.0F, 6.0F, 6.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.0873F, 0.0F, 0.0F));
@@ -172,5 +172,58 @@ public class LocustModel extends EntityModel<LocustRenderState> {
 	@Override
 	public void setupAnim(LocustRenderState state) {
 		HeadMain.yRot = state.yRot / (180F / (float) Math.PI);
+
+		if (!state.isFlying && state.flyingTicks <= 0) {
+			state.flapSin = 0;
+			state.flapCos = 0;
+			LeftFrontLeg.xRot = -state.jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			LeftMidLeg.xRot = state.jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			RightFrontLeg.xRot = -state.jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			RightMidLeg.xRot = state.jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			LeftBackLeg.xRot = -state.jumpAngle * 75.0F * (float) (Math.PI / 180.0);
+			RightBackLeg.xRot = -state.jumpAngle * 75.0F * (float) (Math.PI / 180.0);
+			RBL4.xRot = 0.5236F - RightBackLeg.xRot + state.jumpAngle * 75.0F * (float) (Math.PI / 180.0);
+			RBL5.xRot = -0.6981F + RightBackLeg.xRot + state.jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			RBL6.xRot = 0.1745F + RightBackLeg.xRot + state.jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			LBL4.xRot = 0.5236F - LeftBackLeg.xRot + state.jumpAngle * 75.0F * (float) (Math.PI / 180.0);
+			LBL5.xRot = -0.6981F + LeftBackLeg.xRot + state.jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			LBL6.xRot = 0.1745F + LeftBackLeg.xRot + state.jumpAngle * 50.0F * (float) (Math.PI / 180.0);
+			HeadMain.xRot = -0.1745F + state.jumpAngle * 20.0F * (float) (Math.PI / 180.0);
+			RFWing.yRot = -state.jumpAngle * 95F * (float) (Math.PI / 180.0);
+			RBWing.yRot = -state.flightAngle * 50F * (float) (Math.PI / 180.0);
+			LFWing.yRot = state.jumpAngle * 95F * (float) (Math.PI / 180.0);
+			LBWing.yRot = state.flightAngle * 50F * (float) (Math.PI / 180.0);
+		} else {
+			LeftBackLeg.xRot = -state.flightAngle * 75F;
+			RightBackLeg.xRot = -state.flightAngle * 75F;
+			RBL4.xRot = 0.5236F - RightBackLeg.xRot + state.flightAngle * 75F;
+			RBL5.xRot = -0.6981F + RightBackLeg.xRot + state.flightAngle * 50F;
+			RBL6.xRot = 0.1745F + RightBackLeg.xRot + state.flightAngle * 50F;
+			LBL4.xRot = 0.5236F - LeftBackLeg.xRot + state.flightAngle * 75F;
+			LBL5.xRot = -0.6981F + LeftBackLeg.xRot + state.flightAngle * 50F;
+			LBL6.xRot = 0.1745F + LeftBackLeg.xRot + state.flightAngle * 50F;
+			HeadMain.xRot = -0.1745F + state.flightAngle * 20F;
+			RFWing.yRot = -state.flightAngle * 60F;
+			RBWing.yRot = -state.flightAngle * 50F;
+			LFWing.yRot = state.flightAngle * 65F;
+			LBWing.yRot = state.flightAngle * 50F;
+		}
+
+		if (state.isOnGround) {
+			LAnt.zRot = 0F + state.antSin;
+			LAnt.yRot = 0F + state.antCos;
+			RAnt.zRot = 0F - state.antCos;
+			RAnt.yRot = 0F - state.antSin;
+		} else {
+			LAnt.zRot = 0F;
+			LAnt.yRot = 0F;
+			RAnt.zRot = 0F;
+			RAnt.yRot = 0F;
+		}
+
+		RFWing.xRot = state.flapSin;
+		RBWing.xRot = state.flapCos;
+		LFWing.xRot = state.flapSin;
+		LBWing.xRot = state.flapCos;
 	}
 }

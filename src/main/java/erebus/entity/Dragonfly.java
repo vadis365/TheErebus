@@ -70,7 +70,7 @@ public class Dragonfly extends Monster {
 		goalSelector.addGoal(1, new MeleeAttackGoalMoveToHead(this, 1D, true));
 		goalSelector.addGoal(4, new AIFlyingWander(this, 1D, 0.01F));
 		targetSelector.addGoal(0, new HurtByTargetGoal(this).setAlertOthers(Dragonfly.class));
-		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
+		targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, false));
 	}
 
 	@Override
@@ -206,7 +206,7 @@ public class Dragonfly extends Monster {
 
 		if (level().isClientSide())
 			if (getSkin() == 0) {
-				spawnParticles(level(), getX(), getY(), getZ(), random);
+				spawnParticles(getX(), getY(), getZ(), random);
 				if (!hasCustomName())
 					setCustomName(Component.literal("Ender Dragonfly")); //TODO - Lang this up at some point.
 			}
@@ -219,11 +219,11 @@ public class Dragonfly extends Monster {
         return !this.getPassengers().isEmpty();
     }
 
-	public void spawnParticles(Level level, double x, double y, double z, RandomSource rand) {
+	public void spawnParticles(double x, double y, double z, RandomSource rand) {
 		for (int count = 0; count < 20; ++count) {
-			double velX = 0.0D;
-			double velY = 0.0D;
-			double velZ = 0.0D;
+			double velX;
+			double velY;
+			double velZ;
 			int motionX = rand.nextInt(2) * 2 - 1;
 			int motionZ = rand.nextInt(2) * 2 - 1;
 			velY = (rand.nextFloat() - 0.5D) * 0.125D;
@@ -300,21 +300,10 @@ public class Dragonfly extends Monster {
 	public int getMaxSpawnClusterSize() {
 		return 6;
 	}
-/* TODO
-	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.DRAGONFLY_WING.ordinal()), 0.0F);
-		if (random.nextInt(5) == 0)
-			entityDropItem(new ItemStack(ModItems.MATERIALS, random.nextInt(1) + 1 + looting, EnumErebusMaterialsType.COMPOUND_EYES.ordinal()), 0.0F);
-		if (getSkin() == 0)
-			entityDropItem(new ItemStack(Items.ENDER_PEARL, random.nextInt(1) + 1 + looting), 0.0F);
-	}
-*/
 
-	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
-		setSkin(level.getRandom().nextInt(1)); //51
+		setSkin(level.getRandom().nextInt(51));
 		return spawnGroupData;
 	}
 
@@ -338,7 +327,7 @@ public class Dragonfly extends Monster {
 		setSkin(input.getIntOr("skin", 0));
 	}
 
-	class AIFlyingWander extends WaterAvoidingRandomStrollGoal {
+	static class AIFlyingWander extends WaterAvoidingRandomStrollGoal {
 		public AIFlyingWander(Dragonfly creatureIn, double speedIn, float chance) {
 			super(creatureIn, speedIn, chance);
 		}
