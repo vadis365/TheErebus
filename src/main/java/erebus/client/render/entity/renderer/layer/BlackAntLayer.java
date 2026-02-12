@@ -1,48 +1,57 @@
 package erebus.client.render.entity.renderer.layer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import erebus.Erebus;
 import erebus.client.render.entity.model.BlackAntModel;
+import erebus.client.render.entity.model.layer.BlackAntCollectorModel;
+import erebus.client.render.entity.model.layer.BlackAntFertilizerModel;
+import erebus.client.render.entity.model.layer.BlackAntHarvesterModel;
+import erebus.client.render.entity.model.layer.BlackAntPlanterModel;
 import erebus.client.render.entity.renderer.state.BlackAntRenderState;
-import erebus.registries.entity.ModEntityRendering;
-import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
 public class BlackAntLayer extends RenderLayer<BlackAntRenderState, BlackAntModel> {
 
-    private final BlackAntModel blackAntModel;
+	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/black_ant_kit.png");
 
-    public BlackAntLayer(RenderLayerParent<BlackAntRenderState, BlackAntModel> entity, EntityModelSet modelSet) {
-    	super(entity);
-    	this.blackAntModel = new BlackAntModel(modelSet.bakeLayer(ModEntityRendering.BLACK_ANT));
-    }
+	private final BlackAntCollectorModel collectorModel;
+	private final BlackAntFertilizerModel fertilizerModel;
+	private final BlackAntHarvesterModel harvesterModel;
+	private final BlackAntPlanterModel planterModel;
+
+	public BlackAntLayer(RenderLayerParent<BlackAntRenderState, BlackAntModel> parent, BlackAntCollectorModel collectorModel, BlackAntFertilizerModel fertilizerModel, BlackAntHarvesterModel harvesterModel, BlackAntPlanterModel planterModel) {
+		super(parent);
+		this.collectorModel = collectorModel;
+		this.fertilizerModel = fertilizerModel;
+		this.harvesterModel = harvesterModel;
+		this.planterModel = planterModel;
+	}
 
 	@Override
 	public void submit(PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, BlackAntRenderState state, float xRot, float yRot) {
 		pose.pushPose();
-		//submit.submitModel(blackAntModel, state, pose, RenderTypes::entitySolid, lightCoords, OverlayTexture.NO_OVERLAY, -1, null, state.outlineColor, null);
+
+		if(state.isPlanter) {
+			submit.submitModel(planterModel, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+		}
+
+		if(state.isHarvester) {
+			submit.submitModel(harvesterModel, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+		}
+
+		if(state.isCollector) {
+			submit.submitModel(collectorModel, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+		}
+
+		if(state.isFertilizer) {
+			submit.submitModel(fertilizerModel, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+		}
+
 		pose.popPose();
 	}
-
-	/*@Override
-   	public void render(PoseStack matrix, MultiBufferSource buffer, int packedLight, BlackAnt blackAnt, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-    	blackAntModel.prepareMobModel(blackAnt, limbSwing, limbSwingAmount, partialTicks);
-		blackAntModel.setupAnim(blackAnt, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		matrix.pushPose();
-		if (blackAnt.getAntRole() == blackAnt.PLANTER)
-			blackAntModel.renderPlanter(matrix, buffer.getBuffer(RenderType.entityCutout(getTextureLocation(blackAnt))), packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
-
-		if (blackAnt.getAntRole() == blackAnt.HARVESTER)
-			blackAntModel.renderHarvester(matrix, buffer.getBuffer(RenderType.entityCutout(getTextureLocation(blackAnt))), packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
-
-		if (blackAnt.getAntRole() == blackAnt.COLLECTOR)
-			blackAntModel.renderCollector(matrix, buffer.getBuffer(RenderType.entityCutout(getTextureLocation(blackAnt))), packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
-
-		if (blackAnt.getAntRole() == blackAnt.FERTILIZER)
-			blackAntModel.renderFertilizer(matrix, buffer.getBuffer(RenderType.entityCutout(getTextureLocation(blackAnt))), packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
-
-	    matrix.popPose();
-	}*/
 }

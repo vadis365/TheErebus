@@ -2,7 +2,7 @@ package erebus.registries.entity;
 
 import erebus.Erebus;
 import erebus.client.render.entity.model.*;
-import erebus.client.render.entity.model.layer.WaspWingsModel;
+import erebus.client.render.entity.model.layer.*;
 import erebus.client.render.entity.renderer.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -34,6 +34,10 @@ public class ModEntityRendering {
 	public static ModelLayerLocation WORKER_BEE = register("worker_bee");
 	public static ModelLayerLocation BOMBARDIER_BEETLE = register("bombardier_beetle");
 	public static ModelLayerLocation BLACK_ANT = register("black_ant");
+	public static ModelLayerLocation BLACK_ANT_COLLECTOR = register("black_ant_collector");
+	public static ModelLayerLocation BLACK_ANT_FERTILIZER = register("black_ant_fertilizer");
+	public static ModelLayerLocation BLACK_ANT_HARVESTER = register("black_ant_harvester");
+	public static ModelLayerLocation BLACK_ANT_PLANTER = register("black_ant_planter");
 	public static ModelLayerLocation PUNCHROOM = register("punchroom");
 	public static ModelLayerLocation CROP_WEEVIL = register("crop_weevil");
 	public static ModelLayerLocation FUNGAL_WEEVIL = register("fungal_weevil");
@@ -75,6 +79,10 @@ public class ModEntityRendering {
     	event.registerLayerDefinition(WORKER_BEE, WorkerBeeModel::createBodyLayer);
     	event.registerLayerDefinition(BOMBARDIER_BEETLE, BombardierBeetleModel::createBodyLayer);
     	event.registerLayerDefinition(BLACK_ANT, BlackAntModel::createBodyLayer);
+		event.registerLayerDefinition(BLACK_ANT_COLLECTOR, BlackAntCollectorModel::createBodyLayer);
+		event.registerLayerDefinition(BLACK_ANT_FERTILIZER, BlackAntFertilizerModel::createBodyLayer);
+		event.registerLayerDefinition(BLACK_ANT_HARVESTER, BlackAntHarvesterModel::createBodyLayer);
+		event.registerLayerDefinition(BLACK_ANT_PLANTER, BlackAntPlanterModel::createBodyLayer);
     	event.registerLayerDefinition(PUNCHROOM, PunchroomModel::createBodyLayer);
     	event.registerLayerDefinition(CROP_WEEVIL, WeevilModel::createBodyLayer);
     	event.registerLayerDefinition(FUNGAL_WEEVIL, WeevilModel::createBodyLayer);

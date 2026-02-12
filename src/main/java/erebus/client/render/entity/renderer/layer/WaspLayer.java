@@ -37,17 +37,4 @@ public class WaspLayer extends RenderLayer<WaspRenderState, WaspModel> {
 				null
 		);
 	}
-
-    /*@Override
-   	public void render(PoseStack matrix, MultiBufferSource buffer, int packedLight, Wasp entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-    	waspModel.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-		waspModel.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		matrix.pushPose();
-		RenderSystem.enableBlend();
-		RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-		waspModel.renderWings(matrix, buffer.getBuffer(RenderType.entityTranslucentCull(getTextureLocation(entity))), packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
-		RenderSystem.disableBlend();
-	    RenderSystem.defaultBlendFunc();
-	    matrix.popPose();
-	}*/
 }

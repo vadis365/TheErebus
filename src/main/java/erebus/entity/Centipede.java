@@ -247,25 +247,7 @@ public class Centipede extends Monster {
 	protected float getSoundVolume() {
 		return 0.4F;
 	}
-/* TODO 
-	@Override
-	protected void dropFewItems(boolean recentlyHit, int looting) {
-		int chance = rand.nextInt(4) + rand.nextInt(1 + looting);
-		int amount;
-		for (amount = 0; amount < chance; ++amount) {
-			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.BIO_VELOCITY.ordinal()), 0.0F);
-			entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.POISON_GLAND.ordinal()), 0.0F);
-		}
-	}
 
-	@Override
-	public void onDeath(DamageSource cause) {
-		super.onDeath(cause);
-		if (this.world.getGameRules().getBoolean("doMobLoot") && rand.nextInt(50) == 0)
-			if (cause.getTrueSource() instanceof EntityLivingBase)
-				entityDropItem(new ItemStack(ModItems.MATERIALS, 1, EnumErebusMaterialsType.SUPERNATURAL_VELOCITY.ordinal()), 0.0F);
-	}
-*/
 	@Override
 	public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity entity) {
 		if (hasLineOfSight(entity)) {
@@ -308,13 +290,13 @@ public class Centipede extends Monster {
 	}
 
 	@Override
-	  public void addAdditionalSaveData(ValueOutput output) {
+	  public void addAdditionalSaveData(@NonNull ValueOutput output) {
 		super.addAdditionalSaveData(output);
 		output.putInt("skin", getSkin());
 	}
 
 	@Override
-	public void readAdditionalSaveData(ValueInput input) {
+	public void readAdditionalSaveData(@NonNull ValueInput input) {
 		super.readAdditionalSaveData(input);
 		setSkin(input.getIntOr("skin", 0));
 	}
