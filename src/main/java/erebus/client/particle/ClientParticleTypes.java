@@ -10,10 +10,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 public class ClientParticleTypes {
-	public static void spawnParticles(byte particleType, double xPos, double yPos, double zPos, double vecX, double vecY, double vecZ) {
-        Level level = Minecraft.getInstance().level;
+	public static void spawnParticles(ParticleType particleType, double xPos, double yPos, double zPos, double vecX, double vecY, double vecZ) {
+		Level level = Minecraft.getInstance().level;
 		if (level != null) {
-			switch (ParticleType.values[particleType]) {
+			switch (particleType) {
 				case BEETLE_LARVA_SQUISH:
 					for (int count = 0; count <= 200; ++count)
 						level.addParticle(ParticleTypes.ITEM_SLIME, xPos + (level.getRandom().nextDouble() - 0.5D), yPos + level.getRandom().nextDouble(), zPos + (level.getRandom().nextDouble() - 0.5D), 0, 0, 0);
@@ -44,13 +44,12 @@ public class ClientParticleTypes {
 					float f2 = (level.getRandom().nextFloat() - 0.5F) * 8.0F;
 					level.addParticle(ParticleTypes.EXPLOSION, xPos + f, yPos + 2.0D + f1, zPos + f2, 0.0D, 0.0D, 0.0D);
 					break;
-	/*	case ANTLION_RUMBLE:
-			for (int a = 0; a < 360; a += 4) {
-				double ang = a * Math.PI / 180D;
-				level.addParticle(new BlockParticleOption (ParticleTypes.BLOCK, Blocks.SAND.defaultBlockState()), xPos + -Math.sin((float) ang) * 3.5D, yPos + 0.125D, zPos + Math.cos((float) ang) * 3.5D, -Math.sin((float) ang) * 0.8, 0.3D, Math.cos((float) ang) * 0.8);
-			}
-			break;
-	*/
+				case ANTLION_RUMBLE:
+					for (int a = 0; a < 360; a += 4) {
+						double ang = a * Math.PI / 180D;
+						level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.SAND.defaultBlockState()), xPos + -Math.sin((float) ang) * 3.5D, yPos + 0.125D, zPos + Math.cos((float) ang) * 3.5D, -Math.sin((float) ang) * 0.8, 0.3D, Math.cos((float) ang) * 0.8);
+					}
+					break;
 				case HAMMER_BLAM:
 					for (int a = 0; a < 360; a += 4) {
 						double ang = a * Math.PI / 180D;
@@ -115,6 +114,7 @@ public class ClientParticleTypes {
 		TARANTULA_BLAM,
 		BOSS_DEATH,
 		ANTLION_BLAM,
+		ANTLION_RUMBLE,
 		HAMMER_BLAM,
 		GAS_VENT_SWAMP,
 		GAS_VENT_VOLCANIC,

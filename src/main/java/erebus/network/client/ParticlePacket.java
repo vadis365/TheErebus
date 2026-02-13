@@ -26,7 +26,7 @@ public record ParticlePacket(Byte particleType, double xPos, double yPos, double
 
 	public static void handle(ParticlePacket message, final IPayloadContext ctx) {
 		ctx.enqueueWork(() -> {
-			ClientParticleTypes.spawnParticles(message.particleType, message.xPos, message.yPos, message.zPos, 0D, 0D, 0D);
+			//ClientParticleTypes.spawnParticles(message.particleType, message.xPos, message.yPos, message.zPos, 0D, 0D, 0D);
 		});
 	}
 
