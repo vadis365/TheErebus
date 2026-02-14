@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "erebus:item/fire_ant_spawn_egg"
+  }
+}

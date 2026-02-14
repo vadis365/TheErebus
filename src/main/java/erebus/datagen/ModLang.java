@@ -678,38 +678,65 @@ public class ModLang extends ModLangProvider {
     }
 
     private void addEntityTranslations() {
-        addEntity(ModEntities.WASP, "Wasp");
-        addEntityNoEgg(ModEntities.ANIMATED_BLOCK, "Animated Block");
-        addEntity(ModEntities.SCYTODES, "Scytodes");
-        addEntity(ModEntities.BLACK_WIDOW, "Black Widow");
-        addEntity(ModEntities.MONEY_SPIDER, "Money Spider");
-        addEntity(ModEntities.LAVA_WEB_SPIDER, "Lava Web Spider");
-        addEntity(ModEntities.MOTH, "Moth");
-        addEntity(ModEntities.VELVET_WORM, "Velvet Worm");
+        addEntity(ModEntities.ANIMATED_BLOCK, "Animated Block");
         addEntity(ModEntities.ANTLION, "Antlion");
-        addEntity(ModEntities.FLY, "Fly");
+        addEntity(ModEntities.ANTLION_BOSS, "Antlion Overlord");
+        addEntity(ModEntities.ANTLION_MINI_BOSS, "Antlion Warden");
+        addEntityNoEgg(ModEntities.BABY_SOLIFUGE, "Baby Solifuge");
+        addEntity(ModEntities.BABY_TARANTULA, "Baby Tarantula");
+        addEntity(ModEntities.BED_BUG, "Bed Bug");
+        addEntity(ModEntities.BEETLE, "Beetle");
+        addEntity(ModEntities.BEETLE_LARVA, "Beetle Larva");
+        addEntity(ModEntities.BLACK_ANT, "Black Ant");
+        addEntity(ModEntities.BLACK_WIDOW, "Black Widow");
+        addEntity(ModEntities.BOG_MAW, "Bog Maw");
+        addEntity(ModEntities.BOMBARDIER_BEETLE, "Bombardier Beetle");
+        addEntity(ModEntities.BOMBARDIER_BEETLE_LARVA, "Bombardier Beetle Larva");
         addEntity(ModEntities.BOT_FLY, "Botfly");
         addEntity(ModEntities.BOT_FLY_LARVA, "Botfly Larva");
-        addEntity(ModEntities.DRAGON_FLY, "Dragonfly");
         addEntity(ModEntities.CENTIPEDE, "Centipede");
-        addEntity(ModEntities.GRASSHOPPER, "Grasshopper");
-        addEntity(ModEntities.LOCUST, "Locust");
-        addEntity(ModEntities.BEETLE_LARVA, "Beetle Larva");
-        addEntity(ModEntities.BOMBARDIER_BEETLE_LARVA, "Bombardier Beetle Larva");
-        addEntity(ModEntities.BEETLE, "Beetle");
-        addEntity(ModEntities.WORKER_BEE, "Worker Bee");
-        addEntity(ModEntities.BOMBARDIER_BEETLE, "Bombardier Beetle");
-        addEntity(ModEntities.BLACK_ANT, "Black Ant");
-        addEntity(ModEntities.PUNCHROOM, "Punchroom");
+        addEntity(ModEntities.CHAMELEON_TICK, "Chameleon Tick");
+        addEntity(ModEntities.CICADA, "Cicada");
         addEntity(ModEntities.CROP_WEEVIL, "Crop Weevil");
+        addEntity(ModEntities.CRUSHROOM, "Crushroom");
+        addEntity(ModEntities.DRAGON_FLY, "Dragonfly");
+        addEntity(ModEntities.FIRE_ANT, "Fire Ant");
+        addEntity(ModEntities.FIRE_ANT_SOLDIER, "Fire Ant Soldier");
+        addEntity(ModEntities.FLY, "Fly");
         addEntity(ModEntities.FUNGAL_WEEVIL, "Fungal Weevil");
-        addEntity(ModEntities.BED_BUG, "Bed Bug");
+        addEntity(ModEntities.GLOW_WORM, "Glow Worm");
+        addEntity(ModEntities.GRASSHOPPER, "Grasshopper");
         addEntity(ModEntities.HONEY_POT_ANT, "Honey Pot Ant");
+        addEntity(ModEntities.JUMPING_SPIDER, "Jumping Spider");
+        addEntity(ModEntities.LAVA_WEB_SPIDER, "Lava Web Spider");
+        addEntity(ModEntities.LOCUST, "Locust");
+        addEntity(ModEntities.MAGMA_CRAWLER, "Magma Crawler");
+        addEntity(ModEntities.MIDGE_SWARM, "Midge Swarm");
+        addEntity(ModEntities.MONEY_SPIDER, "Money Spider");
+        addEntity(ModEntities.MOSQUITO, "Mosquito");
+        addEntity(ModEntities.MOTH, "Moth");
+        addEntity(ModEntities.POND_SKATER, "Pond Skater");
+        addEntity(ModEntities.PRAYING_MANTIS, "Praying Mantis");
+        addEntity(ModEntities.PUNCHROOM, "Punchroom");
+        addEntity(ModEntities.RHINO_BEETLE, "Rhino Beetle");
+        addEntity(ModEntities.SCORPION, "Scorpion");
+        addEntity(ModEntities.SCYTODES, "Scytodes");
+        addEntity(ModEntities.SOLIFUGE, "Solifuge");
+        addEntity(ModEntities.STAG_BEETLE, "Stag Beetle");
+        addEntity(ModEntities.TARANTULA, "Tarantula");
+        addEntity(ModEntities.TARANTULA_MINI_BOSS, "Tarantula Mini-Boss");
+        addEntity(ModEntities.TITAN_BEETLE, "Titan Beetle");
+        addEntity(ModEntities.UMBER_GOLEM, "Umber Golem");
+        addEntity(ModEntities.VELVET_WORM, "Velvet Worm");
+        addEntity(ModEntities.WASP, "Wasp");
+        addEntity(ModEntities.WOODLOUSE, "Woodlouse");
+        addEntity(ModEntities.WORKER_BEE, "Worker Bee");
         addEntity(ModEntities.ZOMBIE_ANT, "Zombie Ant");
         addEntity(ModEntities.ZOMBIE_ANT_SOLDIER, "Zombie Ant Soldier");
 
-        addEntityNoEgg(ModEntities.THROWN_BLOCK_AS_ITEM, "Mob Projectile"); // needs a better name
+        addEntityNoEgg(ModEntities.AMBER_STAR, "Amber Star");
         addEntityNoEgg(ModEntities.GOO_BALL, "Goo Ball");
+        addEntityNoEgg(ModEntities.THROWN_BLOCK_AS_ITEM, "Mob Projectile"); // needs a better name
     }
 
     private void addFluidTranslations() {

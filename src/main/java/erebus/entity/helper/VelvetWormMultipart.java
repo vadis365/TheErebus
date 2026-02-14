@@ -1,4 +1,6 @@
-package erebus.entity;
+package erebus.entity.helper;
+
+import erebus.entity.VelvetWorm;
 
 public class VelvetWormMultipart extends GenericPartEntity<VelvetWorm> {
 

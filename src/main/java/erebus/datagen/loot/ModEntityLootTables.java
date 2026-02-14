@@ -46,6 +46,33 @@ public class ModEntityLootTables extends EntityLootSubProvider {
         noLoot(ModEntities.GOO_BALL);
         noLoot(ModEntities.AMBER_STAR);
 
+        noLoot(ModEntities.ANTLION_BOSS);
+        noLoot(ModEntities.ANTLION_MINI_BOSS);
+        noLoot(ModEntities.BABY_SOLIFUGE);
+        noLoot(ModEntities.BABY_TARANTULA);
+        noLoot(ModEntities.BOG_MAW);
+        noLoot(ModEntities.CHAMELEON_TICK);
+        noLoot(ModEntities.CICADA);
+        noLoot(ModEntities.CRUSHROOM);
+        noLoot(ModEntities.FIRE_ANT);
+        noLoot(ModEntities.FIRE_ANT_SOLDIER);
+        noLoot(ModEntities.JUMPING_SPIDER);
+        noLoot(ModEntities.GLOW_WORM);
+        noLoot(ModEntities.MAGMA_CRAWLER);
+        noLoot(ModEntities.MIDGE_SWARM);
+        noLoot(ModEntities.MOSQUITO);
+        noLoot(ModEntities.POND_SKATER);
+        noLoot(ModEntities.PRAYING_MANTIS);
+        noLoot(ModEntities.RHINO_BEETLE);
+        noLoot(ModEntities.SCORPION);
+        noLoot(ModEntities.SOLIFUGE);
+        noLoot(ModEntities.STAG_BEETLE);
+        noLoot(ModEntities.TARANTULA);
+        noLoot(ModEntities.TARANTULA_MINI_BOSS);
+        noLoot(ModEntities.TITAN_BEETLE);
+        noLoot(ModEntities.UMBER_GOLEM);
+        noLoot(ModEntities.WOODLOUSE);
+
         add(
                 ModEntities.BLACK_WIDOW.get(),
                 createMultiPoolLootTable(

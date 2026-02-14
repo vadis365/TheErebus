@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "erebus:item/chameleon_tick_spawn_egg"
+  }
+}

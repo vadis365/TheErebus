@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "erebus:item/cicada_spawn_egg"
+  }
+}

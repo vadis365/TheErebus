@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.entity.helper.CentipedeMultipart;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;

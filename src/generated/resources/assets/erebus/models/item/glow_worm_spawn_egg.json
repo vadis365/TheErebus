@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "erebus:item/glow_worm_spawn_egg"
+  }
+}

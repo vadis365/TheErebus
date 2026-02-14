@@ -1,6 +1,7 @@
 package erebus.entity;
 
 import erebus.entity.ai.ShootGooBallAttackGoal;
+import erebus.entity.helper.VelvetWormMultipart;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;

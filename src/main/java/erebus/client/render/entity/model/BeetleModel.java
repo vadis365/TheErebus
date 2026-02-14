@@ -7,7 +7,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class BeetleModel extends EntityModel<BeetleRenderState> {
+public class BeetleModel<S extends BeetleRenderState> extends EntityModel<S> {
 	public ModelPart root;
     private final ModelPart LeftFrontLeg;
 	private final ModelPart LeftMidLeg;
@@ -110,7 +110,7 @@ public class BeetleModel extends EntityModel<BeetleRenderState> {
 	}
 
 	@Override
-	public void setupAnim(BeetleRenderState state) {
+	public void setupAnim(S state) {
 		float sin = Mth.sin(state.walkAnimationPos) * 0.8F * state.walkAnimationSpeed * 0.8F;
 		float cos = Mth.cos(state.walkAnimationPos) * 0.2F * state.walkAnimationSpeed;
 

@@ -6,7 +6,7 @@ import erebus.Erebus;
 import erebus.client.render.entity.model.CentipedeModel;
 import erebus.client.render.entity.renderer.state.CentipedeRenderState;
 import erebus.entity.Centipede;
-import erebus.entity.CentipedeMultipart;
+import erebus.entity.helper.CentipedeMultipart;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

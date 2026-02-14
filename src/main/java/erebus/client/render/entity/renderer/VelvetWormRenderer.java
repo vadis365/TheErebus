@@ -6,7 +6,7 @@ import erebus.Erebus;
 import erebus.client.render.entity.model.VelvetWormModel;
 import erebus.client.render.entity.renderer.state.VelvetWormRenderState;
 import erebus.entity.VelvetWorm;
-import erebus.entity.VelvetWormMultipart;
+import erebus.entity.helper.VelvetWormMultipart;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "erebus:item/jumping_spider_spawn_egg"
+  }
+}

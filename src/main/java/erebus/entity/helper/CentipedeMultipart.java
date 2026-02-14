@@ -1,4 +1,6 @@
-package erebus.entity;
+package erebus.entity.helper;
+
+import erebus.entity.Centipede;
 
 public class CentipedeMultipart extends GenericPartEntity<Centipede> {
 

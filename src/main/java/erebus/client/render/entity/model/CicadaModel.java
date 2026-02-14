@@ -1,12 +1,12 @@
 package erebus.client.render.entity.model;
 
-import erebus.client.render.entity.renderer.state.CIcadaRenderState;
+import erebus.client.render.entity.renderer.state.CicadaRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class CicadaModel extends EntityModel<CIcadaRenderState> {
+public class CicadaModel extends EntityModel<CicadaRenderState> {
 
     public ModelPart root;
     private final ModelPart LEye;
@@ -54,7 +54,7 @@ public class CicadaModel extends EntityModel<CIcadaRenderState> {
     private final ModelPart LWingMain;
     private final ModelPart LWingBack;
 
-    protected CicadaModel(ModelPart root) {
+    public CicadaModel(ModelPart root) {
         super(root);
         this.root = root;
         this.LEye = root.getChild("LEye");
@@ -94,16 +94,14 @@ public class CicadaModel extends EntityModel<CIcadaRenderState> {
         this.RMLeg3 = root.getChild("RMLeg3");
         this.RMLeg4 = root.getChild("RMLeg4");
         this.RWingFront = root.getChild("RWingFront");
-        this.RWingTop = root.getChild("RWingTop");
-        this.RWingMain = root.getChild("RWingMain");
-        this.RWingBack = root.getChild("RWingBack");
+        this.RWingTop = RWingFront.getChild("RWingTop");
+        this.RWingMain = RWingFront.getChild("RWingMain");
+        this.RWingBack = RWingFront.getChild("RWingBack");
         this.LWingFront = root.getChild("LWingFront");
-        this.LWingTop = root.getChild("LWingTop");
-        this.LWingMain = root.getChild("LWingMain");
-        this.LWingBack = root.getChild("LWingBack");
+        this.LWingTop = LWingFront.getChild("LWingTop");
+        this.LWingMain = LWingFront.getChild("LWingMain");
+        this.LWingBack = LWingFront.getChild("LWingBack");
     }
-
-
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition mesh = new MeshDefinition();

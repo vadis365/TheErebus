@@ -1,4 +1,4 @@
-package erebus.entity;
+package erebus.entity.helper;
 
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;

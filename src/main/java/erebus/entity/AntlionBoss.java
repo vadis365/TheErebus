@@ -3,7 +3,7 @@ package erebus.entity;
 import erebus.client.particle.ClientParticleTypes;
 import erebus.entity.ai.SandThrowAttackGoal;
 import erebus.registries.ModSounds;
-import erebus.registries.entity.ModEntities;
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -12,11 +12,15 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Util;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -25,11 +29,15 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+
+import java.util.List;
 
 public class AntlionBoss extends Monster {
 
@@ -193,10 +201,39 @@ public class AntlionBoss extends Monster {
     }
 
     private void areaOfEffect() {
-
+        List<Entity> entities = level().getEntities(this, getBoundingBox().inflate(16, 1, 16));
+        for (Entity entity : entities) {
+            if (entity instanceof LivingEntity target) {
+                float knockback = (-3 + random.nextInt(4)) * 0.1F;
+                doHurtTarget((ServerLevel) level(), target);
+                target.push(-Mth.sin(getYRot() * -Mth.PI + random.nextInt(3) + 0.141593F / 180.0F) * knockback, 0.01D, Mth.cos(getYRot() * -Mth.PI + random.nextInt(3) + 0.141593F / 180.0F) * knockback);
+                level().playSound(this, getOnPos(), ModSounds.ANTLION_SLAM.get(), SoundSource.HOSTILE);
+            }
+        }
     }
 
     private void destroyBlocksInAABB(AABB box) {
+        if (level().isClientSide())
+            return;
+        int minX = Mth.floor(box.minX - 1);
+        int minY = Mth.floor(box.minY - 0.2);
+        int minZ = Mth.floor(box.minZ - 1);
+        int maxX = Mth.floor(box.maxX + 1);
+        int maxY = Mth.floor(box.maxY);
+        int maxZ = Mth.floor(box.maxZ + 1);
 
+        for (int x = minX; x <= maxX; ++x) {
+            for (int y = minY; y <= maxY; ++y) {
+                for (int z = minZ; z <= maxZ; ++z) {
+                    BlockPos pos = new BlockPos(x, y, z);
+                    Block block = level().getBlockState(pos).getBlock();
+                    Block blockBelow = level().getBlockState(pos.below()).getBlock();
+                    if (block == Blocks.SAND && blockBelow != ModBlocks.TEMPLE_BRICK_UNBREAKING.get()) {
+                        level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+                        level().playSound(null, pos, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.HOSTILE);
+                    }
+                }
+            }
+        }
     }
 }

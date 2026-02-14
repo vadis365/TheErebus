@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
-public class BeetleRenderer extends MobRenderer<Beetle, BeetleRenderState, BeetleModel> {
+public class BeetleRenderer extends MobRenderer<Beetle, BeetleRenderState, BeetleModel<BeetleRenderState>> {
 	private static final Identifier[] TEXTURE = new Identifier[] {
 			Erebus.prefix("textures/entity/beetle_rare_spawn.png"),
 			Erebus.prefix("textures/entity/beetle_blue.png"),
@@ -20,7 +20,7 @@ public class BeetleRenderer extends MobRenderer<Beetle, BeetleRenderState, Beetl
 			Erebus.prefix("textures/entity/beetle_tan.png") };
 
 	public BeetleRenderer(EntityRendererProvider.Context context) {
-		super(context, new BeetleModel(context.bakeLayer(ModEntityRendering.BEETLE)), 0.5F);
+  super(context, new BeetleModel<>(context.bakeLayer(ModEntityRendering.BEETLE)), 0.5F);
 	}
 
 	@Override

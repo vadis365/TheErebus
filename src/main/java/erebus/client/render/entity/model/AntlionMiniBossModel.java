@@ -1,12 +1,12 @@
 package erebus.client.render.entity.model;
 
-import erebus.client.render.entity.renderer.state.ChameleonTickRenderState;
+import erebus.client.render.entity.renderer.state.AntlionMiniBossRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class AntlionMiniBossModel extends EntityModel<ChameleonTickRenderState> {
+public class AntlionMiniBossModel extends EntityModel<AntlionMiniBossRenderState> {
     public ModelPart root;
 
     public AntlionMiniBossModel(ModelPart root) {

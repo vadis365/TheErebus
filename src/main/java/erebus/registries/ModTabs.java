@@ -642,6 +642,31 @@ public class ModTabs {
                         output.accept(ModItems.BOMBARDIER_BEETLE_LARVA_SPAWN_EGG);
                         output.accept(ModItems.ZOMBIE_ANT_SOLDIER_SPAWN_EGG);
                         output.accept(ModItems.BED_BUG_SPAWN_EGG);
+                        output.accept(ModItems.MOSQUITO_SPAWN_EGG);
+                        output.accept(ModItems.TARANTULA_SPAWN_EGG);
+                        output.accept(ModItems.SCORPION_SPAWN_EGG);
+                        output.accept(ModItems.SOLIFUGE_SPAWN_EGG);
+                        output.accept(ModItems.RHINO_BEETLE_SPAWN_EGG);
+                        output.accept(ModItems.GLOW_WORM_SPAWN_EGG);
+                        output.accept(ModItems.PRAYING_MANTIS_SPAWN_EGG);
+                        output.accept(ModItems.JUMPING_SPIDER_SPAWN_EGG);
+                        output.accept(ModItems.FIRE_ANT_SPAWN_EGG);
+                        output.accept(ModItems.TITAN_BEETLE_SPAWN_EGG);
+                        output.accept(ModItems.WOODLOUSE_SPAWN_EGG);
+                        output.accept(ModItems.CICADA_SPAWN_EGG);
+                        output.accept(ModItems.FIRE_ANT_SOLDIER_SPAWN_EGG);
+                        output.accept(ModItems.ANTLION_MINI_BOSS_SPAWN_EGG);
+                        output.accept(ModItems.CHAMELEON_TICK_SPAWN_EGG);
+                        output.accept(ModItems.MIDGE_SWARM_SPAWN_EGG);
+                        output.accept(ModItems.CRUSHROOM_SPAWN_EGG);
+                        output.accept(ModItems.TARANTULA_MINI_BOSS_SPAWN_EGG);
+                        output.accept(ModItems.TARANTULA_BABY_SPAWN_EGG);
+                        output.accept(ModItems.POND_SKATER_SPAWN_EGG);
+                        output.accept(ModItems.BOG_MAW_SPAWN_EGG);
+                        output.accept(ModItems.MAGMA_CRAWLER_SPAWN_EGG);
+                        output.accept(ModItems.UMBER_GOLEM_SPAWN_EGG);
+                        output.accept(ModItems.ANTLION_BOSS_SPAWN_EGG);
+                        output.accept(ModItems.STAG_BEETLE_SPAWN_EGG);
                     })
                     .build()
     );

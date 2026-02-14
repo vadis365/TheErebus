@@ -311,6 +311,31 @@ public class ModItemModels {
         normalItem(ModItems.BOMBARDIER_BEETLE_LARVA_SPAWN_EGG);
         normalItem(ModItems.ZOMBIE_ANT_SOLDIER_SPAWN_EGG);
         normalItem(ModItems.BED_BUG_SPAWN_EGG);
+        normalItem(ModItems.MOSQUITO_SPAWN_EGG);
+        normalItem(ModItems.TARANTULA_SPAWN_EGG);
+        normalItem(ModItems.SCORPION_SPAWN_EGG);
+        normalItem(ModItems.SOLIFUGE_SPAWN_EGG);
+        normalItem(ModItems.RHINO_BEETLE_SPAWN_EGG);
+        normalItem(ModItems.GLOW_WORM_SPAWN_EGG);
+        normalItem(ModItems.PRAYING_MANTIS_SPAWN_EGG);
+        normalItem(ModItems.JUMPING_SPIDER_SPAWN_EGG);
+        normalItem(ModItems.FIRE_ANT_SPAWN_EGG);
+        normalItem(ModItems.TITAN_BEETLE_SPAWN_EGG);
+        normalItem(ModItems.WOODLOUSE_SPAWN_EGG);
+        normalItem(ModItems.CICADA_SPAWN_EGG);
+        normalItem(ModItems.FIRE_ANT_SOLDIER_SPAWN_EGG);
+        normalItem(ModItems.ANTLION_MINI_BOSS_SPAWN_EGG);
+        normalItem(ModItems.CHAMELEON_TICK_SPAWN_EGG);
+        normalItem(ModItems.MIDGE_SWARM_SPAWN_EGG);
+        normalItem(ModItems.CRUSHROOM_SPAWN_EGG);
+        normalItem(ModItems.TARANTULA_MINI_BOSS_SPAWN_EGG);
+        normalItem(ModItems.TARANTULA_BABY_SPAWN_EGG);
+        normalItem(ModItems.POND_SKATER_SPAWN_EGG);
+        normalItem(ModItems.BOG_MAW_SPAWN_EGG);
+        normalItem(ModItems.MAGMA_CRAWLER_SPAWN_EGG);
+        normalItem(ModItems.UMBER_GOLEM_SPAWN_EGG);
+        normalItem(ModItems.ANTLION_BOSS_SPAWN_EGG);
+        normalItem(ModItems.STAG_BEETLE_SPAWN_EGG);
     }
 
     private void normalItem(DeferredHolder<Item, ?> item) {
