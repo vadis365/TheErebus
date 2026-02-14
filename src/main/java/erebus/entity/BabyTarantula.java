@@ -6,17 +6,15 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 
-public class BabyTarantula extends Monster {
+public class BabyTarantula extends Tarantula {
     public BabyTarantula(EntityType<? extends Monster> type, Level level) {
         super(type, level);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 400F)
-                .add(Attributes.MOVEMENT_SPEED, 0.5F)
-                .add(Attributes.ATTACK_DAMAGE, 6.0)
-                .add(Attributes.FOLLOW_RANGE, 36.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0);
+                .add(Attributes.MAX_HEALTH, 30F)
+                .add(Attributes.MOVEMENT_SPEED, 0.6F)
+                .add(Attributes.ATTACK_DAMAGE, 5.0);
     }
 }
