@@ -2,9 +2,15 @@ package erebus.block.bamboo;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.BambooPipeBlockEntity;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -22,11 +28,13 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.function.Consumer;
 
-public class BambooPipe extends DirectionalBlock implements EntityBlock {
+public class BambooPipe extends DirectionalBlock implements EntityBlock, TooltipProvider {
 	public static final MapCodec<BambooPipe> CODEC = simpleCodec(BambooPipe::new);
     public static final BooleanProperty CONNECTED_DOWN = BooleanProperty.create("connected_down");
     public static final BooleanProperty CONNECTED_UP = BooleanProperty.create("connected_up");
@@ -41,7 +49,7 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
 	}
 
 	@Override
-	protected MapCodec<BambooPipe> codec() {
+	protected @NonNull MapCodec<BambooPipe> codec() {
 		return CODEC;
 	}
 
@@ -49,6 +57,11 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
 		return pLevel.isClientSide() ? null : BambooPipeBlockEntity::serverTick;
+	}
+
+	@Override
+	public void addToTooltip(Item.@NonNull TooltipContext context, Consumer<Component> consumer, @NonNull TooltipFlag tooltipFlag, @NonNull DataComponentGetter dataComponentGetter) {
+		consumer.accept(Component.translatable("tooltip.erebus.bamboo_pipe").withColor(ChatFormatting.YELLOW.getColor()));
 	}
 
 	// TODO: This will have to be part of the Item
@@ -64,7 +77,7 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
 	}
 
     @Override
-    protected boolean skipRendering(BlockState state, BlockState adjacentState, Direction direction) {
+    protected boolean skipRendering(@NonNull BlockState state, BlockState adjacentState, @NonNull Direction direction) {
         return adjacentState.is(this) || super.skipRendering(state, adjacentState, direction);
     }
 
@@ -126,7 +139,7 @@ public class BambooPipe extends DirectionalBlock implements EntityBlock {
 	}
 
 	@Override
-    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
+    protected @NonNull BlockState updateShape(BlockState state, @NonNull LevelReader level, @NonNull ScheduledTickAccess ticks, @NonNull BlockPos pos, @NonNull Direction directionToNeighbour, @NonNull BlockPos neighbourPos, @NonNull BlockState neighbourState, @NonNull RandomSource random) {
     	return state.setValue(CONNECTED_DOWN, this.isSideConnectable(level, pos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, pos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, pos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, pos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, pos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, pos, Direction.WEST));
     }
 
