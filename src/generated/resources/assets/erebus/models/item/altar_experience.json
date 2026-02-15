@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/altar_experience_special",
+  "textures": {
+    "particle": "erebus:block/altar_experience"
+  }
+}

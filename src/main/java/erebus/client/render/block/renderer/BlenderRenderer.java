@@ -24,7 +24,7 @@ import org.jspecify.annotations.Nullable;
 
 public class BlenderRenderer implements BlockEntityRenderer<BlenderBlockEntity, BlenderBlockEntityRenderState> {
 
-    private final Material TEXTURE = Sheets.BLOCK_ENTITIES_MAPPER.apply(Erebus.prefix("textures/special/tiles/blender.png"));
+    private final Material TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("blender"));
     private final BlenderModel model;
     private final MaterialSet materials;
 

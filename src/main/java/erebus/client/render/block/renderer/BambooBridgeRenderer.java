@@ -24,7 +24,7 @@ import org.jspecify.annotations.Nullable;
 
 public class BambooBridgeRenderer implements BlockEntityRenderer<BambooBridgeBlockEntity, BambooBridgeBlockEntityRenderState> {
 
-	public final Material TEXTURE = Sheets.BLOCK_ENTITIES_MAPPER.apply(Erebus.prefix("textures/special/tiles/bamboo_bridge.png"));
+	public final Material TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bamboo_bridge"));
 	private final BambooBridgeModel model;
 	private final MaterialSet materials;
 

@@ -32,7 +32,7 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 		super(ModBlockEntities.ALTAR_LIGHTNING.get(), pos, state);
 	}
 
-	public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState blockState, T blockEntity) {
+	public static <T extends BlockEntity> void tick(Level level, BlockPos pos, T blockEntity) {
 		if (blockEntity instanceof LightningAltarBlockEntity altar) {
 			altar.prevAnimationTicks = altar.animationTicks;
 			if (!level.isClientSide()) {

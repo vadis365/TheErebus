@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/altar_lightning"
+    "type": "minecraft:special",
+    "base": "erebus:item/altar_lightning",
+    "model": {
+      "type": "erebus:altar_lightning_special",
+      "texture": "erebus:"
+    }
   }
 }

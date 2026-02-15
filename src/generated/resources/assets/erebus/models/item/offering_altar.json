@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/offering_altar_special",
+  "textures": {
+    "particle": "erebus:block/offering_altar"
+  }
+}

@@ -1,13 +1,14 @@
 package erebus.block.entity;
 
-import erebus.network.client.OfferingAltarNBTPacket;
+import erebus.network.client.OfferingAltarTimerPacket;
 import erebus.recipes.altar.MultiStackInput;
 import erebus.recipes.altar.OfferingAltarRecipe;
 import erebus.registries.ModCustomRecipes;
 import erebus.registries.blocks.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.Connection;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.ContainerHelper;
@@ -108,11 +109,10 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 					altar.isCrafting = false;
 					altar.updateBlockWhenChanged();
 					}
-				else {
+				else if (recipe != null) {
 					altar.isCrafting = true;
 					altar.time += 2;
-					//TODO not sure this is even needed tbh - won't know until server testing 
-					//PacketDistributor.sendToPlayersNear((ServerLevel) altar.getLevel(), null, altar.getBlockPos().getX(), altar.getBlockPos().getY(), altar.getBlockPos().getZ(), 30, new OfferingAltarTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(), altar.getBlockPos().getZ(), altar.time, true));
+					PacketDistributor.sendToPlayersNear((ServerLevel) altar.getLevel(), null, altar.getBlockPos().getX(), altar.getBlockPos().getY(), altar.getBlockPos().getZ(), 30, new OfferingAltarTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(), altar.getBlockPos().getZ(), altar.time, true));
 					if (altar.time == 90 || altar.time == 270 || altar.time == 450)
 						level.levelEvent(2011, pos.above(), 15);
 
@@ -134,34 +134,25 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 		}
 	}
 	@Override
+	public void loadAdditional(@NonNull ValueInput input) {
+		super.loadAdditional(input);
+		time = input.getIntOr("time", 0);
+		isCrafting = input.getBooleanOr("isCrafting", false);
+	}
+
+	public void loadCustomOnly(CompoundTag nbt) {
+		time = nbt.getInt("time").get();
+		isCrafting = nbt.getBoolean("isCrafting").get();
+	}
+
+	@Override
 	public ClientboundBlockEntityDataPacket getUpdatePacket() {
 		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@Override
-	public void onDataPacket(@NonNull Connection net, @NonNull ValueInput valueInput) {
-		super.onDataPacket(net, valueInput);
-		updateBlockWhenChanged();
-	}
-
-	public void updateBlockWhenChanged() {
-		if (!getLevel().isClientSide()) {
-			PacketDistributor.sendToPlayersNear((ServerLevel) getLevel(), null, getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ(), 30, new OfferingAltarNBTPacket(getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ()));
-			final BlockState state = getLevel().getBlockState(getBlockPos());
-			getLevel().sendBlockUpdated(getBlockPos(), state, state, 8);
-			setChanged();
-		}
-	}
-	
-	public void updateBlock() {
-		getLevel().sendBlockUpdated(worldPosition, getLevel().getBlockState(worldPosition), getLevel().getBlockState(worldPosition), 3);
-	}
-
-	@Override
-	protected void loadAdditional(@NonNull ValueInput input) {
-		super.loadAdditional(input);
-		time = input.getIntOr("time", 0);
-		isCrafting = input.getBooleanOr("isCrafting", false);
+	public @NonNull CompoundTag getUpdateTag(HolderLookup.@NonNull Provider provider) {
+		return saveWithoutMetadata(provider);
 	}
 
 	@Override
@@ -169,6 +160,13 @@ public class OfferingAltarBlockEntity extends BlockEntityInventoryHelper {
 		super.saveAdditional(output);
 		output.putInt("time", time);
 		output.putBoolean("isCrafting", isCrafting);
+	}
+
+	public void updateBlockWhenChanged() {
+		if (level != null && !level.isClientSide()) {
+			setChanged();
+			level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+		}
 	}
 
 	@Override

@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/altar_healing"
+    "type": "minecraft:special",
+    "base": "erebus:item/altar_healing",
+    "model": {
+      "type": "erebus:altar_healing_special",
+      "texture": "erebus:"
+    }
   }
 }

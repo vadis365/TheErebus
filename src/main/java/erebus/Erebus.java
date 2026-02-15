@@ -98,17 +98,15 @@ public class Erebus {
 
         NeoForgeMod.enableMilkFluid(); // TEMP - JUST FOR BEETLE MILKING TEST
 
-		if (dist.isClient()) {
-			bus.addListener(this::setFluidRenderTypes);
-			bus.addListener(ModEntityRendering::registerEntityLayers);
-			bus.addListener(ModEntityRendering::registerEntityRender);
-			bus.addListener(ModItemRendering::registerItemLayerDefinitions);
-			bus.addListener(ModItemRendering::registerItemRender);
-			bus.addListener(ModBlockEntityRendering::registerBlockEntityLayerDefinitions);
-			bus.addListener(ModBlockEntityRendering::registerBlockEntityRenderers);
-            bus.addListener(ModParticles::registerParticleFactories);
-            neoBus.register(new GogglesClientTickHandler());
-		}
+        bus.addListener(this::setFluidRenderTypes);
+        bus.addListener(ModEntityRendering::registerEntityLayers);
+        bus.addListener(ModEntityRendering::registerEntityRender);
+        bus.addListener(ModItemRendering::registerItemLayerDefinitions);
+        bus.addListener(ModItemRendering::registerItemRender);
+        bus.addListener(ModBlockEntityRendering::registerBlockEntityLayerDefinitions);
+        bus.addListener(ModBlockEntityRendering::registerBlockEntityRenderers);
+        bus.addListener(ModParticles::registerParticleFactories);
+        neoBus.register(new GogglesClientTickHandler());
     }
 
     private void setFluidRenderTypes(final FMLClientSetupEvent event) {

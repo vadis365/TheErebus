@@ -29,7 +29,7 @@ import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarBlockEntity, OfferingAltarBlockEntityRenderState> {
-	private final Identifier TEXTURE = Erebus.prefix("textures/special/tiles/offering_altar.png");
+	private final Identifier TEXTURE = Erebus.prefix("offering_altar");
 	private final OfferingAltarModel model;
 	private final ItemModelResolver itemModelResolver;
 	private final MaterialSet materials;
@@ -49,24 +49,24 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 		state.rotation = blockEntity.rotation;
 		state.prevRotation = blockEntity.prevRotation;
 		state.random = blockEntity.getLevel().getRandom();
+		state.blockPos = blockEntity.getBlockPos();
 
 		for(int c = 0; c < 4; c++ ) {
-			if(blockEntity.getSlot(c).get() != ItemStack.EMPTY) {
-
+			ItemStack stack = blockEntity.getItem(c);
+			state.stacks[c] = stack;
+			if(!stack.isEmpty()) {
 				itemModelResolver.updateForTopItem(
 						state.itemStackRenderStates[c],
-						blockEntity.getSlot(c).get(),
+						stack,
 						ItemDisplayContext.FIXED,
 						blockEntity.getLevel(),
 						null,
 						0
 				);
-
-				state.stacks[c] = blockEntity.getSlot(c).get();
 			}
 		}
 
-		state.canCraft = blockEntity.getItems().get(3).isEmpty();
+		state.canCraft = blockEntity.getItem(3).isEmpty();
 		state.shouldSpawnParticles = blockEntity.getLevel().getGameTime() % 2 == 0;
 	}
 
@@ -77,7 +77,7 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 
 	@Override
 	public void submit(OfferingAltarBlockEntityRenderState renderState, PoseStack pose, SubmitNodeCollector submit, @NonNull CameraRenderState camera) {
-		Material material = Sheets.BLOCK_ENTITIES_MAPPER.apply(TEXTURE);
+		Material material = Sheets.BLOCKS_MAPPER.apply(TEXTURE);
 
 		pose.pushPose();
 		pose.translate(0.5D, 1.5D, 0.5D);
@@ -106,37 +106,36 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 		float angle = state.time + (state.time - state.prevTime) * state.partialTick;
 		float renderRotation = state.rotation + (state.rotation - state.prevRotation) * state.partialTick;
 		if (state.canCraft) {
-			pose.translate(0F, 0.75, 0F);
 			for (int c = 0; c < 3; c++) {
 				ItemStack item = state.stacks[c];
-				if (item != null) {
-					if (!item.isEmpty()) {
-						pose.pushPose();
-						pose.mulPose(Axis.YP.rotationDegrees((float) 120 * (c + 1) + renderRotation));
-						pose.translate(Math.cos(Math.toRadians(angle)), 0, 0);
-						pose.scale(0.5F, 0.5F, 0.5F);
-						pose.pushPose();
-						pose.mulPose(Axis.XN.rotationDegrees((float) 120 * (c + 1) + renderRotation + angle));
-						pose.mulPose(Axis.YN.rotationDegrees((float) 120 * (c + 1) + renderRotation * 2F + angle));
-						pose.mulPose(Axis.ZN.rotationDegrees((float) 120 * (c + 1) + renderRotation + angle));
-						state.itemStackRenderStates[c].submit(pose, submit, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
-						pose.popPose();
-						pose.popPose();
-						double a = -Math.toRadians((float) 120 * (c + 1) + renderRotation - 90);
-						double offSetX = -Math.sin(a) * Math.cos(Math.toRadians(angle));
-						double offSetZ = Math.cos(a) * Math.cos(Math.toRadians(angle));
-						if (state.shouldSpawnParticles)
-							ClientParticles.spawnParticles(getParticleType(item), state.blockPos.getX() + 0.5F - offSetX, state.blockPos.getY() + 1.5F + (state.random.nextFloat() - state.random.nextFloat()) * 0.1F, state.blockPos.getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
-					}
+				if (item != null && !item.isEmpty()) {
+					pose.pushPose();
+					pose.translate(0F, 0.75, 0F);
+					pose.mulPose(Axis.YP.rotationDegrees((float) 120 * (c + 1) + renderRotation));
+					pose.translate(Math.cos(Math.toRadians(angle)), 0, 0);
+					pose.scale(0.5F, 0.5F, 0.5F);
+					pose.mulPose(Axis.XN.rotationDegrees((float) 120 * (c + 1) + renderRotation + angle));
+					pose.mulPose(Axis.YN.rotationDegrees((float) 120 * (c + 1) + renderRotation * 2F + angle));
+					pose.mulPose(Axis.ZN.rotationDegrees((float) 120 * (c + 1) + renderRotation + angle));
+					state.itemStackRenderStates[c].submit(pose, submit, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+					pose.popPose();
+
+					double a = -Math.toRadians((float) 120 * (c + 1) + renderRotation - 90);
+					double offSetX = -Math.sin(a) * Math.cos(Math.toRadians(angle));
+					double offSetZ = Math.cos(a) * Math.cos(Math.toRadians(angle));
+					if (state.shouldSpawnParticles)
+						ClientParticles.spawnParticles(getParticleType(item), state.blockPos.getX() + 0.5F - offSetX, state.blockPos.getY() + 1.5F + (state.random.nextFloat() - state.random.nextFloat()) * 0.1F, state.blockPos.getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
 				}
 			}
 		} else {
-			pose.pushPose();
-			pose.translate(0F, 0.75F, 0);
-			pose.mulPose(Axis.YP.rotationDegrees(state.partialTick));
-			pose.scale(0.5F, 0.5F, 0.5F);
-			state.itemStackRenderStates[3].submit(pose, submit, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
-			pose.popPose();
+			if (state.stacks[3] != null && !state.stacks[3].isEmpty()) {
+				pose.pushPose();
+				pose.translate(0F, 1.5F, 0);
+				pose.mulPose(Axis.YP.rotationDegrees(angle));
+				pose.scale(0.5F, 0.5F, 0.5F);
+				state.itemStackRenderStates[3].submit(pose, submit, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+				pose.popPose();
+			}
 		}
 	}
 

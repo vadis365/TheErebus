@@ -5,8 +5,7 @@ import erebus.block.GaeanKeystoneBlock;
 import erebus.block.HoneyTreatBlock;
 import erebus.block.plants.ModBerryBushBlock;
 import erebus.block.plants.ModCropBlock;
-import erebus.client.render.block.renderer.stack.BlockOfBonesSpecialRenderer;
-import erebus.client.render.block.renderer.stack.ErebusChestSpecialRenderer;
+import erebus.client.render.block.renderer.stack.*;
 import erebus.registries.ModBlockFamilies;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
@@ -17,6 +16,7 @@ import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
@@ -271,11 +271,16 @@ public class ModBlockStates {
         createCustomBlock(ModBlocks.TARANTULA_EGG);
         createCustomHorizontalBlock(ModBlocks.ALTAR_BASE);
         createCustomHorizontalBlock(ModBlocks.ALTAR_EXPERIENCE);
+        createSpecialItem(ModBlocks.ALTAR_EXPERIENCE, "altar_experience_special", new ExperienceAltarSpecialRenderer.Unbaked(Erebus.prefix("")));
         createCustomHorizontalBlock(ModBlocks.ALTAR_HEALING);
+        createSpecialItem(ModBlocks.ALTAR_HEALING, "altar_healing_special", new HealingAltarSpecialRenderer.Unbaked(Erebus.prefix("")));
         createCustomHorizontalBlock(ModBlocks.ALTAR_LIGHTNING);
+        createSpecialItem(ModBlocks.ALTAR_LIGHTNING, "altar_lightning_special", new LightningAltarSpecialRenderer.Unbaked(Erebus.prefix("")));
         createCustomHorizontalBlock(ModBlocks.ALTAR_REPAIR);
+        createSpecialItem(ModBlocks.ALTAR_REPAIR, "altar_repair_special", new RepairAltarSpecialRenderer.Unbaked(Erebus.prefix("")));
         createCustomHorizontalBlock(ModBlocks.BAMBOO_BRIDGE);
         createCustomBlock(ModBlocks.OFFERING_ALTAR);
+        createSpecialItem(ModBlocks.OFFERING_ALTAR, "offering_altar_special", new OfferingAltarSpecialRenderer.Unbaked(Erebus.prefix("offering_altar")));
         createCustomBlock(ModBlocks.FLOWER_BLACK);
         createCustomBlock(ModBlocks.FLOWER_BLUE);
         createCustomBlock(ModBlocks.FLOWER_BROWN);
@@ -324,6 +329,13 @@ public class ModBlockStates {
 
     private void createCustomHorizontalBlock(DeferredBlock<Block> block) {
         blockModels.createNonTemplateHorizontalBlock(block.get());
+    }
+
+    private void createSpecialItem(DeferredBlock<Block> block, String id, SpecialModelRenderer.Unbaked renderer) {
+        Item item = block.get().asItem();
+        Identifier itemModelBase = ModelTemplates.create(id, TextureSlot.PARTICLE).create(item, TextureMapping.particle(block.get()), blockModels.modelOutput);
+        ItemModel.Unbaked plainModel = ItemModelUtils.specialModel(itemModelBase, renderer);
+        itemModels.itemModelOutput.accept(item, plainModel);
     }
 
     private void createGaeanKeystone() {

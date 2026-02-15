@@ -510,12 +510,12 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> MUCUS_BOMB = registerSimpleBlock("mucus_bomb", ModBlockProperties.MUCUS_BOMB);
     public static final DeferredBlock<Block> UMBER_GOLEM_STATUE = registerSimpleBlock("umber_golem_statue", ModBlockProperties.UMBER_GOLEM_STATUE);
 
-    public static final DeferredBlock<Block> ALTAR_BASE = registerBlock("altar_base", () -> new AltarBase(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("altar_base")))));
-    public static final DeferredBlock<Block> ALTAR_LIGHTNING = registerBlock("altar_lightning", () -> new LightningAltar(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("altar_lightning")))));
-    public static final DeferredBlock<Block> ALTAR_HEALING = registerBlock("altar_healing", () -> new HealingAltar(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("altar_healing")))));
-    public static final DeferredBlock<Block> ALTAR_EXPERIENCE = registerBlock("altar_experience", () -> new ExperienceAltar(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("altar_experience")))));
-    public static final DeferredBlock<Block> ALTAR_REPAIR = registerBlock("altar_repair", () -> new RepairAltar(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("altar_repair")))));
-    public static final DeferredBlock<Block> OFFERING_ALTAR = registerBlock("offering_altar", () -> new OfferingAltar(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("offering_altar")))));
+    public static final DeferredBlock<Block> ALTAR_BASE = registerBlock("altar_base", () -> new AltarBase(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("altar_base"))).noOcclusion()));
+    public static final DeferredBlock<Block> ALTAR_LIGHTNING = registerBlock("altar_lightning", () -> new LightningAltar(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("altar_lightning"))).noOcclusion()));
+    public static final DeferredBlock<Block> ALTAR_HEALING = registerBlock("altar_healing", () -> new HealingAltar(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("altar_healing"))).noOcclusion()));
+    public static final DeferredBlock<Block> ALTAR_EXPERIENCE = registerBlock("altar_experience", () -> new ExperienceAltar(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("altar_experience"))).noOcclusion()));
+    public static final DeferredBlock<Block> ALTAR_REPAIR = registerBlock("altar_repair", () -> new RepairAltar(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("altar_repair"))).noOcclusion()));
+    public static final DeferredBlock<Block> OFFERING_ALTAR = registerBlock("offering_altar", () -> new OfferingAltar(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("offering_altar"))).noOcclusion()));
 
     // MARK: Antlion Dungeon
     public static final DeferredBlock<Block> CAPSTONE = registerSimpleBlock("capstone", ModBlockProperties.CAPSTONE);

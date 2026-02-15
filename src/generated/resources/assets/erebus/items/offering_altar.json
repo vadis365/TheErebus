@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/offering_altar"
+    "type": "minecraft:special",
+    "base": "erebus:item/offering_altar",
+    "model": {
+      "type": "erebus:offering_altar_special",
+      "texture": "erebus:offering_altar"
+    }
   }
 }

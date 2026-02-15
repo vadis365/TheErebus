@@ -25,7 +25,7 @@ import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEntity, LiquifierBlockEntityRenderState> {
-	private final Identifier TEXTURE = Erebus.prefix("textures/special/tiles/liquifier.png");
+	private final Identifier TEXTURE = Erebus.prefix("liquifier");
 	private final LiquifierModel model;
 	private final ItemModelResolver itemModelResolver;
 	private final MaterialSet materials;
@@ -88,7 +88,7 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 
 	@Override
 	public void submit(LiquifierBlockEntityRenderState renderState, PoseStack pose, @NonNull SubmitNodeCollector submitNodeCollector, @NonNull CameraRenderState cameraRenderState) {
-		Material material = Sheets.BLOCK_ENTITIES_MAPPER.apply(TEXTURE);
+		Material material = Sheets.BLOCKS_MAPPER.apply(TEXTURE);
 
 		if (!renderState.tankResource.isEmpty() && renderState.tankAmount > 0) {
 			float height = (0.375F / renderState.tankCapacity) * renderState.tankAmount;

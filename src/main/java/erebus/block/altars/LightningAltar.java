@@ -39,7 +39,7 @@ public class LightningAltar extends AltarAbstract {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
-		return LightningAltarBlockEntity::tick;
+		return (level, pos, blockState, blockEntity) -> LightningAltarBlockEntity.tick(level, pos, blockEntity);
 	}
 
 	@Override

@@ -1,9 +1,12 @@
 package erebus.client.render.block.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import erebus.Erebus;
 import erebus.block.entity.ExperienceAltarBlockEntity;
-import erebus.client.render.block.model.ExperienceAltarModel;
+import erebus.client.render.block.model.altar.experience.ExperienceAltarBaseModel;
+import erebus.client.render.block.model.altar.experience.ExperienceAltarGlassModel;
+import erebus.client.render.block.model.altar.experience.ExperienceAltarMidModel;
 import erebus.client.render.block.renderer.state.ExperienceAltarBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.MaterialMapper;
@@ -25,20 +28,24 @@ import java.util.List;
 
 public class ExperienceAltarRenderer implements BlockEntityRenderer<ExperienceAltarBlockEntity, ExperienceAltarBlockEntityRenderState> {
 
-	private final MaterialMapper MAPPER = new MaterialMapper(TextureAtlas.LOCATION_BLOCKS, "special/tiles/altar_xp");
-	private final Material STEP1 = MAPPER.apply(Erebus.prefix("1.png"));
-	private final Material STEP2 = MAPPER.apply(Erebus.prefix("2.png"));
-	private final Material STEP3 = MAPPER.apply(Erebus.prefix("3.png"));
-	private final Material STEP4 = MAPPER.apply(Erebus.prefix("4.png"));
-	private final Material STEP5 = MAPPER.apply(Erebus.prefix("5.png"));
+	private final MaterialMapper MAPPER = new MaterialMapper(TextureAtlas.LOCATION_BLOCKS, "altar_xp");
+	private final Material STEP1 = MAPPER.apply(Erebus.prefix("1"));
+	private final Material STEP2 = MAPPER.apply(Erebus.prefix("2"));
+	private final Material STEP3 = MAPPER.apply(Erebus.prefix("3"));
+	private final Material STEP4 = MAPPER.apply(Erebus.prefix("4"));
+	private final Material STEP5 = MAPPER.apply(Erebus.prefix("5"));
 
 	private final List<Material> steps = List.of(STEP1, STEP2, STEP3, STEP4, STEP5);
 
-	private final ExperienceAltarModel model;
+	private final ExperienceAltarBaseModel base;
+	private final ExperienceAltarMidModel middle;
+	private final ExperienceAltarGlassModel glass;
 	private final MaterialSet materials;
 
 	public ExperienceAltarRenderer(Context context) {
-		model = new ExperienceAltarModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_EXPERIENCE));
+		base = new ExperienceAltarBaseModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_EXPERIENCE_BASE));
+		middle = new ExperienceAltarMidModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_EXPERIENCE_MID));
+		glass = new ExperienceAltarGlassModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_EXPERIENCE_GLASS));
 		materials = context.materials();
 	}
 
@@ -54,24 +61,36 @@ public class ExperienceAltarRenderer implements BlockEntityRenderer<ExperienceAl
 	}
 
 	@Override
-	public void submit(ExperienceAltarBlockEntityRenderState renderState, @NonNull PoseStack stack, @NonNull SubmitNodeCollector submitNodeCollector, @NonNull CameraRenderState cameraRenderState) {
-		Material material = steps.get(renderState.getStep());
+	public void submit(ExperienceAltarBlockEntityRenderState state, @NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, @NonNull CameraRenderState camera) {
+		Material material = steps.get(state.getStep());
 
-		stack.pushPose();
-		stack.translate(0.5D, 0.75D, 0.5D);
-		stack.scale(-0.5F, -0.5F, 0.5F);
-		submitNodeCollector.submitModel(
-				model,
-				renderState,
-				stack,
-				material.renderType(RenderTypes::entityCutout),
-				renderState.lightCoords,
-				OverlayTexture.NO_OVERLAY,
-				-1,
-				materials.get(material),
-				0,
-				renderState.breakProgress
-		);
-		stack.popPose();
+		pose.pushPose();
+		pose.translate(0.5D, 0.75D, 0.5D);
+		pose.scale(-0.5F, -0.5F, 0.5F);
+		submitGlass(state, pose, submit, material);
+		submitMiddle(state, pose, submit, material);
+		submitBase(state, pose, submit, material);
+		pose.popPose();
+	}
+
+	private void submitGlass(ExperienceAltarBlockEntityRenderState state, PoseStack pose, SubmitNodeCollector submit, Material material) {
+		pose.pushPose();
+		pose.scale(0.04F * state.animationTicks, 0.04F * state.animationTicks, 0.04F * state.animationTicks);
+		submit.submitModel(glass, state, pose, material.renderType(RenderTypes::entityCutout), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, state.breakProgress);
+		pose.popPose();
+	}
+
+	private void submitMiddle(ExperienceAltarBlockEntityRenderState state, PoseStack pose, SubmitNodeCollector submit, Material material) {
+		pose.pushPose();
+		pose.rotateAround(Axis.YP.rotation(-state.animationTicks * 7.2F), 0, 1, 0);
+		submit.submitModel(middle, state, pose, material.renderType(RenderTypes::entityCutout), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, state.breakProgress);
+		pose.popPose();
+	}
+
+	private void submitBase(ExperienceAltarBlockEntityRenderState state, PoseStack pose, SubmitNodeCollector submit, Material material) {
+		pose.pushPose();
+		pose.rotateAround(Axis.YP.rotation(state.animationTicks * 7.2F), 0, 1, 0);
+		submit.submitModel(base, state, pose, material.renderType(RenderTypes::entityCutout), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, state.breakProgress);
+		pose.popPose();
 	}
 }

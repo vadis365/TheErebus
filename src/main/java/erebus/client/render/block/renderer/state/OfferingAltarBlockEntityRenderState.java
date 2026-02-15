@@ -12,7 +12,7 @@ public class OfferingAltarBlockEntityRenderState extends BlockEntityRenderState 
     public int rotation;
     public int prevRotation;
 
-    public ItemStackRenderState[] itemStackRenderStates = new ItemStackRenderState[4];
+    public ItemStackRenderState[] itemStackRenderStates = {new ItemStackRenderState(), new ItemStackRenderState(), new ItemStackRenderState(), new ItemStackRenderState()};
     public ItemStack[] stacks = new ItemStack[4];
 
     public boolean canCraft;

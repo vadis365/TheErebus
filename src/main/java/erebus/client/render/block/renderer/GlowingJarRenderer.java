@@ -24,8 +24,8 @@ import org.jspecify.annotations.Nullable;
 
 public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEntity, GlowingJarBlockEntityRenderState> {
 
-    private final Material TEXTURE = Sheets.BLOCK_ENTITIES_MAPPER.apply(Erebus.prefix("textures/special/tiles/glowing_jar.png"));
-    private final Material WISP = Sheets.BLOCK_ENTITIES_MAPPER.apply(Erebus.prefix("textures/particle/wisp.png"));
+    private final Material TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("glowing_jar"));
+    private final Material WISP = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("particle/wisp"));
     private final GlowingJarModel model;
     private final MaterialSet materials;
 

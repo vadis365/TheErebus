@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
 
 public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtenderBlockEntity, BambooExtenderBlockEntityRenderState> {
 
-	private final Material TEXTURE = Sheets.BLOCK_ENTITIES_MAPPER.apply(Erebus.prefix("textures/special/tiles/bamboo_extender.png"));
+	private final Material TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bamboo_extender"));
 	private final BambooExtenderModel model;
 	private final MaterialSet materials;
 

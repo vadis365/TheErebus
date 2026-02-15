@@ -1,0 +1,56 @@
+{
+  "sources": [
+    {
+      "type": "directory",
+      "source": "block/altar_healing",
+      "prefix": "altar_healing/"
+    },
+    {
+      "type": "directory",
+      "source": "block/altar_lightning",
+      "prefix": "altar_lightning/"
+    },
+    {
+      "type": "directory",
+      "source": "block/altar_repair",
+      "prefix": "altar_repair/"
+    },
+    {
+      "type": "directory",
+      "source": "block/altar_xp",
+      "prefix": "altar_xp/"
+    },
+    {
+      "type": "single",
+      "resource": "erebus:block/offering_altar"
+    },
+    {
+      "type": "single",
+      "resource": "erebus:block/bamboo_bridge"
+    },
+    {
+      "type": "single",
+      "resource": "erebus:block/bamboo_extender"
+    },
+    {
+      "type": "single",
+      "resource": "erebus:block/blender"
+    },
+    {
+      "type": "single",
+      "resource": "erebus:block/glowing_jar"
+    },
+    {
+      "type": "single",
+      "resource": "erebus:block/liquifier"
+    },
+    {
+      "type": "single",
+      "resource": "erebus:block/altar_base"
+    },
+    {
+      "type": "single",
+      "resource": "erebus:particle/wisp"
+    }
+  ]
+}

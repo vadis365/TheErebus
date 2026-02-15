@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/altar_repair_special",
+  "textures": {
+    "particle": "erebus:block/altar_repair"
+  }
+}

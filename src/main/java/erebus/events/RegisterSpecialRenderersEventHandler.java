@@ -1,8 +1,7 @@
 package erebus.events;
 
 import erebus.Erebus;
-import erebus.client.render.block.renderer.stack.BlockOfBonesSpecialRenderer;
-import erebus.client.render.block.renderer.stack.ErebusChestSpecialRenderer;
+import erebus.client.render.block.renderer.stack.*;
 import erebus.client.render.item.renderer.*;
 import erebus.registries.blocks.ModBlocks;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -27,6 +26,11 @@ public class RegisterSpecialRenderersEventHandler {
         event.register(Erebus.prefix("chest_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
 
         event.register(Erebus.prefix("block_of_bones_special"), BlockOfBonesSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Erebus.prefix("altar_experience_special"), ExperienceAltarSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Erebus.prefix("altar_healing_special"), HealingAltarSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Erebus.prefix("altar_lightning_special"), LightningAltarSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Erebus.prefix("altar_repair_special"), RepairAltarSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Erebus.prefix("offering_altar_special"), OfferingAltarSpecialRenderer.Unbaked.MAP_CODEC);
     }
 
     @SubscribeEvent
@@ -47,5 +51,10 @@ public class RegisterSpecialRenderersEventHandler {
         event.register(ModBlocks.CHEST_WHITE.get(), new ErebusChestSpecialRenderer.Unbaked(ErebusChestSpecialRenderer.WHITE_TEXTURE));
 
         event.register(ModBlocks.BLOCK_OF_BONES.get(), new BlockOfBonesSpecialRenderer.Unbaked(Erebus.prefix("bone_block")));
+        event.register(ModBlocks.ALTAR_EXPERIENCE.get(), new ExperienceAltarSpecialRenderer.Unbaked(Erebus.prefix("altar_experience")));
+        event.register(ModBlocks.ALTAR_HEALING.get(), new HealingAltarSpecialRenderer.Unbaked(Erebus.prefix("altar_healing")));
+        event.register(ModBlocks.ALTAR_LIGHTNING.get(), new LightningAltarSpecialRenderer.Unbaked(Erebus.prefix("altar_lightning")));
+        event.register(ModBlocks.ALTAR_REPAIR.get(), new RepairAltarSpecialRenderer.Unbaked(Erebus.prefix("altar_repair")));
+        event.register(ModBlocks.OFFERING_ALTAR.get(), new OfferingAltarSpecialRenderer.Unbaked(Erebus.prefix("offering_altar")));
     }
 }

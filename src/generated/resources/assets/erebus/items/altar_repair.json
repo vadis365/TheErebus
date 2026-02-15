@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/altar_repair"
+    "type": "minecraft:special",
+    "base": "erebus:item/altar_repair",
+    "model": {
+      "type": "erebus:altar_repair_special",
+      "texture": "erebus:"
+    }
   }
 }
