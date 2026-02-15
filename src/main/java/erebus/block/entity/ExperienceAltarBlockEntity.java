@@ -27,45 +27,30 @@ public class ExperienceAltarBlockEntity extends AltarAbstractBlockEntity {
 		if (blockEntity instanceof ExperienceAltarBlockEntity altar) {
 			altar.prevAnimationTicks = altar.animationTicks;
 			if (!level.isClientSide()) {
-			if (altar.active) {
-				if (altar.animationTicks <= 20)
-					altar.animationTicks++;
-				if (altar.spawnTicks == 0)
-					altar.setActive(false);
-				altar.spawnTicks--;
+				if (altar.active) {
+					if (altar.animationTicks <= 20)
+						altar.animationTicks++;
+					if (altar.spawnTicks == 0)
+						altar.setActive(false);
+					altar.spawnTicks--;
+				}
+				if (!altar.active) {
+					if (altar.animationTicks > 0)
+						altar.animationTicks--;
+					if (altar.animationTicks == 1)
+						level.setBlockAndUpdate(pos, ModBlocks.ALTAR_BASE.get().defaultBlockState().setValue(AltarAbstract.FACING, altar.getBlockState().getValue(AltarAbstract.FACING)));
+				}
+				if (altar.prevAnimationTicks != altar.animationTicks)
+					PacketDistributor.sendToPlayersNear((ServerLevel) altar.getLevel(), null, altar.getBlockPos().getX(),
+							altar.getBlockPos().getY(), altar.getBlockPos().getZ(), 30,
+							new AltarAnimationTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(),
+									altar.getBlockPos().getZ(), altar.animationTicks));
 			}
-			if (!altar.active) {
-				if (altar.animationTicks > 0)
-					altar.animationTicks--;
-				if (altar.animationTicks == 1)
-					level.setBlockAndUpdate(pos, ModBlocks.ALTAR_BASE.get().defaultBlockState().setValue(AltarAbstract.FACING, altar.getBlockState().getValue(AltarAbstract.FACING)));
+
+			if (level.isClientSide()) {
+				if (altar.animationTicks == 6)
+					ClientParticles.spawnCloudBurstParticles(pos);
 			}
-			if (altar.prevAnimationTicks != altar.animationTicks)
-				PacketDistributor.sendToPlayersNear((ServerLevel) altar.getLevel(), null, altar.getBlockPos().getX(),
-						altar.getBlockPos().getY(), altar.getBlockPos().getZ(), 30,
-						new AltarAnimationTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(),
-								altar.getBlockPos().getZ(), altar.animationTicks));
-		}
-
-		if (level.isClientSide()) {
-			if (altar.animationTicks == 6)
-				altar.cloudBurst(level, pos);
-		}
-	}
-	}
-
-	private void cloudBurst(Level level, BlockPos pos) {
-		if (level.isClientSide()) {
-			double x = pos.getX() + 0.53125F;
-			double y = pos.getY() + 1.25F;
-			double z = pos.getZ() + 0.53125F;
-			ClientParticles.spawnCustomParticle("cloud", x, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("cloud", x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("cloud", x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("cloud", x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("cloud", x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("cloud", x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("cloud", x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
 		}
 	}
 

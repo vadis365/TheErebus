@@ -126,7 +126,7 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 						double offSetX = -Math.sin(a) * Math.cos(Math.toRadians(angle));
 						double offSetZ = Math.cos(a) * Math.cos(Math.toRadians(angle));
 						if (state.shouldSpawnParticles)
-							ClientParticles.spawnCustomParticle(getParticleType(item), state.blockPos.getX() + 0.5F - offSetX, state.blockPos.getY() + 1.5F + (state.random.nextFloat() - state.random.nextFloat()) * 0.1F, state.blockPos.getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
+							ClientParticles.spawnParticles(getParticleType(item), state.blockPos.getX() + 0.5F - offSetX, state.blockPos.getY() + 1.5F + (state.random.nextFloat() - state.random.nextFloat()) * 0.1F, state.blockPos.getZ() + 0.5F - offSetZ, 0.0D, 0.0D, 0.0D);
 					}
 				}
 			}
@@ -140,13 +140,13 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 		}
 	}
 
-	public String getParticleType (ItemStack stack) {
+	public ClientParticles.ParticleType getParticleType (ItemStack stack) {
 		if(stack.is(Blocks.OBSIDIAN.asItem()))
-			return "swampflame_green";
+			return ClientParticles.ParticleType.SWAMPFLAME_GREEN;
 		if(stack.is(Items.DIAMOND))
-			return "swampflame_green";
+			return ClientParticles.ParticleType.SWAMPFLAME_GREEN;
 		if(stack.is(Items.EMERALD))
-			return "swampflame_green";
-		return "flame";
+			return ClientParticles.ParticleType.SWAMPFLAME_GREEN;
+		return ClientParticles.ParticleType.FLAME;
 	}
 }

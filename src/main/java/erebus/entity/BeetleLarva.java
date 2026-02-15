@@ -1,6 +1,6 @@
 package erebus.entity;
 
-import erebus.client.particle.ClientParticleTypes.ParticleType;
+import erebus.client.particle.ClientParticles.ParticleType;
 import erebus.entity.ai.LarvaEatWoodenBlocksGoal;
 import erebus.network.client.ParticlePacket;
 import erebus.registries.ModSounds;

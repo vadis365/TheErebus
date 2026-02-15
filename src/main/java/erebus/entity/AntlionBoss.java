@@ -1,6 +1,6 @@
 package erebus.entity;
 
-import erebus.client.particle.ClientParticleTypes;
+import erebus.client.particle.ClientParticles;
 import erebus.entity.ai.SandThrowAttackGoal;
 import erebus.registries.ModSounds;
 import erebus.registries.blocks.ModBlocks;
@@ -165,13 +165,13 @@ public class AntlionBoss extends Monster {
 
     public void spawnBlamParticles() {
         if(level().isClientSide() && onGround()) {
-            ClientParticleTypes.spawnParticles(ClientParticleTypes.ParticleType.ANTLION_BLAM, getX(), getY(), getZ(), 0D, 0D, 0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.ANTLION_BLAM, getX(), getY(), getZ(), 0D, 0D, 0D);
         }
     }
 
     public void spawnRumbleParticles() {
         if(level().isClientSide()) {
-            ClientParticleTypes.spawnParticles(ClientParticleTypes.ParticleType.ANTLION_RUMBLE, getX(), getY(), getZ(), 0D, 0D, 0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.ANTLION_RUMBLE, getX(), getY(), getZ(), 0D, 0D, 0D);
         }
     }
 

@@ -44,10 +44,10 @@ public class FormicAcidFluidBlock extends LiquidBlock  {
 			level.addParticle(ModParticles.SWAMP_VENT.get(), xx + randomOffset, (double) pos.getY() + 0.75D, zz - fixedOffset, 0.0D, 0.0D, 0.0D);
 			level.addParticle(ModParticles.SWAMP_VENT.get(), xx + randomOffset, (double) pos.getY() + 0.75D, zz + fixedOffset, 0.0D, 0.0D, 0.0D);
 
-			ClientParticles.spawnCustomParticle("swampflame", xx - fixedOffset, yy, zz + randomOffset, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("swampflame", xx + fixedOffset, yy, zz + randomOffset, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("swampflame", xx + randomOffset, yy, zz - fixedOffset, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("swampflame", xx + randomOffset, yy, zz + fixedOffset, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.SWAMPFLAME, xx - fixedOffset, yy, zz + randomOffset, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.SWAMPFLAME, xx + fixedOffset, yy, zz + randomOffset, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.SWAMPFLAME, xx + randomOffset, yy, zz - fixedOffset, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.SWAMPFLAME, xx + randomOffset, yy, zz + fixedOffset, 0.0D, 0.0D, 0.0D);
 		}
 	}
 }

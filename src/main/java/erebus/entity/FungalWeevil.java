@@ -27,7 +27,7 @@ public class FungalWeevil extends Weevil {
 	@Override
 	public void tick() {
 		if (level().isClientSide())
-			ClientParticles.spawnCustomParticle("spores", getX() + (random.nextDouble() - 0.5D) * getBbWidth(), getBoundingBox().minY + random.nextDouble() * getBbHeight() - 0.25D, getZ() + (random.nextDouble() - 0.5D) * getBbWidth(), 1.0D + random.nextDouble(), 1.0D + random.nextDouble(), 1.0D + random.nextDouble());
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.SPORES, getX() + (random.nextDouble() - 0.5D) * getBbWidth(), getBoundingBox().minY + random.nextDouble() * getBbHeight() - 0.25D, getZ() + (random.nextDouble() - 0.5D) * getBbWidth(), 1.0D + random.nextDouble(), 1.0D + random.nextDouble(), 1.0D + random.nextDouble());
 		if (!level().isClientSide()) {
 			if (random.nextInt(200) == 0) {
 				BlockState state = level().getBlockState(blockPosition().below());

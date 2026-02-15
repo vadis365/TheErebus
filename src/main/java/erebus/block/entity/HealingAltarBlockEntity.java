@@ -71,13 +71,13 @@ public class HealingAltarBlockEntity extends AltarAbstractBlockEntity {
 			double x = pos.getX() + 0.53125F;
 			double y = pos.getY() + 1.25F;
 			double z = pos.getZ() + 0.53125F;
-			ClientParticles.spawnCustomParticle("heart", x, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("heart", x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("heart", x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("heart", x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("heart", x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("heart", x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("heart", x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.HEART, x, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.HEART, x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.HEART, x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.HEART, x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.HEART, x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.HEART, x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.HEART, x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
 		}
 	}
 

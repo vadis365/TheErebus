@@ -53,23 +53,8 @@ public class RepairAltarBlockEntity extends AltarAbstractBlockEntity {
 
 			if (level.isClientSide()) {
 				if (altar.animationTicks == 6)
-					altar.cloudBurst(level, pos);
+					ClientParticles.spawnCloudBurstParticles(pos);
 			}
-		}
-	}
-
-	private void cloudBurst(Level level, BlockPos pos) {
-		if (level.isClientSide()) {
-			double x = pos.getX() + 0.53125F;
-			double y = pos.getY() + 1.25F;
-			double z = pos.getZ() + 0.53125F;
-			ClientParticles.spawnCustomParticle("cloud", x, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("cloud", x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("cloud", x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("cloud", x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("cloud", x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("cloud", x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("cloud", x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -116,11 +101,11 @@ public class RepairAltarBlockEntity extends AltarAbstractBlockEntity {
 			double x = pos.getX() + 0.53125F;
 			double y = pos.getY() + 1.5F;
 			double z = pos.getZ() + 0.53125F;
-			ClientParticles.spawnCustomParticle("enchantmenttable", x, y, z, 0.5D, 0.0D, -0.5D);
-			ClientParticles.spawnCustomParticle("enchantmenttable", x, y, z, -0.5D, 0.0D, 0.5D);
-			ClientParticles.spawnCustomParticle("enchantmenttable", x, y, z, -0.5D, 0.0D, -0.5D);
-			ClientParticles.spawnCustomParticle("enchantmenttable", x, y, z, 0.5D, 0.0D, 0.5D);
-			ClientParticles.spawnCustomParticle("portal", x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.ENCHANTMENT_TABLE, x, y, z, 0.5D, 0.0D, -0.5D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.ENCHANTMENT_TABLE, x, y, z, -0.5D, 0.0D, 0.5D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.ENCHANTMENT_TABLE, x, y, z, -0.5D, 0.0D, -0.5D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.ENCHANTMENT_TABLE, x, y, z, 0.5D, 0.0D, 0.5D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.EREBUS_PORTAL, x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
 		}
 	}
 }

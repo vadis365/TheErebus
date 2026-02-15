@@ -1,10 +1,7 @@
 package erebus.registries.client;
 
 import erebus.Erebus;
-import erebus.client.particle.GneissVentParticle;
-import erebus.client.particle.RepellentParticle;
-import erebus.client.particle.SwampVentParticle;
-import erebus.client.particle.WispParticle;
+import erebus.client.particle.*;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
@@ -20,6 +17,7 @@ public class ModParticles {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GNEISS_VENT = register("gneiss_vent");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> WISP = register("wisp");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> REPELLENT = register("repellent");
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SONIC = register("sonic");
 
     private static DeferredHolder<ParticleType<?>, SimpleParticleType> register(String name) {
         return PARTICLES.register(name, () -> new SimpleParticleType(false));
@@ -30,5 +28,6 @@ public class ModParticles {
         event.registerSpriteSet(GNEISS_VENT.get(), GneissVentParticle.Provider::new);
         event.registerSpriteSet(WISP.get(), WispParticle.Provider::new);
         event.registerSpriteSet(REPELLENT.get(), RepellentParticle.Provider::new);
+        event.registerSpriteSet(SONIC.get(), SonicParticle.Provider::new);
     }
 }

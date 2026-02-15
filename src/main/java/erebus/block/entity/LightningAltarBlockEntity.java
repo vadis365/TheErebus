@@ -79,20 +79,20 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 			double x = pos.getX() + 0.53125F;
 			double y = pos.getY() + 1.25F;
 			double z = pos.getZ() + 0.53125F;
-			ClientParticles.spawnCustomParticle("smoke", x, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("flame", x, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("smoke", x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("flame", x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("smoke", x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("flame", x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("smoke", x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("flame", x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("smoke", x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("flame", x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("smoke", x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("flame", x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("smoke", x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnCustomParticle("flame", x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
+			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
 		}
 	}
 

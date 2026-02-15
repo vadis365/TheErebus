@@ -2,7 +2,7 @@ package erebus.network.client;
 
 
 import erebus.Erebus;
-import erebus.client.particle.ClientParticleTypes;
+import erebus.client.particle.ClientParticles;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -30,7 +30,7 @@ public record AntlionParticlePacket(int blockType, double xPos, double yPos, dou
 
 	public static void handle(AntlionParticlePacket message, final IPayloadContext ctx) {
 		ctx.enqueueWork(() -> {
-			ClientParticleTypes.spawnAntlionParticles(message.blockType, message.xPos, message.yPos, message.zPos, message.offSetRadius, message.reverse, 0D, 0D, 0D);
+			ClientParticles.spawnAntlionParticles(message.blockType, message.xPos, message.yPos, message.zPos, message.offSetRadius, message.reverse, 0D, 0D, 0D);
 		});
 	}
 

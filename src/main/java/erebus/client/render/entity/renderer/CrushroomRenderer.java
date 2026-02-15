@@ -8,6 +8,7 @@ import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
+import org.jspecify.annotations.NonNull;
 
 public class CrushroomRenderer extends MobRenderer<Crushroom, CrushroomRenderState, CrushroomModel> {
 	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/crushroom.png");
@@ -19,6 +20,8 @@ public class CrushroomRenderer extends MobRenderer<Crushroom, CrushroomRenderSta
 	@Override
 	public void extractRenderState(Crushroom entity, CrushroomRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
+		state.standing = entity.isStanding();
+		state.smashCount = entity.getSmashCount();
 	}
 
 	@Override
@@ -27,7 +30,7 @@ public class CrushroomRenderer extends MobRenderer<Crushroom, CrushroomRenderSta
 	}
 
 	@Override
-	public Identifier getTextureLocation(CrushroomRenderState state) {
+	public @NonNull Identifier getTextureLocation(CrushroomRenderState state) {
 		return TEXTURE;
 	}
 }

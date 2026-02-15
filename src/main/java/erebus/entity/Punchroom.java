@@ -95,7 +95,7 @@ public class Punchroom extends Monster {
 				float f2 = Mth.sin(f) * 0.5F * f1;
 				float f3 = Mth.cos(f) * 0.5F * f1;
 				if (level().isClientSide())
-					ClientParticles.spawnCustomParticle("spores", getX() + f2, getBoundingBox().minY, getZ() + f3, 0.0D, 0.0D, 0.0D);
+					ClientParticles.spawnParticles(ClientParticles.ParticleType.SPORES, getX() + f2, getBoundingBox().minY, getZ() + f3, 0.0D, 0.0D, 0.0D);
 			}
 			playSound(getSquishSound(), getSoundVolume(), ((random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F) / 0.8F);
 			squishAmount = -1.5F;
