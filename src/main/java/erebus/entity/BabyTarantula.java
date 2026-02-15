@@ -13,8 +13,13 @@ public class BabyTarantula extends Tarantula {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 30F)
+                .add(Attributes.MAX_HEALTH, 10F)
                 .add(Attributes.MOVEMENT_SPEED, 0.6F)
-                .add(Attributes.ATTACK_DAMAGE, 5.0);
+                .add(Attributes.ATTACK_DAMAGE, 1.0);
+    }
+
+    @Override
+    public float getVoicePitch() {
+        return super.getVoicePitch() * 2;
     }
 }

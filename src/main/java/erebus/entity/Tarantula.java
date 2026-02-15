@@ -9,7 +9,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -19,8 +18,12 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.spider.Spider;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,12 +41,31 @@ public class Tarantula extends Monster {
         super(type, level);
     }
 
+    @Override
+    protected void registerGoals() {
+        goalSelector.addGoal(0, new FloatGoal(this));
+        goalSelector.addGoal(1, new LeapAtTargetGoal(this, 0.4F));
+        goalSelector.addGoal(2, new MeleeAttackGoal(this, 0.6, true));
+        goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.4D));
+        goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+        targetSelector.addGoal(0, new HurtByTargetGoal(this));
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+    }
+
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 30F)
                 .add(Attributes.MOVEMENT_SPEED, 0.6F)
                 .add(Attributes.ARMOR, 4)
                 .add(Attributes.ATTACK_DAMAGE, 5.0);
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(SKIN_TYPE, random.nextInt(3));
+        builder.define(CLIMBING, (byte)0);
     }
 
     @Override
@@ -101,7 +123,7 @@ public class Tarantula extends Monster {
     @Override
     public void tick() {
         super.tick();
-        if(level().isClientSide()) {
+        if(!level().isClientSide()) {
             setBesideClimbableBlock(horizontalCollision);
         }
     }
@@ -128,7 +150,6 @@ public class Tarantula extends Monster {
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnReason, @Nullable SpawnGroupData groupData) {
         groupData = super.finalizeSpawn(level, difficulty, spawnReason, groupData);
-        RandomSource random = level.getRandom();
         if (random.nextInt(100) == 0) {
             MoneySpider spider = ModEntities.MONEY_SPIDER.get().create(this.level(), EntitySpawnReason.JOCKEY);
             if (spider != null) {

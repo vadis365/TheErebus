@@ -2,7 +2,7 @@ package erebus.entity;
 
 import erebus.block.entity.HoneyCombBlockEntity;
 import erebus.entity.ai.BeePollinateGoal;
-import erebus.entity.ai.EntityAIFlyingWander;
+import erebus.entity.ai.FlyingWanderGoal;
 import erebus.registries.ModSounds;
 import erebus.registries.data.ModDataComponents;
 import erebus.registries.item.ModItems;
@@ -60,7 +60,7 @@ public class WorkerBee extends Animal {
 	private static final EntityDataAccessor<BlockPos> DROP_POINT= SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.BLOCK_POS);
 	private static final EntityDataAccessor<Integer> NECTAR_POINTS = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> TAME_STATE = SynchedEntityData.defineId(WorkerBee.class, EntityDataSerializers.BOOLEAN);
-	private EntityAIFlyingWander aiFlyingWander;
+	private FlyingWanderGoal aiFlyingWander;
 
 	public WorkerBee(EntityType<? extends WorkerBee> type, Level level) {
 		super(type, level);
@@ -77,7 +77,7 @@ public class WorkerBee extends Animal {
 
 	@Override
 	protected void registerGoals() {
-		aiFlyingWander = new EntityAIFlyingWander(this, 0.5D, 0.02F);
+		aiFlyingWander = new FlyingWanderGoal(this, 0.5D, 0.02F);
 		goalSelector.addGoal(0, new BeePollinateGoal(this, 10));
 		goalSelector.addGoal(1, new FloatGoal(this));
 		goalSelector.addGoal(2, new MeleeAttackGoal(this, 0.5D, true));

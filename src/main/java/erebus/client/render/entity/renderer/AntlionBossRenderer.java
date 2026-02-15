@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 
 public class AntlionBossRenderer extends MobRenderer<AntlionBoss, AntlionBossRenderState, AntlionBossModel> {
-	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/antlion_boss.png");
+	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/antlionOverlord.png");
 
 	public AntlionBossRenderer(EntityRendererProvider.Context context) {
         super(context, new AntlionBossModel(context.bakeLayer(ModEntityRendering.ANTLION_BOSS)), 2.5F);

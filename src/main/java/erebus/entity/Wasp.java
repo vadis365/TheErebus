@@ -1,6 +1,6 @@
 package erebus.entity;
 
-import erebus.entity.ai.EntityAIFlyingWander;
+import erebus.entity.ai.FlyingWanderGoal;
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.core.BlockPos;
@@ -56,7 +56,7 @@ public class Wasp extends Monster {
 		goalSelector.addGoal(1, new MeleeAttackGoal(this, 1D, true));
 		goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		goalSelector.addGoal(3, new RandomLookAroundGoal(this));
-		goalSelector.addGoal(4, new EntityAIFlyingWander(this, 0.75D, 0.01F));
+		goalSelector.addGoal(4, new FlyingWanderGoal(this, 0.75D, 0.01F));
 		targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
 //		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Monster>(this, Monster.class, 0, true, false, p -> Config.HORNET_ATTACK_MOBS.get()));
 //		targetSelector.addGoal(2, new NearestAttackableTargetGoal<LivingEntity>(this, LivingEntity.class, 0, true, false, p -> Config.HORNET_ATTACK_CREATURES.get()));

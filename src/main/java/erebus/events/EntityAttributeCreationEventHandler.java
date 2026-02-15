@@ -14,7 +14,7 @@ public class EntityAttributeCreationEventHandler {
     public static void initializeAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.ANIMATED_BLOCK.get(), AnimatedBlock.createAttributes().build());
         event.put(ModEntities.ANTLION.get(), Antlion.createAttributes().build());
-        event.put(ModEntities.ANTLION_BOSS.get(), Antlion.createAttributes().build());
+        event.put(ModEntities.ANTLION_BOSS.get(), AntlionBoss.createAttributes().build());
         event.put(ModEntities.ANTLION_MINI_BOSS.get(), AntlionMiniBoss.createAttributes().build());
         event.put(ModEntities.BABY_SOLIFUGE.get(), BabySolifuge.createAttributes().build());
         event.put(ModEntities.BABY_TARANTULA.get(), BabyTarantula.createAttributes().build());

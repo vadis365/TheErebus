@@ -68,7 +68,7 @@ public class BabySolifuge extends Monster {
             setCustomName(Component.literal(POTION_NAME[getPotionEffect()] + " Solifuge"));
         }
 
-        if(level().isClientSide()) {
+        if(!level().isClientSide()) {
             setBesideClimbableBlock(horizontalCollision);
         }
     }

@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -95,13 +94,13 @@ public class AntlionMiniBoss extends Monster {
     public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity target) {
         if (super.doHurtTarget(level, target)) {
             if (target instanceof LivingEntity living) {
-                byte duration = 0;
+                byte duration;
 
-                if (level.getDifficulty().ordinal() > Difficulty.EASY.ordinal())
-                    if (level.getDifficulty() == Difficulty.NORMAL)
-                        duration = 8;
-                    else if (level.getDifficulty() == Difficulty.HARD)
-                        duration = 15;
+                switch (level.getDifficulty()) {
+                    case NORMAL -> duration = 8;
+                    case HARD -> duration = 15;
+                    default -> duration = 0;
+                }
 
                 if (duration > 0)
                     living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, duration * 20, 0));

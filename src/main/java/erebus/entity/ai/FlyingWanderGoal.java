@@ -8,8 +8,8 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 
-public class EntityAIFlyingWander extends WaterAvoidingRandomStrollGoal {
-    public EntityAIFlyingWander(PathfinderMob creatureIn, double speedIn, float chance) {
+public class FlyingWanderGoal extends WaterAvoidingRandomStrollGoal {
+    public FlyingWanderGoal(PathfinderMob creatureIn, double speedIn, float chance) {
         super(creatureIn, speedIn, chance);
     }
 

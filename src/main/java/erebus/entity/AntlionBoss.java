@@ -11,6 +11,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -60,6 +61,7 @@ public class AntlionBoss extends Monster {
 
     public AntlionBoss(EntityType<? extends AntlionBoss> type, Level level) {
         super(type, level);
+        setHealth(getMaxHealth());
     }
 
     @Override
@@ -101,6 +103,18 @@ public class AntlionBoss extends Monster {
     @Override
     protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
         return ModSounds.ANTLION_GROWL.get();
+    }
+
+    @Override
+    public void startSeenByPlayer(ServerPlayer player) {
+        super.startSeenByPlayer(player);
+        bossEvent.addPlayer(player);
+    }
+
+    @Override
+    public void stopSeenByPlayer(ServerPlayer player) {
+        super.stopSeenByPlayer(player);
+        bossEvent.removePlayer(player);
     }
 
     @Override
@@ -204,9 +218,11 @@ public class AntlionBoss extends Monster {
         List<Entity> entities = level().getEntities(this, getBoundingBox().inflate(16, 1, 16));
         for (Entity entity : entities) {
             if (entity instanceof LivingEntity target) {
-                float knockback = (-3 + random.nextInt(4)) * 0.1F;
-                doHurtTarget((ServerLevel) level(), target);
-                target.push(-Mth.sin(getYRot() * -Mth.PI + random.nextInt(3) + 0.141593F / 180.0F) * knockback, 0.01D, Mth.cos(getYRot() * -Mth.PI + random.nextInt(3) + 0.141593F / 180.0F) * knockback);
+                if (!level().isClientSide()) {
+                    float knockback = (-3 + random.nextInt(4)) * 0.1F;
+                    doHurtTarget((ServerLevel) level(), target);
+                    target.push(-Mth.sin(getYRot() * -Mth.PI + random.nextInt(3) + 0.141593F / 180.0F) * knockback, 0.01D, Mth.cos(getYRot() * -Mth.PI + random.nextInt(3) + 0.141593F / 180.0F) * knockback);
+                }
                 level().playSound(this, getOnPos(), ModSounds.ANTLION_SLAM.get(), SoundSource.HOSTILE);
             }
         }

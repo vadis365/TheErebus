@@ -2,7 +2,12 @@ package erebus.registries.entity;
 
 import erebus.Erebus;
 import erebus.client.render.entity.model.*;
-import erebus.client.render.entity.model.layer.*;
+import erebus.client.render.entity.model.layer.WaspWingsModel;
+import erebus.client.render.entity.model.layer.ant.BlackAntCollectorModel;
+import erebus.client.render.entity.model.layer.ant.BlackAntFertilizerModel;
+import erebus.client.render.entity.model.layer.ant.BlackAntHarvesterModel;
+import erebus.client.render.entity.model.layer.ant.BlackAntPlanterModel;
+import erebus.client.render.entity.model.layer.mosquito.*;
 import erebus.client.render.entity.renderer.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -52,6 +57,11 @@ public class ModEntityRendering {
 	public static ModelLayerLocation MIDGE_SWARM = register("midge_swarm");
 	public static ModelLayerLocation MONEY_SPIDER = register("money_spider");
 	public static ModelLayerLocation MOSQUITO = register("mosquito");
+	public static ModelLayerLocation MOSQUITO_HEAD = registerLayer("mosquito", "head");
+	public static ModelLayerLocation MOSQUITO_HEAD_RIDING = registerLayer("mosquito", "head_riding");
+	public static ModelLayerLocation MOSQUITO_WINGS = registerLayer("mosquito", "wings");
+	public static ModelLayerLocation MOSQUITO_APPENDAGE = registerLayer("mosquito", "appendage");
+	public static ModelLayerLocation MOSQUITO_RIDING = registerLayer("mosquito", "riding");
 	public static ModelLayerLocation MOTH = register("moth");
 	public static ModelLayerLocation POND_SKATER = register("pond_skater");
 	public static ModelLayerLocation PRAYING_MANTIS = register("praying_mantis");
@@ -125,6 +135,11 @@ public class ModEntityRendering {
 		event.registerLayerDefinition(MIDGE_SWARM, FlyModel::createBodyLayer);
 		event.registerLayerDefinition(MONEY_SPIDER, ScytodesModel::createBodyLayer);
 		event.registerLayerDefinition(MOSQUITO, MosquitoModel::createBodyLayer);
+		event.registerLayerDefinition(MOSQUITO_HEAD, MosquitoHeadModel::createBodyLayer);
+		event.registerLayerDefinition(MOSQUITO_HEAD_RIDING, MosquitoHeadRidingModel::createBodyLayer);
+		event.registerLayerDefinition(MOSQUITO_APPENDAGE, MosquitoAppendageModel::createBodyLayer);
+		event.registerLayerDefinition(MOSQUITO_RIDING, MosquitoRidingModel::createBodyLayer);
+		event.registerLayerDefinition(MOSQUITO_WINGS, MosquitoWingsModel::createBodyLayer);
 		event.registerLayerDefinition(MOTH, MothModel::createBodyLayer);
 		event.registerLayerDefinition(POND_SKATER, PondSkaterModel::createBodyLayer);
 		event.registerLayerDefinition(PRAYING_MANTIS, PrayingMantisModel::createBodyLayer);

@@ -1,4 +1,4 @@
-package erebus.client.render.entity.model.layer;
+package erebus.client.render.entity.model.layer.ant;
 
 import erebus.client.render.entity.renderer.state.BlackAntRenderState;
 import net.minecraft.client.model.EntityModel;
