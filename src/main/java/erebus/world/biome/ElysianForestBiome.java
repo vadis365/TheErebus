@@ -46,19 +46,19 @@ public class ElysianForestBiome extends ErebusBiome {
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()
                         .addSpawn(MobCategory.CREATURE, 20, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE.get(), 3, 5))
-                        .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE_LARVA.get(), 2, 3))
+                        .addSpawn(MobCategory.CREATURE, 18, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE_LARVA.get(), 2, 3))
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.GRASSHOPPER.get(), 1, 3))
-                        //.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.FLY.get(), 10, 1, 2)) Worker Bee
+                        .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.WORKER_BEE.get(), 1, 2))
                         .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.FLY.get(), 1, 2))
                         .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.DRAGON_FLY.get(), 8, 8))
                         .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.BOT_FLY.get(), 2, 3))
                         .addSpawn(MobCategory.MONSTER, 15, new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 2, 3))
-                        //.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 10, 1, 2)) Crop Weevil
-                        //.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 10, 1, 2)) Chameleon Tick
                         .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 1, 2))
-                        //.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 10, 1, 2)) Cicada
-                        //.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 1, 2)) Glow Worm
-                        //.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 1, 2)) Titan Beetle
+                        .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.CROP_WEEVIL.get(), 1, 2))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.CHAMELEON_TICK.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 100, new MobSpawnSettings.SpawnerData(ModEntities.CICADA.get(), 1, 1))
+                        .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.GLOW_WORM.get(), 1, 3))
+                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(ModEntities.TITAN_BEETLE.get(), 1, 1))
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)

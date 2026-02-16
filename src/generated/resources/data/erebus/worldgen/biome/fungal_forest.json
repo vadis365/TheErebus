@@ -59,9 +59,53 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
+    "creature": [
+      {
+        "type": "erebus:fungal_weevil",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:black_ant",
+        "maxCount": 5,
+        "minCount": 3,
+        "weight": 15
+      },
+      {
+        "type": "erebus:stag_beetle",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 8
+      }
+    ],
     "misc": [],
-    "monster": [],
+    "monster": [
+      {
+        "type": "erebus:crushroom",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "erebus:punchroom",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:zombie_ant",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 8
+      },
+      {
+        "type": "erebus:zombie_ant_soldier",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 8
+      }
+    ],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

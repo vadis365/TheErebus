@@ -49,7 +49,14 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
+    "creature": [
+      {
+        "type": "erebus:jumping_spider",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 10
+      }
+    ],
     "misc": [],
     "monster": [
       {
@@ -63,6 +70,12 @@
         "maxCount": 3,
         "minCount": 2,
         "weight": 10
+      },
+      {
+        "type": "erebus:chameleon_tick",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 30
       },
       {
         "type": "erebus:black_widow",

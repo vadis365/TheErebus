@@ -53,10 +53,22 @@
     "axolotls": [],
     "creature": [
       {
+        "type": "erebus:rhino_beetle",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
         "type": "erebus:beetle_larva",
         "maxCount": 4,
         "minCount": 2,
         "weight": 15
+      },
+      {
+        "type": "erebus:honey_pot_ant",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 10
       }
     ],
     "misc": [],
@@ -86,10 +98,40 @@
         "weight": 10
       },
       {
+        "type": "erebus:midge_swarm",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
         "type": "erebus:scytodes",
         "maxCount": 4,
         "minCount": 1,
         "weight": 20
+      },
+      {
+        "type": "erebus:solifuge",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:tarantula",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:chameleon_tick",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:scorpion",
+        "maxCount": 2,
+        "minCount": 2,
+        "weight": 10
       }
     ],
     "underground_water_creature": [],

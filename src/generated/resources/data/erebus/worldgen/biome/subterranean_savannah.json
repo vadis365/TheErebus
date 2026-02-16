@@ -75,14 +75,26 @@
         "maxCount": 8,
         "minCount": 4,
         "weight": 10
+      },
+      {
+        "type": "erebus:glow_worm",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 5
       }
     ],
     "misc": [],
     "monster": [
       {
-        "type": "erebus:fly",
+        "type": "erebus:mosquito",
         "maxCount": 3,
         "minCount": 1,
+        "weight": 60
+      },
+      {
+        "type": "erebus:fly",
+        "maxCount": 8,
+        "minCount": 8,
         "weight": 15
       },
       {
@@ -92,10 +104,28 @@
         "weight": 20
       },
       {
+        "type": "erebus:chameleon_tick",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
         "type": "erebus:scytodes",
         "maxCount": 4,
         "minCount": 1,
         "weight": 20
+      },
+      {
+        "type": "erebus:tarantula",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:scorpion",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
       }
     ],
     "underground_water_creature": [],

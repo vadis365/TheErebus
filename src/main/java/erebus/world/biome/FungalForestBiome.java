@@ -1,5 +1,6 @@
 package erebus.world.biome;
 
+import erebus.registries.entity.ModEntities;
 import erebus.registries.world.ModBiomes;
 import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
@@ -9,6 +10,7 @@ import erebus.registries.world.feature.TreeFeatures;
 import erebus.world.biome.util.ErebusBiome;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
@@ -41,6 +43,13 @@ public class FungalForestBiome extends ErebusBiome {
                         .build()
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()
+                        .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.FUNGAL_WEEVIL.get(), 1, 1))
+                        .addSpawn(MobCategory.MONSTER, 5, new MobSpawnSettings.SpawnerData(ModEntities.CRUSHROOM.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 15, new MobSpawnSettings.SpawnerData(ModEntities.BLACK_ANT.get(), 3, 5))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.PUNCHROOM.get(), 1, 2))
+                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(ModEntities.STAG_BEETLE.get(), 1, 1))
+                        .addSpawn(MobCategory.MONSTER, 8, new MobSpawnSettings.SpawnerData(ModEntities.ZOMBIE_ANT.get(), 1, 4))
+                        .addSpawn(MobCategory.MONSTER, 8, new MobSpawnSettings.SpawnerData(ModEntities.ZOMBIE_ANT_SOLDIER.get(), 1, 2))
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)

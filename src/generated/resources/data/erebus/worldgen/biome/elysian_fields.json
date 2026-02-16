@@ -63,13 +63,43 @@
         "type": "erebus:beetle_larva",
         "maxCount": 3,
         "minCount": 2,
-        "weight": 10
+        "weight": 18
       },
       {
         "type": "erebus:grasshopper",
         "maxCount": 3,
         "minCount": 1,
         "weight": 10
+      },
+      {
+        "type": "erebus:worker_bee",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:crop_weevil",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:cicada",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 100
+      },
+      {
+        "type": "erebus:glow_worm",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:titan_beetle",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 8
       }
     ],
     "misc": [],
@@ -100,6 +130,12 @@
       },
       {
         "type": "erebus:velvet_worm",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:chameleon_tick",
         "maxCount": 2,
         "minCount": 1,
         "weight": 10

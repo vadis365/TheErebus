@@ -66,6 +66,18 @@
         "weight": 10
       },
       {
+        "type": "erebus:fire_ant",
+        "maxCount": 8,
+        "minCount": 1,
+        "weight": 30
+      },
+      {
+        "type": "erebus:fire_ant_soldier",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 30
+      },
+      {
         "type": "erebus:black_widow",
         "maxCount": 1,
         "minCount": 1,
@@ -74,8 +86,26 @@
       {
         "type": "erebus:antlion",
         "maxCount": 3,
-        "minCount": 3,
+        "minCount": 1,
         "weight": 200
+      },
+      {
+        "type": "erebus:solifuge",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 25
+      },
+      {
+        "type": "erebus:chameleon_tick",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:scorpion",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 20
       },
       {
         "type": "erebus:lava_web_spider",

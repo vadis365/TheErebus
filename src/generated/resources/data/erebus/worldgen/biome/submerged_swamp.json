@@ -57,16 +57,28 @@
     "axolotls": [],
     "creature": [
       {
+        "type": "erebus:beetle_larva",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 25
+      },
+      {
         "type": "erebus:beetle",
         "maxCount": 2,
         "minCount": 1,
         "weight": 20
       },
       {
-        "type": "erebus:beetle_larva",
+        "type": "erebus:jumping_spider",
         "maxCount": 4,
         "minCount": 2,
-        "weight": 25
+        "weight": 10
+      },
+      {
+        "type": "erebus:pond_skater",
+        "maxCount": 5,
+        "minCount": 3,
+        "weight": 100
       }
     ],
     "misc": [],
@@ -82,6 +94,18 @@
         "maxCount": 8,
         "minCount": 4,
         "weight": 10
+      },
+      {
+        "type": "erebus:bog_maw",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 20
+      },
+      {
+        "type": "erebus:mosquito",
+        "maxCount": 4,
+        "minCount": 3,
+        "weight": 20
       }
     ],
     "underground_water_creature": [],
