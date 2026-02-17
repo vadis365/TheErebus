@@ -16,21 +16,21 @@ import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.SpriteGetter;
+import net.minecraft.client.resources.model.SpriteId;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class BlockOfBonesRenderer implements BlockEntityRenderer<BlockOfBonesBlockEntity, BlockOfBonesBlockEntityRenderState> {
 
-    private final Material TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bone_block"));
+    private final SpriteId TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bone_block"));
     private final BlockOfBonesModel model;
-    private final MaterialSet materials;
+    private final SpriteGetter sprites;
 
     public BlockOfBonesRenderer(Context context) {
         model = new BlockOfBonesModel(context.bakeLayer(ModBlockEntityRendering.BLOCK_OF_BONES));
-        materials = context.materials();
+        sprites = context.sprites();
     }
 
     @Override
@@ -67,7 +67,7 @@ public class BlockOfBonesRenderer implements BlockEntityRenderer<BlockOfBonesBlo
                 pose.rotateAround(Axis.YN.rotationDegrees(90), 0, 1, 0);
                 break;
         }
-        submitNodeCollector.submitModel(model, renderState, pose, TEXTURE.renderType(RenderTypes::entitySolid), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(TEXTURE), 0, renderState.breakProgress);
+        submitNodeCollector.submitModel(model, renderState, pose, TEXTURE.renderType(RenderTypes::entitySolid), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, sprites.get(TEXTURE), 0, renderState.breakProgress);
         if (renderState.nametag != null) {
             submitNodeCollector.submitNameTag(pose, renderState.nametagAttachment, 0, renderState.nametag, false, renderState.lightCoords, renderState.distanceToCameraSq, camera);
         }

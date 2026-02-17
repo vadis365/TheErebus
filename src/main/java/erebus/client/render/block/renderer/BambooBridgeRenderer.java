@@ -16,20 +16,20 @@ import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.SpriteGetter;
+import net.minecraft.client.resources.model.SpriteId;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class BambooBridgeRenderer implements BlockEntityRenderer<BambooBridgeBlockEntity, BambooBridgeBlockEntityRenderState> {
 
-	public final Material TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bamboo_bridge"));
+	public final SpriteId TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bamboo_bridge"));
 	private final BambooBridgeModel model;
-	private final MaterialSet materials;
+	private final SpriteGetter sprites;
 
 	public BambooBridgeRenderer(Context context) {
-		materials = context.materials();
+		sprites = context.sprites();
 		model = new BambooBridgeModel(context.bakeLayer(ModBlockEntityRendering.BAMBOO_BRIDGE));
 	}
 
@@ -74,7 +74,7 @@ public class BambooBridgeRenderer implements BlockEntityRenderer<BambooBridgeBlo
 				renderState.lightCoords,
 				OverlayTexture.NO_OVERLAY,
 				-1,
-				materials.get(TEXTURE),
+				sprites.get(TEXTURE),
 				0,
 				renderState.breakProgress
 		);

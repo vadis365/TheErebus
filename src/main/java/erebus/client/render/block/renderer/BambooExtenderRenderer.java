@@ -16,8 +16,8 @@ import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.SpriteGetter;
+import net.minecraft.client.resources.model.SpriteId;
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
@@ -25,13 +25,13 @@ import org.jspecify.annotations.Nullable;
 
 public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtenderBlockEntity, BambooExtenderBlockEntityRenderState> {
 
-	private final Material TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bamboo_extender"));
+	private final SpriteId TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bamboo_extender"));
 	private final BambooExtenderModel model;
-	private final MaterialSet materials;
+	private final SpriteGetter sprites;
 
     public BambooExtenderRenderer(Context context) {
 		model = new BambooExtenderModel(context.bakeLayer(ModBlockEntityRendering.BAMBOO_EXTENDER));
-		materials = context.materials();
+		sprites = context.sprites();
     }
 
 	@Override
@@ -62,7 +62,7 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 						renderState.lightCoords,
 						OverlayTexture.NO_OVERLAY,
 						-1,
-						materials.get(TEXTURE),
+						sprites.get(TEXTURE),
 						0,
 						renderState.breakProgress
 				);
@@ -92,7 +92,7 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 						renderState.lightCoords,
 						OverlayTexture.NO_OVERLAY,
 						-1,
-						materials.get(TEXTURE),
+						sprites.get(TEXTURE),
 						0,
 						renderState.breakProgress
 				);
@@ -121,7 +121,7 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 						renderState.lightCoords,
 						OverlayTexture.NO_OVERLAY,
 						-1,
-						materials.get(TEXTURE),
+						sprites.get(TEXTURE),
 						0,
 						renderState.breakProgress
 				);
@@ -140,7 +140,7 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 						renderState.lightCoords,
 						OverlayTexture.NO_OVERLAY,
 						-1,
-						materials.get(TEXTURE),
+						sprites.get(TEXTURE),
 						0,
 						renderState.breakProgress
 				);
@@ -159,7 +159,7 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 						renderState.lightCoords,
 						OverlayTexture.NO_OVERLAY,
 						-1,
-						materials.get(TEXTURE),
+						sprites.get(TEXTURE),
 						0,
 						renderState.breakProgress
 				);
@@ -178,7 +178,7 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 						renderState.lightCoords,
 						OverlayTexture.NO_OVERLAY,
 						-1,
-						materials.get(TEXTURE),
+						sprites.get(TEXTURE),
 						0,
 						renderState.breakProgress
 				);

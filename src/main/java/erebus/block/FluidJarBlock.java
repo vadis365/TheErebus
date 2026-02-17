@@ -67,9 +67,9 @@ public class FluidJarBlock extends BaseEntityBlock {
 				if (player.getItemInHand(hand).isEmpty() || !FluidUtil.interactWithFluidHandler(player, hand, world, pos, hit.getDirection())) {
 					FluidResource resource = handler.getResource(0);
 					if (!resource.isEmpty())
-						player.displayClientMessage(Component.literal(resource.getHoverName().getString() + ": " + handler.getAmountAsInt(0) + "/" + FluidJarBlockEntity.MAX_CAPACITY), true);
+						player.sendOverlayMessage(Component.literal(resource.getHoverName().getString() + ": " + handler.getAmountAsInt(0) + "/" + FluidJarBlockEntity.MAX_CAPACITY));
 					else
-						player.displayClientMessage(Component.literal("Empty: 0/" + FluidJarBlockEntity.MAX_CAPACITY), true);
+						player.sendOverlayMessage(Component.literal("Empty: 0/" + FluidJarBlockEntity.MAX_CAPACITY));
 				}
 			}
 			return InteractionResult.SUCCESS;

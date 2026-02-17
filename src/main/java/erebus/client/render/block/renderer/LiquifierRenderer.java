@@ -16,8 +16,8 @@ import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.SpriteGetter;
+import net.minecraft.client.resources.model.SpriteId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
@@ -28,12 +28,12 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 	private final Identifier TEXTURE = Erebus.prefix("liquifier");
 	private final LiquifierModel model;
 	private final ItemModelResolver itemModelResolver;
-	private final MaterialSet materials;
+	private final SpriteGetter sprites;
 	
 	public LiquifierRenderer(Context context) {
 		model = new LiquifierModel(context.bakeLayer(ModBlockEntityRendering.LIQUIFIER));
 		itemModelResolver = context.itemModelResolver();
-		materials = context.materials();
+		sprites = context.sprites();
 	}
 
 	/*@Override
@@ -88,7 +88,7 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 
 	@Override
 	public void submit(LiquifierBlockEntityRenderState renderState, PoseStack pose, @NonNull SubmitNodeCollector submitNodeCollector, @NonNull CameraRenderState cameraRenderState) {
-		Material material = Sheets.BLOCKS_MAPPER.apply(TEXTURE);
+		SpriteId sprite = Sheets.BLOCKS_MAPPER.apply(TEXTURE);
 
 		if (!renderState.tankResource.isEmpty() && renderState.tankAmount > 0) {
 			float height = (0.375F / renderState.tankCapacity) * renderState.tankAmount;
@@ -115,11 +115,11 @@ public class LiquifierRenderer implements BlockEntityRenderer<LiquifierBlockEnti
 				model,
 				renderState,
 				pose,
-				material.renderType(RenderTypes::entityCutout),
+				sprite.renderType(RenderTypes::entityCutout),
 				renderState.lightCoords,
 				OverlayTexture.NO_OVERLAY,
 				-1,
-				materials.get(material),
+				sprites.get(sprite),
 				0,
 				renderState.breakProgress
 		);

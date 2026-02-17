@@ -18,8 +18,8 @@ import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.SpriteGetter;
+import net.minecraft.client.resources.model.SpriteId;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
@@ -35,13 +35,13 @@ import org.jspecify.annotations.Nullable;
 
 public class ErebusChestRenderer implements BlockEntityRenderer<ErebusChestBlockEntity, ErebusChestRenderState> {
 
-    private final MaterialSet materials;
+    private final SpriteGetter materials;
     private final ChestModel model;
     private final ChestModel doubleLeftModel;
     private final ChestModel doubleRightModel;
 
     public ErebusChestRenderer(BlockEntityRendererProvider.Context context) {
-        materials = context.materials();
+        materials = context.sprites();
         model = new ChestModel(context.bakeLayer(ModelLayers.CHEST));
         doubleLeftModel = new ChestModel(context.bakeLayer(ModelLayers.DOUBLE_CHEST_LEFT));
         doubleRightModel = new ChestModel(context.bakeLayer(ModelLayers.DOUBLE_CHEST_RIGHT));
@@ -90,7 +90,7 @@ public class ErebusChestRenderer implements BlockEntityRenderer<ErebusChestBlock
         float open = state.open;
         open = 1.0F - open;
         open = 1.0F - open * open * open;
-        Material material = ModSheets.chooseMaterial(state.material, state.type);
+        SpriteId material = ModSheets.chooseSpriteId(state.material, state.type);
         RenderType renderType = material.renderType(RenderTypes::entityCutout);
 
         switch(state.type) {

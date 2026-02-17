@@ -10,15 +10,15 @@ import erebus.client.render.block.model.altar.repair.RepairAltarMidModel;
 import erebus.client.render.block.renderer.state.RepairAltarBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.model.Model;
-import net.minecraft.client.renderer.MaterialMapper;
+import net.minecraft.client.renderer.SpriteMapper;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.SpriteGetter;
+import net.minecraft.client.resources.model.SpriteId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
@@ -28,15 +28,15 @@ import org.jspecify.annotations.Nullable;
 import java.util.function.Consumer;
 
 public final class RepairAltarSpecialRenderer implements NoDataSpecialModelRenderer {
-	private final MaterialMapper MAPPER = new MaterialMapper(TextureAtlas.LOCATION_BLOCKS, "altar_repair");
-	private final Material material = MAPPER.apply(Erebus.prefix("5"));
+	private final SpriteMapper MAPPER = new SpriteMapper(TextureAtlas.LOCATION_BLOCKS, "altar_repair");
+	private final SpriteId material = MAPPER.apply(Erebus.prefix("5"));
 	private final RepairAltarBaseModel base;
 	private final RepairAltarMidModel mid;
 	private final RepairAltarAnvilModel anvil;
-	private final MaterialSet materials;
+	private final SpriteGetter sprites;
 
 	public RepairAltarSpecialRenderer(BakingContext context) {
-		materials = context.materials();
+		sprites = context.sprites();
 		this.base = new RepairAltarBaseModel(context.entityModelSet().bakeLayer(ModBlockEntityRendering.ALTAR_REPAIR_BASE));
 		this.mid = new RepairAltarMidModel(context.entityModelSet().bakeLayer(ModBlockEntityRendering.ALTAR_REPAIR_MID));
 		this.anvil = new RepairAltarAnvilModel(context.entityModelSet().bakeLayer(ModBlockEntityRendering.ALTAR_REPAIR_ANVIL));
@@ -56,7 +56,7 @@ public final class RepairAltarSpecialRenderer implements NoDataSpecialModelRende
 		pose.translate(0.5D, 0.75D, 0.5D);
 		pose.scale(-0.5F, -0.5F, 0.5F);
 		pose.scale(0.5F, 0.5F, 0.5F);
-		submit.submitModel(model, state, pose, material.renderType(RenderTypes::entityCutout), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, null);
+		submit.submitModel(model, state, pose, material.renderType(RenderTypes::entityCutout), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, sprites.get(material), 0, null);
 		pose.popPose();
 	}
 

@@ -17,8 +17,8 @@ import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.SpriteGetter;
+import net.minecraft.client.resources.model.SpriteId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -32,12 +32,12 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 	private final Identifier TEXTURE = Erebus.prefix("offering_altar");
 	private final OfferingAltarModel model;
 	private final ItemModelResolver itemModelResolver;
-	private final MaterialSet materials;
+	private final SpriteGetter sprites;
 
 	public OfferingAltarRenderer(Context context) {
 		model = new OfferingAltarModel(context.bakeLayer(ModBlockEntityRendering.OFFERING_ALTAR));
 		itemModelResolver = context.itemModelResolver();
-		materials = context.materials();
+		sprites = context.sprites();
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 
 	@Override
 	public void submit(OfferingAltarBlockEntityRenderState renderState, PoseStack pose, SubmitNodeCollector submit, @NonNull CameraRenderState camera) {
-		Material material = Sheets.BLOCKS_MAPPER.apply(TEXTURE);
+		SpriteId sprite = Sheets.BLOCKS_MAPPER.apply(TEXTURE);
 
 		pose.pushPose();
 		pose.translate(0.5D, 1.5D, 0.5D);
@@ -86,11 +86,11 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 				model,
 				renderState,
 				pose,
-				material.renderType(RenderTypes::entitySolid),
+				sprite.renderType(RenderTypes::entitySolid),
 				renderState.lightCoords,
 				OverlayTexture.NO_OVERLAY,
 				-1,
-				materials.get(material),
+				sprites.get(sprite),
 				0,
 				renderState.breakProgress
 		);

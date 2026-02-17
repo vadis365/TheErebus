@@ -13,8 +13,8 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.SpriteGetter;
+import net.minecraft.client.resources.model.SpriteId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
@@ -25,22 +25,22 @@ import java.util.function.Consumer;
 
 public final class OfferingAltarSpecialRenderer implements NoDataSpecialModelRenderer {
 	private final OfferingAltarModel model;
-	private final MaterialSet materials;
+	private final SpriteGetter sprites;
 
 	public OfferingAltarSpecialRenderer(BakingContext context) {
 		this.model = new OfferingAltarModel(context.entityModelSet().bakeLayer(ModBlockEntityRendering.OFFERING_ALTAR));
-		this.materials = context.materials();
+		this.sprites = context.sprites();
 	}
 
 	@Override
 	public void submit(@NonNull ItemDisplayContext context, PoseStack pose, SubmitNodeCollector submit, int lightCoords, int overlayCoords, boolean hasFoil, int outlineColor) {
 		OfferingAltarBlockEntityRenderState state = new OfferingAltarBlockEntityRenderState();
-		Material material = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("offering_altar"));
+		SpriteId sprite = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("offering_altar"));
 
 		pose.pushPose();
 		pose.translate(0.5D, 1D, 0.5D);
 		pose.scale(-0.5F, -0.5F, 0.5F);
-		submit.submitModel(model, state, pose, material.renderType(RenderTypes::entitySolid), lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, null);
+		submit.submitModel(model, state, pose, sprite.renderType(RenderTypes::entitySolid), lightCoords, OverlayTexture.NO_OVERLAY, -1, sprites.get(sprite), 0, null);
 		pose.popPose();
 	}
 

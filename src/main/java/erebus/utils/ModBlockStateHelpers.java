@@ -178,18 +178,18 @@ public class ModBlockStateHelpers {
     }
 
     public void createCrossBlock(DeferredBlock<Block> block) {
-        MultiVariant model = plainVariant(PlantType.NOT_TINTED.getCross().extend().renderType("cutout").build().create(block.get(), PlantType.NOT_TINTED.getTextureMapping(block.get()), blockModels.modelOutput));
+        MultiVariant model = plainVariant(PlantType.NOT_TINTED.getCross().create(block.get(), PlantType.NOT_TINTED.getTextureMapping(block.get()), blockModels.modelOutput));
         blockModels.blockStateOutput.accept(createSimpleBlock(block.get(), model));
     }
 
     public void createCrossBlockTinted(DeferredBlock<Block> block) {
-        MultiVariant model = plainVariant(PlantType.TINTED.getCross().extend().renderType("cutout").build().create(block.get(), PlantType.NOT_TINTED.getTextureMapping(block.get()), blockModels.modelOutput));
+        MultiVariant model = plainVariant(PlantType.TINTED.getCross().create(block.get(), PlantType.NOT_TINTED.getTextureMapping(block.get()), blockModels.modelOutput));
         blockModels.blockStateOutput.accept(createSimpleBlock(block.get(), model));
     }
 
     public void createDoublePlant(DeferredBlock<Block> block) {
-        MultiVariant topModel = plainVariant(blockModels.createSuffixedVariant(block.get(), "_top", ModelTemplates.CROSS.extend().renderType("cutout").build(), TextureMapping::cross));
-        MultiVariant bottomModel = plainVariant(blockModels.createSuffixedVariant(block.get(), "_bottom", ModelTemplates.CROSS.extend().renderType("cutout").build(), TextureMapping::cross));
+        MultiVariant topModel = plainVariant(blockModels.createSuffixedVariant(block.get(), "_top", ModelTemplates.CROSS, TextureMapping::cross));
+        MultiVariant bottomModel = plainVariant(blockModels.createSuffixedVariant(block.get(), "_bottom", ModelTemplates.CROSS, TextureMapping::cross));
         blockModels.createDoubleBlock(block.get(), topModel, bottomModel);
     }
 
@@ -202,7 +202,7 @@ public class ModBlockStateHelpers {
                                         PropertyDispatch.initial(ModBerryBushBlock.AGE)
                                                 .generate(
                                                         age -> plainVariant(
-                                                                blockModels.createSuffixedVariant(bush.get(), "_stage" + age, ModelTemplates.CROSS.extend().renderType("cutout").build(), TextureMapping::cross)
+                                                                blockModels.createSuffixedVariant(bush.get(), "_stage" + age, ModelTemplates.CROSS, TextureMapping::cross)
                                                         )
                                                 )
                                 )

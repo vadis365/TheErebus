@@ -35,7 +35,7 @@ public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBl
 	public void extractRenderState(AnimatedBlock entity, AnimatedBlockRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
 		state.blockState = entity.getBlockType();
-		state.sprite = Minecraft.getInstance().getBlockRenderer().getBlockModel(state.blockState).particleIcon();
+		state.sprite = Minecraft.getInstance().getBlockRenderer().getBlockModel(state.blockState).particleMaterial().sprite();
 		itemModelResolver.updateForTopItem(state.itemStackRenderState, new ItemStack(entity.getBlockType().getBlock()), ItemDisplayContext.FIXED, entity.level(), null, 0);
 	}
 

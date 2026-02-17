@@ -46,7 +46,7 @@ public class ModItemModels {
         );
         normalItem(ModItems.CAMO_POWDER);
         normalItem(ModItems.NECTAR);
-        itemModels.generateFlatItem(ModItems.HONEY_DRIP.get(), ModelTemplates.FLAT_HANDHELD_ITEM.extend().renderType("cutout").build());
+        itemModels.generateFlatItem(ModItems.HONEY_DRIP.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         normalItem(ModItems.POISON_GLAND);
         normalItem(ModItems.MUD_BRICK);
         normalItem(ModItems.WHETSTONE_POWDER);

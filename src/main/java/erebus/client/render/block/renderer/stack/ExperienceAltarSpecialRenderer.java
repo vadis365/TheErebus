@@ -10,15 +10,15 @@ import erebus.client.render.block.model.altar.experience.ExperienceAltarMidModel
 import erebus.client.render.block.renderer.state.ExperienceAltarBlockEntityRenderState;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.model.Model;
-import net.minecraft.client.renderer.MaterialMapper;
+import net.minecraft.client.renderer.SpriteMapper;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.SpriteGetter;
+import net.minecraft.client.resources.model.SpriteId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
@@ -28,15 +28,15 @@ import org.jspecify.annotations.Nullable;
 import java.util.function.Consumer;
 
 public final class ExperienceAltarSpecialRenderer implements NoDataSpecialModelRenderer {
-	private final MaterialMapper MAPPER = new MaterialMapper(TextureAtlas.LOCATION_BLOCKS, "altar_xp");
-	private final Material material = MAPPER.apply(Erebus.prefix("5"));
+	private final SpriteMapper MAPPER = new SpriteMapper(TextureAtlas.LOCATION_BLOCKS, "altar_xp");
+	private final SpriteId material = MAPPER.apply(Erebus.prefix("5"));
 	private final ExperienceAltarBaseModel base;
 	private final ExperienceAltarMidModel mid;
 	private final ExperienceAltarGlassModel electrode;
-	private final MaterialSet materials;
+	private final SpriteGetter sprites;
 
 	public ExperienceAltarSpecialRenderer(BakingContext context) {
-		materials = context.materials();
+		sprites = context.sprites();
 		this.base = new ExperienceAltarBaseModel(context.entityModelSet().bakeLayer(ModBlockEntityRendering.ALTAR_EXPERIENCE_BASE));
 		this.mid = new ExperienceAltarMidModel(context.entityModelSet().bakeLayer(ModBlockEntityRendering.ALTAR_EXPERIENCE_MID));
 		this.electrode = new ExperienceAltarGlassModel(context.entityModelSet().bakeLayer(ModBlockEntityRendering.ALTAR_EXPERIENCE_GLASS));
@@ -56,7 +56,7 @@ public final class ExperienceAltarSpecialRenderer implements NoDataSpecialModelR
 		pose.translate(0.5D, 0.75D, 0.5D);
 		pose.scale(-0.5F, -0.5F, 0.5F);
 		pose.scale(0.5F, 0.5F, 0.5F);
-		submit.submitModel(model, state, pose, material.renderType(RenderTypes::entityCutout), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, null);
+		submit.submitModel(model, state, pose, material.renderType(RenderTypes::entityCutout), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, sprites.get(material), 0, null);
 		pose.popPose();
 	}
 

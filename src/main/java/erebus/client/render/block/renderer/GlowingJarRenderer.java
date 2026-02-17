@@ -17,21 +17,21 @@ import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.SpriteGetter;
+import net.minecraft.client.resources.model.SpriteId;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
 public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEntity, GlowingJarBlockEntityRenderState> {
 
-    private final Material TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("glowing_jar"));
-    private final Material WISP = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("particle/wisp"));
+    private final SpriteId TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("glowing_jar"));
+    private final SpriteId WISP = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("particle/wisp"));
     private final GlowingJarModel model;
-    private final MaterialSet materials;
+    private final SpriteGetter sprites;
 
     public GlowingJarRenderer(BlockEntityRendererProvider.Context context) {
         model = new GlowingJarModel(context.bakeLayer(ModBlockEntityRendering.GLOWING_JAR));
-        materials = context.materials();
+        sprites = context.sprites();
     }
 
     private void renderQuads(PoseStack poseStack, VertexConsumer consumer, float xMax, float xMin, float yMin, float height, float zMin, float zMax, int combinedLight) {
@@ -96,7 +96,7 @@ public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEn
         poseStack.scale(0.7125F, -0.9999F, -0.7125F);
 
         GlStateManager._disableCull();
-        submitNodeCollector.submitModel(model, renderState, poseStack, TEXTURE.renderType(RenderTypes::entityTranslucent), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(TEXTURE), 0, renderState.breakProgress);
+        submitNodeCollector.submitModel(model, renderState, poseStack, TEXTURE.renderType(RenderTypes::entityTranslucent), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, sprites.get(TEXTURE), 0, renderState.breakProgress);
         GlStateManager._enableCull();
         poseStack.popPose();
     }

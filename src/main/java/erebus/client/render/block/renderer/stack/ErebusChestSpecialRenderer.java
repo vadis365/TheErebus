@@ -13,8 +13,8 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.ChestSpecialRenderer;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.SpriteGetter;
+import net.minecraft.client.resources.model.SpriteId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
@@ -38,12 +38,12 @@ public final class ErebusChestSpecialRenderer implements NoDataSpecialModelRende
     public static final Identifier VARNISHED_TEXTURE = Erebus.prefix("varnished_chest");
     public static final Identifier WHITE_TEXTURE = Erebus.prefix("white_chest");
 
-    private final MaterialSet materials;
+    private final SpriteGetter materials;
     private final ChestModel model;
-    private final Material material;
+    private final SpriteId material;
     private final float openness;
 
-    public ErebusChestSpecialRenderer(MaterialSet materials, ChestModel model, Material material, float openness) {
+    public ErebusChestSpecialRenderer(SpriteGetter materials, ChestModel model, SpriteId material, float openness) {
         this.materials = materials;
         this.model = model;
         this.material = material;
@@ -83,8 +83,8 @@ public final class ErebusChestSpecialRenderer implements NoDataSpecialModelRende
 
         public SpecialModelRenderer<?> bake(SpecialModelRenderer.BakingContext context) {
             ChestModel model = new ChestModel(context.entityModelSet().bakeLayer(ModelLayers.CHEST));
-            Material fullTexture = Sheets.CHEST_MAPPER.apply(this.texture);
-            return new ChestSpecialRenderer(context.materials(), model, fullTexture, this.openness);
+            SpriteId fullTexture = Sheets.CHEST_MAPPER.apply(this.texture);
+            return new ChestSpecialRenderer(context.sprites(), model, fullTexture, this.openness);
         }
     }
 }
