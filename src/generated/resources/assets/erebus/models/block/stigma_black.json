@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "erebus:block/stigma_black"
+    "all": "erebus:block/stigma"
   }
 }

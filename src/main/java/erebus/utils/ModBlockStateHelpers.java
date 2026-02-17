@@ -15,11 +15,13 @@ import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.block.model.Material;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -39,6 +41,10 @@ public class ModBlockStateHelpers {
 
     protected void createBlock(DeferredBlock<Block> block) {
         blockModels.createTrivialCube(block.get());
+    }
+
+    protected void createStigma(DeferredBlock<Block> block) {
+        blockModels.blockStateOutput.accept(createSimpleBlock(block.get(), plainVariant(TexturedModel.CUBE.updateTexture((mapping) -> mapping.put(TextureSlot.ALL, new Material(Erebus.prefix("block/stigma")))).create(block.get(), blockModels.modelOutput))));
     }
 
     protected void createCustomBlock(Supplier<? extends Block> block) {
@@ -71,17 +77,14 @@ public class ModBlockStateHelpers {
 
     protected void createHoneyTreat() {
         blockModels.registerSimpleFlatItemModel(ModBlocks.HONEY_TREAT.asItem());
-        ModModelTemplates.honeyTreatTemplate.create(Erebus.prefix("block/%s".formatted(ModBlocks.HONEY_TREAT.getId().getPath())), getHoneyTreatTextureMap(ModBlocks.HONEY_TREAT.get()), blockModels.modelOutput);
 
         HoneyTreatBlock.BITES.getPossibleValues().forEach(bite -> {
-            if(bite != 0) {
-                ModModelTemplates.honeyTreatBites[bite - 1].create(
-                        Erebus.prefix("block/%s_slice_%d".formatted(ModBlocks.HONEY_TREAT.getId().getPath(), bite)),
-                        getHoneyTreatTextureMap(ModBlocks.HONEY_TREAT.get())
-                                .put(TextureSlot.INSIDE, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_inside")),
-                        blockModels.modelOutput
-                );
-            }
+            ModModelTemplates.honeyTreatBite(bite).create(
+                    Erebus.prefix("block/%s_slice_%d".formatted(ModBlocks.HONEY_TREAT.getId().getPath(), bite)),
+                    getHoneyTreatTextureMap(ModBlocks.HONEY_TREAT.get())
+                            .put(TextureSlot.INSIDE, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_inside")),
+                    blockModels.modelOutput
+            );
         });
 
         blockModels.blockStateOutput.accept(MultiVariantGenerator
@@ -239,5 +242,27 @@ public class ModBlockStateHelpers {
                         .with(condition().term(BlockStateProperties.UP, false), skinless.with(X_ROT_270))
                         .with(condition().term(BlockStateProperties.DOWN, false), skinless.with(X_ROT_90)));
         blockModels.registerSimpleItemModel(stem.get(), TexturedModel.CUBE.createWithSuffix(stem.get(), "_inventory", blockModels.modelOutput));
+    }
+
+    public void createDustBlocks() {
+        TextureMapping textures = TextureMapping.cube(ModBlocks.DUST.get());
+        MultiVariant snowModel = plainVariant(ModelTemplates.CUBE_ALL.create(ModBlocks.DUST.get(), textures, blockModels.modelOutput));
+
+        SnowLayerBlock.LAYERS.getPossibleValues().forEach((layer) -> ModModelTemplates.dustLayer(layer * 2).create(Erebus.prefix("block/%s_height%d".formatted(ModBlocks.DUST_LAYER.getId().getPath(), layer * 2)), TextureMapping.defaultTexture(ModBlocks.DUST.get()), blockModels.modelOutput));
+
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(ModBlocks.DUST_LAYER.get()).with(PropertyDispatch.initial(BlockStateProperties.LAYERS).generate((level) -> {
+            MultiVariant variant;
+            if (level < 8) {
+                Block dustLayer = ModBlocks.DUST_LAYER.get();
+                variant = plainVariant(ModelLocationUtils.getModelLocation(dustLayer, "_height" + level * 2));
+            } else {
+                variant = snowModel;
+            }
+
+            return variant;
+        })));
+
+        blockModels.registerSimpleItemModel(ModBlocks.DUST_LAYER.get(), ModelLocationUtils.getModelLocation(ModBlocks.DUST_LAYER.get(), "_height2"));
+        blockModels.blockStateOutput.accept(createSimpleBlock(ModBlocks.DUST.get(), snowModel));
     }
 }

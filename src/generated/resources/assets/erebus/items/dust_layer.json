@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/dust_layer"
+    "model": "erebus:block/dust_layer_height2"
   }
 }

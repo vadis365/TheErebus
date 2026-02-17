@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "layers=1": {
+      "model": "erebus:block/dust_layer_height2"
+    },
+    "layers=2": {
+      "model": "erebus:block/dust_layer_height4"
+    },
+    "layers=3": {
+      "model": "erebus:block/dust_layer_height6"
+    },
+    "layers=4": {
+      "model": "erebus:block/dust_layer_height8"
+    },
+    "layers=5": {
+      "model": "erebus:block/dust_layer_height10"
+    },
+    "layers=6": {
+      "model": "erebus:block/dust_layer_height12"
+    },
+    "layers=7": {
+      "model": "erebus:block/dust_layer_height14"
+    },
+    "layers=8": {
+      "model": "erebus:block/dust"
+    }
+  }
+}

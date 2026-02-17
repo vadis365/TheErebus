@@ -10,7 +10,6 @@
     },
     {
       "apply": {
-
         "model": "erebus:block/dark_capped_mushroom_block",
         "uvlock": true,
         "y": 90

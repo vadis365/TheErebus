@@ -36,7 +36,7 @@ public class ModBlockStates extends ModBlockStateHelpers {
         createBlock(ModBlocks.UMBERGRAVEL);
         blockModels.createRotatedPillarWithHorizontalVariant(ModBlocks.UMBERSTONE_PILLAR.get(), TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT);
         createBlock(ModBlocks.VOLCANIC_ROCK);
-        createBlock(ModBlocks.DUST);
+        createDustBlocks();
         createBlock(ModBlocks.PETRIFIED_WOOD_ROCK);
         createBlock(ModBlocks.PETRIFIED_WOOD_ROCK_2);
         createBlock(ModBlocks.PETRIFIED_WOOD_ROCK_3);
@@ -148,22 +148,22 @@ public class ModBlockStates extends ModBlockStateHelpers {
         createBlock(ModBlocks.PETAL_ORANGE);
         createBlock(ModBlocks.PETAL_WHITE);
 
-        createBlock(ModBlocks.EXPLODING_STIGMA);
+        createStigma(ModBlocks.EXPLODING_STIGMA);
         createBlock(ModBlocks.STEM);
-        createBlock(ModBlocks.STIGMA_BLACK);
-        createBlock(ModBlocks.STIGMA_RED);
-        createBlock(ModBlocks.STIGMA_BROWN);
-        createBlock(ModBlocks.STIGMA_BLUE);
-        createBlock(ModBlocks.STIGMA_PURPLE);
-        createBlock(ModBlocks.STIGMA_CYAN);
-        createBlock(ModBlocks.STIGMA_LIGHT_GRAY);
-        createBlock(ModBlocks.STIGMA_GRAY);
-        createBlock(ModBlocks.STIGMA_PINK);
-        createBlock(ModBlocks.STIGMA_YELLOW);
-        createBlock(ModBlocks.STIGMA_LIGHT_BLUE);
-        createBlock(ModBlocks.STIGMA_MAGENTA);
-        createBlock(ModBlocks.STIGMA_ORANGE);
-        createBlock(ModBlocks.STIGMA_WHITE);
+        createStigma(ModBlocks.STIGMA_BLACK);
+        createStigma(ModBlocks.STIGMA_RED);
+        createStigma(ModBlocks.STIGMA_BROWN);
+        createStigma(ModBlocks.STIGMA_BLUE);
+        createStigma(ModBlocks.STIGMA_PURPLE);
+        createStigma(ModBlocks.STIGMA_CYAN);
+        createStigma(ModBlocks.STIGMA_LIGHT_GRAY);
+        createStigma(ModBlocks.STIGMA_GRAY);
+        createStigma(ModBlocks.STIGMA_PINK);
+        createStigma(ModBlocks.STIGMA_YELLOW);
+        createStigma(ModBlocks.STIGMA_LIGHT_BLUE);
+        createStigma(ModBlocks.STIGMA_MAGENTA);
+        createStigma(ModBlocks.STIGMA_ORANGE);
+        createStigma(ModBlocks.STIGMA_WHITE);
 
         createDoublePlant(ModBlocks.BULLRUSH);
         createDoublePlant(ModBlocks.WEEPING_BLUEBELL);
