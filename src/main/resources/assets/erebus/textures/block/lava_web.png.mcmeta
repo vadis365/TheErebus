@@ -1,8 +1,0 @@
-{
-  "animation": {
-    "frametime": 3
-  },
-  "texture": {
-    "mipmap_strategy": "strict_cutout"
-  }
-}

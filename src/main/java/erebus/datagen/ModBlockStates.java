@@ -1,46 +1,33 @@
 package erebus.datagen;
 
 import erebus.Erebus;
-import erebus.block.GaeanKeystoneBlock;
-import erebus.block.HoneyTreatBlock;
-import erebus.block.plants.ModBerryBushBlock;
 import erebus.block.plants.ModCropBlock;
 import erebus.client.render.block.renderer.stack.*;
 import erebus.registries.ModBlockFamilies;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
+import erebus.utils.ModBlockStateHelpers;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
-import net.minecraft.client.data.models.blockstates.PropertyDispatch;
-import net.minecraft.client.data.models.model.*;
-import net.minecraft.client.renderer.item.ItemModel;
-import net.minecraft.client.renderer.special.SpecialModelRenderer;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.BlockFamily;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.registries.DeferredBlock;
-
-import java.util.function.Supplier;
 
 import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant;
 import static net.minecraft.client.data.models.model.TextureMapping.craftingTable;
 
-public class ModBlockStates {
+public class ModBlockStates extends ModBlockStateHelpers {
 
-    private BlockModelGenerators blockModels;
-    protected ItemModelGenerators itemModels;
+    public ModBlockStates(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+        super(blockModels, itemModels);
+    }
 
-    private final TexturedModel.Provider CUTOUT_CROSS = TexturedModel.createDefault(TextureMapping::cross, ModelTemplates.CROSS.extend().renderType("cutout").build());
-    private final TexturedModel.Provider LEAVES = TexturedModel.createDefault(TextureMapping::cube, ModelTemplates.LEAVES.extend().renderType("cutout").build());
-
-    protected void registerModels(BlockModelGenerators blockModels) {
-        this.blockModels = blockModels;
-
+    protected void registerModels() {
         ModBlockFamilies.getAllFamilies()
                 .filter(BlockFamily::shouldGenerateModel)
                 .forEach(family -> blockModels.family(family.getBaseBlock()).generateFor(family));
@@ -100,25 +87,25 @@ public class ModBlockStates {
         blockModels.woodProvider(ModBlocks.LOG_SCORCHED.get()).logWithHorizontal(ModBlocks.LOG_SCORCHED.get());
 
         // MARK: Saplings
-        createBlock(ModBlocks.SAPLING_ASPER, CUTOUT_CROSS);
-        createBlock(ModBlocks.SAPLING_BALSAM, CUTOUT_CROSS);
-        createBlock(ModBlocks.SAPLING_BAMBOO, CUTOUT_CROSS);
-        createBlock(ModBlocks.SAPLING_BAOBAB, CUTOUT_CROSS);
-        createBlock(ModBlocks.SAPLING_CYPRESS, CUTOUT_CROSS);
-        createBlock(ModBlocks.SAPLING_EUCALYPTUS, CUTOUT_CROSS);
-        createBlock(ModBlocks.SAPLING_MAHOGANY, CUTOUT_CROSS);
-        createBlock(ModBlocks.SAPLING_MARSHWOOD, CUTOUT_CROSS);
-        createBlock(ModBlocks.SAPLING_MOSSBARK, CUTOUT_CROSS);
+        createCrossBlock(ModBlocks.SAPLING_ASPER);
+        createCrossBlock(ModBlocks.SAPLING_BALSAM);
+        createCrossBlock(ModBlocks.SAPLING_BAMBOO);
+        createCrossBlock(ModBlocks.SAPLING_BAOBAB);
+        createCrossBlock(ModBlocks.SAPLING_CYPRESS);
+        createCrossBlock(ModBlocks.SAPLING_EUCALYPTUS);
+        createCrossBlock(ModBlocks.SAPLING_MAHOGANY);
+        createCrossBlock(ModBlocks.SAPLING_MARSHWOOD);
+        createCrossBlock(ModBlocks.SAPLING_MOSSBARK);
 
         // MARK: Leaves
-        createBlock(ModBlocks.LEAVES_ASPER, LEAVES);
-        createBlock(ModBlocks.LEAVES_BALSAM, LEAVES);
-        createBlock(ModBlocks.LEAVES_BAOBAB, LEAVES);
-        createBlock(ModBlocks.LEAVES_CYPRESS, LEAVES);
-        createBlock(ModBlocks.LEAVES_EUCALYPTUS, LEAVES);
-        createBlock(ModBlocks.LEAVES_MAHOGANY, LEAVES);
-        createBlock(ModBlocks.LEAVES_MARSHWOOD, LEAVES);
-        createBlock(ModBlocks.LEAVES_MOSSBARK, LEAVES);
+        createBlock(ModBlocks.LEAVES_ASPER);
+        createBlock(ModBlocks.LEAVES_BALSAM);
+        createBlock(ModBlocks.LEAVES_BAOBAB);
+        createBlock(ModBlocks.LEAVES_CYPRESS);
+        createBlock(ModBlocks.LEAVES_EUCALYPTUS);
+        createBlock(ModBlocks.LEAVES_MAHOGANY);
+        createBlock(ModBlocks.LEAVES_MARSHWOOD);
+        createBlock(ModBlocks.LEAVES_MOSSBARK);
 
         // MARK: Plants
         blockModels.createCropBlock(ModBlocks.CROP_TURNIP.get(), ModCropBlock.AGE, 0, 1, 2, 3);
@@ -127,23 +114,23 @@ public class ModBlockStates {
         createBush(ModBlocks.JADE_BERRY_BUSH, ModItems.JADE_BERRIES);
         createBush(ModBlocks.HEART_BERRY_BUSH, ModItems.HEART_BERRIES);
         createBush(ModBlocks.SWAMP_BERRY_BUSH, ModItems.SWAMP_BERRIES);
-        createBlock(ModBlocks.NETTLE, CUTOUT_CROSS);
-        createBlock(ModBlocks.NETTLE_FLOWERED, CUTOUT_CROSS);
-        createBlock(ModBlocks.SWAMP_PLANT, CUTOUT_CROSS);
-        createBlock(ModBlocks.FIRE_BLOOM, CUTOUT_CROSS);
-        createBlock(ModBlocks.FIDDLE_HEAD, CUTOUT_CROSS);
+        createCrossBlock(ModBlocks.NETTLE);
+        createCrossBlock(ModBlocks.NETTLE_FLOWERED);
+        createCrossBlock(ModBlocks.SWAMP_PLANT);
+        createCrossBlock(ModBlocks.FIRE_BLOOM);
+        createCrossBlockTinted(ModBlocks.FIDDLE_HEAD);
 
-        createBlock(ModBlocks.HANGING_WEB, CUTOUT_CROSS);
-        blockModels.createMushroomBlock(ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK.get());
-        blockModels.createMushroomBlock(ModBlocks.DARK_CAPPED_MUSHROOM_STEM.get());
-        blockModels.createMushroomBlock(ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK.get());
-        blockModels.createMushroomBlock(ModBlocks.SARCASTIC_CZECH_MUSHROOM_STEM.get());
-        blockModels.createMushroomBlock(ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK.get());
-        blockModels.createMushroomBlock(ModBlocks.GRANDMAS_SHOES_MUSHROOM_STEM.get());
-        blockModels.createMushroomBlock(ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK.get());
-        blockModels.createMushroomBlock(ModBlocks.DUTCH_CAP_MUSHROOM_STEM.get());
-        blockModels.createMushroomBlock(ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK.get());
-        blockModels.createMushroomBlock(ModBlocks.KAIZERS_FINGERS_MUSHROOM_STEM.get());
+        createCrossBlock(ModBlocks.HANGING_WEB);
+        createMushroomBlock(ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK);
+        createMushroomBlock(ModBlocks.DARK_CAPPED_MUSHROOM_STEM, ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK);
+        createMushroomBlock(ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK);
+        createMushroomBlock(ModBlocks.SARCASTIC_CZECH_MUSHROOM_STEM, ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK);
+        createMushroomBlock(ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK);
+        createMushroomBlock(ModBlocks.GRANDMAS_SHOES_MUSHROOM_STEM, ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK);
+        createMushroomBlock(ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK);
+        createMushroomBlock(ModBlocks.DUTCH_CAP_MUSHROOM_STEM, ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK);
+        createMushroomBlock(ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK);
+        createMushroomBlock(ModBlocks.KAIZERS_FINGERS_MUSHROOM_STEM, ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK);
         createBlock(ModBlocks.GIANT_LILY_PAD);
 
         createBlock(ModBlocks.PETAL_BLACK);
@@ -199,8 +186,8 @@ public class ModBlockStates {
         MultiVariant on = plainVariant(blockModels.createSuffixedVariant(ModBlocks.RED_GEM_LAMP.get(), "_on", ModelTemplates.CUBE_ALL, TextureMapping::cube));
         blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(ModBlocks.RED_GEM_LAMP.get()).with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.LIT, on, off)));
 
-        createBlock(ModBlocks.WITHER_WEB, CUTOUT_CROSS);
-        createBlock(ModBlocks.LAVA_WEB, CUTOUT_CROSS);
+        createCrossBlock(ModBlocks.WITHER_WEB);
+        createCrossBlock(ModBlocks.LAVA_WEB);
         createBlock(ModBlocks.GNEISS);
         createBlock(ModBlocks.GNEISS_CARVED);
         createBlock(ModBlocks.GNEISS_RELIEF);
@@ -313,144 +300,5 @@ public class ModBlockStates {
         createCustomBlock(ModBlocks.SWAMP_VENT);
 
         createBlockOfBones();
-    }
-
-    private void createBlock(DeferredBlock<Block> block) {
-        blockModels.createTrivialCube(block.get());
-    }
-
-    private void createBlock(DeferredBlock<Block> block, TexturedModel.Provider model) {
-        blockModels.createTrivialBlock(block.get(), model);
-    }
-
-    private void createCustomBlock(Supplier<? extends Block> block) {
-        blockModels.createNonTemplateModelBlock(block.get());
-    }
-
-    private void createCustomHorizontalBlock(DeferredBlock<Block> block) {
-        blockModels.createNonTemplateHorizontalBlock(block.get());
-    }
-
-    private void createSpecialItem(DeferredBlock<Block> block, String id, SpecialModelRenderer.Unbaked renderer) {
-        Item item = block.get().asItem();
-        Identifier itemModelBase = ModelTemplates.create(id, TextureSlot.PARTICLE).create(item, TextureMapping.particle(block.get()), blockModels.modelOutput);
-        ItemModel.Unbaked plainModel = ItemModelUtils.specialModel(itemModelBase, renderer);
-        itemModels.itemModelOutput.accept(item, plainModel);
-    }
-
-    private void createGaeanKeystone() {
-        blockModels.blockStateOutput.accept(
-                MultiVariantGenerator
-                        .dispatch(ModBlocks.GAEAN_KEYSTONE.get())
-                        .with(
-                                PropertyDispatch
-                                        .initial(GaeanKeystoneBlock.ACTIVE)
-                                        .select(false, plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.GAEAN_KEYSTONE.get())))
-                                        .select(true, plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.GAEAN_KEYSTONE.get())))
-                        )
-        );
-    }
-
-    private void createHoneyTreat() {
-        blockModels.registerSimpleFlatItemModel(ModBlocks.HONEY_TREAT.get().asItem());
-        blockModels.blockStateOutput.accept(MultiVariantGenerator
-                .dispatch(ModBlocks.HONEY_TREAT.get())
-                .with(PropertyDispatch
-                        .initial(HoneyTreatBlock.BITES)
-                        .generate(bite -> plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.HONEY_TREAT.get(), "_slice" + bite)))
-                )
-        );
-    }
-
-    private void createCandleHoneyTreat(Block candleBlock, Block candleCakeBlock) {
-        MultiVariant candleCake = plainVariant(
-                ModelTemplates.CANDLE_CAKE.create(
-                        candleCakeBlock,
-                        candleHoneyTreat(candleBlock, false),
-                        blockModels.modelOutput
-                )
-        );
-        MultiVariant litCandleCake = plainVariant(
-                ModelTemplates.CANDLE_CAKE.createWithSuffix(
-                        candleCakeBlock,
-                        "_lit",
-                        candleHoneyTreat(candleBlock, true),
-                        blockModels.modelOutput
-                )
-        );
-
-        blockModels.blockStateOutput.accept(
-                MultiVariantGenerator
-                        .dispatch(candleCakeBlock)
-                        .with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.LIT, litCandleCake, candleCake))
-        );
-    }
-
-    private static TextureMapping candleHoneyTreat(Block block, boolean lit) {
-        return (new TextureMapping())
-                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_side"))
-                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_bottom"))
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_top"))
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_side"))
-                .put(TextureSlot.CANDLE, TextureMapping.getBlockTexture(block, lit ? "_lit" : ""));
-    }
-
-    private void createBlockOfBones() {
-        createCustomHorizontalBlock(ModBlocks.BLOCK_OF_BONES);
-        Item boneBlockItem = ModBlocks.BLOCK_OF_BONES.get().asItem();
-        Identifier base = ModelTemplates
-                .createItem("block_of_bones_special", TextureSlot.TEXTURE)
-                .create(boneBlockItem, TextureMapping.defaultTexture(ModBlocks.BLOCK_OF_BONES.get()), blockModels.modelOutput);
-        ItemModel.Unbaked plainModel = ItemModelUtils.specialModel(base, new BlockOfBonesSpecialRenderer.Unbaked(Erebus.prefix("bone_block")));
-
-        itemModels.itemModelOutput.accept(boneBlockItem, plainModel);
-    }
-
-    public void createChest(Supplier<Block> block, Supplier<Block> particle, Identifier texture) {
-        blockModels.createParticleOnlyBlock(block.get(), particle.get());
-        Item chestItem = block.get().asItem();
-        Identifier itemModelBase = ModelTemplates.CHEST_INVENTORY.create(chestItem, TextureMapping.particle(particle.get()), blockModels.modelOutput);
-        ItemModel.Unbaked plainModel = ItemModelUtils.specialModel(itemModelBase, new ErebusChestSpecialRenderer.Unbaked(texture));
-
-        itemModels.itemModelOutput.accept(chestItem, plainModel);
-    }
-
-    public void createChests() {
-        createChest(ModBlocks.CHEST_ASPER, ModBlocks.PLANKS_ASPER, ErebusChestSpecialRenderer.ASPER_TEXTURE);
-        createChest(ModBlocks.CHEST_BAMBOO, ModBlocks.PLANKS_BAMBOO, ErebusChestSpecialRenderer.BAMBOO_TEXTURE);
-        createChest(ModBlocks.CHEST_BALSAM, ModBlocks.PLANKS_BALSAM, ErebusChestSpecialRenderer.BALSAM_TEXTURE);
-        createChest(ModBlocks.CHEST_BAOBAB, ModBlocks.PLANKS_BAOBAB, ErebusChestSpecialRenderer.BAOBAB_TEXTURE);
-        createChest(ModBlocks.CHEST_CYPRESS, ModBlocks.PLANKS_CYPRESS, ErebusChestSpecialRenderer.CYPRESS_TEXTURE);
-        createChest(ModBlocks.CHEST_EUCALYPTUS, ModBlocks.PLANKS_EUCALYPTUS, ErebusChestSpecialRenderer.EUCALYPTUS_TEXTURE);
-        createChest(ModBlocks.CHEST_MAHOGANY, ModBlocks.PLANKS_MAHOGANY, ErebusChestSpecialRenderer.MAHOGANY_TEXTURE);
-        createChest(ModBlocks.CHEST_MARSHWOOD, ModBlocks.PLANKS_MARSHWOOD, ErebusChestSpecialRenderer.MARSHWOOD_TEXTURE);
-        createChest(ModBlocks.CHEST_MOSSBARK, ModBlocks.PLANKS_MOSSBARK, ErebusChestSpecialRenderer.MOSSBARK_TEXTURE);
-        createChest(ModBlocks.CHEST_PETRIFIED, ModBlocks.PLANKS_PETRIFIED, ErebusChestSpecialRenderer.PETRIFIED_TEXTURE);
-        createChest(ModBlocks.CHEST_ROTTEN, ModBlocks.PLANKS_ROTTEN, ErebusChestSpecialRenderer.ROTTEN_TEXTURE);
-        createChest(ModBlocks.CHEST_SCORCHED, ModBlocks.PLANKS_SCORCHED, ErebusChestSpecialRenderer.SCORCHED_TEXTURE);
-        createChest(ModBlocks.CHEST_VARNISHED, ModBlocks.PLANKS_VARNISHED, ErebusChestSpecialRenderer.VARNISHED_TEXTURE);
-        createChest(ModBlocks.CHEST_WHITE, ModBlocks.PLANKS_WHITE, ErebusChestSpecialRenderer.WHITE_TEXTURE);
-    }
-
-    public void createDoublePlant(Supplier<Block> block) {
-        MultiVariant topModel = plainVariant(blockModels.createSuffixedVariant(block.get(), "_top", ModelTemplates.CROSS.extend().renderType("cutout").build(), TextureMapping::cross));
-        MultiVariant bottomModel = plainVariant(blockModels.createSuffixedVariant(block.get(), "_bottom", ModelTemplates.CROSS.extend().renderType("cutout").build(), TextureMapping::cross));
-        blockModels.createDoubleBlock(block.get(), topModel, bottomModel);
-    }
-
-    public void createBush(Supplier<Block> bush, Supplier<Item> item) {
-        blockModels.registerSimpleFlatItemModel(item.get());
-        blockModels.blockStateOutput
-                .accept(
-                        MultiVariantGenerator.dispatch(bush.get())
-                                .with(
-                                        PropertyDispatch.initial(ModBerryBushBlock.AGE)
-                                                .generate(
-                                                        age -> plainVariant(
-                                                                blockModels.createSuffixedVariant(bush.get(), "_stage" + age, ModelTemplates.CROSS.extend().renderType("cutout").build(), TextureMapping::cross)
-                                                        )
-                                                )
-                                )
-                );
     }
 }

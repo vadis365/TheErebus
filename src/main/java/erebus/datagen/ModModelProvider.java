@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 
 public class ModModelProvider extends ModelProvider {
 
-    private final ModBlockStates blockStates = new ModBlockStates();
+    private ModBlockStates blockStates;
     private final ModItemModels itemModels = new ModItemModels();
 
     private static final Set<Block> EXCLUDED_BLOCKS = Set.of(
@@ -99,9 +99,9 @@ public class ModModelProvider extends ModelProvider {
 
     @Override
     protected void registerModels(@NonNull BlockModelGenerators blockModelGenerators, @NonNull ItemModelGenerators itemModelGenerators) {
-        blockStates.itemModels = itemModelGenerators;
+        blockStates = new ModBlockStates(blockModelGenerators, itemModelGenerators);
 
-        blockStates.registerModels(blockModelGenerators);
+        blockStates.registerModels();
         itemModels.registerModels(itemModelGenerators);
     }
 
