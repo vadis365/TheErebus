@@ -211,7 +211,6 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> ANTI_VENOM_BOTTLE = registerItem("anti_venom_bottle");
     public static final DeferredItem<Item> DEATH_COMPASS = registerItem("death_compass", DeathCompass::new);
     public static final DeferredItem<Item> ROLLED_NEWSPAPER = registerItem("rolled_newspaper");
-    public static final DeferredItem<Item> BAMBUCKET = registerItem("bambucket", () -> new BucketItem(Fluids.EMPTY, new Item.Properties().setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("bambucket")))));
     public static final DeferredItem<Item> HOMING_BEECON = registerItem("homing_beecon");
     public static final DeferredItem<Item> HOMING_BEECON_ADVANCED = registerItem("homing_beecon_advanced");
     public static final DeferredItem<Item> SPRAY_CAN = registerItem("spray_can", InsectRepellentItem::new);
@@ -322,10 +321,11 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> STAG_BEETLE_SPAWN_EGG = registerSpawnEgg("stag_beetle", ModEntities.STAG_BEETLE);
 
     // MARK: Buckets
-    public static final DeferredItem<BucketItem> FORMIC_ACID_BUCKET = ITEMS.register("formic_acid_bucket", () -> new BucketItem(ModFluids.FORMIC_ACID_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("formic_acid_bucket")))));
-    public static final DeferredItem<BucketItem> HONEY_BUCKET = ITEMS.register("honey_bucket", () -> new BucketItem(ModFluids.HONEY_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("honey_bucket")))));
-    public static final DeferredItem<BucketItem> ANTI_VENOM_BUCKET = ITEMS.register("anti_venom_bucket", () -> new BucketItem(ModFluids.ANTI_VENOM_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("anti_venom_bucket")))));
-    public static final DeferredItem<BucketItem> BEETLE_JUICE_BUCKET = ITEMS.register("beetle_juice_bucket", () -> new BeettleJuiceBucketItem(ModFluids.BEETLE_JUICE_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("beetle_juice_bucket")))));
+    public static final DeferredItem<Item> BAMBUCKET = registerItem("bambucket", () -> new BamBucketItem(Fluids.EMPTY, new Item.Properties().setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("bambucket")))));
+    public static final DeferredItem<Item> FORMIC_ACID_BUCKET = ITEMS.register("formic_acid_bucket", () -> new BamBucketItem(ModFluids.FORMIC_ACID_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("formic_acid_bucket")))));
+    public static final DeferredItem<Item> HONEY_BUCKET = ITEMS.register("honey_bucket", () -> new BamBucketItem(ModFluids.HONEY_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("honey_bucket")))));
+    public static final DeferredItem<Item> ANTI_VENOM_BUCKET = ITEMS.register("anti_venom_bucket", () -> new BamBucketItem(ModFluids.ANTI_VENOM_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("anti_venom_bucket")))));
+    public static final DeferredItem<Item> BEETLE_JUICE_BUCKET = ITEMS.register("beetle_juice_bucket", () -> new BeetleJuiceBucketItem(ModFluids.BEETLE_JUICE_STILL.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("beetle_juice_bucket")))));
 
     // MARK: Block Items
     public static final DeferredItem<BlockItem> FLUID_JAR = ITEMS.register("fluid_jar", () -> new FluidJarBlockItem(ModBlocks.FLUID_JAR.get(), FluidType.BUCKET_VOLUME * 32, new Item.Properties().setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("fluid_jar")))));

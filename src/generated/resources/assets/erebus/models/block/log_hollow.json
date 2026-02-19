@@ -1,0 +1,251 @@
+{
+  "parent": "minecraft:block/block",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "texture": "#top",
+          "uv": [
+            0.0,
+            0.0,
+            14.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#end"
+        },
+        "north": {
+          "cullface": "north",
+          "texture": "#top",
+          "uv": [
+            0.0,
+            15.0,
+            14.0,
+            16.0
+          ]
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#top",
+          "uv": [
+            0.0,
+            15.0,
+            14.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#top",
+          "uv": [
+            0.0,
+            0.0,
+            14.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#end"
+        }
+      },
+      "from": [
+        1,
+        0,
+        0
+      ],
+      "to": [
+        15,
+        1,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#top",
+          "uv": [
+            0.0,
+            0.0,
+            14.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#end"
+        },
+        "north": {
+          "cullface": "north",
+          "texture": "#top",
+          "uv": [
+            0.0,
+            0.0,
+            14.0,
+            1.0
+          ]
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#top",
+          "uv": [
+            0.0,
+            0.0,
+            14.0,
+            1.0
+          ]
+        },
+        "up": {
+          "texture": "#top",
+          "uv": [
+            0.0,
+            0.0,
+            14.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#end"
+        }
+      },
+      "from": [
+        1,
+        15,
+        0
+      ],
+      "to": [
+        15,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#top"
+        },
+        "east": {
+          "texture": "#side"
+        },
+        "north": {
+          "cullface": "north",
+          "texture": "#end"
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#end"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "west": {
+          "texture": "#side"
+        }
+      },
+      "from": [
+        0,
+        1,
+        0
+      ],
+      "to": [
+        1,
+        15,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#top",
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            16.0
+          ]
+        },
+        "east": {
+          "texture": "#side"
+        },
+        "north": {
+          "cullface": "north",
+          "texture": "#end"
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#end"
+        },
+        "up": {
+          "texture": "#top",
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            16.0
+          ]
+        },
+        "west": {
+          "texture": "#side"
+        }
+      },
+      "from": [
+        15,
+        1,
+        0
+      ],
+      "to": [
+        16,
+        15,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "cullface": "north",
+          "texture": "#end"
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#end"
+        }
+      },
+      "from": [
+        1,
+        1,
+        0
+      ],
+      "to": [
+        15,
+        15,
+        0
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "cullface": "north",
+          "texture": "#end"
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#end"
+        }
+      },
+      "from": [
+        1,
+        1,
+        16
+      ],
+      "to": [
+        15,
+        15,
+        16
+      ]
+    }
+  ],
+  "textures": {
+    "end": "erebus:block/log_hollow_end",
+    "particle": "erebus:block/log_hollow_top",
+    "side": "erebus:block/log_hollow_side",
+    "top": "erebus:block/log_hollow_top"
+  }
+}

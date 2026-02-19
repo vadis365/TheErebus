@@ -25,8 +25,10 @@ import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
+import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
+import static erebus.datagen.ModModelTemplates.FlowerType;
 import static net.minecraft.client.data.models.BlockModelGenerators.*;
 
 public class ModBlockStateHelpers {
@@ -76,16 +78,15 @@ public class ModBlockStateHelpers {
     }
 
     protected void createHoneyTreat() {
-        blockModels.registerSimpleFlatItemModel(ModBlocks.HONEY_TREAT.asItem());
-
         HoneyTreatBlock.BITES.getPossibleValues().forEach(bite -> {
             ModModelTemplates.honeyTreatBite(bite).create(
-                    Erebus.prefix("block/%s_slice_%d".formatted(ModBlocks.HONEY_TREAT.getId().getPath(), bite)),
+                    Erebus.prefix(bite == 0 ? "block/%s".formatted(ModBlocks.HONEY_TREAT.getId().getPath()) : "block/%s_slice_%d".formatted(ModBlocks.HONEY_TREAT.getId().getPath(), bite)),
                     getHoneyTreatTextureMap(ModBlocks.HONEY_TREAT.get())
                             .put(TextureSlot.INSIDE, TextureMapping.getBlockTexture(ModBlocks.HONEY_TREAT.get(), "_inside")),
                     blockModels.modelOutput
             );
         });
+        itemModels.itemModelOutput.accept(ModBlocks.HONEY_TREAT.asItem(), ItemModelUtils.plainModel(Erebus.prefix("block/%s".formatted(ModBlocks.HONEY_TREAT.getId().getPath()))));
 
         blockModels.blockStateOutput.accept(MultiVariantGenerator
                 .dispatch(ModBlocks.HONEY_TREAT.get())
@@ -152,6 +153,20 @@ public class ModBlockStateHelpers {
         ItemModel.Unbaked plainModel = ItemModelUtils.specialModel(base, new BlockOfBonesSpecialRenderer.Unbaked(Erebus.prefix("bone_block")));
 
         itemModels.itemModelOutput.accept(boneBlockItem, plainModel);
+    }
+
+    protected void createHollowLog() {
+        createCustomHorizontalBlock(ModBlocks.LOG_HOLLOW);
+        Identifier base = ModModelTemplates.hollowLog().create(
+                ModBlocks.LOG_HOLLOW.get(),
+                new TextureMapping()
+                        .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(ModBlocks.LOG_HOLLOW.get(), "_top"))
+                        .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.LOG_HOLLOW.get(), "_side"))
+                        .put(TextureSlot.END, TextureMapping.getBlockTexture(ModBlocks.LOG_HOLLOW.get(), "_end"))
+                        .put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.LOG_HOLLOW.get(), "_top")),
+                blockModels.modelOutput
+        );
+        itemModels.itemModelOutput.accept(ModBlocks.LOG_HOLLOW.asItem(), ItemModelUtils.plainModel(base));
     }
 
     public void createChest(DeferredBlock<Block> block, DeferredBlock<Block> particle, Identifier texture) {
@@ -264,5 +279,34 @@ public class ModBlockStateHelpers {
 
         blockModels.registerSimpleItemModel(ModBlocks.DUST_LAYER.get(), ModelLocationUtils.getModelLocation(ModBlocks.DUST_LAYER.get(), "_height2"));
         blockModels.blockStateOutput.accept(createSimpleBlock(ModBlocks.DUST.get(), snowModel));
+    }
+
+    protected void createFlower(FlowerType type, DeferredBlock<Block> block, DeferredBlock<Block> petal) {
+        createFlower(type, block, petal, null);
+    }
+
+    protected void createFlower(FlowerType type, DeferredBlock<Block> block, DeferredBlock<Block> petal, @Nullable DeferredBlock<Block> petal2) {
+        createCustomBlock(block);
+
+        Material stem = TextureMapping.getBlockTexture(ModBlocks.STEM.get());
+        Material petalTexture = TextureMapping.getBlockTexture(petal.get());
+        Material stigma = new Material(Erebus.prefix("block/stigma"));
+        Material petal2Texture = petal2 != null ? TextureMapping.getBlockTexture(petal2.get()) : petalTexture;
+
+        TextureMapping textureMapping = new TextureMapping().put(TextureSlot.PARTICLE, petalTexture).put(ModModelTemplates.STEM, stem).put(ModModelTemplates.PETAL, petalTexture).put(ModModelTemplates.PETAL_CHASE, petal2Texture).put(ModModelTemplates.STIGMA, stigma);
+
+        switch (type) {
+            case DROOP:
+                ModModelTemplates.flower().create(Erebus.prefix("block/%s".formatted(block.getId().getPath())), textureMapping, blockModels.modelOutput);
+                break;
+            case NORMAL:
+                ModModelTemplates.flowerTall().create(Erebus.prefix("block/%s".formatted(block.getId().getPath())), textureMapping, blockModels.modelOutput);
+                break;
+            case THICK:
+                ModModelTemplates.flowerThick().create(Erebus.prefix("block/%s".formatted(block.getId().getPath())), textureMapping, blockModels.modelOutput);
+                break;
+        }
+
+        itemModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(Erebus.prefix("block/%s".formatted(block.getId().getPath()))));
     }
 }

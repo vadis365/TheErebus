@@ -2,6 +2,7 @@ package erebus.item;
 
 import erebus.entity.BotFlyLarva;
 import erebus.registries.ModFluids;
+import erebus.registries.item.ModItems;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -10,7 +11,10 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.transfer.fluid.FluidUtil;
@@ -18,10 +22,10 @@ import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 
-public class BeettleJuiceBucketItem extends BucketItem {
+public class BeetleJuiceBucketItem extends BucketItem {
 	private static final int DRINK_DURATION = 32;
 
-	public BeettleJuiceBucketItem(Fluid content, Properties properties) {
+	public BeetleJuiceBucketItem(Fluid content, Properties properties) {
 		super(content, properties);
 	}
 
@@ -62,7 +66,7 @@ public class BeettleJuiceBucketItem extends BucketItem {
 		}
 
 		if (entityLiving instanceof Player player) 
-			return ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET), false);
+			return ItemUtils.createFilledResult(stack, player, new ItemStack(ModItems.BAMBUCKET.get()), false);
 		else {
 			stack.consume(1, entityLiving);
 			return stack;

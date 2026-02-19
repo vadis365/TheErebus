@@ -442,6 +442,8 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> PETAL_MAGENTA = registerSimpleBlock("petal_magenta", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
     public static final DeferredBlock<Block> PETAL_ORANGE = registerSimpleBlock("petal_orange", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE));
     public static final DeferredBlock<Block> PETAL_WHITE = registerSimpleBlock("petal_white", BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE));
+    public static final DeferredBlock<Block> PETAL_RAINBOW = registerSimpleBlock("petal_rainbow", BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE));
+    public static final DeferredBlock<Block> PETAL_RAINBOW_CHASE = registerSimpleBlock("petal_rainbow_chase", BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE));
 
     public static final DeferredBlock<Block> EXPLODING_STIGMA = registerSimpleBlock("exploding_stigma", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
     public static final DeferredBlock<Block> STEM = registerSimpleBlock("stem", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN));

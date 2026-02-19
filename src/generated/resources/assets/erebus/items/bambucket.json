@@ -1,6 +1,14 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:item/bambucket"
+    "type": "neoforge:fluid_container",
+    "apply_fluid_luminosity": false,
+    "flip_gas": true,
+    "fluid": "minecraft:empty",
+    "textures": {
+      "base": "erebus:item/bambucket",
+      "cover": "erebus:item/bambucket_cover",
+      "fluid": "erebus:item/bambucket_fluid",
+      "particle": "erebus:item/bambucket"
+    }
   }
 }

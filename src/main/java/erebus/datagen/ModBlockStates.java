@@ -3,6 +3,7 @@ package erebus.datagen;
 import erebus.Erebus;
 import erebus.block.plants.ModCropBlock;
 import erebus.client.render.block.renderer.stack.*;
+import erebus.datagen.ModModelTemplates.FlowerType;
 import erebus.registries.ModBlockFamilies;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
@@ -147,6 +148,8 @@ public class ModBlockStates extends ModBlockStateHelpers {
         createBlock(ModBlocks.PETAL_MAGENTA);
         createBlock(ModBlocks.PETAL_ORANGE);
         createBlock(ModBlocks.PETAL_WHITE);
+        createBlock(ModBlocks.PETAL_RAINBOW);
+        createBlock(ModBlocks.PETAL_RAINBOW_CHASE);
 
         createStigma(ModBlocks.EXPLODING_STIGMA);
         createBlock(ModBlocks.STEM);
@@ -268,21 +271,6 @@ public class ModBlockStates extends ModBlockStateHelpers {
         createCustomHorizontalBlock(ModBlocks.BAMBOO_BRIDGE);
         createCustomBlock(ModBlocks.OFFERING_ALTAR);
         createSpecialItem(ModBlocks.OFFERING_ALTAR, "offering_altar_special", new OfferingAltarSpecialRenderer.Unbaked(Erebus.prefix("offering_altar")));
-        createCustomBlock(ModBlocks.FLOWER_BLACK);
-        createCustomBlock(ModBlocks.FLOWER_BLUE);
-        createCustomBlock(ModBlocks.FLOWER_BROWN);
-        createCustomBlock(ModBlocks.FLOWER_CYAN);
-        createCustomBlock(ModBlocks.FLOWER_GRAY);
-        createCustomBlock(ModBlocks.FLOWER_LIGHT_BLUE);
-        createCustomBlock(ModBlocks.FLOWER_LIGHT_GRAY);
-        createCustomBlock(ModBlocks.FLOWER_MAGENTA);
-        createCustomBlock(ModBlocks.FLOWER_ORANGE);
-        createCustomBlock(ModBlocks.FLOWER_PINK);
-        createCustomBlock(ModBlocks.FLOWER_PURPLE);
-        createCustomBlock(ModBlocks.FLOWER_RED);
-        createCustomBlock(ModBlocks.FLOWER_WHITE);
-        createCustomBlock(ModBlocks.FLOWER_YELLOW);
-        createCustomBlock(ModBlocks.FLOWER_RAINBOW);
         createCustomBlock(ModBlocks.FLUID_ANTI_VENOM_BLOCK);
         createCustomBlock(ModBlocks.FLUID_BEETLE_JUICE_BLOCK);
         createCustomBlock(ModBlocks.FLUID_FORMIC_ACID_BLOCK);
@@ -299,6 +287,23 @@ public class ModBlockStates extends ModBlockStateHelpers {
         createCustomBlock(ModBlocks.HONEY_COMB);
         createCustomBlock(ModBlocks.SWAMP_VENT);
 
+        createFlower(FlowerType.THICK, ModBlocks.FLOWER_BLACK, ModBlocks.PETAL_BLACK);
+        createFlower(FlowerType.THICK, ModBlocks.FLOWER_BLUE, ModBlocks.PETAL_BLUE);
+        createFlower(FlowerType.THICK, ModBlocks.FLOWER_BROWN, ModBlocks.PETAL_BROWN);
+        createFlower(FlowerType.THICK, ModBlocks.FLOWER_CYAN, ModBlocks.PETAL_CYAN);
+        createFlower(FlowerType.THICK, ModBlocks.FLOWER_GRAY, ModBlocks.PETAL_GRAY);
+        createFlower(FlowerType.NORMAL, ModBlocks.FLOWER_LIGHT_BLUE, ModBlocks.PETAL_LIGHT_BLUE);
+        createFlower(FlowerType.NORMAL, ModBlocks.FLOWER_LIGHT_GRAY, ModBlocks.PETAL_LIGHT_GRAY);
+        createFlower(FlowerType.NORMAL, ModBlocks.FLOWER_MAGENTA, ModBlocks.PETAL_MAGENTA);
+        createFlower(FlowerType.NORMAL, ModBlocks.FLOWER_ORANGE, ModBlocks.PETAL_ORANGE);
+        createFlower(FlowerType.DROOP, ModBlocks.FLOWER_PINK, ModBlocks.PETAL_PINK);
+        createFlower(FlowerType.DROOP, ModBlocks.FLOWER_PURPLE, ModBlocks.PETAL_PURPLE);
+        createFlower(FlowerType.DROOP, ModBlocks.FLOWER_RED, ModBlocks.PETAL_RED);
+        createFlower(FlowerType.DROOP, ModBlocks.FLOWER_WHITE, ModBlocks.PETAL_WHITE);
+        createFlower(FlowerType.DROOP, ModBlocks.FLOWER_YELLOW, ModBlocks.PETAL_YELLOW);
+        createFlower(FlowerType.THICK, ModBlocks.FLOWER_RAINBOW, ModBlocks.PETAL_RAINBOW_CHASE, ModBlocks.PETAL_RAINBOW);
+
         createBlockOfBones();
+        createHollowLog();
     }
 }

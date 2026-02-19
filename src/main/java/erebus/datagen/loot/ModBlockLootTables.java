@@ -314,6 +314,8 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ModBlocks.PETAL_MAGENTA);
         dropSelf(ModBlocks.PETAL_ORANGE);
         dropSelf(ModBlocks.PETAL_WHITE);
+        dropSelf(ModBlocks.PETAL_RAINBOW);
+        dropSelf(ModBlocks.PETAL_RAINBOW_CHASE);
 
         dropSelf(ModBlocks.EXPLODING_STIGMA);
         dropSelf(ModBlocks.STEM);

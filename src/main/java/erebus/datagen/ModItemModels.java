@@ -5,10 +5,15 @@ import erebus.client.render.item.renderer.*;
 import erebus.registries.item.ModItems;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.renderer.block.model.Material;
 import net.minecraft.client.renderer.item.SpecialModelWrapper;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.client.model.item.DynamicFluidContainerModel;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jspecify.annotations.NonNull;
+
+import java.util.Optional;
 
 public class ModItemModels {
 
@@ -30,7 +35,6 @@ public class ModItemModels {
         normalItem(ModItems.BIO_VELOCITY);
         normalItem(ModItems.ELASTIC_FIBER);
         normalItem(ModItems.WASP_STING);
-        //normalItem(ModItems.BAMBOO_SHOOT); TODO: Figure out what this is
         normalItem(ModItems.RED_GEM);
         normalItem(ModItems.BIO_LUMINESCENCE);
         normalItem(ModItems.SUPERNATURAL_VELOCITY);
@@ -235,7 +239,18 @@ public class ModItemModels {
         normalItem(ModItems.ANTI_VENOM_BOTTLE);
         itemModels.generateRecoveryCompassItem(ModItems.DEATH_COMPASS.get());
         normalItem(ModItems.ROLLED_NEWSPAPER);
-        normalItem(ModItems.BAMBUCKET);
+        itemModels.itemModelOutput.accept(ModItems.BAMBUCKET.get(), new DynamicFluidContainerModel.Unbaked(
+                new DynamicFluidContainerModel.Textures(
+                        Optional.of(new Material(Erebus.prefix("item/bambucket"))),
+                        Optional.of(new Material(Erebus.prefix("item/bambucket"))),
+                        Optional.of(new Material(Erebus.prefix("item/bambucket_fluid"))),
+                        Optional.of(new Material(Erebus.prefix("item/bambucket_cover")))
+                ),
+                Fluids.EMPTY,
+                true,
+                true,
+                false
+        ));
         itemModels.generateStandardCompassItem(ModItems.HOMING_BEECON.get());
         itemModels.generateStandardCompassItem(ModItems.HOMING_BEECON_ADVANCED.get());
         normalItem(ModItems.SPRAY_CAN);
