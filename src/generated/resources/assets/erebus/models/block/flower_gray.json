@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "minecraft:block/cube_all",
   "elements": [
     {
       "faces": {
@@ -638,6 +638,56 @@
             2.0
           ]
         },
+        "north": {
+          "texture": "#Stem",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#Stem",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        7,
+        6,
+        5
+      ],
+      "to": [
+        8,
+        7,
+        6
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#Stem",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "east": {
+          "texture": "#Stem",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
         "south": {
           "texture": "#Stem",
           "uv": [
@@ -688,56 +738,6 @@
             2.0
           ]
         },
-        "north": {
-          "texture": "#Stem",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#Stem",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        8,
-        5,
-        7
-      ],
-      "to": [
-        9,
-        6,
-        8
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "texture": "#Stem",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#Stem",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
         "south": {
           "texture": "#Stem",
           "uv": [
@@ -758,147 +758,70 @@
         }
       },
       "from": [
-        6,
-        5,
-        7
-      ],
-      "to": [
         7,
         6,
-        8
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            6.0,
-            6.0
-          ]
-        },
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            6.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            6.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            6.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            6.0,
-            6.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            6.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        6,
-        6,
-        6
-      ],
-      "to": [
-        9,
-        7,
         9
+      ],
+      "to": [
+        8,
+        7,
+        10
       ]
     },
     {
       "faces": {
-        "east": {
-          "texture": "#Stigma",
+        "down": {
+          "texture": "#Stem",
           "uv": [
-            7.0,
-            4.0,
-            9.0,
-            6.0
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "east": {
+          "texture": "#Stem",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
           ]
         },
         "north": {
-          "texture": "#Stigma",
+          "texture": "#Stem",
           "uv": [
-            7.0,
-            4.0,
-            9.0,
-            6.0
+            0.0,
+            0.0,
+            2.0,
+            2.0
           ]
         },
         "south": {
-          "texture": "#Stigma",
+          "texture": "#Stem",
           "uv": [
-            7.0,
-            4.0,
-            9.0,
-            6.0
-          ]
-        },
-        "up": {
-          "texture": "#Stigma",
-          "uv": [
-            7.0,
-            4.0,
-            9.0,
-            6.0
-          ]
-        },
-        "west": {
-          "texture": "#Stigma",
-          "uv": [
-            7.0,
-            4.0,
-            9.0,
-            6.0
+            0.0,
+            0.0,
+            2.0,
+            2.0
           ]
         }
       },
       "from": [
-        7,
-        7,
+        8,
+        5,
         7
       ],
       "to": [
-        8,
-        8,
+        9,
+        6,
         8
       ]
     },
     {
       "faces": {
         "down": {
-          "texture": "#PetalChase",
+          "texture": "#Stem",
           "uv": [
             0.0,
             0.0,
@@ -907,7 +830,7 @@
           ]
         },
         "east": {
-          "texture": "#PetalChase",
+          "texture": "#Stem",
           "uv": [
             0.0,
             0.0,
@@ -916,102 +839,7 @@
           ]
         },
         "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        5,
-        6,
-        5
-      ],
-      "to": [
-        6,
-        7,
-        6
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
+          "texture": "#Stem",
           "uv": [
             0.0,
             0.0,
@@ -1023,11 +851,1000 @@
       "from": [
         9,
         6,
-        5
+        7
       ],
       "to": [
         10,
         7,
+        8
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#Stem",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#Stem",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#Stem",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#Stem",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        6,
+        5,
+        7
+      ],
+      "to": [
+        7,
+        6,
+        8
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#Stem",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#Stem",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#Stem",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#Stem",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        5,
+        6,
+        7
+      ],
+      "to": [
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            6.0
+          ]
+        },
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            6.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        6,
+        6,
+        6
+      ],
+      "to": [
+        9,
+        7,
+        9
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            6.0
+          ]
+        },
+        "east": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            6.0
+          ]
+        },
+        "west": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        9,
+        7,
+        6
+      ],
+      "to": [
+        10,
+        8,
+        9
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            6.0
+          ]
+        },
+        "east": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            6.0
+          ]
+        },
+        "west": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        5,
+        7,
+        6
+      ],
+      "to": [
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "east": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        6,
+        7,
+        5
+      ],
+      "to": [
+        9,
+        8,
+        6
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "east": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        6,
+        7,
+        9
+      ],
+      "to": [
+        9,
+        8,
+        10
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "texture": "#Stigma",
+          "uv": [
+            7.0,
+            4.0,
+            9.0,
+            6.0
+          ]
+        },
+        "north": {
+          "texture": "#Stigma",
+          "uv": [
+            7.0,
+            4.0,
+            9.0,
+            6.0
+          ]
+        },
+        "south": {
+          "texture": "#Stigma",
+          "uv": [
+            7.0,
+            4.0,
+            9.0,
+            6.0
+          ]
+        },
+        "up": {
+          "texture": "#Stigma",
+          "uv": [
+            7.0,
+            4.0,
+            9.0,
+            6.0
+          ]
+        },
+        "west": {
+          "texture": "#Stigma",
+          "uv": [
+            7.0,
+            4.0,
+            9.0,
+            6.0
+          ]
+        }
+      },
+      "from": [
+        7,
+        8,
+        7
+      ],
+      "to": [
+        8,
+        9,
+        8
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            6.0
+          ]
+        },
+        "west": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        7,
+        7,
+        6
+      ],
+      "to": [
+        8,
+        8,
+        9
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        6,
+        7,
+        7
+      ],
+      "to": [
+        9,
+        8,
+        8
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "east": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        6,
+        8,
+        4
+      ],
+      "to": [
+        9,
+        9,
+        5
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "east": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        6,
+        8,
+        10
+      ],
+      "to": [
+        9,
+        9,
+        11
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            6.0
+          ]
+        },
+        "east": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            6.0
+          ]
+        },
+        "west": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        4,
+        8,
+        6
+      ],
+      "to": [
+        5,
+        9,
+        9
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            6.0
+          ]
+        },
+        "east": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            6.0
+          ]
+        },
+        "west": {
+          "texture": "#Petal",
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        10,
+        8,
+        6
+      ],
+      "to": [
+        11,
+        9,
+        9
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        5,
+        8,
+        5
+      ],
+      "to": [
+        6,
+        9,
+        6
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        9,
+        8,
+        5
+      ],
+      "to": [
+        10,
+        9,
         6
       ]
     },
@@ -1045,17 +1862,17 @@
         "north": {
           "texture": "#PetalChase",
           "uv": [
-            8.0,
-            4.0,
-            4.0,
+            0.0,
+            0.0,
+            2.0,
             2.0
           ]
         },
         "south": {
           "texture": "#PetalChase",
           "uv": [
-            6.0,
-            4.0,
+            0.0,
+            0.0,
             2.0,
             2.0
           ]
@@ -1063,9 +1880,735 @@
         "up": {
           "texture": "#PetalChase",
           "uv": [
-            8.0,
-            4.0,
-            4.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        5,
+        8,
+        7
+      ],
+      "to": [
+        6,
+        9,
+        8
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        9,
+        8,
+        7
+      ],
+      "to": [
+        10,
+        9,
+        8
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        5,
+        8,
+        9
+      ],
+      "to": [
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        9,
+        8,
+        9
+      ],
+      "to": [
+        10,
+        9,
+        10
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        7,
+        8,
+        5
+      ],
+      "to": [
+        8,
+        9,
+        6
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        7,
+        8,
+        9
+      ],
+      "to": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        6,
+        9,
+        4
+      ],
+      "to": [
+        7,
+        10,
+        5
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        8,
+        9,
+        4
+      ],
+      "to": [
+        9,
+        10,
+        5
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        6,
+        9,
+        10
+      ],
+      "to": [
+        7,
+        10,
+        11
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        8,
+        9,
+        10
+      ],
+      "to": [
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        10,
+        9,
+        6
+      ],
+      "to": [
+        11,
+        10,
+        7
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "from": [
+        10,
+        9,
+        8
+      ],
+      "to": [
+        11,
+        10,
+        9
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "north": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#PetalChase",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
             2.0
           ]
         },
@@ -1081,1153 +2624,19 @@
       },
       "from": [
         4,
-        6,
-        7
-      ],
-      "to": [
-        6,
-        7,
-        8
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            4.0,
-            4.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            8.0,
-            4.0,
-            4.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            8.0,
-            4.0,
-            4.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            -3.0,
-            4.0
-          ]
-        }
-      },
-      "from": [
-        9,
-        6,
-        7
-      ],
-      "to": [
-        11,
-        7,
-        8
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        5,
-        6,
-        9
-      ],
-      "to": [
-        6,
-        7,
-        10
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        9,
-        6,
-        9
-      ],
-      "to": [
-        10,
-        7,
-        10
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            4.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            4.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            4.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        7,
-        6,
-        4
-      ],
-      "to": [
-        8,
-        7,
-        6
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            4.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            8.0,
-            2.0,
-            4.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            4.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        7,
-        6,
-        9
-      ],
-      "to": [
-        8,
-        7,
-        11
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        4,
-        5,
-        10
-      ],
-      "to": [
-        5,
-        6,
-        11
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        10,
-        5,
-        10
-      ],
-      "to": [
-        11,
-        6,
-        11
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        10,
-        5,
-        4
-      ],
-      "to": [
-        11,
-        6,
-        5
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        4,
-        5,
-        4
-      ],
-      "to": [
-        5,
-        6,
-        5
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        7,
-        5,
-        11
-      ],
-      "to": [
-        8,
-        6,
-        12
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        7,
-        5,
-        3
-      ],
-      "to": [
-        8,
-        6,
-        4
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        11,
-        5,
-        7
-      ],
-      "to": [
-        12,
-        6,
-        8
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "east": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#PetalChase",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        3,
-        5,
-        7
-      ],
-      "to": [
-        4,
-        6,
-        8
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        5,
-        8,
-        7
-      ],
-      "to": [
-        6,
-        9,
-        8
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        9,
-        8,
-        7
-      ],
-      "to": [
-        10,
-        9,
-        8
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "east": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        5,
-        8,
-        9
-      ],
-      "to": [
-        6,
-        9,
-        10
-      ]
-    },
-    {
-      "faces": {
-        "down": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "east": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        9,
-        8,
-        9
-      ],
-      "to": [
-        10,
-        9,
-        10
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        7,
-        8,
-        5
-      ],
-      "to": [
-        8,
         9,
         6
+      ],
+      "to": [
+        5,
+        10,
+        7
       ]
     },
     {
       "faces": {
         "east": {
-          "texture": "#Petal",
+          "texture": "#PetalChase",
           "uv": [
             0.0,
             0.0,
@@ -2236,7 +2645,7 @@
           ]
         },
         "north": {
-          "texture": "#Petal",
+          "texture": "#PetalChase",
           "uv": [
             0.0,
             0.0,
@@ -2245,7 +2654,7 @@
           ]
         },
         "south": {
-          "texture": "#Petal",
+          "texture": "#PetalChase",
           "uv": [
             0.0,
             0.0,
@@ -2254,7 +2663,7 @@
           ]
         },
         "up": {
-          "texture": "#Petal",
+          "texture": "#PetalChase",
           "uv": [
             0.0,
             0.0,
@@ -2263,7 +2672,7 @@
           ]
         },
         "west": {
-          "texture": "#Petal",
+          "texture": "#PetalChase",
           "uv": [
             0.0,
             0.0,
@@ -2273,250 +2682,14 @@
         }
       },
       "from": [
-        7,
-        8,
+        4,
+        9,
+        8
+      ],
+      "to": [
+        5,
+        10,
         9
-      ],
-      "to": [
-        8,
-        9,
-        10
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        6,
-        9,
-        4
-      ],
-      "to": [
-        7,
-        10,
-        5
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        8,
-        9,
-        4
-      ],
-      "to": [
-        9,
-        10,
-        5
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        6,
-        9,
-        10
-      ],
-      "to": [
-        7,
-        10,
-        11
-      ]
-    },
-    {
-      "faces": {
-        "east": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "north": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "south": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "up": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        },
-        "west": {
-          "texture": "#Petal",
-          "uv": [
-            0.0,
-            0.0,
-            2.0,
-            2.0
-          ]
-        }
-      },
-      "from": [
-        8,
-        9,
-        10
-      ],
-      "to": [
-        9,
-        10,
-        11
       ]
     }
   ],

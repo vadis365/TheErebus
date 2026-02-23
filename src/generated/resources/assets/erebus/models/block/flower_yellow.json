@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "minecraft:block/cube_all",
   "elements": [
     {
       "faces": {
@@ -1914,7 +1914,6 @@
   ],
   "textures": {
     "Petal": "erebus:block/petal_yellow",
-    "PetalChase": "erebus:block/petal_yellow",
     "Stem": "erebus:block/stem",
     "Stigma": "erebus:block/stigma",
     "particle": "erebus:block/petal_yellow"
