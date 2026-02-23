@@ -9,6 +9,7 @@ import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
+import org.jspecify.annotations.NonNull;
 
 public class BotFlyRenderer extends MobRenderer<BotFly, BotFlyRenderState, BotFlyModel> {
 	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/bot_fly.png");
@@ -21,6 +22,9 @@ public class BotFlyRenderer extends MobRenderer<BotFly, BotFlyRenderState, BotFl
 	@Override
 	public void extractRenderState(BotFly entity, BotFlyRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
+		float smoothedTicks = entity.animationTicks + (entity.animationTicks - entity.prevAnimationTicks) * partialTicks;
+		state.flap = (float) (Math.sin((smoothedTicks) * 1.2F) * 0.5F);
+		if(entity.onGround()) state.flap = 0;
 	}
 
 	@Override
@@ -29,7 +33,7 @@ public class BotFlyRenderer extends MobRenderer<BotFly, BotFlyRenderState, BotFl
 	}
 
 	@Override
-	public Identifier getTextureLocation(BotFlyRenderState state) {
+	public @NonNull Identifier getTextureLocation(BotFlyRenderState state) {
 		return TEXTURE;
 	}
 }
