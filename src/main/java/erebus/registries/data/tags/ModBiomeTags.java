@@ -21,6 +21,7 @@ public class ModBiomeTags {
     public static final TagKey<Biome> HAS_GIANT_FLOWERS = create("has_giant_flowers");
     public static final TagKey<Biome> HAS_ROTTEN_STUMPS = create("has_rotten_stumps");
     public static final TagKey<Biome> HAS_BIG_LOGS = create("has_big_logs");
+    public static final TagKey<Biome> HAS_TARANTULA_DUNGEON = create("has_tarantula_dungeon");
 
     private static TagKey<Biome> create(String name) {
         return TagKey.create(Registries.BIOME, Erebus.prefix(name));

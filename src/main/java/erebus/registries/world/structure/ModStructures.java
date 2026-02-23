@@ -16,6 +16,7 @@ public class ModStructures {
     public static final ResourceKey<Structure> SPIDER_DUNGEON = createKey("spider_dungeon");
     public static final ResourceKey<Structure> SWAMP_HUT = createKey("swamp_hut");
     public static final ResourceKey<Structure> WASP_DUNGEON = createKey("wasp_dungeon");
+    public static final ResourceKey<Structure> TARANTULA_DUNGEON = createKey("tarantula_dungeon");
 
     public static void registerStructures(BootstrapContext<Structure> context) {
         context.register(ANTLION_DUNGEON, AntlionDungeon.buildConfig(context));
@@ -26,6 +27,7 @@ public class ModStructures {
         context.register(SPIDER_DUNGEON, SpiderDungeon.buildConfig(context));
         context.register(SWAMP_HUT, SwampHut.buildConfig(context));
         context.register(WASP_DUNGEON, WaspDungeon.buildConfig(context));
+        context.register(TARANTULA_DUNGEON, TarantulaDungeon.buildConfig(context));
     }
 
     private static ResourceKey<Structure> createKey(String name) {

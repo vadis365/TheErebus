@@ -79,6 +79,7 @@ public class ModBlockEntityRendering {
         event.registerBlockEntityRenderer(ModBlockEntities.BAMBOO_EXTENDER.get(), BambooExtenderRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.PRESERVED_BLOCK.get(), PreservedBlockRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.EREBUS_CHEST.get(), ErebusChestRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.SPAWNER.get(), ErebusSpawnerRenderer::new);
     }
     
     private static ModelLayerLocation register(String name, String layer) {

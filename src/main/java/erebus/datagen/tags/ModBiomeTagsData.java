@@ -42,6 +42,8 @@ public class ModBiomeTagsData extends BiomeTagsProvider {
                 .add(ModBiomes.FUNGAL_FOREST_KEY);
         tag(ModBiomeTags.HAS_BIG_LOGS)
                 .add(ModBiomes.FUNGAL_FOREST_KEY);
+        tag(ModBiomeTags.HAS_TARANTULA_DUNGEON)
+                .add(ModBiomes.ULTERIOR_OUTBACK_KEY);
 
         tag(ModBiomeTags.IS_EREBUS)
                 .add(ModBiomes.ELYSIAN_FIELDS_KEY)

@@ -1,7 +1,10 @@
 package erebus.registries.blocks;
 
+import erebus.Erebus;
 import erebus.utils.BlockPropUtils;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -466,7 +469,7 @@ public class ModBlockProperties {
     public static final Properties DRAGON_FLY_SPAWNER = Properties.of().mapColor(MapColor.STONE);
     public static final Properties JUMPING_SPIDER_SPAWNER = Properties.of().mapColor(MapColor.STONE);
     public static final Properties SPIDER_SPAWNER = Properties.of().mapColor(MapColor.STONE);
-    public static final Properties TARANTULA_SPAWNER = Properties.of().mapColor(MapColor.STONE);
+    public static final Properties TARANTULA_SPAWNER = Properties.ofFullCopy(Blocks.SPAWNER).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("tarantula_spawner")));
     public static final Properties WASP_SPAWNER = Properties.of().mapColor(MapColor.STONE);
     public static final Properties ZOMBIE_ANT_SPAWNER = Properties.of().mapColor(MapColor.STONE);
     public static final Properties ZOMBIE_ANT_SOLDIER_SPAWNER = Properties.of().mapColor(MapColor.STONE);

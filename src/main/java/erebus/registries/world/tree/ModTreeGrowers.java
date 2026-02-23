@@ -24,7 +24,7 @@ public class ModTreeGrowers {
         BALSAM = new TreeGrower("%s:balsam".formatted(Erebus.MODID), Optional.empty(), Optional.of(BALSAM_TREE.getConfiguredResourceKey()), Optional.empty());
         BAOBAB = new TreeGrower("%s:baobab".formatted(Erebus.MODID), Optional.empty(), Optional.of(BAOBAB_TREE.getConfiguredResourceKey()), Optional.empty());
         CYPRESS = new TreeGrower("%s:cypress".formatted(Erebus.MODID), Optional.empty(), Optional.of(CYPRESS_TREE.getConfiguredResourceKey()), Optional.empty());
-        EUCALYPTUS = new TreeGrower("%s:eucalyptus".formatted(Erebus.MODID), Optional.of(GIANT_EUCALYPTUS_TREE.getConfiguredResourceKey()), Optional.of(EUCALYPTUS_TREE.getConfiguredResourceKey()), Optional.empty());
+        EUCALYPTUS = new TreeGrower("%s:eucalyptus".formatted(Erebus.MODID), Optional.empty(), Optional.of(EUCALYPTUS_TREE.getConfiguredResourceKey()), Optional.empty());
         MAHOGANY = new TreeGrower("%s:mahogany".formatted(Erebus.MODID), Optional.of(GIANT_MAHOGANY_TREE.getConfiguredResourceKey()), Optional.of(MAHOGANY_TREE.getConfiguredResourceKey()), Optional.empty());
         MARSHWOOD = new TreeGrower("%s:marshwood".formatted(Erebus.MODID), Optional.empty(), Optional.of(MARSHWOOD_TREE.getConfiguredResourceKey()), Optional.empty());
         MOSSBARK = new TreeGrower("%s:mossbark".formatted(Erebus.MODID), Optional.empty(), Optional.of(MOSSBARK_TREE.getConfiguredResourceKey()), Optional.empty());

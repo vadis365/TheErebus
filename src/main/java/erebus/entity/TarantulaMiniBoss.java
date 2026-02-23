@@ -1,14 +1,14 @@
 package erebus.entity;
 
-import net.minecraft.world.entity.EntityType;
+import erebus.registries.entity.ModEntities;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 
 public class TarantulaMiniBoss extends Monster {
-    public TarantulaMiniBoss(EntityType<? extends Monster> type, Level level) {
-        super(type, level);
+    public TarantulaMiniBoss(Level level) {
+        super(ModEntities.TARANTULA_MINI_BOSS.get(), level);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

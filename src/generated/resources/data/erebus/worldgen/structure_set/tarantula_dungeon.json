@@ -1,13 +1,13 @@
 {
   "placement": {
     "type": "minecraft:random_spread",
-    "salt": 1435136,
+    "salt": 1435141,
     "separation": 8,
     "spacing": 32
   },
   "structures": [
     {
-      "structure": "erebus:dung_pile",
+      "structure": "erebus:tarantula_dungeon",
       "weight": 1
     }
   ]

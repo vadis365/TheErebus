@@ -47,6 +47,11 @@ public class ErebusPortalBlock extends Block implements Portal {
     }
 
     @Override
+    protected boolean skipRendering(@NonNull BlockState state, BlockState neighborState, @NonNull Direction direction) {
+        return neighborState.is(this) || super.skipRendering(state, neighborState, direction);
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AXIS);
     }

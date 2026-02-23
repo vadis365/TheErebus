@@ -20,6 +20,7 @@ public class ModStructurePieces {
     public static final DeferredHolder<StructurePieceType, StructurePieceType> GIANT_FLOWERS = register("giant_flowers", GiantFlowersPiece::new);
     public static final DeferredHolder<StructurePieceType, StructurePieceType> ROTTEN_STUMPS = register("rotten_stumps", RottenStumpsPiece::new);
     public static final DeferredHolder<StructurePieceType, StructurePieceType> BIG_LOGS = register("big_logs", BigLogsPiece::new);
+    public static final DeferredHolder<StructurePieceType, StructurePieceType> TARANTULA_DUNGEON = register("tarantula_dungeon", TarantulaDungeonPiece::new);
 
     private static DeferredHolder<StructurePieceType, StructurePieceType> register(String name, StructurePieceType type) {
         return STRUCTURE_PIECES.register(name, () -> type);

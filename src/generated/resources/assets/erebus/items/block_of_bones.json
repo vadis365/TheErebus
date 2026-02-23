@@ -4,7 +4,7 @@
     "base": "erebus:item/block_of_bones",
     "model": {
       "type": "erebus:block_of_bones_special",
-      "texture": "erebus:bone_block"
+      "texture": "erebus:block/bone_block"
     }
   }
 }

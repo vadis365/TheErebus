@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -246,7 +247,7 @@ public class ModEntities {
 		SOLIFUGE = register("solifuge", EntityType.Builder.of(Solifuge::new, MobCategory.MONSTER).sized(2.5F, 1.25F), SOLIFUGE_KEY);
 		STAG_BEETLE = register("stag_beetle", EntityType.Builder.of(StagBeetle::new, MobCategory.CREATURE).sized(2.5F, 1.2F), STAG_BEETLE_KEY);
 		TARANTULA = register("tarantula", EntityType.Builder.of(Tarantula::new, MobCategory.MONSTER).sized(1.3F, 0.6F), TARANTULA_KEY);
-		TARANTULA_MINI_BOSS = register("tarantula_mini_boss", EntityType.Builder.of(TarantulaMiniBoss::new, MobCategory.MONSTER).sized(4.0F, 1.2F), TARANTULA_MINI_BOSS_KEY);
+		TARANTULA_MINI_BOSS = register("tarantula_mini_boss", EntityType.Builder.of((EntityType<TarantulaMiniBoss> type, Level level) -> new TarantulaMiniBoss(level), MobCategory.MONSTER).sized(4.0F, 1.2F), TARANTULA_MINI_BOSS_KEY);
 		THROWN_BLOCK_AS_ITEM = register("thrown_block_as_item", EntityType.Builder.<ThrownBlockAsItem>of(ThrownBlockAsItem::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F), THROWN_BLOCK_AS_ITEM_KEY);
 		TITAN_BEETLE = register("titan_beetle", EntityType.Builder.of(TitanBeetle::new, MobCategory.CREATURE).sized(2.5F, 1.2F), TITAN_BEETLE_KEY);
 		UMBER_GOLEM = register("umber_golem", EntityType.Builder.of(UmberGolem::new, MobCategory.MONSTER).sized(1.0F, 1.0F).fireImmune(), UMBER_GOLEM_KEY);

@@ -150,7 +150,7 @@ public class ModBlockStateHelpers {
         Identifier base = ModelTemplates
                 .createItem("block_of_bones_special", TextureSlot.TEXTURE)
                 .create(boneBlockItem, TextureMapping.defaultTexture(ModBlocks.BLOCK_OF_BONES.get()), blockModels.modelOutput);
-        ItemModel.Unbaked plainModel = ItemModelUtils.specialModel(base, new BlockOfBonesSpecialRenderer.Unbaked(Erebus.prefix("bone_block")));
+        ItemModel.Unbaked plainModel = ItemModelUtils.specialModel(base, new BlockOfBonesSpecialRenderer.Unbaked(Erebus.prefix("block/bone_block")));
 
         itemModels.itemModelOutput.accept(boneBlockItem, plainModel);
     }

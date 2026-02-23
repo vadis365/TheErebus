@@ -49,4 +49,8 @@ public class ModBlockEntities {
             ModBlocks.CHEST_VARNISHED.get(),
             ModBlocks.CHEST_WHITE.get()
     )));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ErebusSpawnerBlockEntity>> SPAWNER = BLOCK_ENTITIES.register("spawner", () -> new BlockEntityType<>(ErebusSpawnerBlockEntity::new, Set.of(
+            ModBlocks.TARANTULA_SPAWNER.get()
+    )));
 }

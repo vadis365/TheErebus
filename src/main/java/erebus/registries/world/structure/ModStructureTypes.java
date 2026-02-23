@@ -19,4 +19,5 @@ public class ModStructureTypes {
     public static final DeferredHolder<StructureType<?>, StructureType<SpiderDungeon>> SPIDER_DUNGEON = STRUCTURE_TYPES.register("spider_dungeon", () -> () -> SpiderDungeon.CODEC);
     public static final DeferredHolder<StructureType<?>, StructureType<SwampHut>> SWAMP_HUT = STRUCTURE_TYPES.register("swamp_hut", () -> () -> SwampHut.CODEC);
     public static final DeferredHolder<StructureType<?>, StructureType<WaspDungeon>> WASP_DUNGEON = STRUCTURE_TYPES.register("wasp_dungeon", () -> () -> WaspDungeon.CODEC);
+    public static final DeferredHolder<StructureType<?>, StructureType<TarantulaDungeon>> TARANTULA_DUNGEON = STRUCTURE_TYPES.register("tarantula_dungeon", () -> () -> TarantulaDungeon.CODEC);
 }

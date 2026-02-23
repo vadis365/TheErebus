@@ -26,8 +26,8 @@ public class ChameleonTick extends Monster {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        goalSelector.addGoal(0, attackTargetGoal);
-        targetSelector.addGoal(1, meleeAttackGoal);
+        //goalSelector.addGoal(0, attackTargetGoal);
+        //targetSelector.addGoal(1, meleeAttackGoal);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

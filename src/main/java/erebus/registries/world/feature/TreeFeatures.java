@@ -13,7 +13,6 @@ public class TreeFeatures extends ModFeatureHelpers {
     public static BaobabTree BAOBAB_TREE = new BaobabTree();
     public static CypressTree CYPRESS_TREE = new CypressTree();
     public static EucalyptusTree EUCALYPTUS_TREE = new EucalyptusTree();
-    public static GiantEucalyptusTree GIANT_EUCALYPTUS_TREE = new GiantEucalyptusTree();
     public static MahoganyTree MAHOGANY_TREE = new MahoganyTree();
     public static GiantMahoganyTree GIANT_MAHOGANY_TREE = new GiantMahoganyTree();
     public static MarshwoodTree MARSHWOOD_TREE = new MarshwoodTree();
@@ -27,7 +26,6 @@ public class TreeFeatures extends ModFeatureHelpers {
         registerConfiguredTree(BAOBAB_TREE);
         registerConfiguredTree(CYPRESS_TREE);
         registerConfiguredTree(EUCALYPTUS_TREE);
-        registerConfiguredTree(GIANT_EUCALYPTUS_TREE);
         registerConfiguredTree(MAHOGANY_TREE);
         registerConfiguredTree(GIANT_MAHOGANY_TREE);
         registerConfiguredTree(MARSHWOOD_TREE);
@@ -42,7 +40,6 @@ public class TreeFeatures extends ModFeatureHelpers {
         registerPlacedFeature(BAOBAB_TREE);
         registerPlacedFeature(CYPRESS_TREE);
         registerPlacedFeature(EUCALYPTUS_TREE);
-        registerPlacedFeature(GIANT_EUCALYPTUS_TREE);
         registerPlacedFeature(MAHOGANY_TREE);
         registerPlacedFeature(GIANT_MAHOGANY_TREE);
         registerPlacedFeature(MARSHWOOD_TREE);
