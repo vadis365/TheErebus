@@ -29,7 +29,7 @@ public class ModNoiseGenerator {
                 0,
                 false,
                 false,
-                false,
+                true,
                 false
         );
     }

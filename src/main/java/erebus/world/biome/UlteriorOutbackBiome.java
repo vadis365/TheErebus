@@ -84,7 +84,6 @@ public class UlteriorOutbackBiome extends ErebusBiome {
                         .addFeature(UNDERGROUND_ORES, OreFeatures.DIAMOND_ORE_ULTERIOR_OUTBACK.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.PETRIFIED_WOOD_ORE_ULTERIOR_OUTBACK.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.FOSSIL_ORE_ULTERIOR_OUTBACK.getPlacedResourceKey())
-
                         .build())
                 .build();
     }

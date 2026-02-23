@@ -26,9 +26,11 @@ public class ModSurfaceRules {
     private static final RuleSource SAND = makeStateRule(Blocks.SAND);
     private static final RuleSource SANDSTONE = makeStateRule(Blocks.SANDSTONE);
     private static final RuleSource RED_SAND = makeStateRule(Blocks.RED_SAND);
+    private static final RuleSource RED_SANDSTONE = makeStateRule(Blocks.RED_SANDSTONE);
     private static final RuleSource BEDROCK = makeStateRule(Blocks.BEDROCK);
     private static final RuleSource GRASS = makeStateRule(Blocks.GRASS_BLOCK);
     private static final RuleSource DIRT = makeStateRule(Blocks.DIRT);
+    private static final RuleSource GRAVEL = makeStateRule(Blocks.GRAVEL);
     private static final RuleSource WATER = makeStateRule(Blocks.WATER);
 
     public static RuleSource erebus() {
@@ -170,12 +172,19 @@ public class ModSurfaceRules {
                 isBiome(ModBiomes.ULTERIOR_OUTBACK.getResourceKey()),
                 sequence(
                         ifTrue(
-                                noiseCondition(Noises.NETHER_STATE_SELECTOR, 0.0, 1.8D),
-                                RED_SAND
+                                ON_FLOOR,
+                                sequence(
+                                        sequence(
+                                                ifTrue(noiseCondition(Noises.SURFACE, -0.1818, 0.1818), GRASS),
+                                                ifTrue(noiseCondition(Noises.SURFACE, 0.5454, 0.909), RED_SAND),
+                                                ifTrue(noiseCondition(Noises.SURFACE, -0.909, -0.5454), DIRT)
+                                        ),
+                                        UMBERSTONE
+                                )
                         ),
                         ifTrue(
-                                noiseCondition(Noises.NETHER_STATE_SELECTOR, 0.0, 1.8D),
-                                DIRT
+                                ON_CEILING,
+                                UMBERSTONE
                         )
                 )
         );
