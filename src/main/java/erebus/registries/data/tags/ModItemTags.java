@@ -26,7 +26,9 @@ public class ModItemTags {
     public static final TagKey<Item> QUAKE_HAMMER_TOOL_MATERIALS = create("quake_hammer_tool_materials");
     
     public static final TagKey<Item> COMPOSTABLE = create("compostable");
-    
+    public static final TagKey<Item> TITAN_BEETLE_FOOD = create("titan_beetle_food");
+    public static final TagKey<Item> TITAN_BEETLE_CHESTS = create("titan_beetle_chests");
+
     private static TagKey<Item> create(String name) {
         return TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix(name));
     }

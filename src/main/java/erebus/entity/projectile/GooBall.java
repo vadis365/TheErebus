@@ -8,7 +8,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -79,10 +78,6 @@ public class GooBall extends ThrowableProjectile implements ItemSupplier {
 
 	@Override
 	public boolean canBeCollidedWith(Entity other) {
-		return false;
-	}
-
-	public boolean attackEntityFrom(DamageSource source, int amount) {
 		return false;
 	}
 

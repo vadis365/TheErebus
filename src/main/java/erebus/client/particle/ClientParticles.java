@@ -135,6 +135,9 @@ public class ClientParticles {
 					level.addParticle(ModParticles.SONIC.get(), xPos, yPos, zPos, vecX, vecY, vecZ);
 					// Note: color setting would normally happen in the particle itself or via custom particle data
 					break;
+				case PORTAL:
+					level.addParticle(ParticleTypes.PORTAL, xPos, yPos, zPos, vecX, vecY, vecZ);
+					break;
 				case EREBUS_PORTAL:
 					level.addParticle(ParticleTypes.PORTAL, xPos, yPos, zPos, vecX, vecY, vecZ);
 					break;
@@ -193,6 +196,7 @@ public class ClientParticles {
 		REPELLENT,
 		SONIC,
 		SONIC_BLUE,
+		PORTAL,
 		EREBUS_PORTAL,
 		BONEMEAL,
 		CLOUD,
@@ -218,19 +222,31 @@ public class ClientParticles {
 		}
 	}
 
-	public static void spawnCloudBurstParticles(BlockPos pos) {
-		Level level = Minecraft.getInstance().level;
+	public static void spawnCloudBurstParticles(Level level, BlockPos pos) {
 		if (level.isClientSide()) {
 			double x = pos.getX() + 0.53125F;
 			double y = pos.getY() + 1.25F;
 			double z = pos.getZ() + 0.53125F;
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.CLOUD, x, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.CLOUD, x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.CLOUD, x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.CLOUD, x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.CLOUD, x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.CLOUD, x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.CLOUD, x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
+			spawnParticles(ParticleType.CLOUD, x, y, z, 0.0D, 0.0D, 0.0D);
+			spawnParticles(ParticleType.CLOUD, x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
+			spawnParticles(ParticleType.CLOUD, x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
+			spawnParticles(ParticleType.CLOUD, x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+			spawnParticles(ParticleType.CLOUD, x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+			spawnParticles(ParticleType.CLOUD, x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
+			spawnParticles(ParticleType.CLOUD, x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
+		}
+	}
+
+	public static void enderChestParticles(Level level, double x, double y, double z) {
+		for(int c = 0; c < 3; c++) {
+			int motionX = level.getRandom().nextInt(2) * 2 - 1;
+			int motionZ = level.getRandom().nextInt(2) * 2 - 1;
+			double velY = (level.getRandom().nextFloat() - 0.5D) * 0.125D;
+
+			double velZ = level.getRandom().nextFloat() * motionZ;
+			double velX = level.getRandom().nextFloat() * motionX;
+
+			spawnParticles(ParticleType.EREBUS_PORTAL, x, y, z, velX, velY, velZ);
 		}
 	}
 }

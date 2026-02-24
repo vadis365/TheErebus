@@ -33,8 +33,9 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
-public class BeetleLarva extends PathfinderMob {
+public class BeetleLarva extends AgeableMob {
 	public static final EntityDataAccessor<Byte> LARVA_TYPE = SynchedEntityData.defineId(BeetleLarva.class, EntityDataSerializers.BYTE);
 	public static final EntityDataAccessor<Float> LARVA_SIZE = SynchedEntityData.defineId(BeetleLarva.class, EntityDataSerializers.FLOAT);
 	public static final EntityDataAccessor<Boolean> IS_SQUASHED = SynchedEntityData.defineId(BeetleLarva.class, EntityDataSerializers.BOOLEAN);
@@ -148,46 +149,19 @@ public class BeetleLarva extends PathfinderMob {
 	}
 
 	private void spawnBeetle() {
-		if (getLarvaType() == 0) {
-			Beetle entityBeetle = ModEntities.BEETLE.get().create(level(), EntitySpawnReason.CONVERSION);
-			if (entityBeetle != null) {
-				entityBeetle.finalizeSpawn((ServerLevel) level(), ((ServerLevel) level()).getCurrentDifficultyAt(blockPosition()), EntitySpawnReason.CONVERSION, null);
-				level().addFreshEntity(entityBeetle);
-				entityBeetle.copyPosition(this);
-			}
+		switch(getLarvaType()) {
+			case 0, 1 -> spawn(ModEntities.BEETLE.get().create(level(), EntitySpawnReason.CONVERSION));
+            case 2 -> spawn(ModEntities.RHINO_BEETLE.get().create(level(), EntitySpawnReason.CONVERSION));
+			case 3 -> spawn(ModEntities.TITAN_BEETLE.get().create(level(), EntitySpawnReason.CONVERSION));
+			case 4 -> spawn(ModEntities.BOMBARDIER_BEETLE.get().create(level(), EntitySpawnReason.CONVERSION));
+			case 5 -> spawn(ModEntities.STAG_BEETLE.get().create(level(), EntitySpawnReason.CONVERSION));
 		}
-		if (getLarvaType() == 1) {
-			Beetle entityBeetle = ModEntities.BEETLE.get().create(level(), EntitySpawnReason.CONVERSION);
-			if (entityBeetle != null) {
-				entityBeetle.setTame(true);
-				entityBeetle.finalizeSpawn((ServerLevel) level(), ((ServerLevel) level()).getCurrentDifficultyAt(blockPosition()), EntitySpawnReason.CONVERSION, null);
-				level().addFreshEntity(entityBeetle);
-				entityBeetle.copyPosition(this);
-			}
-		} 
-		/*	else if (getLarvaType() == 2) {
-			EntityRhinoBeetle entityRhinoBeetle = new EntityRhinoBeetle(level());
-			entityRhinoBeetle.setPosition(posX, posY, posZ);
-			entityRhinoBeetle.setTameState((byte) 1);
-			level().spawnEntity(entityRhinoBeetle);
-		} else if (getLarvaType() == 3) {
-			EntityTitanBeetle entityTitanBeetle = new EntityTitanBeetle(level());
-			entityTitanBeetle.setPosition(posX, posY, posZ);
-			entityTitanBeetle.setTameState((byte) 1);
-			level().spawnEntity(entityTitanBeetle);
-		}*/
-		else if (getLarvaType() == 4) {
-			BombardierBeetle entityBombardierBeetle = ModEntities.BOMBARDIER_BEETLE.get().create(level(), EntitySpawnReason.CONVERSION);
-			//entityBombardierBeetle.finalizeSpawn((ServerLevel)level(), level().getCurrentDifficultyAt(blockPosition()), EntitySpawnReason.CONVERSION, null);
-			level().addFreshEntity(entityBombardierBeetle);
-			entityBombardierBeetle.copyPosition(this);
-		} /*else if (getLarvaType() == 5) {
-			EntityStagBeetle entityStagBeetle = new EntityStagBeetle(level());
-			entityStagBeetle.setPosition(posX, posY, posZ);
-			entityStagBeetle.setTameState((byte) 1);
-			level().spawnEntity(entityStagBeetle);
-		}
-	*/
+	}
+
+	private void spawn(Mob mob) {
+		mob.finalizeSpawn((ServerLevel) level(), ((ServerLevel) level()).getCurrentDifficultyAt(blockPosition()), EntitySpawnReason.CONVERSION, null);
+		level().addFreshEntity(mob);
+		mob.copyPosition(this);
 	}
 
 	@Override
@@ -210,6 +184,11 @@ public class BeetleLarva extends PathfinderMob {
 	}
 
 	@Override
+	public @Nullable AgeableMob getBreedOffspring(@NonNull ServerLevel serverLevel, @NonNull AgeableMob ageableMob) {
+		return null;
+	}
+
+	@Override
 	public @NonNull InteractionResult mobInteract(Player player, @NonNull InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!level().isClientSide() && stack.is(Items.STICK) && getLarvaType() != 4) {
@@ -227,14 +206,14 @@ public class BeetleLarva extends PathfinderMob {
 	}
 
 	@Override
-	public void addAdditionalSaveData(ValueOutput output) {
+	public void addAdditionalSaveData(@NonNull ValueOutput output) {
 		super.addAdditionalSaveData(output);
 		output.putFloat("larvaSize", getLarvaSize());
 		output.putByte("larvaType", getLarvaType());
 	}
 
 	@Override
-	public void readAdditionalSaveData(ValueInput input) {
+	public void readAdditionalSaveData(@NonNull ValueInput input) {
 		super.readAdditionalSaveData(input);
 		setLarvaSize(input.getFloatOr("larvaSize", 0));
 		setLarvaType(input.getByteOr("larvaType", (byte) 0));

@@ -1,0 +1,20 @@
+{
+  "values": [
+    "#minecraft:copper_chests",
+    "minecraft:chest",
+    "erebus:chest_asper",
+    "erebus:chest_bamboo",
+    "erebus:chest_baobab",
+    "erebus:chest_balsam",
+    "erebus:chest_cypress",
+    "erebus:chest_eucalyptus",
+    "erebus:chest_mahogany",
+    "erebus:chest_marshwood",
+    "erebus:chest_mossbark",
+    "erebus:chest_petrified",
+    "erebus:chest_rotten",
+    "erebus:chest_scorched",
+    "erebus:chest_varnished",
+    "erebus:chest_white"
+  ]
+}

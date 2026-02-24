@@ -1,12 +1,14 @@
 package erebus.datagen.tags;
 
 import erebus.Erebus;
+import erebus.registries.blocks.ModBlocks;
 import erebus.registries.data.tags.ModItemTags;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import org.jetbrains.annotations.NotNull;
 
@@ -74,5 +76,58 @@ public class ModItemTagsData extends ItemTagsProvider {
                 		ModItems.BAMBOO_SHOOT.get()
                 );
 
+		tag(ModItemTags.REPAIRS_JADE_ARMOR)
+				.add(ModItems.JADE.get());
+		tag(ModItemTags.REPAIRS_EXOSKELETON_ARMOR)
+				.add(ModItems.PLATE_EXO.get());
+		tag(ModItemTags.REPAIRS_REINFORCED_EXOSKELETON_ARMOR)
+				.add(ModItems.REINFORCED_PLATE_EXO.get());
+		tag(ModItemTags.REPAIRS_RHINO_ARMOR)
+				.add(ModItems.PLATE_EXO_RHINO.get());
+		tag(ModItemTags.REPAIRS_BAMBOO_ARMOR)
+				.add(ModItems.BAMBOO.get());
+		tag(ModItemTags.REPAIRS_REINFORCED_COMPOUND_GOGGLES)
+				.add(ModItems.COMPOUND_LENS.get());
+		tag(ModItemTags.REPAIRS_MUSHROOM_HELM)
+				.add();
+		tag(ModItemTags.REPAIRS_SPIDER_T_SHIRT)
+				.add();
+		tag(ModItemTags.REPAIRS_WATER_STRIDERS)
+				.add();
+		tag(ModItemTags.REPAIRS_JUMP_BOOTS)
+				.add(ModItems.ELASTIC_FIBER.get());
+		tag(ModItemTags.REPAIRS_SPRINT_LEGGINGS)
+				.add();
+		tag(ModItemTags.JADE_TOOL_MATERIALS)
+				.add();
+		tag(ModItemTags.WASP_SWORD_TOOL_MATERIALS)
+				.add();
+		tag(ModItemTags.WASP_DAGGER_TOOL_MATERIALS)
+				.add();
+		tag(ModItemTags.ROLLED_NEWSPAPER_TOOL_MATERIALS)
+				.add();
+		tag(ModItemTags.SCORPION_PINCER_TOOL_MATERIALS)
+				.add();
+		tag(ModItemTags.QUAKE_HAMMER_TOOL_MATERIALS)
+				.add();
+		tag(ModItemTags.TITAN_BEETLE_FOOD)
+				.add(ModItems.TURNIP.get());
+		tag(ModItemTags.TITAN_BEETLE_CHESTS)
+				.addTag(ItemTags.COPPER_CHESTS)
+				.add(Blocks.CHEST.asItem())
+				.add(ModBlocks.CHEST_ASPER.asItem())
+				.add(ModBlocks.CHEST_BAMBOO.asItem())
+				.add(ModBlocks.CHEST_BAOBAB.asItem())
+				.add(ModBlocks.CHEST_BALSAM.asItem())
+				.add(ModBlocks.CHEST_CYPRESS.asItem())
+				.add(ModBlocks.CHEST_EUCALYPTUS.asItem())
+				.add(ModBlocks.CHEST_MAHOGANY.asItem())
+				.add(ModBlocks.CHEST_MARSHWOOD.asItem())
+				.add(ModBlocks.CHEST_MOSSBARK.asItem())
+				.add(ModBlocks.CHEST_PETRIFIED.asItem())
+				.add(ModBlocks.CHEST_ROTTEN.asItem())
+				.add(ModBlocks.CHEST_SCORCHED.asItem())
+				.add(ModBlocks.CHEST_VARNISHED.asItem())
+				.add(ModBlocks.CHEST_WHITE.asItem());
     }
 }

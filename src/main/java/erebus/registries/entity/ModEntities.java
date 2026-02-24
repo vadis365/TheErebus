@@ -2,16 +2,13 @@ package erebus.registries.entity;
 
 import erebus.Erebus;
 import erebus.entity.*;
-import erebus.entity.projectile.AmberStar;
-import erebus.entity.projectile.GooBall;
-import erebus.entity.projectile.ThrownBlockAsItem;
+import erebus.entity.projectile.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -58,6 +55,7 @@ public class ModEntities {
 	public static final ResourceKey<EntityType<?>> MONEY_SPIDER_KEY;
 	public static final ResourceKey<EntityType<?>> MOSQUITO_KEY;
 	public static final ResourceKey<EntityType<?>> MOTH_KEY;
+	public static final ResourceKey<EntityType<?>> POISON_JET_KEY;
 	public static final ResourceKey<EntityType<?>> POND_SKATER_KEY;
 	public static final ResourceKey<EntityType<?>> PRAYING_MANTIS_KEY;
 	public static final ResourceKey<EntityType<?>> PUNCHROOM_KEY;
@@ -67,6 +65,7 @@ public class ModEntities {
 	public static final ResourceKey<EntityType<?>> SOLIFUGE_KEY;
 	public static final ResourceKey<EntityType<?>> STAG_BEETLE_KEY;
 	public static final ResourceKey<EntityType<?>> TARANTULA_KEY;
+	public static final ResourceKey<EntityType<?>> TARANTULA_EGG_KEY;
 	public static final ResourceKey<EntityType<?>> TARANTULA_MINI_BOSS_KEY;
 	public static final ResourceKey<EntityType<?>> THROWN_BLOCK_AS_ITEM_KEY;
 	public static final ResourceKey<EntityType<?>> TITAN_BEETLE_KEY;
@@ -117,6 +116,7 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<MoneySpider>> MONEY_SPIDER;
     public static final DeferredHolder<EntityType<?>, EntityType<Mosquito>> MOSQUITO;
     public static final DeferredHolder<EntityType<?>, EntityType<Moth>> MOTH;
+	public static final DeferredHolder<EntityType<?>, EntityType<PoisonJet>> POISON_JET;
 	public static final DeferredHolder<EntityType<?>, EntityType<PondSkater>> POND_SKATER;
 	public static final DeferredHolder<EntityType<?>, EntityType<PrayingMantis>> PRAYING_MANTIS;
     public static final DeferredHolder<EntityType<?>, EntityType<Punchroom>> PUNCHROOM;
@@ -127,6 +127,7 @@ public class ModEntities {
 	public static final DeferredHolder<EntityType<?>, EntityType<StagBeetle>> STAG_BEETLE;
     public static final DeferredHolder<EntityType<?>, EntityType<Tarantula>> TARANTULA;
     public static final DeferredHolder<EntityType<?>, EntityType<TarantulaMiniBoss>> TARANTULA_MINI_BOSS;
+	public static final DeferredHolder<EntityType<?>, EntityType<TarantulaEgg>> TARANTULA_EGG;
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownBlockAsItem>> THROWN_BLOCK_AS_ITEM;
 	public static final DeferredHolder<EntityType<?>, EntityType<TitanBeetle>> TITAN_BEETLE;
 	public static final DeferredHolder<EntityType<?>, EntityType<UmberGolem>> UMBER_GOLEM;
@@ -179,6 +180,7 @@ public class ModEntities {
 		MONEY_SPIDER_KEY = createKey("money_spider");
 		MOSQUITO_KEY = createKey("mosquito");
 		MOTH_KEY = createKey("moth");
+		POISON_JET_KEY = createKey("poison_jet");
 		POND_SKATER_KEY = createKey("pond_skater");
 		PRAYING_MANTIS_KEY = createKey("praying_mantis");
 		PUNCHROOM_KEY = createKey("punchroom");
@@ -189,6 +191,7 @@ public class ModEntities {
 		STAG_BEETLE_KEY = createKey("stag_beetle");
 		TARANTULA_KEY = createKey("tarantula");
 		TARANTULA_MINI_BOSS_KEY = createKey("tarantula_mini_boss");
+		TARANTULA_EGG_KEY = createKey("tarantula_egg");
 		THROWN_BLOCK_AS_ITEM_KEY = createKey("thrown_block_as_item");
 		TITAN_BEETLE_KEY = createKey("titan_beetle");
 		UMBER_GOLEM_KEY = createKey("umber_golem");
@@ -238,6 +241,7 @@ public class ModEntities {
 		MONEY_SPIDER = register("money_spider", EntityType.Builder.of(MoneySpider::new, MobCategory.MONSTER).sized(0.6F, 0.4F).fireImmune(), MONEY_SPIDER_KEY);
 		MOSQUITO = register("mosquito", EntityType.Builder.of(Mosquito::new, MobCategory.MONSTER).sized(0.9F, 1.3F), MOSQUITO_KEY);
 		MOTH = register("moth", EntityType.Builder.of(Moth::new, MobCategory.MONSTER).sized(1.8F, 0.5F), MOTH_KEY);
+		POISON_JET = register("poison_jet", EntityType.Builder.of(PoisonJet::new, MobCategory.MONSTER).sized(0.7F, 0.7F), POISON_JET_KEY);
 		POND_SKATER = register("pond_skater", EntityType.Builder.of(PondSkater::new, MobCategory.CREATURE).sized(1.0F, 1.0F), POND_SKATER_KEY);
 		PRAYING_MANTIS = register("praying_mantis", EntityType.Builder.of(PrayingMantis::new, MobCategory.CREATURE).sized(2.0F, 2.5F).fireImmune(), PRAYING_MANTIS_KEY);
 		PUNCHROOM = register("punchroom", EntityType.Builder.of(Punchroom::new, MobCategory.MONSTER).sized(1F, 1F).fireImmune(), PUNCHROOM_KEY);
@@ -247,7 +251,8 @@ public class ModEntities {
 		SOLIFUGE = register("solifuge", EntityType.Builder.of(Solifuge::new, MobCategory.MONSTER).sized(2.5F, 1.25F), SOLIFUGE_KEY);
 		STAG_BEETLE = register("stag_beetle", EntityType.Builder.of(StagBeetle::new, MobCategory.CREATURE).sized(2.5F, 1.2F), STAG_BEETLE_KEY);
 		TARANTULA = register("tarantula", EntityType.Builder.of(Tarantula::new, MobCategory.MONSTER).sized(1.3F, 0.6F), TARANTULA_KEY);
-		TARANTULA_MINI_BOSS = register("tarantula_mini_boss", EntityType.Builder.of((EntityType<TarantulaMiniBoss> type, Level level) -> new TarantulaMiniBoss(level), MobCategory.MONSTER).sized(4.0F, 1.2F), TARANTULA_MINI_BOSS_KEY);
+		TARANTULA_MINI_BOSS = register("tarantula_mini_boss", EntityType.Builder.of(TarantulaMiniBoss::new, MobCategory.MONSTER).sized(4.0F, 1.2F), TARANTULA_MINI_BOSS_KEY);
+		TARANTULA_EGG = register("tarantula_egg", EntityType.Builder.of(TarantulaEgg::new, MobCategory.MISC).sized(0.7F, 0.7F), TARANTULA_EGG_KEY);
 		THROWN_BLOCK_AS_ITEM = register("thrown_block_as_item", EntityType.Builder.<ThrownBlockAsItem>of(ThrownBlockAsItem::new, MobCategory.MISC).fireImmune().sized(0.5F, 0.5F), THROWN_BLOCK_AS_ITEM_KEY);
 		TITAN_BEETLE = register("titan_beetle", EntityType.Builder.of(TitanBeetle::new, MobCategory.CREATURE).sized(2.5F, 1.2F), TITAN_BEETLE_KEY);
 		UMBER_GOLEM = register("umber_golem", EntityType.Builder.of(UmberGolem::new, MobCategory.MONSTER).sized(1.0F, 1.0F).fireImmune(), UMBER_GOLEM_KEY);

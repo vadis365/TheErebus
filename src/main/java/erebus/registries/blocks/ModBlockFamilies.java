@@ -1,7 +1,6 @@
-package erebus.registries;
+package erebus.registries.blocks;
 
 import com.google.common.collect.Maps;
-import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.world.level.block.Block;

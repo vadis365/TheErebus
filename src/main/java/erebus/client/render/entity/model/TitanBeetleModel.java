@@ -8,6 +8,7 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class TitanBeetleModel extends EntityModel<TitanBeetleRenderState> {
     public ModelPart root;
@@ -143,5 +144,24 @@ public class TitanBeetleModel extends EntityModel<TitanBeetleRenderState> {
         root.addOrReplaceChild("Lock", CubeListBuilder.create().texOffs(0, 110).addBox(-1F, -1F, -15F, 2, 4, 1), PartPose.offsetAndRotation(0F, 3F, 4F, 0.0872665F, 3.141593F, 0F));
 
         return LayerDefinition.create(mesh, 128, 128);
+    }
+
+    @Override
+    public void setupAnim(TitanBeetleRenderState state) {
+        super.setupAnim(state);
+        Lid.xRot = 0.0872665F - (state.smoothedTicks * Mth.HALF_PI);
+        Lock.xRot = 0.0872665F - (state.smoothedTicks * Mth.HALF_PI);
+
+        float correction = 0.3490659F;
+        float legMovement = Mth.cos(state.walkAnimationPos) * 0.5F * state.walkAnimationSpeed;
+        HeadMain.yRot = state.yRot / (180F / Mth.PI);
+
+        LBL1.xRot = -legMovement + correction;
+        LML1.xRot = legMovement;
+        LFL1.xRot = -legMovement - correction;
+
+        RBL1.xRot = -legMovement + correction;
+        RML1.xRot = legMovement;
+        RFL1.xRot = -legMovement - correction;
     }
 }

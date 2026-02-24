@@ -135,6 +135,10 @@ public class ModEntityTypeTagsData extends EntityTypeTagsProvider {
 				.add(ModEntities.WASP.get())
 				.add(ModEntities.WORKER_BEE.get())
 				.add(ModEntities.BOMBARDIER_BEETLE.get());
+		tag(ModEntityTypeTags.TARANTULA)
+				.add(ModEntities.TARANTULA.get())
+				.add(ModEntities.TARANTULA_MINI_BOSS.get())
+				.add(ModEntities.BABY_TARANTULA.get());
 	}
 
 }

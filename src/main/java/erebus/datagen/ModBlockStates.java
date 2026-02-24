@@ -4,7 +4,7 @@ import erebus.Erebus;
 import erebus.block.plants.ModCropBlock;
 import erebus.client.render.block.renderer.stack.*;
 import erebus.datagen.ModModelTemplates.FlowerType;
-import erebus.registries.ModBlockFamilies;
+import erebus.registries.blocks.ModBlockFamilies;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import erebus.utils.ModBlockStateHelpers;

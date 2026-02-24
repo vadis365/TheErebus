@@ -49,7 +49,7 @@ public class ExperienceAltarBlockEntity extends AltarAbstractBlockEntity {
 
 			if (level.isClientSide()) {
 				if (altar.animationTicks == 6)
-					ClientParticles.spawnCloudBurstParticles(pos);
+					ClientParticles.spawnCloudBurstParticles(level, pos);
 			}
 		}
 	}

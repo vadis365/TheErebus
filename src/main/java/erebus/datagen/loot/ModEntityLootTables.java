@@ -45,6 +45,8 @@ public class ModEntityLootTables extends EntityLootSubProvider {
         noLoot(ModEntities.THROWN_BLOCK_AS_ITEM);
         noLoot(ModEntities.GOO_BALL);
         noLoot(ModEntities.AMBER_STAR);
+        noLoot(ModEntities.POISON_JET);
+        noLoot(ModEntities.TARANTULA_EGG);
 
         noLoot(ModEntities.ANTLION_BOSS);
         noLoot(ModEntities.ANTLION_MINI_BOSS);
