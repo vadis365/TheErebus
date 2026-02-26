@@ -8,6 +8,7 @@ import erebus.datagen.advancement.AgricultureAdvancements;
 import erebus.datagen.advancement.ExplorationAdvancements;
 import erebus.datagen.advancement.PortalAdvancements;
 import erebus.datagen.providers.ModLootTableProvider;
+import erebus.datagen.providers.ModParticleDescriptionProvider;
 import erebus.datagen.providers.ModRecipeProvider;
 import erebus.datagen.tags.ModBiomeTagsData;
 import erebus.datagen.tags.ModBlockTagsData;
@@ -44,6 +45,7 @@ public class GatherDataEventHandler {
         event.createProvider((output, _) -> new ModBiomeTagsData(output, lookup));
         event.createProvider(ModEntityTypeTagsData::new);
         event.createProvider(ModItemTagsData::new);
+        event.createProvider(ModParticleDescriptionProvider::new);
     }
 
     @SubscribeEvent

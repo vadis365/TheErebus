@@ -63,35 +63,29 @@ public class ClientParticles {
 				case GAS_VENT_SWAMP:
 					for (double yy = yPos; yy < yPos + 2D; yy += 0.5D) {
 						double d0 = xPos - 0.075F;
-						double d1 = yy;
-						double d2 = zPos - 0.075F;
+                        double d2 = zPos - 0.075F;
 						double d3 = xPos + 0.075F;
 						double d4 = zPos + 0.075F;
-						double d5 = xPos;
-						double d6 = yy + 0.25F;
-						double d7 = zPos;
-						level.addParticle(ModParticles.SWAMP_VENT.get(), d0, d1, d2, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.SWAMP_VENT.get(), d0, d1, d4, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.SWAMP_VENT.get(), d3, d1, d2, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.SWAMP_VENT.get(), d3, d1, d4, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.SWAMP_VENT.get(), d5, d6, d7, 0.0D, 0.05D, 0.0D);
+                        double d6 = yy + 0.25F;
+                        level.addParticle(ModParticles.SWAMP_VENT.get(), d0, yy, d2, 0.0D, 0.05D, 0.0D);
+						level.addParticle(ModParticles.SWAMP_VENT.get(), d0, yy, d4, 0.0D, 0.05D, 0.0D);
+						level.addParticle(ModParticles.SWAMP_VENT.get(), d3, yy, d2, 0.0D, 0.05D, 0.0D);
+						level.addParticle(ModParticles.SWAMP_VENT.get(), d3, yy, d4, 0.0D, 0.05D, 0.0D);
+						level.addParticle(ModParticles.SWAMP_VENT.get(), xPos, d6, zPos, 0.0D, 0.05D, 0.0D);
 					}
 					break;
 				case GAS_VENT_VOLCANIC:
 					for (double yy = yPos; yy < yPos + 2D; yy += 0.5D) {
 						double d0 = xPos - 0.075F;
-						double d1 = yy;
-						double d2 = zPos - 0.075F;
+                        double d2 = zPos - 0.075F;
 						double d3 = xPos + 0.075F;
 						double d4 = zPos + 0.075F;
-						double d5 = xPos;
-						double d6 = yy + 0.25F;
-						double d7 = zPos;
-						level.addParticle(ModParticles.GNEISS_VENT.get(), d0, d1, d2, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.GNEISS_VENT.get(), d0, d1, d4, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.GNEISS_VENT.get(), d3, d1, d2, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.GNEISS_VENT.get(), d3, d1, d4, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.GNEISS_VENT.get(), d5, d6, d7, 0.0D, 0.05D, 0.0D);
+                        double d6 = yy + 0.25F;
+                        level.addParticle(ModParticles.GNEISS_VENT.get(), d0, yy, d2, 0.0D, 0.05D, 0.0D);
+						level.addParticle(ModParticles.GNEISS_VENT.get(), d0, yy, d4, 0.0D, 0.05D, 0.0D);
+						level.addParticle(ModParticles.GNEISS_VENT.get(), d3, yy, d2, 0.0D, 0.05D, 0.0D);
+						level.addParticle(ModParticles.GNEISS_VENT.get(), d3, yy, d4, 0.0D, 0.05D, 0.0D);
+						level.addParticle(ModParticles.GNEISS_VENT.get(), xPos, d6, zPos, 0.0D, 0.05D, 0.0D);
 					}
 					break;
 				case WASP_DAGGER:
@@ -129,11 +123,10 @@ public class ClientParticles {
 					level.addParticle(ModParticles.REPELLENT.get(), xPos, yPos, zPos, vecX, vecY, vecZ);
 					break;
 				case SONIC:
-					level.addParticle(ModParticles.SONIC.get(), xPos, yPos, zPos, vecX, vecY, vecZ);
+					level.addParticle(ColorParticleOption.create(ModParticles.SONIC.get(), 1, 1, 1), xPos, yPos, zPos, vecX, vecY, vecZ);
 					break;
 				case SONIC_BLUE:
-					level.addParticle(ModParticles.SONIC.get(), xPos, yPos, zPos, vecX, vecY, vecZ);
-					// Note: color setting would normally happen in the particle itself or via custom particle data
+					level.addParticle(ColorParticleOption.create(ModParticles.SONIC.get(), 0.490F, 0.7451F, 1.0F), xPos, yPos, zPos, vecX, vecY, vecZ);
 					break;
 				case PORTAL:
 					level.addParticle(ParticleTypes.PORTAL, xPos, yPos, zPos, vecX, vecY, vecZ);
@@ -160,7 +153,7 @@ public class ClientParticles {
 					level.addParticle(ParticleTypes.ITEM_SLIME, xPos, yPos, zPos, vecX, vecY, vecZ);
 					break;
 				case REDDUST:
-					level.addParticle(new DustParticleOptions(0xFF0000, 1.0F), xPos, yPos, zPos, vecX, vecY, vecZ);
+					level.addParticle(new DustParticleOptions(0xFFFFFF, 1.0F), xPos, yPos, zPos, vecX, vecY, vecZ);
 					break;
 				case SPARKS:
 					level.addParticle(ParticleTypes.FIREWORK, xPos, yPos, zPos, vecX, vecY, vecZ);

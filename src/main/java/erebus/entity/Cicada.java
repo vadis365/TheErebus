@@ -1,8 +1,10 @@
 package erebus.entity;
 
+import erebus.client.particle.ClientParticles;
 import erebus.entity.ai.FlyingWanderGoal;
 import erebus.registries.client.ModParticles;
 import erebus.utils.AnimationMathHelper;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -73,7 +75,7 @@ public class Cicada extends Monster {
 
         for (int c = 0; c < 360; c += 4) {
             float ang = c * Mth.PI / 180F;
-            level().addParticle(ModParticles.SONIC.get(), getX() + -Mth.sin(ang) * 1.0, getY() + 0.5D, getZ() + Mth.cos(ang) * 1.0, -Mth.sin(ang) * 0.3, 0D, Mth.cos(ang) * 0.3);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.SONIC, getX() + -Mth.sin(ang) * 1.0, getY() + 0.5D, getZ() + Mth.cos(ang) * 1.0, -Mth.sin(ang) * 0.3, 0D, Mth.cos(ang) * 0.3);
         }
     }
 }

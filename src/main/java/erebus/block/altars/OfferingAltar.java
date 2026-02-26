@@ -74,22 +74,4 @@ public class OfferingAltar extends Block implements EntityBlock {
 		return InteractionResult.FAIL;
     }
 
-	/*
-        @SideOnly(Side.CLIENT)
-        public boolean addDestroyEffects(World world, BlockPos pos, net.minecraft.client.particle.ParticleManager manager) {
-            return true;
-        }
-    */
-	/*@Override
-	public void onRemove(BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!state.is(newState.getBlock())) {
-			OfferingAltarBlockEntity tile = (OfferingAltarBlockEntity) world.getBlockEntity(pos);
-			if (tile != null) {
-				Containers.dropContents(world, pos, tile);
-				world.updateNeighbourForOutputSignal(pos, this);
-			}
-			super.onRemove(state, world, pos, newState, isMoving);
-		}
-	}*/
-
 }

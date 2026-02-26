@@ -1,13 +1,18 @@
 package erebus.registries.client;
 
+import com.mojang.serialization.MapCodec;
 import erebus.Erebus;
 import erebus.client.particle.*;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jspecify.annotations.NonNull;
 
 public class ModParticles {
 
@@ -17,7 +22,17 @@ public class ModParticles {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GNEISS_VENT = register("gneiss_vent");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> WISP = register("wisp");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> REPELLENT = register("repellent");
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SONIC = register("sonic");
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColorParticleOption>> SONIC = PARTICLES.register("sonic", () -> new ParticleType<>(false) {
+        @Override
+        public @NonNull MapCodec<ColorParticleOption> codec() {
+            return ColorParticleOption.codec(SONIC.get());
+        }
+
+        @Override
+        public @NonNull StreamCodec<? super RegistryFriendlyByteBuf, ColorParticleOption> streamCodec() {
+            return ColorParticleOption.streamCodec(SONIC.get());
+        }
+    });
 
     private static DeferredHolder<ParticleType<?>, SimpleParticleType> register(String name) {
         return PARTICLES.register(name, () -> new SimpleParticleType(false));

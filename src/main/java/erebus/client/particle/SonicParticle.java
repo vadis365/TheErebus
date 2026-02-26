@@ -6,9 +6,10 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.util.RandomSource;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public class SonicParticle extends SingleQuadParticle {
 
@@ -21,7 +22,7 @@ public class SonicParticle extends SingleQuadParticle {
         return Layer.OPAQUE;
     }
 
-    public static class Provider implements ParticleProvider<SimpleParticleType> {
+    public static class Provider implements ParticleProvider<ColorParticleOption> {
         private final SpriteSet sprite;
 
         public Provider(SpriteSet sprite) {
@@ -29,8 +30,10 @@ public class SonicParticle extends SingleQuadParticle {
         }
 
         @Override
-        public Particle createParticle(SimpleParticleType type, @NonNull ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, @NonNull RandomSource random) {
-            return new SonicParticle(level, x, y, z, sprite.first());
+        public @Nullable Particle createParticle(ColorParticleOption option, @NonNull ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, @NonNull RandomSource random) {
+            SonicParticle particle = new SonicParticle(level, x, y, z, sprite.first());
+            particle.setColor(option.getRed(), option.getGreen(), option.getBlue());
+            return particle;
         }
     }
 }
