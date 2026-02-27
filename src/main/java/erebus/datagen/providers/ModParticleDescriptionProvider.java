@@ -33,5 +33,6 @@ public class ModParticleDescriptionProvider extends ParticleDescriptionProvider 
                 Identifier.fromNamespaceAndPath("minecraft", "generic_6"),
                 Identifier.fromNamespaceAndPath("minecraft", "generic_7")
         );
+        spriteSet(ModParticles.FLAME.get(), Identifier.fromNamespaceAndPath("minecraft", "soul_fire_flame"));
     }
 }

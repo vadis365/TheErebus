@@ -141,9 +141,9 @@ public class OfferingAltarRenderer implements BlockEntityRenderer<OfferingAltarB
 
 	public ClientParticles.ParticleType getParticleType (ItemStack stack) {
 		if(stack.is(Blocks.OBSIDIAN.asItem()))
-			return ClientParticles.ParticleType.SWAMPFLAME_GREEN;
+			return ClientParticles.ParticleType.SWAMPFLAME_PURPLE;
 		if(stack.is(Items.DIAMOND))
-			return ClientParticles.ParticleType.SONIC_BLUE;
+			return ClientParticles.ParticleType.SWAMPFLAME;
 		if(stack.is(Items.EMERALD))
 			return ClientParticles.ParticleType.SWAMPFLAME_GREEN;
 		return ClientParticles.ParticleType.FLAME;

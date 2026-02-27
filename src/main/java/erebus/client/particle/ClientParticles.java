@@ -63,11 +63,11 @@ public class ClientParticles {
 				case GAS_VENT_SWAMP:
 					for (double yy = yPos; yy < yPos + 2D; yy += 0.5D) {
 						double d0 = xPos - 0.075F;
-                        double d2 = zPos - 0.075F;
+						double d2 = zPos - 0.075F;
 						double d3 = xPos + 0.075F;
 						double d4 = zPos + 0.075F;
-                        double d6 = yy + 0.25F;
-                        level.addParticle(ModParticles.SWAMP_VENT.get(), d0, yy, d2, 0.0D, 0.05D, 0.0D);
+						double d6 = yy + 0.25F;
+						level.addParticle(ModParticles.SWAMP_VENT.get(), d0, yy, d2, 0.0D, 0.05D, 0.0D);
 						level.addParticle(ModParticles.SWAMP_VENT.get(), d0, yy, d4, 0.0D, 0.05D, 0.0D);
 						level.addParticle(ModParticles.SWAMP_VENT.get(), d3, yy, d2, 0.0D, 0.05D, 0.0D);
 						level.addParticle(ModParticles.SWAMP_VENT.get(), d3, yy, d4, 0.0D, 0.05D, 0.0D);
@@ -77,11 +77,11 @@ public class ClientParticles {
 				case GAS_VENT_VOLCANIC:
 					for (double yy = yPos; yy < yPos + 2D; yy += 0.5D) {
 						double d0 = xPos - 0.075F;
-                        double d2 = zPos - 0.075F;
+						double d2 = zPos - 0.075F;
 						double d3 = xPos + 0.075F;
 						double d4 = zPos + 0.075F;
-                        double d6 = yy + 0.25F;
-                        level.addParticle(ModParticles.GNEISS_VENT.get(), d0, yy, d2, 0.0D, 0.05D, 0.0D);
+						double d6 = yy + 0.25F;
+						level.addParticle(ModParticles.GNEISS_VENT.get(), d0, yy, d2, 0.0D, 0.05D, 0.0D);
 						level.addParticle(ModParticles.GNEISS_VENT.get(), d0, yy, d4, 0.0D, 0.05D, 0.0D);
 						level.addParticle(ModParticles.GNEISS_VENT.get(), d3, yy, d2, 0.0D, 0.05D, 0.0D);
 						level.addParticle(ModParticles.GNEISS_VENT.get(), d3, yy, d4, 0.0D, 0.05D, 0.0D);
@@ -111,7 +111,10 @@ public class ClientParticles {
 					level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, xPos, yPos, zPos, vecX, vecY, vecZ);
 					break;
 				case SWAMPFLAME_GREEN:
-					level.addParticle(ParticleTypes.SMALL_FLAME, xPos, yPos, zPos, vecX, vecY, vecZ);
+					level.addParticle(ColorParticleOption.create(ModParticles.FLAME.get(), 0.0F, 1.0F, 0.0F), xPos, yPos, zPos, vecX, vecY, vecZ);
+					break;
+				case SWAMPFLAME_PURPLE:
+					level.addParticle(ColorParticleOption.create(ModParticles.FLAME.get(), 0.5F, 0.0F, 0.5F), xPos, yPos, zPos, vecX, vecY, vecZ);
 					break;
 				case HEART:
 					level.addParticle(ParticleTypes.HEART, xPos, yPos, zPos, vecX, vecY, vecZ);
@@ -184,6 +187,7 @@ public class ClientParticles {
 		FLAME,
 		SWAMPFLAME,
 		SWAMPFLAME_GREEN,
+		SWAMPFLAME_PURPLE,
 		HEART,
 		SPORES,
 		REPELLENT,

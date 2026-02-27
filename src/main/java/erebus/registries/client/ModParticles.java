@@ -34,9 +34,17 @@ public class ModParticles {
         }
     });
 
-    private static DeferredHolder<ParticleType<?>, SimpleParticleType> register(String name) {
-        return PARTICLES.register(name, () -> new SimpleParticleType(false));
-    }
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColorParticleOption>> FLAME = PARTICLES.register("flame", () -> new ParticleType<>(false) {
+        @Override
+        public @NonNull MapCodec<ColorParticleOption> codec() {
+            return ColorParticleOption.codec(FLAME.get());
+        }
+
+        @Override
+        public @NonNull StreamCodec<? super RegistryFriendlyByteBuf, ColorParticleOption> streamCodec() {
+            return ColorParticleOption.streamCodec(FLAME.get());
+        }
+    });
 
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(SWAMP_VENT.get(), SwampVentParticle.Provider::new);
@@ -44,5 +52,10 @@ public class ModParticles {
         event.registerSpriteSet(WISP.get(), WispParticle.Provider::new);
         event.registerSpriteSet(REPELLENT.get(), RepellentParticle.Provider::new);
         event.registerSpriteSet(SONIC.get(), SonicParticle.Provider::new);
+        event.registerSpriteSet(FLAME.get(), FlameParticle.Provider::new);
+    }
+
+    private static DeferredHolder<ParticleType<?>, SimpleParticleType> register(String name) {
+        return PARTICLES.register(name, () -> new SimpleParticleType(false));
     }
 }
