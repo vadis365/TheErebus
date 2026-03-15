@@ -1,5 +1,3 @@
-
-
 package erebus.client.render.item.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -51,17 +49,17 @@ public class ErebusShieldSpecialRenderer implements NoDataSpecialModelRenderer {
         model.root().getExtentsForGui(pose, consumer);
     }
 
-    public record Unbaked() implements SpecialModelRenderer.Unbaked {
+    public record Unbaked() implements NoDataSpecialModelRenderer.Unbaked {
 
         public static final MapCodec<Unbaked> MAP_CODEC = MapCodec.unit(new Unbaked());
 
         @Override
-        public @NonNull SpecialModelRenderer<?> bake(BakingContext context) {
+        public @NonNull SpecialModelRenderer<Void> bake(BakingContext context) {
             return new ErebusShieldSpecialRenderer(new ErebusShieldPartsModel(context.entityModelSet().bakeLayer(ModItemRendering.EREBUS_SHIELD_PARTS)));
         }
 
         @Override
-        public @NonNull MapCodec<? extends SpecialModelRenderer.Unbaked> type() {
+        public @NonNull MapCodec<Unbaked> type() {
             return MAP_CODEC;
         }
     }

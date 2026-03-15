@@ -33,7 +33,6 @@ import erebus.registries.world.structure.ModStructureTypes;
 import erebus.registries.world.tree.ModFoliagePlacers;
 import erebus.registries.world.tree.ModTreeDecorators;
 import erebus.registries.world.tree.ModTrunkPlacers;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
@@ -98,7 +97,6 @@ public class Erebus {
 
         NeoForgeMod.enableMilkFluid(); // TEMP - JUST FOR BEETLE MILKING TEST
 
-        bus.addListener(this::setFluidRenderTypes);
         bus.addListener(ModEntityRendering::registerEntityLayers);
         bus.addListener(ModEntityRendering::registerEntityRender);
         bus.addListener(ModItemRendering::registerItemLayerDefinitions);
@@ -107,17 +105,6 @@ public class Erebus {
         bus.addListener(ModBlockEntityRendering::registerBlockEntityRenderers);
         bus.addListener(ModParticles::registerParticleFactories);
         neoBus.register(new GogglesClientTickHandler());
-    }
-
-    private void setFluidRenderTypes(final FMLClientSetupEvent event) {
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.BEETLE_JUICE_STILL.get(), ChunkSectionLayer.TRANSLUCENT);
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.HONEY_STILL.get(), ChunkSectionLayer.TRANSLUCENT);
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.ANTI_VENOM_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.ANTI_VENOM_STILL.get(), ChunkSectionLayer.TRANSLUCENT);
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.FORMIC_ACID_FLOW.get(), ChunkSectionLayer.TRANSLUCENT);
-        ItemBlockRenderTypes.setRenderLayer(ModFluids.FORMIC_ACID_STILL.get(), ChunkSectionLayer.TRANSLUCENT);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

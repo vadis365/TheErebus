@@ -10,14 +10,16 @@ import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModBlockEntityRendering;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.block.BlockModelResolver;
+import net.minecraft.client.renderer.block.model.BlockDisplayContext;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.SpriteGetter;
-import net.minecraft.client.resources.model.SpriteId;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
@@ -28,10 +30,13 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 	private final SpriteId TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bamboo_extender"));
 	private final BambooExtenderModel model;
 	private final SpriteGetter sprites;
+	private final BlockModelResolver blockModelResolver;
+	private final BlockDisplayContext BLOCK_DISPLAY_CONTEXT = BlockDisplayContext.create();
 
     public BambooExtenderRenderer(Context context) {
 		model = new BambooExtenderModel(context.bakeLayer(ModBlockEntityRendering.BAMBOO_EXTENDER));
 		sprites = context.sprites();
+		blockModelResolver = context.blockModelResolver();
     }
 
 	@Override
@@ -43,11 +48,12 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 	public void extractRenderState(BambooExtenderBlockEntity blockEntity, BambooExtenderBlockEntityRenderState state, float partialTicks, @NonNull Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
 		BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
 		state.facing = blockEntity.direction == null ? Direction.DOWN : blockEntity.direction;
+		blockModelResolver.update(state.planks, ModBlocks.PLANKS_BAMBOO.get().defaultBlockState(), BLOCK_DISPLAY_CONTEXT);
 	}
 
 	@Override
-	public void submit(BambooExtenderBlockEntityRenderState renderState, @NonNull PoseStack stack, @NonNull SubmitNodeCollector submitNodeCollector, @NonNull CameraRenderState cameraRenderState) {
-		switch (renderState.facing) {
+	public void submit(BambooExtenderBlockEntityRenderState state, @NonNull PoseStack stack, @NonNull SubmitNodeCollector submitNodeCollector, @NonNull CameraRenderState cameraRenderState) {
+		switch (state.facing) {
 			case DOWN:
 				stack.pushPose();
 				stack.translate(0.5F, -0.5F, 0.5F);
@@ -56,27 +62,21 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 				stack.mulPose(Axis.YN.rotationDegrees(180F));
 				submitNodeCollector.submitModel(
 						model,
-						renderState,
+						state,
 						stack,
 						TEXTURE.renderType(RenderTypes::entityCutout),
-						renderState.lightCoords,
+						state.lightCoords,
 						OverlayTexture.NO_OVERLAY,
 						-1,
 						sprites.get(TEXTURE),
 						0,
-						renderState.breakProgress
+						state.breakProgress
 				);
 				stack.popPose();
 				stack.pushPose();
 				stack.translate(0F, 0.125F, 0F);
 				stack.scale(1F, 0.875F, 1F);
-				submitNodeCollector.submitBlock(
-						stack,
-						ModBlocks.PLANKS_BAMBOO.get().defaultBlockState(),
-						renderState.lightCoords,
-						OverlayTexture.NO_OVERLAY,
-						0
-				);
+				state.planks.submit(stack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
 				stack.popPose();
 				break;
 			case UP:
@@ -86,26 +86,20 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 				stack.mulPose(Axis.YP.rotationDegrees(180F));
 				submitNodeCollector.submitModel(
 						model,
-						renderState,
+						state,
 						stack,
 						TEXTURE.renderType(RenderTypes::entityCutout),
-						renderState.lightCoords,
+						state.lightCoords,
 						OverlayTexture.NO_OVERLAY,
 						-1,
 						sprites.get(TEXTURE),
 						0,
-						renderState.breakProgress
+						state.breakProgress
 				);
 				stack.popPose();
 				stack.pushPose();
 				stack.scale(1F, 0.875F, 1F);
-				submitNodeCollector.submitBlock(
-						stack,
-						ModBlocks.PLANKS_BAMBOO.get().defaultBlockState(),
-						renderState.lightCoords,
-						OverlayTexture.NO_OVERLAY,
-						0
-				);
+				state.planks.submit(stack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
 				stack.popPose();
 				break;
 			case NORTH:
@@ -115,15 +109,15 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 				stack.mulPose(Axis.YP.rotationDegrees(0F));
 				submitNodeCollector.submitModel(
 						model,
-						renderState,
+						state,
 						stack,
 						TEXTURE.renderType(RenderTypes::entityCutout),
-						renderState.lightCoords,
+						state.lightCoords,
 						OverlayTexture.NO_OVERLAY,
 						-1,
 						sprites.get(TEXTURE),
 						0,
-						renderState.breakProgress
+						state.breakProgress
 				);
 				stack.popPose();
 				break;
@@ -134,15 +128,15 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 				stack.mulPose(Axis.YP.rotationDegrees(180F));
 				submitNodeCollector.submitModel(
 						model,
-						renderState,
+						state,
 						stack,
 						TEXTURE.renderType(RenderTypes::entityCutout),
-						renderState.lightCoords,
+						state.lightCoords,
 						OverlayTexture.NO_OVERLAY,
 						-1,
 						sprites.get(TEXTURE),
 						0,
-						renderState.breakProgress
+						state.breakProgress
 				);
 				stack.popPose();
 				break;
@@ -153,15 +147,15 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 				stack.mulPose(Axis.YN.rotationDegrees(90F));
 				submitNodeCollector.submitModel(
 						model,
-						renderState,
+						state,
 						stack,
 						TEXTURE.renderType(RenderTypes::entityCutout),
-						renderState.lightCoords,
+						state.lightCoords,
 						OverlayTexture.NO_OVERLAY,
 						-1,
 						sprites.get(TEXTURE),
 						0,
-						renderState.breakProgress
+						state.breakProgress
 				);
 				stack.popPose();
 				break;
@@ -172,15 +166,15 @@ public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtende
 				stack.mulPose(Axis.YP.rotationDegrees(90F));
 				submitNodeCollector.submitModel(
 						model,
-						renderState,
+						state,
 						stack,
 						TEXTURE.renderType(RenderTypes::entityCutout),
-						renderState.lightCoords,
+						state.lightCoords,
 						OverlayTexture.NO_OVERLAY,
 						-1,
 						sprites.get(TEXTURE),
 						0,
-						renderState.breakProgress
+						state.breakProgress
 				);
 				stack.popPose();
 				break;

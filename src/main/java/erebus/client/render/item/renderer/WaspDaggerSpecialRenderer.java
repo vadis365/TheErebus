@@ -51,17 +51,17 @@ public class WaspDaggerSpecialRenderer implements NoDataSpecialModelRenderer {
         model.root().getExtentsForGui(pose, consumer);
     }
 
-    public record Unbaked() implements SpecialModelRenderer.Unbaked {
+    public record Unbaked() implements NoDataSpecialModelRenderer.Unbaked {
 
         public static final MapCodec<Unbaked> MAP_CODEC = MapCodec.unit(new Unbaked());
 
         @Override
-        public @NonNull SpecialModelRenderer<?> bake(BakingContext context) {
+        public @NonNull SpecialModelRenderer<Void> bake(BakingContext context) {
             return new WaspDaggerSpecialRenderer(new WaspDaggerModel(context.entityModelSet().bakeLayer(ModItemRendering.WASP_DAGGER)));
         }
 
         @Override
-        public @NonNull MapCodec<? extends SpecialModelRenderer.Unbaked> type() {
+        public @NonNull MapCodec<Unbaked> type() {
             return MAP_CODEC;
         }
     }

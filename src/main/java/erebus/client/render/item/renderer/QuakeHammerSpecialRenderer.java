@@ -1,5 +1,3 @@
-
-
 package erebus.client.render.item.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -67,17 +65,17 @@ public class QuakeHammerSpecialRenderer implements SpecialModelRenderer<QuakeHam
     public record RenderData(float charge) {
     }
 
-    public record Unbaked() implements SpecialModelRenderer.Unbaked {
+    public record Unbaked() implements SpecialModelRenderer.Unbaked<RenderData> {
 
         public static final MapCodec<Unbaked> MAP_CODEC = MapCodec.unit(new Unbaked());
 
         @Override
-        public @NonNull SpecialModelRenderer<?> bake(BakingContext context) {
+        public @NonNull SpecialModelRenderer<RenderData> bake(BakingContext context) {
             return new QuakeHammerSpecialRenderer(new QuakeHammerModel(context.entityModelSet().bakeLayer(ModItemRendering.QUAKE_HAMMER)));
         }
 
         @Override
-        public @NonNull MapCodec<? extends SpecialModelRenderer.Unbaked> type() {
+        public @NonNull MapCodec<Unbaked> type() {
             return MAP_CODEC;
         }
     }

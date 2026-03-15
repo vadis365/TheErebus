@@ -17,8 +17,8 @@ import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.resources.model.SpriteGetter;
-import net.minecraft.client.resources.model.SpriteId;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
@@ -71,7 +71,7 @@ public final class ExperienceAltarSpecialRenderer implements NoDataSpecialModelR
 		electrode.root().getExtentsForGui(pose, consumer);
 	}
 
-	public record Unbaked(Identifier texture) implements SpecialModelRenderer.Unbaked {
+	public record Unbaked(Identifier texture) implements NoDataSpecialModelRenderer.Unbaked {
 
 		public static final MapCodec<ExperienceAltarSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
 				i -> i.group(
@@ -80,12 +80,12 @@ public final class ExperienceAltarSpecialRenderer implements NoDataSpecialModelR
 		);
 
 		@Override
-		public @Nullable SpecialModelRenderer<?> bake(@NonNull BakingContext bakingContext) {
+		public @NonNull SpecialModelRenderer<Void> bake(@NonNull BakingContext bakingContext) {
 			return new ExperienceAltarSpecialRenderer(bakingContext);
 		}
 
 		@Override
-		public @NonNull MapCodec<? extends SpecialModelRenderer.Unbaked> type() {
+		public @NonNull MapCodec<Unbaked> type() {
 			return MAP_CODEC;
 		}
 	}

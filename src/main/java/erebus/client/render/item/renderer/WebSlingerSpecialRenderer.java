@@ -65,7 +65,7 @@ public class WebSlingerSpecialRenderer implements NoDataSpecialModelRenderer {
         model.root().getExtentsForGui(pose, consumer);
     }
 
-    public record Unbaked(boolean isWither) implements SpecialModelRenderer.Unbaked {
+    public record Unbaked(boolean isWither) implements NoDataSpecialModelRenderer.Unbaked {
 
         public static final MapCodec<Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
                 (i) -> i.group(
@@ -73,12 +73,12 @@ public class WebSlingerSpecialRenderer implements NoDataSpecialModelRenderer {
                 ).apply(i, Unbaked::new));
 
         @Override
-        public @NonNull SpecialModelRenderer<?> bake(BakingContext context) {
+        public @NonNull SpecialModelRenderer<Void> bake(BakingContext context) {
             return new WebSlingerSpecialRenderer(new WebSlingerModel(context.entityModelSet().bakeLayer(ModItemRendering.WEB_SLINGER)), isWither);
         }
 
         @Override
-        public @NonNull MapCodec<? extends SpecialModelRenderer.Unbaked> type() {
+        public @NonNull MapCodec<Unbaked> type() {
             return MAP_CODEC;
         }
     }

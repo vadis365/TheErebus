@@ -57,8 +57,8 @@ public class LavaWebSpider extends Monster {
 	public LavaWebSpider(EntityType<? extends LavaWebSpider> type, Level level) { 
 		super(type, level);
 		setPathfindingMalus(PathType.LAVA, 0.0F);
-		setPathfindingMalus(PathType.DANGER_FIRE, 0.0F);
-        setPathfindingMalus(PathType.DAMAGE_FIRE, 0.0F);
+		setPathfindingMalus(PathType.FIRE, 0.0F);
+        setPathfindingMalus(PathType.FIRE, 0.0F);
 		xpReward = 10;
 	}
 

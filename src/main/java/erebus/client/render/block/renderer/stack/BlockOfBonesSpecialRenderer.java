@@ -55,7 +55,7 @@ public final class BlockOfBonesSpecialRenderer implements NoDataSpecialModelRend
         model.root().getExtentsForGui(poseStack, consumer);
     }
 
-    public record Unbaked(Identifier texture) implements SpecialModelRenderer.Unbaked {
+    public record Unbaked(Identifier texture) implements NoDataSpecialModelRenderer.Unbaked {
 
         public static final MapCodec<Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
                 i -> i.group(
@@ -64,7 +64,7 @@ public final class BlockOfBonesSpecialRenderer implements NoDataSpecialModelRend
         );
 
         @Override
-        public @Nullable SpecialModelRenderer<?> bake(BakingContext bakingContext) {
+        public @NonNull SpecialModelRenderer<Void> bake(BakingContext bakingContext) {
             return new BlockOfBonesSpecialRenderer(
                     new BlockOfBonesModel(
                             bakingContext
@@ -76,7 +76,7 @@ public final class BlockOfBonesSpecialRenderer implements NoDataSpecialModelRend
         }
 
         @Override
-        public @NonNull MapCodec<? extends SpecialModelRenderer.Unbaked> type() {
+        public @NonNull MapCodec<Unbaked> type() {
             return MAP_CODEC;
         }
     }

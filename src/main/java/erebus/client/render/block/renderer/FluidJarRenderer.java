@@ -6,7 +6,7 @@ import erebus.client.render.block.renderer.state.FluidJarBlockEntityRenderState;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 
 public class FluidJarRenderer implements BlockEntityRenderer<FluidJarBlockEntity, FluidJarBlockEntityRenderState> {
 	

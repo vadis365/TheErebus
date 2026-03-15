@@ -4,7 +4,7 @@ import erebus.Erebus;
 import erebus.client.render.block.renderer.state.ErebusChestRenderState;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SpriteMapper;
-import net.minecraft.client.resources.model.SpriteId;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.world.level.block.state.properties.ChestType;
 
 public class ModSheets {

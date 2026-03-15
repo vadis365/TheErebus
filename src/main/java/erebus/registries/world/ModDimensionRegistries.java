@@ -17,6 +17,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.attribute.*;
 import net.minecraft.world.clock.WorldClock;
 import net.minecraft.world.clock.WorldClocks;
+import net.minecraft.world.level.CardinalLighting;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
@@ -47,7 +48,7 @@ public class ModDimensionRegistries {
                 1.0F,
                 new DimensionType.MonsterSettings(UniformInt.of(0, 7), 7),
                 DimensionType.Skybox.OVERWORLD,
-                DimensionType.CardinalLightType.DEFAULT,
+                CardinalLighting.Type.DEFAULT,
                 EnvironmentAttributeMap.builder()
                         .set(EnvironmentAttributes.FOG_COLOR, -4138753)
                         .set(EnvironmentAttributes.SKY_COLOR, OverworldBiomes.calculateSkyColor(0.8F))
