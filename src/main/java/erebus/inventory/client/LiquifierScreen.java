@@ -4,11 +4,16 @@ import erebus.Erebus;
 import erebus.block.entity.LiquifierBlockEntity;
 import erebus.inventory.client.elements.TankGauge;
 import erebus.inventory.server.LiquifierMenu;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTextTooltip;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import org.jspecify.annotations.NonNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +24,7 @@ public class LiquifierScreen extends ErebusScreen<LiquifierMenu> {
 	private TankGauge tankGauge;
 
 	public LiquifierScreen(LiquifierMenu container, Inventory playerInventory, Component name) {
-		super(container, playerInventory, name, Erebus.prefix("textures/gui/container/liquifier.png"), 176, 166);
+		super(container, playerInventory, name, Erebus.prefix("textures/gui/container/liquifier.png"));
 		this.container = container;
 		this.liquifier = this.container.liquifier;
 	}
@@ -33,37 +38,40 @@ public class LiquifierScreen extends ErebusScreen<LiquifierMenu> {
 	}
 
 	@Override
-	protected void renderLabels(@Nonnull GuiGraphics gg, int mouseX, int mouseY) {
-		gg.drawString(font, title, 8, 6, 16777215);
-		gg.drawString(font, Component.translatable("container.inventory"), 8, this.imageHeight - 94, 16777215);
+	protected void extractLabels(GuiGraphicsExtractor graphics, int xm, int ym) {
+		super.extractLabels(graphics, xm, ym);
+		graphics.text(font, title, 8, 6, 16777215);
+		graphics.text(font, Component.translatable("container.inventory"), 8, this.imageHeight - 94, 16777215);
 	}
 
 	@Override
-	protected void renderBg(GuiGraphics gg, float partialTicks, int mouseX, int mouseY) {
-		gg.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
+	public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+		super.extractBackground(graphics, mouseX, mouseY, a);
+		graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
         
 		int operationProgress = liquifier.getOperationProgressScaled(22);
-		gg.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos + 69, topPos + 35, 176, 0, operationProgress, 16, 256, 256);
+		graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos + 69, topPos + 35, 176, 0, operationProgress, 16, 256, 256);
 		
-		gg.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos + 105, topPos + 23, 176, 16, 36, 41, 256, 256);
+		graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos + 105, topPos + 23, 176, 16, 36, 41, 256, 256);
 	}
 
 	@Override
-	protected void renderTooltip(@Nonnull GuiGraphics gg, int x, int y) {
-		super.renderTooltip(gg, x, y);
-		if (tankGauge.isHovered()) {
-			List<Component> tooltip = new ArrayList<>();
-			net.neoforged.neoforge.transfer.fluid.FluidResource resource = liquifier.tank.getResource(0);
+	protected void extractTooltip(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
+		super.extractTooltip(graphics, mouseX, mouseY);
+		if(tankGauge.isHovered()) {
+			List<ClientTooltipComponent> tooltip = new ArrayList<>();
+			FluidResource resource = liquifier.tank.getResource(0);
 			int amount = liquifier.tank.getAmountAsInt(0);
 			int capacity = net.neoforged.neoforge.fluids.FluidType.BUCKET_VOLUME * 8;
 			if (!resource.isEmpty()) {
-				tooltip.add(resource.toStack(amount).getHoverName());
-				tooltip.add(Component.literal(amount + "/" + capacity));
+				tooltip.add(new ClientTextTooltip(resource.toStack(amount).getHoverName().getVisualOrderText()));
+				tooltip.add(new ClientTextTooltip(Component.literal("%d/%d".formatted(amount, capacity)).getVisualOrderText()));
 			} else {
-				tooltip.add(Component.literal("Empty"));
-				tooltip.add(Component.literal("0/" + capacity));
+				tooltip.add(new ClientTextTooltip(Component.literal("Empty").getVisualOrderText()));
+				tooltip.add(new ClientTextTooltip(Component.literal("0/%d".formatted(capacity)).getVisualOrderText()));
 			}
-			gg.renderTooltip(font, tooltip.stream().map(Component::getVisualOrderText).map(net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent::create).toList(), x, y, net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner.INSTANCE, null);
+
+			graphics.tooltip(font, tooltip, mouseX, mouseY, DefaultTooltipPositioner.INSTANCE, null);
 		}
 	}
 }

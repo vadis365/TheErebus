@@ -8,7 +8,6 @@ import erebus.registries.client.ModItemRendering;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
-import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.NonNull;
 
@@ -23,7 +22,7 @@ public class WandOfAnimationItemSpecialRenderer implements NoDataSpecialModelRen
 	}
 
 	@Override
-	public void submit(@NonNull ItemDisplayContext context, PoseStack pose, SubmitNodeCollector submit, int lightCoords, int overlayCoords, boolean hasFoil, int outlineColor) {
+	public void submit(PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
 		pose.pushPose();
 		pose.scale(0.9999F, 0.9999F, 0.9999F);
 		WandOfAnimationItemModel.State state = new WandOfAnimationItemModel.State();
@@ -34,8 +33,8 @@ public class WandOfAnimationItemSpecialRenderer implements NoDataSpecialModelRen
                 state,
                 pose,
 				model.renderType(Erebus.prefix("textures/special/items/wand_of_animation.png")),
-				lightCoords,
-				overlayCoords,
+				light,
+				overlay,
 				-1,
 				null,
                 outlineColor,

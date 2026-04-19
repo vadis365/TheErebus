@@ -8,13 +8,14 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.data.worldgen.features.FeatureUtils;
-import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.*;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
@@ -54,35 +55,18 @@ public class ModFeatureHelpers {
     }
 
     protected static <B extends ErebusBushFeature> void registerConfiguredBush(B bush) {
-        registerConfiguredFeature(bush.getConfiguredResourceKey(), Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(
-                Feature.SIMPLE_BLOCK,
-                bush.getConfiguration(),
-                bush.plantedOn()
-                )
-        );
+        registerConfiguredFeature(bush.getConfiguredResourceKey(), Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(bush.getBush())));
     }
 
     protected static <F extends ErebusFeature> void registerConfiguredOre(F feature, Supplier<? extends Block> ore, int veinSize) {
         registerConfiguredFeature(feature.getConfiguredResourceKey(), Feature.ORE, new OreConfiguration(umberstoneReplaceables, ore.get().defaultBlockState(), veinSize));
     }
 
-    protected static void registerSimpleConfiguredPlant(ErebusFeature feature, Supplier<? extends Block> block, int tries) {
-        registerConfiguredFeature(
-                feature.getConfiguredResourceKey(),
-                Feature.FLOWER,
-                patch(block.get(), tries)
-        );
+    protected static void registerSimpleConfiguredPlant(ErebusFeature feature, Supplier<? extends Block> block) {
+        registerConfiguredFeature(feature.getConfiguredResourceKey(), Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(block.get())));
     }
 
     protected static <F extends ErebusFeature> void registerConfiguredFeatureWithConfig(F feature, Supplier<Feature<NoneFeatureConfiguration>> config) {
         registerConfiguredFeature(feature.getConfiguredResourceKey(), config.get(), FeatureConfiguration.NONE);
-    }
-
-    protected static RandomPatchConfiguration patch(Block block, int tries) {
-        return FeatureUtils.simpleRandomPatchConfiguration(tries, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(block))));
-    }
-
-    protected static RandomPatchConfiguration patch(Block block, int tries, List<Block> whitelist) {
-        return FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(block)), whitelist, tries);
     }
 }

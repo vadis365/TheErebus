@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -21,14 +20,14 @@ import java.util.function.Consumer;
 public record BambooBridgeSpecialRenderer(BambooBridgeModel model, Identifier texture) implements NoDataSpecialModelRenderer {
 
     @Override
-    public void submit(@NonNull ItemDisplayContext itemDisplayContext, @NonNull PoseStack pose, SubmitNodeCollector submit, int packedLight, int packedOverlay, boolean hasFoil, int outlineColor) {
+    public void submit(@NonNull PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
         submit.submitModel(
                 model,
                 new BambooBridgeBlockEntityRenderState(),
                 pose,
                 RenderTypes.entityCutout(texture),
-                packedLight,
-                packedOverlay,
+                light,
+                overlay,
                 outlineColor,
                 null
         );

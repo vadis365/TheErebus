@@ -32,15 +32,15 @@ public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBl
     }
 
 	@Override
-	public void extractRenderState(AnimatedBlock entity, AnimatedBlockRenderState state, float partialTicks) {
+	public void extractRenderState(@NonNull AnimatedBlock entity, @NonNull AnimatedBlockRenderState state, float partialTicks) {
 		super.extractRenderState(entity, state, partialTicks);
 		state.blockState = entity.getBlockType();
-		state.sprite = Minecraft.getInstance().getBlockRenderer().getBlockModel(state.blockState).particleMaterial().sprite();
+		state.sprite = Minecraft.getInstance().getModelManager().getBlockStateModelSet().getParticleMaterial(entity.getBlockType()).sprite();
 		itemModelResolver.updateForTopItem(state.itemStackRenderState, new ItemStack(entity.getBlockType().getBlock()), ItemDisplayContext.FIXED, entity.level(), null, 0);
 	}
 
 	@Override
-	public AnimatedBlockRenderState createRenderState() {
+	public @NonNull AnimatedBlockRenderState createRenderState() {
 		return new AnimatedBlockRenderState();
 	}
 
@@ -63,7 +63,7 @@ public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBl
 	}
 
 	@Override
-	public @NonNull Identifier getTextureLocation(AnimatedBlockRenderState state) {
+	public @NonNull Identifier getTextureLocation(@NonNull AnimatedBlockRenderState state) {
 		return Sheets.BLOCKS_MAPPER.sheet();
 	}
 }

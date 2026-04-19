@@ -225,7 +225,6 @@ public class ModBlockProperties {
             .instabreak()
             .sound(SoundType.GRASS)
             .lightLevel((_) -> 1)
-            .hasPostProcess(BlockPropUtils::always)
             .pushReaction(PushReaction.DESTROY)
             .offsetType(BlockBehaviour.OffsetType.XZ);
 
@@ -522,7 +521,7 @@ public class ModBlockProperties {
     public static final Properties TEMPLE_BRICK_UNBREAKING_EYE = Properties.of().mapColor(MapColor.STONE);
     public static final Properties TEMPLE_BRICK_UNBREAKING_STRING = Properties.of().mapColor(MapColor.STONE);
     public static final Properties TEMPLE_TELEPORTER = Properties.of().mapColor(MapColor.STONE);
-    public static final Properties FORCE_FIELD = Properties.of().mapColor(MapColor.STONE);
+    public static final Properties FORCE_FIELD = Properties.of().mapColor(MapColor.STONE).noOcclusion();
     public static final Properties FORCE_LOCK = Properties.of().mapColor(MapColor.STONE);
     public static final Properties ANT_HILL_BLOCK = Properties.of().mapColor(MapColor.STONE);
 }

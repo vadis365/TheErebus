@@ -4,20 +4,20 @@ import erebus.Erebus;
 import erebus.inventory.client.elements.GuiInvisibleButton;
 import erebus.inventory.server.ColossalCrateMenu;
 import erebus.network.server.ColossalCratePage;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
 import javax.annotation.Nonnull;
 
-public class ColossalCrateScreen extends AbstractContainerScreen<ColossalCrateMenu> {
+public class ColossalCrateScreen extends ErebusScreen<ColossalCrateMenu> {
 
 	private static final Identifier GUI_BAMBOO_CRATE = Erebus.prefix("textures/gui/container/bamboo_collosal_crate.png");
 
 	public ColossalCrateScreen(ColossalCrateMenu handler, Inventory playerInventory, Component text) {
-		super(handler, playerInventory, text);
+		super(handler, playerInventory, text, GUI_BAMBOO_CRATE);
 	}
 
 	@Override
@@ -44,20 +44,22 @@ public class ColossalCrateScreen extends AbstractContainerScreen<ColossalCrateMe
 	}
 
     @Override
-    protected void renderTooltip(@Nonnull GuiGraphics gg, int x, int y) {
-        super.renderTooltip(gg, x, y);
+    protected void extractTooltip(@Nonnull GuiGraphicsExtractor graphics, int x, int y) {
+        super.extractTooltip(graphics, x, y);
     }
 
     @Override
-    protected void renderLabels(@Nonnull GuiGraphics gg, int x, int y) {
-    	gg.drawString(font, Component.translatable("erebus.container.colossal_crate"), 28, 6, 4210752);
+    protected void extractLabels(@Nonnull GuiGraphicsExtractor graphics, int x, int y) {
+    	super.extractLabels(graphics, x, y);
+    	graphics.text(font, Component.translatable("erebus.container.colossal_crate"), 28, 6, 4210752);
 		String str = getPageNumber() + "/3";
-		gg.drawString(font, str, getXSize() / 2 - font.width(str) / 2, 6, 4210752);
-		gg.drawString(font, Component.translatable("container.inventory"), 32, imageHeight - 96 + 3, 4210752);
+		graphics.text(font, str, imageWidth / 2 - font.width(str) / 2, 6, 4210752);
+		graphics.text(font, Component.translatable("container.inventory"), 32, imageHeight - 96 + 3, 4210752);
 	}
 
     @Override
-    protected void renderBg(@Nonnull GuiGraphics gg, float partialTicks, int mouseX, int mouseY) {
-    	gg.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, GUI_BAMBOO_CRATE, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
+    public void extractBackground(@Nonnull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+    	super.extractBackground(graphics, mouseX, mouseY, a);
+    	graphics.blit(RenderPipelines.GUI_TEXTURED, GUI_BAMBOO_CRATE, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
 	}
 }

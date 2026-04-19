@@ -4,7 +4,6 @@ import erebus.client.particle.ClientParticles;
 import erebus.entity.ai.FlyingWanderGoal;
 import erebus.registries.client.ModParticles;
 import erebus.utils.AnimationMathHelper;
-import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;

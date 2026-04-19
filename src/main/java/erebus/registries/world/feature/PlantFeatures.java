@@ -11,6 +11,8 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import static erebus.registries.world.feature.config.PlantFeatureConfigs.*;
@@ -106,7 +108,7 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerConfiguredFeatureWithConfig(SWAMP_BUSH, SWAMP_BUSH_CONFIG);
         registerConfiguredFeatureWithConfig(TURNIP, TURNIP_CONFIG);
         registerConfiguredFeatureWithConfig(VINES, VINES_CONFIG);
-        registerSimpleConfiguredPlant(WEEPING_BLUEBELL, ModBlocks.WEEPING_BLUEBELL, 5);
+        registerSimpleConfiguredPlant(WEEPING_BLUEBELL, ModBlocks.WEEPING_BLUEBELL);
 
         SWAMP_BERRY_BUSH = new SwampBerryBushFeature();
         HEART_BERRY_BUSH = new HeartBerryBushFeature();
@@ -116,16 +118,16 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerConfiguredBush(HEART_BERRY_BUSH);
         registerConfiguredBush(JADE_BERRY_BUSH);
 
-        registerConfiguredFeature(GRASS.getConfiguredResourceKey(), Feature.RANDOM_PATCH, patch(Blocks.SHORT_GRASS, 105));
+        registerConfiguredFeature(GRASS.getConfiguredResourceKey(), Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.SHORT_GRASS)));
 
-        registerSimpleConfiguredPlant(SWAMP_PLANT, ModBlocks.SWAMP_PLANT, 64);
-        registerSimpleConfiguredPlant(FIRE_BLOOM, ModBlocks.FIRE_BLOOM, 64);
-        registerSimpleConfiguredPlant(FIDDLE_HEAD, ModBlocks.FIDDLE_HEAD, 64);
-        registerSimpleConfiguredPlant(BULLRUSH, ModBlocks.BULLRUSH, 64);
-        registerSimpleConfiguredPlant(SUNDEW, ModBlocks.SUNDEW, 64);
-        registerSimpleConfiguredPlant(TALL_BLOOM, ModBlocks.TALL_BLOOM, 64);
-        registerSimpleConfiguredPlant(TANGLED_STALK, ModBlocks.TANGLED_STALK, 64);
-        registerSimpleConfiguredPlant(HIGH_CAPPED_MUSHROOM, ModBlocks.HIGH_CAPPED_MUSHROOM, 64);
+        registerSimpleConfiguredPlant(SWAMP_PLANT, ModBlocks.SWAMP_PLANT);
+        registerSimpleConfiguredPlant(FIRE_BLOOM, ModBlocks.FIRE_BLOOM);
+        registerSimpleConfiguredPlant(FIDDLE_HEAD, ModBlocks.FIDDLE_HEAD);
+        registerSimpleConfiguredPlant(BULLRUSH, ModBlocks.BULLRUSH);
+        registerSimpleConfiguredPlant(SUNDEW, ModBlocks.SUNDEW);
+        registerSimpleConfiguredPlant(TALL_BLOOM, ModBlocks.TALL_BLOOM);
+        registerSimpleConfiguredPlant(TANGLED_STALK, ModBlocks.TANGLED_STALK);
+        registerSimpleConfiguredPlant(HIGH_CAPPED_MUSHROOM, ModBlocks.HIGH_CAPPED_MUSHROOM);
     }
 
     public static void initPlacedFeatures(BootstrapContext<PlacedFeature> context) {

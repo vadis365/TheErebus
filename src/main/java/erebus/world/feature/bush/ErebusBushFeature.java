@@ -39,4 +39,8 @@ public class ErebusBushFeature extends ErebusFeature {
     public List<PlacementModifier> getPlacementModifiers() {
         return patchWithFilter(5, BlockPredicate.matchesBlocks(plantedOn()));
     }
+
+    public Block getBush() {
+        return BUSH.get();
+    }
 }

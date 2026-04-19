@@ -31,21 +31,6 @@ public class RegisterSpecialRenderersEventHandler {
         event.register(Erebus.prefix("altar_repair_special"), RepairAltarSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Erebus.prefix("offering_altar_special"), OfferingAltarSpecialRenderer.Unbaked.MAP_CODEC);
 
-        event.register(ModBlocks.CHEST_ASPER.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ModBlocks.CHEST_BAMBOO.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ModBlocks.CHEST_BALSAM.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ModBlocks.CHEST_BAOBAB.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ModBlocks.CHEST_CYPRESS.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ModBlocks.CHEST_EUCALYPTUS.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ModBlocks.CHEST_MAHOGANY.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ModBlocks.CHEST_MARSHWOOD.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ModBlocks.CHEST_MOSSBARK.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ModBlocks.CHEST_PETRIFIED.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ModBlocks.CHEST_ROTTEN.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ModBlocks.CHEST_SCORCHED.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ModBlocks.CHEST_VARNISHED.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-        event.register(ModBlocks.CHEST_WHITE.getId().withSuffix("_special"), ErebusChestSpecialRenderer.Unbaked.MAP_CODEC);
-
         event.register(ModBlocks.BLOCK_OF_BONES.getId().withSuffix("_special"), BlockOfBonesSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(ModBlocks.ALTAR_EXPERIENCE.getId().withSuffix("_special"), ExperienceAltarSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(ModBlocks.ALTAR_HEALING.getId().withSuffix("_special"), HealingAltarSpecialRenderer.Unbaked.MAP_CODEC);

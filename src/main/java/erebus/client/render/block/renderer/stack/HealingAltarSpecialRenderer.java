@@ -20,10 +20,8 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.sprite.SpriteGetter;
 import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -43,9 +41,9 @@ public final class HealingAltarSpecialRenderer implements NoDataSpecialModelRend
 	}
 
 	@Override
-	public void submit(@NonNull ItemDisplayContext context, @NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, int overlayCoords, boolean hasFoil, int outlineColor) {
+	public void submit(PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
 		HealingAltarBlockEntityRenderState state = new HealingAltarBlockEntityRenderState();
-		state.lightCoords = lightCoords;
+		state.lightCoords = light;
 		submit(base, state, pose, submit);
 		submit(mid, state, pose, submit);
 		submit(rose, state, pose, submit);

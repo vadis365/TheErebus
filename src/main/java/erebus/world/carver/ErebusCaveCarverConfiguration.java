@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.util.valueproviders.FloatProvider;
+import net.minecraft.util.valueproviders.FloatProviders;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.carver.CarverConfiguration;
@@ -14,9 +15,9 @@ public class ErebusCaveCarverConfiguration extends CarverConfiguration {
     public static final Codec<ErebusCaveCarverConfiguration> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
                     CarverConfiguration.CODEC.forGetter(config -> config),
-                    FloatProvider.CODEC.fieldOf("horizontal_radius_multiplier").forGetter(config -> config.horizontalRadiusMultiplier),
-                    FloatProvider.CODEC.fieldOf("vertical_radius_multiplier").forGetter(config -> config.verticalRadiusMultiplier),
-                    FloatProvider.codec(-1.0F, 1.0F).fieldOf("floor_level").forGetter(config -> config.floorLevel))
+                    FloatProviders.CODEC.fieldOf("horizontal_radius_multiplier").forGetter(config -> config.horizontalRadiusMultiplier),
+                    FloatProviders.CODEC.fieldOf("vertical_radius_multiplier").forGetter(config -> config.verticalRadiusMultiplier),
+                    FloatProviders.codec(-1.0F, 1.0F).fieldOf("floor_level").forGetter(config -> config.floorLevel))
                     .apply(instance, ErebusCaveCarverConfiguration::new)
     );
     public final FloatProvider horizontalRadiusMultiplier;

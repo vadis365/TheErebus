@@ -1,17 +1,16 @@
 package erebus.inventory.client;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 
-import javax.annotation.Nonnull;
-
 public class ErebusScreen<T extends AbstractContainerMenu> extends AbstractContainerScreen<T> {
     protected final Identifier TEXTURE;
-    public ErebusScreen(T container, Inventory inventory, Component title, Identifier texture, int width, int height) {
+    public ErebusScreen(T container, Inventory inventory, Component title, Identifier texture) {
         super(container, inventory, title);
         TEXTURE = texture;
     }
@@ -22,24 +21,13 @@ public class ErebusScreen<T extends AbstractContainerMenu> extends AbstractConta
     }
 
     @Override
-    public void render(@Nonnull GuiGraphics gg, int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground(gg, mouseX, mouseY, partialTicks);
-        super.render(gg, mouseX, mouseY, partialTicks);
-        this.renderTooltip(gg, mouseX, mouseY);
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
     }
 
     @Override
-    protected void renderBg(GuiGraphics gg, float partialTicks, int mX, int mY) {
-        gg.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
-    }
-
-    @Override
-    protected void renderLabels(GuiGraphics gg, int mouseX, int mouseY) {
+    protected void extractLabels(GuiGraphicsExtractor graphics, int xm, int ym) {
         String title = getTitle().getString();
-        gg.drawString(font, title, (int) (imageWidth / 2.0f - font.width(title) / 2.0f), 6, 4210752);
-    }
-
-    protected void drawCenteredString(GuiGraphics gg, Component text, int x, int y, int color) {
-        gg.drawString(font, text.getString(), (int) (x - font.width(text.getString()) / 2.0f), y, color);
+        graphics.text(font, title, (int) (imageWidth / 2.0f - font.width(title) / 2.0f), 6, 4210752);
     }
 }

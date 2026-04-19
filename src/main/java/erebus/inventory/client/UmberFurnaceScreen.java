@@ -3,7 +3,7 @@ package erebus.inventory.client;
 import erebus.Erebus;
 import erebus.inventory.client.elements.UmberFurnaceRecipeBookComponent;
 import erebus.inventory.server.UmberFurnaceMenu;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
@@ -43,7 +43,7 @@ public class UmberFurnaceScreen extends AbstractRecipeBookScreen<UmberFurnaceMen
     }
 
     @Override
-    protected void renderBg(GuiGraphics graphics, float a, int xm, int ym) {
+    public void extractBackground(GuiGraphicsExtractor graphics, int xm, int ym, float a) {
         graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos, topPos, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
         if (menu.isLit()) {
             int litSpriteHeight = 14;

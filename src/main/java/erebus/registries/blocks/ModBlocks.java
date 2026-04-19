@@ -425,7 +425,7 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     );
     public static final DeferredBlock<Block> GLOWSHROOM_BLOCK = registerBlock("glowshroom_block", () -> new GlowshroomBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).sound(SoundType.FUNGUS).strength(0.2F).lightLevel((_) -> 15).noOcclusion().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("glowshroom_block")))));
     public static final DeferredBlock<Block> GLOWSHROOM_STALK = registerBlock("glowshroom_stalk", () -> new GlowshroomStalkBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).sound(SoundType.FUNGUS).strength(0.2F).instabreak().noOcclusion().randomTicks().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("glowshroom_stalk")))));
-    public static final DeferredBlock<Block> HANGING_WEB = registerSimpleBlock("hanging_web", BlockBehaviour.Properties.of().mapColor(MapColor.STONE).noOcclusion());
+    public static final DeferredBlock<Block> HANGING_WEB = registerSimpleBlock("hanging_web", BlockBehaviour.Properties.ofFullCopy(Blocks.COBWEB));
 
     // MARK: Flowers
     public static final DeferredBlock<Block> PETAL_BLACK = registerSimpleBlock("petal_black", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK));

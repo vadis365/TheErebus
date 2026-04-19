@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -28,7 +27,7 @@ public final class LiquifierSpecialRenderer implements NoDataSpecialModelRendere
 	}
 
 	@Override
-	public void submit(@NonNull ItemDisplayContext context, PoseStack pose, SubmitNodeCollector submit, int lightCoords, int overlayCoords, boolean hasFoil, int outlineColor) {
+	public void submit(PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
 		pose.pushPose();
 		pose.translate(0.5F, 0.75F, 0.5F);
 		pose.scale(0.7125F, -1.069F, -0.7125F);
@@ -37,8 +36,8 @@ public final class LiquifierSpecialRenderer implements NoDataSpecialModelRendere
 				new LiquifierBlockEntityRenderState(),
 				pose,
 				RenderTypes.entitySolid(texture),
-				lightCoords,
-				overlayCoords,
+				light,
+				overlay,
 				outlineColor,
 				null
 		);

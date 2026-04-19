@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.util.valueproviders.FloatProvider;
+import net.minecraft.util.valueproviders.FloatProviders;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.carver.CanyonCarverConfiguration.CanyonShapeConfiguration;
@@ -16,7 +17,7 @@ public class ErebusCanyonCarverConfiguration extends CarverConfiguration {
     public static final Codec<ErebusCanyonCarverConfiguration> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
                     CarverConfiguration.CODEC.forGetter(o -> o),
-                    FloatProvider.CODEC.fieldOf("vertical_rotation").forGetter(o -> o.verticalRotation),
+                    FloatProviders.CODEC.fieldOf("vertical_rotation").forGetter(o -> o.verticalRotation),
                     CanyonShapeConfiguration.CODEC.fieldOf("shape").forGetter(o -> o.shape)
             ).apply(instance, ErebusCanyonCarverConfiguration::new)
     );

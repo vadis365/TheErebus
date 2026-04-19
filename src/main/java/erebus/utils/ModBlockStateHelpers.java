@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import static erebus.datagen.ModModelTemplates.FlowerType;
@@ -283,6 +284,10 @@ public class ModBlockStateHelpers {
 
     protected void createFlower(FlowerType type, DeferredBlock<Block> block, DeferredBlock<Block> petal) {
         createFlower(type, block, petal, null);
+    }
+
+    protected void createChest(DeferredBlock<Block> block, String name) {
+        blockModels.generateSimpleSpecialItemModel(block.get(), Optional.empty(), new ErebusChestSpecialRenderer.Unbaked(Erebus.prefix(name)));
     }
 
     protected void createFlower(FlowerType type, DeferredBlock<Block> block, DeferredBlock<Block> petal, @Nullable DeferredBlock<Block> petal2) {

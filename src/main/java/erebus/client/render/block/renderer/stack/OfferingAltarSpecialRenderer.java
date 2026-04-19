@@ -16,10 +16,8 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.sprite.SpriteGetter;
 import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -33,14 +31,14 @@ public final class OfferingAltarSpecialRenderer implements NoDataSpecialModelRen
 	}
 
 	@Override
-	public void submit(@NonNull ItemDisplayContext context, PoseStack pose, SubmitNodeCollector submit, int lightCoords, int overlayCoords, boolean hasFoil, int outlineColor) {
+	public void submit(PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
 		OfferingAltarBlockEntityRenderState state = new OfferingAltarBlockEntityRenderState();
 		SpriteId sprite = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("offering_altar"));
 
 		pose.pushPose();
 		pose.translate(0.5D, 1D, 0.5D);
 		pose.scale(-0.5F, -0.5F, 0.5F);
-		submit.submitModel(model, state, pose, sprite.renderType(RenderTypes::entitySolid), lightCoords, OverlayTexture.NO_OVERLAY, -1, sprites.get(sprite), 0, null);
+		submit.submitModel(model, state, pose, sprite.renderType(RenderTypes::entitySolid), light, OverlayTexture.NO_OVERLAY, -1, sprites.get(sprite), 0, null);
 		pose.popPose();
 	}
 

@@ -2,7 +2,7 @@ package erebus.inventory.client;
 
 import erebus.Erebus;
 import erebus.inventory.server.PetrifiedCraftingMenu;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
 import net.minecraft.client.gui.screens.recipebook.CraftingRecipeBookComponent;
@@ -26,7 +26,7 @@ public class PetrifiedCraftingTableScreen extends AbstractRecipeBookScreen<Petri
     }
 
     @Override
-    protected void renderBg(@NonNull GuiGraphics graphics, float a, int xm, int ym) {
+    public void extractBackground(@NonNull GuiGraphicsExtractor graphics, int xm, int ym, float a) {
         graphics.blit(RenderPipelines.GUI_TEXTURED, GUI, leftPos, (height - imageHeight) / 2, 0, 0, imageWidth, imageHeight, 256, 256);
     }
 

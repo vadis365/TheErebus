@@ -16,7 +16,6 @@ import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.resources.model.sprite.SpriteGetter;
 import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemDisplayContext;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.NonNull;
 
@@ -51,8 +50,8 @@ public final class ErebusChestSpecialRenderer implements NoDataSpecialModelRende
     }
 
     @Override
-    public void submit(@NonNull ItemDisplayContext context, PoseStack pose, SubmitNodeCollector submit, int lightCoords, int overlayCoords, boolean hasFoil, int outlineColor) {
-        submit.submitModel(model, openness, pose, material.renderType(RenderTypes::entitySolid), lightCoords, overlayCoords, -1, materials.get(material), outlineColor, null);
+    public void submit(PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
+        submit.submitModel(model, openness, pose, material.renderType(RenderTypes::entitySolid), light, overlay, -1, materials.get(material), outlineColor, null);
     }
 
     @Override
