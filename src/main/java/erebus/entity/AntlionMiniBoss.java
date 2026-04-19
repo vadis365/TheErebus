@@ -49,6 +49,7 @@ public class AntlionMiniBoss extends Monster {
                 .add(Attributes.MOVEMENT_SPEED, 0.7F)
                 .add(Attributes.ATTACK_DAMAGE, 4.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
+                .add(Attributes.ARMOR, 15)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.75);
     }
 
