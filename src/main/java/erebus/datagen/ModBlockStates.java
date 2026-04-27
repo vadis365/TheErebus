@@ -1,6 +1,7 @@
 package erebus.datagen;
 
 import erebus.Erebus;
+import erebus.block.plants.DarkFruitVineBlock;
 import erebus.block.plants.ModCropBlock;
 import erebus.client.render.block.renderer.stack.*;
 import erebus.datagen.ModModelTemplates.FlowerType;
@@ -112,6 +113,7 @@ public class ModBlockStates extends ModBlockStateHelpers {
         blockModels.createCropBlock(ModBlocks.CROP_TURNIP.get(), ModCropBlock.AGE, 0, 1, 2, 3);
         blockModels.createCropBlock(ModBlocks.CROP_CABBAGE.get(), ModCropBlock.AGE, 0, 1, 2, 3);
         blockModels.createCropBlock(ModBlocks.CROP_MANDRAKE.get(), ModCropBlock.AGE, 0, 1, 2, 3);
+        createVines(ModBlocks.DARK_FRUIT_VINE, DarkFruitVineBlock.AGE);
         createBush(ModBlocks.JADE_BERRY_BUSH, ModItems.JADE_BERRIES);
         createBush(ModBlocks.HEART_BERRY_BUSH, ModItems.HEART_BERRIES);
         createBush(ModBlocks.SWAMP_BERRY_BUSH, ModItems.SWAMP_BERRIES);

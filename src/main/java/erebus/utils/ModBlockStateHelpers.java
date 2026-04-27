@@ -8,24 +8,33 @@ import erebus.client.render.block.renderer.stack.BlockOfBonesSpecialRenderer;
 import erebus.client.render.block.renderer.stack.ErebusChestSpecialRenderer;
 import erebus.datagen.ModModelTemplates;
 import erebus.registries.blocks.ModBlocks;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.ConditionBuilder;
 import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.block.dispatch.VariantMutator;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -313,5 +322,30 @@ public class ModBlockStateHelpers {
         }
 
         itemModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(Erebus.prefix("block/%s".formatted(block.getId().getPath()))));
+    }
+
+    protected void createVines(DeferredBlock<Block> block, Property<Integer> ageProperty) {
+        blockModels.registerSimpleFlatItemModel(block.asItem());
+        MultiPartGenerator generator = MultiPartGenerator.multiPart(block.get());
+        Map<Property<Boolean>, VariantMutator> directionProperties = selectMultifaceProperties(block.get().defaultBlockState(), MultifaceBlock::getFaceProperty);
+
+        ageProperty.getPossibleValues().forEach(age -> {
+            Identifier stageModelId = blockModels.createSuffixedVariant(block.get(), "_" + age, ModelTemplates.CUBE_ALL, TextureMapping::cube);
+            MultiVariant model = plainVariant(stageModelId);
+
+            if (directionProperties.isEmpty()) {
+                generator.with(condition().term(ageProperty, age), model);
+            } else {
+                ConditionBuilder noFaces = condition().term(ageProperty, age);
+                directionProperties.forEach((property, _) -> noFaces.term(property, false));
+
+                directionProperties.forEach((property, mutator) -> {
+                    generator.with(condition().term(property, true).term(ageProperty, age), model.with(mutator));
+                    generator.with(noFaces, model.with(mutator));
+                });
+            }
+        });
+
+        blockModels.blockStateOutput.accept(generator);
     }
 }

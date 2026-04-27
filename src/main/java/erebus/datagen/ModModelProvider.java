@@ -32,7 +32,6 @@ public class ModModelProvider extends ModelProvider {
             ModBlocks.COMPOSTER.get(),
             ModBlocks.DARK_CAPPED_MUSHROOM.get(),
             ModBlocks.DESERT_SHRUB.get(),
-            ModBlocks.DARK_FRUIT_VINE.get(),
             ModBlocks.DROUGHTED_SHRUB.get(),
             ModBlocks.DUST_LAYER.get(),
             ModBlocks.DUNG_SPAWNER_BOT_FLY.get(),

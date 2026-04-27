@@ -4,8 +4,13 @@ import erebus.Erebus;
 import erebus.client.render.item.renderer.*;
 import erebus.registries.item.ModItems;
 import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.item.RangeSelectItemModel;
 import net.minecraft.client.renderer.item.SpecialModelWrapper;
+import net.minecraft.client.renderer.item.properties.numeric.UseDuration;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluids;
@@ -181,7 +186,7 @@ public class ModItemModels {
         normalItem(ModItems.SPRINT_LEGGINGS);
         normalItem(ModItems.JUMP_BOOTS);
         normalItem(ModItems.WATER_STRIDERS);
-        itemModels.generateBow(ModItems.MAX_SPEED_BOW.get());
+        generateBow(ModItems.MAX_SPEED_BOW.get());
 
         itemModels.itemModelOutput.accept(
                 ModItems.QUAKE_HAMMER.get(),
@@ -352,6 +357,14 @@ public class ModItemModels {
         normalItem(ModItems.UMBER_GOLEM_SPAWN_EGG);
         normalItem(ModItems.ANTLION_BOSS_SPAWN_EGG);
         normalItem(ModItems.STAG_BEETLE_SPAWN_EGG);
+    }
+
+    private void generateBow(Item item) {
+        ItemModel.Unbaked bowModel = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, ModelTemplates.BOW));
+        ItemModel.Unbaked pulling0 = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_pulling_0", ModelTemplates.BOW));
+        ItemModel.Unbaked pulling1 = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_pulling_1", ModelTemplates.BOW));
+        ItemModel.Unbaked pulling2 = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_pulling_2", ModelTemplates.BOW));
+        itemModels.itemModelOutput.accept(item, ItemModelUtils.conditional(ItemModelUtils.isUsingItem(), ItemModelUtils.rangeSelect(new UseDuration(false), 0.05F, pulling0, new RangeSelectItemModel.Entry[]{ItemModelUtils.override(pulling1, 0.65F), ItemModelUtils.override(pulling2, 0.9F)}), bowModel));
     }
 
     private void normalItem(DeferredHolder<Item, ?> item) {
