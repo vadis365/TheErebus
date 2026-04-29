@@ -107,18 +107,6 @@ public class Antlion extends Monster {
 		this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
 	}
 
-	//TODO Loot tables
-	/*
-	 * @Override protected Item getDropItem() { return
-	 * Item.getItemFromBlock(Blocks.SAND); }
-	 * 
-	 * @Override protected void dropFewItems(boolean recentlyHit, int looting) { if
-	 * (recentlyHit) { int chance = rand.nextInt(4) + rand.nextInt(1 + looting); int
-	 * amount; for (amount = 0; amount < chance; ++amount) entityDropItem(new
-	 * ItemStack(ModItems.MATERIALS, 1,
-	 * EnumErebusMaterialsType.PLATE_EXO.ordinal()), 0.0F); } }
-	 */
-
 	public static boolean canSpawnHere(EntityType<Antlion> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
 		float light = level.getLightLevelDependentMagicValue(pos);
 		return light >= 0F;

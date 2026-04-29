@@ -43,6 +43,7 @@ public class EntityAttributeCreationEventHandler {
         event.put(ModEntities.HONEY_POT_ANT.get(), HoneyPotAnt.createAttributes().build());
         event.put(ModEntities.JUMPING_SPIDER.get(), JumpingSpider.createAttributes().build());
         event.put(ModEntities.LAVA_WEB_SPIDER.get(), LavaWebSpider.createAttributes().build());
+        event.put(ModEntities.LEECH.get(), Leech.createAttributes().build());
         event.put(ModEntities.LOCUST.get(), Locust.createAttributes().build());
         event.put(ModEntities.MAGMA_CRAWLER.get(), MagmaCrawler.createAttributes().build());
         event.put(ModEntities.MIDGE_SWARM.get(), MidgeSwarm.createAttributes().build());

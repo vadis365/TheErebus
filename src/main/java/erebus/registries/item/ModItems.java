@@ -265,7 +265,6 @@ public class ModItems extends ModItemHelpers {
 
     // MARK: Spawn Eggs
 //    public static final DeferredItem<Item> BLOOD_SNAIL_SPAWN_EGG = registerSpawnEgg("blood_snail", ModEntities.BLOOD_SNAIL);
-//    public static final DeferredItem<Item> LEECH_SPAWN_EGG = registerSpawnEgg("blood_snail", ModEntities.LEECH);
     public static final DeferredItem<Item> BEETLE_LARVA_SPAWN_EGG = registerSpawnEgg("beetle_larva", ModEntities.BEETLE_LARVA);
     public static final DeferredItem<Item> WASP_SPAWN_EGG = registerSpawnEgg("wasp", ModEntities.WASP);
     public static final DeferredItem<Item> CENTIPEDE_SPAWN_EGG = registerSpawnEgg("centipede", ModEntities.CENTIPEDE);
@@ -300,6 +299,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> CICADA_SPAWN_EGG = registerSpawnEgg("cicada", ModEntities.CICADA);
     public static final DeferredItem<Item> FIRE_ANT_SOLDIER_SPAWN_EGG = registerSpawnEgg("fire_ant_soldier", ModEntities.FIRE_ANT_SOLDIER);
     public static final DeferredItem<Item> LAVA_WEB_SPIDER_SPAWN_EGG = registerSpawnEgg("lava_web_spider", ModEntities.LAVA_WEB_SPIDER);
+    public static final DeferredItem<Item> LEECH_SPAWN_EGG = registerSpawnEgg("leech", ModEntities.LEECH);
     public static final DeferredItem<Item> ANTLION_MINI_BOSS_SPAWN_EGG = registerSpawnEgg("antlion_mini_boss", ModEntities.ANTLION_MINI_BOSS);
     public static final DeferredItem<Item> CHAMELEON_TICK_SPAWN_EGG = registerSpawnEgg("chameleon_tick", ModEntities.CHAMELEON_TICK);
     public static final DeferredItem<Item> MIDGE_SWARM_SPAWN_EGG = registerSpawnEgg("midge_swarm", ModEntities.MIDGE_SWARM);

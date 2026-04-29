@@ -55,6 +55,7 @@ public class ModEntityLootTables extends ModEntityLootSubProvider {
         addHoneyPotAnt();
         addJumpingSpider();
         addLavaSpider();
+        addLeech();
         addLocust();
         addMagmaCrawler();
         addMidgeSwarm();
@@ -338,6 +339,10 @@ public class ModEntityLootTables extends ModEntityLootSubProvider {
                         createStandardPool(Items.FIRE_CHARGE, ConstantValue.exactly(1))
                 )
         );
+    }
+
+    private void addLeech() {
+        noLoot(ModEntities.LEECH);
     }
 
     private void addLocust() {

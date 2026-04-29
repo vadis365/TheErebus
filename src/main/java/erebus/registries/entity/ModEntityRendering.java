@@ -193,6 +193,7 @@ public class ModEntityRendering {
 		event.registerEntityRenderer(ModEntities.HONEY_POT_ANT.get(), HoneyPotAntRenderer::new);
 		event.registerEntityRenderer(ModEntities.JUMPING_SPIDER.get(), JumpingSpiderRenderer::new);
 		event.registerEntityRenderer(ModEntities.LAVA_WEB_SPIDER.get(), LavaWebSpiderRenderer::new);
+		event.registerEntityRenderer(ModEntities.LEECH.get(), LeechRenderer::new);
 		event.registerEntityRenderer(ModEntities.LOCUST.get(), LocustRenderer::new);
 		event.registerEntityRenderer(ModEntities.MAGMA_CRAWLER.get(), MagmaCrawlerRenderer::new);
 		event.registerEntityRenderer(ModEntities.MIDGE_SWARM.get(), MidgeSwarmRenderer::new);
