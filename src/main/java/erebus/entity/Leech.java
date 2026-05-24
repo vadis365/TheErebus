@@ -27,8 +27,6 @@ import net.minecraft.world.level.LevelAccessor;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
-import java.util.logging.Logger;
-
 public class Leech extends Monster {
 
     public static final EntityDataAccessor<Integer> BLOOD_CONSUMED = SynchedEntityData.defineId(Leech.class, EntityDataSerializers.INT);
@@ -175,7 +173,6 @@ public class Leech extends Monster {
     }
 
     public int getBloodConsumed() {
-        Logger.getLogger("chisel").info("Leech blood consumed: " + entityData.get(BLOOD_CONSUMED));
         return entityData.get(BLOOD_CONSUMED);
     }
 

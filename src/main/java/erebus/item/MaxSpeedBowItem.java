@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class MaxSpeedBowItem extends ProjectileWeaponItem {
+public class MaxSpeedBowItem extends BowItem {
 
     public static final float DRAW_SPEED = 20.0F;
 
@@ -51,7 +51,14 @@ public class MaxSpeedBowItem extends ProjectileWeaponItem {
     public @NotNull InteractionResult use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         boolean hasProjectile = !player.getProjectile(itemstack).isEmpty();
-        return EventHooks.onArrowNock(itemstack, level, player, hand, hasProjectile);
+        EventHooks.onArrowNock(itemstack, level, player, hand, hasProjectile);
+
+        if(!player.hasInfiniteMaterials() && !hasProjectile) {
+            return InteractionResult.FAIL;
+        } else {
+            player.startUsingItem(hand);
+            return InteractionResult.SUCCESS;
+        }
     }
 
     @Override
