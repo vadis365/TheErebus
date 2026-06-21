@@ -143,13 +143,6 @@ public class ModItemRendering {
         event.registerItem(new IClientItemExtensions() {
             @Override
             public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return new BlenderStackItemRenderer(null, null);
-            }
-        }, ModBlocks.BLENDER.get().asItem());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return new FluidJarStackItemRenderer(null, null);
             }
         }, ModBlocks.FLUID_JAR.get().asItem());

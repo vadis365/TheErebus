@@ -1,6 +1,7 @@
 package erebus.inventory.server;
 
 import erebus.entity.BlackAnt;
+import erebus.inventory.container.BlackAntSimpleContainer;
 import erebus.inventory.slot.BlackAntSlot;
 import erebus.registries.client.ModMenuTypes;
 import net.minecraft.client.Minecraft;

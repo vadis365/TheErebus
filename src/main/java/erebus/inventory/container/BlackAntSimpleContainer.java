@@ -1,4 +1,4 @@
-package erebus.inventory.server;
+package erebus.inventory.container;
 
 import erebus.entity.BlackAnt;
 import net.minecraft.world.SimpleContainer;

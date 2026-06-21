@@ -47,8 +47,8 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
     public final FluidStacksResourceHandler tanks = new FluidStacksResourceHandler(4, FluidType.BUCKET_VOLUME * 8);
     public final RecipeManager.CachedCheck<SmoothieRecipeInput, SmoothieRecipe> quickCheck = RecipeManager.createCheck(ModCustomRecipes.SMOOTHIE_RECIPE.get());
     private static final int MAX_TIME = 432;
-    private static int progress = 0;
-    private static int prevProgress = 0;
+    private int progress = 0;
+    private int prevProgress = 0;
     protected ItemStack output = ItemStack.EMPTY;
 
     public BlenderBlockEntity(BlockPos pos, BlockState state) {
@@ -58,7 +58,7 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState blockState, T entity) {
         if (entity instanceof BlenderBlockEntity blender) {
             if(level.isClientSide()) {
-                prevProgress = progress;
+                blender.prevProgress = blender.progress;
                 return;
             }
 
@@ -83,9 +83,9 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
             if(optional.isPresent()) {
                 SmoothieRecipe recipe = optional.get().value();
                 blender.output = recipe.assemble(input);
-                progress++;
+                blender.progress++;
 
-                if(progress >= MAX_TIME) {
+                if(blender.progress >= MAX_TIME) {
                     for(int c = 0; c < 5; c++) {
                         if(!blender.getItem(c).isEmpty()) {
                             blender.getItem(c).shrink(1);
@@ -94,7 +94,7 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
 
                     blender.extractFluids(recipe);
                     blender.setItem(4, blender.output.copy());
-                    progress = 0;
+                    blender.progress = 0;
                     setChanged(level, pos, blockState);
                 }
             }
@@ -181,9 +181,12 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
     @Override
     protected void applyImplicitComponents(@Nonnull DataComponentGetter getter) {
         super.applyImplicitComponents(getter);
-        try(Transaction transaction = Transaction.openRoot()) {
-            if(tanks.insert(getter.getOrDefault(ModDataComponents.FLUID, FluidResource.EMPTY), FluidType.BUCKET_VOLUME, transaction) == FluidType.BUCKET_VOLUME) {
-                transaction.commit();
+        FluidResource resource = getter.getOrDefault(ModDataComponents.FLUID, FluidResource.EMPTY);
+        if (!resource.isEmpty()) {
+            try (Transaction transaction = Transaction.openRoot()) {
+                if (tanks.insert(resource, FluidType.BUCKET_VOLUME, transaction) == FluidType.BUCKET_VOLUME) {
+                    transaction.commit();
+                }
             }
         }
     }

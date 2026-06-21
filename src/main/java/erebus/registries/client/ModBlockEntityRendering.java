@@ -34,7 +34,6 @@ public class ModBlockEntityRendering {
     public static final ModelLayerLocation ALTAR_EXPERIENCE_BASE = register("altar_experience", "base");
     public static final ModelLayerLocation ALTAR_EXPERIENCE_MID = register("altar_experience", "mid");
     public static final ModelLayerLocation ALTAR_EXPERIENCE_GLASS = register("altar_experience", "glass");
-    public static final ModelLayerLocation BLENDER = register("blender");
     public static final ModelLayerLocation LIQUIFIER = register("liquifier");
     public static final ModelLayerLocation GLOWING_JAR = register("glowing_jar");
     public static final ModelLayerLocation BAMBOO_BRIDGE = register("bamboo_bridge");
@@ -56,7 +55,6 @@ public class ModBlockEntityRendering {
         event.registerLayerDefinition(ALTAR_EXPERIENCE_BASE, ExperienceAltarBaseModel::createBodyLayer);
         event.registerLayerDefinition(ALTAR_EXPERIENCE_MID, ExperienceAltarMidModel::createBodyLayer);
         event.registerLayerDefinition(ALTAR_EXPERIENCE_GLASS, ExperienceAltarGlassModel::createBodyLayer);
-        event.registerLayerDefinition(BLENDER, BlenderModel::createBodyLayer);
         event.registerLayerDefinition(LIQUIFIER, LiquifierModel::createBodyLayer);
         event.registerLayerDefinition(GLOWING_JAR, GlowingJarModel::createBodyLayer);
         event.registerLayerDefinition(BAMBOO_BRIDGE, BambooBridgeModel::createBodyLayer);
@@ -71,7 +69,6 @@ public class ModBlockEntityRendering {
         event.registerBlockEntityRenderer(ModBlockEntities.ALTAR_LIGHTNING.get(), LightningAltarRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.ALTAR_REPAIR.get(), RepairAltarRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.ALTAR_EXPERIENCE.get(), ExperienceAltarRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntities.BLENDER.get(), BlenderRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.FLUID_JAR.get(), FluidJarRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.LIQUIFIER.get(), LiquifierRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.GLOWING_JAR.get(), GlowingJarRenderer::new);

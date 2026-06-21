@@ -179,9 +179,12 @@ public class LiquifierBlockEntity extends BlockEntityInventoryHelper implements 
 	@Override
 	protected void applyImplicitComponents(@Nonnull DataComponentGetter getter) {
 		super.applyImplicitComponents(getter);
-		try(Transaction tx = Transaction.openRoot()) {
-			if(tank.insert(getter.getOrDefault(ModDataComponents.FLUID, FluidResource.EMPTY), FluidType.BUCKET_VOLUME, tx) == FluidType.BUCKET_VOLUME) {
-				tx.commit();
+		FluidResource resource = getter.getOrDefault(ModDataComponents.FLUID, FluidResource.EMPTY);
+		if (!resource.isEmpty()) {
+			try (Transaction tx = Transaction.openRoot()) {
+				if (tank.insert(resource, FluidType.BUCKET_VOLUME, tx) == FluidType.BUCKET_VOLUME) {
+					tx.commit();
+				}
 			}
 		}
 	}
