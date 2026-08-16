@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "erebus:item/tarantula_baby_spawn_egg"
+    "layer0": "erebus:item/antlion_spawn_egg"
   }
 }

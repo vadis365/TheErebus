@@ -613,7 +613,7 @@ public class ModTabs {
             "spawn_eggs",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable(String.format("%s.spawn_eggs", Erebus.MODID)))
-                    .icon(() -> ModItems.ANTLION_SPAWN_EGG.get().getDefaultInstance())
+                    .icon(() -> ModItems.WASP_SPAWN_EGG.get().getDefaultInstance())
                     .displayItems((_, output) -> {
                         output.accept(ModItems.BEETLE_LARVA_SPAWN_EGG);
                         output.accept(ModItems.WASP_SPAWN_EGG);
@@ -655,6 +655,7 @@ public class ModTabs {
                         output.accept(ModItems.WOODLOUSE_SPAWN_EGG);
                         output.accept(ModItems.CICADA_SPAWN_EGG);
                         output.accept(ModItems.FIRE_ANT_SOLDIER_SPAWN_EGG);
+                        output.accept(ModItems.ANTLION_SPAWN_EGG);
                         output.accept(ModItems.ANTLION_MINI_BOSS_SPAWN_EGG);
                         output.accept(ModItems.CHAMELEON_TICK_SPAWN_EGG);
                         output.accept(ModItems.MIDGE_SWARM_SPAWN_EGG);

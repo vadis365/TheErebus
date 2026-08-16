@@ -66,7 +66,6 @@ public class ModModelProvider extends ModelProvider {
     );
 
     private static final Set<Item> EXCLUDED_ITEMS = Set.of(
-            ModItems.ANTLION_SPAWN_EGG.get(),
             ModItems.ANTI_VENOM_BUCKET.get(),
             ModItems.BAMBOO_SHIELD.get(),
             ModItems.BAMBOO_SHOOT.get(),

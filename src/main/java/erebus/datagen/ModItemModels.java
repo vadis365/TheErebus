@@ -7,7 +7,6 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.renderer.item.ItemModel;
-import net.minecraft.client.renderer.item.RangeSelectItemModel;
 import net.minecraft.client.renderer.item.SpecialModelWrapper;
 import net.minecraft.client.renderer.item.properties.numeric.UseDuration;
 import net.minecraft.client.resources.model.sprite.Material;
@@ -304,6 +303,7 @@ public class ModItemModels {
         normalItem(ModItems.STAG_HEART_COOKED);
 
         // MARK: Spawn Eggs
+        normalItem(ModItems.ANTLION_SPAWN_EGG);
         normalItem(ModItems.ANTLION_BOSS_SPAWN_EGG);
         normalItem(ModItems.ANTLION_MINI_BOSS_SPAWN_EGG);
         normalItem(ModItems.BED_BUG_SPAWN_EGG);
