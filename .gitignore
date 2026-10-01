@@ -36,6 +36,7 @@ screenshots
 mods
 lib
 libs
+docs
 
 *.txt
 /server.properties

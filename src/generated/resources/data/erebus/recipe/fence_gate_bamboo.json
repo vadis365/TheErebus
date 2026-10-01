@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "P": "erebus:planks_bamboo",
+    "S": "erebus:bamboo"
+  },
+  "pattern": [
+    "SPS",
+    "SPS"
+  ],
+  "result": {
+    "id": "erebus:fence_gate_bamboo"
+  }
+}

@@ -18,7 +18,7 @@ public class FlyingMoveControlLessSpin extends MoveControl {
     @Override
     public void tick() {
         if (this.operation == MoveControl.Operation.MOVE_TO) {
-           this.operation = MoveControl.Operation.WAIT;
+            this.operation = MoveControl.Operation.WAIT;
             this.mob.setNoGravity(true);
             double d0 = this.wantedX - this.mob.getX();
             double d1 = this.wantedY - this.mob.getY();
@@ -30,20 +30,20 @@ public class FlyingMoveControlLessSpin extends MoveControl {
                 return;
             }
 
-            float f = (float)(Mth.atan2(d2, d0) * 180.0F / (float)Math.PI) - 90.0F;
+            float f = (float) (Mth.atan2(d2, d0) * 180.0F / (float) Math.PI) - 90.0F;
             this.mob.setYRot(this.rotlerp(this.mob.getYRot(), f, this.maxTurn));
             float f1;
             if (this.mob.onGround()) {
-                f1 = (float)(this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED));
+                f1 = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED));
             } else {
-                f1 = (float)(this.speedModifier * this.mob.getAttributeValue(Attributes.FLYING_SPEED));
+                f1 = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.FLYING_SPEED));
             }
 
             this.mob.setSpeed(f1);
             double d4 = Math.sqrt(d0 * d0 + d2 * d2);
             if (Math.abs(d1) > 1.0E-5F || Math.abs(d4) > 1.0E-5F) {
-                float f2 = (float)(-(Mth.atan2(d1, d4) * 180.0F / (float)Math.PI));
-                this.mob.setXRot(this.rotlerp(this.mob.getXRot(), f2, (float)this.maxTurn));
+                float f2 = (float) (-(Mth.atan2(d1, d4) * 180.0F / (float) Math.PI));
+                this.mob.setXRot(this.rotlerp(this.mob.getXRot(), f2, (float) this.maxTurn));
                 this.mob.setYya(d1 > 0.0 ? f1 : -f1);
             }
         } else {

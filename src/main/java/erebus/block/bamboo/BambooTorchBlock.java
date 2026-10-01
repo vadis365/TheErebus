@@ -6,6 +6,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -26,7 +29,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class BambooTorchBlock extends Block {
-	public static final MapCodec<BambooTorchBlock> CODEC = simpleCodec(BambooTorchBlock::new);
+    public static final MapCodec<BambooTorchBlock> CODEC = simpleCodec(BambooTorchBlock::new);
     public static final EnumProperty<EnumTorchBlockHalf> HALF = EnumProperty.create("half", EnumTorchBlockHalf.class);
     protected static final VoxelShape TORCH = Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0);
 
@@ -35,11 +38,11 @@ public class BambooTorchBlock extends Block {
         registerDefaultState(getStateDefinition().any().setValue(HALF, EnumTorchBlockHalf.LOWER));
     }
 
-	@Nonnull
-	@Override
-	protected MapCodec<BambooTorchBlock> codec() {
-		return CODEC;
-	}
+    @Nonnull
+    @Override
+    protected MapCodec<BambooTorchBlock> codec() {
+        return CODEC;
+    }
 
     @Override
     protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
@@ -51,11 +54,11 @@ public class BambooTorchBlock extends Block {
         builder.add(HALF);
     }
 
-	@Nonnull
-	@Override
-	public RenderShape getRenderShape(@Nonnull BlockState state) {
-		return RenderShape.MODEL;
-	}
+    @Nonnull
+    @Override
+    public RenderShape getRenderShape(@Nonnull BlockState state) {
+        return RenderShape.MODEL;
+    }
 
     @Nullable
     @Override
@@ -65,26 +68,40 @@ public class BambooTorchBlock extends Block {
         return blockpos.getY() < level.getMaxY() - 1 && level.getBlockState(blockpos.above()).canBeReplaced(context) ? super.getStateForPlacement(context) : null;
     }
 
-	@Override
-	protected void onPlace(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState newState, boolean movedByPiston) {
-		EnumTorchBlockHalf doubleblockhalf = state.getValue(HALF);
-		if(doubleblockhalf == EnumTorchBlockHalf.LOWER)
-			level.setBlock(pos.above(), defaultBlockState().setValue(HALF, EnumTorchBlockHalf.UPPER), 2);
+    @Override
+    public void setPlacedBy(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state, @Nullable LivingEntity placer, @NotNull ItemStack stack) {
+        EnumTorchBlockHalf doubleblockhalf = state.getValue(HALF);
+        if (doubleblockhalf == EnumTorchBlockHalf.LOWER)
+            level.setBlock(pos.above(), defaultBlockState().setValue(HALF, EnumTorchBlockHalf.UPPER), 2);
     }
 
-	@Override
-	protected @NonNull BlockState updateShape(BlockState state, @NonNull LevelReader level, @NonNull ScheduledTickAccess ticks, @NonNull BlockPos currentPos, Direction directionToNeighbour, @NonNull BlockPos neighbourPos, @NonNull BlockState neighbourState, @NonNull RandomSource random) {
-		EnumTorchBlockHalf doubleblockhalf = state.getValue(HALF);
+    @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide() && player.preventsBlockDrops() && state.getValue(HALF) == EnumTorchBlockHalf.LOWER) {
+            var otherPos = pos.above();
+            var other = level.getBlockState(otherPos);
+            if (other.is(this) && other.getValue(HALF) == EnumTorchBlockHalf.UPPER) {
+                // Suppress the partner's neighbor-removal drop, as native double plants do.
+                level.setBlock(otherPos, Blocks.AIR.defaultBlockState(), 35);
+                level.levelEvent(player, 2001, otherPos, Block.getId(other));
+            }
+        }
+        return super.playerWillDestroy(level, pos, state, player);
+    }
+
+    @Override
+    protected @NonNull BlockState updateShape(BlockState state, @NonNull LevelReader level, @NonNull ScheduledTickAccess ticks, @NonNull BlockPos currentPos, Direction directionToNeighbour, @NonNull BlockPos neighbourPos, @NonNull BlockState neighbourState, @NonNull RandomSource random) {
+        EnumTorchBlockHalf doubleblockhalf = state.getValue(HALF);
         if (directionToNeighbour.getAxis() != Direction.Axis.Y
-            || doubleblockhalf == EnumTorchBlockHalf.LOWER != (directionToNeighbour == Direction.UP)
-            || neighbourState.is(this) && neighbourState.getValue(HALF) != doubleblockhalf) {
+                || doubleblockhalf == EnumTorchBlockHalf.LOWER != (directionToNeighbour == Direction.UP)
+                || neighbourState.is(this) && neighbourState.getValue(HALF) != doubleblockhalf) {
             return doubleblockhalf == EnumTorchBlockHalf.LOWER && directionToNeighbour == Direction.DOWN && !canSurvive(state, level, currentPos)
-                ? Blocks.AIR.defaultBlockState()
-                : super.updateShape(state, level, ticks, currentPos, directionToNeighbour, neighbourPos, neighbourState, random);
+                    ? Blocks.AIR.defaultBlockState()
+                    : super.updateShape(state, level, ticks, currentPos, directionToNeighbour, neighbourPos, neighbourState, random);
         } else {
             return Blocks.AIR.defaultBlockState();
         }
-	}
+    }
 
     @Override
     protected boolean canSurvive(BlockState state, @NonNull LevelReader level, @NonNull BlockPos pos) {
@@ -98,26 +115,26 @@ public class BambooTorchBlock extends Block {
 
     @Override
     public void animateTick(BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull RandomSource random) {
-		if (state.getValue(HALF) == EnumTorchBlockHalf.UPPER) {
-			double d0 = pos.getX() + 0.4375F;
-			double d1 = pos.getY() + 1.0625F;
-			double d2 = pos.getZ() + 0.4375F;
-			double d3 = pos.getX() + 0.5625F;
-			double d4 = pos.getZ() + 0.5625F;
-			double d5 = pos.getX() + 0.5F;
-			double d6 = pos.getY() + 1.25F;
-			double d7 = pos.getZ() + 0.5F;
-			level.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-			level.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-			level.addParticle(ParticleTypes.SMOKE, d0, d1, d4, 0.0D, 0.0D, 0.0D);
-			level.addParticle(ParticleTypes.FLAME, d0, d1, d4, 0.0D, 0.0D, 0.0D);
-			level.addParticle(ParticleTypes.SMOKE, d3, d1, d2, 0.0D, 0.0D, 0.0D);
-			level.addParticle(ParticleTypes.FLAME, d3, d1, d2, 0.0D, 0.0D, 0.0D);
-			level.addParticle(ParticleTypes.SMOKE, d3, d1, d4, 0.0D, 0.0D, 0.0D);
-			level.addParticle(ParticleTypes.FLAME, d3, d1, d4, 0.0D, 0.0D, 0.0D);
-			level.addParticle(ParticleTypes.SMOKE, d5, d6, d7, 0.0D, 0.0D, 0.0D);
-			level.addParticle(ParticleTypes.FLAME, d5, d6, d7, 0.0D, 0.0D, 0.0D);
-		}
-	}
+        if (state.getValue(HALF) == EnumTorchBlockHalf.UPPER) {
+            double d0 = pos.getX() + 0.4375F;
+            double d1 = pos.getY() + 1.0625F;
+            double d2 = pos.getZ() + 0.4375F;
+            double d3 = pos.getX() + 0.5625F;
+            double d4 = pos.getZ() + 0.5625F;
+            double d5 = pos.getX() + 0.5F;
+            double d6 = pos.getY() + 1.25F;
+            double d7 = pos.getZ() + 0.5F;
+            level.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ParticleTypes.SMOKE, d0, d1, d4, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ParticleTypes.FLAME, d0, d1, d4, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ParticleTypes.SMOKE, d3, d1, d2, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ParticleTypes.FLAME, d3, d1, d2, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ParticleTypes.SMOKE, d3, d1, d4, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ParticleTypes.FLAME, d3, d1, d4, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ParticleTypes.SMOKE, d5, d6, d7, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ParticleTypes.FLAME, d5, d6, d7, 0.0D, 0.0D, 0.0D);
+        }
+    }
 
 }

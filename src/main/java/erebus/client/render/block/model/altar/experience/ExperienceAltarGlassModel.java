@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 public class ExperienceAltarGlassModel extends Model<ExperienceAltarBlockEntityRenderState> {
 
     public ExperienceAltarGlassModel(ModelPart root) {
-		super(root, RenderTypes::entitySolid);
+        super(root, RenderTypes::entitySolid);
         root.getChild("GlassTop");
         root.getChild("GlassBot");
         root.getChild("GlassMid");
@@ -22,9 +22,9 @@ public class ExperienceAltarGlassModel extends Model<ExperienceAltarBlockEntityR
         root.getChild("LBSupport");
     }
 
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition mesh = new MeshDefinition();
-		PartDefinition part = mesh.getRoot();
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition mesh = new MeshDefinition();
+        PartDefinition part = mesh.getRoot();
 
         part.addOrReplaceChild("GlassTop", CubeListBuilder.create().texOffs(0, 37).addBox(-3.5F, 8.0F, -3.5F, 7.0F, 6.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -32.0F, 0.0F));
         part.addOrReplaceChild("GlassBot", CubeListBuilder.create().texOffs(0, 51).addBox(-3.5F, 16.0F, -3.5F, 7.0F, 6.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -32.0F, 0.0F));
@@ -37,5 +37,5 @@ public class ExperienceAltarGlassModel extends Model<ExperienceAltarBlockEntityR
         part.addOrReplaceChild("LBSupport", CubeListBuilder.create().texOffs(99, 37).addBox(4.0F, 5.0F, 4.0F, 2.0F, 17.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -32.0F, 0.0F));
 
         return LayerDefinition.create(mesh, 256, 64);
-	}
+    }
 }

@@ -8,9 +8,9 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class ScorpionModel extends EntityModel<ScorpionRenderState> {
-    public ModelPart root;
     private final ModelPart RMand, LMand, Head, EyeL, EyeR, Body1, Body2;
     private final ModelPart RBL1, RBL2, RBL3, RBL4;
     private final ModelPart RML1, RML2, RML3, RML4;
@@ -23,6 +23,7 @@ public class ScorpionModel extends EntityModel<ScorpionRenderState> {
     private final ModelPart ClawR1, ClawR2, ClawR3, ClawR4, ClawR5Top, ClawR5Bot;
     private final ModelPart ClawL1, ClawL2, ClawL3, ClawL4, ClawL5Top, ClawL5Bot;
     private final ModelPart Tail1, Tail2, Tail3, Tail4, Tail5, Tail6, Sting1, Sting2;
+    public ModelPart root;
 
     public ScorpionModel(ModelPart root) {
         super(root);
@@ -179,5 +180,108 @@ public class ScorpionModel extends EntityModel<ScorpionRenderState> {
         Tail1.addOrReplaceChild("Sting2", CubeListBuilder.create().texOffs(27, 119).addBox(-0.5F, -6.5F, 18F, 1, 1, 5), PartPose.rotation(1.570796F, 0F, 0F));
 
         return LayerDefinition.create(mesh, 64, 128);
+    }
+
+    @Override
+    public void setupAnim(ScorpionRenderState state) {
+        super.setupAnim(state);
+        float cosz1 = Mth.cos(state.walkAnimationPos + (float) Math.PI) * 0.3F * state.walkAnimationSpeed;
+        float cosz2 = Mth.cos(state.walkAnimationPos) * 0.3F * state.walkAnimationSpeed;
+        float cozy1 = Mth.cos(state.walkAnimationPos + (float) Math.PI) * 0.4F * state.walkAnimationSpeed;
+        float cozy2 = Mth.cos(state.walkAnimationPos) * 0.4F * state.walkAnimationSpeed;
+        float cosxnz1 = Mth.cos(state.walkAnimationPos / 3.0F + (float) Math.PI) * 0.1F * state.walkAnimationSpeed;
+        float cosxnz2 = Mth.cos(state.walkAnimationPos / 3.0F + (float) Math.PI) * 0.05F * state.walkAnimationSpeed;
+        LBL1.zRot = cosz1 - 0.3F;
+        LML1.zRot = cosz2 - 0.3F;
+        LFL1.zRot = cosz1 - 0.3F;
+        LFFL1.zRot = cosz2 - 0.3F;
+        RBL1.zRot = -cosz2 + 0.3F;
+        RML1.zRot = -cosz1 + 0.3F;
+        RFL1.zRot = -cosz2 + 0.3F;
+        RFFL1.zRot = -cosz1 + 0.3F;
+        LBL1.yRot = cozy1 - 0.6981317F;
+        LML1.yRot = cozy2 - 0.2617994F;
+        LFL1.yRot = cozy1 + 0.2617994F;
+        LFFL1.yRot = cozy2 + 0.6981317F;
+        RBL1.yRot = -cozy2 - 2.443461F;
+        RML1.yRot = -cozy1 - 2.879793F;
+        RFL1.yRot = -cozy2 + 2.879793F;
+        RFFL1.yRot = -cozy1 + 2.443461F;
+        ClawR1.xRot = -cosxnz1;
+        ClawR1.zRot = cosxnz1;
+        ClawR2.xRot = -cosxnz1;
+        ClawR3.xRot = cosxnz1;
+        ClawR4.xRot = cosxnz1;
+        ClawR5Bot.xRot = cosxnz2;
+        ClawR5Top.xRot = cosxnz2;
+        ClawR5Bot.zRot = cosxnz2;
+        ClawR5Top.zRot = cosxnz2;
+        ClawL1.xRot = -cosxnz1;
+        ClawL1.zRot = cosxnz1;
+        ClawL2.xRot = -cosxnz1;
+        ClawL3.xRot = cosxnz1;
+        ClawL4.xRot = cosxnz1;
+        ClawL5Bot.xRot = cosxnz2;
+        ClawL5Top.xRot = cosxnz2;
+        ClawL5Bot.zRot = cosxnz2;
+        ClawL5Top.zRot = cosxnz2;
+        Tail1.zRot = -cosxnz1;
+        Tail2.zRot = -cosxnz1;
+        Tail3.zRot = -cosxnz1;
+        Tail4.zRot = -cosxnz1;
+        Tail5.zRot = -cosxnz1;
+        Tail6.zRot = -cosxnz1;
+        Sting1.zRot = -cosxnz1;
+        Sting2.zRot = -cosxnz1;
+        if (state.captured) {
+            Tail1.xRot = state.stingAngle;
+            Tail2.xRot = state.stingAngle + 0.8726646F;
+            Tail3.xRot = state.stingAngle + 1.22173F;
+            Tail4.xRot = state.stingAngle + 1.570796F;
+            Tail5.xRot = state.stingAngle + 1.919862F;
+            Tail6.xRot = state.stingAngle + 2.268928F;
+            Sting1.xRot = state.stingAngle + 2.617994F;
+            Sting2.xRot = state.stingAngle + 1.570796F;
+            ClawR1.zRot = 0.2943951F;
+            ClawR2.xRot = -0F;
+            ClawR2.zRot = 0.2943951F;
+            ClawR3.zRot = 0.2943951F;
+            ClawR4.zRot = 0.2943951F;
+            ClawR5Bot.xRot = 0.14719755F;
+            ClawR5Top.xRot = 0.14719755F;
+            ClawL1.zRot = -0.2943951F;
+            ClawL2.zRot = -0.2943951F;
+            ClawL2.xRot = 0F;
+            ClawL3.zRot = -0.2943951F;
+            ClawL4.zRot = -0.2943951F;
+            ClawL5Bot.xRot = -0.14719755F;
+            ClawL5Top.xRot = -0.14719755F;
+        }
+        if (!state.captured) {
+            Tail1.xRot = 0F;
+            Tail2.xRot = 0.8726646F;
+            Tail3.xRot = 1.22173F;
+            Tail4.xRot = 1.570796F;
+            Tail5.xRot = 1.919862F;
+            Tail6.xRot = 2.268928F;
+            Sting1.xRot = 2.617994F;
+            Sting2.xRot = 1.570796F;
+            ClawR1.zRot = 0F + cosxnz1;
+            ClawR2.xRot = 0F - cosxnz1;
+            ClawR2.zRot = 0F;
+            ClawR3.zRot = 0F;
+            ClawR4.zRot = 0F;
+            ClawL5Bot.xRot = 0F + cosxnz2;
+            ClawL5Top.xRot = 0F + cosxnz2;
+            ClawL1.zRot = 0F + cosxnz1;
+            ClawL2.xRot = 0F - cosxnz1;
+            ClawL2.zRot = 0F;
+            ClawL3.zRot = 0F;
+            ClawL4.zRot = 0F;
+            ClawL5Bot.xRot = 0F + cosxnz2;
+            ClawL5Top.xRot = 0F + cosxnz2;
+        }
+        RMand.yRot = -Mth.cos(state.walkAnimationPos * 0.5F) * 0.2F * state.walkAnimationSpeed + 1.570796F;
+        LMand.yRot = -Mth.cos(state.walkAnimationPos * 0.5F + (float) Math.PI) * 0.2F * state.walkAnimationSpeed + 1.570796F;
     }
 }

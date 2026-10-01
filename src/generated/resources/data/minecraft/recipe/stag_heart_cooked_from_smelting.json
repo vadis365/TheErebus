@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredient": "erebus:stag_heart_raw",
+  "result": {
+    "id": "erebus:stag_heart_cooked"
+  }
+}

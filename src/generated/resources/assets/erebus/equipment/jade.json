@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "erebus:jade"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "erebus:jade"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "erebus:jade"
+      }
+    ]
+  }
+}

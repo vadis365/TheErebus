@@ -20,48 +20,33 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 
 public class HoneyCombBlock extends Block implements EntityBlock {
-	
-	public static final MapCodec<HoneyCombBlock> CODEC = simpleCodec(HoneyCombBlock::new);
 
-	public HoneyCombBlock(Properties properties) {
-		super(properties);
-	}
-	
-	@Override
-	protected @NotNull MapCodec<HoneyCombBlock> codec() {
-		return CODEC;
-	}
+    public static final MapCodec<HoneyCombBlock> CODEC = simpleCodec(HoneyCombBlock::new);
+
+    public HoneyCombBlock(Properties properties) {
+        super(properties);
+    }
 
     @Override
-	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-		return new HoneyCombBlockEntity(pos, state);
-	}
-
-	@Nonnull
-	@Override
-	public RenderShape getRenderShape(@Nonnull BlockState state) {
-		return RenderShape.MODEL;
-	}
+    protected @NotNull MapCodec<HoneyCombBlock> codec() {
+        return CODEC;
+    }
 
     @Override
-	public @NotNull InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
-    	BlockEntity blockEntity = level.getBlockEntity(pos);
-    	if (level.isClientSide()) {
-			return InteractionResult.SUCCESS;
-    	} else if (blockEntity instanceof HoneyCombBlockEntity honeycomb) {
-			if (!stack.isEmpty() && stack.is(blockEntity.getBlockState().getBlock().asItem()) || !stack.isEmpty() && stack.getItem() == ModItems.BEE_TAMING_AMULET.get())
-				return InteractionResult.FAIL;
-			player.openMenu(honeycomb, pos);
-		}
-    	return InteractionResult.SUCCESS;
-	}
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        return new HoneyCombBlockEntity(pos, state);
+    }
 
-	/*@Override
-	public void onRemove(@NotNull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
-		HoneyCombBlockEntity tile = (HoneyCombBlockEntity) level.getBlockEntity(pos);
-		if (tile != null)
-			Containers.dropContents(level, pos, tile);
-		level.levelEvent(2001, pos, Block.getId(state));
-		super.onRemove(state, level, pos, newState, isMoving);
-	}*/
+    @Nonnull
+    @Override
+    public RenderShape getRenderShape(@Nonnull BlockState state) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
+    public @NotNull InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+        if (stack.is(asItem()) || stack.is(ModItems.BEE_TAMING_AMULET)) return InteractionResult.PASS;
+        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof HoneyCombBlockEntity honeycomb) player.openMenu(honeycomb);
+        return InteractionResult.SUCCESS;
+    }
 }

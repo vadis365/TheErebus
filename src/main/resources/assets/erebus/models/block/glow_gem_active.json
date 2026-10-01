@@ -1,5 +1,5 @@
 {
-    "parent": "minecraft:block/cube_all",
+    "parent": "minecraft:block/block",
     "textures": {
         "0": "erebus:block/glow_gem_active",
         "particle": "erebus:block/glow_gem_active"

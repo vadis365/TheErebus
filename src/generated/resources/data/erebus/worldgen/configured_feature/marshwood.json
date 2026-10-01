@@ -21,12 +21,7 @@
         }
       ]
     },
-    "decorators": [
-      {
-        "type": "erebus:leave_dark_fruit_vine_decorator",
-        "probability": 0.125
-      }
-    ],
+    "decorators": [],
     "foliage_placer": {
       "type": "erebus:marshwood_foliage_placer",
       "offset": 2,

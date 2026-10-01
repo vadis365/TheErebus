@@ -10,29 +10,18 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 
 public class BambooBridgeModel extends Model<BambooBridgeBlockEntityRenderState> {
 
+    private final ModelPart[] rightRail;
+    private final ModelPart[] leftRail;
+
     public BambooBridgeModel(ModelPart root) {
-		super(root, RenderTypes::entityCutout);
-        root.getChild("BambooStep1");
-        root.getChild("BambooStep3");
-        root.getChild("BambooStep2");
-        root.getChild("BambooStep4");
-        root.getChild("SupportR1");
-        root.getChild("SupportR2");
-        root.getChild("SupportL1");
-        root.getChild("SupportL2");
-        root.getChild("String1");
-        root.getChild("String2");
-        root.getChild("String3");
-        root.getChild("String4");
-        root.getChild("StringR1");
-        root.getChild("StringR2");
-        root.getChild("StringL1");
-        root.getChild("StringL2");
+        super(root, RenderTypes::entityCutout);
+        rightRail = new ModelPart[]{root.getChild("SupportR1"), root.getChild("SupportR2"), root.getChild("StringR1"), root.getChild("StringR2"), root.getChild("String4")};
+        leftRail = new ModelPart[]{root.getChild("SupportL1"), root.getChild("SupportL2"), root.getChild("StringL1"), root.getChild("StringL2"), root.getChild("String3")};
     }
 
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
 
         partdefinition.addOrReplaceChild("BambooStep1", CubeListBuilder.create().texOffs(1, 1).addBox(0.0F, 0.0F, 0.0F, 14.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-7.0F, 22.0F, -4.5F, -1.5708F, 0.0F, 0.0F));
 
@@ -67,5 +56,12 @@ public class BambooBridgeModel extends Model<BambooBridgeBlockEntityRenderState>
         partdefinition.addOrReplaceChild("StringL2", CubeListBuilder.create().texOffs(0, 6).addBox(0.0F, 0.2F, 0.0F, 1.0F, 12.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(6.6F, 11.0F, 1.5F, 0.0F, 0.0F, 0.1222F));
 
         return LayerDefinition.create(meshdefinition, 64, 32);
-	}
+    }
+
+    @Override
+    public void setupAnim(BambooBridgeBlockEntityRenderState state) {
+        super.setupAnim(state);
+        for (ModelPart part : rightRail) part.visible = state.renderSide1;
+        for (ModelPart part : leftRail) part.visible = state.renderSide2;
+    }
 }

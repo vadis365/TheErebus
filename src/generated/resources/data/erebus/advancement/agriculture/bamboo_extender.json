@@ -1,0 +1,32 @@
+{
+  "parent": "erebus:agriculture/bamboo",
+  "criteria": {
+    "craft_extender": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:bamboo_extender"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/bamboo_extender.desc"
+    },
+    "icon": {
+      "id": "erebus:bamboo_extender"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/bamboo_extender.title"
+    }
+  },
+  "requirements": [
+    [
+      "craft_extender"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

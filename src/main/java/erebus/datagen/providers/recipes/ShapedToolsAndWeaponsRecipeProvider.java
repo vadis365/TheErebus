@@ -1,6 +1,7 @@
 package erebus.datagen.providers.recipes;
 
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.tags.ModItemTags;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -23,6 +24,34 @@ public class ShapedToolsAndWeaponsRecipeProvider extends ErebusRecipeProvider {
     public void buildRecipes() {
         addJadeToolRecipes();
         addSpecialToolRecipes();
+        addArrowRecipes();
+    }
+
+    private void addArrowRecipes() {
+        shaped(COMBAT, Items.ARROW, 4)
+                .pattern("T").pattern("S").pattern("F")
+                .define('T', ModItems.SHARD_BONE)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .define('F', Items.FEATHER)
+                .unlockedBy("has_bone_shard", has(ModItems.SHARD_BONE))
+                .save(output, "erebus:arrows_from_bone_shard");
+
+        shaped(COMBAT, Items.ARROW, 4)
+                .pattern("T").pattern("S").pattern("F")
+                .define('T', ModItems.SHARD_BONE)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .define('F', ModItems.FLY_WING)
+                .unlockedBy("has_bone_shard", has(ModItems.SHARD_BONE))
+                .unlockedBy("has_fly_wing", has(ModItems.FLY_WING))
+                .save(output, "erebus:arrows_from_bone_shard_and_fly_wing");
+
+        shaped(COMBAT, Items.ARROW, 4)
+                .pattern("T").pattern("S").pattern("F")
+                .define('T', Items.FLINT)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .define('F', ModItems.FLY_WING)
+                .unlockedBy("has_fly_wing", has(ModItems.FLY_WING))
+                .save(output, "erebus:arrows_from_fly_wing");
     }
 
     private void addJadeToolRecipes() {
@@ -30,45 +59,45 @@ public class ShapedToolsAndWeaponsRecipeProvider extends ErebusRecipeProvider {
                 .pattern("JJJ")
                 .pattern(" S ")
                 .pattern(" S ")
-                .define('J', ModItems.JADE)
+                .define('J', ModItemTags.GEMS_JADE)
                 .define('S', Tags.Items.RODS_WOODEN)
-                .unlockedBy("has_jade", has(ModItems.JADE))
+                .unlockedBy("has_jade", has(ModItemTags.GEMS_JADE))
                 .save(output);
 
         shaped(TOOLS, ModItems.JADE_SHOVEL)
                 .pattern(" J ")
                 .pattern(" S ")
                 .pattern(" S ")
-                .define('J', ModItems.JADE)
+                .define('J', ModItemTags.GEMS_JADE)
                 .define('S', Tags.Items.RODS_WOODEN)
-                .unlockedBy("has_jade", has(ModItems.JADE))
+                .unlockedBy("has_jade", has(ModItemTags.GEMS_JADE))
                 .save(output);
 
         shaped(TOOLS, ModItems.JADE_AXE)
                 .pattern("JJ ")
                 .pattern("JS ")
                 .pattern(" S ")
-                .define('J', ModItems.JADE)
+                .define('J', ModItemTags.GEMS_JADE)
                 .define('S', Tags.Items.RODS_WOODEN)
-                .unlockedBy("has_jade", has(ModItems.JADE))
+                .unlockedBy("has_jade", has(ModItemTags.GEMS_JADE))
                 .save(output);
 
         shaped(TOOLS, ModItems.JADE_HOE)
                 .pattern("JJ ")
                 .pattern(" S ")
                 .pattern(" S ")
-                .define('J', ModItems.JADE)
+                .define('J', ModItemTags.GEMS_JADE)
                 .define('S', Tags.Items.RODS_WOODEN)
-                .unlockedBy("has_jade", has(ModItems.JADE))
+                .unlockedBy("has_jade", has(ModItemTags.GEMS_JADE))
                 .save(output);
 
         shaped(TOOLS, ModItems.JADE_SWORD)
                 .pattern(" J ")
                 .pattern(" J ")
                 .pattern(" S ")
-                .define('J', ModItems.JADE)
+                .define('J', ModItemTags.GEMS_JADE)
                 .define('S', Tags.Items.RODS_WOODEN)
-                .unlockedBy("has_jade", has(ModItems.JADE))
+                .unlockedBy("has_jade", has(ModItemTags.GEMS_JADE))
                 .save(output);
 
         shaped(TOOLS, ModItems.JADE_PAXEL)
@@ -88,7 +117,7 @@ public class ShapedToolsAndWeaponsRecipeProvider extends ErebusRecipeProvider {
                 .pattern("I I")
                 .pattern("EIE")
                 .pattern("EPE")
-                .define('I', Items.IRON_INGOT)
+                .define('I', Tags.Items.INGOTS_IRON)
                 .define('E', ModItems.REINFORCED_PLATE_EXO)
                 .define('P', ModItems.SCORPION_PINCER)
                 .unlockedBy("has_scorpion_pincer", has(ModItems.SCORPION_PINCER))
@@ -109,7 +138,7 @@ public class ShapedToolsAndWeaponsRecipeProvider extends ErebusRecipeProvider {
                 .pattern("GNG")
                 .pattern("NCN")
                 .pattern("GNG")
-                .define('G', Items.GOLD_INGOT)
+                .define('G', Tags.Items.INGOTS_GOLD)
                 .define('N', ModItems.NECTAR)
                 .define('C', Items.COMPASS)
                 .unlockedBy("has_nectar", has(ModItems.NECTAR))
@@ -130,7 +159,7 @@ public class ShapedToolsAndWeaponsRecipeProvider extends ErebusRecipeProvider {
                 .pattern("IVV")
                 .define('V', Blocks.VINE)
                 .define('S', Tags.Items.RODS_WOODEN)
-                .define('I', Items.GOLD_INGOT)
+                .define('I', Tags.Items.INGOTS_GOLD)
                 .define('G', ModItems.GAEAN_GEM)
                 .unlockedBy("has_gaean_gem", has(ModItems.GAEAN_GEM))
                 .save(output);
@@ -140,9 +169,16 @@ public class ShapedToolsAndWeaponsRecipeProvider extends ErebusRecipeProvider {
                 .pattern("GOG")
                 .pattern("PGP")
                 .define('P', ModItems.ANT_PHEROMONES)
-                .define('G', Items.GOLD_INGOT)
+                .define('G', Tags.Items.INGOTS_GOLD)
                 .define('O', Blocks.OBSIDIAN)
                 .unlockedBy("has_ant_pheremones", has(ModItems.ANT_PHEROMONES))
+                .save(output);
+
+        shaped(TOOLS, ModItems.BEE_TAMING_AMULET)
+                .pattern(" N ").pattern("NJN").pattern(" N ")
+                .define('N', ModItems.NECTAR)
+                .define('J', ModItemTags.GEMS_JADE)
+                .unlockedBy("has_nectar", has(ModItems.NECTAR))
                 .save(output);
 
         shaped(MISC, ModItems.WHETSTONE)

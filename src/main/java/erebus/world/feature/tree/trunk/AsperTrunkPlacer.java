@@ -6,17 +6,20 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import erebus.registries.world.tree.ModTrunkPlacers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
-import org.apache.commons.compress.utils.Lists;
 import org.jspecify.annotations.NonNull;
 
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.function.BiConsumer;
 
@@ -29,21 +32,15 @@ public class AsperTrunkPlacer extends TrunkPlacer {
                     Codec.intRange(0, 24).fieldOf("height_rand_b").forGetter(placer -> placer.heightRandB)
             ).apply(instance, AsperTrunkPlacer::new)
     );
-    protected final int baseHeight;
-    protected final int heightRandA;
-
-    private final Direction[] directions = new Direction[4];
-    protected final int heightRandB;
+    private static final Direction[] DIRECTIONS = {Direction.WEST, Direction.EAST, Direction.NORTH, Direction.SOUTH};
 
     public AsperTrunkPlacer(int baseHeight, int heightRandA, int heightRandB) {
         super(baseHeight, heightRandA, heightRandB);
-        this.baseHeight = baseHeight;
-        this.heightRandA = heightRandA;
-        this.heightRandB = heightRandB;
-        directions[0] = Direction.fromAxisAndDirection(Direction.Axis.X, Direction.AxisDirection.NEGATIVE);
-        directions[1] = Direction.fromAxisAndDirection(Direction.Axis.X, Direction.AxisDirection.POSITIVE);
-        directions[2] = Direction.fromAxisAndDirection(Direction.Axis.Z, Direction.AxisDirection.NEGATIVE);
-        directions[3] = Direction.fromAxisAndDirection(Direction.Axis.Z, Direction.AxisDirection.POSITIVE);
+    }
+
+    @Override
+    public int getTreeHeight(RandomSource random) {
+        return baseHeight + random.nextInt(heightRandA + 1) + (heightRandB == 0 ? 0 : random.nextInt(heightRandB + 1));
     }
 
     @Override
@@ -53,29 +50,56 @@ public class AsperTrunkPlacer extends TrunkPlacer {
 
     @Override
     public @NonNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NonNull WorldGenLevel level, @NonNull BiConsumer<BlockPos, BlockState> trunkSetter, RandomSource random, int treeHeight, @NonNull BlockPos origin, @NonNull TreeConfiguration config) {
-        List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
-        int height = random.nextInt(heightRandA) + baseHeight;
-
-        for (int y = 0; y < height; y++) {
-            placeLog(level, trunkSetter, random, origin.above(y), config);
-
-            if (random.nextBoolean()) {
-                for (int extraWood = 0, extraWoodAttempt = 0; extraWoodAttempt < 5 && extraWood < 3; ++extraWoodAttempt) {
-                    int dir = random.nextInt(4);
-
-                    if (random.nextInt(4) != 3) {
-                        if (placeLog(level, trunkSetter, random, origin.above(y).relative(directions[dir], 1), config, state -> state.setValue(BlockStateProperties.AXIS, directions[dir].getAxis()))) {
-                            list.add(new FoliagePlacer.FoliageAttachment(origin.above(y).relative(directions[dir], 1), 0, false));
-                        }
-
-                    }
-                    extraWood++;
+        if (treeHeight < 1 || level.isOutsideBuildHeight(origin.below())) return List.of();
+        var soil = level.getBlockState(origin.below());
+        if (soil != Blocks.DIRT.defaultBlockState()
+                && soil != Blocks.GRASS_BLOCK.defaultBlockState()) return List.of();
+        // Preserve the broad legacy clearance; protect every base target as well.
+        for (int y = 1; y <= treeHeight + 1; y++)
+            for (int x = -2; x <= 2; x++)
+                for (int z = -2; z <= 2; z++) {
+                    var pos = origin.offset(x, y, z);
+                    if (level.isOutsideBuildHeight(pos) || !level.getBlockState(pos).isAir()) return List.of();
                 }
+        var logs = new LinkedHashMap<BlockPos, BlockState>();
+        var leaves = new LinkedHashSet<BlockPos>();
+        for (int y = 0; y < treeHeight; y++) {
+            var center = origin.above(y);
+            logs.put(center, config.trunkProvider.getState(level, random, center));
+            if (y == treeHeight - 1) continue;
+            for (int count = 0, attempt = 0; attempt < 5 && count < 3; attempt++) {
+                var direction = DIRECTIONS[random.nextInt(4)];
+                var branch = center.relative(direction);
+                // Read the planned trunk as the reference reads its earlier writes.
+                if (y > 0 && (logs.containsKey(branch.below()) || !level.getBlockState(branch.below()).isAir())) continue;
+                logs.put(branch, config.trunkProvider.getState(level, random, branch).setValue(BlockStateProperties.AXIS, direction.getAxis()));
+                if (y > 0 && random.nextBoolean()) leaves.add(center.relative(direction, 2));
+                count++;
             }
         }
+        double centerY = 2D + (treeHeight - 2D) * 0.5D;
+        for (int y = 1; y < treeHeight; y++)
+            for (int x = -1; x <= 1; x++)
+                for (int z = -1; z <= 1; z++) {
+                    if (x == 0 && z == 0) continue;
+                    double distance = Math.sqrt(x * x + Math.pow(centerY - y, 2) + z * z);
+                    var pos = origin.offset(x, y, z);
+                    if ((distance <= 1.5D || random.nextDouble() > distance - 1.5D) && !logs.containsKey(pos)) leaves.add(pos);
+                }
+        for (var direction : DIRECTIONS) leaves.add(origin.above(treeHeight).relative(direction));
+        leaves.add(origin.above(treeHeight));
+        for (var pos : logs.keySet()) {
+            if (level.isOutsideBuildHeight(pos)) return List.of();
+            var state = level.getBlockState(pos);
+            if (!state.isAir() && !(pos.equals(origin) && state.is(BlockTags.SAPLINGS))) return List.of();
+        }
+        // Leaves are contained in the already checked air volume.
+        logs.forEach(trunkSetter);
+        return leaves.stream().map(pos -> new FoliagePlacer.FoliageAttachment(pos, 0, false)).toList();
+    }
 
-        list.add(new FoliagePlacer.FoliageAttachment(origin.above(height), 0, false));
-
-        return list;
+    @Override
+    public boolean isFree(WorldGenLevel level, BlockPos pos) {
+        return validTreePos(level, pos);
     }
 }

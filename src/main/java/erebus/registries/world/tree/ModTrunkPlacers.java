@@ -21,6 +21,8 @@ public class ModTrunkPlacers {
     public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<EucalyptusTrunkPlacer>> EUCALYPTUS_TRUNK_PLACER = register("eucalyptus_trunk_placer", EucalyptusTrunkPlacer.CODEC);
     public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<MarshwoodTrunkPlacer>> MARSHWOOD_TRUNK_PLACER = register("marshwood_trunk_placer", MarshwoodTrunkPlacer.CODEC);
     public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<MossbarkTrunkPlacer>> MOSSBARK_TRUNK_PLACER = register("mossbark_trunk_placer", MossbarkTrunkPlacer.CODEC);
+    public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<TallJungleTrunkPlacer>> TALL_JUNGLE_TRUNK_PLACER = register("tall_jungle_trunk_placer", TallJungleTrunkPlacer.CODEC);
+    public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<GiantMahoganyTrunkPlacer>> GIANT_MAHOGANY_TRUNK_PLACER = register("giant_mahogany_trunk_placer", GiantMahoganyTrunkPlacer.CODEC);
 
     private static <P extends TrunkPlacer> DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<P>> register(String name, MapCodec<P> codec) {
         return TRUNK_PLACERS.register(name, () -> new TrunkPlacerType<>(codec));

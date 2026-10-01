@@ -28,69 +28,71 @@ import java.util.List;
 
 public class RepairAltarRenderer implements BlockEntityRenderer<RepairAltarBlockEntity, RepairAltarBlockEntityRenderState> {
 
-	private final SpriteMapper MAPPER = new SpriteMapper(TextureAtlas.LOCATION_BLOCKS, "altar_repair");
-	private final SpriteId STEP1 = MAPPER.apply(Erebus.prefix("1"));
-	private final SpriteId STEP2 = MAPPER.apply(Erebus.prefix("2"));
-	private final SpriteId STEP3 = MAPPER.apply(Erebus.prefix("3"));
-	private final SpriteId STEP4 = MAPPER.apply(Erebus.prefix("4"));
-	private final SpriteId STEP5 = MAPPER.apply(Erebus.prefix("5"));
+    private final SpriteMapper MAPPER = new SpriteMapper(TextureAtlas.LOCATION_BLOCKS, "altar_repair");
+    private final SpriteId STEP1 = MAPPER.apply(Erebus.prefix("1"));
+    private final SpriteId STEP2 = MAPPER.apply(Erebus.prefix("2"));
+    private final SpriteId STEP3 = MAPPER.apply(Erebus.prefix("3"));
+    private final SpriteId STEP4 = MAPPER.apply(Erebus.prefix("4"));
+    private final SpriteId STEP5 = MAPPER.apply(Erebus.prefix("5"));
 
-	private final List<SpriteId> steps = List.of(STEP1, STEP2, STEP3, STEP4, STEP5);
+    private final List<SpriteId> steps = List.of(STEP1, STEP2, STEP3, STEP4, STEP5);
 
-	private final RepairAltarBaseModel base;
-	private final RepairAltarMidModel middle;
-	private final RepairAltarAnvilModel anvil;
-	private final SpriteGetter sprites;
-	
-	public RepairAltarRenderer(Context context) {
-		base = new RepairAltarBaseModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_REPAIR_BASE));
-		middle = new RepairAltarMidModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_REPAIR_MID));
-		anvil = new RepairAltarAnvilModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_REPAIR_ANVIL));
-		sprites = context.sprites();
-	}
+    private final RepairAltarBaseModel base;
+    private final RepairAltarMidModel middle;
+    private final RepairAltarAnvilModel anvil;
+    private final SpriteGetter sprites;
 
-	@Override
-	public RepairAltarBlockEntityRenderState createRenderState() {
-		return new RepairAltarBlockEntityRenderState();
-	}
+    public RepairAltarRenderer(Context context) {
+        base = new RepairAltarBaseModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_REPAIR_BASE));
+        middle = new RepairAltarMidModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_REPAIR_MID));
+        anvil = new RepairAltarAnvilModel(context.bakeLayer(ModBlockEntityRendering.ALTAR_REPAIR_ANVIL));
+        sprites = context.sprites();
+    }
 
-	@Override
-	public void extractRenderState(RepairAltarBlockEntity blockEntity, RepairAltarBlockEntityRenderState state, float partialTicks, @NonNull Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
-		BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
-		state.animationTicks = blockEntity.animationTicks;
-	}
+    @Override
+    public RepairAltarBlockEntityRenderState createRenderState() {
+        return new RepairAltarBlockEntityRenderState();
+    }
 
-	@Override
-	public void submit(RepairAltarBlockEntityRenderState state, PoseStack pose, @NonNull SubmitNodeCollector submit, @NonNull CameraRenderState camera) {
-		SpriteId sprite = steps.get(state.getStep());
+    @Override
+    public void extractRenderState(RepairAltarBlockEntity blockEntity, RepairAltarBlockEntityRenderState state, float partialTicks, @NonNull Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+        BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+        state.animationTicks = blockEntity.animationTicks;
+        state.facingRotation = blockEntity.getBlockState().getValue(erebus.block.altars.AltarAbstract.FACING).toYRot();
+    }
 
-		pose.pushPose();
-		pose.translate(0.5D, 0.75D, 0.5D);
-		pose.scale(-0.5F, -0.5F, 0.5F);
-		submitAnvil(state, pose, submit, sprite);
-		submitMiddle(state, pose, submit, sprite);
-		submitBase(state, pose, submit, sprite);
-		pose.popPose();
-	}
+    @Override
+    public void submit(RepairAltarBlockEntityRenderState state, PoseStack pose, @NonNull SubmitNodeCollector submit, @NonNull CameraRenderState camera) {
+        SpriteId sprite = steps.get(state.getStep());
 
-	private void submitAnvil(RepairAltarBlockEntityRenderState state, PoseStack pose, SubmitNodeCollector submit, SpriteId sprite) {
-		pose.pushPose();
-		pose.scale(0.04F * state.animationTicks, 0.04F * state.animationTicks, 0.04F * state.animationTicks);
-		submit.submitModel(anvil, state, pose, sprite.renderType(RenderTypes::entityCutout), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, sprites.get(sprite), 0, state.breakProgress);
-		pose.popPose();
-	}
+        pose.pushPose();
+        pose.translate(0.5D, 0.75D, 0.5D);
+        pose.scale(0.5F, -0.5F, -0.5F);
+        pose.mulPose(Axis.YP.rotationDegrees(state.facingRotation));
+        submitAnvil(state, pose, submit, sprite);
+        submitMiddle(state, pose, submit, sprite);
+        submitBase(state, pose, submit, sprite);
+        pose.popPose();
+    }
 
-	private void submitMiddle(RepairAltarBlockEntityRenderState state, PoseStack pose, SubmitNodeCollector submit, SpriteId sprite) {
-		pose.pushPose();
-		pose.rotateAround(Axis.YP.rotation(-state.animationTicks * 7.2F), 0, 1, 0);
-		submit.submitModel(middle, state, pose, sprite.renderType(RenderTypes::entityCutout), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, sprites.get(sprite), 0, state.breakProgress);
-		pose.popPose();
-	}
+    private void submitAnvil(RepairAltarBlockEntityRenderState state, PoseStack pose, SubmitNodeCollector submit, SpriteId sprite) {
+        pose.pushPose();
+        pose.scale(0.04F * state.animationTicks, 0.04F * state.animationTicks, 0.04F * state.animationTicks);
+        submit.submitModel(anvil, state, pose, sprite.renderType(RenderTypes::entityCutout), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, sprites.get(sprite), 0, state.breakProgress);
+        pose.popPose();
+    }
 
-	private void submitBase(RepairAltarBlockEntityRenderState state, PoseStack pose, SubmitNodeCollector submit, SpriteId sprite) {
-		pose.pushPose();
-		pose.rotateAround(Axis.YP.rotation(state.animationTicks * 7.2F), 0, 1, 0);
-		submit.submitModel(base, state, pose, sprite.renderType(RenderTypes::entityCutout), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, sprites.get(sprite), 0, state.breakProgress);
-		pose.popPose();
-	}
+    private void submitMiddle(RepairAltarBlockEntityRenderState state, PoseStack pose, SubmitNodeCollector submit, SpriteId sprite) {
+        pose.pushPose();
+        pose.rotateAround(Axis.YP.rotationDegrees(-state.animationTicks * 7.2F), 0, 1, 0);
+        submit.submitModel(middle, state, pose, sprite.renderType(RenderTypes::entityCutout), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, sprites.get(sprite), 0, state.breakProgress);
+        pose.popPose();
+    }
+
+    private void submitBase(RepairAltarBlockEntityRenderState state, PoseStack pose, SubmitNodeCollector submit, SpriteId sprite) {
+        pose.pushPose();
+        pose.rotateAround(Axis.YP.rotationDegrees(state.animationTicks * 7.2F), 0, 1, 0);
+        submit.submitModel(base, state, pose, sprite.renderType(RenderTypes::entityCutout), state.lightCoords, OverlayTexture.NO_OVERLAY, -1, sprites.get(sprite), 0, state.breakProgress);
+        pose.popPose();
+    }
 }

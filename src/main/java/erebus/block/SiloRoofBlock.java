@@ -18,36 +18,36 @@ import org.jspecify.annotations.NonNull;
 
 public class SiloRoofBlock extends Block {
 
-	public static final MapCodec<SiloRoofBlock> CODEC = simpleCodec(SiloRoofBlock::new);
-	protected static final VoxelShape SILO_ROOF_AABB = Block.box(0D, 0D, 0D, 16D, 12D, 16D);
+    public static final MapCodec<SiloRoofBlock> CODEC = simpleCodec(SiloRoofBlock::new);
+    protected static final VoxelShape SILO_ROOF_AABB = Block.box(0D, 0D, 0D, 16D, 12D, 16D);
 
-	public SiloRoofBlock(Properties properties) {
-		super(properties);
-	}
+    public SiloRoofBlock(Properties properties) {
+        super(properties);
+    }
 
-	@Override
-	protected @NonNull MapCodec<SiloRoofBlock> codec() {
-		return CODEC;
-	}
+    @Override
+    protected @NonNull MapCodec<SiloRoofBlock> codec() {
+        return CODEC;
+    }
 
     @Override
     protected boolean canSurvive(@NonNull BlockState state, LevelReader level, BlockPos pos) {
-		return level.getBlockState(pos.below()).is(ModBlocks.SILO_TANK.get());
-	}
+        return level.getBlockState(pos.below()).is(ModBlocks.SILO_TANK.get());
+    }
 
-	@Override
-	protected @NonNull BlockState updateShape(@NonNull BlockState state, @NonNull LevelReader level, @NonNull ScheduledTickAccess ticks, @NonNull BlockPos pos, @NonNull Direction directionToNeighbour, @NonNull BlockPos neighbourPos, @NonNull BlockState neighbourState, @NonNull RandomSource random) {
-		boolean canSurvive = canSurvive(state, level, pos);
+    @Override
+    protected @NonNull BlockState updateShape(@NonNull BlockState state, @NonNull LevelReader level, @NonNull ScheduledTickAccess ticks, @NonNull BlockPos pos, @NonNull Direction directionToNeighbour, @NonNull BlockPos neighbourPos, @NonNull BlockState neighbourState, @NonNull RandomSource random) {
+        boolean canSurvive = canSurvive(state, level, pos);
         return !canSurvive ? Blocks.AIR.defaultBlockState() : super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
-	}
+    }
 
-	@Override
-	public @NonNull VoxelShape getShape(@NonNull BlockState state, @NonNull BlockGetter worldIn, @NonNull BlockPos pos, @NonNull CollisionContext context) {
-		return SILO_ROOF_AABB;
-	}
+    @Override
+    public @NonNull VoxelShape getShape(@NonNull BlockState state, @NonNull BlockGetter worldIn, @NonNull BlockPos pos, @NonNull CollisionContext context) {
+        return SILO_ROOF_AABB;
+    }
 
-	@Override
-	public @NonNull RenderShape getRenderShape(@NonNull BlockState state) {
-		return RenderShape.MODEL;
-	}
+    @Override
+    public @NonNull RenderShape getRenderShape(@NonNull BlockState state) {
+        return RenderShape.MODEL;
+    }
 }

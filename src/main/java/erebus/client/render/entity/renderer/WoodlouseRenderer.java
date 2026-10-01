@@ -10,24 +10,24 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 
 public class WoodlouseRenderer extends MobRenderer<Woodlouse, WoodlouseRenderState, WoodlouseModel> {
-	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/woodlouse.png");
+    private static final Identifier TEXTURE = Erebus.prefix("textures/entity/woodlouse.png");
 
-	public WoodlouseRenderer(EntityRendererProvider.Context context) {
+    public WoodlouseRenderer(EntityRendererProvider.Context context) {
         super(context, new WoodlouseModel(context.bakeLayer(ModEntityRendering.WOODLOUSE)), 0.3F);
-	}
+    }
 
-	@Override
-	public void extractRenderState(Woodlouse entity, WoodlouseRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-	}
+    @Override
+    public void extractRenderState(Woodlouse entity, WoodlouseRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+    }
 
-	@Override
-	public WoodlouseRenderState createRenderState() {
-		return new WoodlouseRenderState();
-	}
+    @Override
+    public WoodlouseRenderState createRenderState() {
+        return new WoodlouseRenderState();
+    }
 
-	@Override
-	public Identifier getTextureLocation(WoodlouseRenderState state) {
-		return TEXTURE;
-	}
+    @Override
+    public Identifier getTextureLocation(WoodlouseRenderState state) {
+        return TEXTURE;
+    }
 }

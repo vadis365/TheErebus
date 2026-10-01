@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:swamp_tree_population",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

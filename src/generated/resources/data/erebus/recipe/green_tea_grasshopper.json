@@ -12,8 +12,7 @@
     "erebus:grasshopper_leg_raw",
     "erebus:grasshopper_leg_raw",
     "erebus:elastic_fiber",
-    "erebus:fly_wing",
-    "erebus:nectar"
+    "erebus:fly_wing"
   ],
   "result": {
     "id": "erebus:green_tea_grasshopper"

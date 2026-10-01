@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:giant_flower_population",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

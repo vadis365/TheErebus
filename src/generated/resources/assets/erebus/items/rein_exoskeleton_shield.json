@@ -1,9 +1,22 @@
 {
   "model": {
-    "type": "minecraft:special",
-    "base": "erebus:item/rein_exoskeleton_shield",
-    "model": {
-      "type": "erebus:shield_special"
-    }
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:special",
+      "base": "erebus:item/rein_exoskeleton_shield",
+      "model": {
+        "type": "erebus:shield_special",
+        "face_texture": "erebus:textures/item/rein_exoskeleton_shield.png"
+      }
+    },
+    "on_true": {
+      "type": "minecraft:special",
+      "base": "minecraft:item/shield_blocking",
+      "model": {
+        "type": "erebus:shield_special",
+        "face_texture": "erebus:textures/item/rein_exoskeleton_shield.png"
+      }
+    },
+    "property": "minecraft:using_item"
   }
 }

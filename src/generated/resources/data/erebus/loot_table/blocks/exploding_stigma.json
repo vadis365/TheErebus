@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "erebus:exploding_stigma"
+          "name": "minecraft:gunpowder"
         }
       ],
       "rolls": 1.0

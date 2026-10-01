@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:swamp_mud",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

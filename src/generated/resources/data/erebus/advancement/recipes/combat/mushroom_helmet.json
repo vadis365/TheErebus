@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_compound_goggles": {
+    "has_shroom_hide": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:compound_goggles"
+            "items": "erebus:hide_shroom"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_compound_goggles"
+      "has_shroom_hide"
     ]
   ],
   "rewards": {

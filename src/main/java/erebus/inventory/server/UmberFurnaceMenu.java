@@ -1,5 +1,6 @@
 package erebus.inventory.server;
 
+import erebus.block.entity.UmberFurnaceBlockEntity;
 import erebus.inventory.slot.FluidContainerSlot;
 import erebus.inventory.slot.UmberFurnaceFuelSlot;
 import erebus.registries.client.ModMenuTypes;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
@@ -21,10 +23,10 @@ import java.util.List;
 
 public class UmberFurnaceMenu extends RecipeBookMenu {
 
-    public static final int BUCKET_SLOT = 0;
-    public static final int INGREDIENT_SLOT = 1;
-    public static final int FUEL_SLOT = 2;
-    public static final int RESULT_SLOT = 3;
+    public static final int BUCKET_SLOT = 3;
+    public static final int INGREDIENT_SLOT = 0;
+    public static final int FUEL_SLOT = 1;
+    public static final int RESULT_SLOT = 2;
     public static final int SLOT_COUNT = 4;
     public static final int DATA_COUNT = 5;
     public static final int DATA_LIT_TIME = 0;
@@ -36,9 +38,9 @@ public class UmberFurnaceMenu extends RecipeBookMenu {
     private static final int INV_SLOT_END = 31;
     private static final int HOTBAR_SLOT_START = 31;
     private static final int HOTBAR_SLOT_END = 40;
+    protected final Level level;
     private final Container container;
     private final ContainerData data;
-    protected final Level level;
     private final RecipeType<? extends AbstractCookingRecipe> recipeType;
     private final RecipePropertySet acceptedInputs;
     private final RecipeBookType recipeBookType;
@@ -84,7 +86,7 @@ public class UmberFurnaceMenu extends RecipeBookMenu {
     }
 
     public float getLitProgress() {
-        return data.get(DATA_LIT_DURATION) == 0 ? 200 : Mth.clamp((float) data.get(DATA_LIT_TIME) / data.get(DATA_LIT_DURATION), 0.0F, 1.0F);
+        return data.get(DATA_LIT_DURATION) == 0 ? 0 : Mth.clamp((float) data.get(DATA_LIT_TIME) / data.get(DATA_LIT_DURATION), 0.0F, 1.0F);
     }
 
     public boolean isLit() {
@@ -92,7 +94,7 @@ public class UmberFurnaceMenu extends RecipeBookMenu {
     }
 
     public int getTankAmount() {
-        return data.get(DATA_TANK_AMOUNT);
+        return Mth.clamp(data.get(DATA_TANK_AMOUNT) * 65 / UmberFurnaceBlockEntity.TANK_CAPACITY, 0, 65);
     }
 
     @Override
@@ -116,7 +118,7 @@ public class UmberFurnaceMenu extends RecipeBookMenu {
 
     @Override
     public void fillCraftSlotsStackedContents(@NonNull StackedItemContents contents) {
-        if(container instanceof StackedContentsCompatible) {
+        if (container instanceof StackedContentsCompatible) {
             ((StackedContentsCompatible) container).fillStackedContents(contents);
         }
     }
@@ -128,7 +130,28 @@ public class UmberFurnaceMenu extends RecipeBookMenu {
 
     @Override
     public @NonNull ItemStack quickMoveStack(@NonNull Player player, int index) {
-        return null;
+        if (index < 0 || index >= slots.size() || !stillValid(player)) return ItemStack.EMPTY;
+        Slot slot = slots.get(index);
+        if (!slot.hasItem()) return ItemStack.EMPTY;
+        ItemStack stack = slot.getItem();
+        ItemStack original = stack.copy();
+        if (index < SLOT_COUNT) {
+            if (!moveItemStackTo(stack, INV_SLOT_START, HOTBAR_SLOT_END, true)) return ItemStack.EMPTY;
+            if (index == RESULT_SLOT) slot.onQuickCraft(stack, original);
+        } else if (canSmelt(stack)) {
+            if (!moveItemStackTo(stack, INGREDIENT_SLOT, INGREDIENT_SLOT + 1, false)) return ItemStack.EMPTY;
+        } else if (slots.get(BUCKET_SLOT).mayPlace(stack) && !stack.is(Items.BUCKET)) {
+            if (!moveItemStackTo(stack, BUCKET_SLOT, BUCKET_SLOT + 1, false)) return ItemStack.EMPTY;
+        } else if (isFuel(stack)) {
+            if (!moveItemStackTo(stack, FUEL_SLOT, FUEL_SLOT + 1, false)) return ItemStack.EMPTY;
+        } else if (index < INV_SLOT_END) {
+            if (!moveItemStackTo(stack, HOTBAR_SLOT_START, HOTBAR_SLOT_END, false)) return ItemStack.EMPTY;
+        } else if (!moveItemStackTo(stack, INV_SLOT_START, INV_SLOT_END, false)) return ItemStack.EMPTY;
+        if (stack.getCount() == original.getCount()) return ItemStack.EMPTY;
+        if (stack.isEmpty()) slot.set(ItemStack.EMPTY);
+        else slot.setChanged();
+        slot.onTake(player, stack);
+        return original;
     }
 
     @Override

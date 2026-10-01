@@ -2,18 +2,25 @@
   "feature": "erebus:jade_ore_fungal_forest",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 3
+      "type": "erebus:ore_count",
+      "chance": 0.5,
+      "extra_max": 5,
+      "extra_min": 2,
+      "max": 5,
+      "min": 2
+    },
+    {
+      "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:height_range",
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 112
+          "above_bottom": 112
         },
         "min_inclusive": {
-          "absolute": 5
+          "above_bottom": 5
         }
       }
     },

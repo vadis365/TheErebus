@@ -1,0 +1,425 @@
+package erebus.datagen.models;
+
+import erebus.Erebus;
+import erebus.client.render.block.renderer.stack.BambooBridgeSpecialRenderer;
+import erebus.client.render.block.renderer.stack.BambooExtenderSpecialRenderer;
+import erebus.client.render.block.renderer.stack.GlowingJarSpecialRenderer;
+import erebus.client.render.block.renderer.stack.LiquifierSpecialRenderer;
+import erebus.client.render.item.renderer.*;
+import erebus.item.MaxSpeedBowItem;
+import erebus.registries.ModFluids;
+import erebus.registries.blocks.ModBlocks;
+import erebus.registries.item.ModItems;
+import net.minecraft.client.color.item.Constant;
+import net.minecraft.client.color.item.MapColor;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.item.SpecialModelWrapper;
+import net.minecraft.client.renderer.item.properties.numeric.CompassAngle;
+import net.minecraft.client.renderer.item.properties.numeric.CompassAngleState;
+import net.minecraft.client.renderer.item.properties.numeric.UseDuration;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.client.model.item.DynamicFluidContainerModel;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import org.jspecify.annotations.NonNull;
+
+import java.util.List;
+import java.util.Optional;
+
+public class ModItemModels {
+
+    private ItemModelGenerators itemModels;
+
+    public void registerModels(@NonNull ItemModelGenerators itemModels) {
+
+        this.itemModels = itemModels;
+        itemModels.itemModelOutput.accept(ModBlocks.GLOWING_JAR.asItem(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/glowing_jar"), Optional.empty(),
+                        new GlowingJarSpecialRenderer.Unbaked(Erebus.prefix("textures/block/glowing_jar.png"))));
+        itemModels.itemModelOutput.accept(ModBlocks.LIQUIFIER.asItem(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/liquifier"), Optional.empty(),
+                        new LiquifierSpecialRenderer.Unbaked(Erebus.prefix("textures/block/liquifier.png"))));
+        itemModels.itemModelOutput.accept(ModBlocks.BAMBOO_BRIDGE.asItem(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/bamboo_bridge"), Optional.empty(),
+                        new BambooBridgeSpecialRenderer.Unbaked(Erebus.prefix("textures/block/bamboo_bridge.png"))));
+        itemModels.itemModelOutput.accept(ModBlocks.BAMBOO_EXTENDER.asItem(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/bamboo_extender"), Optional.empty(),
+                        new BambooExtenderSpecialRenderer.Unbaked(Erebus.prefix("textures/block/bamboo_extender.png"))));
+        itemModels.itemModelOutput.accept(ModBlocks.UMBER_GOLEM_STATUE.get().asItem(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/umber_golem_statue"), Optional.empty(), new UmberGolemStatueSpecialRenderer.Unbaked()));
+
+        // MARK: Materials
+        normalItem(ModItems.PLATE_EXO);
+        normalItem(ModItems.JADE);
+        normalItem(ModItems.SHARD_BONE);
+        normalItem(ModItems.BAMBOO);
+        normalItem(ModItems.COMPOUND_EYES);
+        normalItem(ModItems.COMPOUND_LENS);
+        normalItem(ModItems.FLY_WING);
+        normalItem(ModItems.PETRIFIED_WOOD);
+        normalItem(ModItems.BIO_VELOCITY);
+        normalItem(ModItems.ELASTIC_FIBER);
+        normalItem(ModItems.WASP_STING);
+        normalItem(ModItems.RED_GEM);
+        normalItem(ModItems.BIO_LUMINESCENCE);
+        normalItem(ModItems.SUPERNATURAL_VELOCITY);
+        normalItem(ModItems.ALTAR_FRAGMENT);
+        normalItem(ModItems.REINFORCED_PLATE_EXO);
+        normalItem(ModItems.GLIDER_WING);
+        normalItem(ModItems.SCORPION_PINCER);
+        itemModels.itemModelOutput.accept(
+                ModItems.ENHANCED_SCORPION_PINCER.get(),
+                new SpecialModelWrapper.Unbaked(
+                        Erebus.prefix("item/enhanced_scorpion_pincer"),
+                        Optional.empty(),
+                        new ScorpionPincerSpecialRenderer.Unbaked()
+                )
+        );
+        normalItem(ModItems.CAMO_POWDER);
+        normalItem(ModItems.NECTAR);
+        itemModels.generateFlatItem(ModItems.HONEY_DRIP.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        normalItem(ModItems.POISON_GLAND);
+        normalItem(ModItems.MUD_BRICK);
+        normalItem(ModItems.WHETSTONE_POWDER);
+        normalItem(ModItems.DRAGONFLY_WING);
+        normalItem(ModItems.BLUEBELL_PETAL);
+        normalItem(ModItems.PAPYRUS);
+        normalItem(ModItems.ENHANCED_GLIDER_WING);
+        normalItem(ModItems.REPELLENT);
+        normalItem(ModItems.MUCUS_CHARGE);
+        normalItem(ModItems.NETTLE_LEAVES);
+        normalItem(ModItems.NETTLE_FLOWERS);
+        normalItem(ModItems.DARK_FRUIT_SEEDS);
+        normalItem(ModItems.MOSS_BALL);
+        normalItem(ModItems.GLOWSHROOM);
+        normalItem(ModItems.PLATE_EXO_RHINO);
+        normalItem(ModItems.RHINO_BEETLE_HORN);
+        normalItem(ModItems.ANT_PHEROMONES);
+        normalItem(ModItems.GAEAN_GEM);
+        normalItem(ModItems.CRIMSON_HEART);
+        normalItem(ModItems.RESIN);
+        normalItem(ModItems.AMBER_STAR);
+        normalItem(ModItems.INGOT_ALUMINUM);
+        normalItem(ModItems.INGOT_LEAD);
+        normalItem(ModItems.INGOT_SILVER);
+        normalItem(ModItems.INGOT_TIN);
+        normalItem(ModItems.GNEISS_ROCK);
+        normalItem(ModItems.HIDE_SHROOM);
+        normalItem(ModItems.BEETLE_RIDING_KIT);
+        normalItem(ModItems.BEETLE_TAMING_AMULET);
+        normalItem(ModItems.UMBERGOLEM_CORE);
+        normalItem(ModItems.UMBERGOLEM_HEAD);
+        normalItem(ModItems.UMBERGOLEM_CLAW);
+        normalItem(ModItems.UMBERGOLEM_LEGS);
+        normalItem(ModItems.BOGMAW_ROOT);
+        normalItem(ModItems.HYDROFUGE);
+        normalItem(ModItems.WATER_REPELLENT);
+        normalItem(ModItems.SMOOTHIE_GLASS);
+        normalItem(ModItems.MAGMA_CRAWLER_EYE);
+        normalItem(ModItems.STEW_POT);
+        normalItem(ModItems.TITAN_STEW);
+        normalItem(ModItems.FORCE_KEY);
+        normalItem(ModItems.SOUL_CRYSTAL);
+        normalItem(ModItems.PLATE_ZOMBIE_ANT);
+        normalItem(ModItems.STAG_BEETLE_MANDIBLES);
+        normalItem(ModItems.TERPSISHROOM);
+        normalItem(ModItems.BAMBOO_PIPE_WRENCH);
+        normalItem(ModItems.TEMPLE_ROCK);
+
+        // MARK: Food
+        normalItem(ModItems.BEETLE_LARVA_RAW);
+        normalItem(ModItems.BEETLE_LARVA_COOKED);
+        normalItem(ModItems.GRASSHOPPER_LEG_RAW);
+        normalItem(ModItems.GRASSHOPPER_LEG_COOKED);
+        normalItem(ModItems.TARANTULA_LEG_RAW);
+        normalItem(ModItems.TARANTULA_LEG_COOKED);
+        normalItem(ModItems.BAMBOO_SOUP);
+        normalItem(ModItems.MELONADE);
+        normalItem(ModItems.MELONADE_SPARKLY);
+        normalItem(ModItems.LARVAE_ON_STICK);
+        normalItem(ModItems.HONEY_SANDWICH);
+        normalItem(ModItems.DARK_FRUIT);
+        normalItem(ModItems.TITAN_CHOP_RAW);
+        normalItem(ModItems.TITAN_CHOP_COOKED);
+        normalItem(ModItems.CABBAGE);
+        normalItem(ModItems.TITAN_STEW_COOKED);
+        normalItem(ModItems.PRICKLY_PEAR_RAW);
+        normalItem(ModItems.PRICKLY_PEAR_COOKED);
+        normalItem(ModItems.DARK_FRUIT_PIE);
+
+        // MARK: Smoothies
+        normalItem(ModItems.GREEN_TEA_GRASSHOPPER);
+        normalItem(ModItems.MONEY_HONEY);
+        normalItem(ModItems.NOTHING_IN_THE_MIDDLE);
+        normalItem(ModItems.GREEN_GIANT);
+        normalItem(ModItems.SEEDY_GOODNESS);
+        normalItem(ModItems.GIVIN_ME_THE_BLUES);
+        normalItem(ModItems.HOT_HOT_BABY);
+        normalItem(ModItems.DONT_MEDDLE_WITH_THE_NETTLE);
+        normalItem(ModItems.LIQUID_GOLD);
+        normalItem(ModItems.BRYUFS_BREW);
+
+        // MARK: Bamboo Armor
+        normalItem(ModItems.BAMBOO_HELMET);
+        normalItem(ModItems.BAMBOO_CHESTPLATE);
+        normalItem(ModItems.BAMBOO_LEGGINGS);
+        normalItem(ModItems.BAMBOO_BOOTS);
+
+        // MARK: Exoskeleton Armor
+        normalItem(ModItems.EXOSKELETON_HELMET);
+        normalItem(ModItems.EXOSKELETON_CHESTPLATE);
+        normalItem(ModItems.EXOSKELETON_LEGGINGS);
+        normalItem(ModItems.EXOSKELETON_BOOTS);
+
+        // MARK: Reinforced Exoskeleton Armor
+        normalItem(ModItems.REIN_EXOSKELETON_HELMET);
+        normalItem(ModItems.REIN_EXOSKELETON_CHESTPLATE);
+        normalItem(ModItems.REIN_EXOSKELETON_LEGGINGS);
+        normalItem(ModItems.REIN_EXOSKELETON_BOOTS);
+
+        // MARK: Rhino Exoskeleton Armor
+        normalItem(ModItems.RHINO_EXOSKELETON_HELMET);
+        normalItem(ModItems.RHINO_EXOSKELETON_CHESTPLATE);
+        normalItem(ModItems.RHINO_EXOSKELETON_LEGGINGS);
+        normalItem(ModItems.RHINO_EXOSKELETON_BOOTS);
+
+        // MARK: Jade Armor
+        normalItem(ModItems.JADE_HELMET);
+        normalItem(ModItems.JADE_CHESTPLATE);
+        normalItem(ModItems.JADE_LEGGINGS);
+        normalItem(ModItems.JADE_BOOTS);
+
+        // MARK: Jade Tools
+        toolItem(ModItems.JADE_SWORD);
+        toolItem(ModItems.JADE_PICKAXE);
+        toolItem(ModItems.JADE_AXE);
+        toolItem(ModItems.JADE_SHOVEL);
+        toolItem(ModItems.JADE_PAXEL);
+        toolItem(ModItems.JADE_HOE);
+
+        // MARK: Misc Armor & Weapons
+        normalItem(ModItems.REIN_COMPOUND_GOGGLES);
+        normalItem(ModItems.COMPOUND_GOGGLES);
+        normalItem(ModItems.MUSHROOM_HELMET);
+        normalItem(ModItems.GLIDER_CHESTPLATE);
+        normalItem(ModItems.GLIDER_CHESTPLATE_POWERED);
+        normalItem(ModItems.SPIDER_T_SHIRT);
+        normalItem(ModItems.SPRINT_LEGGINGS);
+        normalItem(ModItems.JUMP_BOOTS);
+        normalItem(ModItems.WATER_STRIDERS);
+        generateBow(ModItems.MAX_SPEED_BOW.get());
+
+        itemModels.itemModelOutput.accept(
+                ModItems.QUAKE_HAMMER.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/quake_hammer"), Optional.empty(), new QuakeHammerSpecialRenderer.Unbaked())
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.WEB_SLINGER.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/web_slinger"), Optional.empty(), new WebSlingerSpecialRenderer.Unbaked(false))
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.WEB_SLINGER_WITHER.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/web_slinger_wither"), Optional.empty(), new WebSlingerSpecialRenderer.Unbaked(true))
+        );
+        for (var shield : List.of(ModItems.BAMBOO_SHIELD, ModItems.EXOSKELETON_SHIELD, ModItems.JADE_SHIELD,
+                ModItems.REIN_EXOSKELETON_SHIELD, ModItems.RHINO_EXOSKELETON_SHIELD)) {
+            var renderer = new ErebusShieldSpecialRenderer.Unbaked(Erebus.prefix("textures/item/" + shield.getId().getPath() + ".png"));
+            itemModels.itemModelOutput.accept(shield.get(), ItemModelUtils.conditional(ItemModelUtils.isUsingItem(),
+                    ItemModelUtils.specialModel(Identifier.withDefaultNamespace("item/shield_blocking"), renderer),
+                    ItemModelUtils.specialModel(Erebus.prefix("item/" + shield.getId().getPath()), renderer)));
+        }
+        itemModels.itemModelOutput.accept(
+                ModItems.WAND_OF_ANIMATION.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/wand_of_animation"), Optional.empty(), new WandOfAnimationItemSpecialRenderer.Unbaked())
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.WAND_OF_PRESERVATION.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/wand_of_preservation"), Optional.empty(), new WandOfPreservationSpecialRenderer.Unbaked())
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.WASP_SWORD.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/wasp_sword"), Optional.empty(), new WaspSwordSpecialRenderer.Unbaked())
+        );
+        itemModels.itemModelOutput.accept(
+                ModItems.WASP_DAGGER.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/wasp_dagger"), Optional.empty(), new WaspDaggerSpecialRenderer.Unbaked())
+        );
+
+        // MARK: Misc
+        itemModels.itemModelOutput.accept(
+                ModItems.PORTAL_ACTIVATOR.get(),
+                new SpecialModelWrapper.Unbaked(Erebus.prefix("item/portal_activator"), Optional.empty(), new PortalActivatorSpecialRenderer.Unbaked())
+        );
+        itemModels.itemModelOutput.accept(ModItems.WOODLOUSE_BALL.get(), ItemModelUtils.plainModel(Erebus.prefix("item/woodlouse_ball")));
+        normalItem(ModItems.NECTAR_COLLECTOR);
+        normalItem(ModItems.BAMBOO_SHOOT);
+        normalItem(ModItems.ANT_TAMING_AMULET);
+        normalItem(ModItems.BEE_TAMING_AMULET);
+        normalItem(ModItems.ANTI_VENOM_BOTTLE);
+        itemModels.itemModelOutput.accept(ModItems.DEATH_COMPASS.get(), ItemModelUtils.rangeSelect(
+                new CompassAngle(true, CompassAngleState.CompassTarget.LODESTONE), 32, itemModels.createCompassModels(ModItems.DEATH_COMPASS.get())));
+        normalItem(ModItems.ROLLED_NEWSPAPER);
+        itemModels.itemModelOutput.accept(ModItems.BAMBUCKET.get(), new DynamicFluidContainerModel.Unbaked(
+                new DynamicFluidContainerModel.Textures(
+                        Optional.of(new Material(Erebus.prefix("item/bambucket"))),
+                        Optional.of(new Material(Erebus.prefix("item/bambucket"))),
+                        Optional.of(new Material(Erebus.prefix("item/bambucket_fluid"))),
+                        Optional.of(new Material(Erebus.prefix("item/bambucket_cover")))
+                ),
+                Fluids.EMPTY,
+                true,
+                true,
+                false
+        ));
+        itemModels.itemModelOutput.accept(ModItems.ANTI_VENOM_BAMBUCKET.get(), new DynamicFluidContainerModel.Unbaked(
+                new DynamicFluidContainerModel.Textures(
+                        Optional.of(new Material(Erebus.prefix("item/bambucket"))),
+                        Optional.of(new Material(Erebus.prefix("item/bambucket"))),
+                        Optional.of(new Material(Erebus.prefix("item/bambucket_fluid"))),
+                        Optional.of(new Material(Erebus.prefix("item/bambucket_cover")))
+                ),
+                ModFluids.ANTI_VENOM_STILL.get(),
+                true,
+                true,
+                false
+        ));
+        fluidBucket(ModItems.ANTI_VENOM_BUCKET.get(), ModFluids.ANTI_VENOM_STILL.get());
+        fluidBucket(ModItems.BEETLE_JUICE_BUCKET.get(), ModFluids.BEETLE_JUICE_STILL.get());
+        fluidBucket(ModItems.FORMIC_ACID_BUCKET.get(), ModFluids.FORMIC_ACID_STILL.get());
+        fluidBucket(ModItems.HONEY_BUCKET.get(), ModFluids.HONEY_STILL.get());
+        for (var beecon : List.of(ModItems.HOMING_BEECON.get(), ModItems.HOMING_BEECON_ADVANCED.get()))
+            itemModels.itemModelOutput.accept(beecon, ItemModelUtils.rangeSelect(
+                    new CompassAngle(true, CompassAngleState.CompassTarget.LODESTONE), 32, itemModels.createCompassModels(beecon)));
+        normalItem(ModItems.SPRAY_CAN);
+        normalItem(ModItems.WHETSTONE);
+        normalItem(ModItems.COMPOST);
+        normalItem(ModItems.PLANTICIDE);
+        normalItem(ModItems.SMOOTHIE_BOOK);
+        normalItem(ModItems.HORN_OF_SUMMONING);
+
+        // MARK: Idols
+        normalItem(ModItems.MUD_SCARAB);
+        normalItem(ModItems.IRON_SCARAB);
+        normalItem(ModItems.GOLD_SCARAB);
+        normalItem(ModItems.JADE_SCARAB);
+        normalItem(ModItems.MUD_UMBERGOLEM);
+        normalItem(ModItems.IRON_UMBERGOLEM);
+        normalItem(ModItems.GOLD_UMBERGOLEM);
+        normalItem(ModItems.JADE_UMBERGOLEM);
+
+        // MARK: Maps
+        itemModels.itemModelOutput.accept(ModItems.EREBUS_MAP.get(), ItemModelUtils.plainModel(Identifier.withDefaultNamespace("item/map")));
+        itemModels.itemModelOutput.accept(ModItems.EREBUS_MAP_FILLED.get(), ItemModelUtils.tintedModel(Identifier.withDefaultNamespace("item/filled_map"), new Constant(-1), new MapColor()));
+
+        // MARK: Plants
+        normalItem(ModItems.TURNIP);
+        normalItem(ModItems.CABBAGE_SEEDS);
+        normalItem(ModItems.MANDRAKE_ROOT);
+        normalItem(ModItems.SEED_BLACK);
+        normalItem(ModItems.SEED_RED);
+        normalItem(ModItems.SEED_BROWN);
+        normalItem(ModItems.SEED_BLUE);
+        normalItem(ModItems.SEED_PURPLE);
+        normalItem(ModItems.SEED_CYAN);
+        normalItem(ModItems.SEED_LIGHT_GRAY);
+        normalItem(ModItems.SEED_GRAY);
+        normalItem(ModItems.SEED_PINK);
+        normalItem(ModItems.SEED_YELLOW);
+        normalItem(ModItems.SEED_LIGHT_BLUE);
+        normalItem(ModItems.SEED_MAGENTA);
+        normalItem(ModItems.SEED_ORANGE);
+        normalItem(ModItems.SEED_WHITE);
+        normalItem(ModItems.SEED_RAINBOW);
+
+        normalItem(ModItems.LIFE_BLOOD);
+        normalItem(ModItems.STAG_HEART_RAW);
+        normalItem(ModItems.STAG_HEART_COOKED);
+
+        // MARK: Spawn Eggs
+        normalItem(ModItems.ANTLION_SPAWN_EGG);
+        normalItem(ModItems.ANTLION_BOSS_SPAWN_EGG);
+        normalItem(ModItems.ANTLION_MINI_BOSS_SPAWN_EGG);
+        normalItem(ModItems.BED_BUG_SPAWN_EGG);
+        normalItem(ModItems.BEETLE_LARVA_SPAWN_EGG);
+        normalItem(ModItems.BEETLE_SPAWN_EGG);
+        normalItem(ModItems.BLACK_ANT_SPAWN_EGG);
+        normalItem(ModItems.BLACK_WIDOW_SPAWN_EGG);
+        normalItem(ModItems.BOG_MAW_SPAWN_EGG);
+        normalItem(ModItems.BOMBARDIER_BEETLE_LARVA_SPAWN_EGG);
+        normalItem(ModItems.BOMBARDIER_BEETLE_SPAWN_EGG);
+        normalItem(ModItems.BOT_FLY_LARVA_SPAWN_EGG);
+        normalItem(ModItems.BOT_FLY_SPAWN_EGG);
+        normalItem(ModItems.CENTIPEDE_SPAWN_EGG);
+        normalItem(ModItems.CHAMELEON_TICK_SPAWN_EGG);
+        normalItem(ModItems.CICADA_SPAWN_EGG);
+        normalItem(ModItems.CROP_WEEVIL_SPAWN_EGG);
+        normalItem(ModItems.CRUSHROOM_SPAWN_EGG);
+        normalItem(ModItems.DRAGON_FLY_SPAWN_EGG);
+        normalItem(ModItems.FIRE_ANT_SOLDIER_SPAWN_EGG);
+        normalItem(ModItems.FIRE_ANT_SPAWN_EGG);
+        normalItem(ModItems.FLY_SPAWN_EGG);
+        normalItem(ModItems.FUNGAL_WEEVIL_SPAWN_EGG);
+        normalItem(ModItems.GLOW_WORM_SPAWN_EGG);
+        normalItem(ModItems.GRASSHOPPER_SPAWN_EGG);
+        normalItem(ModItems.HONEY_POT_ANT_SPAWN_EGG);
+        normalItem(ModItems.JUMPING_SPIDER_SPAWN_EGG);
+        normalItem(ModItems.LAVA_WEB_SPIDER_SPAWN_EGG);
+        normalItem(ModItems.LEECH_SPAWN_EGG);
+        normalItem(ModItems.LOCUST_SPAWN_EGG);
+        normalItem(ModItems.MAGMA_CRAWLER_SPAWN_EGG);
+        normalItem(ModItems.MIDGE_SWARM_SPAWN_EGG);
+        normalItem(ModItems.MONEY_SPIDER_SPAWN_EGG);
+        normalItem(ModItems.MOSQUITO_SPAWN_EGG);
+        normalItem(ModItems.MOTH_SPAWN_EGG);
+        normalItem(ModItems.POND_SKATER_SPAWN_EGG);
+        normalItem(ModItems.PRAYING_MANTIS_SPAWN_EGG);
+        normalItem(ModItems.PUNCHROOM_SPAWN_EGG);
+        normalItem(ModItems.RHINO_BEETLE_SPAWN_EGG);
+        normalItem(ModItems.SCORPION_SPAWN_EGG);
+        normalItem(ModItems.SCYTODES_SPAWN_EGG);
+        normalItem(ModItems.SOLIFUGE_SPAWN_EGG);
+        normalItem(ModItems.STAG_BEETLE_SPAWN_EGG);
+        normalItem(ModItems.TARANTULA_BABY_SPAWN_EGG);
+        normalItem(ModItems.TARANTULA_MINI_BOSS_SPAWN_EGG);
+        normalItem(ModItems.TARANTULA_SPAWN_EGG);
+        normalItem(ModItems.TITAN_BEETLE_SPAWN_EGG);
+        normalItem(ModItems.UMBER_GOLEM_SPAWN_EGG);
+        normalItem(ModItems.VELVET_WORM_SPAWN_EGG);
+        normalItem(ModItems.WASP_SPAWN_EGG);
+        normalItem(ModItems.WOODLOUSE_SPAWN_EGG);
+        normalItem(ModItems.WORKER_BEE_SPAWN_EGG);
+        normalItem(ModItems.ZOMBIE_ANT_SOLDIER_SPAWN_EGG);
+        normalItem(ModItems.ZOMBIE_ANT_SPAWN_EGG);
+    }
+
+    private void generateBow(Item item) {
+        ItemModel.Unbaked bowModel = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, ModelTemplates.BOW));
+        ItemModel.Unbaked pulling0 = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_pulling_0", ModelTemplates.BOW));
+        ItemModel.Unbaked pulling1 = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_pulling_1", ModelTemplates.BOW));
+        ItemModel.Unbaked pulling2 = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_pulling_2", ModelTemplates.BOW));
+        itemModels.itemModelOutput.accept(item, ItemModelUtils.conditional(ItemModelUtils.isUsingItem(), ItemModelUtils.rangeSelect(new UseDuration(false), 1 / MaxSpeedBowItem.DRAW_SPEED, pulling0, ItemModelUtils.override(pulling1, 0.65F), ItemModelUtils.override(pulling2, 0.9F)), bowModel));
+    }
+
+    private void normalItem(DeferredHolder<Item, ?> item) {
+        itemModels.generateFlatItem(item.get(), ModelTemplates.FLAT_ITEM);
+    }
+
+    private void toolItem(DeferredHolder<Item, ?> item) {
+        itemModels.generateFlatItem(item.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+    }
+
+    private void fluidBucket(Item item, Fluid fluid) {
+        var bucket = new Material(Identifier.withDefaultNamespace("item/bucket"));
+        itemModels.itemModelOutput.accept(item, new DynamicFluidContainerModel.Unbaked(
+                new DynamicFluidContainerModel.Textures(Optional.of(bucket), Optional.of(bucket),
+                        Optional.of(new Material(Identifier.fromNamespaceAndPath("neoforge", "item/mask/bucket_fluid"))), Optional.empty()),
+                fluid, true, true, true));
+    }
+
+}

@@ -1,11 +1,13 @@
 package erebus.datagen.providers.recipes;
 
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.tags.ModItemTags;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 
 import static net.minecraft.data.recipes.RecipeCategory.COMBAT;
 
@@ -26,13 +28,21 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
         addRhinoExoskeletonArmorRecipes();
         addSpecialArmorRecipes();
         addBambooArmorRecipes();
+        addShieldRecipes();
     }
 
     private void addJadeArmorRecipes() {
-        helmet(ModItems.JADE, ModItems.JADE_HELMET);
-        chestplate(ModItems.JADE, ModItems.JADE_CHESTPLATE);
-        leggings(ModItems.JADE, ModItems.JADE_LEGGINGS);
-        boots(ModItems.JADE, ModItems.JADE_BOOTS);
+        jadeArmor(ModItems.JADE_HELMET, "helmet", "MMM", "M M");
+        jadeArmor(ModItems.JADE_CHESTPLATE, "chestplate", "M M", "MMM", "MMM");
+        jadeArmor(ModItems.JADE_LEGGINGS, "leggings", "MMM", "M M", "M M");
+        jadeArmor(ModItems.JADE_BOOTS, "boots", "M M", "M M");
+    }
+
+    private void jadeArmor(ItemLike result, String kind, String... pattern) {
+        var recipe = shaped(COMBAT, result);
+        for (var row : pattern) recipe.pattern(row);
+        recipe.define('M', ModItemTags.GEMS_JADE).unlockedBy("has_material", has(ModItemTags.GEMS_JADE))
+                .save(output, kind + "_" + result.asItem().getDescriptionId().toLowerCase(java.util.Locale.ROOT));
     }
 
     private void addExoskeletonArmorRecipes() {
@@ -50,14 +60,21 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addRhinoExoskeletonArmorRecipes() {
-        helmet(ModItems.PLATE_EXO_RHINO, ModItems.RHINO_EXOSKELETON_HELMET);
+        shaped(COMBAT, ModItems.RHINO_EXOSKELETON_HELMET)
+                .pattern("H H")
+                .pattern("PPP")
+                .pattern("P P")
+                .define('H', ModItems.RHINO_BEETLE_HORN)
+                .define('P', ModItems.PLATE_EXO_RHINO)
+                .unlockedBy("has_rhino_plate", has(ModItems.PLATE_EXO_RHINO))
+                .save(output, "minecraft:helmet_item.erebus.rhino_exoskeleton_helmet");
         chestplate(ModItems.PLATE_EXO_RHINO, ModItems.RHINO_EXOSKELETON_CHESTPLATE);
         leggings(ModItems.PLATE_EXO_RHINO, ModItems.RHINO_EXOSKELETON_LEGGINGS);
         boots(ModItems.PLATE_EXO_RHINO, ModItems.RHINO_EXOSKELETON_BOOTS);
     }
 
     private void addSpecialArmorRecipes() {
-        surround(ModItems.COMPOUND_EYES, ModBlocks.AMBER, ModItems.COMPOUND_LENS);
+        surround(ModItems.COMPOUND_EYES, ModBlocks.AMBER_GLASS, ModItems.COMPOUND_LENS);
 
         shaped(COMBAT, ModItems.COMPOUND_GOGGLES)
                 .pattern("EEE")
@@ -118,7 +135,7 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
                 .pattern("HPH")
                 .define('H', ModItems.HIDE_SHROOM)
                 .define('P', Blocks.PUMPKIN)
-                .unlockedBy("has_compound_goggles", has(ModItems.COMPOUND_GOGGLES))
+                .unlockedBy("has_shroom_hide", has(ModItems.HIDE_SHROOM))
                 .save(output);
     }
 
@@ -127,14 +144,28 @@ public class ShapedArmorRecipeProvider extends ErebusRecipeProvider {
         chestplate(ModBlocks.PLANKS_BAMBOO, ModItems.BAMBOO_CHESTPLATE);
         leggings(ModBlocks.PLANKS_BAMBOO, ModItems.BAMBOO_LEGGINGS);
         boots(ModBlocks.PLANKS_BAMBOO, ModItems.BAMBOO_BOOTS);
+    }
 
+    private void addShieldRecipes() {
+        shield(ModItems.PLATE_EXO, ModItems.EXOSKELETON_SHIELD);
+        shaped(COMBAT, ModItems.JADE_SHIELD).pattern("XIX").pattern("XXX").pattern(" X ")
+                .define('X', ModItemTags.GEMS_JADE).define('I', Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_material", has(ModItemTags.GEMS_JADE)).save(output);
+        shield(ModItems.REINFORCED_PLATE_EXO, ModItems.REIN_EXOSKELETON_SHIELD);
+        shield(ModItems.PLATE_EXO_RHINO, ModItems.RHINO_EXOSKELETON_SHIELD);
         shaped(COMBAT, ModItems.BAMBOO_SHIELD)
                 .pattern("BIB")
                 .pattern("BBB")
                 .pattern(" B ")
                 .define('B', ModItems.BAMBOO)
-                .define('I', Items.IRON_INGOT)
+                .define('I', Tags.Items.INGOTS_IRON)
                 .unlockedBy("has_bamboo", has(ModItems.BAMBOO))
                 .save(output);
+    }
+
+    private void shield(ItemLike material, ItemLike result) {
+        shaped(COMBAT, result).pattern("XIX").pattern("XXX").pattern(" X ")
+                .define('X', material).define('I', Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_material", has(material)).save(output);
     }
 }

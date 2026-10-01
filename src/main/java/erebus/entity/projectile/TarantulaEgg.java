@@ -5,6 +5,7 @@ import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
@@ -26,9 +27,9 @@ public class TarantulaEgg extends ThrowableProjectile {
     @Override
     protected void updateRotation() {
         super.updateRotation();
-        if(rotationTicks < 360F) {
+        if (rotationTicks < 360F) {
             rotationTicks = rotationTicks + 20F;
-            if(rotationTicks >= 360F) {
+            if (rotationTicks >= 360F) {
                 rotationTicks = 0F;
             }
         }
@@ -36,14 +37,15 @@ public class TarantulaEgg extends ThrowableProjectile {
 
     @Override
     protected void onHit(@NonNull HitResult hitResult) {
-        for(int c = 0; c < 2; c++) {
-            BabyTarantula baby = ModEntities.BABY_TARANTULA.get().create(level(), EntitySpawnReason.EVENT);
+        if (!(level() instanceof ServerLevel server) || isRemoved()) return;
+        for (int c = 0; c < 2; c++) {
+            BabyTarantula baby = ModEntities.BABY_TARANTULA.get().create(server, EntitySpawnReason.EVENT);
+            if (baby == null) continue;
             baby.setPos(new Vec3(getX() + (random.nextFloat() * 0.03D - random.nextFloat() * 0.03D), getY() + 1, getZ() + (random.nextFloat() * 0.03D - random.nextFloat() * 0.03D)));
-            level().addFreshEntity(baby);
+            server.addFreshEntity(baby);
         }
-
-        kill((ServerLevel) level());
-        playSound(ModSounds.BEETLE_LARVA_SPLAT.get());
+        discard();
+        server.playSound(null, blockPosition(), ModSounds.BEETLE_LARVA_SPLAT.get(), SoundSource.HOSTILE, 1, 1);
     }
 
     @Override

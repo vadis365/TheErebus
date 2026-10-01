@@ -1,5 +1,6 @@
 {
   "textures": {
+        "particle": "#0",
     "0": "erebus:block/woodlouse_ball"
   },
   "elements": [

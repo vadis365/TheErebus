@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "I": "erebus:umber_golem_statue",
-    "O": "erebus:jade_block"
+    "O": "#c:storage_blocks/jade"
   },
   "pattern": [
     "OOO",

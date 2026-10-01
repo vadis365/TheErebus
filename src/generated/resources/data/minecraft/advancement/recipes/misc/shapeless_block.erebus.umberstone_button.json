@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_block.erebus.umberstone": {
+    "has_block.erebus.umbercobble": {
       "conditions": {
         "items": [
           {
-            "items": "erebus:umberstone"
+            "items": "erebus:umbercobble"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_block.erebus.umberstone"
+      "has_block.erebus.umbercobble"
     ]
   ],
   "rewards": {

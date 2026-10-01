@@ -15,7 +15,7 @@ public class MaxSpeedBowExtensions implements IClientItemExtensions {
 
     @Override
     public boolean applyForgeHandTransform(@NotNull PoseStack pose, @NotNull LocalPlayer player, @NotNull HumanoidArm arm, ItemStack itemInHand, float partialTick, float equipProcess, float swingProcess) {
-        if(itemInHand.is(ModItems.MAX_SPEED_BOW)) {
+        if (itemInHand.is(ModItems.MAX_SPEED_BOW)) {
             int armMultiplier = arm == HumanoidArm.RIGHT ? 1 : -1;
 
             applyItemArmTransform(pose, arm, equipProcess);
@@ -47,7 +47,7 @@ public class MaxSpeedBowExtensions implements IClientItemExtensions {
 
     private void applyItemArmTransform(PoseStack poseStack, HumanoidArm hand, float equippedProg) {
         int handSideMultiplier = hand == HumanoidArm.RIGHT ? 1 : -1;
-        poseStack.translate((float)handSideMultiplier * 0.56F, -0.52F + equippedProg * -0.6F, -0.72F);
+        poseStack.translate((float) handSideMultiplier * 0.56F, -0.52F + equippedProg * -0.6F, -0.72F);
     }
 
 

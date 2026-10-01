@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "erebus:block/gneiss_vent" }
+  "variants": {
+    "": {
+      "model": "erebus:block/gneiss_vent"
     }
+  }
 }

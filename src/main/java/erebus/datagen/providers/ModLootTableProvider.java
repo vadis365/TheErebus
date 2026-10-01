@@ -3,6 +3,7 @@ package erebus.datagen.providers;
 import erebus.datagen.loot.ModBlockLootTables;
 import erebus.datagen.loot.ModChestLootTables;
 import erebus.datagen.loot.ModEntityLootTables;
+import erebus.datagen.loot.ModHarvestLootTables;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
@@ -17,6 +18,7 @@ public class ModLootTableProvider extends LootTableProvider {
     public ModLootTableProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, Set.of(), List.of(
                 new SubProviderEntry(ModBlockLootTables::new, LootContextParamSets.BLOCK),
+                new SubProviderEntry(ModHarvestLootTables::new, LootContextParamSets.BLOCK),
                 new SubProviderEntry(ModChestLootTables::new, LootContextParamSets.CHEST),
                 new SubProviderEntry(ModEntityLootTables::new, LootContextParamSets.ENTITY)
         ), registries);

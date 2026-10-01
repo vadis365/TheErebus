@@ -1,0 +1,22 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "erebus:glider"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "erebus:glider"
+      }
+    ],
+    "wings": [
+      {
+        "dyeable": {
+          "color_when_undyed": 16777215
+        },
+        "texture": "erebus:glider"
+      }
+    ]
+  }
+}

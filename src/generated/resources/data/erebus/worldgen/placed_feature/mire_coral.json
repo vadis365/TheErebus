@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:mire_coral",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

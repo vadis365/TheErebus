@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "J": "#c:gems/jade",
+    "N": "erebus:nectar"
+  },
+  "pattern": [
+    " N ",
+    "NJN",
+    " N "
+  ],
+  "result": {
+    "id": "erebus:bee_taming_amulet"
+  }
+}

@@ -21,17 +21,18 @@ public class TurnipFeatureConfiguration extends Feature<NoneFeatureConfiguration
         BlockPos pos = context.origin();
         RandomSource random = context.random();
 
+        boolean placed = false;
         for (int c = 0; c < 64; c++) {
             int x = random.nextInt(8) - random.nextInt(8);
             int y = random.nextInt(4) - random.nextInt(4);
             int z = random.nextInt(8) - random.nextInt(8);
             BlockPos turnip = pos.offset(x, y, z);
 
-            if (level.isEmptyBlock(turnip) && level.getBlockState(turnip.below()).is(Blocks.GRASS_BLOCK)) {
-                setBlock(level, turnip, ModBlocks.CROP_TURNIP.get().defaultBlockState().setValue(ModCropBlock.AGE, 3));
+            if (!level.isOutsideBuildHeight(turnip) && !level.isOutsideBuildHeight(turnip.below()) && level.isEmptyBlock(turnip) && level.getBlockState(turnip.below()).is(Blocks.GRASS_BLOCK)) {
+                placed |= level.setBlock(turnip, ModBlocks.CROP_TURNIP.get().defaultBlockState().setValue(ModCropBlock.AGE, 3), 2);
             }
         }
 
-        return true;
+        return placed;
     }
 }

@@ -35,14 +35,14 @@ public class ModStructureSets {
         context = ctx;
 
         register(ANTLION_DUNGEON, ModStructures.ANTLION_DUNGEON, new RandomSpreadStructurePlacement(32, 8, RandomSpreadType.LINEAR, 1435132));
-        register(ANTLION_LAIR, ModStructures.ANTLION_LAIR, new RandomSpreadStructurePlacement(32, 8, RandomSpreadType.LINEAR, 1435134));
-        register(DRAGONFLY_DUNGEON, ModStructures.DRAGONFLY_DUNGEON, new RandomSpreadStructurePlacement(32, 8, RandomSpreadType.LINEAR, 1435135));
-        register(DUNG_PILE, ModStructures.DUNG_PILE, new RandomSpreadStructurePlacement(32, 8, RandomSpreadType.LINEAR, 1435136));
-        register(LOCUST_SHRINE, ModStructures.LOCUST_SHRINE, new RandomSpreadStructurePlacement(32, 8, RandomSpreadType.LINEAR, 1435137));
-        register(SPIDER_DUNGEON, ModStructures.SPIDER_DUNGEON, new RandomSpreadStructurePlacement(32, 8, RandomSpreadType.LINEAR, 1435138));
+        register(ANTLION_LAIR, ModStructures.ANTLION_LAIR, new RandomSpreadStructurePlacement(1, 0, RandomSpreadType.LINEAR, 1435134));
+        register(DRAGONFLY_DUNGEON, ModStructures.DRAGONFLY_DUNGEON, new RandomSpreadStructurePlacement(1, 0, RandomSpreadType.LINEAR, 1435135));
+        register(DUNG_PILE, ModStructures.DUNG_PILE, new RandomSpreadStructurePlacement(1, 0, RandomSpreadType.LINEAR, 1435136));
+        register(LOCUST_SHRINE, ModStructures.LOCUST_SHRINE, new RandomSpreadStructurePlacement(1, 0, RandomSpreadType.LINEAR, 1435137));
+        register(SPIDER_DUNGEON, ModStructures.SPIDER_DUNGEON, new RandomSpreadStructurePlacement(1, 0, RandomSpreadType.LINEAR, 1435138));
         register(SWAMP_HUT, ModStructures.SWAMP_HUT, new RandomSpreadStructurePlacement(32, 8, RandomSpreadType.LINEAR, 1435139));
-        register(WASP_DUNGEON, ModStructures.WASP_DUNGEON, new RandomSpreadStructurePlacement(32, 8, RandomSpreadType.LINEAR, 1435140));
-        register(TARANTULA_DUNGEON, ModStructures.TARANTULA_DUNGEON, new RandomSpreadStructurePlacement(32, 8, RandomSpreadType.LINEAR, 1435141));
+        register(WASP_DUNGEON, ModStructures.WASP_DUNGEON, new RandomSpreadStructurePlacement(1, 0, RandomSpreadType.LINEAR, 1435140));
+        register(TARANTULA_DUNGEON, ModStructures.TARANTULA_DUNGEON, new RandomSpreadStructurePlacement(1, 0, RandomSpreadType.LINEAR, 1435141));
     }
 
     private static void register(ResourceKey<StructureSet> key, ResourceKey<Structure> structure, StructurePlacement placement) {

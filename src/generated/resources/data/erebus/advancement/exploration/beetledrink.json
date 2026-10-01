@@ -4,7 +4,7 @@
     "drink_juice": {
       "conditions": {
         "item": {
-          "items": "erebus:bambucket"
+          "items": "erebus:beetle_juice_bucket"
         }
       },
       "trigger": "minecraft:consume_item"
@@ -15,7 +15,7 @@
       "translate": "advancement.erebus.exploration/beetledrink.desc"
     },
     "icon": {
-      "id": "erebus:bambucket"
+      "id": "erebus:beetle_juice_bucket"
     },
     "title": {
       "translate": "advancement.erebus.exploration/beetledrink.title"

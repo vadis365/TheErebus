@@ -23,7 +23,8 @@ public class MosquitoAppendageLayer extends RenderLayer<MosquitoRenderState, Mos
 
     @Override
     public void submit(@NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, MosquitoRenderState state, float xRot, float yRot) {
-        if(!state.isRiding) {
+        if (state.isInvisible) return;
+        if (!state.isRiding) {
             submit.submitModel(model, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
         }
     }

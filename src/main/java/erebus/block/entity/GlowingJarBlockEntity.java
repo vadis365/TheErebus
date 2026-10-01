@@ -12,23 +12,23 @@ import java.util.Random;
 public class GlowingJarBlockEntity extends BlockEntity {
 
     private final Random random = new Random();
-    private float particleSpawnTick = random.nextInt(100);
     public float particleSize;
+    private float particleSpawnTick = random.nextInt(100);
 
     public GlowingJarBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         super(ModBlockEntities.GLOWING_JAR.get(), pos, state);
     }
 
-	public static <T extends BlockEntity> void clientTick(Level ignoredWorld, BlockPos ignoredWorldPosition, BlockState ignoredBlockState, T t) {
-		if (t instanceof GlowingJarBlockEntity tile) {
-			tile.particleSpawnTick++;
-	            if (tile.particleSpawnTick <= 50)
-	            	tile.particleSize = tile.particleSpawnTick / 25;
-	            else
-	            	tile.particleSize = 2 - (tile.particleSpawnTick - 50) / 25;
+    public static <T extends BlockEntity> void clientTick(Level ignoredWorld, BlockPos ignoredWorldPosition, BlockState ignoredBlockState, T t) {
+        if (t instanceof GlowingJarBlockEntity tile) {
+            tile.particleSpawnTick++;
+            if (tile.particleSpawnTick <= 50)
+                tile.particleSize = tile.particleSpawnTick / 25;
+            else
+                tile.particleSize = 2 - (tile.particleSpawnTick - 50) / 25;
 
-	            if (tile.particleSpawnTick > 100)
-	            	tile.particleSpawnTick = 0;
-	        }
-	}
+            if (tile.particleSpawnTick > 100)
+                tile.particleSpawnTick = 0;
+        }
+    }
 }

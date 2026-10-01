@@ -22,27 +22,38 @@ public class RedGemFeatureConfiguration extends Feature<NoneFeatureConfiguration
         BlockPos pos = context.origin();
         RandomSource random = context.random();
 
-        if (!level.isEmptyBlock(pos)) return false;
+        if (level.isOutsideBuildHeight(pos) || level.isOutsideBuildHeight(pos.above())
+                || !level.ensureCanWrite(pos) || !level.isEmptyBlock(pos)) return false;
 
         BlockState state = level.getBlockState(pos.above());
         if (!state.is(ModBlocks.UMBERSTONE.get())) return false;
 
-        level.setBlock(pos, ModBlocks.RED_GEM_BLOCK.get().defaultBlockState(), 2);
+        if (!level.setBlock(pos, ModBlocks.RED_GEM_BLOCK.get().defaultBlockState(), 2)) return false;
 
-        for (int c = 0; c < 1500; c++) {
-            int dx = random.nextInt(8) - random.nextInt(8);
-            int dy = -random.nextInt(12);
-            int dz = random.nextInt(8) - random.nextInt(8);
+        int distance = 2;
+        int distanceUpdates = 0;
+        int attempts = random.nextInt(100) + 300;
+        for (int c = 0; c < attempts; c++) {
+            int dx = random.nextInt(distance) - random.nextInt(distance);
+            int dy = -random.nextInt(distance + 4);
+            int dz = random.nextInt(distance) - random.nextInt(distance);
             BlockPos check = pos.offset(dx, dy, dz);
-            int d = 0;
+            if (!level.isOutsideBuildHeight(check) && level.isEmptyBlock(check)) {
+                int adjacent = 0;
 
-            for (Direction dir : Direction.values()) {
-                if (level.getBlockState(check.relative(dir)).is(ModBlocks.RED_GEM_BLOCK.get())) d++;
-                if (d > 1) break;
+                for (Direction dir : Direction.values()) {
+                    if (level.getBlockState(check.relative(dir)).is(ModBlocks.RED_GEM_BLOCK.get())) adjacent++;
+                    if (adjacent > 1) break;
+                }
+
+                if (adjacent == 1 && level.ensureCanWrite(check)) {
+                    level.setBlock(check, ModBlocks.RED_GEM_BLOCK.get().defaultBlockState(), 2);
+                }
             }
 
-            if (d == 1) {
-                level.setBlock(check, ModBlocks.RED_GEM_BLOCK.get().defaultBlockState(), 2);
+            if (++distanceUpdates > 22 + distance * 30) {
+                distance = Math.min(8, distance + 1);
+                distanceUpdates = 0;
             }
         }
 

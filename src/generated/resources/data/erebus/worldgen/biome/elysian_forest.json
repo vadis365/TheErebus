@@ -13,19 +13,14 @@
     [],
     [],
     [],
-    [],
+    [
+      "erebus:pond"
+    ],
     [],
     [
       "erebus:red_gem",
-      "erebus:coal_ore",
-      "erebus:iron_ore",
-      "erebus:gold_ore",
       "erebus:lapis_ore",
-      "erebus:emerald_ore",
       "erebus:diamond_ore",
-      "erebus:jade_ore",
-      "erebus:petrified_wood_ore",
-      "erebus:fossil_ore",
       "erebus:aluminum_ore",
       "erebus:copper_ore",
       "erebus:lead_ore",
@@ -44,13 +39,15 @@
     [],
     [],
     [
-      "minecraft:trees_birch_and_oak_leaf_litter",
-      "erebus:cypress",
+      "erebus:elysian_forest_population",
+      "erebus:cypress_population",
       "erebus:nettle",
       "erebus:tall_bloom",
       "erebus:weeping_bluebell",
       "erebus:fern",
-      "erebus:moss"
+      "erebus:dark_fruit_vine_population",
+      "erebus:moss",
+      "erebus:grass"
     ]
   ],
   "has_precipitation": false,

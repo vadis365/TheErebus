@@ -21,6 +21,10 @@ import java.util.List;
 import java.util.function.LongFunction;
 
 public record CompanionBiomeLayer(List<Pair<ResourceKey<Biome>, ResourceKey<Biome>>> biomeCompanions) implements CastleTransformer {
+    private static boolean isKey(ResourceKey<Biome> biome, ResourceKey<Biome> center, ResourceKey<Biome> east, ResourceKey<Biome> west, ResourceKey<Biome> north, ResourceKey<Biome> south) {
+        return biome != center && (biome == north || biome == south || biome == east || biome == west);
+    }
+
     @Override
     public ResourceKey<Biome> apply(RandomContext context, ResourceKey<Biome> north, ResourceKey<Biome> south, ResourceKey<Biome> east, ResourceKey<Biome> west, ResourceKey<Biome> center) {
         for (Pair<ResourceKey<Biome>, ResourceKey<Biome>> pair : biomeCompanions) {
@@ -28,10 +32,6 @@ public record CompanionBiomeLayer(List<Pair<ResourceKey<Biome>, ResourceKey<Biom
         }
 
         return center;
-    }
-
-    private static boolean isKey(ResourceKey<Biome> biome, ResourceKey<Biome> center, ResourceKey<Biome> east, ResourceKey<Biome> west, ResourceKey<Biome> north, ResourceKey<Biome> south) {
-        return biome != center && (biome == north || biome == south || biome == east || biome == west);
     }
 
     public static final class Factory implements BiomeLayerFactory {

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "#c:ingots/iron",
+    "X": "#c:gems/jade"
+  },
+  "pattern": [
+    "XIX",
+    "XXX",
+    " X "
+  ],
+  "result": {
+    "id": "erebus:jade_shield"
+  }
+}

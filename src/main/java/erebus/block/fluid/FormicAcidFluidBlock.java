@@ -16,38 +16,38 @@ import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 
-public class FormicAcidFluidBlock extends LiquidBlock  {
+public class FormicAcidFluidBlock extends LiquidBlock {
 
-	public FormicAcidFluidBlock(FlowingFluid fluid, Properties properties) {
-		super(fluid, properties);
-	}
+    public FormicAcidFluidBlock(FlowingFluid fluid, Properties properties) {
+        super(fluid, properties);
+    }
 
-	@Override
-	public void entityInside(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull Entity entity, @NonNull InsideBlockEffectApplier effectApplier, boolean isPrecise) {
-		if (!level.isClientSide())
-			if (entity instanceof LivingEntity)
-				entity.hurtServer((ServerLevel) level, entity.damageSources().generic(), 2F);
-	}
+    @Override
+    public void entityInside(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull Entity entity, @NonNull InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+        if (!level.isClientSide())
+            if (entity instanceof LivingEntity)
+                entity.hurtServer((ServerLevel) level, entity.damageSources().generic(), 2F);
+    }
 
-	@Override
-	public void animateTick(@Nonnull BlockState stateIn, Level level, BlockPos pos, @Nonnull RandomSource rand) {
-		if (level.isEmptyBlock(pos.above())) {
+    @Override
+    public void animateTick(@Nonnull BlockState stateIn, Level level, BlockPos pos, @Nonnull RandomSource rand) {
+        if (level.isEmptyBlock(pos.above())) {
 
-			float xx = (float) pos.getX() + 0.5F;
-			float yy = pos.getY() + 1.0F;
-			float zz = (float) pos.getZ() + 0.5F;
-			float fixedOffset = 0.25F;
-			float randomOffset = rand.nextFloat() * 0.6F - 0.3F;
+            float xx = (float) pos.getX() + 0.5F;
+            float yy = pos.getY() + 1.0F;
+            float zz = (float) pos.getZ() + 0.5F;
+            float fixedOffset = 0.25F;
+            float randomOffset = rand.nextFloat() * 0.6F - 0.3F;
 
-			level.addParticle(ModParticles.SWAMP_VENT.get(), xx - fixedOffset, (double) pos.getY() + 0.75D, zz + randomOffset, 0.0D, 0.0D, 0.0D);
-			level.addParticle(ModParticles.SWAMP_VENT.get(), xx + fixedOffset, (double) pos.getY() + 0.75D, zz + randomOffset, 0.0D, 0.0D, 0.0D);
-			level.addParticle(ModParticles.SWAMP_VENT.get(), xx + randomOffset, (double) pos.getY() + 0.75D, zz - fixedOffset, 0.0D, 0.0D, 0.0D);
-			level.addParticle(ModParticles.SWAMP_VENT.get(), xx + randomOffset, (double) pos.getY() + 0.75D, zz + fixedOffset, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ModParticles.SWAMP_VENT.get(), xx - fixedOffset, (double) pos.getY() + 0.75D, zz + randomOffset, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ModParticles.SWAMP_VENT.get(), xx + fixedOffset, (double) pos.getY() + 0.75D, zz + randomOffset, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ModParticles.SWAMP_VENT.get(), xx + randomOffset, (double) pos.getY() + 0.75D, zz - fixedOffset, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ModParticles.SWAMP_VENT.get(), xx + randomOffset, (double) pos.getY() + 0.75D, zz + fixedOffset, 0.0D, 0.0D, 0.0D);
 
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.SWAMPFLAME, xx - fixedOffset, yy, zz + randomOffset, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.SWAMPFLAME, xx + fixedOffset, yy, zz + randomOffset, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.SWAMPFLAME, xx + randomOffset, yy, zz - fixedOffset, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.SWAMPFLAME, xx + randomOffset, yy, zz + fixedOffset, 0.0D, 0.0D, 0.0D);
-		}
-	}
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.SWAMPFLAME, xx - fixedOffset, yy, zz + randomOffset, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.SWAMPFLAME, xx + fixedOffset, yy, zz + randomOffset, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.SWAMPFLAME, xx + randomOffset, yy, zz - fixedOffset, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.SWAMPFLAME, xx + randomOffset, yy, zz + fixedOffset, 0.0D, 0.0D, 0.0D);
+        }
+    }
 }

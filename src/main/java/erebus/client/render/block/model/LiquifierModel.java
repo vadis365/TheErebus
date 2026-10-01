@@ -8,18 +8,18 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 
 public class LiquifierModel extends Model<LiquifierBlockEntityRenderState> {
+    private final ModelPart lidMid, lidBottom, feedPipe;
 
     public LiquifierModel(ModelPart root) {
-		super(root, RenderTypes::entityTranslucent);
-        root.getChild("tank");
-        root.getChild("lid_mid");
-        root.getChild("lid_bottom");
-        root.getChild("feed_pipe");
+        super(root, RenderTypes::entityTranslucent);
+        lidMid = root.getChild("lid_mid");
+        lidBottom = root.getChild("lid_bottom");
+        feedPipe = root.getChild("feed_pipe");
     }
 
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
 
         partdefinition.addOrReplaceChild("tank", CubeListBuilder.create().texOffs(0, 0).addBox(-8.0F, -3.0F, -8.0F, 16.0F, 11.0F, 16.0F, new CubeDeformation(0.001F))
                 .texOffs(48, 0).addBox(-7.0F, -6.0F, -7.0F, 2.0F, 3.0F, 2.0F, new CubeDeformation(0.0F))
@@ -43,5 +43,14 @@ public class LiquifierModel extends Model<LiquifierBlockEntityRenderState> {
         feed_pipe.addOrReplaceChild("paddle_right", CubeListBuilder.create().texOffs(119, 7).addBox(3.5F, 0.0F, -0.5F, 3.0F, 7.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 128, 64);
-	}
+    }
+
+    @Override
+    public void setupAnim(LiquifierBlockEntityRenderState state) {
+        super.setupAnim(state);
+        feedPipe.yRot = state.animationRotation * (float) Math.PI / 180F;
+        float phase = Math.clamp(state.animationRotation / 360F, 0, 1);
+        float scale = phase <= 0.5F ? 1F - phase * 0.5F : 0.5F + phase * 0.5F;
+        lidMid.xScale = lidMid.zScale = lidBottom.xScale = lidBottom.zScale = scale;
+    }
 }

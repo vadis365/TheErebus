@@ -15,8 +15,9 @@
     [],
     [],
     [
-      "erebus:scorched_wood",
       "erebus:lava_lake",
+      "erebus:ceiling_lava",
+      "erebus:scorched_wood",
       "erebus:desert_rock_gneiss"
     ],
     [],

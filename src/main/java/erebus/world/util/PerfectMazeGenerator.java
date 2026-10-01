@@ -31,11 +31,16 @@ public class PerfectMazeGenerator implements MazeGenerator {
     private final int height;
     private final Random random;
 
-    public PerfectMazeGenerator(int width, int height) {
+    public PerfectMazeGenerator(int width, int height, long seed) {
+        if (width < 1 || height < 1) throw new IllegalArgumentException("Maze dimensions must be positive");
         this.width = width;
         this.height = height;
         maze = new int[width][height];
-        random = new Random();
+        random = new Random(seed);
+    }
+
+    private static boolean between(int v, int upper) {
+        return v >= 0 && v < upper;
     }
 
     @Override
@@ -56,10 +61,6 @@ public class PerfectMazeGenerator implements MazeGenerator {
                 generateMaze(nx, ny);
             }
         }
-    }
-
-    private static boolean between(int v, int upper) {
-        return v >= 0 && v < upper;
     }
 
 }

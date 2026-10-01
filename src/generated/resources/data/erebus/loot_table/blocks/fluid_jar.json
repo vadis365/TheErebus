@@ -18,7 +18,8 @@
         {
           "function": "minecraft:copy_components",
           "include": [
-            "erebus:fluid"
+            "erebus:fluid",
+            "erebus:fluid_amount"
           ],
           "source": "block_entity"
         }

@@ -26,79 +26,79 @@ import org.joml.Vector3f;
 import java.util.List;
 
 public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
-	public Vector3f targetVector;
-	
-	public LightningAltarBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntities.ALTAR_LIGHTNING.get(), pos, state);
-	}
+    public Vector3f targetVector;
 
-	public static <T extends BlockEntity> void tick(Level level, BlockPos pos, T blockEntity) {
-		if (blockEntity instanceof LightningAltarBlockEntity altar) {
-			altar.prevAnimationTicks = altar.animationTicks;
-			if (!level.isClientSide()) {
-				altar.spawnTicks--;
-				if (altar.active) {
-					if (altar.animationTicks == 20)
-						altar.findEnemyToAttack();
-					if (altar.animationTicks < 20)
-						altar.animationTicks++;
-				}
-				if (!altar.active) {
-					if (altar.animationTicks > 0)
-						altar.animationTicks--;
-					if (altar.animationTicks == 1)
-						level.setBlockAndUpdate(pos, ModBlocks.ALTAR_BASE.get().defaultBlockState().setValue(AltarAbstract.FACING, altar.getBlockState().getValue(AltarAbstract.FACING)));
-				}
-				if (altar.spawnTicks == 0) {
-					altar.setActive(false);
-					level.playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE.get(), SoundSource.BLOCKS, 1.0F, 1.3F);
-				}
-				if (altar.prevAnimationTicks != altar.animationTicks)
-					PacketDistributor.sendToPlayersNear((ServerLevel) altar.getLevel(), null, altar.getBlockPos().getX(),
-							altar.getBlockPos().getY(), altar.getBlockPos().getZ(), 30,
-							new AltarAnimationTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(),
-									altar.getBlockPos().getZ(), altar.animationTicks));
-			}
-	
-			if (level.isClientSide()) {
-				if (altar.animationTicks == 20 && level.getGameTime()%2 == 0) {
-					float vx = (level.getRandom().nextFloat() * 0.5f - 0.25f);
-					float vy = (level.getRandom().nextFloat() * 0.5f - 0.25f);
-					float vz = (level.getRandom().nextFloat() * 0.5f - 0.25f);
-					level.addParticle(ParticleTypes.ELECTRIC_SPARK, pos.getX() + 0.5D, pos.getY() + 1.6D, pos.getZ() + 0.5D, vx, vy, vz);
-				}
+    public LightningAltarBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.ALTAR_LIGHTNING.get(), pos, state);
+    }
 
-				if (altar.animationTicks == 6)
-					altar.flameOn(level, pos);
-			}
-		}
-	}
+    public static <T extends BlockEntity> void tick(Level level, BlockPos pos, T blockEntity) {
+        if (blockEntity instanceof LightningAltarBlockEntity altar) {
+            altar.prevAnimationTicks = altar.animationTicks;
+            if (!level.isClientSide()) {
+                if (altar.spawnTicks > 0) altar.spawnTicks--;
+                if (altar.active) {
+                    if (altar.animationTicks == 20)
+                        altar.findEnemyToAttack();
+                    if (altar.animationTicks < 20)
+                        altar.animationTicks++;
+                }
+                if (!altar.active) {
+                    if (altar.animationTicks > 0)
+                        altar.animationTicks--;
+                    if (altar.animationTicks == 1)
+                        level.setBlockAndUpdate(pos, ModBlocks.ALTAR_BASE.get().defaultBlockState().setValue(AltarAbstract.FACING, altar.getBlockState().getValue(AltarAbstract.FACING)));
+                }
+                if (altar.active && altar.spawnTicks == 0) {
+                    altar.setActive(false);
+                    level.playSound(null, pos, ModSounds.ALTAR_CHANGE_STATE.get(), SoundSource.BLOCKS, 1.0F, 1.3F);
+                }
+                if (altar.active || altar.spawnTicks > 0 || altar.prevAnimationTicks != altar.animationTicks) altar.setChanged();
+                if (altar.prevAnimationTicks != altar.animationTicks)
+                    PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, net.minecraft.world.level.ChunkPos.containing(pos),
+                            new AltarAnimationTimerPacket(altar.getBlockPos().getX(), altar.getBlockPos().getY(),
+                                    altar.getBlockPos().getZ(), altar.animationTicks));
+            }
 
-	public void flameOn(Level level, BlockPos pos) {
-		if (level.isClientSide()) {
-			double x = pos.getX() + 0.53125F;
-			double y = pos.getY() + 1.25F;
-			double z = pos.getZ() + 0.53125F;
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
-		}
-	}
+            if (level.isClientSide()) {
+                if (altar.animationTicks == 20 && level.getGameTime() % 2 == 0) {
+                    float vx = (level.getRandom().nextFloat() * 0.5f - 0.25f);
+                    float vy = (level.getRandom().nextFloat() * 0.5f - 0.25f);
+                    float vz = (level.getRandom().nextFloat() * 0.5f - 0.25f);
+                    level.addParticle(ParticleTypes.ELECTRIC_SPARK, pos.getX() + 0.5D, pos.getY() + 1.6D, pos.getZ() + 0.5D, vx, vy, vz);
+                }
 
-	protected void findEnemyToAttack() {
-		List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(getBlockPos()).inflate(6D, 2D, 6D));
-		if (active)
+                if (altar.animationTicks == 6)
+                    altar.flameOn(level, pos);
+            }
+        }
+    }
+
+    public void flameOn(Level level, BlockPos pos) {
+        if (level.isClientSide()) {
+            double x = pos.getX() + 0.53125F;
+            double y = pos.getY() + 1.25F;
+            double z = pos.getZ() + 0.53125F;
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y, z, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y, z, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.SMOKE, x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.FLAME, x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
+        }
+    }
+
+    protected void findEnemyToAttack() {
+        List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(getBlockPos()).inflate(6D, 2D, 6D));
+        if (active)
             for (Entity entity : list) {
                 if (entity != null)
                     if (entity instanceof LivingEntity target)
@@ -109,31 +109,30 @@ public class LightningAltarBlockEntity extends AltarAbstractBlockEntity {
 
                             targetVector = new Vector3f().add(a - getBlockPos().getX() - 0.5F, b - getBlockPos().getY() - 1.6F, c - getBlockPos().getZ() - 0.5F);
 
-                            PacketDistributor.sendToPlayersNear((ServerLevel) level, null, getBlockPos().getX(),
-                                    getBlockPos().getY() + 1D, getBlockPos().getZ(), 30,
+                            PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, net.minecraft.world.level.ChunkPos.containing(getBlockPos()),
                                     new LightningAltarRenderPacket(
                                             getBlockPos().getX(),
                                             getBlockPos().getY(),
                                             getBlockPos().getZ(),
                                             targetVector));
 
-                            target.hurt(target.damageSources().lightningBolt(), 1.0F); // just a test amount
+                            target.hurt(target.damageSources().lightningBolt(), 5.0F);
                         }
             }
-	}
+    }
 
-	@Override
-	protected void writeTileToNBT(ValueOutput output) {
-		output.putInt("animationTicks", animationTicks);
-		output.putInt("spawnTicks", spawnTicks);
-		output.putBoolean("active", active);
-	}
+    @Override
+    protected void writeTileToNBT(ValueOutput output) {
+        output.putInt("animationTicks", animationTicks);
+        output.putInt("spawnTicks", spawnTicks);
+        output.putBoolean("active", active);
+    }
 
-	@Override
-	protected void readTileFromNBT(ValueInput input) {
-		animationTicks = input.getIntOr("animationTicks", 0);
-		spawnTicks = input.getIntOr("spawnTicks", 0);
-		active = input.getBooleanOr("active", false);
-	}
+    @Override
+    protected void readTileFromNBT(ValueInput input) {
+        animationTicks = input.getIntOr("animationTicks", 0);
+        spawnTicks = input.getIntOr("spawnTicks", 0);
+        active = input.getBooleanOr("active", false);
+    }
 
 }

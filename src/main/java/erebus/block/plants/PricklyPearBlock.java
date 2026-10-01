@@ -58,7 +58,7 @@ public class PricklyPearBlock extends Block implements BonemealableBlock {
 
     @Override
     public void performBonemeal(@NotNull ServerLevel level, @NotNull RandomSource random, @NotNull BlockPos pos, @NotNull BlockState state) {
-    	randomTick(state, level, pos, random);
+        randomTick(state, level, pos, random);
     }
 
     @Override
@@ -72,27 +72,27 @@ public class PricklyPearBlock extends Block implements BonemealableBlock {
             level.destroyBlock(pos, true);
     }
 
-	@Override
-	protected void randomTick(@NonNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-		if (level.isEmptyBlock(pos.above())) {
-			int growthHeight;
+    @Override
+    protected void randomTick(@NonNull BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+        if (level.isEmptyBlock(pos.above())) {
+            int growthHeight;
 
-			for (growthHeight = 1; level.getBlockState(pos.below(growthHeight)).is(this); ++growthHeight);
+            for (growthHeight = 1; level.getBlockState(pos.below(growthHeight)).is(this); ++growthHeight) ;
 
-			if (growthHeight < 3) {
-				int stage = state.getValue(AGE);
+            if (growthHeight < 3) {
+                int stage = state.getValue(AGE);
 
-				if (stage == 10) {
-					level.setBlockAndUpdate(pos.above(), defaultBlockState());
-					if (level.getBlockState(pos).is(this) && level.getBlockState(pos.below()).is(this)) {
-						level.setBlock(pos.above(), state.setValue(AGE, 11), 4);
-					} else
-						level.setBlock(pos, state.setValue(AGE, 0), 4);
-				} else if (stage < 10) {
-					level.setBlock(pos, state.setValue(AGE, stage + 1), 4);
-				}
-			}
-		}
+                if (stage == 10) {
+                    level.setBlockAndUpdate(pos.above(), defaultBlockState());
+                    if (level.getBlockState(pos).is(this) && level.getBlockState(pos.below()).is(this)) {
+                        level.setBlock(pos.above(), state.setValue(AGE, 11), 4);
+                    } else
+                        level.setBlock(pos, state.setValue(AGE, 0), 4);
+                } else if (stage < 10) {
+                    level.setBlock(pos, state.setValue(AGE, stage + 1), 4);
+                }
+            }
+        }
       /*  if (state.getValue(AGE) < 11 && level.getRawBrightness(pos.above(), 0) >= 9 && CommonHooks.canCropGrow(level, pos, state, random.nextInt(5) == 0)) {
             BlockState growthAge = state.setValue(AGE, state.getValue(AGE) + 1);
             level.setBlock(pos, growthAge, 2);
@@ -108,16 +108,16 @@ public class PricklyPearBlock extends Block implements BonemealableBlock {
         return super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
     }
 
-	@Override
-	protected boolean canSurvive(@NonNull BlockState state, LevelReader level, BlockPos pos) {
-		BlockState stateBelow = level.getBlockState(pos.below());
-		if (stateBelow.is(this)) {
-			return true;
-		} else {
-			TriState soilDecision = stateBelow.canSustainPlant(level, pos.below(), Direction.UP, state);
-			if (!soilDecision.isDefault())
-				return soilDecision.isTrue();
+    @Override
+    protected boolean canSurvive(@NonNull BlockState state, LevelReader level, BlockPos pos) {
+        BlockState stateBelow = level.getBlockState(pos.below());
+        if (stateBelow.is(this)) {
+            return true;
+        } else {
+            TriState soilDecision = stateBelow.canSustainPlant(level, pos.below(), Direction.UP, state);
+            if (!soilDecision.isDefault())
+                return soilDecision.isTrue();
             return stateBelow.is(BlockTags.DIRT) || stateBelow.is(BlockTags.SAND);
-		}
+        }
     }
 }

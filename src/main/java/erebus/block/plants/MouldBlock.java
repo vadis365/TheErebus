@@ -9,25 +9,25 @@ import javax.annotation.Nonnull;
 
 public class MouldBlock extends WallPlantsAbstract {
 
-	public static final MapCodec<MouldBlock> CODEC = simpleCodec(MouldBlock::new);
+    public static final MapCodec<MouldBlock> CODEC = simpleCodec(MouldBlock::new);
 
-	public MouldBlock(Properties properties) {
-		super(properties);
-	}
-
-    @Override
-	protected @NotNull MapCodec<MouldBlock> codec() {
-		return CODEC;
-	}
+    public MouldBlock(Properties properties) {
+        super(properties);
+    }
 
     @Override
-	public boolean shouldScheduleTick() {
-		return false;
-	}
+    protected @NotNull MapCodec<MouldBlock> codec() {
+        return CODEC;
+    }
 
-	@Nonnull
-	@Override
-	public RenderShape getRenderShape(@Nonnull BlockState state) {
-		return RenderShape.MODEL;
-	}
+    @Override
+    public boolean shouldScheduleTick() {
+        return false;
+    }
+
+    @Nonnull
+    @Override
+    public RenderShape getRenderShape(@Nonnull BlockState state) {
+        return RenderShape.MODEL;
+    }
 }

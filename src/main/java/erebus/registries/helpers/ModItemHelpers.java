@@ -4,17 +4,25 @@ import erebus.Erebus;
 import erebus.item.PaxelItem;
 import erebus.item.shield.ErebusShieldItem;
 import erebus.item.shield.IShieldType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import static erebus.registries.item.ModItems.ITEMS;
@@ -41,6 +49,7 @@ public class ModItemHelpers {
         return registerItem(name, () -> new Item(new Item.Properties()
                 .food(foodProperties, consumable)
                 .usingConvertsTo(convertsTo.asItem())
+                .craftRemainder(convertsTo.asItem()).stacksTo(1)
                 .setId(ResourceKey.create(Registries.ITEM, Erebus.prefix(name)))
         ));
     }
@@ -73,7 +82,14 @@ public class ModItemHelpers {
         return ITEMS.register(name, () -> new HoeItem(material, attackDamageBaseline, attackSpeedBaseline, new Item.Properties().setId(ResourceKey.create(Registries.ITEM, Erebus.prefix(name)))));
     }
 
-    public static DeferredItem<ErebusShieldItem> registerShield(String name, int maxDamage, IShieldType shieldType) {
-        return ITEMS.register(name, () -> new ErebusShieldItem(new Item.Properties().durability(maxDamage).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix(name))), shieldType));
+    public static DeferredItem<ErebusShieldItem> registerShield(String name, int maxDamage, IShieldType shieldType, TagKey<Item> repairs) {
+        return ITEMS.register(name, () -> new ErebusShieldItem(new Item.Properties().durability(maxDamage)
+                .repairable(repairs).equippableUnswappable(EquipmentSlot.OFFHAND)
+                .delayedComponent(DataComponents.BLOCKS_ATTACKS, context -> new BlocksAttacks(0.25F, 1,
+                        List.of(new BlocksAttacks.DamageReduction(90, Optional.empty(), 0, 1)),
+                        new BlocksAttacks.ItemDamageFunction(3, 1, 1), Optional.of(context.getOrThrow(DamageTypeTags.BYPASSES_SHIELD)),
+                        Optional.of(SoundEvents.SHIELD_BLOCK), Optional.of(SoundEvents.SHIELD_BREAK)))
+                .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK)
+                .setId(ResourceKey.create(Registries.ITEM, Erebus.prefix(name))), shieldType));
     }
 }

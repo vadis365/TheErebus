@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "erebus:glowshroom",
+    "erebus:bio_luminescence"
+  ],
+  "result": {
+    "id": "erebus:glowshroom_block"
+  }
+}

@@ -22,36 +22,36 @@ import org.jspecify.annotations.NonNull;
 import java.util.function.Consumer;
 
 public class BambooCrateItem extends BlockItem {
-	
-	public BambooCrateItem(Block blockIn, Properties builder) {
-		super(blockIn, builder);
-	}
 
-	@Override
-	public void appendHoverText(ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay display, Consumer<Component> builder, @NonNull TooltipFlag tooltipFlag) {
-		builder.accept(Component.literal("Stores Items When Broken"));
-		if (stack.has(DataComponents.CONTAINER)) {
-			ItemContainerContents contents = stack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
-			for (int i = 0; i < contents.getSlots(); i++)
-				if (!contents.getStackInSlot(i).isEmpty())
-					builder.accept(Component.literal("Slot " + (i + 1) + ": " + contents.getStackInSlot(i).getHoverName().getString() + " x " + contents.getStackInSlot(i).getCount()).withStyle(ChatFormatting.GREEN));
-		}
-	}
+    public BambooCrateItem(Block blockIn, Properties builder) {
+        super(blockIn, builder);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay display, Consumer<Component> builder, @NonNull TooltipFlag tooltipFlag) {
+        builder.accept(Component.literal("Stores Items When Broken"));
+        if (stack.has(DataComponents.CONTAINER)) {
+            ItemContainerContents contents = stack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
+            for (int i = 0; i < contents.getSlots(); i++)
+                if (!contents.getStackInSlot(i).isEmpty())
+                    builder.accept(Component.literal("Slot " + (i + 1) + ": " + contents.getStackInSlot(i).getHoverName().getString() + " x " + contents.getStackInSlot(i).getCount()).withStyle(ChatFormatting.GREEN));
+        }
+    }
 
     @Override
     protected boolean canPlace(BlockPlaceContext context, @NonNull BlockState state) {
-		Level level = context.getLevel();
-		BlockPos pos = context.getClickedPos();
-		for (Direction dir : Direction.values()) {
-			BlockState state2 = level.getBlockState(pos.offset(dir.getStepX(), dir.getStepY(), dir.getStepZ()));
-			if (state2.is(ModBlocks.BAMBOO_CRATE.get())) {
-				EnumCrateType type = state2.getValue(BambooCrateBlock.CRATE_TYPE);
-				if (type != EnumCrateType.DEFAULT)
-					return false;
-				if (level.getBlockState(pos.offset(dir.getOpposite().getStepX(), dir.getOpposite().getStepY(), dir.getOpposite().getStepZ())).is(ModBlocks.BAMBOO_CRATE.get()))
-					return false;
-			}
-		}
-		return super.canPlace(context, state);
-	}
+        Level level = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        for (Direction dir : Direction.values()) {
+            BlockState state2 = level.getBlockState(pos.offset(dir.getStepX(), dir.getStepY(), dir.getStepZ()));
+            if (state2.is(ModBlocks.BAMBOO_CRATE.get())) {
+                EnumCrateType type = state2.getValue(BambooCrateBlock.CRATE_TYPE);
+                if (type != EnumCrateType.DEFAULT)
+                    return false;
+                if (level.getBlockState(pos.offset(dir.getOpposite().getStepX(), dir.getOpposite().getStepY(), dir.getOpposite().getStepZ())).is(ModBlocks.BAMBOO_CRATE.get()))
+                    return false;
+            }
+        }
+        return super.canPlace(context, state);
+    }
 }

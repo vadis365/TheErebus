@@ -107,7 +107,7 @@ public class ModArmorMaterials {
             0.0F,
             0.0F,
             ModItemTags.REPAIRS_REINFORCED_COMPOUND_GOGGLES,
-            ModEquipmentAssets.REINFORCED_COMPOUND_GOGGLES
+            ModEquipmentAssets.COMPOUND_GOGGLES
     );
 
     // MARK: Mushroom Helm

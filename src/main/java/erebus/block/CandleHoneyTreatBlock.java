@@ -46,15 +46,23 @@ public class CandleHoneyTreatBlock extends AbstractCandleBlock {
     private final CandleBlock candleBlock;
 
     public CandleHoneyTreatBlock(Block candleBlock, Properties properties) {
-        super(properties);
+        super(properties.lightLevel(state -> state.getValue(LIT) ? 3 : 0));
         registerDefaultState(getStateDefinition().any().setValue(LIT, false));
-        if(candleBlock instanceof CandleBlock candleblock) {
+        if (candleBlock instanceof CandleBlock candleblock) {
             BY_CANDLE.put(candleblock, this);
             this.candleBlock = candleblock;
         } else {
             String className = String.valueOf(CandleBlock.class);
             throw new IllegalArgumentException("Expected block to be of %s was %s".formatted(className, String.valueOf(candleBlock.getClass())));
         }
+    }
+
+    private static boolean candleHit(BlockHitResult hit) {
+        return hit.getLocation().y - hit.getBlockPos().getY() > 0.5F;
+    }
+
+    public static BlockState byCandle(CandleBlock candle) {
+        return BY_CANDLE.get(candle).defaultBlockState();
     }
 
     @Override
@@ -74,27 +82,23 @@ public class CandleHoneyTreatBlock extends AbstractCandleBlock {
 
     @Override
     protected @NonNull InteractionResult useItemOn(ItemStack stack, @NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Player player, @NonNull InteractionHand hand, @NonNull BlockHitResult hitResult) {
-        if(!stack.is(Items.FLINT_AND_STEEL) && !stack.is(Items.FIRE_CHARGE)) {
-            if(candleHit(hitResult) && stack.isEmpty() && state.getValue(LIT)) {
+        if (!stack.is(Items.FLINT_AND_STEEL) && !stack.is(Items.FIRE_CHARGE)) {
+            if (candleHit(hitResult) && stack.isEmpty() && state.getValue(LIT)) {
                 extinguish(player, state, level, pos);
                 return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
             } else {
                 return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
             }
         } else {
-            return InteractionResult.SUCCESS;
+            return InteractionResult.PASS;
         }
     }
 
     @Override
     protected @NonNull InteractionResult useWithoutItem(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Player player, @NonNull BlockHitResult hitResult) {
         InteractionResult result = HoneyTreatBlock.eat(level, pos, ModBlocks.HONEY_TREAT.get().defaultBlockState(), player);
-        if(result.consumesAction()) dropResources(state, level, pos);
+        if (result.consumesAction()) dropResources(state, level, pos);
         return result;
-    }
-
-    private static boolean candleHit(BlockHitResult hit) {
-        return hit.getLocation().y - hit.getBlockPos().getY() > 0.5F;
     }
 
     @Override
@@ -130,9 +134,5 @@ public class CandleHoneyTreatBlock extends AbstractCandleBlock {
     @Override
     protected boolean isPathfindable(@NonNull BlockState state, @NonNull PathComputationType pathComputationType) {
         return false;
-    }
-
-    public static BlockState byCandle(CandleBlock candle) {
-        return BY_CANDLE.get(candle).defaultBlockState();
     }
 }

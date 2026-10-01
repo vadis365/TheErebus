@@ -2,6 +2,7 @@ package erebus.world.feature.tree.foliage;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import erebus.block.plants.DarkFruitVineBlock;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.world.tree.ModFoliagePlacers;
 import net.minecraft.core.BlockPos;
@@ -13,12 +14,32 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import org.jetbrains.annotations.NotNull;
 
+
 public class MarshwoodFoliagePlacer extends FoliagePlacer {
 
     public static final MapCodec<MarshwoodFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance -> foliagePlacerParts(instance).apply(instance, MarshwoodFoliagePlacer::new));
 
     public MarshwoodFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
+    }
+
+    public static FoliageAttachment hangerAttachment(BlockPos pos) {
+        return new FoliageAttachment(pos.immutable(), -1, false);
+    }
+
+    public static boolean isHanger(FoliageAttachment attachment) {
+        return attachment.radiusOffset() == -1;
+    }
+
+    private static void placeHanger(WorldGenLevel level, FoliageSetter setter, RandomSource random, BlockPos origin) {
+        if (random.nextInt(4) == 0) return;
+        int length = random.nextInt(13) + 4;
+        var vine = ModBlocks.DARK_FRUIT_VINE.get().defaultBlockState().setValue(DarkFruitVineBlock.AGE, 4);
+        for (int i = 0; i < length; i++) {
+            BlockPos target = origin.below(i);
+            if (level.isOutsideBuildHeight(target) || !level.getBlockState(target).isAir()) break;
+            setter.set(target, vine);
+        }
     }
 
     @Override
@@ -32,6 +53,11 @@ public class MarshwoodFoliagePlacer extends FoliagePlacer {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
+
+        if (isHanger(attachment)) {
+            placeHanger(level, setter, random, pos);
+            return;
+        }
 
         for (int xOff = x - radius; xOff <= x + radius; xOff++) {
             for (int zOff = z - radius; zOff <= z + radius; zOff++) {
@@ -47,8 +73,9 @@ public class MarshwoodFoliagePlacer extends FoliagePlacer {
                     }
 
                     if (rounded == 0) {
-                        tryPlaceLeaf(level, setter, random, config, new BlockPos(xOff, yOff - 2, zOff));
-                        // TODO: Add a vine down 1
+                        if (tryPlaceLeaf(level, setter, random, config, new BlockPos(xOff, yOff - 2, zOff))) {
+                            placeHanger(level, setter, random, new BlockPos(xOff, yOff - 3, zOff));
+                        }
                     }
                 }
             }

@@ -1,7 +1,34 @@
 {
   "variants": {
-    "": {
+    "phase=0": {
       "model": "erebus:block/temple_teleporter"
+    },
+    "phase=1": {
+      "model": "erebus:block/temple_teleporter_1"
+    },
+    "phase=2": {
+      "model": "erebus:block/temple_teleporter_2"
+    },
+    "phase=3": {
+      "model": "erebus:block/temple_teleporter_3"
+    },
+    "phase=4": {
+      "model": "erebus:block/temple_teleporter_4"
+    },
+    "phase=5": {
+      "model": "erebus:block/temple_teleporter_5"
+    },
+    "phase=6": {
+      "model": "erebus:block/temple_teleporter_6"
+    },
+    "phase=7": {
+      "model": "erebus:block/temple_teleporter_7"
+    },
+    "phase=8": {
+      "model": "erebus:block/temple_teleporter_8"
+    },
+    "phase=9": {
+      "model": "erebus:block/temple_teleporter_9"
     }
   }
 }

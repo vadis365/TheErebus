@@ -13,7 +13,8 @@ public class DeathCompassDataHolder {
             instance -> instance.group(
                     Codec.INT.fieldOf("x").forGetter(DeathCompassData::x),
                     Codec.INT.fieldOf("y").forGetter(DeathCompassData::y),
-                    Codec.INT.fieldOf("z").forGetter(DeathCompassData::z)
+                    Codec.INT.fieldOf("z").forGetter(DeathCompassData::z),
+                    Codec.STRING.optionalFieldOf("death_time", "").forGetter(DeathCompassData::deathTime)
             ).apply(instance, DeathCompassData::new)
     );
 
@@ -21,6 +22,7 @@ public class DeathCompassDataHolder {
             ByteBufCodecs.INT, DeathCompassData::x,
             ByteBufCodecs.INT, DeathCompassData::y,
             ByteBufCodecs.INT, DeathCompassData::z,
+            ByteBufCodecs.STRING_UTF8, DeathCompassData::deathTime,
             DeathCompassData::new
     );
 }

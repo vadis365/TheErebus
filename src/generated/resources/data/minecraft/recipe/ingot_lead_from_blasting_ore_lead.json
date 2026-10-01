@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "blocks",
+  "cookingtime": 100,
+  "experience": 0.25,
+  "group": "lead",
+  "ingredient": "erebus:ore_lead",
+  "result": {
+    "id": "erebus:ingot_lead"
+  }
+}

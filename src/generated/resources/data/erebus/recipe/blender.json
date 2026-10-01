@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:bucket",
+    "G": "erebus:smoothie_glass",
+    "U": "erebus:umberstone"
+  },
+  "pattern": [
+    "GBG",
+    "GUG",
+    "UUU"
+  ],
+  "result": {
+    "id": "erebus:blender"
+  }
+}

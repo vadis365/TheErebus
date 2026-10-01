@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "G": "erebus:red_gem_block",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    " S ",
+    "SGS",
+    " S "
+  ],
+  "result": {
+    "id": "erebus:red_gem_lamp"
+  }
+}

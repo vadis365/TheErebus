@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "lead",
+  "ingredient": "erebus:ore_lead",
+  "result": {
+    "id": "erebus:ingot_lead"
+  }
+}

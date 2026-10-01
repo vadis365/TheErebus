@@ -8,9 +8,9 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class FireAntSoldierModel extends EntityModel<FireAntSoldierRenderState> {
-    public ModelPart root;
     private final ModelPart Thx, ThxTop, ThxS, ThxToAb;
     private final ModelPart Ab, AbF, AbSide, AbTop, AbBack;
     private final ModelPart Neck;
@@ -21,7 +21,7 @@ public class FireAntSoldierModel extends EntityModel<FireAntSoldierRenderState> 
     private final ModelPart RFLA, RFLB, RFLC, RFLD;
     private final ModelPart RMLA, RMLB, RMLC, RMLD;
     private final ModelPart RBLA, RBLB, RBLC, RBLD;
-
+    public ModelPart root;
     public FireAntSoldierModel(ModelPart root) {
         super(root);
         this.root = root;
@@ -130,5 +130,22 @@ public class FireAntSoldierModel extends EntityModel<FireAntSoldierRenderState> 
         RBLA.addOrReplaceChild("RBLD", CubeListBuilder.create().texOffs(0, 76).addBox(-1.5F, 8F, -0.5F, 1, 4, 1), PartPose.rotation(0.39F, 0F, 0.77F));
 
         return LayerDefinition.create(mesh, 64, 128);
+    }
+
+    @Override
+    public void setupAnim(FireAntSoldierRenderState state) {
+        super.setupAnim(state);
+        HeadA.yRot += state.yRot * ((float) Math.PI / 180);
+        HeadA.xRot += state.xRot * ((float) Math.PI / 180);
+        float first = Mth.cos(state.walkAnimationPos * 2 + (float) Math.PI) * 0.7F * state.walkAnimationSpeed;
+        float second = Mth.cos(state.walkAnimationPos * 2) * 0.7F * state.walkAnimationSpeed;
+        LBLA.xRot += first;
+        LMLA.xRot += second;
+        LFLA.xRot += first;
+        RBLA.xRot += second;
+        RMLA.xRot += first;
+        RFLA.xRot += second;
+        RMandibleA.yRot -= Mth.cos(state.walkAnimationPos * 0.5F) * 0.2F * state.walkAnimationSpeed;
+        LMandibleA.yRot -= Mth.cos(state.walkAnimationPos * 0.5F + (float) Math.PI) * 0.2F * state.walkAnimationSpeed;
     }
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_glowshroom": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:glowshroom"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:glowshroom_from_bioluminescence"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_glowshroom"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:glowshroom_from_bioluminescence"
+    ]
+  }
+}

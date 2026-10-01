@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:petrified_surface",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

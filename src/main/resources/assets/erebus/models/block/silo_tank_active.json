@@ -1,5 +1,5 @@
 {
-    "parent": "block/cube_all",
+    "parent": "minecraft:block/block",
     "render_type": "minecraft:cutout",
     "textures": {
         "0": "erebus:block/silo_tank_active",

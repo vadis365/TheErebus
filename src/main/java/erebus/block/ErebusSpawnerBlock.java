@@ -3,6 +3,8 @@ package erebus.block;
 import erebus.block.entity.ErebusSpawnerBlockEntity;
 import erebus.registries.blocks.ModBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SpawnerBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -12,15 +14,22 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
+import java.util.function.Supplier;
+
 public class ErebusSpawnerBlock extends SpawnerBlock {
 
-    public ErebusSpawnerBlock(Properties properties) {
+    private final Supplier<? extends EntityType<?>> entityType;
+
+    public ErebusSpawnerBlock(Properties properties, Supplier<? extends EntityType<?>> entityType) {
         super(properties);
+        this.entityType = entityType;
     }
 
     @Override
     public @NonNull BlockEntity newBlockEntity(@NonNull BlockPos pos, @NonNull BlockState state) {
-        return new ErebusSpawnerBlockEntity(pos, state);
+        var entity = new ErebusSpawnerBlockEntity(pos, state);
+        entity.setEntityId(entityType.get(), RandomSource.create());
+        return entity;
     }
 
     @Override

@@ -6,6 +6,7 @@ import erebus.registries.blocks.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -91,7 +92,7 @@ public class UmberFurnaceBlock extends AbstractFurnaceBlock {
 
     protected void openContainer(Level level, @NonNull BlockPos pos, @NonNull Player player) {
         BlockEntity entity = level.getBlockEntity(pos);
-        if(entity instanceof UmberFurnaceBlockEntity) {
+        if (entity instanceof UmberFurnaceBlockEntity) {
             player.openMenu((MenuProvider) entity);
             player.awardStat(Stats.INTERACT_WITH_FURNACE);
         }
@@ -104,7 +105,8 @@ public class UmberFurnaceBlock extends AbstractFurnaceBlock {
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NonNull Level level, @NonNull BlockState state, @NonNull BlockEntityType<T> type) {
-        return createFurnaceTicker(level, type, ModBlockEntities.UMBERFURNACE.get());
+        return level.isClientSide() ? null : createTickerHelper(type, ModBlockEntities.UMBERFURNACE.get(),
+                (world, pos, blockState, furnace) -> UmberFurnaceBlockEntity.serverTick((ServerLevel) world, pos, blockState, furnace));
     }
 
     @Override

@@ -14,6 +14,9 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * Feature that generates rock spikes made of petrified wood.
  * Creates both upward and downward spikes with a diamond ore base.
@@ -28,6 +31,8 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
         WorldGenLevel level = context.level();
         BlockPos originPos = context.origin();
         RandomSource random = context.random();
+
+        if (level.isOutsideBuildHeight(originPos)) return false;
 
         // Find the ground level
         BlockPos groundPos = findGroundPosition(level, originPos);
@@ -45,12 +50,17 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
         int spikeRadius = spikeHeight / 4 + random.nextInt(2);
 
         // Generate the main spike structure
-        generateSpikeStructure(level, groundPos, spikeHeight, spikeRadius, random);
+        var planned = new LinkedHashMap<BlockPos, BlockState>();
+        if (!generateSpikeStructure(level, groundPos, spikeHeight, spikeRadius, random, planned)) return false;
 
         // Generate the diamond ore base
-        generateOreBase(level, groundPos, spikeRadius, random);
+        generateOreBase(level, groundPos, spikeRadius, random, planned);
 
-        return true;
+        boolean placed = false;
+        for (var entry : planned.entrySet()) {
+            placed |= level.setBlock(entry.getKey(), entry.getValue(), 2);
+        }
+        return placed;
     }
 
     /**
@@ -58,7 +68,7 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
      */
     private BlockPos findGroundPosition(WorldGenLevel level, BlockPos startPos) {
         BlockPos currentPos = startPos;
-        while (level.getBlockState(currentPos).isAir() && currentPos.getY() > 2) {
+        while (level.getBlockState(currentPos).isAir() && currentPos.getY() > level.getMinY() + 2) {
             currentPos = currentPos.below();
         }
         return currentPos;
@@ -67,7 +77,7 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
     /**
      * Generates the main spike structure with both upward and downward components.
      */
-    private void generateSpikeStructure(WorldGenLevel level, BlockPos centerPos, int spikeHeight, int maxRadius, RandomSource random) {
+    private boolean generateSpikeStructure(WorldGenLevel level, BlockPos centerPos, int spikeHeight, int maxRadius, RandomSource random, Map<BlockPos, BlockState> planned) {
         for (int heightIndex = 0; heightIndex < spikeHeight; ++heightIndex) {
             // Calculate radius at current height (tapers as height increases)
             float radiusAtHeight = (1.0F - (float) heightIndex / (float) spikeHeight) * (float) maxRadius;
@@ -87,7 +97,7 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
                     // Add randomness to the edge blocks
                     boolean isEdgeBlock = (xOffset == -radius || xOffset == radius ||
                             zOffset == -radius || zOffset == radius);
-                    boolean shouldPlaceEdgeBlock = !isEdgeBlock || random.nextFloat() <= 0.75F;
+                    boolean shouldPlaceEdgeBlock = isWithinSpikeRadius && (!isEdgeBlock || random.nextFloat() <= 0.75F);
 
                     if (isWithinSpikeRadius && shouldPlaceEdgeBlock) {
                         // Generate upward spike
@@ -95,8 +105,9 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
                         BlockState existingBlockUp = level.getBlockState(upwardPos);
 
                         if (existingBlockUp.isAir() || existingBlockUp.is(ModBlocks.VOLCANIC_ROCK)) {
-                            placePetrifiedWoodBlock(level, upwardPos, heightIndex);
-                        }
+                            if (level.isOutsideBuildHeight(upwardPos)) return false;
+                            planned.put(upwardPos, petrifiedWoodState(heightIndex));
+                        } else return false;
 
                         // Generate downward spike (mirror of the upward spike)
                         if (heightIndex != 0 && radius > 0) {
@@ -104,20 +115,22 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
                             BlockState existingBlockDown = level.getBlockState(downwardPos);
 
                             if (existingBlockDown.isAir() || existingBlockDown.is(ModBlocks.VOLCANIC_ROCK)) {
-                                placePetrifiedWoodBlock(level, downwardPos, heightIndex);
-                            }
+                                if (level.isOutsideBuildHeight(downwardPos)) return false;
+                                planned.put(downwardPos, petrifiedWoodState(heightIndex));
+                            } else return false;
                         }
                     }
                 }
             }
         }
+        return true;
     }
 
     /**
-     * Places the appropriate petrified wood block based on height.
+     * Selects the appropriate petrified wood block based on height.
      * Different heights use different variants of petrified wood.
      */
-    private void placePetrifiedWoodBlock(WorldGenLevel level, BlockPos pos, int height) {
+    private BlockState petrifiedWoodState(int height) {
         BlockState blockState;
 
         if (height <= 3) {
@@ -134,13 +147,13 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
             blockState = ModBlocks.PETRIFIED_WOOD_ROCK_6.get().defaultBlockState();
         }
 
-        setBlock(level, pos, blockState.setValue(BlockStateProperties.AXIS, Axis.Y));
+        return blockState.setValue(BlockStateProperties.AXIS, Axis.Y);
     }
 
     /**
      * Generates the diamond ore base beneath the spike.
      */
-    private void generateOreBase(WorldGenLevel level, BlockPos centerPos, int maxRadius, RandomSource random) {
+    private void generateOreBase(WorldGenLevel level, BlockPos centerPos, int maxRadius, RandomSource random, Map<BlockPos, BlockState> planned) {
         // Calculate base radius (smaller than the spike radius)
         int baseRadius = Math.min(Math.max(maxRadius - 1, 0), 1);
 
@@ -157,8 +170,8 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
                 }
 
                 // Place ore column
-                while (currentPos.getY() > 50) {
-                    BlockState existingBlock = level.getBlockState(currentPos);
+                while (currentPos.getY() > level.getMinY() + 50 && !level.isOutsideBuildHeight(currentPos)) {
+                    BlockState existingBlock = planned.getOrDefault(currentPos, level.getBlockState(currentPos));
 
                     // Stop if we hit solid blocks (except certain replaceable blocks)
                     if (!existingBlock.isAir() &&
@@ -170,7 +183,7 @@ public class RockSpikeFeatureConfiguration extends Feature<NoneFeatureConfigurat
                     }
 
                     // Place a diamond ore block
-                    setBlock(level, currentPos, ModBlocks.ORE_ENCRUSTED_DIAMOND.get().defaultBlockState());
+                    planned.put(currentPos, ModBlocks.ORE_ENCRUSTED_DIAMOND.get().defaultBlockState());
                     currentPos = currentPos.below();
                     --oreColumnHeight;
 

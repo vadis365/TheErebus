@@ -2,6 +2,5 @@
   "type": "erebus:dung_pile",
   "biomes": "#erebus:has_dung_pile",
   "spawn_overrides": {},
-  "step": "surface_structures",
-  "terrain_adaptation": "beard_box"
+  "step": "surface_structures"
 }

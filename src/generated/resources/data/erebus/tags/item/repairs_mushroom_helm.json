@@ -1,3 +1,11 @@
 {
-  "values": []
+  "values": [
+    "erebus:dark_capped_mushroom_block",
+    "erebus:grandmas_shoes_mushroom_block",
+    "erebus:sarcastic_czech_mushroom_block",
+    "erebus:kaizers_fingers_mushroom_block",
+    "erebus:dutch_cap_mushroom_block",
+    "minecraft:red_mushroom_block",
+    "minecraft:brown_mushroom_block"
+  ]
 }

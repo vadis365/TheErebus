@@ -11,7 +11,6 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
 public class TitanBeetleModel extends EntityModel<TitanBeetleRenderState> {
-    public ModelPart root;
     private final ModelPart Thx, ThxS;
     private final ModelPart Ab, AbSide, AbBack;
     private final ModelPart HeadMain, Eyes, HeadTop, HeadFront, Neck;
@@ -27,7 +26,6 @@ public class TitanBeetleModel extends EntityModel<TitanBeetleRenderState> {
 
     public TitanBeetleModel(ModelPart root) {
         super(root);
-        this.root = root;
         this.Thx = root.getChild("Thx");
         this.ThxS = root.getChild("ThxS");
         this.Ab = root.getChild("Ab");
@@ -146,9 +144,19 @@ public class TitanBeetleModel extends EntityModel<TitanBeetleRenderState> {
         return LayerDefinition.create(mesh, 128, 128);
     }
 
+    private static void scaleCargo(ModelPart part) {
+        part.xScale = part.yScale = part.zScale = 0.67F;
+        part.y = part.y * 0.67F + 0.27F * 16;
+        part.z = part.z * 0.67F + 0.15F * 16;
+    }
+
     @Override
     public void setupAnim(TitanBeetleRenderState state) {
         super.setupAnim(state);
+        Lid.visible = Body.visible = Lock.visible = state.hasChest || state.hasEnderChest;
+        scaleCargo(Lid);
+        scaleCargo(Body);
+        scaleCargo(Lock);
         Lid.xRot = 0.0872665F - (state.smoothedTicks * Mth.HALF_PI);
         Lock.xRot = 0.0872665F - (state.smoothedTicks * Mth.HALF_PI);
 
@@ -160,8 +168,8 @@ public class TitanBeetleModel extends EntityModel<TitanBeetleRenderState> {
         LML1.xRot = legMovement;
         LFL1.xRot = -legMovement - correction;
 
-        RBL1.xRot = -legMovement + correction;
-        RML1.xRot = legMovement;
-        RFL1.xRot = -legMovement - correction;
+        RBL1.xRot = legMovement + correction;
+        RML1.xRot = -legMovement;
+        RFL1.xRot = legMovement - correction;
     }
 }

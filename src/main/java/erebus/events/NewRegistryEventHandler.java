@@ -30,7 +30,7 @@ public class NewRegistryEventHandler {
 
     @SubscribeEvent
     public static void registerBiomeSource(RegisterEvent event) {
-        if(event.getRegistryKey().equals(Registries.BIOME_SOURCE)) {
+        if (event.getRegistryKey().equals(Registries.BIOME_SOURCE)) {
             Registry.register(BuiltInRegistries.BIOME_SOURCE, Erebus.prefix("erebus_biomes"), ErebusBiomeProvider.CODEC);
         }
     }

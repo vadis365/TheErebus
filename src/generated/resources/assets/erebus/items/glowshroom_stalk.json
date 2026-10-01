@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/glowshroom_stalk"
+    "model": "erebus:block/glowshroom_stalk_main"
   }
 }

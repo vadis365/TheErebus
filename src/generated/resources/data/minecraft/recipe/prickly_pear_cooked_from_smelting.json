@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.2,
+  "ingredient": "erebus:prickly_pear_raw",
+  "result": {
+    "id": "erebus:prickly_pear_cooked"
+  }
+}

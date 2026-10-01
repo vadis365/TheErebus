@@ -170,23 +170,7 @@ public class ModSurfaceRules {
     private static RuleSource decorateUlteriorOutback() {
         return ifTrue(
                 isBiome(ModBiomes.ULTERIOR_OUTBACK.getResourceKey()),
-                sequence(
-                        ifTrue(
-                                ON_FLOOR,
-                                sequence(
-                                        sequence(
-                                                ifTrue(noiseCondition(Noises.SURFACE, -0.1818, 0.1818), GRASS),
-                                                ifTrue(noiseCondition(Noises.SURFACE, 0.5454, 0.909), RED_SAND),
-                                                ifTrue(noiseCondition(Noises.SURFACE, -0.909, -0.5454), DIRT)
-                                        ),
-                                        UMBERSTONE
-                                )
-                        ),
-                        ifTrue(
-                                ON_CEILING,
-                                UMBERSTONE
-                        )
-                )
+                sequence(placeBlock(RED_SAND, false), placeBlock(RED_SANDSTONE, true))
         );
     }
 

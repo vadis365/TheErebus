@@ -7,15 +7,21 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
 public class BotFlyModel extends EntityModel<BotFlyRenderState> {
-	public ModelPart root;
+    private final boolean wingsOnly;
     private final ModelPart RWing1;
-	private final ModelPart RWing2;
-	private final ModelPart LWing1;
-	private final ModelPart LWing2;
+    private final ModelPart RWing2;
+    private final ModelPart LWing1;
+    private final ModelPart LWing2;
+    public ModelPart root;
 
     public BotFlyModel(ModelPart root) {
-		super(root);
-		this.root = root;
+        this(root, false);
+    }
+
+    public BotFlyModel(ModelPart root, boolean wingsOnly) {
+        super(root);
+        this.wingsOnly = wingsOnly;
+        this.root = root;
         root.getChild("Head");
         root.getChild("HeadFront");
         root.getChild("HeadTop");
@@ -30,9 +36,9 @@ public class BotFlyModel extends EntityModel<BotFlyRenderState> {
         root.getChild("Ab3");
         root.getChild("Ab4");
         this.RWing1 = root.getChild("RWing1");
-		this.RWing2 = root.getChild("RWing2");
-		this.LWing1 = root.getChild("LWing1");
-		this.LWing2 = root.getChild("LWing2");
+        this.RWing2 = root.getChild("RWing2");
+        this.LWing1 = root.getChild("LWing1");
+        this.LWing2 = root.getChild("LWing2");
         root.getChild("LegRF1");
         root.getChild("LegRF2");
         root.getChild("LegRF3");
@@ -53,10 +59,10 @@ public class BotFlyModel extends EntityModel<BotFlyRenderState> {
         root.getChild("LegLB3");
     }
 
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
-		partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+        partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
         partdefinition.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(24, 0).addBox(-3.0F, -2.0F, -4.0F, 6.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 15.0F, -4.0F));
 
         partdefinition.addOrReplaceChild("HeadFront", CubeListBuilder.create().texOffs(15, 0).addBox(-2.0F, -1.5F, -4.5F, 4.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 15.0F, -4.0F));
@@ -128,13 +134,16 @@ public class BotFlyModel extends EntityModel<BotFlyRenderState> {
         partdefinition.addOrReplaceChild("LegLB3", CubeListBuilder.create().texOffs(0, 19).addBox(-0.5F, 4.3F, -3.1F, 1.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 18.0F, -1.0F, -0.4363F, -2.618F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 64, 32);
-	}
+    }
 
-	@Override
-	public void setupAnim(BotFlyRenderState state) {
-		RWing1.xRot = state.flap;
-		RWing2.xRot = state.flap;
-		LWing1.xRot = state.flap;
-		LWing2.xRot = state.flap;
-	}
+    @Override
+    public void setupAnim(BotFlyRenderState state) {
+        super.setupAnim(state);
+        root.getAllParts().forEach(part -> part.visible = part == root ||
+                (wingsOnly == (part == RWing1 || part == RWing2 || part == LWing1 || part == LWing2)));
+        RWing1.xRot = state.flap;
+        RWing2.xRot = state.flap;
+        LWing1.xRot = state.flap;
+        LWing2.xRot = state.flap;
+    }
 }

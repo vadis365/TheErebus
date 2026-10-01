@@ -42,7 +42,7 @@ public class PortalAdvancements extends ModAdvancementsHelper {
         setConsumer(consumer);
 
         root = save(
-                getRootBuilder(TASK, Blocks.STONE_BRICKS, "root", Identifier.withDefaultNamespace("textures/block/mossy_stone_bricks.png"))
+                getRootBuilder(TASK, Blocks.STONE_BRICKS, "root", Identifier.withDefaultNamespace("block/mossy_stone_bricks"))
                         .addCriterion("diamond", hasItems(Items.DIAMOND))
                         .addCriterion("emerald", hasItems(Items.EMERALD))
                         .addCriterion("obsidian", hasItems(Blocks.OBSIDIAN))

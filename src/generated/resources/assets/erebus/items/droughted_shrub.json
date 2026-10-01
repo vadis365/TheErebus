@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/droughted_shrub"
+    "model": "erebus:block/droughted_shrub_lower"
   }
 }

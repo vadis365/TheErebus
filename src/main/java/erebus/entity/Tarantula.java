@@ -21,14 +21,20 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.spider.Spider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
@@ -39,6 +45,40 @@ public class Tarantula extends Monster {
 
     public Tarantula(EntityType<? extends Monster> type, Level level) {
         super(type, level);
+    }
+
+    public static AttributeSupplier.Builder createAttributes() {
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 30F)
+                .add(Attributes.MOVEMENT_SPEED, 0.6F)
+                .add(Attributes.ARMOR, 4)
+                .add(Attributes.ATTACK_DAMAGE, 5.0);
+    }
+
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        return new WallClimberNavigation(this, level);
+    }
+
+    @Override
+    public boolean checkSpawnObstruction(LevelReader level) {
+        return !level.containsAnyLiquid(getBoundingBox()) && level.noCollision(this);
+    }
+
+    @Override
+    public boolean checkSpawnRules(LevelAccessor level, EntitySpawnReason reason) {
+        return true;
+    }
+
+    @Override
+    public boolean isWithinMeleeAttackRange(LivingEntity target) {
+        return distanceToSqr(target) <= 4 + target.getBbWidth();
+    }
+
+    @Override
+    public int getMaxSpawnClusterSize() {
+        // The legacy custom spawner ignored the declared cap of two and used biome groups up to eight.
+        return 8;
     }
 
     @Override
@@ -53,24 +93,16 @@ public class Tarantula extends Monster {
         targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 30F)
-                .add(Attributes.MOVEMENT_SPEED, 0.6F)
-                .add(Attributes.ARMOR, 4)
-                .add(Attributes.ATTACK_DAMAGE, 5.0);
-    }
-
     @Override
     protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
         super.defineSynchedData(builder);
         builder.define(SKIN_TYPE, random.nextInt(3));
-        builder.define(CLIMBING, (byte)0);
+        builder.define(CLIMBING, (byte) 0);
     }
 
     @Override
-    public void playAmbientSound() {
-        playSound(SoundEvents.SPIDER_AMBIENT);
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.SPIDER_AMBIENT;
     }
 
     @Override
@@ -93,6 +125,11 @@ public class Tarantula extends Monster {
         return isBesideClimbableBlock();
     }
 
+    @Override
+    public void makeStuckInBlock(BlockState state, Vec3 speedMultiplier) {
+        if (!state.is(Blocks.COBWEB)) super.makeStuckInBlock(state, speedMultiplier);
+    }
+
     @SuppressWarnings("deprecation")
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
@@ -106,42 +143,39 @@ public class Tarantula extends Monster {
     public void setBesideClimbableBlock(boolean climbing) {
         byte data = entityData.get(CLIMBING);
         if (climbing)
-            data = (byte)(data | 1);
+            data = (byte) (data | 1);
         else
-        	data = (byte)(data & -2);
-       entityData.set(CLIMBING, data);
-    }
-
-    public void setSkin(int skin) {
-        entityData.set(SKIN_TYPE, skin);
+            data = (byte) (data & -2);
+        entityData.set(CLIMBING, data);
     }
 
     public int getSkin() {
         return entityData.get(SKIN_TYPE);
     }
 
+    public void setSkin(int skin) {
+        entityData.set(SKIN_TYPE, Math.clamp(skin, 0, 2));
+    }
+
     @Override
     public void tick() {
         super.tick();
-        if(!level().isClientSide()) {
+        if (!level().isClientSide()) {
             setBesideClimbableBlock(horizontalCollision);
         }
     }
 
     @Override
     public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity target) {
-        if (super.doHurtTarget(level, target)) {
-            if (target instanceof LivingEntity living) {
-                byte duration = 0;
-
-                switch (level.getDifficulty()) {
-                    case NORMAL -> duration = 5;
-                    case HARD -> duration = 10;
-                }
-
-                if (duration > 0)
-                    living.addEffect(new MobEffectInstance(MobEffects.POISON, duration * 20, 0));
-            }
+        if (!hasLineOfSight(target) || !super.doHurtTarget(level, target)) return false;
+        if (target instanceof LivingEntity living) {
+            int duration = switch (level.getDifficulty()) {
+                case NORMAL -> 100;
+                case HARD -> 200;
+                default -> 0;
+            };
+            if (duration > 0)
+                living.addEffect(new MobEffectInstance(MobEffects.POISON, duration, 0), this);
         }
         return true;
     }
@@ -162,7 +196,7 @@ public class Tarantula extends Monster {
         if (groupData == null) {
             groupData = new Spider.SpiderEffectsGroupData();
             if (level.getDifficulty() == Difficulty.HARD && random.nextFloat() < 0.1F * difficulty.getSpecialMultiplier()) {
-                ((Spider.SpiderEffectsGroupData)groupData).setRandomEffect(random);
+                ((Spider.SpiderEffectsGroupData) groupData).setRandomEffect(random);
             }
         }
 
@@ -185,6 +219,6 @@ public class Tarantula extends Monster {
     @Override
     protected void readAdditionalSaveData(@NonNull ValueInput input) {
         super.readAdditionalSaveData(input);
-        setSkin(input.getIntOr("skin", 0));
+        setSkin(input.getIntOr("skin", getSkin()));
     }
 }

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "erebus:umberstone"
+    "erebus:umbercobble"
   ],
   "result": {
     "id": "erebus:umberstone_button"

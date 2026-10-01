@@ -51,7 +51,8 @@ public class ErebusChestRenderer implements BlockEntityRenderer<ErebusChestBlock
     public void extractRenderState(ErebusChestBlockEntity entity, ErebusChestRenderState state, float partialTicks, @NonNull Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
         DoubleBlockCombiner.NeighborCombineResult<? extends ChestBlockEntity> combineResult;
 
-        searchForNeighbor: {
+        searchForNeighbor:
+        {
             BlockEntityRenderer.super.extractRenderState(entity, state, partialTicks, cameraPosition, breakProgress);
             boolean hasLevel = entity.getLevel() != null;
             BlockState blockState = hasLevel ? entity.getBlockState() : ModBlocks.CHEST_ASPER.get().defaultBlockState().setValue(ErebusChestBlock.FACING, Direction.SOUTH);
@@ -59,9 +60,9 @@ public class ErebusChestRenderer implements BlockEntityRenderer<ErebusChestBlock
             state.angle = blockState.getValue(ErebusChestBlock.FACING).toYRot();
             state.material = getChestMaterial(entity);
 
-            if(hasLevel) {
+            if (hasLevel) {
                 Block block = blockState.getBlock();
-                if(block instanceof ErebusChestBlock chest) {
+                if (block instanceof ErebusChestBlock chest) {
                     combineResult = chest.combine(blockState, entity.getLevel(), entity.getBlockPos(), true);
                     break searchForNeighbor;
                 }
@@ -71,7 +72,7 @@ public class ErebusChestRenderer implements BlockEntityRenderer<ErebusChestBlock
         }
 
         state.open = combineResult.apply(ErebusChestBlock.opennessCombiner(entity)).get(partialTicks);
-        if(state.type != ChestType.SINGLE) {
+        if (state.type != ChestType.SINGLE) {
             state.lightCoords = combineResult.apply(new BrightnessCombiner<>()).applyAsInt(state.lightCoords);
         }
     }
@@ -93,33 +94,48 @@ public class ErebusChestRenderer implements BlockEntityRenderer<ErebusChestBlock
         SpriteId material = ModSheets.chooseSpriteId(state.material, state.type);
         RenderType renderType = material.renderType(RenderTypes::entityCutout);
 
-        switch(state.type) {
+        switch (state.type) {
             case LEFT -> submit.submitModel(doubleLeftModel, open, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, state.breakProgress);
             case RIGHT -> submit.submitModel(doubleRightModel, open, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, state.breakProgress);
             case SINGLE -> submit.submitModel(model, open, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, -1, materials.get(material), 0, state.breakProgress);
-            default -> {}
+            default -> {
+            }
         }
 
         pose.popPose();
     }
 
     private ErebusChestRenderState.ErebusChestMaterialType getChestMaterial(BlockEntity entity) {
-        if(entity.getBlockState().getBlock() instanceof ErebusChestBlock chest) {
+        if (entity.getBlockState().getBlock() instanceof ErebusChestBlock chest) {
             switch (chest.getUnlocalizedName()) {
-                case "chest_asper": return ErebusChestRenderState.ErebusChestMaterialType.ASPER;
-                case "chest_bamboo": return ErebusChestRenderState.ErebusChestMaterialType.BAMBOO;
-                case "chest_baobab": return ErebusChestRenderState.ErebusChestMaterialType.BAOBAB;
-                case "chest_balsam": return ErebusChestRenderState.ErebusChestMaterialType.BALSAM;
-                case "chest_cypress": return ErebusChestRenderState.ErebusChestMaterialType.CYPRESS;
-                case "chest_eucalyptus": return ErebusChestRenderState.ErebusChestMaterialType.EUCALYPTUS;
-                case "chest_mahogany": return ErebusChestRenderState.ErebusChestMaterialType.MAHOGANY;
-                case "chest_marshwood": return ErebusChestRenderState.ErebusChestMaterialType.MARSHWOOD;
-                case "chest_mossbark": return ErebusChestRenderState.ErebusChestMaterialType.MOSSBARK;
-                case "chest_petrified": return ErebusChestRenderState.ErebusChestMaterialType.PETRIFIED;
-                case "chest_rotten": return ErebusChestRenderState.ErebusChestMaterialType.ROTTEN;
-                case "chest_scorched": return ErebusChestRenderState.ErebusChestMaterialType.SCORCHED;
-                case "chest_varnished": return ErebusChestRenderState.ErebusChestMaterialType.VARNISHED;
-                case "chest_white": return ErebusChestRenderState.ErebusChestMaterialType.WHITE;
+                case "chest_asper":
+                    return ErebusChestRenderState.ErebusChestMaterialType.ASPER;
+                case "chest_bamboo":
+                    return ErebusChestRenderState.ErebusChestMaterialType.BAMBOO;
+                case "chest_baobab":
+                    return ErebusChestRenderState.ErebusChestMaterialType.BAOBAB;
+                case "chest_balsam":
+                    return ErebusChestRenderState.ErebusChestMaterialType.BALSAM;
+                case "chest_cypress":
+                    return ErebusChestRenderState.ErebusChestMaterialType.CYPRESS;
+                case "chest_eucalyptus":
+                    return ErebusChestRenderState.ErebusChestMaterialType.EUCALYPTUS;
+                case "chest_mahogany":
+                    return ErebusChestRenderState.ErebusChestMaterialType.MAHOGANY;
+                case "chest_marshwood":
+                    return ErebusChestRenderState.ErebusChestMaterialType.MARSHWOOD;
+                case "chest_mossbark":
+                    return ErebusChestRenderState.ErebusChestMaterialType.MOSSBARK;
+                case "chest_petrified":
+                    return ErebusChestRenderState.ErebusChestMaterialType.PETRIFIED;
+                case "chest_rotten":
+                    return ErebusChestRenderState.ErebusChestMaterialType.ROTTEN;
+                case "chest_scorched":
+                    return ErebusChestRenderState.ErebusChestMaterialType.SCORCHED;
+                case "chest_varnished":
+                    return ErebusChestRenderState.ErebusChestMaterialType.VARNISHED;
+                case "chest_white":
+                    return ErebusChestRenderState.ErebusChestMaterialType.WHITE;
             }
         }
         return ErebusChestRenderState.ErebusChestMaterialType.ASPER;

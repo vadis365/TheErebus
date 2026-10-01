@@ -29,9 +29,10 @@ public class BiomeDensitySource {
             TerrainColumn.CODEC.listOf().fieldOf("biome_landscape").xmap(l -> l.stream().collect(Collectors.toMap(TerrainColumn::getResourceKey, Function.identity())), m -> m.values().stream().sorted(Comparator.comparing(TerrainColumn::getResourceKey)).toList()).forGetter(o -> o.biomeList),
             BiomeLayerStack.HOLDER_CODEC.fieldOf("biome_layer_config").forGetter(BiomeDensitySource::getBiomeConfig)
     ).apply(instance, instance.stable(BiomeDensitySource::new)));
-
+    private static final double BLEND_RADIUS = 8.75;
+    private static final int BLEND_RADIUS_INT = Mth.floor(BLEND_RADIUS + 1.0);
+    private static final int BLOCK_XYZ_OFFSET = QuartPos.SIZE / 2;
     private final Map<ResourceKey<Biome>, TerrainColumn> biomeList;
-
     private final Holder<BiomeLayerFactory> genBiomeConfig;
     private final Supplier<LazyArea> genBiomes;
 
@@ -69,16 +70,9 @@ public class BiomeDensitySource {
         return Optional.ofNullable(this.biomeList.get(biome));
     }
 
-    // Only used for building a cache
     public Stream<Holder<Biome>> collectPossibleBiomes() {
-        return this.biomeList.values().stream().flatMap(TerrainColumn::getBiomes);
+        return this.biomeList.values().stream().sorted(Comparator.comparing(TerrainColumn::getResourceKey)).flatMap(TerrainColumn::getBiomes);
     }
-
-    public record DensityData(double depth, double scale) {}
-
-    private static final double BLEND_RADIUS = 8.75;
-    private static final int BLEND_RADIUS_INT = Mth.floor(BLEND_RADIUS + 1.0);
-    private static final int BLOCK_XYZ_OFFSET = QuartPos.SIZE / 2;
 
     public DensityData sampleTerrain(int blockX, int blockZ, DensityFunction.FunctionContext context) {
         double totalMappedDepth = 0.0;
@@ -132,5 +126,8 @@ public class BiomeDensitySource {
         }
 
         return new DensityData(totalMappedDepth / totalContribution, totalScale / totalScaleContribution);
+    }
+
+    public record DensityData(double depth, double scale) {
     }
 }

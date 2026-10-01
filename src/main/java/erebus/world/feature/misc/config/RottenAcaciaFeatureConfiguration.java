@@ -26,18 +26,23 @@ public class RottenAcaciaFeatureConfiguration extends Feature<NoneFeatureConfigu
         int offsetX = random.nextInt(2);
         int offsetZ = 1 - offsetX;
 
+        int unsupported = 0;
         for (int c = 0; c < length; c++) {
             BlockPos pos = origin.offset(offsetX * c, 0, offsetZ * c);
-            if (!level.getBlockState(pos).isAir() || level.getBlockState(pos.below()).isAir()) {
+            if (level.isOutsideBuildHeight(pos) || level.isOutsideBuildHeight(pos.below()) || !level.isEmptyBlock(pos)) {
                 return false;
+            }
+            if (!level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP)) {
+                if ((c != 0 && c != length - 1) || ++unsupported > 1) return false;
             }
         }
 
+        boolean placed = false;
         for (int c = 0; c < length; c++) {
             BlockPos pos = origin.offset(offsetX * c, 0, offsetZ * c);
-            setBlock(level, pos, ModBlocks.LOG_HOLLOW.get().defaultBlockState().setValue(HollowLogBlock.FACING, offsetX == 0 ? Direction.SOUTH : Direction.EAST));
+            placed |= level.setBlock(pos, ModBlocks.LOG_HOLLOW.get().defaultBlockState().setValue(HollowLogBlock.FACING, offsetX == 0 ? Direction.SOUTH : Direction.EAST), 2);
         }
 
-        return true;
+        return placed;
     }
 }

@@ -18,62 +18,69 @@ import org.jspecify.annotations.Nullable;
 import java.util.function.Consumer;
 
 public final class LiquifierSpecialRenderer implements NoDataSpecialModelRenderer {
-	private final LiquifierModel model;
-	private final Identifier texture;
+    private final LiquifierModel model;
+    private final Identifier texture;
 
-	public LiquifierSpecialRenderer(LiquifierModel model, Identifier texture) {
-		this.model = model;
-		this.texture = texture;
-	}
+    public LiquifierSpecialRenderer(LiquifierModel model, Identifier texture) {
+        this.model = model;
+        this.texture = texture;
+    }
 
-	@Override
-	public void submit(PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
-		pose.pushPose();
-		pose.translate(0.5F, 0.75F, 0.5F);
-		pose.scale(0.7125F, -1.069F, -0.7125F);
-		submit.submitModel(
-				model,
-				new LiquifierBlockEntityRenderState(),
-				pose,
-				RenderTypes.entitySolid(texture),
-				light,
-				overlay,
-				outlineColor,
-				null
-		);
-		pose.popPose();
-	}
+    private static void applyPose(PoseStack pose) {
+        pose.translate(0.5F, 1.5F, 0.5F);
+        pose.scale(-1, -1, 1);
+    }
 
-	@Override
-	public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
-		PoseStack poseStack = new PoseStack();
-		model.setupAnim(new LiquifierBlockEntityRenderState());
-		model.root().getExtentsForGui(poseStack, consumer);
-	}
+    @Override
+    public void submit(PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
+        pose.pushPose();
+        applyPose(pose);
+        submit.submitModel(
+                model,
+                new LiquifierBlockEntityRenderState(),
+                pose,
+                RenderTypes.entityTranslucent(texture),
+                light,
+                overlay,
+                -1,
+                null,
+                outlineColor,
+                null
+        );
+        pose.popPose();
+    }
 
-	public record Unbaked(Identifier texture) implements SpecialModelRenderer.Unbaked {
+    @Override
+    public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
+        PoseStack poseStack = new PoseStack();
+        model.setupAnim(new LiquifierBlockEntityRenderState());
+        applyPose(poseStack);
+        model.root().getExtentsForGui(poseStack, consumer);
+    }
 
-		public static final MapCodec<Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
-				i -> i.group(
-						Identifier.CODEC.fieldOf("texture").forGetter(LiquifierSpecialRenderer.Unbaked::texture)
-				).apply(i, LiquifierSpecialRenderer.Unbaked::new)
-		);
+    public record Unbaked(Identifier texture) implements NoDataSpecialModelRenderer.Unbaked {
 
-		@Override
-		public @Nullable SpecialModelRenderer<?> bake(BakingContext bakingContext) {
-			return new LiquifierSpecialRenderer(
-					new LiquifierModel(
-							bakingContext
-									.entityModelSet()
-									.bakeLayer(ModBlockEntityRendering.LIQUIFIER)
-					),
-					texture
-			);
-		}
+        public static final MapCodec<Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
+                i -> i.group(
+                        Identifier.CODEC.fieldOf("texture").forGetter(LiquifierSpecialRenderer.Unbaked::texture)
+                ).apply(i, LiquifierSpecialRenderer.Unbaked::new)
+        );
 
-		@Override
-		public @NonNull MapCodec<? extends SpecialModelRenderer.Unbaked> type() {
-			return MAP_CODEC;
-		}
-	}
+        @Override
+        public @Nullable SpecialModelRenderer<Void> bake(BakingContext bakingContext) {
+            return new LiquifierSpecialRenderer(
+                    new LiquifierModel(
+                            bakingContext
+                                    .entityModelSet()
+                                    .bakeLayer(ModBlockEntityRendering.LIQUIFIER)
+                    ),
+                    texture
+            );
+        }
+
+        @Override
+        public @NonNull MapCodec<Unbaked> type() {
+            return MAP_CODEC;
+        }
+    }
 }

@@ -17,41 +17,41 @@ import org.jspecify.annotations.NonNull;
 
 public class BlackAntLayer extends RenderLayer<BlackAntRenderState, BlackAntModel> {
 
-	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/black_ant_kit.png");
+    private static final Identifier TEXTURE = Erebus.prefix("textures/entity/black_ant_kit.png");
 
-	private final BlackAntCollectorModel collectorModel;
-	private final BlackAntFertilizerModel fertilizerModel;
-	private final BlackAntHarvesterModel harvesterModel;
-	private final BlackAntPlanterModel planterModel;
+    private final BlackAntCollectorModel collectorModel;
+    private final BlackAntFertilizerModel fertilizerModel;
+    private final BlackAntHarvesterModel harvesterModel;
+    private final BlackAntPlanterModel planterModel;
 
-	public BlackAntLayer(RenderLayerParent<BlackAntRenderState, BlackAntModel> parent, BlackAntCollectorModel collectorModel, BlackAntFertilizerModel fertilizerModel, BlackAntHarvesterModel harvesterModel, BlackAntPlanterModel planterModel) {
-		super(parent);
-		this.collectorModel = collectorModel;
-		this.fertilizerModel = fertilizerModel;
-		this.harvesterModel = harvesterModel;
-		this.planterModel = planterModel;
-	}
+    public BlackAntLayer(RenderLayerParent<BlackAntRenderState, BlackAntModel> parent, BlackAntCollectorModel collectorModel, BlackAntFertilizerModel fertilizerModel, BlackAntHarvesterModel harvesterModel, BlackAntPlanterModel planterModel) {
+        super(parent);
+        this.collectorModel = collectorModel;
+        this.fertilizerModel = fertilizerModel;
+        this.harvesterModel = harvesterModel;
+        this.planterModel = planterModel;
+    }
 
-	@Override
-	public void submit(PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, BlackAntRenderState state, float xRot, float yRot) {
-		pose.pushPose();
+    @Override
+    public void submit(PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, BlackAntRenderState state, float xRot, float yRot) {
+        pose.pushPose();
 
-		if(state.isPlanter) {
-			submit.submitModel(planterModel, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
-		}
+        if (state.isPlanter) {
+            submit.submitModel(planterModel, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+        }
 
-		if(state.isHarvester) {
-			submit.submitModel(harvesterModel, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
-		}
+        if (state.isHarvester) {
+            submit.submitModel(harvesterModel, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+        }
 
-		if(state.isCollector) {
-			submit.submitModel(collectorModel, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
-		}
+        if (state.isCollector) {
+            submit.submitModel(collectorModel, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+        }
 
-		if(state.isFertilizer) {
-			submit.submitModel(fertilizerModel, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
-		}
+        if (state.isFertilizer) {
+            submit.submitModel(fertilizerModel, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+        }
 
-		pose.popPose();
-	}
+        pose.popPose();
+    }
 }

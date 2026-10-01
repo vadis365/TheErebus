@@ -16,36 +16,36 @@ import org.jspecify.annotations.NonNull;
 
 public class SiloSupportsBlock extends Block {
 
-	public static final MapCodec<SiloSupportsBlock> CODEC = simpleCodec(SiloSupportsBlock::new);
+    public static final MapCodec<SiloSupportsBlock> CODEC = simpleCodec(SiloSupportsBlock::new);
 
-	public SiloSupportsBlock(Properties properties) {
-		super(properties);
-	}
+    public SiloSupportsBlock(Properties properties) {
+        super(properties);
+    }
 
-	@Override
-	protected @NonNull MapCodec<SiloSupportsBlock> codec() {
-		return CODEC;
-	}
+    @Override
+    protected @NonNull MapCodec<SiloSupportsBlock> codec() {
+        return CODEC;
+    }
 
     @Override
     protected boolean canSurvive(@NonNull BlockState state, LevelReader level, BlockPos pos) {
-		return level.getBlockState(pos.below()).is(ModBlocks.RED_GEM_BLOCK.get());
-	}
+        return level.getBlockState(pos.below()).is(ModBlocks.RED_GEM_BLOCK.get());
+    }
 
     @Override
     protected boolean isPathfindable(@NonNull BlockState state, @NonNull PathComputationType pathComputationType) {
-		return true;
+        return true;
     }
 
-	@Override
-	protected @NonNull BlockState updateShape(@NonNull BlockState state, @NonNull LevelReader level, @NonNull ScheduledTickAccess ticks, @NonNull BlockPos pos, @NonNull Direction directionToNeighbour, @NonNull BlockPos neighbourPos, @NonNull BlockState neighbourState, @NonNull RandomSource random) {
-		boolean canSurvive = canSurvive(state, level, pos);
+    @Override
+    protected @NonNull BlockState updateShape(@NonNull BlockState state, @NonNull LevelReader level, @NonNull ScheduledTickAccess ticks, @NonNull BlockPos pos, @NonNull Direction directionToNeighbour, @NonNull BlockPos neighbourPos, @NonNull BlockState neighbourState, @NonNull RandomSource random) {
+        boolean canSurvive = canSurvive(state, level, pos);
         return !canSurvive ? Blocks.AIR.defaultBlockState() : super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
-	}
+    }
 
-	@NonNull
-	@Override
-	public RenderShape getRenderShape(@NonNull BlockState state) {
-		return RenderShape.MODEL;
-	}
+    @NonNull
+    @Override
+    public RenderShape getRenderShape(@NonNull BlockState state) {
+        return RenderShape.MODEL;
+    }
 }

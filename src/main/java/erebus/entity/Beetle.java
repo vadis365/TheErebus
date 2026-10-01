@@ -4,7 +4,6 @@ import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -24,185 +23,183 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.transfer.fluid.FluidUtil;
 import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
 public class Beetle extends Animal {
 
-	private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(Beetle.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Boolean> TAMED = SynchedEntityData.defineId(Beetle.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(Beetle.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> TAMED = SynchedEntityData.defineId(Beetle.class, EntityDataSerializers.BOOLEAN);
 
-	public Beetle(EntityType<? extends Beetle> type, Level level) {
-		super(type, level);
-	}
+    public Beetle(EntityType<? extends Beetle> type, Level level) {
+        super(type, level);
+        setPathfindingMalus(PathType.WATER, -8);
+    }
 
-	@Override
-	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
-		super.defineSynchedData(builder);
-		builder.define(SKIN_TYPE, 0);
-		builder.define(TAMED, false);
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 15D)
+                .add(Attributes.MOVEMENT_SPEED, 0.5D)
+                .add(Attributes.ARMOR, 4D)
+                .add(Attributes.TEMPT_RANGE, 16.0D)
+                .add(Attributes.STEP_HEIGHT, 1D);
+    }
 
-	@Override
-	protected void registerGoals() {
-		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new PanicGoal(this, 0.6D));
-		goalSelector.addGoal(2, new BreedGoal(this, 0.5D));
-		goalSelector.addGoal(3, new TemptGoal(this, 0.5D, item -> item.is(ModItems.TURNIP.get()), false));
-		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.5D));
-		goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		goalSelector.addGoal(6, new RandomLookAroundGoal(this));
-	}
+    public static boolean canSpawnHere(EntityType<Beetle> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
+        float light = level.getLightLevelDependentMagicValue(pos);
+        return light >= 0F;
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes()
-				.add(Attributes.MAX_HEALTH, 15D)
-				.add(Attributes.MOVEMENT_SPEED, 0.5D)
-				.add(Attributes.ARMOR, 4D)
-				.add(Attributes.TEMPT_RANGE, 16.0D)
-				.add(Attributes.STEP_HEIGHT, 1D);
-	}
+    @Override
+    protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(SKIN_TYPE, 0);
+        builder.define(TAMED, false);
+    }
 
-	public static boolean canSpawnHere(EntityType<Beetle> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
-		float light = level.getLightLevelDependentMagicValue(pos);
-		return light >= 0F;
-	}
+    @Override
+    protected void registerGoals() {
+        goalSelector.addGoal(0, new FloatGoal(this));
+        goalSelector.addGoal(1, new PanicGoal(this, 0.6D));
+        goalSelector.addGoal(2, new BreedGoal(this, 0.5D));
+        goalSelector.addGoal(3, new TemptGoal(this, 0.5D, item -> item.is(ModItems.TURNIP.get()), false));
+        goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.5D));
+        goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+    }
 
-	@Override
-	public boolean checkSpawnObstruction(LevelReader world) {
-		return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
-	}
+    @Override
+    public boolean checkSpawnObstruction(LevelReader world) {
+        return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
+    }
 
-	@Override
-	public int getMaxSpawnClusterSize() {
-		return 3;
-	}
+    @Override
+    public int getMaxSpawnClusterSize() {
+        return 5;
+    }
 
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return ModSounds.BEETLE_SOUND.get();
-	}
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.BEETLE_SOUND.get();
+    }
 
-	@Override
-	protected SoundEvent getHurtSound(@NonNull DamageSource source) {
-		return ModSounds.BEETLE_HURT.get();
-	}
+    @Override
+    protected SoundEvent getHurtSound(@NonNull DamageSource source) {
+        return ModSounds.BEETLE_HURT.get();
+    }
 
-	@Override
-	protected SoundEvent getDeathSound() {
-		return ModSounds.SQUISH.get();
-	}
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.SQUISH.get();
+    }
 
-	@Override
-	protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
-		this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
-	}
+    @Override
+    protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
+        this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
+    }
 
-	@Override
-	public void tick() {
-		super.tick();
-	}
+    @Override
+    public @NonNull InteractionResult mobInteract(Player player, @NonNull InteractionHand hand) {
+        var stack = player.getItemInHand(hand);
+        if (stack.is(Items.BUCKET) || stack.is(ModItems.BAMBUCKET)) {
+            if (!level().isClientSide()) {
+                player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(ModItems.BEETLE_JUICE_BUCKET.get())));
+                level().playSound(null, blockPosition(), SoundEvents.BUCKET_FILL, SoundSource.PLAYERS, 1, 1);
+                gameEvent(GameEvent.ENTITY_INTERACT, player);
+            }
+            return InteractionResult.SUCCESS;
+        }
+        if (stack.is(ModItems.BEETLE_TAMING_AMULET) && !getIsTame()) {
+            if (!level().isClientSide()) {
+                stack.consume(1, player);
+                setTame(true);
+            }
+            return InteractionResult.SUCCESS;
+        }
+        boolean food = isFood(stack);
+        var result = super.mobInteract(player, hand);
+        if (food && result.consumesAction() && !level().isClientSide()) {
+            setTame(true);
+            if (getHealth() < getMaxHealth()) heal(1);
+        }
+        return result;
+    }
 
-	@Override
-	public @NonNull InteractionResult mobInteract(Player player, @NonNull InteractionHand hand) {
-		ItemStack stack = player.getItemInHand(hand);
-		FluidUtil.interactWithFluidHandler(player, hand, getOnPos(), getCapability(Capabilities.Fluid.ENTITY, Direction.DOWN));
+    @Override
+    protected void playEatingSound() {
+        level().playSound(null, blockPosition(), ModSounds.BEETLE_LARVA_MUNCH.get(), SoundSource.NEUTRAL, 1, 0.75F);
+    }
 
-		if (!stack.isEmpty() && stack.is(ModItems.TURNIP.get()) && !isInLove()) {
-			stack.shrink(1);
-			if (!getIsTame())
-				setTame(true);
-			if (getHealth() < getMaxHealth())
-				heal(1);
-			setInLoveTime(600);
-			level().playSound(null, blockPosition(), ModSounds.BEETLE_LARVA_MUNCH.get(), SoundSource.NEUTRAL, 1.0F, 0.75F);
-			return InteractionResult.SUCCESS;
-		}
-		if (!stack.isEmpty() && stack.is(ModItems.BEETLE_TAMING_AMULET.get())) {
-			stack.shrink(1);
-			if (!getIsTame())
-				setTame(true);
-			return InteractionResult.SUCCESS;
-		}
+    @Override
+    public boolean isFood(ItemStack stack) {
+        return !stack.isEmpty() && stack.is(ModItems.TURNIP.get());
+    }
 
-		return super.mobInteract(player, hand);
-	}
+    @Override
+    public boolean isPersistenceRequired() {
+        return getIsTame() || super.isPersistenceRequired();
+    }
 
-	@Override
-	public boolean isFood(ItemStack stack) {
-		return !stack.isEmpty() && stack.is(ModItems.TURNIP.get());
-	}
+    @Override
+    public boolean removeWhenFarAway(double distance) {
+        return !getIsTame();
+    }
 
-	@Override
-	public void spawnChildFromBreeding(@NonNull ServerLevel level, @NonNull Animal mate) {
-		BeetleLarva entityBeetleLarva = ModEntities.BEETLE_LARVA.get().create(level(), EntitySpawnReason.BREEDING);
-		if (entityBeetleLarva != null) {
-			entityBeetleLarva.setLarvaType((byte) 1);
-			entityBeetleLarva.setPos(getX(), getY(), getZ());
-			level.addFreshEntity(entityBeetleLarva);
-		}
-		resetLove();
-		mate.resetLove();
-		setAge(6000);
-		mate.setAge(6000);
-	}
+    @Override
+    public AgeableMob getBreedOffspring(@NonNull ServerLevel level, @NonNull AgeableMob otherParent) {
+        var larva = ModEntities.BEETLE_LARVA.get().create(level, EntitySpawnReason.BREEDING);
+        if (larva != null) larva.setLarvaType((byte) 1);
+        return larva;
+    }
 
-	@Override
-	public boolean isPersistenceRequired() {
-		return !getIsTame();
-	}
+    public int getSkin() {
+        return entityData.get(SKIN_TYPE);
+    }
 
-	@Override
-	public AgeableMob getBreedOffspring(@NonNull ServerLevel level, @NonNull AgeableMob otherParent) {
-		return null;
-	}
+    public void setSkin(int skinType) {
+        entityData.set(SKIN_TYPE, skinType);
+    }
 
-	public void setSkin(int skinType) {
-		entityData.set(SKIN_TYPE, skinType);
-	}
+    public void setTame(boolean hasMated) {
+        entityData.set(TAMED, hasMated);
+    }
 
-	public int getSkin() {
-		return entityData.get(SKIN_TYPE);
-	}
+    public boolean getIsTame() {
+        return entityData.get(TAMED);
+    }
 
-	public void setTame(boolean hasMated) {
-		entityData.set(TAMED, hasMated);
-	}
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+        spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
+        RandomSource randomsource = level.getRandom();
+        setSkin(randomsource.nextInt(51));
+        return spawnGroupData;
+    }
 
-	public boolean getIsTame() {
-		return entityData.get(TAMED);
-	}
+    @Override
+    public void addAdditionalSaveData(@NonNull ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putInt("beetleSkin", getSkin());
+        output.putBoolean("isTamed", getIsTame());
+    }
 
-	@Nullable
-	@Override
-	public SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
-		spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
-		RandomSource randomsource = level.getRandom();
-		setSkin(randomsource.nextInt(51));
-		return spawnGroupData;
-	}
-
-	@Override
-	public void addAdditionalSaveData(@NonNull ValueOutput output) {
-		super.addAdditionalSaveData(output);
-		output.putInt("beetleSkin", getSkin());
-		output.putBoolean("isTamed", getIsTame());
-	}
-
-	@Override
-	public void readAdditionalSaveData(@NonNull ValueInput input) {
-		super.readAdditionalSaveData(input);
-		setSkin(input.getIntOr("beetleSkin", 0));
-		setTame(input.getBooleanOr("isTamed", false));
-	}
+    @Override
+    public void readAdditionalSaveData(@NonNull ValueInput input) {
+        super.readAdditionalSaveData(input);
+        setSkin(input.getIntOr("beetleSkin", 0));
+        setTame(input.getBooleanOr("isTamed", false));
+    }
 }

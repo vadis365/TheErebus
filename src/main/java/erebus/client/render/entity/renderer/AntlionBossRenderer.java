@@ -1,5 +1,6 @@
 package erebus.client.render.entity.renderer;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import erebus.Erebus;
 import erebus.client.render.entity.model.AntlionBossModel;
 import erebus.client.render.entity.renderer.state.AntlionBossRenderState;
@@ -10,24 +11,32 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 
 public class AntlionBossRenderer extends MobRenderer<AntlionBoss, AntlionBossRenderState, AntlionBossModel> {
-	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/antlionOverlord.png");
+    private static final Identifier TEXTURE = Erebus.prefix("textures/entity/antlion_overlord.png");
 
-	public AntlionBossRenderer(EntityRendererProvider.Context context) {
-        super(context, new AntlionBossModel(context.bakeLayer(ModEntityRendering.ANTLION_BOSS)), 2.5F);
-	}
+    public AntlionBossRenderer(EntityRendererProvider.Context context) {
+        super(context, new AntlionBossModel(context.bakeLayer(ModEntityRendering.ANTLION_BOSS)), 3.0F);
+    }
 
-	@Override
-	public void extractRenderState(AntlionBoss entity, AntlionBossRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-	}
+    @Override
+    public void extractRenderState(AntlionBoss entity, AntlionBossRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+        state.blam = entity.getBlam();
+        state.overlordDeathTicks = entity.getDeathTicks();
+    }
 
-	@Override
-	public AntlionBossRenderState createRenderState() {
-		return new AntlionBossRenderState();
-	}
+    @Override
+    protected void scale(AntlionBossRenderState state, PoseStack pose) {
+        pose.scale(2, 2, 2);
+        if (state.overlordDeathTicks > 0) pose.translate(0, state.overlordDeathTicks * 0.006F, 0);
+    }
 
-	@Override
-	public Identifier getTextureLocation(AntlionBossRenderState state) {
-		return TEXTURE;
-	}
+    @Override
+    public AntlionBossRenderState createRenderState() {
+        return new AntlionBossRenderState();
+    }
+
+    @Override
+    public Identifier getTextureLocation(AntlionBossRenderState state) {
+        return TEXTURE;
+    }
 }

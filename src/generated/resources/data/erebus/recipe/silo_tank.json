@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "minecraft:iron_block",
+    "B": "#c:storage_blocks/iron",
     "C": "erebus:chest_petrified",
-    "I": "minecraft:iron_ingot",
+    "I": "#c:ingots/iron",
     "P": "erebus:planks_varnished"
   },
   "pattern": [

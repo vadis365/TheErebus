@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "active=false": {
       "model": "erebus:block/temple_brick_unbreaking_string"
+    },
+    "active=true": {
+      "model": "erebus:block/temple_brick_unbreaking_string_active"
     }
   }
 }

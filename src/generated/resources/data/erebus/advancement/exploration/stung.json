@@ -1,0 +1,44 @@
+{
+  "parent": "erebus:exploration/entomology",
+  "criteria": {
+    "scorpion": {
+      "conditions": {
+        "damage": {
+          "source_entity": {
+            "type": "erebus:scorpion"
+          }
+        }
+      },
+      "trigger": "minecraft:entity_hurt_player"
+    },
+    "wasp": {
+      "conditions": {
+        "damage": {
+          "source_entity": {
+            "type": "erebus:wasp"
+          }
+        }
+      },
+      "trigger": "minecraft:entity_hurt_player"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/stung.desc"
+    },
+    "hidden": true,
+    "icon": {
+      "id": "erebus:wasp_sting"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/stung.title"
+    }
+  },
+  "requirements": [
+    [
+      "wasp",
+      "scorpion"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

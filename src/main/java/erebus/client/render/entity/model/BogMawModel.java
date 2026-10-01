@@ -7,7 +7,6 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
 public class BogMawModel extends EntityModel<BogMawRenderState> {
-    public ModelPart root;
     private final ModelPart roots;
     private final ModelPart main;
     private final ModelPart rim1;
@@ -25,7 +24,6 @@ public class BogMawModel extends EntityModel<BogMawRenderState> {
 
     public BogMawModel(ModelPart root) {
         super(root);
-        this.root = root;
         roots = root.getChild("roots");
         main = roots.getChild("main");
         rim1 = main.getChild("rim1");
@@ -103,5 +101,18 @@ public class BogMawModel extends EntityModel<BogMawRenderState> {
                 .addBox(-1F, 0F, 9F, 2, 1, 1, CubeDeformation.NONE), PartPose.rotation(-0.122173F, -1.570796F, 0F));
 
         return LayerDefinition.create(mesh, 128, 32);
+    }
+
+    @Override
+    public void setupAnim(BogMawRenderState state) {
+        super.setupAnim(state);
+        jawmain1.xRot = state.jawAngle;
+        jawtip1.xRot = 0;
+        jawmain2.xRot = -state.jawAngle;
+        jawtip2.xRot = 0;
+        jawmain3.xRot = -state.jawAngle;
+        jawtip3.xRot = 0;
+        jawmain4.xRot = state.jawAngle;
+        jawtip4.xRot = 0;
     }
 }

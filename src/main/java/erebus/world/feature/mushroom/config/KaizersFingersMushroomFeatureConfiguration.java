@@ -4,11 +4,8 @@ import erebus.registries.blocks.ModBlocks;
 import erebus.utils.MathUtil;
 import erebus.world.util.FeatureUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HugeMushroomBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -28,26 +25,26 @@ public class KaizersFingersMushroomFeatureConfiguration extends Feature<NoneFeat
 
     @Override
     public boolean place(@NotNull FeaturePlaceContext<NoneFeatureConfiguration> context) {
-        WorldGenLevel level = context.level();
-        BlockPos pos = context.origin();
-        RandomSource random = context.random();
-        int height = 4 + random.nextInt(4);
+        var level = context.level();
+        var pos = context.origin();
+        var random = context.random();
+        var height = 4 + random.nextInt(4);
 
-        BlockState STEM = ModBlocks.KAIZERS_FINGERS_MUSHROOM_STEM.get().defaultBlockState()
+        var STEM = ModBlocks.KAIZERS_FINGERS_MUSHROOM_STEM.get().defaultBlockState()
                 .setValue(HugeMushroomBlock.UP, true)
                 .setValue(HugeMushroomBlock.DOWN, true);
-        BlockState SHROOM = ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK.get().defaultBlockState();
+        var SHROOM = ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK.get().defaultBlockState();
 
-        if(!level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)) return false;
+        if (!level.getBlockState(context.origin().below()).is(Blocks.GRASS_BLOCK) && !level.getBlockState(context.origin().below()).is(Blocks.MYCELIUM)) return false;
 
-        if(!Utils.checkAirCube(level, pos.offset(-1, 3, -1), pos.offset(1, height + 1, 1))) return false;
-        if(!Utils.checkAirCube(level, pos.offset(-4, 0, -4), pos.offset(4, 2, 4))) return false;
-        if(!Utils.checkAirCube(level, pos.offset(-4, -1, -4), pos.offset(4, -1, 4))) return false;
+        if (!Utils.checkAirCube(level, pos.offset(-1, 3, -1), pos.offset(1, height + 1, 1))) return false;
+        if (!Utils.checkAirCube(level, pos.offset(-4, 0, -4), pos.offset(4, 2, 4))) return false;
+        if (!Utils.checkSolidCube(level, pos.offset(-4, -1, -4), pos.offset(4, -1, 4))) return false;
 
-        for(int y = 0, sidesPlaced = 0; y <= height; y++) {
+        for (int y = 0, sidesPlaced = 0; y <= height; y++) {
             setBlock(level, pos.above(y), STEM);
 
-            if(y >= 2 && y < height - 1 && random.nextInt(4 + sidesPlaced * 2) == 0) {
+            if (y >= 2 && y < height - 1 && random.nextInt(4 + sidesPlaced * 2) == 0) {
                 int dir = random.nextInt(4);
                 setBlock(level, pos.offset(offsetX[dir], y, offsetZ[dir]), SHROOM);
                 ++sidesPlaced;
@@ -55,20 +52,20 @@ public class KaizersFingersMushroomFeatureConfiguration extends Feature<NoneFeat
         }
 
         setBlock(level, pos.above(height + 1), SHROOM);
-        for(int c = 0; c < 4; c++) setBlock(level, pos.offset(offsetX[c], height, offsetZ[c]), SHROOM);
+        for (int c = 0; c < 4; c++) setBlock(level, pos.offset(offsetX[c], height, offsetZ[c]), SHROOM);
         List<BlockPos> connectList = new ArrayList<>();
         connectList.add(pos.below());
         int x, z;
 
-        for(int smallShroomAttempt = 0; smallShroomAttempt < 4 + random.nextInt(7); smallShroomAttempt++) {
+        for (int smallShroomAttempt = 0; smallShroomAttempt < 4 + random.nextInt(7); smallShroomAttempt++) {
             x = random.nextInt(4) - random.nextInt(4);
             z = random.nextInt(4) - random.nextInt(4);
 
-            if(!level.isEmptyBlock(pos.offset(x, 0, z)) || !level.isEmptyBlock(pos.offset(x - 1, 0, z)) || !level.isEmptyBlock(pos.offset(x + 1, 0, z)) || !level.isEmptyBlock(pos.offset(x, 0, z + 1)) || !level.isEmptyBlock(pos.offset(x + 1, 0, z - 1)))
+            if (!level.isEmptyBlock(pos.offset(x, 0, z)) || !level.isEmptyBlock(pos.offset(x - 1, 0, z)) || !level.isEmptyBlock(pos.offset(x + 1, 0, z)) || !level.isEmptyBlock(pos.offset(x, 0, z + 1)) || !level.isEmptyBlock(pos.offset(x, 0, z - 1)))
                 continue;
 
             int smallShroomHeight = random.nextBoolean() ? 1 : 1 + random.nextInt(2);
-            Utils.setBlockPillar(level, pos.offset(x, 0, z), smallShroomHeight - 1, STEM);
+            Utils.setBlockPillar(level, pos.offset(x, 0, z), smallShroomHeight, STEM);
             setBlock(level, pos.offset(x, smallShroomHeight, z), SHROOM);
             connectList.add(pos.offset(x, -1, z));
         }
@@ -76,7 +73,7 @@ public class KaizersFingersMushroomFeatureConfiguration extends Feature<NoneFeat
         int coordAmount = connectList.size();
         int dir;
 
-        if(coordAmount != 0) {
+        if (coordAmount != 0) {
             for (int connectionAttempt = 0; connectionAttempt < 48; connectionAttempt++) {
                 BlockPos coords1 = connectList.get(random.nextInt(coordAmount));
                 BlockPos coords2 = random.nextInt(3) != 0 ? connectList.getFirst() : connectList.get(random.nextInt(coordAmount));

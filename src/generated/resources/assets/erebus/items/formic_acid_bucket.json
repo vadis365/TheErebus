@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "neoforge:fluid_container",
+    "flip_gas": true,
+    "fluid": "erebus:formic_acid_still",
+    "textures": {
+      "base": "minecraft:item/bucket",
+      "fluid": "neoforge:item/mask/bucket_fluid",
+      "particle": "minecraft:item/bucket"
+    }
+  }
+}

@@ -9,48 +9,48 @@ import java.util.List;
 
 public class MultiStackInput implements RecipeInput {
 
-	private final List<ItemStack> items;
-	private final StackedItemContents stackedContents = new StackedItemContents();
-	private final int ingredientCount;
+    private final List<ItemStack> items;
+    private final StackedItemContents stackedContents = new StackedItemContents();
+    private final int ingredientCount;
 
-	public MultiStackInput(List<ItemStack> item) {
-		items = item;
-		int i = 0;
+    public MultiStackInput(List<ItemStack> item) {
+        items = item;
+        int i = 0;
 
-		for (ItemStack stack : item) {
-			if (!stack.isEmpty()) {
-				i++;
-				stackedContents.accountStack(stack, stack.getCount());
-			}
-		}
+        for (ItemStack stack : item) {
+            if (!stack.isEmpty()) {
+                i++;
+                stackedContents.accountStack(stack, stack.getCount());
+            }
+        }
 
-		ingredientCount = i;
-	}
+        ingredientCount = i;
+    }
 
-	@Override
-	public @NotNull ItemStack getItem(int index) {
-		return items.get(index);
-	}
+    @Override
+    public @NotNull ItemStack getItem(int index) {
+        return items.get(index);
+    }
 
-	@Override
-	public int size() {
-		return items.size();
-	}
+    @Override
+    public int size() {
+        return items.size();
+    }
 
-	@Override
-	public boolean isEmpty() {
-		return this.ingredientCount == 0;
-	}
+    @Override
+    public boolean isEmpty() {
+        return this.ingredientCount == 0;
+    }
 
-	public StackedItemContents stackedContents() {
-		return stackedContents;
-	}
+    public StackedItemContents stackedContents() {
+        return stackedContents;
+    }
 
-	public List<ItemStack> items() {
-		return items;
-	}
+    public List<ItemStack> items() {
+        return items;
+    }
 
-	public int ingredientCount() {
-		return ingredientCount;
-	}
+    public int ingredientCount() {
+        return ingredientCount;
+    }
 }

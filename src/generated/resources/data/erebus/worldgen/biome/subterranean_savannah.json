@@ -17,8 +17,8 @@
       "erebus:pond",
       "erebus:savannah_rock",
       "erebus:rotten_acacia",
-      "erebus:amber_ground",
-      "erebus:amber_umberstone"
+      "erebus:amber_umberstone",
+      "erebus:amber_ground"
     ],
     [],
     [
@@ -46,10 +46,10 @@
     [],
     [],
     [
-      "minecraft:trees_savanna",
-      "erebus:asper",
-      "erebus:baobab",
-      "erebus:bamboo"
+      "erebus:savannah_acacia_population",
+      "erebus:savannah_asper_population",
+      "erebus:savannah_baobab_population",
+      "erebus:grass"
     ]
   ],
   "has_precipitation": false,
@@ -78,9 +78,9 @@
       },
       {
         "type": "erebus:glow_worm",
-        "maxCount": 3,
+        "maxCount": 4,
         "minCount": 1,
-        "weight": 5
+        "weight": 8
       }
     ],
     "misc": [],

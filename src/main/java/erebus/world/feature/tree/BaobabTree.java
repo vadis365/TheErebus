@@ -21,7 +21,7 @@ public class BaobabTree extends ErebusTree {
     public TreeConfiguration getTreeConfiguration() {
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.LOG_BAOBAB.get()),
-                new BaobabTrunkPlacer(4, 4, 3),
+                new BaobabTrunkPlacer(12, 0, 0),
                 BlockStateProvider.simple(ModBlocks.LEAVES_BAOBAB.get()),
                 new BaobabFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0)),
                 new TwoLayersFeatureSize(1, 0, 2)

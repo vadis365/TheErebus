@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "blocks",
+  "cookingtime": 100,
+  "experience": 0.25,
+  "group": "aluminum",
+  "ingredient": "erebus:ore_aluminum",
+  "result": {
+    "id": "erebus:ingot_aluminum"
+  }
+}

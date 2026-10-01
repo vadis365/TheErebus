@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "erebus:red_candle_honey_treat"
+          "name": "minecraft:red_candle"
         }
       ],
       "rolls": 1.0

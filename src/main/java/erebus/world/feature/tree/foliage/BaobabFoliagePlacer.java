@@ -2,9 +2,7 @@ package erebus.world.feature.tree.foliage;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import erebus.registries.blocks.ModBlocks;
 import erebus.registries.world.tree.ModFoliagePlacers;
-import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.WorldGenLevel;
@@ -29,26 +27,14 @@ public class BaobabFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected void createFoliage(@NotNull WorldGenLevel level, @NotNull FoliageSetter setter, @NotNull RandomSource random, @NotNull TreeConfiguration config, int maxHeight, @NotNull FoliageAttachment attachment, int h, int radius, int offset) {
-        int height = 2;
-        BlockPos pos = attachment.pos();
-        int x = pos.getX();
-        int y = pos.getY();
-        int z = pos.getZ();
-
-        for (int xOff = x - radius; xOff <= x + radius; xOff++) {
-            for (int zOff = z - radius; zOff <= z + radius; zOff++) {
-                for (int yOff = y; yOff < y + height; yOff++) {
-                    double sq = Math.pow(xOff - x, 2) + Math.pow(zOff - z, 2) + Math.pow(yOff - y, 2);
-                    if (Math.round(Math.sqrt(sq)) <= radius) {
-                        if (Math.round(Math.sqrt(sq)) == 0) {
-                            setter.set(new BlockPos(xOff, yOff, zOff), ModBlocks.LOG_BAOBAB.get().defaultBlockState());
-                        } else {
-                            placeLeavesRow(level, setter, random, config, new BlockPos(xOff, yOff, zOff), radius, 0, attachment.doubleTrunk());
-                        }
-                    }
+        int crownRadius = attachment.radiusOffset();
+        for (int x = -crownRadius; x <= crownRadius; x++)
+            for (int z = -crownRadius; z <= crownRadius; z++)
+                for (int y = 0; y < 2; y++) {
+                    long distance = Math.round(Math.sqrt(x * x + y * y + z * z));
+                    if (distance > 0 && distance <= crownRadius)
+                        tryPlaceLeaf(level, setter, random, config, attachment.pos().offset(x, y, z));
                 }
-            }
-        }
     }
 
     @Override

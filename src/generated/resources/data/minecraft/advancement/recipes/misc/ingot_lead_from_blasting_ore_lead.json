@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ore_lead": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:ore_lead"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:ingot_lead_from_blasting_ore_lead"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ore_lead"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:ingot_lead_from_blasting_ore_lead"
+    ]
+  }
+}

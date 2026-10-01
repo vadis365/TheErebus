@@ -6,7 +6,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -17,7 +16,6 @@ import java.util.function.Supplier;
 public class MossPatchFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
 
     private final Supplier<? extends Block> mossHolder;
-    private boolean blockPlaced = false;
 
     public MossPatchFeatureConfiguration(Supplier<? extends Block> moss) {
         super(NoneFeatureConfiguration.CODEC);
@@ -26,25 +24,26 @@ public class MossPatchFeatureConfiguration extends Feature<NoneFeatureConfigurat
 
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
-        WorldGenLevel level = context.level();
-        BlockPos pos = context.origin();
-        RandomSource random = context.random();
+        var level = context.level();
+        var pos = context.origin();
+        var random = context.random();
 
-        placeBlockAt(level, pos, random);
-        if (blockPlaced) createPatch(level, pos, random);
+        if (!placeBlockAt(level, pos, random)) return false;
+        createPatch(level, pos, random);
 
         return true;
     }
 
-    private void placeBlockAt(WorldGenLevel level, BlockPos pos, RandomSource random) {
-        BlockState moss = mossHolder.get().defaultBlockState();
-        Direction side = Direction.getRandom(random);
+    private boolean placeBlockAt(WorldGenLevel level, BlockPos pos, RandomSource random) {
+        if (!level.isEmptyBlock(pos)) return false;
+        var moss = mossHolder.get().defaultBlockState();
+        var side = Direction.getRandom(random);
 
         if (level.getBlockState(pos.relative(side)).isFaceSturdy(level, pos.relative(side), side.getOpposite()) && isValidBlock(level, pos.relative(side))) {
-            moss.setValue(BlockStateProperties.FACING, side);
-            setBlock(level, pos, moss);
-            blockPlaced = true;
+            moss = moss.setValue(BlockStateProperties.FACING, side.getOpposite());
+            return level.setBlock(pos, moss, 2);
         }
+        return false;
     }
 
     private void createPatch(WorldGenLevel level, BlockPos pos, RandomSource random) {
@@ -64,8 +63,7 @@ public class MossPatchFeatureConfiguration extends Feature<NoneFeatureConfigurat
     }
 
     private boolean isValidBlock(WorldGenLevel level, BlockPos pos) {
-        BlockState state = level.getBlockState(pos);
-
+        var state = level.getBlockState(pos);
         return state.is(ModBlocks.LOG_ROTTEN) || state.is(ModBlocks.UMBERSTONE);
     }
 }

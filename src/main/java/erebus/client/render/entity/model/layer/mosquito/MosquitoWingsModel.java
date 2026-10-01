@@ -11,12 +11,10 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 
 public class MosquitoWingsModel extends EntityModel<MosquitoRenderState> {
 
-    public ModelPart root;
     private final ModelPart WingLeft, WingRight;
 
     public MosquitoWingsModel(ModelPart root) {
         super(root);
-        this.root = root;
         this.WingLeft = root.getChild("WingLeft");
         this.WingRight = root.getChild("WingRight");
     }

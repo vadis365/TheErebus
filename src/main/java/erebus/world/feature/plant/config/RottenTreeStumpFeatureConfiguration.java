@@ -1,5 +1,6 @@
 package erebus.world.feature.plant.config;
 
+import erebus.block.RottenLogBlock;
 import erebus.datagen.loot.ModChestLootTables;
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -16,8 +17,8 @@ public class RottenTreeStumpFeatureConfiguration extends Feature<NoneFeatureConf
 
     private final int maxRadius = 6;
     private final int maxHeight = 16;
-    private int height = -1;
-    private int baseRadius = -1;
+    private final int height;
+    private final int baseRadius;
 
     public RottenTreeStumpFeatureConfiguration(int height, int radius) {
         super(NoneFeatureConfiguration.CODEC);
@@ -32,18 +33,20 @@ public class RottenTreeStumpFeatureConfiguration extends Feature<NoneFeatureConf
         RandomSource random = context.random();
         BlockState log = ModBlocks.LOG_ROTTEN.get().defaultBlockState();
 
-        for (int x = -baseRadius; x <= baseRadius; x++) {
-            for (int y = 1; y < height; y++) {
-                for (int z = -baseRadius; z <= baseRadius; z++) {
-                    if (!level.isEmptyBlock(pos.offset(x, y, z))) return false;
+        for (int x = -baseRadius - 1; x <= baseRadius; x++) {
+            for (int y = 0; y <= height; y++) {
+                for (int z = -baseRadius - 1; z <= baseRadius; z++) {
+                    BlockPos target = pos.offset(x, y, z);
+                    if (level.isOutsideBuildHeight(target) || !level.isEmptyBlock(target)) return false;
                 }
             }
         }
 
-        if(level.isEmptyBlock(pos.below())) return false;
+        if (!level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)
+                && !level.getBlockState(pos.below()).is(Blocks.MYCELIUM)) return false;
 
         generateTrunk(level, pos, random, log);
-        generateRoots(level, pos, random, log);
+        generateRoots(level, pos, random, log.setValue(RottenLogBlock.ALL_BARK, true));
 
         if (baseRadius >= maxRadius) {
             generateLowerSpawner(level, pos);
@@ -147,6 +150,8 @@ public class RottenTreeStumpFeatureConfiguration extends Feature<NoneFeatureConf
 
         ChestBlockEntity chest1 = (ChestBlockEntity) level.getBlockEntity(pos);
         if (chest1 != null) chest1.setLootTable(ModChestLootTables.ROTTEN_LOG);
+
+        if (height < maxHeight - 3) return;
 
         int z = random.nextInt(5) - 2;
         BlockPos chest2Pos = pos.offset(-4, 11, z);

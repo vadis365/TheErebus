@@ -1,7 +1,6 @@
 package erebus.inventory.client;
 
 import erebus.Erebus;
-import erebus.block.entity.BlenderBlockEntity;
 import erebus.inventory.client.elements.TankGauge;
 import erebus.inventory.server.BlenderMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -22,14 +21,13 @@ import java.util.List;
 @SuppressWarnings("AccessStaticViaInstance")
 public class BlenderScreen extends ErebusScreen<BlenderMenu> {
 
-    private final BlenderMenu container;
-    public static final Rectangle[] tankPositions = new Rectangle[] {
+    public static final Rectangle[] tankPositions = new Rectangle[]{
             new Rectangle(8, 6, 9, 73),
             new Rectangle(25, 6, 8, 73),
             new Rectangle(142, 6, 9, 73),
             new Rectangle(159, 6, 9, 73)
     };
-
+    private final BlenderMenu container;
     private final TankGauge[] tankGauges = new TankGauge[tankPositions.length];
 
     public BlenderScreen(BlenderMenu container, Inventory inventory, Component title) {
@@ -38,11 +36,16 @@ public class BlenderScreen extends ErebusScreen<BlenderMenu> {
     }
 
     @Override
+    protected void extractLabels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
+        // The original full-panel layout has no header space between its four gauges.
+    }
+
+    @Override
     protected void init() {
         super.init();
         clearWidgets();
-        for(int c = 0; c < tankPositions.length; c++) {
-            tankGauges[c] = new TankGauge(leftPos + tankPositions[c].x, topPos + tankPositions[c].y, tankPositions[c].width, tankPositions[c].height, container.blender.tanks, c, FluidType.BUCKET_VOLUME * 8);
+        for (int c = 0; c < tankPositions.length; c++) {
+            tankGauges[c] = new TankGauge(leftPos + tankPositions[c].x, topPos + tankPositions[c].y, tankPositions[c].width, tankPositions[c].height, container.tanks, c, FluidType.BUCKET_VOLUME * 8);
             addRenderableWidget(tankGauges[c]);
         }
     }
@@ -50,17 +53,13 @@ public class BlenderScreen extends ErebusScreen<BlenderMenu> {
     @Override
     public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractBackground(graphics, mouseX, mouseY, a);
-        graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
 
-        for(Rectangle tank : tankPositions) {
+        for (Rectangle tank : tankPositions) {
             graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos + tank.x, topPos + 3 + tank.y, 176, 41, tank.width, tank.height, 256, 256);
         }
 
-        BlenderBlockEntity blender = container.blender;
-        if(blender.isBlending()) {
-            float currentProgress = blender.getBlendProgress();
-            float prevProgress = blender.getPrevBlendProgress();
-            int progress = (int) (currentProgress + (currentProgress - prevProgress) * a);
+        int progress = container.getProgress() / 12;
+        if (progress > 0) {
             graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos + 52, topPos + 26, 176, 0, 73, progress + 1, 256, 256);
         }
     }
@@ -69,8 +68,8 @@ public class BlenderScreen extends ErebusScreen<BlenderMenu> {
     protected void extractTooltip(@NotNull GuiGraphicsExtractor graphics, int x, int y) {
         super.extractTooltip(graphics, x, y);
 
-        for(int c = 0; c < tankGauges.length; c++) {
-            if(tankGauges[c].isHovered()) {
+        for (int c = 0; c < tankGauges.length; c++) {
+            if (tankGauges[c].isHovered()) {
                 renderTankTooltip(graphics, c, x, y);
             }
         }
@@ -78,8 +77,8 @@ public class BlenderScreen extends ErebusScreen<BlenderMenu> {
 
     private void renderTankTooltip(GuiGraphicsExtractor graphics, int index, int x, int y) {
         List<ClientTooltipComponent> tooltip = new ArrayList<>();
-        FluidResource resource = container.blender.tanks.getResource(index);
-        int amount = container.blender.tanks.getAmountAsInt(index);
+        FluidResource resource = container.tanks.getResource(index);
+        int amount = container.tanks.getAmountAsInt(index);
         int capacity = FluidType.BUCKET_VOLUME * 8;
         if (!resource.isEmpty()) {
             tooltip.add(new ClientTextTooltip(resource.toStack(amount).getHoverName().getVisualOrderText()));

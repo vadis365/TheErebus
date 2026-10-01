@@ -2,14 +2,19 @@ package erebus.block;
 
 import erebus.registries.client.ModParticles;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -35,49 +40,39 @@ public class InsectRepellentBlock extends Block {
     }
 
     @Override
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP);
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos,
+                                     Direction side, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        return side == Direction.DOWN && !canSurvive(state, level, pos) ? Blocks.AIR.defaultBlockState() : state;
+    }
+
+    @Override
     public void animateTick(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        double d = 0.0625D;
-
-        for(int c = 0; c < 6; c++) {
-            double x = pos.getX() + random.nextFloat();
-            double y = pos.getY() + random.nextFloat();
-            double z = pos.getZ() + random.nextFloat();
-
-            if(c == 0 && !level.getBlockState(pos.above()).isCollisionShapeFullBlock(level, pos.above())) {
-                y = pos.getY() + 1 + d;
+        for (Direction side : Direction.values()) {
+            BlockPos neighbor = pos.relative(side);
+            if (level.getBlockState(neighbor).isCollisionShapeFullBlock(level, neighbor)) continue;
+            double x = pos.getX() + random.nextDouble();
+            double y = pos.getY() + random.nextDouble();
+            double z = pos.getZ() + random.nextDouble();
+            switch (side) {
+                case DOWN -> y = pos.getY() - 0.0625;
+                case UP -> y = pos.getY() + 1.0625;
+                case NORTH -> z = pos.getZ() - 0.0625;
+                case SOUTH -> z = pos.getZ() + 1.0625;
+                case WEST -> x = pos.getX() - 0.0625;
+                case EAST -> x = pos.getX() + 1.0625;
             }
-
-            if(c == 1 && !level.getBlockState(pos.below()).isCollisionShapeFullBlock(level, pos.below())) {
-                y = pos.getY() - d;
-            }
-
-            if(c == 2 && !level.getBlockState(pos.east()).isCollisionShapeFullBlock(level, pos.east())) {
-                z = pos.getZ() + 1 + d;
-            }
-
-            if(c == 3 && !level.getBlockState(pos.west()).isCollisionShapeFullBlock(level, pos.west())) {
-                z = pos.getZ() - d;
-            }
-
-            if(c == 4 && !level.getBlockState(pos.north()).isCollisionShapeFullBlock(level, pos.north())) {
-                x = pos.getX() - d;
-            }
-
-            if(c == 5 && !level.getBlockState(pos.south()).isCollisionShapeFullBlock(level, pos.south())) {
-                x = pos.getX() + 1 + d;
-            }
-
-            if(x < pos.getX() || x > pos.getX() + 1 || y < 0 || y > pos.getY() + 1 || z < pos.getZ() || z > pos.getZ() + 1) {
-                level.addParticle(ModParticles.REPELLENT.get(), x, y, z, 0.0D, 0.0D, 0.0D);
-            }
+            level.addParticle(ModParticles.REPELLENT.get(), x, y, z, 0, 0, 0);
         }
-
-        super.animateTick(state, level, pos, random);
     }
 
     @Override
     protected void entityInside(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, Entity entity, @NonNull InsideBlockEffectApplier effectApplier, boolean isPrecise) {
-        if(entity.is(EntityTypeTags.ARTHROPOD)) {
+        if (!level.isClientSide() && entity instanceof Mob && entity.is(EntityTypeTags.ARTHROPOD)) {
             entity.push(new Vec3(
                     Mth.sin((float) (entity.getYRot() * Math.PI / 180.0F)) * 0.1F,
                     0.1F,

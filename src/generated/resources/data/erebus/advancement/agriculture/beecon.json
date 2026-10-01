@@ -1,0 +1,32 @@
+{
+  "parent": "erebus:agriculture/nectar",
+  "criteria": {
+    "get_homing_beecon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:homing_beecon"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/beecon.desc"
+    },
+    "icon": {
+      "id": "erebus:homing_beecon"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/beecon.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_homing_beecon"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

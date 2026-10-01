@@ -11,32 +11,32 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
-public class BlackWidowRenderer extends  MobRenderer<BlackWidow, BlackWidowRenderState, BlackWidowModel> {
-	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/black_widow.png");
+public class BlackWidowRenderer extends MobRenderer<BlackWidow, BlackWidowRenderState, BlackWidowModel> {
+    private static final Identifier TEXTURE = Erebus.prefix("textures/entity/black_widow.png");
 
-	public BlackWidowRenderer(EntityRendererProvider.Context context) {
-		super(context, new BlackWidowModel(context.bakeLayer(ModEntityRendering.BLACK_WIDOW)), 0.3F);
-	}
+    public BlackWidowRenderer(EntityRendererProvider.Context context) {
+        super(context, new BlackWidowModel(context.bakeLayer(ModEntityRendering.BLACK_WIDOW)), 0.3F);
+    }
 
-	@Override
-	protected void scale(BlackWidowRenderState widow, PoseStack matrix) {
-		shadowRadius = widow.size * 0.3F;
-		matrix.scale(shadowRadius, shadowRadius, shadowRadius);
-	}
+    @Override
+    protected void scale(BlackWidowRenderState widow, PoseStack matrix) {
+        shadowRadius = widow.size * 0.3F;
+        matrix.scale(shadowRadius, shadowRadius, shadowRadius);
+    }
 
-	@Override
-	public BlackWidowRenderState createRenderState() {
-		return new BlackWidowRenderState();
-	}
+    @Override
+    public BlackWidowRenderState createRenderState() {
+        return new BlackWidowRenderState();
+    }
 
-	@Override
-	public void extractRenderState(BlackWidow entity, BlackWidowRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-		state.size = entity.getWidowSize();
-	}
+    @Override
+    public void extractRenderState(BlackWidow entity, BlackWidowRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+        state.size = entity.getWidowSize();
+    }
 
-	@Override
-	public @NonNull Identifier getTextureLocation(BlackWidowRenderState state) {
-		return TEXTURE;
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(BlackWidowRenderState state) {
+        return TEXTURE;
+    }
 }

@@ -1,6 +1,7 @@
 package erebus.datagen.providers.recipes;
 
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.tags.ModItemTags;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -28,6 +29,23 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
         addBlockRecipes();
         addGolemRecipes();
         addMiscItemRecipes();
+        addPlantDyeRecipes();
+    }
+
+    private void addPlantDyeRecipes() {
+        shaped(MISC, Items.GREEN_DYE)
+                .pattern("SS")
+                .pattern("SS")
+                .define('S', ModBlocks.STEM)
+                .unlockedBy("has_stem", has(ModBlocks.STEM))
+                .save(output, "erebus:green_dye_from_stems");
+
+        shaped(MISC, Items.GREEN_DYE)
+                .pattern("LL")
+                .pattern("LL")
+                .define('L', ModBlocks.GIANT_LILY_PAD)
+                .unlockedBy("has_giant_lily_pad", has(ModBlocks.GIANT_LILY_PAD))
+                .save(output, "erebus:green_dye_from_giant_lily_pads");
     }
 
     private void addGliderWingRecipes() {
@@ -78,7 +96,7 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_bamboo", has(ModItems.BAMBOO))
                 .save(output);
 
-        shaped(MISC, ModBlocks.BAMBOO_PIPE)
+        shaped(MISC, ModBlocks.BAMBOO_PIPE, 3)
                 .pattern("  B")
                 .pattern("HBS")
                 .pattern("B  ")
@@ -120,12 +138,36 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addBlockRecipes() {
+        shaped(MISC, ModBlocks.GLOW_GEM_ACTIVE, 3)
+                .pattern("BBB").pattern("BGB").pattern("BBB")
+                .define('B', ModItems.BIO_LUMINESCENCE)
+                .define('G', ModItems.RED_GEM)
+                .unlockedBy("has_bio_luminescence", has(ModItems.BIO_LUMINESCENCE))
+                .save(output);
+
+        shaped(MISC, ModBlocks.BAMBOO_EXTENDER)
+                .pattern("BSB").pattern("PDP").pattern("BRB")
+                .define('B', ModItems.BAMBOO).define('S', Items.STRING).define('P', ModBlocks.PLANKS_BAMBOO)
+                .define('D', Blocks.DISPENSER).define('R', Tags.Items.DUSTS_REDSTONE)
+                .unlockedBy("has_bamboo", has(ModItems.BAMBOO)).save(output);
+
+        shaped(MISC, ModBlocks.LIQUIFIER)
+                .pattern("RBR").pattern("SGS").pattern("RJR")
+                .define('R', Tags.Items.DUSTS_REDSTONE).define('B', ModBlocks.PLANKS_BAMBOO)
+                .define('S', Tags.Items.RODS_WOODEN).define('G', ModBlocks.AMBER_GLASS).define('J', ModBlocks.FLUID_JAR)
+                .unlockedBy("has_fluid_jar", has(ModBlocks.FLUID_JAR)).save(output);
+
+        shaped(MISC, ModBlocks.BLENDER)
+                .pattern("GBG").pattern("GUG").pattern("UUU")
+                .define('G', ModItems.SMOOTHIE_GLASS).define('B', Items.BUCKET).define('U', ModBlocks.UMBERSTONE)
+                .unlockedBy("has_smoothie_glass", has(ModItems.SMOOTHIE_GLASS)).save(output);
+
         shaped(MISC, ModBlocks.GLOWING_JAR)
                 .pattern("III")
                 .pattern("GBG")
                 .pattern("GGG")
                 .define('B', ModItems.BIO_LUMINESCENCE)
-                .define('I', Items.IRON_INGOT)
+                .define('I', Tags.Items.INGOTS_IRON)
                 .define('G', ModBlocks.AMBER_GLASS)
                 .unlockedBy("has_bio_luminescence", has(ModItems.BIO_LUMINESCENCE))
                 .save(output);
@@ -141,6 +183,11 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .define('G', ModBlocks.AMBER_GLASS)
                 .unlockedBy("has_amber_glass", has(ModBlocks.AMBER_GLASS))
                 .save(output);
+
+        shaped(MISC, ModBlocks.MUCUS_BOMB)
+                .pattern("MMM").pattern("MTM").pattern("MMM")
+                .define('M', ModItems.MUCUS_CHARGE).define('T', Blocks.TNT)
+                .unlockedBy("has_mucus_charge", has(ModItems.MUCUS_CHARGE)).save(output);
 
         shaped(MISC, ModItems.MUCUS_CHARGE)
                 .pattern("SSS")
@@ -188,9 +235,9 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .pattern("IPI")
                 .pattern("BCB")
                 .pattern("IPI")
-                .define('I', Items.IRON_INGOT)
+                .define('I', Tags.Items.INGOTS_IRON)
                 .define('P', ModBlocks.PLANKS_VARNISHED)
-                .define('B', Blocks.IRON_BLOCK)
+                .define('B', Tags.Items.STORAGE_BLOCKS_IRON)
                 .define('C', ModBlocks.CHEST_PETRIFIED)
                 .unlockedBy("has_petrified_wood_chest", has(ModBlocks.CHEST_PETRIFIED))
                 .save(output);
@@ -283,19 +330,36 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_umbergolem_legs", has(ModItems.UMBERGOLEM_LEGS))
                 .save(output);
 
-        surround(ModBlocks.MUD, ModBlocks.UMBER_GOLEM_STATUE, ModItems.MUD_UMBERGOLEM);
-        surround(Blocks.IRON_BLOCK, ModBlocks.UMBER_GOLEM_STATUE, ModItems.IRON_UMBERGOLEM);
-        surround(Blocks.GOLD_BLOCK, ModBlocks.UMBER_GOLEM_STATUE, ModItems.GOLD_UMBERGOLEM);
-        surround(ModBlocks.JADE_BLOCK, ModBlocks.UMBER_GOLEM_STATUE, ModItems.JADE_UMBERGOLEM);
+        surround(ModBlocks.MUD_BRICKS, ModBlocks.UMBER_GOLEM_STATUE, ModItems.MUD_UMBERGOLEM);
+        surround(Tags.Items.STORAGE_BLOCKS_IRON, ModItems.IRON_UMBERGOLEM);
+        surround(Tags.Items.STORAGE_BLOCKS_GOLD, ModItems.GOLD_UMBERGOLEM);
+        surround(ModItemTags.STORAGE_BLOCKS_JADE, ModItems.JADE_UMBERGOLEM);
     }
 
     private void addMiscItemRecipes() {
+        shaped(MISC, ModItems.JADE)
+                .pattern("BBB")
+                .pattern("BBB")
+                .pattern("BBB")
+                .define('B', ModItems.JADE_BERRIES)
+                .unlockedBy("has_jade_berries", has(ModItems.JADE_BERRIES))
+                .save(output, "erebus:jade_from_jadeberries");
+
+        shaped(MISC, ModItems.STEW_POT)
+                .pattern(" N ")
+                .pattern("N N")
+                .pattern(" B ")
+                .define('N', Items.IRON_NUGGET)
+                .define('B', Items.BUCKET)
+                .unlockedBy("has_bucket", has(Items.BUCKET))
+                .save(output);
+
         shaped(MISC, ModItems.SPRAY_CAN, 9)
                 .pattern(" B ")
                 .pattern("IRI")
                 .pattern("III")
-                .define('B', ItemTags.BUTTONS)
-                .define('I', Items.IRON_INGOT)
+                .define('B', ItemTags.WOODEN_BUTTONS)
+                .define('I', Tags.Items.INGOTS_IRON)
                 .define('R', ModItems.REPELLENT)
                 .unlockedBy("has_repellent", has(ModItems.REPELLENT))
                 .save(output);
@@ -328,9 +392,9 @@ public class ShapedMiscRecipeProvider extends ErebusRecipeProvider {
                 .pattern("NJN")
                 .pattern(" A ")
                 .define('N', Tags.Items.NUGGETS_GOLD)
-                .define('J', ModItems.JADE)
+                .define('J', ModItemTags.GEMS_JADE)
                 .define('A', ModItems.ALTAR_FRAGMENT)
-                .unlockedBy("has_jade", has(ModItems.JADE))
+                .unlockedBy("has_jade", has(ModItemTags.GEMS_JADE))
                 .save(output);
     }
 }

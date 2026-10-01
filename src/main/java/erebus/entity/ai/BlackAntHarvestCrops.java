@@ -3,68 +3,56 @@ package erebus.entity.ai;
 import erebus.entity.BlackAnt;
 import erebus.utils.FakePlayerHandler;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BlackAntHarvestCrops extends BlackAntBlockHome {
-	private final BlackAnt blackAnt;
-	private final double moveSpeed;
+    private final BlackAnt blackAnt;
+    private final double moveSpeed;
 
-	public BlackAntHarvestCrops(BlackAnt blackAnt, double moveSpeed, int eatSpeed, boolean shouldDropItem) {
-		super(blackAnt, null, moveSpeed, eatSpeed, shouldDropItem);
-		this.blackAnt = blackAnt;
-		this.moveSpeed = moveSpeed;
-	}
+    public BlackAntHarvestCrops(BlackAnt blackAnt, double moveSpeed, int eatSpeed, boolean shouldDropItem) {
+        super(blackAnt, null, moveSpeed, eatSpeed, shouldDropItem);
+        this.blackAnt = blackAnt;
+        this.moveSpeed = moveSpeed;
+    }
 
-	@Override
-	public boolean canUse() {
-		return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.HARVESTER && !blackAnt.getMoveControl().hasWanted() && super.canUse();
-	}
+    @Override
+    public boolean canUse() {
+        return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.HARVESTER && !blackAnt.getMoveControl().hasWanted() && super.canUse();
+    }
 
-	@Override
-	protected boolean canEatBlock(BlockState state) {
-		Block block = state.getBlock();
-		return block instanceof CropBlock && ((CropBlock) block).isMaxAge(state);
-	}
+    @Override
+    protected boolean canEatBlock(BlockPos pos, BlockState state) {
+        Block block = state.getBlock();
+        return block instanceof CropBlock && ((CropBlock) block).isMaxAge(state);
+    }
 
-	@Override
-	protected boolean isEntityReady() {
-		return true;
-	}
+    @Override
+    protected boolean isEntityReady() {
+        return blackAnt.isTamedAnt() && blackAnt.getAntRole() == blackAnt.HARVESTER;
+    }
 
-	@Override
-	protected void moveToLocation() {
-		blackAnt.getMoveControl().setWantedPosition(targetX + 0.5D, targetY, targetZ + 0.5D, moveSpeed);
-	}
+    @Override
+    protected void moveToLocation() {
+        blackAnt.getNavigation().moveTo(targetX + 0.5D, targetY, targetZ + 0.5D, moveSpeed);
+    }
 
-	@Override
-	protected void prepareToEat() {
-	}
+    @Override
+    protected void prepareToEat() {
+    }
 
-	@Override
-	protected void eatingInterupted() {
-		blackAnt.getNavigation().isDone();
-	}
+    @Override
+    protected void eatingInterupted() {
+        blackAnt.getNavigation().stop();
+    }
 
-	@Override
-	protected void dropItem() {
-	}
+    @Override
+    protected void dropItem() {
+    }
 
-	@Override
-	protected void afterEaten() {
-		BlockPos pos = new BlockPos(targetX, targetY, targetZ);
-		if (!blackAnt.level().isClientSide()) {
-			Player player = FakePlayerHandler.get((ServerLevel) blackAnt.level(), blackAnt.getPlayerOwner());
-			blackAnt.level().destroyBlock(new BlockPos(targetX, targetY, targetZ), dropItem, player);
-			// TODO no idea why the empty block above check in the planter is failing so harvester will make dirt for now.
-			blackAnt.level().setBlock(pos.below(), Blocks.DIRT.defaultBlockState(), 3);
-			blackAnt.setPos(targetX + 0.5D, targetY, targetZ + 0.5D); // may stop ant glitching in to farmland once it changed
-			blackAnt.getNavigation().isDone();
-		}
-	}
-
+    @Override
+    protected void afterEaten() {
+        FakePlayerHandler.breakBlockAt(blackAnt.level(), new BlockPos(targetX, targetY, targetZ), blackAnt.getPlayerOwner());
+    }
 }

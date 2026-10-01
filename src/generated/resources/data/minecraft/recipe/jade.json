@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    "erebus:jade_block"
+    "#c:storage_blocks/jade"
   ],
   "result": {
     "count": 9,

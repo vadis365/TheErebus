@@ -1,11 +1,10 @@
 package erebus.block.entity;
 
+import erebus.block.SiloTankBlock;
 import erebus.inventory.server.SiloTankMenu;
 import erebus.registries.blocks.ModBlockEntities;
-import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
@@ -18,38 +17,46 @@ import org.jetbrains.annotations.NotNull;
 
 public class SiloTankBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 
-	public SiloTankBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntities.SILO_TANK.get(), 104,  pos, state);
-	}
+    public SiloTankBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.SILO_TANK.get(), 104, pos, state);
+    }
 
-	@Override
-	public @NotNull Component getDisplayName() {
-		return Component.translatable("erebus.container.silo").append(Component.literal(" X:" + getBlockPos().getX() + " Y:" + getBlockPos().getY() + " Z:" + getBlockPos().getZ()));
-	}
+    @Override
+    public @NotNull Component getDisplayName() {
+        return Component.translatable("erebus.container.silo").append(Component.literal(" X:" + getBlockPos().getX() + " Y:" + getBlockPos().getY() + " Z:" + getBlockPos().getZ()));
+    }
 
-	@Override
-	public boolean canPlaceItem(int slot, @NotNull ItemStack stack) {
-		return true;
-	}
+    @Override
+    public boolean canPlaceItem(int slot, @NotNull ItemStack stack) {
+        return true;
+    }
 
-	@Override
-	public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, Direction direction) {
-		return true;
-	}
+    @Override
+    public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, Direction direction) {
+        return true;
+    }
 
-	@Override
-	public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
-		return true;
-	}
+    @Override
+    public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
+        return true;
+    }
 
-	@Override
-	public @NotNull ItemStack removeItemNoUpdate(int slot) {
-		return ContainerHelper.takeItem(getItems(), slot);
-	}
+    @Override
+    public @NotNull ItemStack removeItemNoUpdate(int slot) {
+        return ContainerHelper.takeItem(getItems(), slot);
+    }
 
-	
-	@Override
-	public AbstractContainerMenu createMenu(int containerId, @NotNull Inventory playerInventory, @NotNull Player player) {
-		return new SiloTankMenu(containerId, playerInventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
-	}
+
+    @Override
+    public AbstractContainerMenu createMenu(int containerId, @NotNull Inventory playerInventory, @NotNull Player player) {
+        return new SiloTankMenu(containerId, playerInventory, this);
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return !isRemoved() && level == player.level() && level.getBlockEntity(worldPosition) == this
+                && player.distanceToSqr(worldPosition.getCenter()) <= 64
+                && getBlockState().getBlock() instanceof SiloTankBlock block && block.isSiloComplete(level, worldPosition);
+    }
+
 }

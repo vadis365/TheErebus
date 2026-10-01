@@ -90,7 +90,7 @@ public class ModBlockHelpers {
     protected static DeferredBlock<Block> registerSimpleBlock(String name, Properties properties) {
         return registerBlock(name, () -> new Block(properties.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix(name)))));
     }
-    
+
     protected static <T extends Block> DeferredBlock<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {
         return BLOCKS.registerBlock(name, (_ -> block.get()));
     }

@@ -33,74 +33,77 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 public class BambooPipeWrenchItem extends Item {
-	public BambooPipeWrenchItem() {
-		super(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("bamboo_pipe_wrench"))));
-	}
+    public BambooPipeWrenchItem() {
+        super(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("bamboo_pipe_wrench"))));
+    }
 
-	@Override
-	public void appendHoverText(ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay display, Consumer<Component> builder, @NonNull TooltipFlag tooltipFlag) {
-		builder.accept(Component.translatable("tooltip.erebus.bamboo_pipe_wrench").withStyle(ChatFormatting.YELLOW));
-	}
+    private static <T extends Comparable<T>> BlockState cycleState(BlockState state, Property<T> property) {
+        return state.setValue(property, getRelative(property.getPossibleValues(), state.getValue(property)));
+    }
 
-	// TODO make this nicer for use on all the pipe types
-	@Override
-	public InteractionResult useOn(UseOnContext context) {
-		Player player = context.getPlayer();
-		Level level = context.getLevel();
-		if (!level.isClientSide() && player != null) {
-			BlockPos pos = context.getClickedPos();
-			BlockState state = level.getBlockState(pos);
-			if (state != null && state.getBlock() == ModBlocks.BAMBOO_PIPE.get()) {
-				if (!player.isCrouching()) {
-					BlockState stateNew = cycleState(state, BambooPipe.FACING);
-					level.setBlock(pos, stateNew, Block.UPDATE_ALL);
-					return InteractionResult.SUCCESS;
-				} else {
-					level.removeBlockEntity(pos);
-					level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
-					ItemStack stackDrop = new ItemStack(ModBlocks.BAMBOO_PIPE.get());
-					Block.popResource(level, pos, stackDrop);
-					level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.5F, 2.0F);
-					return InteractionResult.SUCCESS;
-				}
-			}
-			
-			if (state != null && state.getBlock() == ModBlocks.BAMBOO_PIPE_EXTRACT.get()) {
-				if (!player.isCrouching()) {
-					BlockState stateNew = cycleState(state, BambooPipeExtract.FACING);
-					level.setBlock(pos, stateNew, Block.UPDATE_ALL);
-					return InteractionResult.SUCCESS;
-				} else {
-					level.removeBlockEntity(pos);
-					level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
-					ItemStack stackDrop = new ItemStack(ModBlocks.BAMBOO_PIPE_EXTRACT.get());
-					Block.popResource(level, pos, stackDrop);
-					level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.5F, 2.0F);
-					return InteractionResult.SUCCESS;
-				}
-			}
+    private static <T> T getRelative(Iterable<T> allowedValues, @Nullable T currentValue) {
+        return Util.findNextInIterable(allowedValues, currentValue);
+    }
 
-			if (state != null && state.getBlock() == ModBlocks.BAMBOO_EXTENDER.get()) {
-				BlockEntity blockEntity = level.getBlockEntity(pos);
-				if (blockEntity instanceof BambooExtenderBlockEntity extender) {
-					if (!player.isCrouching()) {
-						BlockState stateNew = cycleState(state, BambooExtender.FACING);
-						extender.direction = stateNew.getValue(BambooExtender.FACING);
-						level.setBlock(pos, stateNew, Block.UPDATE_ALL);
-						return InteractionResult.SUCCESS;
-					}
-				}
-			}
-		}
+    @Override
+    public void appendHoverText(ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay display, Consumer<Component> builder, @NonNull TooltipFlag tooltipFlag) {
+        builder.accept(Component.translatable("tooltip.erebus.bamboo_pipe_wrench").withStyle(ChatFormatting.YELLOW));
+    }
 
-		return InteractionResult.SUCCESS;
-	}
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        Player player = context.getPlayer();
+        Level level = context.getLevel();
+        if (level.isClientSide()) {
+            var block = level.getBlockState(context.getClickedPos()).getBlock();
+            return block instanceof BambooPipe || block instanceof BambooPipeExtract || block instanceof BambooExtender
+                    ? InteractionResult.SUCCESS : InteractionResult.PASS;
+        }
+        if (!level.isClientSide() && player != null) {
+            BlockPos pos = context.getClickedPos();
+            BlockState state = level.getBlockState(pos);
+            if (state != null && state.getBlock() == ModBlocks.BAMBOO_PIPE.get()) {
+                if (!player.isShiftKeyDown()) {
+                    BlockState stateNew = cycleState(state, BambooPipe.FACING);
+                    level.setBlock(pos, ((BambooPipe) state.getBlock()).withConnections(stateNew, level, pos), Block.UPDATE_ALL);
+                    return InteractionResult.SUCCESS;
+                } else {
+                    level.removeBlockEntity(pos);
+                    level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+                    ItemStack stackDrop = new ItemStack(ModBlocks.BAMBOO_PIPE.get());
+                    Block.popResource(level, pos, stackDrop);
+                    level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.5F, 2.0F);
+                    return InteractionResult.SUCCESS;
+                }
+            }
 
-	private static <T extends Comparable<T>> BlockState cycleState(BlockState state, Property<T> property) {
-		return state.setValue(property, getRelative(property.getPossibleValues(), state.getValue(property)));
-	}
+            if (state != null && state.getBlock() == ModBlocks.BAMBOO_PIPE_EXTRACT.get()) {
+                if (!player.isShiftKeyDown()) {
+                    BlockState stateNew = cycleState(state, BambooPipeExtract.FACING);
+                    level.setBlock(pos, ((BambooPipeExtract) state.getBlock()).withConnections(stateNew, level, pos), Block.UPDATE_ALL);
+                    return InteractionResult.SUCCESS;
+                } else {
+                    level.removeBlockEntity(pos);
+                    level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+                    ItemStack stackDrop = new ItemStack(ModBlocks.BAMBOO_PIPE_EXTRACT.get());
+                    Block.popResource(level, pos, stackDrop);
+                    level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.5F, 2.0F);
+                    return InteractionResult.SUCCESS;
+                }
+            }
 
-	private static <T> T getRelative(Iterable<T> allowedValues, @Nullable T currentValue) {
-		return Util.findNextInIterable(allowedValues, currentValue);
-	}
+            if (state != null && state.getBlock() == ModBlocks.BAMBOO_EXTENDER.get()) {
+                BlockEntity blockEntity = level.getBlockEntity(pos);
+                if (blockEntity instanceof BambooExtenderBlockEntity extender) {
+                    if (!player.isShiftKeyDown()) {
+                        BlockState stateNew = cycleState(state, BambooExtender.FACING);
+                        level.setBlock(pos, stateNew, Block.UPDATE_ALL);
+                        return InteractionResult.SUCCESS;
+                    }
+                }
+            }
+        }
+
+        return InteractionResult.PASS;
+    }
 }

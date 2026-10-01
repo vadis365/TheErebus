@@ -1,0 +1,46 @@
+{
+  "parent": "erebus:agriculture/root",
+  "criteria": {
+    "collect_bamboo": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:bamboo"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "collect_shoot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:sapling_bamboo"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/bamboo.desc"
+    },
+    "hidden": true,
+    "icon": {
+      "id": "erebus:bamboo"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/bamboo.title"
+    }
+  },
+  "requirements": [
+    [
+      "collect_bamboo"
+    ],
+    [
+      "collect_shoot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -23,7 +23,7 @@ public class ChunkCachedDensityRouter extends TerrainDensityRouter {
 
         BiomeDensitySource.DensityData dataColumn = horizontalCache[arrayCoord];
 
-        if(dataColumn == null) {
+        if (dataColumn == null) {
             dataColumn = biomeDensitySource.sampleTerrain(context.blockX(), context.blockZ(), context);
             horizontalCache[arrayCoord] = dataColumn;
         }

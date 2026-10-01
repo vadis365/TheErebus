@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/sarcastic_czech_mushroom"
+    "model": "erebus:item/sarcastic_czech_mushroom"
   }
 }

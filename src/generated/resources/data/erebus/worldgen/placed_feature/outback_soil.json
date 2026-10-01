@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:outback_soil",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -24,12 +24,12 @@ public class ErebusFeature {
         this.CONFIGURED_KEY = registerConfiguredKey(name);
     }
 
-    private ResourceKey<PlacedFeature> registerPlacedKey(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, Erebus.prefix(name));
-    }
-
     private static ResourceKey<ConfiguredFeature<?, ?>> registerConfiguredKey(String name) {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, Identifier.fromNamespaceAndPath(Erebus.MODID, name));
+    }
+
+    private ResourceKey<PlacedFeature> registerPlacedKey(String name) {
+        return ResourceKey.create(Registries.PLACED_FEATURE, Erebus.prefix(name));
     }
 
     public ResourceKey<PlacedFeature> getPlacedResourceKey() {

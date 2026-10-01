@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bone_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:shard_bone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_fly_wing": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:fly_wing"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:arrows_from_bone_shard_and_fly_wing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bone_shard",
+      "has_fly_wing"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:arrows_from_bone_shard_and_fly_wing"
+    ]
+  }
+}

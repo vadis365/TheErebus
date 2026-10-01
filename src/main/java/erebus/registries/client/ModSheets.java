@@ -55,7 +55,7 @@ public class ModSheets {
 
     @SuppressWarnings("DuplicatedCode")
     public static SpriteId chooseSpriteId(ErebusChestRenderState.ErebusChestMaterialType materialType, ChestType type) {
-        return switch(materialType) {
+        return switch (materialType) {
             case ASPER -> chooseSpriteId(type, CHEST_ASPER, CHEST_ASPER_LEFT, CHEST_ASPER_RIGHT);
             case BAMBOO -> chooseSpriteId(type, CHEST_BAMBOO, CHEST_BAMBOO_LEFT, CHEST_BAMBOO_RIGHT);
             case BAOBAB -> chooseSpriteId(type, CHEST_BAOBAB, CHEST_BAOBAB_LEFT, CHEST_BAOBAB_RIGHT);

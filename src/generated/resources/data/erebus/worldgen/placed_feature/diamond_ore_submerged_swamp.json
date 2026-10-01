@@ -2,18 +2,25 @@
   "feature": "erebus:diamond_ore_submerged_swamp",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 3
+      "type": "erebus:ore_count",
+      "chance": 0.66,
+      "extra_max": 4,
+      "extra_min": 3,
+      "max": 4,
+      "min": 3
+    },
+    {
+      "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:height_range",
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 112
+          "above_bottom": 112
         },
         "min_inclusive": {
-          "absolute": 5
+          "above_bottom": 5
         }
       }
     },

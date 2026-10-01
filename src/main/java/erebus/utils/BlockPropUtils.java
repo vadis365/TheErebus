@@ -9,6 +9,7 @@ public class BlockPropUtils {
     public static Boolean never(BlockState state, BlockGetter level, BlockPos pos) {
         return false;
     }
+
     public static Boolean always(BlockState state, BlockGetter level, BlockPos pos) {
         return true;
     }

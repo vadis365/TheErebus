@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:petrified_dust_layer",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

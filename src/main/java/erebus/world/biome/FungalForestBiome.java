@@ -6,7 +6,6 @@ import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
 import erebus.registries.world.feature.PlantFeatures;
-import erebus.registries.world.feature.TreeFeatures;
 import erebus.world.biome.util.ErebusBiome;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
@@ -55,18 +54,15 @@ public class FungalForestBiome extends ErebusBiome {
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
                         .addCarver(ModCarvers.CAVE)
                         .addCarver(ModCarvers.CANYON)
-                        .addFeature(SURFACE_STRUCTURES, PlantFeatures.BIG_LOGS_X.getPlacedResourceKey())
-                        .addFeature(SURFACE_STRUCTURES, PlantFeatures.BIG_LOGS_Z.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, PlantFeatures.FALLEN_LOG_POPULATION.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, PlantFeatures.ROTTEN_TREE_STUMP.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ROTTEN_ACACIA.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, TreeFeatures.CYPRESS_TREE.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, PlantFeatures.DARK_CAPPED_MUSHROOM.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, PlantFeatures.DUTCH_CAP_MUSHROOM.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, PlantFeatures.GRANDMAS_SHOES_MUSHROOM.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, PlantFeatures.KAIZERS_FINGERS_MUSHROOM.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, PlantFeatures.SARCASTIC_CZECH_MUSHROOM.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.GIANT_MUSHROOM_POPULATION.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.SMALL_MUSHROOM_POPULATION.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.VANILLA_GIANT_MUSHROOM_POPULATION.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.TANGLED_STALK.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.HIGH_CAPPED_MUSHROOM.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.GLOWSHROOM_POPULATION.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.FERN.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.MOSS.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())

@@ -8,7 +8,8 @@ import net.minecraft.client.model.geom.builders.*;
 
 public class CicadaModel extends EntityModel<CicadaRenderState> {
 
-    public ModelPart root;
+    private final ModelPart rightRearWing;
+    private final ModelPart leftRearWing;
     private final ModelPart LEye;
     private final ModelPart REye;
     private final ModelPart HeadL;
@@ -53,10 +54,12 @@ public class CicadaModel extends EntityModel<CicadaRenderState> {
     private final ModelPart LWingTop;
     private final ModelPart LWingMain;
     private final ModelPart LWingBack;
-
+    public ModelPart root;
     public CicadaModel(ModelPart root) {
         super(root);
         this.root = root;
+        rightRearWing = root.getChild("RightRearWing");
+        leftRearWing = root.getChild("LeftRearWing");
         this.LEye = root.getChild("LEye");
         this.REye = root.getChild("REye");
         this.HeadL = root.getChild("HeadL");
@@ -283,6 +286,24 @@ public class CicadaModel extends EntityModel<CicadaRenderState> {
                 .texOffs(16, 63)
                 .addBox(0.0F, -2.0F, 18.0F, 1, 4, 1, CubeDeformation.NONE), PartPose.ZERO);
 
+        part.addOrReplaceChild("RightRearWing", CubeListBuilder.create(),
+                        PartPose.offsetAndRotation(0.8F, 6.4F, 1.6F, 0, 0.34906585F, 0).withScale(0.7F))
+                .addOrReplaceChild("Wing", RWingFront);
+        part.addOrReplaceChild("LeftRearWing", CubeListBuilder.create(),
+                        PartPose.offsetAndRotation(-0.8F, 6.4F, 1.6F, 0, -0.34906585F, 0).withScale(0.7F))
+                .addOrReplaceChild("Wing", LWingFront);
         return LayerDefinition.create(mesh, 64, 128);
+    }
+
+    @Override
+    public void setupAnim(CicadaRenderState state) {
+        super.setupAnim(state);
+        RWingFront.xRot = LWingFront.xRot = state.flying ? -1.8F : 0;
+        RWingFront.yRot = LWingFront.yRot = 0;
+        RWingFront.zRot = state.flying ? 1.8F - state.wingFloat : 0.3F;
+        LWingFront.zRot = -RWingFront.zRot;
+        rightRearWing.visible = leftRearWing.visible = state.flying;
+        rightRearWing.getChild("Wing").loadPose(RWingFront.storePose());
+        leftRearWing.getChild("Wing").loadPose(LWingFront.storePose());
     }
 }

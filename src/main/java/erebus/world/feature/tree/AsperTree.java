@@ -1,11 +1,10 @@
 package erebus.world.feature.tree;
 
 import erebus.registries.blocks.ModBlocks;
+import erebus.world.feature.tree.foliage.SingleLeafFoliagePlacer;
 import erebus.world.feature.tree.trunk.AsperTrunkPlacer;
-import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
@@ -21,9 +20,9 @@ public class AsperTree extends ErebusTree {
     public TreeConfiguration getTreeConfiguration() {
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.LOG_ASPER.get()),
-                new AsperTrunkPlacer(4, 2, 0),
+                new AsperTrunkPlacer(4, 1, 0),
                 BlockStateProvider.simple(ModBlocks.LEAVES_ASPER.get()),
-                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), 3),
+                new SingleLeafFoliagePlacer(),
                 new TwoLayersFeatureSize(1, 0, 1)).build();
     }
 

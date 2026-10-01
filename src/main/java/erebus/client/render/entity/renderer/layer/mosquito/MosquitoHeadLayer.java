@@ -23,9 +23,10 @@ public class MosquitoHeadLayer extends RenderLayer<MosquitoRenderState, Mosquito
 
     @Override
     public void submit(@NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, MosquitoRenderState state, float xRot, float yRot) {
-        if(!state.isRiding) {
+        if (state.isInvisible) return;
+        if (!state.isRiding) {
             pose.pushPose();
-            pose.scale(state.suck, 1.0F, 1.0F);
+            pose.scale(state.suck * (1 - state.blood * state.blood), 1.0F, 1.0F);
             submit.submitModel(model, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
             pose.popPose();
         }

@@ -8,7 +8,7 @@ public class CentipedeMultipart extends GenericPartEntity<Centipede> {
         super(parentMob, width, height);
     }
 
-	@Override
+    @Override
     protected double getDefaultGravity() {
         return 0.2;
     }

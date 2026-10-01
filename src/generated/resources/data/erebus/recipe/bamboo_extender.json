@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "erebus:bamboo",
+    "D": "minecraft:dispenser",
+    "P": "erebus:planks_bamboo",
+    "R": "#c:dusts/redstone",
+    "S": "minecraft:string"
+  },
+  "pattern": [
+    "BSB",
+    "PDP",
+    "BRB"
+  ],
+  "result": {
+    "id": "erebus:bamboo_extender"
+  }
+}

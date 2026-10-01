@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:savannah_acacia_population",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

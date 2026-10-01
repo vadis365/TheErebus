@@ -7,8 +7,13 @@ import java.util.List;
 
 public class ModOrePlacement {
 
+    public static List<PlacementModifier> legacyOrePlacement(float chance, int min, int max, int extraMin, int extraMax, int low, int high) {
+        return orePlacement(new OreCountPlacement(chance, min, max, extraMin, extraMax),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(low), VerticalAnchor.aboveBottom(high)));
+    }
+
     public static List<PlacementModifier> orePlacement(int count, int low, int high) {
-        return List.of(CountPlacement.of(count), HeightRangePlacement.uniform(VerticalAnchor.absolute(low),  VerticalAnchor.absolute(high)), BiomeFilter.biome());
+        return orePlacement(CountPlacement.of(count), HeightRangePlacement.uniform(VerticalAnchor.absolute(low), VerticalAnchor.absolute(high)));
     }
 
     public static List<PlacementModifier> orePlacement(int count) {
@@ -24,6 +29,6 @@ public class ModOrePlacement {
     }
 
     public static List<PlacementModifier> rareOrePlacement(int chance, int low, int high) {
-        return orePlacement(RarityFilter.onAverageOnceEvery(chance), HeightRangePlacement.uniform(VerticalAnchor.absolute(low),  VerticalAnchor.absolute(high)));
+        return orePlacement(RarityFilter.onAverageOnceEvery(chance), HeightRangePlacement.uniform(VerticalAnchor.absolute(low), VerticalAnchor.absolute(high)));
     }
 }

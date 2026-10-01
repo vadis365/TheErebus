@@ -3,15 +3,27 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "erebus:swamp_plant"
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "items": "minecraft:shears"
+                  }
+                }
+              ],
+              "name": "erebus:swamp_plant"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "erebus:cabbage_seeds"
+            }
+          ]
         }
       ],
       "rolls": 1.0

@@ -21,7 +21,7 @@ public class EucalyptusTree extends ErebusTree {
     public TreeConfiguration getTreeConfiguration() {
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.LOG_EUCALYPTUS.get()),
-                new EucalyptusTrunkPlacer(8, 4, 0),
+                new EucalyptusTrunkPlacer(8, 3, 0),
                 BlockStateProvider.simple(ModBlocks.LEAVES_EUCALYPTUS.get()),
                 new SingleLeafFoliagePlacer(ConstantInt.ZERO, ConstantInt.ZERO),
                 new TwoLayersFeatureSize(1, 0, 2)

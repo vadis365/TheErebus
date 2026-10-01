@@ -42,276 +42,283 @@ import org.jspecify.annotations.NonNull;
 import javax.annotation.Nullable;
 
 public class VelvetWorm extends Monster {
-	private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(VelvetWorm.class, EntityDataSerializers.INT);
-	public VelvetWormMultipart[] parts;
+    private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(VelvetWorm.class, EntityDataSerializers.INT);
+    private final boolean doSpawningAnimation = false;
+    public VelvetWormMultipart[] parts;
+    private int wallInvulnerabilityTicks = 40;
 
-	private int wallInvulnerabilityTicks = 40;
-	private final boolean doSpawningAnimation = false;
+    public VelvetWorm(EntityType<? extends Monster> type, Level level) {
+        super(type, level);
+        this.setPathfindingMalus(PathType.WATER, -8F);
+        xpReward = 15;
+        getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(getAttackStrength());
+        this.parts = new VelvetWormMultipart[]{
+                new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+                new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+                new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+                new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+                new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+                new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+                new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+                new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+                new VelvetWormMultipart(this, 0.3125F, 0.3125F),
+                new VelvetWormMultipart(this, 0.3125F, 0.3125F)
+        };
+        setId(ENTITY_COUNTER.getAndAdd(this.parts.length + 1) + 1);
+    }
 
-	public VelvetWorm(EntityType<? extends Monster> type, Level level) {
-		super(type, level);
-		this.setPathfindingMalus(PathType.WATER, -1.0F);
-		this.parts = new VelvetWormMultipart[]{
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F),
-			new VelvetWormMultipart(this, 0.3125F, 0.3125F)
-			};
-		setId(ENTITY_COUNTER.getAndAdd(this.parts.length + 1) + 1);
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 25D)
+                .add(Attributes.FOLLOW_RANGE, 32D)
+                .add(Attributes.MOVEMENT_SPEED, 0.5D)
+                .add(Attributes.ATTACK_DAMAGE, 4D)
+                .add(Attributes.STEP_HEIGHT, 1D);
+    }
 
-	@Override
-	public void setId(int id) {
-		super.setId(id);
-		for (int i = 0; i < this.parts.length; i++)
-			this.parts[i].setId(id + i + 1);
-	}
+    public static boolean canSpawnHere(EntityType<VelvetWorm> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
+        float light = level.getLightLevelDependentMagicValue(pos);
+        return light >= 0F;
+    }
 
-	@Override
-	public PartEntity<?> @NonNull [] getParts() {
-		return parts;
-	}
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+        for (int i = 0; i < this.parts.length; i++)
+            this.parts[i].setId(id + i + 1);
+    }
 
-	@Override
-	public boolean isMultipartEntity() {
-		return true;
-	}
+    @Override
+    public PartEntity<?> @NonNull [] getParts() {
+        return parts;
+    }
 
-	@Override
-	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
-		super.defineSynchedData(builder);
-		builder.define(SKIN_TYPE, 0);
-	}
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
 
-	@Override
-	protected void registerGoals() {
-		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new ShootGooBallAttackGoal(this, 1.3D));
-		goalSelector.addGoal(3, new RandomStrollGoal(this, 0.8D, 1));
-		goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 4.0F));
-		targetSelector.addGoal(0, new HurtByTargetGoal(this));
-		targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
-	}
+    @Override
+    protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(SKIN_TYPE, random.nextInt(5));
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes()
-				.add(Attributes.MAX_HEALTH, 25D)
-				.add(Attributes.FOLLOW_RANGE, 32D)
-				.add(Attributes.MOVEMENT_SPEED, 0.3D)
-				.add(Attributes.ATTACK_DAMAGE, 2D);
-	}
+    @Override
+    protected void registerGoals() {
+        goalSelector.addGoal(0, new FloatGoal(this));
+        goalSelector.addGoal(1, new ShootGooBallAttackGoal(this, 1.3D));
+        goalSelector.addGoal(3, new RandomStrollGoal(this, 0.8D, 1));
+        goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 4.0F));
+        targetSelector.addGoal(0, new HurtByTargetGoal(this));
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
+    }
 
-	public static boolean canSpawnHere(EntityType<VelvetWorm> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
-		float light = level.getLightLevelDependentMagicValue(pos);
-		return light >= 0F;
-	}
+    @Override
+    public boolean checkSpawnRules(LevelAccessor level, EntitySpawnReason reason) {
+        return true;
+    }
 
-	@Override
-	public boolean checkSpawnObstruction(LevelReader world) {
-		return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
-	}
+    @Override
+    public boolean checkSpawnObstruction(LevelReader world) {
+        return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
+    }
 
-	@Override
-	public int getMaxSpawnClusterSize() {
-		return 2;
-	}
+    @Override
+    public int getMaxSpawnClusterSize() {
+        return 2;
+    }
 
-	@Override
-	public void aiStep() {
-		super.aiStep();
-		setHitBoxes();
-	}
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        setHitBoxes();
+    }
 
-	protected float getHeadMotionYMultiplier() {
-		return this.doSpawningAnimation && this.tickCount < 20 ? 0.65F : 1.0F;
-	}
+    protected float getHeadMotionYMultiplier() {
+        return this.doSpawningAnimation && this.tickCount < 20 ? 0.65F : 1.0F;
+    }
 
-	protected float getTailMotionYMultiplier() {
-		return this.doSpawningAnimation && this.tickCount < 20 ? 0.0F : 1.0F;
-	}
+    protected float getTailMotionYMultiplier() {
+        return this.doSpawningAnimation && this.tickCount < 20 ? 0.0F : 1.0F;
+    }
 
-	@Override
-	public void tick() {
-		super.tick();
+    @Override
+    public void tick() {
+        super.tick();
 
-		if (this.level().isClientSide() && this.tickCount % 20 == 0) {
-			this.spawnParticles(this.level(), this.xo, this.yo, this.zo, this.getRandom());
-		}
+        if (this.level().isClientSide() && this.tickCount % 20 == 0) {
+            this.spawnParticles(this.level(), this.xo, this.yo, this.zo, this.getRandom());
+        }
 
-		if (this.wallInvulnerabilityTicks > 0) {
-			this.wallInvulnerabilityTicks--;
-		}
+        if (this.wallInvulnerabilityTicks > 0) {
+            this.wallInvulnerabilityTicks--;
+        }
 
-		Vec3 vec3 = this.getDeltaMovement();
-		this.setDeltaMovement(vec3.multiply(1.0D, this.getHeadMotionYMultiplier(), 1.0D));
-	}
+        Vec3 vec3 = this.getDeltaMovement();
+        this.setDeltaMovement(vec3.multiply(1.0D, this.getHeadMotionYMultiplier(), 1.0D));
+    }
 
-	@Override
-	public @NonNull AABB getHitbox() {
-		AABB newBox = getBoundingBox();
-		for(VelvetWormMultipart part : this.parts)
-			newBox = getBoundingBox().minmax(part.getBoundingBox());
-		return newBox;
-	}
+    @Override
+    public @NonNull AABB getHitbox() {
+        AABB newBox = getBoundingBox();
+        for (VelvetWormMultipart part : this.parts)
+            newBox = newBox.minmax(part.getBoundingBox());
+        return newBox;
+    }
 
-	@Override
-	public boolean shouldRenderAtSqrDistance(double distance) {
-		double aabbSize = this.getBoundingBox().getSize() * 10.0;
-		if (Double.isNaN(aabbSize))
-			aabbSize = 1.0;
-		aabbSize *= 64.0 * getViewScale();
-		return distance < aabbSize * aabbSize;
-	}
+    @Override
+    public boolean shouldRenderAtSqrDistance(double distance) {
+        double aabbSize = this.getBoundingBox().getSize() * 10.0;
+        if (Double.isNaN(aabbSize))
+            aabbSize = 1.0;
+        aabbSize *= 64.0 * getViewScale();
+        return distance < aabbSize * aabbSize;
+    }
 
-	public void spawnParticles(Level level, double x, double y, double z, RandomSource rand) {
-		for (int count = 0; count < 1 + level.getRandom().nextInt(4); ++count) {
-			double a = Math.toRadians(this.yBodyRot);
-			double offSetX = -Math.sin(a) * 0D + rand.nextDouble() * 0.5D - rand.nextDouble() * 0.5D;
-			double offSetZ = Math.cos(a) * 0D + rand.nextDouble() * 0.5D - rand.nextDouble() * 0.5D;
-			level.addParticle(ParticleTypes.ITEM_SLIME, x + offSetX, y, z + offSetZ, 0, 0, 0);
-		}
-	}
+    public void spawnParticles(Level level, double x, double y, double z, RandomSource rand) {
+        for (int count = 0; count < 1 + level.getRandom().nextInt(4); ++count) {
+            double a = Math.toRadians(this.yBodyRot);
+            double offSetX = -Math.sin(a) * 0D + rand.nextDouble() * 0.5D - rand.nextDouble() * 0.5D;
+            double offSetZ = Math.cos(a) * 0D + rand.nextDouble() * 0.5D - rand.nextDouble() * 0.5D;
+            level.addParticle(ParticleTypes.ITEM_SLIME, x + offSetX, y, z + offSetZ, 0, 0, 0);
+        }
+    }
 
-	@Override
-	public void makeStuckInBlock(BlockState state, @NonNull Vec3 motionMultiplier) {
-		if (!state.is(Blocks.COBWEB))
-			super.makeStuckInBlock(state, motionMultiplier);
-	}
+    @Override
+    public void makeStuckInBlock(BlockState state, @NonNull Vec3 motionMultiplier) {
+        if (!state.is(Blocks.COBWEB))
+            super.makeStuckInBlock(state, motionMultiplier);
+    }
 
-	public double getAttackStrength() {
-		switch (level().getDifficulty()) {
-			default:
-				return 4.0D;
-			case EASY:
-				return 4.0D;
-			case NORMAL:
-				return 5.0D;
-			case HARD:
-				return 6.0D;
-		}
-	}
+    public double getAttackStrength() {
+        switch (level().getDifficulty()) {
+            default:
+                return 4.0D;
+            case EASY:
+                return 4.0D;
+            case NORMAL:
+                return 5.0D;
+            case HARD:
+                return 6.0D;
+        }
+    }
 
-	@Override
-	public boolean hurtServer(@NonNull ServerLevel level, DamageSource source, float damage) {
-		if(source.is(DamageTypes.IN_WALL) && this.wallInvulnerabilityTicks > 0)
-			return false;
-		return super.hurtServer(level, source, damage);
-	}
+    @Override
+    public boolean hurtServer(@NonNull ServerLevel level, DamageSource source, float damage) {
+        if (source.is(DamageTypes.IN_WALL) && this.wallInvulnerabilityTicks > 0)
+            return false;
+        return super.hurtServer(level, source, damage);
+    }
 
-	private void setHitBoxes() {
-		for (VelvetWormMultipart part : this.parts) {
-			part.yRotO = part.getYRot();
-			part.xRotO = part.getXRot();
-			part.xOld = part.getX();
-			part.yOld = part.getY();
-			part.zOld = part.getZ();
-		}
+    private void setHitBoxes() {
+        for (VelvetWormMultipart part : this.parts) {
+            part.yRotO = part.getYRot();
+            part.xRotO = part.getXRot();
+            part.xOld = part.getX();
+            part.yOld = part.getY();
+            part.zOld = part.getZ();
+        }
 
-		for (int i = 0; i < this.parts.length; i++) {
-			this.movePiecePos(this, this.parts[i], i > 0 ? this.parts[i - 1] : this, 4.5F, 2F);
-		}
-	}
+        for (int i = 0; i < this.parts.length; i++) {
+            this.movePiecePos(this, this.parts[i], i > 0 ? this.parts[i - 1] : this, 4.5F, 2F);
+        }
+    }
 
-	protected double getMaxPieceDistance() {
-		return 0.3125F;
-	}
+    protected double getMaxPieceDistance() {
+        return 0.3125F;
+    }
 
-	public void movePiecePos(VelvetWorm sludgeWorm, VelvetWormMultipart targetPart, Entity destinationPart, float speed, float yawSpeed) {
-		//TODO make this better and use the parent entities motionY
+    public void movePiecePos(VelvetWorm sludgeWorm, VelvetWormMultipart targetPart, Entity destinationPart, float speed, float yawSpeed) {
+        //TODO make this better and use the parent entities motionY
 
-		if (destinationPart.yo - targetPart.yo < -0.5D)
-			speed = 1.5F;
+        if (destinationPart.yo - targetPart.yo < -0.5D)
+            speed = 1.5F;
 
-		double movementTolerance = 0.05D;
-		double maxDist = this.getMaxPieceDistance();
-		boolean correctY = false;
+        double movementTolerance = 0.05D;
+        double maxDist = this.getMaxPieceDistance();
+        boolean correctY = false;
 
-		for (int i = 0; i < 5; i++) {
-			Vec3 diff = destinationPart.position().subtract(targetPart.position());
-			double len = diff.length();
+        for (int i = 0; i < 5; i++) {
+            Vec3 diff = destinationPart.position().subtract(targetPart.position());
+            double len = diff.length();
 
-			if (len > maxDist) {
-				Vec3 correction = diff.scale(1.0D / len * (len - maxDist));
-				targetPart.xo += correction.x;
-				if(tickCount <= 1)
-					targetPart.yo = destinationPart.yo;
-				else
-					targetPart.yo += correction.y; // this?
-				targetPart.zo += correction.z;
-				targetPart.setPos(targetPart.xo, targetPart.yo, targetPart.zo);
+            if (len > maxDist) {
+                Vec3 correction = diff.scale(1.0D / len * (len - maxDist));
+                targetPart.xo += correction.x;
+                if (tickCount <= 1)
+                    targetPart.yo = destinationPart.yo;
+                else
+                    targetPart.yo += correction.y; // this?
+                targetPart.zo += correction.z;
+                targetPart.setPos(targetPart.xo, targetPart.yo, targetPart.zo);
 
-				double cy = targetPart.getY();
-				Vec3 vec3 = targetPart.getDeltaMovement();
-				targetPart.setDeltaMovement(vec3.add(0D, correction.y, 0D));
+                double cy = targetPart.getY();
+                Vec3 vec3 = targetPart.getDeltaMovement();
+                targetPart.setDeltaMovement(vec3.add(0D, correction.y, 0D));
 
-				if (Math.abs((targetPart.yo - cy) - correction.y) <= movementTolerance) {
-					correctY = true;
-					break;
-				}
-			}
-		}
+                if (Math.abs((targetPart.yo - cy) - correction.y) <= movementTolerance) {
+                    correctY = true;
+                    break;
+                }
+            }
+        }
 
-		//Welp, failed to move smoothly along Y, just clip
-		if (!correctY) {
-			Vec3 diff = destinationPart.position().subtract(targetPart.position());
-			double len = diff.lengthSqr();
+        //Welp, failed to move smoothly along Y, just clip
+        if (!correctY) {
+            Vec3 diff = destinationPart.position().subtract(targetPart.position());
+            double len = diff.lengthSqr();
 
-			if (len > maxDist) {
-				Vec3 correction = diff.scale(1.0D / len * (len - maxDist));
-				targetPart.xo += correction.x;
-				targetPart.yo += correction.y;
-				targetPart.zo += correction.z;
-			}
-		}
+            if (len > maxDist) {
+                Vec3 correction = diff.scale(1.0D / len * (len - maxDist));
+                targetPart.xo += correction.x;
+                targetPart.yo += correction.y;
+                targetPart.zo += correction.z;
+            }
+        }
 
-		Vec3 diff = new Vec3(destinationPart.xo, 0, destinationPart.zo).subtract(new Vec3(targetPart.xo, 0, targetPart.zo));
-		float destYaw = (float) Math.toDegrees(Math.atan2(diff.z, diff.x)) - 90;
-		double yawDiff = (destYaw - targetPart.getYRot()) % 360.0F;
-		double yawInterpolant = 2 * yawDiff % 360.0F - yawDiff;
-		double rotationYaw = targetPart.getYRot();
-		rotationYaw += yawInterpolant / yawSpeed;
-		targetPart.setYRot((float) rotationYaw);
-		targetPart.setXRot(0F);
-		if ((yo < targetPart.yo) && level().collidesWithSuffocatingBlock(targetPart, targetPart.getBoundingBox()))
-			targetPart.yo += 0.02D;
-		targetPart.setPos(targetPart.xo, targetPart.yo, targetPart.zo);
-	}
+        Vec3 diff = new Vec3(destinationPart.xo, 0, destinationPart.zo).subtract(new Vec3(targetPart.xo, 0, targetPart.zo));
+        float destYaw = (float) Math.toDegrees(Math.atan2(diff.z, diff.x)) - 90;
+        double yawDiff = (destYaw - targetPart.getYRot()) % 360.0F;
+        double yawInterpolant = 2 * yawDiff % 360.0F - yawDiff;
+        double rotationYaw = targetPart.getYRot();
+        rotationYaw += yawInterpolant / yawSpeed;
+        targetPart.setYRot((float) rotationYaw);
+        targetPart.setXRot(0F);
+        if ((yo < targetPart.yo) && level().collidesWithSuffocatingBlock(targetPart, targetPart.getBoundingBox()))
+            targetPart.yo += 0.02D;
+        targetPart.setPos(targetPart.xo, targetPart.yo, targetPart.zo);
+    }
 
-	@Nullable
-	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason type, @Nullable SpawnGroupData data) {
-		setSkin(level.getRandom().nextInt(5));
-		for (VelvetWormMultipart part : this.parts) {
-			part.setPos(this.xo, this.yo, this.zo);
-			part.setYRot(this.getYRot());
-		}
-		return data;
-	}
-	
-	public void setSkin(int skinType) {
-		entityData.set(SKIN_TYPE, skinType);
-	}
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason type, @Nullable SpawnGroupData data) {
+        setSkin(level.getRandom().nextInt(5));
+        for (VelvetWormMultipart part : this.parts) {
+            part.setPos(this.xo, this.yo, this.zo);
+            part.setYRot(this.getYRot());
+        }
+        return data;
+    }
 
-	public int getSkin() {
-		return entityData.get(SKIN_TYPE);
-	}
+    public int getSkin() {
+        return entityData.get(SKIN_TYPE);
+    }
 
-	@Override
-	  public void addAdditionalSaveData(@NonNull ValueOutput output) {
-		super.addAdditionalSaveData(output);
-		output.putInt("skin", getSkin());
-	}
+    public void setSkin(int skinType) {
+        entityData.set(SKIN_TYPE, Math.clamp(skinType, 0, 4));
+    }
 
-	@Override
-	public void readAdditionalSaveData(@NonNull ValueInput input) {
-		super.readAdditionalSaveData(input);
-		setSkin(input.getIntOr("skin", 0));
-	}
+    @Override
+    public void addAdditionalSaveData(@NonNull ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putInt("skin", getSkin());
+    }
+
+    @Override
+    public void readAdditionalSaveData(@NonNull ValueInput input) {
+        super.readAdditionalSaveData(input);
+        setSkin(input.getIntOr("skin", getSkin()));
+    }
 
 }

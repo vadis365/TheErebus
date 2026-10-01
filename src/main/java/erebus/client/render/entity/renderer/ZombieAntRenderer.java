@@ -12,25 +12,25 @@ import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
 public class ZombieAntRenderer extends MobRenderer<ZombieAnt, ZombieAntRenderState, ZombieAntModel> {
-	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/zombie_ant.png");
+    private static final Identifier TEXTURE = Erebus.prefix("textures/entity/zombie_ant.png");
 
-	public ZombieAntRenderer(EntityRendererProvider.Context context) {
-		super(context, new ZombieAntModel(context.bakeLayer(ModEntityRendering.ZOMBIE_ANT)), 0.5F);
-		addLayer(new ZombieAntLayer(this, context.getModelSet()));
-	}
+    public ZombieAntRenderer(EntityRendererProvider.Context context) {
+        super(context, new ZombieAntModel(context.bakeLayer(ModEntityRendering.ZOMBIE_ANT)), 0.5F);
+        addLayer(new ZombieAntLayer(this, context.getModelSet()));
+    }
 
-	@Override
-	public ZombieAntRenderState createRenderState() {
-		return new ZombieAntRenderState();
-	}
+    @Override
+    public ZombieAntRenderState createRenderState() {
+        return new ZombieAntRenderState();
+    }
 
-	@Override
-	public void extractRenderState(ZombieAnt entity, ZombieAntRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-	}
+    @Override
+    public void extractRenderState(ZombieAnt entity, ZombieAntRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+    }
 
-	@Override
-	public @NonNull Identifier getTextureLocation(ZombieAntRenderState state) {
-		return TEXTURE;
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(ZombieAntRenderState state) {
+        return TEXTURE;
+    }
 }

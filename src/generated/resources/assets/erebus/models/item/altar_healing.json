@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/altar_healing_special",
+  "parent": "minecraft:block/block",
   "textures": {
-    "particle": "erebus:block/altar_healing"
+    "particle": "erebus:block/altar_base"
   }
 }

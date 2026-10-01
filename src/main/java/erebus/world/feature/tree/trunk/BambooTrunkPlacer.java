@@ -32,7 +32,7 @@ public class BambooTrunkPlacer extends TrunkPlacer {
 
     @Override
     public @NonNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NonNull WorldGenLevel level, @NonNull BiConsumer<BlockPos, BlockState> trunkSetter, @NonNull RandomSource random, int treeHeight, @NonNull BlockPos origin, @NonNull TreeConfiguration config) {
-        for(int y = 0; y < treeHeight; y++) {
+        for (int y = 0; y < treeHeight; y++) {
             trunkSetter.accept(origin.above(y), ModBlocks.COLOSSAL_BAMBOO.get().defaultBlockState().setValue(BambooBlock.AGE, random.nextInt(15)));
         }
 

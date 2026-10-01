@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "erebus:jump_boots"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "erebus:jump_boots"
+      }
+    ]
+  }
+}

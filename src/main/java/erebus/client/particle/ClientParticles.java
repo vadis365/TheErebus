@@ -12,238 +12,238 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 public class ClientParticles {
-	public static void spawnParticles(ParticleType particleType, double xPos, double yPos, double zPos, double vecX, double vecY, double vecZ) {
-		Level level = Minecraft.getInstance().level;
-		if (level != null) {
-			switch (particleType) {
-				case BEETLE_LARVA_SQUISH:
-					for (int count = 0; count <= 200; ++count)
-						level.addParticle(ParticleTypes.ITEM_SLIME, xPos + (level.getRandom().nextDouble() - 0.5D), yPos + level.getRandom().nextDouble(), zPos + (level.getRandom().nextDouble() - 0.5D), 0, 0, 0);
-					break;
-				case CRUSHROOM_BLAM:
-					for (int a = 0; a < 360; a += 4) {
-						double ang = a * Math.PI / 180D;
-						level.addParticle(ParticleTypes.ELECTRIC_SPARK, xPos + -Math.sin((float) ang) * 3, yPos + 0.1D, zPos + Math.cos((float) ang) * 3, 0, 0, 0);
-					}
-					break;
-				case TARANTULA_BLAM:
-					for (int a = 0; a < 360; a += 4) {
-						double ang = a * Math.PI / 180D;
-						level.addParticle(ParticleTypes.CLOUD, xPos + -Math.sin((float) ang) * 3, yPos, zPos + Math.cos((float) ang) * 3, -Math.sin((float) ang) * 0.5, 0.1D, Math.cos((float) ang) * 0.5);
-					}
-					break;
-				case ANTLION_BLAM:
-					for (int a = 0; a < 360; a += 4) {
-						double ang = a * Math.PI / 180D;
-						for (int count = 0; count <= 20; ++count)
-							level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.SAND.defaultBlockState()), xPos + -Math.sin((float) ang) * 3.5D, yPos + 0.5D, zPos + Math.cos((float) ang) * 3.5D, -Math.sin((float) ang) * 0.8, 0.0D, Math.cos((float) ang) * 0.8);
-						level.addParticle(ParticleTypes.CLOUD, xPos + -Math.sin((float) ang) * 4.5D, yPos, zPos + Math.cos((float) ang) * 4.5D, -Math.sin((float) ang), 0.1D, Math.cos((float) ang));
-					}
-					break;
-				case BOSS_DEATH:
-					float f = (level.getRandom().nextFloat() - 0.5F) * 8.0F;
-					float f1 = (level.getRandom().nextFloat() - 0.5F) * 4.0F;
-					float f2 = (level.getRandom().nextFloat() - 0.5F) * 8.0F;
-					level.addParticle(ParticleTypes.EXPLOSION, xPos + f, yPos + 2.0D + f1, zPos + f2, 0.0D, 0.0D, 0.0D);
-					break;
-				case ANTLION_RUMBLE:
-					for (int a = 0; a < 360; a += 4) {
-						double ang = a * Math.PI / 180D;
-						level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.SAND.defaultBlockState()), xPos + -Math.sin((float) ang) * 3.5D, yPos + 0.125D, zPos + Math.cos((float) ang) * 3.5D, -Math.sin((float) ang) * 0.8, 0.3D, Math.cos((float) ang) * 0.8);
-					}
-					break;
-				case HAMMER_BLAM:
-					for (int a = 0; a < 360; a += 4) {
-						double ang = a * Math.PI / 180D;
-						for (int count = 0; count <= 4; ++count)
-							level.addParticle(ParticleTypes.ELECTRIC_SPARK, xPos + -Math.sin((float) ang) * 1D * count * 0.5, yPos, zPos + Math.cos((float) ang) * 1 * count * 0.5, -Math.sin((float) ang) * 0.5D, 0.01D, Math.cos((float) ang) * 0.5D);
-						level.addParticle(ParticleTypes.CLOUD, xPos + -Math.sin((float) ang) * 2D, yPos, zPos + Math.cos((float) ang) * 2D, -Math.sin((float) ang) * 0.5D, 0.01D, Math.cos((float) ang) * 0.5D);
-					}
-					break;
-				case GAS_VENT_SWAMP:
-					for (double yy = yPos; yy < yPos + 2D; yy += 0.5D) {
-						double d0 = xPos - 0.075F;
-						double d2 = zPos - 0.075F;
-						double d3 = xPos + 0.075F;
-						double d4 = zPos + 0.075F;
-						double d6 = yy + 0.25F;
-						level.addParticle(ModParticles.SWAMP_VENT.get(), d0, yy, d2, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.SWAMP_VENT.get(), d0, yy, d4, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.SWAMP_VENT.get(), d3, yy, d2, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.SWAMP_VENT.get(), d3, yy, d4, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.SWAMP_VENT.get(), xPos, d6, zPos, 0.0D, 0.05D, 0.0D);
-					}
-					break;
-				case GAS_VENT_VOLCANIC:
-					for (double yy = yPos; yy < yPos + 2D; yy += 0.5D) {
-						double d0 = xPos - 0.075F;
-						double d2 = zPos - 0.075F;
-						double d3 = xPos + 0.075F;
-						double d4 = zPos + 0.075F;
-						double d6 = yy + 0.25F;
-						level.addParticle(ModParticles.GNEISS_VENT.get(), d0, yy, d2, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.GNEISS_VENT.get(), d0, yy, d4, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.GNEISS_VENT.get(), d3, yy, d2, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.GNEISS_VENT.get(), d3, yy, d4, 0.0D, 0.05D, 0.0D);
-						level.addParticle(ModParticles.GNEISS_VENT.get(), xPos, d6, zPos, 0.0D, 0.05D, 0.0D);
-					}
-					break;
-				case WASP_DAGGER:
-					for (int i = 0; i < 8; i++)
-						level.addParticle(new DustParticleOptions(0xFF0000, 1.0F), xPos, yPos, zPos, 0.0D, 0.0D, 0.0D);
-					break;
-				case ELECTRIC:
-					float vx = (level.getRandom().nextFloat() * 0.5f - 0.25f) * 0.00125f;
-					float vy = (level.getRandom().nextFloat() * 0.5f - 0.25f) * 0.00125f;
-					float vz = (level.getRandom().nextFloat() * 0.5f - 0.25f) * 0.00125f;
-					level.addParticle(ParticleTypes.ELECTRIC_SPARK, xPos, yPos, zPos, vx, vy, vz);
-					break;
-				case LAVA:
-					level.addParticle(ParticleTypes.LAVA, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case SMOKE:
-					level.addParticle(ParticleTypes.LARGE_SMOKE, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case FLAME:
-					level.addParticle(ParticleTypes.FLAME, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case SWAMPFLAME:
-					level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case SWAMPFLAME_GREEN:
-					level.addParticle(ColorParticleOption.create(ModParticles.FLAME.get(), 0.0F, 1.0F, 0.0F), xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case SWAMPFLAME_PURPLE:
-					level.addParticle(ColorParticleOption.create(ModParticles.FLAME.get(), 0.5F, 0.0F, 0.5F), xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case HEART:
-					level.addParticle(ParticleTypes.HEART, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case SPORES:
-					level.addParticle(ParticleTypes.SPORE_BLOSSOM_AIR, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case REPELLENT:
-					level.addParticle(ModParticles.REPELLENT.get(), xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case SONIC:
-					level.addParticle(ColorParticleOption.create(ModParticles.SONIC.get(), 1, 1, 1), xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case SONIC_BLUE:
-					level.addParticle(ColorParticleOption.create(ModParticles.SONIC.get(), 0.490F, 0.7451F, 1.0F), xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case PORTAL:
-					level.addParticle(ParticleTypes.PORTAL, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case EREBUS_PORTAL:
-					level.addParticle(ParticleTypes.PORTAL, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case BONEMEAL:
-					level.addParticle(ParticleTypes.HAPPY_VILLAGER, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case CLOUD:
-					level.addParticle(ParticleTypes.CLOUD, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case SPELL:
-					level.addParticle(ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, 1.0F, 1.0F, 1.0F), xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case POISON:
-					level.addParticle(ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, 0.306F, 0.576F, 0.192F), xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case ENCHANTMENT_TABLE:
-					level.addParticle(ParticleTypes.ENCHANT, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case SLIME:
-					level.addParticle(ParticleTypes.ITEM_SLIME, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case REDDUST:
-					level.addParticle(new DustParticleOptions(0xFFFFFF, 1.0F), xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case SPARKS:
-					level.addParticle(ParticleTypes.FIREWORK, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				case HUGE_EXPLODE:
-					level.addParticle(ParticleTypes.EXPLOSION_EMITTER, xPos, yPos, zPos, vecX, vecY, vecZ);
-					break;
-				default:
-			}
-		}
-	}
+    public static void spawnParticles(ParticleType particleType, double xPos, double yPos, double zPos, double vecX, double vecY, double vecZ) {
+        Level level = Minecraft.getInstance().level;
+        if (level != null) {
+            switch (particleType) {
+                case BEETLE_LARVA_SQUISH:
+                    for (int count = 0; count <= 200; ++count)
+                        level.addParticle(ParticleTypes.ITEM_SLIME, xPos + (level.getRandom().nextDouble() - 0.5D), yPos + level.getRandom().nextDouble(), zPos + (level.getRandom().nextDouble() - 0.5D), 0, 0, 0);
+                    break;
+                case CRUSHROOM_BLAM:
+                    for (int a = 0; a < 360; a += 4) {
+                        double ang = a * Math.PI / 180D;
+                        level.addParticle(ParticleTypes.ELECTRIC_SPARK, xPos + -Math.sin((float) ang) * 3, yPos + 0.1D, zPos + Math.cos((float) ang) * 3, 0, 0, 0);
+                    }
+                    break;
+                case TARANTULA_BLAM:
+                    for (int a = 0; a < 360; a += 4) {
+                        double ang = a * Math.PI / 180D;
+                        level.addParticle(ParticleTypes.CLOUD, xPos + -Math.sin((float) ang) * 3, yPos, zPos + Math.cos((float) ang) * 3, -Math.sin((float) ang) * 0.5, 0.1D, Math.cos((float) ang) * 0.5);
+                    }
+                    break;
+                case ANTLION_BLAM:
+                    for (int a = 0; a < 360; a += 4) {
+                        double ang = a * Math.PI / 180D;
+                        for (int count = 0; count <= 20; ++count)
+                            level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.SAND.defaultBlockState()), xPos + -Math.sin((float) ang) * 3.5D, yPos + 0.5D, zPos + Math.cos((float) ang) * 3.5D, -Math.sin((float) ang) * 0.8, 0.0D, Math.cos((float) ang) * 0.8);
+                        level.addParticle(ParticleTypes.CLOUD, xPos + -Math.sin((float) ang) * 4.5D, yPos, zPos + Math.cos((float) ang) * 4.5D, -Math.sin((float) ang), 0.1D, Math.cos((float) ang));
+                    }
+                    break;
+                case BOSS_DEATH:
+                    float f = (level.getRandom().nextFloat() - 0.5F) * 8.0F;
+                    float f1 = (level.getRandom().nextFloat() - 0.5F) * 4.0F;
+                    float f2 = (level.getRandom().nextFloat() - 0.5F) * 8.0F;
+                    level.addParticle(ParticleTypes.EXPLOSION, xPos + f, yPos + 2.0D + f1, zPos + f2, 0.0D, 0.0D, 0.0D);
+                    break;
+                case ANTLION_RUMBLE:
+                    for (int a = 0; a < 360; a += 4) {
+                        double ang = a * Math.PI / 180D;
+                        level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.SAND.defaultBlockState()), xPos + -Math.sin((float) ang) * 3.5D, yPos + 0.125D, zPos + Math.cos((float) ang) * 3.5D, -Math.sin((float) ang) * 0.8, 0.3D, Math.cos((float) ang) * 0.8);
+                    }
+                    break;
+                case HAMMER_BLAM:
+                    for (int a = 0; a < 360; a += 4) {
+                        double ang = a * Math.PI / 180D;
+                        for (int count = 0; count <= 4; ++count)
+                            level.addParticle(ParticleTypes.ELECTRIC_SPARK, xPos + -Math.sin((float) ang) * 1D * count * 0.5, yPos, zPos + Math.cos((float) ang) * 1 * count * 0.5, -Math.sin((float) ang) * 0.5D, 0.01D, Math.cos((float) ang) * 0.5D);
+                        level.addParticle(ParticleTypes.CLOUD, xPos + -Math.sin((float) ang) * 2D, yPos, zPos + Math.cos((float) ang) * 2D, -Math.sin((float) ang) * 0.5D, 0.01D, Math.cos((float) ang) * 0.5D);
+                    }
+                    break;
+                case GAS_VENT_SWAMP:
+                    for (double yy = yPos; yy < yPos + 2D; yy += 0.5D) {
+                        double d0 = xPos - 0.075F;
+                        double d2 = zPos - 0.075F;
+                        double d3 = xPos + 0.075F;
+                        double d4 = zPos + 0.075F;
+                        double d6 = yy + 0.25F;
+                        level.addParticle(ModParticles.SWAMP_VENT.get(), d0, yy, d2, 0.0D, 0.05D, 0.0D);
+                        level.addParticle(ModParticles.SWAMP_VENT.get(), d0, yy, d4, 0.0D, 0.05D, 0.0D);
+                        level.addParticle(ModParticles.SWAMP_VENT.get(), d3, yy, d2, 0.0D, 0.05D, 0.0D);
+                        level.addParticle(ModParticles.SWAMP_VENT.get(), d3, yy, d4, 0.0D, 0.05D, 0.0D);
+                        level.addParticle(ModParticles.SWAMP_VENT.get(), xPos, d6, zPos, 0.0D, 0.05D, 0.0D);
+                    }
+                    break;
+                case GAS_VENT_VOLCANIC:
+                    for (double yy = yPos; yy < yPos + 2D; yy += 0.5D) {
+                        double d0 = xPos - 0.075F;
+                        double d2 = zPos - 0.075F;
+                        double d3 = xPos + 0.075F;
+                        double d4 = zPos + 0.075F;
+                        double d6 = yy + 0.25F;
+                        level.addParticle(ModParticles.GNEISS_VENT.get(), d0, yy, d2, 0.0D, 0.05D, 0.0D);
+                        level.addParticle(ModParticles.GNEISS_VENT.get(), d0, yy, d4, 0.0D, 0.05D, 0.0D);
+                        level.addParticle(ModParticles.GNEISS_VENT.get(), d3, yy, d2, 0.0D, 0.05D, 0.0D);
+                        level.addParticle(ModParticles.GNEISS_VENT.get(), d3, yy, d4, 0.0D, 0.05D, 0.0D);
+                        level.addParticle(ModParticles.GNEISS_VENT.get(), xPos, d6, zPos, 0.0D, 0.05D, 0.0D);
+                    }
+                    break;
+                case WASP_DAGGER:
+                    for (int i = 0; i < 8; i++)
+                        level.addParticle(new DustParticleOptions(0xFF0000, 1.0F), xPos, yPos, zPos, 0.0D, 0.0D, 0.0D);
+                    break;
+                case ELECTRIC:
+                    float vx = (level.getRandom().nextFloat() * 0.5f - 0.25f) * 0.00125f;
+                    float vy = (level.getRandom().nextFloat() * 0.5f - 0.25f) * 0.00125f;
+                    float vz = (level.getRandom().nextFloat() * 0.5f - 0.25f) * 0.00125f;
+                    level.addParticle(ParticleTypes.ELECTRIC_SPARK, xPos, yPos, zPos, vx, vy, vz);
+                    break;
+                case LAVA:
+                    level.addParticle(ParticleTypes.LAVA, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case SMOKE:
+                    level.addParticle(ParticleTypes.LARGE_SMOKE, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case FLAME:
+                    level.addParticle(ParticleTypes.FLAME, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case SWAMPFLAME:
+                    level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case SWAMPFLAME_GREEN:
+                    level.addParticle(ColorParticleOption.create(ModParticles.FLAME.get(), 0.0F, 1.0F, 0.0F), xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case SWAMPFLAME_PURPLE:
+                    level.addParticle(ColorParticleOption.create(ModParticles.FLAME.get(), 0.5F, 0.0F, 0.5F), xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case HEART:
+                    level.addParticle(ParticleTypes.HEART, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case SPORES:
+                    level.addParticle(ParticleTypes.SPORE_BLOSSOM_AIR, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case REPELLENT:
+                    level.addParticle(ModParticles.REPELLENT.get(), xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case SONIC:
+                    level.addParticle(ColorParticleOption.create(ModParticles.SONIC.get(), 1, 1, 1), xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case SONIC_BLUE:
+                    level.addParticle(ColorParticleOption.create(ModParticles.SONIC.get(), 0.490F, 0.7451F, 1.0F), xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case PORTAL:
+                    level.addParticle(ParticleTypes.PORTAL, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case EREBUS_PORTAL:
+                    level.addParticle(ParticleTypes.PORTAL, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case BONEMEAL:
+                    level.addParticle(ParticleTypes.HAPPY_VILLAGER, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case CLOUD:
+                    level.addParticle(ParticleTypes.CLOUD, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case SPELL:
+                    level.addParticle(ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, 1.0F, 1.0F, 1.0F), xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case POISON:
+                    level.addParticle(ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, 0.306F, 0.576F, 0.192F), xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case ENCHANTMENT_TABLE:
+                    level.addParticle(ParticleTypes.ENCHANT, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case SLIME:
+                    level.addParticle(ParticleTypes.ITEM_SLIME, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case REDDUST:
+                    level.addParticle(new DustParticleOptions(0xFFFFFF, 1.0F), xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case SPARKS:
+                    level.addParticle(ParticleTypes.FIREWORK, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                case HUGE_EXPLODE:
+                    level.addParticle(ParticleTypes.EXPLOSION_EMITTER, xPos, yPos, zPos, vecX, vecY, vecZ);
+                    break;
+                default:
+            }
+        }
+    }
 
-	public enum ParticleType {
-		BEETLE_LARVA_SQUISH,
-		SPRAY_CAN,
-		CRUSHROOM_BLAM,
-		TARANTULA_BLAM,
-		BOSS_DEATH,
-		ANTLION_BLAM,
-		ANTLION_RUMBLE,
-		HAMMER_BLAM,
-		GAS_VENT_SWAMP,
-		GAS_VENT_VOLCANIC,
-		WASP_DAGGER,
-		ELECTRIC,
-		LAVA,
-		SMOKE,
-		FLAME,
-		SWAMPFLAME,
-		SWAMPFLAME_GREEN,
-		SWAMPFLAME_PURPLE,
-		HEART,
-		SPORES,
-		REPELLENT,
-		SONIC,
-		SONIC_BLUE,
-		PORTAL,
-		EREBUS_PORTAL,
-		BONEMEAL,
-		CLOUD,
-		SPELL,
-		POISON,
-		ENCHANTMENT_TABLE,
-		SLIME,
-		REDDUST,
-		SPARKS,
-		HUGE_EXPLODE;
+    public static void spawnAntlionParticles(int blockType, double xPos, double yPos, double zPos, double offSetRadius, boolean reverse) {
+        Level level = Minecraft.getInstance().level;
+        for (int a = 0; a < 360; a += 4) {
+            double ang = a * Math.PI / 180D;
+            if (reverse)
+                level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Block.stateById(blockType)), xPos + -Math.sin((float) ang) * offSetRadius, yPos, zPos + Math.cos((float) ang) * offSetRadius, -Math.sin((float) ang) * -1D, 1D, Math.cos((float) ang) * -1D);
+            else
+                level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Block.stateById(blockType)), xPos + -Math.sin((float) ang) * offSetRadius, yPos, zPos + Math.cos((float) ang) * offSetRadius, -Math.sin((float) ang) * 0.8D, 0.3D, Math.cos((float) ang) * 0.8D);
+        }
+    }
 
-		static final ParticleType[] values = values();
-	}
+    public static void spawnCloudBurstParticles(Level level, BlockPos pos) {
+        if (level.isClientSide()) {
+            double x = pos.getX() + 0.53125F;
+            double y = pos.getY() + 1.25F;
+            double z = pos.getZ() + 0.53125F;
+            spawnParticles(ParticleType.CLOUD, x, y, z, 0.0D, 0.0D, 0.0D);
+            spawnParticles(ParticleType.CLOUD, x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
+            spawnParticles(ParticleType.CLOUD, x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
+            spawnParticles(ParticleType.CLOUD, x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+            spawnParticles(ParticleType.CLOUD, x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
+            spawnParticles(ParticleType.CLOUD, x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
+            spawnParticles(ParticleType.CLOUD, x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
+        }
+    }
 
-	public static void spawnAntlionParticles(int blockType, double xPos, double yPos, double zPos, double offSetRadius, boolean reverse, double velX, double velY, double velZ) {
-		Level level = Minecraft.getInstance().level;
-		for (int a = 0; a < 360; a += 4) {
-			double ang = a * Math.PI / 180D;
-			if(reverse)
-				level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Block.stateById(blockType)), xPos + -Math.sin((float) ang) * offSetRadius, yPos, zPos + Math.cos((float) ang) * offSetRadius, -Math.sin((float) ang) * -1D, 1D, Math.cos((float) ang) * -1D);
-			else
-				level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Block.stateById(blockType)), xPos + -Math.sin((float) ang) * offSetRadius, yPos, zPos + Math.cos((float) ang) * offSetRadius, -Math.sin((float) ang) * 0.8D, 0.3D, Math.cos((float) ang) * 0.8D);
-		}
-	}
+    public static void enderChestParticles(Level level, double x, double y, double z) {
+        for (int c = 0; c < 3; c++) {
+            int motionX = level.getRandom().nextInt(2) * 2 - 1;
+            int motionZ = level.getRandom().nextInt(2) * 2 - 1;
+            double velY = (level.getRandom().nextFloat() - 0.5D) * 0.125D;
 
-	public static void spawnCloudBurstParticles(Level level, BlockPos pos) {
-		if (level.isClientSide()) {
-			double x = pos.getX() + 0.53125F;
-			double y = pos.getY() + 1.25F;
-			double z = pos.getZ() + 0.53125F;
-			spawnParticles(ParticleType.CLOUD, x, y, z, 0.0D, 0.0D, 0.0D);
-			spawnParticles(ParticleType.CLOUD, x, y, z - 0.265625, 0.0D, 0.0D, 0.0D);
-			spawnParticles(ParticleType.CLOUD, x, y, z + 0.265625, 0.0D, 0.0D, 0.0D);
-			spawnParticles(ParticleType.CLOUD, x - 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			spawnParticles(ParticleType.CLOUD, x + 0.265625, y, z, 0.0D, 0.0D, 0.0D);
-			spawnParticles(ParticleType.CLOUD, x, y + 0.25, z, 0.0D, 0.0D, 0.0D);
-			spawnParticles(ParticleType.CLOUD, x, y + 0.5, z, 0.0D, 0.0D, 0.0D);
-		}
-	}
+            double velZ = level.getRandom().nextFloat() * motionZ;
+            double velX = level.getRandom().nextFloat() * motionX;
 
-	public static void enderChestParticles(Level level, double x, double y, double z) {
-		for(int c = 0; c < 3; c++) {
-			int motionX = level.getRandom().nextInt(2) * 2 - 1;
-			int motionZ = level.getRandom().nextInt(2) * 2 - 1;
-			double velY = (level.getRandom().nextFloat() - 0.5D) * 0.125D;
+            spawnParticles(ParticleType.EREBUS_PORTAL, x, y, z, velX, velY, velZ);
+        }
+    }
 
-			double velZ = level.getRandom().nextFloat() * motionZ;
-			double velX = level.getRandom().nextFloat() * motionX;
+    public enum ParticleType {
+        BEETLE_LARVA_SQUISH,
+        SPRAY_CAN,
+        CRUSHROOM_BLAM,
+        TARANTULA_BLAM,
+        BOSS_DEATH,
+        ANTLION_BLAM,
+        ANTLION_RUMBLE,
+        HAMMER_BLAM,
+        GAS_VENT_SWAMP,
+        GAS_VENT_VOLCANIC,
+        WASP_DAGGER,
+        ELECTRIC,
+        LAVA,
+        SMOKE,
+        FLAME,
+        SWAMPFLAME,
+        SWAMPFLAME_GREEN,
+        SWAMPFLAME_PURPLE,
+        HEART,
+        SPORES,
+        REPELLENT,
+        SONIC,
+        SONIC_BLUE,
+        PORTAL,
+        EREBUS_PORTAL,
+        BONEMEAL,
+        CLOUD,
+        SPELL,
+        POISON,
+        ENCHANTMENT_TABLE,
+        SLIME,
+        REDDUST,
+        SPARKS,
+        HUGE_EXPLODE;
 
-			spawnParticles(ParticleType.EREBUS_PORTAL, x, y, z, velX, velY, velZ);
-		}
-	}
+        static final ParticleType[] values = values();
+    }
 }

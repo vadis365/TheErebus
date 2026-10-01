@@ -15,21 +15,21 @@ import javax.annotation.Nonnull;
 
 public class GlowGemInactiveBlock extends GlowGemActiveBlock {
 
-	public GlowGemInactiveBlock(Block.Properties properties) {
-		super(properties);
-		registerDefaultState(this.stateDefinition.any().setValue(TYPE, EnumGemDirection.DOWN_NORTH));
-		//setLightLevel(0F);
-	}
+    public GlowGemInactiveBlock(Block.Properties properties) {
+        super(properties);
+        registerDefaultState(this.stateDefinition.any().setValue(TYPE, EnumGemDirection.DOWN_NORTH));
+        //setLightLevel(0F);
+    }
 
-	@Nonnull
-	@Override
-	public InteractionResult useWithoutItem(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull BlockHitResult hitResult) {
-		if (!world.isClientSide()) {
-			BlockState activeState = ModBlocks.GLOW_GEM_ACTIVE.get().defaultBlockState().setValue(GlowGemActiveBlock.TYPE, state.getValue(TYPE));
-			world.setBlock(pos, activeState, 3);
-			world.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, 0.6F);
-		}
-		return InteractionResult.SUCCESS;
-	}
+    @Nonnull
+    @Override
+    public InteractionResult useWithoutItem(@Nonnull BlockState state, @Nonnull Level world, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull BlockHitResult hitResult) {
+        if (!world.isClientSide()) {
+            BlockState activeState = ModBlocks.GLOW_GEM_ACTIVE.get().defaultBlockState().setValue(GlowGemActiveBlock.TYPE, state.getValue(TYPE));
+            world.setBlock(pos, activeState, 3);
+            world.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, 0.6F);
+        }
+        return InteractionResult.SUCCESS;
+    }
 
 }

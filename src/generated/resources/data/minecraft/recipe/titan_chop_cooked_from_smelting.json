@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.2,
+  "ingredient": "erebus:titan_chop_raw",
+  "result": {
+    "id": "erebus:titan_chop_cooked"
+  }
+}

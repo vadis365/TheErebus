@@ -9,7 +9,6 @@ import erebus.registries.world.feature.PlantFeatures;
 import erebus.registries.world.feature.TreeFeatures;
 import erebus.world.biome.util.ErebusBiome;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
@@ -19,8 +18,7 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.UNDERGROUND_ORES;
-import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.VEGETAL_DECORATION;
+import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.*;
 
 public class ElysianForestBiome extends ErebusBiome {
 
@@ -62,25 +60,21 @@ public class ElysianForestBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.POND.getPlacedResourceKey())
                         .addCarver(ModCarvers.CAVE)
                         .addCarver(ModCarvers.CANYON)
-                        .addFeature(VEGETAL_DECORATION, VegetationPlacements.TREES_BIRCH_AND_OAK_LEAF_LITTER)
-                        .addFeature(VEGETAL_DECORATION, TreeFeatures.CYPRESS_TREE.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, TreeFeatures.ELYSIAN_FOREST_POPULATION.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, TreeFeatures.CYPRESS_POPULATION.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.NETTLE.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.TALL_BLOOM.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.WEEPING_BLUEBELL.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.FERN.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.DARK_FRUIT_VINE_POPULATION.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.MOSS.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.GRASS.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
-                        .addFeature(UNDERGROUND_ORES, OreFeatures.COAL_ORE.getPlacedResourceKey())
-                        .addFeature(UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())
-                        .addFeature(UNDERGROUND_ORES, OreFeatures.GOLD_ORE.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.LAPIS_ORE.getPlacedResourceKey())
-                        .addFeature(UNDERGROUND_ORES, OreFeatures.EMERALD_ORE.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.DIAMOND_ORE.getPlacedResourceKey())
-                        .addFeature(UNDERGROUND_ORES, OreFeatures.JADE_ORE.getPlacedResourceKey())
-                        .addFeature(UNDERGROUND_ORES, OreFeatures.PETRIFIED_WOOD_ORE.getPlacedResourceKey())
-                        .addFeature(UNDERGROUND_ORES, OreFeatures.FOSSIL_ORE.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.ALUMINUM_ORE.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.COPPER_ORE.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.LEAD_ORE.getPlacedResourceKey())

@@ -31,6 +31,7 @@ public class NoiseDensityRouter implements DensityFunction.SimpleFunction {
         this.upperDensityBound = upperDensityBound;
         this.depthScalar = depthScalar;
     }
+
     @Override
     public double compute(@NotNull FunctionContext context) {
         return computeTerrain(context).scale();

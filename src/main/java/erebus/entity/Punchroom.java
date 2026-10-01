@@ -2,11 +2,11 @@ package erebus.entity;
 
 import erebus.client.particle.ClientParticles;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -29,320 +29,336 @@ import net.minecraft.world.level.storage.ValueOutput;
 import java.util.EnumSet;
 
 public class Punchroom extends Monster {
-	public float squishAmount;
-	public float squishFactor;
-	public float prevSquishFactor;
-	private boolean wasOnGround;
+    public float squishAmount;
+    public float squishFactor;
+    public float prevSquishFactor;
+    private boolean wasOnGround;
 
-	public Punchroom(EntityType<? extends Punchroom> type, Level level) {
-		super(type, level);
-		this.moveControl = new PunchroomMoveHelper(this);
-	}
+    public Punchroom(EntityType<? extends Punchroom> type, Level level) {
+        super(type, level);
+        this.moveControl = new PunchroomMoveHelper(this);
+    }
 
-	@Override
-	protected void registerGoals() {
-		goalSelector.addGoal(0, new AIPunchroomFloat(this));
-		goalSelector.addGoal(1, new AIPunchroomAttack(this));
-		goalSelector.addGoal(2, new AIPunchroomFaceRandom(this));
-		goalSelector.addGoal(3, new AIPunchroomHop(this));
-		targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MOVEMENT_SPEED, 0.5D)
+                .add(Attributes.MAX_HEALTH, 20D)
+                .add(Attributes.ATTACK_DAMAGE, 2D)
+                .add(Attributes.FOLLOW_RANGE, 16.0D);
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes()
-				.add(Attributes.MOVEMENT_SPEED, 0.5D)
-				.add(Attributes.MAX_HEALTH, 20D)
-				.add(Attributes.ATTACK_DAMAGE, 2D)
-				.add(Attributes.FOLLOW_RANGE, 16.0D);
-	}
+    public static boolean canSpawnHere(EntityType<Punchroom> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
+        float light = level.getLightLevelDependentMagicValue(pos);
+        return light >= 0F;
+    }
 
-	public static boolean canSpawnHere(EntityType<Punchroom> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
-		float light = level.getLightLevelDependentMagicValue(pos);
-		return light >= 0F;
-	}
+    @Override
+    protected void registerGoals() {
+        goalSelector.addGoal(0, new AIPunchroomFloat(this));
+        goalSelector.addGoal(1, new AIPunchroomAttack(this));
+        goalSelector.addGoal(2, new AIPunchroomFaceRandom(this));
+        goalSelector.addGoal(3, new AIPunchroomHop(this));
+        targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
+    }
 
-	@Override
-	public boolean checkSpawnObstruction(LevelReader world) {
-		return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
-	}
+    @Override
+    public boolean checkSpawnRules(LevelAccessor level, EntitySpawnReason reason) {
+        return true;
+    }
 
-	@Override
-	public int getMaxSpawnClusterSize() {
-		return 2;
-	}
+    @Override
+    public boolean checkSpawnObstruction(LevelReader world) {
+        return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
+    }
 
-	@Override
-	public void addAdditionalSaveData(ValueOutput output) {
-		super.addAdditionalSaveData(output);
-		output.putBoolean("wasOnGround", wasOnGround);
-	}
+    @Override
+    public int getMaxSpawnClusterSize() {
+        return 2;
+    }
 
-	@Override
-	public void readAdditionalSaveData(ValueInput input) {
-		super.readAdditionalSaveData(input);
-		wasOnGround = input.getBooleanOr("wasOnGround", false);
-	}
+    @Override
+    public void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putBoolean("wasOnGround", wasOnGround);
+    }
 
-	@Override
-	public void tick() {
-		squishFactor += (squishAmount - squishFactor) * 0.5F;
-		prevSquishFactor = squishFactor;
-		super.tick();
-		if (onGround() && !wasOnGround) {
-			for (int j = 0; j < 8; ++j) {
-				float f = random.nextFloat() * Mth.PI * 2.0F;
-				float f1 = random.nextFloat() * 0.5F + 0.5F;
-				float f2 = Mth.sin(f) * 0.5F * f1;
-				float f3 = Mth.cos(f) * 0.5F * f1;
-				if (level().isClientSide())
-					ClientParticles.spawnParticles(ClientParticles.ParticleType.SPORES, getX() + f2, getBoundingBox().minY, getZ() + f3, 0.0D, 0.0D, 0.0D);
-			}
-			playSound(getSquishSound(), getSoundVolume(), ((random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F) / 0.8F);
-			squishAmount = -1.5F;
-		} else if (!onGround() && wasOnGround) {
-			squishAmount = 2.0F;
-		}
-		wasOnGround = onGround();
-		alterSquishAmount();
-	}
+    @Override
+    public void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        wasOnGround = input.getBooleanOr("wasOnGround", false);
+    }
 
-	protected void alterSquishAmount() {
-		squishAmount *= 0.6F;
-	}
+    @Override
+    public void tick() {
+        prevSquishFactor = squishFactor;
+        squishFactor += (squishAmount - squishFactor) * 0.5F;
+        super.tick();
+        if (onGround() && !wasOnGround) {
+            for (int j = 0; j < 8; ++j) {
+                float f = random.nextFloat() * Mth.PI * 2.0F;
+                float f1 = random.nextFloat() * 0.5F + 0.5F;
+                float f2 = Mth.sin(f) * 0.5F * f1;
+                float f3 = Mth.cos(f) * 0.5F * f1;
+                if (level().isClientSide())
+                    ClientParticles.spawnParticles(ClientParticles.ParticleType.SPORES, getX() + f2, getBoundingBox().minY, getZ() + f3, 0.0D, 0.0D, 0.0D);
+            }
+            playSound(getSquishSound(), getSoundVolume(), ((random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F) / 0.8F);
+            squishAmount = -1.5F;
+        } else if (!onGround() && wasOnGround) {
+            squishAmount = 2.0F;
+        }
+        wasOnGround = onGround();
+        alterSquishAmount();
+    }
 
-	protected int getJumpDelay() {
-		return random.nextInt(20) + 10;
-	}
+    protected void alterSquishAmount() {
+        squishAmount *= 0.6F;
+    }
 
-	@Override
-	public void knockback(double strength, double xRatio, double zRatio) {
-		float knockback = 0.4F;
-		if (!level().isClientSide()) {
-			if (level().getDifficulty().ordinal() > Difficulty.PEACEFUL.ordinal())
-				if (level().getDifficulty() == Difficulty.NORMAL)
-					knockback = 0.6F;
-				else if (level().getDifficulty() == Difficulty.HARD)
-					knockback = 0.8F;
-		}
-		super.knockback(knockback, xRatio, zRatio);
-	}
+    protected int getJumpDelay() {
+        return random.nextInt(20) + 10;
+    }
 
-	@Override
-	public void playerTouch(Player player) {
-		super.playerTouch(player);
-		if (!level().isClientSide() && !player.isCreative()) {
-			if (player.getBoundingBox().maxY >= getBoundingBox().minY && player.getBoundingBox().minY <= getBoundingBox().maxY)
-				player.hurt(this.damageSources().mobAttack(this), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
-		}
-	}
+    @Override
+    public void playerTouch(Player player) {
+        super.playerTouch(player);
+        if (!(level() instanceof ServerLevel server) || !isAlive() || !player.isAlive() || player.isCreative() || player.isSpectator()
+                || player.getBoundingBox().maxY < getBoundingBox().minY || player.getBoundingBox().minY > getBoundingBox().maxY) return;
+        player.hurtServer(server, damageSources().mobAttack(this), (float) getAttributeValue(Attributes.ATTACK_DAMAGE));
+        double strength = switch (server.getDifficulty()) {
+            case NORMAL -> 0.4;
+            case HARD -> 0.6;
+            default -> 0.2;
+        };
+        double yaw = Math.toRadians(getYRot());
+        player.push(-Math.sin(yaw) * strength, 0.3, Math.cos(yaw) * strength);
+        player.hurtMarked = true;
+    }
 
-	@Override
-	public float getVoicePitch() {
-		return super.getVoicePitch() * 3.95F;
-	}
+    @Override
+    public float getVoicePitch() {
+        return super.getVoicePitch() * 3.95F;
+    }
 
-	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.SLIME_HURT;
-	}
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return SoundEvents.SLIME_HURT;
+    }
 
-	@Override
-	protected SoundEvent getDeathSound() {
-		return SoundEvents.SLIME_DEATH;
-	}
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.SLIME_DEATH;
+    }
 
-	protected SoundEvent getSquishSound() {
-		return SoundEvents.SLIME_SQUISH;
-	}
+    protected SoundEvent getSquishSound() {
+        return SoundEvents.SLIME_SQUISH;
+    }
 
-	@Override
-	public void jumpFromGround() {
-		this.setDeltaMovement(this.getDeltaMovement().x(), 0.5D, this.getDeltaMovement().z());
-	}
+    @Override
+    public void jumpFromGround() {
+        this.setDeltaMovement(this.getDeltaMovement().x(), 0.5D, this.getDeltaMovement().z());
+        needsSync = true;
+        net.neoforged.neoforge.common.CommonHooks.onLivingJump(this);
+    }
 
-	@Override
-	protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
-	}
+    @Override
+    protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
+    }
 
-	protected SoundEvent getJumpSound() {
-		return SoundEvents.SLIME_JUMP;
-	}
+    @Override
+    public boolean causeFallDamage(double distance, float multiplier, DamageSource source) {
+        return false;
+    }
+
+    protected SoundEvent getJumpSound() {
+        return SoundEvents.SLIME_JUMP;
+    }
 
 
-	static class AIPunchroomAttack extends Goal {
-		private final Punchroom punchroom;
-		private int growTiredTimer;
+    static class AIPunchroomAttack extends Goal {
+        private final Punchroom punchroom;
+        private int growTiredTimer;
 
-		public AIPunchroomAttack(Punchroom punchroomIn) {
-			punchroom = punchroomIn;
-			setFlags(EnumSet.of(Goal.Flag.LOOK));
-		}
+        public AIPunchroomAttack(Punchroom punchroomIn) {
+            punchroom = punchroomIn;
+            setFlags(EnumSet.of(Goal.Flag.LOOK));
+        }
 
-		@Override
-		public boolean canUse() {
-			LivingEntity entitylivingbase = punchroom.getTarget();
-			return entitylivingbase != null && entitylivingbase.isAlive() && punchroom.canAttack(entitylivingbase);
-		}
+        @Override
+        public boolean canUse() {
+            LivingEntity entitylivingbase = punchroom.getTarget();
+            return entitylivingbase != null && entitylivingbase.isAlive() && punchroom.canAttack(entitylivingbase);
+        }
 
-		@Override
-		public void start() {
-			growTiredTimer = 300;
-			super.start();
-		}
+        @Override
+        public void start() {
+            growTiredTimer = 300;
+            super.start();
+        }
 
-		@Override
-		public boolean canContinueToUse() {
-			LivingEntity entitylivingbase = punchroom.getTarget();
-			return entitylivingbase != null && entitylivingbase.isAlive() && punchroom.canAttack(entitylivingbase) && --growTiredTimer > 0;
-		}
+        @Override
+        public boolean canContinueToUse() {
+            LivingEntity entitylivingbase = punchroom.getTarget();
+            return entitylivingbase != null && entitylivingbase.isAlive() && punchroom.canAttack(entitylivingbase) && --growTiredTimer > 0;
+        }
 
-		@Override
-		public boolean requiresUpdateEveryTick() {
-			return true;
-		}
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
 
-		@Override
-		public void tick() {
-			if (punchroom.getTarget() != null)
-				punchroom.lookAt(punchroom.getTarget(), 10.0F, 10.0F);
+        @Override
+        public void tick() {
+            if (punchroom.getTarget() != null)
+                punchroom.lookAt(punchroom.getTarget(), 10.0F, 10.0F);
 
-			if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
-				control.setDirection(punchroom.getYRot(), true);
+            if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
+                control.setDirection(punchroom.getYRot(), true);
 
-		}
-	}
+        }
+    }
 
-	static class AIPunchroomFaceRandom extends Goal {
-		private final Punchroom punchroom;
-		private float chosenDegrees;
-		private int nextRandomizeTime;
+    static class AIPunchroomFaceRandom extends Goal {
+        private final Punchroom punchroom;
+        private float chosenDegrees;
+        private int nextRandomizeTime;
 
-		public AIPunchroomFaceRandom(Punchroom punchroomIn) {
-			punchroom = punchroomIn;
-			setFlags(EnumSet.of(Goal.Flag.LOOK));
-		}
+        public AIPunchroomFaceRandom(Punchroom punchroomIn) {
+            punchroom = punchroomIn;
+            setFlags(EnumSet.of(Goal.Flag.LOOK));
+        }
 
-		@Override
-		public boolean canUse() {
-			return punchroom.getTarget() == null && (punchroom.onGround() || punchroom.isInWater() || punchroom.isInLava() || punchroom.hasEffect(MobEffects.LEVITATION));
-		}
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
 
-		@Override
-		public void tick() {
-			if (--nextRandomizeTime <= 0) {
-				nextRandomizeTime = 40 + punchroom.getRandom().nextInt(60);
-				chosenDegrees = (float) punchroom.getRandom().nextInt(360);
-			}
+        @Override
+        public boolean canUse() {
+            return punchroom.getTarget() == null && (punchroom.onGround() || punchroom.isInWater() || punchroom.isInLava() || punchroom.hasEffect(MobEffects.LEVITATION));
+        }
 
-			if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
-				control.setDirection(chosenDegrees, false);
-		}
-	}
+        @Override
+        public void tick() {
+            if (--nextRandomizeTime <= 0) {
+                nextRandomizeTime = 40 + punchroom.getRandom().nextInt(60);
+                chosenDegrees = (float) punchroom.getRandom().nextInt(360);
+            }
 
-	static class AIPunchroomFloat extends Goal {
-		private final Punchroom punchroom;
+            if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
+                control.setDirection(chosenDegrees, false);
+        }
+    }
 
-		public AIPunchroomFloat(Punchroom punchroomIn) {
-			punchroom = punchroomIn;
-			setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
-			punchroomIn.getNavigation().setCanFloat(true);
-		}
+    static class AIPunchroomFloat extends Goal {
+        private final Punchroom punchroom;
 
-		@Override
-		public boolean canUse() {
-			return punchroom.isInWater() || punchroom.isInLava();
-		}
+        public AIPunchroomFloat(Punchroom punchroomIn) {
+            punchroom = punchroomIn;
+            setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
+            punchroomIn.getNavigation().setCanFloat(true);
+        }
 
-		@Override
-		public boolean requiresUpdateEveryTick() {
-			return true;
-		}
+        @Override
+        public boolean canUse() {
+            return punchroom.isInWater() || punchroom.isInLava();
+        }
 
-		@Override
-		public void tick() {
-			if (punchroom.getRandom().nextFloat() < 0.8F)
-				punchroom.getJumpControl().jump();
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
 
-			if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
-				control.setSpeed(1.2D);
-		}
-	}
+        @Override
+        public void tick() {
+            if (punchroom.getRandom().nextFloat() < 0.8F)
+                punchroom.getJumpControl().jump();
 
-	static class AIPunchroomHop extends Goal {
-		private final Punchroom punchroom;
+            if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
+                control.setSpeed(1.2D);
+        }
+    }
 
-		public AIPunchroomHop(Punchroom punchroomIn) {
-			punchroom = punchroomIn;
-			setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
-		}
+    static class AIPunchroomHop extends Goal {
+        private final Punchroom punchroom;
 
-		@Override
-		public boolean canUse() {
-			return true;
-		}
+        public AIPunchroomHop(Punchroom punchroomIn) {
+            punchroom = punchroomIn;
+            setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
+        }
 
-		@Override
-		public void tick() {
-			if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
-				control.setSpeed(1.0D);
-		}
-	}
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
 
-	static class PunchroomMoveHelper extends MoveControl {
-		private float yRot;
-		private int jumpDelay;
-		private final Punchroom punchroom;
-		private boolean isAggressive;
+        @Override
+        public boolean canUse() {
+            return true;
+        }
 
-		public PunchroomMoveHelper(Punchroom punchroomIn) {
-			super(punchroomIn);
-			punchroom = punchroomIn;
-			yRot = 180.0F * punchroomIn.getYRot() / Mth.PI;
-		}
+        @Override
+        public void tick() {
+            if (punchroom.getMoveControl() instanceof PunchroomMoveHelper control)
+                control.setSpeed(1.0D);
+        }
+    }
 
-		public void setDirection(float rotationY, boolean aggressive) {
-			yRot = rotationY;
-			isAggressive = aggressive;
-		}
+    static class PunchroomMoveHelper extends MoveControl {
+        private final Punchroom punchroom;
+        private float yRot;
+        private int jumpDelay;
+        private boolean isAggressive;
 
-		public void setSpeed(double speedIn) {
-			speedModifier = speedIn;
-			operation = MoveControl.Operation.MOVE_TO;
-		}
+        public PunchroomMoveHelper(Punchroom punchroomIn) {
+            super(punchroomIn);
+            punchroom = punchroomIn;
+            yRot = punchroomIn.getYRot();
+        }
 
-		@Override
-		public void tick() {
-			mob.setYRot(rotlerp(mob.getYRot(), yRot, 90.0F));
-			mob.yHeadRot = this.mob.getYRot();
-			mob.yBodyRot = this.mob.getYRot();
+        public void setDirection(float rotationY, boolean aggressive) {
+            yRot = rotationY;
+            isAggressive = aggressive;
+        }
 
-			if (operation != MoveControl.Operation.MOVE_TO) {
-				mob.setZza(0.0F);
-			} else {
-				operation = MoveControl.Operation.WAIT;
+        public void setSpeed(double speedIn) {
+            speedModifier = speedIn;
+            operation = MoveControl.Operation.MOVE_TO;
+        }
 
-				if (mob.onGround()) {
-					mob.setSpeed((float) (speedModifier * mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
+        @Override
+        public void tick() {
+            mob.setYRot(rotlerp(mob.getYRot(), yRot, 90.0F));
+            mob.yHeadRot = this.mob.getYRot();
+            mob.yBodyRot = this.mob.getYRot();
 
-					if (jumpDelay-- <= 0) {
-						jumpDelay = punchroom.getJumpDelay();
+            if (operation != MoveControl.Operation.MOVE_TO) {
+                mob.setZza(0.0F);
+            } else {
+                operation = MoveControl.Operation.WAIT;
 
-						if (isAggressive) {
-							jumpDelay /= 3;
-						}
+                if (mob.onGround()) {
+                    mob.setSpeed((float) (speedModifier * mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
 
-						punchroom.getJumpControl().jump();
-						punchroom.playSound(punchroom.getJumpSound(), 1F, ((punchroom.getRandom().nextFloat() - punchroom.getRandom().nextFloat()) * 0.2F + 1.0F) * 2.8F);
+                    if (jumpDelay-- <= 0) {
+                        jumpDelay = punchroom.getJumpDelay();
 
-					} else {
-						punchroom.xxa = 0.0F;
-						punchroom.zza = 0.0F;
-						mob.setSpeed(0.0F);
-					}
-				} else {
-					mob.setSpeed((float) (speedModifier * mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
-				}
-			}
-		}
-	}
+                        if (isAggressive) {
+                            jumpDelay /= 3;
+                        }
+
+                        punchroom.getJumpControl().jump();
+                        punchroom.playSound(punchroom.getJumpSound(), 1F, ((punchroom.getRandom().nextFloat() - punchroom.getRandom().nextFloat()) * 0.2F + 1.0F) * 2.8F);
+
+                    } else {
+                        punchroom.xxa = 0.0F;
+                        punchroom.zza = 0.0F;
+                        mob.setSpeed(0.0F);
+                    }
+                } else {
+                    mob.setSpeed((float) (speedModifier * mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
+                }
+            }
+        }
+    }
 }

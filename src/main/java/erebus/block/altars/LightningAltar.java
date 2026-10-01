@@ -19,44 +19,44 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class LightningAltar extends AltarAbstract {
-	
-	public static final MapCodec<LightningAltar> CODEC = simpleCodec(LightningAltar::new);
 
-	public LightningAltar(Properties properties) {
-		super(properties);
-	}
-	
+    public static final MapCodec<LightningAltar> CODEC = simpleCodec(LightningAltar::new);
+
+    public LightningAltar(Properties properties) {
+        super(properties);
+    }
+
     @Override
     protected @NonNull MapCodec<LightningAltar> codec() {
         return CODEC;
     }
 
-	@Override
-	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-		return new LightningAltarBlockEntity(pos, state);
-	}
-	
-	@Nullable
-	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
-		return (level, pos, blockState, blockEntity) -> LightningAltarBlockEntity.tick(level, pos, blockEntity);
-	}
+    @Override
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        return new LightningAltarBlockEntity(pos, state);
+    }
 
-	@Override
-	 protected void onPlace(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull BlockState oldState, boolean movedByPiston) {
-		BlockEntity blockEntity =  level.getBlockEntity(pos);
-		if (blockEntity instanceof LightningAltarBlockEntity altar)
-			altar.setActive(false);
-	}
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
+        return (level, pos, blockState, blockEntity) -> LightningAltarBlockEntity.tick(level, pos, blockEntity);
+    }
 
-	@Override
-	public @NonNull InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
-		BlockEntity blockEntity = level.getBlockEntity(pos);
-		if (level.isClientSide()) {
-			return InteractionResult.SUCCESS;
-		} else if (blockEntity instanceof LightningAltarBlockEntity altar) {
-			return activateAltar(level, stack, player, altar, pos);
-		}
-		return InteractionResult.FAIL;
-	}
+    @Override
+    protected void onPlace(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull BlockState oldState, boolean movedByPiston) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof LightningAltarBlockEntity altar)
+            altar.setActive(false);
+    }
+
+    @Override
+    public @NonNull InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        } else if (blockEntity instanceof LightningAltarBlockEntity altar) {
+            return activateAltar(level, stack, player, altar, pos, hand);
+        }
+        return InteractionResult.FAIL;
+    }
 }

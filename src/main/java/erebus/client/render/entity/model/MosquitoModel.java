@@ -10,12 +10,11 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 public class MosquitoModel extends EntityModel<MosquitoRenderState> {
-    public ModelPart root;
+    private final ModelPart body;
 
     public MosquitoModel(ModelPart root) {
         super(root);
-        this.root = root;
-        root.getChild("Body");
+        body = root.getChild("Body");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -25,5 +24,11 @@ public class MosquitoModel extends EntityModel<MosquitoRenderState> {
         root.addOrReplaceChild("Body", CubeListBuilder.create().texOffs(0, 0).addBox(-8.0F, -8.0F, 0.0F, 16, 16, 16), PartPose.offset(0.0F, 0.0F, 0.0F));
 
         return LayerDefinition.create(mesh, 128, 128);
+    }
+
+    @Override
+    public void setupAnim(MosquitoRenderState state) {
+        super.setupAnim(state);
+        body.xScale = 1 + state.blood;
     }
 }

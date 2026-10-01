@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
-public class PreservedBlockRenderer implements BlockEntityRenderer <PreservedBlockEntity, PreservedBlockEntityRenderState> {
+public class PreservedBlockRenderer implements BlockEntityRenderer<PreservedBlockEntity, PreservedBlockEntityRenderState> {
 
     private final EntityRenderDispatcher entityRenderer;
 
@@ -29,15 +29,19 @@ public class PreservedBlockRenderer implements BlockEntityRenderer <PreservedBlo
     @Override
     public void extractRenderState(PreservedBlockEntity blockEntity, PreservedBlockEntityRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
         BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
-        if(blockEntity.getTrappedEntity() != null) {
-            state.displayEntity = entityRenderer.extractEntity(blockEntity.getTrappedEntity(), partialTicks);
+        state.displayEntity = null;
+        var trappedEntity = blockEntity.getTrappedEntity();
+        // Saved contents can outlive their client renderer (for example, an incomplete entity port).
+        // Keep the contents intact, but omit the display until a renderer is available.
+        if (trappedEntity != null && entityRenderer.getRenderer(trappedEntity) != null) {
+            state.displayEntity = entityRenderer.extractEntity(trappedEntity, partialTicks);
             state.displayEntity.lightCoords = state.lightCoords;
         }
     }
 
     @Override
     public void submit(PreservedBlockEntityRenderState state, PoseStack pose, SubmitNodeCollector submit, CameraRenderState camera) {
-        if(state.displayEntity != null) {
+        if (state.displayEntity != null) {
             pose.pushPose();
             pose.translate(0.5F, 0.0F, 0.5F);
             float f = 0.53125F;

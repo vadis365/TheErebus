@@ -1,4 +1,37 @@
 {
   "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "erebus:jumping_spider_drop_count"
+            }
+          ],
+          "name": "erebus:bio_velocity"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.02,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "erebus:supernatural_velocity"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
   "random_sequence": "erebus:entities/solifuge"
 }

@@ -14,6 +14,7 @@
     [],
     [],
     [
+      "erebus:outback_soil",
       "erebus:rotten_acacia"
     ],
     [],
@@ -40,10 +41,12 @@
     [],
     [],
     [
-      "minecraft:patch_grass_savanna",
-      "minecraft:trees_savanna",
-      "erebus:balsam",
-      "erebus:eucalyptus"
+      "erebus:outback_acacia_population",
+      "erebus:outback_balsam_population",
+      "erebus:droughted_shrub",
+      "erebus:desert_shrub",
+      "erebus:outback_grass",
+      "erebus:outback_eucalyptus_population"
     ]
   ],
   "has_precipitation": false,

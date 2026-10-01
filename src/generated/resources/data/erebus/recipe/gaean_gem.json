@@ -2,8 +2,8 @@
   "type": "erebus:offering_altar",
   "category": "misc",
   "ingredients": [
-    "minecraft:diamond",
-    "minecraft:emerald",
+    "#c:gems/diamond",
+    "#c:gems/emerald",
     "minecraft:obsidian"
   ],
   "result": {

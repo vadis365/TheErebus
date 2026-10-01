@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -34,6 +35,11 @@ public class BlenderBlock extends BaseEntityBlock {
     public BlenderBlock(Properties properties) {
         super(properties);
         registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH));
+    }
+
+    @Override
+    public @NotNull BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
+        return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
@@ -65,12 +71,14 @@ public class BlenderBlock extends BaseEntityBlock {
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         } else if (blockEntity instanceof BlenderBlockEntity blender) {
-            if(player.getItemInHand(hand).is(Items.BOOK)) {
-                player.getItemInHand(hand).shrink(1);
-                player.addItem(new ItemStack(ModItems.SMOOTHIE_BOOK.get()));
+            if (player.getItemInHand(hand).is(Items.BOOK)) {
+                player.getItemInHand(hand).consume(1, player);
+                var book = new ItemStack(ModItems.SMOOTHIE_BOOK.get());
+                if (!player.addItem(book)) player.drop(book, false);
+                return InteractionResult.SUCCESS;
             }
-            FluidUtil.interactWithFluidHandler(player, hand, level, pos, hit.getDirection());
-            player.openMenu(blender, pos);
+            if (FluidUtil.interactWithFluidHandler(player, hand, level, pos, hit.getDirection())) return InteractionResult.SUCCESS;
+            player.openMenu(blender);
         }
         return InteractionResult.SUCCESS;
     }

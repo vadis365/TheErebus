@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "#c:ingots/iron",
+    "X": "erebus:plate_exo_rhino"
+  },
+  "pattern": [
+    "XIX",
+    "XXX",
+    " X "
+  ],
+  "result": {
+    "id": "erebus:rhino_exoskeleton_shield"
+  }
+}

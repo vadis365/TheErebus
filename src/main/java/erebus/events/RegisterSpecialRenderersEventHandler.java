@@ -4,15 +4,21 @@ import erebus.Erebus;
 import erebus.client.render.block.renderer.stack.*;
 import erebus.client.render.item.renderer.*;
 import erebus.registries.blocks.ModBlocks;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
 
-@EventBusSubscriber(modid = Erebus.MODID)
+@EventBusSubscriber(modid = Erebus.MODID, value = Dist.CLIENT)
 public class RegisterSpecialRenderersEventHandler {
 
     @SubscribeEvent
     public static void registerSpecialRenderers(RegisterSpecialModelRendererEvent event) {
+        event.register(Erebus.prefix("glowing_jar_special"), GlowingJarSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Erebus.prefix("liquifier_special"), LiquifierSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Erebus.prefix("bamboo_bridge_special"), BambooBridgeSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Erebus.prefix("bamboo_extender_special"), BambooExtenderSpecialRenderer.Unbaked.MAP_CODEC);
+        event.register(Erebus.prefix("umber_golem_statue_special"), UmberGolemStatueSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Erebus.prefix("shield_special"), ErebusShieldSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Erebus.prefix("portal_activator_special"), PortalActivatorSpecialRenderer.Unbaked.MAP_CODEC);
         event.register(Erebus.prefix("quake_hammer_special"), QuakeHammerSpecialRenderer.Unbaked.MAP_CODEC);

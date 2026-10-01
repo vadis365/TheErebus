@@ -1,0 +1,32 @@
+{
+  "parent": "erebus:agriculture/bamboo_extender",
+  "criteria": {
+    "craft_pole": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:bamboo_nerd_pole"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/nerd_pole.desc"
+    },
+    "icon": {
+      "id": "erebus:bamboo_nerd_pole"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/nerd_pole.title"
+    }
+  },
+  "requirements": [
+    [
+      "craft_pole"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

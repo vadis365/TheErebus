@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:swamp_reeds",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -22,7 +22,7 @@ public class MushroomHelmModel extends EntityModel<HumanoidRenderState> {
         PartDefinition top = part.addOrReplaceChild(
                 "Top",
                 CubeListBuilder.create()
-                        .texOffs(28,  0)
+                        .texOffs(28, 0)
                         .addBox(-4.5F, -12F, -4.5F, 9, 1, 9),
                 PartPose.ZERO
         );

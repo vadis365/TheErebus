@@ -12,12 +12,12 @@ public class ComputeFOVModifierEventHandler {
 
     @SubscribeEvent
     public static void onComputeFovModifierEvent(ComputeFovModifierEvent event) {
-        if(event.getPlayer().isUsingItem() && event.getPlayer().getUseItem().getItem() == ModItems.MAX_SPEED_BOW.get()) {
+        if (event.getPlayer().isUsingItem() && event.getPlayer().getUseItem().getItem() == ModItems.MAX_SPEED_BOW.get()) {
             float fovModifier = 1;
             int ticksUsingItem = event.getPlayer().getTicksUsingItem();
             float deltaTicks = ticksUsingItem / MaxSpeedBowItem.DRAW_SPEED;
 
-            if(deltaTicks > 1.0F) {
+            if (deltaTicks > 1.0F) {
                 deltaTicks = 1.0F;
             } else {
                 deltaTicks *= deltaTicks;

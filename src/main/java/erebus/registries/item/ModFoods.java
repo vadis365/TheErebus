@@ -3,7 +3,10 @@ package erebus.registries.item;
 import net.minecraft.world.food.FoodProperties;
 
 public class ModFoods {
-    public static final FoodProperties BAMBOO_SOUP = food(3, 0.2F).build();
+    public static final FoodProperties TURNIP = food(4, 0.6F).build();
+    public static final FoodProperties CABBAGE_SEEDS = food(4, 0.1F).build();
+    public static final FoodProperties MANDRAKE_ROOT = food(2, 0.2F).build();
+    public static final FoodProperties BAMBOO_SOUP = food(4, 0.3F).build();
     public static final FoodProperties BEETLE_LARVA_RAW = food(1, 0.1F).build();
     public static final FoodProperties BEETLE_LARVA_COOKED = food(3, 0.4F).build();
     public static final FoodProperties GRASSHOPPER_LEG_RAW = food(1, 0.1F).build();
@@ -13,7 +16,7 @@ public class ModFoods {
     public static final FoodProperties MELONADE = food(3, 0.2F).build();
     public static final FoodProperties MELONADE_SPARKLY = food(5, 0.4F).build();
     public static final FoodProperties LARVAE_ON_STICK = food(9, 0.5F).build();
-    public static final FoodProperties HONEY_SANDWICH = food(6, 0.5F).build();
+    public static final FoodProperties HONEY_SANDWICH = food(6, 0.6F).build();
     public static final FoodProperties DARK_FRUIT = food(2, 0.3F).build();
     public static final FoodProperties TITAN_CHOP_RAW = food(4, 0.3F).build();
     public static final FoodProperties TITAN_CHOP_COOKED = food(8, 0.8F).build();
@@ -23,20 +26,20 @@ public class ModFoods {
     public static final FoodProperties PRICKLY_PEAR_RAW = food(3, 0.3F).build();
     public static final FoodProperties PRICKLY_PEAR_COOKED = food(4, 0.5F).build();
     public static final FoodProperties DARK_FRUIT_PIE = food(8, 0.3F).build();
-    public static final FoodProperties GREEN_TEA_GRASSHOPPER = food(4, 0.4F).build();
-    public static final FoodProperties MONEY_HONEY = food(4, 0.4F).build();
-    public static final FoodProperties NOTHING_IN_THE_MIDDLE = food(4, 0.4F).build();
-    public static final FoodProperties GREEN_GIANT = food(4, 0.4F).build();
-    public static final FoodProperties SEEDY_GOODNESS = food(4, 0.4F).build();
-    public static final FoodProperties GIVIN_ME_THE_BLUES = food(4, 0.4F).build();
-    public static final FoodProperties HOT_HOT_BABY = food(4, 0.4F).build();
-    public static final FoodProperties DONT_MEDDLE_WITH_THE_NETTLE = food(4, 0.4F).build();
-    public static final FoodProperties LIQUID_GOLD = food(4, 0.4F).build();
-    public static final FoodProperties BRYUFS_BREW = food(4, 0.4F).build();
-    public static final FoodProperties LIFE_BLOOD = food(4, 0.4F).build();
-    public static final FoodProperties HEART_BERRIES = food(4, 0.4F).build();
-    public static final FoodProperties STAG_HEART_RAW = food(4, 0.4F).build();
-    public static final FoodProperties STAG_HEART_COOKED = food(4, 0.4F).build();
+    public static final FoodProperties GREEN_TEA_GRASSHOPPER = food(5, 0.4F).alwaysEdible().build();
+    public static final FoodProperties MONEY_HONEY = food(3, 0.2F).alwaysEdible().build();
+    public static final FoodProperties NOTHING_IN_THE_MIDDLE = food(1, 0.0F).alwaysEdible().build();
+    public static final FoodProperties GREEN_GIANT = food(2, 0.1F).alwaysEdible().build();
+    public static final FoodProperties SEEDY_GOODNESS = food(1, 1.1F).alwaysEdible().build();
+    public static final FoodProperties GIVIN_ME_THE_BLUES = food(3, 0.2F).alwaysEdible().build();
+    public static final FoodProperties HOT_HOT_BABY = food(2, 0.1F).alwaysEdible().build();
+    public static final FoodProperties DONT_MEDDLE_WITH_THE_NETTLE = food(2, 0.1F).alwaysEdible().build();
+    public static final FoodProperties LIQUID_GOLD = food(0, 0.0F).alwaysEdible().build();
+    public static final FoodProperties BRYUFS_BREW = food(2, 0.0F).alwaysEdible().build();
+    public static final FoodProperties LIFE_BLOOD = food(0, 0F).alwaysEdible().build();
+    public static final FoodProperties HEART_BERRIES = food(0, 0F).alwaysEdible().build();
+    public static final FoodProperties STAG_HEART_RAW = food(0, 0F).alwaysEdible().build();
+    public static final FoodProperties STAG_HEART_COOKED = food(20, 0.5F).alwaysEdible().build();
     public static final FoodProperties JADE_BERRIES = food(1, 0.1F).build();
 
     private static FoodProperties.Builder food(int nutrition, float saturationModifier) {

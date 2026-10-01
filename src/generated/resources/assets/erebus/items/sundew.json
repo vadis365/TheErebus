@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/sundew"
+    "model": "erebus:block/sundew_bottom"
   }
 }

@@ -10,7 +10,6 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 public class PrayingMantisModel extends EntityModel<PrayingMantisRenderState> {
-    public ModelPart root;
     private final ModelPart Head1, Head2, Head3, REye, LEye, RAnt, LAnt1;
     private final ModelPart Neck, Thorax1, Ab1, Ab2, Ab3, Ab4;
     private final ModelPart LArm1, LArm2, LArm3, LArm4;
@@ -19,6 +18,7 @@ public class PrayingMantisModel extends EntityModel<PrayingMantisRenderState> {
     private final ModelPart LFLeg1, LFLeg2, LFLeg3, LFLeg4, LFLeg5, LFLeg6;
     private final ModelPart RBLeg1, RBLeg2, RBLeg3, RBLeg4, RBLeg5, RBLeg6;
     private final ModelPart LBLeg1, LBLeg2, LBLeg3, LBLeg4, LBLeg5, LBLeg6;
+    public ModelPart root;
 
     public PrayingMantisModel(ModelPart root) {
         super(root);
@@ -128,5 +128,21 @@ public class PrayingMantisModel extends EntityModel<PrayingMantisRenderState> {
         root.addOrReplaceChild("LBLeg6", CubeListBuilder.create().texOffs(49, 120).addBox(9.0F, 16.0F, -0.5F, 1, 4, 1), PartPose.offsetAndRotation(2F, 8F, 0F, 0.3490659F, -0.7853982F, -0.3490659F));
 
         return LayerDefinition.create(mesh, 64, 128);
+    }
+
+    @Override
+    public void setupAnim(PrayingMantisRenderState state) {
+        super.setupAnim(state);
+        float first = (float) Math.cos(state.walkAnimationPos + Math.PI) * 0.3F * state.walkAnimationSpeed;
+        float second = (float) Math.cos(state.walkAnimationPos) * 0.3F * state.walkAnimationSpeed;
+        LBLeg1.xRot = LBLeg2.xRot = LBLeg3.xRot = LBLeg4.xRot = LBLeg5.xRot = LBLeg6.xRot = first;
+        RFLeg1.xRot = RFLeg2.xRot = RFLeg3.xRot = RFLeg4.xRot = RFLeg5.xRot = RFLeg6.xRot = first;
+        LFLeg1.xRot = LFLeg2.xRot = LFLeg3.xRot = LFLeg4.xRot = LFLeg5.xRot = LFLeg6.xRot = second;
+        RBLeg1.xRot = RBLeg2.xRot = RBLeg3.xRot = RBLeg4.xRot = RBLeg5.xRot = RBLeg6.xRot = second;
+        float arm = (float) Math.cos(state.walkAnimationPos * 0.5F + Math.PI) * 0.7F * state.walkAnimationSpeed;
+        LArm1.xRot = LArm3.xRot = LArm4.xRot = state.walkingPose ? arm + 0.3490659F : -1.222F;
+        LArm2.xRot = state.walkingPose ? arm - 2.268928F : 2.443F;
+        RArm1.xRot = RArm3.xRot = RArm4.xRot = state.walkingPose ? -arm + 0.3490659F : -1.222F;
+        RArm2.xRot = state.walkingPose ? -arm - 2.268928F : 2.443F;
     }
 }

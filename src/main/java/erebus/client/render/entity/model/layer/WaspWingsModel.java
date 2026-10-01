@@ -43,15 +43,15 @@ public class WaspWingsModel extends EntityModel<WaspRenderState> {
     @Override
     public void setupAnim(WaspRenderState state) {
         super.setupAnim(state);
-        float smoothedTicks = state.animationTicks + (state.animationTicks - state.prevAnimationTicks) * state.partialTick;
+        float smoothedTicks = state.prevAnimationTicks + (state.animationTicks - state.prevAnimationTicks) * state.partialTick;
         float flap = Mth.sin(smoothedTicks * 1.2F) * 0.5F;
 
-        if(state.isFlying) {
+        if (state.isFlying) {
             RWingMid.yRot = 1.5F;
             LWingMid.yRot = -1.5F;
             RWingMid.xRot = flap;
             LWingMid.xRot = flap;
-        } else  {
+        } else {
             RWingMid.yRot = 0.25F;
             LWingMid.yRot = -0.25F;
             RWingMid.xRot = 0F;

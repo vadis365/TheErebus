@@ -4,4 +4,5 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 
 public class AntlionBossRenderState extends LivingEntityRenderState {
     public byte blam;
+    public int overlordDeathTicks;
 }

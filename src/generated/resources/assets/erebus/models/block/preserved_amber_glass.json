@@ -1,6 +1,9 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "erebus:block/preserved_amber_glass"
+    "all": {
+      "force_translucent": true,
+      "sprite": "erebus:block/amber_glass_island"
+    }
   }
 }

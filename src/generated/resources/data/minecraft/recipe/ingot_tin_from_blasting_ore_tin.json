@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "blocks",
+  "cookingtime": 100,
+  "experience": 0.25,
+  "group": "tin",
+  "ingredient": "erebus:ore_tin",
+  "result": {
+    "id": "erebus:ingot_tin"
+  }
+}

@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/bamboo_extender"
+    "type": "minecraft:special",
+    "base": "erebus:item/bamboo_extender",
+    "model": {
+      "type": "erebus:bamboo_extender_special",
+      "texture": "erebus:textures/block/bamboo_extender.png"
+    }
   }
 }

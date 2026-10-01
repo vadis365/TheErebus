@@ -26,21 +26,17 @@ public final class GlowingJarSpecialRenderer implements NoDataSpecialModelRender
         this.texture = texture;
     }
 
+    private static void applyPose(PoseStack pose) {
+        pose.translate(0.5F, 0.75F, 0.5F);
+        pose.scale(0.7125F, -0.9999F, -0.7125F);
+    }
+
     @Override
     public void submit(PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
+        erebus.client.render.block.renderer.GlowingJarRenderer.submitWisp(pose, submit, 1.4F, 180F);
         pose.pushPose();
-        pose.translate(0.5F, 0.75F, 0.5F);
-        pose.scale(0.7125F, -1.069F, -0.7125F);
-        submit.submitModel(
-                model,
-                new GlowingJarBlockEntityRenderState(),
-                pose,
-                RenderTypes.entitySolid(texture),
-                light,
-                overlay,
-                outlineColor,
-                null
-        );
+        applyPose(pose);
+        model.submit(pose, submit, RenderTypes.entityTranslucent(texture), light, overlay, null, outlineColor, null);
         pose.popPose();
     }
 
@@ -48,10 +44,11 @@ public final class GlowingJarSpecialRenderer implements NoDataSpecialModelRender
     public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
         PoseStack poseStack = new PoseStack();
         model.setupAnim(new GlowingJarBlockEntityRenderState());
+        applyPose(poseStack);
         model.root().getExtentsForGui(poseStack, consumer);
     }
 
-    public record Unbaked(Identifier texture) implements SpecialModelRenderer.Unbaked {
+    public record Unbaked(Identifier texture) implements NoDataSpecialModelRenderer.Unbaked {
 
         public static final MapCodec<Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
                 i -> i.group(
@@ -60,7 +57,7 @@ public final class GlowingJarSpecialRenderer implements NoDataSpecialModelRender
         );
 
         @Override
-        public @Nullable SpecialModelRenderer<?> bake(BakingContext bakingContext) {
+        public @Nullable SpecialModelRenderer<Void> bake(BakingContext bakingContext) {
             return new GlowingJarSpecialRenderer(
                     new GlowingJarModel(
                             bakingContext
@@ -72,7 +69,7 @@ public final class GlowingJarSpecialRenderer implements NoDataSpecialModelRender
         }
 
         @Override
-        public @NonNull MapCodec<? extends SpecialModelRenderer.Unbaked> type() {
+        public @NonNull MapCodec<Unbaked> type() {
             return MAP_CODEC;
         }
     }

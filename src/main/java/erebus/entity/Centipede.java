@@ -41,264 +41,268 @@ import org.jspecify.annotations.NonNull;
 import javax.annotation.Nullable;
 
 public class Centipede extends Monster {
-	private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(Centipede.class, EntityDataSerializers.INT);
-	public CentipedeMultipart[] parts;
-	public Centipede(EntityType<? extends Monster> type, Level level) {
-		super(type, level);
-		this.setPathfindingMalus(PathType.WATER, -8.0F);
-		this.parts = new CentipedeMultipart[]{
-				new CentipedeMultipart(this, 0.3125F, 0.3125F),
-				new CentipedeMultipart(this, 0.3125F, 0.3125F),
-				new CentipedeMultipart(this, 0.3125F, 0.3125F),
-				new CentipedeMultipart(this, 0.3125F, 0.3125F),
-				new CentipedeMultipart(this, 0.3125F, 0.3125F),
-				new CentipedeMultipart(this, 0.3125F, 0.3125F),
-				new CentipedeMultipart(this, 0.3125F, 0.3125F),
-				new CentipedeMultipart(this, 0.3125F, 0.3125F),
-				new CentipedeMultipart(this, 0.3125F, 0.3125F),
-				new CentipedeMultipart(this, 0.3125F, 0.3125F)
-				};
-			setId(ENTITY_COUNTER.getAndAdd(this.parts.length + 1) + 1);
-		}
+    private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(Centipede.class, EntityDataSerializers.INT);
+    public CentipedeMultipart[] parts;
 
-		@Override
-		public void setId(int id) {
-			super.setId(id);
-			for (int i = 0; i < this.parts.length; i++)
-				this.parts[i].setId(id + i + 1);
-		}
+    public Centipede(EntityType<? extends Monster> type, Level level) {
+        super(type, level);
+        this.setPathfindingMalus(PathType.WATER, -8.0F);
+        getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(getAttackStrength());
+        this.parts = new CentipedeMultipart[]{
+                new CentipedeMultipart(this, 0.3125F, 0.3125F),
+                new CentipedeMultipart(this, 0.3125F, 0.3125F),
+                new CentipedeMultipart(this, 0.3125F, 0.3125F),
+                new CentipedeMultipart(this, 0.3125F, 0.3125F),
+                new CentipedeMultipart(this, 0.3125F, 0.3125F),
+                new CentipedeMultipart(this, 0.3125F, 0.3125F),
+                new CentipedeMultipart(this, 0.3125F, 0.3125F),
+                new CentipedeMultipart(this, 0.3125F, 0.3125F),
+                new CentipedeMultipart(this, 0.3125F, 0.3125F),
+                new CentipedeMultipart(this, 0.3125F, 0.3125F)
+        };
+        setId(ENTITY_COUNTER.getAndAdd(this.parts.length + 1) + 1);
+    }
 
-		@Override
-		public PartEntity<?> @NonNull [] getParts() {
-			return parts;
-		}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 25D)
+                .add(Attributes.FOLLOW_RANGE, 16D)
+                .add(Attributes.MOVEMENT_SPEED, 1D)
+                .add(Attributes.ATTACK_DAMAGE, 2D)
+                .add(Attributes.ARMOR, 8D);
+    }
 
-		@Override
-		public boolean isMultipartEntity() {
-			return true;
-		}
+    public static boolean canSpawnHere(EntityType<Centipede> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
+        float light = level.getLightLevelDependentMagicValue(pos);
+        return light >= 0F;
+    }
 
-	@Override
-	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
-		super.defineSynchedData(builder);
-		builder.define(SKIN_TYPE, 0);
-	}
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+        for (int i = 0; i < this.parts.length; i++)
+            this.parts[i].setId(id + i + 1);
+    }
 
-	@Override
-	protected void registerGoals() {
-		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.3D, false));
-		goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		goalSelector.addGoal(3, new RandomStrollGoal(this, 0.3D, 1));
-		targetSelector.addGoal(0, new HurtByTargetGoal(this));
-		targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
-	}
+    @Override
+    public PartEntity<?> @NonNull [] getParts() {
+        return parts;
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes()
-				.add(Attributes.MAX_HEALTH, 25D)
-				.add(Attributes.FOLLOW_RANGE, 16D)
-				.add(Attributes.MOVEMENT_SPEED, 1D)
-				.add(Attributes.ATTACK_DAMAGE, 2D)
-				.add(Attributes.ARMOR, 8D);
-	}
-	
-	@Override
-	public void aiStep() {
-		super.aiStep();
-		setHitBoxes();
-	}
-	
-	private void setHitBoxes() {
-		for (CentipedeMultipart part : this.parts) {
-			part.yRotO = part.getYRot();
-			part.xRotO = part.getXRot();
-			part.xOld = part.getX();
-			part.yOld = part.getY();
-			part.zOld = part.getZ();
-		}
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
 
-		for (int i = 0; i < this.parts.length; i++) {
-			this.movePiecePos(this, this.parts[i], i > 0 ? this.parts[i - 1] : this, 4.5F, 2F);
-		}
-	}
+    @Override
+    protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(SKIN_TYPE, 0);
+    }
 
-	protected double getMaxPieceDistance() {
-		return 0.3125F;
-	}
+    @Override
+    protected void registerGoals() {
+        goalSelector.addGoal(0, new FloatGoal(this));
+        goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.3D, false));
+        goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        goalSelector.addGoal(3, new RandomStrollGoal(this, 0.3D, 1));
+        targetSelector.addGoal(0, new HurtByTargetGoal(this));
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
+    }
 
-	public void movePiecePos(Centipede centipede, CentipedeMultipart targetPart, Entity destinationPart, float speed, float yawSpeed) {
-		//TODO make this better and use the parent entities motionY
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        setHitBoxes();
+    }
 
-		if (destinationPart.yo - targetPart.yo < -0.5D)
-			speed = 1.5F;
+    private void setHitBoxes() {
+        for (CentipedeMultipart part : this.parts) {
+            part.yRotO = part.getYRot();
+            part.xRotO = part.getXRot();
+            part.xOld = part.getX();
+            part.yOld = part.getY();
+            part.zOld = part.getZ();
+        }
 
-		double movementTolerance = 0.05D;
-		double maxDist = this.getMaxPieceDistance();
-		boolean correctY = false;
+        for (int i = 0; i < this.parts.length; i++) {
+            this.movePiecePos(this, this.parts[i], i > 0 ? this.parts[i - 1] : this, 4.5F, 2F);
+        }
+    }
 
-		for (int i = 0; i < 5; i++) {
-			Vec3 diff = destinationPart.position().subtract(targetPart.position());
-			double len = diff.length();
+    protected double getMaxPieceDistance() {
+        return 0.3125F;
+    }
 
-			if (len > maxDist) {
-				Vec3 correction = diff.scale(1.0D / len * (len - maxDist));
-				targetPart.xo += correction.x;
-				if(tickCount <= 1)
-					targetPart.yo = destinationPart.yo;
-				else
-					targetPart.yo += correction.y; // this?
-				targetPart.zo += correction.z;
-				targetPart.setPos(targetPart.xo, targetPart.yo, targetPart.zo);
+    public void movePiecePos(Centipede centipede, CentipedeMultipart targetPart, Entity destinationPart, float speed, float yawSpeed) {
+        //TODO make this better and use the parent entities motionY
 
-				double cy = targetPart.getY();
-				Vec3 vec3 = targetPart.getDeltaMovement();
-				targetPart.setDeltaMovement(vec3.add(0D, correction.y, 0D));
+        if (destinationPart.yo - targetPart.yo < -0.5D)
+            speed = 1.5F;
 
-				if (Math.abs((targetPart.yo - cy) - correction.y) <= movementTolerance) {
-					correctY = true;
-					break;
-				}
-			}
-		}
+        double movementTolerance = 0.05D;
+        double maxDist = this.getMaxPieceDistance();
+        boolean correctY = false;
 
-		//Welp, failed to move smoothly along Y, just clip
-		if (!correctY) {
-			Vec3 diff = destinationPart.position().subtract(targetPart.position());
-			double len = diff.lengthSqr();
+        for (int i = 0; i < 5; i++) {
+            Vec3 diff = destinationPart.position().subtract(targetPart.position());
+            double len = diff.length();
 
-			if (len > maxDist) {
-				Vec3 correction = diff.scale(1.0D / len * (len - maxDist));
-				targetPart.xo += correction.x;
-				targetPart.yo += correction.y;
-				targetPart.zo += correction.z;
-			}
-		}
+            if (len > maxDist) {
+                Vec3 correction = diff.scale(1.0D / len * (len - maxDist));
+                targetPart.xo += correction.x;
+                if (tickCount <= 1)
+                    targetPart.yo = destinationPart.yo;
+                else
+                    targetPart.yo += correction.y; // this?
+                targetPart.zo += correction.z;
+                targetPart.setPos(targetPart.xo, targetPart.yo, targetPart.zo);
 
-		Vec3 diff = new Vec3(destinationPart.xo, 0, destinationPart.zo).subtract(new Vec3(targetPart.xo, 0, targetPart.zo));
-		float destYaw = (float) Math.toDegrees(Math.atan2(diff.z, diff.x)) - 90;
-		double yawDiff = (destYaw - targetPart.getYRot()) % 360.0F;
-		double yawInterpolant = 2 * yawDiff % 360.0F - yawDiff;
-		double rotationYaw = targetPart.getYRot();
-		rotationYaw += yawInterpolant / yawSpeed;
-		targetPart.setYRot((float) rotationYaw);
-		targetPart.setXRot(0F);
-		if ((yo < targetPart.yo) && level().collidesWithSuffocatingBlock(targetPart, targetPart.getBoundingBox()))
-			targetPart.yo += 0.02D;
-		targetPart.setPos(targetPart.xo, targetPart.yo, targetPart.zo);
-	}
+                double cy = targetPart.getY();
+                Vec3 vec3 = targetPart.getDeltaMovement();
+                targetPart.setDeltaMovement(vec3.add(0D, correction.y, 0D));
 
-	@Override
-	public @NonNull AABB getHitbox() {
-		AABB newBox = getBoundingBox();
-		for(CentipedeMultipart part : this.parts)
-			newBox = getBoundingBox().minmax(part.getBoundingBox());
-		return newBox;
-	}
+                if (Math.abs((targetPart.yo - cy) - correction.y) <= movementTolerance) {
+                    correctY = true;
+                    break;
+                }
+            }
+        }
 
-	@Override
-	public boolean shouldRenderAtSqrDistance(double distance) {
-		double aabbSize = this.getBoundingBox().getSize() * 10.0;
-		if (Double.isNaN(aabbSize))
-			aabbSize = 1.0;
-		aabbSize *= 64.0 * getViewScale();
-		return distance < aabbSize * aabbSize;
-	}
+        //Welp, failed to move smoothly along Y, just clip
+        if (!correctY) {
+            Vec3 diff = destinationPart.position().subtract(targetPart.position());
+            double len = diff.lengthSqr();
 
-	@Override
-	public int getMaxSpawnClusterSize() {
-		return 2;
-	}
+            if (len > maxDist) {
+                Vec3 correction = diff.scale(1.0D / len * (len - maxDist));
+                targetPart.xo += correction.x;
+                targetPart.yo += correction.y;
+                targetPart.zo += correction.z;
+            }
+        }
 
-	public static boolean canSpawnHere(EntityType<Centipede> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
-		float light = level.getLightLevelDependentMagicValue(pos);
-		return light >= 0F;
-	}
+        Vec3 diff = new Vec3(destinationPart.xo, 0, destinationPart.zo).subtract(new Vec3(targetPart.xo, 0, targetPart.zo));
+        float destYaw = (float) Math.toDegrees(Math.atan2(diff.z, diff.x)) - 90;
+        double yawDiff = (destYaw - targetPart.getYRot()) % 360.0F;
+        double yawInterpolant = 2 * yawDiff % 360.0F - yawDiff;
+        double rotationYaw = targetPart.getYRot();
+        rotationYaw += yawInterpolant / yawSpeed;
+        targetPart.setYRot((float) rotationYaw);
+        targetPart.setXRot(0F);
+        if ((yo < targetPart.yo) && level().collidesWithSuffocatingBlock(targetPart, targetPart.getBoundingBox()))
+            targetPart.yo += 0.02D;
+        targetPart.setPos(targetPart.xo, targetPart.yo, targetPart.zo);
+    }
 
-	@Override
-	public boolean checkSpawnObstruction(LevelReader world) {
-		return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
-	}
+    @Override
+    public @NonNull AABB getHitbox() {
+        AABB newBox = getBoundingBox();
+        for (CentipedeMultipart part : this.parts)
+            newBox = newBox.minmax(part.getBoundingBox());
+        return newBox;
+    }
 
-	public double getAttackStrength() {
-		return level().getDifficulty() == Difficulty.HARD ? 4D : 2D;
-	}
+    @Override
+    public boolean shouldRenderAtSqrDistance(double distance) {
+        double aabbSize = this.getBoundingBox().getSize() * 10.0;
+        if (Double.isNaN(aabbSize))
+            aabbSize = 1.0;
+        aabbSize *= 64.0 * getViewScale();
+        return distance < aabbSize * aabbSize;
+    }
 
-	@Override
+    @Override
+    public int getMaxSpawnClusterSize() {
+        return 8;
+    }
+
+    @Override
+    public boolean checkSpawnRules(LevelAccessor level, EntitySpawnReason reason) {
+        return true;
+    }
+
+    @Override
+    public boolean isWithinMeleeAttackRange(LivingEntity target) {
+        return distanceToSqr(target) <= 4 + target.getBbWidth();
+    }
+
+    @Override
+    public boolean checkSpawnObstruction(LevelReader world) {
+        return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
+    }
+
+    public double getAttackStrength() {
+        return level().getDifficulty() == Difficulty.HARD ? 4D : 2D;
+    }
+
+    @Override
     public SoundEvent getAmbientSound() {
-		return ModSounds.CENTIPEDE_SOUND.get();
-	}
+        return ModSounds.CENTIPEDE_SOUND.get();
+    }
 
-	@Override
+    @Override
     protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
-		return ModSounds.CENTIPEDE_HURT.get();
-	}
+        return ModSounds.CENTIPEDE_HURT.get();
+    }
 
-	@Override
+    @Override
     protected @NonNull SoundEvent getDeathSound() {
-		return ModSounds.SQUISH.get();
-	}
+        return ModSounds.SQUISH.get();
+    }
 
     @Override
     protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
         this.playSound(ModSounds.CENTIPEDE_WALK.get(), 0.5F, 1.0F);
     }
 
-	@Override
-	protected float getSoundVolume() {
-		return 0.4F;
-	}
+    @Override
+    protected float getSoundVolume() {
+        return 0.4F;
+    }
 
-	@Override
-	public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity entity) {
-		if (hasLineOfSight(entity)) {
-			if (super.doHurtTarget(level, entity)) {
-				if (entity instanceof LivingEntity) {
-					byte duration = 0;
+    @Override
+    public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity entity) {
+        if (!hasLineOfSight(entity) || !super.doHurtTarget(level, entity)) return false;
+        if (entity instanceof LivingEntity living) {
+            int duration = switch (level.getDifficulty()) {
+                case NORMAL -> 140;
+                case HARD -> 300;
+                default -> 0;
+            };
+            if (duration > 0) living.addEffect(new MobEffectInstance(MobEffects.POISON, duration, 0), this);
+        }
+        return true;
+    }
 
-					if (level().getDifficulty().ordinal() > Difficulty.EASY.ordinal())
-						if (level().getDifficulty() == Difficulty.NORMAL)
-							duration = 7;
-						else if (level().getDifficulty() == Difficulty.HARD)
-							duration = 15;
+    public int getSkin() {
+        return entityData.get(SKIN_TYPE);
+    }
 
-					if (duration > 0)
-						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.POISON, duration * 20, 0));
-				}
-			}
-			return true;
-		} else
-			return false;
-	}
+    public void setSkin(int skinType) {
+        entityData.set(SKIN_TYPE, skinType);
+    }
 
-	public void setSkin(int skinType) {
-		entityData.set(SKIN_TYPE, skinType);
-	}
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason type, @Nullable SpawnGroupData data) {
+        setSkin(level.getRandom().nextInt(3));
+        for (CentipedeMultipart part : this.parts) {
+            part.setPos(this.xo, this.yo, this.zo);
+            part.setYRot(this.getYRot());
+        }
+        return data;
+    }
 
-	public int getSkin() {
-		return entityData.get(SKIN_TYPE);
-	}
+    @Override
+    public void addAdditionalSaveData(@NonNull ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putInt("skin", getSkin());
+    }
 
-	@Nullable
-	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason type, @Nullable SpawnGroupData data) {
-		setSkin(level.getRandom().nextInt(3));
-		for (CentipedeMultipart part : this.parts) {
-			part.setPos(this.xo, this.yo, this.zo);
-			part.setYRot(this.getYRot());
-		}
-		return data;
-	}
-
-	@Override
-	  public void addAdditionalSaveData(@NonNull ValueOutput output) {
-		super.addAdditionalSaveData(output);
-		output.putInt("skin", getSkin());
-	}
-
-	@Override
-	public void readAdditionalSaveData(@NonNull ValueInput input) {
-		super.readAdditionalSaveData(input);
-		setSkin(input.getIntOr("skin", 0));
-	}
+    @Override
+    public void readAdditionalSaveData(@NonNull ValueInput input) {
+        super.readAdditionalSaveData(input);
+        setSkin(input.getIntOr("skin", 0));
+    }
 }

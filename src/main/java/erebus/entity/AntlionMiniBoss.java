@@ -30,17 +30,8 @@ import org.jspecify.annotations.NonNull;
 public class AntlionMiniBoss extends Monster {
     public AntlionMiniBoss(EntityType<? extends Monster> type, Level level) {
         super(type, level);
-    }
-
-    @Override
-    protected void registerGoals() {
-        super.registerGoals();
-        goalSelector.addGoal(0, new FloatGoal(this));
-        goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, false));
-        goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.5D));
-        targetSelector.addGoal(0, new HurtByTargetGoal(this));
-        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        xpReward = 35;
+        setPersistenceRequired();
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -54,6 +45,17 @@ public class AntlionMiniBoss extends Monster {
     }
 
     @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        goalSelector.addGoal(0, new FloatGoal(this));
+        goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, false));
+        goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.5D));
+        targetSelector.addGoal(0, new HurtByTargetGoal(this));
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+    }
+
+    @Override
     public float getVoicePitch() {
         return super.getVoicePitch() * 1.5F;
     }
@@ -64,8 +66,8 @@ public class AntlionMiniBoss extends Monster {
     }
 
     @Override
-    public void playAmbientSound() {
-        playSound(ModSounds.ANTLION_GROWL.get());
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.ANTLION_GROWL.get();
     }
 
     @Override
@@ -93,6 +95,7 @@ public class AntlionMiniBoss extends Monster {
 
     @Override
     public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity target) {
+        if (!hasLineOfSight(target)) return false;
         if (super.doHurtTarget(level, target)) {
             if (target instanceof LivingEntity living) {
                 byte duration;
@@ -106,7 +109,18 @@ public class AntlionMiniBoss extends Monster {
                 if (duration > 0)
                     living.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, duration * 20, 0));
             }
+            return true;
         }
-        return true;
+        return false;
+    }
+
+    @Override
+    public boolean removeWhenFarAway(double distance) {
+        return false;
+    }
+
+    @Override
+    public boolean isWithinMeleeAttackRange(LivingEntity target) {
+        return distanceToSqr(target) <= 4.0F + target.getBbWidth();
     }
 }

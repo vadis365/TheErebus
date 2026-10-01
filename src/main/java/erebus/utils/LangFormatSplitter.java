@@ -185,27 +185,6 @@ public class LangFormatSplitter {
             this.isChoice = isChoice;
         }
 
-        public int getArgumentIndex() {
-            return argumentIndex;
-        }
-
-        /**
-         * @apiNote This will not be null if {@link #getFormatStyle()} is not null
-         */
-        @Nullable
-        public String getFormatType() {
-            return formatType;
-        }
-
-        @Nullable
-        public String getFormatStyle() {
-            return formatStyle;
-        }
-
-        public boolean isChoice() {
-            return isChoice;
-        }
-
         /**
          * @param contents Contents to create a {@link MessageFormatComponent} from.
          * @return A {@link MessageFormatComponent} representing the given contents, or {@code null} if the contents do not represent a valid
@@ -312,6 +291,27 @@ public class LangFormatSplitter {
                 }
             }
             return new MessageFormatComponent(contents, argumentIndex, formatType, formatStyle, isChoice);
+        }
+
+        public int getArgumentIndex() {
+            return argumentIndex;
+        }
+
+        /**
+         * @apiNote This will not be null if {@link #getFormatStyle()} is not null
+         */
+        @Nullable
+        public String getFormatType() {
+            return formatType;
+        }
+
+        @Nullable
+        public String getFormatStyle() {
+            return formatStyle;
+        }
+
+        public boolean isChoice() {
+            return isChoice;
         }
     }
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "erebus:exploration/titan_beetle",
+  "criteria": {
+    "get_titan_stew": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:titan_stew_cooked"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/titan_stew.desc"
+    },
+    "icon": {
+      "id": "erebus:titan_stew_cooked"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/titan_stew.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_titan_stew"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

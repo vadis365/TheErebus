@@ -2,18 +2,25 @@
   "feature": "erebus:emerald_ore_elysian_fields",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 3
+      "type": "erebus:ore_count",
+      "chance": 0.33,
+      "extra_max": 4,
+      "extra_min": 2,
+      "max": 4,
+      "min": 2
+    },
+    {
+      "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:height_range",
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 112
+          "above_bottom": 112
         },
         "min_inclusive": {
-          "absolute": 5
+          "above_bottom": 5
         }
       }
     },

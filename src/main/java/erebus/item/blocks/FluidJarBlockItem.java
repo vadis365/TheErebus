@@ -10,29 +10,28 @@ import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import org.jspecify.annotations.NonNull;
 
 import java.util.function.Consumer;
 
 public class FluidJarBlockItem extends BlockItem {
-	private final int capacity;
+    private final int capacity;
 
-	public FluidJarBlockItem(Block blockIn, int capacity, Properties builder) {
-		super(blockIn, builder);
-		this.capacity = capacity;
-	}
+    public FluidJarBlockItem(Block blockIn, int capacity, Properties builder) {
+        super(blockIn, builder);
+        this.capacity = capacity;
+    }
 
-	@Override
-	public void appendHoverText(ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay display, @NonNull Consumer<Component> builder, @NonNull TooltipFlag tooltipFlag) {
-		if (stack.has(ModDataComponents.FLUID)) {
-			FluidStack fluid = stack.get(ModDataComponents.FLUID).toStack(FluidType.BUCKET_VOLUME);
-			if (!fluid.isEmpty()) {
-				builder.accept(Component.literal("Contains: " + fluid.getHoverName().getString()).withStyle(ChatFormatting.GREEN));
-				builder.accept(Component.literal(String.format("%dMb/%dMb", fluid.getAmount(),capacity)).withStyle(ChatFormatting.BLUE));
-			}
-		}
-		else
-			builder.accept(Component.literal(String.format("Holds %dMb (%d Buckets)", capacity, capacity / 1000)).withStyle(ChatFormatting.BLUE));
-	}
+    @Override
+    public void appendHoverText(ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay display, @NonNull Consumer<Component> builder, @NonNull TooltipFlag tooltipFlag) {
+        FluidStack fluid = stack.getOrDefault(ModDataComponents.FLUID, FluidResource.EMPTY).toStack(stack.getOrDefault(ModDataComponents.FLUID_AMOUNT, FluidType.BUCKET_VOLUME));
+        if (!fluid.isEmpty()) {
+            builder.accept(Component.literal("Contains: " + fluid.getHoverName().getString()).withStyle(ChatFormatting.GREEN));
+            builder.accept(Component.literal(String.format("%dMb/%dMb", fluid.getAmount(), capacity)).withStyle(ChatFormatting.BLUE));
+        } else {
+            builder.accept(Component.literal(String.format("Holds %dMb (%d Buckets)", capacity, capacity / 1000)).withStyle(ChatFormatting.BLUE));
+        }
+    }
 
 }

@@ -2,7 +2,6 @@ package erebus.network.client;
 
 import erebus.Erebus;
 import erebus.block.entity.PreservedBlockEntity;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -26,15 +25,15 @@ public record PreservedBlockNBTPacket(int x, int y, int z, CompoundTag tag) impl
             PreservedBlockNBTPacket::z,
             ByteBufCodecs.COMPOUND_TAG,
             PreservedBlockNBTPacket::tag
-            ,PreservedBlockNBTPacket::new
+            , PreservedBlockNBTPacket::new
     );
 
     public static void handle(PreservedBlockNBTPacket message, final IPayloadContext ctx) {
         ctx.enqueueWork(() -> {
-            Level level = Minecraft.getInstance().level;
-            if(level != null) {
+            Level level = ctx.player().level();
+            if (level != null) {
                 BlockEntity entity = level.getBlockEntity(new BlockPos(message.x, message.y, message.z));
-                if(entity instanceof PreservedBlockEntity preserved) {
+                if (entity instanceof PreservedBlockEntity preserved) {
                     //preserved.saveAdditional(message.tag, level.registryAccess());
                 }
             }

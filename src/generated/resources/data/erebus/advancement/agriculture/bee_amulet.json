@@ -1,0 +1,32 @@
+{
+  "parent": "erebus:agriculture/honeycomb",
+  "criteria": {
+    "get_amulet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:bee_taming_amulet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/bee_amulet.desc"
+    },
+    "icon": {
+      "id": "erebus:bee_taming_amulet"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/bee_amulet.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_amulet"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

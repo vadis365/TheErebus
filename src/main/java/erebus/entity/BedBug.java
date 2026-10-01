@@ -6,6 +6,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -20,62 +21,74 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.PathType;
 import org.jspecify.annotations.NonNull;
 
 public class BedBug extends Monster {
 
-	public BedBug(EntityType<? extends BedBug> type, Level level) {
-		super(type, level);
-		xpReward = 0;
-	}
+    public BedBug(EntityType<? extends BedBug> type, Level level) {
+        super(type, level);
+        xpReward = 5;
+        setPathfindingMalus(PathType.WATER, -8F);
+        getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(switch (level.getDifficulty()) {
+            case NORMAL -> 2D;
+            case HARD -> 3D;
+            default -> 1D;
+        });
+    }
 
-	@Override
-	protected void registerGoals() {
-		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.3D, false));
-		goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.3D));
-		goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		targetSelector.addGoal(0, new HurtByTargetGoal(this));
-		targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, false));
-		targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Villager.class, false));
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 10D)
+                .add(Attributes.FOLLOW_RANGE, 16D)
+                .add(Attributes.MOVEMENT_SPEED, 1D)
+                .add(Attributes.ATTACK_DAMAGE, 2D)
+                .add(Attributes.ARMOR, 2D);
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes()
-				.add(Attributes.MAX_HEALTH, 10D)
-				.add(Attributes.FOLLOW_RANGE, 16D)
-				.add(Attributes.MOVEMENT_SPEED, 1D)
-				.add(Attributes.ATTACK_DAMAGE, 2D)
-				.add(Attributes.ARMOR, 2D);
-	}
+    @Override
+    public boolean isWithinMeleeAttackRange(LivingEntity target) {
+        return distanceToSqr(target) <= 4 + target.getBbWidth();
+    }
 
-	@Override
-	public float getVoicePitch() {
-		return super.getVoicePitch() * 1.25F;
-	}
+    @Override
+    protected void registerGoals() {
+        goalSelector.addGoal(0, new FloatGoal(this));
+        goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.3D, false));
+        goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.3D));
+        goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        targetSelector.addGoal(0, new HurtByTargetGoal(this));
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, false));
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Villager.class, false));
+    }
 
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return ModSounds.BEETLE_SOUND.get();
-	}
+    @Override
+    public float getVoicePitch() {
+        return super.getVoicePitch() * 1.25F;
+    }
 
-	@Override
-	protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
-		return ModSounds.BEETLE_HURT.get();
-	}
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.BEETLE_SOUND.get();
+    }
 
-	@Override
-	protected @NonNull SoundEvent getDeathSound() {
-		return ModSounds.SQUISH.get();
-	}
+    @Override
+    protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
+        return ModSounds.BEETLE_HURT.get();
+    }
 
-	@Override
-	protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
-		this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
-	}
+    @Override
+    protected @NonNull SoundEvent getDeathSound() {
+        return ModSounds.SQUISH.get();
+    }
 
-	@Override
-	public boolean checkSpawnObstruction(LevelReader world) {
-		return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
-	}
+    @Override
+    protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState block) {
+        this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
+    }
+
+    @Override
+    public boolean checkSpawnObstruction(LevelReader world) {
+        return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
+    }
 }

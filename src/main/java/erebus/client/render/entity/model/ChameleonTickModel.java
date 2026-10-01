@@ -8,9 +8,9 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class ChameleonTickModel extends EntityModel<ChameleonTickRenderState> {
-    public ModelPart root;
     private final ModelPart LBL1, LBL2, LBL3, LBL4;
     private final ModelPart LML1, LML2, LML3, LML4;
     private final ModelPart LFL1, LFL2, LFL3, LFL4;
@@ -22,7 +22,6 @@ public class ChameleonTickModel extends EntityModel<ChameleonTickRenderState> {
 
     public ChameleonTickModel(ModelPart root) {
         super(root);
-        this.root = root;
         this.LBL1 = root.getChild("LBL1");
         this.LBL2 = LBL1.getChild("LBL2");
         this.LBL3 = LBL1.getChild("LBL3");
@@ -98,5 +97,31 @@ public class ChameleonTickModel extends EntityModel<ChameleonTickRenderState> {
         HeadBack.addOrReplaceChild("Lmand", CubeListBuilder.create().texOffs(-1, 0).addBox(1.0F, 0.0F, -15.0F, 2, 2, 6).mirror(), PartPose.ZERO);
 
         return LayerDefinition.create(mesh, 16, 16);
+    }
+
+    @Override
+    public void setupAnim(ChameleonTickRenderState state) {
+        super.setupAnim(state);
+        float size = state.unfold * 0.1F;
+        root.xScale = size;
+        root.yScale = size;
+        root.zScale = size;
+        root.y = 16 * (1 - size);
+        float a = Mth.cos(state.walkAnimationPos * 2) * 0.7F * state.walkAnimationSpeed;
+        float b = Mth.cos(state.walkAnimationPos * 2 + Mth.PI) * 0.7F * state.walkAnimationSpeed;
+        LBL1.xRot = b + 0.25F;
+        LBL3.xRot = 0.05F;
+        LBL4.xRot = 0.084F;
+        LML1.xRot = a;
+        LFL1.xRot = b - 0.25F;
+        LFL3.xRot = -0.05F;
+        LFL4.xRot = -0.084F;
+        RBL1.xRot = a + 0.25F;
+        RBL3.xRot = 0.05F;
+        RBL4.xRot = 0.084F;
+        RML1.xRot = b;
+        RFL1.xRot = a - 0.25F;
+        RFL3.xRot = -0.05F;
+        RFL4.xRot = -0.084F;
     }
 }

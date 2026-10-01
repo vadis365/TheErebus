@@ -28,94 +28,101 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
 public class BombardierBeetleLarva extends BeetleLarva implements Enemy {
-	private static final EntityDataAccessor<Integer> INFLATE_SIZE = SynchedEntityData.defineId(BombardierBeetleLarva.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> INFLATE_SIZE = SynchedEntityData.defineId(BombardierBeetleLarva.class, EntityDataSerializers.INT);
 
-	public BombardierBeetleLarva(EntityType<? extends BombardierBeetleLarva> type, Level level) {
-		super(type, level);
-	}
+    public BombardierBeetleLarva(EntityType<? extends BombardierBeetleLarva> type, Level level) {
+        super(type, level);
+        setLarvaType((byte) 4);
+    }
 
-	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
-		super.defineSynchedData(builder);
-		builder.define(INFLATE_SIZE, 0);
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 8D)
+                .add(Attributes.ATTACK_DAMAGE, 1D)
+                .add(Attributes.FOLLOW_RANGE, 16D)
+                .add(Attributes.MOVEMENT_SPEED, 0.35D)
+                .add(Attributes.STEP_HEIGHT, 1D);
+    }
 
-	@Override
-	protected void registerGoals() {
-		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, true));
-		goalSelector.addGoal(2, new LarvaEatWoodenBlocksGoal(this, 0.48D, 10));
-		goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.48D));
-		goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-		targetSelector.addGoal(0, new HurtByTargetGoal(this));
-		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true, true));
-	}
+    public static boolean canSpawnHereAlt(EntityType<BombardierBeetleLarva> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
+        float light = level.getLightLevelDependentMagicValue(pos);
+        return light >= 0F;
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes()
-				.add(Attributes.MAX_HEALTH, 8D)
-				.add(Attributes.ATTACK_DAMAGE, 0.5D)
-				.add(Attributes.FOLLOW_RANGE, 16D)
-				.add(Attributes.MOVEMENT_SPEED, 0.35D)
-				.add(Attributes.STEP_HEIGHT, 1D);
-	}
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(INFLATE_SIZE, 0);
+    }
 
-	@Override
-	public void tick() {
-		super.tick();
-		if (!level().isClientSide()) {
-			if (getInflateSize() <= 0)
-				setInflateSize(0);
-			if (getInflateSize() >= 100)
-				explode();
-			if (getTarget() == null)
-				setInflateSize(getInflateSize() - 2);
-			if (getTarget() != null) {
-				float distance = distanceTo(getTarget());
-				if (getInflateSize() < 100 && distance <= 4)
-					setInflateSize(getInflateSize() + 2);
-				if (getInflateSize() < 100 && distance > 4)
-					setInflateSize(getInflateSize() - 2);
-			}
-		}
-	}
+    @Override
+    protected void registerGoals() {
+        goalSelector.addGoal(0, new FloatGoal(this));
+        goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, true));
+        goalSelector.addGoal(2, new LarvaEatWoodenBlocksGoal(this, 0.48D, 10));
+        goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.48D));
+        goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        targetSelector.addGoal(0, new HurtByTargetGoal(this));
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true, true));
+    }
 
-	private void explode() {
-		if (!level().isClientSide()) {
-			level().explode(this, getX(), getY(), getZ(), 1.5F, Level.ExplosionInteraction.NONE);
-			PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, blockPosition().getX(),
-					blockPosition().getY(), blockPosition().getZ(), 30,
-					new ParticlePacket((byte) ParticleType.BEETLE_LARVA_SQUISH.ordinal(), blockPosition().getX() + 0.5D,
-							blockPosition().getY() + 0.5D, blockPosition().getZ() + 0.5D));
-			level().playSound(null, blockPosition(), getJumpedOnSound(), SoundSource.NEUTRAL, 1.0F, 0.5F);
-			level().playSound(null, blockPosition(), getDeathSound(), SoundSource.NEUTRAL, 1.0F, 0.7F);
-			remove(RemovalReason.DISCARDED);
-		}
-	}
+    @Override
+    public void tick() {
+        super.tick();
+        if (level().isClientSide() || !isAlive()) return;
+        if (getInflateSize() >= 100) {
+            explode();
+            return;
+        }
+        var target = getTarget();
+        setInflateSize(getInflateSize() + (target != null && target.isAlive() && distanceToSqr(target) <= 16 ? 2 : -2));
+    }
 
-	public void setInflateSize(int size) {
-		entityData.set(INFLATE_SIZE, size);
-	}
+    private void explode() {
+        if (!level().isClientSide()) {
+            level().explode(this, getX(), getY(), getZ(), 3F, Level.ExplosionInteraction.NONE);
+            PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, blockPosition().getX(),
+                    blockPosition().getY(), blockPosition().getZ(), 30,
+                    new ParticlePacket((byte) ParticleType.BEETLE_LARVA_SQUISH.ordinal(), blockPosition().getX() + 0.5D,
+                            blockPosition().getY() + 0.5D, blockPosition().getZ() + 0.5D));
+            level().playSound(null, blockPosition(), getJumpedOnSound(), SoundSource.NEUTRAL, 1.0F, 0.5F);
+            level().playSound(null, blockPosition(), getDeathSound(), SoundSource.NEUTRAL, 1.0F, 0.7F);
+            remove(RemovalReason.DISCARDED);
+        }
+    }
 
-	public int getInflateSize() {
-		return entityData.get(INFLATE_SIZE);
-	}
+    @Override
+    public void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putInt("InflateSize", getInflateSize());
+    }
 
-	public static boolean canSpawnHereAlt(EntityType<BombardierBeetleLarva> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
-		float light = level.getLightLevelDependentMagicValue(pos);
-		return light >= 0F;
-	}
+    @Override
+    public void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        setInflateSize(input.getIntOr("InflateSize", 0));
+    }
 
-	@Nullable
-	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
-		spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
-		setLarvaType((byte) 4);
-		return spawnGroupData;
-	}
+    public int getInflateSize() {
+        return entityData.get(INFLATE_SIZE);
+    }
+
+    public void setInflateSize(int size) {
+        entityData.set(INFLATE_SIZE, Math.clamp(size, 0, 100));
+    }
+
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+        spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
+        setLarvaType((byte) 4);
+        return spawnGroupData;
+    }
 }

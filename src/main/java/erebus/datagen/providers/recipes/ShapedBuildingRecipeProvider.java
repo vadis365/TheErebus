@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 
-import static net.minecraft.data.recipes.RecipeCategory.BUILDING_BLOCKS;
+import static net.minecraft.data.recipes.RecipeCategory.*;
 
 /**
  * Provider for shaped crafting recipes related to building blocks.
@@ -43,6 +43,16 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
         twoByTwo(ModBlocks.PLANKS_PETRIFIED, ModBlocks.PETRIFIED_CRAFTING_TABLE);
         twoByTwo(ModBlocks.AMBER, ModBlocks.AMBER_BRICKS, 4);
         twoByTwo(ModItems.MUD_BRICK, ModBlocks.MUD_BRICKS);
+        twoByTwo(ModItems.BAMBOO, ModBlocks.PLANKS_BAMBOO);
+        twoByTwo(ModBlocks.UMBERTILE_SMOOTH, ModBlocks.UMBERTILE_SMOOTH_SMALL, 4);
+        twoByTwo(ModItems.RED_GEM, ModBlocks.RED_GEM_BLOCK);
+
+        shaped(REDSTONE, ModBlocks.RED_GEM_LAMP)
+                .pattern(" S ").pattern("SGS").pattern(" S ")
+                .define('G', ModBlocks.RED_GEM_BLOCK)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .unlockedBy("has_red_gem_block", has(ModBlocks.RED_GEM_BLOCK))
+                .save(output);
 
         threeByThree(ModBlocks.UMBERSTONE, ModBlocks.UMBERTILE_SMOOTH, 9);
         threeByThree(ModBlocks.DARK_CAPPED_MUSHROOM, ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK);
@@ -77,7 +87,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_mud_bricks", has(ModBlocks.MUD_BRICKS))
                 .save(output, "mir_bricks_bulk");
 
-        shaped(BUILDING_BLOCKS, ModBlocks.MIR_BRICKS, 4)
+        shaped(BUILDING_BLOCKS, ModBlocks.MIR_BRICKS)
                 .pattern("AB")
                 .pattern("BA")
                 .define('A', ModItems.MUD_BRICK)
@@ -151,6 +161,8 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addDoorRecipes() {
+        door(ModBlocks.AMBER_BRICKS, ModBlocks.AMBER_DOOR);
+        door(ModBlocks.PLANKS_PETRIFIED, ModBlocks.DOOR_PETRIFIED);
         door(ModBlocks.PLANKS_BAOBAB, ModBlocks.DOOR_BAOBAB);
         door(ModBlocks.PLANKS_EUCALYPTUS, ModBlocks.DOOR_EUCALYPTUS);
         door(ModBlocks.PLANKS_MAHOGANY, ModBlocks.DOOR_MAHOGANY);
@@ -165,6 +177,18 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addFenceRecipes() {
+        shaped(DECORATIONS, ModBlocks.FENCE_BAMBOO, 3)
+                .pattern("PSP").pattern("PSP")
+                .define('P', ModBlocks.PLANKS_BAMBOO)
+                .define('S', ModItems.BAMBOO)
+                .unlockedBy("has_bamboo_planks", has(ModBlocks.PLANKS_BAMBOO))
+                .save(output);
+        shaped(DECORATIONS, ModBlocks.FENCE_VARNISHED, 3)
+                .pattern("PSP").pattern("PSP")
+                .define('P', ModBlocks.PLANKS_VARNISHED)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .unlockedBy("has_varnished_planks", has(ModBlocks.PLANKS_VARNISHED))
+                .save(output);
         fence(ModBlocks.PLANKS_BAOBAB, ModBlocks.FENCE_BAOBAB);
         fence(ModBlocks.PLANKS_EUCALYPTUS, ModBlocks.FENCE_EUCALYPTUS);
         fence(ModBlocks.PLANKS_MAHOGANY, ModBlocks.FENCE_MAHOGANY);
@@ -179,6 +203,18 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addFenceGateRecipes() {
+        shaped(REDSTONE, ModBlocks.FENCE_GATE_BAMBOO)
+                .pattern("SPS").pattern("SPS")
+                .define('P', ModBlocks.PLANKS_BAMBOO)
+                .define('S', ModItems.BAMBOO)
+                .unlockedBy("has_bamboo_planks", has(ModBlocks.PLANKS_BAMBOO))
+                .save(output);
+        shaped(REDSTONE, ModBlocks.FENCE_GATE_VARNISHED)
+                .pattern("SPS").pattern("SPS")
+                .define('P', ModBlocks.PLANKS_VARNISHED)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .unlockedBy("has_varnished_planks", has(ModBlocks.PLANKS_VARNISHED))
+                .save(output);
         fenceGate(ModBlocks.PLANKS_BAOBAB, ModBlocks.FENCE_GATE_BAOBAB);
         fenceGate(ModBlocks.PLANKS_EUCALYPTUS, ModBlocks.FENCE_GATE_EUCALYPTUS);
         fenceGate(ModBlocks.PLANKS_MAHOGANY, ModBlocks.FENCE_GATE_MAHOGANY);
@@ -208,7 +244,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
     }
 
     private void addSpecialBlockRecipes() {
-        surround(ModBlocks.PLANKS_PETRIFIED, Items.GOLD_INGOT, ModBlocks.CHEST_PETRIFIED);
+        surround();
 
         shaped(BUILDING_BLOCKS, ModBlocks.BAMBOO_BRIDGE, 3)
                 .pattern("SSS")
@@ -220,7 +256,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_bamboo_ladder", has(ModBlocks.BAMBOO_LADDER))
                 .save(output);
 
-        shaped(BUILDING_BLOCKS, ModBlocks.BAMBOO_LADDER, 3)
+        shaped(BUILDING_BLOCKS, ModBlocks.BAMBOO_LADDER)
                 .pattern("BBB")
                 .pattern("S S")
                 .pattern("BBB")
@@ -243,8 +279,8 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
                 .pattern("F F")
                 .pattern("F F")
                 .define('S', ItemTags.WOODEN_SLABS)
-                .define('F', ItemTags.FENCES)
-                .unlockedBy("has_fence", has(ItemTags.FENCES))
+                .define('F', ItemTags.WOODEN_FENCES)
+                .unlockedBy("has_fence", has(ItemTags.WOODEN_FENCES))
                 .save(output);
 
         shaped(BUILDING_BLOCKS, ModBlocks.SILO_ROOF)
@@ -254,7 +290,7 @@ public class ShapedBuildingRecipeProvider extends ErebusRecipeProvider {
                 .unlockedBy("has_planks_varnished", has(ModBlocks.PLANKS_VARNISHED))
                 .save(output);
 
-        shaped(BUILDING_BLOCKS, ModBlocks.TEMPLE_PILLAR)
+        shaped(BUILDING_BLOCKS, ModBlocks.TEMPLE_PILLAR, 2)
                 .pattern("T")
                 .pattern("T")
                 .define('T', ModBlocks.TEMPLE_TILE)

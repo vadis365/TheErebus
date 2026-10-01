@@ -13,6 +13,8 @@ public class EntityAttributeCreationEventHandler {
     @SubscribeEvent
     public static void initializeAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.ANIMATED_BLOCK.get(), AnimatedBlock.createAttributes().build());
+        event.put(ModEntities.ANIMATED_BAMBOO_CRATE.get(), AnimatedBlock.createAttributes().build());
+        event.put(ModEntities.ANIMATED_CHEST.get(), AnimatedBlock.createAttributes().build());
         event.put(ModEntities.ANTLION.get(), Antlion.createAttributes().build());
         event.put(ModEntities.ANTLION_BOSS.get(), AntlionBoss.createAttributes().build());
         event.put(ModEntities.ANTLION_MINI_BOSS.get(), AntlionMiniBoss.createAttributes().build());
@@ -61,6 +63,7 @@ public class EntityAttributeCreationEventHandler {
         event.put(ModEntities.TARANTULA.get(), Tarantula.createAttributes().build());
         event.put(ModEntities.TARANTULA_MINI_BOSS.get(), TarantulaMiniBoss.createAttributes().build());
         event.put(ModEntities.TITAN_BEETLE.get(), TitanBeetle.createAttributes().build());
+        event.put(ModEntities.DUNGEON_UMBER_GOLEM.get(), DungeonUmberGolem.createAttributes().build());
         event.put(ModEntities.UMBER_GOLEM.get(), UmberGolem.createAttributes().build());
         event.put(ModEntities.VELVET_WORM.get(), VelvetWorm.createAttributes().build());
         event.put(ModEntities.WASP.get(), Wasp.createAttributes().build());

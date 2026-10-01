@@ -5,6 +5,7 @@ import erebus.registries.world.ModBiomes;
 import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
+import erebus.registries.world.feature.PlantFeatures;
 import erebus.world.biome.util.ErebusBiome;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.resources.ResourceKey;
@@ -46,22 +47,29 @@ public class PetrifiedForestBiome extends ErebusBiome {
                         .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.BOT_FLY.get(), 2, 3))
                         .addSpawn(MobCategory.MONSTER, 30, new MobSpawnSettings.SpawnerData(ModEntities.CHAMELEON_TICK.get(), 1, 2))
                         .addSpawn(MobCategory.MONSTER, 5, new MobSpawnSettings.SpawnerData(ModEntities.BLACK_WIDOW.get(), 1, 1))
+                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(ModEntities.GLOW_WORM.get(), 1, 4))
                         .addSpawn(MobCategory.MONSTER, 15, new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 2, 3))
                         .addSpawn(MobCategory.MONSTER, 20, new MobSpawnSettings.SpawnerData(ModEntities.SCYTODES.get(), 1, 4))
-                        .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.JUMPING_SPIDER.get(), 2, 4))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.JUMPING_SPIDER.get(), 2, 4))
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
                         .addCarver(ModCarvers.CAVE)
                         .addCarver(ModCarvers.CANYON)
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ACID_LAKE.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_SURFACE.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ROCK_SPIKE.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, PlantFeatures.PETRIFIED_FALLEN_LOGS.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, PlantFeatures.WILD_MANDRAKE.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.SCORCHED_WOOD.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_BROWN_SMALL.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_BROWN_MEDIUM.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_BROWN_LARGE.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_RED_SMALL.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_RED_MEDIUM.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_TREE_RED_LARGE.getPlacedResourceKey())
-                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.LAVA_LAKE.getPlacedResourceKey())
-                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ROCK_SPIKE.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.PETRIFIED_DUST_LAYER.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.HANGING_WEB.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.LAPIS_ORE.getPlacedResourceKey())

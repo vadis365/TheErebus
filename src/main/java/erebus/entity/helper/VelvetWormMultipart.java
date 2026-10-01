@@ -8,7 +8,7 @@ public class VelvetWormMultipart extends GenericPartEntity<VelvetWorm> {
         super(parentMob, width, height);
     }
 
-	@Override
+    @Override
     protected double getDefaultGravity() {
         return 0.2;
     }

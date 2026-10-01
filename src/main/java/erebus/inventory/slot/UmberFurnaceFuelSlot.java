@@ -15,6 +15,10 @@ public class UmberFurnaceFuelSlot extends Slot {
         this.menu = menu;
     }
 
+    public static boolean isBucket(ItemStack stack) {
+        return stack.is(Items.BUCKET);
+    }
+
     @Override
     public boolean mayPlace(@NonNull ItemStack stack) {
         return menu.isFuel(stack) || isBucket(stack);
@@ -23,9 +27,5 @@ public class UmberFurnaceFuelSlot extends Slot {
     @Override
     public int getMaxStackSize(@NonNull ItemStack stack) {
         return isBucket(stack) ? 1 : super.getMaxStackSize(stack);
-    }
-
-    public static boolean isBucket(ItemStack stack) {
-        return stack.is(Items.BUCKET);
     }
 }

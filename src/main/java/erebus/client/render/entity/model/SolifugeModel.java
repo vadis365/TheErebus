@@ -10,7 +10,6 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 public class SolifugeModel extends EntityModel<SolifugeRenderState> {
-    public ModelPart root;
     private final ModelPart HeadMain, HeadTop, HeadFront, Neck, REye, LEye, Thorax;
     private final ModelPart RMand1, RMand2, LMand1, LMand2;
     private final ModelPart Ab1, Ab2, Ab3, Ab4;
@@ -24,6 +23,7 @@ public class SolifugeModel extends EntityModel<SolifugeRenderState> {
     private final ModelPart LFL1, LFL2, LFL3, LFL4;
     private final ModelPart ClawR1, ClawR2, ClawR3;
     private final ModelPart ClawL1, ClawL2, ClawL3;
+    public ModelPart root;
 
     public SolifugeModel(ModelPart root) {
         super(root);
@@ -162,5 +162,31 @@ public class SolifugeModel extends EntityModel<SolifugeRenderState> {
         ClawL1.addOrReplaceChild("ClawL3", CubeListBuilder.create().texOffs(2, 26).addBox(-19F, -6F, -0.5F, 8, 1, 1), PartPose.ZERO);
 
         return LayerDefinition.create(mesh, 64, 128);
+    }
+
+    @Override
+    public void setupAnim(SolifugeRenderState state) {
+        super.setupAnim(state);
+        float first = (float) Math.cos(state.walkAnimationPos + Math.PI) * state.walkAnimationSpeed;
+        float second = (float) Math.cos(state.walkAnimationPos) * state.walkAnimationSpeed;
+        LBL1.zRot = LMFL1.zRot = first * 0.3F - 0.3F;
+        LMBL1.zRot = LFL1.zRot = second * 0.3F - 0.3F;
+        RBL1.zRot = RMFL1.zRot = -second * 0.3F + 0.3F;
+        RMBL1.zRot = RFL1.zRot = -first * 0.3F + 0.3F;
+        LBL1.yRot = first * 0.4F - 0.6981317F;
+        LMBL1.yRot = second * 0.4F - 0.2617994F;
+        LMFL1.yRot = first * 0.4F + 0.2617994F;
+        LFL1.yRot = second * 0.4F + 0.6981317F;
+        RBL1.yRot = -second * 0.4F - 2.443461F;
+        RMBL1.yRot = -first * 0.4F - 2.879793F;
+        RMFL1.yRot = -second * 0.4F + 2.879793F;
+        RFL1.yRot = -first * 0.4F + 2.443461F;
+        float claw = (float) Math.cos(state.walkAnimationPos * 0.5F + Math.PI) * 0.3F * state.walkAnimationSpeed;
+        ClawR1.xRot = ClawL1.xRot = -claw;
+        ClawR1.zRot = ClawL1.zRot = claw;
+        RMand1.yRot = -(float) Math.cos(state.walkAnimationPos * 0.5F) * 0.2F * state.walkAnimationSpeed;
+        RMand2.yRot = RMand1.yRot - 0.2617994F;
+        LMand1.yRot = -(float) Math.cos(state.walkAnimationPos * 0.5F + Math.PI) * 0.2F * state.walkAnimationSpeed;
+        LMand2.yRot = LMand1.yRot + 0.2617994F;
     }
 }

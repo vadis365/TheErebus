@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_anti_venom": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:anti_venom_bambucket"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:anti_venom_bottles_from_bambucket"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_anti_venom"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:anti_venom_bottles_from_bambucket"
+    ]
+  }
+}

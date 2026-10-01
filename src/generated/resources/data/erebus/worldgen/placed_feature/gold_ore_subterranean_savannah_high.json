@@ -2,8 +2,12 @@
   "feature": "erebus:gold_ore_subterranean_savannah_high",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 4
+      "type": "erebus:ore_count",
+      "chance": 0.75,
+      "extra_max": 1,
+      "extra_min": 1,
+      "max": 2,
+      "min": 2
     },
     {
       "type": "minecraft:in_square"
@@ -13,10 +17,10 @@
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 126
+          "above_bottom": 126
         },
         "min_inclusive": {
-          "absolute": 50
+          "above_bottom": 50
         }
       }
     },

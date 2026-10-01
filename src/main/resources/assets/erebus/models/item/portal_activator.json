@@ -1,5 +1,5 @@
 {
-  "parent": "builtin/entity",
+  "parent": "minecraft:block/block",
   "display": {
     "thirdperson_righthand": {
       "rotation": [

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/insect_repellent"
+    "model": "erebus:block/blank"
   }
 }

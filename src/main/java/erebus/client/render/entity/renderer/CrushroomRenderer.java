@@ -11,26 +11,27 @@ import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
 public class CrushroomRenderer extends MobRenderer<Crushroom, CrushroomRenderState, CrushroomModel> {
-	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/crushroom.png");
+    private static final Identifier TEXTURE = Erebus.prefix("textures/entity/crushroom.png");
 
-	public CrushroomRenderer(EntityRendererProvider.Context context) {
+    public CrushroomRenderer(EntityRendererProvider.Context context) {
         super(context, new CrushroomModel(context.bakeLayer(ModEntityRendering.CRUSHROOM)), 1.5F);
-	}
+    }
 
-	@Override
-	public void extractRenderState(Crushroom entity, CrushroomRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-		state.standing = entity.isStanding();
-		state.smashCount = entity.getSmashCount();
-	}
+    @Override
+    public void extractRenderState(Crushroom entity, CrushroomRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+        state.standing = entity.isStanding();
+        state.smashCount = entity.getSmashCount(partialTicks);
+        state.scale *= 2;
+    }
 
-	@Override
-	public CrushroomRenderState createRenderState() {
-		return new CrushroomRenderState();
-	}
+    @Override
+    public CrushroomRenderState createRenderState() {
+        return new CrushroomRenderState();
+    }
 
-	@Override
-	public @NonNull Identifier getTextureLocation(CrushroomRenderState state) {
-		return TEXTURE;
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(CrushroomRenderState state) {
+        return TEXTURE;
+    }
 }

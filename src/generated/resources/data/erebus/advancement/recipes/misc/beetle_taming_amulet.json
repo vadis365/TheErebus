@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:jade"
+            "items": "#c:gems/jade"
           }
         ]
       },

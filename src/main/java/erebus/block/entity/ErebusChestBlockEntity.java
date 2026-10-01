@@ -22,7 +22,7 @@ public class ErebusChestBlockEntity extends ChestBlockEntity {
 
     @Override
     public @NotNull Component getDisplayName() {
-        if(getBlockState().getValue(ErebusChestBlock.TYPE).equals(ChestType.SINGLE)) {
+        if (getBlockState().getValue(ErebusChestBlock.TYPE).equals(ChestType.SINGLE)) {
             String unlocalizedName = "chest";
             if (this.getBlockState().getBlock() instanceof ErebusChestBlock chestBlock) {
                 unlocalizedName = chestBlock.getUnlocalizedName();

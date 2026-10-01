@@ -11,30 +11,29 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
-public class AntlionRenderer extends MobRenderer<Antlion, AntlionRenderState, AntlionModel> {
+public class AntlionRenderer extends MobRenderer<Antlion, AntlionRenderState, AntlionModel<AntlionRenderState>> {
 
-	public AntlionRenderer(EntityRendererProvider.Context context) {
-		super(context, new AntlionModel(context.bakeLayer(ModEntityRendering.ANTLION)), 0.75F);
-		this.model = new AntlionModel(context.bakeLayer(ModEntityRendering.ANTLION));
-	}
+    public AntlionRenderer(EntityRendererProvider.Context context) {
+        super(context, new AntlionModel<>(context.bakeLayer(ModEntityRendering.ANTLION)), 0.75F);
+    }
 
-	@Override
-	protected void scale(AntlionRenderState state, PoseStack pose) {
-		pose.scale(0.75F, 0.75F, 0.75F);
-	}
+    @Override
+    protected void scale(AntlionRenderState state, PoseStack pose) {
+        pose.scale(0.75F, 0.75F, 0.75F);
+    }
 
-	@Override
-	public AntlionRenderState createRenderState() {
-		return new AntlionRenderState();
-	}
+    @Override
+    public AntlionRenderState createRenderState() {
+        return new AntlionRenderState();
+    }
 
-	@Override
-	public void extractRenderState(Antlion entity, AntlionRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-	}
+    @Override
+    public void extractRenderState(Antlion entity, AntlionRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+    }
 
-	@Override
-	public @NonNull Identifier getTextureLocation(AntlionRenderState state) {
-		return Erebus.prefix("textures/entity/antlion.png");
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(AntlionRenderState state) {
+        return Erebus.prefix("textures/entity/antlion.png");
+    }
 }

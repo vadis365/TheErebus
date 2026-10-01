@@ -71,7 +71,7 @@ public class ModBerryBushBlock extends BushBlock implements BonemealableBlock {
 
     @Override
     protected void randomTick(BlockState state, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        if (state.getValue(AGE) < 3 && level.getRawBrightness(pos.above(), 0) >= 9 && CommonHooks.canCropGrow(level, pos, state, random.nextInt(5) == 0)) {
+        if (state.getValue(AGE) < 3 && level.getRawBrightness(pos.above(), 0) >= 4 && CommonHooks.canCropGrow(level, pos, state, random.nextInt(5) == 0)) {
             BlockState growthAge = state.setValue(AGE, state.getValue(AGE) + 1);
             level.setBlock(pos, growthAge, 2);
             CommonHooks.fireCropGrowPost(level, pos, state);

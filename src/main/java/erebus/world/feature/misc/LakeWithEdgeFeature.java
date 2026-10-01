@@ -11,12 +11,16 @@ import java.util.List;
 
 public class LakeWithEdgeFeature extends ErebusFeature {
 
+    private final boolean population;
+
     public LakeWithEdgeFeature(String name) {
         super(name);
+        population = name.equals("lava_lake");
     }
 
     @Override
     public List<PlacementModifier> getPlacementModifiers() {
+        if (population) return List.of(BiomeFilter.biome());
         return List.of(CountPlacement.of(10), InSquarePlacement.spread(), PlacementUtils.FULL_RANGE, BiomeFilter.biome());
     }
 }

@@ -1,5 +1,3 @@
-
-
 package erebus.client.render.item.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;

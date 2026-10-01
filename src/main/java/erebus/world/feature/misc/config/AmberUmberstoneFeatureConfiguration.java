@@ -11,9 +11,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class AmberUmberstoneFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
 
-    private static final float BUGGED_AMBER_CHANCE = 0.01F;
-    private static final float WAND_CHANCE = 0.05F;
-
     public AmberUmberstoneFeatureConfiguration() {
         super(NoneFeatureConfiguration.CODEC);
     }
@@ -34,7 +31,8 @@ public class AmberUmberstoneFeatureConfiguration extends Feature<NoneFeatureConf
                 for (int z = -ceilRad; z <= ceilRad; z++) {
                     float dist = (float) Math.sqrt((x * x) + (y * y) + (z * z));
 
-                    if (dist <= rad + random.nextFloat() * 0.4F) {
+                    if (dist <= rad + random.nextFloat() * 0.4F
+                            && level.getBlockState(pos.offset(x, y, z)).is(ModBlocks.UMBERSTONE)) {
                         setAmberBlock(level, pos.offset(x, y, z), random);
                     }
                 }
@@ -45,11 +43,6 @@ public class AmberUmberstoneFeatureConfiguration extends Feature<NoneFeatureConf
     }
 
     protected void setAmberBlock(WorldGenLevel level, BlockPos pos, RandomSource random) {
-        if (random.nextFloat() > BUGGED_AMBER_CHANCE) {
-            level.setBlock(pos, ModBlocks.AMBER.get().defaultBlockState(), 2);
-        } else {
-            level.setBlock(pos, ModBlocks.PRESERVED_AMBER.get().defaultBlockState(), 3);
-            // TODO: Implement Preserved Block Entity
-        }
+        AmberContents.place(level, pos, random);
     }
 }

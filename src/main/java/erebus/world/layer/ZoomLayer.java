@@ -31,17 +31,17 @@ public enum ZoomLayer implements AreaTransformer1 {
         int xOff = x & 1;
         int zOff = z & 1;
 
-        if(xOff == 0 && zOff == 0) return biome;
+        if (xOff == 0 && zOff == 0) return biome;
 
         ResourceKey<Biome> south = layer.getBiome(getParentX(x), getParentZ(z + 1));
         ResourceKey<Biome> random = context.random(biome, south);
 
-        if(xOff == 0) return random;
+        if (xOff == 0) return random;
 
         ResourceKey<Biome> east = layer.getBiome(getParentX(x + 1), getParentZ(z));
         random = context.random(biome, east);
 
-        if(zOff == 0) return random;
+        if (zOff == 0) return random;
 
         ResourceKey<Biome> southEast = layer.getBiome(getParentX(x + 1), getParentZ(z + 1));
         return modeOrRandom(context, biome, east, south, southEast);

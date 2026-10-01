@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import erebus.registries.world.tree.ModTrunkPlacers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,17 +15,13 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
-import org.apache.commons.compress.utils.Lists;
 import org.jspecify.annotations.NonNull;
 
-import java.util.List;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 public class BalsamTrunkPlacer extends TrunkPlacer {
 
-    protected final int baseHeight;
-    protected final int heightRandA;
-    protected final int heightRandB;
 
     public static final MapCodec<BalsamTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
@@ -36,9 +33,15 @@ public class BalsamTrunkPlacer extends TrunkPlacer {
 
     public BalsamTrunkPlacer(int baseHeight, int heightRandA, int heightRandB) {
         super(baseHeight, heightRandA, heightRandB);
-        this.baseHeight = baseHeight;
-        this.heightRandA = heightRandA;
-        this.heightRandB = heightRandB;
+    }
+
+    private static void crown(Set<BlockPos> leaves, BlockPos center) {
+        for (int x = -1; x <= 1; x++) for (int z = -1; z <= 1; z++) leaves.add(center.offset(x, 0, z));
+    }
+
+    @Override
+    public int getTreeHeight(RandomSource random) {
+        return baseHeight + random.nextInt(heightRandA + 1) + (heightRandB == 0 ? 0 : random.nextInt(heightRandB + 1));
     }
 
     @Override
@@ -48,65 +51,54 @@ public class BalsamTrunkPlacer extends TrunkPlacer {
 
     @Override
     public @NonNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NonNull WorldGenLevel level, @NonNull BiConsumer<BlockPos, BlockState> trunkSetter, RandomSource random, int treeHeight, @NonNull BlockPos origin, @NonNull TreeConfiguration config) {
-        List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
-
-        int height = random.nextInt(heightRandA) + baseHeight;
+        int height = treeHeight;
+        var below = origin.below();
+        if (level.isOutsideBuildHeight(below)) return List.of();
+        var soil = level.getBlockState(below);
+        if (!(soil.is(BlockTags.DIRT) || soil.is(BlockTags.GRASS_BLOCKS)) || soil.hasBlockEntity()
+                || !soil.getFluidState().isEmpty() || !soil.isFaceSturdy(level, below, Direction.UP)) return List.of();
         boolean alternate = random.nextBoolean();
-
+        for (int x = -5; x <= 5; x++)
+            for (int z = -5; z <= 5; z++)
+                for (int y = 2; y < height; y++) {
+                    var pos = origin.offset(x, y, z);
+                    if (level.isOutsideBuildHeight(pos) || !level.getBlockState(pos).isAir()) return List.of();
+                }
+        var logs = new LinkedHashMap<BlockPos, Direction.Axis>();
+        var leaves = new LinkedHashSet<BlockPos>();
         for (int y = 0; y < height; y++) {
-            BlockPos posToPlace = origin.above(y);
-
-            placeLog(level, trunkSetter, random, posToPlace, config);
-
-            if (posToPlace.getY() == origin.getY() + height - 7 || posToPlace.getY() == origin.getY() + height - 10) {
-                alternate = alternatePlacingBranches(level, trunkSetter, random, config, alternate, posToPlace, list);
+            if (y < height - 1) logs.put(origin.above(y), Direction.Axis.Y);
+            if (y == height - 1) {
+                crown(leaves, origin.above(y));
+                leaves.add(origin.above(y + 1));
             }
-
-            if (posToPlace.getY() == origin.getY() + height - 4) {
-                alternate = alternatePlacingBranches(level, trunkSetter, random, config, alternate, posToPlace, list);
+            if (y == height - 10 || y == height - 7 || y == height - 4) {
+                var positive = alternate ? Direction.EAST : Direction.SOUTH;
+                for (var direction : new Direction[]{positive, positive.getOpposite()}) {
+                    var start = origin.above(y - random.nextInt(2)).relative(direction);
+                    logs.put(start, direction.getAxis());
+                    var tip = start.relative(direction).above();
+                    logs.put(tip, Direction.Axis.Y);
+                    crown(leaves, tip);
+                    leaves.add(tip.relative(direction, 2));
+                }
+                alternate = !alternate;
             }
         }
-
-        list.add(new FoliagePlacer.FoliageAttachment(origin.above(height), 0, false));
-
-        return list;
+        leaves.removeAll(logs.keySet());
+        var targets = new HashSet<>(logs.keySet());
+        targets.addAll(leaves);
+        for (var pos : targets) {
+            if (level.isOutsideBuildHeight(pos)) return List.of();
+            var state = level.getBlockState(pos);
+            if (!state.isAir() && !(pos.equals(origin) && state.is(BlockTags.SAPLINGS))) return List.of();
+        }
+        logs.forEach((pos, axis) -> trunkSetter.accept(pos, config.trunkProvider.getState(level, random, pos).setValue(BlockStateProperties.AXIS, axis)));
+        return leaves.stream().map(pos -> new FoliagePlacer.FoliageAttachment(pos, 0, false)).toList();
     }
 
-    private boolean alternatePlacingBranches(WorldGenLevel level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, TreeConfiguration config, boolean alternate, BlockPos posToPlace, List<FoliagePlacer.FoliageAttachment> list) {
-        if (alternate) {
-            createBranch(level, blockSetter, random, posToPlace.relative(Direction.Axis.X, 1), config, Direction.Axis.X, list, true);
-            createBranch(level, blockSetter, random, posToPlace.relative(Direction.Axis.X, -1), config, Direction.Axis.X, list, false);
-            alternate = false;
-        } else {
-            createBranch(level, blockSetter, random, posToPlace.relative(Direction.Axis.Z, 1), config, Direction.Axis.Z, list, true);
-            createBranch(level, blockSetter, random, posToPlace.relative(Direction.Axis.Z, -1), config, Direction.Axis.Z, list, false);
-            alternate = true;
-        }
-        return alternate;
-    }
-
-    private void createBranch(WorldGenLevel level, BiConsumer<BlockPos, BlockState> trunkSetter, RandomSource random, BlockPos pos, TreeConfiguration config, Direction.Axis axis, List<FoliagePlacer.FoliageAttachment> list, boolean positive) {
-        int y = 0;
-        for (int c = 0; c < 2; c++) {
-            if (c == 1) y++;
-
-            BlockPos place;
-
-            if (axis == Direction.Axis.X) {
-                place = pos.mutable().move(positive ? c : -c, y, 0);
-            } else {
-                place = pos.mutable().move(0, y, positive ? c : -c);
-            }
-
-            placeLog(
-                    level,
-                    trunkSetter,
-                    random,
-                    place,
-                    config,
-                    state -> state.setValue(BlockStateProperties.AXIS, axis)
-            );
-            if (y == 1) list.add(new FoliagePlacer.FoliageAttachment(place, 0, false));
-        }
+    @Override
+    public boolean isFree(WorldGenLevel level, BlockPos pos) {
+        return validTreePos(level, pos);
     }
 }

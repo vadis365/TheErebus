@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "erebus:water_striders"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "erebus:water_striders"
+      }
+    ]
+  }
+}

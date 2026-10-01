@@ -2,18 +2,25 @@
   "feature": "erebus:emerald_ore",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 3
+      "type": "erebus:ore_count",
+      "chance": 0.33,
+      "extra_max": 2,
+      "extra_min": 0,
+      "max": 2,
+      "min": 0
+    },
+    {
+      "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:height_range",
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 112
+          "above_bottom": 112
         },
         "min_inclusive": {
-          "absolute": 5
+          "above_bottom": 5
         }
       }
     },

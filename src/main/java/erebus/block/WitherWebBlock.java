@@ -15,20 +15,20 @@ import org.jspecify.annotations.NonNull;
 
 public class WitherWebBlock extends WebBlock {
 
-	public WitherWebBlock(Properties properties) {
-		super(properties);
-	}
+    public WitherWebBlock(Properties properties) {
+        super(properties);
+    }
 
-	@Override
-	protected void entityInside(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Entity entity, @NonNull InsideBlockEffectApplier effectApplier, boolean isPrecise) {
-		Vec3 vec3 = new Vec3(0.25, 0.05F, 0.25);
-		if (entity instanceof LivingEntity livingentity && livingentity.hasEffect(MobEffects.WEAVING))
-			vec3 = new Vec3(0.5, 0.25, 0.5);
+    @Override
+    protected void entityInside(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Entity entity, @NonNull InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+        Vec3 vec3 = new Vec3(0.25, 0.05F, 0.25);
+        if (entity instanceof LivingEntity livingentity && livingentity.hasEffect(MobEffects.WEAVING))
+            vec3 = new Vec3(0.5, 0.25, 0.5);
 
-		if (entity instanceof LivingEntity livingentity && !(livingentity instanceof BlackWidow))
-			livingentity.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0));
+        if (entity instanceof LivingEntity livingentity && !(livingentity instanceof BlackWidow))
+            livingentity.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 0));
 
-		entity.makeStuckInBlock(state, vec3);
-	}
+        entity.makeStuckInBlock(state, vec3);
+    }
 
 }

@@ -2,14 +2,11 @@ package erebus.events;
 
 import erebus.Erebus;
 import erebus.datagen.ModLang;
-import erebus.datagen.ModModelProvider;
 import erebus.datagen.ModRegistries;
 import erebus.datagen.advancement.AgricultureAdvancements;
 import erebus.datagen.advancement.ExplorationAdvancements;
 import erebus.datagen.advancement.PortalAdvancements;
-import erebus.datagen.providers.ModLootTableProvider;
-import erebus.datagen.providers.ModParticleDescriptionProvider;
-import erebus.datagen.providers.ModRecipeProvider;
+import erebus.datagen.providers.*;
 import erebus.datagen.tags.ModBiomeTagsData;
 import erebus.datagen.tags.ModBlockTagsData;
 import erebus.datagen.tags.ModEntityTypeTagsData;
@@ -27,10 +24,13 @@ public class GatherDataEventHandler {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent.Client event) {
         event.createProvider(ModModelProvider::new);
+        event.createProvider(ModEquipmentAssetProvider::new);
         event.createProvider(ModLang::new);
 
-        event.createProvider((output, lookupProvider) -> new AdvancementProvider(
-                output, lookupProvider,
+        var registries = event.createProvider(ModRegistries::new);
+        var lookup = registries.getRegistryProvider();
+        event.createProvider((output, _) -> new AdvancementProvider(
+                output, lookup,
                 List.of(
                         new AgricultureAdvancements(),
                         new ExplorationAdvancements(),
@@ -40,11 +40,10 @@ public class GatherDataEventHandler {
         event.createProvider(ModLootTableProvider::new);
         event.createProvider(ModRecipeProvider.Runner::new);
         event.createProvider(ModBlockTagsData::new);
-        var registries = event.createProvider(ModRegistries::new);
-        var lookup = registries.getRegistryProvider();
         event.createProvider((output, _) -> new ModBiomeTagsData(output, lookup));
         event.createProvider(ModEntityTypeTagsData::new);
         event.createProvider(ModItemTagsData::new);
+        event.createProvider(erebus.datagen.providers.ModDataMapProvider::new);
         event.createProvider(ModParticleDescriptionProvider::new);
     }
 

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "aluminum",
+  "ingredient": "erebus:ore_aluminum",
+  "result": {
+    "id": "erebus:ingot_aluminum"
+  }
+}

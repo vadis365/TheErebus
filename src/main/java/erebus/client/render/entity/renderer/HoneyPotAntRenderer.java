@@ -13,30 +13,30 @@ import org.jspecify.annotations.NonNull;
 
 public class HoneyPotAntRenderer extends MobRenderer<HoneyPotAnt, HoneyPotAntRenderState, HoneyPotAntModel> {
 
-	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/honey_pot_ant.png");
+    private static final Identifier TEXTURE = Erebus.prefix("textures/entity/honey_pot_ant.png");
 
-	public HoneyPotAntRenderer(EntityRendererProvider.Context context) {
-		super(context, new HoneyPotAntModel(context.bakeLayer(ModEntityRendering.HONEY_POT_ANT)), 0.5F);
-	}
+    public HoneyPotAntRenderer(EntityRendererProvider.Context context) {
+        super(context, new HoneyPotAntModel(context.bakeLayer(ModEntityRendering.HONEY_POT_ANT)), 0.5F);
+    }
 
-	@Override
-	public HoneyPotAntRenderState createRenderState() {
-		return new HoneyPotAntRenderState();
-	}
+    @Override
+    public HoneyPotAntRenderState createRenderState() {
+        return new HoneyPotAntRenderState();
+    }
 
-	@Override
-	public void extractRenderState(HoneyPotAnt entity, HoneyPotAntRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-		state.belly = entity.getHoneyBelly();
-	}
+    @Override
+    public void extractRenderState(HoneyPotAnt entity, HoneyPotAntRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+        state.belly = entity.getHoneyBelly();
+    }
 
-	@Override
-	protected void scale(HoneyPotAntRenderState state, PoseStack pose) {
-		pose.scale(0.5F, 0.5F, 0.5F);
-	}
+    @Override
+    protected void scale(HoneyPotAntRenderState state, PoseStack pose) {
+        pose.scale(0.5F, 0.5F, 0.5F);
+    }
 
-	@Override
-	public @NonNull Identifier getTextureLocation(HoneyPotAntRenderState state) {
-		return TEXTURE;
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(HoneyPotAntRenderState state) {
+        return TEXTURE;
+    }
 }

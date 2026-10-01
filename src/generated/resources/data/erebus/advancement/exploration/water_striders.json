@@ -1,0 +1,32 @@
+{
+  "parent": "erebus:exploration/water_repellent",
+  "criteria": {
+    "repellent": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:water_striders"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/water_striders.desc"
+    },
+    "icon": {
+      "id": "erebus:water_striders"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/water_striders.title"
+    }
+  },
+  "requirements": [
+    [
+      "repellent"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

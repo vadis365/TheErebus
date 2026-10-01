@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:hanging_web",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

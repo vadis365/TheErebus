@@ -23,20 +23,21 @@ public final class BambooExtenderSpecialRenderer implements NoDataSpecialModelRe
     private final BambooExtenderModel model;
     private final Identifier texture;
 
-    //private final Identifier TEXTURE = Erebus.prefix("textures/special/tiles/bamboo_extender.png");
-
     public BambooExtenderSpecialRenderer(BambooExtenderModel model, Identifier texture) {
         this.model = model;
         this.texture = texture;
     }
 
+    private static void applyPose(PoseStack pose) {
+        pose.translate(0.5D, 1.5D, 0.5D);
+        pose.scale(-1, -1, 1);
+        pose.mulPose(Axis.YN.rotationDegrees(90));
+    }
+
     @Override
     public void submit(PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
         pose.pushPose();
-        pose.translate(0.5D, 1.5D, 0.5D);
-        pose.scale(-1, -1, 1);
-        pose.scale(1F, 1F, 1F);
-        pose.rotateAround(Axis.YN.rotationDegrees(90), 0, 1, 0);
+        applyPose(pose);
         submit.submitModel(
                 model,
                 new BambooExtenderBlockEntityRenderState(),
@@ -44,6 +45,8 @@ public final class BambooExtenderSpecialRenderer implements NoDataSpecialModelRe
                 RenderTypes.entitySolid(texture),
                 light,
                 overlay,
+                -1,
+                null,
                 outlineColor,
                 null
         );
@@ -54,10 +57,11 @@ public final class BambooExtenderSpecialRenderer implements NoDataSpecialModelRe
     public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
         PoseStack poseStack = new PoseStack();
         model.setupAnim(new BambooExtenderBlockEntityRenderState());
+        applyPose(poseStack);
         model.root().getExtentsForGui(poseStack, consumer);
     }
 
-    public record Unbaked(Identifier texture) implements SpecialModelRenderer.Unbaked {
+    public record Unbaked(Identifier texture) implements NoDataSpecialModelRenderer.Unbaked {
 
         public static final MapCodec<BambooExtenderSpecialRenderer.Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
                 i -> i.group(
@@ -66,7 +70,7 @@ public final class BambooExtenderSpecialRenderer implements NoDataSpecialModelRe
         );
 
         @Override
-        public @Nullable SpecialModelRenderer<?> bake(BakingContext bakingContext) {
+        public @Nullable SpecialModelRenderer<Void> bake(BakingContext bakingContext) {
             return new BambooExtenderSpecialRenderer(
                     new BambooExtenderModel(
                             bakingContext
@@ -78,7 +82,7 @@ public final class BambooExtenderSpecialRenderer implements NoDataSpecialModelRe
         }
 
         @Override
-        public @NonNull MapCodec<? extends SpecialModelRenderer.Unbaked> type() {
+        public @NonNull MapCodec<Unbaked> type() {
             return MAP_CODEC;
         }
     }

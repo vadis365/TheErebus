@@ -1,0 +1,109 @@
+{
+  "values": {
+    "erebus:bamboo_bridge": {
+      "burn_time": 300
+    },
+    "erebus:bamboo_crate": {
+      "burn_time": 300
+    },
+    "erebus:bamboo_extender": {
+      "burn_time": 300
+    },
+    "erebus:bamboo_nerd_pole": {
+      "burn_time": 300
+    },
+    "erebus:bamboo_pipe": {
+      "burn_time": 300
+    },
+    "erebus:bamboo_pipe_extract": {
+      "burn_time": 300
+    },
+    "erebus:bamboo_torch": {
+      "burn_time": 300
+    },
+    "erebus:chest_asper": {
+      "burn_time": 300
+    },
+    "erebus:chest_balsam": {
+      "burn_time": 300
+    },
+    "erebus:chest_bamboo": {
+      "burn_time": 300
+    },
+    "erebus:chest_baobab": {
+      "burn_time": 300
+    },
+    "erebus:chest_cypress": {
+      "burn_time": 300
+    },
+    "erebus:chest_eucalyptus": {
+      "burn_time": 300
+    },
+    "erebus:chest_mahogany": {
+      "burn_time": 300
+    },
+    "erebus:chest_marshwood": {
+      "burn_time": 300
+    },
+    "erebus:chest_mossbark": {
+      "burn_time": 300
+    },
+    "erebus:chest_rotten": {
+      "burn_time": 300
+    },
+    "erebus:chest_scorched": {
+      "burn_time": 300
+    },
+    "erebus:chest_varnished": {
+      "burn_time": 300
+    },
+    "erebus:chest_white": {
+      "burn_time": 300
+    },
+    "erebus:dark_capped_mushroom_block": {
+      "burn_time": 300
+    },
+    "erebus:dark_capped_mushroom_stem": {
+      "burn_time": 300
+    },
+    "erebus:dutch_cap_mushroom_block": {
+      "burn_time": 300
+    },
+    "erebus:dutch_cap_mushroom_stem": {
+      "burn_time": 300
+    },
+    "erebus:giant_lily_pad": {
+      "burn_time": 300
+    },
+    "erebus:glowshroom_stalk": {
+      "burn_time": 300
+    },
+    "erebus:grandmas_shoes_mushroom_block": {
+      "burn_time": 300
+    },
+    "erebus:grandmas_shoes_mushroom_stem": {
+      "burn_time": 300
+    },
+    "erebus:kaizers_fingers_mushroom_block": {
+      "burn_time": 300
+    },
+    "erebus:kaizers_fingers_mushroom_stem": {
+      "burn_time": 300
+    },
+    "erebus:log_hollow": {
+      "burn_time": 300
+    },
+    "erebus:sarcastic_czech_mushroom_block": {
+      "burn_time": 300
+    },
+    "erebus:sarcastic_czech_mushroom_stem": {
+      "burn_time": 300
+    },
+    "erebus:silo_roof": {
+      "burn_time": 300
+    },
+    "erebus:silo_supports": {
+      "burn_time": 300
+    }
+  }
+}

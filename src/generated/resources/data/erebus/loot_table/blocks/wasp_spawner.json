@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "erebus:wasp_spawner"
+          "name": "erebus:wasp_sword"
         }
       ],
       "rolls": 1.0

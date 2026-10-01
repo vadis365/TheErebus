@@ -2,7 +2,6 @@ package erebus.network.client;
 
 import erebus.Erebus;
 import erebus.block.entity.LightningAltarBlockEntity;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -17,52 +16,52 @@ import org.joml.Vector3f;
 
 public record LightningAltarRenderPacket(int xPos, int yPos, int zPos, Vector3f targetVector) implements CustomPacketPayload {
 
-	public static final Type<LightningAltarRenderPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(Erebus.MODID, "altar_lightning_render"));
-	public static final StreamCodec<RegistryFriendlyByteBuf, LightningAltarRenderPacket> STREAM_CODEC = StreamCodec.of(
-			(buf, packet) -> {
-				buf.writeInt(packet.xPos());
-				buf.writeInt(packet.yPos());
-				buf.writeInt(packet.zPos());
-				ByteBufCodecs.VECTOR3F.encode(buf, packet.targetVector());
-			},
-			buf -> new LightningAltarRenderPacket(
-					buf.readInt(),
-					buf.readInt(),
-					buf.readInt(),
-					new Vector3f(ByteBufCodecs.VECTOR3F.decode(buf))
-			)
-	);
+    public static final Type<LightningAltarRenderPacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(Erebus.MODID, "altar_lightning_render"));
+    public static final StreamCodec<RegistryFriendlyByteBuf, LightningAltarRenderPacket> STREAM_CODEC = StreamCodec.of(
+            (buf, packet) -> {
+                buf.writeInt(packet.xPos());
+                buf.writeInt(packet.yPos());
+                buf.writeInt(packet.zPos());
+                ByteBufCodecs.VECTOR3F.encode(buf, packet.targetVector());
+            },
+            buf -> new LightningAltarRenderPacket(
+                    buf.readInt(),
+                    buf.readInt(),
+                    buf.readInt(),
+                    new Vector3f(ByteBufCodecs.VECTOR3F.decode(buf))
+            )
+    );
 
 
-	public static void handle(LightningAltarRenderPacket message, final IPayloadContext ctx) {
-		ctx.enqueueWork(() -> {
-			Level level = Minecraft.getInstance().level;
-			if (level == null) {
-				return;
-			}
-			BlockEntity tile = level.getBlockEntity(new BlockPos(message.xPos, message.yPos, message.zPos));
-			if (tile instanceof LightningAltarBlockEntity altar) {
-				//TODO THIS IS TEMPORARY UNTIL NEW RENDER IS MADE
-				// altar.targetVector = message.targetVector;
-				for (int particles = 0; particles < 40; particles++) {
-					float offsetLen = level.getRandom().nextFloat();
-					Vector3f offset = new Vector3f(
-							message.targetVector.x * offsetLen + level.getRandom().nextFloat() * 0.2f - 0.1f,
-							message.targetVector.y * offsetLen + level.getRandom().nextFloat() * 0.2f - 0.1f,
-							message.targetVector.z * offsetLen + level.getRandom().nextFloat() * 0.2f - 0.1f);
+    public static void handle(LightningAltarRenderPacket message, final IPayloadContext ctx) {
+        ctx.enqueueWork(() -> {
+            Level level = ctx.player().level();
+            if (level == null) {
+                return;
+            }
+            BlockEntity tile = level.getBlockEntity(new BlockPos(message.xPos, message.yPos, message.zPos));
+            if (tile instanceof LightningAltarBlockEntity altar) {
+                //TODO THIS IS TEMPORARY UNTIL NEW RENDER IS MADE
+                // altar.targetVector = message.targetVector;
+                for (int particles = 0; particles < 40; particles++) {
+                    float offsetLen = level.getRandom().nextFloat();
+                    Vector3f offset = new Vector3f(
+                            message.targetVector.x * offsetLen + level.getRandom().nextFloat() * 0.2f - 0.1f,
+                            message.targetVector.y * offsetLen + level.getRandom().nextFloat() * 0.2f - 0.1f,
+                            message.targetVector.z * offsetLen + level.getRandom().nextFloat() * 0.2f - 0.1f);
 
-					float vx = (level.getRandom().nextFloat() * 0.5f - 0.25f) * 0.00125f;
-					float vy = (level.getRandom().nextFloat() * 0.5f - 0.25f) * 0.00125f;
-					float vz = (level.getRandom().nextFloat() * 0.5f - 0.25f) * 0.00125f;
-					level.addParticle(ParticleTypes.ELECTRIC_SPARK, false, true, message.xPos + 0.5D + offset.x, message.yPos + 1.6D + offset.y, message.zPos + 0.5D + offset.z, vx, vy, vz);
-				}
-			}
-		});
-	}
+                    float vx = (level.getRandom().nextFloat() * 0.5f - 0.25f) * 0.00125f;
+                    float vy = (level.getRandom().nextFloat() * 0.5f - 0.25f) * 0.00125f;
+                    float vz = (level.getRandom().nextFloat() * 0.5f - 0.25f) * 0.00125f;
+                    level.addParticle(ParticleTypes.ELECTRIC_SPARK, false, true, message.xPos + 0.5D + offset.x, message.yPos + 1.6D + offset.y, message.zPos + 0.5D + offset.z, vx, vy, vz);
+                }
+            }
+        });
+    }
 
-	@Override
-	public Type<? extends CustomPacketPayload> type() {
-		return TYPE;
-	}
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
+    }
 
 }

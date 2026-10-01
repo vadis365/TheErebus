@@ -1,0 +1,45 @@
+{
+  "parent": "erebus:exploration/repellent",
+  "criteria": {
+    "hydrofuge": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:hydrofuge"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "water_repellent": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:water_repellent"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/water_repellent.desc"
+    },
+    "icon": {
+      "id": "erebus:water_repellent"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/water_repellent.title"
+    }
+  },
+  "requirements": [
+    [
+      "hydrofuge"
+    ],
+    [
+      "water_repellent"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

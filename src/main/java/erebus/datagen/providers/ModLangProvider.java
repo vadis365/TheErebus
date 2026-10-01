@@ -27,8 +27,8 @@ import java.util.function.Supplier;
 
 public abstract class ModLangProvider extends LanguageProvider {
 
-    private final PackOutput output;
     public final Map<String, String> upsideDownEntries = new HashMap<>();
+    private final PackOutput output;
 
     public ModLangProvider(PackOutput output) {
         super(output, Erebus.MODID, "en_us");
@@ -46,7 +46,7 @@ public abstract class ModLangProvider extends LanguageProvider {
         add(entity.get().getDescriptionId(), name);
         add("item.erebus.%s_spawn_egg".formatted(entity.get().getDescriptionId().replaceFirst("entity.erebus.", "")), "%s Spawn Egg".formatted(name));
     }
-    
+
     protected void addEntityNoEgg(Supplier<? extends EntityType<?>> entity, String name) {
         add(entity.get().getDescriptionId(), name);
     }

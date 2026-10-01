@@ -13,28 +13,22 @@ import org.jspecify.annotations.NonNull;
 
 public class BedBugRenderer extends MobRenderer<BedBug, BedBugRenderState, BedBugModel> {
 
-	public BedBugRenderer(EntityRendererProvider.Context context) {
-		super(context, new BedBugModel(context.bakeLayer(ModEntityRendering.BED_BUG)), 0.5F);
-		this.model = new BedBugModel(context.bakeLayer(ModEntityRendering.BED_BUG));
-	}
+    public BedBugRenderer(EntityRendererProvider.Context context) {
+        super(context, new BedBugModel(context.bakeLayer(ModEntityRendering.BED_BUG)), 0.5F);
+    }
 
-	@Override
-	public BedBugRenderState createRenderState() {
-		return new BedBugRenderState();
-	}
+    @Override
+    public BedBugRenderState createRenderState() {
+        return new BedBugRenderState();
+    }
 
-	@Override
-	public void extractRenderState(BedBug entity, BedBugRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-	}
+    @Override
+    protected void scale(BedBugRenderState state, PoseStack pose) {
+        pose.scale(0.5F, 0.5F, 0.5F);
+    }
 
-	@Override
-	protected void scale(BedBugRenderState state, PoseStack pose) {
-		pose.scale(0.5F, 0.5F, 0.5F);
-	}
-
-	@Override
-	public @NonNull Identifier getTextureLocation(BedBugRenderState state) {
-		return Erebus.prefix("textures/entity/bed_bug.png");
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(BedBugRenderState state) {
+        return Erebus.prefix("textures/entity/bed_bug.png");
+    }
 }

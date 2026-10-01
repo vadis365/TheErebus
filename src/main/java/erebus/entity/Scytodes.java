@@ -18,10 +18,7 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -48,61 +45,71 @@ import javax.annotation.Nullable;
 
 public class Scytodes extends Monster {
 
-	private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(Scytodes.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Byte> CLIMBING = SynchedEntityData.defineId(Scytodes.class, EntityDataSerializers.BYTE);
+    private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(Scytodes.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Byte> CLIMBING = SynchedEntityData.defineId(Scytodes.class, EntityDataSerializers.BYTE);
 
-	public Scytodes(EntityType<? extends Scytodes> type, Level level) { 
-		super(type, level);
-	}
+    public Scytodes(EntityType<? extends Scytodes> type, Level level) {
+        super(type, level);
+    }
 
-	@Override
-	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
-		super.defineSynchedData(builder);
-		builder.define(SKIN_TYPE, 0);
-		builder.define(CLIMBING, (byte)0);
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 25D)
+                .add(Attributes.FOLLOW_RANGE, 32D)
+                .add(Attributes.MOVEMENT_SPEED, 0.6D)
+                .add(Attributes.ATTACK_DAMAGE, 4D);
+    }
 
-	@Override
-	protected void registerGoals() {
-		goalSelector.addGoal(0, new FloatGoal(this));
-		goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.9D, Blocks.COBWEB.defaultBlockState()));
-		goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0.4F));
-		goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.6D, true));
-		goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.6D));
-		goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8.0F));
-		goalSelector.addGoal(6,  new RandomLookAroundGoal(this));
-		targetSelector.addGoal(0, new HurtByTargetGoal(this));
-		targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
-		targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Villager.class, true, true));
-	}
+    public static boolean canSpawnHere(EntityType<Scytodes> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
+        float light = level.getLightLevelDependentMagicValue(pos);
+        return light >= 0F;
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes()
-				.add(Attributes.MAX_HEALTH, 25D)
-				.add(Attributes.FOLLOW_RANGE, 32D)
-				.add(Attributes.MOVEMENT_SPEED, 0.6D)
-				.add(Attributes.ATTACK_DAMAGE, 4D);
-	}
+    @Override
+    protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(SKIN_TYPE, random.nextInt(4));
+        builder.define(CLIMBING, (byte) 0);
+    }
+
+    @Override
+    protected void registerGoals() {
+        goalSelector.addGoal(0, new FloatGoal(this));
+        goalSelector.addGoal(1, new ThrowWebAttackGoal(this, 0.6D, Blocks.COBWEB.defaultBlockState()));
+        goalSelector.addGoal(2, new LeapAtTargetGoal(this, 0.4F));
+        goalSelector.addGoal(3, new MeleeAttackGoal(this, 0.5D, true));
+        goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.5D));
+        goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        targetSelector.addGoal(0, new HurtByTargetGoal(this));
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Villager.class, true, true));
+    }
 
     @Override
     protected @NonNull PathNavigation createNavigation(@NonNull Level level) {
         return new WallClimberNavigation(this, level);
     }
 
-	public static boolean canSpawnHere(EntityType<Scytodes> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
-		float light = level.getLightLevelDependentMagicValue(pos);
-		return light >= 0F;
-	}
-	
-	@Override
-	public boolean checkSpawnObstruction(LevelReader world) {
-		return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
-	}
+    @Override
+    public boolean checkSpawnObstruction(LevelReader world) {
+        return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
+    }
 
-	@Override
-	public int getMaxSpawnClusterSize() {
-		return 3;
-	}
+    @Override
+    public boolean checkSpawnRules(LevelAccessor level, EntitySpawnReason reason) {
+        return true;
+    }
+
+    @Override
+    public boolean isWithinMeleeAttackRange(LivingEntity target) {
+        return distanceToSqr(target) < 4.0D + target.getBbWidth();
+    }
+
+    @Override
+    public int getMaxSpawnClusterSize() {
+        return 4;
+    }
 
     @Override
     public void tick() {
@@ -111,10 +118,10 @@ public class Scytodes extends Monster {
             setClimbing(horizontalCollision);
     }
 
-	@Override
-	public boolean causeFallDamage(double fallDistance, float damageModifier, @NonNull DamageSource damageSource) {
-		return false;
-	}
+    @Override
+    public boolean causeFallDamage(double fallDistance, float damageModifier, @NonNull DamageSource damageSource) {
+        return false;
+    }
 
     @Override
     public void makeStuckInBlock(BlockState state, @NonNull Vec3 motionMultiplier) {
@@ -126,7 +133,7 @@ public class Scytodes extends Monster {
     public boolean onClimbable() {
         return isClimbing();
     }
-	
+
     public boolean isClimbing() {
         return (entityData.get(CLIMBING) & 1) != 0;
     }
@@ -134,24 +141,24 @@ public class Scytodes extends Monster {
     public void setClimbing(boolean climbing) {
         byte climingState = entityData.get(CLIMBING);
         if (climbing)
-            climingState = (byte)(climingState | 1);
-        else 
-        	climingState = (byte)(climingState & -2);
-       entityData.set(CLIMBING, climingState);
+            climingState = (byte) (climingState | 1);
+        else
+            climingState = (byte) (climingState & -2);
+        entityData.set(CLIMBING, climingState);
     }
 
     @Override
     public boolean canBeAffected(MobEffectInstance potionEffect) {
-		 return (!potionEffect.is(MobEffects.POISON) && !potionEffect.is(MobEffects.WITHER) && super.canBeAffected(potionEffect));
-	}
+        return (!potionEffect.is(MobEffects.POISON) && !potionEffect.is(MobEffects.WITHER) && super.canBeAffected(potionEffect));
+    }
 
-	@Override
-	public boolean hurtServer(@NonNull ServerLevel level, DamageSource source, float damage) {
-		if (source.is(DamageTypes.IN_WALL)) {
-			return false;
-		}
-		return super.hurtServer(level, source, damage);
-	}
+    @Override
+    public boolean hurtServer(@NonNull ServerLevel level, DamageSource source, float damage) {
+        if (source.is(DamageTypes.IN_WALL)) {
+            return false;
+        }
+        return super.hurtServer(level, source, damage);
+    }
 
     @Override
     protected SoundEvent getAmbientSound() {
@@ -173,64 +180,65 @@ public class Scytodes extends Monster {
         playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
 
-	@Nullable
-	@Override
-	public SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
-		spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
-		RandomSource randomsource = level.getRandom();
-		setSkin(level.getRandom().nextInt(4));
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+        spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
+        RandomSource randomsource = level.getRandom();
+        setSkin(level.getRandom().nextInt(4));
 
-		if (randomsource.nextInt(100) == 0) {
-			MoneySpider moneyspider = ModEntities.MONEY_SPIDER.get().create((Level) level, EntitySpawnReason.NATURAL);
-			if (moneyspider != null) {
-				moneyspider.moveTowardsClosestSpace(getX(), getY(), getZ());
-				moneyspider.finalizeSpawn(level, difficulty, spawnType, null);
-				moneyspider.startRiding(this);
-			}
-		}
+        if (randomsource.nextInt(100) == 0) {
+            MoneySpider moneyspider = ModEntities.MONEY_SPIDER.get().create(level(), EntitySpawnReason.JOCKEY);
+            if (moneyspider != null) {
+                moneyspider.snapTo(getX(), getY(), getZ(), getYRot(), 0);
+                moneyspider.finalizeSpawn(level, difficulty, spawnType, null);
+                moneyspider.startRiding(this);
+            }
+        }
 
-		if (spawnGroupData == null)
-			spawnGroupData = new Spider.SpiderEffectsGroupData();
-			if (level.getDifficulty() == Difficulty.HARD && randomsource.nextFloat() < 0.1F * difficulty.getSpecialMultiplier())
-				((Spider.SpiderEffectsGroupData) spawnGroupData).setRandomEffect(randomsource);
+        if (spawnGroupData == null) {
+            spawnGroupData = new Spider.SpiderEffectsGroupData();
+            if (level.getDifficulty() == Difficulty.HARD && randomsource.nextFloat() < 0.1F * difficulty.getSpecialMultiplier())
+                ((Spider.SpiderEffectsGroupData) spawnGroupData).setRandomEffect(randomsource);
+        }
 
-		if (spawnGroupData instanceof Spider.SpiderEffectsGroupData spider$spidereffectsgroupdata) {
-			Holder<MobEffect> holder = spider$spidereffectsgroupdata.effect;
-			if (holder != null)
-				this.addEffect(new MobEffectInstance(holder, -1));
-		}
+        if (spawnGroupData instanceof Spider.SpiderEffectsGroupData spider$spidereffectsgroupdata) {
+            Holder<MobEffect> holder = spider$spidereffectsgroupdata.effect;
+            if (holder != null)
+                this.addEffect(new MobEffectInstance(holder, -1));
+        }
 
-		return spawnGroupData;
-	}
+        return spawnGroupData;
+    }
 
-	@Override
-	public void positionRider(@NonNull Entity entity, Entity.@NonNull MoveFunction moveFunction) {
-		super.positionRider(entity, moveFunction);
-		if (entity instanceof MoneySpider) {
-			double a = Math.toRadians(yBodyRot);
-			double offSetX = -Math.sin(a) * 0.35D;
-			double offSetZ = Math.cos(a) * 0.35D;
-			entity.setPos(getX() - offSetX, getY() + getBbHeight() - 0.2F, getZ() - offSetZ);
-		}
-	}
+    @Override
+    public void positionRider(@NonNull Entity entity, Entity.@NonNull MoveFunction moveFunction) {
+        super.positionRider(entity, moveFunction);
+        if (entity instanceof MoneySpider) {
+            double a = Math.toRadians(yBodyRot);
+            double offSetX = -Math.sin(a) * 0.35D;
+            double offSetZ = Math.cos(a) * 0.35D;
+            entity.setPos(getX() - offSetX, getY() + getBbHeight() - 0.2F, getZ() - offSetZ);
+        }
+    }
 
-	public void setSkin(int skinType) {
-		entityData.set(SKIN_TYPE, skinType);
-	}
+    public int getSkin() {
+        return entityData.get(SKIN_TYPE);
+    }
 
-	public int getSkin() {
-		return entityData.get(SKIN_TYPE);
-	}
+    public void setSkin(int skinType) {
+        entityData.set(SKIN_TYPE, Math.clamp(skinType, 0, 3));
+    }
 
-	@Override
-	  public void addAdditionalSaveData(ValueOutput output) {
-		super.addAdditionalSaveData(output);
-		output.putInt("skin", getSkin());
-	}
+    @Override
+    public void addAdditionalSaveData(ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putInt("skin", getSkin());
+    }
 
-	@Override
-	public void readAdditionalSaveData(ValueInput input) {
-		super.readAdditionalSaveData(input);
-		setSkin(input.getIntOr("skin", 0));
-	}
+    @Override
+    public void readAdditionalSaveData(ValueInput input) {
+        super.readAdditionalSaveData(input);
+        setSkin(input.getIntOr("skin", getSkin()));
+    }
 }

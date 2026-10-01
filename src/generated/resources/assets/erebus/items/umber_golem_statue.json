@@ -1,6 +1,9 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/umber_golem_statue"
+    "type": "minecraft:special",
+    "base": "erebus:item/umber_golem_statue",
+    "model": {
+      "type": "erebus:umber_golem_statue_special"
+    }
   }
 }

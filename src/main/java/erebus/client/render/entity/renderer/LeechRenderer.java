@@ -13,37 +13,37 @@ import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
 public class LeechRenderer extends MobRenderer<Leech, LeechRenderState, LeechModel> {
-	public static final Identifier TEXTURE = Erebus.prefix("textures/entity/leech.png");
+    public static final Identifier TEXTURE = Erebus.prefix("textures/entity/leech.png");
 
-	public LeechRenderer(EntityRendererProvider.Context context) {
+    public LeechRenderer(EntityRendererProvider.Context context) {
         super(context, new LeechModel(context.bakeLayer(ModEntityRendering.LEECH)), 0.5F);
     }
 
-	@Override
-	public @NonNull LeechRenderState createRenderState() {
-		return new LeechRenderState();
-	}
+    @Override
+    public @NonNull LeechRenderState createRenderState() {
+        return new LeechRenderState();
+    }
 
-	@Override
-	public void extractRenderState(@NonNull Leech entity, @NonNull LeechRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-		state.isFeeding = entity.isFeeding();
-		state.bloodConsumed = entity.getBloodConsumed();
-	}
+    @Override
+    public void extractRenderState(@NonNull Leech entity, @NonNull LeechRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+        state.isFeeding = entity.isFeeding();
+        state.bloodConsumed = entity.getBloodConsumed();
+    }
 
-	@Override
-	protected void scale(@NonNull LeechRenderState state, PoseStack pose) {
-		if(state.isFeeding) {
-			pose.rotateAround(Axis.YP.rotationDegrees(180F), 0, 1, 0);
-			pose.translate(0, 0, 0.5F);
-		} else {
-			float scale = 1 + state.bloodConsumed * 0.1F;
-			pose.scale(scale, scale, 1F);
-		}
-	}
+    @Override
+    protected void scale(@NonNull LeechRenderState state, PoseStack pose) {
+        if (state.isFeeding) {
+            pose.rotateAround(Axis.YP.rotationDegrees(180F), 0, 1, 0);
+            pose.translate(0, 0, 0.5F);
+        } else {
+            float scale = 1 + state.bloodConsumed * 0.1F;
+            pose.scale(scale, scale, 1F);
+        }
+    }
 
-	@Override
-	public @NonNull Identifier getTextureLocation(@NonNull LeechRenderState state) {
-		return TEXTURE;
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(@NonNull LeechRenderState state) {
+        return TEXTURE;
+    }
 }

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "F": "#minecraft:fences",
+    "F": "#minecraft:wooden_fences",
     "S": "#minecraft:wooden_slabs"
   },
   "pattern": [

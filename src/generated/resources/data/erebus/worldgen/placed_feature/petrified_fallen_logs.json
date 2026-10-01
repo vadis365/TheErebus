@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:petrified_fallen_logs",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

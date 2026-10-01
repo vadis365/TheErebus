@@ -10,6 +10,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModStructurePieces {
     public static final DeferredRegister<StructurePieceType> STRUCTURE_PIECES = DeferredRegister.create(Registries.STRUCTURE_PIECE, Erebus.MODID);
 
+    public static final DeferredHolder<StructurePieceType, StructurePieceType> ANTLION_DUNGEON = register("antlion_dungeon", AntlionDungeonPiece::new);
     public static final DeferredHolder<StructurePieceType, StructurePieceType> ANTLION_LAIR = register("antlion_lair", AntlionLairPiece::new);
     public static final DeferredHolder<StructurePieceType, StructurePieceType> DRAGONFLY_DUNGEON = register("dragonfly_dungeon", DragonflyDungeonPiece::new);
     public static final DeferredHolder<StructurePieceType, StructurePieceType> DUNG_PILE = register("dung_pile", DungPilePiece::new);

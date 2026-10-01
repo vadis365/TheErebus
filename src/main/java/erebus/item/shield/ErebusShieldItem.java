@@ -3,7 +3,11 @@ package erebus.item.shield;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import org.jspecify.annotations.NonNull;
+
+import java.util.function.Consumer;
 
 public class ErebusShieldItem extends ShieldItem {
 
@@ -14,16 +18,9 @@ public class ErebusShieldItem extends ShieldItem {
         this.shieldType = shieldType;
     }
 
-    public IShieldType getShieldType() {
-        return shieldType;
-    }
-
     @Override
-    public @NonNull Component getHighlightTip(ItemStack stack, @NonNull Component displayName) {
-        ErebusShieldItem shield = (ErebusShieldItem) stack.getItem();
-        return Component
-                .translatable("tooltip.erebus.shield.damage")
-                .append("%d/%d".formatted(stack.getDamageValue(), stack.getMaxDamage()))
-                .append("tooltip.erebus.shield.repair").append(shield.getShieldType().getRepairItem().getItemName());
+    public void appendHoverText(ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay display, Consumer<Component> lines, @NonNull TooltipFlag flag) {
+        lines.accept(Component.translatable("tooltip.erebus.shield.damage").append("%d/%d".formatted(stack.getDamageValue(), stack.getMaxDamage())));
+        lines.accept(Component.translatable("tooltip.erebus.shield.repair").append(shieldType.getRepairItem().getHoverName()));
     }
 }

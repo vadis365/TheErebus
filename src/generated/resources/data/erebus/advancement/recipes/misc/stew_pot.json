@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cauldron": {
+    "has_bucket": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:cauldron"
+            "items": "minecraft:bucket"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cauldron"
+      "has_bucket"
     ]
   ],
   "rewards": {

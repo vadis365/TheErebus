@@ -2,18 +2,25 @@
   "feature": "erebus:aluminum_ore",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 2
+      "type": "erebus:ore_count",
+      "chance": 1.0,
+      "extra_max": 3,
+      "extra_min": 2,
+      "max": 3,
+      "min": 2
+    },
+    {
+      "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:height_range",
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 112
+          "above_bottom": 112
         },
         "min_inclusive": {
-          "absolute": 5
+          "above_bottom": 5
         }
       }
     },

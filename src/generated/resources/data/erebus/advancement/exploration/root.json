@@ -2,14 +2,23 @@
   "criteria": {
     "enter_dimension": {
       "conditions": {
-        "from": "minecraft:overworld",
-        "to": "erebus:erebus"
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "dimension": "erebus:erebus"
+              }
+            }
+          }
+        ]
       },
-      "trigger": "minecraft:changed_dimension"
+      "trigger": "minecraft:location"
     }
   },
   "display": {
-    "background": "erebus:textures/block/umberstone.png",
+    "background": "erebus:block/umberstone",
     "description": {
       "translate": "advancement.erebus.exploration/root.desc"
     },

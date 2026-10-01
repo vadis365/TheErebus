@@ -2,7 +2,7 @@ package erebus.block.bamboo;
 
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.BambooPipeExtractBlockEntity;
-import erebus.registries.blocks.ModBlocks;
+import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -30,12 +30,13 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.capabilities.Capabilities;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class BambooPipeExtract extends DirectionalBlock implements EntityBlock {
-	public static final MapCodec<BambooPipeExtract> CODEC = simpleCodec(BambooPipeExtract::new);
+    public static final MapCodec<BambooPipeExtract> CODEC = simpleCodec(BambooPipeExtract::new);
     public static final BooleanProperty CONNECTED_DOWN = BooleanProperty.create("connected_down");
     public static final BooleanProperty CONNECTED_UP = BooleanProperty.create("connected_up");
     public static final BooleanProperty CONNECTED_NORTH = BooleanProperty.create("connected_north");
@@ -44,125 +45,125 @@ public class BambooPipeExtract extends DirectionalBlock implements EntityBlock {
     public static final BooleanProperty CONNECTED_EAST = BooleanProperty.create("connected_east");
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
-	public BambooPipeExtract(Properties properties) {
-		super(properties);
-		registerDefaultState(this.stateDefinition.any().setValue(CONNECTED_DOWN, Boolean.FALSE).setValue(CONNECTED_EAST, Boolean.FALSE).setValue(CONNECTED_NORTH, Boolean.FALSE).setValue(CONNECTED_SOUTH, Boolean.FALSE).setValue(CONNECTED_UP, Boolean.FALSE).setValue(CONNECTED_WEST, Boolean.FALSE).setValue(ACTIVE, Boolean.FALSE));
-	}
-	
-	@Override
-	protected MapCodec<BambooPipeExtract> codec() {
-		return CODEC;
-	}
+    public BambooPipeExtract(Properties properties) {
+        super(properties);
+        registerDefaultState(this.stateDefinition.any().setValue(CONNECTED_DOWN, Boolean.FALSE).setValue(CONNECTED_EAST, Boolean.FALSE).setValue(CONNECTED_NORTH, Boolean.FALSE).setValue(CONNECTED_SOUTH, Boolean.FALSE).setValue(CONNECTED_UP, Boolean.FALSE).setValue(CONNECTED_WEST, Boolean.FALSE).setValue(ACTIVE, Boolean.FALSE));
+    }
 
-	@Nullable
-	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide() ? null : BambooPipeExtractBlockEntity::serverTick;
-	}
+    @Override
+    protected MapCodec<BambooPipeExtract> codec() {
+        return CODEC;
+    }
 
-	//TODO: This will have to be part of the item
-	/*@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-		tooltipComponents.add(Component.translatable("tooltip.erebus.bamboo_pipe_extract").withStyle(ChatFormatting.YELLOW));
-	}*/
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
+        return pLevel.isClientSide() ? null : BambooPipeExtractBlockEntity::serverTick;
+    }
 
-	@Nonnull
-	@Override
-	public RenderShape getRenderShape(@Nonnull BlockState state) {
-		return RenderShape.MODEL;
-	}
+    @Nonnull
+    @Override
+    public RenderShape getRenderShape(@Nonnull BlockState state) {
+        return RenderShape.MODEL;
+    }
 
     @Override
     protected boolean skipRendering(BlockState state, BlockState adjacentState, Direction direction) {
         return adjacentState.is(this) || super.skipRendering(state, adjacentState, direction);
     }
 
-	@Nonnull
-	@Override
-	public VoxelShape getShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
-		float minX = 5F, minY = 5F, minZ = 5F;
-		float maxX = 11F, maxY = 11F, maxZ = 11F;
-		if (state.getValue(FACING) == Direction.UP) maxY = 16.0F;
-		if (state.getValue(FACING) == Direction.DOWN) minY = 0.0F;
-		if (state.getValue(FACING) == Direction.SOUTH) maxZ = 16.0F;
-		if (state.getValue(FACING) == Direction.NORTH) minZ = 0.0F;
-		if (state.getValue(FACING) == Direction.WEST) minX = 0.0F;
-		if (state.getValue(FACING) == Direction.EAST) maxX = 16.0F;
+    @Nonnull
+    @Override
+    public VoxelShape getShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+        float minX = 5F, minY = 5F, minZ = 5F;
+        float maxX = 11F, maxY = 11F, maxZ = 11F;
+        if (state.getValue(FACING) == Direction.UP) maxY = 16.0F;
+        if (state.getValue(FACING) == Direction.DOWN) minY = 0.0F;
+        if (state.getValue(FACING) == Direction.SOUTH) maxZ = 16.0F;
+        if (state.getValue(FACING) == Direction.NORTH) minZ = 0.0F;
+        if (state.getValue(FACING) == Direction.WEST) minX = 0.0F;
+        if (state.getValue(FACING) == Direction.EAST) maxX = 16.0F;
 
-		if (state.getValue(CONNECTED_UP)) maxY = 16.0F;
-		if (state.getValue(CONNECTED_DOWN)) minY = 0.0F;
-		if (state.getValue(CONNECTED_SOUTH)) maxZ = 16.0F;
-		if (state.getValue(CONNECTED_NORTH)) minZ = 0.0F;
-		if (state.getValue(CONNECTED_WEST)) minX = 0.0F;
-		if (state.getValue(CONNECTED_EAST)) maxX = 16.0F;
+        if (state.getValue(CONNECTED_UP)) maxY = 16.0F;
+        if (state.getValue(CONNECTED_DOWN)) minY = 0.0F;
+        if (state.getValue(CONNECTED_SOUTH)) maxZ = 16.0F;
+        if (state.getValue(CONNECTED_NORTH)) minZ = 0.0F;
+        if (state.getValue(CONNECTED_WEST)) minX = 0.0F;
+        if (state.getValue(CONNECTED_EAST)) maxX = 16.0F;
 
-		VoxelShape voxelshape = Block.box(minX, minY, minZ, maxX, maxY, maxZ);
-		return voxelshape;
-	}
-
-	@Nonnull
-	@Override
-	public VoxelShape getInteractionShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos) {
-		float minX = 5F, minY = 5F, minZ = 5F;
-		float maxX = 11F, maxY = 11F, maxZ = 11F;
-		if (state.getValue(FACING) == Direction.UP) maxY = 16.0F;
-		if (state.getValue(FACING) == Direction.DOWN) minY = 0.0F;
-		if (state.getValue(FACING) == Direction.SOUTH) maxZ = 16.0F;
-		if (state.getValue(FACING) == Direction.NORTH) minZ = 0.0F;
-		if (state.getValue(FACING) == Direction.WEST) minX = 0.0F;
-		if (state.getValue(FACING) == Direction.EAST) maxX = 16.0F;
-
-		if (state.getValue(CONNECTED_UP)) maxY = 16.0F;
-		if (state.getValue(CONNECTED_DOWN)) minY = 0.0F;
-		if (state.getValue(CONNECTED_SOUTH)) maxZ = 16.0F;
-		if (state.getValue(CONNECTED_NORTH)) minZ = 0.0F;
-		if (state.getValue(CONNECTED_WEST)) minX = 0.0F;
-		if (state.getValue(CONNECTED_EAST)) maxX = 16.0F;
-
-		VoxelShape voxelshape = Block.box(minX, minY, minZ, maxX, maxY, maxZ);
-		return voxelshape;
-	}
-
-	@Override
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(FACING, CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST, ACTIVE);
-	}
-
-	@Override
-    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos currentPos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
-    	return state.setValue(CONNECTED_DOWN, this.isSideConnectable(level, currentPos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, currentPos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, currentPos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, currentPos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, currentPos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, currentPos, Direction.WEST));
+        VoxelShape voxelshape = Block.box(minX, minY, minZ, maxX, maxY, maxZ);
+        return voxelshape;
     }
-
-    private boolean isSideConnectable (LevelReader level, BlockPos pos, Direction side) {
-    	BlockEntity blockEntity = level.getBlockEntity(pos.relative(side));
-        return blockEntity != null && blockEntity.getLevel() != null;
-    }
-
-	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		Direction direction = context.getClickedFace().getOpposite();
-		return this.defaultBlockState().setValue(FACING, direction).setValue(ACTIVE, false);
-	}
 
     @Nonnull
-	@Override
-    public InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
-    	if (level.isClientSide()) {
-			return InteractionResult.SUCCESS;
-		}
-		 else {
-			 if (stack.isEmpty()) {
-				BlockState activeState = ModBlocks.BAMBOO_PIPE_EXTRACT.get().defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(ACTIVE, !state.getValue(ACTIVE)).setValue(CONNECTED_DOWN, this.isSideConnectable(level, pos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, pos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, pos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, pos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, pos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, pos, Direction.WEST));
-				level.setBlock(pos, activeState, 3);
-				level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, 0.5F);
-				return InteractionResult.SUCCESS;
-			}
-		}
-    	return InteractionResult.FAIL;
-	}
+    @Override
+    public VoxelShape getInteractionShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos) {
+        float minX = 5F, minY = 5F, minZ = 5F;
+        float maxX = 11F, maxY = 11F, maxZ = 11F;
+        if (state.getValue(FACING) == Direction.UP) maxY = 16.0F;
+        if (state.getValue(FACING) == Direction.DOWN) minY = 0.0F;
+        if (state.getValue(FACING) == Direction.SOUTH) maxZ = 16.0F;
+        if (state.getValue(FACING) == Direction.NORTH) minZ = 0.0F;
+        if (state.getValue(FACING) == Direction.WEST) minX = 0.0F;
+        if (state.getValue(FACING) == Direction.EAST) maxX = 16.0F;
+
+        if (state.getValue(CONNECTED_UP)) maxY = 16.0F;
+        if (state.getValue(CONNECTED_DOWN)) minY = 0.0F;
+        if (state.getValue(CONNECTED_SOUTH)) maxZ = 16.0F;
+        if (state.getValue(CONNECTED_NORTH)) minZ = 0.0F;
+        if (state.getValue(CONNECTED_WEST)) minX = 0.0F;
+        if (state.getValue(CONNECTED_EAST)) maxX = 16.0F;
+
+        VoxelShape voxelshape = Block.box(minX, minY, minZ, maxX, maxY, maxZ);
+        return voxelshape;
+    }
 
     @Override
-	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-		return new BambooPipeExtractBlockEntity(pos, state);
-	}
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING, CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST, ACTIVE);
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos currentPos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
+        return withConnections(state, level, currentPos);
+    }
+
+    public BlockState withConnections(BlockState state, LevelReader level, BlockPos pos) {
+        return state.setValue(CONNECTED_DOWN, this.isSideConnectable(level, pos, Direction.DOWN)).setValue(CONNECTED_EAST, this.isSideConnectable(level, pos, Direction.EAST)).setValue(CONNECTED_NORTH, this.isSideConnectable(level, pos, Direction.NORTH)).setValue(CONNECTED_SOUTH, this.isSideConnectable(level, pos, Direction.SOUTH)).setValue(CONNECTED_UP, this.isSideConnectable(level, pos, Direction.UP)).setValue(CONNECTED_WEST, this.isSideConnectable(level, pos, Direction.WEST));
+    }
+
+    private boolean isSideConnectable(LevelReader level, BlockPos pos, Direction side) {
+        return level instanceof Level world && world.hasChunkAt(pos.relative(side))
+                && world.getCapability(Capabilities.Fluid.BLOCK, pos.relative(side), side.getOpposite()) != null;
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        Direction direction = context.getClickedFace().getOpposite();
+        return withConnections(defaultBlockState().setValue(FACING, direction).setValue(ACTIVE, false), context.getLevel(), context.getClickedPos());
+    }
+
+    @Override
+    public InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        return stack.is(ModItems.BAMBOO_PIPE_WRENCH) ? InteractionResult.PASS : toggle(state, level, pos);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        return toggle(state, level, pos);
+    }
+
+    private InteractionResult toggle(BlockState state, Level level, BlockPos pos) {
+        if (!level.isClientSide()) {
+            var toggled = state.cycle(ACTIVE);
+            level.setBlock(pos, withConnections(toggled, level, pos), Block.UPDATE_ALL);
+            level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.3F, toggled.getValue(ACTIVE) ? 0.6F : 0.5F);
+        }
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        return new BambooPipeExtractBlockEntity(pos, state);
+    }
 }

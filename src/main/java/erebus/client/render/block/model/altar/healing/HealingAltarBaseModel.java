@@ -10,12 +10,12 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 public class HealingAltarBaseModel extends Model<HealingAltarBlockEntityRenderState> {
 
     public HealingAltarBaseModel(ModelPart root) {
-		super(root, RenderTypes::entitySolid);
+        super(root, RenderTypes::entitySolid);
         root.getChild("Top");
         root.getChild("Bot");
     }
 
-	public static LayerDefinition createBodyLayer() {
+    public static LayerDefinition createBodyLayer() {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition part = mesh.getRoot();
 
@@ -23,5 +23,5 @@ public class HealingAltarBaseModel extends Model<HealingAltarBlockEntityRenderSt
         part.addOrReplaceChild("Bot", CubeListBuilder.create().texOffs(0, 0).addBox(-16.0F, 0.0F, -16.0F, 32.0F, 4.0F, 32.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 20.0F, 0.0F));
 
         return LayerDefinition.create(mesh, 256, 64);
-	}
+    }
 }

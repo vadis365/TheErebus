@@ -2,10 +2,11 @@
   "type": "minecraft:smelting",
   "category": "blocks",
   "cookingtime": 200,
-  "experience": 0.25,
+  "experience": 1.0,
   "group": "diamond",
   "ingredient": "erebus:ore_encrusted_diamond",
   "result": {
+    "count": 2,
     "id": "minecraft:diamond"
   }
 }

@@ -16,8 +16,8 @@
     [
       "erebus:quick_sand",
       "erebus:pond",
-      "erebus:amber_ground",
-      "erebus:amber_umberstone"
+      "erebus:amber_umberstone",
+      "erebus:amber_ground"
     ],
     [],
     [
@@ -44,20 +44,16 @@
     [],
     [],
     [
-      "erebus:asper",
-      "erebus:eucalyptus",
-      "erebus:mahogany",
-      "erebus:giant_mahogany",
-      "erebus:mossbark",
-      "erebus:dark_capped_mushroom",
-      "erebus:dutch_cap_mushroom",
-      "erebus:grandmas_shoes_mushroom",
-      "erebus:kaizers_fingers_mushroom",
-      "erebus:sarcastic_czech_mushroom",
-      "erebus:bamboo",
-      "erebus:turnip",
-      "erebus:melon",
-      "erebus:fern"
+      "erebus:jungle_tree_population",
+      "erebus:jungle_bamboo_population",
+      "erebus:small_mushroom_population",
+      "erebus:vanilla_giant_mushroom_population",
+      "erebus:fern",
+      "erebus:fiddle_head",
+      "erebus:jungle_grass_population",
+      "erebus:jungle_vine_population",
+      "erebus:dark_fruit_vine_population",
+      "erebus:jungle_crop_population"
     ]
   ],
   "has_precipitation": false,
@@ -77,18 +73,6 @@
         "maxCount": 2,
         "minCount": 1,
         "weight": 15
-      },
-      {
-        "type": "erebus:jumping_spider",
-        "maxCount": 4,
-        "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "erebus:praying_mantis",
-        "maxCount": 8,
-        "minCount": 4,
-        "weight": 10
       }
     ],
     "misc": [],
@@ -134,6 +118,18 @@
         "maxCount": 4,
         "minCount": 2,
         "weight": 20
+      },
+      {
+        "type": "erebus:jumping_spider",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:praying_mantis",
+        "maxCount": 8,
+        "minCount": 4,
+        "weight": 10
       },
       {
         "type": "erebus:scytodes",

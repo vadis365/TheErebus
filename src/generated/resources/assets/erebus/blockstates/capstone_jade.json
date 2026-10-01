@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "active=false": {
       "model": "erebus:block/capstone_jade"
+    },
+    "active=true": {
+      "model": "erebus:block/capstone_jade_active"
     }
   }
 }

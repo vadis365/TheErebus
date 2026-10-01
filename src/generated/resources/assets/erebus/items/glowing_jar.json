@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "erebus:block/glowing_jar"
+    "type": "minecraft:special",
+    "base": "erebus:item/glowing_jar",
+    "model": {
+      "type": "erebus:glowing_jar_special",
+      "texture": "erebus:textures/block/glowing_jar.png"
+    }
   }
 }

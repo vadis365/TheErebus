@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/bamboo_torch"
+    "model": "erebus:block/bamboo_torch_lower"
   }
 }

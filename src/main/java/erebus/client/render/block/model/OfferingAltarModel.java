@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 public class OfferingAltarModel extends Model<OfferingAltarBlockEntityRenderState> {
 
     public OfferingAltarModel(ModelPart root) {
-		super(root, RenderTypes::entitySolid);
+        super(root, RenderTypes::entitySolid);
         root.getChild("boxes0");
         root.getChild("boxes1");
         root.getChild("boxes2");
@@ -21,9 +21,9 @@ public class OfferingAltarModel extends Model<OfferingAltarBlockEntityRenderStat
         root.getChild("boxes7");
     }
 
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
 
         partdefinition.addOrReplaceChild("boxes0", CubeListBuilder.create().texOffs(0, 43).addBox(-7.5F, 0.0F, -7.5F, 15.0F, 2.0F, 15.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 22.0F, 0.0F));
 
@@ -42,5 +42,5 @@ public class OfferingAltarModel extends Model<OfferingAltarBlockEntityRenderStat
         partdefinition.addOrReplaceChild("boxes7", CubeListBuilder.create().texOffs(60, 33).addBox(-3.5F, 0.0F, -3.5F, 7.0F, 1.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 9.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 128, 64);
-	}
+    }
 }

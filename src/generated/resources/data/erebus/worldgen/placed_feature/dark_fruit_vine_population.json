@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:dark_fruit_vine_population",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

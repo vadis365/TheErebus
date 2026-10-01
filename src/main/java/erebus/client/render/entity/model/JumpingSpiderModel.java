@@ -8,9 +8,9 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class JumpingSpiderModel extends EntityModel<JumpingSpiderRenderState> {
-    public ModelPart root;
     private final ModelPart LFL1, LFL2, LFL3, LFL4, LFL5, LFL6;
     private final ModelPart LMFL1, LMFL2, LMFL3, LMFL4, LMFL5, LMFL6;
     private final ModelPart LMBL1, LMBL2, LMBL3, LMBL4, LMBL5, LMBL6;
@@ -23,7 +23,7 @@ public class JumpingSpiderModel extends EntityModel<JumpingSpiderRenderState> {
     private final ModelPart HeadToAb, HeadBack, HeadMid, HeadTop, HeadBot;
     private final ModelPart Lmand1, Lmand2, Rmand1, Rmand2, Jaw;
     private final ModelPart LFEye, LMEye, LBEye, RFEye, RMEye, RBEye;
-
+    public ModelPart root;
     public JumpingSpiderModel(ModelPart root) {
         super(root);
         this.root = root;
@@ -184,5 +184,28 @@ public class JumpingSpiderModel extends EntityModel<JumpingSpiderRenderState> {
         root.addOrReplaceChild("RBEye", CubeListBuilder.create().texOffs(0, 25).addBox(-6.0F, -8.0F, 0.5F, 1, 1, 1), PartPose.offsetAndRotation(0.0F, 18.0F, -7.0F, -0.1745329F, 0.0F, 0.0F));
 
         return LayerDefinition.create(mesh, 64, 128);
+    }
+
+    @Override
+    public void setupAnim(JumpingSpiderRenderState state) {
+        super.setupAnim(state);
+        float cycle = Mth.cos(state.walkAnimationPos * 1.75F) * state.walkAnimationSpeed;
+        float z = cycle * 0.3F, y = cycle * 0.4F;
+        LBL1.zRot += z;
+        LMBL1.zRot -= z;
+        LMFL1.zRot += z;
+        LFL1.zRot += z;
+        RBL1.zRot -= z;
+        RMBL1.zRot += z;
+        RMFL1.zRot -= z;
+        RFL1.zRot += z;
+        LBL1.yRot -= y;
+        LMBL1.yRot += y;
+        LMFL1.yRot -= y;
+        LFL1.yRot += y;
+        RBL1.yRot -= y;
+        RMBL1.yRot += y;
+        RMFL1.yRot -= y;
+        RFL1.yRot += y;
     }
 }

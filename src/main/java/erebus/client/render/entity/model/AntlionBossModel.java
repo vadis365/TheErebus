@@ -9,7 +9,6 @@ import net.minecraft.util.Mth;
 
 public class AntlionBossModel extends EntityModel<AntlionBossRenderState> {
 
-    public ModelPart root;
     private final ModelPart MandR1;
     private final ModelPart MandR2;
     private final ModelPart MandR3;
@@ -57,6 +56,7 @@ public class AntlionBossModel extends EntityModel<AntlionBossRenderState> {
     private final ModelPart LB1;
     private final ModelPart LB2;
     private final ModelPart LB3;
+    public ModelPart root;
     private float addHead = 0;
 
     public AntlionBossModel(ModelPart root) {
@@ -314,8 +314,8 @@ public class AntlionBossModel extends EntityModel<AntlionBossRenderState> {
         float headY = state.yRot / (180F / (float) Math.PI);
         float headX = state.xRot / (180F / (float) Math.PI);
 
-        if(state.blam == 2) {
-            for(addHead = 0; addHead < 17; addHead++) {
+        if (state.blam == 2) {
+            for (addHead = 0; addHead < 17; addHead++) {
                 headX = headX - addHead * 0.0053702F;
             }
         }

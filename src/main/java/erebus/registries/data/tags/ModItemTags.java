@@ -6,6 +6,23 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 public class ModItemTags {
+    public static final TagKey<Item> ORES_ALUMINUM = common("ores/aluminum");
+    public static final TagKey<Item> ORES_LEAD = common("ores/lead");
+    public static final TagKey<Item> ORES_SILVER = common("ores/silver");
+    public static final TagKey<Item> ORES_TIN = common("ores/tin");
+    public static final TagKey<Item> ORES_JADE = common("ores/jade");
+    public static final TagKey<Item> ORES_PETRIFIED_WOOD = common("ores/petrified_wood");
+    public static final TagKey<Item> ORES_FOSSIL = common("ores/fossil");
+    public static final TagKey<Item> ORES_GNEISS = common("ores/gneiss");
+    public static final TagKey<Item> INGOTS_ALUMINUM = common("ingots/aluminum");
+    public static final TagKey<Item> INGOTS_LEAD = common("ingots/lead");
+    public static final TagKey<Item> INGOTS_SILVER = common("ingots/silver");
+    public static final TagKey<Item> INGOTS_TIN = common("ingots/tin");
+    public static final TagKey<Item> GEMS_JADE = common("gems/jade");
+    public static final TagKey<Item> STORAGE_BLOCKS_JADE = common("storage_blocks/jade");
+    public static final TagKey<Item> EXPERIENCE_ALTAR_FUEL = create("experience_altar_fuel");
+    public static final TagKey<Item> REPAIRS_GLIDER = create("repairs_glider");
+    public static final TagKey<Item> GLIDER_FUEL = create("glider_fuel");
     public static final TagKey<Item> REPAIRS_JADE_ARMOR = create("repairs_jade_armor");
     public static final TagKey<Item> REPAIRS_EXOSKELETON_ARMOR = create("repairs_exoskeleton_armor");
     public static final TagKey<Item> REPAIRS_REINFORCED_EXOSKELETON_ARMOR = create("repairs_reinforced_exoskeleton_armor");
@@ -24,10 +41,14 @@ public class ModItemTags {
     public static final TagKey<Item> ROLLED_NEWSPAPER_TOOL_MATERIALS = create("rolled_newspaper_tool_materials");
     public static final TagKey<Item> SCORPION_PINCER_TOOL_MATERIALS = create("scorpion_pincer_tool_materials");
     public static final TagKey<Item> QUAKE_HAMMER_TOOL_MATERIALS = create("quake_hammer_tool_materials");
-    
+
     public static final TagKey<Item> COMPOSTABLE = create("compostable");
     public static final TagKey<Item> TITAN_BEETLE_FOOD = create("titan_beetle_food");
     public static final TagKey<Item> TITAN_BEETLE_CHESTS = create("titan_beetle_chests");
+
+    private static TagKey<Item> common(String name) {
+        return TagKey.create(BuiltInRegistries.ITEM.key(), net.minecraft.resources.Identifier.fromNamespaceAndPath("c", name));
+    }
 
     private static TagKey<Item> create(String name) {
         return TagKey.create(BuiltInRegistries.ITEM.key(), Erebus.prefix(name));

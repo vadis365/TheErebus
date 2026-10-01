@@ -6,33 +6,34 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
+
 public class BedBugModel extends EntityModel<BedBugRenderState> {
 
-	public ModelPart root;
     private final ModelPart LeftFrontLeg;
-	private final ModelPart LeftMidLeg;
-	private final ModelPart LeftBackLeg;
-	private final ModelPart RightFrontLeg;
-	private final ModelPart RightMidLeg;
-	private final ModelPart RightBackLeg;
+    private final ModelPart LeftMidLeg;
+    private final ModelPart LeftBackLeg;
+    private final ModelPart RightFrontLeg;
+    private final ModelPart RightMidLeg;
+    private final ModelPart RightBackLeg;
+    public ModelPart root;
 
-	public BedBugModel(ModelPart root) {
-		super(root);
+    public BedBugModel(ModelPart root) {
+        super(root);
         root.getChild("HeadMain");
         root.getChild("Body");
         this.LeftFrontLeg = root.getChild("LeftFrontLeg");
-		this.LeftMidLeg = root.getChild("LeftMidLeg");
-		this.LeftBackLeg = root.getChild("LeftBackLeg");
-		this.RightFrontLeg = root.getChild("RightFrontLeg");
-		this.RightMidLeg = root.getChild("RightMidLeg");
-		this.RightBackLeg = root.getChild("RightBackLeg");
-	}
+        this.LeftMidLeg = root.getChild("LeftMidLeg");
+        this.LeftBackLeg = root.getChild("LeftBackLeg");
+        this.RightFrontLeg = root.getChild("RightFrontLeg");
+        this.RightMidLeg = root.getChild("RightMidLeg");
+        this.RightBackLeg = root.getChild("RightBackLeg");
+    }
 
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition HeadMain = partdefinition.addOrReplaceChild("HeadMain", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 17.0F, -13.0F, 0.3927F, 0.0F, 0.0F));
+        PartDefinition HeadMain = partdefinition.addOrReplaceChild("HeadMain", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 17.0F, -13.0F, 0.3927F, 0.0F, 0.0F));
 
         HeadMain.addOrReplaceChild("Head1", CubeListBuilder.create().texOffs(21, 0).addBox(-2.5F, -2.296F, -3.1679F, 5.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 2.0F, -1.0F, 0.1745F, 0.0F, 0.0F));
 
@@ -153,23 +154,23 @@ public class BedBugModel extends EntityModel<BedBugRenderState> {
         RightBackLeg.addOrReplaceChild("RBL4", CubeListBuilder.create().texOffs(0, 112).addBox(-3.5F, 10.0F, -0.5F, 1.0F, 4.0F, 1.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.8727F));
 
         return LayerDefinition.create(meshdefinition, 64, 128);
-	}
+    }
 
-	@Override
-	public void setupAnim(BedBugRenderState state) {
-		float sin = Mth.sin(state.walkAnimationPos) * 0.8F * state.walkAnimationSpeed;
-		float cos = Mth.cos(state.walkAnimationPos) * 0.4F * state.walkAnimationSpeed;
-		LeftBackLeg.zRot = -cos;
-		LeftMidLeg.zRot = cos;
-		LeftFrontLeg.zRot = -cos;
-		RightBackLeg.zRot = -cos;
-		RightMidLeg.zRot = cos;
-		RightFrontLeg.zRot = -cos;
-		LeftBackLeg.yRot = sin -0.4363F;
-		LeftMidLeg.yRot = -sin;
-		LeftFrontLeg.yRot = sin + 0.5236F;
-		RightBackLeg.yRot = sin + 0.4363F;
-		RightMidLeg.yRot = -sin;
-		RightFrontLeg.yRot = sin -0.5236F;
-	}
+    @Override
+    public void setupAnim(BedBugRenderState state) {
+        float sin = Mth.sin(state.walkAnimationPos) * 0.8F * state.walkAnimationSpeed;
+        float cos = Mth.cos(state.walkAnimationPos) * 0.4F * state.walkAnimationSpeed;
+        LeftBackLeg.zRot = -cos;
+        LeftMidLeg.zRot = cos;
+        LeftFrontLeg.zRot = -cos;
+        RightBackLeg.zRot = -cos;
+        RightMidLeg.zRot = cos;
+        RightFrontLeg.zRot = -cos;
+        LeftBackLeg.yRot = sin - 0.4363F;
+        LeftMidLeg.yRot = -sin;
+        LeftFrontLeg.yRot = sin + 0.5236F;
+        RightBackLeg.yRot = sin + 0.4363F;
+        RightMidLeg.yRot = -sin;
+        RightFrontLeg.yRot = sin - 0.5236F;
+    }
 }

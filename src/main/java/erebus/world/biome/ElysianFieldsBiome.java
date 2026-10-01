@@ -18,8 +18,7 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.UNDERGROUND_ORES;
-import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.VEGETAL_DECORATION;
+import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.*;
 
 public class ElysianFieldsBiome extends ErebusBiome {
 
@@ -48,8 +47,8 @@ public class ElysianFieldsBiome extends ErebusBiome {
                         .addSpawn(MobCategory.CREATURE, 18, new MobSpawnSettings.SpawnerData(ModEntities.BEETLE_LARVA.get(), 2, 3))
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.GRASSHOPPER.get(), 1, 3))
                         .addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(ModEntities.WORKER_BEE.get(), 1, 2))
-                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.FLY.get(), 1, 2))
-                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.DRAGON_FLY.get(), 8, 8))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.FLY.get(), 8, 8))
+                        .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.DRAGON_FLY.get(), 1, 2))
                         .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.BOT_FLY.get(), 2, 3))
                         .addSpawn(MobCategory.MONSTER, 15, new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 2, 3))
                         .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.VELVET_WORM.get(), 1, 2))
@@ -61,14 +60,16 @@ public class ElysianFieldsBiome extends ErebusBiome {
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.POND.getPlacedResourceKey())
                         .addCarver(ModCarvers.CAVE)
                         .addCarver(ModCarvers.CANYON)
-                        .addFeature(VEGETAL_DECORATION, TreeFeatures.CYPRESS_TREE.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, PlantFeatures.GIANT_FLOWER.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, TreeFeatures.CYPRESS_POPULATION.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.GIANT_FLOWER_POPULATION.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.NETTLE.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.TALL_BLOOM.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.WEEPING_BLUEBELL.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.FERN.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.DARK_FRUIT_VINE_POPULATION.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.MOSS.getPlacedResourceKey())
                         .addFeature(VEGETAL_DECORATION, PlantFeatures.GRASS.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())

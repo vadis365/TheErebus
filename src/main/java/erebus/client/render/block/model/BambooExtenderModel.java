@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 public class BambooExtenderModel extends Model<BambooExtenderBlockEntityRenderState> {
 
     public BambooExtenderModel(ModelPart root) {
-		super(root, RenderTypes::entityCutout);
+        super(root, RenderTypes::entityCutout);
         root.getChild("BambooStep1");
         root.getChild("BambooStep2");
         root.getChild("SupportR1");
@@ -25,9 +25,9 @@ public class BambooExtenderModel extends Model<BambooExtenderBlockEntityRenderSt
         root.getChild("Main");
     }
 
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
 
         partdefinition.addOrReplaceChild("BambooStep1", CubeListBuilder.create().texOffs(25, 31).addBox(0.0F, 0.0F, 0.0F, 14.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-7.0F, 22.0F, -4.5F, -1.5708F, 0.0F, 0.0F));
 
@@ -54,5 +54,5 @@ public class BambooExtenderModel extends Model<BambooExtenderBlockEntityRenderSt
         partdefinition.addOrReplaceChild("Main", CubeListBuilder.create().texOffs(10, 7).addBox(-8.0F, 10.0F, -1.0F, 16.0F, 14.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 64, 64);
-	}
+    }
 }

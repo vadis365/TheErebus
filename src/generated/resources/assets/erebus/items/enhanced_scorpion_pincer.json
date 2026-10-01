@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "erebus:item/enhanced_scorpion_pincer",
+    "model": {
+      "type": "erebus:scorpion_pincer_special"
+    }
+  }
+}

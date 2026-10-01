@@ -1,7 +1,9 @@
 package erebus.registries;
 
 import erebus.Erebus;
+import erebus.network.data.SprintLeggingsData;
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.ModDataComponents;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -96,6 +98,7 @@ public class ModTabs {
                         output.accept(ModBlocks.SILK.get());
                         output.accept(ModBlocks.MIR_BRICKS.get());
                         output.accept(ModBlocks.PLANKS_PETRIFIED.get());
+                        output.accept(ModBlocks.DOOR_PETRIFIED.get());
                         output.accept(ModBlocks.CHEST_PETRIFIED.get());
                         output.accept(ModBlocks.REIN_EXO.get());
                         output.accept(ModBlocks.MUD_BRICKS.get());
@@ -414,7 +417,13 @@ public class ModTabs {
                         output.accept(ModItems.JADE_UMBERGOLEM);
                         output.accept(ModItems.BAMBUCKET);
                         output.accept(ModItems.ANTI_VENOM_BOTTLE);
+                        output.accept(ModItems.ANTI_VENOM_BAMBUCKET);
                         output.accept(ModItems.WHETSTONE);
+                        for (int level = 1; level <= 5; level++) {
+                            var whetstone = new ItemStack(ModItems.WHETSTONE.get());
+                            whetstone.set(ModDataComponents.WHETSTONE_LEVEL, level);
+                            output.accept(whetstone);
+                        }
                         output.accept(ModItems.PORTAL_ACTIVATOR);
                         output.accept(ModItems.COMPOST);
                         output.accept(ModItems.PLANTICIDE);
@@ -460,6 +469,9 @@ public class ModTabs {
                         output.accept(ModItems.REIN_COMPOUND_GOGGLES);
                         output.accept(ModItems.COMPOUND_GOGGLES);
                         output.accept(ModItems.SPRINT_LEGGINGS);
+                        var maxSprintLeggings = new ItemStack(ModItems.SPRINT_LEGGINGS.get());
+                        maxSprintLeggings.set(ModDataComponents.SPRINT_LEGGINGS, new SprintLeggingsData(9));
+                        output.accept(maxSprintLeggings);
                         output.accept(ModItems.JUMP_BOOTS);
                         output.accept(ModItems.GLIDER_CHESTPLATE);
                         output.accept(ModItems.GLIDER_CHESTPLATE_POWERED);
@@ -552,6 +564,7 @@ public class ModTabs {
                         output.accept(ModBlocks.NETTLE);
                         output.accept(ModBlocks.NETTLE_FLOWERED);
                         output.accept(ModBlocks.SWAMP_PLANT);
+                        output.accept(ModBlocks.MIRE_CORAL);
                         output.accept(ModBlocks.DESERT_SHRUB);
                         output.accept(ModBlocks.FIRE_BLOOM);
                         output.accept(ModBlocks.FIDDLE_HEAD);

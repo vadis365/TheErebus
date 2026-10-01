@@ -10,12 +10,12 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 public class WoodlouseModel extends EntityModel<WoodlouseRenderState> {
-    public ModelPart root;
     private final ModelPart AntBaseR, AntBaseL, AntR1, AntR2, AntL1, AntL2;
     private final ModelPart HL1, HR2, HR1, HL2, HM1, HM2;
     private final ModelPart ThxR2, ThxL2, ThxR3, ThxL3, ThxR4, ThxL4, ThxR5, ThxL5, ThxR6, ThxL6, ThxR7, ThxL7, ThxR8, ThxL8, ThxR9, ThxL9, ThxR10, ThxL10, Thx11, Thx12;
     private final ModelPart RLA1, RLA2, RLA3, RLB1, RLB2, RLB3, RLC1, RLC2, RLC3, RLD1, RLD2, RLD3, RLE1, RLE2, RLE3, RLF1, RLF2, RLF3, RLG1, RLG2, RLG3;
     private final ModelPart LLA1, LLA2, LLA3, LLB1, LLB2, LLB3, LLC1, LLC2, LLC3, LLD1, LLD2, LLD3, LLE1, LLE2, LLE3, LLF1, LLF2, LLF3, LLG1, LLG2, LLG3;
+    public ModelPart root;
 
     public WoodlouseModel(ModelPart root) {
         super(root);

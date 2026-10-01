@@ -1,6 +1,7 @@
 {
-  "parent": "erebus:block/blank",
+  "parent": "minecraft:item/shield",
   "textures": {
-    "layer0": "erebus:item/bamboo_shield"
+    "layer0": "erebus:item/bamboo_shield",
+    "particle": "erebus:item/bamboo_shield"
   }
 }

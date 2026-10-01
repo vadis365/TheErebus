@@ -11,9 +11,9 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 
 public class BambooFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
 
+    private final boolean checkForWater;
+    private final boolean isFarmed;
     private int bambooAmount = -1;
-    private boolean checkForWater = true;
-    private boolean isFarmed = false;
 
     public BambooFeatureConfiguration(int bambooAmount, boolean checkForWater) {
         super(NoneFeatureConfiguration.CODEC);
@@ -57,11 +57,10 @@ public class BambooFeatureConfiguration extends Feature<NoneFeatureConfiguration
                 xOff = random.nextInt(8) - random.nextInt(8);
                 zOff = random.nextInt(8) - random.nextInt(8);
 
-                for (int yOff = -4; yOff < 4; yOff++) {
+                for (int yOff = -4; yOff <= 4; yOff++) {
                     BlockPos check = pos.offset(xOff, yOff, zOff);
 
                     if (level.isEmptyBlock(check) && level.getBlockState(check.below()).is(Blocks.GRASS_BLOCK)) {
-                        setBlock(level, check, ModBlocks.COLOSSAL_BAMBOO.get().defaultBlockState());
                         placeBambooShaft(level, check, random);
 
                         bambooPlaced++;

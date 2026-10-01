@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_tall_bloom": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:tall_bloom"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:pink_dye_from_tall_bloom"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tall_bloom"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:pink_dye_from_tall_bloom"
+    ]
+  }
+}

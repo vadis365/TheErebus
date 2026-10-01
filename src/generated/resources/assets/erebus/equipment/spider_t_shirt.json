@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "erebus:spider_t_shirt"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "erebus:spider_t_shirt"
+      }
+    ]
+  }
+}

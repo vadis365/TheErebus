@@ -7,7 +7,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
 public class SprintLeggingsDataHolder {
-    public static final SprintLeggingsData DEFAULT = new SprintLeggingsData(1);
+    public static final SprintLeggingsData DEFAULT = new SprintLeggingsData(0);
 
     public static final Codec<SprintLeggingsData> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(

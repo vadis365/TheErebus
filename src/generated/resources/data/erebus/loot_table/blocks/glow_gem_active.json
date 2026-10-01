@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "erebus:glow_gem_inactive"
+          "name": "erebus:glow_gem_active"
         }
       ],
       "rolls": 1.0

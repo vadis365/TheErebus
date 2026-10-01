@@ -1,32 +1,40 @@
 package erebus.block.portal;
 
-import erebus.Erebus;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.world.ModPOIs;
+import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
+import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
-import net.minecraft.core.Direction.AxisDirection;
 import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.BlockUtil;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.ai.village.poi.PoiRecord;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.border.WorldBorder;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.status.ChunkStatus;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Comparator;
+import java.util.Map;
 import java.util.Optional;
+import java.util.WeakHashMap;
 
 public class ErebusPortalForcer {
 
-    protected final ServerLevel level;
+    private static final Map<ServerLevel, LongSet> indexedLegacyChunks = new WeakHashMap<>();
     private static final byte F = 1, L = 2, END = -1;
     private static final byte[] portalFrame = new byte[]{
             0, F, F, F, 0, END,
@@ -35,173 +43,160 @@ public class ErebusPortalForcer {
             F, L, L, L, F, END,
             0, F, F, F, 0, END,
     };
+    protected final ServerLevel level;
 
     public ErebusPortalForcer(ServerLevel level) {
         this.level = level;
     }
 
-    public static Optional<BlockPos> findClosestPortalPosition(ServerLevel level, BlockPos exitPos, boolean isErebus, WorldBorder border) {
+    public static Optional<BlockPos> findClosestKeystone(ServerLevel level, BlockPos exitPos, WorldBorder border) {
         PoiManager poiManager = level.getPoiManager();
-        int scale = isErebus ? 16 : 128;
+        int scale = 128;
         poiManager.ensureLoadedAndValid(level, exitPos, scale);
-        return poiManager.getInSquare(type -> type.is(ModPOIs.EREBUS_PORTAL), exitPos, scale, PoiManager.Occupancy.ANY)
+        restoreLegacyKeystones(level, exitPos);
+        return poiManager.getInSquare(type -> type.is(ModPOIs.GAEAN_KEYSTONE), exitPos, scale, PoiManager.Occupancy.ANY)
                 .map(PoiRecord::getPos)
                 .filter(border::isWithinBounds)
-                .filter(pos -> level.getBlockState(pos).hasProperty(BlockStateProperties.HORIZONTAL_AXIS))
+                .filter(pos -> pos.distSqr(exitPos) < 128 * 128)
+                .filter(pos -> level.getBlockState(pos).is(ModBlocks.GAEAN_KEYSTONE))
                 .min(Comparator.<BlockPos>comparingDouble(pos -> pos.distSqr(exitPos)).thenComparingInt(Vec3i::getY));
     }
 
-    public static Optional<BlockUtil.FoundRectangle> createPortal(ServerLevel level, BlockPos pos, Axis axis) {
-        Direction direction = Direction.get(AxisDirection.POSITIVE, axis);
-        double d0 = -1;
-        double d1 = -1;
-        BlockPos blockPos = null, blockPos1 = null;
+    private static void restoreLegacyKeystones(ServerLevel level, BlockPos center) {
+        LongSet inspected = indexedLegacyChunks.computeIfAbsent(level, ignored -> new LongOpenHashSet());
+        PoiManager pois = level.getPoiManager();
+        ChunkPos chunkCenter = ChunkPos.containing(center);
+        for (int x = chunkCenter.x() - 8; x <= chunkCenter.x() + 8; x++) {
+            for (int z = chunkCenter.z() - 8; z <= chunkCenter.z() + 8; z++) {
+                ChunkAccess chunk = level.getChunkSource().getChunkNow(x, z);
+                if (chunk == null) {
+                    if (!inspected.add(ChunkPos.pack(x, z))) continue;
+                    chunk = level.getChunk(x, z, ChunkStatus.EMPTY);
+                }
+                for (BlockPos pos : chunk.getBlockEntitiesPos()) {
+                    if (chunk.getBlockState(pos).is(ModBlocks.GAEAN_KEYSTONE)
+                            && !pois.exists(pos, type -> type.is(ModPOIs.GAEAN_KEYSTONE))) {
+                        pois.add(pos, ModPOIs.GAEAN_KEYSTONE);
+                    }
+                }
+            }
+        }
+    }
+
+    public static @Nullable TeleportTransition getDestination(ServerLevel level, Entity entity, BlockPos exitPos) {
+        Optional<BlockPos> anchor = findClosestKeystone(level, exitPos, level.getWorldBorder());
+        if (anchor.isEmpty()) anchor = createPortal(level, exitPos, Axis.X);
+        if (anchor.isEmpty()) return null;
+
+        Vec3 arrival = anchor.get().above().getBottomCenter();
+        var dimensions = entity.getDimensions(entity.getPose());
+
+        while (arrival.y + dimensions.height() <= level.getMaxY() + 1) {
+            var bounds = dimensions.makeBoundingBox(arrival);
+            if (level.getWorldBorder().isWithinBounds(bounds) && level.noCollision(entity, bounds)
+                    && !level.containsAnyLiquid(bounds)) {
+                return new TeleportTransition(level, arrival, Vec3.ZERO, entity.getYRot(), entity.getXRot(),
+                        TeleportTransition.PLAY_PORTAL_SOUND.then(TeleportTransition.PLACE_PORTAL_TICKET));
+            }
+            arrival = arrival.add(0, 1, 0);
+        }
+        return null;
+    }
+
+    public static Optional<BlockPos> createPortal(ServerLevel level, BlockPos pos, Axis axis) {
+        if (axis == Axis.Y) return Optional.empty();
         WorldBorder border = level.getWorldBorder();
-        int minHeight = Math.min(level.getMaxY(), level.getLogicalHeight() - 1);
-        MutableBlockPos mutable = pos.mutable();
+        int top = Math.min(level.getMaxY(), level.getMinY() + level.getLogicalHeight() - 1);
+        BlockPos base = null;
+        double closest = Double.POSITIVE_INFINITY;
+        MutableBlockPos cursor = new MutableBlockPos();
 
-        for(MutableBlockPos mut : BlockPos.spiralAround(pos, 16, Direction.EAST, Direction.SOUTH)) {
-            int validStartHeight = Math.min(minHeight, level.getHeight(Heightmap.Types.MOTION_BLOCKING, mut.getX(), mut.getZ()));
-            if(border.isWithinBounds(mut) && border.isWithinBounds(mut.move(direction, 1))) {
-                mut.move(direction.getOpposite(), 1);
-
-                for(int y = validStartHeight; y >= 0; y--) {
-                    mut.setY(y);
-
-                    if(canPortalReplaceBlock(level, mut)) {
-                        int y1 = y;
-
-                        while(y > level.getMinY() && canPortalReplaceBlock(level, mut.move(Direction.DOWN))) {
-                            y--;
-                        }
-
-                        if(y + 4 <= minHeight) {
-                            int yDiff = y1 - y;
-
-                            if(yDiff <= 0 || yDiff >= 3) {
-                                mut.setY(y);
-
-                                if(canHostFrame(level, mut, mutable, direction, 0)) {
-                                    double dist = pos.distSqr(mut);
-                                    if(canHostFrame(level, mut, mutable, direction, -1)) {
-                                        if(canHostFrame(level, mut, mutable, direction, 1)) {
-                                            if(d0 == -1 || d0 > dist) {
-                                                d0 = dist;
-                                                blockPos = mut.immutable();
-                                            }
-
-                                            if (d0 == -1 && (d1 == -1 || d1 > dist)) {
-                                                d1 = dist;
-                                                blockPos1 = mut.immutable();
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+        for (MutableBlockPos column : BlockPos.spiralAround(pos, 16, Direction.EAST, Direction.SOUTH)) {
+            int startY = Math.min(top - 4, level.getHeight(Heightmap.Types.MOTION_BLOCKING, column.getX(), column.getZ()));
+            for (int y = startY; y > level.getMinY(); y--) {
+                cursor.set(column.getX(), y, column.getZ());
+                if (!canPortalReplaceBlock(level, cursor)) continue;
+                while (y > level.getMinY() && canPortalReplaceBlock(level, cursor.below())) {
+                    cursor.setY(--y);
+                }
+                if (!fitsWorld(level, border, cursor, top) || !canHostFrame(level, cursor)) continue;
+                double distance = pos.distSqr(cursor);
+                if (distance < closest) {
+                    closest = distance;
+                    base = cursor.immutable();
                 }
             }
         }
 
-        if(d0 == -1 && d1 != -1) {
-            blockPos = blockPos1;
-            d0 = d1;
-        }
+        if (base == null) {
+            int bottom = Math.clamp(top - 4, level.getMinY() + 1, 32);
+            if (bottom > top - 4) return Optional.empty();
+            int minX = Mth.ceil(border.getMinX());
+            int minZ = Mth.ceil(border.getMinZ());
+            int maxX = Mth.floor(border.getMaxX()) - 5;
+            int maxZ = Mth.floor(border.getMaxZ()) - 5;
+            if (maxX < minX || maxZ < minZ) return Optional.empty();
+            base = new BlockPos(Mth.clamp(pos.getX(), minX, maxX),
+                    Mth.clamp(pos.getY(), bottom, Math.clamp(top - 4, bottom, 70)), Mth.clamp(pos.getZ(), minZ, maxZ));
+            if (!fitsWorld(level, border, base, top)) return Optional.empty();
 
-        if(d0 == -1) {
-            int clampHeight = Mth.clamp(pos.getY(), 32, 70);
-            int height = minHeight - 9;
-            if(height < clampHeight) return Optional.empty();
-
-            blockPos = new BlockPos(pos.getX() - direction.getStepX(), Mth.clamp(pos.getY(), clampHeight, height), pos.getZ() - direction.getStepZ()).immutable();
-            blockPos = border.clampToBounds(blockPos);
-            Direction dir = direction.getClockWise();
-
-            for(int x = -5; x < 5; x++) {
-                for (int z = -5; z < 5; z++) {
-                    for (int y = 0; y < ErebusPortalShape.HEIGHT; y++) {
-                        Erebus.LOGGER.info("BASE: %s".formatted(blockPos));
-                        mutable.setWithOffset(blockPos, z * direction.getStepX() + x * dir.getStepX(), y, z * direction.getStepZ() + x * dir.getStepZ());
-                        Erebus.LOGGER.info("Updated: %s".formatted(mutable));
-                        level.setBlockAndUpdate(mutable, Blocks.AIR.defaultBlockState());
-                    }
-                }
+            for (BlockPos check : BlockPos.betweenClosed(base.below(), base.offset(4, 4, 4))) {
+                BlockState state = level.getBlockState(check);
+                if (state.hasBlockEntity() || state.getDestroySpeed(level, check) < 0) return Optional.empty();
             }
+            for (BlockPos check : BlockPos.betweenClosed(base, base.offset(4, 4, 4))) {
+                level.setBlockAndUpdate(check, Blocks.AIR.defaultBlockState());
+            }
+            for (int x = 0; x < 5; x++)
+                for (int z = 0; z < 5; z++) {
+                    level.setBlockAndUpdate(base.offset(x, -1, z), ModBlocks.UMBERSTONE.get().defaultBlockState());
+                }
         }
 
-        int dx = 0, dy = 0, dz = 0;
-
-        for (byte b : portalFrame) {
-            if (b == END) {
-                dy++;
-                dx = 0;
+        int width = 0, height = 0;
+        for (byte part : portalFrame) {
+            if (part == END) {
+                height++;
+                width = 0;
                 continue;
-            } else if (b == F || b == L) {
-                BlockState state;
-                if (b == L) {
-                    if (level.getDifficulty() != Difficulty.HARD) {
-                        state = Blocks.OAK_LEAVES.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, true);
-                    } else {
-                        state = Blocks.AIR.defaultBlockState();
-                    }
-                } else {
-                    state = level.getRandom().nextBoolean() ? ModBlocks.UMBERTILE_SMOOTH.get().defaultBlockState() : ModBlocks.UMBERTILE_SMOOTH_SMALL.get().defaultBlockState();
-                }
-                mutable.setWithOffset(blockPos, dx, dy, dz);
-                level.setBlock(mutable, state, 3);
             }
-            dx++;
-        }
-
-        mutable.setWithOffset(blockPos, 0, -1, 0);
-
-        for(int x = 0; x < ErebusPortalShape.WIDTH; x++) {
-            for(int z = -1; z < 2; z++) {
-                if(axis == Axis.X) {
-                    mutable.setWithOffset(blockPos, x, -1, z);
-                } else {
-                    mutable.setWithOffset(blockPos, z, -1, x);
-                }
-
-                if(level.getBlockState(mutable).isAir()) {
-                    level.setBlockAndUpdate(mutable, ModBlocks.UMBERSTONE.get().defaultBlockState());
-                }
+            if (part == F || part == L) {
+                BlockState state = part == F
+                        ? (level.getRandom().nextBoolean() ? ModBlocks.UMBERTILE_SMOOTH : ModBlocks.UMBERTILE_SMOOTH_SMALL).get().defaultBlockState()
+                        : level.getDifficulty() == Difficulty.HARD ? Blocks.AIR.defaultBlockState()
+                        : Blocks.OAK_LEAVES.defaultBlockState().setValue(BlockStateProperties.PERSISTENT, true);
+                level.setBlockAndUpdate(offset(base, axis, width, height, 0), state);
             }
+            width++;
         }
-
-        if(axis == Axis.X) {
-            mutable.setWithOffset(blockPos, 2, 0, 3);
-        } else {
-            mutable.setWithOffset(blockPos, 3, 0, 2);
-        }
-
-        level.setBlockAndUpdate(mutable, ModBlocks.GAEAN_KEYSTONE.get().defaultBlockState());
-        return Optional.of(new BlockUtil.FoundRectangle(mutable.immutable(), ErebusPortalShape.WIDTH, ErebusPortalShape.HEIGHT));
+        BlockPos anchor = offset(base, axis, 2, 0, 3);
+        level.setBlockAndUpdate(anchor, ModBlocks.GAEAN_KEYSTONE.get().defaultBlockState());
+        return Optional.of(anchor);
     }
 
-    private static boolean canPortalReplaceBlock(ServerLevel level, MutableBlockPos pos) {
+    private static BlockPos offset(BlockPos base, Axis axis, int width, int height, int depth) {
+        return axis == Axis.X ? base.offset(width, height, depth) : base.offset(depth, height, width);
+    }
+
+    private static boolean fitsWorld(ServerLevel level, WorldBorder border, BlockPos base, int top) {
+        return base.getY() > level.getMinY() && base.getY() + 4 <= top
+                && border.isWithinBounds(base) && border.isWithinBounds(base.offset(4, 0, 4));
+    }
+
+    private static boolean canPortalReplaceBlock(ServerLevel level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
-        return state.canBeReplaced() && state.getFluidState().isEmpty();
+        return state.canBeReplaced() && state.getFluidState().isEmpty() && !state.hasBlockEntity();
     }
 
-    private static boolean canHostFrame(ServerLevel level, BlockPos originalPos, MutableBlockPos offsetPos, Direction direction, int offsetScale) {
-        Direction clockwise = direction.getClockWise();
-
-        for (int c = -1; c <= 3; c++) {
-            for (int d = -1; d <= 3; d++) {
-                offsetPos.setWithOffset(originalPos, clockwise.getStepX() * c + clockwise.getStepX() * offsetScale, d, clockwise.getStepZ() * c + clockwise.getStepZ() * offsetScale);
-
-                if (d < 0 && !level.getBlockState(offsetPos).isSolid()) {
-                    return false;
-                }
-
-                if (d >= 0 && !canPortalReplaceBlock(level, offsetPos)) {
-                    return false;
+    private static boolean canHostFrame(ServerLevel level, BlockPos base) {
+        for (int x = 0; x < 5; x++)
+            for (int z = 0; z < 5; z++) {
+                BlockPos floor = base.offset(x, -1, z);
+                if (!level.getBlockState(floor).isCollisionShapeFullBlock(level, floor)) return false;
+                for (int y = 0; y < 5; y++) {
+                    if (!canPortalReplaceBlock(level, base.offset(x, y, z))) return false;
                 }
             }
-        }
-
         return true;
     }
 }

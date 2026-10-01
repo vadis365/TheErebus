@@ -28,7 +28,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle"
+              "type": "erebus:rhino_beetle"
             }
           }
         ]

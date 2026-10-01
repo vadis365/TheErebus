@@ -15,59 +15,67 @@ import java.util.function.Consumer;
 
 public class WandOfAnimationItemSpecialRenderer implements NoDataSpecialModelRenderer {
 
-	private final WandOfAnimationItemModel model;
+    private final WandOfAnimationItemModel model;
 
-	public WandOfAnimationItemSpecialRenderer(WandOfAnimationItemModel model) {
-		this.model = model;
-	}
+    public WandOfAnimationItemSpecialRenderer(WandOfAnimationItemModel model) {
+        this.model = model;
+    }
 
-	@Override
-	public void submit(PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
-		pose.pushPose();
-		pose.scale(0.9999F, 0.9999F, 0.9999F);
-		WandOfAnimationItemModel.State state = new WandOfAnimationItemModel.State();
-		state.animationTick = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+    @Override
+    public void submit(PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
+        pose.pushPose();
+        pose.scale(0.9999F, 0.9999F, 0.9999F);
+        WandOfAnimationItemModel.State state = new WandOfAnimationItemModel.State();
+        state.animationTick = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
-		submit.submitModel(
-				model,
+        submit.submitModel(
+                model,
                 state,
                 pose,
-				model.renderType(Erebus.prefix("textures/special/items/wand_of_animation.png")),
-				light,
-				overlay,
-				-1,
-				null,
+                model.renderType(Erebus.prefix("textures/special/items/wand_of_animation.png")),
+                light,
+                overlay,
+                -1,
+                null,
                 outlineColor,
-				null
-			);
-		
-		pose.popPose();
-	}
+                null
+        );
 
-	@Override
-	public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
-		PoseStack pose = new PoseStack();
-		pose.scale(0.9999F, 0.9999F, 0.9999F);
-		
-		WandOfAnimationItemModel.State state = new WandOfAnimationItemModel.State();
-		state.animationTick = (float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
-		model.setupAnim(state);
-		model.root().getExtentsForGui(pose, consumer);
-	}
+        pose.popPose();
+    }
 
-	public record Unbaked() implements NoDataSpecialModelRenderer.Unbaked {
+    @Override
+    public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
+        PoseStack pose = new PoseStack();
+        pose.scale(0.9999F, 0.9999F, 0.9999F);
 
-		public static final MapCodec<Unbaked> MAP_CODEC = MapCodec.unit(new Unbaked());
+        // Include both bobbing extremes and the complete rotation envelope so GUI bounds stay stable.
+        var state = new WandOfAnimationItemModel.State();
+        for (float phase : new float[]{0, 360}) {
+            state.animationTick = phase;
+            model.setupAnim(state);
+            model.root().getExtentsForGui(pose, vertex -> {
+                float radius = (float) Math.hypot(vertex.x(), vertex.z());
+                consumer.accept(new org.joml.Vector3f(-radius, vertex.y(), -radius));
+                consumer.accept(new org.joml.Vector3f(radius, vertex.y(), radius));
+            });
+        }
+        model.resetPose();
+    }
 
-		@Override
-		public @NonNull SpecialModelRenderer<Void> bake(BakingContext context) {
-			return new WandOfAnimationItemSpecialRenderer(new WandOfAnimationItemModel(context.entityModelSet().bakeLayer(ModItemRendering.WAND_OF_ANIMATION)));
-		}
+    public record Unbaked() implements NoDataSpecialModelRenderer.Unbaked {
 
-		@Override
-		public @NonNull MapCodec<Unbaked> type() {
-			return MAP_CODEC;
-		}
-	}
+        public static final MapCodec<Unbaked> MAP_CODEC = MapCodec.unit(new Unbaked());
+
+        @Override
+        public @NonNull SpecialModelRenderer<Void> bake(BakingContext context) {
+            return new WandOfAnimationItemSpecialRenderer(new WandOfAnimationItemModel(context.entityModelSet().bakeLayer(ModItemRendering.WAND_OF_ANIMATION)));
+        }
+
+        @Override
+        public @NonNull MapCodec<Unbaked> type() {
+            return MAP_CODEC;
+        }
+    }
 
 }

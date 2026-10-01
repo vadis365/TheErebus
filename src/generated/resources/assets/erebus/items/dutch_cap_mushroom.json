@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/dutch_cap_mushroom"
+    "model": "erebus:item/dutch_cap_mushroom"
   }
 }

@@ -6,7 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import erebus.registries.world.tree.ModTrunkPlacers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.Mth;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,10 +15,9 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
-import org.apache.commons.compress.utils.Lists;
 import org.jspecify.annotations.NonNull;
 
-import java.util.List;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 public class BaobabTrunkPlacer extends TrunkPlacer {
@@ -42,56 +41,83 @@ public class BaobabTrunkPlacer extends TrunkPlacer {
 
     @Override
     public @NonNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NonNull WorldGenLevel level, @NonNull BiConsumer<BlockPos, BlockState> trunkSetter, RandomSource random, int treeHeight, @NonNull BlockPos origin, @NonNull TreeConfiguration config) {
-        List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
-
+        var attachments = new ArrayList<FoliagePlacer.FoliageAttachment>();
+        var logs = new LinkedHashMap<BlockPos, BlockState>();
         int radius = random.nextInt(2) + 3;
         int height = random.nextInt(radius) + 12;
-
-        for (int yOffset = 0; yOffset < height; yOffset++) {
-            if (yOffset % 5 == 0 && radius != 1) --radius;
-
-            for (int xOffset = -radius; xOffset <= radius; xOffset++) {
-                for (int zOffset = -radius; zOffset <= radius; zOffset++) {
-                    double sqrd = Mth.square(xOffset) + Mth.square(zOffset);
-                    double roundedRoot = Math.round(Math.sqrt(sqrd));
-                    int topBuffer = origin.getY() + height - 2;
-
-                    if (roundedRoot <= radius && origin.getY() + yOffset <= topBuffer) {
-                        placeLog(level, trunkSetter, random, origin.mutable().move(xOffset, yOffset, zOffset), config);
-                    }
+        int clearanceRadius = radius + 2;
+        // Preserve the reference's broad air clearance, including its actual sampled height.
+        for (int x = -clearanceRadius; x <= clearanceRadius; x++)
+            for (int z = -clearanceRadius; z <= clearanceRadius; z++)
+                for (int y = 1; y < height + 2; y++) {
+                    var pos = origin.offset(x, y, z);
+                    if (level.isOutsideBuildHeight(pos) || !level.getBlockState(pos).isAir()) return List.of();
                 }
-            }
-
-            if (yOffset == height - 2) {
-                createBranch(level, trunkSetter, config, list, random, origin.mutable().move(radius + 1, yOffset - random.nextInt(3), 0), Direction.Axis.X, true);
-                createBranch(level, trunkSetter, config, list, random, origin.mutable().move(-radius - 1, yOffset - random.nextInt(3), 0), Direction.Axis.X, false);
-                createBranch(level, trunkSetter, config, list, random, origin.mutable().move(0, yOffset - random.nextInt(3), radius + 1), Direction.Axis.Z, true);
-                createBranch(level, trunkSetter, config, list, random, origin.mutable().move(0, yOffset - random.nextInt(3), -radius - 1), Direction.Axis.Z, false);
+        for (int y = 0; y < height; y++) {
+            // Approved base-relative taper: planting elevation never changes the shape.
+            if (y % 5 == 0 && radius != 1) radius--;
+            for (int x = -radius; x <= radius; x++)
+                for (int z = -radius; z <= radius; z++) {
+                    if (Math.round(Math.sqrt(x * x + z * z)) <= radius && y <= height - 2)
+                        planLog(level, logs, random, config, origin.offset(x, y, z), Direction.Axis.Y);
+                }
+            if (y == height - 2) {
+                createBranch(level, logs, config, attachments, random, origin.offset(radius + 1, y - random.nextInt(3), 0), Direction.Axis.X, true);
+                createBranch(level, logs, config, attachments, random, origin.offset(-radius - 1, y - random.nextInt(3), 0), Direction.Axis.X, false);
+                createBranch(level, logs, config, attachments, random, origin.offset(0, y - random.nextInt(3), radius + 1), Direction.Axis.Z, true);
+                createBranch(level, logs, config, attachments, random, origin.offset(0, y - random.nextInt(3), -radius - 1), Direction.Axis.Z, false);
             }
         }
-
-        list.add(new FoliagePlacer.FoliageAttachment(origin.above(height), 0, false));
-
-        return list;
+        var targets = new HashSet<>(logs.keySet());
+        for (var attachment : attachments) {
+            int r = attachment.radiusOffset();
+            for (int x = -r; x <= r; x++)
+                for (int z = -r; z <= r; z++)
+                    for (int y = 0; y < 2; y++)
+                        if (Math.round(Math.sqrt(x * x + y * y + z * z)) <= r) targets.add(attachment.pos().offset(x, y, z));
+        }
+        // Branch-tip crowns can extend beyond the old clearance box. Validate them too.
+        for (var pos : targets) {
+            if (level.isOutsideBuildHeight(pos)) return List.of();
+            var state = level.getBlockState(pos);
+            if (!state.isAir() && !(pos.equals(origin) && state.is(BlockTags.SAPLINGS))) return List.of();
+        }
+        // Validate the actual tapered base, not just the five legacy soil probes.
+        for (var pos : logs.keySet()) {
+            if (pos.getY() != origin.getY()) continue;
+            var below = pos.below();
+            if (level.isOutsideBuildHeight(below)) return List.of();
+            var soil = level.getBlockState(below);
+            if (!(soil.is(BlockTags.DIRT) || soil.is(BlockTags.GRASS_BLOCKS)) || soil.hasBlockEntity()
+                    || !soil.getFluidState().isEmpty() || !soil.isFaceSturdy(level, below, Direction.UP)) return List.of();
+        }
+        logs.forEach(trunkSetter);
+        return attachments;
     }
 
-    private void createBranch(WorldGenLevel level, BiConsumer<BlockPos, BlockState> setter, TreeConfiguration config, List<FoliagePlacer.FoliageAttachment> list, RandomSource random, BlockPos pos, Direction.Axis axis, boolean positive) {
-        int branchLength = random.nextInt(2) + 2;
-        int y = 0;
+    @Override
+    public boolean isFree(WorldGenLevel level, BlockPos pos) {
+        return validTreePos(level, pos);
+    }
 
-        for (int c = 0; c < branchLength; c++) {
-            if (c >= 2) y++;
+    private void planLog(WorldGenLevel level, Map<BlockPos, BlockState> logs, RandomSource random, TreeConfiguration config, BlockPos pos, Direction.Axis axis) {
+        logs.put(pos.immutable(), config.trunkProvider.getState(level, random, pos).setValue(BlockStateProperties.AXIS, axis));
+    }
 
-            BlockPos place;
-
-            if (axis == Direction.Axis.X) {
-                place = pos.mutable().move(positive ? c : -c, y, 0);
-            } else {
-                place = pos.mutable().move(0, y, positive ? c : -c);
+    private void createBranch(WorldGenLevel level, Map<BlockPos, BlockState> logs, TreeConfiguration config,
+                              List<FoliagePlacer.FoliageAttachment> attachments, RandomSource random, BlockPos start, Direction.Axis axis, boolean positive) {
+        int length = random.nextInt(2) + 2;
+        int rise = 0;
+        for (int step = 0; step <= length; step++) {
+            if (step >= 2) rise++;
+            int distance = positive ? step : -step;
+            var pos = start.offset(axis == Direction.Axis.X ? distance : 0, rise, axis == Direction.Axis.Z ? distance : 0);
+            planLog(level, logs, random, config, pos, step >= 2 ? Direction.Axis.Y : axis);
+            if (step == length) {
+                var crown = pos.above();
+                planLog(level, logs, random, config, crown, Direction.Axis.Y);
+                attachments.add(new FoliagePlacer.FoliageAttachment(crown, length, false));
             }
-
-            placeLog(level, setter, random, place, config, state -> state.setValue(BlockStateProperties.AXIS, axis));
-            list.add(new FoliagePlacer.FoliageAttachment(place, 0, false));
         }
     }
 }

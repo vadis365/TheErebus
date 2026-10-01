@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:jade_block"
+            "items": "#c:storage_blocks/jade"
           }
         ]
       },

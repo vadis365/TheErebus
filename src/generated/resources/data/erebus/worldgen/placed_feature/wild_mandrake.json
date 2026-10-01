@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:wild_mandrake",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -2,10 +2,7 @@ package erebus.datagen.advancement;
 
 import erebus.Erebus;
 import net.minecraft.advancements.*;
-import net.minecraft.advancements.criterion.EntityPredicate;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.advancements.criterion.KilledTrigger;
-import net.minecraft.advancements.criterion.PlayerTrigger;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
@@ -20,8 +17,8 @@ import java.util.function.Supplier;
 
 public abstract class ModAdvancementsHelper implements AdvancementSubProvider {
 
-    private Consumer<AdvancementHolder> consumer;
     private final String prefix;
+    private Consumer<AdvancementHolder> consumer;
 
     public ModAdvancementsHelper(String prefix) {
         this.prefix = prefix;
@@ -33,10 +30,11 @@ public abstract class ModAdvancementsHelper implements AdvancementSubProvider {
 
     /**
      * Generic method to create advancement with one criterion
-     * @param displayItem The item to display for the advancement
-     * @param name The key for title and description translations
+     *
+     * @param displayItem   The item to display for the advancement
+     * @param name          The key for title and description translations
      * @param criterionName The name of the criterion
-     * @param criterion Criteria for completion
+     * @param criterion     Criteria for completion
      */
     protected AdvancementHolder createSimpleAdvancement(AdvancementType type, ItemLike displayItem, String name, String criterionName, Criterion<?> criterion) {
         return save(getBuilder(type, displayItem, name, criterionName, criterion), name);
@@ -44,10 +42,11 @@ public abstract class ModAdvancementsHelper implements AdvancementSubProvider {
 
     /**
      * Generic method to create advancement with one criterion and parent
-     * @param displayItem The item to display for the advancement
-     * @param name The key for title and description translations
+     *
+     * @param displayItem   The item to display for the advancement
+     * @param name          The key for title and description translations
      * @param criterionName The name of the criterion
-     * @param criterion Criteria for completion
+     * @param criterion     Criteria for completion
      */
     protected AdvancementHolder createSimpleAdvancementWithParent(AdvancementHolder parent, AdvancementType type, ItemLike displayItem, String name, String criterionName, Criterion<?> criterion) {
         return save(getBuilder(type, displayItem, name, criterionName, criterion).parent(parent), name);
@@ -94,7 +93,8 @@ public abstract class ModAdvancementsHelper implements AdvancementSubProvider {
     }
 
     protected Criterion<?> seen(HolderGetter<EntityType<? extends Entity>> lookup, Supplier<? extends EntityType<?>> entity) {
-        return PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().of(lookup, entity.get()));
+        return PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().subPredicate(
+                PlayerPredicate.Builder.player().setLookingAt(EntityPredicate.Builder.entity().of(lookup, entity.get())).build()));
     }
 
     private String getName(String name) {

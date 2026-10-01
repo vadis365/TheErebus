@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "erebus:compound_goggles"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "erebus:compound_goggles"
+      }
+    ]
+  }
+}

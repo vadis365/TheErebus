@@ -29,20 +29,16 @@ public class VinesFeatureConfiguration extends Feature<NoneFeatureConfiguration>
         BlockPos pos = context.origin();
         RandomSource random = context.random();
 
+        boolean placed = false;
         for (BlockPos check = pos; check.getY() < maxVineHeight + random.nextInt(variation) - random.nextInt(variation); check = check.above()) {
 
+            if (level.isOutsideBuildHeight(check)) continue;
             if (level.isAreaLoaded(check, 1) && level.isEmptyBlock(check)) {
                 for (Direction direction : HorizontalDirectionalBlock.FACING.getPossibleValues()) {
                     if (level.isAreaLoaded(check.relative(direction), 1)) {
                         if (VineBlock.isAcceptableNeighbour(level, check.relative(direction), direction.getOpposite())) {
-                            BlockState vine = Blocks.VINE.defaultBlockState();
-
-                            vine.setValue(VineBlock.NORTH, direction.getName().equals(Direction.NORTH.getName()));
-                            vine.setValue(VineBlock.SOUTH, direction.getName().equals(Direction.SOUTH.getName()));
-                            vine.setValue(VineBlock.EAST, direction.getName().equals(Direction.EAST.getName()));
-                            vine.setValue(VineBlock.WEST, direction.getName().equals(Direction.WEST.getName()));
-
-                            setBlock(level, check, vine);
+                            BlockState vine = Blocks.VINE.defaultBlockState().setValue(VineBlock.getPropertyForFace(direction), true);
+                            placed |= level.setBlock(check, vine, 2);
                             break;
                         }
                     } else {
@@ -52,6 +48,6 @@ public class VinesFeatureConfiguration extends Feature<NoneFeatureConfiguration>
             }
         }
 
-        return true;
+        return placed;
     }
 }

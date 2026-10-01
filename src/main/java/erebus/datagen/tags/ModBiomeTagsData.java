@@ -30,7 +30,7 @@ public class ModBiomeTagsData extends BiomeTagsProvider {
                 .add(ModBiomes.ULTERIOR_OUTBACK_KEY);
         tag(ModBiomeTags.HAS_LOCUST_SHRINE)
                 .add(ModBiomes.SUBTERRANEAN_SAVANNAH_KEY);
-        tag(ModBiomeTags.HAS_SPIDER_DUNGEON);
+        tag(ModBiomeTags.HAS_SPIDER_DUNGEON).addTag(ModBiomeTags.IS_EREBUS);
         tag(ModBiomeTags.HAS_SWAMP_HUT)
                 .add(ModBiomes.SUBMERGED_SWAMP_KEY);
         tag(ModBiomeTags.HAS_WASP_DUNGEON)

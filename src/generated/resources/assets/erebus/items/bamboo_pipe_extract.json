@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/bamboo_pipe_extract"
+    "model": "erebus:item/bamboo_pipe_extract"
   }
 }

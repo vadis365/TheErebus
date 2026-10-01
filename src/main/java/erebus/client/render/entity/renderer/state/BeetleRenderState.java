@@ -3,5 +3,5 @@ package erebus.client.render.entity.renderer.state;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 
 public class BeetleRenderState extends LivingEntityRenderState {
-     public int skin;
+    public int skin;
 }

@@ -52,12 +52,12 @@ public class ModToolMaterials {
             ModItemTags.ROLLED_NEWSPAPER_TOOL_MATERIALS
     );
 
-    public static final ToolMaterial SCORPION_PINCER =  new ToolMaterial(
+    public static final ToolMaterial SCORPION_PINCER = new ToolMaterial(
             BlockTags.INCORRECT_FOR_IRON_TOOL,
             863,
             1,
-            6,
-            18,
+            4,
+            12,
             ModItemTags.SCORPION_PINCER_TOOL_MATERIALS
     );
 

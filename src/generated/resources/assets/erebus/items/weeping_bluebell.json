@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/weeping_bluebell"
+    "model": "erebus:block/weeping_bluebell_bottom"
   }
 }

@@ -14,37 +14,37 @@ import net.minecraft.util.Mth;
 import org.jspecify.annotations.NonNull;
 
 public class GrasshopperRenderer extends MobRenderer<Grasshopper, GrasshopperRenderState, GrasshopperModel> {
-	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/grasshopper.png");
+    private static final Identifier TEXTURE = Erebus.prefix("textures/entity/grasshopper.png");
 
-	public GrasshopperRenderer(EntityRendererProvider.Context context) {
-		super(context, new GrasshopperModel(context.bakeLayer(ModEntityRendering.GRASSHOPPER)), 0.5F);
-	}
-	
-	@Override
-	protected void scale(GrasshopperRenderState state, PoseStack pose) {
-		float jumpAngle = Mth.sin(state.jump * (float) Math.PI);
-		pose.mulPose(Axis.XP.rotation(-jumpAngle * 10.0F * (float) (Math.PI / 180.0)));
-	}
+    public GrasshopperRenderer(EntityRendererProvider.Context context) {
+        super(context, new GrasshopperModel(context.bakeLayer(ModEntityRendering.GRASSHOPPER)), 0.5F);
+    }
 
-	@Override
-	public GrasshopperRenderState createRenderState() {
-		return new GrasshopperRenderState();
-	}
+    @Override
+    protected void scale(GrasshopperRenderState state, PoseStack pose) {
+        float jumpAngle = Mth.sin(state.jump * (float) Math.PI);
+        pose.mulPose(Axis.XP.rotation(-jumpAngle * 10.0F * (float) (Math.PI / 180.0)));
+    }
 
-	@Override
-	public void extractRenderState(Grasshopper entity, GrasshopperRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-		state.jump = entity.getJumpCompletion(partialTicks);
+    @Override
+    public GrasshopperRenderState createRenderState() {
+        return new GrasshopperRenderState();
+    }
 
-		float smoothedTicks = entity.animationTicks + (entity.animationTicks - entity.prevAnimationTicks) * partialTicks;
-		state.antSin = Mth.sin(smoothedTicks * 0.25F) * 0.125F;
-		state.antCos = Mth.cos(smoothedTicks * 0.25F) * 0.125F;
-		state.jumpAngle = Mth.sin(entity.getJumpCompletion(partialTicks) * Mth.PI);
-		state.isOnGround = entity.onGround();
-	}
+    @Override
+    public void extractRenderState(Grasshopper entity, GrasshopperRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+        state.jump = entity.getJumpCompletion(partialTicks);
 
-	@Override
-	public @NonNull Identifier getTextureLocation(GrasshopperRenderState state) {
-		return TEXTURE;
-	}
+        float smoothedTicks = entity.prevAnimationTicks + (entity.animationTicks - entity.prevAnimationTicks) * partialTicks;
+        state.antSin = Mth.sin(smoothedTicks * 0.25F) * 0.125F;
+        state.antCos = Mth.cos(smoothedTicks * 0.25F) * 0.125F;
+        state.jumpAngle = Mth.sin(entity.getJumpCompletion(partialTicks) * Mth.PI);
+        state.isOnGround = entity.onGround();
+    }
+
+    @Override
+    public @NonNull Identifier getTextureLocation(GrasshopperRenderState state) {
+        return TEXTURE;
+    }
 }

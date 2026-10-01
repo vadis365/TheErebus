@@ -1,5 +1,5 @@
 {
-    "parent": "minecraft:block/cube_all",
+    "parent": "minecraft:block/block",
     "textures": {
         "0": "erebus:block/keystone_sides",
         "1": "erebus:block/keystone_top",

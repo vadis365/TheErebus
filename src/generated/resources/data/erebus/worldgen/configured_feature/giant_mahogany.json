@@ -24,17 +24,12 @@
     "decorators": [
       {
         "type": "erebus:trunk_thorn_decorator"
-      },
-      {
-        "type": "erebus:leave_thorn_decorator",
-        "probability": 0.25
       }
     ],
     "foliage_placer": {
-      "type": "minecraft:jungle_foliage_placer",
-      "height": 2,
+      "type": "erebus:single_leaf_foliage_placer",
       "offset": 0,
-      "radius": 2
+      "radius": 0
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
@@ -55,10 +50,10 @@
       "upper_size": 2
     },
     "trunk_placer": {
-      "type": "minecraft:mega_jungle_trunk_placer",
-      "base_height": 10,
-      "height_rand_a": 2,
-      "height_rand_b": 19
+      "type": "erebus:giant_mahogany_trunk_placer",
+      "base_height": 20,
+      "height_rand_a": 4,
+      "height_rand_b": 2
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",

@@ -20,71 +20,71 @@ import org.jspecify.annotations.Nullable;
 
 public class BotFlyLarvaRenderer extends MobRenderer<BotFlyLarva, BotFlyLarvaRenderState, BotFlyLarvaModel> {
 
-	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/bot_fly_larva.png");
+    private static final Identifier TEXTURE = Erebus.prefix("textures/entity/bot_fly_larva.png");
 
-	public BotFlyLarvaRenderer(EntityRendererProvider.Context context) {
-		super(context, new BotFlyLarvaModel(context.bakeLayer(ModEntityRendering.BOT_FLY_LARVA)), 0.3F);
-	}
+    public BotFlyLarvaRenderer(EntityRendererProvider.Context context) {
+        super(context, new BotFlyLarvaModel(context.bakeLayer(ModEntityRendering.BOT_FLY_LARVA)), 0.3F);
+    }
 
-	@Override
-	public void submit(BotFlyLarvaRenderState state, @NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, @NonNull CameraRenderState camera) {
-		boolean isTranslucentToPlayer = !isBodyVisible(state) && !state.isInvisibleToPlayer;
-		int overlay = getOverlayCoords(state, getWhiteOverlayProgress(state));
-		int colour = isTranslucentToPlayer ? 654311423 : -1;
-		RenderType renderType = getRenderType(state, isBodyVisible(state), isTranslucentToPlayer, state.appearsGlowing());
+    @Override
+    public void submit(BotFlyLarvaRenderState state, @NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, @NonNull CameraRenderState camera) {
+        boolean isTranslucentToPlayer = !isBodyVisible(state) && !state.isInvisibleToPlayer;
+        int overlay = getOverlayCoords(state, getWhiteOverlayProgress(state));
+        int colour = isTranslucentToPlayer ? 654311423 : -1;
+        RenderType renderType = getRenderType(state, isBodyVisible(state), isTranslucentToPlayer, state.appearsGlowing());
 
-		if (renderType != null) {
-			pose.pushPose();
-			pose.mulPose(Axis.YN.rotationDegrees(state.yRot));
-			pose.scale(-0.6F, -0.6F, 0.6F);
-			pose.translate(0F, -1.6F, -0.2F);
+        if (renderType != null) {
+            pose.pushPose();
+            pose.mulPose(Axis.YN.rotationDegrees(state.yRot));
+            pose.scale(-0.6F, -0.6F, 0.6F);
+            pose.translate(0F, -1.6F, -0.2F);
 
-			if (state.parasiteCount > 0)
-				submit.submitModel(model, state, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, colour, null, state.outlineColor, null);
-			if (state.parasiteCount > 1) {
-				pose.pushPose();
-				pose.translate(0.5F, -0.4F, 0.0F);
-				submit.submitModel(model, state, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, colour, null, state.outlineColor, null);
-				pose.popPose();
-			}
-			if (state.parasiteCount > 2) {
-				pose.pushPose();
-				pose.translate(-0.5F, -0.4F, 0.0F);
-				submit.submitModel(model, state, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, colour, null, state.outlineColor, null);
-				pose.popPose();
-			}
-			pose.popPose();
-		}
-	}
+            if (state.parasiteCount > 0)
+                submit.submitModel(model, state, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, colour, null, state.outlineColor, null);
+            if (state.parasiteCount > 1) {
+                pose.pushPose();
+                pose.translate(0.5F, -0.4F, 0.0F);
+                submit.submitModel(model, state, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, colour, null, state.outlineColor, null);
+                pose.popPose();
+            }
+            if (state.parasiteCount > 2) {
+                pose.pushPose();
+                pose.translate(-0.5F, -0.4F, 0.0F);
+                submit.submitModel(model, state, pose, renderType, state.lightCoords, OverlayTexture.NO_OVERLAY, colour, null, state.outlineColor, null);
+                pose.popPose();
+            }
+            pose.popPose();
+        }
+    }
 
-	@Override
-	public BotFlyLarvaRenderState createRenderState() {
-		return new BotFlyLarvaRenderState();
-	}
+    @Override
+    public BotFlyLarvaRenderState createRenderState() {
+        return new BotFlyLarvaRenderState();
+    }
 
-	@Override
-	public void extractRenderState(BotFlyLarva entity, BotFlyLarvaRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-		state.parasiteCount = entity.getParasiteCount();
-	}
+    @Override
+    public void extractRenderState(BotFlyLarva entity, BotFlyLarvaRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+        state.parasiteCount = entity.getParasiteCount();
+    }
 
-	@Override
-	protected @Nullable RenderType getRenderType(BotFlyLarvaRenderState state, boolean isBodyVisible, boolean forceTransparent, boolean appearGlowing) {
-		if (!forceTransparent)
-			return RenderTypes.entityTranslucentEmissive(getTextureLocation(state));
-		else if (isBodyVisible)
-			return RenderTypes.entityCutout(getTextureLocation(state));
-		else
-			return appearGlowing ? RenderTypes.outline(getTextureLocation(state)) : null;
-	}
+    @Override
+    protected @Nullable RenderType getRenderType(BotFlyLarvaRenderState state, boolean isBodyVisible, boolean forceTransparent, boolean appearGlowing) {
+        if (!forceTransparent)
+            return RenderTypes.entityTranslucentEmissive(getTextureLocation(state));
+        else if (isBodyVisible)
+            return RenderTypes.entityCutout(getTextureLocation(state));
+        else
+            return appearGlowing ? RenderTypes.outline(getTextureLocation(state)) : null;
+    }
 
-	@Override
-	protected float getFlipDegrees() {
-		return 180F;
-	}
+    @Override
+    protected float getFlipDegrees() {
+        return 180F;
+    }
 
-	@Override
-	public @NonNull Identifier getTextureLocation(BotFlyLarvaRenderState state) {
-		return TEXTURE;
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(BotFlyLarvaRenderState state) {
+        return TEXTURE;
+    }
 }

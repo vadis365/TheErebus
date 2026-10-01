@@ -4,9 +4,15 @@
   "package": "erebus.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    //"HumanoidArmorLayerMixin"
+    "BasinTerrainMixin",
+    "FallenLogTreeClearanceMixin",
+    "NoiseGeneratorAccessor",
+    "StructureManagerAccessor",
+    "WaterStridersCollisionMixin"
   ],
   "client": [
+    "EntityLightMixin",
+    "GliderPoseMixin"
   ],
   "injectors": {
     "defaultRequire": 1

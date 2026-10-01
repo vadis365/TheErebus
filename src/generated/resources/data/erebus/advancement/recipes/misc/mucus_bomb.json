@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mucus_charge": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:mucus_charge"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "erebus:mucus_bomb"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mucus_charge"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "erebus:mucus_bomb"
+    ]
+  }
+}

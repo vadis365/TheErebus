@@ -1,17 +1,19 @@
 package erebus.entity;
 
-import erebus.client.particle.ClientParticles;
 import erebus.entity.ai.TarantulaMiniBossAttackGoal;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -37,31 +39,44 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gamerules.GameRules;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.neoforged.neoforge.event.EventHooks;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class TarantulaMiniBoss extends Monster {
 
+    private static final EntityDataAccessor<Byte> SKIN_TYPE = SynchedEntityData.defineId(TarantulaMiniBoss.class, EntityDataSerializers.BYTE);
     private final ServerBossEvent bossEvent = Util.make(
             new ServerBossEvent(
                     Mth.createInsecureUUID(random),
                     getDisplayName(),
                     BossEvent.BossBarColor.RED,
-                    BossEvent.BossBarOverlay.PROGRESS
+                    BossEvent.BossBarOverlay.NOTCHED_10
             ),
-            e -> e.setDarkenScreen(true)
+            e -> e.setDarkenScreen(false)
     );
-
-    private static final EntityDataAccessor<Byte> SKIN_TYPE = SynchedEntityData.defineId(TarantulaMiniBoss.class, EntityDataSerializers.BYTE);
     public int deathTicks;
 
     public TarantulaMiniBoss(EntityType<? extends Monster> type, Level level) {
         super(type, level);
+    }
+
+    public static AttributeSupplier.Builder createAttributes() {
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 300F)
+                .add(Attributes.MOVEMENT_SPEED, 0.9F)
+                .add(Attributes.ATTACK_DAMAGE, 8.0)
+                .add(Attributes.ARMOR, 8.0)
+                .add(Attributes.FOLLOW_RANGE, 32.0)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0);
     }
 
     @Override
@@ -90,13 +105,15 @@ public class TarantulaMiniBoss extends Monster {
         return false;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 300F)
-                .add(Attributes.MOVEMENT_SPEED, 0.9F)
-                .add(Attributes.ATTACK_DAMAGE, 8.0)
-                .add(Attributes.FOLLOW_RANGE, 32.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0);
+    @Override
+    public boolean canBeAffected(MobEffectInstance effect) {
+        return !effect.is(MobEffects.POISON) && super.canBeAffected(effect);
+    }
+
+    @Override
+    public void makeStuckInBlock(BlockState state, Vec3 speedMultiplier) {
+        if (!state.is(Blocks.COBWEB))
+            super.makeStuckInBlock(state, speedMultiplier);
     }
 
     @Override
@@ -123,11 +140,11 @@ public class TarantulaMiniBoss extends Monster {
     public void tick() {
         super.tick();
 
-        if(isInDesperation() && getFancyRenderOverlay()) {
+        if (isInDesperation() && getFancyRenderOverlay()) {
             entityData.set(SKIN_TYPE, (byte) 0);
         }
 
-        if(isInDesperation() && !isDeadOrDying() && getTarget() != null) {
+        if (isInDesperation() && !isDeadOrDying() && getTarget() != null) {
 
             forceCollideWithPlayer(getTarget(), distanceTo(getTarget()));
         }
@@ -140,34 +157,76 @@ public class TarantulaMiniBoss extends Monster {
     }
 
     @Override
+    public void setCustomName(@Nullable Component name) {
+        super.setCustomName(name);
+        bossEvent.setName(getDisplayName());
+    }
+
+    @Override
+    public void startSeenByPlayer(ServerPlayer player) {
+        super.startSeenByPlayer(player);
+        bossEvent.addPlayer(player);
+    }
+
+    @Override
+    public void stopSeenByPlayer(ServerPlayer player) {
+        super.stopSeenByPlayer(player);
+        bossEvent.removePlayer(player);
+    }
+
+    @Override
+    protected void addAdditionalSaveData(@NonNull ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putInt("GuardianDeathTicks", deathTicks);
+    }
+
+    @Override
+    protected void readAdditionalSaveData(@NonNull ValueInput input) {
+        super.readAdditionalSaveData(input);
+        bossEvent.setName(getDisplayName());
+        deathTicks = Mth.clamp(input.getIntOr("GuardianDeathTicks", 0), 0, 200);
+    }
+
+    // The extended death sequence owns the full XP reward, as with the Antlion boss.
+    @Override
+    protected void dropExperience(ServerLevel level, @Nullable Entity killer) {
+    }
+
+    @Override
     protected void tickDeath() {
         ++deathTicks;
         int xpCount = 1000;
 
         move(MoverType.SELF, new Vec3(0.0D, 0.310000000149011612D, 0.0D));
         walkAnimation.setSpeed(0.5F);
+        yBodyRot += 0.05F;
 
-        if(deathTicks % 25 == 1) {
+        if (deathTicks % 25 == 1) {
             playSound(getDeathSound(), 1.0F, 0.1F);
             playSound(SoundEvents.SPIDER_HURT, 1.0F, 0.1F);
             playSound(SoundEvents.GHAST_HURT, 1.0F, 0.1F);
         }
 
-        if(deathTicks >= 100 && deathTicks <= 200) {
-            ClientParticles.spawnParticles(ClientParticles.ParticleType.BOSS_DEATH, getX(), getY(), getZ(), 0, 0, 0);
+        if (deathTicks >= 180 && deathTicks <= 200 && level() instanceof ServerLevel server) {
+            server.sendParticles(ParticleTypes.EXPLOSION,
+                    getX() + (random.nextFloat() - 0.5F) * 8,
+                    getY() + 2 + (random.nextFloat() - 0.5F) * 4,
+                    getZ() + (random.nextFloat() - 0.5F) * 8, 1, 0, 0, 0, 0);
         }
 
         Level award = level();
-        if(award instanceof ServerLevel level) {
-            if(deathTicks > 150 && deathTicks % 5 == 0 && level.getGameRules().get(GameRules.MOB_DROPS)) {
-                int amount = EventHooks.getExperienceDrop(this, EntityReference.get(lastHurtByPlayer, level, Player.class), Mth.floor(xpCount * 0.08));
+        if (award instanceof ServerLevel level) {
+            if (deathTicks > 150 && deathTicks % 5 == 0 && level.getGameRules().get(GameRules.MOB_DROPS)) {
+                int amount = EventHooks.getExperienceDrop(this, EntityReference.get(lastHurtByPlayer, level, Player.class), xpCount);
                 ExperienceOrb.award(level, position(), amount);
             }
 
-            if(deathTicks == 200) {
-                int amount = EventHooks.getExperienceDrop(this, EntityReference.get(lastHurtByPlayer, level, Player.class), Mth.floor(xpCount * 2 * 0.08));
-                ExperienceOrb.award(level, position(), amount);
-                level.setBlock(blockPosition(), ModBlocks.TARANTULA_EGG.get().defaultBlockState(), Block.UPDATE_ALL);
+            if (deathTicks == 200) {
+                if (level.getGameRules().get(GameRules.MOB_DROPS)) {
+                    int amount = EventHooks.getExperienceDrop(this, EntityReference.get(lastHurtByPlayer, level, Player.class), xpCount * 2);
+                    ExperienceOrb.award(level, position(), amount);
+                }
+                releaseTrophyEgg(level);
                 drop(new ItemStack(ModItems.SPIDER_T_SHIRT.get()), true, false);
                 remove(RemovalReason.KILLED);
                 gameEvent(GameEvent.ENTITY_DIE);
@@ -175,13 +234,28 @@ public class TarantulaMiniBoss extends Monster {
         }
     }
 
+    protected void releaseTrophyEgg(ServerLevel level) {
+        var egg = ModBlocks.TARANTULA_EGG.get().defaultBlockState();
+        // Nearest Manhattan-distance candidates, bounded to three blocks per axis.
+        for (var candidate : BlockPos.withinManhattan(blockPosition(), 3, 3, 3)) {
+            if (level.isOutsideBuildHeight(candidate) || !level.getWorldBorder().isWithinBounds(candidate)
+                    || !level.hasChunkAt(candidate)) continue;
+            var state = level.getBlockState(candidate);
+            if (!state.isAir() || !state.getFluidState().isEmpty() || level.getBlockEntity(candidate) != null) continue;
+            if (!level.isUnobstructed(this, Shapes.block()
+                    .move(candidate.getX(), candidate.getY(), candidate.getZ()))) continue;
+            if (level.setBlock(candidate, egg, Block.UPDATE_ALL)) return;
+        }
+        drop(new ItemStack(ModBlocks.TARANTULA_EGG.get()), true, false);
+    }
+
     @Override
     public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity target) {
-        if(super.doHurtTarget(level, target)) {
-            if(target instanceof LivingEntity living) {
+        if (super.doHurtTarget(level, target)) {
+            if (target instanceof LivingEntity living) {
                 byte duration = 0;
 
-                if(random.nextInt(19) == 0) {
+                if (random.nextInt(19) == 0) {
                     switch (level.getDifficulty()) {
                         case NORMAL -> duration = 5;
                         case HARD -> duration = 10;
@@ -189,7 +263,7 @@ public class TarantulaMiniBoss extends Monster {
                     }
                 }
 
-                if(duration > 0) {
+                if (duration > 0) {
                     living.addEffect(new MobEffectInstance(MobEffects.POISON, duration * 20, 0, false, false));
                 }
             }
@@ -200,14 +274,11 @@ public class TarantulaMiniBoss extends Monster {
 
     @Override
     public boolean hurtServer(@NonNull ServerLevel level, @NonNull DamageSource source, float damage) {
-        if(isDeadOrDying()) {
-            setHealth(1.0F);
-            return true;
-        }
+        if (isDeadOrDying()) return false;
 
-        if(isInDesperation() && !source.isDirect()) return false;
-        if(!isInDesperation() && source.isDirect()) return false;
-        if(damage < 0.01F) return false;
+        if (isInDesperation() && !source.isDirect()) return false;
+        if (!isInDesperation() && source.isDirect()) return false;
+        if (damage < 0.01F) return false;
         return super.hurtServer(level, source, damage);
     }
 
@@ -226,7 +297,7 @@ public class TarantulaMiniBoss extends Monster {
         if (groupData == null) {
             groupData = new Spider.SpiderEffectsGroupData();
             if (level.getDifficulty() == Difficulty.HARD && random.nextFloat() < 0.1F * difficulty.getSpecialMultiplier()) {
-                ((Spider.SpiderEffectsGroupData)groupData).setRandomEffect(random);
+                ((Spider.SpiderEffectsGroupData) groupData).setRandomEffect(random);
             }
         }
 
@@ -241,16 +312,21 @@ public class TarantulaMiniBoss extends Monster {
     }
 
     @Override
-    public void addDeltaMovement(@NonNull Vec3 momentum) {
-        if(!isInDesperation()) {
-            momentum.multiply(1, 2, 1);
-            setOnGround(true);
-        } else {
-            momentum.multiply(2, 2, 2);
-            setOnGround(false);
-        }
+    public void push(double x, double y, double z) {
+        addDeltaMovement(new Vec3(x, y, z));
+    }
 
-        super.addDeltaMovement(momentum);
+    @Override
+    public void addDeltaMovement(@NonNull Vec3 momentum) {
+        if (!momentum.isFinite()) return;
+        // Legacy addVelocity used a fixed 150-health cutoff, not max-health scaling.
+        if (getHealth() > 150) {
+            setDeltaMovement(0, getDeltaMovement().y + momentum.y, 0);
+            needsSync = false;
+        } else {
+            super.addDeltaMovement(momentum);
+            needsSync = true;
+        }
     }
 
     public boolean getFancyRenderOverlay() {
@@ -264,6 +340,7 @@ public class TarantulaMiniBoss extends Monster {
                 double distanceX = target.getX() - getX();
                 double distanceZ = target.getZ() - getZ();
                 float sqrt = Mth.sqrt((float) (distanceX * distanceX + distanceZ * distanceZ));
+                if (sqrt < 1.0E-7F) return;
                 Vec3 movement = getDeltaMovement();
                 setDeltaMovement(new Vec3(distanceX / sqrt * 0.5D * 0.300000011920929D + movement.x * 0.10000000298023224D, 0, distanceZ / sqrt * 0.5D * 0.300000011920929D + movement.z * 0.10000000298023224D));
             }
@@ -274,6 +351,13 @@ public class TarantulaMiniBoss extends Monster {
     }
 
     public void spawnBlamParticles() {
-        ClientParticles.spawnParticles(ClientParticles.ParticleType.TARANTULA_BLAM, getX(), getY(), getZ(), 0, 0, 0);
+        if (level() instanceof ServerLevel server) {
+            for (int angle = 0; angle < 360; angle += 4) {
+                double radians = Math.toRadians(angle);
+                double x = -Math.sin(radians), z = Math.cos(radians);
+                server.sendParticles(ParticleTypes.CLOUD,
+                        getX() + x * 3, getY(), getZ() + z * 3, 0, x * 0.5, 0.1, z * 0.5, 1);
+            }
+        }
     }
 }

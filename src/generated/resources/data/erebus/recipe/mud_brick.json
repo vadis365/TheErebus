@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 0.2,
+  "ingredient": "erebus:mud",
+  "result": {
+    "id": "erebus:mud_brick"
+  }
+}

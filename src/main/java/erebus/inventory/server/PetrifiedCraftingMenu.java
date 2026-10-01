@@ -1,5 +1,6 @@
 package erebus.inventory.server;
 
+import erebus.entity.AnimatedBlock;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModMenuTypes;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +34,7 @@ public class PetrifiedCraftingMenu extends AbstractCraftingMenu {
     private static final int USE_ROW_SLOT_END = 46;
     private final ContainerLevelAccess access;
     private final Player player;
+    private final @Nullable AnimatedBlock animatedTable;
     private boolean placingRecipe;
 
     public PetrifiedCraftingMenu(int containerID, Inventory inventory) {
@@ -39,9 +42,18 @@ public class PetrifiedCraftingMenu extends AbstractCraftingMenu {
     }
 
     public PetrifiedCraftingMenu(int containerID, Inventory inventory, ContainerLevelAccess access) {
+        this(containerID, inventory, access, null);
+    }
+
+    public PetrifiedCraftingMenu(int containerID, Inventory inventory, AnimatedBlock table) {
+        this(containerID, inventory, ContainerLevelAccess.create(table.level(), table.blockPosition()), table);
+    }
+
+    private PetrifiedCraftingMenu(int containerID, Inventory inventory, ContainerLevelAccess access, @Nullable AnimatedBlock table) {
         super(ModMenuTypes.PETRIFIED_CRAFTING_MENU.get(), containerID, CRAFTING_GRID_WIDTH, CRAFTING_GRID_HEIGHT);
         this.access = access;
         this.player = inventory.player;
+        this.animatedTable = table;
         this.addResultSlot(player, 124, 35);
         this.addCraftingGridSlots(30, 17);
         this.addStandardInventorySlots(inventory, 8, 84);
@@ -53,13 +65,13 @@ public class PetrifiedCraftingMenu extends AbstractCraftingMenu {
         ItemStack result = ItemStack.EMPTY;
         Optional<RecipeHolder<CraftingRecipe>> recipeLookup = level.getServer().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, input, level, recipeHint);
 
-        if(recipeLookup.isPresent()) {
+        if (recipeLookup.isPresent()) {
             RecipeHolder<CraftingRecipe> recipeHolder = recipeLookup.get();
             CraftingRecipe recipe = recipeHolder.value();
 
-            if(resultSlots.setRecipeUsed(serverPlayer, recipeHolder)) {
+            if (resultSlots.setRecipeUsed(serverPlayer, recipeHolder)) {
                 ItemStack recipeResult = recipe.assemble(input);
-                if(recipeResult.isItemEnabled(level.enabledFeatures())) {
+                if (recipeResult.isItemEnabled(level.enabledFeatures())) {
                     result = recipeResult;
                 }
             }
@@ -72,9 +84,9 @@ public class PetrifiedCraftingMenu extends AbstractCraftingMenu {
 
     @Override
     public void slotsChanged(@NonNull Container container) {
-        if(!placingRecipe) {
+        if (!placingRecipe) {
             access.execute((level, _) -> {
-                if(level instanceof ServerLevel serverLevel) {
+                if (level instanceof ServerLevel serverLevel) {
                     slotChangedCraftingGrid(this, serverLevel, player, craftSlots, resultSlots, null);
                 }
             });
@@ -125,24 +137,24 @@ public class PetrifiedCraftingMenu extends AbstractCraftingMenu {
         ItemStack clicked = ItemStack.EMPTY;
         Slot slot = slots.get(index);
 
-        if(slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack stack = slot.getItem();
             clicked = stack.copy();
 
-            if(index == RESULT_SLOT) {
+            if (index == RESULT_SLOT) {
                 stack.getItem().onCraftedBy(stack, player);
-                if(!moveItemStackTo(stack, INV_SLOT_START, USE_ROW_SLOT_END, true)) {
+                if (!moveItemStackTo(stack, INV_SLOT_START, USE_ROW_SLOT_END, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onQuickCraft(stack, clicked);
-            } else if(index >= INV_SLOT_START && index < USE_ROW_SLOT_END) {
+            } else if (index >= INV_SLOT_START && index < USE_ROW_SLOT_END) {
                 if (!moveItemStackTo(stack, CRAFT_SLOT_START, CRAFT_SLOT_END, false)) {
-                    if(index < INV_SLOT_END) {
-                        if(!moveItemStackTo(stack, USE_ROW_SLOT_START, USE_ROW_SLOT_END, false)) {
+                    if (index < INV_SLOT_END) {
+                        if (!moveItemStackTo(stack, USE_ROW_SLOT_START, USE_ROW_SLOT_END, false)) {
                             return ItemStack.EMPTY;
                         }
-                    } else if(!moveItemStackTo(stack, INV_SLOT_START, INV_SLOT_END, false)) {
+                    } else if (!moveItemStackTo(stack, INV_SLOT_START, INV_SLOT_END, false)) {
                         return ItemStack.EMPTY;
                     }
                 }
@@ -150,19 +162,19 @@ public class PetrifiedCraftingMenu extends AbstractCraftingMenu {
                 return ItemStack.EMPTY;
             }
 
-            if(stack.isEmpty()) {
+            if (stack.isEmpty()) {
                 slot.setByPlayer(ItemStack.EMPTY);
             } else {
                 slot.setChanged();
             }
 
-            if(stack.getCount() == clicked.getCount()) {
+            if (stack.getCount() == clicked.getCount()) {
                 return ItemStack.EMPTY;
             }
 
             slot.onTake(player, stack);
 
-            if(index == RESULT_SLOT) {
+            if (index == RESULT_SLOT) {
                 player.drop(stack, false);
             }
         }
@@ -172,6 +184,12 @@ public class PetrifiedCraftingMenu extends AbstractCraftingMenu {
 
     @Override
     public boolean stillValid(@NonNull Player player) {
+        if (animatedTable != null) {
+            return animatedTable.isAlive()
+                    && animatedTable.level() == player.level()
+                    && animatedTable.getBlockType().is(ModBlocks.PETRIFIED_CRAFTING_TABLE.get())
+                    && player.isWithinEntityInteractionRange(animatedTable, 4.0);
+        }
         return stillValid(access, player, ModBlocks.PETRIFIED_CRAFTING_TABLE.get());
     }
 }

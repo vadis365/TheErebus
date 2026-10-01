@@ -4,7 +4,7 @@ import erebus.client.particle.ClientParticles;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.data.tags.ModBiomeTags;
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
@@ -12,34 +12,36 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.event.EventHooks;
 
 public class FungalWeevil extends Weevil {
 
-	public FungalWeevil(EntityType<? extends Weevil> type, Level level) {
-		super(type, level);
-	}
+    public FungalWeevil(EntityType<? extends Weevil> type, Level level) {
+        super(type, level);
+    }
 
-	public static boolean canSpawnHereAlt(EntityType<FungalWeevil> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
-		float light = level.getLightLevelDependentMagicValue(pos);
-		return light >= 0F;
-	}
+    public static boolean canSpawnHereAlt(EntityType<FungalWeevil> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
+        float light = level.getLightLevelDependentMagicValue(pos);
+        return light >= 0F;
+    }
 
-	@Override
-	public void tick() {
-		if (level().isClientSide())
-			ClientParticles.spawnParticles(ClientParticles.ParticleType.SPORES, getX() + (random.nextDouble() - 0.5D) * getBbWidth(), getBoundingBox().minY + random.nextDouble() * getBbHeight() - 0.25D, getZ() + (random.nextDouble() - 0.5D) * getBbWidth(), 1.0D + random.nextDouble(), 1.0D + random.nextDouble(), 1.0D + random.nextDouble());
-		if (!level().isClientSide()) {
-			if (random.nextInt(200) == 0) {
-				BlockState state = level().getBlockState(blockPosition().below());
-				// TODO Add all biomes to Tags as individuals just in case we need them for anything else later
-				if (level().isEmptyBlock(blockPosition()) && level().getBiome(blockPosition()).is(ModBiomeTags.IS_FUNGAL_FOREST) && state.is(BlockTags.DIRT)) {
-					// TODO Replace this to pull one of the random mushrooms from its loot table drop and plant it as a block
-					level().setBlockAndUpdate(blockPosition(), getMushroomToPlace());
-				}
-			}
-		}
-		super.tick();
-	}
+    @Override
+    public void tick() {
+        if (level().isClientSide())
+            ClientParticles.spawnParticles(ClientParticles.ParticleType.SPORES, getX() + (random.nextDouble() - 0.5D) * getBbWidth(), getBoundingBox().minY + random.nextDouble() * getBbHeight() - 0.25D, getZ() + (random.nextDouble() - 0.5D) * getBbWidth(), 1.0D + random.nextDouble(), 1.0D + random.nextDouble(), 1.0D + random.nextDouble());
+        if (level() instanceof ServerLevel server && isAlive()) {
+            if (random.nextInt(200) == 0) {
+                BlockPos pos = blockPosition();
+                if (server.isInWorldBounds(pos) && server.getWorldBorder().isWithinBounds(pos)
+                        && server.isEmptyBlock(pos) && server.getBiome(pos).is(ModBiomeTags.IS_FUNGAL_FOREST)
+                        && EventHooks.canEntityGrief(server, this)) {
+                    BlockState mushroom = getMushroomToPlace();
+                    if (mushroom.canSurvive(server, pos)) server.setBlockAndUpdate(pos, mushroom);
+                }
+            }
+        }
+        super.tick();
+    }
 
     public BlockState getMushroomToPlace() {
         return switch (random.nextInt(7)) {

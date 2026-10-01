@@ -10,37 +10,32 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
-public class TarantulaModel extends EntityModel<TarantulaRenderState> {
-    public ModelPart root;
+public class TarantulaModel<S extends TarantulaRenderState> extends EntityModel<S> {
     private final ModelPart Body, RearEnd, Head;
     private final ModelPart Left_Fang, Right_Fang, Left_Pincerthing, Right_Pincerthing;
     private final ModelPart Left_Spinneret, Right_Spinneret;
     private final ModelPart Leg1, LegE1, Leg2, LegE2, Leg3, LegE3, Leg4, LegE4;
     private final ModelPart Leg1F, LegEF1, Leg2F, LegEF2, Leg3F, LegEF3, Leg4F, LegEF4;
-
     // Normal Legs
     private final float Pair1Z = 1.4F;
     private final float Pair2Z = 1F;
     private final float Pair3Z = 1.2F;
     private final float Pair4Z = 1F;
-
     private final float Pair1Y = 0.8F;
     private final float Pair2Y = 0.5F;
     private final float Pair3Y = 0.3F;
     private final float Pair4Y = 0.6F;
-
     // Extension Legs
     private final float PairE1Z = 0.3F;
     private final float PairE2Z = 1.3F;
     private final float PairE3Z = 1.8F;
     private final float PairE4Z = 1.2F;
-
     private final float PairE1Y = 1.4F;
     private final float PairE2Y = 0.5F;
     private final float PairE3Y = 0.3F;
     private final float PairE4Y = 0.6F;
-
     private final float legSpeed = 1.1F;
+    public ModelPart root;
 
     public TarantulaModel(ModelPart root) {
         super(root);
@@ -118,7 +113,7 @@ public class TarantulaModel extends EntityModel<TarantulaRenderState> {
     }
 
     @Override
-    public void setupAnim(TarantulaRenderState state) {
+    public void setupAnim(S state) {
         super.setupAnim(state);
 
         Head.yRot = state.yRot / (180F / (float) Math.PI);

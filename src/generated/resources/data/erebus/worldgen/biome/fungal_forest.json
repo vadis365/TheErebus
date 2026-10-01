@@ -14,8 +14,7 @@
     [],
     [],
     [
-      "erebus:big_logs_x",
-      "erebus:big_logs_z",
+      "erebus:fallen_log_population",
       "erebus:rotten_tree_stump",
       "erebus:rotten_acacia"
     ],
@@ -42,14 +41,12 @@
     [],
     [],
     [
-      "erebus:cypress",
-      "erebus:dark_capped_mushroom",
-      "erebus:dutch_cap_mushroom",
-      "erebus:grandmas_shoes_mushroom",
-      "erebus:kaizers_fingers_mushroom",
-      "erebus:sarcastic_czech_mushroom",
+      "erebus:giant_mushroom_population",
+      "erebus:small_mushroom_population",
+      "erebus:vanilla_giant_mushroom_population",
       "erebus:tangled_stalk",
       "erebus:high_capped_mushroom",
+      "erebus:glowshroom_population",
       "erebus:fern",
       "erebus:moss"
     ]

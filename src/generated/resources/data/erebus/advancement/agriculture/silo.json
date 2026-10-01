@@ -1,0 +1,58 @@
+{
+  "parent": "erebus:agriculture/varnished_planks",
+  "criteria": {
+    "roof": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:silo_roof"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "supports": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:silo_supports"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "tank": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:silo_tank"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/silo.desc"
+    },
+    "icon": {
+      "id": "erebus:silo_supports"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/silo.title"
+    }
+  },
+  "requirements": [
+    [
+      "roof"
+    ],
+    [
+      "tank"
+    ],
+    [
+      "supports"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 
 public class LightningAltarBlockEntityRenderState extends BlockEntityRenderState {
     public int animationTicks;
+    public float facingRotation = 180;
 
     public int getStep() {
         if (animationTicks <= 4)

@@ -2,6 +2,7 @@ package erebus.world.feature.misc.config;
 
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -26,21 +27,21 @@ public class GasVentFeatureConfiguration extends Feature<NoneFeatureConfiguratio
         int z = pos.getZ();
         float angle, length;
 
-        for (int attempt = 0, placed = 0, xx, yy, zz; attempt < 10 && placed < 5; attempt++) {
+        int placed = 0;
+        for (int attempt = 0, xx, yy, zz; attempt < 10 && placed < 5; attempt++) {
             angle = (float) (random.nextDouble() * Math.PI * 2.0D);
             length = random.nextFloat() * (0.3F + random.nextFloat() * 0.7F) * 7.0F;
 
-            xx = (int) (x + 0.5F + Math.cos(angle) * length);
+            xx = (int) (x + 0.5F + Mth.cos(angle) * length);
             yy = y + random.nextInt(3) - random.nextInt(3);
-            zz = (int) (z + 0.5F + Math.sin(angle) * length);
+            zz = (int) (z + 0.5F + Mth.sin(angle) * length);
             BlockPos newPos = new BlockPos(xx, yy, zz);
 
-            if (level.isEmptyBlock(newPos.above()) && level.getBlockState(newPos).is(Blocks.GRASS_BLOCK)) {
-                level.setBlock(newPos, ModBlocks.SWAMP_VENT.get().defaultBlockState(), 2);
-                ++placed;
-            }
+            if (!level.isOutsideBuildHeight(newPos) && !level.isOutsideBuildHeight(newPos.above())
+                    && level.isEmptyBlock(newPos.above()) && level.getBlockState(newPos) == Blocks.GRASS_BLOCK.defaultBlockState()
+                    && level.setBlock(newPos, ModBlocks.SWAMP_VENT.get().defaultBlockState(), 2)) ++placed;
         }
 
-        return true;
+        return placed > 0;
     }
 }

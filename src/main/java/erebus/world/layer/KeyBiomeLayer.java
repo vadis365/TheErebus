@@ -27,14 +27,14 @@ import java.util.function.LongFunction;
 public record KeyBiomeLayer(List<ResourceKey<Biome>> keyBiomes) implements AreaTransformer1 {
     @Override
     public ResourceKey<Biome> applyPixel(RandomContext context, Area layer, int x, int z) {
-        final Random random = new Random(LevelUtils.getOverworldSeed() + (x & -4) * 2511L + (z & -4)  * 151121L);
+        final Random random = new Random(LevelUtils.getOverworldSeed() + (x & -4) * 2511L + (z & -4) * 151121L);
         int ox = random.nextInt(2) + 1;
         int oz = random.nextInt(2) + 1;
         random.setSeed(LevelUtils.getOverworldSeed() + (x / 8) * 2511L + (z / 8) * 151121L);
         int offset = random.nextInt(3);
 
-        if((x & 3) == ox && (z & 3) == oz) {
-            if((x & 4) == 0) {
+        if ((x & 3) == ox && (z & 3) == oz) {
+            if ((x & 4) == 0) {
                 return (z & 4) == 0 ? getKeyBiomeFor(offset) : getKeyBiomeFor(offset + 1);
             } else {
                 return (z & 4) == 0 ? getKeyBiomeFor(offset + 2) : getKeyBiomeFor(offset + 3);

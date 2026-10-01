@@ -6,24 +6,22 @@ import erebus.recipes.smoothie.SmoothieRecipeInput;
 import erebus.registries.ModCustomRecipes;
 import erebus.registries.blocks.ModBlockEntities;
 import erebus.registries.data.ModDataComponents;
-import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.network.Connection;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -32,7 +30,6 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
@@ -40,90 +37,106 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.Optional;
+import java.util.ArrayList;
 
 public class BlenderBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 
-    public final FluidStacksResourceHandler tanks = new FluidStacksResourceHandler(4, FluidType.BUCKET_VOLUME * 8);
-    public final RecipeManager.CachedCheck<SmoothieRecipeInput, SmoothieRecipe> quickCheck = RecipeManager.createCheck(ModCustomRecipes.SMOOTHIE_RECIPE.get());
+    public static final int TANK_CAPACITY = FluidType.BUCKET_VOLUME * 8;
     private static final int MAX_TIME = 432;
+    public final FluidStacksResourceHandler tanks = new FluidStacksResourceHandler(4, TANK_CAPACITY) {
+        @Override
+        protected void onContentsChanged(int index, FluidStack previous) {
+            setChanged();
+        }
+    };
+    public final RecipeManager.CachedCheck<SmoothieRecipeInput, SmoothieRecipe> quickCheck = RecipeManager.createCheck(ModCustomRecipes.SMOOTHIE_RECIPE.get());
+    private final ContainerData data = new ContainerData() {
+        public int get(int index) {
+            return progress;
+        }
+
+        public void set(int index, int value) {
+            progress = value;
+        }
+
+        public int getCount() {
+            return 1;
+        }
+    };
     private int progress = 0;
     private int prevProgress = 0;
-    protected ItemStack output = ItemStack.EMPTY;
 
     public BlenderBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.BLENDER.get(), 5, pos, state);
     }
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState blockState, T entity) {
-        if (entity instanceof BlenderBlockEntity blender) {
-            if(level.isClientSide()) {
-                blender.prevProgress = blender.progress;
-                return;
-            }
-
-            NonNullList<ItemStack> itemInputs = NonNullList.create();
-            for(int c = 0; c < 4; c++) {
-                if(!blender.getItem(c).isEmpty())
-                    itemInputs.add(blender.getItem(c));
-            }
-
-            NonNullList<SizedFluidIngredient> fluidInputs = NonNullList.create();
-            for(int c = 0; c < 4; c++) {
-                FluidResource fluid = blender.tanks.getResource(c);
-                if(!fluid.isEmpty()) {
-                    fluidInputs.add(SizedFluidIngredient.of(fluid.getFluid(), FluidType.BUCKET_VOLUME));
-                }
-            }
-
-            SmoothieRecipeInput input = new SmoothieRecipeInput(fluidInputs, itemInputs);
-
-            Optional<RecipeHolder<SmoothieRecipe>> optional = blender.quickCheck.getRecipeFor(input, (ServerLevel) level);
-
-            if(optional.isPresent()) {
-                SmoothieRecipe recipe = optional.get().value();
-                blender.output = recipe.assemble(input);
-                blender.progress++;
-
-                if(blender.progress >= MAX_TIME) {
-                    for(int c = 0; c < 5; c++) {
-                        if(!blender.getItem(c).isEmpty()) {
-                            blender.getItem(c).shrink(1);
-                        }
-                    }
-
-                    blender.extractFluids(recipe);
-                    blender.setItem(4, blender.output.copy());
-                    blender.progress = 0;
-                    setChanged(level, pos, blockState);
-                }
+        if (!(entity instanceof BlenderBlockEntity blender)) return;
+        if (level.isClientSide()) {
+            blender.prevProgress = blender.progress;
+            return;
+        }
+        var input = blender.recipeInput();
+        var match = blender.quickCheck.getRecipeFor(input, (ServerLevel) level);
+        int previous = blender.progress;
+        if (match.isEmpty()) {
+            blender.progress = 0;
+        } else {
+            blender.progress++;
+            if (blender.progress >= MAX_TIME) {
+                blender.craft(match.get().value(), input);
+                blender.progress = 0;
             }
         }
+        if (previous != blender.progress) blender.setChanged();
     }
 
-    private void extractFluids(SmoothieRecipe recipe) {
-        try(Transaction tx = Transaction.openRoot()) {
-            for (SizedFluidIngredient fluidIngredient : recipe.getFluidIngredients()) {
-                for (int c = 0; c < 4; c++) {
-                    FluidResource resource = tanks.getResource(c);
-                    if (fluidIngredient.test(new FluidStack(resource.getFluid(), tanks.getAmountAsInt(c)))) {
-                        tanks.extract(resource, fluidIngredient.amount(), tx);
-                        break;
-                    }
-                }
+    private SmoothieRecipeInput recipeInput() {
+        var fluids = new ArrayList<FluidStack>();
+        for (int tank = 0; tank < 4; tank++) fluids.add(tanks.getResource(tank).toStack(tanks.getAmountAsInt(tank)));
+        return new SmoothieRecipeInput(fluids, getItems());
+    }
+
+    private void craft(SmoothieRecipe recipe, SmoothieRecipeInput input) {
+        int[] items = recipe.itemConsumption(input);
+        int[] fluids = recipe.fluidAssignments(input);
+        if (items == null || fluids == null) return;
+        try (Transaction transaction = Transaction.openRoot()) {
+            for (int ingredient = 0; ingredient < fluids.length; ingredient++) {
+                int tank = fluids[ingredient];
+                int amount = recipe.getFluidIngredients().get(ingredient).amount();
+                if (tanks.extract(tank, tanks.getResource(tank), amount, transaction) != amount) return;
             }
-            tx.commit();
+            transaction.commit();
         }
+        for (int slot = 0; slot < 4; slot++) getItem(slot).shrink(items[slot]);
+        setItem(4, recipe.assemble(input));
+        setChanged();
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return Container.stillValidBlockEntity(this, player);
+    }
+
+    @Override
+    public int getMaxStackSize(ItemStack stack) {
+        return BlenderMenu.isContainer(stack) ? 1 : super.getMaxStackSize(stack);
+    }
+
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack stack) {
+        return slot == 4 ? BlenderMenu.isContainer(stack) && getItem(4).isEmpty() : !BlenderMenu.isContainer(stack);
     }
 
     @Override
     public boolean canPlaceItemThroughFace(int i, @NotNull ItemStack itemStack, @Nullable Direction direction) {
-        return true;
+        return canPlaceItem(i, itemStack);
     }
 
     @Override
     public boolean canTakeItemThroughFace(int i, @NotNull ItemStack itemStack, @NotNull Direction direction) {
-        return true;
+        return i == 4 && !BlenderMenu.isContainer(itemStack);
     }
 
     @Override
@@ -138,7 +151,7 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int containerId, @NotNull Inventory inventory, @NotNull Player player) {
-        return new BlenderMenu(containerId, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
+        return new BlenderMenu(containerId, inventory, this, data, tanks);
     }
 
     public float getBlendProgress() {

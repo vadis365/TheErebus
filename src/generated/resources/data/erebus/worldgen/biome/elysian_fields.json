@@ -13,7 +13,9 @@
     [],
     [],
     [],
-    [],
+    [
+      "erebus:pond"
+    ],
     [],
     [
       "erebus:red_gem",
@@ -37,12 +39,13 @@
     [],
     [],
     [
-      "erebus:cypress",
-      "erebus:giant_flower",
+      "erebus:cypress_population",
+      "erebus:giant_flower_population",
       "erebus:nettle",
       "erebus:tall_bloom",
       "erebus:weeping_bluebell",
       "erebus:fern",
+      "erebus:dark_fruit_vine_population",
       "erebus:moss",
       "erebus:grass"
     ]
@@ -106,14 +109,14 @@
     "monster": [
       {
         "type": "erebus:fly",
-        "maxCount": 2,
-        "minCount": 1,
+        "maxCount": 8,
+        "minCount": 8,
         "weight": 10
       },
       {
         "type": "erebus:dragon_fly",
-        "maxCount": 8,
-        "minCount": 8,
+        "maxCount": 2,
+        "minCount": 1,
         "weight": 10
       },
       {

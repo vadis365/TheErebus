@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BucketPickup;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,10 +29,14 @@ public class BamBucketItem extends BucketItem {
         super(fluid, properties);
     }
 
+    public static @NonNull ItemStack getEmptySuccessItem(@NonNull ItemStack stack, Player player) {
+        return !player.hasInfiniteMaterials() ? new ItemStack(ModItems.BAMBUCKET.get()) : stack;
+    }
+
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, Player player, @NonNull InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        BlockHitResult hitResult = getPlayerPOVHitResult(level, player, getContent() == Fluids.EMPTY ? net.minecraft.world.level.ClipContext.Fluid.SOURCE_ONLY : net.minecraft.world.level.ClipContext.Fluid.NONE);
+        BlockHitResult hitResult = getPlayerPOVHitResult(level, player, getContent() == Fluids.EMPTY ? ClipContext.Fluid.SOURCE_ONLY : ClipContext.Fluid.NONE);
         if (hitResult.getType() == HitResult.Type.MISS) {
             return InteractionResult.PASS;
         } else if (hitResult.getType() != HitResult.Type.BLOCK) {
@@ -51,7 +56,7 @@ public class BamBucketItem extends BucketItem {
                             level.gameEvent(player, GameEvent.FLUID_PICKUP, pos);
                             ItemStack result = ItemUtils.createFilledResult(stack, player, taken);
                             if (!level.isClientSide()) {
-                                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer)player, taken);
+                                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, taken);
                             }
 
                             return InteractionResult.SUCCESS.heldItemTransformedTo(result);
@@ -65,7 +70,7 @@ public class BamBucketItem extends BucketItem {
                     if (this.emptyContents(player, level, placePos, hitResult, stack)) {
                         this.checkExtraContent(player, level, stack, placePos);
                         if (player instanceof ServerPlayer) {
-                            CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer)player, placePos, stack);
+                            CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, placePos, stack);
                         }
 
                         player.awardStat(Stats.ITEM_USED.get(this));
@@ -79,9 +84,5 @@ public class BamBucketItem extends BucketItem {
                 return InteractionResult.FAIL;
             }
         }
-    }
-
-    public static @NonNull ItemStack getEmptySuccessItem(@NonNull ItemStack stack, Player player) {
-        return !player.hasInfiniteMaterials() ? new ItemStack(ModItems.BAMBUCKET.get()) : stack;
     }
 }

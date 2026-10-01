@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "E": "erebus:reinforced_plate_exo",
-    "I": "minecraft:iron_ingot",
+    "I": "#c:ingots/iron",
     "P": "erebus:scorpion_pincer"
   },
   "pattern": [

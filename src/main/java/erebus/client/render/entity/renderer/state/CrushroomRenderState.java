@@ -3,6 +3,6 @@ package erebus.client.render.entity.renderer.state;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 
 public class CrushroomRenderState extends LivingEntityRenderState {
-    public int smashCount;
+    public float smashCount;
     public byte standing;
 }

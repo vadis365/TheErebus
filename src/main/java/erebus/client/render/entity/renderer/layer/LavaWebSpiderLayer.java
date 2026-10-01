@@ -19,20 +19,20 @@ public class LavaWebSpiderLayer extends RenderLayer<LavaWebSpiderRenderState, La
     private final LavaWebSpiderModel model;
 
     public LavaWebSpiderLayer(RenderLayerParent<LavaWebSpiderRenderState, LavaWebSpiderModel> entity, EntityModelSet modelSet) {
-    	super(entity);
-    	this.model = new LavaWebSpiderModel(modelSet.bakeLayer(ModEntityRendering.LAVA_WEB_SPIDER_FLOW));
+        super(entity);
+        this.model = new LavaWebSpiderModel(modelSet.bakeLayer(ModEntityRendering.LAVA_WEB_SPIDER_FLOW));
     }
 
-	@Override
-	public void submit(@NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, LavaWebSpiderRenderState state, float xRot, float yRot) {
-		submit.submitModelPart(model.ThxTop, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
-		submit.submitModelPart(model.ThxS, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
-		submit.submitModelPart(model.AbTop1, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
-		submit.submitModelPart(model.AbTop2, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
-		submit.submitModelPart(model.ABot1, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
-		submit.submitModelPart(model.AbBack, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
-		submit.submitModelPart(model.AbCore1, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
-		submit.submitModelPart(model.AbCore2, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
-		submit.submitModelPart(model.AbCore3, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
-	}
+    @Override
+    public void submit(@NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, LavaWebSpiderRenderState state, float xRot, float yRot) {
+        submit.submitModelPart(model.ThxTop, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
+        submit.submitModelPart(model.ThxS, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
+        submit.submitModelPart(model.AbTop1, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
+        submit.submitModelPart(model.AbTop2, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
+        submit.submitModelPart(model.ABot1, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
+        submit.submitModelPart(model.AbBack, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
+        submit.submitModelPart(model.AbCore1, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
+        submit.submitModelPart(model.AbCore2, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
+        submit.submitModelPart(model.AbCore3, pose, RenderTypes.entityCutout(LIGHTING_TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, null, false, false, -1, null, state.outlineColor);
+    }
 }

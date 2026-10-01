@@ -2,11 +2,15 @@
   "type": "erebus:cave",
   "config": {
     "floor_level": -0.7,
+    "gaussian_height": {
+      "deviation": 48.0,
+      "mean": 68.0
+    },
     "horizontal_radius_multiplier": 1.0,
     "lava_level": {
       "above_bottom": 10
     },
-    "probability": 0.2,
+    "probability": 0.1,
     "replaceable": "#erebus:erebus_carver_replaceables",
     "vertical_radius_multiplier": 1.0,
     "y": {
@@ -18,6 +22,10 @@
         "absolute": 0
       }
     },
-    "yScale": 0.5
+    "yScale": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 0.8,
+      "min_inclusive": 0.3
+    }
   }
 }

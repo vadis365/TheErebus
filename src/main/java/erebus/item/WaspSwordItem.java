@@ -1,6 +1,7 @@
 package erebus.item;
 
 import erebus.Erebus;
+import erebus.entity.Wasp;
 import erebus.registries.data.ModToolMaterials;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -18,6 +19,6 @@ public class WaspSwordItem extends Item {
 
     @Override
     public void hurtEnemy(@NotNull ItemStack stack, @NotNull LivingEntity target, @NotNull LivingEntity attacker) {
-        target.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0));
+        if (!target.level().isClientSide() && !(target instanceof Wasp)) target.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0));
     }
 }

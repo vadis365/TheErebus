@@ -2,10 +2,8 @@ package erebus.block.entity;
 
 import erebus.inventory.server.HoneyCombMenu;
 import erebus.registries.blocks.ModBlockEntities;
-import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
@@ -14,49 +12,50 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 
 public class HoneyCombBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
-	
-	public HoneyCombBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntities.HONEY_COMB.get(), 27,  pos, state);
-	}
 
-	@Override
-	public @NonNull Component getDisplayName() {
-		return Component.translatable("erebus.container.honeycomb_cell").append(Component.literal(" X:" + getBlockPos().getX() + " Y:" + getBlockPos().getY() + " Z:" + getBlockPos().getZ()));
-	}
+    public HoneyCombBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.HONEY_COMB.get(), 27, pos, state);
+    }
 
-	@Override
-	public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
-		return new int[getContainerSize()];
-	}
+    @Override
+    public @NonNull Component getDisplayName() {
+        return Component.translatable("erebus.container.honeycomb_cell").append(Component.literal(" X:" + getBlockPos().getX() + " Y:" + getBlockPos().getY() + " Z:" + getBlockPos().getZ()));
+    }
 
-	@Override
-	public boolean canPlaceItem(int slot, @NonNull ItemStack stack) {
-		return true;
-	}
-	
-	@Override
-	public boolean canPlaceItemThroughFace(int index, @NonNull ItemStack stack, Direction direction) {
-		return true;
-	}
 
-	@Override
-	public boolean canTakeItemThroughFace(int index, @NonNull ItemStack stack, @NonNull Direction direction) {
-		return true;
-	}
+    @Override
+    public boolean canPlaceItem(int slot, @NonNull ItemStack stack) {
+        return true;
+    }
 
-	@Override
-	public @NonNull ItemStack removeItemNoUpdate(int slot) {
-		return ContainerHelper.takeItem(getItems(), slot);
-	}
+    @Override
+    public boolean canPlaceItemThroughFace(int index, @NonNull ItemStack stack, Direction direction) {
+        return true;
+    }
 
-	@Override
-	public AbstractContainerMenu createMenu(int containerId, @NonNull Inventory playerInventory, @NonNull Player player) {
-		return new HoneyCombMenu(containerId, playerInventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition));
-	}
+    @Override
+    public boolean canTakeItemThroughFace(int index, @NonNull ItemStack stack, @NonNull Direction direction) {
+        return true;
+    }
 
+    @Override
+    public @NonNull ItemStack removeItemNoUpdate(int slot) {
+        return ContainerHelper.takeItem(getItems(), slot);
+    }
+
+    @Override
+    public AbstractContainerMenu createMenu(int containerId, @NonNull Inventory playerInventory, @NonNull Player player) {
+        return new HoneyCombMenu(containerId, playerInventory, this);
+    }
+
+
+    @Override
+    public boolean stillValid(Player player) {
+        return !isRemoved() && level == player.level() && level.getBlockEntity(worldPosition) == this
+                && player.distanceToSqr(worldPosition.getCenter()) <= 64;
+    }
 
 }

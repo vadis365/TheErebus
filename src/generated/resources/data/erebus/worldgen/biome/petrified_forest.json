@@ -14,14 +14,20 @@
     [],
     [],
     [
+      "erebus:acid_lake",
+      "erebus:petrified_surface",
+      "erebus:rock_spike",
+      "erebus:petrified_fallen_logs",
+      "erebus:wild_mandrake",
+      "erebus:scorched_wood",
       "erebus:petrified_tree_brown_small",
       "erebus:petrified_tree_brown_medium",
       "erebus:petrified_tree_brown_large",
       "erebus:petrified_tree_red_small",
       "erebus:petrified_tree_red_medium",
       "erebus:petrified_tree_red_large",
-      "erebus:lava_lake",
-      "erebus:rock_spike"
+      "erebus:petrified_dust_layer",
+      "erebus:hanging_web"
     ],
     [],
     [
@@ -51,10 +57,10 @@
     "axolotls": [],
     "creature": [
       {
-        "type": "erebus:jumping_spider",
+        "type": "erebus:glow_worm",
         "maxCount": 4,
-        "minCount": 2,
-        "weight": 10
+        "minCount": 1,
+        "weight": 8
       }
     ],
     "misc": [],
@@ -94,6 +100,12 @@
         "maxCount": 4,
         "minCount": 1,
         "weight": 20
+      },
+      {
+        "type": "erebus:jumping_spider",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 10
       }
     ],
     "underground_water_creature": [],

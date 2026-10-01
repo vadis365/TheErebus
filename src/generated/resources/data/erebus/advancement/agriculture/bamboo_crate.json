@@ -1,0 +1,32 @@
+{
+  "parent": "erebus:agriculture/bamboo",
+  "criteria": {
+    "craft_crate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:bamboo_crate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/bamboo_crate.desc"
+    },
+    "icon": {
+      "id": "erebus:bamboo_crate"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/bamboo_crate.title"
+    }
+  },
+  "requirements": [
+    [
+      "craft_crate"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

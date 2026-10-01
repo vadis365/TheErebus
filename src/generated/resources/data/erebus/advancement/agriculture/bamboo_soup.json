@@ -1,0 +1,32 @@
+{
+  "parent": "erebus:agriculture/bamboo",
+  "criteria": {
+    "craft_bamboo_soup": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:bamboo_soup"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/bamboo_soup.desc"
+    },
+    "icon": {
+      "id": "erebus:bamboo_soup"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/bamboo_soup.title"
+    }
+  },
+  "requirements": [
+    [
+      "craft_bamboo_soup"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

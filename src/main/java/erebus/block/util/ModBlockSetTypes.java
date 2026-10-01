@@ -14,6 +14,7 @@ public class ModBlockSetTypes {
     public static final BlockSetType MAHOGANY = BlockSetType.register(new BlockSetType("mahogany"));
     public static final BlockSetType MARSHWOOD = BlockSetType.register(new BlockSetType("marshwood"));
     public static final BlockSetType MOSSBARK = BlockSetType.register(new BlockSetType("mossbark"));
+    public static final BlockSetType PETRIFIED = BlockSetType.register(new BlockSetType("petrified"));
     public static final BlockSetType ROTTEN = BlockSetType.register(new BlockSetType("rotten"));
     public static final BlockSetType SCORCHED = BlockSetType.register(new BlockSetType("scorched"));
     public static final BlockSetType VARNISHED = BlockSetType.register(new BlockSetType("varnished"));

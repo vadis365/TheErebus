@@ -1,0 +1,32 @@
+{
+  "parent": "erebus:exploration/woodlouse",
+  "criteria": {
+    "ball": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:woodlouse_ball"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/woodlouse_ball.desc"
+    },
+    "icon": {
+      "id": "erebus:woodlouse_ball"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/woodlouse_ball.title"
+    }
+  },
+  "requirements": [
+    [
+      "ball"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "erebus:block/tangled_stalk"
+    "model": "erebus:block/tangled_stalk_bottom"
   }
 }

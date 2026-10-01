@@ -12,48 +12,64 @@ import org.jspecify.annotations.NonNull;
 
 public abstract class AltarAbstractBlockEntity extends BlockEntity {
 
-	public AltarAbstractBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
-		super(type, pos, blockState);
-	}
+    public int animationTicks, prevAnimationTicks;
+    public boolean active;
+    protected int spawnTicks;
 
-	protected abstract void writeTileToNBT(ValueOutput output);
+    public AltarAbstractBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+        super(type, pos, blockState);
+    }
 
-	protected abstract void readTileFromNBT(ValueInput input);
+    protected abstract void writeTileToNBT(ValueOutput output);
 
-	public int animationTicks, prevAnimationTicks;
-	public boolean active;
-	protected int spawnTicks;
+    protected abstract void readTileFromNBT(ValueInput input);
 
+    public void setActive(boolean isActive) {
+        if (active == isActive) return;
+        active = isActive;
+        syncState();
+    }
 
-	public void setActive(boolean isActive) {
-		active = isActive;
-	}
+    public void setSpawnTicks(int i) {
+        int duration = Math.max(0, i);
+        if (spawnTicks == duration) return;
+        spawnTicks = duration;
+        syncState();
+    }
 
-	public void setSpawnTicks(int i) {
-		spawnTicks = i;
-	}
+    protected void syncState() {
+        setChanged();
+        if (level != null && !level.isClientSide())
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+    }
 
-	@Override
-	protected void saveAdditional(@NonNull ValueOutput output) {
-		super.saveAdditional(output);
-		writeTileToNBT(output);
-	}
+    @Override
+    public net.minecraft.nbt.@NonNull CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.@NonNull Provider registries) {
+        return saveWithoutMetadata(registries);
+    }
 
-	@Override
-	protected void loadAdditional(@NonNull ValueInput input) {
-		super.loadAdditional(input);
-		readTileFromNBT(input);
-	}
+    @Override
+    protected void saveAdditional(@NonNull ValueOutput output) {
+        super.saveAdditional(output);
+        writeTileToNBT(output);
+    }
 
-	@Override
-	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		return ClientboundBlockEntityDataPacket.create(this);
-	}
+    @Override
+    protected void loadAdditional(@NonNull ValueInput input) {
+        super.loadAdditional(input);
+        readTileFromNBT(input);
+        prevAnimationTicks = animationTicks;
+    }
 
-	@Override
-	public void onDataPacket(@NonNull Connection net, @NonNull ValueInput valueInput) {
-		super.onDataPacket(net, valueInput);
-		loadAdditional(valueInput);
-	}
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public void onDataPacket(@NonNull Connection net, @NonNull ValueInput valueInput) {
+        super.onDataPacket(net, valueInput);
+        loadAdditional(valueInput);
+    }
 
 }

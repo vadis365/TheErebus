@@ -1,30 +1,176 @@
 {
   "criteria": {
-    "diamond": {
+    "bamboo": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:diamond"
+            "items": "erebus:bamboo"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "emerald": {
+    "cabbage": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:emerald"
+            "items": "erebus:cabbage_seeds"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "obsidian": {
+    "dark_fruit": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:obsidian"
+            "items": "erebus:dark_fruit_seeds"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flowers": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "erebus:seed_black",
+              "erebus:seed_red",
+              "erebus:seed_brown",
+              "erebus:seed_blue",
+              "erebus:seed_purple",
+              "erebus:seed_cyan",
+              "erebus:seed_light_gray",
+              "erebus:seed_gray",
+              "erebus:seed_pink",
+              "erebus:seed_yellow",
+              "erebus:seed_light_blue",
+              "erebus:seed_magenta",
+              "erebus:seed_orange",
+              "erebus:seed_white",
+              "erebus:seed_rainbow"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "heartberries": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:heart_berries"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "heartberry": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:heart_berry_bush"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "jadeberries": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:jade_berries"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "jadeberry": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:jade_berry_bush"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "mandrake": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:mandrake_root"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "moss": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:moss"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "mould": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:mould"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "prickly": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:prickly_pear"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "shoot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:sapling_bamboo"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "swampberries": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:swamp_berries"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "swampberry": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:swamp_berry_bush"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "turnip": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:turnip"
           }
         ]
       },
@@ -32,12 +178,12 @@
     }
   },
   "display": {
-    "background": "erebus:textures/block/planks_varnished.png",
+    "background": "erebus:block/planks_varnished",
     "description": {
       "translate": "advancement.erebus.agriculture/root.desc"
     },
     "icon": {
-      "id": "minecraft:stone_bricks"
+      "id": "erebus:jade_hoe"
     },
     "title": {
       "translate": "advancement.erebus.agriculture/root.title"
@@ -45,13 +191,22 @@
   },
   "requirements": [
     [
-      "diamond"
-    ],
-    [
-      "emerald"
-    ],
-    [
-      "obsidian"
+      "turnip",
+      "cabbage",
+      "shoot",
+      "flowers",
+      "dark_fruit",
+      "mould",
+      "moss",
+      "mandrake",
+      "swampberry",
+      "heartberry",
+      "jadeberry",
+      "prickly",
+      "jadeberries",
+      "heartberries",
+      "swampberries",
+      "bamboo"
     ]
   ],
   "sends_telemetry_event": true

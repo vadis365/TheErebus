@@ -10,8 +10,13 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 
 public class ErebusScreen<T extends AbstractContainerMenu> extends AbstractContainerScreen<T> {
     protected final Identifier TEXTURE;
+
     public ErebusScreen(T container, Inventory inventory, Component title, Identifier texture) {
-        super(container, inventory, title);
+        this(container, inventory, title, texture, 176, 166);
+    }
+
+    public ErebusScreen(T container, Inventory inventory, Component title, Identifier texture, int imageWidth, int imageHeight) {
+        super(container, inventory, title, imageWidth, imageHeight);
         TEXTURE = texture;
     }
 
@@ -28,6 +33,6 @@ public class ErebusScreen<T extends AbstractContainerMenu> extends AbstractConta
     @Override
     protected void extractLabels(GuiGraphicsExtractor graphics, int xm, int ym) {
         String title = getTitle().getString();
-        graphics.text(font, title, (int) (imageWidth / 2.0f - font.width(title) / 2.0f), 6, 4210752);
+        graphics.text(font, title, (int) (imageWidth / 2.0f - font.width(title) / 2.0f), 6, 0xFF404040);
     }
 }

@@ -2,7 +2,7 @@
   "type": "minecraft:smelting",
   "category": "blocks",
   "cookingtime": 200,
-  "experience": 0.25,
+  "experience": 0.1,
   "group": "shard_bone",
   "ingredient": "erebus:ore_fossil",
   "result": {

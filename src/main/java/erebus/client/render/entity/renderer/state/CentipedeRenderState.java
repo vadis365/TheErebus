@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 public class CentipedeRenderState extends LivingEntityRenderState {
     public int skin;
     public float avgWibbleStrength;
-    public PartState head;
     public PartState[] bodyParts;
     public PartState tail;
 
@@ -15,5 +14,7 @@ public class CentipedeRenderState extends LivingEntityRenderState {
         public float wibbleStrength;
         public int frame;
         public boolean isPartA;
+        public boolean tail;
+        public float ageInTicks;
     }
 }

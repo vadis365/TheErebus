@@ -15,13 +15,11 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
 
     private static final int[] offsetX = {-1, 1, 0, 0};
     private static final int[] offsetZ = {0, 0, -1, 1};
-    private int primaryPetalColor = -1;
-    private int secondaryPetalColor = -1;
+    private final int primaryPetalColor;
+    private final int secondaryPetalColor;
 
     public GiantFlowerFeatureConfiguration(int color) {
-        super(NoneFeatureConfiguration.CODEC);
-        this.primaryPetalColor = color;
-        this.secondaryPetalColor = color;
+        this(color, color);
     }
 
     public GiantFlowerFeatureConfiguration(int primaryPetalColor, int secondaryPetalColor) {
@@ -31,34 +29,31 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
     }
 
     public GiantFlowerFeatureConfiguration() {
-        super(NoneFeatureConfiguration.CODEC);
+        this(-1, -1);
     }
 
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
-        WorldGenLevel level = context.level();
-        BlockPos pos = context.origin();
-        RandomSource random = context.random();
-        BlockState stem = ModBlocks.STEM.get().defaultBlockState();
-        StemShape stemShape = StemShape.values()[random.nextInt(StemShape.values().length)];
-        PetalShape petalShape = PetalShape.values()[random.nextInt(PetalShape.values().length)];
-        if (primaryPetalColor == -1) primaryPetalColor = random.nextInt(13);
-        if (secondaryPetalColor == -1)
-            secondaryPetalColor = petalShape.canHaveSecondaryColor && random.nextInt(8) == 0 ? random.nextInt(13) : primaryPetalColor;
-        BlockState petal = getPetalForColor(primaryPetalColor);
-        BlockState stigma = getStigmaForColor(secondaryPetalColor);
+        var level = context.level();
+        var pos = context.origin();
+        var random = context.random();
+        var stem = ModBlocks.STEM.get().defaultBlockState();
+        var stemShape = StemShape.values()[random.nextInt(StemShape.values().length)];
+        var petalShape = PetalShape.values()[random.nextInt(PetalShape.values().length)];
+        int primaryColor = primaryPetalColor == -1 ? random.nextInt(13) : primaryPetalColor;
+        int secondaryColor = secondaryPetalColor == -1
+                ? (petalShape.canHaveSecondaryColor && random.nextInt(8) == 0 ? random.nextInt(13) : primaryColor)
+                : secondaryPetalColor;
+        var petal = getPetalForColor(primaryColor);
+        var stigma = getStigmaForColor(secondaryColor);
         int stemHeight = random.nextInt(6) + 2;
 
-        // Check if the area is clear
         if (!checkAreaClear(level, pos, stemHeight, stemShape, petalShape)) {
             return false;
         }
 
         generateStem(level, pos, stemHeight, stemShape, stem);
         generatePetal(level, pos, random, petalShape, stemHeight, stem, petal, stigma);
-
-        primaryPetalColor = -1;
-        secondaryPetalColor = -1;
 
         return true;
     }

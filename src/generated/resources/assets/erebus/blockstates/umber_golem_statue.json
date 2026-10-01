@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "erebus:block/umber_golem_statue",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "erebus:block/umber_golem_statue"
+    },
+    "facing=south": {
+      "model": "erebus:block/umber_golem_statue",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "erebus:block/umber_golem_statue",
+      "y": 270
+    }
+  }
+}

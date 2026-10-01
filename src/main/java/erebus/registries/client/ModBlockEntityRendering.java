@@ -34,14 +34,15 @@ public class ModBlockEntityRendering {
     public static final ModelLayerLocation ALTAR_EXPERIENCE_BASE = register("altar_experience", "base");
     public static final ModelLayerLocation ALTAR_EXPERIENCE_MID = register("altar_experience", "mid");
     public static final ModelLayerLocation ALTAR_EXPERIENCE_GLASS = register("altar_experience", "glass");
+    public static final ModelLayerLocation UMBER_GOLEM_STATUE = register("umber_golem_statue");
     public static final ModelLayerLocation LIQUIFIER = register("liquifier");
     public static final ModelLayerLocation GLOWING_JAR = register("glowing_jar");
     public static final ModelLayerLocation BAMBOO_BRIDGE = register("bamboo_bridge");
     public static final ModelLayerLocation BAMBOO_EXTENDER = register("bamboo_extender");
 
-	@SuppressWarnings("DuplicatedCode")
+    @SuppressWarnings("DuplicatedCode")
     public static void registerBlockEntityLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		event.registerLayerDefinition(OFFERING_ALTAR, OfferingAltarModel::createBodyLayer);
+        event.registerLayerDefinition(OFFERING_ALTAR, OfferingAltarModel::createBodyLayer);
         event.registerLayerDefinition(BLOCK_OF_BONES, BlockOfBonesModel::createBodyLayer);
         event.registerLayerDefinition(ALTAR_HEALING_BASE, HealingAltarBaseModel::createBodyLayer);
         event.registerLayerDefinition(ALTAR_HEALING_ROSE, HealingAltarRoseModel::createBodyLayer);
@@ -55,13 +56,15 @@ public class ModBlockEntityRendering {
         event.registerLayerDefinition(ALTAR_EXPERIENCE_BASE, ExperienceAltarBaseModel::createBodyLayer);
         event.registerLayerDefinition(ALTAR_EXPERIENCE_MID, ExperienceAltarMidModel::createBodyLayer);
         event.registerLayerDefinition(ALTAR_EXPERIENCE_GLASS, ExperienceAltarGlassModel::createBodyLayer);
+        event.registerLayerDefinition(UMBER_GOLEM_STATUE, UmberGolemStatueModel::createBodyLayer);
         event.registerLayerDefinition(LIQUIFIER, LiquifierModel::createBodyLayer);
         event.registerLayerDefinition(GLOWING_JAR, GlowingJarModel::createBodyLayer);
         event.registerLayerDefinition(BAMBOO_BRIDGE, BambooBridgeModel::createBodyLayer);
         event.registerLayerDefinition(BAMBOO_EXTENDER, BambooExtenderModel::createBodyLayer);
-	}
-	
+    }
+
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ModBlockEntities.UMBER_GOLEM_STATUE.get(), UmberGolemStatueRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.GAEAN_KEYSTONE.get(), GaeanKeystoneRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.OFFERING_ALTAR.get(), OfferingAltarRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.BLOCK_OF_BONES.get(), BlockOfBonesRenderer::new);
@@ -78,11 +81,11 @@ public class ModBlockEntityRendering {
         event.registerBlockEntityRenderer(ModBlockEntities.EREBUS_CHEST.get(), ErebusChestRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.SPAWNER.get(), ErebusSpawnerRenderer::new);
     }
-    
+
     private static ModelLayerLocation register(String name, String layer) {
         return new ModelLayerLocation(Erebus.prefix(name), layer);
     }
-    
+
     private static ModelLayerLocation register(String name) {
         return register(name, "main");
     }

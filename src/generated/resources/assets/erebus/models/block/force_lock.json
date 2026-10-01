@@ -1,6 +1,33 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "all": "erebus:block/force_lock"
+    "down": {
+      "force_translucent": true,
+      "sprite": "erebus:block/force_field"
+    },
+    "east": {
+      "force_translucent": true,
+      "sprite": "erebus:block/force_field"
+    },
+    "north": {
+      "force_translucent": true,
+      "sprite": "erebus:block/force_lock"
+    },
+    "particle": {
+      "force_translucent": true,
+      "sprite": "erebus:block/force_field"
+    },
+    "south": {
+      "force_translucent": true,
+      "sprite": "erebus:block/force_field"
+    },
+    "up": {
+      "force_translucent": true,
+      "sprite": "erebus:block/force_field"
+    },
+    "west": {
+      "force_translucent": true,
+      "sprite": "erebus:block/force_field"
+    }
   }
 }

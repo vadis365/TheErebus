@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 
 public class GaeanKeystoneBlockEntityRenderState extends BlockEntityRenderState {
+    public final ItemStackRenderState itemStackRenderState = new ItemStackRenderState();
     public double now;
     public float rotation;
-    public final ItemStackRenderState itemStackRenderState = new ItemStackRenderState();
 }

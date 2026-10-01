@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "erebus:planks_bamboo",
+    "G": "erebus:amber_glass",
+    "J": "erebus:fluid_jar",
+    "R": "#c:dusts/redstone",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    "RBR",
+    "SGS",
+    "RJR"
+  ],
+  "result": {
+    "id": "erebus:liquifier"
+  }
+}

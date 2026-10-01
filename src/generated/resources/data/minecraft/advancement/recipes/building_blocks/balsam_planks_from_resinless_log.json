@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_resinless_balsam": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:log_balsam_resinless"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:balsam_planks_from_resinless_log"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_resinless_balsam"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:balsam_planks_from_resinless_log"
+    ]
+  }
+}

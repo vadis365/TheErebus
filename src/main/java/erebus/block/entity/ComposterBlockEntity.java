@@ -7,6 +7,8 @@ import erebus.registries.data.tags.ModItemTags;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Container;
@@ -25,225 +27,242 @@ import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 
 public class ComposterBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
-	public static final int DATA_MOULD_PROGRESS = 0;
-	public static final int DATA_COMPOSTING_PROGRESS = 1;
-	public static final int DATA_MOULD_MAX_TIME = 2;
-	public int mouldDurationTicks;
-	public int mouldMaxTime;
-	public int compostingProgressTicks;
-	private final int SMELT_SLOT = 0;
-	private final int FUEL_SLOT = 1;
-	private final int RESULT_SLOT = 2;
-	protected final ContainerData dataAccess;
+    public static final int DATA_MOULD_PROGRESS = 0;
+    public static final int DATA_COMPOSTING_PROGRESS = 1;
+    public static final int DATA_MOULD_MAX_TIME = 2;
+    protected final ContainerData dataAccess;
+    private final int SMELT_SLOT = 0;
+    private final int FUEL_SLOT = 1;
+    private final int RESULT_SLOT = 2;
+    public int mouldDurationTicks;
+    public int mouldMaxTime;
+    public int compostingProgressTicks;
 
-	public ComposterBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntities.COMPOSTER.get(), 3, pos, state);
+    public ComposterBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.COMPOSTER.get(), 3, pos, state);
 
-		this.dataAccess = new ContainerData() {
-			@Override
-			public int get(int i) {
-				switch (i) {
-					case DATA_MOULD_PROGRESS:
-						return getMouldProgressScaled(13);
-					case DATA_COMPOSTING_PROGRESS:
-						return getCompostingProgressScaled(32);
-					case DATA_MOULD_MAX_TIME:
-						return mouldMaxTime;
-					default:
-						return 0;
-				}
-			}
+        this.dataAccess = new ContainerData() {
+            @Override
+            public int get(int i) {
+                switch (i) {
+                    case DATA_MOULD_PROGRESS:
+                        return mouldDurationTicks;
+                    case DATA_COMPOSTING_PROGRESS:
+                        return compostingProgressTicks;
+                    case DATA_MOULD_MAX_TIME:
+                        return mouldMaxTime;
+                    default:
+                        return 0;
+                }
+            }
 
-			@Override
-			public void set(int key, int value) {
-				switch (key) {
-					case DATA_MOULD_PROGRESS -> mouldDurationTicks = value;
-					case DATA_COMPOSTING_PROGRESS -> compostingProgressTicks = value;
-					case DATA_MOULD_MAX_TIME -> mouldMaxTime = value;
-				}
-			}
+            @Override
+            public void set(int key, int value) {
+                switch (key) {
+                    case DATA_MOULD_PROGRESS -> mouldDurationTicks = value;
+                    case DATA_COMPOSTING_PROGRESS -> compostingProgressTicks = value;
+                    case DATA_MOULD_MAX_TIME -> mouldMaxTime = value;
+                }
+            }
 
-			@Override
-			public int getCount() {
-				return 3;
-			}
-		};
-	}
+            @Override
+            public int getCount() {
+                return 3;
+            }
+        };
+    }
 
-	@Override
-	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		return ClientboundBlockEntityDataPacket.create(this);
-	}
+    public static <T extends BlockEntity> void serverTick(Level level, BlockPos pos, BlockState state, T t) {
+        if (t instanceof ComposterBlockEntity tile) {
+            int oldDuration = tile.mouldDurationTicks;
+            int oldProgress = tile.compostingProgressTicks;
+            boolean shouldUpdate = tile.mouldDurationTicks > 0;
+            boolean isDirty = false;
 
-	@Override
-	protected void loadAdditional(@NonNull ValueInput input) {
-		super.loadAdditional(input);
-		mouldDurationTicks = input.getIntOr("MouldDuration", 0);
-		compostingProgressTicks = input.getIntOr("CompostProgress", 0);
-		mouldMaxTime = getMouldUseTime(getItems().get(1));
-	}
+            if (tile.mouldDurationTicks > 0)
+                tile.mouldDurationTicks--;
 
-	@Override
-	protected void saveAdditional(@NonNull ValueOutput output) {
-		super.saveAdditional(output);
-		output.putInt("MouldDuration", mouldDurationTicks);
-		output.putInt("CompostProgress", compostingProgressTicks);
-	}
+            if (tile.mouldDurationTicks != 0 || !tile.getItems().get(1).isEmpty() && !tile.getItems().get(0).isEmpty()) {
+                if (tile.mouldDurationTicks == 0 && tile.canCompost()) {
+                    tile.mouldMaxTime = tile.mouldDurationTicks = getMouldUseTime(tile.getItems().get(1));
 
-	public int getCompostingProgressScaled(int cookTime) {
-		return compostingProgressTicks * cookTime / 200;
-	}
+                    if (tile.mouldDurationTicks > 0) {
+                        isDirty = true;
 
-	public int getMouldProgressScaled(int burnTime) {
-		if (mouldMaxTime == 0)
-			mouldMaxTime = 200;
+                        if (!tile.getItems().get(1).isEmpty()) {
+                            ItemStack fuel = tile.getItems().get(1);
+                            var remainder = fuel.getItem().getCraftingRemainder(fuel);
+                            fuel.shrink(1);
+                            if (fuel.isEmpty())
+                                tile.getItems().set(1, remainder == null ? ItemStack.EMPTY : remainder.create());
+                        }
+                    }
+                }
 
-		return mouldDurationTicks * burnTime / mouldMaxTime;
-	}
+                if (tile.isComposting() && tile.canCompost()) {
+                    ++tile.compostingProgressTicks;
 
-	public boolean isComposting() {
-		return mouldDurationTicks > 0;
-	}
+                    if (tile.compostingProgressTicks == 200) {
+                        tile.compostingProgressTicks = 0;
+                        tile.compostItem();
+                        isDirty = true;
+                    }
+                } else
+                    tile.compostingProgressTicks = 0;
+            }
 
-	public static <T extends BlockEntity> void serverTick(Level level, BlockPos pos, BlockState state, T t) {
-		if (t instanceof ComposterBlockEntity tile) {
-			boolean shouldUpdate = tile.mouldDurationTicks > 0;
-			boolean isDirty = false;
+            if (shouldUpdate != tile.mouldDurationTicks > 0) {
+                isDirty = true;
+            }
 
-			if (tile.mouldDurationTicks > 0)
-				tile.mouldDurationTicks--;
+            if (oldDuration != tile.mouldDurationTicks || oldProgress != tile.compostingProgressTicks)
+                tile.setChanged();
+            if (isDirty || (oldProgress > 0) != (tile.compostingProgressTicks > 0))
+                tile.updateBlock();
+        }
+    }
 
-			if (tile.mouldDurationTicks != 0 || !tile.getItems().get(1).isEmpty() && !tile.getItems().get(0).isEmpty()) {
-				if (tile.mouldDurationTicks == 0 && tile.canCompost()) {
-					tile.mouldMaxTime = tile.mouldDurationTicks = getMouldUseTime(tile.getItems().get(1));
+    public static int getMouldUseTime(ItemStack itemStack) {
+        if (itemStack.isEmpty())
+            return 0;
+        else {
+            if (itemStack.is(ModBlocks.MOULD.asItem()))
+                return 800;
+            if (itemStack.is(ModBlocks.MOULD_CULTIVATED.asItem()))
+                return 400;
+        }
+        return 0;
+    }
 
-					if (tile.mouldDurationTicks > 0) {
-						isDirty = true;
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
 
-						if (!tile.getItems().get(1).isEmpty()) {
-							tile.getItems().get(1).shrink(1);
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        return saveWithoutMetadata(provider);
+    }
 
-							if (tile.getItems().get(1).getCount() == 0)
-								tile.getItems().set(1, tile.getItems().get(1).getItem().getCraftingRemainder(tile.getItems().get(1)).create());
-						}
-					}
-				}
+    @Override
+    protected void loadAdditional(@NonNull ValueInput input) {
+        super.loadAdditional(input);
+        mouldDurationTicks = input.getIntOr("MouldDuration", 0);
+        compostingProgressTicks = input.getIntOr("CompostProgress", 0);
+        // Older saves lack the consumed fuel's original duration; keep their remaining budget.
+        int fallback = Math.max(200, Math.max(mouldDurationTicks, getMouldUseTime(getItems().get(1))));
+        mouldMaxTime = Math.max(1, input.getIntOr("MouldMaxTime", fallback));
+    }
 
-				if (tile.isComposting() && tile.canCompost()) {
-					++tile.compostingProgressTicks;
+    @Override
+    protected void saveAdditional(@NonNull ValueOutput output) {
+        super.saveAdditional(output);
+        output.putInt("MouldDuration", mouldDurationTicks);
+        output.putInt("CompostProgress", compostingProgressTicks);
+        output.putInt("MouldMaxTime", mouldMaxTime);
+    }
 
-					if (tile.compostingProgressTicks == 200) {
-						tile.compostingProgressTicks = 0;
-						tile.compostItem();
-						isDirty = true;
-					}
-				} else
-					tile.compostingProgressTicks = 0;
-			}
+    public int getCompostingProgressScaled(int cookTime) {
+        return compostingProgressTicks * cookTime / 200;
+    }
 
-			if (shouldUpdate != tile.mouldDurationTicks > 0) {
-				isDirty = true;
-			}
+    public int getMouldProgressScaled(int burnTime) {
+        return Math.clamp((int) ((long) mouldDurationTicks * burnTime / Math.max(1, mouldMaxTime)), 0, burnTime);
+    }
 
-			if (isDirty)
-				tile.updateBlock();
-		}
-	}
+    public boolean isComposting() {
+        return mouldDurationTicks > 0;
+    }
 
-	public void updateBlock() {
-		getLevel().sendBlockUpdated(worldPosition, getLevel().getBlockState(worldPosition), getLevel().getBlockState(worldPosition), 3);
-	}
+    public void updateBlock() {
+        setChanged();
+        if (level != null && !level.isClientSide())
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+    }
 
-	private boolean canCompost() {
-		if (getItems().get(0).isEmpty())
-			return false;
-		else {
-			ItemStack itemstack = isCompostable(getItems().get(0));
-			if (itemstack.isEmpty())
-				return false;
-			if (getItems().get(2).isEmpty())
-				return true;
-			if (!ItemStack.isSameItem(getItems().get(2), itemstack))
-				return false;
-			int result = getItems().get(2).getCount() + itemstack.getCount();
-			return result <= getItems().get(2).getMaxStackSize();
-		}
-	}
+    @Override
+    public boolean stillValid(@NonNull Player player) {
+        return Container.stillValidBlockEntity(this, player);
+    }
 
-	public void compostItem() {
-		if (canCompost()) {
-			ItemStack itemstack = isCompostable(getItems().get(0));
-			if (getItems().get(2).isEmpty())
-				getItems().set(2, itemstack.copy());
-			else if (getItems().get(2).getItem() == itemstack.getItem())
-				getItems().get(2).grow(itemstack.getCount());
-			getItems().get(0).shrink(1);
-			if (getItems().get(0).getCount() <= 0)
-				getItems().set(0, ItemStack.EMPTY);
-		}
-	}
+    private boolean canCompost() {
+        if (getItems().get(0).isEmpty())
+            return false;
+        else {
+            ItemStack itemstack = isCompostable(getItems().get(0));
+            if (itemstack.isEmpty())
+                return false;
+            if (getItems().get(2).isEmpty())
+                return true;
+            if (!ItemStack.isSameItem(getItems().get(2), itemstack))
+                return false;
+            int result = getItems().get(2).getCount() + itemstack.getCount();
+            return result <= getItems().get(2).getMaxStackSize();
+        }
+    }
 
-	public ItemStack isCompostable(ItemStack itemStack) {
-		return itemStack.is(ModItemTags.COMPOSTABLE) ? new ItemStack(ModItems.COMPOST.get()) : ItemStack.EMPTY;
-	}
+    public void compostItem() {
+        if (canCompost()) {
+            ItemStack itemstack = isCompostable(getItems().get(0));
+            if (getItems().get(2).isEmpty())
+                getItems().set(2, itemstack.copy());
+            else if (getItems().get(2).getItem() == itemstack.getItem())
+                getItems().get(2).grow(itemstack.getCount());
+            getItems().get(0).shrink(1);
+            if (getItems().get(0).getCount() <= 0)
+                getItems().set(0, ItemStack.EMPTY);
+        }
+    }
 
-	public static int getMouldUseTime(ItemStack itemStack) {
-		if (itemStack.isEmpty())
-			return 0;
-		else {
-			if (itemStack.is(ModBlocks.MOULD.asItem()))
-				return 800;
-			if (itemStack.is(ModBlocks.MOULD_CULTIVATED.asItem()))
-				return 400;
-		}
-		return 0;
-	}
+    public ItemStack isCompostable(ItemStack itemStack) {
+        return itemStack.is(ModItemTags.COMPOSTABLE) ? new ItemStack(ModItems.COMPOST.get()) : ItemStack.EMPTY;
+    }
 
-	public boolean isItemMould(ItemStack is) {
-		return getMouldUseTime(is) > 0;
-	}
+    public boolean isItemMould(ItemStack is) {
+        return getMouldUseTime(is) > 0;
+    }
 
-	public boolean isItemValidForSlot(int slot, ItemStack is) {
-		return slot != RESULT_SLOT && (slot == FUEL_SLOT ? isItemMould(is) : slot == SMELT_SLOT && is.is(ModItemTags.COMPOSTABLE));
-	}
+    public boolean isItemValidForSlot(int slot, ItemStack is) {
+        return slot != RESULT_SLOT && (slot == FUEL_SLOT ? isItemMould(is) : slot == SMELT_SLOT && is.is(ModItemTags.COMPOSTABLE));
+    }
 
-	@Override
-	public AbstractContainerMenu createMenu(int containerId, @NonNull Inventory playerInventory, @NonNull Player player) {
-		return new ComposterMenu(containerId, playerInventory, this, this.dataAccess);
-	}
+    @Override
+    public AbstractContainerMenu createMenu(int containerId, @NonNull Inventory playerInventory, @NonNull Player player) {
+        return new ComposterMenu(containerId, playerInventory, this, this.dataAccess);
+    }
 
-	@Override
-	public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
-		return side == Direction.DOWN ? new int[]{RESULT_SLOT} : new int[]{FUEL_SLOT, SMELT_SLOT};
-	}
+    @Override
+    public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
+        return side == Direction.DOWN ? new int[]{RESULT_SLOT} : new int[]{FUEL_SLOT, SMELT_SLOT};
+    }
 
-	@Override
-	public boolean canPlaceItemThroughFace(int index, @NonNull ItemStack itemStack, Direction direction) {
-		return isItemValidForSlot(index, itemStack);
-	}
+    @Override
+    public boolean canPlaceItemThroughFace(int index, @NonNull ItemStack itemStack, Direction direction) {
+        return isItemValidForSlot(index, itemStack);
+    }
 
-	@Override
-	public boolean canTakeItemThroughFace(int index, @NonNull ItemStack stack, @NonNull Direction direction) {
-		return direction == Direction.DOWN && index == RESULT_SLOT && stack.is(ModItems.COMPOST.get());
-	}
+    @Override
+    public boolean canTakeItemThroughFace(int index, @NonNull ItemStack stack, @NonNull Direction direction) {
+        return direction == Direction.DOWN && index == RESULT_SLOT && stack.is(ModItems.COMPOST.get());
+    }
 
-	@Override
-	public boolean canPlaceItem(int slot, @NonNull ItemStack stack) {
-		return isItemValidForSlot(slot, stack);
-	}
+    @Override
+    public boolean canPlaceItem(int slot, @NonNull ItemStack stack) {
+        return isItemValidForSlot(slot, stack);
+    }
 
-	@Override
-	public boolean canTakeItem(@NonNull Container target, int slot, @NonNull ItemStack stack) {
-		return slot == RESULT_SLOT && stack.is(ModItems.COMPOST.get());
-	}
+    @Override
+    public boolean canTakeItem(@NonNull Container target, int slot, @NonNull ItemStack stack) {
+        return slot == RESULT_SLOT && stack.is(ModItems.COMPOST.get());
+    }
 
-	@Override
-	public @NonNull ItemStack removeItemNoUpdate(int slot) {
-		return ItemStack.EMPTY;
-	}
+    @Override
+    public @NonNull ItemStack removeItemNoUpdate(int slot) {
+        return ItemStack.EMPTY;
+    }
 
-	@Override
-	public @NonNull Component getDisplayName() {
-		return Component.translatable("erebus.container.composter");
-	}
+    @Override
+    public @NonNull Component getDisplayName() {
+        return Component.translatable("erebus.container.composter");
+    }
 }

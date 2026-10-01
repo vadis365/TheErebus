@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:bowl",
+    "erebus:bamboo",
+    "erebus:sapling_bamboo"
+  ],
+  "result": {
+    "id": "erebus:bamboo_soup"
+  }
+}

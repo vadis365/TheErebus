@@ -9,17 +9,17 @@ import net.minecraft.util.Mth;
 
 public class WeevilModel extends EntityModel<WeevilRenderState> {
 
-	public ModelPart root;
     private final ModelPart LeftFrontLeg;
-	private final ModelPart LeftMidLeg;
-	private final ModelPart LeftBackLeg;
-	private final ModelPart RightFrontLeg;
-	private final ModelPart RightMidLeg;
-	private final ModelPart RightBackLeg;
+    private final ModelPart LeftMidLeg;
+    private final ModelPart LeftBackLeg;
+    private final ModelPart RightFrontLeg;
+    private final ModelPart RightMidLeg;
+    private final ModelPart RightBackLeg;
+    public ModelPart root;
 
-	public WeevilModel(ModelPart root) {
-		super(root);
-		this.root = root;
+    public WeevilModel(ModelPart root) {
+        super(root);
+        this.root = root;
         root.getChild("HeadMain");
         root.getChild("Ab");
         root.getChild("AbSideR");
@@ -27,18 +27,18 @@ public class WeevilModel extends EntityModel<WeevilRenderState> {
         root.getChild("AbTop");
         root.getChild("AbBack");
         this.LeftFrontLeg = root.getChild("LeftFrontLeg");
-		this.LeftMidLeg = root.getChild("LeftMidLeg");
-		this.LeftBackLeg = root.getChild("LeftBackLeg");
-		this.RightFrontLeg = root.getChild("RightFrontLeg");
-		this.RightMidLeg = root.getChild("RightMidLeg");
-		this.RightBackLeg = root.getChild("RightBackLeg");
-	}
+        this.LeftMidLeg = root.getChild("LeftMidLeg");
+        this.LeftBackLeg = root.getChild("LeftBackLeg");
+        this.RightFrontLeg = root.getChild("RightFrontLeg");
+        this.RightMidLeg = root.getChild("RightMidLeg");
+        this.RightBackLeg = root.getChild("RightBackLeg");
+    }
 
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition HeadMain = partdefinition.addOrReplaceChild("HeadMain", CubeListBuilder.create().texOffs(16, 37).addBox(-4.0F, -1.0F, -3.0F, 8.0F, 4.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 18.0F, -4.0F));
+        PartDefinition HeadMain = partdefinition.addOrReplaceChild("HeadMain", CubeListBuilder.create().texOffs(16, 37).addBox(-4.0F, -1.0F, -3.0F, 8.0F, 4.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 18.0F, -4.0F));
 
         HeadMain.addOrReplaceChild("Eyes", CubeListBuilder.create().texOffs(24, 22).addBox(-3.0F, 1.0F, -5.0F, 6.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
@@ -68,7 +68,7 @@ public class WeevilModel extends EntityModel<WeevilRenderState> {
 
         PartDefinition LeftFrontLeg = partdefinition.addOrReplaceChild("LeftFrontLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(3.0F, 20.0F, -2.0F, 0.0F, 0.5236F, 0.0F));
 
-		PartDefinition LFL1 = LeftFrontLeg.addOrReplaceChild("LFL1", CubeListBuilder.create().texOffs(0, 95).addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -0.3491F));
+        PartDefinition LFL1 = LeftFrontLeg.addOrReplaceChild("LFL1", CubeListBuilder.create().texOffs(0, 95).addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -0.3491F));
 
         LFL1.addOrReplaceChild("LFL2", CubeListBuilder.create().texOffs(0, 88).addBox(-6.0F, 1.0F, -0.5F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
@@ -78,7 +78,7 @@ public class WeevilModel extends EntityModel<WeevilRenderState> {
 
         PartDefinition LeftMidLeg = partdefinition.addOrReplaceChild("LeftMidLeg", CubeListBuilder.create(), PartPose.offset(4.0F, 20.0F, 2.0F));
 
-		PartDefinition LML1 = LeftMidLeg.addOrReplaceChild("LML1", CubeListBuilder.create().texOffs(0, 95).addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -0.3491F));
+        PartDefinition LML1 = LeftMidLeg.addOrReplaceChild("LML1", CubeListBuilder.create().texOffs(0, 95).addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -0.3491F));
 
         LML1.addOrReplaceChild("LML2", CubeListBuilder.create().texOffs(0, 88).addBox(-6.0F, 1.0F, -0.5F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
@@ -88,7 +88,7 @@ public class WeevilModel extends EntityModel<WeevilRenderState> {
 
         PartDefinition LeftBackLeg = partdefinition.addOrReplaceChild("LeftBackLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(4.0F, 20.0F, 7.0F, 0.0F, -0.3491F, 0.0F));
 
-		PartDefinition LBL1 = LeftBackLeg.addOrReplaceChild("LBL1", CubeListBuilder.create().texOffs(0, 95).addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -0.3491F));
+        PartDefinition LBL1 = LeftBackLeg.addOrReplaceChild("LBL1", CubeListBuilder.create().texOffs(0, 95).addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, -0.3491F));
 
         LBL1.addOrReplaceChild("LBL2", CubeListBuilder.create().texOffs(0, 88).addBox(-6.0F, 1.0F, -0.5F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
@@ -98,7 +98,7 @@ public class WeevilModel extends EntityModel<WeevilRenderState> {
 
         PartDefinition RightFrontLeg = partdefinition.addOrReplaceChild("RightFrontLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(-3.0F, 20.0F, -2.0F, 0.0F, -0.3491F, 0.0F));
 
-		PartDefinition RFL1 = RightFrontLeg.addOrReplaceChild("RFL1", CubeListBuilder.create().texOffs(0, 95).addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
+        PartDefinition RFL1 = RightFrontLeg.addOrReplaceChild("RFL1", CubeListBuilder.create().texOffs(0, 95).addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
 
         RFL1.addOrReplaceChild("RFL2", CubeListBuilder.create().texOffs(0, 88).addBox(-6.0F, 1.0F, -0.5F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
@@ -108,7 +108,7 @@ public class WeevilModel extends EntityModel<WeevilRenderState> {
 
         PartDefinition RightMidLeg = partdefinition.addOrReplaceChild("RightMidLeg", CubeListBuilder.create(), PartPose.offset(-4.0F, 20.0F, 2.0F));
 
-		PartDefinition RML1 = RightMidLeg.addOrReplaceChild("RML1", CubeListBuilder.create().texOffs(0, 95).addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
+        PartDefinition RML1 = RightMidLeg.addOrReplaceChild("RML1", CubeListBuilder.create().texOffs(0, 95).addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
 
         RML1.addOrReplaceChild("RML2", CubeListBuilder.create().texOffs(0, 88).addBox(-6.0F, 1.0F, -0.5F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
@@ -118,7 +118,7 @@ public class WeevilModel extends EntityModel<WeevilRenderState> {
 
         PartDefinition RightBackLeg = partdefinition.addOrReplaceChild("RightBackLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(-4.0F, 20.0F, 7.0F, 0.0F, 0.3491F, 0.0F));
 
-		PartDefinition RBL1 = RightBackLeg.addOrReplaceChild("RBL1", CubeListBuilder.create().texOffs(0, 95).addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
+        PartDefinition RBL1 = RightBackLeg.addOrReplaceChild("RBL1", CubeListBuilder.create().texOffs(0, 95).addBox(-6.0F, -1.0F, -1.0F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
 
         RBL1.addOrReplaceChild("RBL2", CubeListBuilder.create().texOffs(0, 88).addBox(-6.0F, 1.0F, -0.5F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
@@ -127,24 +127,24 @@ public class WeevilModel extends EntityModel<WeevilRenderState> {
         RBL1.addOrReplaceChild("RBL4", CubeListBuilder.create().texOffs(0, 76).addBox(-10.5F, 2.5F, -0.5F, 2.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.3491F));
 
         return LayerDefinition.create(meshdefinition, 64, 128);
-	}
+    }
 
-	@Override
-	public void setupAnim(WeevilRenderState state) {
-		float correction = 0.3490659F;
-		float sin = Mth.sin(state.walkAnimationPos) * 0.8F * state.walkAnimationSpeed;
-		float cos = Mth.cos(state.walkAnimationPos) * 0.4F * state.walkAnimationSpeed;
-		LeftBackLeg.zRot = -cos;
-		LeftMidLeg.zRot = cos;
-		LeftFrontLeg.zRot = -cos;
-		RightBackLeg.zRot = -cos;
-		RightMidLeg.zRot = cos;
-		RightFrontLeg.zRot = -cos;
-		LeftBackLeg.yRot = sin - correction;
-		LeftMidLeg.yRot = -sin;
-		LeftFrontLeg.yRot = sin + correction;
-		RightBackLeg.yRot = sin + correction;
-		RightMidLeg.yRot = -sin;
-		RightFrontLeg.yRot = sin - correction;
-	}
+    @Override
+    public void setupAnim(WeevilRenderState state) {
+        float correction = 0.3490659F;
+        float sin = Mth.sin(state.walkAnimationPos) * 0.8F * state.walkAnimationSpeed;
+        float cos = Mth.cos(state.walkAnimationPos) * 0.4F * state.walkAnimationSpeed;
+        LeftBackLeg.zRot = -cos;
+        LeftMidLeg.zRot = cos;
+        LeftFrontLeg.zRot = -cos;
+        RightBackLeg.zRot = -cos;
+        RightMidLeg.zRot = cos;
+        RightFrontLeg.zRot = -cos;
+        LeftBackLeg.yRot = sin - correction;
+        LeftMidLeg.yRot = -sin;
+        LeftFrontLeg.yRot = sin + correction;
+        RightBackLeg.yRot = sin + correction;
+        RightMidLeg.yRot = -sin;
+        RightFrontLeg.yRot = sin - correction;
+    }
 }

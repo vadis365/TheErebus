@@ -1,0 +1,192 @@
+{
+  "parent": "erebus:agriculture/root",
+  "criteria": {
+    "cabbage": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:cabbage_seeds"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "dark_fruit": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:dark_fruit_seeds"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flowers": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "erebus:seed_black",
+              "erebus:seed_red",
+              "erebus:seed_brown",
+              "erebus:seed_blue",
+              "erebus:seed_purple",
+              "erebus:seed_cyan",
+              "erebus:seed_light_gray",
+              "erebus:seed_gray",
+              "erebus:seed_pink",
+              "erebus:seed_yellow",
+              "erebus:seed_light_blue",
+              "erebus:seed_magenta",
+              "erebus:seed_orange",
+              "erebus:seed_white",
+              "erebus:seed_rainbow"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "heartberry": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:heart_berry_bush"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "jadeberry": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:jade_berry_bush"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "mandrake": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:mandrake_root"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "moss": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:moss"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "mould": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:mould"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "prickly": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:prickly_pear"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "shoot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:sapling_bamboo"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "swampberry": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:swamp_berry_bush"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "turnip": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:turnip"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/farm_complete.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "minecraft:diamond_hoe"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/farm_complete.title"
+    }
+  },
+  "requirements": [
+    [
+      "turnip"
+    ],
+    [
+      "cabbage"
+    ],
+    [
+      "shoot"
+    ],
+    [
+      "flowers"
+    ],
+    [
+      "dark_fruit"
+    ],
+    [
+      "mould"
+    ],
+    [
+      "moss"
+    ],
+    [
+      "mandrake"
+    ],
+    [
+      "swampberry"
+    ],
+    [
+      "heartberry"
+    ],
+    [
+      "jadeberry"
+    ],
+    [
+      "prickly"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

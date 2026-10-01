@@ -3,11 +3,12 @@ package erebus.events;
 import erebus.Erebus;
 import erebus.inventory.client.*;
 import erebus.registries.client.ModMenuTypes;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
-@EventBusSubscriber(modid = Erebus.MODID)
+@EventBusSubscriber(modid = Erebus.MODID, value = Dist.CLIENT)
 public class RegisterMenuScreensEventHandler {
 
     @SubscribeEvent
@@ -18,6 +19,7 @@ public class RegisterMenuScreensEventHandler {
         event.register(ModMenuTypes.HONEY_COMB.get(), HoneyCombScreen::new);
         event.register(ModMenuTypes.BAMBOO_EXTENDER.get(), BambooExtenderScreen::new);
         event.register(ModMenuTypes.BAMBOO_CRATE.get(), BambooCrateScreen::new);
+        event.register(ModMenuTypes.ANIMATED_BAMBOO_CRATE.get(), BambooCrateScreen::new);
         event.register(ModMenuTypes.COLOSSAL_CRATE.get(), ColossalCrateScreen::new);
         event.register(ModMenuTypes.COMPOSTER.get(), ComposterScreen::new);
         event.register(ModMenuTypes.SILO_TANK.get(), SiloTankScreen::new);

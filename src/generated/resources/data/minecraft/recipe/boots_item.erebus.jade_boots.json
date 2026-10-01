@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "M": "erebus:jade"
+    "M": "#c:gems/jade"
   },
   "pattern": [
     "M M",

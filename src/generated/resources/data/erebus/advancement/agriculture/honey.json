@@ -1,0 +1,32 @@
+{
+  "parent": "erebus:agriculture/nectar",
+  "criteria": {
+    "get_honey": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:honey_drip"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/honey.desc"
+    },
+    "icon": {
+      "id": "erebus:honey_drip"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/honey.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_honey"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

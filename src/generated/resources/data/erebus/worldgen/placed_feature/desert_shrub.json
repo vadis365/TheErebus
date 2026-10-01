@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:desert_shrub",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

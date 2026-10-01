@@ -5,309 +5,321 @@
       "bonus_rolls": 0.0,
       "entries": [
         {
+          "type": "minecraft:loot_table",
+          "value": {
+            "pools": [
+              {
+                "bonus_rolls": 0.0,
+                "entries": [
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_black"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_red"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_brown"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_blue"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_purple"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_cyan"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_light_gray"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_gray"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_pink"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_yellow"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_light_blue"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_magenta"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_orange"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": {
+                          "type": "minecraft:uniform",
+                          "max": 3.0,
+                          "min": 1.0
+                        },
+                        "function": "minecraft:set_count"
+                      },
+                      {
+                        "count": 1.0,
+                        "enchantment": "minecraft:looting",
+                        "function": "minecraft:enchanted_count_increase"
+                      }
+                    ],
+                    "name": "erebus:stigma_white"
+                  }
+                ],
+                "rolls": 1.0
+              }
+            ]
+          }
+        },
+        {
           "type": "minecraft:item",
           "functions": [
             {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
+              "function": "erebus:crop_weevil_seed_count"
             }
           ],
-          "name": "erebus:stigma_black"
+          "name": "minecraft:wheat_seeds"
         },
         {
           "type": "minecraft:item",
           "functions": [
             {
               "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:stigma_red"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:stigma_brown"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:stigma_blue"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:stigma_purple"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:stigma_cyan"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:stigma_light_gray"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:stigma_gray"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:stigma_pink"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:stigma_yellow"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:stigma_light_blue"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:stigma_magenta"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:stigma_orange"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:stigma_white"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
+                "max": 3.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
             },
             {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
+              "count": 1.0,
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
             }
@@ -321,17 +333,13 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
+                "max": 3.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
             },
             {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
+              "count": 1.0,
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
             }
@@ -345,46 +353,18 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
+                "max": 3.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
             },
             {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
+              "count": 1.0,
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
             }
           ],
-          "name": "minecraft:wheat_seeds"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
-            }
-          ],
-          "name": "erebus:cabbage_seeds"
+          "name": "minecraft:cocoa_beans"
         }
       ],
       "rolls": 1.0
@@ -403,19 +383,11 @@
           "functions": [
             {
               "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
+              "count": 1.0,
               "function": "minecraft:set_count"
             },
             {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
+              "count": 1.0,
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
             }
@@ -427,19 +399,11 @@
           "functions": [
             {
               "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
+              "count": 1.0,
               "function": "minecraft:set_count"
             },
             {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
+              "count": 1.0,
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
             }
@@ -451,19 +415,11 @@
           "functions": [
             {
               "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
+              "count": 1.0,
               "function": "minecraft:set_count"
             },
             {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
+              "count": 1.0,
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
             }
@@ -475,19 +431,11 @@
           "functions": [
             {
               "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
+              "count": 1.0,
               "function": "minecraft:set_count"
             },
             {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
+              "count": 1.0,
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
             }
@@ -499,19 +447,11 @@
           "functions": [
             {
               "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
+              "count": 1.0,
               "function": "minecraft:set_count"
             },
             {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
+              "count": 1.0,
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
             }
@@ -523,19 +463,11 @@
           "functions": [
             {
               "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
+              "count": 1.0,
               "function": "minecraft:set_count"
             },
             {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
+              "count": 1.0,
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
             }
@@ -547,19 +479,11 @@
           "functions": [
             {
               "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
+              "count": 1.0,
               "function": "minecraft:set_count"
             },
             {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
+              "count": 1.0,
               "enchantment": "minecraft:looting",
               "function": "minecraft:enchanted_count_increase"
             }

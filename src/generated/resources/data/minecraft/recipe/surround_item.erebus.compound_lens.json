@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "I": "erebus:amber",
+    "I": "erebus:amber_glass",
     "O": "erebus:compound_eyes"
   },
   "pattern": [

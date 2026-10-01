@@ -6,5 +6,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class BambooBridgeBlockEntityRenderState extends BlockEntityRenderState {
     public Direction facing;
+    public boolean renderSide1 = true;
+    public boolean renderSide2 = true;
     public BlockState blockState;
 }

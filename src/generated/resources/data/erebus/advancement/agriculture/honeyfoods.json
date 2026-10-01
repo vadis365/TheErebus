@@ -1,0 +1,45 @@
+{
+  "parent": "erebus:agriculture/honey",
+  "criteria": {
+    "sandwich": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:honey_sandwich"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "treat": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:honey_treat"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/honeyfoods.desc"
+    },
+    "icon": {
+      "id": "erebus:honey_treat"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/honeyfoods.title"
+    }
+  },
+  "requirements": [
+    [
+      "treat"
+    ],
+    [
+      "sandwich"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

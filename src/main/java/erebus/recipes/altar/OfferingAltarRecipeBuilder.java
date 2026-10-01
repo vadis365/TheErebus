@@ -21,80 +21,80 @@ import java.util.List;
 
 public class OfferingAltarRecipeBuilder implements RecipeBuilder {
 
-	private final HolderGetter<Item> items;
-	private final ItemStackTemplate result;
-	private final List<Ingredient> ingredients = new ArrayList<>();
-	private final RecipeUnlockAdvancementBuilder advancementBuilder = new RecipeUnlockAdvancementBuilder();
-	private String group;
+    private final HolderGetter<Item> items;
+    private final ItemStackTemplate result;
+    private final List<Ingredient> ingredients = new ArrayList<>();
+    private final RecipeUnlockAdvancementBuilder advancementBuilder = new RecipeUnlockAdvancementBuilder();
+    private String group;
 
-	private OfferingAltarRecipeBuilder(HolderGetter<Item> items, ItemStackTemplate result) {
-		this.items = items;
-		this.result = result;
-	}
+    private OfferingAltarRecipeBuilder(HolderGetter<Item> items, ItemStackTemplate result) {
+        this.items = items;
+        this.result = result;
+    }
 
-	public static OfferingAltarRecipeBuilder altarRecipe(HolderGetter<Item> items, ItemStackTemplate result) {
-		return new OfferingAltarRecipeBuilder(items, result);
-	}
+    public static OfferingAltarRecipeBuilder altarRecipe(HolderGetter<Item> items, ItemStackTemplate result) {
+        return new OfferingAltarRecipeBuilder(items, result);
+    }
 
-	public static OfferingAltarRecipeBuilder altarRecipe(HolderGetter<Item> items, ItemLike result) {
-		return altarRecipe(items, result, 1);
-	}
+    public static OfferingAltarRecipeBuilder altarRecipe(HolderGetter<Item> items, ItemLike result) {
+        return altarRecipe(items, result, 1);
+    }
 
-	public static OfferingAltarRecipeBuilder altarRecipe(HolderGetter<Item> items, ItemLike result, int count) {
-		return new OfferingAltarRecipeBuilder(items, new ItemStackTemplate(result.asItem(), count));
-	}
+    public static OfferingAltarRecipeBuilder altarRecipe(HolderGetter<Item> items, ItemLike result, int count) {
+        return new OfferingAltarRecipeBuilder(items, new ItemStackTemplate(result.asItem(), count));
+    }
 
-	public OfferingAltarRecipeBuilder requires(TagKey<Item> tag) {
-		return requires(Ingredient.of(items.getOrThrow(tag)));
-	}
+    public OfferingAltarRecipeBuilder requires(TagKey<Item> tag) {
+        return requires(Ingredient.of(items.getOrThrow(tag)));
+    }
 
-	public OfferingAltarRecipeBuilder requires(ItemLike item) {
-		return requires(item, 1);
-	}
+    public OfferingAltarRecipeBuilder requires(ItemLike item) {
+        return requires(item, 1);
+    }
 
-	public OfferingAltarRecipeBuilder requires(ItemLike item, int count) {
-		for (int i = 0; i < count; i++) {
-			requires(Ingredient.of(item));
-		}
+    public OfferingAltarRecipeBuilder requires(ItemLike item, int count) {
+        for (int i = 0; i < count; i++) {
+            requires(Ingredient.of(item));
+        }
 
-		return this;
-	}
+        return this;
+    }
 
-	public OfferingAltarRecipeBuilder requires(Ingredient ingredient) {
-		return requires(ingredient, 1);
-	}
+    public OfferingAltarRecipeBuilder requires(Ingredient ingredient) {
+        return requires(ingredient, 1);
+    }
 
-	public OfferingAltarRecipeBuilder requires(Ingredient ingredient, int count) {
-		for (int i = 0; i < count; i++) {
-			ingredients.add(ingredient);
-		}
+    public OfferingAltarRecipeBuilder requires(Ingredient ingredient, int count) {
+        for (int i = 0; i < count; i++) {
+            ingredients.add(ingredient);
+        }
 
-		return this;
-	}
+        return this;
+    }
 
-	public @NonNull OfferingAltarRecipeBuilder unlockedBy(@NonNull String name, @NonNull Criterion<?> criterion) {
-		advancementBuilder.unlockedBy(name, criterion);
-		return this;
-	}
+    public @NonNull OfferingAltarRecipeBuilder unlockedBy(@NonNull String name, @NonNull Criterion<?> criterion) {
+        advancementBuilder.unlockedBy(name, criterion);
+        return this;
+    }
 
-	public @NonNull OfferingAltarRecipeBuilder group(@Nullable String group) {
-		this.group = group;
-		return this;
-	}
+    public @NonNull OfferingAltarRecipeBuilder group(@Nullable String group) {
+        this.group = group;
+        return this;
+    }
 
-	@Override
-	public @NonNull ResourceKey<Recipe<?>> defaultId() {
-		return RecipeBuilder.getDefaultRecipeId(result);
-	}
+    @Override
+    public @NonNull ResourceKey<Recipe<?>> defaultId() {
+        return RecipeBuilder.getDefaultRecipeId(result);
+    }
 
-	@Override
-	public void save(RecipeOutput output, @NonNull ResourceKey<Recipe<?>> id) {
-		OfferingAltarRecipe recipe = new OfferingAltarRecipe(
-				RecipeBuilder.createCraftingCommonInfo(true),
-				RecipeBuilder.createCraftingBookInfo(RecipeCategory.MISC, group),
-				result,
-				ingredients
-		);
-		output.accept(id, recipe, advancementBuilder.build(output, id, RecipeCategory.MISC));
-	}
+    @Override
+    public void save(RecipeOutput output, @NonNull ResourceKey<Recipe<?>> id) {
+        OfferingAltarRecipe recipe = new OfferingAltarRecipe(
+                RecipeBuilder.createCraftingCommonInfo(true),
+                RecipeBuilder.createCraftingBookInfo(RecipeCategory.MISC, group),
+                result,
+                ingredients
+        );
+        output.accept(id, recipe, advancementBuilder.build(output, id, RecipeCategory.MISC));
+    }
 }

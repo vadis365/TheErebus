@@ -5,10 +5,10 @@ import erebus.registries.world.ModBiomes;
 import erebus.registries.world.carver.ModCarvers;
 import erebus.registries.world.feature.DecorationFeatures;
 import erebus.registries.world.feature.OreFeatures;
+import erebus.registries.world.feature.PlantFeatures;
 import erebus.registries.world.feature.TreeFeatures;
 import erebus.world.biome.util.ErebusBiome;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
@@ -61,11 +61,14 @@ public class UlteriorOutbackBiome extends ErebusBiome {
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
                         .addCarver(ModCarvers.CAVE)
                         .addCarver(ModCarvers.CANYON)
+                        .addFeature(SURFACE_STRUCTURES, PlantFeatures.OUTBACK_SOIL.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ROTTEN_ACACIA.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_SAVANNA)
-                        .addFeature(VEGETAL_DECORATION, VegetationPlacements.TREES_SAVANNA)
-                        .addFeature(VEGETAL_DECORATION, TreeFeatures.BALSAM_TREE.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, TreeFeatures.EUCALYPTUS_TREE.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, TreeFeatures.OUTBACK_ACACIA.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, TreeFeatures.OUTBACK_BALSAM.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.DROUGHTED_SHRUB.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.DESERT_SHRUB.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.OUTBACK_GRASS.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, TreeFeatures.OUTBACK_EUCALYPTUS.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.GOLD_ORE.getPlacedResourceKey())

@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:savannah_baobab_population",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

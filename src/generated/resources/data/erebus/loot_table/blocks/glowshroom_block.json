@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "erebus:glowshroom_block"
+          "name": "erebus:glowshroom"
         }
       ],
       "rolls": 1.0

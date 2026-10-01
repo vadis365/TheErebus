@@ -11,14 +11,9 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 
 public class MosquitoHeadRidingModel extends EntityModel<MosquitoRenderState> {
 
-    public ModelPart root;
 
     public MosquitoHeadRidingModel(ModelPart root) {
         super(root);
-        this.root = root;
-        root.getChild("Head2");
-        root.getChild("Head3");
-        root.getChild("Head4");
     }
 
     public static LayerDefinition createBodyLayer() {

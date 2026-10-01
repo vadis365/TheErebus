@@ -34,7 +34,7 @@ public class ErebusSpawnerRenderer implements BlockEntityRenderer<ErebusSpawnerB
     @Override
     public void extractRenderState(ErebusSpawnerBlockEntity entity, ErebusSpawnerBlockEntityRenderState state, float partialTicks, @NonNull Vec3 camera, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
         BlockEntityRenderer.super.extractRenderState(entity, state, partialTicks, camera, breakProgress);
-        if(entity.getLevel() != null) {
+        if (entity.getLevel() != null) {
             BaseSpawner spawner = entity.getSpawner();
             Entity displayEntity = spawner.getOrCreateDisplayEntity(entity.getLevel(), entity.getBlockPos());
 
@@ -44,7 +44,7 @@ public class ErebusSpawnerRenderer implements BlockEntityRenderer<ErebusSpawnerB
                 state.spin = (float) Mth.lerp(partialTicks, spawner.getOSpin(), spawner.getSpin()) * 10.0F;
                 state.scale = 0.53125F;
                 float maxLength = Math.max(displayEntity.getBbWidth(), displayEntity.getBbHeight());
-                if ((double)maxLength > (double)1.0F) {
+                if ((double) maxLength > (double) 1.0F) {
                     state.scale /= maxLength;
                 }
             }
@@ -53,7 +53,7 @@ public class ErebusSpawnerRenderer implements BlockEntityRenderer<ErebusSpawnerB
 
     @Override
     public void submit(ErebusSpawnerBlockEntityRenderState state, @NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, @NonNull CameraRenderState camera) {
-        if(state.displayEntity != null) {
+        if (state.displayEntity != null) {
             pose.pushPose();
             pose.translate(0.5F, 0.4F, 0.5F);
             pose.mulPose(Axis.YP.rotationDegrees(state.spin));

@@ -3,10 +3,16 @@
   "category": "building",
   "ingredients": [
     "#minecraft:planks",
-    "#c:slime_balls",
-    "erebus:repellent"
+    "#minecraft:planks",
+    "#minecraft:planks",
+    "#minecraft:planks",
+    "erebus:resin",
+    "erebus:resin",
+    "erebus:repellent",
+    "erebus:camo_powder"
   ],
   "result": {
+    "count": 4,
     "id": "erebus:planks_varnished"
   }
 }

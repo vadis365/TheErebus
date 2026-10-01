@@ -24,60 +24,62 @@ import org.jspecify.annotations.Nullable;
 
 public class BambooBridgeRenderer implements BlockEntityRenderer<BambooBridgeBlockEntity, BambooBridgeBlockEntityRenderState> {
 
-	public final SpriteId TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bamboo_bridge"));
-	private final BambooBridgeModel model;
-	private final SpriteGetter sprites;
+    public final SpriteId TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bamboo_bridge"));
+    private final BambooBridgeModel model;
+    private final SpriteGetter sprites;
 
-	public BambooBridgeRenderer(Context context) {
-		sprites = context.sprites();
-		model = new BambooBridgeModel(context.bakeLayer(ModBlockEntityRendering.BAMBOO_BRIDGE));
-	}
+    public BambooBridgeRenderer(Context context) {
+        sprites = context.sprites();
+        model = new BambooBridgeModel(context.bakeLayer(ModBlockEntityRendering.BAMBOO_BRIDGE));
+    }
 
-	@Override
-	public BambooBridgeBlockEntityRenderState createRenderState() {
-		return new BambooBridgeBlockEntityRenderState();
-	}
+    @Override
+    public BambooBridgeBlockEntityRenderState createRenderState() {
+        return new BambooBridgeBlockEntityRenderState();
+    }
 
-	@Override
-	public void extractRenderState(BambooBridgeBlockEntity blockEntity, BambooBridgeBlockEntityRenderState state, float partialTicks, @NonNull Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
-		BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
-		state.facing = blockEntity.getBlockState().getValue(BambooBridge.FACING);
-	}
+    @Override
+    public void extractRenderState(BambooBridgeBlockEntity blockEntity, BambooBridgeBlockEntityRenderState state, float partialTicks, @NonNull Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+        BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+        state.facing = blockEntity.getBlockState().getValue(BambooBridge.FACING);
+        state.renderSide1 = BambooBridge.shouldRenderRail(blockEntity.getBlockState(), blockEntity.getLevel(), blockEntity.getBlockPos(), true);
+        state.renderSide2 = BambooBridge.shouldRenderRail(blockEntity.getBlockState(), blockEntity.getLevel(), blockEntity.getBlockPos(), false);
+    }
 
-	@Override
-	public void submit(BambooBridgeBlockEntityRenderState renderState, PoseStack pose, @NonNull SubmitNodeCollector nodeCollector, @NonNull CameraRenderState cameraRenderState) {
-		pose.pushPose();
-		pose.translate(0.5F, 1.5F, 0.5F);
-		pose.scale(-1F, -1F, 1F);
-		switch (renderState.facing) {
-			case UP:
-			case DOWN:
-			case NORTH:
-				pose.mulPose(Axis.YP.rotationDegrees(0F));
-				break;
-			case SOUTH:
-				pose.mulPose(Axis.YP.rotationDegrees(180F));
-				break;
-			case WEST:
-				pose.mulPose(Axis.YN.rotationDegrees(90F));
-				break;
-			case EAST:
-				pose.mulPose(Axis.YP.rotationDegrees(90F));
-				break;
-		}
+    @Override
+    public void submit(BambooBridgeBlockEntityRenderState renderState, PoseStack pose, @NonNull SubmitNodeCollector nodeCollector, @NonNull CameraRenderState cameraRenderState) {
+        pose.pushPose();
+        pose.translate(0.5F, 1.5F, 0.5F);
+        pose.scale(-1F, -1F, 1F);
+        switch (renderState.facing) {
+            case UP:
+            case DOWN:
+            case NORTH:
+                pose.mulPose(Axis.YP.rotationDegrees(0F));
+                break;
+            case SOUTH:
+                pose.mulPose(Axis.YP.rotationDegrees(180F));
+                break;
+            case WEST:
+                pose.mulPose(Axis.YN.rotationDegrees(90F));
+                break;
+            case EAST:
+                pose.mulPose(Axis.YP.rotationDegrees(90F));
+                break;
+        }
 
-		nodeCollector.submitModel(
-				model,
-				renderState,
-				pose,
-				TEXTURE.renderType(RenderTypes::entityCutout),
-				renderState.lightCoords,
-				OverlayTexture.NO_OVERLAY,
-				-1,
-				sprites.get(TEXTURE),
-				0,
-				renderState.breakProgress
-		);
-		pose.popPose();
-	}
+        nodeCollector.submitModel(
+                model,
+                renderState,
+                pose,
+                TEXTURE.renderType(RenderTypes::entityCutout),
+                renderState.lightCoords,
+                OverlayTexture.NO_OVERLAY,
+                -1,
+                sprites.get(TEXTURE),
+                0,
+                renderState.breakProgress
+        );
+        pose.popPose();
+    }
 }

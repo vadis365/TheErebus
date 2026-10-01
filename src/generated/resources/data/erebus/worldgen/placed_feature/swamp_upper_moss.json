@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:swamp_upper_moss",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

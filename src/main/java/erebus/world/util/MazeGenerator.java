@@ -29,11 +29,6 @@ public interface MazeGenerator {
         S(2, 0, 1),
         E(4, 1, 0),
         W(8, -1, 0);
-        public final int bit;
-        public Direction opposite;
-        public final int dx;
-        public final int dy;
-
         // use the static initializer to resolve forward references
         static {
             N.opposite = S;
@@ -41,6 +36,11 @@ public interface MazeGenerator {
             E.opposite = W;
             W.opposite = E;
         }
+
+        public final int bit;
+        public final int dx;
+        public final int dy;
+        public Direction opposite;
 
         Direction(int bit, int dx, int dy) {
             this.bit = bit;

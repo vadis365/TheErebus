@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -32,12 +33,15 @@ public class ScorchedWoodFeatureConfiguration extends Feature<NoneFeatureConfigu
         int x = origin.getX(), y = origin.getY(), z = origin.getZ();
         int height = partAmount * 2;
 
-        if (level.isOutsideBuildHeight(y)) return false;
+        if (level.isOutsideBuildHeight(y - 1) || level.isOutsideBuildHeight(y + height)) return false;
+        BlockState ground = level.getBlockState(origin);
+        if (!ground.is(ModBlocks.VOLCANIC_ROCK) && !ground.is(Blocks.SAND) && !ground.is(Blocks.RED_SAND)) return false;
+        if (level.getBlockState(origin.below(2)).isAir()) return false;
 
         for (int testY = y + 1; testY <= y + height; testY++) {
             for (int testX = x - 1; testX <= x + 1; testX++) {
                 for (int testZ = z - 1; testZ <= z + 1; testZ++) {
-                    if (level.getBlockState(new BlockPos(testX, testY, testZ)).isAir()) return false;
+                    if (!level.getBlockState(new BlockPos(testX, testY, testZ)).isAir()) return false;
                 }
             }
         }

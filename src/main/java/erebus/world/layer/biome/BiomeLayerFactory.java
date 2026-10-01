@@ -7,5 +7,6 @@ import java.util.function.LongFunction;
 
 public interface BiomeLayerFactory {
     LazyArea build(LongFunction<LazyAreaContext> context);
+
     BiomeLayerType getType();
 }

@@ -10,16 +10,16 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 public class LightningAltarMidModel extends Model<LightningAltarBlockEntityRenderState> {
 
     public LightningAltarMidModel(ModelPart root) {
-		super(root, RenderTypes::entitySolid);
+        super(root, RenderTypes::entitySolid);
         root.getChild("Mid");
     }
 
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition mesh = new MeshDefinition();
-		PartDefinition part = mesh.getRoot();
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition mesh = new MeshDefinition();
+        PartDefinition part = mesh.getRoot();
 
         part.addOrReplaceChild("Mid", CubeListBuilder.create().texOffs(130, 0).addBox(-12.0F, 0.0F, -12.0F, 24.0F, 24.0F, 24.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -4.0F, 0.0F));
 
         return LayerDefinition.create(mesh, 256, 64);
-	}
+    }
 }

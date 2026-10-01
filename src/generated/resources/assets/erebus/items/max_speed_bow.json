@@ -28,7 +28,7 @@
         "model": "erebus:item/max_speed_bow_pulling_0"
       },
       "property": "minecraft:use_duration",
-      "scale": 0.05
+      "scale": 0.2
     },
     "property": "minecraft:using_item"
   }

@@ -15,14 +15,14 @@ public class ZombieAntLayer extends RenderLayer<ZombieAntRenderState, ZombieAntM
     private final ZombieAntModel antModel;
 
     public ZombieAntLayer(RenderLayerParent<ZombieAntRenderState, ZombieAntModel> entity, EntityModelSet modelSet) {
-    	super(entity);
-    	this.antModel = new ZombieAntModel(modelSet.bakeLayer(ModEntityRendering.ZOMBIE_ANT));
+        super(entity);
+        this.antModel = new ZombieAntModel(modelSet.bakeLayer(ModEntityRendering.ZOMBIE_ANT));
     }
 
-	@Override
-	public void submit(@NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, ZombieAntRenderState state, float xRot, float yRot) {
+    @Override
+    public void submit(@NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, ZombieAntRenderState state, float xRot, float yRot) {
 
-	}
+    }
 
     /*@Override
    	public void render(PoseStack stack, MultiBufferSource buffer, int packedLight, ZombieAnt ant, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {

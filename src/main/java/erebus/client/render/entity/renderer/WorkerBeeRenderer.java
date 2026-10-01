@@ -13,33 +13,33 @@ import net.minecraft.util.Mth;
 import org.jspecify.annotations.NonNull;
 
 public class WorkerBeeRenderer extends MobRenderer<WorkerBee, WorkerBeeRenderState, WorkerBeeModel> {
-	public static final Identifier TEXTURE = Erebus.prefix("textures/entity/worker_bee.png");
+    public static final Identifier TEXTURE = Erebus.prefix("textures/entity/worker_bee.png");
 
-	public WorkerBeeRenderer(EntityRendererProvider.Context context) {
-		super(context, new WorkerBeeModel(context.bakeLayer(ModEntityRendering.WORKER_BEE)), 0.5F);
-	}
+    public WorkerBeeRenderer(EntityRendererProvider.Context context) {
+        super(context, new WorkerBeeModel(context.bakeLayer(ModEntityRendering.WORKER_BEE)), 0.5F);
+    }
 
-	@Override
-	public WorkerBeeRenderState createRenderState() {
-		return new WorkerBeeRenderState();
-	}
+    @Override
+    public WorkerBeeRenderState createRenderState() {
+        return new WorkerBeeRenderState();
+    }
 
-	@Override
-	public void extractRenderState(WorkerBee entity, WorkerBeeRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-		float smoothedTicks = entity.tickCount + (entity.tickCount - (entity.tickCount - 1)) * partialTicks;
-		state.flap = Mth.sin((smoothedTicks) * 1.2F) * 0.5F;
-		state.isOnGround = entity.onGround();
-		state.isFlying = entity.isFlying();
-	}
+    @Override
+    public void extractRenderState(WorkerBee entity, WorkerBeeRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+        float smoothedTicks = entity.tickCount + (entity.tickCount - (entity.tickCount - 1)) * partialTicks;
+        state.flap = Mth.sin((smoothedTicks) * 1.2F) * 0.5F;
+        state.isOnGround = entity.onGround();
+        state.isFlying = entity.isFlying();
+    }
 
-	@Override
-	protected void scale(WorkerBeeRenderState state, PoseStack matrix) {
-		matrix.scale(0.5F, 0.5F, 0.5F);
-	}
+    @Override
+    protected void scale(WorkerBeeRenderState state, PoseStack matrix) {
+        matrix.scale(0.5F, 0.5F, 0.5F);
+    }
 
-	@Override
-	public @NonNull Identifier getTextureLocation(WorkerBeeRenderState state) {
-		return TEXTURE;
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(WorkerBeeRenderState state) {
+        return TEXTURE;
+    }
 }

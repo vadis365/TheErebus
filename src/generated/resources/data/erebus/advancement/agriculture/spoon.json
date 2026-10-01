@@ -1,0 +1,32 @@
+{
+  "parent": "erebus:agriculture/bee_amulet",
+  "criteria": {
+    "get_spoon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:nectar_collector"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/spoon.desc"
+    },
+    "icon": {
+      "id": "erebus:nectar_collector"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/spoon.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_spoon"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

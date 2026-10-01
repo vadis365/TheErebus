@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "erebus:bio_luminescence",
+    "G": "erebus:red_gem"
+  },
+  "pattern": [
+    "BBB",
+    "BGB",
+    "BBB"
+  ],
+  "result": {
+    "count": 3,
+    "id": "erebus:glow_gem_active"
+  }
+}

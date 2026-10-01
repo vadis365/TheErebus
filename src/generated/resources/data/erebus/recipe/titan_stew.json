@@ -4,8 +4,8 @@
   "ingredients": [
     "erebus:stew_pot",
     "erebus:titan_chop_raw",
-    "minecraft:potato",
-    "minecraft:carrot",
+    "erebus:mandrake_root",
+    "erebus:turnip",
     "erebus:cabbage",
     "#c:mushrooms",
     "#c:mushrooms"

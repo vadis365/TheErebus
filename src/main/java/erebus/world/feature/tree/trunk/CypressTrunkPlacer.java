@@ -30,10 +30,8 @@ public class CypressTrunkPlacer extends TrunkPlacer {
             ).apply(instance, CypressTrunkPlacer::new)
     );
 
-    private List<FoliagePlacer.FoliageAttachment> list;
-
-    private static final int[] offsetX = { -1, 1, 0, 0 };
-    private static final int[] offsetZ = { 0, 0, -1, 1 };
+    private static final int[] offsetX = {-1, 1, 0, 0};
+    private static final int[] offsetZ = {0, 0, -1, 1};
 
     public CypressTrunkPlacer(int baseHeight, int heightRandA, int heightRandB) {
         super(baseHeight, heightRandA, heightRandB);
@@ -46,27 +44,27 @@ public class CypressTrunkPlacer extends TrunkPlacer {
 
     @Override
     public @NonNull List<FoliagePlacer.FoliageAttachment> placeTrunk(@NonNull WorldGenLevel level, @NonNull BiConsumer<BlockPos, BlockState> trunkSetter, RandomSource random, int treeHeight, @NonNull BlockPos origin, @NonNull TreeConfiguration config) {
-        list = Lists.newArrayList();
-        float chance =  random.nextFloat();
+        List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
+        float chance = random.nextFloat();
 
-        if(chance >= 0.5F) {
-            generateMediumTree(level, trunkSetter, random, origin, config);
-        } else if(chance >= 0.3F) {
-            generateLargeTree(level, trunkSetter, random, origin, config);
+        if (chance >= 0.5F) {
+            generateMediumTree(level, trunkSetter, random, origin, config, list);
+        } else if (chance >= 0.3F) {
+            generateLargeTree(level, trunkSetter, random, origin, config, list);
         } else {
-            generateSmallTree(level, trunkSetter, random, origin, config);
+            generateSmallTree(level, trunkSetter, random, origin, config, list);
         }
 
         return list;
     }
 
     private boolean canPlaceAt(LevelSimulatedReader level, BlockPos pos, int height, int radius) {
-        if(!level.isStateAtPosition(pos, BlockBehaviour.BlockStateBase::isAir)) return false;
+        if (!level.isStateAtPosition(pos, BlockBehaviour.BlockStateBase::isAir)) return false;
 
-        for(int x = -radius; x <= radius; x++) {
-            for(int z = -radius; z <= radius; z++) {
-                for(int y = 1; y < height; y++) {
-                    if(!level.isStateAtPosition(pos, BlockBehaviour.BlockStateBase::isAir)) return false;
+        for (int x = -radius; x <= radius; x++) {
+            for (int z = -radius; z <= radius; z++) {
+                for (int y = 1; y <= height; y++) {
+                    if (!level.isStateAtPosition(pos.offset(x, y, z), BlockBehaviour.BlockStateBase::isAir)) return false;
                 }
             }
         }
@@ -74,140 +72,140 @@ public class CypressTrunkPlacer extends TrunkPlacer {
         return true;
     }
 
-    private void placeLeaf(BlockPos pos) {
+    private void placeLeaf(List<FoliagePlacer.FoliageAttachment> list, BlockPos pos) {
         list.add(new FoliagePlacer.FoliageAttachment(pos, 0, false));
     }
 
-    private void placeOuterLeaves(RandomSource random, BlockPos pos, int x, int z, int y, boolean canSkip) {
-        if(!canSkip || random.nextInt(10) != 0) placeLeaf(pos.offset(-2 + 4 * x, y, -1 + 2 * z));
-        if(!canSkip || random.nextInt(10) != 0) placeLeaf(pos.offset(-1 + 2 * x, y, -2 + 4 * z));
+    private void placeOuterLeaves(List<FoliagePlacer.FoliageAttachment> list, RandomSource random, BlockPos pos, int x, int z, int y, boolean canSkip) {
+        if (!canSkip || random.nextInt(10) != 0) placeLeaf(list, pos.offset(-2 + 4 * x, y, -1 + 2 * z));
+        if (!canSkip || random.nextInt(10) != 0) placeLeaf(list, pos.offset(-1 + 2 * x, y, -2 + 4 * z));
     }
 
-    private void generateSmallTree(WorldGenLevel level, BiConsumer<BlockPos, BlockState> setter, RandomSource random, BlockPos pos, TreeConfiguration config) {
+    private void generateSmallTree(WorldGenLevel level, BiConsumer<BlockPos, BlockState> setter, RandomSource random, BlockPos pos, TreeConfiguration config, List<FoliagePlacer.FoliageAttachment> list) {
         int height = random.nextInt(4) + 5;
         int trunkHeight = random.nextInt(2) + 1;
         int leafHeight = height - trunkHeight;
 
-        if(canPlaceAt(level, pos, height + 2, 2)) {
-            for(int y = 0; y < height; y++) placeLog(level, setter, random, pos.above(y), config);
-            for(int y = height + 1; y <= height + 2; y++) placeLeaf(pos.above(y));
+        if (canPlaceAt(level, pos, height + 2, 2)) {
+            for (int y = 0; y <= height; y++) placeLog(level, setter, random, pos.above(y), config);
+            for (int y = height + 1; y <= height + 2; y++) placeLeaf(list, pos.above(y));
 
-            for(int c = 0; c < 4; c++) {
-                for(int y = trunkHeight; y <= height; y++) placeLeaf(pos.offset(offsetX[c], y, offsetZ[c]));
+            for (int c = 0; c < 4; c++) {
+                for (int y = trunkHeight; y <= height; y++) placeLeaf(list, pos.offset(offsetX[c], y, offsetZ[c]));
 
-                if(leafHeight - 4 > 1) {
-                    for(int y = trunkHeight + 2; y <= height - 2; y++) {
-                        if((y == trunkHeight + 2 || y == height - 2) && leafHeight - 4 > 3 && random.nextInt(11) == 0)
+                if (leafHeight - 4 > 1) {
+                    for (int y = trunkHeight + 2; y <= height - 2; y++) {
+                        if ((y == trunkHeight + 2 || y == height - 2) && leafHeight - 4 > 3 && random.nextInt(11) == 0)
                             continue;
-                        placeLeaf(pos.offset(offsetX[c] * 2, y, offsetZ[c] * 2));
+                        placeLeaf(list, pos.offset(offsetX[c] * 2, y, offsetZ[c] * 2));
                     }
                 }
             }
 
-            for(int x = 0; x < 2; x++) {
-                for(int z = 0; z < 2; z++) {
-                    for(int y = trunkHeight + 1; y <= height - 1; y++) {
-                        if((y == trunkHeight + 1 || y == height - 1) && leafHeight - 2 > 3 && random.nextInt(8) == 0)
+            for (int x = 0; x < 2; x++) {
+                for (int z = 0; z < 2; z++) {
+                    for (int y = trunkHeight + 1; y <= height - 1; y++) {
+                        if ((y == trunkHeight + 1 || y == height - 1) && leafHeight - 2 > 3 && random.nextInt(8) == 0)
                             continue;
-                        placeLeaf(pos.offset(-1 + 2 * x, y, -1 + 2 * z));
+                        placeLeaf(list, pos.offset(-1 + 2 * x, y, -1 + 2 * z));
                     }
                 }
             }
         }
     }
 
-    private void generateMediumTree(WorldGenLevel level, BiConsumer<BlockPos, BlockState> setter, RandomSource random, BlockPos pos, TreeConfiguration config) {
+    private void generateMediumTree(WorldGenLevel level, BiConsumer<BlockPos, BlockState> setter, RandomSource random, BlockPos pos, TreeConfiguration config, List<FoliagePlacer.FoliageAttachment> list) {
         int height = random.nextInt(5) + 8;
         int trunkHeight = random.nextInt(3) + 1;
         int leafHeight = height - trunkHeight;
 
-        if(canPlaceAt(level, pos, height + 3, 3)) {
-            for(int y = 0; y <= height; y++) placeLog(level, setter, random, pos.above(y), config);
-            for(int y = height + 1; y <= height + 3; y++) placeLeaf(pos.above(y));
+        if (canPlaceAt(level, pos, height + 3, 3)) {
+            for (int y = 0; y <= height; y++) placeLog(level, setter, random, pos.above(y), config);
+            for (int y = height + 1; y <= height + 3; y++) placeLeaf(list, pos.above(y));
 
-            for(int c = 0; c < 4; c++) {
-                for(int y = trunkHeight; y <= height + 1; y++) placeLeaf(pos.offset(offsetX[c], y, offsetZ[c]));
-                for(int y = trunkHeight + 1; y <= height - 2; y++) placeLeaf(pos.offset(offsetX[c] * 2, y, offsetZ[c] * 2));
+            for (int c = 0; c < 4; c++) {
+                for (int y = trunkHeight; y <= height + 1; y++) placeLeaf(list, pos.offset(offsetX[c], y, offsetZ[c]));
+                for (int y = trunkHeight + 1; y <= height - 2; y++) placeLeaf(list, pos.offset(offsetX[c] * 2, y, offsetZ[c] * 2));
 
-                if(leafHeight - 7 > 1) {
-                    for(int y = trunkHeight + 3; y <= height - 4; y++) {
-                        if((y == trunkHeight + 3 || y == height - 4) && leafHeight - 7 > 3 && random.nextInt(10) == 0)
+                if (leafHeight - 7 > 1) {
+                    for (int y = trunkHeight + 3; y <= height - 4; y++) {
+                        if ((y == trunkHeight + 3 || y == height - 4) && leafHeight - 7 > 3 && random.nextInt(10) == 0)
                             continue;
-                        placeLeaf(pos.offset(offsetX[c] * 3, y, offsetZ[c] * 3));
+                        placeLeaf(list, pos.offset(offsetX[c] * 3, y, offsetZ[c] * 3));
                     }
                 }
             }
 
-            for(int x = 0; x < 2; x++) {
-                for(int z = 0; z < 2; z++) {
-                    for(int y = trunkHeight + 1; y <= height - 1; y++) {
-                        if((y == trunkHeight + 1 || y == height - 1) && random.nextInt(14) == 0)
+            for (int x = 0; x < 2; x++) {
+                for (int z = 0; z < 2; z++) {
+                    for (int y = trunkHeight + 1; y <= height - 1; y++) {
+                        if ((y == trunkHeight + 1 || y == height - 1) && random.nextInt(14) == 0)
                             continue;
-                        placeLeaf(pos.offset(-1 + 2 * x, y, -1 + 2 * z));
+                        placeLeaf(list, pos.offset(-1 + 2 * x, y, -1 + 2 * z));
                     }
 
-                    for(int y = trunkHeight + 2; y <= height - 3; y++) {
+                    for (int y = trunkHeight + 2; y <= height - 3; y++) {
                         boolean canSkip = y == trunkHeight + 2 || y == height - 3;
-                        placeOuterLeaves(random, pos, x, z, y, canSkip);
+                        placeOuterLeaves(list, random, pos, x, z, y, canSkip);
                     }
                 }
             }
         }
     }
 
-    private void generateLargeTree(WorldGenLevel level, BiConsumer<BlockPos, BlockState> setter, RandomSource random, BlockPos pos, TreeConfiguration config) {
+    private void generateLargeTree(WorldGenLevel level, BiConsumer<BlockPos, BlockState> setter, RandomSource random, BlockPos pos, TreeConfiguration config, List<FoliagePlacer.FoliageAttachment> list) {
         int height = random.nextInt(6) + 12;
         int trunkHeight = random.nextInt(3) + 2;
         int leafHeight = height - trunkHeight;
 
-        if(canPlaceAt(level, pos, height + 4, 3)) {
-            for(int y = 0; y <= height; y++) {
+        if (canPlaceAt(level, pos, height + 4, 3)) {
+            for (int y = 0; y <= height; y++) {
                 placeLog(level, setter, random, pos.above(y), config);
 
-                if(y <= height - 2) {
-                    for(int c = 0; c < 4; c++) {
-                        placeLeaf(pos.offset(offsetX[c], y, offsetZ[c]));
+                if (y <= height - 2) {
+                    for (int c = 0; c < 4; c++) {
+                        placeLeaf(list, pos.offset(offsetX[c], y, offsetZ[c]));
                     }
                 }
             }
 
-            for(int y = height + 1; y <= height + 4; y++) placeLeaf(pos.above(y));
+            for (int y = height + 1; y <= height + 4; y++) placeLeaf(list, pos.above(y));
 
-            for(int c = 0; c < 4; c++) {
-                for(int y = height - 1; y <= height + 2; y++) {
-                    if(y == height + 2 && random.nextInt(5) == 0) continue;
-                    placeLeaf(pos.offset(offsetX[c], y, offsetZ[c]));
+            for (int c = 0; c < 4; c++) {
+                for (int y = height - 1; y <= height + 2; y++) {
+                    if (y == height + 2 && random.nextInt(5) == 0) continue;
+                    placeLeaf(list, pos.offset(offsetX[c], y, offsetZ[c]));
                 }
 
-                for(int y = trunkHeight; y <= height; y++) {
-                    if(y == height && random.nextInt(6) == 0) continue;
-                    placeLeaf(pos.offset(offsetX[c] * 2, y, offsetZ[c] * 2));
+                for (int y = trunkHeight; y <= height; y++) {
+                    if (y == height && random.nextInt(6) == 0) continue;
+                    placeLeaf(list, pos.offset(offsetX[c] * 2, y, offsetZ[c] * 2));
                 }
 
-                for(int y = trunkHeight + 2; y <= height - 3; y++) {
-                    placeLeaf(pos.offset(offsetX[c] * 3, y, offsetZ[c] * 3));
+                for (int y = trunkHeight + 2; y <= height - 3; y++) {
+                    placeLeaf(list, pos.offset(offsetX[c] * 3, y, offsetZ[c] * 3));
                 }
             }
 
-            for(int x = 0; x < 2; x++) {
-                for(int z = 0; z < 2; z++) {
-                    for(int y = trunkHeight; y <= height + 1; y++) placeLeaf(pos.offset(-1 + 2 * x, y, -1 + 2 * z));
+            for (int x = 0; x < 2; x++) {
+                for (int z = 0; z < 2; z++) {
+                    for (int y = trunkHeight; y <= height + 1; y++) placeLeaf(list, pos.offset(-1 + 2 * x, y, -1 + 2 * z));
 
-                    for(int y = trunkHeight + 1; y <= height - 2; y++) {
+                    for (int y = trunkHeight + 1; y <= height - 2; y++) {
                         boolean canSkip = y == trunkHeight + 1 || y == height - 2;
-                        placeOuterLeaves(random, pos, x, z, y, canSkip);
+                        placeOuterLeaves(list, random, pos, x, z, y, canSkip);
                     }
 
-                    for(int y = trunkHeight + 3; y <= height - 3; y++) {
-                        if(y == height - 3  && random.nextInt(7) == 0) continue;
-                        placeLeaf(pos.offset(-2 + 4 * x, y, -2 + 4 * z));
+                    for (int y = trunkHeight + 3; y <= height - 3; y++) {
+                        if (y == height - 3 && random.nextInt(7) == 0) continue;
+                        placeLeaf(list, pos.offset(-2 + 4 * x, y, -2 + 4 * z));
                     }
 
-                    if(leafHeight - 9 > 1) {
-                        for(int y = trunkHeight + 4; y <= height - 5; y++) {
+                    if (leafHeight - 9 > 1) {
+                        for (int y = trunkHeight + 4; y <= height - 5; y++) {
                             boolean canSkip = (y == trunkHeight + 4 || y == height - 5) && leafHeight - 9 > 2;
-                            if(!canSkip || random.nextInt(12) != 0) placeLeaf(pos.offset(-3 + 6 * x, y, -1 + 2 * z));
-                            if(!canSkip || random.nextInt(12) != 0) placeLeaf(pos.offset(-1 + 2 * x, y, -3 + 6 * z));
+                            if (!canSkip || random.nextInt(12) != 0) placeLeaf(list, pos.offset(-3 + 6 * x, y, -1 + 2 * z));
+                            if (!canSkip || random.nextInt(12) != 0) placeLeaf(list, pos.offset(-1 + 2 * x, y, -3 + 6 * z));
                         }
                     }
                 }

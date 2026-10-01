@@ -43,237 +43,237 @@ import org.jspecify.annotations.NonNull;
 import javax.annotation.Nullable;
 
 public class Wasp extends Monster {
-	private static final EntityDataAccessor<Boolean> IS_BOSS = SynchedEntityData.defineId(Wasp.class, EntityDataSerializers.BOOLEAN);
-	public int animationTicks, prevAnimationTicks;
+    private static final EntityDataAccessor<Boolean> IS_BOSS = SynchedEntityData.defineId(Wasp.class, EntityDataSerializers.BOOLEAN);
+    public int animationTicks, prevAnimationTicks;
 
-	public Wasp(EntityType<? extends Wasp> type, Level level) {
-		super(type, level);
-		this.moveControl = new FlyingMoveControl(this, 10, false);
-	}
+    public Wasp(EntityType<? extends Wasp> type, Level level) {
+        super(type, level);
+        this.moveControl = new FlyingMoveControl(this, 10, false);
+        xpReward = 10;
+        setPathfindingMalus(net.minecraft.world.level.pathfinder.PathType.WATER, -8F);
+    }
 
-	@Override
-	protected void registerGoals() {
-		goalSelector.addGoal(1, new MeleeAttackGoal(this, 1D, true));
-		goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
-		goalSelector.addGoal(3, new RandomLookAroundGoal(this));
-		goalSelector.addGoal(4, new FlyingWanderGoal(this, 0.75D, 0.01F));
-		targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, true, false));
-//		targetSelector.addGoal(1, new NearestAttackableTargetGoal<Monster>(this, Monster.class, 0, true, false, p -> Config.HORNET_ATTACK_MOBS.get()));
-//		targetSelector.addGoal(2, new NearestAttackableTargetGoal<LivingEntity>(this, LivingEntity.class, 0, true, false, p -> Config.HORNET_ATTACK_CREATURES.get()));
-		targetSelector.addGoal(3, new HurtByTargetGoal(this).setAlertOthers(Wasp.class));
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 25D)
+                .add(Attributes.FOLLOW_RANGE, 16D)
+                .add(Attributes.MOVEMENT_SPEED, 0.75D)
+                .add(Attributes.FLYING_SPEED, 1D)
+                .add(Attributes.ATTACK_DAMAGE, 4D);
+    }
 
-	@Override
-	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
-		super.defineSynchedData(builder);
-		builder.define(IS_BOSS, false);
-	}
+    public static boolean canSpawnHere(EntityType<Wasp> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
+        float light = level.getLightLevelDependentMagicValue(pos);
+        return light >= 0F;
+    }
 
-	@Override
-	public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> key) {
-		if (IS_BOSS.equals(key)) {
-			refreshDimensions();
-			setYRot(this.yHeadRot);
-			yBodyRot = this.yHeadRot;
-		}
-		super.onSyncedDataUpdated(key);
-	}
+    @Override
+    protected void registerGoals() {
+        goalSelector.addGoal(0, new net.minecraft.world.entity.ai.goal.FloatGoal(this));
+        goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, true));
+        goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        goalSelector.addGoal(3, new RandomLookAroundGoal(this));
+        goalSelector.addGoal(4, new FlyingWanderGoal(this, 0.75D, 0.01F));
+        targetSelector.addGoal(0, new HurtByTargetGoal(this).setAlertOthers(Wasp.class));
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Beetle.class, true));
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, BeetleLarva.class, true));
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, WorkerBee.class, true));
+    }
 
-	@Override
-	public void refreshDimensions() {
-		double x = this.getX();
-		double y = this.getY();
-		double z = this.getZ();
-		super.refreshDimensions();
-		this.setPos(x, y, z);
-	}
+    @Override
+    protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(IS_BOSS, false);
+    }
 
-	@Override
-	public @NotNull EntityDimensions getDefaultDimensions(@NotNull Pose pose) {
-		return getIsBoss() ? super.getDefaultDimensions(pose).scale(3F, 2.5F) : super.getDefaultDimensions(pose).scale(1F, 1F);
-	}
+    @Override
+    public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> key) {
+        if (IS_BOSS.equals(key)) {
+            refreshDimensions();
+            setYRot(this.yHeadRot);
+            yBodyRot = this.yHeadRot;
+        }
+        super.onSyncedDataUpdated(key);
+    }
 
-	public Boolean getIsBoss() {
-		return entityData.get(IS_BOSS);
-	}
+    @Override
+    public void refreshDimensions() {
+        double x = this.getX();
+        double y = this.getY();
+        double z = this.getZ();
+        super.refreshDimensions();
+        this.setPos(x, y, z);
+    }
 
-	public void setIsBoss(boolean boss, boolean resetHealth) {
-		entityData.set(IS_BOSS, boss);
-		reapplyPosition();
-		refreshDimensions();
+    @Override
+    public @NotNull EntityDimensions getDefaultDimensions(@NotNull Pose pose) {
+        return getIsBoss() ? super.getDefaultDimensions(pose).scale(3F, 2.5F) : super.getDefaultDimensions(pose).scale(1F, 1F);
+    }
 
-		if (boss) {
-			getAttribute(Attributes.MAX_HEALTH).setBaseValue(60D);
-			getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(8D);
-			getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.9D);
-			getAttribute(Attributes.FLYING_SPEED).setBaseValue(1.25D);
-		}
-		else
-		{
-			getAttribute(Attributes.MAX_HEALTH).setBaseValue(25D);
-			getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(4D);
-			getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.75D);
-			getAttribute(Attributes.FLYING_SPEED).setBaseValue(1D);
-		}
+    public Boolean getIsBoss() {
+        return entityData.get(IS_BOSS);
+    }
 
-		if (resetHealth)
-			setHealth(getMaxHealth());
+    public void setIsBoss(boolean boss, boolean resetHealth) {
+        entityData.set(IS_BOSS, boss);
+        reapplyPosition();
+        refreshDimensions();
 
-		if (!hasCustomName())
-			if (random.nextBoolean())
-				if (random.nextBoolean())
-					setCustomName(Component.literal("Livid's Bane"));
-				else
-					setCustomName(Component.literal("Nano's Nemesis"));
-			else
-				setCustomName(Component.literal("Hornet of Despair"));
-	}
+        if (boss) {
+            getAttribute(Attributes.MAX_HEALTH).setBaseValue(60D);
+            getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(8D);
+            getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.9D);
+            getAttribute(Attributes.FLYING_SPEED).setBaseValue(1.25D);
+        } else {
+            getAttribute(Attributes.MAX_HEALTH).setBaseValue(25D);
+            getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(4D);
+            getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.75D);
+            getAttribute(Attributes.FLYING_SPEED).setBaseValue(1D);
+        }
 
-	@Nullable
-	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
-		RandomSource randomsource = level.getRandom();
-		int isBoss = randomsource.nextInt(32);
-		if(isBoss == 0)
-			setIsBoss(true, true);
-		return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
-	}
+        xpReward = boss ? 25 : 10;
 
-	@Override
-	  public void addAdditionalSaveData(@NonNull ValueOutput output) {
-		super.addAdditionalSaveData(output);
-		output.putBoolean("mobType", getIsBoss());
-	}
+        if (resetHealth)
+            setHealth(getMaxHealth());
 
-	@Override
-	public void readAdditionalSaveData(@NonNull ValueInput input) {
-		super.readAdditionalSaveData(input);
-		setIsBoss(input.getBooleanOr("mobType", false), false);
-	}
+        if (boss && !hasCustomName())
+            if (random.nextBoolean())
+                if (random.nextBoolean())
+                    setCustomName(Component.literal("Livid's Bane"));
+                else
+                    setCustomName(Component.literal("Nano's Nemesis"));
+            else
+                setCustomName(Component.literal("Hornet of Despair"));
+    }
 
-	@Override
-	public float getWalkTargetValue(@NonNull BlockPos pos, LevelReader level) {
-		return level.getBlockState(pos).isAir() ? 10.0F : 0.0F;
-	}
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, @NotNull DifficultyInstance difficulty, @NotNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+        RandomSource randomsource = level.getRandom();
+        int isBoss = randomsource.nextInt(32);
+        if (isBoss == 0)
+            setIsBoss(true, true);
+        return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-			return Monster.createMonsterAttributes()
-					.add(Attributes.MAX_HEALTH, 25D)
-					.add(Attributes.FOLLOW_RANGE, 32D)
-					.add(Attributes.MOVEMENT_SPEED, 0.75D)
-					.add(Attributes.FLYING_SPEED, 1D)
-					.add(Attributes.ATTACK_DAMAGE, 4D);
-	}
+    @Override
+    public void addAdditionalSaveData(@NonNull ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putBoolean("mobType", getIsBoss());
+    }
 
-	public static boolean canSpawnHere(EntityType<Wasp> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
-		float light = level.getLightLevelDependentMagicValue(pos);
-		return light >= 0F;
-	}
+    @Override
+    public void readAdditionalSaveData(@NonNull ValueInput input) {
+        super.readAdditionalSaveData(input);
+        setIsBoss(input.getBooleanOr("mobType", false), false);
+    }
 
-	@Override
-	public boolean checkSpawnObstruction(LevelReader world) {
-		return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
-	}
+    @Override
+    public float getWalkTargetValue(@NonNull BlockPos pos, LevelReader level) {
+        return level.getBlockState(pos).isAir() ? 10.0F : 0.0F;
+    }
 
-	@Override
-	public int getMaxSpawnClusterSize() {
-		return 2;
-	}
+    @Override
+    public boolean checkSpawnRules(LevelAccessor level, EntitySpawnReason reason) {
+        return true;
+    }
 
-	@Override
-	protected SoundEvent getAmbientSound() {
-		return ModSounds.WASP_SOUND.get();
-	}
+    @Override
+    public boolean checkSpawnObstruction(LevelReader world) {
+        return !world.containsAnyLiquid(getBoundingBox()) && world.noCollision(this);
+    }
 
-	@Override
-	protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
-		return ModSounds.WASP_HURT.get();
-	}
+    @Override
+    public int getMaxSpawnClusterSize() {
+        return 8;
+    }
 
-	@Override
-	protected @NonNull SoundEvent getDeathSound() {
-		return ModSounds.SQUISH.get();
-	}
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.WASP_SOUND.get();
+    }
 
-	@Override
+    @Override
+    protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
+        return ModSounds.WASP_HURT.get();
+    }
+
+    @Override
+    protected @NonNull SoundEvent getDeathSound() {
+        return ModSounds.SQUISH.get();
+    }
+
+    @Override
     protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState blockIn) {
         this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
     }
 
-	@Override
-	protected float getSoundVolume() {
-		return 0.5F;
-	}
+    @Override
+    protected float getSoundVolume() {
+        return 0.5F;
+    }
 
-	public boolean isFlying() {
-		return !onGround();
-	}
+    public boolean isFlying() {
+        return !onGround();
+    }
 
-	@Override
-	public void tick() {
-		super.tick();
+    @Override
+    public void tick() {
+        super.tick();
 
-		if (level().isClientSide()) {
-			prevAnimationTicks = animationTicks;
-			if (animationTicks < 720)
-				animationTicks += 1;
-			if (animationTicks >= 720) {
-				animationTicks -= 720;
-				prevAnimationTicks -= 720;
-			}
-		}
+        if (level().isClientSide()) {
+            prevAnimationTicks = animationTicks;
+            if (animationTicks < 720)
+                animationTicks += 1;
+            if (animationTicks >= 720) {
+                animationTicks -= 720;
+                prevAnimationTicks -= 720;
+            }
+        }
 
-		Vec3 vec3 = this.getDeltaMovement();
-		if (!this.onGround() && vec3.y < 0.0D) {
-			if (getTarget() == null)
-				this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
-			else
-				this.setDeltaMovement(vec3.multiply(1.0D, 0.75D, 1.0D));
-		}
+        if (level().isClientSide() || !isAlive()) return;
+        Vec3 motion = getDeltaMovement();
+        if (motion.y < 0) setDeltaMovement(motion.multiply(1, 0.4, 1));
+        if (isInWater()) getMoveControl().setWantedPosition(getX(), getY() + 1, getZ(), 0.32);
 
-		if(isInWater())
-			getNavigation().moveTo(getX(), getY() + 1D, getZ(), 0.5D);
-	}
+    }
 
-	@Override
-    protected @NonNull PathNavigation createNavigation(@NonNull Level level){
-		return new FlyingPathNavigation(this, level);
-	}
+    @Override
+    protected @NonNull PathNavigation createNavigation(@NonNull Level level) {
+        return new FlyingPathNavigation(this, level);
+    }
 
-	@Override
-	public boolean causeFallDamage(double fallDistance, float damageModifier, @NonNull DamageSource damageSource) {
-		return false;
-	}
+    @Override
+    public boolean causeFallDamage(double fallDistance, float damageModifier, @NonNull DamageSource damageSource) {
+        return false;
+    }
 
     @Override
     public boolean isIgnoringBlockTriggers() {
         return true;
     }
 
-	@Override
-	public boolean canAttack(LivingEntity target) {
-		return !target.is(ModEntities.WASP.get());
-	}
+    @Override
+    public boolean canAttack(LivingEntity target) {
+        return !target.is(ModEntities.WASP.get()) && super.canAttack(target);
+    }
 
-	@Override
-	public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity entity) {
-		if (hasLineOfSight(entity)) {
-			if (super.doHurtTarget(level, entity)) {
-				if (entity instanceof LivingEntity) {
-					byte duration;
+    @Override
+    public boolean isWithinMeleeAttackRange(LivingEntity target) {
+        return distanceToSqr(target) <= 4 + target.getBbWidth();
+    }
 
-					switch(level.getDifficulty()) {
-                        case NORMAL-> duration = 3;
-						case HARD-> duration = 5;
-                        default -> duration = 0;
-                    }
-
-					if (duration > 0)
-						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.POISON, duration * 20, 0));
-				}
-			}
-			return true;
-		} else
-			return false;
-	}
+    @Override
+    public boolean doHurtTarget(@NonNull ServerLevel level, @NonNull Entity entity) {
+        if (!hasLineOfSight(entity) || !super.doHurtTarget(level, entity)) return false;
+        int duration = switch (level.getDifficulty()) {
+            case NORMAL -> 60;
+            case HARD -> 100;
+            default -> 0;
+        };
+        if (duration > 0 && entity instanceof LivingEntity living)
+            living.addEffect(new MobEffectInstance(MobEffects.POISON, duration, 0), this);
+        return true;
+    }
 }

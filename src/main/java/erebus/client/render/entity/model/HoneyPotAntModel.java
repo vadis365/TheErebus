@@ -8,21 +8,21 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
 public class HoneyPotAntModel extends EntityModel<HoneyPotAntRenderState> {
-	public ModelPart root;
     private final ModelPart Ab;
-	private final ModelPart AbF;
-	private final ModelPart AbSide;
-	private final ModelPart AbTop;
-	private final ModelPart AbBack;
+    private final ModelPart AbF;
+    private final ModelPart AbSide;
+    private final ModelPart AbTop;
+    private final ModelPart AbBack;
     private final ModelPart Head1;
-	private final ModelPart RightFrontLeg;
-	private final ModelPart RightMidLeg;
-	private final ModelPart RightBackLeg;
-	private final ModelPart LeftFrontLeg;
-	private final ModelPart LeftMidLeg;
-	private final ModelPart LeftBackLeg;
+    private final ModelPart RightFrontLeg;
+    private final ModelPart RightMidLeg;
+    private final ModelPart RightBackLeg;
+    private final ModelPart LeftFrontLeg;
+    private final ModelPart LeftMidLeg;
+    private final ModelPart LeftBackLeg;
+    public ModelPart root;
 
-	public HoneyPotAntModel(ModelPart root) {
+    public HoneyPotAntModel(ModelPart root) {
         super(root);
         this.root = root;
         root.getChild("Thx");
@@ -30,23 +30,23 @@ public class HoneyPotAntModel extends EntityModel<HoneyPotAntRenderState> {
         root.getChild("ThxS");
         root.getChild("Thx2Ab");
         this.Ab = root.getChild("Ab");
-		this.AbF = root.getChild("AbF");
-		this.AbSide = root.getChild("AbSide");
-		this.AbTop = root.getChild("AbTop");
-		this.AbBack = root.getChild("AbBack");
+        this.AbF = root.getChild("AbF");
+        this.AbSide = root.getChild("AbSide");
+        this.AbTop = root.getChild("AbTop");
+        this.AbBack = root.getChild("AbBack");
         root.getChild("Neck");
         this.Head1 = root.getChild("Head1");
-		this.RightFrontLeg = root.getChild("RightFrontLeg");
-		this.RightMidLeg = root.getChild("RightMidLeg");
-		this.RightBackLeg = root.getChild("RightBackLeg");
-		this.LeftFrontLeg = root.getChild("LeftFrontLeg");
-		this.LeftMidLeg = root.getChild("LeftMidLeg");
-		this.LeftBackLeg = root.getChild("LeftBackLeg");
-	}
+        this.RightFrontLeg = root.getChild("RightFrontLeg");
+        this.RightMidLeg = root.getChild("RightMidLeg");
+        this.RightBackLeg = root.getChild("RightBackLeg");
+        this.LeftFrontLeg = root.getChild("LeftFrontLeg");
+        this.LeftMidLeg = root.getChild("LeftMidLeg");
+        this.LeftBackLeg = root.getChild("LeftBackLeg");
+    }
 
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
 
         partdefinition.addOrReplaceChild("Thx", CubeListBuilder.create().texOffs(14, 13).addBox(-3.5F, -3.5F, 0.0F, 7.0F, 7.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 17.0F, -8.0F));
 
@@ -92,7 +92,7 @@ public class HoneyPotAntModel extends EntityModel<HoneyPotAntRenderState> {
 
         PartDefinition RightFrontLeg = partdefinition.addOrReplaceChild("RightFrontLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(-4.0F, 17.0F, -6.0F, 0.0F, -0.6981F, 0.0F));
 
-		PartDefinition RFL1 = RightFrontLeg.addOrReplaceChild("RFL1", CubeListBuilder.create().texOffs(0, 95).addBox(-3.6543F, -0.7758F, -0.9378F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
+        PartDefinition RFL1 = RightFrontLeg.addOrReplaceChild("RFL1", CubeListBuilder.create().texOffs(0, 95).addBox(-3.6543F, -0.7758F, -0.9378F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
 
         RFL1.addOrReplaceChild("RFL2", CubeListBuilder.create().texOffs(0, 88).addBox(-1.7111F, -1.1971F, 5.0622F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.1543F, 1.2242F, -6.0F, 0.0F, 0.0F, 0.0F));
 
@@ -102,7 +102,7 @@ public class HoneyPotAntModel extends EntityModel<HoneyPotAntRenderState> {
 
         PartDefinition RightMidLeg = partdefinition.addOrReplaceChild("RightMidLeg", CubeListBuilder.create(), PartPose.offset(-4.0F, 17.0F, -3.0F));
 
-		PartDefinition RML1 = RightMidLeg.addOrReplaceChild("RML1", CubeListBuilder.create().texOffs(0, 95).addBox(-3.6543F, -0.7758F, -0.9378F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
+        PartDefinition RML1 = RightMidLeg.addOrReplaceChild("RML1", CubeListBuilder.create().texOffs(0, 95).addBox(-3.6543F, -0.7758F, -0.9378F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
 
         RML1.addOrReplaceChild("RML2", CubeListBuilder.create().texOffs(0, 88).addBox(-1.7111F, -1.1971F, 5.0622F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.1543F, 1.2242F, -6.0F, 0.0F, 0.0F, 0.0F));
 
@@ -112,7 +112,7 @@ public class HoneyPotAntModel extends EntityModel<HoneyPotAntRenderState> {
 
         PartDefinition RightBackLeg = partdefinition.addOrReplaceChild("RightBackLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(-4.0F, 17.0F, 0.0F, 0.0F, 0.6981F, 0.0F));
 
-		PartDefinition RBL1 = RightBackLeg.addOrReplaceChild("RBL1", CubeListBuilder.create().texOffs(0, 95).addBox(-3.6543F, -0.7758F, -0.9378F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
+        PartDefinition RBL1 = RightBackLeg.addOrReplaceChild("RBL1", CubeListBuilder.create().texOffs(0, 95).addBox(-3.6543F, -0.7758F, -0.9378F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
 
         RBL1.addOrReplaceChild("RBL2", CubeListBuilder.create().texOffs(0, 88).addBox(-1.7111F, -1.1971F, 5.0622F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.1543F, 1.2242F, -6.0F, 0.0F, 0.0F, 0.0F));
 
@@ -122,7 +122,7 @@ public class HoneyPotAntModel extends EntityModel<HoneyPotAntRenderState> {
 
         PartDefinition LeftFrontLeg = partdefinition.addOrReplaceChild("LeftFrontLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(4.0F, 17.0F, -6.0F, 0.0F, -2.4435F, 0.0F));
 
-		PartDefinition LFL1 = LeftFrontLeg.addOrReplaceChild("LFL1", CubeListBuilder.create().texOffs(0, 95).addBox(-3.6543F, -0.7758F, -0.9378F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
+        PartDefinition LFL1 = LeftFrontLeg.addOrReplaceChild("LFL1", CubeListBuilder.create().texOffs(0, 95).addBox(-3.6543F, -0.7758F, -0.9378F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
 
         LFL1.addOrReplaceChild("LFL2", CubeListBuilder.create().texOffs(0, 88).addBox(-1.7111F, -1.1971F, 5.0622F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.1543F, 1.2242F, -6.0F, 0.0F, 0.0F, 0.0F));
 
@@ -132,7 +132,7 @@ public class HoneyPotAntModel extends EntityModel<HoneyPotAntRenderState> {
 
         PartDefinition LeftMidLeg = partdefinition.addOrReplaceChild("LeftMidLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(4.0F, 17.0F, -3.0F, 0.0F, 3.1416F, 0.0F));
 
-		PartDefinition LML1 = LeftMidLeg.addOrReplaceChild("LML1", CubeListBuilder.create().texOffs(0, 95).addBox(-3.6543F, -0.7758F, -0.9378F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
+        PartDefinition LML1 = LeftMidLeg.addOrReplaceChild("LML1", CubeListBuilder.create().texOffs(0, 95).addBox(-3.6543F, -0.7758F, -0.9378F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
 
         LML1.addOrReplaceChild("LML2", CubeListBuilder.create().texOffs(0, 88).addBox(-1.7111F, -1.1971F, 5.0622F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.1543F, 1.2242F, -6.0F, 0.0F, 0.0F, 0.0F));
 
@@ -142,7 +142,7 @@ public class HoneyPotAntModel extends EntityModel<HoneyPotAntRenderState> {
 
         PartDefinition LeftBackLeg = partdefinition.addOrReplaceChild("LeftBackLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(4.0F, 17.0F, 0.0F, 0.0F, 2.4435F, 0.0F));
 
-		PartDefinition LBL1 = LeftBackLeg.addOrReplaceChild("LBL1", CubeListBuilder.create().texOffs(0, 95).addBox(-3.6543F, -0.7758F, -0.9378F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
+        PartDefinition LBL1 = LeftBackLeg.addOrReplaceChild("LBL1", CubeListBuilder.create().texOffs(0, 95).addBox(-3.6543F, -0.7758F, -0.9378F, 4.0F, 2.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3927F));
 
         LBL1.addOrReplaceChild("LBL2", CubeListBuilder.create().texOffs(0, 88).addBox(-1.7111F, -1.1971F, 5.0622F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.1543F, 1.2242F, -6.0F, 0.0F, 0.0F, 0.0F));
 
@@ -151,33 +151,33 @@ public class HoneyPotAntModel extends EntityModel<HoneyPotAntRenderState> {
         LBL1.addOrReplaceChild("LBL4", CubeListBuilder.create().texOffs(0, 76).addBox(0.7498F, 5.3188F, 5.5622F, 1.0F, 4.0F, 1.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(-3.1543F, 1.2242F, -6.0F, 0.0F, 0.0F, 0.48F));
 
         return LayerDefinition.create(meshdefinition, 64, 128);
-	}
+    }
 
-	@Override
-	public void setupAnim(HoneyPotAntRenderState state) {
-		Head1.yRot = state.yRot / (180F / (float) Math.PI);
-		Head1.xRot = state.xRot / (180F / (float) Math.PI) - 1F;
+    @Override
+    public void setupAnim(HoneyPotAntRenderState state) {
+        Head1.yRot = state.yRot / (180F / (float) Math.PI);
+        Head1.xRot = state.xRot / (180F / (float) Math.PI) - 1F;
 
-		float sin = Mth.sin(state.walkAnimationPos) * 0.8F * state.walkAnimationSpeed;
-		float cos = Mth.cos(state.walkAnimationPos) * 0.2F * state.walkAnimationSpeed;
+        float sin = Mth.sin(state.walkAnimationPos) * 0.8F * state.walkAnimationSpeed;
+        float cos = Mth.cos(state.walkAnimationPos) * 0.2F * state.walkAnimationSpeed;
 
-		LeftBackLeg.zRot = -cos;
-		LeftMidLeg.zRot = cos;
-		LeftFrontLeg.zRot = -cos;
-		RightBackLeg.zRot = -cos;
-		RightMidLeg.zRot = cos;
-		RightFrontLeg.zRot = -cos;
-		LeftBackLeg.yRot = 2.4435F + sin;
-		LeftMidLeg.yRot = 3.1416F - sin;
-		LeftFrontLeg.yRot = -2.4435F + sin;
-		RightBackLeg.yRot = 0.6981F + sin;
-		RightMidLeg.yRot = 0F - sin;
-		RightFrontLeg.yRot = -0.6981F + sin;
+        LeftBackLeg.zRot = -cos;
+        LeftMidLeg.zRot = cos;
+        LeftFrontLeg.zRot = -cos;
+        RightBackLeg.zRot = -cos;
+        RightMidLeg.zRot = cos;
+        RightFrontLeg.zRot = -cos;
+        LeftBackLeg.yRot = 2.4435F + sin;
+        LeftMidLeg.yRot = 3.1416F - sin;
+        LeftFrontLeg.yRot = -2.4435F + sin;
+        RightBackLeg.yRot = 0.6981F + sin;
+        RightMidLeg.yRot = 0F - sin;
+        RightFrontLeg.yRot = -0.6981F + sin;
 
-		Ab.xRot = state.belly * 0.25F;
-		AbF.xRot = state.belly * 0.25F;
-		AbSide.xRot = state.belly * 0.25F;
-		AbTop.xRot = state.belly * 0.25F;
-		AbBack.xRot = state.belly * 0.25F;
-	}
+        Ab.xRot = state.belly * 0.25F;
+        AbF.xRot = state.belly * 0.25F;
+        AbSide.xRot = state.belly * 0.25F;
+        AbTop.xRot = state.belly * 0.25F;
+        AbBack.xRot = state.belly * 0.25F;
+    }
 }

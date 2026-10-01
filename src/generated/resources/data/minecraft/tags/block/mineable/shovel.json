@@ -1,5 +1,9 @@
 {
   "values": [
-    "erebus:quick_sand"
+    "erebus:quick_sand",
+    "erebus:ghost_sand",
+    "erebus:dung",
+    "erebus:umbergravel",
+    "erebus:dust"
   ]
 }

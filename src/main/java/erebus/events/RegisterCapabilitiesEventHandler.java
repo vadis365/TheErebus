@@ -2,6 +2,7 @@ package erebus.events;
 
 import erebus.Erebus;
 import erebus.registries.blocks.ModBlockEntities;
+import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -15,6 +16,7 @@ public class RegisterCapabilitiesEventHandler {
 
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerEntity(Capabilities.Item.ENTITY_AUTOMATION, ModEntities.BLACK_ANT.get(), (ant, side) -> ant.getCargoHandler());
         event.registerBlockEntity(
                 Capabilities.Fluid.BLOCK,
                 ModBlockEntities.FLUID_JAR.get(),
@@ -105,10 +107,12 @@ public class RegisterCapabilitiesEventHandler {
                 WorldlyContainerWrapper::new
         );
 
+        event.registerItem(Capabilities.Fluid.ITEM,
+                (_, access) -> new erebus.item.BambucketResourceHandler(access),
+                ModItems.BAMBUCKET.get(), ModItems.ANTI_VENOM_BAMBUCKET.get());
         event.registerItem(
                 Capabilities.Fluid.ITEM,
                 (_, access) -> new BucketResourceHandler(access),
-                ModItems.BAMBUCKET.asItem(),
                 ModItems.FORMIC_ACID_BUCKET.asItem(),
                 ModItems.HONEY_BUCKET.asItem(),
                 ModItems.ANTI_VENOM_BUCKET.asItem(),

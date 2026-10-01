@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": "erebus:mucus_charge",
+    "T": "minecraft:tnt"
+  },
+  "pattern": [
+    "MMM",
+    "MTM",
+    "MMM"
+  ],
+  "result": {
+    "id": "erebus:mucus_bomb"
+  }
+}

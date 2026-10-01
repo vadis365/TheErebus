@@ -1,0 +1,32 @@
+{
+  "parent": "erebus:agriculture/root",
+  "criteria": {
+    "varnished_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:planks_varnished"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/varnished_planks.desc"
+    },
+    "icon": {
+      "id": "erebus:planks_varnished"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/varnished_planks.title"
+    }
+  },
+  "requirements": [
+    [
+      "varnished_planks"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

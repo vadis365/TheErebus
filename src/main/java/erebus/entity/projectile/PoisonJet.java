@@ -14,6 +14,7 @@ import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
@@ -28,9 +29,9 @@ public class PoisonJet extends ThrowableProjectile {
     @Override
     protected void updateRotation() {
         super.updateRotation();
-        if(rotationTicks < 360F) {
+        if (rotationTicks < 360F) {
             rotationTicks = rotationTicks + 20F;
-            if(rotationTicks >= 360F) {
+            if (rotationTicks >= 360F) {
                 rotationTicks = 0F;
             }
         }
@@ -39,29 +40,42 @@ public class PoisonJet extends ThrowableProjectile {
     @Override
     public void tick() {
         super.tick();
-        if(level().isClientSide()) {
+        if (level().isClientSide()) {
             makeParticles();
+        } else if (tickCount > 140) {
+            discard();
         }
     }
 
+    @Override
+    protected double getDefaultGravity() {
+        return 0.02D;
+    }
+
+    @Override
+    protected void onHit(@NonNull HitResult result) {
+        if (!(level() instanceof ServerLevel) || isRemoved()) return;
+        super.onHit(result);
+        discard();
+    }
+
     private void makeParticles() {
-        for(int c = 0; c < 5; c++) {
+        for (int c = 0; c < 5; c++) {
             ClientParticles.spawnParticles(ClientParticles.ParticleType.POISON, getX(), getY(), getZ(), 0D, 0D, 0D);
         }
     }
 
     @Override
     protected void onHitEntity(@NonNull EntityHitResult result) {
+        if (!(level() instanceof ServerLevel serverLevel) || isRemoved()) return;
         super.onHitEntity(result);
         Entity target = result.getEntity();
         Entity owner = this.getOwner();
-        LivingEntity livingOwner = owner instanceof LivingEntity ? (LivingEntity)owner : null;
+        LivingEntity livingOwner = owner instanceof LivingEntity ? (LivingEntity) owner : null;
         DamageSource damageSource = this.damageSources().mobProjectile(this, livingOwner);
-        boolean wasHurt = target.hurtOrSimulate(damageSource, 1.0F);
+        boolean wasHurt = target.hurtServer(serverLevel, damageSource, 1.0F);
         if (wasHurt) {
-            if (this.level() instanceof ServerLevel serverLevel) {
-                EnchantmentHelper.doPostAttackEffects(serverLevel, target, damageSource);
-            }
+            EnchantmentHelper.doPostAttackEffects(serverLevel, target, damageSource);
 
             if (target instanceof LivingEntity livingTarget) {
                 livingTarget.addEffect(new MobEffectInstance(MobEffects.POISON, 100), MoreObjects.firstNonNull(owner, this));

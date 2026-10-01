@@ -11,12 +11,15 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
+
 public class TrunkThornDecorator extends TreeDecorator {
     public static final TrunkThornDecorator INSTANCE = new TrunkThornDecorator();
     public static final MapCodec<TrunkThornDecorator> CODEC = MapCodec.unit(() -> INSTANCE);
 
     public static void placeThorn(Context context, BlockPos pos, BooleanProperty sideProperty) {
-        context.setBlock(pos, ModBlocks.THORNS.get().defaultBlockState().setValue(sideProperty, true));
+        var thorn = ModBlocks.THORNS.get().defaultBlockState().setValue(sideProperty, true);
+        if (thorn.canSurvive(context.level(), pos)) context.setBlock(pos, thorn);
     }
 
     protected @NotNull TreeDecoratorType<?> type() {
@@ -24,8 +27,13 @@ public class TrunkThornDecorator extends TreeDecorator {
     }
 
     public void place(TreeDecorator.Context context) {
+        if (context.logs().isEmpty()) return;
+        int baseY = context.logs().getFirst().getY();
+        var footprint = new HashSet<BlockPos>();
+        for (var log : context.logs()) if (log.getY() == baseY) footprint.add(log);
         RandomSource randomsource = context.random();
         context.logs().forEach((pos) -> {
+            if (pos.getY() == baseY || !footprint.contains(new BlockPos(pos.getX(), baseY, pos.getZ()))) return;
             if (randomsource.nextInt(3) > 0) {
                 BlockPos blockpos = pos.west();
                 if (context.isAir(blockpos)) {

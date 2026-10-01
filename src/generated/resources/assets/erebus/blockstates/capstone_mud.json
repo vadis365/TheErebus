@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "active=false": {
       "model": "erebus:block/capstone_mud"
+    },
+    "active=true": {
+      "model": "erebus:block/capstone_mud_active"
     }
   }
 }

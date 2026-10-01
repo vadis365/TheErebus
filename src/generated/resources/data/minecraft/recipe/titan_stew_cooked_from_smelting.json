@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredient": "erebus:titan_stew",
+  "result": {
+    "id": "erebus:titan_stew_cooked"
+  }
+}

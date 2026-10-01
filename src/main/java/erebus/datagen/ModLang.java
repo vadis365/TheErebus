@@ -14,6 +14,8 @@ public class ModLang extends ModLangProvider {
 
     @Override
     protected void addTranslations() {
+        add("message.erebus.map.dimension", "Papyrus Maps can only be used in the Erebus.");
+        add("block.erebus.bed.respawn_only", "You cannot sleep in the Erebus.");
         addItemTranslations();
         addBlockTranslations();
         addEntityTranslations();
@@ -40,7 +42,7 @@ public class ModLang extends ModLangProvider {
         addItem(ModItems.PETRIFIED_WOOD, "Petrified Wood");
         addItem(ModItems.BIO_VELOCITY, "Bio Velocity");
         addItem(ModItems.ELASTIC_FIBER, "Elastic Fiber");
-        addItem(ModItems.WASP_STING,"Wasp Sting");
+        addItem(ModItems.WASP_STING, "Wasp Sting");
         addItem(ModItems.BAMBOO_SHOOT, "Colossal Bamboo Shoot");
         addItem(ModItems.RED_GEM, "Redgem");
         addItem(ModItems.BIO_LUMINESCENCE, "Bioluminescence");
@@ -196,6 +198,7 @@ public class ModLang extends ModLangProvider {
         addItem(ModItems.DEATH_COMPASS, "Death Compass");
         addItem(ModItems.ROLLED_NEWSPAPER, "Rolled-up Newspaper");
         addItem(ModItems.BAMBUCKET, "Bambucket");
+        addItem(ModItems.ANTI_VENOM_BAMBUCKET, "Anti-venom Bambucket");
         addItem(ModItems.HOMING_BEECON, "Homing Beecon");
         addItem(ModItems.HOMING_BEECON_ADVANCED, "Advanced Homing Beecon");
         addItem(ModItems.SPRAY_CAN, "Insect Repellent");
@@ -204,6 +207,7 @@ public class ModLang extends ModLangProvider {
         addItem(ModItems.PLANTICIDE, "Planticide");
         addItem(ModItems.SMOOTHIE_BOOK, "Smoothie-matic 2000");
         addItem(ModItems.HORN_OF_SUMMONING, "Horn of Bee Summoning");
+        add("tooltip.erebus.hornsummon", "Summons a swarm of Worker Bees. Consumed on use.");
         addItem(ModItems.MUD_SCARAB, "Mud Scarab");
         addItem(ModItems.IRON_SCARAB, "Iron Scarab");
         addItem(ModItems.GOLD_SCARAB, "Gold Scarab");
@@ -427,6 +431,7 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.DOOR_ROTTEN, "Rotten Door");
         addBlock(ModBlocks.DOOR_MARSHWOOD, "Marshwood Door");
         addBlock(ModBlocks.DOOR_SCORCHED, "Scorched Door");
+        addBlock(ModBlocks.DOOR_PETRIFIED, "Petrified Wood Door");
 
         // MARK: Fences
         addBlock(ModBlocks.FENCE_BAOBAB, "Baobab Fence");
@@ -678,7 +683,14 @@ public class ModLang extends ModLangProvider {
     }
 
     private void addEntityTranslations() {
+        addEntityNoEgg(ModEntities.SWAMP_VENT_GAS, "Swamp Vent Gas");
+        addEntityNoEgg(ModEntities.WEB_SLING, "Web Sling");
+        addEntityNoEgg(ModEntities.SPORE_BALL, "Spore Cloud");
+        add("key.erebus.beetleram", "Beetle Ram Attack");
+        add("key.erebus.beetlemine", "Stag Beetle Dig");
         addEntity(ModEntities.ANIMATED_BLOCK, "Animated Block");
+        addEntity(ModEntities.ANIMATED_BAMBOO_CRATE, "Animated Bamboo Crate");
+        addEntity(ModEntities.ANIMATED_CHEST, "Animated Chest");
         addEntity(ModEntities.ANTLION, "Antlion");
         addEntity(ModEntities.ANTLION_BOSS, "Antlion Overlord");
         addEntity(ModEntities.ANTLION_MINI_BOSS, "Antlion Warden");
@@ -700,6 +712,7 @@ public class ModLang extends ModLangProvider {
         addEntity(ModEntities.CROP_WEEVIL, "Crop Weevil");
         addEntity(ModEntities.CRUSHROOM, "Crushroom");
         addEntity(ModEntities.DRAGON_FLY, "Dragonfly");
+        add("entity.erebus.ender_dragonfly", "Ender Dragonfly");
         addEntity(ModEntities.FIRE_ANT, "Fire Ant");
         addEntity(ModEntities.FIRE_ANT_SOLDIER, "Fire Ant Soldier");
         addEntity(ModEntities.FLY, "Fly");
@@ -709,6 +722,7 @@ public class ModLang extends ModLangProvider {
         addEntity(ModEntities.HONEY_POT_ANT, "Honey Pot Ant");
         addEntity(ModEntities.JUMPING_SPIDER, "Jumping Spider");
         addEntity(ModEntities.LAVA_WEB_SPIDER, "Lava Web Spider");
+        addEntity(ModEntities.LEECH, "Leech");
         addEntity(ModEntities.LOCUST, "Locust");
         addEntity(ModEntities.MAGMA_CRAWLER, "Magma Crawler");
         addEntity(ModEntities.MIDGE_SWARM, "Midge Swarm");
@@ -726,6 +740,7 @@ public class ModLang extends ModLangProvider {
         addEntity(ModEntities.TARANTULA, "Tarantula");
         addEntity(ModEntities.TARANTULA_MINI_BOSS, "Tarantula Mini-Boss");
         addEntity(ModEntities.TITAN_BEETLE, "Titan Beetle");
+        addEntity(ModEntities.DUNGEON_UMBER_GOLEM, "Umber Golem Idol Guardian");
         addEntity(ModEntities.UMBER_GOLEM, "Umber Golem");
         addEntity(ModEntities.VELVET_WORM, "Velvet Worm");
         addEntity(ModEntities.WASP, "Wasp");
@@ -736,11 +751,17 @@ public class ModLang extends ModLangProvider {
 
         addEntityNoEgg(ModEntities.AMBER_STAR, "Amber Star");
         addEntityNoEgg(ModEntities.GOO_BALL, "Goo Ball");
+        addEntityNoEgg(ModEntities.MUCUS_BOMB_PRIMED, "Primed Mucus Bomb");
+        addEntityNoEgg(ModEntities.WASP_DAGGER, "Wasp Dagger");
+        addEntityNoEgg(ModEntities.WOODLOUSE_BALL, "Woodlouse Ball");
         addEntityNoEgg(ModEntities.THROWN_BLOCK_AS_ITEM, "Mob Projectile"); // needs a better name
     }
 
     private void addFluidTranslations() {
-
+        add("erebus.beetle_juice", "Beetle Juice");
+        add("erebus.formic_acid", "Formic Acid");
+        add("erebus.honey", "Honey");
+        add("erebus.anti_venom", "Anti-venom");
     }
 
     private void addCreativeTabTranslations() {
@@ -752,82 +773,85 @@ public class ModLang extends ModLangProvider {
     }
 
     private void addToolTipTranslations() {
-    	add("tooltip.erebus.death_compass", "Given to Player after death to find Block o' Bones."); // Death compass needs more work - eg dimension and time of death
-    	add("tooltip.erebus.dimension", "Dimension: %s");
+        add("tooltip.erebus.death_compass", "Given to Player after death to find Block o' Bones."); // Death compass needs more work - eg dimension and time of death
+        add("tooltip.erebus.dimension", "Dimension: %s");
         add("tooltip.death_compass.pos", "Death Pos: ");
         add("tooltip.erebus.time_of_death", "Time of Death: %s");
         add("tooltip.erebus.shield.damage", "Damage: ");
         add("tooltip.erebus.shield.repair", "Anvil Repair: ");
-		add("tooltip.erebus.wand_of_animation", "Right click blocks to animate them.");
-		add("tooltip.erebus.bamboo_pipe", "A very basic directional fluid pipe.");
-		add("tooltip.erebus.bamboo_pipe_extract", "Extracts fluids from fluid containers and pushes them in to pipes and fluid containers.");
-		add("tooltip.erebus.bamboo_pipe_wrench", "Use on any Bamboo Pipe to rotate them or Use + Sneak to insta-break them.");
-		add("tooltip.erebus.honeycomb_x", "Honeycomb Cell X: %s");
-		add("tooltip.erebus.honeycomb_y", "Honeycomb Cell Y: %s");
-		add("tooltip.erebus.honeycomb_z", "Honeycomb Cell Z: %s");
-		add("tooltip.erebus.bee_taming_amulet_1", "Click on a Honeycomb Cell to set as target for Bee drops.");
-		add("tooltip.erebus.bee_taming_amulet_2", "Then click on Bee to tame.");
-		add("tooltip.erebus.sprint_leggings_tier", "Tier %s");
-		add("tooltip.erebus.jump_boots", "Enables you to Jump 4 blocks high.");
-		add("tooltip.erebus.silo_x", "Silo Block X: %s");
-		add("tooltip.erebus.silo_y", "Silo Block Y: %s");
-		add("tooltip.erebus.silo_z", "Silo Block Z: %s");
-		add("tooltip.erebus.ant_taming_amulet_1", "Click on a Silo Block to set as target for Ants.");
-		add("tooltip.erebus.ant_taming_amulet_2", "Then click on Ant to link it.");
-		add("tooltip.erebus.spray_can", "Use on the top of blocks to keep those pesky critters away.");
-		add("tooltip.erebus.wand_of_preservation", "Shoots Amber stars and captures mobs. Silk touch the block to collect or break to free the mob.");
-		add("tooltip.erebus.liquifier", "Turns Honey Drips in to Fluid Honey. Redstone activated.");
-		add("tooltip.erebus.glow_gem", "Place on ANY side of a solid block as a light source. Right click to turn off and on.");
-		add("tooltip.erebus.planticide", "Removes Plants, Leaves and Crops in a 4x4x4 area!"); // I think this is right - used to be 5x5x5
-		add("tooltip.erebus.night_vision", "Enables you to see in the dark.");
+        add("tooltip.erebus.wand_of_animation", "Right click blocks to animate them.");
+        add("tooltip.erebus.bamboo_pipe", "A very basic directional fluid pipe.");
+        add("tooltip.erebus.bamboo_pipe_extract", "Extracts fluids from fluid containers and pushes them in to pipes and fluid containers.");
+        add("tooltip.erebus.bamboo_pipe_wrench", "Use on any Bamboo Pipe to rotate them or Use + Sneak to insta-break them.");
+        add("tooltip.erebus.honeycomb_x", "Honeycomb Cell X: %s");
+        add("tooltip.erebus.honeycomb_y", "Honeycomb Cell Y: %s");
+        add("tooltip.erebus.honeycomb_z", "Honeycomb Cell Z: %s");
+        add("tooltip.erebus.bee_taming_amulet_1", "Click on a Honeycomb Cell to set as target for Bee drops.");
+        add("tooltip.erebus.bee_taming_amulet_2", "Then click on Bee to tame.");
+        add("tooltip.erebus.sprint_leggings_tier", "Tier %s");
+        add("tooltip.erebus.jump_boots", "Enables you to Jump 4 blocks high.");
+        add("tooltip.erebus.silo_x", "Silo Block X: %s");
+        add("tooltip.erebus.silo_y", "Silo Block Y: %s");
+        add("tooltip.erebus.silo_z", "Silo Block Z: %s");
+        add("tooltip.erebus.ant_taming_amulet_1", "Click on a Silo Block to set as target for Ants.");
+        add("tooltip.erebus.ant_taming_amulet_2", "Then click on Ant to link it.");
+        add("tooltip.erebus.spray_can", "Use on the top of blocks to keep those pesky critters away.");
+        add("tooltip.erebus.wand_of_preservation", "Shoots Amber stars and captures mobs. Silk touch the block to collect or break to free the mob.");
+        add("tooltip.erebus.liquifier", "Turns Honey Drips in to Fluid Honey. Redstone activated.");
+        add("tooltip.erebus.glow_gem", "Place on ANY side of a solid block as a light source. Right click to turn off and on.");
+        add("tooltip.erebus.planticide", "Removes Plants, Leaves and Crops in a 5x5x5 area!");
+        add("tooltip.erebus.night_vision", "Enables you to see in the dark.");
 
-	//	TODO - NYI, either the thing isn't added yet or it doesn't have the tool-tip added to it yet.
-		add("tooltip.erebus.nectar_collector", "Right click Bees or Honeypot Ants to collect nectar.");
-		add("tooltip.erebus.homingbeecon_advanced_1", "Sneak + Right click on a block to set as target.");
-		add("tooltip.erebus.homingbeecon_advanced_2", "Right click to teleport.");
-		add("tooltip.erebus.homingbeecon", "Sneak + Click on a block to set as target.");
-		add("tooltip.erebus.quake_hammer_1", "Hold Right mouse button to charge up.");
-		add("tooltip.erebus.quake_hammer_2", "Sneak + Right Click on top of block to use A.O.E. attack.");
-		add("tooltip.erebus.wasp_dagger_1", "One use.");
-		add("tooltip.erebus.wasp_dagger_2", "Can be thrown.");
-		add("tooltip.erebus.whetstone_sharpness", "Sharpness Level %s");
-		add("tooltip.erebus.whetstone_1", "Apply to tools using an Anvil.");
-		add("tooltip.erebus.whetstone_2", "Un-enchanted");
-		add("tooltip.erebus.whetstone_3", "Surround with Whetstone Powder to increase levels.");
-		add("tooltip.erebus.extractor", "Point at blocks and hold down the right mouse button to extract them.");
-		add("tooltip.erebus.scorpion_pincer", "Can Shoot Fire Charges if in your Inventory.");
-		add("tooltip.erebus.heals", "Heals 10 Hearts when consumed. Always Edible.");
-		add("tooltip.erebus.feeds", "Fills Hunger Bar when consumed. Always Edible.");
-		add("tooltip.erebus.powered_glider", "Needs redgem blocks at the cost of fuel to flight.");
-		add("tooltip.erebus.glider_glide_key", "Gliding Key");
-		add("tooltip.erebus.glider_powered_key", "Flying Key");
-		add("tooltip.erebus.mush_helm", "Keeps you fed whilst worn at the cost of durability. Repaired in Anvil with Big Mushroom Blocks.");
-		add("tooltip.erebus.healing_hearts", "Heals you a small amount when consumed.");
-		add("tooltip.erebus.water_striders", "Enables you to Walk on Water.");
-		add("tooltip.erebus.compost", "Works just like bonemeal Mr.");
-		add("tooltip.erebus.horn_summon", "Summons some bees.");
-		add("tooltip.erebus.web_slinger", "Can Shoot Webs if in your Inventory.");
-		add("tooltip.erebus.force_key", "N.Y.I.");
-	}
+        //	TODO - NYI, either the thing isn't added yet or it doesn't have the tool-tip added to it yet.
+        add("tooltip.erebus.nectar_collector", "Right click Bees or Honeypot Ants to collect nectar.");
+        add("tooltip.erebus.homingbeecon_advanced_1", "Sneak + Right click on a block to set as target.");
+        add("tooltip.erebus.homingbeecon_advanced_2", "Right click to teleport.");
+        add("tooltip.erebus.homingbeecon", "Sneak + Click on a block to set as target.");
+        add("tooltip.erebus.quake_hammer_1", "Hold Right mouse button to charge up.");
+        add("tooltip.erebus.quake_hammer_2", "Sneak + Right Click on top of block to use A.O.E. attack.");
+        add("tooltip.erebus.wasp_dagger_1", "One use.");
+        add("tooltip.erebus.wasp_dagger_2", "Can be thrown.");
+        add("tooltip.erebus.whetstone_sharpness", "Sharpness Level %s");
+        add("tooltip.erebus.whetstone_1", "Apply to tools using an Anvil.");
+        add("tooltip.erebus.whetstone_2", "Un-enchanted");
+        add("tooltip.erebus.whetstone_3", "Surround with Whetstone Powder to increase levels.");
+        add("tooltip.erebus.extractor", "Point at blocks and hold down the right mouse button to extract them.");
+        add("tooltip.erebus.scorpion_pincer", "Can Shoot Fire Charges if in your Inventory.");
+        add("tooltip.erebus.healinghearts", "Heals half a heart when consumed. Always edible.");
+        add("tooltip.erebus.heals", "Heals 10 Hearts when consumed. Always Edible.");
+        add("tooltip.erebus.feeds", "Fills Hunger Bar when consumed. Always Edible.");
+        add("tooltip.erebus.powered_glider", "Consumes one Redgem Block or Lamp every 4 seconds of powered flight.");
+        add("key.erebus.glide", "Hold to Glide");
+        add("key.erebus.poweredglide", "Hold for Powered Flight");
+        add("tooltip.erebus.glider_glide_key", "Gliding Key");
+        add("tooltip.erebus.glider_powered_key", "Flying Key");
+        add("tooltip.erebus.mush_helm", "Keeps you fed whilst worn at the cost of durability. Repaired in Anvil with Big Mushroom Blocks.");
+        add("tooltip.erebus.healing_hearts", "Heals you a small amount when consumed.");
+        add("tooltip.erebus.water_striders", "Enables you to Walk on Water.");
+        add("tooltip.erebus.compost", "Works just like bonemeal Mr.");
+        add("tooltip.erebus.horn_summon", "Summons some bees.");
+        add("tooltip.erebus.web_slinger", "Can Shoot Webs if in your Inventory.");
+        add("tooltip.erebus.force_key", "N.Y.I.");
+    }
 
     private void addBookTranslations() {
-        addPage(0, "§0Thank you for using the new ErebusCo. Smoothie-matic 2000.\nIn the following pages you will find some delicious recipes.\n\nEach recipe will require a different base fluid. The fluid bars shown in the gui are for: Honey, Beetle Juice, Anti-Venom and Milk.");
-        addPage(1, "§0Fluids can be added to the Smoothie-matic 2000 by right clicking on the block with a full bucket.\n\nThe Four top slots in the gui are for the required ingredients and the lower slot must contain a Smoothie Glass.");
+        addPage(0, "§0Thank you for using the new ErebusCo. Smoothie-matic 2000.\nIn the following pages you will find some delicious recipes.\n\nEach recipe will require a different base fluid. The four tanks hold recipe fluids: honey, beetle juice, anti-venom, milk or water.");
+        addPage(1, "§0Fluids can be added to the Smoothie-matic 2000 by right clicking on the block with a full bucket.\n\nPut ingredients in the four upper slots. Put one smoothie glass, bottle or bucket in the lower slot, as the recipe requires.");
         addPage(2, "§9Green Tea Grasshopper\n\n§0Grasshopper Leg x2\nElastic Fibre\nFly Wing\n\n§dBeetle Juice\n\n§4Effects:\nJumping");
         addPage(3, "§9Money Honey\n\n§0Honey drip x2\nNectar\nGold Nugget\n\n§dHoney\n\n§4Effects:\nRegeneration");
-        addPage(4, "§9Darkness In The Middle\n\n§0Camo powder x2\nDark Fruit\nSwamp Berries\n\n§dBeetle Juice\n\n§4Effects:\nInvisibility");
+        addPage(4, "§9Nothing In The Middle\n\n§0Camo powder x2\nDark Fruit\nSwamp Berries\n\n§dBeetle Juice\n\n§4Effects:\nInvisibility");
         addPage(5, "§9Green Giant\n\n§0Repellent\nPoison Gland x2\nWasp Sting\n\n§dAnti-Venom\n\n§4Effects:\nNegates Potions");
         addPage(6, "§9Seedy Goodness\n\n§0Pumpkin Seeds\nMelon Seeds\nDark Fruit Seeds\nBio-Velocity\n\n§dBeetle Juice\n\n§4Effects:\nDig Speed");
         addPage(7, "§9Givin' Me The Blues\n\n§0Blue Bell Petal x2\nLapis Lazuli x2\n\n§dMilk\n\n§4Effects:\nExtinguish");
         addPage(8, "§9Hot Hot Baby\n\n§0Fire Bloom x2\nWasp Sting\nBog Maw Root\n\n§dAnti-Venom\n\n§4Effects:\nStrength");
         addPage(9, "§9Don't Meddle With The Nettle\n\n§0Nettle Leaf\nNettle Flower\nJade Berries\nExo Skeleton\n\n§dHoney\n\n§4Effects:\nResistance");
-        addPage(10, "§9Liquid Gold\n\n§0Life Blood x2\nBamboo Shoot\nGlistering Melon\n\n§dMilk\n\n§4Effects:\nSaturation");
+        addPage(10, "§9Liquid Gold\n\n§0Life Blood x2\nBamboo Sapling\nGlistering Melon\n\n§dMilk\n\n§4Effects:\nRegeneration and healing");
         addPage(11, "§9Bryuf's Brew\n\n§0Terpsishroom\nTurnip\nCompound Eyes\nHeart Berries\n\n§dHoney\n§dBeetle Juice\n§dAnti-Venom\n§dMilk\n\n§4Effects:\nMighty Buffs");
         addPage(12, "§9Melonade\n\n§0Melon Slice\n\n§dWater\n\n§4Effects:\nRefreshing");
-        addPage(13, "§9Sparkling Melonade\n\n§0Glistening Melon Slice\n\n§dWater\n\n§4Effects:\nSmall Regen");
-        addPage(14, "§9Antivenom Bambucket\n\n§0Bambucket\n\n§0Nettle Leaves x2\n\n§0Poison Glands x2\n\n§dBeetle Juice\n\n§4Effects:\nImmunity to Poison");
-        addPage(15, "§9Antivenom Bottle\n\n§0Glass Bottle\n\n§0Nettle Leaf\n\n§0Poison Gland\n\n§dBeetle Juice\n\n§4Effects:\nImmunity to Poison");
-        addPage(16, "§9Antivenom Bucket\n\n§0Bucket\n\n§0Nettle Leaves x2\n\n§0Poison Glands x2\n\n§dBeetle Juice\n\n§4Effects:\nFilled Bucket");
+        addPage(13, "§9Sparkling Melonade\n\n§0Glistering Melon Slice\n\n§dWater\n\n§4Effects:\nSmall Regen");
+        addPage(14, "§9Anti-venom\n\n§0Bambucket or Bucket\n2 Poison Glands\n2 Nettle Leaves\nBeetle Juice\n\nDrink for 180 seconds of protection. Bottles grant 60 seconds, stacking to 180.");
+        addPage(15, "§9Antivenom Bottle\n\n§0Glass Bottle\n\n§0Nettle Leaf\n\n§0Poison Gland\n\n§dBeetle Juice\n\n§4Effects:\n60 seconds of protection");
+        addPage(16, "§9Antivenom Bucket\n\n§0Bucket\n\n§0Nettle Leaves x2\n\n§0Poison Glands x2\n\n§dBeetle Juice\n\n§4Effects:\n180 seconds of protection");
     }
 
     private void addAdvancementTranslations() {
@@ -835,6 +859,12 @@ public class ModLang extends ModLangProvider {
         addExploration("arborist", "Obsessive Arborist", "Gather all the different saplings of trees native to the Erebus.");
         addExploration("traveller", "A True Traveller Never Arrives", "Travel to all biomes the Erebus has to offer.");
         addExploration("quicksand", "Let That Sink In", "Get yourself stuck in some Quicksand.");
+        add("tooltip.erebus.death_compass.position", "Death location: %s, %s, %s");
+        add("tooltip.erebus.death_compass.dimension", "Dimension: %s");
+        add("erebus.smoothie.effect.milk", "Clears status effects");
+        add("erebus.smoothie.effect.extinguish", "Extinguishes fire");
+        add("erebus.smoothie.effect.set_fire", "Sets you on fire for 5 seconds");
+        add("erebus.smoothie.effect.heal", "Restores health");
         addExploration("smoothie_all", "Smoothie Enthusiast", "Brew all 10 smoothies.");
         addExploration("smoothie_book", "The Menu", "Get the smoothie guide book by right-clicking the Smoothie-matic 2000 with a blank book.");
         addExploration("smoothie_blender", "For The Juiceheads", "Craft the ErebusCo. Smoothie-matic 2000, all rights reserved.");
@@ -845,7 +875,7 @@ public class ModLang extends ModLangProvider {
         addExploration("petrified_wood", "Very Hard Wood", "Acquire Petrified Wood.");
         addExploration("entomology", "Aggressive Entomology", "Slay a creature native to the Erebus.");
         addExploration("kill_all", "Pest Control", "Kill all regular mobs the Erebus has to offer.");
-        addExploration("find_beetles", "Meet the Beetles!", "Have a somewhat unkind encounter with any of the Beetles or their Larvae.");
+        addExploration("find_beetles", "Meet the Beetles!", "Observe all seven kinds of beetles and their larvae.");
         addExploration("beetlejuice", "Alpha Orionis", "Milk a Beetle to obtain Beetle Juice, the Erebus counterpart to milk.");
         addExploration("beetledrink", "Pour Up, Drank", "Down an entire Bambucket of Beetle Juice. Yes, you heard that right.");
         addExploration("titan_beetle", "Titanomachy", "Slay a Titan Beetle and obtain its flesh.");
@@ -867,6 +897,7 @@ public class ModLang extends ModLangProvider {
         addExploration("newspaper", "News of the World", "Enhance some Papyrus with Ink and Whetstone Powder to roll a newspaper with extreme swatting capabilities.");
 
         // Agriculture advancements
+        addAgriculture("farm_complete", "Accomplished Agronomist", "Collect all the farmables the Erebus has to offer.");
         addAgriculture("root", "Subterranean Agriculture", "Even though the sun does not shine down here, there are still many plants and other growables to be found. Dive into the wonderful world of subterranean agriculture!");
         addAgriculture("varnished_planks", "Resist Those Pesky Larvae", "Craft some Varnished Planks.");
         addAgriculture("silo", "Every Farm Needs One", "Craft the three parts of the Silo multiblock.");
@@ -925,6 +956,7 @@ public class ModLang extends ModLangProvider {
         addContainer("composter", "Organic Composter");
         addContainer("silo", "Silo Location");
         addContainer("blender", "ErebusCo. Smoothie-matic 2000");
+        addContainer("titan_beetle_chest", "Titan Beetle Chest");
     }
 
     private void addTagTranslations() {

@@ -1,0 +1,33 @@
+{
+  "parent": "erebus:agriculture/root",
+  "criteria": {
+    "get_nectar": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:nectar"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/nectar.desc"
+    },
+    "hidden": true,
+    "icon": {
+      "id": "erebus:nectar"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/nectar.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_nectar"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

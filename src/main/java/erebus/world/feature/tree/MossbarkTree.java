@@ -1,12 +1,11 @@
 package erebus.world.feature.tree;
 
 import erebus.registries.blocks.ModBlocks;
-import net.minecraft.util.valueproviders.ConstantInt;
+import erebus.world.feature.tree.foliage.SingleLeafFoliagePlacer;
+import erebus.world.feature.tree.trunk.MossbarkTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
 import java.util.List;
@@ -21,10 +20,10 @@ public class MossbarkTree extends ErebusTree {
     public TreeConfiguration getTreeConfiguration() {
         return new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.LOG_MOSSBARK.get()),
-                new ForkingTrunkPlacer(4, 4, 3),
+                new MossbarkTrunkPlacer(4, 2, 0),
                 BlockStateProvider.simple(ModBlocks.LEAVES_MOSSBARK.get()),
-                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), 3),
-                new TwoLayersFeatureSize(1, 0, 2)
+                new SingleLeafFoliagePlacer(),
+                new TwoLayersFeatureSize(1, 0, 0)
         ).build();
     }
 

@@ -8,9 +8,9 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class RhinoBeetleModel extends EntityModel<RhinoBeetleRenderState> {
-    public ModelPart root;
     private final ModelPart Ab, AbSide, AbTop, AbBack;
     private final ModelPart LBL1, LBL2, LBL3, LBL4;
     private final ModelPart LFL1, LFL2, LFL3, LFL4;
@@ -19,6 +19,7 @@ public class RhinoBeetleModel extends EntityModel<RhinoBeetleRenderState> {
     private final ModelPart RML1, RML2, RML3, RML4;
     private final ModelPart RBL1, RBL2, RBL3, RBL4;
     private final ModelPart HeadA, HeadB, HeadC, Eyes, Lplate, Rplate, TplateA, TplateB, TplateC, NoseA, NoseB, NoseC, Neck;
+    public ModelPart root;
 
     public RhinoBeetleModel(ModelPart root) {
         super(root);
@@ -127,5 +128,39 @@ public class RhinoBeetleModel extends EntityModel<RhinoBeetleRenderState> {
         root.addOrReplaceChild("Neck", CubeListBuilder.create().texOffs(21, 66).addBox(-2F, -4F, 2F, 4, 6, 2), PartPose.offset(0F, 17F, -4F));
 
         return LayerDefinition.create(mesh, 64, 128);
+    }
+
+    @Override
+    public void setupAnim(RhinoBeetleRenderState state) {
+        super.setupAnim(state);
+        float cos1 = Mth.cos(state.walkAnimationPos + (float) Math.PI) * 0.5F * state.walkAnimationSpeed;
+        float cos2 = Mth.cos(state.walkAnimationPos) * 0.5F * state.walkAnimationSpeed;
+        float headAngle = state.ramCharge * 0.01F;
+
+        HeadA.xRot = headAngle;
+        HeadB.xRot = headAngle;
+        HeadC.xRot = headAngle;
+        Eyes.xRot = headAngle;
+        Lplate.xRot = headAngle;
+        Rplate.xRot = headAngle;
+        TplateA.xRot = headAngle + 0.6981317F;
+        TplateB.xRot = headAngle + 0.6981317F;
+        TplateC.xRot = headAngle + 0.6981317F;
+        NoseA.xRot = headAngle + 0.3490659F;
+        NoseB.xRot = headAngle - 0.1396263F;
+        NoseC.xRot = headAngle - 0.1396263F;
+
+        LBL1.xRot = cos1;
+        LML1.xRot = cos2;
+        LFL1.xRot = cos1;
+        RBL1.xRot = -cos2;
+        RML1.xRot = -cos1;
+        RFL1.xRot = -cos2;
+        LBL1.yRot = cos1 + 2.617994F;
+        LML1.yRot = cos2 - 3.142F;
+        LFL1.yRot = cos1 - 2.617994F;
+        RBL1.yRot = -cos2 + 0.3490659F;
+        RML1.yRot = -cos1;
+        RFL1.yRot = -cos2 - 0.3490659F;
     }
 }

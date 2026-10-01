@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "erebus:glowshroom",
+    "minecraft:torch"
+  ],
+  "result": {
+    "id": "erebus:glowshroom_block"
+  }
+}

@@ -15,26 +15,26 @@ import org.jspecify.annotations.NonNull;
 
 public class WaspLayer extends RenderLayer<WaspRenderState, WaspModel> {
 
+    public static final Identifier WASP = Erebus.prefix("textures/entity/wasp.png");
+    private static final Identifier HORNET = Erebus.prefix("textures/entity/hornet.png");
     private final WaspWingsModel model;
-	public static final Identifier WASP = Erebus.prefix("textures/entity/wasp.png");
-	private static final Identifier HORNET = Erebus.prefix("textures/entity/hornet.png");
 
     public WaspLayer(RenderLayerParent<WaspRenderState, WaspModel> parent, WaspWingsModel wings) {
-    	super(parent);
-    	model = wings;
+        super(parent);
+        model = wings;
     }
 
-	@Override
-	public void submit(@NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, WaspRenderState state, float xRot, float yRot) {
-		submit.submitModel(
-				model,
-				state,
-				pose,
-				RenderTypes.entityTranslucent(state.isBoss ? HORNET : WASP),
-				state.lightCoords,
-				OverlayTexture.NO_OVERLAY,
-				state.outlineColor,
-				null
-		);
-	}
+    @Override
+    public void submit(@NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, WaspRenderState state, float xRot, float yRot) {
+        if (state.isInvisible) return;
+        submit.submitModel(
+                model,
+                state,
+                pose,
+                RenderTypes.entityTranslucent(state.isBoss ? HORNET : WASP),
+                state.lightCoords,
+                OverlayTexture.NO_OVERLAY,
+                0xBFFFFFFF, null, state.outlineColor, null
+        );
+    }
 }

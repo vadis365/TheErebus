@@ -1,8 +1,6 @@
 package erebus.client.render.block.renderer;
 
-import com.mojang.blaze3d.opengl.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import erebus.Erebus;
 import erebus.block.entity.GlowingJarBlockEntity;
@@ -24,8 +22,8 @@ import org.jspecify.annotations.Nullable;
 
 public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEntity, GlowingJarBlockEntityRenderState> {
 
+    private static final net.minecraft.resources.Identifier WISP = Erebus.prefix("textures/particle/wisp.png");
     private final SpriteId TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("glowing_jar"));
-    private final SpriteId WISP = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("particle/wisp"));
     private final GlowingJarModel model;
     private final SpriteGetter sprites;
 
@@ -34,38 +32,24 @@ public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEn
         sprites = context.sprites();
     }
 
-    private void renderQuads(PoseStack poseStack, VertexConsumer consumer, float xMax, float xMin, float yMin, float height, float zMin, float zMax, int combinedLight) {
-        float uMin = 0;
-        float uMax = 1;
-        float vMin = 0;
-        float vMax = 1;
-        float vHeight = vMax - vMin;
-
-        // north
-        addVertexWithUV(poseStack, consumer, xMax, yMin, zMin, uMax, vMin, combinedLight);
-        addVertexWithUV(poseStack, consumer, xMin, yMin, zMin, uMin, vMin, combinedLight);
-        addVertexWithUV(poseStack, consumer, xMin, height, zMin, uMin, vMin + (vHeight * height), combinedLight);
-        addVertexWithUV(poseStack, consumer, xMax, height, zMin, uMax, vMin + (vHeight * height), combinedLight);
-        // south
-        addVertexWithUV(poseStack, consumer, xMax, yMin, zMax, uMin, vMin, combinedLight);
-        addVertexWithUV(poseStack, consumer, xMax, height, zMax, uMin, vMin + (vHeight * height), combinedLight);
-        addVertexWithUV(poseStack, consumer, xMin, height, zMax, uMax, vMin + (vHeight * height), combinedLight);
-        addVertexWithUV(poseStack, consumer, xMin, yMin, zMax, uMax, vMin, combinedLight);
-    }
-
-    private void addVertexWithUV(PoseStack poseStack, VertexConsumer consumer, float x, float y, float z, float u, float v, int combinedLight) {
-        //Extract RGB from 16776960 (0xFFFF00)
-    	float red = ((float) (((16776960) >> 16) & 0xFF)) / 255.0f;    // ~1
-    	float green = ((float) (((16776960) >> 8) & 0xFF)) / 255.0f;   // ~1
-    	float blue = ((float) ((16776960) & 0xFF)) / 255.0f;           // ~0
-    	float alpha = 0.6f;
-
-        consumer.addVertex(poseStack.last().pose(), x * 0.5F, y, z * 0.5F)
-                .setColor(red, green, blue, alpha)
-                .setUv(u, v)
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setUv2(combinedLight, 240)
-                .setNormal(1, 0, 0);
+    public static void submitWisp(PoseStack pose, SubmitNodeCollector collector, float particleSize, float yaw) {
+        pose.pushPose();
+        pose.translate(0.5F, -particleSize / 4, 0.5F);
+        float scale = particleSize / 3 + 0.5F;
+        pose.scale(scale, scale, scale);
+        pose.mulPose(Axis.YN.rotationDegrees(yaw));
+        // Emit the glow before glass writes depth; custom geometry otherwise runs after model parts.
+        collector.order(-1).submitCustomGeometry(pose, RenderTypes.entityTranslucentEmissive(WISP), (matrix, buffer) -> {
+            // The original upright, double-sided glow keeps its center at jar height while pulsing.
+            float[][] vertices = {{0.25F, 0.5F, 1, 0}, {-0.25F, 0.5F, 0, 0},
+                    {-0.25F, 1, 0, 1}, {0.25F, 1, 1, 1}};
+            for (float[] vertex : vertices) {
+                buffer.addVertex(matrix, vertex[0], vertex[1], 0).setColor(0xFFEC810E)
+                        .setUv(vertex[2], vertex[3]).setOverlay(OverlayTexture.NO_OVERLAY)
+                        .setLight(net.minecraft.util.LightCoordsUtil.FULL_BRIGHT).setNormal(matrix, 0, 0, 1);
+            }
+        });
+        pose.popPose();
     }
 
     @Override
@@ -81,23 +65,13 @@ public class GlowingJarRenderer implements BlockEntityRenderer<GlowingJarBlockEn
 
     @Override
     public void submit(GlowingJarBlockEntityRenderState renderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
-        poseStack.pushPose();
-        poseStack.translate(0.5F, 0F - renderState.particleSize / 4, 0.5F);
-        poseStack.scale(renderState.particleSize / 3 + 0.5F, renderState.particleSize / 3 + 0.5F, renderState.particleSize / 3 + 0.5F);
-        GlStateManager._enableBlend();
-        poseStack.mulPose(Axis.YN.rotationDegrees(camera.orientation.y));
-
-        //renderQuads(poseStack, vertex, 0.5F, -0.5F, 0.5F, 1, 0, 0, renderState.lightCoords);
-        GlStateManager._disableBlend();
-        poseStack.popPose();
+        submitWisp(poseStack, submitNodeCollector, renderState.particleSize, 180F + camera.yRot);
 
         poseStack.pushPose();
         poseStack.translate(0.5F, 0.75F, 0.5F);
         poseStack.scale(0.7125F, -0.9999F, -0.7125F);
 
-        GlStateManager._disableCull();
-        submitNodeCollector.submitModel(model, renderState, poseStack, TEXTURE.renderType(RenderTypes::entityTranslucent), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, sprites.get(TEXTURE), 0, renderState.breakProgress);
-        GlStateManager._enableCull();
+        model.submit(poseStack, submitNodeCollector, TEXTURE.renderType(RenderTypes::entityTranslucent), renderState.lightCoords, OverlayTexture.NO_OVERLAY, sprites.get(TEXTURE), 0, renderState.breakProgress);
         poseStack.popPose();
     }
 }

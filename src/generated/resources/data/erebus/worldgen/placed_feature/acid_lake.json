@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:acid_lake",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

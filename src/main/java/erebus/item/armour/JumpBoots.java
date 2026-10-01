@@ -6,33 +6,23 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.equipment.ArmorType;
 import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+
+import java.util.function.Consumer;
 
 public class JumpBoots extends Item {
-	public JumpBoots() {
-		super(new Item.Properties().humanoidArmor(ModArmorMaterials.JUMP_BOOTS, ArmorType.BOOTS).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("jump_boots"))));
-	}
+    public JumpBoots() {
+        super(new Item.Properties().humanoidArmor(ModArmorMaterials.JUMP_BOOTS, ArmorType.BOOTS).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("jump_boots"))));
+    }
 
-	@Override
-	public @NonNull Component getHighlightTip(@NonNull ItemStack item, @NonNull Component displayName) {
-		return Component.translatable("tooltip.erebus.jump_boots").withStyle(ChatFormatting.YELLOW);
-	}
+    @Override
+    public void appendHoverText(@NonNull ItemStack stack, @NonNull TooltipContext context, @NonNull TooltipDisplay display, Consumer<Component> lines, @NonNull TooltipFlag flag) {
+        lines.accept(Component.translatable("tooltip.erebus.jump_boots").withStyle(ChatFormatting.YELLOW));
+    }
 
-	@Override
-	public void inventoryTick(@NonNull ItemStack itemStack, @NonNull ServerLevel level, @NonNull Entity owner, @Nullable EquipmentSlot slot) {
-		if (owner instanceof Player player) {
-			ItemStack is = player.getItemBySlot(EquipmentSlot.FEET);
-			if (!is.isEmpty() && is.getItem() == this) {
-				owner.fallDistance = 0.0F;
-			}
-		}
-	}
 }

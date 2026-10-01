@@ -1,24 +1,21 @@
 package erebus.datagen.providers.recipes;
 
+import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.world.item.crafting.CampfireCookingRecipe;
-import net.minecraft.world.item.crafting.CookingBookCategory;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.SmokingRecipe;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 
-import java.util.List;
 import java.util.Locale;
 
 import static net.minecraft.data.recipes.RecipeCategory.*;
 
-/**
- * Base class for all Erebus recipe providers.
- * Contains common utility methods used by multiple recipe providers.
- */
 public abstract class ErebusRecipeProvider extends RecipeProvider {
     protected RecipeOutput output;
 
@@ -27,24 +24,30 @@ public abstract class ErebusRecipeProvider extends RecipeProvider {
         this.output = output;
     }
 
-    /**
-     * Generate recipes for this provider.
-     */
-
-    // Utility methods shared across recipe providers
-
     protected void smelting(ItemLike ingredient, ItemLike result) {
         smeltingResultFromBase(result, ingredient);
     }
 
-    protected void cook(ItemLike ingredient, ItemLike result) {
+    protected void cook(ItemLike ingredient, ItemLike result, float furnaceExperience) {
+        simpleCookingRecipe("smelting", SmeltingRecipe::new, 200, ingredient, result, furnaceExperience);
         simpleCookingRecipe("smoking", SmokingRecipe::new, 100, ingredient, result, 0.35F);
         simpleCookingRecipe("campfire_cooking", CampfireCookingRecipe::new, 600, ingredient, result, 0.35F);
     }
 
-    protected void ore(ItemLike ore, ItemLike ingot, String group) {
-        oreSmelting(List.of(ore), MISC, CookingBookCategory.BLOCKS, ingot, 0.25F, 200, group);
-        oreBlasting(List.of(ore), MISC, CookingBookCategory.BLOCKS, ingot, 0.25F, 100, group);
+    protected void ore(ItemLike ore, ItemLike result, String group, float furnaceExperience) {
+        ore(ore, result, group, furnaceExperience, 1);
+    }
+
+    protected void ore(ItemLike ore, ItemLike result, String group, float furnaceExperience, int count) {
+        var outputStack = new ItemStackTemplate(result.asItem(), count);
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ore), MISC, CookingBookCategory.BLOCKS,
+                        outputStack, furnaceExperience, 200)
+                .group(group).unlockedBy(getHasName(ore), has(ore))
+                .save(output, getItemName(result) + "_from_smelting_" + getItemName(ore));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ore), MISC, CookingBookCategory.BLOCKS,
+                        outputStack, 0.25F, 100)
+                .group(group).unlockedBy(getHasName(ore), has(ore))
+                .save(output, getItemName(result) + "_from_blasting_" + getItemName(ore));
     }
 
     protected void shapeless(RecipeCategory category, ItemLike ingredient, ItemLike result, int amount) {
@@ -166,5 +169,19 @@ public abstract class ErebusRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_outer", has(outer))
                 .unlockedBy("has_inner", has(inner))
                 .save(output, "surround_%s".formatted(result.asItem().getDescriptionId().toLowerCase(Locale.ROOT)));
+    }
+
+    protected void surround(TagKey<Item> outer, ItemLike result) {
+        shaped(MISC, result).pattern("OOO").pattern("OIO").pattern("OOO")
+                .define('O', outer).define('I', ModBlocks.UMBER_GOLEM_STATUE)
+                .unlockedBy("has_outer", has(outer)).unlockedBy("has_inner", has(ModBlocks.UMBER_GOLEM_STATUE))
+                .save(output, "surround_%s".formatted(result.asItem().getDescriptionId().toLowerCase(Locale.ROOT)));
+    }
+
+    protected void surround() {
+        shaped(MISC, ModBlocks.CHEST_PETRIFIED).pattern("OOO").pattern("OIO").pattern("OOO")
+                .define('O', ModBlocks.PLANKS_PETRIFIED).define('I', net.neoforged.neoforge.common.Tags.Items.INGOTS_GOLD)
+                .unlockedBy("has_outer", has(ModBlocks.PLANKS_PETRIFIED)).unlockedBy("has_inner", has(net.neoforged.neoforge.common.Tags.Items.INGOTS_GOLD))
+                .save(output, "surround_%s".formatted(ModBlocks.CHEST_PETRIFIED.asItem().getDescriptionId().toLowerCase(Locale.ROOT)));
     }
 }

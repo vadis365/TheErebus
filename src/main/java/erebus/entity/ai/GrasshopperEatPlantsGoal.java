@@ -16,78 +16,76 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class GrasshopperEatPlantsGoal extends EatBlockGoal {
 
-	private final double moveSpeed;
-	private int plantsEaten = 0;
-	private final Grasshopper grasshopper;
+    private final double moveSpeed;
+    private final Grasshopper grasshopper;
 
-	public GrasshopperEatPlantsGoal(Grasshopper grasshopper, double moveSpeed, int eatSpeed, boolean doDropItem) {
-		super(grasshopper, null, moveSpeed, eatSpeed, doDropItem);
-		this.moveSpeed = moveSpeed;
-		this.dropItem = doDropItem;
-		this.grasshopper = grasshopper;
-	}
-
-	@Override
-	protected boolean canEatBlock(BlockState state) {
-		Block block = state.getBlock();
-		if (state.isAir())
-			return false;
-		else return state.is(Blocks.SHORT_GRASS) || state.is(ModBlocks.FERN.get()) || block instanceof CropBlock && ((CropBlock) block).isMaxAge(state);
+    public GrasshopperEatPlantsGoal(Grasshopper grasshopper, double moveSpeed, int eatSpeed, boolean doDropItem) {
+        super(grasshopper, null, moveSpeed, eatSpeed, doDropItem);
+        this.moveSpeed = moveSpeed;
+        this.dropItem = doDropItem;
+        this.grasshopper = grasshopper;
     }
 
-	@Override
-	protected boolean isEntityReady() {
-		return true;
-	}
+    @Override
+    protected boolean canEatBlock(BlockState state) {
+        Block block = state.getBlock();
+        if (state.isAir())
+            return false;
+        else return state.is(Blocks.SHORT_GRASS) || state.is(ModBlocks.FERN.get()) || block instanceof CropBlock && ((CropBlock) block).isMaxAge(state);
+    }
 
-	@Override
-	public boolean canUse() {
-		return !grasshopper.getMoveControl().hasWanted() && !grasshopper.isEating && super.canUse();
-	}
+    @Override
+    protected boolean isEntityReady() {
+        return true;
+    }
 
-	@Override
-	protected void moveToLocation() {
-		grasshopper.getMoveControl().setWantedPosition(targetX + 0.5D, targetY + 0.5D, targetZ + 0.5D, moveSpeed);
-	}
+    @Override
+    public boolean canUse() {
+        return !grasshopper.getMoveControl().hasWanted() && !grasshopper.isEating && super.canUse();
+    }
 
-	@Override
-	protected void prepareToEat() {
-		grasshopper.setIsEating(true);
-	}
+    @Override
+    protected void moveToLocation() {
+        grasshopper.getMoveControl().setWantedPosition(targetX + 0.5D, targetY + 0.5D, targetZ + 0.5D, moveSpeed);
+    }
 
-	@Override
-	protected void eatingInterupted() {
-		grasshopper.setIsEating(false);
-	}
+    @Override
+    protected void prepareToEat() {
+        grasshopper.setIsEating(true);
+    }
 
-	@Override
-	protected void afterEaten() {
-		grasshopper.level().destroyBlock(new BlockPos(targetX, targetY, targetZ), dropItem, grasshopper);
-		grasshopper.setIsEating(false);
-		plantsEaten++;
-		if (plantsEaten == 6)
-			if (grasshopper.level().getEntitiesOfClass(Grasshopper.class, grasshopper.getBoundingBox().inflate(16)).size() < 10) {
-				Grasshopper newGrasshopper = ModEntities.GRASSHOPPER.get().create(grasshopper.level(), EntitySpawnReason.BREEDING);
-				if (newGrasshopper != null) {
-					newGrasshopper.copyPosition(grasshopper);
-					grasshopper.level().addFreshEntity(newGrasshopper);
-				}
-			}
-		if (plantsEaten >= 12) {
-			if (grasshopper.level().getEntitiesOfClass(Locust.class, grasshopper.getBoundingBox().inflate(16)).size() < 5) {
-				Locust locust = ModEntities.LOCUST.get().create(grasshopper.level(), EntitySpawnReason.BREEDING);
-				if (locust != null) {
-					locust.copyPosition(grasshopper);
-					grasshopper.remove(Entity.RemovalReason.DISCARDED);
-					grasshopper.level().addFreshEntity(locust);
-					grasshopper.level().playSound(null, locust.blockPosition(), ModSounds.LOCUST_SPAWN.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
-				}
-			}
-		}
-	}
+    @Override
+    protected void eatingInterupted() {
+        grasshopper.setIsEating(false);
+    }
 
-	@Override
-	protected void dropItem() {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    protected void afterEaten() {
+        grasshopper.setIsEating(false);
+        if (!grasshopper.level().destroyBlock(new BlockPos(targetX, targetY, targetZ), dropItem, grasshopper)) return;
+        grasshopper.setPlantsEaten(grasshopper.getPlantsEaten() + 1);
+        if (grasshopper.getPlantsEaten() == 6)
+            if (grasshopper.level().getEntitiesOfClass(Grasshopper.class, grasshopper.getBoundingBox().inflate(16)).size() < 10) {
+                Grasshopper newGrasshopper = ModEntities.GRASSHOPPER.get().create(grasshopper.level(), EntitySpawnReason.BREEDING);
+                if (newGrasshopper != null) {
+                    newGrasshopper.copyPosition(grasshopper);
+                    grasshopper.level().addFreshEntity(newGrasshopper);
+                }
+            }
+        if (grasshopper.getPlantsEaten() >= 12) {
+            if (grasshopper.level().getEntitiesOfClass(Locust.class, grasshopper.getBoundingBox().inflate(16)).size() < 5) {
+                Locust locust = ModEntities.LOCUST.get().create(grasshopper.level(), EntitySpawnReason.BREEDING);
+                if (locust != null) {
+                    locust.copyPosition(grasshopper);
+                    if (!grasshopper.level().addFreshEntity(locust)) return;
+                    grasshopper.remove(Entity.RemovalReason.DISCARDED);
+                    grasshopper.level().playSound(null, locust.blockPosition(), ModSounds.LOCUST_SPAWN.get(), SoundSource.HOSTILE, 1.0F, 1.0F);
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void dropItem() {
+    }
 }

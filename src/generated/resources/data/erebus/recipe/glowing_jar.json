@@ -4,7 +4,7 @@
   "key": {
     "B": "erebus:bio_luminescence",
     "G": "erebus:amber_glass",
-    "I": "minecraft:iron_ingot"
+    "I": "#c:ingots/iron"
   },
   "pattern": [
     "III",

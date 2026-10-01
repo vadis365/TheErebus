@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:fallen_log_population",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

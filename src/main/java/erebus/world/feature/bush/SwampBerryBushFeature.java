@@ -2,6 +2,7 @@ package erebus.world.feature.bush;
 
 
 import erebus.registries.blocks.ModBlocks;
+
 public class SwampBerryBushFeature extends ErebusBushFeature {
 
     public SwampBerryBushFeature() {

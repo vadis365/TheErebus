@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "erebus:tall_bloom"
+  ],
+  "result": {
+    "count": 2,
+    "id": "minecraft:pink_dye"
+  }
+}

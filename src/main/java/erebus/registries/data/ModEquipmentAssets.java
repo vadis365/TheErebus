@@ -4,15 +4,19 @@ import erebus.Erebus;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 
 public class ModEquipmentAssets {
-    public static ResourceKey<? extends Registry<EquipmentAsset>> ROOT_ID = ResourceKey.createRegistryKey(Erebus.prefix("equipment_assets"));
+    public static ResourceKey<? extends Registry<EquipmentAsset>> ROOT_ID = EquipmentAssets.ROOT_ID;
 
+    public static ResourceKey<EquipmentAsset> GLIDER = register("glider");
+    public static ResourceKey<EquipmentAsset> POWERED_GLIDER = register("powered_glider");
     public static ResourceKey<EquipmentAsset> JADE = register("jade");
     public static ResourceKey<EquipmentAsset> EXOSKELETON = register("exoskeleton");
     public static ResourceKey<EquipmentAsset> REINFORCED_EXOSKELETON = register("reinforced_exoskeleton");
     public static ResourceKey<EquipmentAsset> RHINO = register("rhino");
     public static ResourceKey<EquipmentAsset> BAMBOO = register("bamboo");
+    public static ResourceKey<EquipmentAsset> COMPOUND_GOGGLES = register("compound_goggles");
     public static ResourceKey<EquipmentAsset> REINFORCED_COMPOUND_GOGGLES = register("reinforced_compound_goggles");
     public static ResourceKey<EquipmentAsset> MUSHROOM_HELM = register("mushroom_helm");
     public static ResourceKey<EquipmentAsset> SPIDER_T_SHIRT = register("spider_t_shirt");

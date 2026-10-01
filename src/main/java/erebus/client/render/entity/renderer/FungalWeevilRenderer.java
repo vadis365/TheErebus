@@ -13,24 +13,24 @@ import org.jspecify.annotations.NonNull;
 
 public class FungalWeevilRenderer extends MobRenderer<FungalWeevil, WeevilRenderState, WeevilModel> {
 
-	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/fungal_weevil.png");
+    private static final Identifier TEXTURE = Erebus.prefix("textures/entity/fungal_weevil.png");
 
-	public FungalWeevilRenderer(EntityRendererProvider.Context context) {
-		super(context, new WeevilModel(context.bakeLayer(ModEntityRendering.FUNGAL_WEEVIL)), 0.5F);
-	}
+    public FungalWeevilRenderer(EntityRendererProvider.Context context) {
+        super(context, new WeevilModel(context.bakeLayer(ModEntityRendering.FUNGAL_WEEVIL)), 0.5F);
+    }
 
-	@Override
-	public WeevilRenderState createRenderState() {
-		return new WeevilRenderState();
-	}
+    @Override
+    public WeevilRenderState createRenderState() {
+        return new WeevilRenderState();
+    }
 
-	@Override
-	protected void scale(WeevilRenderState weevil, PoseStack pose) {
-		pose.scale(0.6F, 0.6F, 0.6F);
-	}
+    @Override
+    protected void scale(WeevilRenderState weevil, PoseStack pose) {
+        pose.scale(0.6F, 0.6F, 0.6F);
+    }
 
-	@Override
-	public @NonNull Identifier getTextureLocation(WeevilRenderState weevil) {
-		return TEXTURE;
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(WeevilRenderState weevil) {
+        return TEXTURE;
+    }
 }

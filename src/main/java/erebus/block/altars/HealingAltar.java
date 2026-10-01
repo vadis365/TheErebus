@@ -19,44 +19,44 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class HealingAltar extends AltarAbstract {
-	public static final MapCodec<HealingAltar> CODEC = simpleCodec(HealingAltar::new);
+    public static final MapCodec<HealingAltar> CODEC = simpleCodec(HealingAltar::new);
 
-	public HealingAltar(Properties properties) {
-		super(properties);
-	}
+    public HealingAltar(Properties properties) {
+        super(properties);
+    }
 
     @Override
     protected @NonNull MapCodec<HealingAltar> codec() {
         return CODEC;
     }
 
-	@Override
-	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-		return new HealingAltarBlockEntity(pos, state);
-	}
+    @Override
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        return new HealingAltarBlockEntity(pos, state);
+    }
 
-	@Nullable
-	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
-		return HealingAltarBlockEntity::tick;
-	}
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
+        return HealingAltarBlockEntity::tick;
+    }
 
-	@Override
-	 protected void onPlace(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull BlockState oldState, boolean movedByPiston) {
-		BlockEntity blockEntity =  level.getBlockEntity(pos);
-		if (blockEntity instanceof HealingAltarBlockEntity altar)
-			altar.setActive(false);
-	}
+    @Override
+    protected void onPlace(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull BlockState oldState, boolean movedByPiston) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof HealingAltarBlockEntity altar)
+            altar.setActive(false);
+    }
 
-	@Nonnull
-	@Override
-	public InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
-		BlockEntity blockEntity = level.getBlockEntity(pos);
-		if (level.isClientSide()) {
-			return InteractionResult.SUCCESS;
-		} else if (blockEntity instanceof HealingAltarBlockEntity altar) {
-			return activateAltar(level, stack, player, altar, pos);
-		}
-		return InteractionResult.FAIL;
-	}
+    @Nonnull
+    @Override
+    public InteractionResult useItemOn(@Nonnull ItemStack stack, @Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        } else if (blockEntity instanceof HealingAltarBlockEntity altar) {
+            return activateAltar(level, stack, player, altar, pos, hand);
+        }
+        return InteractionResult.FAIL;
+    }
 }

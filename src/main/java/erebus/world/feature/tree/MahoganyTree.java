@@ -14,7 +14,7 @@ public class MahoganyTree extends ErebusTree {
 
     @Override
     public TreeConfiguration getTreeConfiguration() {
-        return createStraightBlobTree(ModBlocks.LOG_MAHOGANY, ModBlocks.LEAVES_MAHOGANY, 4, 8, 0, 2);
+        return createStraightBlobTree(ModBlocks.LOG_MAHOGANY, ModBlocks.LEAVES_MAHOGANY, 5, 2, 0, 2);
     }
 
     @Override

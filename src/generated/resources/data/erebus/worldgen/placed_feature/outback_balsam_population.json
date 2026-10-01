@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:outback_balsam_population",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

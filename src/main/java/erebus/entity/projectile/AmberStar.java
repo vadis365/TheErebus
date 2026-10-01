@@ -6,6 +6,7 @@ import erebus.registries.data.tags.ModEntityTypeTags;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -15,15 +16,11 @@ import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.NotNull;
 
 public class AmberStar extends ThrowableProjectile implements ItemSupplier {
-
-    private Entity trappedEntity;
 
     public AmberStar(EntityType<? extends AmberStar> type, Level level) {
         super(type, level);
@@ -39,30 +36,37 @@ public class AmberStar extends ThrowableProjectile implements ItemSupplier {
 
     @Override
     protected void onHitBlock(@NotNull BlockHitResult result) {
-        BlockPos pos = result.getBlockPos();
-        level().setBlock(pos.relative(result.getDirection()), ModBlocks.AMBER.get().defaultBlockState(), 2);
-        remove(RemovalReason.DISCARDED);
+        if (level().isClientSide()) return;
+        BlockPos pos = result.getBlockPos().relative(result.getDirection());
+        if (canPlaceAt(pos)) level().setBlock(pos, ModBlocks.AMBER.get().defaultBlockState(), Block.UPDATE_ALL);
+        discard();
     }
 
     @Override
     protected void onHitEntity(@NotNull EntityHitResult result) {
+        Level level = level();
+        if (level.isClientSide()) return;
         Entity entity = result.getEntity();
-        Level level = entity.level();
-        if(!level.isClientSide()) return;
-
         BlockPos pos = entity.blockPosition();
-
-        if (!(entity instanceof Player)) {
-            if(canTrap(entity)) {
-                level.setBlock(pos, ModBlocks.PRESERVED_AMBER_GLASS.get().defaultBlockState(), Block.UPDATE_ALL);
-                PreservedBlockEntity blockEntity = (PreservedBlockEntity) level.getBlockEntity(pos);
-                if(blockEntity != null)
-                    blockEntity.setTrappedEntity(entity);
-                entity.remove(RemovalReason.DISCARDED);
+        if (!(entity instanceof Player) && entity.isAlive() && !entity.isPassenger() && !entity.isVehicle() && canTrap(entity) && canPlaceAt(pos)) {
+            var previousState = level.getBlockState(pos);
+            if (level.setBlock(pos, ModBlocks.PRESERVED_AMBER_GLASS.get().defaultBlockState(), Block.UPDATE_ALL)) {
+                if (level.getBlockEntity(pos) instanceof PreservedBlockEntity preserved && preserved.setTrappedEntity(entity)) {
+                    entity.discard();
+                } else {
+                    level.setBlock(pos, previousState, Block.UPDATE_ALL);
+                }
             }
         }
+        discard();
+    }
 
-        remove(RemovalReason.DISCARDED);
+    private boolean canPlaceAt(BlockPos pos) {
+        if (!level().getWorldBorder().isWithinBounds(pos) || !level().getBlockState(pos).canBeReplaced() || level().getBlockState(pos).hasBlockEntity()) return false;
+        if (getOwner() instanceof Player player) {
+            return level().mayInteract(player, pos) && player.mayUseItemAt(pos, Direction.UP, player.getMainHandItem());
+        }
+        return true;
     }
 
     private boolean canTrap(Entity entity) {
@@ -70,22 +74,12 @@ public class AmberStar extends ThrowableProjectile implements ItemSupplier {
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {}
+    protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
+    }
 
     @Override
     public @NotNull ItemStack getItem() {
         return new ItemStack(ModItems.AMBER_STAR.get());
     }
 
-    @Override
-    protected void addAdditionalSaveData(ValueOutput output) {
-        super.addAdditionalSaveData(output);
-        trappedEntity.save(output);
-    }
-
-    @Override
-    protected void readAdditionalSaveData(ValueInput input) {
-        super.readAdditionalSaveData(input);
-        trappedEntity.load(input);
-    }
 }

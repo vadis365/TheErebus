@@ -5,6 +5,6 @@ import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.core.Direction;
 
 public class BambooExtenderBlockEntityRenderState extends BlockEntityRenderState {
-    public Direction facing;
     public final BlockModelRenderState planks = new BlockModelRenderState();
+    public Direction facing;
 }

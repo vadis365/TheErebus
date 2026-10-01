@@ -11,8 +11,8 @@
     "erebus:smoothie_glass",
     "erebus:bluebell_petal",
     "erebus:bluebell_petal",
-    "minecraft:lapis_lazuli",
-    "minecraft:lapis_lazuli"
+    "#c:gems/lapis",
+    "#c:gems/lapis"
   ],
   "result": {
     "id": "erebus:givin_me_the_blues"

@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:ceiling_lava",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

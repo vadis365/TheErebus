@@ -77,35 +77,35 @@ public abstract class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(crop.get(), createCropDrops(crop.get(), grownDrop.get(), seed.get(), condition));
     }
 
-	public void dropPricklyPearBasedOffCondition(Supplier<Block> blockIn) {
-		LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(blockIn.get())
-				.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PricklyPearBlock.AGE, 11));
-		add(blockIn.get(),
-				LootTable.lootTable()
-						.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-								.add(LootItem.lootTableItem(ModItems.PRICKLY_PEAR_RAW).when(condition)
-										.otherwise(LootItem.lootTableItem(blockIn.get().asItem())))));
-	}
+    public void dropPricklyPearBasedOffCondition(Supplier<Block> blockIn) {
+        LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(blockIn.get())
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PricklyPearBlock.AGE, 11));
+        add(blockIn.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .add(LootItem.lootTableItem(ModItems.PRICKLY_PEAR_RAW).when(condition)
+                                        .otherwise(LootItem.lootTableItem(blockIn.get().asItem())))));
+    }
 
-	public void dropColossalBambooBasedOffCondition(Supplier<Block> blockIn) {
-		LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(blockIn.get())
-				.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BambooBlock.AGE, 15));
-		add(blockIn.get(),
-				LootTable.lootTable()
-						.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-								.add(LootItem.lootTableItem(ModItems.BAMBOO)))
-						.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-								.add(LootItem.lootTableItem(ModBlocks.SAPLING_BAMBOO.get().asItem()).when(condition))));
-	}
-	
-	public void dropSingleBambooTorchCondition(Supplier<Block> blockIn) {
-		LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(blockIn.get())
-				.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BambooTorchBlock.HALF, EnumTorchBlockHalf.UPPER));
-		add(blockIn.get(),
-				LootTable.lootTable()
-				.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-						.add(LootItem.lootTableItem(blockIn.get().asItem()).when(condition))));
-	}
+    public void dropColossalBambooBasedOffCondition(Supplier<Block> blockIn) {
+        LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(blockIn.get())
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BambooBlock.AGE, 15));
+        add(blockIn.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .add(LootItem.lootTableItem(ModItems.BAMBOO)))
+                        .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .add(LootItem.lootTableItem(ModBlocks.SAPLING_BAMBOO.get().asItem()).when(condition))));
+    }
+
+    public void dropSingleBambooTorchCondition(Supplier<Block> blockIn) {
+        LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(blockIn.get())
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BambooTorchBlock.HALF, EnumTorchBlockHalf.UPPER));
+        add(blockIn.get(),
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .add(LootItem.lootTableItem(blockIn.get().asItem()).when(condition))));
+    }
 
     public void dropComponents(Supplier<Block> blockSupplier, Consumer<LootPool.Builder> lootFunctionSupplier) {
         LootPool.Builder lootPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1))

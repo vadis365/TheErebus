@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:droughted_shrub",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

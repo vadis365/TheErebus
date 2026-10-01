@@ -3,8 +3,8 @@
   "category": "misc",
   "ingredients": [
     "erebus:poison_gland",
-    "#c:slime_balls",
-    "#c:dyes/white"
+    "erebus:repellent",
+    "minecraft:bone_meal"
   ],
   "result": {
     "count": 2,

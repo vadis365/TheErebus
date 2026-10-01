@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "copper",
+  "ingredient": "erebus:ore_copper",
+  "result": {
+    "id": "minecraft:copper_ingot"
+  }
+}

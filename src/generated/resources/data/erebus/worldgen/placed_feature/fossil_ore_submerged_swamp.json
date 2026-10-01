@@ -2,8 +2,12 @@
   "feature": "erebus:fossil_ore_submerged_swamp",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 4
+      "type": "erebus:ore_count",
+      "chance": 0.25,
+      "extra_max": 2,
+      "extra_min": 1,
+      "max": 2,
+      "min": 1
     },
     {
       "type": "minecraft:in_square"
@@ -13,10 +17,10 @@
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 112
+          "above_bottom": 112
         },
         "min_inclusive": {
-          "absolute": 5
+          "above_bottom": 36
         }
       }
     },

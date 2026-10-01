@@ -25,55 +25,55 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class FluidJarBlock extends BaseEntityBlock {
-	
-	public static final MapCodec<FluidJarBlock> CODEC = simpleCodec(FluidJarBlock::new);
-	
-	public FluidJarBlock(Properties properties) {
-		super(properties);
-	}
-	
-	@Nonnull
-	@Override
-	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return CODEC;
-	}
 
-	@Override
-	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-		return new FluidJarBlockEntity(pos, state);
-	}
+    public static final MapCodec<FluidJarBlock> CODEC = simpleCodec(FluidJarBlock::new);
 
-	@Nullable
-	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide() ? null : FluidJarBlockEntity::serverTick;
-	}
+    public FluidJarBlock(Properties properties) {
+        super(properties);
+    }
 
-	@Nonnull
-	@Override
-	public RenderShape getRenderShape(@Nonnull BlockState state) {
-		return RenderShape.MODEL;
-	}
+    @Nonnull
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
+    }
 
-	@Nonnull
-	@Override
-	public InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (world.isClientSide())
-			return InteractionResult.SUCCESS;
-		BlockEntity tileentity = world.getBlockEntity(pos);
-		if (tileentity instanceof FluidJarBlockEntity) {
-			ResourceHandler<FluidResource> handler = world.getCapability(Capabilities.Fluid.BLOCK, pos, hit.getDirection());
-			if (handler != null) {
-				if (player.getItemInHand(hand).isEmpty() || !FluidUtil.interactWithFluidHandler(player, hand, world, pos, hit.getDirection())) {
-					FluidResource resource = handler.getResource(0);
-					if (!resource.isEmpty())
-						player.sendOverlayMessage(Component.literal(resource.getHoverName().getString() + ": " + handler.getAmountAsInt(0) + "/" + FluidJarBlockEntity.MAX_CAPACITY));
-					else
-						player.sendOverlayMessage(Component.literal("Empty: 0/" + FluidJarBlockEntity.MAX_CAPACITY));
-				}
-			}
-			return InteractionResult.SUCCESS;
-		}
-		return InteractionResult.PASS;
-	}
+    @Override
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+        return new FluidJarBlockEntity(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
+        return pLevel.isClientSide() ? null : FluidJarBlockEntity::serverTick;
+    }
+
+    @Nonnull
+    @Override
+    public RenderShape getRenderShape(@Nonnull BlockState state) {
+        return RenderShape.MODEL;
+    }
+
+    @Nonnull
+    @Override
+    public InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (world.isClientSide())
+            return InteractionResult.SUCCESS;
+        BlockEntity tileentity = world.getBlockEntity(pos);
+        if (tileentity instanceof FluidJarBlockEntity) {
+            ResourceHandler<FluidResource> handler = world.getCapability(Capabilities.Fluid.BLOCK, pos, hit.getDirection());
+            if (handler != null) {
+                if (player.getItemInHand(hand).isEmpty() || !FluidUtil.interactWithFluidHandler(player, hand, world, pos, hit.getDirection())) {
+                    FluidResource resource = handler.getResource(0);
+                    if (!resource.isEmpty())
+                        player.sendOverlayMessage(Component.literal(resource.getHoverName().getString() + ": " + handler.getAmountAsInt(0) + "/" + FluidJarBlockEntity.MAX_CAPACITY));
+                    else
+                        player.sendOverlayMessage(Component.literal("Empty: 0/" + FluidJarBlockEntity.MAX_CAPACITY));
+                }
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
+    }
 }

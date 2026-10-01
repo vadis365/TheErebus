@@ -14,7 +14,9 @@
     [],
     [],
     [
+      "erebus:fallen_log_population",
       "erebus:quick_sand",
+      "erebus:pond",
       "erebus:rotten_acacia",
       "erebus:gas_vent"
     ],
@@ -42,12 +44,19 @@
     [],
     [],
     [
-      "erebus:marshwood",
-      "erebus:mossbark",
+      "erebus:swamp_mud",
+      "erebus:swamp_tree_population",
+      "erebus:swamp_upper_moss",
       "erebus:vines",
       "erebus:swamp_bush",
+      "erebus:sundew",
+      "erebus:fern",
+      "erebus:fiddle_head",
+      "erebus:swamp_plant",
+      "erebus:mire_coral",
       "erebus:moss",
-      "erebus:algae"
+      "erebus:algae",
+      "erebus:swamp_reeds"
     ]
   ],
   "has_precipitation": false,
@@ -67,18 +76,6 @@
         "maxCount": 2,
         "minCount": 1,
         "weight": 20
-      },
-      {
-        "type": "erebus:jumping_spider",
-        "maxCount": 4,
-        "minCount": 2,
-        "weight": 10
-      },
-      {
-        "type": "erebus:pond_skater",
-        "maxCount": 5,
-        "minCount": 3,
-        "weight": 100
       }
     ],
     "misc": [],
@@ -94,6 +91,18 @@
         "maxCount": 8,
         "minCount": 4,
         "weight": 10
+      },
+      {
+        "type": "erebus:jumping_spider",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 10
+      },
+      {
+        "type": "erebus:pond_skater",
+        "maxCount": 5,
+        "minCount": 3,
+        "weight": 100
       },
       {
         "type": "erebus:bog_maw",

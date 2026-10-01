@@ -19,6 +19,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ambient.AmbientCreature;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -28,52 +29,63 @@ import org.jspecify.annotations.NonNull;
 import javax.annotation.Nullable;
 
 public class Fly extends AmbientCreature {
-	@Nullable
+    private static final EntityDataAccessor<Byte> HANGING = SynchedEntityData.defineId(Fly.class, EntityDataSerializers.BYTE);
+    public int animationTicks, prevAnimationTicks;
+    @Nullable
     private BlockPos targetPosition;
-	private static final EntityDataAccessor<Byte> HANGING = SynchedEntityData.defineId(Fly.class, EntityDataSerializers.BYTE);
-	public int animationTicks, prevAnimationTicks;
 
-	public Fly(EntityType<? extends Fly> type, Level level) { 
-		super(type, level);
-		setIsFlyHanging(false);
-	}
+    public Fly(EntityType<? extends Fly> type, Level level) {
+        super(type, level);
+        setIsFlyHanging(false);
+    }
 
-	@Override
-	protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
-		super.defineSynchedData(builder);
-		builder.define(HANGING, (byte)0);
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 2D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D);
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes()
-				.add(Attributes.MAX_HEALTH, 2D)
-				.add(Attributes.MOVEMENT_SPEED, 0.3D);
-	}
+    public static boolean canSpawnHere(EntityType<Fly> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
+        if (pos.getY() >= 120 || pos.getY() <= 20)
+            return false;
+        else {
+            int light = level.getMaxLocalRawBrightness(pos);
+            if (random.nextBoolean())
+                return false;
+            return light <= random.nextInt(7) && checkMobSpawnRules(entity, level, spawn, pos, random);
+        }
+    }
 
-	@Override
-	protected float getSoundVolume() {
-		return 0.1F;
-	}
+    @Override
+    protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(HANGING, (byte) 0);
+    }
 
-	@Override
-	public float getVoicePitch() {
-		return super.getVoicePitch() * 0.95F;
-	}
+    @Override
+    protected float getSoundVolume() {
+        return 0.1F;
+    }
 
-	@Override
+    @Override
+    public float getVoicePitch() {
+        return super.getVoicePitch() * 0.95F;
+    }
+
+    @Override
     public SoundEvent getAmbientSound() {
-		return getIsFlyHanging() && random.nextInt(4) != 0 ? null : ModSounds.FLY_SOUND.get();
-	}
+        return getIsFlyHanging() && random.nextInt(4) != 0 ? null : ModSounds.FLY_SOUND.get();
+    }
 
-	@Override
+    @Override
     protected SoundEvent getHurtSound(@NonNull DamageSource source) {
-		return ModSounds.FLY_HURT.get();
-	}
+        return ModSounds.FLY_HURT.get();
+    }
 
-	@Override
+    @Override
     protected SoundEvent getDeathSound() {
-		return ModSounds.SQUISH.get();
-	}
+        return ModSounds.SQUISH.get();
+    }
 
     @Override
     public boolean isPushable() {
@@ -88,53 +100,53 @@ public class Fly extends AmbientCreature {
     protected void pushEntities() {
     }
 
-	public boolean getIsFlyHanging() {
-		return (entityData.get(HANGING).byteValue() & 1) != 0;
-	}
+    public boolean getIsFlyHanging() {
+        return (entityData.get(HANGING).byteValue() & 1) != 0;
+    }
 
-	public void setIsFlyHanging(boolean isHanging) {
-		byte b0 = entityData.get(HANGING).byteValue();
-		if (isHanging)
-			entityData.set(HANGING, Byte.valueOf((byte) (b0 | 1)));
-		else
-			entityData.set(HANGING, Byte.valueOf((byte) (b0 & -2)));
-	}
+    public void setIsFlyHanging(boolean isHanging) {
+        byte b0 = entityData.get(HANGING).byteValue();
+        if (isHanging)
+            entityData.set(HANGING, Byte.valueOf((byte) (b0 | 1)));
+        else
+            entityData.set(HANGING, Byte.valueOf((byte) (b0 & -2)));
+    }
 
-	@Override
-	public void tick() {
-		super.tick();
+    @Override
+    public void tick() {
+        super.tick();
 
-		if (level().isClientSide()) {
-			prevAnimationTicks = animationTicks;
-			if (animationTicks < 360)
-				animationTicks += 1;
-			if (animationTicks >= 360) {
-				animationTicks -= 360;
-				prevAnimationTicks -= 360;
-			}
-		}
+        if (level().isClientSide()) {
+            prevAnimationTicks = animationTicks;
+            if (animationTicks < 360)
+                animationTicks += 1;
+            if (animationTicks >= 360) {
+                animationTicks -= 360;
+                prevAnimationTicks -= 360;
+            }
+        }
 
-		if (getIsFlyHanging()) {
+        if (getIsFlyHanging()) {
             this.setDeltaMovement(Vec3.ZERO);
-            this.setPosRaw(this.getX(), (double)Mth.floor(this.getY()) + 1.0 - (double)this.getBbHeight(), this.getZ());
+            this.setPosRaw(this.getX(), (double) Mth.floor(this.getY()) + 1.0 - (double) this.getBbHeight(), this.getZ());
         } else {
             this.setDeltaMovement(this.getDeltaMovement().multiply(1.0, 0.6, 1.0));
         }
-	}
+    }
 
-	@Override
+    @Override
     protected void customServerAiStep(@NonNull ServerLevel level) {
         super.customServerAiStep(level);
         BlockPos blockpos = this.blockPosition();
         BlockPos blockpos1 = blockpos.above();
         if (this.getIsFlyHanging()) {
             boolean flag = this.isSilent();
-            if (this.level().getBlockState(blockpos1).isRedstoneConductor(this.level(), blockpos)) {
+            if (this.level().getBlockState(blockpos1).isRedstoneConductor(this.level(), blockpos1)) {
                 if (this.random.nextInt(200) == 0) {
-                    this.yHeadRot = (float)this.random.nextInt(360);
+                    this.yHeadRot = (float) this.random.nextInt(360);
                 }
 
-                if (this.level().getNearestPlayer(self(), 4) != null) {
+                if (this.level().getNearestPlayer(getX(), getY(), getZ(), 4, true) != null) {
                     this.setIsFlyHanging(false);
                     if (!flag) {
                         this.level().levelEvent(null, 1025, blockpos, 0);
@@ -148,25 +160,25 @@ public class Fly extends AmbientCreature {
             }
         } else {
             if (this.targetPosition != null
-                && (!this.level().isEmptyBlock(this.targetPosition) || this.targetPosition.getY() <= this.level().getMinY())) {
+                    && (!this.level().isEmptyBlock(this.targetPosition) || this.targetPosition.getY() <= this.level().getMinY())) {
                 this.targetPosition = null;
             }
 
             if (this.targetPosition == null || this.random.nextInt(30) == 0 || this.targetPosition.closerToCenterThan(this.position(), 2.0)) {
                 this.targetPosition = BlockPos.containing(
-                    this.getX() + (double)this.random.nextInt(7) - (double)this.random.nextInt(7),
-                    this.getY() + (double)this.random.nextInt(6) - 2.0,
-                    this.getZ() + (double)this.random.nextInt(7) - (double)this.random.nextInt(7)
+                        this.getX() + (double) this.random.nextInt(7) - (double) this.random.nextInt(7),
+                        this.getY() + (double) this.random.nextInt(6) - 2.0,
+                        this.getZ() + (double) this.random.nextInt(7) - (double) this.random.nextInt(7)
                 );
             }
 
-            double d2 = (double)this.targetPosition.getX() + 0.5 - this.getX();
-            double d0 = (double)this.targetPosition.getY() + 0.1 - this.getY();
-            double d1 = (double)this.targetPosition.getZ() + 0.5 - this.getZ();
+            double d2 = (double) this.targetPosition.getX() + 0.5 - this.getX();
+            double d0 = (double) this.targetPosition.getY() + 0.1 - this.getY();
+            double d1 = (double) this.targetPosition.getZ() + 0.5 - this.getZ();
             Vec3 vec3 = this.getDeltaMovement();
             Vec3 vec31 = vec3.add((Math.signum(d2) * 0.5 - vec3.x) * 0.1F, (Math.signum(d0) * 0.7F - vec3.y) * 0.1F, (Math.signum(d1) * 0.5 - vec3.z) * 0.1F);
             this.setDeltaMovement(vec31);
-            float f = (float)(Mth.atan2(vec31.z, vec31.x) * 180.0F / (float)Math.PI) - 90.0F;
+            float f = (float) (Mth.atan2(vec31.z, vec31.x) * 180.0F / (float) Math.PI) - 90.0F;
             float f1 = Mth.wrapDegrees(f - this.getYRot());
             this.zza = 0.5F;
             this.setYRot(this.getYRot() + f1);
@@ -185,40 +197,34 @@ public class Fly extends AmbientCreature {
         return true;
     }
 
-	@Override
-	public boolean hurtServer(@NonNull ServerLevel level, @NonNull DamageSource source, float amount) {
-		if (isInvulnerableTo(level, source))
-			return false;
-		else if (!level().isClientSide() && getIsFlyHanging())
-			setIsFlyHanging(false);
-		return super.hurtServer(level, source, amount);
-	}
+    @Override
+    public boolean hurtServer(@NonNull ServerLevel level, @NonNull DamageSource source, float amount) {
+        if (isInvulnerableTo(level, source))
+            return false;
+        else if (!level().isClientSide() && getIsFlyHanging())
+            setIsFlyHanging(false);
+        return super.hurtServer(level, source, amount);
+    }
 
     @Override
     public void readAdditionalSaveData(@NonNull ValueInput input) {
         super.readAdditionalSaveData(input);
-		entityData.set(HANGING, input.getByteOr("fly_hanging", (byte) 0));
-	}
+        entityData.set(HANGING, input.getByteOr("fly_hanging", (byte) 0));
+    }
 
     @Override
     public void addAdditionalSaveData(@NonNull ValueOutput output) {
         super.addAdditionalSaveData(output);
-		output.putByte("fly_hanging", (entityData.get(HANGING)));
-	}
+        output.putByte("fly_hanging", (entityData.get(HANGING)));
+    }
 
-	public static boolean canSpawnHere(EntityType<Fly> entity, LevelAccessor level, EntitySpawnReason spawn, BlockPos pos, RandomSource random) {
-		if (pos.getY() >= 120 || pos.getY() <= 0)
-			return false;
-		else {
-			int light = level.getMaxLocalRawBrightness(pos);
-			if (random.nextBoolean())
-				return false;
-			return light <= random.nextInt(7) && checkMobSpawnRules(entity, level, spawn, pos, random);
-		}
-	}
+    @Override
+    public boolean checkSpawnObstruction(LevelReader level) {
+        return !level.containsAnyLiquid(getBoundingBox()) && level.noCollision(this);
+    }
 
-	@Override
-	public int getMaxSpawnClusterSize() {
-		return 5;
-	}
+    @Override
+    public int getMaxSpawnClusterSize() {
+        return 8;
+    }
 }

@@ -2,18 +2,25 @@
   "feature": "erebus:coal_ore_underground_jungle_large",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 6
+      "type": "erebus:ore_count",
+      "chance": 1.0,
+      "extra_max": 4,
+      "extra_min": 4,
+      "max": 6,
+      "min": 6
+    },
+    {
+      "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:height_range",
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 24
+          "above_bottom": 24
         },
         "min_inclusive": {
-          "absolute": 6
+          "above_bottom": 6
         }
       }
     },

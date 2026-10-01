@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "A": "erebus:altar_fragment",
-    "J": "erebus:jade",
+    "J": "#c:gems/jade",
     "N": "#c:nuggets/gold"
   },
   "pattern": [

@@ -1,0 +1,33 @@
+{
+  "parent": "erebus:agriculture/bamboo_soup",
+  "criteria": {
+    "plant_shoot": {
+      "conditions": {
+        "location": [
+          {
+            "block": "erebus:sapling_bamboo",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.agriculture/bamboo_plant.desc"
+    },
+    "icon": {
+      "id": "erebus:sapling_bamboo"
+    },
+    "title": {
+      "translate": "advancement.erebus.agriculture/bamboo_plant.title"
+    }
+  },
+  "requirements": [
+    [
+      "plant_shoot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

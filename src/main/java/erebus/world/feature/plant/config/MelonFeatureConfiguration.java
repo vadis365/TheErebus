@@ -35,17 +35,18 @@ public class MelonFeatureConfiguration extends Feature<NoneFeatureConfiguration>
 
         if (!canSpawn) return false;
 
+        boolean placed = false;
         for (int c = 0; c < 64; c++) {
             int x = random.nextInt(8) - random.nextInt(8);
             int y = random.nextInt(4) - random.nextInt(4);
             int z = random.nextInt(8) - random.nextInt(8);
             BlockPos melon = pos.offset(x, y, z);
 
-            if (level.isEmptyBlock(melon) && level.getBlockState(melon.below()).is(Blocks.GRASS_BLOCK)) {
-                setBlock(level, melon, Blocks.MELON.defaultBlockState());
+            if (!level.isOutsideBuildHeight(melon) && !level.isOutsideBuildHeight(melon.below()) && level.isEmptyBlock(melon) && level.getBlockState(melon.below()).is(Blocks.GRASS_BLOCK)) {
+                placed |= level.setBlock(melon, Blocks.MELON.defaultBlockState(), 2);
             }
         }
 
-        return true;
+        return placed;
     }
 }

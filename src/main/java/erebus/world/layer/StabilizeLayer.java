@@ -25,10 +25,10 @@ public enum StabilizeLayer implements AreaTransformer1 {
     public ResourceKey<Biome> applyPixel(RandomContext randomContext, Area layer, int x, int z) {
         int xOff = getParentX(x << 4);
         int zOff = getParentZ(z << 4);
-        int centerX = ((x + xOff + 1) &  -4) - xOff;
-        int centerZ = ((z + zOff + 1) &  -4) - zOff;
+        int centerX = ((x + xOff + 1) & -4) - xOff;
+        int centerZ = ((z + zOff + 1) & -4) - zOff;
 
-        if(x <= centerX + 1 && x >= centerX - 1 && z <= centerZ + 1 && z >= centerZ - 1) {
+        if (x <= centerX + 1 && x >= centerX - 1 && z <= centerZ + 1 && z >= centerZ - 1) {
             return layer.getBiome(centerX, centerZ);
         }
 

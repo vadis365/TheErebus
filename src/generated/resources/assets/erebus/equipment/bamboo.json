@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "erebus:bamboo"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "erebus:bamboo"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "erebus:bamboo"
+      }
+    ]
+  }
+}

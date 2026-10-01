@@ -12,6 +12,7 @@ import java.util.Set;
 
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Erebus.MODID);
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TempleTeleporterBlockEntity>> TEMPLE_TELEPORTER = BLOCK_ENTITIES.register("temple_teleporter", () -> new BlockEntityType<>(TempleTeleporterBlockEntity::new, Set.of(ModBlocks.TEMPLE_TELEPORTER.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ExperienceAltarBlockEntity>> ALTAR_EXPERIENCE = BLOCK_ENTITIES.register("altar_experience", () -> new BlockEntityType<>(ExperienceAltarBlockEntity::new, Set.of(ModBlocks.ALTAR_EXPERIENCE.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HealingAltarBlockEntity>> ALTAR_HEALING = BLOCK_ENTITIES.register("altar_healing", () -> new BlockEntityType<>(HealingAltarBlockEntity::new, Set.of(ModBlocks.ALTAR_HEALING.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LightningAltarBlockEntity>> ALTAR_LIGHTNING = BLOCK_ENTITIES.register("altar_lightning", () -> new BlockEntityType<>(LightningAltarBlockEntity::new, Set.of(ModBlocks.ALTAR_LIGHTNING.get())));
@@ -25,6 +26,7 @@ public class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockOfBonesBlockEntity>> BLOCK_OF_BONES = BLOCK_ENTITIES.register("block_of_bones", () -> new BlockEntityType<>(BlockOfBonesBlockEntity::new, Set.of(ModBlocks.BLOCK_OF_BONES.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FluidJarBlockEntity>> FLUID_JAR = BLOCK_ENTITIES.register("fluid_jar", () -> new BlockEntityType<>(FluidJarBlockEntity::new, Set.of(ModBlocks.FLUID_JAR.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GlowingJarBlockEntity>> GLOWING_JAR = BLOCK_ENTITIES.register("glowing_jar", () -> new BlockEntityType<>(GlowingJarBlockEntity::new, Set.of(ModBlocks.GLOWING_JAR.get())));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<UmberGolemStatueBlockEntity>> UMBER_GOLEM_STATUE = BLOCK_ENTITIES.register("umber_golem_statue", () -> new BlockEntityType<>(UmberGolemStatueBlockEntity::new, Set.of(ModBlocks.UMBER_GOLEM_STATUE.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GaeanKeystoneBlockEntity>> GAEAN_KEYSTONE = BLOCK_ENTITIES.register("gaean_keystone", () -> new BlockEntityType<>(GaeanKeystoneBlockEntity::new, Set.of(ModBlocks.GAEAN_KEYSTONE.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HoneyCombBlockEntity>> HONEY_COMB = BLOCK_ENTITIES.register("honey_comb", () -> new BlockEntityType<>(HoneyCombBlockEntity::new, Set.of(ModBlocks.HONEY_COMB.get())));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LiquifierBlockEntity>> LIQUIFIER = BLOCK_ENTITIES.register("liquifier", () -> new BlockEntityType<>(LiquifierBlockEntity::new, Set.of(ModBlocks.LIQUIFIER.get())));
@@ -51,6 +53,11 @@ public class ModBlockEntities {
     )));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ErebusSpawnerBlockEntity>> SPAWNER = BLOCK_ENTITIES.register("spawner", () -> new BlockEntityType<>(ErebusSpawnerBlockEntity::new, Set.of(
-            ModBlocks.TARANTULA_SPAWNER.get()
+            ModBlocks.DRAGON_FLY_SPAWNER.get(),
+            ModBlocks.ANTLION_SPAWNER.get(), ModBlocks.MAGMA_CRAWLER_SPAWNER.get(),
+            ModBlocks.ZOMBIE_ANT_SPAWNER.get(), ModBlocks.ZOMBIE_ANT_SOLDIER_SPAWNER.get(),
+            ModBlocks.TARANTULA_SPAWNER.get(), ModBlocks.SPIDER_SPAWNER.get(),
+            ModBlocks.JUMPING_SPIDER_SPAWNER.get(), ModBlocks.LOCUST_SPAWNER.get(), ModBlocks.WASP_SPAWNER.get(),
+            ModBlocks.DUNG_SPAWNER_FLY.get(), ModBlocks.DUNG_SPAWNER_BOT_FLY.get()
     )));
 }

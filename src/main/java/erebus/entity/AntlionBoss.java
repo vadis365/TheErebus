@@ -1,10 +1,13 @@
 package erebus.entity;
 
+import erebus.block.TempleTeleporterBlock;
+import erebus.block.entity.TempleTeleporterBlockEntity;
 import erebus.client.particle.ClientParticles;
 import erebus.entity.ai.SandThrowAttackGoal;
 import erebus.registries.ModSounds;
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -13,15 +16,12 @@ import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Util;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -29,12 +29,18 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.neoforged.neoforge.event.EventHooks;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
@@ -42,6 +48,9 @@ import java.util.List;
 
 public class AntlionBoss extends Monster {
 
+    private static final EntityDataAccessor<BlockPos> SPAWN_ORIGIN = SynchedEntityData.defineId(AntlionBoss.class, EntityDataSerializers.BLOCK_POS);
+    private static final EntityDataAccessor<Byte> IN_PYRAMID = SynchedEntityData.defineId(AntlionBoss.class, EntityDataSerializers.BYTE);
+    private static final EntityDataAccessor<Byte> BLAM = SynchedEntityData.defineId(AntlionBoss.class, EntityDataSerializers.BYTE);
     private final ServerBossEvent bossEvent = Util.make(
             new ServerBossEvent(
                     Mth.createInsecureUUID(random),
@@ -49,19 +58,29 @@ public class AntlionBoss extends Monster {
                     ServerBossEvent.BossBarColor.PURPLE,
                     ServerBossEvent.BossBarOverlay.PROGRESS
             ),
-            e -> e.setDarkenScreen(true)
+            e -> e.setDarkenScreen(false)
     );
-
-    private static final EntityDataAccessor<BlockPos> SPAWN_ORIGIN = SynchedEntityData.defineId(AntlionBoss.class, EntityDataSerializers.BLOCK_POS);
-    private static final EntityDataAccessor<Byte> IN_PYRAMID = SynchedEntityData.defineId(AntlionBoss.class, EntityDataSerializers.BYTE);
-    private static final EntityDataAccessor<Byte> BLAM = SynchedEntityData.defineId(AntlionBoss.class, EntityDataSerializers.BYTE);
-
     private int blamCount;
     private int deathTicks;
+    private boolean hasSpawnOrigin;
 
     public AntlionBoss(EntityType<? extends AntlionBoss> type, Level level) {
         super(type, level);
         setHealth(getMaxHealth());
+        setPersistenceRequired();
+    }
+
+    public static AttributeSupplier.Builder createAttributes() {
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 400F)
+                .add(Attributes.MOVEMENT_SPEED, 0.5F)
+                .add(Attributes.ATTACK_DAMAGE, 6.0)
+                .add(Attributes.FOLLOW_RANGE, 36.0)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0).add(Attributes.STEP_HEIGHT, 1.0);
+    }
+
+    public int getDeathTicks() {
+        return deathTicks;
     }
 
     @Override
@@ -84,15 +103,6 @@ public class AntlionBoss extends Monster {
     public void setCustomName(@Nullable Component name) {
         super.setCustomName(name);
         bossEvent.setName(getDisplayName());
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 400F)
-                .add(Attributes.MOVEMENT_SPEED, 0.5F)
-                .add(Attributes.ATTACK_DAMAGE, 6.0)
-                .add(Attributes.FOLLOW_RANGE, 36.0)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0);
     }
 
     @Override
@@ -121,30 +131,19 @@ public class AntlionBoss extends Monster {
     public void tick() {
         super.tick();
 
-        if(blamCount <= 75) {
-            blamCount++;
-        }
-
-        if(blamCount == 5) {
-            setBlam(5, (byte) 3);
-        }
-
-        if(blamCount < 75 && blamCount > 10) {
-            if(getBlam() >= 1 && getBlam() <= 2) {
-                setBlam(blamCount, (byte) 2);
-            } else {
-                setBlam(blamCount, (byte) 1);
-                areaOfEffect();
+        if (isDeadOrDying()) return;
+        if (!level().isClientSide()) {
+            if (blamCount <= 75) blamCount++;
+            if (blamCount == 5 || blamCount == 75) setBlam(blamCount, (byte) 3);
+            if (blamCount > 10 && blamCount < 75 && (getBlam() == 1 || getBlam() == 2)) {
+                if (blamCount % 10 == 5) setBlam(blamCount, (byte) 2);
+                else if (blamCount % 10 == 0) {
+                    setBlam(blamCount, (byte) 1);
+                    areaOfEffect();
+                }
             }
         }
-
-        if(blamCount == 75) {
-            setBlam(75, (byte) 3);
-        }
-
-        if(getBlam() == 1) {
-            spawnRumbleParticles();
-        }
+        if (getBlam() == 1) spawnRumbleParticles();
 
         destroyBlocksInAABB(getBoundingBox());
     }
@@ -157,20 +156,26 @@ public class AntlionBoss extends Monster {
 
     @Override
     public boolean hurtServer(@NonNull ServerLevel level, DamageSource source, float damage) {
-        if(source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.DROWN) || !source.isDirect()) {
+        if (isDeadOrDying()) return false;
+        if (source.is(DamageTypes.IN_WALL) || source.is(DamageTypes.DROWN) || !source.isDirect()) {
             return false;
         }
         return super.hurtServer(level, source, damage);
     }
 
     public void spawnBlamParticles() {
-        if(level().isClientSide() && onGround()) {
-            ClientParticles.spawnParticles(ClientParticles.ParticleType.ANTLION_BLAM, getX(), getY(), getZ(), 0D, 0D, 0D);
-        }
+        if (level() instanceof ServerLevel server && onGround()) server.broadcastEntityEvent(this, (byte) 61);
+    }
+
+    @Override
+    public void handleEntityEvent(byte event) {
+        if (event == 61) {
+            if (level().isClientSide()) ClientParticles.spawnParticles(ClientParticles.ParticleType.ANTLION_BLAM, getX(), getY(), getZ(), 0, 0, 0);
+        } else super.handleEntityEvent(event);
     }
 
     public void spawnRumbleParticles() {
-        if(level().isClientSide()) {
+        if (level().isClientSide()) {
             ClientParticles.spawnParticles(ClientParticles.ParticleType.ANTLION_RUMBLE, getX(), getY(), getZ(), 0D, 0D, 0D);
         }
     }
@@ -184,12 +189,12 @@ public class AntlionBoss extends Monster {
         return entityData.get(BLAM);
     }
 
-    public void setInPyramid(byte state) {
-        entityData.set(IN_PYRAMID, state);
-    }
-
     public byte getInPyramid() {
         return entityData.get(IN_PYRAMID);
+    }
+
+    public void setInPyramid(byte state) {
+        entityData.set(IN_PYRAMID, state);
     }
 
     public BlockPos getSpawnOrigin() {
@@ -197,13 +202,15 @@ public class AntlionBoss extends Monster {
     }
 
     public void setSpawnOrigin(BlockPos pos) {
-        entityData.set(SPAWN_ORIGIN, pos);
+        entityData.set(SPAWN_ORIGIN, pos.immutable());
+        hasSpawnOrigin = true;
     }
 
     @Override
     protected void addAdditionalSaveData(@NonNull ValueOutput output) {
         super.addAdditionalSaveData(output);
-        output.store("spawnOrigin", BlockPos.CODEC, getSpawnOrigin());
+        if (hasSpawnOrigin) output.store("spawnOrigin", BlockPos.CODEC, getSpawnOrigin());
+        output.putInt("AntlionDeathTicks", deathTicks);
         output.putByte("inPyramid", getInPyramid());
     }
 
@@ -211,16 +218,87 @@ public class AntlionBoss extends Monster {
     protected void readAdditionalSaveData(@NonNull ValueInput input) {
         super.readAdditionalSaveData(input);
         setInPyramid(input.getByteOr("inPyramid", (byte) 0));
-        setSpawnOrigin(input.read("spawnOrigin", BlockPos.CODEC).orElse(BlockPos.ZERO));
+        hasSpawnOrigin = false;
+        input.read("spawnOrigin", BlockPos.CODEC).ifPresent(this::setSpawnOrigin);
+        deathTicks = Mth.clamp(input.getIntOr("AntlionDeathTicks", 0), 0, 200);
+        bossEvent.setName(getDisplayName());
+    }
+
+    @Override
+    public boolean removeWhenFarAway(double distance) {
+        return false;
+    }
+
+    @Override
+    public boolean causeFallDamage(double distance, float multiplier, DamageSource source) {
+        return false;
+    }
+
+    // The original extended death sequence pays XP in ten bursts and a final award.
+    @Override
+    protected void dropExperience(ServerLevel level, @Nullable Entity killer) {
+    }
+
+    @Override
+    protected void tickDeath() {
+        ++deathTicks;
+        move(MoverType.SELF, new Vec3(0, 0.310000000149011612, 0));
+        walkAnimation.setSpeed(0.5F);
+        yBodyRot += 0.03F;
+        if (deathTicks % 25 == 1) {
+            playSound(ModSounds.ANTLION_GROWL.get(), 1, random.nextFloat() * 0.1F + 0.9F);
+            playSound(ModSounds.ANTLION_GROWL.get(), 1, random.nextFloat() * 0.1F + 0.3F);
+            playSound(ModSounds.ANTLION_GROWL.get(), 1, random.nextFloat() * 0.1F + 0.1F);
+        }
+        spawnRumbleParticles();
+        if (!(level() instanceof ServerLevel server)) return;
+        if (deathTicks >= 180 && deathTicks <= 200) server.sendParticles(ParticleTypes.EXPLOSION,
+                getX() + (random.nextFloat() - 0.5F) * 8, getY() + 2 + (random.nextFloat() - 0.5F) * 4,
+                getZ() + (random.nextFloat() - 0.5F) * 8, 1, 0, 0, 0, 0);
+        if (deathTicks > 150 && deathTicks <= 200 && deathTicks % 5 == 0) awardDeathExperience(server, 1000);
+        if (deathTicks == 200) {
+            awardDeathExperience(server, 2000);
+            if (getInPyramid() == 1 && hasSpawnOrigin) createReturnTeleporters(server);
+            releaseTrophyEgg(server);
+            remove(RemovalReason.KILLED);
+            gameEvent(GameEvent.ENTITY_DIE);
+        }
+    }
+
+    private void awardDeathExperience(ServerLevel level, int amount) {
+        if (level.getGameRules().get(GameRules.MOB_DROPS) && !wasExperienceConsumed())
+            ExperienceOrb.award(level, position(), EventHooks.getExperienceDrop(this, getLastHurtByPlayer(), amount));
+    }
+
+    private void createReturnTeleporters(ServerLevel level) {
+        int[] phases = {7, 6, 9, 8};
+        for (int index = 0; index < 4; index++) {
+            var pos = getSpawnOrigin().offset(index % 2, 0, index / 2);
+            if (!level.isInWorldBounds(pos) || !level.getWorldBorder().isWithinBounds(pos) || !level.hasChunkAt(pos)) continue;
+            var existing = level.getBlockState(pos);
+            if (!(existing.isAir() || existing.is(Blocks.SAND) || existing.is(ModBlocks.GNEISS_VENT) || existing.is(ModBlocks.TEMPLE_TELEPORTER))) continue;
+            var portal = ModBlocks.TEMPLE_TELEPORTER.get().defaultBlockState().setValue(TempleTeleporterBlock.PHASE, phases[index]);
+            if (level.setBlock(pos, portal, 3) && level.getBlockEntity(pos) instanceof TempleTeleporterBlockEntity teleporter)
+                teleporter.setDestination(pos.above(12));
+        }
+    }
+
+    private void releaseTrophyEgg(ServerLevel level) {
+        for (var pos : BlockPos.withinManhattan(blockPosition(), 3, 3, 3)) {
+            if (!level.isInWorldBounds(pos) || !level.getWorldBorder().isWithinBounds(pos) || !level.hasChunkAt(pos)
+                    || !level.isEmptyBlock(pos) || !level.isUnobstructed(this, Shapes.block().move(pos.getX(), pos.getY(), pos.getZ()))) continue;
+            if (level.setBlock(pos, ModBlocks.ANTLION_EGG.get().defaultBlockState(), 3)) return;
+        }
+        drop(new ItemStack(ModBlocks.ANTLION_EGG.get()), true, false);
     }
 
     private void areaOfEffect() {
         List<Entity> entities = level().getEntities(this, getBoundingBox().inflate(16, 1, 16));
         for (Entity entity : entities) {
-            if (entity instanceof LivingEntity target) {
+            if (entity instanceof LivingEntity target && !(target instanceof AntlionBoss)) {
                 if (!level().isClientSide()) {
                     float knockback = (-3 + random.nextInt(4)) * 0.1F;
-                    doHurtTarget((ServerLevel) level(), target);
+                    target.hurtServer((ServerLevel) level(), damageSources().mobAttack(this), 2);
                     target.push(-Mth.sin(getYRot() * -Mth.PI + random.nextInt(3) + 0.141593F / 180.0F) * knockback, 0.01D, Mth.cos(getYRot() * -Mth.PI + random.nextInt(3) + 0.141593F / 180.0F) * knockback);
                 }
                 level().playSound(this, getOnPos(), ModSounds.ANTLION_SLAM.get(), SoundSource.HOSTILE);
@@ -229,8 +307,7 @@ public class AntlionBoss extends Monster {
     }
 
     private void destroyBlocksInAABB(AABB box) {
-        if (level().isClientSide())
-            return;
+        if (!(level() instanceof ServerLevel server) || !EventHooks.canEntityGrief(server, this)) return;
         int minX = Mth.floor(box.minX - 1);
         int minY = Mth.floor(box.minY - 0.2);
         int minZ = Mth.floor(box.minZ - 1);
@@ -242,11 +319,14 @@ public class AntlionBoss extends Monster {
             for (int y = minY; y <= maxY; ++y) {
                 for (int z = minZ; z <= maxZ; ++z) {
                     BlockPos pos = new BlockPos(x, y, z);
-                    Block block = level().getBlockState(pos).getBlock();
+                    if (!server.isInWorldBounds(pos) || !server.hasChunkAt(pos) || !server.getWorldBorder().isWithinBounds(pos)) continue;
+                    var state = server.getBlockState(pos);
+                    Block block = state.getBlock();
                     Block blockBelow = level().getBlockState(pos.below()).getBlock();
-                    if (block == Blocks.SAND && blockBelow != ModBlocks.TEMPLE_BRICK_UNBREAKING.get()) {
+                    if (block == Blocks.SAND && blockBelow != ModBlocks.TEMPLE_BRICK_UNBREAKING.get()
+                            && state.canEntityDestroy(server, pos, this) && EventHooks.onEntityDestroyBlock(this, pos, state)) {
                         level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-                        level().playSound(null, pos, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.HOSTILE);
+                        server.levelEvent(2001, pos, Block.getId(state));
                     }
                 }
             }

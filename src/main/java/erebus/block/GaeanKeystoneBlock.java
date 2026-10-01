@@ -6,6 +6,7 @@ import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import erebus.utils.AdvancedBlockPos;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -63,23 +64,27 @@ public class GaeanKeystoneBlock extends BaseEntityBlock {
 
     @Override
     protected @NotNull InteractionResult useItemOn(@NotNull ItemStack stack, BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
+        if (level.isClientSide()) {
+            return state.getValue(ACTIVE) || stack.is(ModItems.PORTAL_ACTIVATOR)
+                    ? InteractionResult.SUCCESS : InteractionResult.PASS;
+        }
         if (state.getValue(ACTIVE)) {
             if (!stack.isEmpty()) {
                 return InteractionResult.SUCCESS;
             }
             breakPortal(level, pos);
             level.setBlock(pos, state.setValue(ACTIVE, false), 3);
-            player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModItems.PORTAL_ACTIVATOR.get()));
+            player.setItemInHand(hand, new ItemStack(ModItems.PORTAL_ACTIVATOR.get()));
             return InteractionResult.SUCCESS;
         }
 
         if (stack.isEmpty() || stack.getItem() != ModItems.PORTAL_ACTIVATOR.asItem()) {
-            return InteractionResult.FAIL;
+            return InteractionResult.PASS;
         }
 
         if (makePortal(level, pos)) {
             level.setBlock(pos, state.setValue(ACTIVE, true), 3);
-            player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+            player.setItemInHand(hand, ItemStack.EMPTY);
         } else {
             level.setBlock(pos, state.setValue(ACTIVE, false), 3);
         }
@@ -118,6 +123,15 @@ public class GaeanKeystoneBlock extends BaseEntityBlock {
         });
     }
 
+    @Override
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
+        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+        if (state.getValue(ACTIVE)) {
+            breakPortal(level, pos);
+            Block.popResource(level, pos, new ItemStack(ModItems.PORTAL_ACTIVATOR.get()));
+        }
+    }
+
     private boolean makePortal(Level level, BlockPos pos) {
         AdvancedBlockPos keystone = new AdvancedBlockPos(level, pos);
         AdvancedBlockPos min = keystone.add(-LEAF_SEARCH, -LEAF_SEARCH, -LEAF_SEARCH);
@@ -146,8 +160,12 @@ public class GaeanKeystoneBlock extends BaseEntityBlock {
             return false;
         }
 
+        // Install the complete plane before notifying neighbors, as in the original leaf conversion.
         for (AdvancedBlockPos at : contig) {
-            level.setBlockAndUpdate(at, ModBlocks.PORTAL.get().defaultBlockState());
+            level.setBlock(at, ModBlocks.PORTAL.get().defaultBlockState(), Block.UPDATE_CLIENTS);
+        }
+        for (AdvancedBlockPos at : contig) {
+            level.updateNeighborsAt(at, ModBlocks.PORTAL.get());
         }
         return true;
     }

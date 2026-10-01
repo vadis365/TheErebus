@@ -8,6 +8,7 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class MagmaCrawlerModel extends EntityModel<MagmaCrawlerRenderState> {
 
@@ -58,5 +59,18 @@ public class MagmaCrawlerModel extends EntityModel<MagmaCrawlerRenderState> {
         RBLA.addOrReplaceChild("RBLD", CubeListBuilder.create().texOffs(0, 76).addBox(-1.5F, 8.0F, -0.5F, 1, 4, 1), PartPose.rotation(0.39F, 0.0F, 0.77F));
 
         return LayerDefinition.create(mesh, 64, 128);
+    }
+
+    @Override
+    public void setupAnim(MagmaCrawlerRenderState state) {
+        super.setupAnim(state);
+        float first = Mth.cos(state.walkAnimationPos * 1.5F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed;
+        float second = Mth.cos(state.walkAnimationPos * 1.5F) * 0.7F * state.walkAnimationSpeed;
+        root.getChild("LBLA").xRot += first;
+        root.getChild("LMLA").xRot += second;
+        root.getChild("LFLA").xRot += first;
+        root.getChild("RBLA").xRot += second;
+        root.getChild("RMLA").xRot += first;
+        root.getChild("RFLA").xRot += second;
     }
 }

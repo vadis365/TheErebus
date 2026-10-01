@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/altar_lightning_special",
+  "parent": "minecraft:block/block",
   "textures": {
-    "particle": "erebus:block/altar_lightning"
+    "particle": "erebus:block/altar_base"
   }
 }

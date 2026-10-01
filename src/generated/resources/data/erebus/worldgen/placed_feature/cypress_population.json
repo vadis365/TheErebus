@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:cypress_population",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

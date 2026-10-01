@@ -32,6 +32,12 @@ public class Woodlouse extends Animal {
         super(type, level);
     }
 
+    public static AttributeSupplier.Builder createAttributes() {
+        return Monster.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, 15F)
+                .add(Attributes.MOVEMENT_SPEED, 0.6F);
+    }
+
     @Override
     protected void registerGoals() {
         super.registerGoals();
@@ -41,12 +47,6 @@ public class Woodlouse extends Animal {
         goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.6D));
         goalSelector.addGoal(4, new PanicGoal(this, 0.6D));
         goalSelector.addGoal(5, new RandomLookAroundGoal(this));
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 15F)
-                .add(Attributes.MOVEMENT_SPEED, 0.6F);
     }
 
     @Override
@@ -66,10 +66,10 @@ public class Woodlouse extends Animal {
 
     @Override
     public @NonNull InteractionResult interact(Player player, @NonNull InteractionHand hand, @NonNull Vec3 location) {
-        if(player.getUseItem().isEmpty()) {
-            if(!level().isClientSide()) {
-                kill((ServerLevel) level());
+        if (isAlive() && !isRemoved() && player.getItemInHand(hand).isEmpty()) {
+            if (!level().isClientSide()) {
                 drop(new ItemStack(ModItems.WOODLOUSE_BALL.get()), false, false);
+                discard();
             }
             return InteractionResult.SUCCESS;
         }

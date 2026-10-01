@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "C": "minecraft:compass",
-    "G": "minecraft:gold_ingot",
+    "G": "#c:ingots/gold",
     "N": "erebus:nectar"
   },
   "pattern": [

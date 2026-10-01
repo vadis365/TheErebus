@@ -8,6 +8,7 @@ import erebus.client.render.entity.renderer.state.MosquitoRenderState;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
@@ -23,6 +24,7 @@ public class MosquitoWingsLayer extends RenderLayer<MosquitoRenderState, Mosquit
 
     @Override
     public void submit(@NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, int lightCoords, MosquitoRenderState state, float xRot, float yRot) {
-        submit.submitModel(model, state, pose, getParentModel().renderType(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+        if (state.isInvisible) return;
+        submit.submitModel(model, state, pose, RenderTypes.entityTranslucent(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, 0xBFFFFFFF, null, state.outlineColor, null);
     }
 }

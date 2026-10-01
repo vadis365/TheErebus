@@ -8,7 +8,12 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle"
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "erebus:beetle"
+                }
+              }
             }
           }
         ]
@@ -22,7 +27,12 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:bombardier_beetle"
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "erebus:bombardier_beetle"
+                }
+              }
             }
           }
         ]
@@ -36,7 +46,12 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:bombardier_beetle_larva"
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "erebus:bombardier_beetle_larva"
+                }
+              }
             }
           }
         ]
@@ -50,7 +65,12 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "erebus:beetle_larva"
+                }
+              }
             }
           }
         ]
@@ -64,7 +84,12 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle"
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "erebus:rhino_beetle"
+                }
+              }
             }
           }
         ]
@@ -78,7 +103,12 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle"
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "erebus:stag_beetle"
+                }
+              }
             }
           }
         ]
@@ -92,7 +122,12 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle"
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "erebus:titan_beetle"
+                }
+              }
             }
           }
         ]

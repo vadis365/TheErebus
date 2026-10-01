@@ -32,7 +32,8 @@ public abstract class ModEntityLootSubProvider extends EntityLootSubProvider {
 
     /**
      * Creates a standard loot pool with a single item
-     * @param item The item to drop
+     *
+     * @param item       The item to drop
      * @param countRange The range of items to drop (min, max)
      * @return A LootPool builder
      */
@@ -44,7 +45,8 @@ public abstract class ModEntityLootSubProvider extends EntityLootSubProvider {
 
     /**
      * Creates a LootItem builder with count and looting multiplier
-     * @param item The item to drop
+     *
+     * @param item       The item to drop
      * @param countRange The range of items to drop (min, max)
      * @return A LootItem builder
      */
@@ -56,9 +58,10 @@ public abstract class ModEntityLootSubProvider extends EntityLootSubProvider {
 
     /**
      * Adds multiple items to a loot pool with the same count and looting multiplier
-     * @param builder The pool builder
+     *
+     * @param builder    The pool builder
      * @param countRange The range of items to drop (min, max)
-     * @param items The items to add
+     * @param items      The items to add
      * @return The pool builder
      */
     protected LootPool.Builder addItemsToPool(LootPool.Builder builder, NumberProvider countRange, ItemLike... items) {
@@ -70,9 +73,10 @@ public abstract class ModEntityLootSubProvider extends EntityLootSubProvider {
 
     /**
      * Creates a standard loot pool with a single item and a chance condition
-     * @param item The item to drop
+     *
+     * @param item       The item to drop
      * @param countRange The range of items to drop (min, max)
-     * @param chance The chance of dropping (0.0-1.0)
+     * @param chance     The chance of dropping (0.0-1.0)
      * @return A LootPool builder
      */
     protected LootPool.Builder createChancePool(ItemLike item, NumberProvider countRange, float chance) {
@@ -82,7 +86,8 @@ public abstract class ModEntityLootSubProvider extends EntityLootSubProvider {
 
     /**
      * Creates a standard loot pool with a single item that requires player kill
-     * @param item The item to drop
+     *
+     * @param item       The item to drop
      * @param countRange The range of items to drop (min, max)
      * @return A LootPool builder
      */
@@ -93,9 +98,10 @@ public abstract class ModEntityLootSubProvider extends EntityLootSubProvider {
 
     /**
      * Creates a standard loot pool with a single item that requires player kill and has a chance
-     * @param item The item to drop
+     *
+     * @param item       The item to drop
      * @param countRange The range of items to drop (min, max)
-     * @param chance The chance of dropping (0.0-1.0)
+     * @param chance     The chance of dropping (0.0-1.0)
      * @return A LootPool builder
      */
     protected LootPool.Builder createPlayerKillChancePool(ItemLike item, NumberProvider countRange, float chance) {
@@ -105,7 +111,8 @@ public abstract class ModEntityLootSubProvider extends EntityLootSubProvider {
 
     /**
      * Creates a standard loot table with a single pool
-     * @param item The item to drop
+     *
+     * @param item       The item to drop
      * @param countRange The range of items to drop (min, max)
      * @return A LootTable builder
      */
@@ -116,6 +123,7 @@ public abstract class ModEntityLootSubProvider extends EntityLootSubProvider {
 
     /**
      * Creates a standard loot table with multiple pools
+     *
      * @param pools The loot pools to add
      * @return A LootTable builder
      */
@@ -129,7 +137,8 @@ public abstract class ModEntityLootSubProvider extends EntityLootSubProvider {
 
     /**
      * Creates a food item loot pool that can be cooked if the entity is on fire
-     * @param rawItem The raw food item
+     *
+     * @param rawItem    The raw food item
      * @param countRange The range of items to drop (min, max)
      * @return A LootPool builder
      */
@@ -138,8 +147,7 @@ public abstract class ModEntityLootSubProvider extends EntityLootSubProvider {
                 .setRolls(ConstantValue.exactly(1))
                 .add(LootItem.lootTableItem(rawItem)
                         .apply(SetItemCountFunction.setCount(countRange))
-                        .apply(SmeltItemFunction.smelted().when(shouldSmeltLoot()))
-                        .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0, 1))));
+                        .apply(SmeltItemFunction.smelted().when(shouldSmeltLoot())));
     }
 
     public <T extends Entity> void noLoot(DeferredHolder<EntityType<?>, EntityType<T>> type) {

@@ -23,47 +23,47 @@ import org.jspecify.annotations.NonNull;
 
 public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBlockRenderState, AnimatedBlockModel> {
 
-	private final ItemModelResolver itemModelResolver;
+    private final ItemModelResolver itemModelResolver;
 
     public AnimatedBlockRenderer(Context context) {
         super(context, new AnimatedBlockModel(context.bakeLayer(ModEntityRendering.ANIMATED_BLOCK)), 0.75F);
-		itemModelResolver = context.getItemModelResolver();
-		model = new AnimatedBlockModel(context.bakeLayer(ModEntityRendering.ANIMATED_BLOCK));
+        itemModelResolver = context.getItemModelResolver();
+        model = new AnimatedBlockModel(context.bakeLayer(ModEntityRendering.ANIMATED_BLOCK));
     }
 
-	@Override
-	public void extractRenderState(@NonNull AnimatedBlock entity, @NonNull AnimatedBlockRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-		state.blockState = entity.getBlockType();
-		state.sprite = Minecraft.getInstance().getModelManager().getBlockStateModelSet().getParticleMaterial(entity.getBlockType()).sprite();
-		itemModelResolver.updateForTopItem(state.itemStackRenderState, new ItemStack(entity.getBlockType().getBlock()), ItemDisplayContext.FIXED, entity.level(), null, 0);
-	}
+    @Override
+    public void extractRenderState(@NonNull AnimatedBlock entity, @NonNull AnimatedBlockRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+        state.blockState = entity.getBlockType();
+        state.sprite = Minecraft.getInstance().getModelManager().getBlockStateModelSet().getParticleMaterial(entity.getBlockType()).sprite();
+        itemModelResolver.updateForTopItem(state.itemStackRenderState, new ItemStack(entity.getBlockType().getBlock()), ItemDisplayContext.FIXED, entity.level(), null, 0);
+    }
 
-	@Override
-	public @NonNull AnimatedBlockRenderState createRenderState() {
-		return new AnimatedBlockRenderState();
-	}
+    @Override
+    public @NonNull AnimatedBlockRenderState createRenderState() {
+        return new AnimatedBlockRenderState();
+    }
 
-	@Override
-	public void submit(AnimatedBlockRenderState state, @NonNull PoseStack pose, @NonNull SubmitNodeCollector node, @NonNull CameraRenderState camera) {
-		pose.pushPose();
-		pose.translate(0F, 0.8F, 0F);
-		pose.mulPose(Axis.YN.rotationDegrees(state.bodyRot));
-		pose.scale(2F, 2F, 2F);
-		state.itemStackRenderState.submit(pose, node, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
-		pose.popPose();
+    @Override
+    public void submit(AnimatedBlockRenderState state, @NonNull PoseStack pose, @NonNull SubmitNodeCollector node, @NonNull CameraRenderState camera) {
+        pose.pushPose();
+        pose.translate(0F, 0.8F, 0F);
+        pose.mulPose(Axis.YN.rotationDegrees(state.bodyRot));
+        pose.scale(2F, 2F, 2F);
+        state.itemStackRenderState.submit(pose, node, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+        pose.popPose();
 
-		RenderType rt = RenderTypes.entityCutout(getTextureLocation(state));
-		model.setupAnim(state);
-		pose.pushPose();
-		pose.scale(-1.0F, -1.0F, 1.0F);
-		pose.translate(0.0F, -1.501F, 0.0F);
-		node.submitModelPart(model.root, pose, rt, state.lightCoords, OverlayTexture.NO_OVERLAY, state.sprite, false, false, -1, null, state.outlineColor);
-		pose.popPose();
-	}
+        RenderType rt = RenderTypes.entityCutout(getTextureLocation(state));
+        model.setupAnim(state);
+        pose.pushPose();
+        pose.scale(-1.0F, -1.0F, 1.0F);
+        pose.translate(0.0F, -1.501F, 0.0F);
+        node.submitModelPart(model.root, pose, rt, state.lightCoords, OverlayTexture.NO_OVERLAY, state.sprite, false, false, -1, null, state.outlineColor);
+        pose.popPose();
+    }
 
-	@Override
-	public @NonNull Identifier getTextureLocation(@NonNull AnimatedBlockRenderState state) {
-		return Sheets.BLOCKS_MAPPER.sheet();
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(@NonNull AnimatedBlockRenderState state) {
+        return Sheets.BLOCKS_MAPPER.sheet();
+    }
 }

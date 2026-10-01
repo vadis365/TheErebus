@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:elysian_forest_population",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

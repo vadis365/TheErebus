@@ -2,11 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "M": "erebus:plate_exo_rhino"
+    "H": "erebus:rhino_beetle_horn",
+    "P": "erebus:plate_exo_rhino"
   },
   "pattern": [
-    "MMM",
-    "M M"
+    "H H",
+    "PPP",
+    "P P"
   ],
   "result": {
     "id": "erebus:rhino_exoskeleton_helmet"

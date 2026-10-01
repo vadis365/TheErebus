@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_dye",
+  "category": "misc",
+  "dye": "#minecraft:dyes",
+  "result": {
+    "id": "erebus:glider_chestplate_powered"
+  },
+  "target": "erebus:glider_chestplate_powered"
+}

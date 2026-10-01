@@ -35,7 +35,7 @@ public class ErebusSpawnerBlockEntity extends BlockEntity implements Spawner {
         @Override
         protected void setNextSpawnData(@Nullable Level level, @NonNull BlockPos pos, @NonNull SpawnData nextSpawnData) {
             super.setNextSpawnData(level, pos, nextSpawnData);
-            if(level != null) {
+            if (level != null) {
                 BlockState state = level.getBlockState(pos);
                 level.sendBlockUpdated(pos, state, state, Block.UPDATE_NONE);
             }
@@ -51,6 +51,14 @@ public class ErebusSpawnerBlockEntity extends BlockEntity implements Spawner {
         super(ModBlockEntities.SPAWNER.get(), pos, state);
     }
 
+    public static void clientTick(Level level, BlockPos pos, ErebusSpawnerBlockEntity entity) {
+        entity.spawner.clientTick(level, pos);
+    }
+
+    public static void serverTick(Level level, BlockPos pos, ErebusSpawnerBlockEntity entity) {
+        entity.spawner.serverTick((ServerLevel) level, pos);
+    }
+
     @Override
     protected void loadAdditional(@NonNull ValueInput input) {
         super.loadAdditional(input);
@@ -61,14 +69,6 @@ public class ErebusSpawnerBlockEntity extends BlockEntity implements Spawner {
     protected void saveAdditional(@NonNull ValueOutput output) {
         super.saveAdditional(output);
         spawner.save(output);
-    }
-
-    public static void clientTick(Level level, BlockPos pos, ErebusSpawnerBlockEntity entity) {
-        entity.spawner.clientTick(level, pos);
-    }
-
-    public static void serverTick(Level level, BlockPos pos, ErebusSpawnerBlockEntity entity) {
-        entity.spawner.serverTick((ServerLevel) level, pos);
     }
 
     @Override

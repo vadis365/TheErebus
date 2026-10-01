@@ -22,9 +22,9 @@ public abstract class ErebusOpenersCounter extends ContainerOpenersCounter {
     @Override
     public void incrementOpeners(@NonNull LivingEntity player, @NonNull Level level, @NonNull BlockPos pos, @NonNull BlockState state, double maxInteractionRange) {
         int count = openCount++;
-        if(count == 0) {
+        if (count == 0) {
             onOpen(level, pos, state);
-            if(isForPhysicalBlock) {
+            if (isForPhysicalBlock) {
                 level.gameEvent(player, GameEvent.CONTAINER_OPEN, pos);
                 scheduleRecheck(level, pos, state);
             }
@@ -40,24 +40,24 @@ public abstract class ErebusOpenersCounter extends ContainerOpenersCounter {
         maxInteractionRange = 0.0;
 
         ContainerUser user;
-        for(Iterator<ContainerUser> users = list.iterator(); users.hasNext(); maxInteractionRange = Math.max(user.getContainerInteractionRange(), maxInteractionRange)) {
+        for (Iterator<ContainerUser> users = list.iterator(); users.hasNext(); maxInteractionRange = Math.max(user.getContainerInteractionRange(), maxInteractionRange)) {
             user = users.next();
         }
 
         int playersInteracting = list.size();
         int count = openCount;
 
-        if(playersInteracting != count) {
+        if (playersInteracting != count) {
             boolean hasPlayersInteracting = playersInteracting != 0;
             boolean hasCount = count != 0;
 
-            if(hasPlayersInteracting && !hasCount) {
+            if (hasPlayersInteracting && !hasCount) {
                 onOpen(level, pos, state);
-                if(isForPhysicalBlock)
+                if (isForPhysicalBlock)
                     level.gameEvent(null, GameEvent.CONTAINER_OPEN, pos);
-            } else if(!hasPlayersInteracting) {
+            } else if (!hasPlayersInteracting) {
                 onClose(level, pos, state);
-                if(isForPhysicalBlock)
+                if (isForPhysicalBlock)
                     level.gameEvent(null, GameEvent.CONTAINER_CLOSE, pos);
             }
 
@@ -66,7 +66,7 @@ public abstract class ErebusOpenersCounter extends ContainerOpenersCounter {
 
         openerCountChanged(level, pos, state, playersInteracting, count);
 
-        if(isForPhysicalBlock && count > 0)
+        if (isForPhysicalBlock && count > 0)
             scheduleRecheck(level, pos, state);
     }
 }

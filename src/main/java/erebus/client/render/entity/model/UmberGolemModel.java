@@ -8,9 +8,9 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class UmberGolemModel extends EntityModel<UmberGolemRenderState> {
-    public ModelPart root;
     private final ModelPart HeadTop, HeadMain, HeadFront, HeadBottom, EyeR, EyeL;
     private final ModelPart MandibleR1, MandibleR2, MandibleL1, MandibleL2, Neck;
     private final ModelPart BodyTop, BodyMid, BodyMain, BodyBack;
@@ -18,6 +18,7 @@ public class UmberGolemModel extends EntityModel<UmberGolemRenderState> {
     private final ModelPart ArmL1, ArmL2, ArmL3, PincerL1, PincerLOuter, PincerLInner;
     private final ModelPart LegR1, LegR2, FootR, FootRFront, ToeROuter1, ToeROuter2, ToeRInner1, ToeRInner2, FootRBack, ToeRBack1, ToeRBack2;
     private final ModelPart LegL1, LegL2, FootL, FootLFront, ToeLOuter1, ToeLOuter2, ToeLInner1, ToeLInner2, FootLBack, ToeLBack1, ToeLBack2;
+    public ModelPart root;
 
     public UmberGolemModel(ModelPart root) {
         super(root);
@@ -139,5 +140,45 @@ public class UmberGolemModel extends EntityModel<UmberGolemRenderState> {
         FootL.addOrReplaceChild("ToeLBack2", CubeListBuilder.create().texOffs(0, 124).addBox(-0.5F, 9.2F, -1.5F, 1, 2, 1), PartPose.rotation(-0.3490659F, 3.141593F, 0F));
 
         return LayerDefinition.create(mesh, 64, 128);
+    }
+
+    @Override
+    public void setupAnim(UmberGolemRenderState state) {
+        super.setupAnim(state);
+        float movcos1 = Mth.cos(state.walkAnimationPos * 0.7F) * 0.3F * state.walkAnimationSpeed;
+        float movsin1 = Mth.sin(state.walkAnimationPos * 0.7F) * 1.2F * state.walkAnimationSpeed;
+        float x = 0.2617994F;
+        float lx = 1.047198F;
+        float ex = 0.6981317F;
+        HeadMain.yRot = state.yRot / (180F / (float) Math.PI);
+        HeadTop.yRot = state.yRot / (180F / (float) Math.PI);
+        HeadFront.yRot = state.yRot / (180F / (float) Math.PI);
+        HeadBottom.yRot = state.yRot / (180F / (float) Math.PI);
+        EyeR.yRot = state.yRot / (180F / (float) Math.PI);
+        EyeL.yRot = state.yRot / (180F / (float) Math.PI);
+        MandibleR1.yRot = state.yRot / (180F / (float) Math.PI);
+        MandibleR2.yRot = state.yRot / (180F / (float) Math.PI);
+        MandibleL1.yRot = state.yRot / (180F / (float) Math.PI);
+        MandibleL2.yRot = state.yRot / (180F / (float) Math.PI);
+        HeadMain.xRot = state.xRot / (180F / (float) Math.PI);
+        HeadTop.xRot = state.xRot / (180F / (float) Math.PI);
+        HeadFront.xRot = state.xRot / (180F / (float) Math.PI);
+        HeadBottom.xRot = state.xRot / (180F / (float) Math.PI);
+        EyeR.xRot = state.xRot / (180F / (float) Math.PI) + ex;
+        EyeL.xRot = state.xRot / (180F / (float) Math.PI) + ex;
+        MandibleR1.xRot = state.xRot / (180F / (float) Math.PI) + x;
+        MandibleR2.xRot = state.xRot / (180F / (float) Math.PI) + x;
+        MandibleL1.xRot = state.xRot / (180F / (float) Math.PI) + x;
+        MandibleL2.xRot = state.xRot / (180F / (float) Math.PI) + x;
+        ArmR1.zRot = -movcos1;
+        ArmL1.zRot = -movcos1;
+        ArmR1.xRot = -x + movsin1;
+        ArmL1.xRot = -x - movsin1;
+        LegR1.xRot = -lx - movsin1;
+        LegL1.xRot = -lx + movsin1;
+        LegR2.xRot = 0.5235988F + lx;
+        LegL2.xRot = 0.5235988F + lx;
+        FootR.xRot = -movsin1;
+        FootL.xRot = +movsin1;
     }
 }

@@ -3,6 +3,7 @@ package erebus.world.feature.plant.config;
 import erebus.block.plants.ModBerryBushBlock;
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -37,21 +38,20 @@ public class SwampBushFeatureConfiguration extends Feature<NoneFeatureConfigurat
             angle = (float) (random.nextDouble() * Math.PI * 2.0D);
             length = random.nextFloat() * (0.3F + random.nextFloat() * 0.7F) * 7.0F;
 
-            int x = (int) (0.5F + Math.cos(angle) * length);
-            int y = random.nextInt(3) - random.nextInt(3);
-            int z = (int) (0.5F + Math.sin(angle) * length);
-            BlockPos check = pos.offset(x, y, z);
+            int x = (int) (pos.getX() + 0.5F + Mth.cos(angle) * length);
+            int y = pos.getY() + random.nextInt(3) - random.nextInt(3);
+            int z = (int) (pos.getZ() + 0.5F + Mth.sin(angle) * length);
+            BlockPos check = new BlockPos(x, y, z);
+            if (level.isOutsideBuildHeight(check) || level.isOutsideBuildHeight(check.below())) continue;
 
             if (level.isEmptyBlock(check) && level.getBlockState(check.below()).is(ModBlocks.UMBERSTONE)) {
                 setBlock(level, check.below(), Blocks.DIRT.defaultBlockState());
-                setBlock(level, check, bushes[randomBush]);
-                placed++;
+                if (level.setBlock(check, bushes[2], 2)) placed++;
             } else if (level.isEmptyBlock(check) && level.getBlockState(check.below()).is(Blocks.GRASS_BLOCK)) {
-                setBlock(level, check, bushes[randomBush]);
-                placed++;
+                if (level.setBlock(check, bushes[randomBush], 2)) placed++;
             }
         }
 
-        return true;
+        return placed > 0;
     }
 }

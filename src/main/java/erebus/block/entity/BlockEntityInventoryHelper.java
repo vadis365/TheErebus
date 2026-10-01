@@ -19,44 +19,44 @@ import javax.annotation.Nullable;
 
 public abstract class BlockEntityInventoryHelper extends BlockEntity implements WorldlyContainer {
 
-	private final NonNullList<ItemStack> inventory;
+    private final NonNullList<ItemStack> inventory;
 
-	public BlockEntityInventoryHelper(BlockEntityType<?> tileEntityTypeIn, int invSize, BlockPos pos, BlockState state) {
-		super(tileEntityTypeIn, pos, state);
-		inventory = NonNullList.withSize(invSize, ItemStack.EMPTY);
-	}
+    public BlockEntityInventoryHelper(BlockEntityType<?> tileEntityTypeIn, int invSize, BlockPos pos, BlockState state) {
+        super(tileEntityTypeIn, pos, state);
+        inventory = NonNullList.withSize(invSize, ItemStack.EMPTY);
+    }
 
-	@Override
-	public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
-		int[] SLOTS = new int[getContainerSize()];
-		for (int index = 0; index < SLOTS.length; index++)
-			SLOTS[index] = index;
-		return SLOTS;
-	}
+    @Override
+    public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
+        int[] SLOTS = new int[getContainerSize()];
+        for (int index = 0; index < SLOTS.length; index++)
+            SLOTS[index] = index;
+        return SLOTS;
+    }
 
-	@Override
-	public int getContainerSize() {
-		return inventory.size();
-	}
+    @Override
+    public int getContainerSize() {
+        return inventory.size();
+    }
 
-	@Override
-	public @NotNull ItemStack getItem(int slot) {
-		return inventory.get(slot);
-	}
+    @Override
+    public @NotNull ItemStack getItem(int slot) {
+        return inventory.get(slot);
+    }
 
     public NonNullList<ItemStack> getItems() {
         return inventory;
     }
 
-	@Override
+    @Override
     public @NotNull ItemStack removeItem(int index, int count) {
-		ItemStack itemstack = ContainerHelper.removeItem(inventory, index, count);
-		if (!itemstack.isEmpty())
-			this.setChanged();
-		return itemstack;
-	}
+        ItemStack itemstack = ContainerHelper.removeItem(inventory, index, count);
+        if (!itemstack.isEmpty())
+            this.setChanged();
+        return itemstack;
+    }
 
-	@Override
+    @Override
     public void setItem(int index, @Nullable ItemStack stack) {
         inventory.set(index, stack);
         if (stack.getCount() > this.getMaxStackSize())
@@ -64,45 +64,47 @@ public abstract class BlockEntityInventoryHelper extends BlockEntity implements 
         this.setChanged();
     }
 
-	@Override
-	public int getMaxStackSize() {
-		return 64;
-	}
+    @Override
+    public int getMaxStackSize() {
+        return 64;
+    }
 
-	@Override
-	public boolean stillValid(@NotNull Player player) {
-		return true;
-	}
+    @Override
+    public boolean stillValid(@NotNull Player player) {
+        return true;
+    }
 
-	@Override
-	public boolean isEmpty() {
-		for (ItemStack itemstack : inventory) {
-			if (!itemstack.isEmpty()) {
-				return false;
-			}
-		}
+    @Override
+    public boolean isEmpty() {
+        for (ItemStack itemstack : inventory) {
+            if (!itemstack.isEmpty()) {
+                return false;
+            }
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	protected void saveAdditional(@NonNull ValueOutput output) {
-		super.saveAdditional(output);
-		ContainerHelper.saveAllItems(output, inventory, false);
-	}
+    @Override
+    protected void saveAdditional(@NonNull ValueOutput output) {
+        super.saveAdditional(output);
+        ContainerHelper.saveAllItems(output, inventory, false);
+    }
 
-	@Override
-	protected void loadAdditional(@NonNull ValueInput input) {
-		super.loadAdditional(input);
-		ContainerHelper.loadAllItems(input, inventory);
-	}
+    @Override
+    protected void loadAdditional(@NonNull ValueInput input) {
+        super.loadAdditional(input);
+        // Saved inventories omit empty slots; a reload replaces the previous contents.
+        inventory.clear();
+        ContainerHelper.loadAllItems(input, inventory);
+    }
 
-	@Override
-	public void clearContent() {
-		inventory.clear();
-	}
+    @Override
+    public void clearContent() {
+        inventory.clear();
+    }
 
-	public boolean canInsertItem() {
-		return false;
-	}
+    public boolean canInsertItem() {
+        return false;
+    }
 }

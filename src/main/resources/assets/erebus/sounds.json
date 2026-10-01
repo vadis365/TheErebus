@@ -1,4 +1,14 @@
 {
+    "fire_ant_sound": {
+        "sounds": [
+            "erebus:fire_ant_sound"
+        ]
+    },
+    "fire_ant_hurt": {
+        "sounds": [
+            "erebus:fire_ant_hurt"
+        ]
+    },
     "altar_change_state": {
         "category": "block",
         "sounds": [
@@ -354,6 +364,22 @@
                 "name": "erebus:music/ambient_bug_in_the_system",
                 "stream": true
             },
+            {
+                "name": "erebus:music/ambient_feint_sleepless",
+                "stream": true
+            }
+        ]
+    },
+    "music/ambient_bug_in_the_system": {
+        "sounds": [
+            {
+                "name": "erebus:music/ambient_bug_in_the_system",
+                "stream": true
+            }
+        ]
+    },
+    "music/ambient_feint_sleepless": {
+        "sounds": [
             {
                 "name": "erebus:music/ambient_feint_sleepless",
                 "stream": true

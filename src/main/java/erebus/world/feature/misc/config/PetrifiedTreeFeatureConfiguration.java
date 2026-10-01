@@ -3,7 +3,8 @@ package erebus.world.feature.misc.config;
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -17,13 +18,13 @@ import java.util.function.Supplier;
 
 public class PetrifiedTreeFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
 
-    private final int height;
+    private final IntProvider height;
     private final int baseRadius;
-    protected Supplier<? extends Block> bark;
-    protected Supplier<? extends Block> core;
-    protected Supplier<? extends Block> ore;
+    private final Supplier<? extends Block> bark;
+    private final Supplier<? extends Block> core;
+    private final Supplier<? extends Block> ore;
 
-    public PetrifiedTreeFeatureConfiguration(int height, int baseRadius, Supplier<? extends Block> bark, Supplier<? extends Block> fillerBlock, Supplier<? extends Block> ore) {
+    public PetrifiedTreeFeatureConfiguration(IntProvider height, int baseRadius, Supplier<? extends Block> bark, Supplier<? extends Block> fillerBlock, Supplier<? extends Block> ore) {
         super(NoneFeatureConfiguration.CODEC);
         this.height = height;
         this.baseRadius = baseRadius;
@@ -32,7 +33,7 @@ public class PetrifiedTreeFeatureConfiguration extends Feature<NoneFeatureConfig
         this.ore = ore;
     }
 
-    public PetrifiedTreeFeatureConfiguration(int height, int baseRadius, Supplier<? extends Block> bark) {
+    public PetrifiedTreeFeatureConfiguration(IntProvider height, int baseRadius, Supplier<? extends Block> bark) {
         super(NoneFeatureConfiguration.CODEC);
         this.height = height;
         this.baseRadius = baseRadius;
@@ -41,31 +42,48 @@ public class PetrifiedTreeFeatureConfiguration extends Feature<NoneFeatureConfig
         this.ore = bark;
     }
 
+    private static boolean canReplaceRoot(BlockState state) {
+        if (state.hasBlockEntity()) return false;
+        boolean soil = state.is(BlockTags.DIRT) || state.is(BlockTags.GRASS_BLOCKS)
+                || state.is(BlockTags.MUD) || state.is(BlockTags.MOSS_BLOCKS)
+                || state.is(Blocks.PODZOL) || state.is(Blocks.MYCELIUM) || state.is(Blocks.FARMLAND);
+        boolean vegetation = state.is(BlockTags.REPLACEABLE_BY_TREES) && !state.liquid();
+        return state.isAir() || state.is(ModBlocks.DUST) || soil || vegetation;
+    }
+
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
-        WorldGenLevel level = context.level();
-        BlockPos pos = context.origin();
-        RandomSource random = context.random();
+        var level = context.level();
+        var pos = context.origin();
+        var random = context.random();
+        int height = this.height.sample(random);
 
-        if (!level.getBlockState(pos.below()).is(ModBlocks.VOLCANIC_ROCK)) return false;
+        var ground = level.getBlockState(pos.below());
+        if (!ground.is(ModBlocks.VOLCANIC_ROCK) && !(baseRadius == 1 && ground.is(ModBlocks.DUST))) return false;
+        if (level.getBlockState(pos.below(3)).isAir()) return false;
 
+        var oreState = ore.get().defaultBlockState();
+        if (!erebus.Config.petrifiedQuartzGen && oreState.is(ModBlocks.ORE_PETRIFIED_QUARTZ)) {
+            oreState = ModBlocks.PETRIFIED_WOOD_ROCK.get().defaultBlockState();
+        }
         boolean alternate = random.nextBoolean();
-        BlockState barkState = bark.get().defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y);
+        var barkState = bark.get().defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y);
 
         for (int x = -baseRadius; x <= baseRadius; x++) {
             for (int z = -baseRadius; z <= baseRadius; z++) {
-                for (int y = 1; y < height; y++) {
-                    if (!level.getBlockState(pos.offset(x, y, z)).isAir()) return false;
+                for (int y = 0; y <= height; y++) {
+                    if (level.isOutsideBuildHeight(pos.offset(x, y, z))
+                            || !level.getBlockState(pos.offset(x, y, z)).isAir()) return false;
                 }
             }
         }
 
-        for (int y = 0; y < height; y++) {
+        for (int y = 0; y <= height; y++) {
             for (int x = -baseRadius; x <= baseRadius; x++) {
                 for (int z = -baseRadius; z <= baseRadius; z++) {
                     double dSq = x * x + z * z;
                     if (Math.round(Math.sqrt(dSq)) == baseRadius) {
-                        if (y < height / 10 && height > 10) {
+                        if (y <= height / 10 && height > 10) {
                             level.setBlock(pos.offset(x, y, z), barkState, 2);
                         }
 
@@ -99,72 +117,74 @@ public class PetrifiedTreeFeatureConfiguration extends Feature<NoneFeatureConfig
                     }
 
                     if (Math.round(Math.sqrt(dSq)) < baseRadius - 1) {
-                        level.setBlock(pos.offset(x, y, z), random.nextInt(8) == 0 ? ore.get().defaultBlockState() : core.get().defaultBlockState(), 2);
+                        level.setBlock(pos.offset(x, y, z), random.nextInt(8) == 0 ? oreState : core.get().defaultBlockState(), 2);
                     }
                 }
             }
 
             if (y == height - 1) {
                 if (alternate) {
-                    createBranch(level, pos.offset(baseRadius, y - random.nextInt(2), 0), Direction.NORTH, height / 8, false);
-                    createBranch(level, pos.offset(-baseRadius, y - random.nextInt(2), 0), Direction.SOUTH, height / 8, false);
+                    createBranch(level, pos.offset(baseRadius, y - random.nextInt(2), 0), Direction.NORTH, height / 8, false, height);
+                    createBranch(level, pos.offset(-baseRadius, y - random.nextInt(2), 0), Direction.SOUTH, height / 8, false, height);
                     alternate = false;
                 } else {
-                    createBranch(level, pos.offset(0, y - random.nextInt(2), baseRadius), Direction.EAST, height / 8, false);
-                    createBranch(level, pos.offset(0, y - random.nextInt(2), -baseRadius), Direction.WEST, height / 8, false);
+                    createBranch(level, pos.offset(0, y - random.nextInt(2), baseRadius), Direction.EAST, height / 8, false, height);
+                    createBranch(level, pos.offset(0, y - random.nextInt(2), -baseRadius), Direction.WEST, height / 8, false, height);
                     alternate = true;
                 }
             }
 
             if (y == height - height / 3 || y == height - height / 4) {
                 if (alternate) {
-                    createBranch(level, pos.offset(baseRadius, y - random.nextInt(2), 0), Direction.NORTH, height / 8, false);
-                    createBranch(level, pos.offset(-baseRadius, y - random.nextInt(2), 0), Direction.SOUTH, height / 8, false);
+                    createBranch(level, pos.offset(baseRadius, y - random.nextInt(2), 0), Direction.NORTH, height / 8, false, height);
+                    createBranch(level, pos.offset(-baseRadius, y - random.nextInt(2), 0), Direction.SOUTH, height / 8, false, height);
                     alternate = false;
                 } else {
-                    createBranch(level, pos.offset(0, y - random.nextInt(2), baseRadius), Direction.EAST, height / 8, false);
-                    createBranch(level, pos.offset(0, y - random.nextInt(2), -baseRadius), Direction.WEST, height / 8, false);
+                    createBranch(level, pos.offset(0, y - random.nextInt(2), baseRadius), Direction.EAST, height / 8, false, height);
+                    createBranch(level, pos.offset(0, y - random.nextInt(2), -baseRadius), Direction.WEST, height / 8, false, height);
                     alternate = true;
                 }
             }
 
             if (y == height - height / 2) {
                 if (alternate) {
-                    createBranch(level, pos.offset(baseRadius, y - random.nextInt(2), 0), Direction.NORTH, height / 8, false);
-                    createBranch(level, pos.offset(-baseRadius, y - random.nextInt(2), 0), Direction.SOUTH, height / 8, false);
+                    createBranch(level, pos.offset(baseRadius, y - random.nextInt(2), 0), Direction.NORTH, height / 6, false, height);
+                    createBranch(level, pos.offset(-baseRadius, y - random.nextInt(2), 0), Direction.SOUTH, height / 6, false, height);
                     alternate = false;
                 } else {
-                    createBranch(level, pos.offset(0, y - random.nextInt(2), baseRadius), Direction.EAST, height / 8, false);
-                    createBranch(level, pos.offset(0, y - random.nextInt(2), -baseRadius), Direction.WEST, height / 8, false);
+                    createBranch(level, pos.offset(0, y - random.nextInt(2), baseRadius), Direction.EAST, height / 6, false, height);
+                    createBranch(level, pos.offset(0, y - random.nextInt(2), -baseRadius), Direction.WEST, height / 6, false, height);
                     alternate = true;
                 }
             }
 
             if (y == 1) {
-                createBranch(level, pos.offset(baseRadius, y - random.nextInt(2), 0), Direction.NORTH, height / 8, true);
-                createBranch(level, pos.offset(-baseRadius, y - random.nextInt(2), 0), Direction.SOUTH, height / 8, true);
-                createBranch(level, pos.offset(0, y - random.nextInt(2), baseRadius), Direction.EAST, height / 8, true);
-                createBranch(level, pos.offset(0, y - random.nextInt(2), -baseRadius), Direction.WEST, height / 8, true);
+                createBranch(level, pos.offset(baseRadius, y - random.nextInt(2), 0), Direction.NORTH, height / 8, true, height);
+                createBranch(level, pos.offset(-baseRadius, y - random.nextInt(2), 0), Direction.SOUTH, height / 8, true, height);
+                createBranch(level, pos.offset(0, y - random.nextInt(2), baseRadius), Direction.EAST, height / 8, true, height);
+                createBranch(level, pos.offset(0, y - random.nextInt(2), -baseRadius), Direction.WEST, height / 8, true, height);
             }
         }
         return true;
     }
 
-    private void createBranch(WorldGenLevel level, BlockPos pos, Direction direction, int length, boolean down) {
+    private void createBranch(WorldGenLevel level, BlockPos pos, Direction direction, int length, boolean down, int height) {
         int y = 0;
 
-        for (int c = 0; c < length; c++) {
-            if (c >= height / 8 && !down) y++;
-            if (c >= height / 8 && down) y--;
-
-            if (direction == Direction.NORTH)
-                level.setBlock(pos.offset(c, y, 0), bark.get().defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.X), 2);
-            if (direction == Direction.SOUTH)
-                level.setBlock(pos.offset(-c, y, 0), bark.get().defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.X), 2);
-            if (direction == Direction.WEST)
-                level.setBlock(pos.offset(0, y, c), bark.get().defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Z), 2);
-            if (direction == Direction.EAST)
-                level.setBlock(pos.offset(0, y, -c), bark.get().defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Z), 2);
+        for (int c = 0; c <= length; c++) {
+            if (c >= height / 8) y += down ? -1 : 1;
+            var target = switch (direction) {
+                case NORTH -> pos.offset(c, y, 0);
+                case SOUTH -> pos.offset(-c, y, 0);
+                case EAST -> pos.offset(0, y, c);
+                case WEST -> pos.offset(0, y, -c);
+                default -> throw new IllegalArgumentException("Horizontal branch required");
+            };
+            if (level.isOutsideBuildHeight(target)) continue;
+            var existing = level.getBlockState(target);
+            if (down && !canReplaceRoot(existing)) continue;
+            var axis = direction == Direction.NORTH || direction == Direction.SOUTH ? Direction.Axis.X : Direction.Axis.Z;
+            level.setBlock(target, bark.get().defaultBlockState().setValue(BlockStateProperties.AXIS, axis), 2);
         }
     }
 }

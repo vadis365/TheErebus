@@ -1,6 +1,9 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "erebus:block/force_field"
+    "all": {
+      "force_translucent": true,
+      "sprite": "erebus:block/force_field"
+    }
   }
 }

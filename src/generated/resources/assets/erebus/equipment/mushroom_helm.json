@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "erebus:mushroom_helm"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "erebus:mushroom_helm"
+      }
+    ]
+  }
+}

@@ -13,24 +13,24 @@ import org.jspecify.annotations.NonNull;
 
 public class BombardierBeetleRenderer extends MobRenderer<BombardierBeetle, BombardierBeetleRenderState, BombardierBeetleModel> {
 
-	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/beetle_bombardier.png");
+    private static final Identifier TEXTURE = Erebus.prefix("textures/entity/beetle_bombardier.png");
 
-	public BombardierBeetleRenderer(EntityRendererProvider.Context context) {
-		super(context, new BombardierBeetleModel(context.bakeLayer(ModEntityRendering.BOMBARDIER_BEETLE)), 0.6F);
-	}
+    public BombardierBeetleRenderer(EntityRendererProvider.Context context) {
+        super(context, new BombardierBeetleModel(context.bakeLayer(ModEntityRendering.BOMBARDIER_BEETLE)), 0.6F);
+    }
 
-	@Override
-	protected void scale(BombardierBeetleRenderState state, PoseStack matrix) {
-		matrix.scale(1.5F, 1.5F, 1.5F);
-	}
+    @Override
+    protected void scale(BombardierBeetleRenderState state, PoseStack matrix) {
+        matrix.scale(1.5F, 1.5F, 1.5F);
+    }
 
-	@Override
-	public BombardierBeetleRenderState createRenderState() {
-		return new BombardierBeetleRenderState();
-	}
+    @Override
+    public BombardierBeetleRenderState createRenderState() {
+        return new BombardierBeetleRenderState();
+    }
 
-	@Override
-	public @NonNull Identifier getTextureLocation(BombardierBeetleRenderState state) {
-		return TEXTURE;
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(BombardierBeetleRenderState state) {
+        return TEXTURE;
+    }
 }

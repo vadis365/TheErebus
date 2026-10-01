@@ -5,8 +5,10 @@ import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.EmptyBlockGetter;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.*;
@@ -18,23 +20,92 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
-import org.jetbrains.annotations.NotNull;
 
-public class SwampHutPiece extends ScatteredFeaturePiece {
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
+public class SwampHutPiece extends ScatteredFeaturePiece implements TerrainCheckedPiece {
+
+    private final long layoutSeed;
     private BlockState LOG;
     private BlockState PLANK;
     private BlockState STAIR;
     private BlockState BRICKS;
     private BlockState FENCE;
     private BlockState DOOR;
+    private boolean validated, rejected;
 
-    public SwampHutPiece(RandomSource random, int x, int z) {
-        super(ModStructurePieces.SWAMP_HUT.get(), x, 64, z, 10, 8, 10, getRandomHorizontalDirection(random));
+    public SwampHutPiece(RandomSource random, BlockPos origin) {
+        super(ModStructurePieces.SWAMP_HUT.get(), origin.getX(), origin.getY(), origin.getZ(), 16, 12, 16, Direction.SOUTH);
+        layoutSeed = random.nextLong();
     }
 
-    public SwampHutPiece(StructurePieceSerializationContext ignoredContext, CompoundTag tag) {
+    public SwampHutPiece(StructurePieceSerializationContext context, CompoundTag tag) {
         super(ModStructurePieces.SWAMP_HUT.get(), tag);
+        layoutSeed = tag.getLongOr("LayoutSeed", 0);
+        validated = tag.getBooleanOr("Validated", false);
+        rejected = tag.getBooleanOr("Rejected", false) || !tag.contains("LayoutSeed");
+    }
+
+    public static boolean soil(BlockState state) {
+        return (state.is(BlockTags.DIRT) || state.is(BlockTags.GRASS_BLOCKS))
+                && state.getFluidState().isEmpty() && !state.hasBlockEntity();
+    }
+
+    public static boolean validSite(BlockPos origin, Function<BlockPos, BlockState> blocks,
+                                    Predicate<BlockPos> inBounds) {
+        for (int x = 0; x < 16; x++)
+            for (int z = 0; z < 16; z++) {
+                var below = origin.offset(x, -1, z);
+                if (!inBounds.test(below) || !soil(blocks.apply(below))
+                        || !blocks.apply(below).isCollisionShapeFullBlock(EmptyBlockGetter.INSTANCE, below)) return false;
+                for (int y = 0; y < 12; y++) {
+                    var pos = origin.offset(x, y, z);
+                    if (!inBounds.test(pos) || !blocks.apply(pos).isAir()) return false;
+                }
+            }
+        return true;
+    }
+
+    @Override
+    protected void addAdditionalSaveData(StructurePieceSerializationContext context, CompoundTag tag) {
+        super.addAdditionalSaveData(context, tag);
+        tag.putLong("LayoutSeed", layoutSeed);
+        tag.putBoolean("Validated", validated);
+        tag.putBoolean("Rejected", rejected);
+    }
+
+    @Override
+    public synchronized boolean isRejected() {
+        return rejected;
+    }
+
+    public BlockPos origin() {
+        return new BlockPos(boundingBox.minX(), boundingBox.minY(), boundingBox.minZ());
+    }
+
+    @Override
+    public synchronized void postProcess(WorldGenLevel level, StructureManager manager, ChunkGenerator generator,
+                                         RandomSource random, BoundingBox clip, ChunkPos chunk, BlockPos ignored) {
+        if (rejected) return;
+        if (!validated) {
+            if (!validSite(origin(), level::getBlockState, p -> !level.isOutsideBuildHeight(p))) {
+                rejected = true;
+                return;
+            }
+            validated = true;
+        }
+        for (var entry : layout().entrySet()) {
+            var pos = entry.getKey();
+            if (clip.isInside(pos) && level.isEmptyBlock(pos) && !entry.getValue().isAir()
+                    && level.setBlock(pos, entry.getValue(), Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE)) {
+                if (entry.getValue().getBlock() instanceof FenceBlock || entry.getValue().getBlock() instanceof StairBlock
+                        || entry.getValue().getBlock() instanceof DoorBlock) level.getChunk(pos).markPosForPostprocessing(pos);
+            }
+        }
     }
 
     private void setupBlockStates() {
@@ -46,8 +117,10 @@ public class SwampHutPiece extends ScatteredFeaturePiece {
         DOOR = ModBlocks.DOOR_MOSSBARK.get().defaultBlockState();
     }
 
-    @Override
-    public void postProcess(@NotNull WorldGenLevel level, @NotNull StructureManager manager, @NotNull ChunkGenerator generator, @NotNull RandomSource random, @NotNull BoundingBox boundingBox, @NotNull ChunkPos chunkPos, @NotNull BlockPos pos) {
+    public synchronized Map<BlockPos, BlockState> layout() {
+        var level = new LinkedHashMap<BlockPos, BlockState>();
+        var pos = origin();
+        var random = RandomSource.create(layoutSeed);
         setupBlockStates();
         verticalBeam(level, pos.offset(5, 0, 5), LOG, 4);
         verticalBeam(level, pos.offset(10, 0, 5), LOG, 4);
@@ -89,7 +162,7 @@ public class SwampHutPiece extends ScatteredFeaturePiece {
         verticalBeam(level, pos.offset(8, 9, 4), LOG, 2);
         verticalBeam(level, pos.offset(8, 9, 11), LOG, 2);
 
-        for(int direction = 0; direction < 4; direction++) {
+        for (int direction = 0; direction < 4; direction++) {
             rotatedBeam(level, pos, 6, 5, BRICKS, 4, direction);
 
             // bottom window
@@ -147,7 +220,7 @@ public class SwampHutPiece extends ScatteredFeaturePiece {
         boolean rightExtension = random.nextBoolean();
         boolean backExtension = random.nextBoolean();
 
-        if(!leftExtension && !rightExtension && !backExtension) {
+        if (!leftExtension && !rightExtension && !backExtension) {
             int direction = random.nextInt(4);
 
             rotatedBeam(level, pos, 7, 5, getDoorRotations(DOOR, direction == 1 ? 1 : direction == 3 ? 3 : direction == 2 ? 2 : 0).setValue(DoorBlock.HINGE, direction == 0 || direction == 2 ? DoorHingeSide.RIGHT : DoorHingeSide.LEFT), 1, direction);
@@ -156,37 +229,38 @@ public class SwampHutPiece extends ScatteredFeaturePiece {
             rotatedBeam(level, pos.above(), 8, 5, getDoorRotations(DOOR, direction == 1 ? 5 : direction == 3 ? 7 : direction == 2 ? 6 : 4).setValue(DoorBlock.HINGE, direction == 0 || direction == 2 ? DoorHingeSide.LEFT : DoorHingeSide.RIGHT), 1, direction);
         }
 
-        if(leftExtension) addExtension(level, pos, 1);
-        if(backExtension) addExtension(level, pos, 2);
-        if(rightExtension) addExtension(level, pos, 3);
+        if (leftExtension) addExtension(level, pos, 1);
+        if (backExtension) addExtension(level, pos, 2);
+        if (rightExtension) addExtension(level, pos, 3);
+        return Collections.unmodifiableMap(level);
     }
 
-    private void addExtension(WorldGenLevel level, BlockPos pos, int direction) {
+    private void addExtension(Map<BlockPos, BlockState> level, BlockPos pos, int direction) {
         rotatedBeam(level, pos.above(2), 2, 6, getLogRotations(LOG, direction == 0 || direction == 2 ? 4 : 8), 3, direction);
         rotatedBeam(level, pos.above(2), 2, 9, getLogRotations(LOG, direction == 0 || direction == 2 ? 4 : 8), 3, direction);
 
-        for(int beamHeight = 0; beamHeight < 2; beamHeight++) {
+        for (int beamHeight = 0; beamHeight < 2; beamHeight++) {
             rotatedBeam(level, pos.above(beamHeight), 1, 6, LOG, 1, direction);
             rotatedBeam(level, pos.above(beamHeight), 1, 9, LOG, 1, direction);
             rotatedBeam(level, pos.above(beamHeight), 4, 6, LOG, 1, direction);
             rotatedBeam(level, pos.above(beamHeight), 4, 9, LOG, 1, direction);
         }
 
-        for(int l = 0; l < 4; l++) {
+        for (int l = 0; l < 4; l++) {
             rotatedBeam(level, pos.above(2), 1, 6 + l, getLogRotations(LOG, direction == 0 || direction == 2 ? 4 : 8), 1, direction);
         }
 
-        for(int l = 0; l < 2; l++) {
+        for (int l = 0; l < 2; l++) {
             rotatedBeam(level, pos.above(3), 1, 7 + l, PLANK, 1, direction);
         }
 
-        for(int l = 0; l < 2; l++ ) {
-            for(int h = 0; h < 3; h++) {
+        for (int l = 0; l < 2; l++) {
+            for (int h = 0; h < 3; h++) {
                 rotatedBeam(level, pos.above(h), 5, 7 + l, Blocks.AIR.defaultBlockState(), 1, direction);
             }
         }
 
-        for(int l = 0; l < 2; l++) {
+        for (int l = 0; l < 2; l++) {
             rotatedBeam(level, pos, 1, 7 + l, BRICKS, 1, direction);
             rotatedBeam(level, pos.above(), 1, 7 + l, FENCE, 1, direction);
         }
@@ -209,7 +283,7 @@ public class SwampHutPiece extends ScatteredFeaturePiece {
         rotatedBeam(level, pos.above(3), 0, 9, getStairRotations(STAIR, upper), 5, direction);
 
         lower = direction == 0 ? 3 : direction == 1 ? 1 : direction == 2 ? 2 : 0;
-        upper = direction == 0 ? 6 : direction == 1 ? 4: direction == 2 ? 7 : 5;
+        upper = direction == 0 ? 6 : direction == 1 ? 4 : direction == 2 ? 7 : 5;
         rotatedBeam(level, pos.above(4), 0, 8, getStairRotations(STAIR, lower), 4, direction);
         rotatedBeam(level, pos.above(3), 0, 9, getStairRotations(STAIR, lower), 4, direction);
         rotatedBeam(level, pos.above(2), 0, 10, getStairRotations(STAIR, lower), 5, direction);
@@ -220,39 +294,39 @@ public class SwampHutPiece extends ScatteredFeaturePiece {
         rotatedBeam(level, pos.above(3), 4, 9, PLANK, 1, direction);
     }
 
-    private void rotatedBeam(WorldGenLevel level, BlockPos pos, int a, int b, BlockState block, int size, int direction) {
+    private void rotatedBeam(Map<BlockPos, BlockState> level, BlockPos pos, int a, int b, BlockState block, int size, int direction) {
         int LENGTH = 16;
-        switch(direction) {
+        switch (direction) {
             case 0 -> {
-                for(int x = a; x < a + size; x++) setBlock(level, pos.offset(x, 0, b), block);
+                for (int x = a; x < a + size; x++) setBlock(level, pos.offset(x, 0, b), block);
             }
             case 1 -> {
-                for(int z = a; z < a + size; z++) setBlock(level, pos.offset(b, 0, z), block);
+                for (int z = a; z < a + size; z++) setBlock(level, pos.offset(b, 0, z), block);
             }
             case 2 -> {
-                for(int x = LENGTH - a - 1; x > LENGTH - a - size - 1; x--) setBlock(level, pos.offset(x, 0, LENGTH - b - 1), block);
+                for (int x = LENGTH - a - 1; x > LENGTH - a - size - 1; x--) setBlock(level, pos.offset(x, 0, LENGTH - b - 1), block);
             }
             case 3 -> {
-                for(int z = LENGTH - a - 1; z > LENGTH - a - size - 1; z--) setBlock(level, pos.offset(LENGTH - b - 1, 0, z), block);
+                for (int z = LENGTH - a - 1; z > LENGTH - a - size - 1; z--) setBlock(level, pos.offset(LENGTH - b - 1, 0, z), block);
             }
         }
     }
 
-    private void verticalBeam(WorldGenLevel level, BlockPos pos, BlockState block, int size) {
-        for(int y = 0; y < size; y++) {
+    private void verticalBeam(Map<BlockPos, BlockState> level, BlockPos pos, BlockState block, int size) {
+        for (int y = 0; y < size; y++) {
             setBlock(level, pos.above(y), block);
         }
     }
 
-    private void horizontalBeam(WorldGenLevel level, BlockPos pos, BlockState block, int size, Direction.Axis axis) {
+    private void horizontalBeam(Map<BlockPos, BlockState> level, BlockPos pos, BlockState block, int size, Direction.Axis axis) {
         switch (axis) {
             case X -> {
-                for(int x = 0; x < size; x++) {
+                for (int x = 0; x < size; x++) {
                     setBlock(level, pos.offset(x, 0, 0), block);
                 }
             }
             case Z -> {
-                for(int z = 0; z < size; z++) {
+                for (int z = 0; z < size; z++) {
                     setBlock(level, pos.offset(0, 0, z), block);
                 }
             }
@@ -289,13 +363,14 @@ public class SwampHutPiece extends ScatteredFeaturePiece {
 
     private BlockState getLogRotations(BlockState state, int axis) {
         return switch (axis) {
-            case 0 -> state.setValue(RotatedPillarBlock.AXIS, Direction.Axis.Z);
+            case 0 -> state.setValue(RotatedPillarBlock.AXIS, Direction.Axis.Y);
             case 4 -> state.setValue(RotatedPillarBlock.AXIS, Direction.Axis.X);
+            case 8 -> state.setValue(RotatedPillarBlock.AXIS, Direction.Axis.Z);
             default -> state;
         };
     }
 
-    private void setBlock(WorldGenLevel level, BlockPos pos, BlockState block) {
-        level.setBlock(pos, block, Block.UPDATE_ALL);
+    private void setBlock(Map<BlockPos, BlockState> level, BlockPos pos, BlockState block) {
+        level.put(pos.immutable(), block);
     }
 }

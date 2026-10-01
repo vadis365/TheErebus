@@ -20,12 +20,12 @@ public class QuicksandBlock extends Block {
     }
 
     public static boolean entityWillSink(Entity entity) {
-        if(entity instanceof Player player) {
-            if(player.getItemBySlot(EquipmentSlot.FEET).is(ModItems.WATER_STRIDERS)) {
+        if (entity instanceof Player player) {
+            if (player.getItemBySlot(EquipmentSlot.FEET).is(ModItems.WATER_STRIDERS)) {
                 return false;
             }
 
-            if(player.isCreative()) return false;
+            if (player.isCreative()) return false;
         }
 
         return !(entity instanceof ItemEntity);
@@ -36,10 +36,10 @@ public class QuicksandBlock extends Block {
         if (entityWillSink(entity)) {
             entity.makeStuckInBlock(state, new Vec3(0.08D, 0.08D, 0.08D));
 
-            if(pos.getY() < 0) {
-                if(Math.abs(entity.getBoundingBox().maxY - entity.getEyeHeight()) >= Math.abs(pos.getY())) entity.hurt(entity.damageSources().inWall(), 2.0F);
+            if (pos.getY() < 0) {
+                if (Math.abs(entity.getBoundingBox().maxY - entity.getEyeHeight()) >= Math.abs(pos.getY())) entity.hurt(entity.damageSources().inWall(), 2.0F);
             } else {
-                if(Math.abs(entity.getBoundingBox().maxY) <= Math.abs(pos.getY())) entity.hurt(entity.damageSources().inWall(), 2.0F);
+                if (Math.abs(entity.getBoundingBox().maxY) <= Math.abs(pos.getY())) entity.hurt(entity.damageSources().inWall(), 2.0F);
             }
         }
     }

@@ -13,33 +13,33 @@ import org.jspecify.annotations.NonNull;
 
 public class MoneySpiderRenderer extends MobRenderer<MoneySpider, MoneySpiderRenderState, MoneySpiderModel> {
 
-	private static final Identifier[] TEXTURES = new Identifier[] {
-			Erebus.prefix("textures/entity/money_spider.png"),
-			Erebus.prefix("textures/entity/money_spider_euro.png"),
-			Erebus.prefix("textures/entity/money_spider_pound.png") };
+    private static final Identifier[] TEXTURES = new Identifier[]{
+            Erebus.prefix("textures/entity/money_spider.png"),
+            Erebus.prefix("textures/entity/money_spider_euro.png"),
+            Erebus.prefix("textures/entity/money_spider_pound.png")};
 
-	public MoneySpiderRenderer(EntityRendererProvider.Context context) {
-		super(context, new MoneySpiderModel(context.bakeLayer(ModEntityRendering.MONEY_SPIDER)), 0.15F);
-	}
+    public MoneySpiderRenderer(EntityRendererProvider.Context context) {
+        super(context, new MoneySpiderModel(context.bakeLayer(ModEntityRendering.MONEY_SPIDER)), 0.15F);
+    }
 
-	@Override
-	public MoneySpiderRenderState createRenderState() {
-		return new MoneySpiderRenderState();
-	}
+    @Override
+    public MoneySpiderRenderState createRenderState() {
+        return new MoneySpiderRenderState();
+    }
 
-	@Override
-	public void extractRenderState(MoneySpider entity, MoneySpiderRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-		state.skin = entity.getSkin();
-	}
+    @Override
+    public void extractRenderState(MoneySpider entity, MoneySpiderRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+        state.skin = entity.getSkin();
+    }
 
-	@Override
-	protected void scale(MoneySpiderRenderState state, PoseStack pose) {
-		pose.scale(0.3F, 0.3F, 0.3F);
-	}
+    @Override
+    protected void scale(MoneySpiderRenderState state, PoseStack pose) {
+        pose.scale(0.3F, 0.3F, 0.3F);
+    }
 
-	@Override
-	public @NonNull Identifier getTextureLocation(MoneySpiderRenderState state) {
-		return TEXTURES[state.skin];
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(MoneySpiderRenderState state) {
+        return TEXTURES[state.skin];
+    }
 }

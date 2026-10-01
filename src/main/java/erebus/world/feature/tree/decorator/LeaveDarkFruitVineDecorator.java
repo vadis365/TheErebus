@@ -43,6 +43,8 @@ public class LeaveDarkFruitVineDecorator extends TreeDecorator {
                     BlockPos check = below.below(yOffset);
                     if (context.isAir(check)) {
                         context.setBlock(check, ModBlocks.DARK_FRUIT_VINE.get().defaultBlockState().setValue(DarkFruitVineBlock.AGE, 4));
+                    } else {
+                        break;
                     }
                 }
             }

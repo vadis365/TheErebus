@@ -48,11 +48,11 @@ public class GlowingJarBlock extends BaseEntityBlock {
         return RenderShape.INVISIBLE;
     }
 
-	@Nullable
-	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide() ? GlowingJarBlockEntity::clientTick : null;
-	}
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pBlockEntityType) {
+        return pLevel.isClientSide() ? GlowingJarBlockEntity::clientTick : null;
+    }
 
     @Override
     public void animateTick(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull RandomSource random) {

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "#minecraft:planks",
+    "#c:dyes/white"
+  ],
+  "result": {
+    "id": "erebus:planks_white"
+  }
+}

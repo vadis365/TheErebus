@@ -3,6 +3,7 @@ package erebus.client.render.block.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import erebus.Erebus;
+import erebus.block.bamboo.BambooExtender;
 import erebus.block.entity.BambooExtenderBlockEntity;
 import erebus.client.render.block.model.BambooExtenderModel;
 import erebus.client.render.block.renderer.state.BambooExtenderBlockEntityRenderState;
@@ -20,164 +21,163 @@ import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.sprite.SpriteGetter;
 import net.minecraft.client.resources.model.sprite.SpriteId;
-import net.minecraft.core.Direction;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class BambooExtenderRenderer implements BlockEntityRenderer<BambooExtenderBlockEntity, BambooExtenderBlockEntityRenderState> {
 
-	private final SpriteId TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bamboo_extender"));
-	private final BambooExtenderModel model;
-	private final SpriteGetter sprites;
-	private final BlockModelResolver blockModelResolver;
-	private final BlockDisplayContext BLOCK_DISPLAY_CONTEXT = BlockDisplayContext.create();
+    private final SpriteId TEXTURE = Sheets.BLOCKS_MAPPER.apply(Erebus.prefix("bamboo_extender"));
+    private final BambooExtenderModel model;
+    private final SpriteGetter sprites;
+    private final BlockModelResolver blockModelResolver;
+    private final BlockDisplayContext BLOCK_DISPLAY_CONTEXT = BlockDisplayContext.create();
 
     public BambooExtenderRenderer(Context context) {
-		model = new BambooExtenderModel(context.bakeLayer(ModBlockEntityRendering.BAMBOO_EXTENDER));
-		sprites = context.sprites();
-		blockModelResolver = context.blockModelResolver();
+        model = new BambooExtenderModel(context.bakeLayer(ModBlockEntityRendering.BAMBOO_EXTENDER));
+        sprites = context.sprites();
+        blockModelResolver = context.blockModelResolver();
     }
 
-	@Override
-	public BambooExtenderBlockEntityRenderState createRenderState() {
-		return new BambooExtenderBlockEntityRenderState();
-	}
+    @Override
+    public BambooExtenderBlockEntityRenderState createRenderState() {
+        return new BambooExtenderBlockEntityRenderState();
+    }
 
-	@Override
-	public void extractRenderState(BambooExtenderBlockEntity blockEntity, BambooExtenderBlockEntityRenderState state, float partialTicks, @NonNull Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
-		BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
-		state.facing = blockEntity.direction == null ? Direction.DOWN : blockEntity.direction;
-		blockModelResolver.update(state.planks, ModBlocks.PLANKS_BAMBOO.get().defaultBlockState(), BLOCK_DISPLAY_CONTEXT);
-	}
+    @Override
+    public void extractRenderState(BambooExtenderBlockEntity blockEntity, BambooExtenderBlockEntityRenderState state, float partialTicks, @NonNull Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+        BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+        state.facing = blockEntity.getBlockState().getValue(BambooExtender.FACING);
+        blockModelResolver.update(state.planks, ModBlocks.PLANKS_BAMBOO.get().defaultBlockState(), BLOCK_DISPLAY_CONTEXT);
+    }
 
-	@Override
-	public void submit(BambooExtenderBlockEntityRenderState state, @NonNull PoseStack stack, @NonNull SubmitNodeCollector submitNodeCollector, @NonNull CameraRenderState cameraRenderState) {
-		switch (state.facing) {
-			case DOWN:
-				stack.pushPose();
-				stack.translate(0.5F, -0.5F, 0.5F);
-				stack.scale(-1F, -1F, 1F);
-				stack.mulPose(Axis.ZP.rotationDegrees(180F));
-				stack.mulPose(Axis.YN.rotationDegrees(180F));
-				submitNodeCollector.submitModel(
-						model,
-						state,
-						stack,
-						TEXTURE.renderType(RenderTypes::entityCutout),
-						state.lightCoords,
-						OverlayTexture.NO_OVERLAY,
-						-1,
-						sprites.get(TEXTURE),
-						0,
-						state.breakProgress
-				);
-				stack.popPose();
-				stack.pushPose();
-				stack.translate(0F, 0.125F, 0F);
-				stack.scale(1F, 0.875F, 1F);
-				state.planks.submit(stack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
-				stack.popPose();
-				break;
-			case UP:
-				stack.pushPose();
-				stack.translate(0.5F, 1.5F, 0.5F);
-				stack.scale(-1F, -1F, 1F);
-				stack.mulPose(Axis.YP.rotationDegrees(180F));
-				submitNodeCollector.submitModel(
-						model,
-						state,
-						stack,
-						TEXTURE.renderType(RenderTypes::entityCutout),
-						state.lightCoords,
-						OverlayTexture.NO_OVERLAY,
-						-1,
-						sprites.get(TEXTURE),
-						0,
-						state.breakProgress
-				);
-				stack.popPose();
-				stack.pushPose();
-				stack.scale(1F, 0.875F, 1F);
-				state.planks.submit(stack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
-				stack.popPose();
-				break;
-			case NORTH:
-				stack.pushPose();
-				stack.translate(0.5F, 1.5F, 0.5F);
-				stack.scale(-1F, -1F, 1F);
-				stack.mulPose(Axis.YP.rotationDegrees(0F));
-				submitNodeCollector.submitModel(
-						model,
-						state,
-						stack,
-						TEXTURE.renderType(RenderTypes::entityCutout),
-						state.lightCoords,
-						OverlayTexture.NO_OVERLAY,
-						-1,
-						sprites.get(TEXTURE),
-						0,
-						state.breakProgress
-				);
-				stack.popPose();
-				break;
-			case SOUTH:
-				stack.pushPose();
-				stack.translate(0.5F, 1.5F, 0.5F);
-				stack.scale(-1F, -1F, 1F);
-				stack.mulPose(Axis.YP.rotationDegrees(180F));
-				submitNodeCollector.submitModel(
-						model,
-						state,
-						stack,
-						TEXTURE.renderType(RenderTypes::entityCutout),
-						state.lightCoords,
-						OverlayTexture.NO_OVERLAY,
-						-1,
-						sprites.get(TEXTURE),
-						0,
-						state.breakProgress
-				);
-				stack.popPose();
-				break;
-			case WEST:
-				stack.pushPose();
-				stack.translate(0.5F, 1.5F, 0.5F);
-				stack.scale(-1F, -1F, 1F);
-				stack.mulPose(Axis.YN.rotationDegrees(90F));
-				submitNodeCollector.submitModel(
-						model,
-						state,
-						stack,
-						TEXTURE.renderType(RenderTypes::entityCutout),
-						state.lightCoords,
-						OverlayTexture.NO_OVERLAY,
-						-1,
-						sprites.get(TEXTURE),
-						0,
-						state.breakProgress
-				);
-				stack.popPose();
-				break;
-			case EAST:
-				stack.pushPose();
-				stack.translate(0.5F, 1.5F, 0.5F);
-				stack.scale(-1F, -1F, 1F);
-				stack.mulPose(Axis.YP.rotationDegrees(90F));
-				submitNodeCollector.submitModel(
-						model,
-						state,
-						stack,
-						TEXTURE.renderType(RenderTypes::entityCutout),
-						state.lightCoords,
-						OverlayTexture.NO_OVERLAY,
-						-1,
-						sprites.get(TEXTURE),
-						0,
-						state.breakProgress
-				);
-				stack.popPose();
-				break;
-		}
-	}
+    @Override
+    public void submit(BambooExtenderBlockEntityRenderState state, @NonNull PoseStack stack, @NonNull SubmitNodeCollector submitNodeCollector, @NonNull CameraRenderState cameraRenderState) {
+        switch (state.facing) {
+            case DOWN:
+                stack.pushPose();
+                stack.translate(0.5F, -0.5F, 0.5F);
+                stack.scale(-1F, -1F, 1F);
+                stack.mulPose(Axis.ZP.rotationDegrees(180F));
+                stack.mulPose(Axis.YN.rotationDegrees(180F));
+                submitNodeCollector.submitModel(
+                        model,
+                        state,
+                        stack,
+                        TEXTURE.renderType(RenderTypes::entityCutout),
+                        state.lightCoords,
+                        OverlayTexture.NO_OVERLAY,
+                        -1,
+                        sprites.get(TEXTURE),
+                        0,
+                        state.breakProgress
+                );
+                stack.popPose();
+                stack.pushPose();
+                stack.translate(0F, 0.125F, 0F);
+                stack.scale(1F, 0.875F, 1F);
+                state.planks.submit(stack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+                stack.popPose();
+                break;
+            case UP:
+                stack.pushPose();
+                stack.translate(0.5F, 1.5F, 0.5F);
+                stack.scale(-1F, -1F, 1F);
+                stack.mulPose(Axis.YP.rotationDegrees(180F));
+                submitNodeCollector.submitModel(
+                        model,
+                        state,
+                        stack,
+                        TEXTURE.renderType(RenderTypes::entityCutout),
+                        state.lightCoords,
+                        OverlayTexture.NO_OVERLAY,
+                        -1,
+                        sprites.get(TEXTURE),
+                        0,
+                        state.breakProgress
+                );
+                stack.popPose();
+                stack.pushPose();
+                stack.scale(1F, 0.875F, 1F);
+                state.planks.submit(stack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+                stack.popPose();
+                break;
+            case NORTH:
+                stack.pushPose();
+                stack.translate(0.5F, 1.5F, 0.5F);
+                stack.scale(-1F, -1F, 1F);
+                stack.mulPose(Axis.YP.rotationDegrees(0F));
+                submitNodeCollector.submitModel(
+                        model,
+                        state,
+                        stack,
+                        TEXTURE.renderType(RenderTypes::entityCutout),
+                        state.lightCoords,
+                        OverlayTexture.NO_OVERLAY,
+                        -1,
+                        sprites.get(TEXTURE),
+                        0,
+                        state.breakProgress
+                );
+                stack.popPose();
+                break;
+            case SOUTH:
+                stack.pushPose();
+                stack.translate(0.5F, 1.5F, 0.5F);
+                stack.scale(-1F, -1F, 1F);
+                stack.mulPose(Axis.YP.rotationDegrees(180F));
+                submitNodeCollector.submitModel(
+                        model,
+                        state,
+                        stack,
+                        TEXTURE.renderType(RenderTypes::entityCutout),
+                        state.lightCoords,
+                        OverlayTexture.NO_OVERLAY,
+                        -1,
+                        sprites.get(TEXTURE),
+                        0,
+                        state.breakProgress
+                );
+                stack.popPose();
+                break;
+            case WEST:
+                stack.pushPose();
+                stack.translate(0.5F, 1.5F, 0.5F);
+                stack.scale(-1F, -1F, 1F);
+                stack.mulPose(Axis.YN.rotationDegrees(90F));
+                submitNodeCollector.submitModel(
+                        model,
+                        state,
+                        stack,
+                        TEXTURE.renderType(RenderTypes::entityCutout),
+                        state.lightCoords,
+                        OverlayTexture.NO_OVERLAY,
+                        -1,
+                        sprites.get(TEXTURE),
+                        0,
+                        state.breakProgress
+                );
+                stack.popPose();
+                break;
+            case EAST:
+                stack.pushPose();
+                stack.translate(0.5F, 1.5F, 0.5F);
+                stack.scale(-1F, -1F, 1F);
+                stack.mulPose(Axis.YP.rotationDegrees(90F));
+                submitNodeCollector.submitModel(
+                        model,
+                        state,
+                        stack,
+                        TEXTURE.renderType(RenderTypes::entityCutout),
+                        state.lightCoords,
+                        OverlayTexture.NO_OVERLAY,
+                        -1,
+                        sprites.get(TEXTURE),
+                        0,
+                        state.breakProgress
+                );
+                stack.popPose();
+                break;
+        }
+    }
 }

@@ -8,9 +8,9 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class PondSkaterModel extends EntityModel<PondSkaterRenderState> {
-    public ModelPart root;
     private final ModelPart proboscis1, proboscis2, proboscis3;
     private final ModelPart leftAnt1, leftAnt2, rightAnt1, rightAnt2;
     private final ModelPart leftEye, rightEye, head;
@@ -21,6 +21,7 @@ public class PondSkaterModel extends EntityModel<PondSkaterRenderState> {
     private final ModelPart leftLegBack1, leftLegBack2, leftLegBack3, leftLegBack4;
     private final ModelPart rightLegBack1, rightLegBack2, rightLegBack3, rightLegBack4;
     private final ModelPart bum1, bum2;
+    public ModelPart root;
 
     public PondSkaterModel(ModelPart root) {
         super(root);
@@ -100,6 +101,16 @@ public class PondSkaterModel extends EntityModel<PondSkaterRenderState> {
         root.addOrReplaceChild("bum1", CubeListBuilder.create().texOffs(30, 110).addBox(-2F, -2F, 0F, 4, 4, 10), PartPose.offsetAndRotation(0F, 16F, 13F, -0.1745329F, 0F, 0F));
         root.addOrReplaceChild("bum2", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, -1.5F, -1F, 3, 3, 4), PartPose.offsetAndRotation(0F, 18F, 23F, -0.1745329F, 0F, 0F));
 
-        return LayerDefinition.create(mesh, 128, 128);
+        return LayerDefinition.create(mesh, 64, 128);
+    }
+
+    @Override
+    public void setupAnim(PondSkaterRenderState state) {
+        super.setupAnim(state);
+        float swing = Mth.cos(state.walkAnimationPos) * 0.5F * state.walkAnimationSpeed;
+        rightLegMid3.yRot = -swing + 0.7853982F;
+        leftLegMid3.yRot = swing - 0.7853982F;
+        rightLegMid4.yRot = -swing - 1.745329F;
+        leftLegMid4.yRot = swing + 1.745329F;
     }
 }

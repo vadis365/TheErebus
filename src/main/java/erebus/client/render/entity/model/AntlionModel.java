@@ -6,50 +6,50 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class AntlionModel extends EntityModel<AntlionRenderState> {
-	public ModelPart root;
-	private final ModelPart Head;
-	private final ModelPart Neck1;
+public class AntlionModel<S extends AntlionRenderState> extends EntityModel<S> {
+    private final ModelPart Head;
+    private final ModelPart Neck1;
     private final ModelPart LeftFrontLeg;
-	private final ModelPart LeftMidLeg;
-	private final ModelPart LeftBackLeg;
-	private final ModelPart RightFrontLeg;
-	private final ModelPart RightMidLeg;
-	private final ModelPart RightBackLeg;
-	private final ModelPart MandR1;
-	private final ModelPart MandR2;
-	private final ModelPart MandR3;
-	private final ModelPart MandL1;
-	private final ModelPart MandL2;
-	private final ModelPart MandL3;
+    private final ModelPart LeftMidLeg;
+    private final ModelPart LeftBackLeg;
+    private final ModelPart RightFrontLeg;
+    private final ModelPart RightMidLeg;
+    private final ModelPart RightBackLeg;
+    private final ModelPart MandR1;
+    private final ModelPart MandR2;
+    private final ModelPart MandR3;
+    private final ModelPart MandL1;
+    private final ModelPart MandL2;
+    private final ModelPart MandL3;
+    public ModelPart root;
 
-	public AntlionModel(ModelPart root) {
-		super(root);
-		this.root = root;
-		this.Head = root.getChild("Head");
-		this.MandR1 = Head.getChild("MandR1");
-		this.MandR2 = Head.getChild("MandR2");
-		this.MandR3 = Head.getChild("MandR3");
-		this.MandL1 = Head.getChild("MandL1");
-		this.MandL2 = Head.getChild("MandL2");
-		this.MandL3 = Head.getChild("MandL3");
-		this.Neck1 = root.getChild("Neck1");
+    public AntlionModel(ModelPart root) {
+        super(root);
+        this.root = root;
+        this.Head = root.getChild("Head");
+        this.MandR1 = Head.getChild("MandR1");
+        this.MandR2 = Head.getChild("MandR2");
+        this.MandR3 = Head.getChild("MandR3");
+        this.MandL1 = Head.getChild("MandL1");
+        this.MandL2 = Head.getChild("MandL2");
+        this.MandL3 = Head.getChild("MandL3");
+        this.Neck1 = root.getChild("Neck1");
         root.getChild("Neck2");
         root.getChild("Thorax");
         this.LeftFrontLeg = root.getChild("LeftFrontLeg");
-		this.LeftMidLeg = root.getChild("LeftMidLeg");
-		this.LeftBackLeg = root.getChild("LeftBackLeg");
-		this.RightFrontLeg = root.getChild("RightFrontLeg");
-		this.RightMidLeg = root.getChild("RightMidLeg");
-		this.RightBackLeg = root.getChild("RightBackLeg");
-	}
+        this.LeftMidLeg = root.getChild("LeftMidLeg");
+        this.LeftBackLeg = root.getChild("LeftBackLeg");
+        this.RightFrontLeg = root.getChild("RightFrontLeg");
+        this.RightMidLeg = root.getChild("RightMidLeg");
+        this.RightBackLeg = root.getChild("RightBackLeg");
+    }
 
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
-		partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+        partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition Head = partdefinition.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(88, 64).addBox(-4.5F, 3.0F, -13.5F, 9.0F, 5.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 16.0F, -15.5F));
+        PartDefinition Head = partdefinition.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(88, 64).addBox(-4.5F, 3.0F, -13.5F, 9.0F, 5.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 16.0F, -15.5F));
 
         Head.addOrReplaceChild("MandR1", CubeListBuilder.create().texOffs(110, 54).addBox(-0.5F, 4.0F, -17.0F, 3.0F, 4.0F, 5.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.3491F, 0.0F));
 
@@ -111,7 +111,7 @@ public class AntlionModel extends EntityModel<AntlionRenderState> {
 
         PartDefinition LeftFrontLeg = partdefinition.addOrReplaceChild("LeftFrontLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(6.0F, 19.0F, -13.0F, 0.0F, 0.6109F, 0.0F));
 
-		PartDefinition LF1 = LeftFrontLeg.addOrReplaceChild("LF1", CubeListBuilder.create().texOffs(82, 0).addBox(0.0F, -1.0F, -1.0F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.829F));
+        PartDefinition LF1 = LeftFrontLeg.addOrReplaceChild("LF1", CubeListBuilder.create().texOffs(82, 0).addBox(0.0F, -1.0F, -1.0F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.829F));
 
         LF1.addOrReplaceChild("LF2", CubeListBuilder.create().texOffs(82, 10).addBox(-0.1905F, -0.9252F, -0.5F, 5.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(4.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.9599F));
 
@@ -119,7 +119,7 @@ public class AntlionModel extends EntityModel<AntlionRenderState> {
 
         PartDefinition LeftMidLeg = partdefinition.addOrReplaceChild("LeftMidLeg", CubeListBuilder.create(), PartPose.offset(9.0F, 18.0F, -8.5F));
 
-		PartDefinition LM1 = LeftMidLeg.addOrReplaceChild("LM1", CubeListBuilder.create().texOffs(82, 5).addBox(0.0F, -1.0F, -1.0F, 7.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.6981F));
+        PartDefinition LM1 = LeftMidLeg.addOrReplaceChild("LM1", CubeListBuilder.create().texOffs(82, 5).addBox(0.0F, -1.0F, -1.0F, 7.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.6981F));
 
         LM1.addOrReplaceChild("LM2", CubeListBuilder.create().texOffs(82, 10).addBox(-0.3567F, -0.5963F, -0.5F, 5.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(6.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.8727F));
 
@@ -127,7 +127,7 @@ public class AntlionModel extends EntityModel<AntlionRenderState> {
 
         PartDefinition LeftBackLeg = partdefinition.addOrReplaceChild("LeftBackLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(9.0F, 19.0F, -2.0F, 0.0F, -0.5236F, 0.0F));
 
-		PartDefinition LB1 = LeftBackLeg.addOrReplaceChild("LB1", CubeListBuilder.create().texOffs(82, 0).addBox(0.0F, -1.0F, -0.5F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, 0.0F, -0.5F, 0.0F, 0.0F, 0.7854F));
+        PartDefinition LB1 = LeftBackLeg.addOrReplaceChild("LB1", CubeListBuilder.create().texOffs(82, 0).addBox(0.0F, -1.0F, -0.5F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, 0.0F, -0.5F, 0.0F, 0.0F, 0.7854F));
 
         LB1.addOrReplaceChild("LB2", CubeListBuilder.create().texOffs(82, 10).addBox(0.0927F, -0.6945F, -0.2456F, 5.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.8927F, 0.0F, 0.2456F, 0.0F, 0.0F, -0.925F));
 
@@ -135,7 +135,7 @@ public class AntlionModel extends EntityModel<AntlionRenderState> {
 
         PartDefinition RightFrontLeg = partdefinition.addOrReplaceChild("RightFrontLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(-6.0F, 19.0F, -13.0F, 0.0F, 2.5307F, 0.0F));
 
-		PartDefinition RF1 = RightFrontLeg.addOrReplaceChild("RF1", CubeListBuilder.create().texOffs(82, 0).addBox(0.0F, -1.0F, -1.0F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.829F));
+        PartDefinition RF1 = RightFrontLeg.addOrReplaceChild("RF1", CubeListBuilder.create().texOffs(82, 0).addBox(0.0F, -1.0F, -1.0F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.829F));
 
         RF1.addOrReplaceChild("RF2", CubeListBuilder.create().texOffs(82, 10).addBox(-0.1905F, -0.9252F, -0.5F, 5.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(4.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.9599F));
 
@@ -143,7 +143,7 @@ public class AntlionModel extends EntityModel<AntlionRenderState> {
 
         PartDefinition RightMidLeg = partdefinition.addOrReplaceChild("RightMidLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(-9.0F, 18.0F, -8.5F, 0.0F, 3.1416F, 0.0F));
 
-		PartDefinition RM1 = RightMidLeg.addOrReplaceChild("RM1", CubeListBuilder.create().texOffs(82, 5).addBox(0.0F, -1.0F, -1.0F, 7.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.6981F));
+        PartDefinition RM1 = RightMidLeg.addOrReplaceChild("RM1", CubeListBuilder.create().texOffs(82, 5).addBox(0.0F, -1.0F, -1.0F, 7.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.6981F));
 
         RM1.addOrReplaceChild("RM2", CubeListBuilder.create().texOffs(82, 10).addBox(-0.3567F, -0.5963F, -0.5F, 5.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(6.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.8727F));
 
@@ -151,45 +151,45 @@ public class AntlionModel extends EntityModel<AntlionRenderState> {
 
         PartDefinition RightBackLeg = partdefinition.addOrReplaceChild("RightBackLeg", CubeListBuilder.create(), PartPose.offsetAndRotation(-9.0F, 19.0F, -2.0F, 0.0F, -2.618F, 0.0F));
 
-		PartDefinition RB1 = RightBackLeg.addOrReplaceChild("RB1", CubeListBuilder.create().texOffs(82, 0).addBox(0.0F, -1.0F, -0.5F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, 0.0F, -0.5F, 0.0F, 0.0F, 0.7854F));
+        PartDefinition RB1 = RightBackLeg.addOrReplaceChild("RB1", CubeListBuilder.create().texOffs(82, 0).addBox(0.0F, -1.0F, -0.5F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, 0.0F, -0.5F, 0.0F, 0.0F, 0.7854F));
 
         RB1.addOrReplaceChild("RB2", CubeListBuilder.create().texOffs(82, 10).addBox(0.0927F, -0.6945F, -0.2456F, 5.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.8927F, 0.0F, 0.2456F, 0.0F, 0.0F, -0.925F));
 
         RB1.addOrReplaceChild("RB3", CubeListBuilder.create().texOffs(82, 14).addBox(-0.3277F, -0.1772F, -0.5F, 5.0F, 1.0F, 1.0F, new CubeDeformation(-0.001F)), PartPose.offsetAndRotation(6.5F, -4.0F, 0.5F, 0.0F, 0.0F, -0.2269F));
 
         return LayerDefinition.create(meshdefinition, 128, 128);
-	}
+    }
 
-	@Override
-	public void setupAnim(AntlionRenderState state) {
-		float sin = (float) (Math.sin(state.walkAnimationPos * 0.75F) * 0.5F * state.walkAnimationSpeed);
-		float sinJaw = (float) (Math.sin(state.walkAnimationPos * 0.75F) * 0.2F * state.walkAnimationSpeed);
-		float headY = state.yRot / (180F / (float) Math.PI);
-		float headX = state.xRot / (180F / (float) Math.PI);
-		Head.yRot = headY;
-		Neck1.yRot = headY;
-		Head.xRot = headX;
-		Neck1.xRot = 0.6981F + headX;
+    @Override
+    public void setupAnim(S state) {
+        float sin = (float) (Math.sin(state.walkAnimationPos * 0.75F) * 0.5F * state.walkAnimationSpeed);
+        float sinJaw = (float) (Math.sin(state.walkAnimationPos * 0.75F) * 0.2F * state.walkAnimationSpeed);
+        float headY = state.yRot / (180F / (float) Math.PI);
+        float headX = state.xRot / (180F / (float) Math.PI);
+        Head.yRot = headY;
+        Neck1.yRot = headY;
+        Head.xRot = headX;
+        Neck1.xRot = 0.6981F + headX;
 
-		LeftFrontLeg.yRot = 0.6109F - sin;
-		LeftMidLeg.yRot = 0F + sin;
-		LeftBackLeg.yRot = -0.5236F - sin;
-		RightFrontLeg.yRot = 2.5307F -sin;
-		RightMidLeg.yRot = 3.1416F + sin;
-		RightBackLeg.yRot = -2.618F - sin;
+        LeftFrontLeg.yRot = 0.6109F - sin;
+        LeftMidLeg.yRot = 0F + sin;
+        LeftBackLeg.yRot = -0.5236F - sin;
+        RightFrontLeg.yRot = 2.5307F - sin;
+        RightMidLeg.yRot = 3.1416F + sin;
+        RightBackLeg.yRot = -2.618F - sin;
 
-		LeftFrontLeg.zRot = 0F + sin * 0.75F;
-		LeftMidLeg.zRot = 0F - sin * 0.75F;
-		LeftBackLeg.zRot = 0F + sin * 0.75F;
-		RightFrontLeg.zRot = 0F + sin * 0.75F;
-		RightMidLeg.zRot = 0F - sin * 0.75F;
-		RightBackLeg.zRot = 0F + sin * 0.75F;
+        LeftFrontLeg.zRot = 0F + sin * 0.75F;
+        LeftMidLeg.zRot = 0F - sin * 0.75F;
+        LeftBackLeg.zRot = 0F + sin * 0.75F;
+        RightFrontLeg.zRot = 0F + sin * 0.75F;
+        RightMidLeg.zRot = 0F - sin * 0.75F;
+        RightBackLeg.zRot = 0F + sin * 0.75F;
 
-		MandR1.yRot = -sinJaw + 0.3491F;
-		MandR2.yRot = -sinJaw + 0.3491F;
-		MandR3.yRot = -sinJaw - 0.3491F;
-		MandL1.yRot = sinJaw - 0.3491F;
-		MandL2.yRot = sinJaw - 0.3491F;
-		MandL3.yRot = sinJaw + 0.3491F;
-	}
+        MandR1.yRot = -sinJaw + 0.3491F;
+        MandR2.yRot = -sinJaw + 0.3491F;
+        MandR3.yRot = -sinJaw - 0.3491F;
+        MandL1.yRot = sinJaw - 0.3491F;
+        MandL2.yRot = sinJaw - 0.3491F;
+        MandL3.yRot = sinJaw + 0.3491F;
+    }
 }

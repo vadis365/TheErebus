@@ -2,6 +2,7 @@ package erebus.registries.blocks;
 
 import erebus.Erebus;
 import erebus.block.*;
+import erebus.block.ComposterBlock;
 import erebus.block.altars.*;
 import erebus.block.bamboo.*;
 import erebus.block.fluid.FormicAcidFluidBlock;
@@ -10,6 +11,8 @@ import erebus.block.portal.ErebusPortalBlock;
 import erebus.block.util.ModBlockSetTypes;
 import erebus.block.util.ModWoodTypes;
 import erebus.registries.ModFluids;
+import erebus.registries.entity.ModEntities;
+import erebus.registries.helpers.ModBlockHelpers;
 import erebus.registries.item.ModItems;
 import erebus.registries.world.feature.PlantFeatures;
 import erebus.registries.world.tree.ModTreeGrowers;
@@ -18,6 +21,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.TriState;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
@@ -31,16 +35,16 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
-public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
+public class ModBlocks extends ModBlockHelpers {
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Erebus.MODID);
 
     // MARK: Amber
-    public static final DeferredBlock<Block> AMBER = registerTransparentBlock("amber", ModBlockProperties.AMBER_PROPERTIES.strength(1.5F));
-    public static final DeferredBlock<Block> AMBER_BRICKS = registerTransparentBlock("amber_bricks", ModBlockProperties.AMBER_PROPERTIES.strength(2.0F));
-    public static final DeferredBlock<Block> AMBER_GLASS = registerConnectedTextureBlock("amber_glass", ModBlockProperties.AMBER_PROPERTIES.strength(1.5F));
-    public static final DeferredBlock<Block> PRESERVED_AMBER = registerBlock("preserved_amber", () -> new PreservedBlock(ModBlockProperties.AMBER_PROPERTIES.strength(10).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("preserved_amber")))));
-    public static final DeferredBlock<Block> PRESERVED_AMBER_GLASS = registerBlock("preserved_amber_glass", () -> new PreservedBlock(ModBlockProperties.AMBER_PROPERTIES.strength(10).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("preserved_amber_glass")))));
+    public static final DeferredBlock<Block> AMBER = registerTransparentBlock("amber", ModBlockProperties.AMBER_PROPERTIES);
+    public static final DeferredBlock<Block> AMBER_BRICKS = registerTransparentBlock("amber_bricks", ModBlockProperties.AMBER_BRICKS_PROPERTIES);
+    public static final DeferredBlock<Block> AMBER_GLASS = registerConnectedTextureBlock("amber_glass", ModBlockProperties.AMBER_GLASS_PROPERTIES);
+    public static final DeferredBlock<Block> PRESERVED_AMBER = registerBlock("preserved_amber", () -> new PreservedBlock(ModBlockProperties.PRESERVED_AMBER_PROPERTIES.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("preserved_amber")))));
+    public static final DeferredBlock<Block> PRESERVED_AMBER_GLASS = registerBlock("preserved_amber_glass", () -> new PreservedBlock(ModBlockProperties.PRESERVED_AMBER_GLASS_PROPERTIES.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("preserved_amber_glass")))));
 
     public static final DeferredBlock<Block> GLOWING_JAR = registerBlock("glowing_jar", () -> new GlowingJarBlock(ModBlockProperties.GLOWING_JAR_PROPERTIES.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("glowing_jar")))));
     public static final DeferredBlock<Block> FLUID_JAR = registerBlockWithoutBlockItem("fluid_jar", () -> new FluidJarBlock(ModBlockProperties.FLUID_JAR_PROPERTIES.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("fluid_jar")))));
@@ -55,14 +59,20 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> UMBERCOBBLE_WEBBED = registerSimpleBlock("umbercobble_webbed", ModBlockProperties.UMBERCOBBLE_WEBBED);
     public static final DeferredBlock<Block> UMBERTILE_SMOOTH = registerSimpleBlock("umbertile_smooth", ModBlockProperties.UMBERTILE_SMOOTH);
     public static final DeferredBlock<Block> UMBERTILE_SMOOTH_SMALL = registerSimpleBlock("umbertile_smooth_small", ModBlockProperties.UMBERTILE_SMOOTH_SMALL);
-    public static final DeferredBlock<Block> UMBERGRAVEL = registerSimpleBlock("umbergravel", ModBlockProperties.UMBERGRAVEL);
+    public static final DeferredBlock<Block> UMBERGRAVEL = registerBlock("umbergravel", () -> new ColoredFallingBlock(new net.minecraft.util.ColorRGBA(-8356741),
+            ModBlockProperties.UMBERGRAVEL.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("umbergravel")))));
     public static final DeferredBlock<Block> UMBERPAVER = registerSimpleBlock("umberpaver", ModBlockProperties.UMBERPAVER);
     public static final DeferredBlock<Block> UMBERPAVER_MOSSY = registerSimpleBlock("umberpaver_mossy", ModBlockProperties.UMBERPAVER_MOSSY);
     public static final DeferredBlock<Block> UMBERPAVER_WEBBED = registerSimpleBlock("umberpaver_webbed", ModBlockProperties.UMBERPAVER_WEBBED);
     public static final DeferredBlock<Block> UMBERSTONE_PILLAR = registerBlock("umberstone_pillar", () -> new RotatedPillarBlock(ModBlockProperties.UMBERSTONE_PILLAR.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("umberstone_pillar")))));
     public static final DeferredBlock<Block> VOLCANIC_ROCK = registerSimpleBlock("volcanic_rock", ModBlockProperties.VOLCANIC_ROCK);
-    public static final DeferredBlock<Block> DUST = registerSimpleBlock("dust", ModBlockProperties.DUST);
-    public static final DeferredBlock<Block> DUST_LAYER = registerBlock("dust_layer", () -> new SnowLayerBlock(ModBlockProperties.DUST_LAYER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("dust_layer")))));
+    public static final DeferredBlock<Block> DUST = registerBlock("dust", () -> new Block(ModBlockProperties.DUST.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("dust")))) {
+        @Override
+        public @NotNull TriState canSustainPlant(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos soilPosition, @NotNull Direction facing, @NotNull BlockState plant) {
+            return TriState.TRUE;
+        }
+    });
+    public static final DeferredBlock<Block> DUST_LAYER = registerBlock("dust_layer", () -> new DustLayerBlock(ModBlockProperties.DUST_LAYER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("dust_layer")))));
     public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK = registerLog("petrified_wood_rock", ModBlockProperties.PETRIFIED_WOOD_ROCK);
     public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_2 = registerLog("petrified_wood_rock_2", ModBlockProperties.PETRIFIED_WOOD_ROCK_2);
     public static final DeferredBlock<Block> PETRIFIED_WOOD_ROCK_3 = registerLog("petrified_wood_rock_3", ModBlockProperties.PETRIFIED_WOOD_ROCK_3);
@@ -72,30 +82,30 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> PETRIFIED_BARK_RED = registerLog("petrified_bark_red", ModBlockProperties.PETRIFIED_BARK_RED);
     public static final DeferredBlock<Block> PETRIFIED_BARK_BROWN = registerLog("petrified_bark_brown", ModBlockProperties.PETRIFIED_BARK_BROWN);
     public static final DeferredBlock<Block> PETRIFIED_LOG_INNER = registerSimpleBlock("petrified_log_inner", ModBlockProperties.PETRIFIED_LOG_INNER);
-    public static final DeferredBlock<Block> DUNG = registerSimpleBlock("dung", ModBlockProperties.DUNG);
+    public static final DeferredBlock<Block> DUNG = registerBlock("dung", () -> new DungBlock(ModBlockProperties.DUNG.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("dung")))));
     public static final DeferredBlock<Block> MIR_BRICKS = registerSimpleBlock("mir_bricks", ModBlockProperties.MIR_BRICKS);
     public static final DeferredBlock<Block> MUD_BRICKS = registerSimpleBlock("mud_bricks", ModBlockProperties.MUD_BRICKS);
 
     // MARK: Ore
-    public static final DeferredBlock<Block> ORE_IRON = registerBlock("ore_iron", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_IRON.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_iron")))));
-    public static final DeferredBlock<Block> ORE_GOLD = registerBlock("ore_gold", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_GOLD.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_gold")))));
-    public static final DeferredBlock<Block> ORE_COAL = registerBlock("ore_coal", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_COAL.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_coal")))));
-    public static final DeferredBlock<Block> ORE_DIAMOND = registerBlock("ore_diamond", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_DIAMOND.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_diamond")))));
-    public static final DeferredBlock<Block> ORE_EMERALD = registerBlock("ore_emerald", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_EMERALD.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_emerald")))));
-    public static final DeferredBlock<Block> ORE_LAPIS = registerBlock("ore_lapis", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_LAPIS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_lapis")))));
-    public static final DeferredBlock<Block> ORE_QUARTZ = registerBlock("ore_quartz", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_QUARTZ.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_quartz")))));
-    public static final DeferredBlock<Block> ORE_PETRIFIED_QUARTZ = registerBlock("ore_petrified_quartz", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_PETRIFIED_QUARTZ.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_petrified_quartz")))));
-    public static final DeferredBlock<Block> ORE_COPPER = registerBlock("ore_copper", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_COPPER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_copper")))));
-    public static final DeferredBlock<Block> ORE_SILVER = registerBlock("ore_silver", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_SILVER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_silver")))));
-    public static final DeferredBlock<Block> ORE_TIN = registerBlock("ore_tin", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_TIN.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_tin")))));
-    public static final DeferredBlock<Block> ORE_LEAD = registerBlock("ore_lead", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_LEAD.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_lead")))));
-    public static final DeferredBlock<Block> ORE_ALUMINUM = registerBlock("ore_aluminum", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_ALUMINUM.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_aluminum")))));
-    public static final DeferredBlock<Block> ORE_JADE = registerBlock("ore_jade", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_JADE.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_jade")))));
-    public static final DeferredBlock<Block> ORE_ENCRUSTED_DIAMOND = registerBlock("ore_encrusted_diamond", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_ENCRUSTED_DIAMOND.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_encrusted_diamond")))));
-    public static final DeferredBlock<Block> ORE_FOSSIL = registerBlock("ore_fossil", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_FOSSIL.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_fossil")))));
-    public static final DeferredBlock<Block> ORE_GNEISS = registerBlock("ore_gneiss", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_GNEISS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_gneiss")))));
-    public static final DeferredBlock<Block> ORE_PETRIFIED_WOOD = registerBlock("ore_petrified_wood", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_PETRIFIED_WOOD.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_petrified_wood")))));
-    public static final DeferredBlock<Block> ORE_TEMPLE = registerBlock("ore_temple", () -> new DropExperienceBlock(UniformInt.of(2, 4), ModBlockProperties.ORE_TEMPLE.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_temple")))));
+    public static final DeferredBlock<Block> ORE_IRON = registerBlock("ore_iron", () -> new DropExperienceBlock(ConstantInt.of(0), ModBlockProperties.ORE_IRON.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_iron")))));
+    public static final DeferredBlock<Block> ORE_GOLD = registerBlock("ore_gold", () -> new DropExperienceBlock(ConstantInt.of(0), ModBlockProperties.ORE_GOLD.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_gold")))));
+    public static final DeferredBlock<Block> ORE_COAL = registerBlock("ore_coal", () -> new DropExperienceBlock(UniformInt.of(0, 2), ModBlockProperties.ORE_COAL.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_coal")))));
+    public static final DeferredBlock<Block> ORE_DIAMOND = registerBlock("ore_diamond", () -> new DropExperienceBlock(UniformInt.of(3, 7), ModBlockProperties.ORE_DIAMOND.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_diamond")))));
+    public static final DeferredBlock<Block> ORE_EMERALD = registerBlock("ore_emerald", () -> new DropExperienceBlock(UniformInt.of(3, 7), ModBlockProperties.ORE_EMERALD.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_emerald")))));
+    public static final DeferredBlock<Block> ORE_LAPIS = registerBlock("ore_lapis", () -> new DropExperienceBlock(UniformInt.of(2, 5), ModBlockProperties.ORE_LAPIS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_lapis")))));
+    public static final DeferredBlock<Block> ORE_QUARTZ = registerBlock("ore_quartz", () -> new DropExperienceBlock(UniformInt.of(2, 5), ModBlockProperties.ORE_QUARTZ.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_quartz")))));
+    public static final DeferredBlock<Block> ORE_PETRIFIED_QUARTZ = registerBlock("ore_petrified_quartz", () -> new DropExperienceBlock(UniformInt.of(2, 5), ModBlockProperties.ORE_PETRIFIED_QUARTZ.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_petrified_quartz")))));
+    public static final DeferredBlock<Block> ORE_COPPER = registerBlock("ore_copper", () -> new DropExperienceBlock(ConstantInt.of(0), ModBlockProperties.ORE_COPPER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_copper")))));
+    public static final DeferredBlock<Block> ORE_SILVER = registerBlock("ore_silver", () -> new DropExperienceBlock(ConstantInt.of(0), ModBlockProperties.ORE_SILVER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_silver")))));
+    public static final DeferredBlock<Block> ORE_TIN = registerBlock("ore_tin", () -> new DropExperienceBlock(ConstantInt.of(0), ModBlockProperties.ORE_TIN.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_tin")))));
+    public static final DeferredBlock<Block> ORE_LEAD = registerBlock("ore_lead", () -> new DropExperienceBlock(ConstantInt.of(0), ModBlockProperties.ORE_LEAD.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_lead")))));
+    public static final DeferredBlock<Block> ORE_ALUMINUM = registerBlock("ore_aluminum", () -> new DropExperienceBlock(ConstantInt.of(0), ModBlockProperties.ORE_ALUMINUM.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_aluminum")))));
+    public static final DeferredBlock<Block> ORE_JADE = registerBlock("ore_jade", () -> new DropExperienceBlock(UniformInt.of(3, 7), ModBlockProperties.ORE_JADE.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_jade")))));
+    public static final DeferredBlock<Block> ORE_ENCRUSTED_DIAMOND = registerBlock("ore_encrusted_diamond", () -> new DropExperienceBlock(UniformInt.of(3, 7), ModBlockProperties.ORE_ENCRUSTED_DIAMOND.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_encrusted_diamond")))));
+    public static final DeferredBlock<Block> ORE_FOSSIL = registerBlock("ore_fossil", () -> new DropExperienceBlock(UniformInt.of(0, 2), ModBlockProperties.ORE_FOSSIL.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_fossil")))));
+    public static final DeferredBlock<Block> ORE_GNEISS = registerBlock("ore_gneiss", () -> new DropExperienceBlock(UniformInt.of(0, 2), ModBlockProperties.ORE_GNEISS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_gneiss")))));
+    public static final DeferredBlock<Block> ORE_PETRIFIED_WOOD = registerBlock("ore_petrified_wood", () -> new DropExperienceBlock(UniformInt.of(0, 2), ModBlockProperties.ORE_PETRIFIED_WOOD.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_petrified_wood")))));
+    public static final DeferredBlock<Block> ORE_TEMPLE = registerBlock("ore_temple", () -> new DropExperienceBlock(UniformInt.of(0, 2), ModBlockProperties.ORE_TEMPLE.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("ore_temple")))));
 
     // MARK: Wood Logs
     public static final DeferredBlock<Block> LOG_ASPER = registerLog("log_asper", ModBlockProperties.log(MapColor.WOOD, MapColor.PODZOL));
@@ -103,11 +113,11 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> LOG_BALSAM_RESINLESS = registerLog("log_balsam_resinless", ModBlockProperties.log(MapColor.WOOD, MapColor.PODZOL));
     public static final DeferredBlock<Block> LOG_BAOBAB = registerLog("log_baobab", ModBlockProperties.log(MapColor.WOOD, MapColor.PODZOL));
     public static final DeferredBlock<Block> LOG_CYPRESS = registerLog("log_cypress", ModBlockProperties.log(MapColor.WOOD, MapColor.PODZOL));
-    public static final DeferredBlock<Block> LOG_EUCALYPTUS = registerLog("log_eucalyptus", ModBlockProperties.log(MapColor.WOOD, MapColor.PODZOL));
+    public static final DeferredBlock<Block> LOG_EUCALYPTUS = registerBlock("log_eucalyptus", () -> new BarkLogBlock(ModBlockProperties.log(MapColor.WOOD, MapColor.PODZOL).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("log_eucalyptus")))));
     public static final DeferredBlock<Block> LOG_MAHOGANY = registerLog("log_mahogany", ModBlockProperties.log(MapColor.WOOD, MapColor.PODZOL));
     public static final DeferredBlock<Block> LOG_MARSHWOOD = registerLog("log_marshwood", ModBlockProperties.log(MapColor.WOOD, MapColor.PODZOL));
     public static final DeferredBlock<Block> LOG_MOSSBARK = registerLog("log_mossbark", ModBlockProperties.log(MapColor.WOOD, MapColor.PODZOL));
-    public static final DeferredBlock<Block> LOG_ROTTEN = registerLog("log_rotten", ModBlockProperties.log(MapColor.WOOD, MapColor.PODZOL));
+    public static final DeferredBlock<Block> LOG_ROTTEN = registerBlock("log_rotten", () -> new RottenLogBlock(ModBlockProperties.log(MapColor.WOOD, MapColor.PODZOL).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("log_rotten")))));
     public static final DeferredBlock<Block> LOG_SCORCHED = registerLog("log_scorched", ModBlockProperties.log(MapColor.WOOD, MapColor.PODZOL));
     public static final DeferredBlock<Block> LOG_HOLLOW = registerBlock("log_hollow", () -> new HollowLogBlock(ModBlockProperties.LOG_HOLLOW.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("log_hollow")))));
 
@@ -133,57 +143,57 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> LEAVES_MOSSBARK = registerBlock("leaves_mossbark", () -> new TintedParticleLeavesBlock(0.01F, ModBlockProperties.LEAVES.mapColor(MapColor.PLANT).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("leaves_mossbark")))));
 
     // MARK: Wood Planks
-    public static final DeferredBlock<Block> PLANKS_ASPER = registerSimpleBlock("planks_asper", ModBlockProperties.PLANKS.mapColor(MapColor.WOOD));
-    public static final DeferredBlock<Block> PLANKS_BAMBOO = registerSimpleBlock("planks_bamboo", ModBlockProperties.PLANKS.mapColor(MapColor.SAND));
-    public static final DeferredBlock<Block> PLANKS_BAOBAB = registerSimpleBlock("planks_baobab", ModBlockProperties.PLANKS.mapColor(MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<Block> PLANKS_BALSAM = registerSimpleBlock("planks_balsam", ModBlockProperties.PLANKS.mapColor(MapColor.TERRACOTTA_PINK));
-    public static final DeferredBlock<Block> PLANKS_CYPRESS = registerSimpleBlock("planks_cypress", ModBlockProperties.PLANKS.mapColor(MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<Block> PLANKS_EUCALYPTUS = registerSimpleBlock("planks_eucalyptus", ModBlockProperties.PLANKS.mapColor(MapColor.TERRACOTTA_PINK));
-    public static final DeferredBlock<Block> PLANKS_MAHOGANY = registerSimpleBlock("planks_mahogany", ModBlockProperties.PLANKS.mapColor(MapColor.COLOR_BROWN));
-    public static final DeferredBlock<Block> PLANKS_MARSHWOOD = registerSimpleBlock("planks_marshwood", ModBlockProperties.PLANKS.mapColor(MapColor.TERRACOTTA_GREEN));
-    public static final DeferredBlock<Block> PLANKS_MOSSBARK = registerSimpleBlock("planks_mossbark", ModBlockProperties.PLANKS.mapColor(MapColor.COLOR_BROWN));
-    public static final DeferredBlock<Block> PLANKS_PETRIFIED = registerSimpleBlock("planks_petrified", ModBlockProperties.PLANKS.mapColor(MapColor.TERRACOTTA_BROWN));
-    public static final DeferredBlock<Block> PLANKS_ROTTEN = registerSimpleBlock("planks_rotten", ModBlockProperties.PLANKS.mapColor(MapColor.COLOR_BLACK));
-    public static final DeferredBlock<Block> PLANKS_SCORCHED = registerSimpleBlock("planks_scorched", ModBlockProperties.PLANKS.mapColor(MapColor.COLOR_BLACK));
-    public static final DeferredBlock<Block> PLANKS_VARNISHED = registerSimpleBlock("planks_varnished", ModBlockProperties.PLANKS.mapColor(MapColor.WOOD));
-    public static final DeferredBlock<Block> PLANKS_WHITE = registerSimpleBlock("planks_white", ModBlockProperties.PLANKS.mapColor(MapColor.TERRACOTTA_WHITE));
+    public static final DeferredBlock<Block> PLANKS_ASPER = registerSimpleBlock("planks_asper", ModBlockProperties.planksProperties().mapColor(MapColor.WOOD));
+    public static final DeferredBlock<Block> PLANKS_BAMBOO = registerSimpleBlock("planks_bamboo", ModBlockProperties.planksProperties().mapColor(MapColor.SAND));
+    public static final DeferredBlock<Block> PLANKS_BAOBAB = registerSimpleBlock("planks_baobab", ModBlockProperties.planksProperties().mapColor(MapColor.TERRACOTTA_WHITE));
+    public static final DeferredBlock<Block> PLANKS_BALSAM = registerSimpleBlock("planks_balsam", ModBlockProperties.planksProperties().mapColor(MapColor.TERRACOTTA_PINK));
+    public static final DeferredBlock<Block> PLANKS_CYPRESS = registerSimpleBlock("planks_cypress", ModBlockProperties.planksProperties().mapColor(MapColor.TERRACOTTA_WHITE));
+    public static final DeferredBlock<Block> PLANKS_EUCALYPTUS = registerSimpleBlock("planks_eucalyptus", ModBlockProperties.planksProperties().mapColor(MapColor.TERRACOTTA_PINK));
+    public static final DeferredBlock<Block> PLANKS_MAHOGANY = registerSimpleBlock("planks_mahogany", ModBlockProperties.planksProperties().mapColor(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<Block> PLANKS_MARSHWOOD = registerSimpleBlock("planks_marshwood", ModBlockProperties.planksProperties().mapColor(MapColor.TERRACOTTA_GREEN));
+    public static final DeferredBlock<Block> PLANKS_MOSSBARK = registerSimpleBlock("planks_mossbark", ModBlockProperties.planksProperties().mapColor(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<Block> PLANKS_PETRIFIED = registerSimpleBlock("planks_petrified", ModBlockProperties.PLANKS_PETRIFIED);
+    public static final DeferredBlock<Block> PLANKS_ROTTEN = registerSimpleBlock("planks_rotten", ModBlockProperties.planksProperties().mapColor(MapColor.COLOR_BLACK));
+    public static final DeferredBlock<Block> PLANKS_SCORCHED = registerSimpleBlock("planks_scorched", ModBlockProperties.planksProperties().mapColor(MapColor.COLOR_BLACK));
+    public static final DeferredBlock<Block> PLANKS_VARNISHED = registerSimpleBlock("planks_varnished", ModBlockProperties.planksProperties().mapColor(MapColor.WOOD));
+    public static final DeferredBlock<Block> PLANKS_WHITE = registerSimpleBlock("planks_white", ModBlockProperties.planksProperties().mapColor(MapColor.TERRACOTTA_WHITE));
 
     // MARK: Chests
-    public static final DeferredBlock<Block> CHEST_ASPER = registerChest("chest_asper", ModBlockProperties.CHEST.mapColor(MapColor.WOOD));
-    public static final DeferredBlock<Block> CHEST_BAMBOO = registerChest("chest_bamboo", ModBlockProperties.CHEST.mapColor(MapColor.SAND));
-    public static final DeferredBlock<Block> CHEST_BAOBAB = registerChest("chest_baobab", ModBlockProperties.CHEST.mapColor(MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<Block> CHEST_BALSAM = registerChest("chest_balsam", ModBlockProperties.CHEST.mapColor(MapColor.TERRACOTTA_PINK));
-    public static final DeferredBlock<Block> CHEST_CYPRESS = registerChest("chest_cypress", ModBlockProperties.CHEST.mapColor(MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<Block> CHEST_EUCALYPTUS = registerChest("chest_eucalyptus", ModBlockProperties.CHEST.mapColor(MapColor.TERRACOTTA_PINK));
-    public static final DeferredBlock<Block> CHEST_MAHOGANY = registerChest("chest_mahogany", ModBlockProperties.CHEST.mapColor(MapColor.COLOR_BROWN));
-    public static final DeferredBlock<Block> CHEST_MARSHWOOD = registerChest("chest_marshwood", ModBlockProperties.CHEST.mapColor(MapColor.TERRACOTTA_GREEN));
-    public static final DeferredBlock<Block> CHEST_MOSSBARK = registerChest("chest_mossbark", ModBlockProperties.CHEST.mapColor(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<Block> CHEST_ASPER = registerChest("chest_asper", ModBlockProperties.chestProperties().mapColor(MapColor.WOOD));
+    public static final DeferredBlock<Block> CHEST_BAMBOO = registerChest("chest_bamboo", ModBlockProperties.chestProperties().mapColor(MapColor.SAND));
+    public static final DeferredBlock<Block> CHEST_BAOBAB = registerChest("chest_baobab", ModBlockProperties.chestProperties().mapColor(MapColor.TERRACOTTA_WHITE));
+    public static final DeferredBlock<Block> CHEST_BALSAM = registerChest("chest_balsam", ModBlockProperties.chestProperties().mapColor(MapColor.TERRACOTTA_PINK));
+    public static final DeferredBlock<Block> CHEST_CYPRESS = registerChest("chest_cypress", ModBlockProperties.chestProperties().mapColor(MapColor.TERRACOTTA_WHITE));
+    public static final DeferredBlock<Block> CHEST_EUCALYPTUS = registerChest("chest_eucalyptus", ModBlockProperties.chestProperties().mapColor(MapColor.TERRACOTTA_PINK));
+    public static final DeferredBlock<Block> CHEST_MAHOGANY = registerChest("chest_mahogany", ModBlockProperties.chestProperties().mapColor(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<Block> CHEST_MARSHWOOD = registerChest("chest_marshwood", ModBlockProperties.chestProperties().mapColor(MapColor.TERRACOTTA_GREEN));
+    public static final DeferredBlock<Block> CHEST_MOSSBARK = registerChest("chest_mossbark", ModBlockProperties.chestProperties().mapColor(MapColor.COLOR_BROWN));
     public static final DeferredBlock<Block> CHEST_PETRIFIED = registerChest("chest_petrified", BlockBehaviour.Properties.of()
             .instrument(NoteBlockInstrument.BASS)
             .strength(2.5F)
             .sound(SoundType.WOOD)
             .mapColor(MapColor.TERRACOTTA_BROWN)
     );
-    public static final DeferredBlock<Block> CHEST_ROTTEN = registerChest("chest_rotten", ModBlockProperties.CHEST.mapColor(MapColor.COLOR_BLACK));
-    public static final DeferredBlock<Block> CHEST_SCORCHED = registerChest("chest_scorched", ModBlockProperties.CHEST.mapColor(MapColor.COLOR_BLACK));
-    public static final DeferredBlock<Block> CHEST_VARNISHED = registerChest("chest_varnished", ModBlockProperties.CHEST.mapColor(MapColor.WOOD));
-    public static final DeferredBlock<Block> CHEST_WHITE = registerChest("chest_white", ModBlockProperties.CHEST.mapColor(MapColor.TERRACOTTA_WHITE));
+    public static final DeferredBlock<Block> CHEST_ROTTEN = registerChest("chest_rotten", ModBlockProperties.chestProperties().mapColor(MapColor.COLOR_BLACK));
+    public static final DeferredBlock<Block> CHEST_SCORCHED = registerChest("chest_scorched", ModBlockProperties.chestProperties().mapColor(MapColor.COLOR_BLACK));
+    public static final DeferredBlock<Block> CHEST_VARNISHED = registerChest("chest_varnished", ModBlockProperties.chestProperties().mapColor(MapColor.WOOD));
+    public static final DeferredBlock<Block> CHEST_WHITE = registerChest("chest_white", ModBlockProperties.chestProperties().mapColor(MapColor.TERRACOTTA_WHITE));
 
     // MARK: Slabs Wood
-    public static final DeferredBlock<Block> SLAB_PLANKS_ASPER = registerSlab("slab_planks_asper", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.WOOD));
-    public static final DeferredBlock<Block> SLAB_PLANKS_BAOBAB = registerSlab("slab_planks_baobab", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<Block> SLAB_PLANKS_BALSAM = registerSlab("slab_planks_balsam", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_PINK));
-    public static final DeferredBlock<Block> SLAB_PLANKS_BAMBOO = registerSlab("slab_planks_bamboo", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.SAND));
-    public static final DeferredBlock<Block> SLAB_PLANKS_CYPRESS = registerSlab("slab_planks_cypress", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_WHITE));
-    public static final DeferredBlock<Block> SLAB_PLANKS_EUCALYPTUS = registerSlab("slab_planks_eucalyptus", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_PINK));
-    public static final DeferredBlock<Block> SLAB_PLANKS_MAHOGANY = registerSlab("slab_planks_mahogany", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.COLOR_BROWN));
-    public static final DeferredBlock<Block> SLAB_PLANKS_MARSHWOOD = registerSlab("slab_planks_marshwood", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_GREEN));
-    public static final DeferredBlock<Block> SLAB_PLANKS_MOSSBARK = registerSlab("slab_planks_mossbark", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.COLOR_BROWN));
-    public static final DeferredBlock<Block> SLAB_PLANKS_PETRIFIED = registerSlab("slab_planks_petrified", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_BROWN));
-    public static final DeferredBlock<Block> SLAB_PLANKS_ROTTEN = registerSlab("slab_planks_rotten", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.COLOR_BLACK));
-    public static final DeferredBlock<Block> SLAB_PLANKS_SCORCHED = registerSlab("slab_planks_scorched", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.COLOR_BLACK));
-    public static final DeferredBlock<Block> SLAB_PLANKS_VARNISHED = registerSlab("slab_planks_varnished", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.WOOD));
-    public static final DeferredBlock<Block> SLAB_PLANKS_WHITE = registerSlab("slab_planks_white", ModBlockProperties.SLAB_PLANKS.mapColor(MapColor.TERRACOTTA_WHITE));
+    public static final DeferredBlock<Block> SLAB_PLANKS_ASPER = registerSlab("slab_planks_asper", ModBlockProperties.woodSlabProperties().mapColor(MapColor.WOOD));
+    public static final DeferredBlock<Block> SLAB_PLANKS_BAOBAB = registerSlab("slab_planks_baobab", ModBlockProperties.woodSlabProperties().mapColor(MapColor.TERRACOTTA_WHITE));
+    public static final DeferredBlock<Block> SLAB_PLANKS_BALSAM = registerSlab("slab_planks_balsam", ModBlockProperties.woodSlabProperties().mapColor(MapColor.TERRACOTTA_PINK));
+    public static final DeferredBlock<Block> SLAB_PLANKS_BAMBOO = registerSlab("slab_planks_bamboo", ModBlockProperties.woodSlabProperties().mapColor(MapColor.SAND));
+    public static final DeferredBlock<Block> SLAB_PLANKS_CYPRESS = registerSlab("slab_planks_cypress", ModBlockProperties.woodSlabProperties().mapColor(MapColor.TERRACOTTA_WHITE));
+    public static final DeferredBlock<Block> SLAB_PLANKS_EUCALYPTUS = registerSlab("slab_planks_eucalyptus", ModBlockProperties.woodSlabProperties().mapColor(MapColor.TERRACOTTA_PINK));
+    public static final DeferredBlock<Block> SLAB_PLANKS_MAHOGANY = registerSlab("slab_planks_mahogany", ModBlockProperties.woodSlabProperties().mapColor(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<Block> SLAB_PLANKS_MARSHWOOD = registerSlab("slab_planks_marshwood", ModBlockProperties.woodSlabProperties().mapColor(MapColor.TERRACOTTA_GREEN));
+    public static final DeferredBlock<Block> SLAB_PLANKS_MOSSBARK = registerSlab("slab_planks_mossbark", ModBlockProperties.woodSlabProperties().mapColor(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<Block> SLAB_PLANKS_PETRIFIED = registerSlab("slab_planks_petrified", ModBlockProperties.SLAB_PLANKS_PETRIFIED);
+    public static final DeferredBlock<Block> SLAB_PLANKS_ROTTEN = registerSlab("slab_planks_rotten", ModBlockProperties.woodSlabProperties().mapColor(MapColor.COLOR_BLACK));
+    public static final DeferredBlock<Block> SLAB_PLANKS_SCORCHED = registerSlab("slab_planks_scorched", ModBlockProperties.woodSlabProperties().mapColor(MapColor.COLOR_BLACK));
+    public static final DeferredBlock<Block> SLAB_PLANKS_VARNISHED = registerSlab("slab_planks_varnished", ModBlockProperties.woodSlabProperties().mapColor(MapColor.WOOD));
+    public static final DeferredBlock<Block> SLAB_PLANKS_WHITE = registerSlab("slab_planks_white", ModBlockProperties.woodSlabProperties().mapColor(MapColor.TERRACOTTA_WHITE));
 
     // MARK: Slabs Stone
     public static final DeferredBlock<Block> SLAB_AMBER = registerSlab("slab_amber", ModBlockProperties.SLAB_AMBER);
@@ -259,6 +269,7 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> DOOR_ROTTEN = registerDoor("door_rotten", ModBlockSetTypes.ROTTEN, ModBlockProperties.DOOR_ROTTEN);
     public static final DeferredBlock<Block> DOOR_SCORCHED = registerDoor("door_scorched", ModBlockSetTypes.SCORCHED, ModBlockProperties.DOOR_SCORCHED);
     public static final DeferredBlock<Block> DOOR_WHITE = registerDoor("door_white", ModBlockSetTypes.WHITE, ModBlockProperties.DOOR_WHITE);
+    public static final DeferredBlock<Block> DOOR_PETRIFIED = registerDoor("door_petrified", ModBlockSetTypes.PETRIFIED, ModBlockProperties.DOOR_PETRIFIED);
 
     // MARK: Fences
     public static final DeferredBlock<Block> FENCE_ASPER = registerFence("fence_asper", ModBlockProperties.FENCE_ASPER);
@@ -309,18 +320,18 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> QUICK_SAND = registerBlock("quick_sand", () -> new QuicksandBlock(ModBlockProperties.QUICK_SAND.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("quick_sand")))));
     public static final DeferredBlock<Block> GHOST_SAND = registerSimpleBlock("ghost_sand", ModBlockProperties.GHOST_SAND);
     public static final DeferredBlock<Block> SWAMP_VENT = registerBlock("swamp_vent", () -> new SwampVentBlock(ModBlockProperties.SWAMP_VENT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("swamp_vent")))));
-    public static final DeferredBlock<Block> GNEISS_VENT = registerSimpleBlock("gneiss_vent", ModBlockProperties.GNEISS_VENT);
+    public static final DeferredBlock<Block> GNEISS_VENT = registerBlock("gneiss_vent", () -> new GneissVentBlock(ModBlockProperties.GNEISS_VENT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("gneiss_vent")))));
     public static final DeferredBlock<Block> RED_GEM_BLOCK = registerSimpleBlock("red_gem_block", ModBlockProperties.RED_GEM_BLOCK);
     public static final DeferredBlock<Block> RED_GEM_LAMP = registerBlock("red_gem_lamp", () -> new RedstoneLampBlock(ModBlockProperties.RED_GEM_LAMP.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("red_gem_lamp")))));
     public static final DeferredBlock<Block> WITHER_WEB = registerBlock("wither_web", () -> new WitherWebBlock(ModBlockProperties.WITHER_WEB.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("wither_web")))));
     public static final DeferredBlock<Block> LAVA_WEB = registerBlock("lava_web", () -> new LavaWebBlock(ModBlockProperties.LAVA_WEB.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("lava_web")))));
-    public static final DeferredBlock<Block> GNEISS = registerSimpleBlock("gneiss", ModBlockProperties.GNEISS);
-    public static final DeferredBlock<Block> GNEISS_CARVED = registerSimpleBlock("gneiss_carved", ModBlockProperties.GNEISS_CARVED);
-    public static final DeferredBlock<Block> GNEISS_RELIEF = registerSimpleBlock("gneiss_relief", ModBlockProperties.GNEISS_RELIEF);
-    public static final DeferredBlock<Block> GNEISS_BRICKS = registerSimpleBlock("gneiss_bricks", ModBlockProperties.GNEISS_BRICKS);
-    public static final DeferredBlock<Block> GNEISS_SMOOTH = registerSimpleBlock("gneiss_smooth", ModBlockProperties.GNEISS_SMOOTH);
-    public static final DeferredBlock<Block> GNEISS_TILES = registerSimpleBlock("gneiss_tiles", ModBlockProperties.GNEISS_TILES);
-    public static final DeferredBlock<Block> GNEISS_TILES_CRACKED = registerSimpleBlock("gneiss_tiles_cracked", ModBlockProperties.GNEISS_TILES_CRACKED);
+    public static final DeferredBlock<Block> GNEISS = registerBlock("gneiss", () -> new GneissBlock(ModBlockProperties.GNEISS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("gneiss")))));
+    public static final DeferredBlock<Block> GNEISS_CARVED = registerBlock("gneiss_carved", () -> new GneissBlock(ModBlockProperties.GNEISS_CARVED.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("gneiss_carved")))));
+    public static final DeferredBlock<Block> GNEISS_RELIEF = registerBlock("gneiss_relief", () -> new GneissBlock(ModBlockProperties.GNEISS_RELIEF.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("gneiss_relief")))));
+    public static final DeferredBlock<Block> GNEISS_BRICKS = registerBlock("gneiss_bricks", () -> new GneissBlock(ModBlockProperties.GNEISS_BRICKS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("gneiss_bricks")))));
+    public static final DeferredBlock<Block> GNEISS_SMOOTH = registerBlock("gneiss_smooth", () -> new GneissBlock(ModBlockProperties.GNEISS_SMOOTH.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("gneiss_smooth")))));
+    public static final DeferredBlock<Block> GNEISS_TILES = registerBlock("gneiss_tiles", () -> new GneissBlock(ModBlockProperties.GNEISS_TILES.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("gneiss_tiles")))));
+    public static final DeferredBlock<Block> GNEISS_TILES_CRACKED = registerBlock("gneiss_tiles_cracked", () -> new GneissBlock(ModBlockProperties.GNEISS_TILES_CRACKED.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("gneiss_tiles_cracked")))));
     public static final DeferredBlock<Block> TEMPLE_BRICK = registerSimpleBlock("temple_brick", ModBlockProperties.TEMPLE_BRICK);
     public static final DeferredBlock<Block> TEMPLE_PILLAR = registerSimpleBlock("temple_pillar", ModBlockProperties.TEMPLE_PILLAR);
     public static final DeferredBlock<Block> TEMPLE_TILE = registerSimpleBlock("temple_tile", ModBlockProperties.TEMPLE_TILE);
@@ -331,24 +342,24 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> BLOCK_OF_BONES = registerBlock("block_of_bones", () -> new BlockOfBonesBlock(ModBlockProperties.BLOCK_OF_BONES.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("block_of_bones")))));
     public static final DeferredBlock<Block> ANTLION_EGG = registerSimpleBlock("antlion_egg", ModBlockProperties.ANTLION_EGG);
     public static final DeferredBlock<Block> TARANTULA_EGG = registerSimpleBlock("tarantula_egg", ModBlockProperties.TARANTULA_EGG);
-    public static final DeferredBlock<Block> HONEY_TREAT = registerBlock("honey_treat", () -> new HoneyTreatBlock(ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("honey_treat")))));
-    public static final DeferredBlock<Block> CANDLE_HONEY_TREAT = registerBlock("candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("candle_honey_treat")))));
-    public static final DeferredBlock<Block> WHITE_CANDLE_HONEY_TREAT = registerBlock("white_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.WHITE_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("white_candle_honey_treat")))));
-    public static final DeferredBlock<Block> ORANGE_CANDLE_HONEY_TREAT = registerBlock("orange_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.ORANGE_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("orange_candle_honey_treat")))));
-    public static final DeferredBlock<Block> MAGENTA_CANDLE_HONEY_TREAT = registerBlock("magenta_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.MAGENTA_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("magenta_candle_honey_treat")))));
-    public static final DeferredBlock<Block> LIGHT_BLUE_CANDLE_HONEY_TREAT = registerBlock("light_blue_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.LIGHT_BLUE_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("light_blue_candle_honey_treat")))));
-    public static final DeferredBlock<Block> YELLOW_CANDLE_HONEY_TREAT = registerBlock("yellow_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.YELLOW_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("yellow_candle_honey_treat")))));
-    public static final DeferredBlock<Block> LIME_CANDLE_HONEY_TREAT = registerBlock("lime_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.LIME_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("lime_candle_honey_treat")))));
-    public static final DeferredBlock<Block> PINK_CANDLE_HONEY_TREAT = registerBlock("pink_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.PINK_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("pink_candle_honey_treat")))));
-    public static final DeferredBlock<Block> GRAY_CANDLE_HONEY_TREAT = registerBlock("gray_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.GRAY_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("gray_candle_honey_treat")))));
-    public static final DeferredBlock<Block> LIGHT_GRAY_CANDLE_HONEY_TREAT = registerBlock("light_gray_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.LIGHT_GRAY_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("light_gray_candle_honey_treat")))));
-    public static final DeferredBlock<Block> CYAN_CANDLE_HONEY_TREAT = registerBlock("cyan_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.CYAN_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("cyan_candle_honey_treat")))));
-    public static final DeferredBlock<Block> PURPLE_CANDLE_HONEY_TREAT = registerBlock("purple_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.PURPLE_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("purple_candle_honey_treat")))));
-    public static final DeferredBlock<Block> BLUE_CANDLE_HONEY_TREAT = registerBlock("blue_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.BLUE_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("blue_candle_honey_treat")))));
-    public static final DeferredBlock<Block> BROWN_CANDLE_HONEY_TREAT = registerBlock("brown_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.BROWN_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("brown_candle_honey_treat")))));
-    public static final DeferredBlock<Block> GREEN_CANDLE_HONEY_TREAT = registerBlock("green_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.GREEN_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("green_candle_honey_treat")))));
-    public static final DeferredBlock<Block> RED_CANDLE_HONEY_TREAT = registerBlock("red_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.RED_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("red_candle_honey_treat")))));
-    public static final DeferredBlock<Block> BLACK_CANDLE_HONEY_TREAT = registerBlock("black_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.BLACK_CANDLE, ModBlockProperties.HONEY_TREAT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("black_candle_honey_treat")))));
+    public static final DeferredBlock<Block> HONEY_TREAT = registerBlock("honey_treat", () -> new HoneyTreatBlock(ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("honey_treat")))));
+    public static final DeferredBlock<Block> CANDLE_HONEY_TREAT = registerBlock("candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("candle_honey_treat")))));
+    public static final DeferredBlock<Block> WHITE_CANDLE_HONEY_TREAT = registerBlock("white_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.WHITE_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("white_candle_honey_treat")))));
+    public static final DeferredBlock<Block> ORANGE_CANDLE_HONEY_TREAT = registerBlock("orange_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.ORANGE_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("orange_candle_honey_treat")))));
+    public static final DeferredBlock<Block> MAGENTA_CANDLE_HONEY_TREAT = registerBlock("magenta_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.MAGENTA_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("magenta_candle_honey_treat")))));
+    public static final DeferredBlock<Block> LIGHT_BLUE_CANDLE_HONEY_TREAT = registerBlock("light_blue_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.LIGHT_BLUE_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("light_blue_candle_honey_treat")))));
+    public static final DeferredBlock<Block> YELLOW_CANDLE_HONEY_TREAT = registerBlock("yellow_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.YELLOW_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("yellow_candle_honey_treat")))));
+    public static final DeferredBlock<Block> LIME_CANDLE_HONEY_TREAT = registerBlock("lime_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.LIME_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("lime_candle_honey_treat")))));
+    public static final DeferredBlock<Block> PINK_CANDLE_HONEY_TREAT = registerBlock("pink_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.PINK_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("pink_candle_honey_treat")))));
+    public static final DeferredBlock<Block> GRAY_CANDLE_HONEY_TREAT = registerBlock("gray_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.GRAY_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("gray_candle_honey_treat")))));
+    public static final DeferredBlock<Block> LIGHT_GRAY_CANDLE_HONEY_TREAT = registerBlock("light_gray_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.LIGHT_GRAY_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("light_gray_candle_honey_treat")))));
+    public static final DeferredBlock<Block> CYAN_CANDLE_HONEY_TREAT = registerBlock("cyan_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.CYAN_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("cyan_candle_honey_treat")))));
+    public static final DeferredBlock<Block> PURPLE_CANDLE_HONEY_TREAT = registerBlock("purple_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.PURPLE_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("purple_candle_honey_treat")))));
+    public static final DeferredBlock<Block> BLUE_CANDLE_HONEY_TREAT = registerBlock("blue_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.BLUE_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("blue_candle_honey_treat")))));
+    public static final DeferredBlock<Block> BROWN_CANDLE_HONEY_TREAT = registerBlock("brown_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.BROWN_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("brown_candle_honey_treat")))));
+    public static final DeferredBlock<Block> GREEN_CANDLE_HONEY_TREAT = registerBlock("green_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.GREEN_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("green_candle_honey_treat")))));
+    public static final DeferredBlock<Block> RED_CANDLE_HONEY_TREAT = registerBlock("red_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.RED_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("red_candle_honey_treat")))));
+    public static final DeferredBlock<Block> BLACK_CANDLE_HONEY_TREAT = registerBlock("black_candle_honey_treat", () -> new CandleHoneyTreatBlock(Blocks.BLACK_CANDLE, ModBlockProperties.honeyTreatProperties().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("black_candle_honey_treat")))));
     public static final DeferredBlock<Block> WASP_NEST = registerSimpleBlock("wasp_nest", ModBlockProperties.WASP_NEST);
     public static final DeferredBlock<Block> STAIRS_WASP_NEST = registerBlock(
             "stairs_wasp_nest",
@@ -360,21 +371,21 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> INSECT_REPELLENT = registerBlock("insect_repellent", () -> new InsectRepellentBlock(ModBlockProperties.INSECT_REPELLENT.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("insect_repellent")))));
 
     // MARK: Spawners
-    public static final DeferredBlock<Block> ANTLION_SPAWNER = registerSimpleBlock("antlion_spawner", ModBlockProperties.ANTLION_SPAWNER);
-    public static final DeferredBlock<Block> DRAGON_FLY_SPAWNER = registerSimpleBlock("dragon_fly_spawner", ModBlockProperties.DRAGON_FLY_SPAWNER);
-    public static final DeferredBlock<Block> JUMPING_SPIDER_SPAWNER = registerSimpleBlock("jumping_spider_spawner", ModBlockProperties.JUMPING_SPIDER_SPAWNER);
-    public static final DeferredBlock<Block> SPIDER_SPAWNER = registerSimpleBlock("spider_spawner", ModBlockProperties.SPIDER_SPAWNER);
-    public static final DeferredBlock<Block> TARANTULA_SPAWNER = registerBlock("tarantula_spawner", () -> new ErebusSpawnerBlock(ModBlockProperties.TARANTULA_SPAWNER));
-    public static final DeferredBlock<Block> WASP_SPAWNER = registerSimpleBlock("wasp_spawner", ModBlockProperties.WASP_SPAWNER);
-    public static final DeferredBlock<Block> ZOMBIE_ANT_SPAWNER = registerSimpleBlock("zombie_ant_spawner", ModBlockProperties.ZOMBIE_ANT_SPAWNER);
-    public static final DeferredBlock<Block> ZOMBIE_ANT_SOLDIER_SPAWNER = registerSimpleBlock("zombie_ant_soldier_spawner", ModBlockProperties.ZOMBIE_ANT_SOLDIER_SPAWNER);
-    public static final DeferredBlock<Block> MAGMA_CRAWLER_SPAWNER = registerSimpleBlock("magma_crawler_spawner", ModBlockProperties.MAGMA_CRAWLER_SPAWNER);
-    public static final DeferredBlock<Block> DUNG_SPAWNER_FLY = registerSimpleBlock("dung_spawner_fly", ModBlockProperties.DUNG_SPAWNER_FLY);
+    public static final DeferredBlock<Block> ANTLION_SPAWNER = registerBlock("antlion_spawner", () -> new ErebusSpawnerBlock(ModBlockProperties.ANTLION_SPAWNER, ModEntities.ANTLION));
+    public static final DeferredBlock<Block> DRAGON_FLY_SPAWNER = registerBlock("dragon_fly_spawner", () -> new ErebusSpawnerBlock(ModBlockProperties.DRAGON_FLY_SPAWNER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("dragon_fly_spawner"))), ModEntities.DRAGON_FLY));
+    public static final DeferredBlock<Block> JUMPING_SPIDER_SPAWNER = registerBlock("jumping_spider_spawner", () -> new ErebusSpawnerBlock(ModBlockProperties.JUMPING_SPIDER_SPAWNER, ModEntities.JUMPING_SPIDER));
+    public static final DeferredBlock<Block> SPIDER_SPAWNER = registerBlock("spider_spawner", () -> new ErebusSpawnerBlock(ModBlockProperties.SPIDER_SPAWNER, ModEntities.SCYTODES));
+    public static final DeferredBlock<Block> TARANTULA_SPAWNER = registerBlock("tarantula_spawner", () -> new ErebusSpawnerBlock(ModBlockProperties.TARANTULA_SPAWNER, ModEntities.TARANTULA));
+    public static final DeferredBlock<Block> WASP_SPAWNER = registerBlock("wasp_spawner", () -> new ErebusSpawnerBlock(ModBlockProperties.WASP_SPAWNER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("wasp_spawner"))), ModEntities.WASP));
+    public static final DeferredBlock<Block> ZOMBIE_ANT_SPAWNER = registerBlock("zombie_ant_spawner", () -> new ErebusSpawnerBlock(ModBlockProperties.ZOMBIE_ANT_SPAWNER, ModEntities.ZOMBIE_ANT));
+    public static final DeferredBlock<Block> ZOMBIE_ANT_SOLDIER_SPAWNER = registerBlock("zombie_ant_soldier_spawner", () -> new ErebusSpawnerBlock(ModBlockProperties.ZOMBIE_ANT_SOLDIER_SPAWNER, ModEntities.ZOMBIE_ANT_SOLDIER));
+    public static final DeferredBlock<Block> MAGMA_CRAWLER_SPAWNER = registerBlock("magma_crawler_spawner", () -> new ErebusSpawnerBlock(ModBlockProperties.MAGMA_CRAWLER_SPAWNER, ModEntities.MAGMA_CRAWLER));
+    public static final DeferredBlock<Block> DUNG_SPAWNER_FLY = registerBlock("dung_spawner_fly", () -> new BotFlySpawnerBlock(ModBlockProperties.DUNG_SPAWNER_FLY.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("dung_spawner_fly"))), ModEntities.FLY));
     public static final DeferredBlock<Block> DUNG_SPAWNER_BOT_FLY = registerBlock("dung_spawner_bot_fly", () -> new BotFlySpawnerBlock(ModBlockProperties.DUNG_SPAWNER_BOT_FLY.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("dung_spawner_bot_fly")))));
-    public static final DeferredBlock<Block> LOCUST_SPAWNER = registerSimpleBlock("locust_spawner", ModBlockProperties.LOCUST_SPAWNER);
+    public static final DeferredBlock<Block> LOCUST_SPAWNER = registerBlock("locust_spawner", () -> new ErebusSpawnerBlock(ModBlockProperties.LOCUST_SPAWNER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("locust_spawner"))), ModEntities.LOCUST));
 
     // MARK: Plants
-    public static final DeferredBlock<Block> CROP_TURNIP = registerCrop("crop_turnip", ModItems.TURNIP, ModBlockProperties.CROP_PROPS);
+    public static final DeferredBlock<Block> CROP_TURNIP = registerBlock("crop_turnip", () -> new TurnipCropBlock(ModBlockProperties.CROP_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("crop_turnip")))));
     public static final DeferredBlock<Block> CROP_CABBAGE = registerCrop("crop_cabbage", ModItems.CABBAGE_SEEDS, ModBlockProperties.CROP_PROPS);
     public static final DeferredBlock<Block> CROP_MANDRAKE = registerCrop("crop_mandrake", ModItems.MANDRAKE_ROOT, ModBlockProperties.CROP_PROPS);
     public static final DeferredBlock<Block> JADE_BERRY_BUSH = registerBush("jade_berry_bush", ModItems.JADE_BERRIES, BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH));
@@ -398,26 +409,27 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> KAIZERS_FINGERS_MUSHROOM_STEM = registerHugeMushroom("kaizers_fingers_mushroom_stem", ModBlockProperties.KAIZERS_FINGERS_MUSHROOM_BLOCK_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("kaizers_fingers_mushroom_stem"))));
     public static final DeferredBlock<Block> SARCASTIC_CZECH_MUSHROOM_BLOCK = registerHugeMushroom("sarcastic_czech_mushroom_block", ModBlockProperties.SARCASTIC_CZECH_MUSHROOM_BLOCK_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("sarcastic_czech_mushroom_block"))));
     public static final DeferredBlock<Block> SARCASTIC_CZECH_MUSHROOM_STEM = registerHugeMushroom("sarcastic_czech_mushroom_stem", ModBlockProperties.SARCASTIC_CZECH_MUSHROOM_BLOCK_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("sarcastic_czech_mushroom_stem"))));
-    public static final DeferredBlock<Block> GIANT_LILY_PAD = registerSimpleBlock("giant_lily_pad", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> DESERT_SHRUB = registerSimpleBlock("desert_shrub", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
-    public static final DeferredBlock<Block> MIRE_CORAL = registerSimpleBlock("mire_coral", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> NETTLE = registerSimpleBlock("nettle", BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS));
-    public static final DeferredBlock<Block> NETTLE_FLOWERED = registerSimpleBlock("nettle_flowered", BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS));
-    public static final DeferredBlock<Block> SWAMP_PLANT = registerSimpleBlock("swamp_plant", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
-    public static final DeferredBlock<Block> FIRE_BLOOM = registerSimpleBlock("fire_bloom", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
-    public static final DeferredBlock<Block> FERN = registerSimpleBlock("fern", BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS));
-    public static final DeferredBlock<Block> FIDDLE_HEAD = registerSimpleBlock("fiddle_head", BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS));
-    public static final DeferredBlock<Block> THORNS = registerBlock("thorns", () -> new VineBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.VINE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("thorns")))));
+    public static final DeferredBlock<Block> GIANT_LILY_PAD = registerSimpleBlock("giant_lily_pad", ModBlockProperties.GIANT_LILY_PAD);
+    public static final DeferredBlock<Block> DESERT_SHRUB = registerBlock("desert_shrub", () -> new SmallGroundPlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("desert_shrub")))));
+    public static final DeferredBlock<Block> MIRE_CORAL = registerBlock("mire_coral", () -> new SmallGroundPlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).lightLevel(_ -> 9).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("mire_coral")))));
+    public static final DeferredBlock<Block> NETTLE = registerBlock("nettle", () -> new NettleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).randomTicks().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("nettle")))));
+    public static final DeferredBlock<Block> NETTLE_FLOWERED = registerBlock("nettle_flowered", () -> new NettleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).randomTicks().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("nettle_flowered")))));
+    public static final DeferredBlock<Block> SWAMP_PLANT = registerBlock("swamp_plant", () -> new SmallGroundPlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("swamp_plant")))));
+    public static final DeferredBlock<Block> FIRE_BLOOM = registerBlock("fire_bloom", () -> new FireBloomBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("fire_bloom")))));
+    public static final DeferredBlock<Block> FERN = registerBlock("fern", () -> new FernBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("fern")))));
+    public static final DeferredBlock<Block> FIDDLE_HEAD = registerBlock("fiddle_head", () -> new SmallGroundPlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("fiddle_head")))));
+    public static final DeferredBlock<Block> THORNS = registerBlock("thorns", () -> new ThornsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.VINE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("thorns")))));
     public static final DeferredBlock<Block> MOSS = registerBlock("moss", () -> new MossBlock(BlockBehaviour.Properties.of().strength(0.2F).noCollision().randomTicks().sound(SoundType.VINE).noOcclusion().replaceable().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("moss")))));
     public static final DeferredBlock<Block> MOULD = registerBlock("mould", () -> new MouldBlock(BlockBehaviour.Properties.of().strength(0.2F).noCollision().randomTicks().sound(SoundType.VINE).noOcclusion().replaceable().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("mould")))));
     public static final DeferredBlock<Block> MOSS_CULTIVATED = registerBlock("moss_cultivated", () -> new MossCultivatedBlock(BlockBehaviour.Properties.of().strength(0.2F).noCollision().sound(SoundType.VINE).noOcclusion().replaceable().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("moss_cultivated")))));
     public static final DeferredBlock<Block> MOULD_CULTIVATED = registerBlock("mould_cultivated", () -> new MouldCultivatedBlock(BlockBehaviour.Properties.of().strength(0.2F).noCollision().sound(SoundType.VINE).noOcclusion().replaceable().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("mould_cultivated")))));
     public static final DeferredBlock<Block> ALGAE = registerBlock(
             "algae",
-            () -> new LilyPadBlock(BlockBehaviour.Properties.of()
+            () -> new AlgaeBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.PLANT)
                     .instabreak()
-                    .sound(SoundType.LILY_PAD)
+                    .sound(SoundType.GRASS)
+                    .noCollision()
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
                     .setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("algae")))
@@ -425,7 +437,7 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     );
     public static final DeferredBlock<Block> GLOWSHROOM_BLOCK = registerBlock("glowshroom_block", () -> new GlowshroomBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).sound(SoundType.FUNGUS).strength(0.2F).lightLevel((_) -> 15).noOcclusion().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("glowshroom_block")))));
     public static final DeferredBlock<Block> GLOWSHROOM_STALK = registerBlock("glowshroom_stalk", () -> new GlowshroomStalkBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).sound(SoundType.FUNGUS).strength(0.2F).instabreak().noOcclusion().randomTicks().setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("glowshroom_stalk")))));
-    public static final DeferredBlock<Block> HANGING_WEB = registerSimpleBlock("hanging_web", BlockBehaviour.Properties.ofFullCopy(Blocks.COBWEB));
+    public static final DeferredBlock<Block> HANGING_WEB = registerBlock("hanging_web", () -> new HangingWebBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBWEB).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("hanging_web")))));
 
     // MARK: Flowers
     public static final DeferredBlock<Block> PETAL_BLACK = registerSimpleBlock("petal_black", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK));
@@ -445,48 +457,48 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> PETAL_RAINBOW = registerSimpleBlock("petal_rainbow", BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE));
     public static final DeferredBlock<Block> PETAL_RAINBOW_CHASE = registerSimpleBlock("petal_rainbow_chase", BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE));
 
-    public static final DeferredBlock<Block> EXPLODING_STIGMA = registerSimpleBlock("exploding_stigma", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
+    public static final DeferredBlock<Block> EXPLODING_STIGMA = registerBlock("exploding_stigma", () -> new ExplodingStigmaBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("exploding_stigma")))));
     public static final DeferredBlock<Block> STEM = registerSimpleBlock("stem", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN));
-    public static final DeferredBlock<Block> STIGMA_BLACK = registerSimpleBlock("stigma_black", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> STIGMA_RED = registerSimpleBlock("stigma_red", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> STIGMA_BROWN = registerSimpleBlock("stigma_brown", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> STIGMA_BLUE = registerSimpleBlock("stigma_blue", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> STIGMA_PURPLE = registerSimpleBlock("stigma_purple", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> STIGMA_CYAN = registerSimpleBlock("stigma_cyan", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> STIGMA_LIGHT_GRAY = registerSimpleBlock("stigma_light_gray", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> STIGMA_GRAY = registerSimpleBlock("stigma_gray", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> STIGMA_PINK = registerSimpleBlock("stigma_pink", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> STIGMA_YELLOW = registerSimpleBlock("stigma_yellow", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> STIGMA_LIGHT_BLUE = registerSimpleBlock("stigma_light_blue", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> STIGMA_MAGENTA = registerSimpleBlock("stigma_magenta", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> STIGMA_ORANGE = registerSimpleBlock("stigma_orange", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> STIGMA_WHITE = registerSimpleBlock("stigma_white", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW));
+    public static final DeferredBlock<Block> STIGMA_BLACK = registerSimpleBlock("stigma_black", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
+    public static final DeferredBlock<Block> STIGMA_RED = registerSimpleBlock("stigma_red", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
+    public static final DeferredBlock<Block> STIGMA_BROWN = registerSimpleBlock("stigma_brown", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
+    public static final DeferredBlock<Block> STIGMA_BLUE = registerSimpleBlock("stigma_blue", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
+    public static final DeferredBlock<Block> STIGMA_PURPLE = registerSimpleBlock("stigma_purple", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
+    public static final DeferredBlock<Block> STIGMA_CYAN = registerSimpleBlock("stigma_cyan", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
+    public static final DeferredBlock<Block> STIGMA_LIGHT_GRAY = registerSimpleBlock("stigma_light_gray", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
+    public static final DeferredBlock<Block> STIGMA_GRAY = registerSimpleBlock("stigma_gray", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
+    public static final DeferredBlock<Block> STIGMA_PINK = registerSimpleBlock("stigma_pink", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
+    public static final DeferredBlock<Block> STIGMA_YELLOW = registerSimpleBlock("stigma_yellow", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
+    public static final DeferredBlock<Block> STIGMA_LIGHT_BLUE = registerSimpleBlock("stigma_light_blue", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
+    public static final DeferredBlock<Block> STIGMA_MAGENTA = registerSimpleBlock("stigma_magenta", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
+    public static final DeferredBlock<Block> STIGMA_ORANGE = registerSimpleBlock("stigma_orange", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
+    public static final DeferredBlock<Block> STIGMA_WHITE = registerSimpleBlock("stigma_white", BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).lightLevel(_ -> 15));
 
-    public static final DeferredBlock<Block> FLOWER_BLACK = registerSimpleBlock("flower_black", ModBlockProperties.FLOWER_BLACK_PROPS);
-    public static final DeferredBlock<Block> FLOWER_RED = registerSimpleBlock("flower_red", ModBlockProperties.FLOWER_RED_PROPS);
-    public static final DeferredBlock<Block> FLOWER_BROWN = registerSimpleBlock("flower_brown", ModBlockProperties.FLOWER_BROWN_PROPS);
-    public static final DeferredBlock<Block> FLOWER_BLUE = registerSimpleBlock("flower_blue", ModBlockProperties.FLOWER_BLUE_PROPS);
-    public static final DeferredBlock<Block> FLOWER_PURPLE = registerSimpleBlock("flower_purple", ModBlockProperties.FLOWER_PURPLE_PROPS);
-    public static final DeferredBlock<Block> FLOWER_CYAN = registerSimpleBlock("flower_cyan", ModBlockProperties.FLOWER_CYAN_PROPS);
-    public static final DeferredBlock<Block> FLOWER_LIGHT_GRAY = registerSimpleBlock("flower_light_gray", ModBlockProperties.FLOWER_LIGHT_GRAY_PROPS);
-    public static final DeferredBlock<Block> FLOWER_GRAY = registerSimpleBlock("flower_gray", ModBlockProperties.FLOWER_GRAY_PROPS);
-    public static final DeferredBlock<Block> FLOWER_PINK = registerSimpleBlock("flower_pink", ModBlockProperties.FLOWER_PINK_PROPS);
-    public static final DeferredBlock<Block> FLOWER_YELLOW = registerSimpleBlock("flower_yellow", ModBlockProperties.FLOWER_YELLOW_PROPS);
-    public static final DeferredBlock<Block> FLOWER_LIGHT_BLUE = registerSimpleBlock("flower_light_blue", ModBlockProperties.FLOWER_LIGHT_BLUE_PROPS);
-    public static final DeferredBlock<Block> FLOWER_MAGENTA = registerSimpleBlock("flower_magenta", ModBlockProperties.FLOWER_MAGENTA_PROPS);
-    public static final DeferredBlock<Block> FLOWER_ORANGE = registerSimpleBlock("flower_orange", ModBlockProperties.FLOWER_ORANGE_PROPS);
-    public static final DeferredBlock<Block> FLOWER_WHITE = registerSimpleBlock("flower_white", ModBlockProperties.FLOWER_WHITE_PROPS);
-    public static final DeferredBlock<Block> FLOWER_RAINBOW = registerSimpleBlock("flower_rainbow", ModBlockProperties.FLOWER_RAINBOW_PROPS);
+    public static final DeferredBlock<Block> FLOWER_BLACK = registerBlock("flower_black", () -> new PlantedGiantFlowerBlock(0, ModBlockProperties.FLOWER_BLACK_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_black")))));
+    public static final DeferredBlock<Block> FLOWER_RED = registerBlock("flower_red", () -> new PlantedGiantFlowerBlock(1, ModBlockProperties.FLOWER_RED_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_red")))));
+    public static final DeferredBlock<Block> FLOWER_BROWN = registerBlock("flower_brown", () -> new PlantedGiantFlowerBlock(2, ModBlockProperties.FLOWER_BROWN_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_brown")))));
+    public static final DeferredBlock<Block> FLOWER_BLUE = registerBlock("flower_blue", () -> new PlantedGiantFlowerBlock(3, ModBlockProperties.FLOWER_BLUE_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_blue")))));
+    public static final DeferredBlock<Block> FLOWER_PURPLE = registerBlock("flower_purple", () -> new PlantedGiantFlowerBlock(4, ModBlockProperties.FLOWER_PURPLE_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_purple")))));
+    public static final DeferredBlock<Block> FLOWER_CYAN = registerBlock("flower_cyan", () -> new PlantedGiantFlowerBlock(5, ModBlockProperties.FLOWER_CYAN_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_cyan")))));
+    public static final DeferredBlock<Block> FLOWER_LIGHT_GRAY = registerBlock("flower_light_gray", () -> new PlantedGiantFlowerBlock(6, ModBlockProperties.FLOWER_LIGHT_GRAY_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_light_gray")))));
+    public static final DeferredBlock<Block> FLOWER_GRAY = registerBlock("flower_gray", () -> new PlantedGiantFlowerBlock(7, ModBlockProperties.FLOWER_GRAY_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_gray")))));
+    public static final DeferredBlock<Block> FLOWER_PINK = registerBlock("flower_pink", () -> new PlantedGiantFlowerBlock(8, ModBlockProperties.FLOWER_PINK_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_pink")))));
+    public static final DeferredBlock<Block> FLOWER_YELLOW = registerBlock("flower_yellow", () -> new PlantedGiantFlowerBlock(9, ModBlockProperties.FLOWER_YELLOW_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_yellow")))));
+    public static final DeferredBlock<Block> FLOWER_LIGHT_BLUE = registerBlock("flower_light_blue", () -> new PlantedGiantFlowerBlock(10, ModBlockProperties.FLOWER_LIGHT_BLUE_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_light_blue")))));
+    public static final DeferredBlock<Block> FLOWER_MAGENTA = registerBlock("flower_magenta", () -> new PlantedGiantFlowerBlock(11, ModBlockProperties.FLOWER_MAGENTA_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_magenta")))));
+    public static final DeferredBlock<Block> FLOWER_ORANGE = registerBlock("flower_orange", () -> new PlantedGiantFlowerBlock(12, ModBlockProperties.FLOWER_ORANGE_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_orange")))));
+    public static final DeferredBlock<Block> FLOWER_WHITE = registerBlock("flower_white", () -> new PlantedGiantFlowerBlock(13, ModBlockProperties.FLOWER_WHITE_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_white")))));
+    public static final DeferredBlock<Block> FLOWER_RAINBOW = registerBlock("flower_rainbow", () -> new PlantedGiantFlowerBlock(14, ModBlockProperties.FLOWER_RAINBOW_PROPS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("flower_rainbow")))));
 
     // MARK: Flowers Double Height
-    public static final DeferredBlock<Block> BULLRUSH = registerDoublePlant("bullrush", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+    public static final DeferredBlock<Block> BULLRUSH = registerBlock("bullrush", () -> new BullrushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("bullrush")))));
     public static final DeferredBlock<Block> WEEPING_BLUEBELL = registerDoublePlant("weeping_bluebell", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
     public static final DeferredBlock<Block> SUNDEW = registerDoublePlant("sundew", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
-    public static final DeferredBlock<Block> DROUGHTED_SHRUB = registerDoublePlant("droughted_shrub", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+    public static final DeferredBlock<Block> DROUGHTED_SHRUB = registerBlock("droughted_shrub", () -> new TallFlowerBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("droughted_shrub")))));
     public static final DeferredBlock<Block> TALL_BLOOM = registerDoublePlant("tall_bloom", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
     public static final DeferredBlock<Block> TANGLED_STALK = registerDoublePlant("tangled_stalk", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
     public static final DeferredBlock<Block> HIGH_CAPPED_MUSHROOM = registerDoublePlant("high_capped_mushroom", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
-    public static final DeferredBlock<Block> TALL_FERN = registerDoublePlant("tall_fern", BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH));
+    public static final DeferredBlock<Block> TALL_FERN = registerBlock("tall_fern", () -> new TallFernBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("tall_fern")))));
 
     // MARK: Utility Blocks
     public static final DeferredBlock<Block> PETRIFIED_CRAFTING_TABLE = registerBlock("petrified_crafting_table", () -> new PetrifiedCraftingTableBlock(ModBlockProperties.PETRIFIED_CRAFTING_TABLE.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("petrified_crafting_table")))));
@@ -502,15 +514,15 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
     public static final DeferredBlock<Block> SILO_TANK = registerBlock("silo_tank", () -> new SiloTankBlock(ModBlockProperties.SILO_TANK.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("silo_tank")))));
     public static final DeferredBlock<Block> SILO_SUPPORTS = registerBlock("silo_supports", () -> new SiloSupportsBlock(ModBlockProperties.SILO_SUPPORTS.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("silo_supports")))));
     public static final DeferredBlock<Block> HONEY_COMB = registerBlock("honey_comb", () -> new HoneyCombBlock(ModBlockProperties.HONEY_COMB.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("honey_comb")))));
-    public static final DeferredBlock<Block> COMPOSTER = registerBlock("composter", () -> new erebus.block.ComposterBlock(ModBlockProperties.COMPOSTER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("composter")))));
+    public static final DeferredBlock<Block> COMPOSTER = registerBlock("composter", () -> new ComposterBlock(ModBlockProperties.COMPOSTER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("composter")))));
     public static final DeferredBlock<Block> BLENDER = registerBlock("blender", () -> new BlenderBlock(ModBlockProperties.BLENDER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("blender")))));
     public static final DeferredBlock<Block> UMBER_FURNACE = registerBlock("umber_furnace", () -> new UmberFurnaceBlock(ModBlockProperties.UMBER_FURNACE.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("umber_furnace")))));
-    public static final DeferredBlock<Block> UMBERSTONE_BUTTON = registerBlock("umberstone_button", () -> new ButtonBlock(BlockSetType.STONE, 10, ModBlockProperties.UMBERSTONE_BUTTON.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("umberstone_button")))));
+    public static final DeferredBlock<Block> UMBERSTONE_BUTTON = registerBlock("umberstone_button", () -> new ButtonBlock(BlockSetType.STONE, 20, ModBlockProperties.UMBERSTONE_BUTTON.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("umberstone_button")))));
     public static final DeferredBlock<Block> LIQUIFIER = registerBlockWithoutBlockItem("liquifier", () -> new LiquifierBlock(ModBlockProperties.LIQUIFIER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("liquifier")))));
     public static final DeferredBlock<Block> GLOW_GEM_ACTIVE = registerBlock("glow_gem_active", () -> new GlowGemActiveBlock(ModBlockProperties.GLOW_GEM_ACTIVE.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("glow_gem_active")))));
     public static final DeferredBlock<Block> GLOW_GEM_INACTIVE = registerBlock("glow_gem_inactive", () -> new GlowGemInactiveBlock(ModBlockProperties.GLOW_GEM_INACTIVE.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("glow_gem_inactive")))));
-    public static final DeferredBlock<Block> MUCUS_BOMB = registerSimpleBlock("mucus_bomb", ModBlockProperties.MUCUS_BOMB);
-    public static final DeferredBlock<Block> UMBER_GOLEM_STATUE = registerSimpleBlock("umber_golem_statue", ModBlockProperties.UMBER_GOLEM_STATUE);
+    public static final DeferredBlock<MucusBombBlock> MUCUS_BOMB = registerBlock("mucus_bomb", () -> new MucusBombBlock(ModBlockProperties.MUCUS_BOMB.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("mucus_bomb")))));
+    public static final DeferredBlock<Block> UMBER_GOLEM_STATUE = registerBlock("umber_golem_statue", () -> new UmberGolemStatueBlock(ModBlockProperties.UMBER_GOLEM_STATUE.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("umber_golem_statue")))));
 
     public static final DeferredBlock<Block> ALTAR_BASE = registerBlock("altar_base", () -> new AltarBase(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("altar_base"))).noOcclusion()));
     public static final DeferredBlock<Block> ALTAR_LIGHTNING = registerBlock("altar_lightning", () -> new LightningAltar(BlockBehaviour.Properties.ofFullCopy(Blocks.ENCHANTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("altar_lightning"))).noOcclusion()));
@@ -521,19 +533,19 @@ public class ModBlocks extends erebus.registries.helpers.ModBlockHelpers {
 
     // MARK: Antlion Dungeon
     public static final DeferredBlock<Block> CAPSTONE = registerSimpleBlock("capstone", ModBlockProperties.CAPSTONE);
-    public static final DeferredBlock<Block> CAPSTONE_MUD = registerSimpleBlock("capstone_mud", ModBlockProperties.CAPSTONE_MUD);
-    public static final DeferredBlock<Block> CAPSTONE_IRON = registerSimpleBlock("capstone_iron", ModBlockProperties.CAPSTONE_IRON);
-    public static final DeferredBlock<Block> CAPSTONE_GOLD = registerSimpleBlock("capstone_gold", ModBlockProperties.CAPSTONE_GOLD);
-    public static final DeferredBlock<Block> CAPSTONE_JADE = registerSimpleBlock("capstone_jade", ModBlockProperties.CAPSTONE_JADE);
+    public static final DeferredBlock<Block> CAPSTONE_MUD = registerBlock("capstone_mud", () -> new CapstoneBlock(ModBlockProperties.CAPSTONE_MUD.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("capstone_mud")))));
+    public static final DeferredBlock<Block> CAPSTONE_IRON = registerBlock("capstone_iron", () -> new CapstoneBlock(ModBlockProperties.CAPSTONE_IRON.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("capstone_iron")))));
+    public static final DeferredBlock<Block> CAPSTONE_GOLD = registerBlock("capstone_gold", () -> new CapstoneBlock(ModBlockProperties.CAPSTONE_GOLD.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("capstone_gold")))));
+    public static final DeferredBlock<Block> CAPSTONE_JADE = registerBlock("capstone_jade", () -> new CapstoneBlock(ModBlockProperties.CAPSTONE_JADE.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("capstone_jade")))));
     public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING = registerSimpleBlock("temple_brick_unbreaking", ModBlockProperties.TEMPLE_BRICK_UNBREAKING);
-    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_JADE = registerSimpleBlock("temple_brick_unbreaking_jade", ModBlockProperties.TEMPLE_BRICK_UNBREAKING_JADE);
-    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_EXO = registerSimpleBlock("temple_brick_unbreaking_exo", ModBlockProperties.TEMPLE_BRICK_UNBREAKING_EXO);
-    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_CREAM = registerSimpleBlock("temple_brick_unbreaking_cream", ModBlockProperties.TEMPLE_BRICK_UNBREAKING_CREAM);
-    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_EYE = registerSimpleBlock("temple_brick_unbreaking_eye", ModBlockProperties.TEMPLE_BRICK_UNBREAKING_EYE);
-    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_STRING = registerSimpleBlock("temple_brick_unbreaking_string", ModBlockProperties.TEMPLE_BRICK_UNBREAKING_STRING);
-    public static final DeferredBlock<Block> TEMPLE_TELEPORTER = registerSimpleBlock("temple_teleporter", ModBlockProperties.TEMPLE_TELEPORTER);
-    public static final DeferredBlock<Block> FORCE_FIELD = registerSimpleBlock("force_field", ModBlockProperties.FORCE_FIELD);
-    public static final DeferredBlock<Block> FORCE_LOCK = registerSimpleBlock("force_lock", ModBlockProperties.FORCE_LOCK);
+    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_JADE = registerBlock("temple_brick_unbreaking_jade", () -> new TempleSealBlock(ModBlockProperties.TEMPLE_BRICK_UNBREAKING_JADE.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("temple_brick_unbreaking_jade")))));
+    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_EXO = registerBlock("temple_brick_unbreaking_exo", () -> new TempleSealBlock(ModBlockProperties.TEMPLE_BRICK_UNBREAKING_EXO.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("temple_brick_unbreaking_exo")))));
+    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_CREAM = registerBlock("temple_brick_unbreaking_cream", () -> new TempleSealBlock(ModBlockProperties.TEMPLE_BRICK_UNBREAKING_CREAM.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("temple_brick_unbreaking_cream")))));
+    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_EYE = registerBlock("temple_brick_unbreaking_eye", () -> new TempleSealBlock(ModBlockProperties.TEMPLE_BRICK_UNBREAKING_EYE.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("temple_brick_unbreaking_eye")))));
+    public static final DeferredBlock<Block> TEMPLE_BRICK_UNBREAKING_STRING = registerBlock("temple_brick_unbreaking_string", () -> new TempleSealBlock(ModBlockProperties.TEMPLE_BRICK_UNBREAKING_STRING.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("temple_brick_unbreaking_string")))));
+    public static final DeferredBlock<Block> TEMPLE_TELEPORTER = registerBlock("temple_teleporter", () -> new TempleTeleporterBlock(ModBlockProperties.TEMPLE_TELEPORTER.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("temple_teleporter")))));
+    public static final DeferredBlock<Block> FORCE_FIELD = registerBlock("force_field", () -> new ForceFieldBlock(ModBlockProperties.FORCE_FIELD.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("force_field")))));
+    public static final DeferredBlock<Block> FORCE_LOCK = registerBlock("force_lock", () -> new ForceLockBlock(ModBlockProperties.FORCE_LOCK.setId(ResourceKey.create(Registries.BLOCK, Erebus.prefix("force_lock")))));
 
     public static final DeferredBlock<Block> ANT_HILL_BLOCK = registerSimpleBlock("ant_hill_block", ModBlockProperties.ANT_HILL_BLOCK);
 }

@@ -10,27 +10,27 @@ import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record ParticlePacket(Byte particleType, double xPos, double yPos, double zPos) implements CustomPacketPayload {
-	public static final Type<ParticlePacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(Erebus.MODID, "erebus_particle"));
-	public static final StreamCodec<RegistryFriendlyByteBuf, ParticlePacket> STREAM_CODEC = StreamCodec.composite(
-			ByteBufCodecs.BYTE,
-			ParticlePacket::particleType, 
-			ByteBufCodecs.DOUBLE,
-			ParticlePacket::xPos,
-			ByteBufCodecs.DOUBLE,
-			ParticlePacket::yPos,
-			ByteBufCodecs.DOUBLE,
-			ParticlePacket::zPos,
-			ParticlePacket::new
-		);
+    public static final Type<ParticlePacket> TYPE = new Type<>(Identifier.fromNamespaceAndPath(Erebus.MODID, "erebus_particle"));
+    public static final StreamCodec<RegistryFriendlyByteBuf, ParticlePacket> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.BYTE,
+            ParticlePacket::particleType,
+            ByteBufCodecs.DOUBLE,
+            ParticlePacket::xPos,
+            ByteBufCodecs.DOUBLE,
+            ParticlePacket::yPos,
+            ByteBufCodecs.DOUBLE,
+            ParticlePacket::zPos,
+            ParticlePacket::new
+    );
 
-	public static void handle(ParticlePacket message, final IPayloadContext ctx) {
-		ctx.enqueueWork(() -> {
-			//ClientParticleTypes.spawnParticles(message.particleType, message.xPos, message.yPos, message.zPos, 0D, 0D, 0D);
-		});
-	}
+    public static void handle(ParticlePacket message, final IPayloadContext ctx) {
+        ctx.enqueueWork(() -> {
+            //ClientParticleTypes.spawnParticles(message.particleType, message.xPos, message.yPos, message.zPos, 0D, 0D, 0D);
+        });
+    }
 
-	@Override
-	public Type<? extends CustomPacketPayload> type() {
-		return TYPE;
-	}
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
+    }
 }

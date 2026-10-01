@@ -236,6 +236,6 @@
     ],
     "property": "minecraft:compass",
     "scale": 32.0,
-    "target": "recovery"
+    "target": "lodestone"
   }
 }

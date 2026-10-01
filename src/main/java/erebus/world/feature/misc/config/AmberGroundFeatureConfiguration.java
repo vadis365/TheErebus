@@ -1,6 +1,5 @@
 package erebus.world.feature.misc.config;
 
-import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -11,9 +10,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import org.jetbrains.annotations.NotNull;
 
 public class AmberGroundFeatureConfiguration extends Feature<NoneFeatureConfiguration> {
-
-    private static final float BUGGED_AMBER_CHANCE = 0.01F;
-    private static final float WAND_CHANCE = 0.05F;
 
     public AmberGroundFeatureConfiguration() {
         super(NoneFeatureConfiguration.CODEC);
@@ -26,7 +22,6 @@ public class AmberGroundFeatureConfiguration extends Feature<NoneFeatureConfigur
         RandomSource random = context.random();
 
         boolean plausible = false;
-        int y = pos.getY();
 
         for (int c = 0; c < 10; c++) {
             if (level.getBlockState(pos).is(Blocks.AIR) && level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)) {
@@ -34,7 +29,8 @@ public class AmberGroundFeatureConfiguration extends Feature<NoneFeatureConfigur
                 break;
             }
 
-            if (--y <= 1) {
+            pos = pos.below();
+            if (level.isOutsideBuildHeight(pos.below())) {
                 return false;
             }
         }
@@ -60,11 +56,6 @@ public class AmberGroundFeatureConfiguration extends Feature<NoneFeatureConfigur
     }
 
     protected void setAmberBlock(WorldGenLevel level, BlockPos pos, RandomSource random) {
-        if (random.nextFloat() > BUGGED_AMBER_CHANCE) {
-            level.setBlock(pos, ModBlocks.AMBER.get().defaultBlockState(), 2);
-        } else {
-            level.setBlock(pos, ModBlocks.PRESERVED_AMBER.get().defaultBlockState(), 3);
-            // TODO: Implement Preserved Block Entity
-        }
+        AmberContents.place(level, pos, random);
     }
 }

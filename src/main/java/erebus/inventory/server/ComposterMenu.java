@@ -1,5 +1,6 @@
 package erebus.inventory.server;
 
+import erebus.block.entity.ComposterBlockEntity;
 import erebus.registries.client.ModMenuTypes;
 import erebus.registries.data.tags.ModItemTags;
 import net.minecraft.world.Container;
@@ -15,169 +16,91 @@ import net.minecraft.world.item.ItemStack;
 import javax.annotation.Nonnull;
 
 public class ComposterMenu extends AbstractContainerMenu {
-	public static final int DATA_MOULD_PROGRESS = 0;
-	public static final int DATA_COMPOSTING_PROGRESS = 1;
-	public static final int DATA_MOULD_MAX_TIME = 2;
+    public static final int DATA_MOULD_PROGRESS = 0;
+    public static final int DATA_COMPOSTING_PROGRESS = 1;
+    public static final int DATA_MOULD_MAX_TIME = 2;
     private final Container container;
     private final ContainerData data;
-	public int numRows = 3;
-	
+    public int numRows = 3;
+
     public ComposterMenu(int id, Inventory inv) {
         this(id, inv, new SimpleContainer(3), new SimpleContainerData(3));
     }
 
-	public ComposterMenu(int windowId, Inventory playerInventory, Container container, ContainerData data) {
-		super(ModMenuTypes.COMPOSTER.get(), windowId);
+    public ComposterMenu(int windowId, Inventory playerInventory, Container container, ContainerData data) {
+        super(ModMenuTypes.COMPOSTER.get(), windowId);
+        checkContainerSize(container, 3);
         checkContainerDataCount(data, 3);
+        container.startOpen(playerInventory.player);
         this.container = container;
         this.data = data;
-		
-		addSlot(new Slot(container, 0, 56, 17));
-		addSlot(new Slot(container, 1, 56, 53));
-		addSlot(new Slot(container, 2, 116, 35));
 
-		for (int i = 0; i < 3; i++)
-			for (int j = 0; j < 9; j++)
-				addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+        addSlot(new Slot(container, 0, 56, 17) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(ModItemTags.COMPOSTABLE);
+            }
+        });
+        addSlot(new Slot(container, 1, 56, 53) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return ComposterBlockEntity.getMouldUseTime(stack) > 0;
+            }
+        });
+        addSlot(new Slot(container, 2, 116, 35) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return false;
+            }
+        });
+        addStandardInventorySlots(playerInventory, 8, 84);
+        addDataSlots(data);
+    }
 
-		for (int i = 0; i < 9; i++)
-			addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
-		addDataSlots(data);
-	}
-	
-	@Override
-	public boolean stillValid(@Nonnull Player player) {
-		return container.stillValid(player);
-	}
+    @Override
+    public boolean stillValid(@Nonnull Player player) {
+        return container.stillValid(player);
+    }
 
-	@Nonnull
-	@Override
-	public ItemStack quickMoveStack(@Nonnull Player player, int slotIndex) {
-		ItemStack itemstack = ItemStack.EMPTY;
-		Slot slot = slots.get(slotIndex);
+    @Override
+    public void removed(Player player) {
+        super.removed(player);
+        container.stopOpen(player);
+    }
 
-		if (slot != null && slot.hasItem()) {
-			ItemStack itemstack1 = slot.getItem();
-			itemstack = itemstack1.copy();
+    @Nonnull
+    @Override
+    public ItemStack quickMoveStack(@Nonnull Player player, int index) {
+        if (index < 0 || index >= slots.size() || !stillValid(player)) return ItemStack.EMPTY;
+        Slot slot = slots.get(index);
+        if (!slot.hasItem()) return ItemStack.EMPTY;
+        ItemStack stack = slot.getItem(), original = stack.copy();
+        if (index < 3) {
+            if (!moveItemStackTo(stack, 3, 39, true)) return ItemStack.EMPTY;
+        } else if (ComposterBlockEntity.getMouldUseTime(stack) > 0) {
+            if (!moveItemStackTo(stack, 1, 2, false)) return ItemStack.EMPTY;
+        } else if (stack.is(ModItemTags.COMPOSTABLE)) {
+            if (!moveItemStackTo(stack, 0, 1, false)) return ItemStack.EMPTY;
+        } else if (index < 30) {
+            if (!moveItemStackTo(stack, 30, 39, false)) return ItemStack.EMPTY;
+        } else if (!moveItemStackTo(stack, 3, 30, false)) return ItemStack.EMPTY;
+        if (stack.getCount() == original.getCount()) return ItemStack.EMPTY;
+        if (stack.isEmpty()) slot.set(ItemStack.EMPTY);
+        else slot.setChanged();
+        slot.onTake(player, stack);
+        return original;
+    }
 
-			if (slotIndex == 2) {
-                if (!moveItemStackTo(itemstack1, 3, 39, true))
-                    return ItemStack.EMPTY;
-                slot.setByPlayer(itemstack1, itemstack);
-			} else if (slotIndex != 1 && slotIndex != 0) {
-				if (!itemstack1.isEmpty() && itemstack1.is(ModItemTags.COMPOSTABLE)) {
-					if (!moveItemStackTo(itemstack1, 0, 1, false))
-						return ItemStack.EMPTY;
-				} else if (itemstack1.is(ModItemTags.COMPOSTABLE)) {
-					if (!moveItemStackTo(itemstack1, 1, 2, false))
-						return ItemStack.EMPTY;
-				} else if (slotIndex >= 3 && slotIndex < 30) {
-					if (!moveItemStackTo(itemstack1, 30, 39, false))
-						return ItemStack.EMPTY;
-				} else if (slotIndex >= 30 && slotIndex < 39 && !moveItemStackTo(itemstack1, 3, 30, false))
-					return ItemStack.EMPTY;
-			} else if (!moveItemStackTo(itemstack1, 3, 39, false))
-				return ItemStack.EMPTY;
-            
-            if (itemstack1.getCount() == 0)
-                slot.set(ItemStack.EMPTY);
-            else
-                slot.setChanged();
-            if (itemstack1.getCount() == itemstack.getCount())
-                return ItemStack.EMPTY;
-
-            slot.onTake(player, itemstack1);
-		}
-		return itemstack;
-	}
-
-	@Override
-	protected boolean moveItemStackTo(@Nonnull ItemStack stack, int startIndex, int endIndex, boolean reverseDirection) {
-		boolean merged = false;
-		int slotIndex = startIndex;
-
-		if (reverseDirection)
-			slotIndex = endIndex - 1;
-
-		Slot slot;
-		ItemStack slotstack;
-
-		if (stack.isStackable()) {
-			while (stack.getCount() > 0 && (!reverseDirection && slotIndex < endIndex || reverseDirection && slotIndex >= startIndex)) {
-				slot = this.slots.get(slotIndex);
-				slotstack = slot.getItem();
-
-				if (!slotstack.isEmpty() && slotstack.getItem() == stack.getItem() && stack.getDamageValue() == slotstack.getDamageValue() && ItemStack.isSameItemSameComponents(stack, slotstack) && slotstack.getCount() < slot.getMaxStackSize()) {
-					int mergedStackSize = stack.getCount() + Math.min(slotstack.getCount(), slot.getMaxStackSize());
-
-					if (mergedStackSize <= stack.getMaxStackSize() && mergedStackSize <= slot.getMaxStackSize()) {
-						stack.setCount(0);
-						slotstack.setCount(mergedStackSize);
-						slot.setChanged();
-						merged = true;
-					} else if (slotstack.getCount() < stack.getMaxStackSize() && slotstack.getCount() < slot.getMaxStackSize()) {
-						if (slot.getMaxStackSize() >= stack.getMaxStackSize()) {
-							stack.shrink(stack.getMaxStackSize() - slotstack.getCount());
-							slotstack.setCount(stack.getMaxStackSize());
-							slot.setChanged();
-							merged = true;
-						}
-						else if (slot.getMaxStackSize() < stack.getMaxStackSize()) {
-							stack.shrink(slot.getMaxStackSize() - slotstack.getCount());
-							slotstack.setCount(slot.getMaxStackSize());
-							slot.setChanged();
-							merged = true;
-						}
-					}
-				}
-
-				if (reverseDirection)
-					--slotIndex;
-				else
-					++slotIndex;
-			}
-		}
-
-		if (stack.getCount() > 0) {
-			if (reverseDirection)
-				slotIndex = endIndex - 1;
-			else
-				slotIndex = startIndex;
-
-			while (!reverseDirection && slotIndex < endIndex || reverseDirection && slotIndex >= startIndex) {
-				slot = this.slots.get(slotIndex);
-				slotstack = slot.getItem();
-				if (slotstack.isEmpty() && slot.mayPlace(stack) && slot.getMaxStackSize() < stack.getCount()) {
-					ItemStack copy = stack.copy();
-					copy.setCount(slot.getMaxStackSize());
-					stack.shrink(slot.getMaxStackSize());
-					slot.set(copy);
-					slot.setChanged();
-					merged = true;
-					break;
-				} else if (slotstack.isEmpty() && slot.mayPlace(stack)) {
-					slot.set(stack.copy());
-					slot.setChanged();
-					stack.setCount(0);
-					merged = true;
-					break;
-				}
-
-				if (reverseDirection)
-					--slotIndex;
-				else
-					++slotIndex;
-			}
-		}
-
-		return merged;
-	}
-	
     public int getMouldProgress() {
-        return data.get(DATA_MOULD_PROGRESS);
+        return Math.clamp((int) ((long) data.get(DATA_MOULD_PROGRESS) * 13
+                / Math.max(1, data.get(DATA_MOULD_MAX_TIME))), 0, 13);
     }
 
     public int getCompostingProgress() {
-    	return data.get(DATA_COMPOSTING_PROGRESS);
+        return Math.clamp(data.get(DATA_COMPOSTING_PROGRESS) * 32L / 200, 0, 32);
+    }
+
+    public boolean isComposting() {
+        return data.get(DATA_MOULD_PROGRESS) > 0;
     }
 }

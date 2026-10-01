@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 public class RepairAltarAnvilModel extends Model<RepairAltarBlockEntityRenderState> {
 
     public RepairAltarAnvilModel(ModelPart root) {
-		super(root, RenderTypes::entitySolid);
+        super(root, RenderTypes::entitySolid);
         root.getChild("AnvilFrontFoot");
         root.getChild("AnvilRearFoot");
         root.getChild("AnvilBase");
@@ -21,9 +21,9 @@ public class RepairAltarAnvilModel extends Model<RepairAltarBlockEntityRenderSta
         root.getChild("AnvilHeel");
     }
 
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition mesh = new MeshDefinition();
-		PartDefinition part = mesh.getRoot();
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition mesh = new MeshDefinition();
+        PartDefinition part = mesh.getRoot();
 
         part.addOrReplaceChild("AnvilFrontFoot", CubeListBuilder.create().texOffs(0, 37).addBox(-6.0F, 20.0F, -6.0F, 4.0F, 4.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -32.0F, 0.0F));
         part.addOrReplaceChild("AnvilRearFoot", CubeListBuilder.create().texOffs(0, 37).addBox(2.0F, 20.0F, -6.0F, 4.0F, 4.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -32.0F, 0.0F));
@@ -35,5 +35,5 @@ public class RepairAltarAnvilModel extends Model<RepairAltarBlockEntityRenderSta
         part.addOrReplaceChild("AnvilHeel", CubeListBuilder.create().texOffs(109, 45).addBox(7.0F, 8.0F, -5.0F, 3.0F, 4.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -32.0F, 0.0F));
 
         return LayerDefinition.create(mesh, 256, 64);
-	}
+    }
 }

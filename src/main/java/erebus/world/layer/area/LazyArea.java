@@ -8,7 +8,7 @@ import net.minecraft.world.level.biome.Biomes;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class LazyArea implements Area{
+public class LazyArea implements Area {
     private final Area transformer;
     private final ConcurrentHashMap<Long, ResourceKey<Biome>> cachedSamples;
     private final LinkedBlockingQueue<Long> evictionQueue;
@@ -26,18 +26,18 @@ public class LazyArea implements Area{
         long key = new ChunkPos(x, z).pack();
         ResourceKey<Biome> biome = cachedSamples.get(key);
 
-        if(biome != null && biome != Biomes.THE_VOID) return biome;
+        if (biome != null && biome != Biomes.THE_VOID) return biome;
 
         ResourceKey<Biome> computed = transformer.getBiome(x, z);
         ResourceKey<Biome> existing = cachedSamples.putIfAbsent(key, computed);
 
-        if(existing != null && existing != Biomes.THE_VOID) return existing;
+        if (existing != null && existing != Biomes.THE_VOID) return existing;
 
         evictionQueue.offer(key);
-        if(evictionQueue.size() > maxCacheSize) {
-            for(int c = 0, limit = maxCacheSize / 16; c < limit; c++) {
+        if (evictionQueue.size() > maxCacheSize) {
+            for (int c = 0, limit = maxCacheSize / 16; c < limit; c++) {
                 Long oldest = evictionQueue.poll();
-                if(oldest != null) cachedSamples.remove(oldest);
+                if (oldest != null) cachedSamples.remove(oldest);
             }
         }
 

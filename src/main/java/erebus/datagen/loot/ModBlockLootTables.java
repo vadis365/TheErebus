@@ -1,16 +1,46 @@
 package erebus.datagen.loot;
 
+import erebus.block.plants.DarkFruitVineBlock;
+import erebus.block.plants.TallFernBlock;
 import erebus.datagen.providers.ModBlockLootTableProvider;
+import erebus.loot.BalsamResinCount;
+import erebus.loot.RedGemDropCount;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.data.ModDataComponents;
 import erebus.registries.item.ModItems;
+import net.minecraft.advancements.criterion.BlockPredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.LocationPredicate;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.storage.loot.IntRange;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
+import net.minecraft.world.level.storage.loot.functions.LimitCount;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
+import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.jetbrains.annotations.NotNull;
 
 public class ModBlockLootTables extends ModBlockLootTableProvider {
@@ -19,25 +49,66 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         super(provider);
     }
 
+    private void darkFruitVine() {
+        var vine = ModBlocks.DARK_FRUIT_VINE.get();
+        var player = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().of(registries.lookupOrThrow(Registries.ENTITY_TYPE), EntityType.PLAYER));
+        var table = LootTable.lootTable();
+        for (int age : new int[]{5, 6}) {
+            table.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                    .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(vine)
+                            .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DarkFruitVineBlock.AGE, age)))
+                    .add(LootItem.lootTableItem(age == 5 ? ModItems.DARK_FRUIT.get() : ModItems.DARK_FRUIT_SEEDS.get())
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2)).when(player))));
+        }
+        add(vine, table);
+    }
+
+    private LootTable.Builder tallFernDrops() {
+        var block = ModBlocks.TALL_FERN.get();
+        var entry = LootItem.lootTableItem(block).when(hasShears()).otherwise(DynamicLoot.dynamicEntry(TallFernBlock.SEEDS));
+        return pairedPlantDrops(block, entry);
+    }
+
+    private LootTable.Builder pairedPlantDrops(Block block, LootPoolEntryContainer.Builder<?> entry) {
+        var blocks = registries.lookupOrThrow(Registries.BLOCK);
+        var table = LootTable.lootTable();
+        for (var half : DoubleBlockHalf.values()) {
+            boolean lower = half == DoubleBlockHalf.LOWER;
+            var other = lower ? DoubleBlockHalf.UPPER : DoubleBlockHalf.LOWER;
+            table.withPool(LootPool.lootPool().add(entry)
+                    .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(
+                            StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, half)))
+                    .when(LocationCheck.checkLocation(
+                            LocationPredicate.Builder.location().setBlock(
+                                    BlockPredicate.Builder.block().of(blocks, block)
+                                            .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, other))),
+                            new BlockPos(0, lower ? 1 : -1, 0))));
+        }
+        return table;
+    }
+
     @Override
     protected void generate() {
         // MARK: Umberstone
-        dropWhenSilkTouch(ModBlocks.UMBERSTONE.get());
-        dropOther(ModBlocks.UMBERSTONE, ModBlocks.UMBERCOBBLE);
+        add(ModBlocks.UMBERSTONE.get(), block -> createSingleItemTableWithSilkTouch(block, ModBlocks.UMBERCOBBLE.get()));
         dropSelf(ModBlocks.UMBERSTONE_BRICKS);
         dropSelf(ModBlocks.UMBERCOBBLE);
         dropSelf(ModBlocks.UMBERCOBBLE_MOSSY);
         dropSelf(ModBlocks.UMBERCOBBLE_WEBBED);
         dropSelf(ModBlocks.UMBERTILE_SMOOTH);
         dropSelf(ModBlocks.UMBERTILE_SMOOTH_SMALL);
-        dropSelf(ModBlocks.UMBERGRAVEL);
+        add(ModBlocks.UMBERGRAVEL.get(), block -> createSilkTouchDispatchTable(block,
+                applyExplosionCondition(block, LootItem.lootTableItem(Items.FLINT)
+                        .when(BonusLevelTableCondition.bonusLevelFlatChance(registries.lookupOrThrow(Registries.ENCHANTMENT)
+                                .getOrThrow(Enchantments.FORTUNE), 0.1F, 1F / 7, 0.25F, 1F))
+                        .otherwise(LootItem.lootTableItem(block)))));
         dropSelf(ModBlocks.UMBERPAVER);
         dropSelf(ModBlocks.UMBERPAVER_MOSSY);
         dropSelf(ModBlocks.UMBERPAVER_WEBBED);
         dropSelf(ModBlocks.UMBERSTONE_PILLAR);
         dropSelf(ModBlocks.VOLCANIC_ROCK);
         dropSelf(ModBlocks.DUST);
-        dropSelf(ModBlocks.DUST_LAYER);
+        add(ModBlocks.DUST_LAYER.get(), LootTable.lootTable());
         dropSelf(ModBlocks.PETRIFIED_WOOD_ROCK);
         dropSelf(ModBlocks.PETRIFIED_WOOD_ROCK_2);
         dropSelf(ModBlocks.PETRIFIED_WOOD_ROCK_3);
@@ -53,10 +124,10 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ModBlocks.AMBER);
         dropSelf(ModBlocks.AMBER_GLASS);
         dropSelf(ModBlocks.AMBER_BRICKS);
-        dropSelf(ModBlocks.PRESERVED_AMBER);
-        dropSelf(ModBlocks.PRESERVED_AMBER_GLASS);
+        dropWhenSilkTouch(ModBlocks.PRESERVED_AMBER.get());
+        dropWhenSilkTouch(ModBlocks.PRESERVED_AMBER_GLASS.get());
         dropSelf(ModBlocks.GLOWING_JAR);
-        dropSelf(ModBlocks.AMBER_DOOR);
+        add(ModBlocks.AMBER_DOOR.get(), this::createDoorTable);
 
         dropSelf(ModBlocks.MIR_BRICKS);
         dropSelf(ModBlocks.MUD_BRICKS);
@@ -67,17 +138,21 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         ore(ModBlocks.ORE_COAL, Items.COAL);
         ore(ModBlocks.ORE_DIAMOND, Items.DIAMOND);
         ore(ModBlocks.ORE_EMERALD, Items.EMERALD);
-        ore(ModBlocks.ORE_LAPIS, Items.LAPIS_LAZULI);
+        add(ModBlocks.ORE_LAPIS.get(), block -> createSilkTouchDispatchTable(block,
+                applyExplosionDecay(block, LootItem.lootTableItem(Items.LAPIS_LAZULI)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(4, 8)))
+                        .apply(ApplyBonusCount.addOreBonusCount(registries.lookupOrThrow(Registries.ENCHANTMENT)
+                                .getOrThrow(Enchantments.FORTUNE))))));
         ore(ModBlocks.ORE_QUARTZ, Items.QUARTZ);
         ore(ModBlocks.ORE_PETRIFIED_QUARTZ, Items.QUARTZ);
         ore(ModBlocks.ORE_COPPER, Items.RAW_COPPER);
-        ore(ModBlocks.ORE_SILVER, ModItems.INGOT_SILVER);
-        ore(ModBlocks.ORE_TIN, ModItems.INGOT_TIN);
-        ore(ModBlocks.ORE_LEAD, ModItems.INGOT_LEAD);
-        ore(ModBlocks.ORE_ALUMINUM, ModItems.INGOT_ALUMINUM);
+        dropSelf(ModBlocks.ORE_SILVER);
+        dropSelf(ModBlocks.ORE_TIN);
+        dropSelf(ModBlocks.ORE_LEAD);
+        dropSelf(ModBlocks.ORE_ALUMINUM);
         ore(ModBlocks.ORE_JADE, ModItems.JADE);
         ore(ModBlocks.ORE_ENCRUSTED_DIAMOND, Items.DIAMOND);
-        ore(ModBlocks.ORE_FOSSIL, Items.BONE);
+        ore(ModBlocks.ORE_FOSSIL, ModItems.SHARD_BONE);
         ore(ModBlocks.ORE_GNEISS, ModItems.GNEISS_ROCK);
         ore(ModBlocks.ORE_PETRIFIED_WOOD, ModItems.PETRIFIED_WOOD);
         ore(ModBlocks.ORE_TEMPLE, ModItems.TEMPLE_ROCK);
@@ -89,7 +164,13 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ModBlocks.LOG_MOSSBARK);
         dropSelf(ModBlocks.LOG_ASPER);
         dropSelf(ModBlocks.LOG_CYPRESS);
-        dropSelf(ModBlocks.LOG_BALSAM);
+        add(ModBlocks.LOG_BALSAM.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(ModBlocks.LOG_BALSAM).when(hasSilkTouch())
+                                .otherwise(LootItem.lootTableItem(ModBlocks.LOG_BALSAM_RESINLESS))))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(hasSilkTouch().invert())
+                        .add(LootItem.lootTableItem(ModItems.RESIN)
+                                .apply(() -> BalsamResinCount.INSTANCE))));
         dropSelf(ModBlocks.LOG_BALSAM_RESINLESS);
         dropSelf(ModBlocks.LOG_ROTTEN);
         dropSelf(ModBlocks.LOG_MARSHWOOD);
@@ -134,36 +215,36 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ModBlocks.PLANKS_PETRIFIED);
 
         // MARK: Slabs Wood
-        dropSelf(ModBlocks.SLAB_PLANKS_BAOBAB);
-        dropSelf(ModBlocks.SLAB_PLANKS_EUCALYPTUS);
-        dropSelf(ModBlocks.SLAB_PLANKS_MAHOGANY);
-        dropSelf(ModBlocks.SLAB_PLANKS_MOSSBARK);
-        dropSelf(ModBlocks.SLAB_PLANKS_ASPER);
-        dropSelf(ModBlocks.SLAB_PLANKS_CYPRESS);
-        dropSelf(ModBlocks.SLAB_PLANKS_BALSAM);
-        dropSelf(ModBlocks.SLAB_PLANKS_WHITE);
-        dropSelf(ModBlocks.SLAB_PLANKS_BAMBOO);
-        dropSelf(ModBlocks.SLAB_PLANKS_ROTTEN);
-        dropSelf(ModBlocks.SLAB_PLANKS_MARSHWOOD);
-        dropSelf(ModBlocks.SLAB_PLANKS_SCORCHED);
-        dropSelf(ModBlocks.SLAB_PLANKS_VARNISHED);
-        dropSelf(ModBlocks.SLAB_PLANKS_PETRIFIED);
+        add(ModBlocks.SLAB_PLANKS_BAOBAB.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_PLANKS_EUCALYPTUS.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_PLANKS_MAHOGANY.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_PLANKS_MOSSBARK.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_PLANKS_ASPER.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_PLANKS_CYPRESS.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_PLANKS_BALSAM.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_PLANKS_WHITE.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_PLANKS_BAMBOO.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_PLANKS_ROTTEN.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_PLANKS_MARSHWOOD.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_PLANKS_SCORCHED.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_PLANKS_VARNISHED.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_PLANKS_PETRIFIED.get(), this::createSlabItemTable);
 
         // MARK: Slabs Stone
-        dropSelf(ModBlocks.SLAB_UMBERSTONE);
-        dropSelf(ModBlocks.SLAB_UMBERCOBBLE);
-        dropSelf(ModBlocks.SLAB_UMBERCOBBLE_MOSSY);
-        dropSelf(ModBlocks.SLAB_UMBERCOBBLE_WEBBED);
-        dropSelf(ModBlocks.SLAB_UMBERSTONE_BRICKS);
-        dropSelf(ModBlocks.SLAB_UMBERTILE_SMOOTH);
-        dropSelf(ModBlocks.SLAB_UMBERTILE_SMOOTH_SMALL);
-        dropSelf(ModBlocks.SLAB_UMBERPAVER);
-        dropSelf(ModBlocks.SLAB_AMBER);
-        dropSelf(ModBlocks.SLAB_AMBER_BRICKS);
-        dropSelf(ModBlocks.SLAB_UMBERPAVER_MOSSY);
-        dropSelf(ModBlocks.SLAB_UMBERPAVER_WEBBED);
-        dropSelf(ModBlocks.SLAB_MIR_BRICKS);
-        dropSelf(ModBlocks.SLAB_MUD_BRICKS);
+        add(ModBlocks.SLAB_UMBERSTONE.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_UMBERCOBBLE.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_UMBERCOBBLE_MOSSY.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_UMBERCOBBLE_WEBBED.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_UMBERSTONE_BRICKS.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_UMBERTILE_SMOOTH.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_UMBERTILE_SMOOTH_SMALL.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_UMBERPAVER.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_AMBER.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_AMBER_BRICKS.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_UMBERPAVER_MOSSY.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_UMBERPAVER_WEBBED.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_MIR_BRICKS.get(), this::createSlabItemTable);
+        add(ModBlocks.SLAB_MUD_BRICKS.get(), this::createSlabItemTable);
 
         // MARK: Stairs Wood
         dropSelf(ModBlocks.STAIRS_BAOBAB);
@@ -199,17 +280,18 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ModBlocks.STAIRS_WASP_NEST);
 
         // MARK: Doors
-        dropSelf(ModBlocks.DOOR_BAOBAB);
-        dropSelf(ModBlocks.DOOR_EUCALYPTUS);
-        dropSelf(ModBlocks.DOOR_MAHOGANY);
-        dropSelf(ModBlocks.DOOR_MOSSBARK);
-        dropSelf(ModBlocks.DOOR_ASPER);
-        dropSelf(ModBlocks.DOOR_CYPRESS);
-        dropSelf(ModBlocks.DOOR_BALSAM);
-        dropSelf(ModBlocks.DOOR_WHITE);
-        dropSelf(ModBlocks.DOOR_ROTTEN);
-        dropSelf(ModBlocks.DOOR_MARSHWOOD);
-        dropSelf(ModBlocks.DOOR_SCORCHED);
+        add(ModBlocks.DOOR_BAOBAB.get(), this::createDoorTable);
+        add(ModBlocks.DOOR_EUCALYPTUS.get(), this::createDoorTable);
+        add(ModBlocks.DOOR_MAHOGANY.get(), this::createDoorTable);
+        add(ModBlocks.DOOR_MOSSBARK.get(), this::createDoorTable);
+        add(ModBlocks.DOOR_ASPER.get(), this::createDoorTable);
+        add(ModBlocks.DOOR_CYPRESS.get(), this::createDoorTable);
+        add(ModBlocks.DOOR_BALSAM.get(), this::createDoorTable);
+        add(ModBlocks.DOOR_WHITE.get(), this::createDoorTable);
+        add(ModBlocks.DOOR_PETRIFIED.get(), this::createDoorTable);
+        add(ModBlocks.DOOR_ROTTEN.get(), this::createDoorTable);
+        add(ModBlocks.DOOR_MARSHWOOD.get(), this::createDoorTable);
+        add(ModBlocks.DOOR_SCORCHED.get(), this::createDoorTable);
 
         // MARK: Fences
         dropSelf(ModBlocks.FENCE_BAOBAB);
@@ -262,7 +344,7 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ModBlocks.JADE_BERRY_BUSH);
         dropSelf(ModBlocks.HEART_BERRY_BUSH);
         dropSelf(ModBlocks.SWAMP_BERRY_BUSH);
-        dropSelf(ModBlocks.DARK_FRUIT_VINE);
+        darkFruitVine();
         dropPricklyPearBasedOffCondition(ModBlocks.PRICKLY_PEAR);
         dropColossalBambooBasedOffCondition(ModBlocks.COLOSSAL_BAMBOO);
         dropSelf(ModBlocks.DARK_CAPPED_MUSHROOM);
@@ -270,33 +352,41 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ModBlocks.GRANDMAS_SHOES_MUSHROOM);
         dropSelf(ModBlocks.KAIZERS_FINGERS_MUSHROOM);
         dropSelf(ModBlocks.SARCASTIC_CZECH_MUSHROOM);
-        dropSelf(ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK);
-        dropSelf(ModBlocks.DARK_CAPPED_MUSHROOM_STEM);
-        dropSelf(ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK);
-        dropSelf(ModBlocks.DUTCH_CAP_MUSHROOM_STEM);
-        dropSelf(ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK);
-        dropSelf(ModBlocks.GRANDMAS_SHOES_MUSHROOM_STEM);
-        dropSelf(ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK);
-        dropSelf(ModBlocks.KAIZERS_FINGERS_MUSHROOM_STEM);
-        dropSelf(ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK);
-        dropSelf(ModBlocks.SARCASTIC_CZECH_MUSHROOM_STEM);
+        hugeMushroom(ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK.get(), ModBlocks.DARK_CAPPED_MUSHROOM.get());
+        hugeMushroom(ModBlocks.DARK_CAPPED_MUSHROOM_STEM.get(), ModBlocks.DARK_CAPPED_MUSHROOM.get());
+        hugeMushroom(ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK.get(), ModBlocks.DUTCH_CAP_MUSHROOM.get());
+        hugeMushroom(ModBlocks.DUTCH_CAP_MUSHROOM_STEM.get(), ModBlocks.DUTCH_CAP_MUSHROOM.get());
+        hugeMushroom(ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK.get(), ModBlocks.GRANDMAS_SHOES_MUSHROOM.get());
+        hugeMushroom(ModBlocks.GRANDMAS_SHOES_MUSHROOM_STEM.get(), ModBlocks.GRANDMAS_SHOES_MUSHROOM.get());
+        hugeMushroom(ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK.get(), ModBlocks.KAIZERS_FINGERS_MUSHROOM.get());
+        hugeMushroom(ModBlocks.KAIZERS_FINGERS_MUSHROOM_STEM.get(), ModBlocks.KAIZERS_FINGERS_MUSHROOM.get());
+        hugeMushroom(ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK.get(), ModBlocks.SARCASTIC_CZECH_MUSHROOM.get());
+        hugeMushroom(ModBlocks.SARCASTIC_CZECH_MUSHROOM_STEM.get(), ModBlocks.SARCASTIC_CZECH_MUSHROOM.get());
         dropSelf(ModBlocks.DESERT_SHRUB);
-        dropSelf(ModBlocks.MIRE_CORAL);
-        dropSelf(ModBlocks.NETTLE);
-        dropSelf(ModBlocks.NETTLE_FLOWERED);
-        dropSelf(ModBlocks.SWAMP_PLANT);
+        add(ModBlocks.MIRE_CORAL.get(), createShearsOnlyDrop(ModBlocks.MIRE_CORAL));
+        add(ModBlocks.NETTLE.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(ModBlocks.NETTLE).when(hasShears())
+                        .otherwise(LootItem.lootTableItem(ModItems.NETTLE_LEAVES)))));
+        add(ModBlocks.NETTLE_FLOWERED.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(ModBlocks.NETTLE_FLOWERED).when(hasShears())
+                        .otherwise(LootItem.lootTableItem(ModItems.NETTLE_FLOWERS)))));
+        add(ModBlocks.SWAMP_PLANT.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(ModBlocks.SWAMP_PLANT).when(hasShears())
+                        .otherwise(LootItem.lootTableItem(ModItems.CABBAGE_SEEDS)))));
         dropSelf(ModBlocks.FIRE_BLOOM);
-        dropSelf(ModBlocks.FERN);
-        dropSelf(ModBlocks.FIDDLE_HEAD);
-        dropSelf(ModBlocks.THORNS);
-        dropSelf(ModBlocks.MOSS);
-        dropSelf(ModBlocks.MOULD);
+        add(ModBlocks.FERN.get(), createShearsOnlyDrop(ModBlocks.FERN));
+        add(ModBlocks.FIDDLE_HEAD.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(ModBlocks.FIDDLE_HEAD).when(hasShears())
+                        .otherwise(LootItem.lootTableItem(Items.MELON_SEEDS)))));
+        add(ModBlocks.THORNS.get(), createShearsOnlyDrop(ModBlocks.THORNS));
+        add(ModBlocks.MOSS.get(), createShearsOnlyDrop(ModBlocks.MOSS));
+        add(ModBlocks.MOULD.get(), createShearsOnlyDrop(ModBlocks.MOULD));
         dropSelf(ModBlocks.MOSS_CULTIVATED);
         dropSelf(ModBlocks.MOULD_CULTIVATED);
-        dropSelf(ModBlocks.ALGAE);
-        dropSelf(ModBlocks.GLOWSHROOM_BLOCK);
-        dropSelf(ModBlocks.GLOWSHROOM_STALK);
-        dropSelf(ModBlocks.HANGING_WEB);
+        add(ModBlocks.ALGAE.get(), LootTable.lootTable());
+        dropOther(ModBlocks.GLOWSHROOM_BLOCK, ModItems.GLOWSHROOM.get());
+        add(ModBlocks.GLOWSHROOM_STALK.get(), LootTable.lootTable());
+        add(ModBlocks.HANGING_WEB.get(), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(Items.STRING).when(hasShears()))));
         dropSelf(ModBlocks.GIANT_LILY_PAD);
 
         // MARK: Flowers
@@ -317,57 +407,75 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ModBlocks.PETAL_RAINBOW);
         dropSelf(ModBlocks.PETAL_RAINBOW_CHASE);
 
-        dropSelf(ModBlocks.EXPLODING_STIGMA);
+        dropOther(ModBlocks.EXPLODING_STIGMA, Items.GUNPOWDER);
         dropSelf(ModBlocks.STEM);
-        dropSelf(ModBlocks.STIGMA_BLACK);
-        dropSelf(ModBlocks.STIGMA_RED);
-        dropSelf(ModBlocks.STIGMA_BROWN);
-        dropSelf(ModBlocks.STIGMA_BLUE);
-        dropSelf(ModBlocks.STIGMA_PURPLE);
-        dropSelf(ModBlocks.STIGMA_CYAN);
-        dropSelf(ModBlocks.STIGMA_LIGHT_GRAY);
-        dropSelf(ModBlocks.STIGMA_GRAY);
-        dropSelf(ModBlocks.STIGMA_PINK);
-        dropSelf(ModBlocks.STIGMA_YELLOW);
-        dropSelf(ModBlocks.STIGMA_LIGHT_BLUE);
-        dropSelf(ModBlocks.STIGMA_MAGENTA);
-        dropSelf(ModBlocks.STIGMA_ORANGE);
-        dropSelf(ModBlocks.STIGMA_WHITE);
+        add(ModBlocks.STIGMA_BLACK.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_BLACK.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_RED.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_RED.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_BROWN.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_BROWN.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_BLUE.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_BLUE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_PURPLE.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_PURPLE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_CYAN.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_CYAN.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_LIGHT_GRAY.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_LIGHT_GRAY.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_GRAY.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_GRAY.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_PINK.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_PINK.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_YELLOW.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_YELLOW.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_LIGHT_BLUE.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_LIGHT_BLUE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_MAGENTA.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_MAGENTA.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_ORANGE.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_ORANGE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_WHITE.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_WHITE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
 
-        dropSelf(ModBlocks.FLOWER_BLACK);
-        dropSelf(ModBlocks.FLOWER_RED);
-        dropSelf(ModBlocks.FLOWER_BROWN);
-        dropSelf(ModBlocks.FLOWER_BLUE);
-        dropSelf(ModBlocks.FLOWER_PURPLE);
-        dropSelf(ModBlocks.FLOWER_CYAN);
-        dropSelf(ModBlocks.FLOWER_LIGHT_GRAY);
-        dropSelf(ModBlocks.FLOWER_GRAY);
-        dropSelf(ModBlocks.FLOWER_PINK);
-        dropSelf(ModBlocks.FLOWER_YELLOW);
-        dropSelf(ModBlocks.FLOWER_LIGHT_BLUE);
-        dropSelf(ModBlocks.FLOWER_MAGENTA);
-        dropSelf(ModBlocks.FLOWER_ORANGE);
-        dropSelf(ModBlocks.FLOWER_WHITE);
-        dropSelf(ModBlocks.FLOWER_RAINBOW);
+        dropOther(ModBlocks.FLOWER_BLACK, ModItems.SEED_BLACK.get());
+        dropOther(ModBlocks.FLOWER_RED, ModItems.SEED_RED.get());
+        dropOther(ModBlocks.FLOWER_BROWN, ModItems.SEED_BROWN.get());
+        dropOther(ModBlocks.FLOWER_BLUE, ModItems.SEED_BLUE.get());
+        dropOther(ModBlocks.FLOWER_PURPLE, ModItems.SEED_PURPLE.get());
+        dropOther(ModBlocks.FLOWER_CYAN, ModItems.SEED_CYAN.get());
+        dropOther(ModBlocks.FLOWER_LIGHT_GRAY, ModItems.SEED_LIGHT_GRAY.get());
+        dropOther(ModBlocks.FLOWER_GRAY, ModItems.SEED_GRAY.get());
+        dropOther(ModBlocks.FLOWER_PINK, ModItems.SEED_PINK.get());
+        dropOther(ModBlocks.FLOWER_YELLOW, ModItems.SEED_YELLOW.get());
+        dropOther(ModBlocks.FLOWER_LIGHT_BLUE, ModItems.SEED_LIGHT_BLUE.get());
+        dropOther(ModBlocks.FLOWER_MAGENTA, ModItems.SEED_MAGENTA.get());
+        dropOther(ModBlocks.FLOWER_ORANGE, ModItems.SEED_ORANGE.get());
+        dropOther(ModBlocks.FLOWER_WHITE, ModItems.SEED_WHITE.get());
+        dropOther(ModBlocks.FLOWER_RAINBOW, ModItems.SEED_RAINBOW.get());
 
         // MARK: Flowers Double Height
         dropSelf(ModBlocks.BULLRUSH);
-        dropSelf(ModBlocks.WEEPING_BLUEBELL);
+        add(ModBlocks.WEEPING_BLUEBELL.get(), pairedPlantDrops(ModBlocks.WEEPING_BLUEBELL.get(),
+                LootItem.lootTableItem(ModBlocks.WEEPING_BLUEBELL).when(hasShears())
+                        .otherwise(LootItem.lootTableItem(ModItems.BLUEBELL_PETAL))));
         dropSelf(ModBlocks.SUNDEW);
-        dropSelf(ModBlocks.DROUGHTED_SHRUB);
-        dropSelf(ModBlocks.TALL_BLOOM);
+        add(ModBlocks.DROUGHTED_SHRUB.get(), pairedPlantDrops(ModBlocks.DROUGHTED_SHRUB.get(), LootItem.lootTableItem(ModBlocks.DROUGHTED_SHRUB)));
+        add(ModBlocks.TALL_BLOOM.get(), pairedPlantDrops(ModBlocks.TALL_BLOOM.get(), LootItem.lootTableItem(ModBlocks.TALL_BLOOM)));
         dropSelf(ModBlocks.TANGLED_STALK);
         dropSelf(ModBlocks.HIGH_CAPPED_MUSHROOM);
-        dropSelf(ModBlocks.TALL_FERN);
+        add(ModBlocks.TALL_FERN.get(), tallFernDrops());
 
         dropSelf(ModBlocks.PORTAL);
         dropSelf(ModBlocks.JADE_BLOCK);
         dropSelf(ModBlocks.MUD);
         dropSelf(ModBlocks.QUICK_SAND);
-        dropSelf(ModBlocks.GHOST_SAND);
+        add(ModBlocks.GHOST_SAND.get(), createSingleItemTableWithSilkTouch(ModBlocks.GHOST_SAND.get(), Blocks.SAND));
         dropSelf(ModBlocks.SWAMP_VENT);
-        dropSelf(ModBlocks.GNEISS_VENT);
-        dropSelf(ModBlocks.RED_GEM_BLOCK);
+        add(ModBlocks.GNEISS_VENT.get(), LootTable.lootTable());
+        add(ModBlocks.RED_GEM_BLOCK.get(), createSilkTouchDispatchTable(ModBlocks.RED_GEM_BLOCK.get(),
+                applyExplosionDecay(ModBlocks.RED_GEM_BLOCK, LootItem.lootTableItem(ModItems.RED_GEM)
+                        .apply(() -> RedGemDropCount.INSTANCE))));
         dropSelf(ModBlocks.RED_GEM_LAMP);
         dropSelf(ModBlocks.GNEISS);
         dropSelf(ModBlocks.GNEISS_CARVED);
@@ -383,44 +491,51 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ModBlocks.REIN_EXO);
         dropSelf(ModBlocks.VELOCITY_BLOCK);
         dropSelf(ModBlocks.VELOCITY_BLOCK_LIGHTNING_SPEED);
-        dropSelf(ModBlocks.BLOCK_OF_BONES);
+        add(ModBlocks.BLOCK_OF_BONES.get(), LootTable.lootTable());
         dropSelf(ModBlocks.ANTLION_EGG);
         dropSelf(ModBlocks.TARANTULA_EGG);
-        dropSelf(ModBlocks.HONEY_TREAT);
-        dropSelf(ModBlocks.CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.WHITE_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.ORANGE_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.MAGENTA_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.LIGHT_BLUE_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.YELLOW_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.LIME_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.PINK_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.GRAY_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.LIGHT_GRAY_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.CYAN_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.PURPLE_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.BLUE_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.BROWN_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.GREEN_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.RED_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.BLACK_CANDLE_HONEY_TREAT);
-        dropSelf(ModBlocks.WASP_NEST);
-        dropSelf(ModBlocks.STAIRS_WASP_NEST);
-        dropSelf(ModBlocks.INSECT_REPELLENT);
+        add(ModBlocks.HONEY_TREAT.get(), LootTable.lootTable());
+        dropOther(ModBlocks.CANDLE_HONEY_TREAT.get(), Blocks.CANDLE);
+        dropOther(ModBlocks.WHITE_CANDLE_HONEY_TREAT.get(), Blocks.WHITE_CANDLE);
+        dropOther(ModBlocks.ORANGE_CANDLE_HONEY_TREAT.get(), Blocks.ORANGE_CANDLE);
+        dropOther(ModBlocks.MAGENTA_CANDLE_HONEY_TREAT.get(), Blocks.MAGENTA_CANDLE);
+        dropOther(ModBlocks.LIGHT_BLUE_CANDLE_HONEY_TREAT.get(), Blocks.LIGHT_BLUE_CANDLE);
+        dropOther(ModBlocks.YELLOW_CANDLE_HONEY_TREAT.get(), Blocks.YELLOW_CANDLE);
+        dropOther(ModBlocks.LIME_CANDLE_HONEY_TREAT.get(), Blocks.LIME_CANDLE);
+        dropOther(ModBlocks.PINK_CANDLE_HONEY_TREAT.get(), Blocks.PINK_CANDLE);
+        dropOther(ModBlocks.GRAY_CANDLE_HONEY_TREAT.get(), Blocks.GRAY_CANDLE);
+        dropOther(ModBlocks.LIGHT_GRAY_CANDLE_HONEY_TREAT.get(), Blocks.LIGHT_GRAY_CANDLE);
+        dropOther(ModBlocks.CYAN_CANDLE_HONEY_TREAT.get(), Blocks.CYAN_CANDLE);
+        dropOther(ModBlocks.PURPLE_CANDLE_HONEY_TREAT.get(), Blocks.PURPLE_CANDLE);
+        dropOther(ModBlocks.BLUE_CANDLE_HONEY_TREAT.get(), Blocks.BLUE_CANDLE);
+        dropOther(ModBlocks.BROWN_CANDLE_HONEY_TREAT.get(), Blocks.BROWN_CANDLE);
+        dropOther(ModBlocks.GREEN_CANDLE_HONEY_TREAT.get(), Blocks.GREEN_CANDLE);
+        dropOther(ModBlocks.RED_CANDLE_HONEY_TREAT.get(), Blocks.RED_CANDLE);
+        dropOther(ModBlocks.BLACK_CANDLE_HONEY_TREAT.get(), Blocks.BLACK_CANDLE);
+        add(ModBlocks.WASP_NEST.get(), LootTable.lootTable());
+        add(ModBlocks.INSECT_REPELLENT.get(), LootTable.lootTable());
 
         // MARK: Spawners
-        dropSelf(ModBlocks.ANTLION_SPAWNER);
-        dropSelf(ModBlocks.DRAGON_FLY_SPAWNER);
-        dropSelf(ModBlocks.JUMPING_SPIDER_SPAWNER);
-        dropSelf(ModBlocks.SPIDER_SPAWNER);
-        dropSelf(ModBlocks.TARANTULA_SPAWNER);
-        dropSelf(ModBlocks.WASP_SPAWNER);
-        dropSelf(ModBlocks.ZOMBIE_ANT_SPAWNER);
-        dropSelf(ModBlocks.ZOMBIE_ANT_SOLDIER_SPAWNER);
-        dropSelf(ModBlocks.MAGMA_CRAWLER_SPAWNER);
-        dropSelf(ModBlocks.DUNG_SPAWNER_FLY);
-        dropSelf(ModBlocks.DUNG_SPAWNER_BOT_FLY);
-        dropSelf(ModBlocks.LOCUST_SPAWNER);
+        add(ModBlocks.ANTLION_SPAWNER.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(ModBlocks.GHOST_SAND.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.DRAGON_FLY_SPAWNER.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(Items.ENDER_PEARL).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.JUMPING_SPIDER_SPAWNER.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(Items.STRING).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.SPIDER_SPAWNER.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(Items.STRING).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.TARANTULA_SPAWNER.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(Items.STRING).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        dropOther(ModBlocks.WASP_SPAWNER, ModItems.WASP_SWORD.get());
+        add(ModBlocks.ZOMBIE_ANT_SPAWNER.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(Items.ENDER_PEARL).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.ZOMBIE_ANT_SOLDIER_SPAWNER.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(Items.ENDER_PEARL).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.MAGMA_CRAWLER_SPAWNER.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(Items.MAGMA_CREAM).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.DUNG_SPAWNER_FLY.get(), LootTable.lootTable());
+        add(ModBlocks.DUNG_SPAWNER_BOT_FLY.get(), LootTable.lootTable());
+        dropOther(ModBlocks.LOCUST_SPAWNER, ModItems.REIN_EXOSKELETON_SHIELD.get());
 
         // MARK: Utility Blocks
         dropSelf(ModBlocks.PETRIFIED_CRAFTING_TABLE);
@@ -441,9 +556,9 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ModBlocks.UMBER_FURNACE);
         dropSelf(ModBlocks.UMBERSTONE_BUTTON);
         dropSelf(ModBlocks.LIQUIFIER);
-        dropOther(ModBlocks.GLOW_GEM_ACTIVE, ModBlocks.GLOW_GEM_INACTIVE);
-        dropSelf(ModBlocks.GLOW_GEM_INACTIVE);
-        dropSelf(ModBlocks.MUCUS_BOMB);
+        dropSelf(ModBlocks.GLOW_GEM_ACTIVE);
+        dropOther(ModBlocks.GLOW_GEM_INACTIVE, ModBlocks.GLOW_GEM_ACTIVE);
+        dropSelf(ModBlocks.MUCUS_BOMB.get());
         dropSelf(ModBlocks.UMBER_GOLEM_STATUE);
 
         // MARK: Chests
@@ -470,37 +585,45 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ModBlocks.OFFERING_ALTAR);
         dropSelf(ModBlocks.GAEAN_KEYSTONE);
 
-        dropSelf(ModBlocks.CAPSTONE);
-        dropSelf(ModBlocks.CAPSTONE_MUD);
-        dropSelf(ModBlocks.CAPSTONE_IRON);
-        dropSelf(ModBlocks.CAPSTONE_GOLD);
-        dropSelf(ModBlocks.CAPSTONE_JADE);
-        dropSelf(ModBlocks.TEMPLE_BRICK_UNBREAKING);
-        dropSelf(ModBlocks.TEMPLE_BRICK_UNBREAKING_JADE);
-        dropSelf(ModBlocks.TEMPLE_BRICK_UNBREAKING_EXO);
-        dropSelf(ModBlocks.TEMPLE_BRICK_UNBREAKING_CREAM);
-        dropSelf(ModBlocks.TEMPLE_BRICK_UNBREAKING_EYE);
-        dropSelf(ModBlocks.TEMPLE_BRICK_UNBREAKING_STRING);
-        dropSelf(ModBlocks.TEMPLE_TELEPORTER);
-        dropSelf(ModBlocks.FORCE_FIELD);
-        dropSelf(ModBlocks.FORCE_LOCK);
+        add(ModBlocks.CAPSTONE.get(), LootTable.lootTable());
+        add(ModBlocks.CAPSTONE_MUD.get(), LootTable.lootTable());
+        add(ModBlocks.CAPSTONE_IRON.get(), LootTable.lootTable());
+        add(ModBlocks.CAPSTONE_GOLD.get(), LootTable.lootTable());
+        add(ModBlocks.CAPSTONE_JADE.get(), LootTable.lootTable());
+        add(ModBlocks.TEMPLE_BRICK_UNBREAKING.get(), LootTable.lootTable());
+        add(ModBlocks.TEMPLE_BRICK_UNBREAKING_JADE.get(), LootTable.lootTable());
+        add(ModBlocks.TEMPLE_BRICK_UNBREAKING_EXO.get(), LootTable.lootTable());
+        add(ModBlocks.TEMPLE_BRICK_UNBREAKING_CREAM.get(), LootTable.lootTable());
+        add(ModBlocks.TEMPLE_BRICK_UNBREAKING_EYE.get(), LootTable.lootTable());
+        add(ModBlocks.TEMPLE_BRICK_UNBREAKING_STRING.get(), LootTable.lootTable());
+        add(ModBlocks.TEMPLE_TELEPORTER.get(), LootTable.lootTable());
+        add(ModBlocks.FORCE_FIELD.get(), LootTable.lootTable());
+        add(ModBlocks.FORCE_LOCK.get(), LootTable.lootTable());
         dropSelf(ModBlocks.ANT_HILL_BLOCK);
-        
+
         //Webs
         add(ModBlocks.WITHER_WEB.get(), createSilkTouchOrShearsDispatchTable(ModBlocks.WITHER_WEB.get(), applyExplosionCondition(ModBlocks.WITHER_WEB, LootItem.lootTableItem(Items.STRING))));
         add(ModBlocks.LAVA_WEB.get(), createSilkTouchOrShearsDispatchTable(ModBlocks.LAVA_WEB.get(), applyExplosionCondition(ModBlocks.WITHER_WEB, LootItem.lootTableItem(Items.STRING))));
-    
+
         // Fluid Tank Blocks
         CopyComponentsFunction.Builder copyFluid = CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
-                .include(ModDataComponents.FLUID.get());
-        
-      // Portable Inventory Storage Blocks
+                .include(ModDataComponents.FLUID.get()).include(ModDataComponents.FLUID_AMOUNT.get());
+
+        // Portable Inventory Storage Blocks
         CopyComponentsFunction.Builder copyItems = CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
                 .include(DataComponents.CONTAINER);
 
         dropComponents(ModBlocks.FLUID_JAR, $ -> $.apply(copyFluid));
         dropComponents(ModBlocks.LIQUIFIER, $ -> $.apply(copyFluid));
         dropComponents(ModBlocks.BAMBOO_CRATE, $ -> $.apply(copyItems));
+    }
+
+    private void hugeMushroom(Block block, Block mushroom) {
+        // 1.12 uses ten equiprobable rolls: eight empty, one single and one double drop.
+        add(block, createSilkTouchDispatchTable(block, applyExplosionDecay(block,
+                LootItem.lootTableItem(mushroom)
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(-7, 2)))
+                        .apply(LimitCount.limitCount(IntRange.lowerBound(0))))));
     }
 
     @Override

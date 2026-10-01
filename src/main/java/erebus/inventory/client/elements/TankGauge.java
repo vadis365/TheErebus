@@ -1,6 +1,5 @@
 package erebus.inventory.client.elements;
 
-import erebus.Erebus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -8,9 +7,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
-import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.client.fluid.FluidTintSource;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.transfer.ResourceHandler;
@@ -20,7 +17,6 @@ import org.jspecify.annotations.NonNull;
 import javax.annotation.Nonnull;
 
 public class TankGauge extends AbstractWidget {
-    private final Identifier texture = Erebus.prefix("sprites/umberfurnace/tank");
     private final ResourceHandler<FluidResource> tank;
     private final int tankIndex;
     private final int capacity;
@@ -34,22 +30,21 @@ public class TankGauge extends AbstractWidget {
 
     @Override
     protected void extractWidgetRenderState(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
-        float fluidLevel = getFluidLevel();
-        if(tank == null) return;
-
+        if (tank == null || tank.getAmountAsInt(tankIndex) <= 0) return;
         FluidResource resource = tank.getResource(tankIndex);
+        if (resource.isEmpty()) return;
         FluidStack stack = resource.toStack(tank.getAmountAsInt(tankIndex));
-        FluidState fluid = stack.getFluid().defaultFluidState();
-        FluidModel model = Minecraft.getInstance().getModelManager().getFluidStateModelSet().get(fluid);
+        FluidModel model = Minecraft.getInstance().getModelManager().getFluidStateModelSet().get(stack.getFluid().defaultFluidState());
         FluidTintSource tintSource = model.fluidTintSource();
-        if (tintSource != null) {
-            tintSource.color(fluid);
+        int color = tintSource == null ? -1 : ARGB.opaque(tintSource.colorAsStack(stack));
+        int filled = Math.clamp(Math.round(getFluidLevel() * height), 0, height);
+        graphics.enableScissor(getX(), getY() + height - filled, getX() + width, getY() + height);
+        for (int y = getY() + height - 16; y > getY() + height - filled - 16; y -= 16) {
+            for (int x = getX(); x < getX() + width; x += 16) {
+                graphics.blitSprite(RenderPipelines.GUI_TEXTURED, model.stillMaterial().sprite(), x, y, 16, 16, color);
+            }
         }
-
-        if(fluidLevel > 0 && !stack.isEmpty()) {
-            double tankLevel = fluidLevel * height;
-            graphics.blit(RenderPipelines.ANIMATE_SPRITE_BLIT, texture, getX(), (int) (getY() + height - tankLevel), 0, 0, width, height, 18, 65, ARGB.white(0));
-        }
+        graphics.disableScissor();
     }
 
     public float getFluidLevel() {

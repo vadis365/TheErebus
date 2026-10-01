@@ -22,7 +22,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:antlion_boss"
             }
           }
         ]
@@ -36,7 +36,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:bed_bug"
             }
           }
         ]
@@ -78,7 +78,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:bot_fly_larva"
             }
           }
         ]
@@ -92,7 +92,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:black_ant"
             }
           }
         ]
@@ -120,7 +120,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:bog_maw"
             }
           }
         ]
@@ -190,7 +190,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:chameleon_tick"
             }
           }
         ]
@@ -204,7 +204,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:cicada"
             }
           }
         ]
@@ -218,7 +218,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:crop_weevil"
             }
           }
         ]
@@ -232,7 +232,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:crushroom"
             }
           }
         ]
@@ -260,7 +260,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:fire_ant"
             }
           }
         ]
@@ -274,7 +274,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:fire_ant_soldier"
             }
           }
         ]
@@ -302,7 +302,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:fungal_weevil"
             }
           }
         ]
@@ -316,7 +316,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:glow_worm"
             }
           }
         ]
@@ -344,7 +344,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:honey_pot_ant"
             }
           }
         ]
@@ -358,7 +358,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:jumping_spider"
             }
           }
         ]
@@ -400,7 +400,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:magma_crawler"
             }
           }
         ]
@@ -414,7 +414,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:midge_swarm"
             }
           }
         ]
@@ -442,7 +442,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:mosquito"
             }
           }
         ]
@@ -470,7 +470,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:pond_skater"
             }
           }
         ]
@@ -484,7 +484,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:praying_mantis"
             }
           }
         ]
@@ -498,7 +498,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:punchroom"
             }
           }
         ]
@@ -512,7 +512,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:rhino_beetle"
             }
           }
         ]
@@ -526,7 +526,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:scorpion"
             }
           }
         ]
@@ -554,7 +554,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:solifuge"
             }
           }
         ]
@@ -568,7 +568,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:baby_solifuge"
             }
           }
         ]
@@ -582,7 +582,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:stag_beetle"
             }
           }
         ]
@@ -596,7 +596,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:tarantula"
             }
           }
         ]
@@ -610,7 +610,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:baby_tarantula"
             }
           }
         ]
@@ -624,7 +624,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:tarantula_mini_boss"
             }
           }
         ]
@@ -638,7 +638,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:titan_beetle"
             }
           }
         ]
@@ -680,7 +680,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:woodlouse"
             }
           }
         ]
@@ -708,7 +708,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:zombie_ant"
             }
           }
         ]
@@ -722,7 +722,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "erebus:beetle_larva"
+              "type": "erebus:zombie_ant_soldier"
             }
           }
         ]

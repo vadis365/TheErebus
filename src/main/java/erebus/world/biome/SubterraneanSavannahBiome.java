@@ -9,7 +9,6 @@ import erebus.registries.world.feature.PlantFeatures;
 import erebus.registries.world.feature.TreeFeatures;
 import erebus.world.biome.util.ErebusBiome;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
@@ -54,7 +53,7 @@ public class SubterraneanSavannahBiome extends ErebusBiome {
                         .addSpawn(MobCategory.MONSTER, 20, new MobSpawnSettings.SpawnerData(ModEntities.SCYTODES.get(), 1, 4))
                         .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.TARANTULA.get(), 1, 4))
                         .addSpawn(MobCategory.MONSTER, 10, new MobSpawnSettings.SpawnerData(ModEntities.SCORPION.get(), 1, 3))
-                        .addSpawn(MobCategory.CREATURE, 5, new MobSpawnSettings.SpawnerData(ModEntities.GLOW_WORM.get(), 1, 3))
+                        .addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(ModEntities.GLOW_WORM.get(), 1, 4))
                         .build()
                 )
                 .generationSettings(new BiomeGenerationSettings.Builder(featureGetter, carverGetter)
@@ -63,12 +62,12 @@ public class SubterraneanSavannahBiome extends ErebusBiome {
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.POND.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.SAVANNAH_ROCK.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.ROTTEN_ACACIA.getPlacedResourceKey())
-                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.AMBER_GROUND.getPlacedResourceKey())
                         .addFeature(SURFACE_STRUCTURES, DecorationFeatures.AMBER_UMBERSTONE.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, VegetationPlacements.TREES_SAVANNA)
-                        .addFeature(VEGETAL_DECORATION, TreeFeatures.ASPER_TREE.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, TreeFeatures.BAOBAB_TREE.getPlacedResourceKey())
-                        .addFeature(VEGETAL_DECORATION, PlantFeatures.BAMBOO.getPlacedResourceKey())
+                        .addFeature(SURFACE_STRUCTURES, DecorationFeatures.AMBER_GROUND.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, TreeFeatures.SAVANNAH_ACACIA.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, TreeFeatures.SAVANNAH_ASPER.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, TreeFeatures.SAVANNAH_BAOBAB.getPlacedResourceKey())
+                        .addFeature(VEGETAL_DECORATION, PlantFeatures.GRASS.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, DecorationFeatures.RED_GEM.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.COAL_ORE.getPlacedResourceKey())
                         .addFeature(UNDERGROUND_ORES, OreFeatures.IRON_ORE.getPlacedResourceKey())

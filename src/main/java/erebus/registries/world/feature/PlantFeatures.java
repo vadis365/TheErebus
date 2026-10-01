@@ -6,22 +6,40 @@ import erebus.world.feature.bush.HeartBerryBushFeature;
 import erebus.world.feature.bush.JadeBerryBushFeature;
 import erebus.world.feature.bush.SwampBerryBushFeature;
 import erebus.world.feature.mushroom.*;
+import erebus.world.feature.mushroom.population.GiantMushroomPopulation;
+import erebus.world.feature.mushroom.population.GlowshroomPopulation;
+import erebus.world.feature.mushroom.population.SmallMushroomPopulation;
+import erebus.world.feature.mushroom.population.VanillaGiantMushroomPopulation;
 import erebus.world.feature.plant.*;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import static erebus.registries.world.feature.config.PlantFeatureConfigs.*;
 
 public class PlantFeatures extends ModFeatureHelpers {
+    public static SmallMushroomPopulation SMALL_MUSHROOM_POPULATION = new SmallMushroomPopulation();
+    public static JungleBambooPopulationFeature JUNGLE_BAMBOO_POPULATION = new JungleBambooPopulationFeature("jungle_bamboo_population");
+    public static JungleGrassPopulationFeature JUNGLE_GRASS_POPULATION = new JungleGrassPopulationFeature("jungle_grass_population");
+    public static JungleVinePopulationFeature JUNGLE_VINE_POPULATION = new JungleVinePopulationFeature("jungle_vine_population");
+    public static JungleCropPopulationFeature JUNGLE_CROP_POPULATION = new JungleCropPopulationFeature("jungle_crop_population");
+    public static DesertShrubFeature DESERT_SHRUB = new DesertShrubFeature();
+    public static DroughtedShrubFeature DROUGHTED_SHRUB = new DroughtedShrubFeature();
+    public static OutbackGrassFeature OUTBACK_GRASS = new OutbackGrassFeature();
+    public static OutbackSoilFeature OUTBACK_SOIL = new OutbackSoilFeature();
+    public static PetrifiedLogPopulationFeature PETRIFIED_FALLEN_LOGS = new PetrifiedLogPopulationFeature();
+    public static WildMandrakeFeature WILD_MANDRAKE = new WildMandrakeFeature();
+    public static DarkFruitVinePopulationFeature DARK_FRUIT_VINE_POPULATION = new DarkFruitVinePopulationFeature();
+    public static GiantFlowerPopulationFeature GIANT_FLOWER_POPULATION = new GiantFlowerPopulationFeature();
 
-    //NEW
+    public static GiantMushroomPopulation GIANT_MUSHROOM_POPULATION = new GiantMushroomPopulation();
+    public static VanillaGiantMushroomPopulation VANILLA_GIANT_MUSHROOM_POPULATION = new VanillaGiantMushroomPopulation();
+    public static GlowshroomPopulation GLOWSHROOM_POPULATION = new GlowshroomPopulation();
+    public static FallenLogPopulationFeature FALLEN_LOG_POPULATION = new FallenLogPopulationFeature();
+
     public static AlgaeFeature ALGAE = new AlgaeFeature("algae");
     public static BambooFeature BAMBOO = new BambooFeature("bamboo");
+    public static BambooFeature BAMBOO_SAVANNAH = new BambooFeature("bamboo_savannah");
     public static BigLogsFeature BIG_LOGS_X = new BigLogsFeature("big_logs_x");
     public static BigLogsFeature BIG_LOGS_Z = new BigLogsFeature("big_logs_z");
     public static FernFeature FERN = new FernFeature("fern");
@@ -47,7 +65,9 @@ public class PlantFeatures extends ModFeatureHelpers {
     public static KaizersFingersMushroomFeature KAIZERS_FINGERS_MUSHROOM = new KaizersFingersMushroomFeature();
     public static SarcasticCzechMushroomFeature SARCASTIC_CZECH_MUSHROOM = new SarcasticCzechMushroomFeature();
     public static MelonFeature MELON = new MelonFeature("melon");
-    public static MossPatchFeature MOSS = new MossPatchFeature("moss");
+    public static SwampReedFeature SWAMP_REEDS = new SwampReedFeature();
+    public static MossPopulationFeature SWAMP_UPPER_MOSS = new MossPopulationFeature("swamp_upper_moss");
+    public static MossPopulationFeature MOSS = new MossPopulationFeature();
     public static MossPatchFeature MOULD = new MossPatchFeature("mould");
     public static NettlePatchFeature NETTLE = new NettlePatchFeature("nettle");
     public static PricklyPearPatchFeature PRICKLY_PEAR = new PricklyPearPatchFeature("prickly_pear");
@@ -58,12 +78,13 @@ public class PlantFeatures extends ModFeatureHelpers {
     public static WeepingBluebell WEEPING_BLUEBELL = new WeepingBluebell("weeping_bluebell");
 
     // Old
-    public static ErebusPlantFeature SWAMP_PLANT = new ErebusPlantFeature("swamp_plant");
+    public static GroundPlantPopulationFeature MIRE_CORAL = new GroundPlantPopulationFeature("mire_coral");
+    public static GroundPlantPopulationFeature SWAMP_PLANT = new GroundPlantPopulationFeature("swamp_plant");
     public static ErebusPlantFeature FIRE_BLOOM = new ErebusPlantFeature("fire_bloom");
-    public static ErebusPlantFeature FIDDLE_HEAD = new ErebusPlantFeature("fiddle_head");
+    public static GroundPlantPopulationFeature FIDDLE_HEAD = new GroundPlantPopulationFeature("fiddle_head");
     public static ErebusPlantFeature BULLRUSH = new ErebusPlantFeature("bullrush");
-    public static ErebusPlantFeature SUNDEW = new ErebusPlantFeature("sundew");
-    public static ErebusPlantFeature TALL_BLOOM = new ErebusPlantFeature("tall_bloom");
+    public static TallFlowerPopulationFeature SUNDEW = new TallFlowerPopulationFeature("sundew");
+    public static TallFlowerPopulationFeature TALL_BLOOM = new TallFlowerPopulationFeature("tall_bloom");
     public static ErebusPlantFeature TANGLED_STALK = new ErebusPlantFeature("tangled_stalk");
     public static ErebusPlantFeature HIGH_CAPPED_MUSHROOM = new ErebusPlantFeature("high_capped_mushroom");
 
@@ -73,8 +94,24 @@ public class PlantFeatures extends ModFeatureHelpers {
 
     public static void initConfiguredFeatures(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         setConfiguredContext(context);
+        registerConfiguredFeatureWithConfig(SMALL_MUSHROOM_POPULATION, SMALL_MUSHROOM_POPULATION_CONFIG);
+        registerConfiguredFeatureWithConfig(JUNGLE_BAMBOO_POPULATION, JUNGLE_BAMBOO_POPULATION_CONFIG);
+        registerConfiguredFeatureWithConfig(JUNGLE_GRASS_POPULATION, GRASS_CONFIG);
+        registerConfiguredFeatureWithConfig(JUNGLE_VINE_POPULATION, JUNGLE_VINE_POPULATION_CONFIG);
+        registerConfiguredFeatureWithConfig(JUNGLE_CROP_POPULATION, JUNGLE_CROP_POPULATION_CONFIG);
+        registerConfiguredFeatureWithConfig(DESERT_SHRUB, DESERT_SHRUB_CONFIG);
+        registerConfiguredFeatureWithConfig(DROUGHTED_SHRUB, DROUGHTED_SHRUB_CONFIG);
+        registerConfiguredFeatureWithConfig(OUTBACK_GRASS, OUTBACK_GRASS_CONFIG);
+        registerConfiguredFeatureWithConfig(OUTBACK_SOIL, OUTBACK_SOIL_CONFIG);
+        registerConfiguredFeatureWithConfig(DARK_FRUIT_VINE_POPULATION, DARK_FRUIT_VINE_POPULATION_CONFIG);
+        registerConfiguredFeatureWithConfig(GIANT_FLOWER_POPULATION, GIANT_FLOWER_POPULATION_CONFIG);
+        registerConfiguredFeatureWithConfig(FALLEN_LOG_POPULATION, FALLEN_LOG_POPULATION_CONFIG);
+        registerConfiguredFeatureWithConfig(GLOWSHROOM_POPULATION, GLOWSHROOM_POPULATION_CONFIG);
+        registerConfiguredFeatureWithConfig(VANILLA_GIANT_MUSHROOM_POPULATION, VANILLA_GIANT_MUSHROOM_POPULATION_CONFIG);
+        registerConfiguredFeatureWithConfig(GIANT_MUSHROOM_POPULATION, GIANT_MUSHROOM_POPULATION_CONFIG);
         registerConfiguredFeatureWithConfig(ALGAE, ALGAE_CONFIG);
         registerConfiguredFeatureWithConfig(BAMBOO, BAMBOO_CONFIG);
+        registerConfiguredFeatureWithConfig(BAMBOO_SAVANNAH, BAMBOO_SAVANNAH_CONFIG);
         registerConfiguredFeatureWithConfig(BIG_LOGS_X, BIG_LOGS_X_CONFIG);
         registerConfiguredFeatureWithConfig(BIG_LOGS_Z, BIG_LOGS_Z_CONFIG);
         registerConfiguredFeatureWithConfig(FERN, FERN_CONFIG);
@@ -100,15 +137,19 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerConfiguredFeatureWithConfig(SARCASTIC_CZECH_MUSHROOM, SARCASTIC_CZECH_MUSHROOM_CONFIG);
 
         registerConfiguredFeatureWithConfig(MELON, MELON_CONFIG);
+        registerConfiguredFeatureWithConfig(SWAMP_REEDS, SWAMP_REEDS_CONFIG);
         registerConfiguredFeatureWithConfig(MOSS, MOSS_CONFIG);
+        registerConfiguredFeatureWithConfig(SWAMP_UPPER_MOSS, SWAMP_UPPER_MOSS_CONFIG);
         registerConfiguredFeatureWithConfig(MOULD, MOULD_CONFIG);
         registerConfiguredFeatureWithConfig(NETTLE, NETTLE_CONFIG);
-        registerConfiguredFeatureWithConfig(PRICKLY_PEAR, PRICKLY_PEAR_CONFIG);
+        registerConfiguredFeatureWithConfig(PETRIFIED_FALLEN_LOGS, PETRIFIED_FALLEN_LOGS_CONFIG);
+        registerConfiguredFeatureWithConfig(WILD_MANDRAKE, WILD_MANDRAKE_CONFIG);
+        registerConfiguredFeatureWithConfig(PRICKLY_PEAR, PRICKLY_PEAR_POPULATION_CONFIG);
         registerConfiguredFeatureWithConfig(ROTTEN_TREE_STUMP, ROTTEN_TREE_STUMP_CONFIG);
         registerConfiguredFeatureWithConfig(SWAMP_BUSH, SWAMP_BUSH_CONFIG);
         registerConfiguredFeatureWithConfig(TURNIP, TURNIP_CONFIG);
         registerConfiguredFeatureWithConfig(VINES, VINES_CONFIG);
-        registerSimpleConfiguredPlant(WEEPING_BLUEBELL, ModBlocks.WEEPING_BLUEBELL);
+        registerConfiguredFeatureWithConfig(WEEPING_BLUEBELL, WEEPING_BLUEBELL_CONFIG);
 
         SWAMP_BERRY_BUSH = new SwampBerryBushFeature();
         HEART_BERRY_BUSH = new HeartBerryBushFeature();
@@ -118,22 +159,39 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerConfiguredBush(HEART_BERRY_BUSH);
         registerConfiguredBush(JADE_BERRY_BUSH);
 
-        registerConfiguredFeature(GRASS.getConfiguredResourceKey(), Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.SHORT_GRASS)));
+        registerConfiguredFeatureWithConfig(GRASS, GRASS_CONFIG);
 
-        registerSimpleConfiguredPlant(SWAMP_PLANT, ModBlocks.SWAMP_PLANT);
+        registerConfiguredFeatureWithConfig(SWAMP_PLANT, SWAMP_PLANT_CONFIG);
+        registerConfiguredFeatureWithConfig(MIRE_CORAL, MIRE_CORAL_CONFIG);
         registerSimpleConfiguredPlant(FIRE_BLOOM, ModBlocks.FIRE_BLOOM);
-        registerSimpleConfiguredPlant(FIDDLE_HEAD, ModBlocks.FIDDLE_HEAD);
+        registerConfiguredFeatureWithConfig(FIDDLE_HEAD, FIDDLE_HEAD_CONFIG);
         registerSimpleConfiguredPlant(BULLRUSH, ModBlocks.BULLRUSH);
-        registerSimpleConfiguredPlant(SUNDEW, ModBlocks.SUNDEW);
-        registerSimpleConfiguredPlant(TALL_BLOOM, ModBlocks.TALL_BLOOM);
+        registerConfiguredFeatureWithConfig(SUNDEW, SUNDEW_CONFIG);
+        registerConfiguredFeatureWithConfig(TALL_BLOOM, TALL_BLOOM_CONFIG);
         registerSimpleConfiguredPlant(TANGLED_STALK, ModBlocks.TANGLED_STALK);
         registerSimpleConfiguredPlant(HIGH_CAPPED_MUSHROOM, ModBlocks.HIGH_CAPPED_MUSHROOM);
     }
 
     public static void initPlacedFeatures(BootstrapContext<PlacedFeature> context) {
         setPlacedContext(context);
+        registerPlacedFeature(SMALL_MUSHROOM_POPULATION);
+        registerPlacedFeature(JUNGLE_BAMBOO_POPULATION);
+        registerPlacedFeature(JUNGLE_GRASS_POPULATION);
+        registerPlacedFeature(JUNGLE_VINE_POPULATION);
+        registerPlacedFeature(JUNGLE_CROP_POPULATION);
+        registerPlacedFeature(DESERT_SHRUB);
+        registerPlacedFeature(DROUGHTED_SHRUB);
+        registerPlacedFeature(OUTBACK_GRASS);
+        registerPlacedFeature(OUTBACK_SOIL);
+        registerPlacedFeature(DARK_FRUIT_VINE_POPULATION);
+        registerPlacedFeature(GIANT_FLOWER_POPULATION);
+        registerPlacedFeature(FALLEN_LOG_POPULATION);
+        registerPlacedFeature(GLOWSHROOM_POPULATION);
+        registerPlacedFeature(VANILLA_GIANT_MUSHROOM_POPULATION);
+        registerPlacedFeature(GIANT_MUSHROOM_POPULATION);
         registerPlacedFeature(ALGAE);
         registerPlacedFeature(BAMBOO);
+        registerPlacedFeature(BAMBOO_SAVANNAH);
         registerPlacedFeature(BIG_LOGS_X);
         registerPlacedFeature(BIG_LOGS_Z);
         registerPlacedFeature(FERN);
@@ -158,9 +216,13 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerPlacedFeature(KAIZERS_FINGERS_MUSHROOM);
         registerPlacedFeature(SARCASTIC_CZECH_MUSHROOM);
         registerPlacedFeature(MELON);
+        registerPlacedFeature(SWAMP_REEDS);
         registerPlacedFeature(MOSS);
+        registerPlacedFeature(SWAMP_UPPER_MOSS);
         registerPlacedFeature(MOULD);
         registerPlacedFeature(NETTLE);
+        registerPlacedFeature(PETRIFIED_FALLEN_LOGS);
+        registerPlacedFeature(WILD_MANDRAKE);
         registerPlacedFeature(PRICKLY_PEAR);
         registerPlacedFeature(ROTTEN_TREE_STUMP);
         registerPlacedFeature(SWAMP_BUSH);
@@ -174,6 +236,7 @@ public class PlantFeatures extends ModFeatureHelpers {
         registerPlacedFeature(GRASS);
 
         registerPlacedFeature(SWAMP_PLANT);
+        registerPlacedFeature(MIRE_CORAL);
         registerPlacedFeature(FIRE_BLOOM);
         registerPlacedFeature(FIDDLE_HEAD);
         registerPlacedFeature(BULLRUSH);

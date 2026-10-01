@@ -8,9 +8,9 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class GlowWormModel extends EntityModel<GlowWormRenderState> {
-    public ModelPart root;
     private final ModelPart Head1, Head2, LMandible, RMandible, AntL, AntR, Eyes;
     private final ModelPart ThxL1, ThxR1, ThxL2, ThxR2, ThxL3, ThxR3, ThxL4, ThxR4, ThxL5, ThxR5;
     private final ModelPart ThxL6, ThxR6, ThxL7, ThxR7, ThxL8, ThxR8, ThxL9, ThxR9, ThxL10, ThxR10, Thx11;
@@ -20,6 +20,7 @@ public class GlowWormModel extends EntityModel<GlowWormRenderState> {
     private final ModelPart RFL1, RFL2, RFL3, RFL4;
     private final ModelPart RML1, RML2, RML3, RML4;
     private final ModelPart RBL1, RBL2, RBL3, RBL4;
+    public ModelPart root;
 
     public GlowWormModel(ModelPart root) {
         super(root);
@@ -145,5 +146,15 @@ public class GlowWormModel extends EntityModel<GlowWormRenderState> {
         RBL1.addOrReplaceChild("RBL4", CubeListBuilder.create().texOffs(7, 82).addBox(-3.5F, 9F, -0.5F, 1, 4, 1), PartPose.rotation(0F, 0F, 0.5235987F));
 
         return LayerDefinition.create(mesh, 64, 128);
+    }
+
+    @Override
+    public void setupAnim(GlowWormRenderState state) {
+        super.setupAnim(state);
+        Head1.yRot = state.yRot * Mth.DEG_TO_RAD;
+        float left = Mth.cos(state.walkAnimationPos * 2) * 0.7F * state.walkAnimationSpeed;
+        float right = Mth.cos(state.walkAnimationPos * 2 + Mth.PI) * 0.7F * state.walkAnimationSpeed;
+        LBL1.xRot = LFL1.xRot = RML1.xRot = right;
+        LML1.xRot = RBL1.xRot = RFL1.xRot = left;
     }
 }

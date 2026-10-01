@@ -15,45 +15,45 @@ import org.jspecify.annotations.NonNull;
 
 public class FlyRenderer extends MobRenderer<Fly, FlyRenderState, FlyModel> {
 
-	private static final Identifier TEXTURE = Erebus.prefix("textures/entity/fly.png");
+    private static final Identifier TEXTURE = Erebus.prefix("textures/entity/fly.png");
 
-	public FlyRenderer(EntityRendererProvider.Context context) {
-		super(context, new FlyModel(context.bakeLayer(ModEntityRendering.FLY)), 0.25F);
-		addLayer(new FlyLayer(this, context.getModelSet()));
-	}
+    public FlyRenderer(EntityRendererProvider.Context context) {
+        super(context, new FlyModel(context.bakeLayer(ModEntityRendering.FLY)), 0.25F);
+        addLayer(new FlyLayer(this, context.getModelSet()));
+    }
 
-	@Override
-	public FlyRenderState createRenderState() {
-		return new FlyRenderState();
-	}
+    @Override
+    public FlyRenderState createRenderState() {
+        return new FlyRenderState();
+    }
 
-	@Override
-	public void extractRenderState(Fly entity, FlyRenderState state, float partialTicks) {
-		super.extractRenderState(entity, state, partialTicks);
-		state.isHanging = entity.getIsFlyHanging();
-		state.animationTicks = entity.animationTicks;
-		state.prevAnimationTicks = entity.prevAnimationTicks;
-	}
+    @Override
+    public void extractRenderState(Fly entity, FlyRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+        state.isHanging = entity.getIsFlyHanging();
+        state.animationTicks = entity.animationTicks;
+        state.prevAnimationTicks = entity.prevAnimationTicks;
+    }
 
-	@Override
-	public @NonNull Identifier getTextureLocation(FlyRenderState state) {
-		return TEXTURE;
-	}
+    @Override
+    public @NonNull Identifier getTextureLocation(FlyRenderState state) {
+        return TEXTURE;
+    }
 
-	@Override
-	protected void scale(FlyRenderState state, PoseStack stack) {
-		stack.scale(0.75F, 0.75F, 0.75F);
-	}
+    @Override
+    protected void scale(FlyRenderState state, PoseStack stack) {
+        stack.scale(0.75F, 0.75F, 0.75F);
+    }
 
-	@Override
-	protected void setupRotations(FlyRenderState state, PoseStack pose, float bodyRot, float entityScale) {
-		if(state.isHanging) {
-			pose.translate(0F, 0.5F, 0F);
-			pose.mulPose(Axis.XP.rotationDegrees(180F));
-		} else {
-			pose.translate(0.0F, Math.cos(state.y * 0.3F) * 0.1F, 0.0F);
-		}
+    @Override
+    protected void setupRotations(FlyRenderState state, PoseStack pose, float bodyRot, float entityScale) {
+        if (state.isHanging) {
+            pose.translate(0F, 0.5F, 0F);
+            pose.mulPose(Axis.XP.rotationDegrees(180F));
+        } else {
+            pose.translate(0.0F, Math.cos(state.ageInTicks * 0.3F) * 0.1F, 0.0F);
+        }
 
-		super.setupRotations(state, pose, bodyRot, entityScale);
-	}
+        super.setupRotations(state, pose, bodyRot, entityScale);
+    }
 }

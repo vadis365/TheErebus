@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:small_mushroom_population",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

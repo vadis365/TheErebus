@@ -12,10 +12,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
@@ -26,10 +23,9 @@ import java.util.function.Supplier;
 
 public class ModFeatureHelpers {
 
+    private static final RuleTest umberstoneReplaceables = new TagMatchTest(ModBlockTags.UMBERSTONE_ORE_REPLACEABLES);
     private static BootstrapContext<ConfiguredFeature<?, ?>> configuredContext;
     private static BootstrapContext<PlacedFeature> placedContext;
-
-    private static final RuleTest umberstoneReplaceables = new TagMatchTest(ModBlockTags.UMBERSTONE_ORE_REPLACEABLES);
 
     protected static void setConfiguredContext(BootstrapContext<ConfiguredFeature<?, ?>> configuredContext) {
         ModFeatureHelpers.configuredContext = configuredContext;
@@ -59,7 +55,16 @@ public class ModFeatureHelpers {
     }
 
     protected static <F extends ErebusFeature> void registerConfiguredOre(F feature, Supplier<? extends Block> ore, int veinSize) {
-        registerConfiguredFeature(feature.getConfiguredResourceKey(), Feature.ORE, new OreConfiguration(umberstoneReplaceables, ore.get().defaultBlockState(), veinSize));
+        if (veinSize == 1) {
+            registerConfiguredFeature(feature.getConfiguredResourceKey(), Feature.REPLACE_SINGLE_BLOCK,
+                    new ReplaceBlockConfiguration(List.of(OreConfiguration.target(umberstoneReplaceables, ore.get().defaultBlockState()))));
+        } else {
+            registerConfiguredOre(feature, ore, veinSize, veinSize == 2 ? Feature.SCATTERED_ORE : Feature.ORE);
+        }
+    }
+
+    protected static <F extends ErebusFeature> void registerConfiguredOre(F feature, Supplier<? extends Block> ore, int veinSize, Feature<OreConfiguration> generator) {
+        registerConfiguredFeature(feature.getConfiguredResourceKey(), generator, new OreConfiguration(umberstoneReplaceables, ore.get().defaultBlockState(), veinSize));
     }
 
     protected static void registerSimpleConfiguredPlant(ErebusFeature feature, Supplier<? extends Block> block) {

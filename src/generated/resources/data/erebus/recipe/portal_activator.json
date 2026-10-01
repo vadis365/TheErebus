@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "G": "erebus:gaean_gem",
-    "I": "minecraft:gold_ingot",
+    "I": "#c:ingots/gold",
     "S": "#c:rods/wooden",
     "V": "minecraft:vine"
   },

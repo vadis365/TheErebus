@@ -32,7 +32,7 @@ public class ModWoodTypes {
         MAHOGANY = register("mahogany", ModBlockSetTypes.MAHOGANY);
         MARSHWOOD = register("marshwood", ModBlockSetTypes.MARSHWOOD);
         MOSSBARK = register("mossbark", ModBlockSetTypes.MOSSBARK);
-        PETRIFIED = register("petrified", ModBlockSetTypes.SCORCHED);
+        PETRIFIED = register("petrified", ModBlockSetTypes.PETRIFIED);
         ROTTEN = register("rotten", ModBlockSetTypes.ROTTEN);
         SCORCHED = register("scorched", ModBlockSetTypes.SCORCHED);
         VARNISHED = register("varnished", ModBlockSetTypes.VARNISHED);

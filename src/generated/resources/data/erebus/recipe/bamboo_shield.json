@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "B": "erebus:bamboo",
-    "I": "minecraft:iron_ingot"
+    "I": "#c:ingots/iron"
   },
   "pattern": [
     "BIB",

@@ -1,0 +1,50 @@
+{
+  "parent": "erebus:exploration/find_beetles",
+  "criteria": {
+    "get_chop": {
+      "conditions": {
+        "items": [
+          {
+            "items": "erebus:titan_chop_raw"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "kill_titan": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "erebus:titan_beetle"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.erebus.exploration/titan_beetle.desc"
+    },
+    "hidden": true,
+    "icon": {
+      "id": "erebus:titan_chop_raw"
+    },
+    "title": {
+      "translate": "advancement.erebus.exploration/titan_beetle.title"
+    }
+  },
+  "requirements": [
+    [
+      "kill_titan"
+    ],
+    [
+      "get_chop"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "F": "erebus:fly_wing",
+    "S": "#c:rods/wooden",
+    "T": "erebus:shard_bone"
+  },
+  "pattern": [
+    "T",
+    "S",
+    "F"
+  ],
+  "result": {
+    "count": 4,
+    "id": "minecraft:arrow"
+  }
+}

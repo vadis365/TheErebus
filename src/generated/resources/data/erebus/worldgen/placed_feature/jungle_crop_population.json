@@ -1,0 +1,8 @@
+{
+  "feature": "erebus:jungle_crop_population",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

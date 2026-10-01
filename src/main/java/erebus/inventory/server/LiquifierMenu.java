@@ -1,154 +1,92 @@
 package erebus.inventory.server;
 
 import erebus.block.entity.LiquifierBlockEntity;
+import erebus.network.client.MachineFluidsPacket;
 import erebus.registries.client.ModMenuTypes;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
+import erebus.registries.item.ModItems;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
 
-import javax.annotation.Nonnull;
+import java.util.List;
 
 public class LiquifierMenu extends AbstractContainerMenu {
-	public LiquifierBlockEntity liquifier;
-	public int numRows = 3;
+    public final FluidStacksResourceHandler tank;
+    private final Container inventory;
+    private final ContainerData data;
+    private final Player viewer;
+    private List<FluidStack> lastFluids;
 
-	public LiquifierMenu(final int windowId, final Inventory playerInventory, FriendlyByteBuf extra) {
-		super(ModMenuTypes.LIQUIFIER.get(), windowId);
-		BlockPos tilePos = extra.readBlockPos();
-		BlockEntity tile = playerInventory.player.level().getBlockEntity(tilePos);
-		if (!(tile instanceof LiquifierBlockEntity))
-			return;
-		liquifier = (LiquifierBlockEntity) tile;
+    public LiquifierMenu(int id, Inventory playerInventory) {
+        this(id, playerInventory, new SimpleContainer(1), new SimpleContainerData(1), new FluidStacksResourceHandler(1, LiquifierBlockEntity.TANK_CAPACITY));
+    }
 
-		int i = (numRows - 4) * 18;
-		int j;
-		int k;
+    public LiquifierMenu(int id, Inventory playerInventory, Container inventory, ContainerData data, FluidStacksResourceHandler tank) {
+        super(ModMenuTypes.LIQUIFIER.get(), id);
+        checkContainerSize(inventory, 1);
+        checkContainerDataCount(data, 1);
+        this.inventory = inventory;
+        this.data = data;
+        this.tank = tank;
+        viewer = playerInventory.player;
+        inventory.startOpen(viewer);
+        addDataSlots(data);
+        addSlot(new Slot(inventory, 0, 36, 36) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(ModItems.HONEY_DRIP);
+            }
+        });
+        addStandardInventorySlots(playerInventory, 8, 84);
+    }
 
-		addSlot(new Slot((Container)tile, 0, 36, 36));
+    public int getOperationProgressScaled(int scale) {
+        return data.get(0) * scale / 180;
+    }
 
-		for (j = 0; j < 3; ++j)
-			for (k = 0; k < 9; ++k)
-				addSlot(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, 102 + j * 18 + i));
+    @Override
+    public boolean stillValid(Player player) {
+        return inventory.stillValid(player);
+    }
 
-		for (j = 0; j < 9; ++j)
-			addSlot(new Slot(playerInventory, j, 8 + j * 18, 160 + i));
-	}
-	
-	@Override
-	public boolean stillValid(@Nonnull Player player) {
-		return true;
-	}
+    @Override
+    public void removed(Player player) {
+        super.removed(player);
+        inventory.stopOpen(player);
+    }
 
-	@Nonnull
-	@Override
-	public ItemStack quickMoveStack(@Nonnull Player player, int slotIndex) {
-		ItemStack is = ItemStack.EMPTY;
-		Slot slot = slots.get(slotIndex);
+    @Override
+    public void broadcastChanges() {
+        super.broadcastChanges();
+        if (viewer instanceof ServerPlayer player) lastFluids = MachineFluidsPacket.sendChanges(player, containerId, tank, lastFluids);
+    }
 
-		if (slot != null && slot.hasItem()) {
-			ItemStack is1 = slot.getItem();
-			is = is1.copy();
-
-			if (slotIndex < numRows * 9) {
-				if (!moveItemStackTo(is1, numRows * 9, slots.size(), true))
-					return ItemStack.EMPTY;
-			} else if (!moveItemStackTo(is1, 0, numRows * 9, false))
-				return ItemStack.EMPTY;
-
-			if (is1.getCount() == 0)
-				slot.set(ItemStack.EMPTY);
-			else
-				slot.setChanged();
-		}
-
-		return is;
-	}
-
-	@Override
-	protected boolean moveItemStackTo(@Nonnull ItemStack stack, int startIndex, int endIndex, boolean reverseDirection) {
-		boolean merged = false;
-		int slotIndex = startIndex;
-
-		if (reverseDirection)
-			slotIndex = endIndex - 1;
-
-		Slot slot;
-		ItemStack slotstack;
-
-		if (stack.isStackable()) {
-			while (stack.getCount() > 0 && (!reverseDirection && slotIndex < endIndex || reverseDirection && slotIndex >= startIndex)) {
-				slot = this.slots.get(slotIndex);
-				slotstack = slot.getItem();
-
-				if (!slotstack.isEmpty() && slotstack.getItem() == stack.getItem() && stack.getDamageValue() == slotstack.getDamageValue() && ItemStack.isSameItemSameComponents(stack, slotstack) && slotstack.getCount() < slot.getMaxStackSize()) {
-					int mergedStackSize = stack.getCount() + Math.min(slotstack.getCount(), slot.getMaxStackSize());
-
-					if (mergedStackSize <= stack.getMaxStackSize() && mergedStackSize <= slot.getMaxStackSize()) {
-						stack.setCount(0);
-						slotstack.setCount(mergedStackSize);
-						slot.setChanged();
-						merged = true;
-					} else if (slotstack.getCount() < stack.getMaxStackSize() && slotstack.getCount() < slot.getMaxStackSize()) {
-						if (slot.getMaxStackSize() >= stack.getMaxStackSize()) {
-							stack.shrink(stack.getMaxStackSize() - slotstack.getCount());
-							slotstack.setCount(stack.getMaxStackSize());
-							slot.setChanged();
-							merged = true;
-						}
-						else if (slot.getMaxStackSize() < stack.getMaxStackSize()) {
-							stack.shrink(slot.getMaxStackSize() - slotstack.getCount());
-							slotstack.setCount(slot.getMaxStackSize());
-							slot.setChanged();
-							merged = true;
-						}
-					}
-				}
-
-				if (reverseDirection)
-					--slotIndex;
-				else
-					++slotIndex;
-			}
-		}
-
-		if (stack.getCount() > 0) {
-			if (reverseDirection)
-				slotIndex = endIndex - 1;
-			else
-				slotIndex = startIndex;
-
-			while (!reverseDirection && slotIndex < endIndex || reverseDirection && slotIndex >= startIndex) {
-				slot = this.slots.get(slotIndex);
-				slotstack = slot.getItem();
-				if (slotstack.isEmpty() && slot.mayPlace(stack) && slot.getMaxStackSize() < stack.getCount()) {
-					ItemStack copy = stack.copy();
-					copy.setCount(slot.getMaxStackSize());
-					stack.shrink(slot.getMaxStackSize());
-					slot.set(copy);
-					slot.setChanged();
-					merged = true;
-					break;
-				} else if (slotstack.isEmpty() && slot.mayPlace(stack)) {
-					slot.set(stack.copy());
-					slot.setChanged();
-					stack.setCount(0);
-					merged = true;
-					break;
-				}
-
-				if (reverseDirection)
-					--slotIndex;
-				else
-					++slotIndex;
-			}
-		}
-
-		return merged;
-	}
+    @Override
+    public ItemStack quickMoveStack(Player player, int index) {
+        if (index < 0 || index >= slots.size() || !stillValid(player)) return ItemStack.EMPTY;
+        Slot slot = slots.get(index);
+        if (!slot.hasItem()) return ItemStack.EMPTY;
+        ItemStack stack = slot.getItem(), original = stack.copy();
+        if (index == 0) {
+            if (!moveItemStackTo(stack, 1, slots.size(), true)) return ItemStack.EMPTY;
+        } else if (stack.is(ModItems.HONEY_DRIP)) {
+            if (!moveItemStackTo(stack, 0, 1, false)) return ItemStack.EMPTY;
+        } else if (index < 28) {
+            if (!moveItemStackTo(stack, 28, 37, false)) return ItemStack.EMPTY;
+        } else if (!moveItemStackTo(stack, 1, 28, false)) return ItemStack.EMPTY;
+        if (stack.getCount() == original.getCount()) return ItemStack.EMPTY;
+        if (stack.isEmpty()) slot.set(ItemStack.EMPTY);
+        else slot.setChanged();
+        slot.onTake(player, stack);
+        return original;
+    }
 }

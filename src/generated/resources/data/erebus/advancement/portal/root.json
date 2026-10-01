@@ -32,7 +32,7 @@
     }
   },
   "display": {
-    "background": "minecraft:textures/block/mossy_stone_bricks.png",
+    "background": "minecraft:block/mossy_stone_bricks",
     "description": {
       "translate": "advancement.erebus.portal/root.desc"
     },

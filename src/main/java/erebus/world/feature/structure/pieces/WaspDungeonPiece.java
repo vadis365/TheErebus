@@ -18,20 +18,94 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
-import org.jetbrains.annotations.NotNull;
 
-public class WaspDungeonPiece extends ScatteredFeaturePiece {
+import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
+public class WaspDungeonPiece extends ScatteredFeaturePiece implements TerrainCheckedPiece {
+
+    private final Set<Long> processedChunks = new HashSet<>();
     private BlockState BLOCK;
     private BlockState STAIR;
     private BlockState SPAWNER;
+    private boolean validated, rejected;
 
-    public WaspDungeonPiece(RandomSource random, int x, int z) {
-        super(ModStructurePieces.WASP_DUNGEON.get(), x, 64, z, 10, 8, 10, getRandomHorizontalDirection(random));
+    public WaspDungeonPiece(BlockPos top) {
+        super(ModStructurePieces.WASP_DUNGEON.get(), top.getX() - 7, top.getY() - 14, top.getZ() - 7, 15, 15, 15, Direction.SOUTH);
     }
 
-    public WaspDungeonPiece(StructurePieceSerializationContext ignoredContext, CompoundTag tag) {
+    public WaspDungeonPiece(StructurePieceSerializationContext context, CompoundTag tag) {
         super(ModStructurePieces.WASP_DUNGEON.get(), tag);
+        validated = tag.getBooleanOr("Validated", false);
+        rejected = tag.getBooleanOr("Rejected", false) || tag.getIntOr("LayoutVersion", 0) != 1;
+        for (long chunk : tag.getLongArray("ProcessedChunks").orElse(new long[0])) processedChunks.add(chunk);
+    }
+
+    private static boolean ceiling(BlockState state) {
+        return state == ModBlocks.UMBERSTONE.get().defaultBlockState();
+    }
+
+    public static boolean validSite(BlockPos top, Function<BlockPos, BlockState> blocks,
+                                    Predicate<BlockPos> inBounds) {
+        // A solid attachment above the cap prevents detached nests; retain the
+        // reference umberstone anchor two layers below the top as well.
+        for (int x = -1; x <= 1; x++)
+            for (int z = -1; z <= 1; z++) {
+                var p = top.offset(x, 1, z);
+                if (!inBounds.test(p) || !ceiling(blocks.apply(p))) return false;
+            }
+        if (!inBounds.test(top.below(2)) || !ceiling(blocks.apply(top.below(2)))) return false;
+        for (int x = -7; x <= 7; x++)
+            for (int z = -7; z <= 7; z++)
+                for (int depth = 0; depth <= 16; depth++) {
+                    var p = top.offset(x, -depth, z);
+                    if (!inBounds.test(p)) return false;
+                    var state = blocks.apply(p);
+                    if (!state.isAir() && !(depth < 8 && ceiling(state))) return false;
+                }
+        return true;
+    }
+
+    @Override
+    public synchronized boolean isRejected() {
+        return rejected;
+    }
+
+    @Override
+    protected void addAdditionalSaveData(StructurePieceSerializationContext context, CompoundTag tag) {
+        super.addAdditionalSaveData(context, tag);
+        tag.putInt("LayoutVersion", 1);
+        tag.putBoolean("Validated", validated);
+        tag.putBoolean("Rejected", rejected);
+        tag.putLongArray("ProcessedChunks", processedChunks.stream().mapToLong(Long::longValue).toArray());
+    }
+
+    public BlockPos top() {
+        return new BlockPos(boundingBox.minX() + 7, boundingBox.maxY(), boundingBox.minZ() + 7);
+    }
+
+    @Override
+    public synchronized void postProcess(WorldGenLevel level, StructureManager manager, ChunkGenerator generator,
+                                         RandomSource random, BoundingBox clip, ChunkPos chunk, BlockPos ignored) {
+        long key = ((long) chunk.getMinBlockX() << 32) ^ (chunk.getMinBlockZ() & 0xffffffffL);
+        if (rejected || processedChunks.contains(key)) return;
+        if (!validated) {
+            if (!validSite(top(), level::getBlockState, p -> !level.isOutsideBuildHeight(p))) {
+                rejected = true;
+                return;
+            }
+            validated = true;
+        }
+        for (var entry : layout().entrySet()) {
+            var p = entry.getKey();
+            if (!clip.isInside(p)) continue;
+            var current = level.getBlockState(p);
+            if (!current.isAir() && !(p.getY() > top().getY() - 8 && ceiling(current))) continue;
+            if (level.setBlock(p, entry.getValue(), Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE)
+                    && entry.getValue().getBlock() instanceof StairBlock) level.getChunk(p).markPosForPostprocessing(p);
+        }
+        processedChunks.add(key);
     }
 
     private void setupBlockStates() {
@@ -40,13 +114,11 @@ public class WaspDungeonPiece extends ScatteredFeaturePiece {
         SPAWNER = ModBlocks.WASP_SPAWNER.get().defaultBlockState();
     }
 
-    @Override
-    public void postProcess(@NotNull WorldGenLevel level, @NotNull StructureManager manager, @NotNull ChunkGenerator generator, @NotNull RandomSource random, @NotNull BoundingBox boundingBox, @NotNull ChunkPos chunkPos, @NotNull BlockPos pos) {
+    public synchronized Map<BlockPos, BlockState> layout() {
         setupBlockStates();
-        int x = pos.getX();
-        int y = pos.getY();
-        int z = pos.getZ();
-        y -= 12 + random.nextInt(14);
+        var level = new LinkedHashMap<BlockPos, BlockState>();
+        var pos = top();
+        int x = pos.getX(), y = pos.getY(), z = pos.getZ();
 
         // Layer 0 (starting from the top)
 
@@ -229,30 +301,31 @@ public class WaspDungeonPiece extends ScatteredFeaturePiece {
             lineZ(level, getStairRotation(STAIR, 4 + (a == 0 ? 1 : 0)), z - 2, z + 2, x - 3 + 6 * a, y);
         }
         rect(level, Blocks.AIR.defaultBlockState(), x - 2, z - 2, x + 2, z + 2, y);
+        return Collections.unmodifiableMap(level);
     }
 
-    private void rect(WorldGenLevel level, BlockState state, int x1, int z1, int x2, int z2, int y) {
-        for(int x = x1; x <= x2; x++) {
-            for(int z = z1; z <= z2; z++) {
-                level.setBlock(new BlockPos(x, y, z), state, Block.UPDATE_ALL);
+    private void rect(Map<BlockPos, BlockState> level, BlockState state, int x1, int z1, int x2, int z2, int y) {
+        for (int x = x1; x <= x2; x++) {
+            for (int z = z1; z <= z2; z++) {
+                level.put(new BlockPos(x, y, z), state);
             }
         }
     }
 
-    private void lineX(WorldGenLevel level, BlockState state, int x1, int x2, int z, int y) {
-        for(int x = x1; x <= x2; x++) {
-            level.setBlock(new BlockPos(x, y, z), state, Block.UPDATE_ALL);
+    private void lineX(Map<BlockPos, BlockState> level, BlockState state, int x1, int x2, int z, int y) {
+        for (int x = x1; x <= x2; x++) {
+            level.put(new BlockPos(x, y, z), state);
         }
     }
 
-    private void lineZ(WorldGenLevel level, BlockState state, int z1, int z2, int x, int y) {
-        for(int z = z1; z <= z2; z++) {
-            level.setBlock(new BlockPos(x, y, z), state, Block.UPDATE_ALL);
+    private void lineZ(Map<BlockPos, BlockState> level, BlockState state, int z1, int z2, int x, int y) {
+        for (int z = z1; z <= z2; z++) {
+            level.put(new BlockPos(x, y, z), state);
         }
     }
 
-    private void block(WorldGenLevel level, BlockState state, int x, int z, int y) {
-        level.setBlock(new BlockPos(x, y, z), state, Block.UPDATE_ALL);
+    private void block(Map<BlockPos, BlockState> level, BlockState state, int x, int z, int y) {
+        level.put(new BlockPos(x, y, z), state);
     }
 
     private BlockState getStairRotation(BlockState state, int direction) {

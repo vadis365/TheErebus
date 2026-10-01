@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:bambucket"
+            "items": "erebus:beetle_juice_bucket"
           }
         ]
       },
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "items": "erebus:bambucket"
+            "items": "erebus:beetle_juice_bucket"
           }
         ]
       },
@@ -27,7 +27,7 @@
       "translate": "advancement.erebus.exploration/beetlejuice.desc"
     },
     "icon": {
-      "id": "erebus:bambucket"
+      "id": "erebus:beetle_juice_bucket"
     },
     "title": {
       "translate": "advancement.erebus.exploration/beetlejuice.title"

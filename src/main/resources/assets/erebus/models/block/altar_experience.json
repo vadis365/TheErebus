@@ -1,5 +1,5 @@
 {
-    "parent": "builtin/entity",
+    "parent": "minecraft:block/block",
     "textures": {
         "particle": "erebus:block/temple_brick"
     }

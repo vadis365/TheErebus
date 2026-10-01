@@ -19,8 +19,15 @@ import java.util.function.Consumer;
 
 public record BambooBridgeSpecialRenderer(BambooBridgeModel model, Identifier texture) implements NoDataSpecialModelRenderer {
 
+    private static void applyPose(PoseStack pose) {
+        pose.translate(0.5D, 1.5D, 0.5D);
+        pose.scale(-1, -1, 1);
+    }
+
     @Override
     public void submit(@NonNull PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
+        pose.pushPose();
+        applyPose(pose);
         submit.submitModel(
                 model,
                 new BambooBridgeBlockEntityRenderState(),
@@ -28,17 +35,23 @@ public record BambooBridgeSpecialRenderer(BambooBridgeModel model, Identifier te
                 RenderTypes.entityCutout(texture),
                 light,
                 overlay,
+                -1,
+                null,
                 outlineColor,
                 null
         );
+        pose.popPose();
     }
 
     @Override
     public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
-        model.root().getExtentsForGui(new PoseStack(), consumer);
+        model.setupAnim(new BambooBridgeBlockEntityRenderState());
+        var pose = new PoseStack();
+        applyPose(pose);
+        model.root().getExtentsForGui(pose, consumer);
     }
 
-    public record Unbaked(Identifier texture) implements SpecialModelRenderer.Unbaked {
+    public record Unbaked(Identifier texture) implements NoDataSpecialModelRenderer.Unbaked {
 
         public static final MapCodec<Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
                 i -> i.group(
@@ -47,12 +60,12 @@ public record BambooBridgeSpecialRenderer(BambooBridgeModel model, Identifier te
         );
 
         @Override
-        public @Nullable SpecialModelRenderer<?> bake(BakingContext bakingContext) {
+        public @Nullable SpecialModelRenderer<Void> bake(BakingContext bakingContext) {
             return new BambooBridgeSpecialRenderer(new BambooBridgeModel(bakingContext.entityModelSet().bakeLayer(ModBlockEntityRendering.BAMBOO_BRIDGE)), texture);
         }
 
         @Override
-        public @NonNull MapCodec<? extends SpecialModelRenderer.Unbaked> type() {
+        public @NonNull MapCodec<Unbaked> type() {
             return MAP_CODEC;
         }
     }

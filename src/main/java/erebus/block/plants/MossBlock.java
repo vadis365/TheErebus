@@ -9,25 +9,25 @@ import javax.annotation.Nonnull;
 
 public class MossBlock extends WallPlantsAbstract {
 
-	public static final MapCodec<MossBlock> CODEC = simpleCodec(MossBlock::new);
+    public static final MapCodec<MossBlock> CODEC = simpleCodec(MossBlock::new);
 
-	public MossBlock(Properties properties) {
-		super(properties);
-	}
-
-    @Override
-	protected @NotNull MapCodec<MossBlock> codec() {
-		return CODEC;
-	}
+    public MossBlock(Properties properties) {
+        super(properties);
+    }
 
     @Override
-	public boolean shouldScheduleTick() {
-		return false;
-	}
+    protected @NotNull MapCodec<MossBlock> codec() {
+        return CODEC;
+    }
 
-	@Nonnull
-	@Override
-	public RenderShape getRenderShape(@Nonnull BlockState state) {
-		return RenderShape.MODEL;
-	}
+    @Override
+    public boolean shouldScheduleTick() {
+        return false;
+    }
+
+    @Nonnull
+    @Override
+    public RenderShape getRenderShape(@Nonnull BlockState state) {
+        return RenderShape.MODEL;
+    }
 }

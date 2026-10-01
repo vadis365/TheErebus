@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "I": "minecraft:gold_ingot",
+    "I": "#c:ingots/gold",
     "O": "erebus:planks_petrified"
   },
   "pattern": [
