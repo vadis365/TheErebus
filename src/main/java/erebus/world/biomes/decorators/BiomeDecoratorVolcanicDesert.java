@@ -44,7 +44,6 @@ public class BiomeDecoratorVolcanicDesert extends BiomeDecoratorBaseErebus {
 			BlockPos pos = new BlockPos(xx, yy, zz);
 			if (world.getBlockState(pos) == ModBlocks.UMBERSTONE.getDefaultState() && world.isAirBlock(pos.down())) {
 				world.setBlockState(pos, Blocks.FLOWING_LAVA.getDefaultState());
-				world.immediateBlockTick(pos, Blocks.FLOWING_LAVA.getDefaultState(), rand);
 			}
 		}
 
