@@ -46,11 +46,6 @@ neoForge {
         }
     }
 
-    parchment {
-        mappingsVersion = project.parchment_mappings_version
-        minecraftVersion = project.parchment_minecraft_version
-    }
-
     runs {
         client {
             client()

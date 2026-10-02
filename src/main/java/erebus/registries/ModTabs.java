@@ -545,7 +545,6 @@ public class ModTabs {
                         output.accept(ModBlocks.STIGMA_MAGENTA);
                         output.accept(ModBlocks.STIGMA_ORANGE);
                         output.accept(ModBlocks.STIGMA_WHITE);
-                        output.accept(ModBlocks.STIGMA_WHITE);
                         output.accept(ModBlocks.FLOWER_BLACK);
                         output.accept(ModBlocks.FLOWER_RED);
                         output.accept(ModBlocks.FLOWER_BROWN);

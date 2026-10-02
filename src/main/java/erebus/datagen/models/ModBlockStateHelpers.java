@@ -176,9 +176,9 @@ public class ModBlockStateHelpers {
         createCustomHorizontalBlock(ModBlocks.BLOCK_OF_BONES);
         var boneBlockItem = ModBlocks.BLOCK_OF_BONES.get().asItem();
         var base = ModelTemplates
-                .create("block", TextureSlot.TEXTURE)
-                .create(boneBlockItem, TextureMapping.defaultTexture(ModBlocks.BLOCK_OF_BONES.get()), blockModels.modelOutput);
-        var plainModel = ItemModelUtils.specialModel(base, new BlockOfBonesSpecialRenderer.Unbaked(Erebus.prefix("block/bone_block")));
+                .create("block", TextureSlot.PARTICLE)
+                .create(boneBlockItem, new TextureMapping().put(TextureSlot.PARTICLE, new Material(Erebus.prefix("block/bone_block"))), blockModels.modelOutput);
+        var plainModel = ItemModelUtils.specialModel(base, new BlockOfBonesSpecialRenderer.Unbaked(Erebus.prefix("textures/block/bone_block.png")));
 
         itemModels.itemModelOutput.accept(boneBlockItem, plainModel);
     }

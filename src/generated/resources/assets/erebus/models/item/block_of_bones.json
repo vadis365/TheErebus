@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "texture": "erebus:block/block_of_bones"
+    "particle": "erebus:block/bone_block"
   }
 }

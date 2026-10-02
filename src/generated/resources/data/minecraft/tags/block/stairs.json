@@ -1,20 +1,20 @@
 {
   "values": [
-    "erebus:stairs_umberstone",
-    "erebus:stairs_umberstone_smooth",
-    "erebus:stairs_petrified",
-    "erebus:stairs_mud_bricks",
-    "erebus:stairs_umberstone_bricks",
-    "erebus:stairs_umbercobble_webbed",
-    "erebus:stairs_umberpaver_webbed",
-    "erebus:stairs_umbercobble",
-    "erebus:stairs_mir_bricks",
-    "erebus:stairs_wasp_nest",
-    "erebus:stairs_umberpaver",
-    "erebus:stairs_amber",
     "erebus:stairs_umberpaver_mossy",
+    "erebus:stairs_mud_bricks",
+    "erebus:stairs_umberstone_smooth",
+    "erebus:stairs_umberpaver_webbed",
+    "erebus:stairs_petrified",
     "erebus:stairs_umbercobble_mossy",
+    "erebus:stairs_umberstone_bricks",
+    "erebus:stairs_amber",
+    "erebus:stairs_umberstone",
+    "erebus:stairs_amber_bricks",
+    "erebus:stairs_umberpaver",
+    "erebus:stairs_umbercobble_webbed",
+    "erebus:stairs_umbercobble",
     "erebus:stairs_umberstone_smooth_small",
-    "erebus:stairs_amber_bricks"
+    "erebus:stairs_wasp_nest",
+    "erebus:stairs_mir_bricks"
   ]
 }
