@@ -11,10 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -31,6 +28,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -57,15 +55,20 @@ public class BombardierBeetleLarva extends BeetleLarva implements Enemy {
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+    protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
         super.defineSynchedData(builder);
         builder.define(INFLATE_SIZE, 0);
     }
 
     @Override
+    public boolean isWithinMeleeAttackRange(@NonNull LivingEntity target) {
+        return distanceToSqr(target) <= 4 + target.getBbWidth();
+    }
+
+    @Override
     protected void registerGoals() {
         goalSelector.addGoal(0, new FloatGoal(this));
-        goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, true));
+        goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, false));
         goalSelector.addGoal(2, new LarvaEatWoodenBlocksGoal(this, 0.48D, 10));
         goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.48D));
         goalSelector.addGoal(4, new RandomLookAroundGoal(this));
@@ -99,13 +102,13 @@ public class BombardierBeetleLarva extends BeetleLarva implements Enemy {
     }
 
     @Override
-    public void addAdditionalSaveData(ValueOutput output) {
+    public void addAdditionalSaveData(@NonNull ValueOutput output) {
         super.addAdditionalSaveData(output);
         output.putInt("InflateSize", getInflateSize());
     }
 
     @Override
-    public void readAdditionalSaveData(ValueInput input) {
+    public void readAdditionalSaveData(@NonNull ValueInput input) {
         super.readAdditionalSaveData(input);
         setInflateSize(input.getIntOr("InflateSize", 0));
     }
@@ -120,7 +123,7 @@ public class BombardierBeetleLarva extends BeetleLarva implements Enemy {
 
     @Nullable
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
+    public SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnType, @Nullable SpawnGroupData spawnGroupData) {
         spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
         setLarvaType((byte) 4);
         return spawnGroupData;

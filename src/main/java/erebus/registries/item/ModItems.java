@@ -119,7 +119,7 @@ public class ModItems extends ModItemHelpers {
     public static final DeferredItem<Item> TITAN_CHOP_RAW = registerFoodItem("titan_chop_raw", ModFoods.TITAN_CHOP_RAW, ModConsumables.food().build());
     public static final DeferredItem<Item> TITAN_CHOP_COOKED = registerFoodItem("titan_chop_cooked", ModFoods.TITAN_CHOP_COOKED, ModConsumables.TITAN_CHOP_COOKED);
     public static final DeferredItem<Item> SWAMP_BERRIES = ITEMS.register("swamp_berries", () -> new BlockItem(ModBlocks.SWAMP_BERRY_BUSH.get(), new Item.Properties().food(ModFoods.SWAMP_BERRIES).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix("swamp_berries")))));
-    public static final DeferredItem<Item> CABBAGE = registerFoodItem("cabbage", ModFoods.CABBAGE, ModConsumables.food().build());
+    public static final DeferredItem<Item> CABBAGE = registerFoodItem("cabbage", ModFoods.CABBAGE, ModConsumables.CABBAGE);
     public static final DeferredItem<Item> TITAN_STEW_COOKED = registerFoodItem("titan_stew_cooked", ModFoods.TITAN_STEW_COOKED, ModConsumables.food().build(), STEW_POT);
     public static final DeferredItem<Item> PRICKLY_PEAR_RAW = registerItem("prickly_pear_raw", PricklyPearItem::new);
     public static final DeferredItem<Item> PRICKLY_PEAR_COOKED = registerFoodItem("prickly_pear_cooked", ModFoods.PRICKLY_PEAR_COOKED, ModConsumables.food().build());

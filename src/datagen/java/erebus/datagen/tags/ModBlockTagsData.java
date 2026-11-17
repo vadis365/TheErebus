@@ -274,6 +274,7 @@ public class ModBlockTagsData extends BlockTagsProvider {
                         ModBlocks.STIGMA_PURPLE.get(),
                         ModBlocks.STIGMA_RED.get(),
                         ModBlocks.STIGMA_WHITE.get(),
+                        ModBlocks.STIGMA_RAINBOW.get(),
                         ModBlocks.STIGMA_YELLOW.get(),
                         ModBlocks.EXPLODING_STIGMA.get()
                 );

@@ -1,5 +1,12 @@
 {
   "values": [
-    "erebus:jade_helmet"
+    "erebus:jade_helmet",
+    "erebus:bamboo_helmet",
+    "erebus:exoskeleton_helmet",
+    "erebus:rein_exoskeleton_helmet",
+    "erebus:rhino_exoskeleton_helmet",
+    "erebus:compound_goggles",
+    "erebus:rein_compound_goggles",
+    "erebus:mushroom_helmet"
   ]
 }

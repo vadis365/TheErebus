@@ -1,6 +1,7 @@
 package erebus.registries.item;
 
 import erebus.item.consume.HealConsumeEffect;
+import erebus.registries.ModSounds;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -8,6 +9,7 @@ import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.item.consume_effects.ClearAllStatusEffectsConsumeEffect;
+import net.minecraft.world.item.consume_effects.PlaySoundConsumeEffect;
 
 import java.util.List;
 
@@ -142,6 +144,7 @@ public class ModConsumables {
             ).build();
 
     public static final Consumable HEALING_BERRIES = food().onConsume(new HealConsumeEffect(1)).build();
+    public static final Consumable CABBAGE = food().onConsume(new PlaySoundConsumeEffect(ModSounds.CABBAGE_FART)).build();
     public static final Consumable STAG_HEART_RAW = food().onConsume(new HealConsumeEffect(20)).build();
 
     public static final Consumable BEETLE_LARVA_RAW = rawFood(300, 2);

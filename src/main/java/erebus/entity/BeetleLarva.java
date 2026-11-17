@@ -41,6 +41,7 @@ public class BeetleLarva extends AgeableMob {
     public static final EntityDataAccessor<Float> LARVA_SIZE = SynchedEntityData.defineId(BeetleLarva.class, EntityDataSerializers.FLOAT);
     public static final EntityDataAccessor<Boolean> IS_SQUASHED = SynchedEntityData.defineId(BeetleLarva.class, EntityDataSerializers.BOOLEAN);
     public boolean isEating;
+    private boolean squashEffectsPlayed;
     private @Nullable EntityReference<LivingEntity> futureOwner;
 
     public BeetleLarva(EntityType<? extends BeetleLarva> type, Level level) {
@@ -113,7 +114,7 @@ public class BeetleLarva extends AgeableMob {
             else if (level().getDifficulty() == Difficulty.HARD)
                 duration = 15;
             if (duration > 0)
-                player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, duration * 20, 0));
+                player.addEffect(new MobEffectInstance(MobEffects.NAUSEA, duration * 20, 0));
             setIsSquashed(true);
             kill((ServerLevel) level());
             deathTime = 19;
@@ -181,7 +182,8 @@ public class BeetleLarva extends AgeableMob {
     @Override
     protected void tickDeath() {
         super.tickDeath();
-        if (getIsSquashed()) {
+        if (getIsSquashed() && !squashEffectsPlayed) {
+            squashEffectsPlayed = true;
             if (!level().isClientSide())
                 PacketDistributor.sendToPlayersNear((ServerLevel) level(), null, blockPosition().getX(),
                         blockPosition().getY(), blockPosition().getZ(), 30,
@@ -189,10 +191,8 @@ public class BeetleLarva extends AgeableMob {
             level().playSound(null, blockPosition(), getJumpedOnSound(), SoundSource.NEUTRAL, 1.0F, 0.5F);
             level().playSound(null, blockPosition(), getDeathSound(), SoundSource.NEUTRAL, 1.0F, 0.7F);
             if (!level().isClientSide()) {
-                if (random.nextInt(200) == 0) {
-                    //		entityDropItem(new ItemStack(Items.DIAMOND), 0.0F);
-                }
-                //	entityDropItem(new ItemStack(Items.SLIME_BALL), 0.0F);
+                if (random.nextInt(200) == 0) spawnAtLocation((ServerLevel) level(), new ItemStack(Items.DIAMOND));
+                spawnAtLocation((ServerLevel) level(), new ItemStack(Items.SLIME_BALL));
             }
         }
     }

@@ -2,7 +2,7 @@ package erebus.registries.world;
 
 import com.mojang.serialization.Codec;
 import erebus.Erebus;
-import erebus.datagen.ModRegistries;
+import erebus.registries.ModRegistries;
 import erebus.world.layer.*;
 import erebus.world.layer.biome.BiomeLayerType;
 import net.neoforged.neoforge.registries.DeferredHolder;

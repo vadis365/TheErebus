@@ -14,7 +14,6 @@ import net.minecraft.data.recipes.CustomCraftingRecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.SpecialRecipeBuilder;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
@@ -23,6 +22,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.NeoForgeMod;
+import net.neoforged.neoforge.common.Tags;
 
 public class CustomRecipeProvider extends ErebusRecipeProvider {
 
@@ -44,7 +44,7 @@ public class CustomRecipeProvider extends ErebusRecipeProvider {
         for (var glider : new Item[]{ModItems.GLIDER_CHESTPLATE.get(), ModItems.GLIDER_CHESTPLATE_POWERED.get()}) {
             String name = glider == ModItems.GLIDER_CHESTPLATE.get() ? "glider_chestplate" : "glider_chestplate_powered";
             CustomCraftingRecipeBuilder.customCrafting(RecipeCategory.MISC,
-                            (common, book) -> new DyeRecipe(common, book, Ingredient.of(glider), Ingredient.of(items.getOrThrow(ItemTags.DYES)), new ItemStackTemplate(glider)))
+                            (common, book) -> new DyeRecipe(common, book, Ingredient.of(glider), Ingredient.of(items.getOrThrow(Tags.Items.DYES)), new ItemStackTemplate(glider)))
                     .unlockedBy("has_glider", has(glider)).save(output, "erebus:" + name + "_dyed");
         }
         SpecialRecipeBuilder.special(() -> WhetstoneUpgradeRecipe.INSTANCE)

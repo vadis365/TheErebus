@@ -66,7 +66,7 @@ public final class PlantedGiantFlowerBlock extends VegetationBlock implements Bo
 
     @Override
     public void performBonemeal(@NonNull ServerLevel level, @NonNull RandomSource random, BlockPos pos, @NonNull BlockState state) {
-        for (var check : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 11, 4))) {
+        for (var check : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 13, 4))) {
             if (!level.isInWorldBounds(check) || !level.getWorldBorder().isWithinBounds(check) || !level.hasChunkAt(check) || (!check.equals(pos) && !level.isEmptyBlock(check))) return;
         }
         int primary = color == 14 ? random.nextInt(14) : color;

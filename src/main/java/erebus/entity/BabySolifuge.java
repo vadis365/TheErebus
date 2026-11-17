@@ -47,6 +47,7 @@ public class BabySolifuge extends Monster {
 
     public BabySolifuge(EntityType<? extends Monster> type, Level level) {
         super(type, level);
+        xpReward = 3;
         setPotionEffect((byte) random.nextInt(POTION_NAME.length));
     }
 
@@ -59,24 +60,24 @@ public class BabySolifuge extends Monster {
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+    protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
         super.defineSynchedData(builder);
         builder.define(CLIMBING, (byte) 0);
         builder.define(POTION_TYPE, (byte) 0);
     }
 
     @Override
-    protected PathNavigation createNavigation(Level level) {
+    protected @NonNull PathNavigation createNavigation(@NonNull Level level) {
         return new WallClimberNavigation(this, level);
     }
 
     @Override
-    public boolean causeFallDamage(double distance, float multiplier, DamageSource source) {
+    public boolean causeFallDamage(double distance, float multiplier, @NonNull DamageSource source) {
         return false;
     }
 
     @Override
-    public void makeStuckInBlock(BlockState state, Vec3 multiplier) {
+    public void makeStuckInBlock(BlockState state, @NonNull Vec3 multiplier) {
         if (!state.is(Blocks.COBWEB)) super.makeStuckInBlock(state, multiplier);
     }
 
@@ -86,7 +87,7 @@ public class BabySolifuge extends Monster {
     }
 
     @Override
-    public boolean checkSpawnRules(LevelAccessor level, EntitySpawnReason reason) {
+    public boolean checkSpawnRules(@NonNull LevelAccessor level, @NonNull EntitySpawnReason reason) {
         return true;
     }
 
@@ -101,7 +102,7 @@ public class BabySolifuge extends Monster {
         goalSelector.addGoal(1, new LeapAtTargetGoal(this, 0.4F));
         goalSelector.addGoal(2, new MeleeAttackGoal(this, 0.3, false) {
             @Override
-            protected boolean canPerformAttack(LivingEntity target) {
+            protected boolean canPerformAttack(@NonNull LivingEntity target) {
                 return isTimeToAttack() && mob.distanceToSqr(target) <= 4 + target.getBbWidth() && mob.getSensing().hasLineOfSight(target);
             }
         });

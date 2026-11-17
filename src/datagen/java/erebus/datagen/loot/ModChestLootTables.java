@@ -1,13 +1,10 @@
 package erebus.datagen.loot;
 
-import erebus.Erebus;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
@@ -24,27 +21,16 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.function.BiConsumer;
 
+import static erebus.registries.data.ModLootTables.*;
+
 public record ModChestLootTables(HolderLookup.Provider registries) implements LootTableSubProvider {
-
-    public static final ResourceKey<LootTable> ROTTEN_LOG = createKey("chests/rotten_log");
-    public static final ResourceKey<LootTable> ANTLION_DUNGEON = createKey("chests/antlion_dungeon");
-    public static final ResourceKey<LootTable> ANTLION_LAIR = createKey("chests/antlion_lair");
-    public static final ResourceKey<LootTable> DRAGONFLY_DUNGEON = createKey("chests/dragonfly_dungeon");
-    public static final ResourceKey<LootTable> DUNG_PILE = createKey("chests/dung_pile");
-    public static final ResourceKey<LootTable> LOCUST_SHRINE = createKey("chests/locust_shrine");
-    public static final ResourceKey<LootTable> SPIDER_DUNGEON = createKey("chests/spider_dungeon");
-    public static final ResourceKey<LootTable> TARANTULA_DUNGEON = createKey("chests/tarantula_dungeon");
-
-    private static ResourceKey<LootTable> createKey(String name) {
-        return ResourceKey.create(Registries.LOOT_TABLE, Erebus.prefix(name));
-    }
 
     @Override
     public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer) {
         consumer.accept(ROTTEN_LOG, LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(UniformGenerator.between(3, 10))
-                        .add(item(Items.BOOK, 18, 2, 4))
+                        .add(item(Items.BOOK, 18, 1, 4))
                         .add(item(Items.PAPER, 16, 2, 6))
                         .add(item(Items.COBWEB, 13, 2, 7))
                         .add(item(ModItems.JADE, 10, 1, 3))
@@ -119,16 +105,20 @@ public record ModChestLootTables(HolderLookup.Provider registries) implements Lo
                         .add(item(ModItems.ALTAR_FRAGMENT, 1))
                         .add(item(ModItems.REINFORCED_PLATE_EXO, 1))
                         .add(item(ModItems.SCORPION_PINCER, 1))
-                        .add(item(ModItems.WHETSTONE_POWDER, 1))
+                        .add(item(ModItems.WHETSTONE_POWDER, 3, 1, 3))
                         .add(item(ModItems.PLATE_EXO_RHINO, 1))
                         .add(item(ModItems.HONEY_SANDWICH, 3, 1, 3))
                         .add(item(ModItems.CABBAGE_SEEDS, 2, 1, 3))
                         .add(item(ModItems.WHETSTONE, 1))
                         .add(item(ModItems.LIFE_BLOOD, 4, 1, 2))
                         .add(item(ModItems.ROLLED_NEWSPAPER, 1))
-                        .add(item(ModItems.BAMBUCKET, 6))
+                        .add(NestedLootTable.inlineLootTable(LootTable.lootTable()
+                                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                                        .add(item(ModItems.HONEY_BUCKET, 1))
+                                        .add(item(ModItems.BEETLE_JUICE_BUCKET, 1))
+                                        .add(item(ModItems.ANTI_VENOM_BUCKET, 1))).build()).setWeight(6))
                         .add(item(ModItems.HOMING_BEECON, 1))
-                        .add(item(ModBlocks.GLOW_GEM_INACTIVE, 5, 1, 3))
+                        .add(item(ModBlocks.GLOW_GEM_ACTIVE, 5, 1, 3))
                         .add(item(ModItems.GIVIN_ME_THE_BLUES, 3, 1, 3))
                         .add(item(ModItems.BRYUFS_BREW, 1))
                         .add(item(ModItems.WASP_DAGGER, 2, 1, 3))
@@ -168,6 +158,10 @@ public record ModChestLootTables(HolderLookup.Provider registries) implements Lo
                         .add(itemEnchanted(Items.GOLDEN_BOOTS, 1))
                         .add(itemEnchanted(Items.IRON_BOOTS, 2))
                         .add(itemEnchanted(ModItems.JADE_BOOTS, 1))
+                        .add(itemEnchanted(Items.STONE_PICKAXE, 1))
+                        .add(itemEnchanted(Items.STONE_SHOVEL, 1))
+                        .add(itemEnchanted(Items.STONE_AXE, 1))
+                        .add(itemEnchanted(Items.STONE_SWORD, 1))
                         .add(item(ModBlocks.UMBER_GOLEM_STATUE, 1))
                         .add(item(ModItems.WEB_SLINGER, 1))
                 )
@@ -213,9 +207,13 @@ public record ModChestLootTables(HolderLookup.Provider registries) implements Lo
                         .add(item(ModItems.CABBAGE_SEEDS, 2, 1, 3))
                         .add(item(ModItems.LIFE_BLOOD, 4, 1, 2))
                         .add(item(ModItems.ROLLED_NEWSPAPER, 1))
-                        .add(item(ModItems.BAMBUCKET, 6))
+                        .add(NestedLootTable.inlineLootTable(LootTable.lootTable()
+                                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                                        .add(item(ModItems.HONEY_BUCKET, 1))
+                                        .add(item(ModItems.BEETLE_JUICE_BUCKET, 1))
+                                        .add(item(ModItems.ANTI_VENOM_BUCKET, 1))).build()).setWeight(6))
                         .add(item(ModItems.WHETSTONE, 1))
-                        .add(item(ModBlocks.GLOW_GEM_INACTIVE, 5, 1, 3))
+                        .add(item(ModBlocks.GLOW_GEM_ACTIVE, 5, 1, 3))
                         .add(item(ModItems.NOTHING_IN_THE_MIDDLE, 3, 1, 3))
                         .add(item(ModItems.BRYUFS_BREW, 1))
                         .add(item(ModItems.WASP_DAGGER, 2, 1, 3))
@@ -404,10 +402,7 @@ public record ModChestLootTables(HolderLookup.Provider registries) implements Lo
     }
 
     private LootPoolSingletonContainer.Builder<?> itemEnchanted(ItemLike item, int weight) {
-        return LootItem.lootTableItem(item)
-                .setWeight(weight)
-                .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, UniformGenerator.between(1, 10))
-                        .withOptions(registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(EnchantmentTags.TREASURE))
-                );
+        boolean book = item == Items.ENCHANTED_BOOK;
+        return legacyEnchanted(book ? Items.BOOK : item, weight, !book);
     }
 }

@@ -189,14 +189,14 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropSelf(ModBlocks.SAPLING_BAMBOO);
 
         // MARK: Leaves
-        dropSelf(ModBlocks.LEAVES_BAOBAB);
-        dropSelf(ModBlocks.LEAVES_EUCALYPTUS);
-        dropSelf(ModBlocks.LEAVES_MAHOGANY);
-        dropSelf(ModBlocks.LEAVES_MOSSBARK);
-        dropSelf(ModBlocks.LEAVES_ASPER);
-        dropSelf(ModBlocks.LEAVES_CYPRESS);
-        dropSelf(ModBlocks.LEAVES_BALSAM);
-        dropSelf(ModBlocks.LEAVES_MARSHWOOD);
+        leaves(ModBlocks.LEAVES_BAOBAB.get(), ModBlocks.SAPLING_BAOBAB.get());
+        leaves(ModBlocks.LEAVES_EUCALYPTUS.get(), ModBlocks.SAPLING_EUCALYPTUS.get());
+        leaves(ModBlocks.LEAVES_MAHOGANY.get(), ModBlocks.SAPLING_MAHOGANY.get());
+        leaves(ModBlocks.LEAVES_MOSSBARK.get(), ModBlocks.SAPLING_MOSSBARK.get());
+        leaves(ModBlocks.LEAVES_ASPER.get(), ModBlocks.SAPLING_ASPER.get());
+        leaves(ModBlocks.LEAVES_CYPRESS.get(), ModBlocks.SAPLING_CYPRESS.get());
+        leaves(ModBlocks.LEAVES_BALSAM.get(), ModBlocks.SAPLING_BALSAM.get());
+        leaves(ModBlocks.LEAVES_MARSHWOOD.get(), ModBlocks.SAPLING_MARSHWOOD.get());
 
         // MARK: Planks
         dropSelf(ModBlocks.PLANKS_BAOBAB);
@@ -437,6 +437,8 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
                 .add(LootItem.lootTableItem(ModItems.SEED_ORANGE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
         add(ModBlocks.STIGMA_WHITE.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(LootItem.lootTableItem(ModItems.SEED_WHITE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
+        add(ModBlocks.STIGMA_RAINBOW.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(ModItems.SEED_RAINBOW.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))))));
 
         dropOther(ModBlocks.FLOWER_BLACK, ModItems.SEED_BLACK.get());
         dropOther(ModBlocks.FLOWER_RED, ModItems.SEED_RED.get());
@@ -455,15 +457,19 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropOther(ModBlocks.FLOWER_RAINBOW, ModItems.SEED_RAINBOW.get());
 
         // MARK: Flowers Double Height
-        dropSelf(ModBlocks.BULLRUSH);
+        add(ModBlocks.BULLRUSH.get(), pairedPlantDrops(ModBlocks.BULLRUSH.get(),
+                LootItem.lootTableItem(ModBlocks.BULLRUSH).when(hasShears())
+                        .otherwise(LootItem.lootTableItem(ModItems.PAPYRUS))));
         add(ModBlocks.WEEPING_BLUEBELL.get(), pairedPlantDrops(ModBlocks.WEEPING_BLUEBELL.get(),
                 LootItem.lootTableItem(ModBlocks.WEEPING_BLUEBELL).when(hasShears())
                         .otherwise(LootItem.lootTableItem(ModItems.BLUEBELL_PETAL))));
-        dropSelf(ModBlocks.SUNDEW);
+        add(ModBlocks.SUNDEW.get(), pairedPlantDrops(ModBlocks.SUNDEW.get(),
+                LootItem.lootTableItem(ModBlocks.SUNDEW).when(hasShears())
+                        .otherwise(LootItem.lootTableItem(ModItems.BIO_LUMINESCENCE))));
         add(ModBlocks.DROUGHTED_SHRUB.get(), pairedPlantDrops(ModBlocks.DROUGHTED_SHRUB.get(), LootItem.lootTableItem(ModBlocks.DROUGHTED_SHRUB)));
         add(ModBlocks.TALL_BLOOM.get(), pairedPlantDrops(ModBlocks.TALL_BLOOM.get(), LootItem.lootTableItem(ModBlocks.TALL_BLOOM)));
-        dropSelf(ModBlocks.TANGLED_STALK);
-        dropSelf(ModBlocks.HIGH_CAPPED_MUSHROOM);
+        add(ModBlocks.TANGLED_STALK.get(), pairedPlantDrops(ModBlocks.TANGLED_STALK.get(), LootItem.lootTableItem(ModBlocks.TANGLED_STALK)));
+        add(ModBlocks.HIGH_CAPPED_MUSHROOM.get(), pairedPlantDrops(ModBlocks.HIGH_CAPPED_MUSHROOM.get(), LootItem.lootTableItem(ModBlocks.HIGH_CAPPED_MUSHROOM)));
         add(ModBlocks.TALL_FERN.get(), tallFernDrops());
 
         dropSelf(ModBlocks.PORTAL);
@@ -616,6 +622,11 @@ public class ModBlockLootTables extends ModBlockLootTableProvider {
         dropComponents(ModBlocks.FLUID_JAR, $ -> $.apply(copyFluid));
         dropComponents(ModBlocks.LIQUIFIER, $ -> $.apply(copyFluid));
         dropComponents(ModBlocks.BAMBOO_CRATE, $ -> $.apply(copyItems));
+    }
+
+    private void leaves(Block block, Block sapling) {
+        // Keep the legacy sapling chance and the approved native stick drops.
+        add(block, createLeavesDrops(block, sapling, 0.05F));
     }
 
     private void hugeMushroom(Block block, Block mushroom) {

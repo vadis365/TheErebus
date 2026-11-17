@@ -1,7 +1,7 @@
 package erebus.world.feature.structure.pieces;
 
-import erebus.datagen.loot.ModChestLootTables;
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.ModLootTables;
 import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -205,7 +205,7 @@ public class DragonflyDungeonPiece extends ScatteredFeaturePiece implements Terr
             if (entry.getValue().isAir() && existing.isAir()) continue;
             if (level.setBlock(pos, entry.getValue(), 2) && entry.getValue().is(Blocks.CHEST)
                     && level.getBlockEntity(pos) instanceof ChestBlockEntity chest) {
-                chest.setLootTable(ModChestLootTables.DRAGONFLY_DUNGEON);
+                chest.setLootTable(ModLootTables.DRAGONFLY_DUNGEON);
             }
         }
     }

@@ -1,7 +1,7 @@
 package erebus.world.feature.structure.pieces;
 
-import erebus.datagen.loot.ModChestLootTables;
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.ModLootTables;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;
@@ -118,7 +118,7 @@ public class AntlionLairPiece extends ScatteredFeaturePiece implements TerrainCh
                             continue;
                         }
                         if (replacement.is(Blocks.CHEST) && level.getBlockEntity(pos) instanceof ChestBlockEntity chest)
-                            chest.setLootTable(ModChestLootTables.ANTLION_LAIR);
+                            chest.setLootTable(ModLootTables.ANTLION_LAIR);
                     }
             if (complete) completedChunks.add(chunkKey);
         }

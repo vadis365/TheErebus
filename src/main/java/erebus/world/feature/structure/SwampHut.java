@@ -1,9 +1,9 @@
 package erebus.world.feature.structure;
 
 import com.mojang.serialization.MapCodec;
-import erebus.registries.blocks.ModBlocks;
 import erebus.registries.data.tags.ModBiomeTags;
 import erebus.registries.world.structure.ModStructureTypes;
+import erebus.world.feature.structure.pieces.AdaptedStructureTerrain;
 import erebus.world.feature.structure.pieces.SwampHutPiece;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -13,7 +13,6 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.NoiseColumn;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -56,7 +55,7 @@ public class SwampHut extends TerrainCheckedStructure {
                                         )
                                 )
                         )
-                        .terrainAdapation(TerrainAdjustment.NONE)
+                        .terrainAdapation(TerrainAdjustment.BEARD_THIN)
                         .generationStep(GenerationStep.Decoration.SURFACE_STRUCTURES)
                         .build()
         );
@@ -72,10 +71,8 @@ public class SwampHut extends TerrainCheckedStructure {
             var center = pos.offset(7, 0, 7);
             if (!context.validBiome().test(context.biomeSource().getNoiseBiome(center.getX() >> 2, center.getY() >> 2, center.getZ() >> 2, context.randomState().sampler())))
                 return false;
-            return SwampHutPiece.validSite(pos, p -> {
-                var state = terrain.apply(p);
-                return p.getY() == pos.getY() - 1 && state.is(ModBlocks.UMBERSTONE) && terrain.apply(p.above()).isAir() ? Blocks.GRASS_BLOCK.defaultBlockState() : state;
-            }, p -> !context.heightAccessor().isOutsideBuildHeight(p));
+            return AdaptedStructureTerrain.ground(terrain.apply(center.below())) && terrain.apply(center).isAir()
+                    && SwampHutPiece.canAdaptSite(pos, terrain, p -> !context.heightAccessor().isOutsideBuildHeight(p));
         });
         return origin.map(pos -> new GenerationStub(pos, builder -> builder.addPiece(new SwampHutPiece(context.random(), pos))));
     }

@@ -31,7 +31,7 @@ public class GrasshopperEatPlantsGoal extends EatBlockGoal {
         Block block = state.getBlock();
         if (state.isAir())
             return false;
-        else return state.is(Blocks.SHORT_GRASS) || state.is(ModBlocks.FERN.get()) || block instanceof CropBlock && ((CropBlock) block).isMaxAge(state);
+        else return state.is(Blocks.SHORT_GRASS) || state.is(Blocks.FERN) || state.is(ModBlocks.FERN.get()) || block instanceof CropBlock && ((CropBlock) block).isMaxAge(state);
     }
 
     @Override

@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.NonNull;
 
 public class FireAnt extends Monster {
     private static final EntityDataAccessor<Boolean> CLIMBING = SynchedEntityData.defineId(FireAnt.class, EntityDataSerializers.BOOLEAN);
@@ -44,9 +46,14 @@ public class FireAnt extends Monster {
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+    protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
         super.defineSynchedData(builder);
         builder.define(CLIMBING, false);
+    }
+
+    @Override
+    public boolean isWithinMeleeAttackRange(@NonNull LivingEntity target) {
+        return distanceToSqr(target) <= 4 + target.getBbWidth();
     }
 
     @Override
@@ -78,7 +85,7 @@ public class FireAnt extends Monster {
     }
 
     @Override
-    public boolean checkSpawnRules(LevelAccessor level, EntitySpawnReason reason) {
+    public boolean checkSpawnRules(@NonNull LevelAccessor level, @NonNull EntitySpawnReason reason) {
         return true;
     }
 
@@ -98,17 +105,17 @@ public class FireAnt extends Monster {
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource source) {
+    protected @NonNull SoundEvent getHurtSound(@NonNull DamageSource source) {
         return ModSounds.FIRE_ANT_HURT.get();
     }
 
     @Override
-    protected SoundEvent getDeathSound() {
+    protected @NonNull SoundEvent getDeathSound() {
         return ModSounds.SQUISH.get();
     }
 
     @Override
-    protected void playStepSound(BlockPos pos, BlockState state) {
+    protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState state) {
         playSound(SoundEvents.SPIDER_STEP, 0.15F, 1);
     }
 }

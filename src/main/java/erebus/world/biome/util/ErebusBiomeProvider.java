@@ -1,7 +1,7 @@
 package erebus.world.biome.util;
 
 import com.mojang.serialization.MapCodec;
-import erebus.datagen.ModRegistries;
+import erebus.registries.ModRegistries;
 import erebus.world.layer.biome.BiomeDensitySource;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.RegistryFileCodec;

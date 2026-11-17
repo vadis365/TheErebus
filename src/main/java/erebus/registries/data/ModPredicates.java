@@ -2,8 +2,8 @@ package erebus.registries.data;
 
 import com.mojang.serialization.MapCodec;
 import erebus.Erebus;
-import erebus.datagen.loot.predicates.DragonflyPredicate;
-import erebus.datagen.loot.predicates.WaspPredicate;
+import erebus.loot.predicates.DragonflyPredicate;
+import erebus.loot.predicates.WaspPredicate;
 import net.minecraft.advancements.criterion.EntitySubPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.neoforge.registries.DeferredHolder;

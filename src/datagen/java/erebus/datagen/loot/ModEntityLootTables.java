@@ -1,9 +1,9 @@
 package erebus.datagen.loot;
 
-import erebus.datagen.loot.predicates.DragonflyPredicate;
-import erebus.datagen.loot.predicates.WaspPredicate;
 import erebus.datagen.providers.ModEntityLootSubProvider;
 import erebus.loot.*;
+import erebus.loot.predicates.DragonflyPredicate;
+import erebus.loot.predicates.WaspPredicate;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;

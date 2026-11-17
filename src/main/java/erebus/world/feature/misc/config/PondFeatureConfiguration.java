@@ -4,6 +4,7 @@ import erebus.registries.blocks.ModBlocks;
 import erebus.registries.world.ModBiomes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -30,7 +31,7 @@ public class PondFeatureConfiguration extends Feature<NoneFeatureConfiguration> 
 
         var basePos = originPos.below(4);
         boolean[] waterBlockPositions = new boolean[2048];
-        int clayPatchSize = random.nextInt(4) + 4;
+        random.nextInt(4); // Retain the unused legacy draw before the ellipsoids.
 
         for (int ellipsoidCount = 0, totalEllipsoids = random.nextInt(3) + 5; ellipsoidCount < totalEllipsoids; ellipsoidCount++) {
             double ellipsoidWidth = (random.nextDouble() * 6.0D + 3.0D) * size * (0.4D + random.nextDouble() * 0.6D);
@@ -140,7 +141,7 @@ public class PondFeatureConfiguration extends Feature<NoneFeatureConfiguration> 
                     var clayPos = new BlockPos(clayX, basePos.getY() + y, clayZ);
                     if (level.getBlockState(clayPos).is(Blocks.SAND)) {
                         double clayRadius = random.nextDouble() * 1.3D + 1.8D;
-                        int clayRange = (int) Math.ceil(clayPatchSize);
+                        int clayRange = (int) Math.ceil(clayRadius);
 
                         for (int px = clayX - clayRange; px <= clayX + clayRange; px++) {
                             for (int pz = clayZ - clayRange; pz <= clayZ + clayRange; pz++) {
@@ -177,11 +178,13 @@ public class PondFeatureConfiguration extends Feature<NoneFeatureConfiguration> 
             var groundPos = new BlockPos(x, y, z).below();
             var state = level.getBlockState(groundPos);
 
-            if (state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.SAND) || state.is(ModBlocks.MUD.get())) {
+            var cane = Blocks.SUGAR_CANE.defaultBlockState();
+            if ((state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.SAND) || state.is(ModBlocks.MUD.get()))
+                    && cane.canSurvive(level, groundPos.above())) {
                 for (int height = 0; height < 1 + random.nextInt(7); height++) {
                     var canePos = new BlockPos(x, y + height, z);
-                    if (level.getBlockState(canePos).isAir()) {
-                        level.setBlock(canePos, Blocks.SUGAR_CANE.defaultBlockState(), 2);
+                    if (!level.isOutsideBuildHeight(canePos) && level.isEmptyBlock(canePos)) {
+                        level.setBlock(canePos, cane, 2);
                     } else {
                         break;
                     }
@@ -197,13 +200,13 @@ public class PondFeatureConfiguration extends Feature<NoneFeatureConfiguration> 
             var state = level.getBlockState(groundPos);
 
             if (state.is(Blocks.SAND) || state.is(ModBlocks.MUD.get())) {
-                for (int height = 0; height < 1; height++) {
-                    var rushPos = new BlockPos(x, y + height, z);
-                    if (level.getBlockState(rushPos).isAir()) {
-                        level.setBlock(new BlockPos(x, y, z), ModBlocks.BULLRUSH.get().defaultBlockState(), 2);
-                    } else {
-                        break;
-                    }
+                var rushPos = new BlockPos(x, y, z);
+                var rush = ModBlocks.BULLRUSH.get().defaultBlockState();
+                if (!level.isOutsideBuildHeight(rushPos.above()) && level.isEmptyBlock(rushPos)
+                        && level.isEmptyBlock(rushPos.above()) && rush.canSurvive(level, rushPos)) {
+                    DoublePlantBlock.placeAt(level, rush, rushPos, 2);
+                    level.getChunk(rushPos).markPosForPostprocessing(rushPos);
+                    level.getChunk(rushPos.above()).markPosForPostprocessing(rushPos.above());
                 }
             }
         }

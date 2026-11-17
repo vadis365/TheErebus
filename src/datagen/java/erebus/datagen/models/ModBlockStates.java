@@ -241,6 +241,7 @@ public class ModBlockStates extends ModBlockStateHelpers {
         createStigma(ModBlocks.STIGMA_MAGENTA);
         createStigma(ModBlocks.STIGMA_ORANGE);
         createStigma(ModBlocks.STIGMA_WHITE);
+        createStigma(ModBlocks.STIGMA_RAINBOW);
 
         createDoublePlant(ModBlocks.BULLRUSH);
         createDoublePlant(ModBlocks.WEEPING_BLUEBELL);

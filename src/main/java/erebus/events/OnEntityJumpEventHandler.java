@@ -3,6 +3,7 @@ package erebus.events;
 import erebus.block.QuicksandBlock;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -19,8 +20,9 @@ public class OnEntityJumpEventHandler {
         LivingEntity entity = event.getEntity();
 
         if (entity.level().getBlockState(entity.blockPosition().below()).is(ModBlocks.QUICK_SAND)) {
-            if (!QuicksandBlock.entityWillSink(entity)) {
-                entity.setJumping(false);
+            if (QuicksandBlock.entityWillSink(entity)) {
+                entity.setDeltaMovement(entity.getDeltaMovement().with(Direction.Axis.Y, 0));
+                return;
             }
         }
 

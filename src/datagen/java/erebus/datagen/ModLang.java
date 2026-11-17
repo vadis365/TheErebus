@@ -543,6 +543,7 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.STIGMA_MAGENTA, "Magenta Stigma");
         addBlock(ModBlocks.STIGMA_ORANGE, "Orange Stigma");
         addBlock(ModBlocks.STIGMA_WHITE, "White Stigma");
+        addBlock(ModBlocks.STIGMA_RAINBOW, "Rainbow Stigma");
         addBlock(ModBlocks.EXPLODING_STIGMA, "Exploding Stigma");
         addBlock(ModBlocks.FLOWER_BLACK, "Black Flower");
         addBlock(ModBlocks.FLOWER_RED, "Red Flower");
@@ -738,7 +739,7 @@ public class ModLang extends ModLangProvider {
         addEntity(ModEntities.SOLIFUGE, "Solifuge");
         addEntity(ModEntities.STAG_BEETLE, "Stag Beetle");
         addEntity(ModEntities.TARANTULA, "Tarantula");
-        addEntity(ModEntities.TARANTULA_MINI_BOSS, "Tarantula Mini-Boss");
+        addEntity(ModEntities.TARANTULA_MINI_BOSS, "Tarantula Brood Mother");
         addEntity(ModEntities.TITAN_BEETLE, "Titan Beetle");
         addEntity(ModEntities.DUNGEON_UMBER_GOLEM, "Umber Golem Idol Guardian");
         addEntity(ModEntities.UMBER_GOLEM, "Umber Golem");
@@ -777,7 +778,7 @@ public class ModLang extends ModLangProvider {
         add("tooltip.erebus.dimension", "Dimension: %s");
         add("tooltip.death_compass.pos", "Death Pos: ");
         add("tooltip.erebus.time_of_death", "Time of Death: %s");
-        add("tooltip.erebus.shield.damage", "Damage: ");
+        add("tooltip.erebus.shield.damage", "Durability: ");
         add("tooltip.erebus.shield.repair", "Anvil Repair: ");
         add("tooltip.erebus.wand_of_animation", "Right click blocks to animate them.");
         add("tooltip.erebus.bamboo_pipe", "A very basic directional fluid pipe.");

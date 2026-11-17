@@ -1,7 +1,7 @@
 package erebus.world.feature.structure.pieces;
 
-import erebus.datagen.loot.ModChestLootTables;
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.ModLootTables;
 import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -209,7 +209,7 @@ public class SpiderDungeonPiece extends ScatteredFeaturePiece implements Terrain
                     var target = state(code);
                     if (level.setBlock(p, target, Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE)
                             && code >= 5 && code <= 8 && level.getBlockEntity(p) instanceof ChestBlockEntity chest)
-                        chest.setLootTable(ModChestLootTables.SPIDER_DUNGEON, layoutSeed ^ p.asLong());
+                        chest.setLootTable(ModLootTables.SPIDER_DUNGEON, layoutSeed ^ p.asLong());
                 }
         processedChunks.add(key);
     }

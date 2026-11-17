@@ -5,7 +5,6 @@ import erebus.registries.blocks.ModBlocks;
 import erebus.registries.world.ModBiomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
@@ -18,7 +17,6 @@ public class ModSurfaceRules {
     // Erebus
     private static final RuleSource MUD = makeStateRule(ModBlocks.MUD);
     private static final RuleSource UMBERSTONE = makeStateRule(ModBlocks.UMBERSTONE);
-    private static final RuleSource DUST_LAYER = makeStateRule(ModBlocks.DUST_LAYER);
     private static final RuleSource DUST = makeStateRule(ModBlocks.DUST);
     private static final RuleSource VOLCANIC_ROCK = makeStateRule(ModBlocks.VOLCANIC_ROCK);
 
@@ -106,10 +104,7 @@ public class ModSurfaceRules {
                 ifTrue(
                         stoneDepthCheck(0, true, 0, CaveSurface.FLOOR),
                         sequence(
-                                ifTrue(
-                                        noiseCondition(Noises.POWDER_SNOW, 0.45, 0.58),
-                                        DUST_LAYER
-                                ),
+                                // Thin dust belongs above solid terrain; the decoration feature places it.
                                 placeBlock(VOLCANIC_ROCK, false),
                                 placeBlock(VOLCANIC_ROCK, true)
                         )

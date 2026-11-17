@@ -1,5 +1,12 @@
 {
   "values": [
-    "erebus:jade_chest"
+    "erebus:jade_chest",
+    "erebus:bamboo_chest",
+    "erebus:exoskeleton_chest",
+    "erebus:rein_exoskeleton_chest",
+    "erebus:rhino_exoskeleton_chest",
+    "erebus:glider_chestplate",
+    "erebus:glider_chestplate_powered",
+    "erebus:spider_t_shirt"
   ]
 }

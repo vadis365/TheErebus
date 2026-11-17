@@ -164,6 +164,8 @@ public class Crushroom extends Monster {
                 if (getSmashCount() == 0) setStanding((byte) 2);
             }
         } else {
+            if (distance > 144 || !getSensing().hasLineOfSight(target)) getNavigation().moveTo(target, 0.75D);
+            else getNavigation().stop();
             if (distance <= 144 && getSensing().hasLineOfSight(target) && --sporeCooldown <= 0) {
                 shootSpores(target);
                 sporeCooldown = 40;

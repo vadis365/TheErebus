@@ -4,8 +4,8 @@ import erebus.block.BarkLogBlock;
 import erebus.block.bamboo.BambooTorchBlock;
 import erebus.block.entity.ErebusSpawnerBlockEntity;
 import erebus.block.types.EnumTorchBlockHalf;
-import erebus.datagen.loot.ModChestLootTables;
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.ModLootTables;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;
@@ -17,17 +17,16 @@ import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.VineBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece;
+import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
+import net.neoforged.neoforge.common.world.PieceBeardifierModifier;
 import org.jspecify.annotations.NonNull;
 
 import java.util.HashSet;
@@ -35,10 +34,12 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class TarantulaDungeonPiece extends ScatteredFeaturePiece implements TerrainCheckedPiece {
+public class TarantulaDungeonPiece extends ScatteredFeaturePiece implements TerrainCheckedPiece, PieceBeardifierModifier {
     private final BlockState STAIRS = ModBlocks.STAIRS_EUCALYPTUS.get().defaultBlockState();
     private final BlockState LOG = ModBlocks.LOG_EUCALYPTUS.get().defaultBlockState();
-    private final BlockState LEAVES = ModBlocks.LEAVES_EUCALYPTUS.get().defaultBlockState();
+    // The legacy dungeon disabled initial decay. Structure foliage must not
+    // disappear while native leaf-distance updates are still crossing chunks.
+    private final BlockState LEAVES = ModBlocks.LEAVES_EUCALYPTUS.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true);
     private final BlockState FENCE = ModBlocks.FENCE_EUCALYPTUS.get().defaultBlockState();
     private final BlockState DOOR = ModBlocks.DOOR_EUCALYPTUS.get().defaultBlockState();
     private final BlockState BAMBOO_TORCH_LOWER = ModBlocks.BAMBOO_TORCH.get().defaultBlockState().setValue(BambooTorchBlock.HALF, EnumTorchBlockHalf.LOWER);
@@ -47,6 +48,7 @@ public class TarantulaDungeonPiece extends ScatteredFeaturePiece implements Terr
     private final BlockState AIR = Blocks.AIR.defaultBlockState();
     private final BlockState COBWEB = Blocks.COBWEB.defaultBlockState();
     private final long layoutSeed;
+    private final boolean adaptTerrain;
     private final Set<Long> processedChunks = new HashSet<>();
     private boolean guardianSpawned;
     private boolean validated, rejected;
@@ -54,6 +56,7 @@ public class TarantulaDungeonPiece extends ScatteredFeaturePiece implements Terr
     public TarantulaDungeonPiece(RandomSource random, BlockPos base) {
         super(ModStructurePieces.TARANTULA_DUNGEON.get(), base.getX() - 15, base.getY(), base.getZ() - 15, 31, 31, 31, getRandomHorizontalDirection(random));
         layoutSeed = random.nextLong();
+        adaptTerrain = true;
         boundingBox = new BoundingBox(boundingBox.minX(), boundingBox.minY() - 14, boundingBox.minZ(),
                 boundingBox.maxX(), boundingBox.minY() + 31, boundingBox.maxZ());
     }
@@ -64,6 +67,7 @@ public class TarantulaDungeonPiece extends ScatteredFeaturePiece implements Terr
         validated = tag.getBooleanOr("Validated", false);
         rejected = tag.getBooleanOr("Rejected", false);
         layoutSeed = tag.getLongOr("LayoutSeed", 0);
+        adaptTerrain = tag.getBooleanOr("AdaptTerrain", false);
         for (long chunk : tag.getLongArray("ProcessedChunks").orElse(new long[0])) processedChunks.add(chunk);
     }
 
@@ -78,23 +82,38 @@ public class TarantulaDungeonPiece extends ScatteredFeaturePiece implements Terr
 
     public static boolean validSite(BlockPos base, Function<BlockPos, BlockState> blocks,
                                     Predicate<BlockPos> inBounds) {
+        return validSite(base, blocks, inBounds, false);
+    }
+
+    public static boolean canAdaptSite(BlockPos base, Function<BlockPos, BlockState> blocks,
+                                       Predicate<BlockPos> inBounds) {
+        return validSite(base, blocks, inBounds, true);
+    }
+
+    private static boolean validSite(BlockPos base, Function<BlockPos, BlockState> blocks,
+                                     Predicate<BlockPos> inBounds, boolean adapt) {
         if (!inBounds.test(base.below(14)) || !inBounds.test(base.above(31))) return false;
         // Match the actual rounded radius-13 trunk floor, not its square bounds.
         for (int x = -13; x <= 13; x++)
             for (int z = -13; z <= 13; z++) {
                 if (Math.round(Math.sqrt(x * x + z * z)) > 13) continue;
                 var pos = base.offset(x, 0, z);
-                if (!inBounds.test(pos) || !soil(blocks.apply(pos))) return false;
+                if (adapt ? !AdaptedStructureTerrain.supported(pos, blocks, inBounds)
+                        : !inBounds.test(pos) || !soil(blocks.apply(pos))) return false;
             }
-        // Reference above-ground clearance, including fluids as obstructions.
+        // Keep the legacy square check for old pieces. Adapted starts clear the
+        // round trunk; the projecting entrances and canopy are checked below.
         for (int x = -14; x <= 14; x++)
-            for (int z = -14; z <= 14; z++)
+            for (int z = -14; z <= 14; z++) {
+                if (adapt && Math.round(Math.sqrt(x * x + z * z)) > 13) continue;
                 for (int y = 1; y < 28; y++) {
                     var pos = base.offset(x, y, z);
                     if (!inBounds.test(pos)) return false;
                     var state = blocks.apply(pos);
-                    if (!state.canBeReplaced() || !state.getFluidState().isEmpty()) return false;
+                    if (adapt ? !AdaptedStructureTerrain.clearable(state, y)
+                            : !state.canBeReplaced() || !state.getFluidState().isEmpty()) return false;
                 }
+            }
         // The reference clearance box stops below the highest canopy layers.
         int[][] crowns = {{10, 29, 0}, {-10, 29, 0}, {0, 29, 10}, {0, 29, -10}, {7, 27, 7}, {-7, 27, 7}, {7, 27, -7}, {-7, 27, -7}};
         for (var crown : crowns)
@@ -104,19 +123,42 @@ public class TarantulaDungeonPiece extends ScatteredFeaturePiece implements Terr
                         int relativeY = crown[1] + y;
                         if (relativeY < 28) continue;
                         int distance = x * x + y * y + z * z;
+                        var pos = base.offset(crown[0] + x, relativeY, crown[2] + z);
                         if (distance >= 9 && Math.round(Math.sqrt(distance)) < 5
-                                && !clear(base.offset(crown[0] + x, relativeY, crown[2] + z), blocks, inBounds)) return false;
+                                && !(adapt ? inBounds.test(pos) && AdaptedStructureTerrain.clearable(blocks.apply(pos), relativeY)
+                                : clear(pos, blocks, inBounds))) return false;
                     }
         // Outer entrances extend one block past that box on each side.
-        for (int side : new int[]{-15, 15})
+        for (int side : adapt ? new int[]{-15, -14, 14, 15} : new int[]{-15, 15})
             for (int offset = -1; offset <= 1; offset++)
                 for (int y = 0; y <= 4; y++) {
                     for (var pos : new BlockPos[]{base.offset(side, y, offset), base.offset(offset, y, side)}) {
+                        if (adapt && y == 0 && AdaptedStructureTerrain.supported(pos, blocks, inBounds)) continue;
+                        if (adapt && y > 0 && inBounds.test(pos)
+                                && AdaptedStructureTerrain.clearable(blocks.apply(pos), y)) continue;
                         if (y == 0 && inBounds.test(pos) && soil(blocks.apply(pos))) continue;
                         if (!clear(pos, blocks, inBounds)) return false;
                     }
                 }
         return true;
+    }
+
+    @Override
+    public BoundingBox getBeardifierBox() {
+        // The stored piece includes fourteen underground root layers. Beard to
+        // the walkable trunk floor, not the bottom of those roots.
+        return new BoundingBox(boundingBox.minX(), base().getY() + 1, boundingBox.minZ(),
+                boundingBox.maxX(), boundingBox.maxY(), boundingBox.maxZ());
+    }
+
+    @Override
+    public TerrainAdjustment getTerrainAdjustment() {
+        return adaptTerrain ? TerrainAdjustment.BEARD_THIN : TerrainAdjustment.NONE;
+    }
+
+    @Override
+    public int getGroundLevelDelta() {
+        return 0;
     }
 
     private static boolean clear(BlockPos pos, Function<BlockPos, BlockState> blocks,
@@ -142,6 +184,7 @@ public class TarantulaDungeonPiece extends ScatteredFeaturePiece implements Terr
         tag.putBoolean("Validated", validated);
         tag.putBoolean("Rejected", rejected);
         tag.putLong("LayoutSeed", layoutSeed);
+        tag.putBoolean("AdaptTerrain", adaptTerrain);
         tag.putLongArray("ProcessedChunks", processedChunks.stream().mapToLong(Long::longValue).toArray());
     }
 
@@ -174,7 +217,10 @@ public class TarantulaDungeonPiece extends ScatteredFeaturePiece implements Terr
     public synchronized void postProcess(@NonNull WorldGenLevel level, @NonNull StructureManager structureManager, @NonNull ChunkGenerator generator, @NonNull RandomSource random, @NonNull BoundingBox chunkBB, @NonNull ChunkPos chunkPos, @NonNull BlockPos pos) {
         if (rejected) return;
         if (!validated) {
-            if (!validSite(base(), level::getBlockState, p -> !level.isOutsideBuildHeight(p))) {
+            boolean valid = adaptTerrain
+                    ? canAdaptSite(base(), level::getBlockState, p -> !level.isOutsideBuildHeight(p))
+                    : validSite(base(), level::getBlockState, p -> !level.isOutsideBuildHeight(p));
+            if (!valid) {
                 rejected = true;
                 return;
             }
@@ -184,6 +230,17 @@ public class TarantulaDungeonPiece extends ScatteredFeaturePiece implements Terr
         if (processedChunks.contains(chunkKey)) {
             placeGuardian(level, chunkBB, RandomSource.create(layoutSeed ^ 4));
             return;
+        }
+        if (adaptTerrain) {
+            var base = base();
+            for (int x = -15; x <= 15; x++)
+                for (int z = -15; z <= 15; z++) {
+                    boolean trunk = Math.round(Math.sqrt(x * x + z * z)) <= 13;
+                    boolean entrance = Math.abs(x) <= 1 || Math.abs(z) <= 1;
+                    if (trunk || entrance)
+                        AdaptedStructureTerrain.prepareColumn(level, chunkBB, base.offset(x, 0, z), 27,
+                                Blocks.RED_SAND.defaultBlockState(), Blocks.RED_SANDSTONE.defaultBlockState());
+                }
         }
         generateTrunk(level, chunkBB);
         generateLeaves(level, RandomSource.create(layoutSeed ^ 1), chunkBB);
@@ -453,7 +510,7 @@ public class TarantulaDungeonPiece extends ScatteredFeaturePiece implements Terr
         // Legacy chests start facing north. Avoid terrain-dependent reorientation:
         // neighboring chunks may not have generated their floor yet.
         createChest(level, boundingBox, rand, getWorldPos(15 + x, y - 1, 15 + z),
-                ModChestLootTables.TARANTULA_DUNGEON, Blocks.CHEST.defaultBlockState());
+                ModLootTables.TARANTULA_DUNGEON, Blocks.CHEST.defaultBlockState());
     }
 
     private void rotatedCubeVolume(WorldGenLevel level, int offsetA, int offsetB, int offsetC, BlockState state, int sizeWidth, int sizeHeight, int sizeDepth, int direction, BoundingBox boundingBox) {

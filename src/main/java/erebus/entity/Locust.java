@@ -75,6 +75,11 @@ public class Locust extends Monster {
     }
 
     @Override
+    public boolean isWithinMeleeAttackRange(LivingEntity target) {
+        return distanceToSqr(target) <= 4 + target.getBbWidth();
+    }
+
+    @Override
     protected void registerGoals() {
         goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, true));

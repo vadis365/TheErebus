@@ -45,6 +45,11 @@ public class JumpingSpider extends Spider {
     }
 
     @Override
+    public boolean isWithinMeleeAttackRange(LivingEntity target) {
+        return distanceToSqr(target) <= 4 + target.getBbWidth();
+    }
+
+    @Override
     protected void registerGoals() {
         goalSelector.addGoal(1, new FloatGoal(this));
         goalSelector.addGoal(3, new LeapAtTargetGoal(this, 0.6F));

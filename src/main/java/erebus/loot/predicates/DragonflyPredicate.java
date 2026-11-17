@@ -1,9 +1,9 @@
-package erebus.datagen.loot.predicates;
+package erebus.loot.predicates;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import erebus.entity.Wasp;
+import erebus.entity.Dragonfly;
 import net.minecraft.advancements.criterion.EntitySubPredicate;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -11,16 +11,16 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public record WaspPredicate(boolean isBoss) implements EntitySubPredicate {
+public record DragonflyPredicate(int skin) implements EntitySubPredicate {
 
-    public static final MapCodec<WaspPredicate> CODEC = RecordCodecBuilder.mapCodec(
+    public static final MapCodec<DragonflyPredicate> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(
-                    Codec.BOOL.fieldOf("is_boss").forGetter(WaspPredicate::isBoss)
-            ).apply(instance, WaspPredicate::new)
+                    Codec.INT.fieldOf("skin").forGetter(DragonflyPredicate::skin)
+            ).apply(instance, DragonflyPredicate::new)
     );
 
-    public static WaspPredicate isBoss(boolean isBoss) {
-        return new WaspPredicate(isBoss);
+    public static DragonflyPredicate skin(int skin) {
+        return new DragonflyPredicate(skin);
     }
 
     @Override
@@ -30,6 +30,6 @@ public record WaspPredicate(boolean isBoss) implements EntitySubPredicate {
 
     @Override
     public boolean matches(@NotNull Entity entity, @NotNull ServerLevel level, @Nullable Vec3 position) {
-        return entity instanceof Wasp wasp && this.isBoss == wasp.getIsBoss();
+        return entity instanceof Dragonfly dragonfly && dragonfly.getSkin() == this.skin;
     }
 }

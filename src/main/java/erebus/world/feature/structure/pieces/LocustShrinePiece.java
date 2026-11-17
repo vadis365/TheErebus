@@ -2,8 +2,8 @@ package erebus.world.feature.structure.pieces;
 
 import erebus.block.BlockOfBonesBlock;
 import erebus.block.entity.BlockOfBonesBlockEntity;
-import erebus.datagen.loot.ModChestLootTables;
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.ModLootTables;
 import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -125,7 +125,7 @@ public class LocustShrinePiece extends ScatteredFeaturePiece implements TerrainC
                 var params = new LootParams.Builder(level.getLevel())
                         .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
                         .create(LootContextParamSets.CHEST);
-                var table = level.getLevel().getServer().reloadableRegistries().getLootTable(ModChestLootTables.LOCUST_SHRINE);
+                var table = level.getLevel().getServer().reloadableRegistries().getLootTable(ModLootTables.LOCUST_SHRINE);
                 for (var stack : table.getRandomItems(params, lootRandom)) bones.setItem(lootRandom.nextInt(bones.getContainerSize()), stack);
             }
         }

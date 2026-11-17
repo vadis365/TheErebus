@@ -1,5 +1,10 @@
 {
   "values": [
-    "erebus:jade_legs"
+    "erebus:jade_legs",
+    "erebus:bamboo_legs",
+    "erebus:exoskeleton_legs",
+    "erebus:rein_exoskeleton_legs",
+    "erebus:rhino_exoskeleton_legs",
+    "erebus:sprint_leggings"
   ]
 }

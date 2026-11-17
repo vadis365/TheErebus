@@ -2,7 +2,7 @@ package erebus.block.plants;
 
 import com.mojang.serialization.MapCodec;
 import erebus.Erebus;
-import erebus.datagen.loot.ModHarvestLootTables;
+import erebus.registries.data.ModLootTables;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -39,6 +39,6 @@ public class TallFernBlock extends DoublePlantBlock {
     }
 
     protected LootTable seedTable(ServerLevel level) {
-        return level.getServer().reloadableRegistries().getLootTable(ModHarvestLootTables.FERN_SEEDS);
+        return level.getServer().reloadableRegistries().getLootTable(ModLootTables.FERN_SEEDS);
     }
 }

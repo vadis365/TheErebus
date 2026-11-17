@@ -1,7 +1,7 @@
 package erebus.world.feature.structure.pieces;
 
-import erebus.datagen.loot.ModChestLootTables;
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.ModLootTables;
 import erebus.registries.world.structure.ModStructurePieces;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -114,7 +114,7 @@ public class DungPilePiece extends ScatteredFeaturePiece implements TerrainCheck
             if (!chunkBounds.isInside(pos)) continue;
             var current = level.getBlockState(pos);
             if (!current.isAir() && !(pos.getY() == center().getY() - 1 && soil(current))) continue;
-            if (level.setBlock(pos, entry.getValue(), 2) && entry.getValue().is(Blocks.CHEST) && level.getBlockEntity(pos) instanceof ChestBlockEntity chest) chest.setLootTable(ModChestLootTables.DUNG_PILE);
+            if (level.setBlock(pos, entry.getValue(), 2) && entry.getValue().is(Blocks.CHEST) && level.getBlockEntity(pos) instanceof ChestBlockEntity chest) chest.setLootTable(ModLootTables.DUNG_PILE);
         }
     }
 }

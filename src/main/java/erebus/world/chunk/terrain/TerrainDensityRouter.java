@@ -3,7 +3,7 @@ package erebus.world.chunk.terrain;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import erebus.datagen.ModRegistries;
+import erebus.registries.ModRegistries;
 import erebus.world.layer.biome.BiomeDensitySource;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.RegistryFileCodec;

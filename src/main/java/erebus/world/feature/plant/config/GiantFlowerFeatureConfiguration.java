@@ -45,7 +45,8 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
                 ? (petalShape.canHaveSecondaryColor && random.nextInt(8) == 0 ? random.nextInt(13) : primaryColor)
                 : secondaryPetalColor;
         var petal = getPetalForColor(primaryColor);
-        var stigma = getStigmaForColor(secondaryColor);
+        var secondaryPetal = getPetalForColor(secondaryColor);
+        var stigma = getStigmaForColor(petalShape.canHaveSecondaryColor ? 14 : primaryColor);
         int stemHeight = random.nextInt(6) + 2;
 
         if (!checkAreaClear(level, pos, stemHeight, stemShape, petalShape)) {
@@ -53,13 +54,13 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
         }
 
         generateStem(level, pos, stemHeight, stemShape, stem);
-        generatePetal(level, pos, random, petalShape, stemHeight, stem, petal, stigma);
+        generatePetal(level, pos, random, petalShape, stemHeight + 1, stem, petal, secondaryPetal, stigma);
 
         return true;
     }
 
     private boolean checkAreaClear(WorldGenLevel level, BlockPos pos, int stemHeight, StemShape stemShape, PetalShape petalShape) {
-        for (int y = 2; y < stemHeight; y++) {
+        for (int y = 2; y <= stemHeight; y++) {
             if (!level.isEmptyBlock(pos.above(y))) {
                 return false;
             }
@@ -67,7 +68,7 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
 
         for (int x = -stemShape.radius; x <= stemShape.radius; x++) {
             for (int z = -stemShape.radius; z <= stemShape.radius; z++) {
-                for (int y = 0; y < stemShape.height; y++) {
+                for (int y = 0; y <= stemShape.height; y++) {
                     if (!level.isEmptyBlock(pos.offset(x, y, z))) return false;
                 }
 
@@ -78,11 +79,9 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
 
         for (int x = -petalShape.radius; x <= petalShape.radius; x++) {
             for (int z = -petalShape.radius; z <= petalShape.radius; z++) {
-                for (int y = stemHeight + 1; y < stemShape.height + 1 + petalShape.height; y++) {
+                for (int y = stemHeight + 1; y <= stemHeight + 1 + petalShape.height; y++) {
                     if (!level.isEmptyBlock(pos.offset(x, y, z))) return false;
                 }
-
-                if (level.isEmptyBlock(pos.offset(x, -1, z))) return false;
             }
         }
 
@@ -111,16 +110,16 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
             }
         }
 
-        for (int y = 0; y < stemHeight; y++) {
+        for (int y = 0; y <= stemHeight; y++) {
             setBlock(level, pos.above(y), stem);
         }
     }
 
-    private void generatePetal(WorldGenLevel level, BlockPos pos, RandomSource random, PetalShape petalShape, int top, BlockState stem, BlockState petal, BlockState stigma) {
+    private void generatePetal(WorldGenLevel level, BlockPos pos, RandomSource random, PetalShape petalShape, int top, BlockState stem, BlockState petal, BlockState secondaryPetal, BlockState stigma) {
         switch (petalShape) {
             case DENSE_HEMISPHERE -> generateDenseHemisphere(level, pos, random, top, stem, petal, stigma);
-            case DISPERSE_HEMISPHERE -> generateDisperseHemisphere(level, pos, random, top, stem, petal, stigma);
-            case UMBRELLA -> generateUmbrella(level, pos, random, top, stem, petal, stigma);
+            case DISPERSE_HEMISPHERE -> generateDisperseHemisphere(level, pos, random, top, stem, petal, secondaryPetal, stigma);
+            case UMBRELLA -> generateUmbrella(level, pos, random, top, stem, petal, secondaryPetal, stigma);
         }
     }
 
@@ -137,7 +136,7 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
 
         for (int x = -1; x <= 1; x++) {
             for (int z = -1; z <= 1; z++) {
-                setBlock(level, pos.offset(x, top + 1, z), stem);
+                setBlock(level, pos.offset(x, top + 1, z), petal);
             }
         }
 
@@ -169,9 +168,10 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
             }
         }
 
+        boolean petalFormation = random.nextBoolean();
         for (int c = 0; c < 2; c++) {
             for (int d = 0; d < 2; d++) {
-                if (random.nextBoolean()) {
+                if (petalFormation) {
                     setBlock(level, pos.offset(-3 + c * 6, top + 4, -1 + d * 2), petal);
                     setBlock(level, pos.offset(-1 + c * 2, top + 4, -3 + d * 6), petal);
                 } else {
@@ -182,12 +182,12 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
         }
     }
 
-    private void generateDisperseHemisphere(WorldGenLevel level, BlockPos pos, RandomSource random, int top, BlockState stem, BlockState petal, BlockState stigma) {
+    private void generateDisperseHemisphere(WorldGenLevel level, BlockPos pos, RandomSource random, int top, BlockState stem, BlockState petal, BlockState secondaryPetal, BlockState stigma) {
         setBlock(level, pos.above(top), stem);
         setBlock(level, pos.above(top + 1), random.nextInt(10) == 0 ? ModBlocks.EXPLODING_STIGMA.get().defaultBlockState() : stigma);
         for (int c = 0; c < 4; c++) {
             for (int d = 1; d <= 3; d++) {
-                setBlock(level, pos.offset(offsetX[c] * d, top + d - 1, offsetZ[c] * d), petal);
+                setBlock(level, pos.offset(offsetX[c] * d, top + d - 1, offsetZ[c] * d), secondaryPetal);
             }
         }
 
@@ -199,7 +199,7 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
         }
     }
 
-    private void generateUmbrella(WorldGenLevel level, BlockPos pos, RandomSource random, int top, BlockState stem, BlockState petal, BlockState stigma) {
+    private void generateUmbrella(WorldGenLevel level, BlockPos pos, RandomSource random, int top, BlockState stem, BlockState petal, BlockState secondaryPetal, BlockState stigma) {
         setBlock(level, pos.above(top), stem);
 
         for (int c = 0; c < 4; c++) {
@@ -220,9 +220,9 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
 
         for (int c = 0; c < 2; c++) {
             for (int d = 0; d < 2; d++) {
-                setBlock(level, pos.offset(-1 + c * 2, top + 1, -1 + d * 2), petal);
-                setBlock(level, pos.offset(-2 + c * 4, top + 1, -2 + d * 4), petal);
-                setBlock(level, pos.offset(-3 + c * 6, top + (reallyStrongWind ? 2 : 0), -3 + d * 6), petal);
+                setBlock(level, pos.offset(-1 + c * 2, top + 1, -1 + d * 2), secondaryPetal);
+                setBlock(level, pos.offset(-2 + c * 4, top + 1, -2 + d * 4), secondaryPetal);
+                setBlock(level, pos.offset(-3 + c * 6, top + (reallyStrongWind ? 2 : 0), -3 + d * 6), secondaryPetal);
                 setBlock(level, pos.offset(offsetX[c * 2 + d] * 4, top + (reallyStrongWind ? 2 : 0), offsetZ[c * 2 + d] * 4), petal);
             }
         }
@@ -264,6 +264,7 @@ public class GiantFlowerFeatureConfiguration extends Feature<NoneFeatureConfigur
             case 11 -> ModBlocks.STIGMA_MAGENTA.get().defaultBlockState();
             case 12 -> ModBlocks.STIGMA_ORANGE.get().defaultBlockState();
             case 13 -> ModBlocks.STIGMA_WHITE.get().defaultBlockState();
+            case 14 -> ModBlocks.STIGMA_RAINBOW.get().defaultBlockState();
             default -> throw new IllegalStateException("Unexpected value: " + color);
         };
     }

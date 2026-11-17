@@ -8,29 +8,20 @@ import erebus.registries.world.feature.ModFeatures;
 import erebus.registries.world.structure.ModStructureSets;
 import erebus.registries.world.structure.ModStructures;
 import erebus.world.ModNoiseGenerator;
-import erebus.world.layer.biome.BiomeDensitySource;
-import erebus.world.layer.biome.BiomeLayerFactory;
 import erebus.world.layer.biome.BiomeLayerStack;
-import erebus.world.layer.biome.BiomeLayerType;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.Registry;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceKey;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import net.neoforged.neoforge.registries.RegistryBuilder;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
+import static erebus.registries.ModRegistries.BIOME_STACK;
+import static erebus.registries.ModRegistries.BIOME_TERRAIN_DATA;
+
 public class ModRegistries extends DatapackBuiltinEntriesProvider {
-
-    public static final ResourceKey<Registry<BiomeLayerType>> BIOME_LAYER_TYPE_KEY = ResourceKey.createRegistryKey(Erebus.prefix("biome_layer_type"));
-    public static final ResourceKey<Registry<BiomeLayerFactory>> BIOME_STACK = ResourceKey.createRegistryKey(Erebus.prefix("biome_layer_stack"));
-    public static final ResourceKey<Registry<BiomeDensitySource>> BIOME_TERRAIN_DATA = ResourceKey.createRegistryKey(Erebus.prefix("biome_terrain_data"));
-
-    public static final Registry<BiomeLayerType> BIOME_LAYER_TYPE = new RegistryBuilder<>(BIOME_LAYER_TYPE_KEY).create();
 
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.BIOME, ModBiomes::bootstrap)

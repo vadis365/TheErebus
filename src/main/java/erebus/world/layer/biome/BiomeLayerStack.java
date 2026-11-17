@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import erebus.Erebus;
-import erebus.datagen.ModRegistries;
+import erebus.registries.ModRegistries;
 import erebus.registries.world.ModBiomeLayerTypes;
 import erebus.registries.world.ModBiomes;
 import erebus.world.biome.util.TerrainBuilder;

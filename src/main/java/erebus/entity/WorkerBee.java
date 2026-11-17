@@ -93,7 +93,7 @@ public class WorkerBee extends Animal {
         aiFlyingWander = new FlyingWanderGoal(this, 0.5D, 0.02F);
         goalSelector.addGoal(0, new BeePollinateGoal(this, 10));
         goalSelector.addGoal(1, new FloatGoal(this));
-        goalSelector.addGoal(2, new MeleeAttackGoal(this, 0.5D, true));
+        goalSelector.addGoal(2, new MeleeAttackGoal(this, 0.3D, true));
         //tasks.addTask(3, new EntityAITempt(this, 0.5D, Items.SUGAR, false));
         goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
         goalSelector.addGoal(6, new RandomLookAroundGoal(this));

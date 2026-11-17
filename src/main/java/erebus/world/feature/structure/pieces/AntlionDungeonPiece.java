@@ -2,8 +2,8 @@ package erebus.world.feature.structure.pieces;
 
 import erebus.block.entity.BlockOfBonesBlockEntity;
 import erebus.block.entity.TempleTeleporterBlockEntity;
-import erebus.datagen.loot.ModChestLootTables;
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.ModLootTables;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
 import erebus.registries.world.structure.ModStructurePieces;
@@ -102,11 +102,11 @@ public final class AntlionDungeonPiece extends ScatteredFeaturePiece {
                     if (destination != null) teleporter.setDestination(destination);
                 } else if (blockEntity instanceof ChestBlockEntity chest) {
                     if (pos.equals(plan.jadeChest())) chest.setItem(0, new ItemStack(ModItems.JADE.get(), 8));
-                    else if (plan.lootChests().contains(pos)) chest.setLootTable(ModChestLootTables.ANTLION_DUNGEON, layoutSeed ^ pos.asLong());
+                    else if (plan.lootChests().contains(pos)) chest.setLootTable(ModLootTables.ANTLION_DUNGEON, layoutSeed ^ pos.asLong());
                 } else if (blockEntity instanceof BlockOfBonesBlockEntity bones && plan.lootBones().contains(pos)) {
                     var server = level.getLevel();
                     var params = new LootParams.Builder(server).withParameter(LootContextParams.ORIGIN, pos.getCenter()).create(LootContextParamSets.CHEST);
-                    server.getServer().reloadableRegistries().getLootTable(ModChestLootTables.ANTLION_DUNGEON).fill(bones, params, layoutSeed ^ pos.asLong());
+                    server.getServer().reloadableRegistries().getLootTable(ModLootTables.ANTLION_DUNGEON).fill(bones, params, layoutSeed ^ pos.asLong());
                     bones.setChanged();
                 }
                 var fluid = state.getFluidState();

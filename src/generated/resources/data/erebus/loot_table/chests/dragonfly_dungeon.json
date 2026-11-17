@@ -75,26 +75,32 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
-          "name": "minecraft:enchanted_book",
+          "name": "minecraft:book",
           "weight": 8
         },
         {
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:golden_pickaxe",
@@ -104,13 +110,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:iron_pickaxe",
@@ -120,13 +132,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "erebus:jade_pickaxe"
@@ -135,13 +153,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:golden_shovel",
@@ -151,13 +175,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:iron_shovel",
@@ -167,13 +197,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "erebus:jade_shovel"
@@ -182,13 +218,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:golden_axe",
@@ -198,13 +240,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:iron_axe",
@@ -214,13 +262,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "erebus:jade_axe"
@@ -229,13 +283,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:golden_sword",
@@ -245,13 +305,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:iron_sword",
@@ -261,13 +327,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "erebus:jade_sword"
@@ -276,13 +348,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:golden_chestplate"
@@ -291,13 +369,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:iron_chestplate",
@@ -307,13 +391,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "erebus:jade_chest"
@@ -322,13 +412,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:golden_helmet"
@@ -337,13 +433,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:iron_helmet",
@@ -353,13 +455,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "erebus:jade_helmet"
@@ -368,13 +476,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:golden_leggings"
@@ -383,13 +497,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:iron_leggings",
@@ -399,13 +519,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "erebus:jade_legs"
@@ -414,13 +540,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:golden_boots"
@@ -429,13 +561,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "minecraft:iron_boots",
@@ -445,13 +583,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "conditions": [
+                {
+                  "chance": 0.5,
+                  "condition": "minecraft:random_chance"
+                }
+              ],
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 1.0
+                "max": 16.0,
+                "min": 7.0
               },
-              "options": "#minecraft:treasure"
+              "options": "#minecraft:on_random_loot"
             }
           ],
           "name": "erebus:jade_boots"
@@ -565,15 +709,50 @@
           "name": "erebus:rolled_newspaper"
         },
         {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "erebus:bambucket",
+          "type": "minecraft:loot_table",
+          "value": {
+            "pools": [
+              {
+                "bonus_rolls": 0.0,
+                "entries": [
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": 1.0,
+                        "function": "minecraft:set_count"
+                      }
+                    ],
+                    "name": "erebus:honey_bucket"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": 1.0,
+                        "function": "minecraft:set_count"
+                      }
+                    ],
+                    "name": "erebus:beetle_juice_bucket"
+                  },
+                  {
+                    "type": "minecraft:item",
+                    "functions": [
+                      {
+                        "add": false,
+                        "count": 1.0,
+                        "function": "minecraft:set_count"
+                      }
+                    ],
+                    "name": "erebus:anti_venom_bucket"
+                  }
+                ],
+                "rolls": 1.0
+              }
+            ]
+          },
           "weight": 6
         },
         {
@@ -600,7 +779,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "erebus:glow_gem_inactive",
+          "name": "erebus:glow_gem_active",
           "weight": 5
         },
         {

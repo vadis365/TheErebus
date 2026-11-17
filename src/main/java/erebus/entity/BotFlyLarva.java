@@ -18,6 +18,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -34,14 +35,28 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public class BotFlyLarva extends Mob {
+public class BotFlyLarva extends PathfinderMob {
     private static final EntityDataAccessor<Byte> PARASITE_COUNT = SynchedEntityData.defineId(BotFlyLarva.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Optional<EntityReference<LivingEntity>>> INFESTED_PLAYER = SynchedEntityData.defineId(BotFlyLarva.class, EntityDataSerializers.OPTIONAL_LIVING_ENTITY_REFERENCE);
     private static final Codec<List<EntityReference<LivingEntity>>> INFESTED_PLAYER_CODEC = EntityReference.<LivingEntity>codec().listOf();
 
     public BotFlyLarva(EntityType<? extends BotFlyLarva> type, Level level) {
         super(type, level);
-        //tasks.addTask(0, new EntityAIWander(this, 0.3D));
+    }
+
+    @Override
+    protected void registerGoals() {
+        goalSelector.addGoal(0, new RandomStrollGoal(this, 0.3D) {
+            @Override
+            public boolean canUse() {
+                return entityData.get(INFESTED_PLAYER).isEmpty() && super.canUse();
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                return entityData.get(INFESTED_PLAYER).isEmpty() && super.canContinueToUse();
+            }
+        });
     }
 
     public static AttributeSupplier.Builder createAttributes() {

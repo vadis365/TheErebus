@@ -6,6 +6,7 @@
   "downfall": 0.0,
   "effects": {
     "foliage_color": "#29bc05",
+    "grass_color": "#53ca37",
     "water_color": "#53ca37"
   },
   "features": [

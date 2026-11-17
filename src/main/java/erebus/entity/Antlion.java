@@ -16,6 +16,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -58,6 +59,7 @@ public class Antlion extends Monster {
                 .add(Attributes.FOLLOW_RANGE, 16D)
                 .add(Attributes.MOVEMENT_SPEED, 0.6D)
                 .add(Attributes.ATTACK_DAMAGE, 4D)
+                .add(Attributes.STEP_HEIGHT, 1D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D)
                 .add(Attributes.ARMOR, 8D);
     }
@@ -68,16 +70,21 @@ public class Antlion extends Monster {
     }
 
     @Override
+    public boolean isWithinMeleeAttackRange(@NonNull LivingEntity target) {
+        return distanceToSqr(target) <= 4 + target.getBbWidth();
+    }
+
+    @Override
     protected void registerGoals() {
         goalSelector.addGoal(0, new FloatGoal(this));
-        goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.6D, false));
-        goalSelector.addGoal(2, new AIWander(this, 0.5D));
-        goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.5D, false));
+        goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        goalSelector.addGoal(3, new AIWander(this, 0.5D));
         targetSelector.addGoal(0, new HurtByTargetGoal(this));
         targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, false));
-        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Villager.class, false));
-        // targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityFireAnt.class, false));
-        // targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityFireAntSoldier.class, false));
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, FireAnt.class, false));
+        targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, FireAntSoldier.class, false));
+        targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Villager.class, false));
         // targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityBlackAnt.class, true));
     }
 
@@ -166,13 +173,13 @@ public class Antlion extends Monster {
     }
 
     @Override
-    protected void addAdditionalSaveData(ValueOutput output) {
+    protected void addAdditionalSaveData(@NonNull ValueOutput output) {
         super.addAdditionalSaveData(output);
         output.putBoolean("Active", isActive());
     }
 
     @Override
-    protected void readAdditionalSaveData(ValueInput input) {
+    protected void readAdditionalSaveData(@NonNull ValueInput input) {
         super.readAdditionalSaveData(input);
         var active = input.read("Active", Codec.BOOL);
         setActive(active.orElse(true));
@@ -181,7 +188,7 @@ public class Antlion extends Monster {
     }
 
     @Override
-    public boolean checkSpawnRules(LevelAccessor level, EntitySpawnReason reason) {
+    public boolean checkSpawnRules(@NonNull LevelAccessor level, @NonNull EntitySpawnReason reason) {
         return true;
     }
 

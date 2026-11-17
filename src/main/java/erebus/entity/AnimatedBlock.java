@@ -4,6 +4,7 @@ import erebus.entity.ai.AnimatedBlockFollowOwnerGoal;
 import erebus.inventory.server.PetrifiedCraftingMenu;
 import erebus.registries.ModSounds;
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,12 +13,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
@@ -99,6 +102,25 @@ public class AnimatedBlock extends PathfinderMob {
     @Override
     protected void playStepSound(@NonNull BlockPos pos, @NonNull BlockState state) {
         this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
+    }
+
+    @Override
+    public boolean onClimbable() {
+        return horizontalCollision;
+    }
+
+    @Override
+    public boolean removeWhenFarAway(double distance) {
+        return false;
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(@NonNull ServerLevel level, @NonNull DamageSource source, boolean killedByPlayer) {
+        super.dropCustomDeathLoot(level, source, killedByPlayer);
+        // Golems and animated containers have separate reward/cargo paths.
+        if (getType() == ModEntities.ANIMATED_BLOCK.get()) {
+            spawnAtLocation(level, new ItemStack(getBlockType().getBlock()));
+        }
     }
 
     @Override

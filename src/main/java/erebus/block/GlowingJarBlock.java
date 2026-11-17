@@ -3,9 +3,11 @@ package erebus.block;
 import com.mojang.serialization.MapCodec;
 import erebus.block.entity.GlowingJarBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
@@ -36,6 +38,12 @@ public class GlowingJarBlock extends BaseEntityBlock {
     @Override
     public @Nullable BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new GlowingJarBlockEntity(pos, state);
+    }
+
+    @Override
+    protected boolean canSurvive(@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
+        var support = level.getBlockState(pos.below());
+        return !support.is(BlockTags.LEAVES) && support.isSolid();
     }
 
     @Override

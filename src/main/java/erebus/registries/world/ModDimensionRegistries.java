@@ -1,7 +1,7 @@
 package erebus.registries.world;
 
 import erebus.Erebus;
-import erebus.datagen.ModRegistries;
+import erebus.registries.ModRegistries;
 import erebus.world.ModNoiseGenerator;
 import erebus.world.biome.util.ErebusBiomeProvider;
 import erebus.world.layer.biome.BiomeLayerStack;

@@ -37,16 +37,39 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
+sourceSets {
+    datagen {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+
+configurations {
+    datagenImplementation.extendsFrom implementation
+    datagenCompileOnly.extendsFrom compileOnly
+    datagenRuntimeOnly.extendsFrom runtimeOnly, localRuntime
+}
+
 neoForge {
     version = project.neo_version
+    addModdingDependenciesTo sourceSets.datagen
 
     mods {
         erebus {
             sourceSet sourceSets.main
         }
+        erebusDatagen {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.datagen
+        }
     }
 
     runs {
+        configureEach {
+            loadedMods = [mods.erebus]
+            logLevel = org.slf4j.event.Level.INFO
+        }
+
         client {
             client()
         }
@@ -58,18 +81,20 @@ neoForge {
 
         data {
             clientData()
+            sourceSet = sourceSets.datagen
+            loadedMods = [mods.erebusDatagen]
             programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
 
-        configureEach {
-            loadedMods = [mods.erebus]
-            logLevel = org.slf4j.event.Level.INFO
-        }
     }
 
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+tasks.named('check') {
+    dependsOn tasks.named('datagenClasses')
+}
 
 configurations {
     runtimeClasspath.extendsFrom localRuntime

@@ -19,7 +19,9 @@ import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.ScatteredFeaturePiece;
+import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
+import net.neoforged.neoforge.common.world.PieceBeardifierModifier;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -27,9 +29,10 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class SwampHutPiece extends ScatteredFeaturePiece implements TerrainCheckedPiece {
+public class SwampHutPiece extends ScatteredFeaturePiece implements TerrainCheckedPiece, PieceBeardifierModifier {
 
     private final long layoutSeed;
+    private final boolean adaptTerrain;
     private BlockState LOG;
     private BlockState PLANK;
     private BlockState STAIR;
@@ -41,11 +44,13 @@ public class SwampHutPiece extends ScatteredFeaturePiece implements TerrainCheck
     public SwampHutPiece(RandomSource random, BlockPos origin) {
         super(ModStructurePieces.SWAMP_HUT.get(), origin.getX(), origin.getY(), origin.getZ(), 16, 12, 16, Direction.SOUTH);
         layoutSeed = random.nextLong();
+        adaptTerrain = true;
     }
 
     public SwampHutPiece(StructurePieceSerializationContext context, CompoundTag tag) {
         super(ModStructurePieces.SWAMP_HUT.get(), tag);
         layoutSeed = tag.getLongOr("LayoutSeed", 0);
+        adaptTerrain = tag.getBooleanOr("AdaptTerrain", false);
         validated = tag.getBooleanOr("Validated", false);
         rejected = tag.getBooleanOr("Rejected", false) || !tag.contains("LayoutSeed");
     }
@@ -70,10 +75,40 @@ public class SwampHutPiece extends ScatteredFeaturePiece implements TerrainCheck
         return true;
     }
 
+    public static boolean canAdaptSite(BlockPos origin, Function<BlockPos, BlockState> blocks,
+                                       Predicate<BlockPos> inBounds) {
+        for (int x = 0; x < 16; x++)
+            for (int z = 0; z < 16; z++) {
+                var floor = origin.offset(x, -1, z);
+                if (!AdaptedStructureTerrain.supported(floor, blocks, inBounds)) return false;
+                for (int height = 1; height <= 12; height++) {
+                    var pos = floor.above(height);
+                    if (!inBounds.test(pos) || !AdaptedStructureTerrain.clearable(blocks.apply(pos), height)) return false;
+                }
+            }
+        return true;
+    }
+
+    @Override
+    public BoundingBox getBeardifierBox() {
+        return boundingBox;
+    }
+
+    @Override
+    public TerrainAdjustment getTerrainAdjustment() {
+        return adaptTerrain ? TerrainAdjustment.BEARD_THIN : TerrainAdjustment.NONE;
+    }
+
+    @Override
+    public int getGroundLevelDelta() {
+        return 0;
+    }
+
     @Override
     protected void addAdditionalSaveData(StructurePieceSerializationContext context, CompoundTag tag) {
         super.addAdditionalSaveData(context, tag);
         tag.putLong("LayoutSeed", layoutSeed);
+        tag.putBoolean("AdaptTerrain", adaptTerrain);
         tag.putBoolean("Validated", validated);
         tag.putBoolean("Rejected", rejected);
     }
@@ -92,11 +127,20 @@ public class SwampHutPiece extends ScatteredFeaturePiece implements TerrainCheck
                                          RandomSource random, BoundingBox clip, ChunkPos chunk, BlockPos ignored) {
         if (rejected) return;
         if (!validated) {
-            if (!validSite(origin(), level::getBlockState, p -> !level.isOutsideBuildHeight(p))) {
+            boolean valid = adaptTerrain
+                    ? canAdaptSite(origin(), level::getBlockState, p -> !level.isOutsideBuildHeight(p))
+                    : validSite(origin(), level::getBlockState, p -> !level.isOutsideBuildHeight(p));
+            if (!valid) {
                 rejected = true;
                 return;
             }
             validated = true;
+        }
+        if (adaptTerrain) {
+            for (int x = 0; x < 16; x++)
+                for (int z = 0; z < 16; z++)
+                    AdaptedStructureTerrain.prepareColumn(level, clip, origin().offset(x, -1, z), 12,
+                            Blocks.GRASS_BLOCK.defaultBlockState(), Blocks.DIRT.defaultBlockState());
         }
         for (var entry : layout().entrySet()) {
             var pos = entry.getKey();

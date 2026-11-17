@@ -1,7 +1,6 @@
 package erebus.client.render.entity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import erebus.Erebus;
 import erebus.client.render.entity.model.TarantulaMiniBossModel;
 import erebus.client.render.entity.renderer.state.TarantulaMiniBossRenderState;
@@ -13,7 +12,6 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
@@ -21,6 +19,7 @@ import net.minecraft.util.RandomSource;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public class TarantulaMiniBossRenderer extends MobRenderer<TarantulaMiniBoss, TarantulaMiniBossRenderState, TarantulaMiniBossModel> {
     private static final Identifier BASE = Erebus.prefix("textures/entity/tarantula.png");
@@ -28,11 +27,9 @@ public class TarantulaMiniBossRenderer extends MobRenderer<TarantulaMiniBoss, Ta
     private static final Identifier DISSOLVE = Erebus.prefix("textures/entity/tarantula_dissolve.png");
     private static final RenderType DYING_RENDER_TYPE = RenderTypes.entityCutoutDissolve(DESPERATION, DISSOLVE);
     private static final float HALF_SQRT_3 = (float) (Math.sqrt(3.0F) / (double) 2.0F);
-    private final TarantulaMiniBossModel model;
 
     public TarantulaMiniBossRenderer(EntityRendererProvider.Context context) {
         super(context, new TarantulaMiniBossModel(context.bakeLayer(ModEntityRendering.TARANTULA_MINI_BOSS)), 1.2F);
-        model = new TarantulaMiniBossModel(context.bakeLayer(ModEntityRendering.TARANTULA_MINI_BOSS));
         addLayer(new TarantulaMiniBossRenderLayer(this, context.getModelSet()));
     }
 
@@ -72,7 +69,7 @@ public class TarantulaMiniBossRenderer extends MobRenderer<TarantulaMiniBoss, Ta
     }
 
     @Override
-    public void extractRenderState(TarantulaMiniBoss entity, TarantulaMiniBossRenderState state, float partialTicks) {
+    public void extractRenderState(@NonNull TarantulaMiniBoss entity, @NonNull TarantulaMiniBossRenderState state, float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
         state.desperate = entity.isInDesperation();
         state.scale = 2.0F;
@@ -82,17 +79,8 @@ public class TarantulaMiniBossRenderer extends MobRenderer<TarantulaMiniBoss, Ta
     }
 
     @Override
-    public void submit(TarantulaMiniBossRenderState state, PoseStack pose, @NonNull SubmitNodeCollector submit, @NonNull CameraRenderState camera) {
-        pose.pushPose();
-        int overlayCoords = OverlayTexture.pack(0.0F, state.hasRedOverlay);
-        if (state.deathTime > 0.0F) {
-            pose.translate(0, -0.7F, 0F);
-            pose.rotateAround(Axis.YP.rotationDegrees(180F), 0, 1, 0);
-            int color = ARGB.white(1.0F - state.deathTime / 200.0F);
-            submit.submitModel(this.model, state, pose, DYING_RENDER_TYPE, state.lightCoords, OverlayTexture.NO_OVERLAY, color, null, state.outlineColor, null);
-        } else {
-            submit.submitModel(this.model, state, pose, RenderTypes.entityCutout(getTextureLocation(state)), state.lightCoords, overlayCoords, -1, null, state.outlineColor, null);
-        }
+    public void submit(@NonNull TarantulaMiniBossRenderState state, @NonNull PoseStack pose, @NonNull SubmitNodeCollector submit, @NonNull CameraRenderState camera) {
+        super.submit(state, pose, submit, camera);
 
         if (state.deathTime > 0.0F) {
             float deathTime = state.deathTime / 200.0F;
@@ -102,25 +90,33 @@ public class TarantulaMiniBossRenderer extends MobRenderer<TarantulaMiniBoss, Ta
             submitRays(pose, deathTime, submit, RenderTypes.dragonRaysDepth());
             pose.popPose();
         }
-
-        pose.popPose();
-
-        super.submit(state, pose, submit, camera);
     }
 
     @Override
-    public TarantulaMiniBossRenderState createRenderState() {
+    protected @Nullable RenderType getRenderType(TarantulaMiniBossRenderState state, boolean isBodyVisible, boolean forceTransparent, boolean appearGlowing) {
+        if (state.deathTime > 0.0F && isBodyVisible) return DYING_RENDER_TYPE;
+        return super.getRenderType(state, isBodyVisible, forceTransparent, appearGlowing);
+    }
+
+    @Override
+    protected int getModelTint(TarantulaMiniBossRenderState state) {
+        if (state.deathTime > 0.0F)
+            return ARGB.white(1.0F - Mth.clamp(state.deathTime / 200.0F, 0.0F, 1.0F));
+        return super.getModelTint(state);
+    }
+
+    @Override
+    public @NonNull TarantulaMiniBossRenderState createRenderState() {
         return new TarantulaMiniBossRenderState();
     }
 
     @Override
-    protected float getShadowRadius(TarantulaMiniBossRenderState state) {
+    protected float getShadowRadius(@NonNull TarantulaMiniBossRenderState state) {
         return 2.5F;
     }
 
     @Override
     public @NonNull Identifier getTextureLocation(TarantulaMiniBossRenderState state) {
-        if (state.deathTime > 0) return DISSOLVE;
         return state.desperate ? BASE : DESPERATION;
     }
 }

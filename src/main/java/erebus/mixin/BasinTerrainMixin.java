@@ -1,5 +1,6 @@
 package erebus.mixin;
 
+import erebus.registries.blocks.ModBlocks;
 import erebus.world.BasinTerrain;
 import erebus.world.ModNoiseGenerator;
 import net.minecraft.core.BlockPos;
@@ -42,7 +43,12 @@ public abstract class BasinTerrainMixin {
         for (int x = protoChunk.getPos().getMinBlockX(); x <= protoChunk.getPos().getMaxBlockX(); x++) {
             for (int z = protoChunk.getPos().getMinBlockZ(); z <= protoChunk.getPos().getMaxBlockZ(); z++) {
                 pos.set(x, minY, z);
-                BasinTerrain.apply(x, z, minY, protoChunk.getMaxY(), generator.getBiomeSource(), randomState, y -> protoChunk.getBlockState(pos.setY(y)), (y, state) -> protoChunk.setBlockState(pos.setY(y), state, 0));
+                BasinTerrain.apply(x, z, minY, protoChunk.getMaxY(), generator.getBiomeSource(), randomState,
+                        y -> protoChunk.getBlockState(pos.setY(y)), (y, state) -> {
+                            var target = pos.setY(y);
+                            protoChunk.setBlockState(target, state, 0);
+                            if (state.is(ModBlocks.BULLRUSH)) protoChunk.markPosForPostprocessing(target);
+                        });
             }
         }
     }

@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NonNull;
@@ -22,6 +23,6 @@ public class BullrushBlock extends DoublePlantBlock {
 
     @Override
     protected boolean mayPlaceOn(BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos) {
-        return state.is(ModBlocks.MUD.get()) || super.mayPlaceOn(state, level, pos);
+        return state.is(ModBlocks.MUD.get()) || state.is(Blocks.SAND) || super.mayPlaceOn(state, level, pos);
     }
 }

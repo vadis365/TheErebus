@@ -40,6 +40,7 @@ public class UndergroundJungleBiome extends ErebusBiome {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(COLOR)
                         .foliageColorOverride(0x29BC05)
+                        .grassColorOverride(COLOR)
                         .build()
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()

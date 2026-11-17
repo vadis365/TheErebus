@@ -41,7 +41,7 @@ public class Fly extends AmbientCreature {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 2D)
+                .add(Attributes.MAX_HEALTH, 4D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D);
     }
 

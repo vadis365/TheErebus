@@ -4,6 +4,7 @@ import erebus.Erebus;
 import erebus.item.PaxelItem;
 import erebus.item.shield.ErebusShieldItem;
 import erebus.item.shield.IShieldType;
+import erebus.registries.data.tags.ModBlockTags;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -75,7 +76,9 @@ public class ModItemHelpers {
     }
 
     public static DeferredItem<PaxelItem> registerPaxel(String name, ToolMaterial material, float attackDamageBaseline, float attackSpeedBaseline) {
-        return ITEMS.register(name, () -> new PaxelItem(new Item.Properties().sword(material, attackDamageBaseline, attackSpeedBaseline).setId(ResourceKey.create(Registries.ITEM, Erebus.prefix(name)))));
+        return ITEMS.register(name, () -> new PaxelItem(material.applyToolProperties(new Item.Properties(),
+                ModBlockTags.MINEABLE_WITH_PAXEL, attackDamageBaseline, attackSpeedBaseline, 0)
+                .setId(ResourceKey.create(Registries.ITEM, Erebus.prefix(name)))));
     }
 
     public static DeferredItem<HoeItem> registerHoe(String name, ToolMaterial material, float attackDamageBaseline, float attackSpeedBaseline) {

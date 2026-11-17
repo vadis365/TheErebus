@@ -1,8 +1,8 @@
 package erebus.world.feature.plant.config;
 
 import erebus.block.RottenLogBlock;
-import erebus.datagen.loot.ModChestLootTables;
 import erebus.registries.blocks.ModBlocks;
+import erebus.registries.data.ModLootTables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -149,7 +149,7 @@ public class RottenTreeStumpFeatureConfiguration extends Feature<NoneFeatureConf
         setBlock(level, pos, chest);
 
         ChestBlockEntity chest1 = (ChestBlockEntity) level.getBlockEntity(pos);
-        if (chest1 != null) chest1.setLootTable(ModChestLootTables.ROTTEN_LOG);
+        if (chest1 != null) chest1.setLootTable(ModLootTables.ROTTEN_LOG);
 
         if (height < maxHeight - 3) return;
 
@@ -165,7 +165,7 @@ public class RottenTreeStumpFeatureConfiguration extends Feature<NoneFeatureConf
         ChestBlockEntity chest2 = (ChestBlockEntity) level.getBlockEntity(chest2Pos);
         ChestBlockEntity chest3 = (ChestBlockEntity) level.getBlockEntity(chest3Pos);
 
-        if (chest2 != null) chest2.setLootTable(ModChestLootTables.ROTTEN_LOG);
-        if (chest3 != null) chest3.setLootTable(ModChestLootTables.ROTTEN_LOG);
+        if (chest2 != null) chest2.setLootTable(ModLootTables.ROTTEN_LOG);
+        if (chest3 != null) chest3.setLootTable(ModLootTables.ROTTEN_LOG);
     }
 }

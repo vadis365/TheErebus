@@ -40,6 +40,7 @@ public class SubterraneanSavannahBiome extends ErebusBiome {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(COLOR)
                         .foliageColorOverride(0xA3A52D)
+                        .grassColorOverride(COLOR)
                         .build()
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()

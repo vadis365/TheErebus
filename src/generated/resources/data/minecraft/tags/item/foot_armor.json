@@ -1,5 +1,11 @@
 {
   "values": [
-    "erebus:jade_boots"
+    "erebus:jade_boots",
+    "erebus:bamboo_boots",
+    "erebus:exoskeleton_boots",
+    "erebus:rein_exoskeleton_boots",
+    "erebus:rhino_exoskeleton_boots",
+    "erebus:jump_boots",
+    "erebus:water_striders"
   ]
 }

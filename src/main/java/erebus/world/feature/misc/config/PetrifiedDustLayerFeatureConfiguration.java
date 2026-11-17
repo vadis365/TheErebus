@@ -37,6 +37,7 @@ public class PetrifiedDustLayerFeatureConfiguration extends Feature<NoneFeatureC
                 if (level.isOutsideBuildHeight(soil) || level.isOutsideBuildHeight(soil.above())) continue;
                 if (isHost(level.getBlockState(soil)) && level.isEmptyBlock(soil.above())) {
                     var state = ModBlocks.DUST_LAYER.get().defaultBlockState().setValue(SnowLayerBlock.LAYERS, random.nextInt(3) + 1);
+                    if (!state.canSurvive(level, soil.above())) continue;
                     placed |= level.setBlock(soil.above(), state, 2);
                     break;
                 }

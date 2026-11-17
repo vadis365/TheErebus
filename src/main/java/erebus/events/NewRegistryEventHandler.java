@@ -1,7 +1,7 @@
 package erebus.events;
 
 import erebus.Erebus;
-import erebus.datagen.ModRegistries;
+import erebus.registries.ModRegistries;
 import erebus.world.biome.util.ErebusBiomeProvider;
 import erebus.world.layer.biome.BiomeDensitySource;
 import erebus.world.layer.biome.BiomeLayerStack;

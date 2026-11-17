@@ -40,6 +40,7 @@ public class SubmergedSwampBiome extends ErebusBiome {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(COLOR)
                         .foliageColorOverride(COLOR)
+                        .grassColorOverride(COLOR)
                         .build()
                 )
                 .mobSpawnSettings(new MobSpawnSettings.Builder()

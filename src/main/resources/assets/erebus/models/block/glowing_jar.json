@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:block/block",
     "textures": {
-        "particle": "erebus:block/amber"
+        "particle": "erebus:block/amber_glass_island"
     }
 }

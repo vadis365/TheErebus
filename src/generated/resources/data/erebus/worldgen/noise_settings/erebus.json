@@ -399,24 +399,6 @@
                   {
                     "type": "minecraft:condition",
                     "if_true": {
-                      "type": "minecraft:noise_threshold",
-                      "max_threshold": 0.58,
-                      "min_threshold": 0.45,
-                      "noise": "minecraft:powder_snow"
-                    },
-                    "then_run": {
-                      "type": "minecraft:block",
-                      "result_state": {
-                        "Name": "erebus:dust_layer",
-                        "Properties": {
-                          "layers": "1"
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "type": "minecraft:condition",
-                    "if_true": {
                       "type": "minecraft:stone_depth",
                       "add_surface_depth": false,
                       "offset": 0,

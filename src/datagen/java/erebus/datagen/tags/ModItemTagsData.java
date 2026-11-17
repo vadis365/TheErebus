@@ -88,18 +88,28 @@ public class ModItemTagsData extends ItemTagsProvider {
         tag(ItemTags.CAULDRON_CAN_REMOVE_DYE).add(ModItems.GLIDER_CHESTPLATE.get(), ModItems.GLIDER_CHESTPLATE_POWERED.get());
         tag(ModItemTags.GLIDER_FUEL).add(ModBlocks.RED_GEM_BLOCK.get().asItem(), ModBlocks.RED_GEM_LAMP.get().asItem());
 
-        tag(ItemTags.SWORDS).add(ModItems.JADE_SWORD.get(), ModItems.ROLLED_NEWSPAPER.get(), ModItems.WASP_SWORD.get(), ModItems.WASP_DAGGER.get());
+        tag(ItemTags.SWORDS).add(ModItems.JADE_SWORD.get(), ModItems.ROLLED_NEWSPAPER.get(), ModItems.WASP_SWORD.get(),
+                ModItems.WASP_DAGGER.get(), ModItems.ENHANCED_SCORPION_PINCER.get());
         tag(Tags.Items.TOOLS_SHIELD).add(ModItems.BAMBOO_SHIELD.get(), ModItems.EXOSKELETON_SHIELD.get(), ModItems.JADE_SHIELD.get(),
                 ModItems.REIN_EXOSKELETON_SHIELD.get(), ModItems.RHINO_EXOSKELETON_SHIELD.get());
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(ModItems.BAMBOO_SHIELD.get(), ModItems.EXOSKELETON_SHIELD.get(), ModItems.JADE_SHIELD.get(),
                 ModItems.REIN_EXOSKELETON_SHIELD.get(), ModItems.RHINO_EXOSKELETON_SHIELD.get());
-        tag(ItemTags.PICKAXES).add(ModItems.JADE_PICKAXE.get());
-        tag(ItemTags.AXES).add(ModItems.JADE_AXE.get());
-        tag(ItemTags.SHOVELS).add(ModItems.JADE_SHOVEL.get());
-        tag(ItemTags.HEAD_ARMOR).add(ModItems.JADE_HELMET.get());
-        tag(ItemTags.CHEST_ARMOR).add(ModItems.JADE_CHESTPLATE.get());
-        tag(ItemTags.LEG_ARMOR).add(ModItems.JADE_LEGGINGS.get());
-        tag(ItemTags.FOOT_ARMOR).add(ModItems.JADE_BOOTS.get());
+        tag(ItemTags.PICKAXES).add(ModItems.JADE_PICKAXE.get(), ModItems.JADE_PAXEL.get());
+        tag(ItemTags.AXES).add(ModItems.JADE_AXE.get(), ModItems.JADE_PAXEL.get());
+        tag(ItemTags.SHOVELS).add(ModItems.JADE_SHOVEL.get(), ModItems.JADE_PAXEL.get());
+        tag(ItemTags.HOES).add(ModItems.JADE_HOE.get());
+        tag(ItemTags.HEAD_ARMOR).add(ModItems.JADE_HELMET.get(), ModItems.BAMBOO_HELMET.get(),
+                ModItems.EXOSKELETON_HELMET.get(), ModItems.REIN_EXOSKELETON_HELMET.get(), ModItems.RHINO_EXOSKELETON_HELMET.get(),
+                ModItems.COMPOUND_GOGGLES.get(), ModItems.REIN_COMPOUND_GOGGLES.get(), ModItems.MUSHROOM_HELMET.get());
+        tag(ItemTags.CHEST_ARMOR).add(ModItems.JADE_CHESTPLATE.get(), ModItems.BAMBOO_CHESTPLATE.get(),
+                ModItems.EXOSKELETON_CHESTPLATE.get(), ModItems.REIN_EXOSKELETON_CHESTPLATE.get(), ModItems.RHINO_EXOSKELETON_CHESTPLATE.get(),
+                ModItems.GLIDER_CHESTPLATE.get(), ModItems.GLIDER_CHESTPLATE_POWERED.get(), ModItems.SPIDER_T_SHIRT.get());
+        tag(ItemTags.LEG_ARMOR).add(ModItems.JADE_LEGGINGS.get(), ModItems.BAMBOO_LEGGINGS.get(),
+                ModItems.EXOSKELETON_LEGGINGS.get(), ModItems.REIN_EXOSKELETON_LEGGINGS.get(), ModItems.RHINO_EXOSKELETON_LEGGINGS.get(),
+                ModItems.SPRINT_LEGGINGS.get());
+        tag(ItemTags.FOOT_ARMOR).add(ModItems.JADE_BOOTS.get(), ModItems.BAMBOO_BOOTS.get(),
+                ModItems.EXOSKELETON_BOOTS.get(), ModItems.REIN_EXOSKELETON_BOOTS.get(), ModItems.RHINO_EXOSKELETON_BOOTS.get(),
+                ModItems.JUMP_BOOTS.get(), ModItems.WATER_STRIDERS.get());
 
         tag(Tags.Items.FOODS).add(
                 ModItems.TURNIP.get(), ModItems.CABBAGE_SEEDS.get(), ModItems.MANDRAKE_ROOT.get(), ModItems.PRICKLY_PEAR_RAW.get(),
@@ -185,7 +195,7 @@ public class ModItemTagsData extends ItemTagsProvider {
                         ModBlocks.STEM.get(), ModBlocks.STIGMA_BLACK.get(), ModBlocks.STIGMA_RED.get(), ModBlocks.STIGMA_BROWN.get(),
                         ModBlocks.STIGMA_BLUE.get(), ModBlocks.STIGMA_PURPLE.get(), ModBlocks.STIGMA_CYAN.get(), ModBlocks.STIGMA_LIGHT_GRAY.get(),
                         ModBlocks.STIGMA_GRAY.get(), ModBlocks.STIGMA_PINK.get(), ModBlocks.STIGMA_YELLOW.get(), ModBlocks.STIGMA_LIGHT_BLUE.get(),
-                        ModBlocks.STIGMA_MAGENTA.get(), ModBlocks.STIGMA_ORANGE.get(), ModBlocks.STIGMA_WHITE.get(), ModBlocks.FLOWER_BLACK.get(),
+                        ModBlocks.STIGMA_MAGENTA.get(), ModBlocks.STIGMA_ORANGE.get(), ModBlocks.STIGMA_WHITE.get(), ModBlocks.STIGMA_RAINBOW.get(), ModBlocks.FLOWER_BLACK.get(),
                         ModBlocks.FLOWER_RED.get(), ModBlocks.FLOWER_BROWN.get(), ModBlocks.FLOWER_BLUE.get(), ModBlocks.FLOWER_PURPLE.get(),
                         ModBlocks.FLOWER_CYAN.get(), ModBlocks.FLOWER_LIGHT_GRAY.get(), ModBlocks.FLOWER_GRAY.get(), ModBlocks.FLOWER_PINK.get(),
                         ModBlocks.FLOWER_YELLOW.get(), ModBlocks.FLOWER_LIGHT_BLUE.get(), ModBlocks.FLOWER_MAGENTA.get(), ModBlocks.FLOWER_ORANGE.get(),
