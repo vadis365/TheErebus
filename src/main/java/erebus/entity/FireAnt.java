@@ -3,9 +3,6 @@ package erebus.entity;
 import erebus.entity.ai.FireAntFireballGoal;
 import erebus.registries.ModSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -25,9 +22,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NonNull;
 
-public class FireAnt extends Monster {
-    private static final EntityDataAccessor<Boolean> CLIMBING = SynchedEntityData.defineId(FireAnt.class, EntityDataSerializers.BOOLEAN);
-
+public class FireAnt extends ClimbingMonster {
     public FireAnt(EntityType<? extends Monster> type, Level level) {
         super(type, level);
     }
@@ -43,12 +38,6 @@ public class FireAnt extends Monster {
 
     protected boolean soldier() {
         return false;
-    }
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(CLIMBING, false);
     }
 
     @Override
@@ -70,18 +59,8 @@ public class FireAnt extends Monster {
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        if (!level().isClientSide()) entityData.set(CLIMBING, horizontalCollision);
-    }
-
-    @Override
     public boolean onClimbable() {
         return horizontalCollision;
-    }
-
-    public boolean isClimbing() {
-        return !onGround() && entityData.get(CLIMBING);
     }
 
     @Override

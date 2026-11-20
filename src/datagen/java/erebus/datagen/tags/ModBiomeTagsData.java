@@ -18,7 +18,8 @@ public class ModBiomeTagsData extends BiomeTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         tag(ModBiomeTags.IS_FUNGAL_FOREST)
-                .add(ModBiomes.FUNGAL_FOREST_KEY);
+                .add(ModBiomes.FUNGAL_FOREST_KEY)
+                .add(ModBiomes.GLOWROT_GROVES_KEY);
 
         tag(ModBiomeTags.HAS_ANTLION_DUNGEON)
                 .add(ModBiomes.VOLCANIC_DESERT_KEY);
@@ -54,6 +55,11 @@ public class ModBiomeTagsData extends BiomeTagsProvider {
                 .add(ModBiomes.SUBTERRANEAN_SAVANNAH_KEY)
                 .add(ModBiomes.ULTERIOR_OUTBACK_KEY)
                 .add(ModBiomes.UNDERGROUND_JUNGLE_KEY)
-                .add(ModBiomes.VOLCANIC_DESERT_KEY);
+                .add(ModBiomes.VOLCANIC_DESERT_KEY)
+                .add(ModBiomes.ROOTWATER_MARSH_KEY)
+                .add(ModBiomes.CINDER_SCRUB_KEY)
+                .add(ModBiomes.GLOWROT_GROVES_KEY)
+                .add(ModBiomes.AMBER_THICKETS_KEY)
+                .add(ModBiomes.FOSSIL_BARRENS_KEY);
     }
 }

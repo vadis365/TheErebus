@@ -1,0 +1,66 @@
+{
+  "attributes": {
+    "minecraft:visual/fog_color": "#878059"
+  },
+  "carvers": [
+    "erebus:cave",
+    "erebus:canyon"
+  ],
+  "downfall": 0.65,
+  "effects": {
+    "foliage_color": "#83af4c",
+    "grass_color": "#83af4c",
+    "water_color": "#747846"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "erebus:amber_banks"
+    ],
+    [],
+    [
+      "erebus:iron_ore",
+      "erebus:copper_ore",
+      "erebus:quartz_ore",
+      "erebus:gneiss_ore",
+      "erebus:temple_ore"
+    ],
+    [],
+    [],
+    [
+      "erebus:savannah_acacia_population",
+      "erebus:jungle_bamboo_population",
+      "erebus:fern",
+      "erebus:dark_fruit_vine_population"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
+      {
+        "type": "erebus:grasshopper",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 14
+      },
+      {
+        "type": "erebus:beetle",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 12
+      }
+    ],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.95
+}

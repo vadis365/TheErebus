@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cross",
   "textures": {
-    "all": "erebus:block/dark_fruit_vine_1"
+    "cross": "erebus:block/dark_fruit_vine_1"
   }
 }

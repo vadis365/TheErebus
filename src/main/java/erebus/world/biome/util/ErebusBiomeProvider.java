@@ -3,7 +3,11 @@ package erebus.world.biome.util;
 import com.mojang.serialization.MapCodec;
 import erebus.registries.ModRegistries;
 import erebus.world.layer.biome.BiomeDensitySource;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.QuartPos;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
@@ -43,6 +47,11 @@ public class ErebusBiomeProvider extends BiomeSource {
     @Override
     public @NotNull Holder<Biome> getNoiseBiome(int x, int y, int z, Climate.@NotNull Sampler sampler) {
         return biomeConfig.value().getNoiseBiome(x, y, z);
+    }
+
+    public static boolean isColumn(ChunkGenerator generator, BlockPos pos, ResourceKey<Biome> biome) {
+        return generator.getBiomeSource() instanceof ErebusBiomeProvider provider
+                && provider.getMainBiome(QuartPos.fromBlock(pos.getX()), QuartPos.fromBlock(pos.getZ())).is(biome);
     }
 
     public Holder<Biome> getMainBiome(int x, int z) {

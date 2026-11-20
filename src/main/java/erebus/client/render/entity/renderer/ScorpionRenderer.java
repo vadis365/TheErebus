@@ -6,10 +6,9 @@ import erebus.client.render.entity.renderer.state.ScorpionRenderState;
 import erebus.entity.Scorpion;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 
-public class ScorpionRenderer extends MobRenderer<Scorpion, ScorpionRenderState, ScorpionModel> {
+public class ScorpionRenderer extends ClimbingMobRenderer<Scorpion, ScorpionRenderState, ScorpionModel> {
     private static final Identifier TEXTURE = Erebus.prefix("textures/entity/scorpion.png");
 
     public ScorpionRenderer(EntityRendererProvider.Context context) {

@@ -20,7 +20,7 @@ public class OutbackGrassFeatureConfiguration extends Feature<NoneFeatureConfigu
         if (!level.getBiome(context.origin()).is(ModBiomes.ULTERIOR_OUTBACK_KEY)) return false;
         var random = context.random();
         boolean placed = false;
-        for (int attempt = 0; attempt < 50; attempt++) {
+        for (int attempt = 0; attempt < 60; attempt++) {
             int x = context.origin().getX() + 8 + random.nextInt(16), z = context.origin().getZ() + 8 + random.nextInt(16);
             for (int y = 20; y < 100; y += random.nextBoolean() ? 2 : 1) {
                 var soil = new BlockPos(x, level.getMinY() + y, z);

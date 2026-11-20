@@ -6,11 +6,10 @@ import erebus.client.render.entity.renderer.state.ScytodesRenderState;
 import erebus.entity.Scytodes;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
-public class ScytodesRenderer extends MobRenderer<Scytodes, ScytodesRenderState, ScytodesModel> {
+public class ScytodesRenderer extends ClimbingMobRenderer<Scytodes, ScytodesRenderState, ScytodesModel> {
 
     private static final Identifier[] TEXTURES = new Identifier[]{
             Erebus.prefix("textures/entity/scytodes_1.png"),

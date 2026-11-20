@@ -19,7 +19,7 @@ public class WildMandrakePopulationFeatureConfiguration extends Feature<NoneFeat
         if (!level.getBiome(context.origin()).is(ModBiomes.PETRIFIED_FOREST_KEY)) return false;
         var random = context.random();
         boolean placed = false;
-        for (int attempt = 0; attempt < 5; attempt++) {
+        for (int attempt = 0; attempt < 6; attempt++) {
             int x = context.origin().getX() + 8 + random.nextInt(16);
             int z = context.origin().getZ() + 8 + random.nextInt(16);
             for (int y = 20; y < 100; y += random.nextBoolean() ? 2 : 1) {

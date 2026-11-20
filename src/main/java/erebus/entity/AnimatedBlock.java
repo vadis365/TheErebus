@@ -2,6 +2,7 @@ package erebus.entity;
 
 import erebus.entity.ai.AnimatedBlockFollowOwnerGoal;
 import erebus.inventory.server.PetrifiedCraftingMenu;
+import erebus.entity.helper.SurfaceClimbing;
 import erebus.registries.ModSounds;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.entity.ModEntities;
@@ -61,6 +62,11 @@ public class AnimatedBlock extends PathfinderMob {
                 .add(Attributes.FOLLOW_RANGE, 16D)
                 .add(Attributes.MOVEMENT_SPEED, 0.5D)
                 .add(Attributes.ATTACK_DAMAGE, 2D);
+    }
+
+    @Override
+    public void calculateEntityAnimation(boolean useY) {
+        super.calculateEntityAnimation(useY || SurfaceClimbing.isOnWall(this));
     }
 
     @Override

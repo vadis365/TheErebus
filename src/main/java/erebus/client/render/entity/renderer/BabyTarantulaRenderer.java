@@ -7,10 +7,9 @@ import erebus.client.render.entity.renderer.state.TarantulaBabyRenderState;
 import erebus.entity.BabyTarantula;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 
-public class BabyTarantulaRenderer extends MobRenderer<BabyTarantula, TarantulaBabyRenderState, TarantulaBabyModel> {
+public class BabyTarantulaRenderer extends ClimbingMobRenderer<BabyTarantula, TarantulaBabyRenderState, TarantulaBabyModel> {
     private static final Identifier TEXTURE = Erebus.prefix("textures/entity/tarantula.png");
     private static final Identifier TURQUOISE = Erebus.prefix("textures/entity/tarantula_turquoise.png");
     private static final Identifier YELLOW = Erebus.prefix("textures/entity/tarantula_yellow.png");

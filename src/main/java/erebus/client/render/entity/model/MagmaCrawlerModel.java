@@ -10,10 +10,21 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
+import java.util.List;
+
 public class MagmaCrawlerModel extends EntityModel<MagmaCrawlerRenderState> {
+    private final List<ModelPart> firstTripod;
+    private final List<ModelPart> secondTripod;
 
     public MagmaCrawlerModel(ModelPart root) {
         super(root);
+        ModelPart legs = root.getChild("legs");
+        firstTripod = getLegSegments(legs.getChild("first_tripod"));
+        secondTripod = getLegSegments(legs.getChild("second_tripod"));
+    }
+
+    private static List<ModelPart> getLegSegments(ModelPart tripod) {
+        return tripod.getAllParts().stream().filter(part -> !part.isEmpty()).toList();
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -28,49 +39,49 @@ public class MagmaCrawlerModel extends EntityModel<MagmaCrawlerRenderState> {
         root.addOrReplaceChild("ThxButt", CubeListBuilder.create().texOffs(14, 30).addBox(-2.5F, -2.5F, 0.0F, 5, 5, 1), PartPose.offset(0.0F, 17.0F, 5.0F));
         root.addOrReplaceChild("ThxFront", CubeListBuilder.create().texOffs(14, 30).addBox(-2.5F, -2.5F, 0.0F, 5, 5, 1), PartPose.offset(0.0F, 17.0F, -5.0F));
 
-        PartDefinition LBLA = root.addOrReplaceChild("LBLA", CubeListBuilder.create().texOffs(0, 95).addBox(0.0F, -1.0F, -1.0F, 4, 2, 2), PartPose.offsetAndRotation(4.0F, 17.0F, 8.0F, 0.25F, -0.7F, -0.5F));
-        LBLA.addOrReplaceChild("LBLB", CubeListBuilder.create().texOffs(0, 88).addBox(3.0F, 0.0F, -1.0F, 2, 4, 2), PartPose.ZERO);
-        LBLA.addOrReplaceChild("LBLC", CubeListBuilder.create().texOffs(0, 82).addBox(1.5F, 4.5F, -0.5F, 2, 4, 1), PartPose.rotation(0.25F, 0.1F, -0.45F));
-        LBLA.addOrReplaceChild("LBLD", CubeListBuilder.create().texOffs(0, 76).addBox(0.5F, 8.0F, -0.5F, 1, 4, 1), PartPose.rotation(0.39F, 0.0F, -0.77F));
+        // The original renderer shifted the legs forward by 0.2 blocks.
+        PartDefinition legs = root.addOrReplaceChild("legs", CubeListBuilder.create(), PartPose.offset(0F, 0F, -3.2F));
+        PartDefinition first = legs.addOrReplaceChild("first_tripod", CubeListBuilder.create(), PartPose.ZERO);
+        addLeg(first, "LBL", 4F, 8F, 1F);
+        addLeg(first, "LFL", 4F, 2F, -1F);
+        addLeg(first, "RML", -4F, 5F, 0F);
 
-        PartDefinition LMLA = root.addOrReplaceChild("LMLA", CubeListBuilder.create().texOffs(0, 95).addBox(0.0F, -1.0F, -1.0F, 4, 2, 2), PartPose.offsetAndRotation(4.0F, 17.0F, 5.0F, 0.0F, 0.0F, -0.3490659F));
-        LMLA.addOrReplaceChild("LMLB", CubeListBuilder.create().texOffs(0, 88).addBox(3.0F, 0.0F, -1.0F, 2, 4, 2), PartPose.ZERO);
-        LMLA.addOrReplaceChild("LMLC", CubeListBuilder.create().texOffs(0, 82).addBox(1.5F, 4.5F, -0.5F, 2, 4, 1), PartPose.rotation(0.0F, 0.0F, -0.3490658F));
-        LMLA.addOrReplaceChild("LMLD", CubeListBuilder.create().texOffs(0, 76).addBox(0.5F, 8.0F, -0.5F, 1, 4, 1), PartPose.rotation(0.0F, 0.0F, -0.5235987F));
-
-        PartDefinition LFLA = root.addOrReplaceChild("LFLA", CubeListBuilder.create().texOffs(0, 95).addBox(0.0F, -1.0F, -1.0F, 4, 2, 2), PartPose.offsetAndRotation(4.0F, 17.0F, 2.0F, -0.25F, 0.7F, -0.5F));
-        LFLA.addOrReplaceChild("LFLB", CubeListBuilder.create().texOffs(0, 88).addBox(3.0F, 0.0F, -1.0F, 2, 4, 2), PartPose.ZERO);
-        LFLA.addOrReplaceChild("LFLC", CubeListBuilder.create().texOffs(0, 82).addBox(1.5F, 4.5F, -0.5F, 2, 4, 1), PartPose.rotation(-0.25F, -0.1F, -0.45F));
-        LFLA.addOrReplaceChild("LFLD", CubeListBuilder.create().texOffs(0, 76).addBox(0.5F, 8.0F, -0.5F, 1, 4, 1), PartPose.rotation(-0.39F, 0.0F, -0.77F));
-
-        PartDefinition RFLA = root.addOrReplaceChild("RFLA", CubeListBuilder.create().texOffs(0, 95).addBox(-4.0F, -1.0F, -1.0F, 4, 2, 2), PartPose.offsetAndRotation(-4.0F, 17.0F, 2.0F, -0.25F, -0.7F, 0.5F));
-        RFLA.addOrReplaceChild("RFLB", CubeListBuilder.create().texOffs(0, 88).addBox(-5.0F, 0.0F, -1.0F, 2, 4, 2), PartPose.ZERO);
-        RFLA.addOrReplaceChild("RFLC", CubeListBuilder.create().texOffs(0, 82).addBox(-3.5F, 4.5F, -0.5F, 2, 4, 1), PartPose.rotation(-0.25F, 0.1F, 0.45F));
-        RFLA.addOrReplaceChild("RFLD", CubeListBuilder.create().texOffs(0, 76).addBox(-1.5F, 8.0F, -0.5F, 1, 4, 1), PartPose.rotation(-0.39F, 0.0F, 0.77F));
-
-        PartDefinition RMLA = root.addOrReplaceChild("RMLA", CubeListBuilder.create().texOffs(0, 95).addBox(-4.0F, -1.0F, -1.0F, 4, 2, 2), PartPose.offsetAndRotation(-4.0F, 17.0F, 5.0F, 0.0F, 0.0F, 0.3490659F));
-        RMLA.addOrReplaceChild("RMLB", CubeListBuilder.create().texOffs(0, 88).addBox(-5.0F, 0.0F, -1.0F, 2, 4, 2), PartPose.ZERO);
-        RMLA.addOrReplaceChild("RMLC", CubeListBuilder.create().texOffs(0, 82).addBox(-3.5F, 4.5F, -0.5F, 2, 4, 1), PartPose.rotation(0.0F, 0.0F, 0.3490658F));
-        RMLA.addOrReplaceChild("RMLD", CubeListBuilder.create().texOffs(0, 76).addBox(-1.5F, 8.0F, -0.5F, 1, 4, 1), PartPose.rotation(0.0F, 0.0F, 0.5235987F));
-
-        PartDefinition RBLA = root.addOrReplaceChild("RBLA", CubeListBuilder.create().texOffs(0, 95).addBox(-4.0F, -1.0F, -1.0F, 4, 2, 2), PartPose.offsetAndRotation(-4.0F, 17.0F, 8.0F, 0.25F, 0.7F, 0.5F));
-        RBLA.addOrReplaceChild("RBLB", CubeListBuilder.create().texOffs(0, 88).addBox(-5.0F, 0.0F, -1.0F, 2, 4, 2), PartPose.ZERO);
-        RBLA.addOrReplaceChild("RBLC", CubeListBuilder.create().texOffs(0, 82).addBox(-3.5F, 4.5F, -0.5F, 2, 4, 1), PartPose.rotation(0.25F, -0.1F, 0.45F));
-        RBLA.addOrReplaceChild("RBLD", CubeListBuilder.create().texOffs(0, 76).addBox(-1.5F, 8.0F, -0.5F, 1, 4, 1), PartPose.rotation(0.39F, 0.0F, 0.77F));
+        PartDefinition second = legs.addOrReplaceChild("second_tripod", CubeListBuilder.create(), PartPose.ZERO);
+        addLeg(second, "RBL", -4F, 8F, 1F);
+        addLeg(second, "RFL", -4F, 2F, -1F);
+        addLeg(second, "LML", 4F, 5F, 0F);
 
         return LayerDefinition.create(mesh, 64, 128);
+    }
+
+    private static void addLeg(PartDefinition tripod, String name, float x, float z, float bend) {
+        boolean left = x > 0F;
+        boolean middle = bend == 0F;
+        float side = Math.signum(x);
+        float yawDirection = -side * bend;
+
+        // The segments share a pivot and each has its own rest rotation.
+        PartPose upperPose = PartPose.offsetAndRotation(x, 17F, z, 0.25F * bend, 0.7F * yawDirection,
+                (middle ? -0.3490659F : -0.5F) * side);
+        tripod.addOrReplaceChild(name + "A", CubeListBuilder.create().texOffs(0, 95).addBox(left ? 0F : -4F, -1F, -1F, 4, 2, 2), upperPose);
+        tripod.addOrReplaceChild(name + "B", CubeListBuilder.create().texOffs(0, 88).addBox(left ? 3F : -5F, 0F, -1F, 2, 4, 2), upperPose);
+        tripod.addOrReplaceChild(name + "C", CubeListBuilder.create().texOffs(0, 82).addBox(left ? 1.5F : -3.5F, 4.5F, -0.5F, 2, 4, 1),
+                PartPose.offsetAndRotation(x, 17F, z, 0.5F * bend, 0.6F * yawDirection, (middle ? -0.6981317F : -0.95F) * side));
+        tripod.addOrReplaceChild(name + "D", CubeListBuilder.create().texOffs(0, 76).addBox(left ? 0.5F : -1.5F, 8F, -0.5F, 1, 4, 1),
+                PartPose.offsetAndRotation(x, 17F, z, 0.64F * bend, 0.7F * yawDirection, (middle ? -0.8726646F : -1.27F) * side));
     }
 
     @Override
     public void setupAnim(MagmaCrawlerRenderState state) {
         super.setupAnim(state);
-        float first = Mth.cos(state.walkAnimationPos * 1.5F + (float) Math.PI) * 0.7F * state.walkAnimationSpeed;
-        float second = Mth.cos(state.walkAnimationPos * 1.5F) * 0.7F * state.walkAnimationSpeed;
-        root.getChild("LBLA").xRot += first;
-        root.getChild("LMLA").xRot += second;
-        root.getChild("LFLA").xRot += first;
-        root.getChild("RBLA").xRot += second;
-        root.getChild("RMLA").xRot += first;
-        root.getChild("RFLA").xRot += second;
+        float stride = state.walkAnimationPos * 1.5F;
+        float first = Mth.cos(stride + (float) Math.PI) * 0.7F * state.walkAnimationSpeed;
+        float second = Mth.cos(stride) * 0.7F * state.walkAnimationSpeed;
+        for (ModelPart segment : firstTripod) {
+            segment.xRot += first;
+        }
+        for (ModelPart segment : secondTripod) {
+            segment.xRot += second;
+        }
     }
 }

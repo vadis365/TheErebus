@@ -1,0 +1,66 @@
+{
+  "attributes": {
+    "minecraft:visual/fog_color": "#84968e"
+  },
+  "carvers": [
+    "erebus:cave",
+    "erebus:canyon"
+  ],
+  "downfall": 0.85,
+  "effects": {
+    "foliage_color": "#679946",
+    "grass_color": "#679946",
+    "water_color": "#55706b"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "erebus:glowrot_logs",
+      "erebus:rotten_tree_stump"
+    ],
+    [],
+    [
+      "erebus:iron_ore",
+      "erebus:copper_ore",
+      "erebus:quartz_ore",
+      "erebus:gneiss_ore",
+      "erebus:temple_ore"
+    ],
+    [],
+    [],
+    [
+      "erebus:glowrot_canopy",
+      "erebus:giant_mushroom_population",
+      "erebus:fern"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
+      {
+        "type": "erebus:glow_worm",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 12
+      },
+      {
+        "type": "erebus:fungal_weevil",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 14
+      }
+    ],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.65
+}

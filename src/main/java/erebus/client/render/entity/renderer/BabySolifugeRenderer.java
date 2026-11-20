@@ -8,10 +8,9 @@ import erebus.client.render.entity.renderer.state.SolifugeRenderState;
 import erebus.entity.BabySolifuge;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 
-public class BabySolifugeRenderer extends MobRenderer<BabySolifuge, SolifugeRenderState, SolifugeModel> {
+public class BabySolifugeRenderer extends ClimbingMobRenderer<BabySolifuge, SolifugeRenderState, SolifugeModel> {
     private static final Identifier TEXTURE = Erebus.prefix("textures/entity/solifuge.png");
 
     public BabySolifugeRenderer(EntityRendererProvider.Context context) {

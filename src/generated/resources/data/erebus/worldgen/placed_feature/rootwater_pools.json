@@ -1,0 +1,12 @@
+{
+  "feature": "erebus:rootwater_pools",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 3
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

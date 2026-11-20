@@ -1,0 +1,20 @@
+{
+  "feature": "erebus:glowrot_canopy",
+  "placement": [
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": 36
+        },
+        "min_inclusive": {
+          "absolute": 36
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

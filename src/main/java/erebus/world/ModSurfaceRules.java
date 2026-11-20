@@ -5,6 +5,7 @@ import erebus.registries.blocks.ModBlocks;
 import erebus.registries.world.ModBiomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 
@@ -17,7 +18,7 @@ public class ModSurfaceRules {
     // Erebus
     private static final RuleSource MUD = makeStateRule(ModBlocks.MUD);
     private static final RuleSource UMBERSTONE = makeStateRule(ModBlocks.UMBERSTONE);
-    private static final RuleSource DUST = makeStateRule(ModBlocks.DUST);
+    private static final RuleSource GNEISS = makeStateRule(ModBlocks.GNEISS);
     private static final RuleSource VOLCANIC_ROCK = makeStateRule(ModBlocks.VOLCANIC_ROCK);
 
     // Vanilla
@@ -27,6 +28,7 @@ public class ModSurfaceRules {
     private static final RuleSource RED_SANDSTONE = makeStateRule(Blocks.RED_SANDSTONE);
     private static final RuleSource BEDROCK = makeStateRule(Blocks.BEDROCK);
     private static final RuleSource GRASS = makeStateRule(Blocks.GRASS_BLOCK);
+    private static final RuleSource COARSE_DIRT = makeStateRule(Blocks.COARSE_DIRT);
     private static final RuleSource DIRT = makeStateRule(Blocks.DIRT);
     private static final RuleSource GRAVEL = makeStateRule(Blocks.GRAVEL);
     private static final RuleSource WATER = makeStateRule(Blocks.WATER);
@@ -50,7 +52,8 @@ public class ModSurfaceRules {
                         decorateSubterraneanSavannah(),
                         decorateUlteriorOutback(),
                         decorateUndergroundJungle(),
-                        decorateVolcanicDesert()
+                        decorateVolcanicDesert(),
+                        decorateTransitions()
                 )
         );
 
@@ -188,6 +191,22 @@ public class ModSurfaceRules {
                         placeBlock(SAND, false),
                         placeBlock(SANDSTONE, true)
                 )
+        );
+    }
+
+    private static RuleSource decorateTransitions() {
+        return sequence(
+                ifTrue(isBiome(ModBiomes.ROOTWATER_MARSH_KEY), sequence(
+                        placeBlock(ifTrue(not(waterBlockCheck(0, 0)), MUD), false),
+                        placeBlock(GRASS, false), placeBlock(DIRT, true))),
+                ifTrue(isBiome(ModBiomes.CINDER_SCRUB_KEY), sequence(
+                        placeBlock(ifTrue(noiseCondition(Noises.SURFACE, 0.1, Double.MAX_VALUE), GNEISS), false),
+                        placeBlock(ifTrue(noiseCondition(Noises.SURFACE, -0.12, 0.0), COARSE_DIRT), false),
+                        placeBlock(RED_SAND, false), placeBlock(RED_SANDSTONE, true))),
+                ifTrue(isBiome(ModBiomes.GLOWROT_GROVES_KEY, ModBiomes.AMBER_THICKETS_KEY),
+                        sequence(placeBlock(GRASS, false), placeBlock(DIRT, true))),
+                ifTrue(isBiome(ModBiomes.FOSSIL_BARRENS_KEY),
+                        sequence(placeBlock(VOLCANIC_ROCK, false), placeBlock(UMBERSTONE, true)))
         );
     }
 

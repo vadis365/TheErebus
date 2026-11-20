@@ -7,11 +7,10 @@ import erebus.client.render.entity.renderer.state.CicadaRenderState;
 import erebus.entity.Cicada;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
-public class CicadaRenderer extends MobRenderer<Cicada, CicadaRenderState, CicadaModel> {
+public class CicadaRenderer extends ClimbingMobRenderer<Cicada, CicadaRenderState, CicadaModel> {
     private static final Identifier TEXTURE = Erebus.prefix("textures/entity/cicada.png");
 
     public CicadaRenderer(EntityRendererProvider.Context context) {

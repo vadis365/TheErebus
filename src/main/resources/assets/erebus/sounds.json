@@ -1,357 +1,417 @@
 {
     "fire_ant_sound": {
+        "subtitle": "subtitles.erebus.fire_ant_sound",
         "sounds": [
             "erebus:fire_ant_sound"
         ]
     },
     "fire_ant_hurt": {
+        "subtitle": "subtitles.erebus.fire_ant_hurt",
         "sounds": [
             "erebus:fire_ant_hurt"
         ]
     },
     "altar_change_state": {
+        "subtitle": "subtitles.erebus.altar_change_state",
         "category": "block",
         "sounds": [
             "erebus:altar_change_state"
         ]
     },
     "altar_offering": {
+        "subtitle": "subtitles.erebus.altar_offering",
         "category": "block",
         "sounds": [
             "erebus:altar_offering"
         ]
     },
     "squish": {
+        "subtitle": "subtitles.erebus.squish",
         "category": "neutral",
         "sounds": [
             "erebus:squish"
         ]
     },
     "beetle_hurt": {
+        "subtitle": "subtitles.erebus.beetle_hurt",
         "category": "neutral",
         "sounds": [
             "erebus:beetle_hurt"
         ]
     },
     "beetle_sound": {
+        "subtitle": "subtitles.erebus.beetle_sound",
         "category": "neutral",
         "sounds": [
             "erebus:beetle_sound"
         ]
     },
     "beetle_larva_hurt": {
+        "subtitle": "subtitles.erebus.beetle_larva_hurt",
         "category": "neutral",
         "sounds": [
             "erebus:beetle_larva_hurt"
         ]
     },
     "beetle_larva_munch": {
+        "subtitle": "subtitles.erebus.beetle_larva_munch",
         "category": "neutral",
         "sounds": [
             "erebus:beetle_larva_munch"
         ]
     },
     "beetle_larva_sound": {
+        "subtitle": "subtitles.erebus.beetle_larva_sound",
         "category": "neutral",
         "sounds": [
             "erebus:beetle_larva_sound"
         ]
     },
     "beetle_larva_splat": {
+        "subtitle": "subtitles.erebus.beetle_larva_splat",
         "category": "neutral",
         "sounds": [
             "erebus:beetle_larva_splat"
         ]
     },
     "black_widow_hurt": {
+        "subtitle": "subtitles.erebus.black_widow_hurt",
         "category": "hostile",
         "sounds": [
             "erebus:black_widow_hurt"
         ]
     },
     "black_widow_sound": {
+        "subtitle": "subtitles.erebus.black_widow_sound",
         "category": "hostile",
         "sounds": [
             "erebus:black_widow_sound"
         ]
     },
     "blam_sound": {
+        "subtitle": "subtitles.erebus.blam_sound",
         "category": "hostile",
         "sounds": [
             "erebus:blam_sound"
         ]
     },
     "bombardier_beetle_hurt": {
+        "subtitle": "subtitles.erebus.bombardier_beetle_hurt",
         "category": "hostile",
         "sounds": [
             "erebus:bombardier_beetle_hurt"
         ]
     },
     "bombardier_beetle_sound": {
+        "subtitle": "subtitles.erebus.bombardier_beetle_sound",
         "category": "hostile",
         "sounds": [
             "erebus:bombardier_beetle_sound"
         ]
     },
     "centipede_hurt": {
+        "subtitle": "subtitles.erebus.centipede_hurt",
         "category": "hostile",
         "sounds": [
             "erebus:centipede_hurt"
         ]
     },
     "centipede_sound": {
+        "subtitle": "subtitles.erebus.centipede_sound",
         "category": "hostile",
         "sounds": [
             "erebus:centipede_sound"
         ]
     },
     "centipede_walk": {
+        "subtitle": "subtitles.erebus.centipede_walk",
         "category": "hostile",
         "sounds": [
             "erebus:centipede_walk"
         ]
     },
     "ant_hurt": {
+        "subtitle": "subtitles.erebus.ant_hurt",
         "category": "hostile",
         "sounds": [
             "erebus:ant_hurt"
         ]
     },
     "ant_sound": {
+        "subtitle": "subtitles.erebus.ant_sound",
         "category": "hostile",
         "sounds": [
             "erebus:ant_sound"
         ]
     },
     "fly_hurt": {
+        "subtitle": "subtitles.erebus.fly_hurt",
         "category": "neutral",
         "sounds": [
             "erebus:fly_hurt"
         ]
     },
     "fly_sound": {
+        "subtitle": "subtitles.erebus.fly_sound",
         "category": "neutral",
         "sounds": [
             "erebus:fly_sound"
         ]
     },
     "glow_worm_hurt": {
+        "subtitle": "subtitles.erebus.glow_worm_hurt",
         "category": "neutral",
         "sounds": [
             "erebus:glow_worm_hurt"
         ]
     },
     "glow_worm_sound": {
+        "subtitle": "subtitles.erebus.glow_worm_sound",
         "category": "neutral",
         "sounds": [
             "erebus:glow_worm_sound"
         ]
     },
     "grasshopper_hurt": {
+        "subtitle": "subtitles.erebus.grasshopper_hurt",
         "category": "neutral",
         "sounds": [
             "erebus:grasshopper_hurt"
         ]
     },
     "grasshopper_sound": {
+        "subtitle": "subtitles.erebus.grasshopper_sound",
         "category": "neutral",
         "sounds": [
             "erebus:grasshopper_sound"
         ]
     },
     "horn_blow": {
+        "subtitle": "subtitles.erebus.horn_blow",
         "category": "player",
         "sounds": [
             "erebus:horn_blow"
         ]
     },
     "locust_hurt": {
+        "subtitle": "subtitles.erebus.locust_hurt",
         "category": "hostile",
         "sounds": [
             "erebus:locust_hurt"
         ]
     },
     "locust_sound": {
+        "subtitle": "subtitles.erebus.locust_sound",
         "category": "hostile",
         "sounds": [
             "erebus:locust_sound"
         ]
     },
     "locust_spawn": {
+        "subtitle": "subtitles.erebus.locust_spawn",
         "category": "hostile",
         "sounds": [
             "erebus:locust_spawn"
         ]
     },
     "mantis_hurt": {
+        "subtitle": "subtitles.erebus.mantis_hurt",
         "category": "hostile",
         "sounds": [
             "erebus:mantis_hurt"
         ]
     },
     "mantis_sound": {
+        "subtitle": "subtitles.erebus.mantis_sound",
         "category": "hostile",
         "sounds": [
             "erebus:mantis_sound"
         ]
     },
     "mosquito_death": {
+        "subtitle": "subtitles.erebus.mosquito_death",
         "category": "hostile",
         "sounds": [
             "erebus:mosquito_death"
         ]
     },
     "mosquito_flying": {
+        "subtitle": "subtitles.erebus.mosquito_flying",
         "category": "hostile",
         "sounds": [
             "erebus:mosquito_flying"
         ]
     },
     "mosquito_hit": {
+        "subtitle": "subtitles.erebus.mosquito_hit",
         "category": "hostile",
         "sounds": [
             "erebus:mosquito_hit"
         ]
     },
     "mosquito_sucking": {
+        "subtitle": "subtitles.erebus.mosquito_sucking",
         "category": "hostile",
         "sounds": [
             "erebus:mosquito_sucking"
         ]
     },
     "slime_charge": {
+        "subtitle": "subtitles.erebus.slime_charge",
         "category": "hostile",
         "sounds": [
             "erebus:slime_charge"
         ]
     },
     "snail_death": {
+        "subtitle": "subtitles.erebus.snail_death",
         "category": "hostile",
         "sounds": [
             "erebus:snail_death"
         ]
     },
     "snail_hurt": {
+        "subtitle": "subtitles.erebus.snail_hurt",
         "category": "hostile",
         "sounds": [
             "erebus:snail_hurt"
         ]
     },
     "snail_living": {
+        "subtitle": "subtitles.erebus.snail_living",
         "category": "hostile",
         "sounds": [
             "erebus:snail_living"
         ]
     },
     "spider_screech": {
+        "subtitle": "subtitles.erebus.spider_screech",
         "category": "hostile",
         "sounds": [
             "erebus:spider_screech"
         ]
     },
     "crushling_death": {
+        "subtitle": "subtitles.erebus.crushling_death",
         "category": "neutral",
         "sounds": [
             "erebus:crushling_death"
         ]
     },
     "crushling_hurt": {
+        "subtitle": "subtitles.erebus.crushling_hurt",
         "category": "neutral",
         "sounds": [
             "erebus:crushling_hurt"
         ]
     },
     "crushling_living": {
+        "subtitle": "subtitles.erebus.crushling_living",
         "category": "neutral",
         "sounds": [
             "erebus:crushling_living"
         ]
     },
     "spray_can_sound": {
+        "subtitle": "subtitles.erebus.spray_can_sound",
         "category": "player",
         "sounds": [
             "erebus:spray_can_sound"
         ]
     },
     "tunneling_sound": {
+        "subtitle": "subtitles.erebus.tunneling_sound",
         "category": "hostile",
         "sounds": [
             "erebus:tunneling_sound"
         ]
     },
     "wasp_hurt": {
+        "subtitle": "subtitles.erebus.wasp_hurt",
         "category": "hostile",
         "sounds": [
             "erebus:wasp_hurt"
         ]
     },
     "wasp_sound": {
+        "subtitle": "subtitles.erebus.wasp_sound",
         "category": "hostile",
         "sounds": [
             "erebus:wasp_sound"
         ]
     },
     "websling_splat": {
+        "subtitle": "subtitles.erebus.websling_splat",
         "category": "hostile",
         "sounds": [
             "erebus:websling_splat"
         ]
     },
     "websling_throw": {
+        "subtitle": "subtitles.erebus.websling_throw",
         "category": "hostile",
         "sounds": [
             "erebus:websling_throw"
         ]
     },
     "cabbage_fart": {
+        "subtitle": "subtitles.erebus.cabbage_fart",
         "category": "player",
         "sounds": [
             "erebus:cabbage_fart"
         ]
     },
     "antlion_explode": {
+        "subtitle": "subtitles.erebus.antlion_explode",
         "category": "hostile",
         "sounds": [
             "erebus:antlion_explode"
         ]
     },
     "antlion_growl": {
+        "subtitle": "subtitles.erebus.antlion_growl",
         "category": "hostile",
         "sounds": [
             "erebus:antlion_growl"
         ]
     },
     "antlion_slam": {
+        "subtitle": "subtitles.erebus.antlion_slam",
         "category": "hostile",
         "sounds": [
             "erebus:antlion_slam"
         ]
     },
     "magmacrawler": {
+        "subtitle": "subtitles.erebus.magmacrawler",
         "category": "hostile",
         "sounds": [
             "erebus:magmacrawler"
         ]
     },
     "magmacrawler_hurt": {
+        "subtitle": "subtitles.erebus.magmacrawler_hurt",
         "category": "hostile",
         "sounds": [
             "erebus:magmacrawler_hurt"
         ]
     },
     "magmacrawler_death": {
+        "subtitle": "subtitles.erebus.magmacrawler_death",
         "category": "hostile",
         "sounds": [
             "erebus:magmacrawler_death"
         ]
     },
     "rhino_beetle_sound": {
+        "subtitle": "subtitles.erebus.rhino_beetle_sound",
         "category": "hostile",
         "sounds": [
             "erebus:rhino_beetle_sound"
         ]
     },
     "rhino_beetle_hurt": {
+        "subtitle": "subtitles.erebus.rhino_beetle_hurt",
         "category": "hostile",
         "sounds": [
             "erebus:rhino_beetle_hurt"

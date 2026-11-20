@@ -1,7 +1,5 @@
 package erebus.client.render.entity.renderer.state;
 
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-
-public class TarantulaRenderState extends LivingEntityRenderState {
+public class TarantulaRenderState extends ClimbingRenderState {
     public int skin;
 }

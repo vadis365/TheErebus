@@ -42,7 +42,7 @@ import java.util.ArrayList;
 public class BlenderBlockEntity extends BlockEntityInventoryHelper implements MenuProvider {
 
     public static final int TANK_CAPACITY = FluidType.BUCKET_VOLUME * 8;
-    private static final int MAX_TIME = 432;
+    public static final int BLEND_TICKS = 432;
     public final FluidStacksResourceHandler tanks = new FluidStacksResourceHandler(4, TANK_CAPACITY) {
         @Override
         protected void onContentsChanged(int index, FluidStack previous) {
@@ -83,7 +83,7 @@ public class BlenderBlockEntity extends BlockEntityInventoryHelper implements Me
             blender.progress = 0;
         } else {
             blender.progress++;
-            if (blender.progress >= MAX_TIME) {
+            if (blender.progress >= BLEND_TICKS) {
                 blender.craft(match.get().value(), input);
                 blender.progress = 0;
             }

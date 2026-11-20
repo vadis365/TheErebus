@@ -20,10 +20,12 @@ public class FernPopulationFeatureConfiguration extends Feature<NoneFeatureConfi
         var level = context.level();
         var biome = level.getBiome(context.origin());
         int attempts;
-        if (biome.is(ModBiomes.FUNGAL_FOREST_KEY)) attempts = 100;
-        else if (biome.is(ModBiomes.SUBMERGED_SWAMP_KEY)) attempts = 20;
-        else if (biome.is(ModBiomes.UNDERGROUND_JUNGLE_KEY)) attempts = 30;
-        else if (biome.is(ModBiomes.ELYSIAN_FIELDS_KEY) || biome.is(ModBiomes.ELYSIAN_FOREST_KEY)) attempts = 10;
+        if (biome.is(ModBiomes.FUNGAL_FOREST_KEY)) attempts = 110;
+        else if (biome.is(ModBiomes.SUBMERGED_SWAMP_KEY)) attempts = 24;
+        else if (biome.is(ModBiomes.UNDERGROUND_JUNGLE_KEY)) attempts = 36;
+        else if (biome.is(ModBiomes.ELYSIAN_FIELDS_KEY) || biome.is(ModBiomes.ELYSIAN_FOREST_KEY)) attempts = 13;
+        else if (biome.is(ModBiomes.ROOTWATER_MARSH_KEY) || biome.is(ModBiomes.AMBER_THICKETS_KEY)) attempts = 22;
+        else if (biome.is(ModBiomes.GLOWROT_GROVES_KEY)) attempts = 40;
         else return false;
         var random = context.random();
         boolean placed = false;

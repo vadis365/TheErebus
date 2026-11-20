@@ -1,0 +1,60 @@
+{
+  "attributes": {
+    "minecraft:visual/fog_color": "#998776"
+  },
+  "carvers": [
+    "erebus:cave",
+    "erebus:canyon"
+  ],
+  "downfall": 0.1,
+  "effects": {
+    "foliage_color": "#9d935b",
+    "grass_color": "#9d935b",
+    "water_color": "#887254"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "erebus:fossil_stands",
+      "erebus:scorched_wood"
+    ],
+    [],
+    [
+      "erebus:iron_ore",
+      "erebus:copper_ore",
+      "erebus:quartz_ore",
+      "erebus:gneiss_ore",
+      "erebus:temple_ore",
+      "erebus:fossil_ore_petrified_forest"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "erebus:black_widow",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "erebus:scytodes",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 14
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 1.35
+}

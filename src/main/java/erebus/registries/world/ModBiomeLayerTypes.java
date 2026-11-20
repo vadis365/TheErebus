@@ -21,6 +21,8 @@ public class ModBiomeLayerTypes {
     public static final DeferredHolder<BiomeLayerType, BiomeLayerType> ZOOM = registerType("zoom", () -> () -> ZoomLayer.Factory.CODEC);
     public static final DeferredHolder<BiomeLayerType, BiomeLayerType> STABILIZE = registerType("stabilize", () -> () -> StabilizeLayer.Factory.CODEC);
 
+    public static final DeferredHolder<BiomeLayerType, BiomeLayerType> TRANSITION_BIOMES = registerType("transition_biomes", () -> () -> TransitionBiomeLayer.CODEC);
+
     private static DeferredHolder<BiomeLayerType, BiomeLayerType> registerType(String name, Supplier<BiomeLayerType> factory) {
         return BIOME_LAYER_TYPES.register(name, factory);
     }

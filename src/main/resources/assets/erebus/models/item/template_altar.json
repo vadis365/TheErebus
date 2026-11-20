@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "erebus:block/altar_base"
+  },
+  "display": {
+    "gui": {
+      "rotation": [30, 225, 0],
+      "scale": [1, 1, 1]
+    },
+    "ground": {
+      "translation": [0, 3, 0],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "fixed": {
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "on_shelf": {
+      "rotation": [0, 180, 0],
+      "scale": [1.6, 1.6, 1.6]
+    },
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.6, 0.6, 0.6]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 45, 0],
+      "scale": [0.64, 0.64, 0.64]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 225, 0],
+      "scale": [0.64, 0.64, 0.64]
+    }
+  }
+}

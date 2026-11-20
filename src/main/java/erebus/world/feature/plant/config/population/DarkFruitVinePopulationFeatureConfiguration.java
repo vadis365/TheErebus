@@ -18,7 +18,8 @@ public class DarkFruitVinePopulationFeatureConfiguration extends Feature<NoneFea
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         var level = context.level();
         var biome = level.getBiome(context.origin());
-        if (!biome.is(ModBiomes.ELYSIAN_FIELDS_KEY) && !biome.is(ModBiomes.ELYSIAN_FOREST_KEY) && !biome.is(ModBiomes.UNDERGROUND_JUNGLE_KEY)) return false;
+        if (!biome.is(ModBiomes.ELYSIAN_FIELDS_KEY) && !biome.is(ModBiomes.ELYSIAN_FOREST_KEY) && !biome.is(ModBiomes.UNDERGROUND_JUNGLE_KEY)
+                && !biome.is(ModBiomes.ROOTWATER_MARSH_KEY) && !biome.is(ModBiomes.AMBER_THICKETS_KEY)) return false;
         var random = context.random();
         boolean placed = false;
         for (int attempt = 0; attempt < 10; attempt++) {

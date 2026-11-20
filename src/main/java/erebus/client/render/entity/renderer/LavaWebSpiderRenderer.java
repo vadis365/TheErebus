@@ -8,11 +8,10 @@ import erebus.client.render.entity.renderer.state.LavaWebSpiderRenderState;
 import erebus.entity.LavaWebSpider;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
-public class LavaWebSpiderRenderer extends MobRenderer<LavaWebSpider, LavaWebSpiderRenderState, LavaWebSpiderModel> {
+public class LavaWebSpiderRenderer extends ClimbingMobRenderer<LavaWebSpider, LavaWebSpiderRenderState, LavaWebSpiderModel> {
     public static final Identifier TEXTURE = Erebus.prefix("textures/entity/lava_web_spider.png");
 
     public LavaWebSpiderRenderer(EntityRendererProvider.Context context) {

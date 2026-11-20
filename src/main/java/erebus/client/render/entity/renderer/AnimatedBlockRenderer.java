@@ -10,7 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
@@ -21,7 +20,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.NonNull;
 
-public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBlockRenderState, AnimatedBlockModel> {
+public class AnimatedBlockRenderer extends ClimbingMobRenderer<AnimatedBlock, AnimatedBlockRenderState, AnimatedBlockModel> {
 
     private final ItemModelResolver itemModelResolver;
 
@@ -47,6 +46,9 @@ public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBl
     @Override
     public void submit(AnimatedBlockRenderState state, @NonNull PoseStack pose, @NonNull SubmitNodeCollector node, @NonNull CameraRenderState camera) {
         pose.pushPose();
+        orientClimbingModel(state, pose, state.bodyRot, 1.0F);
+
+        pose.pushPose();
         pose.translate(0F, 0.8F, 0F);
         pose.mulPose(Axis.YN.rotationDegrees(state.bodyRot));
         pose.scale(2F, 2F, 2F);
@@ -59,6 +61,7 @@ public class AnimatedBlockRenderer extends MobRenderer<AnimatedBlock, AnimatedBl
         pose.scale(-1.0F, -1.0F, 1.0F);
         pose.translate(0.0F, -1.501F, 0.0F);
         node.submitModelPart(model.root, pose, rt, state.lightCoords, OverlayTexture.NO_OVERLAY, state.sprite, false, false, -1, null, state.outlineColor);
+        pose.popPose();
         pose.popPose();
     }
 

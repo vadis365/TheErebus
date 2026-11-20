@@ -34,7 +34,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 
-public class Scorpion extends Monster {
+public class Scorpion extends ClimbingMonster {
     private static final EntityDataAccessor<Boolean> CLIMBING = SynchedEntityData.defineId(Scorpion.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> STING_TICKS = SynchedEntityData.defineId(Scorpion.class, EntityDataSerializers.INT);
     private float stingAngle;

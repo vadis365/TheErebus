@@ -23,7 +23,8 @@ public class TreeFeatures extends ModFeatureHelpers {
     public static SavannahTreePopulationFeature SAVANNAH_BAOBAB = new SavannahTreePopulationFeature("savannah_baobab_population");
 
     public static SwampTreePopulationFeature SWAMP_TREE_POPULATION = new SwampTreePopulationFeature();
-    public static ElysianForestPopulationFeature ELYSIAN_FOREST_POPULATION = new ElysianForestPopulationFeature();
+    public static ElysianForestPopulationFeature ELYSIAN_FOREST_POPULATION = new ElysianForestPopulationFeature(false);
+    public static final ElysianForestPopulationFeature GLOWROT_CANOPY = new ElysianForestPopulationFeature(true);
     public static CypressPopulationFeature CYPRESS_POPULATION = new CypressPopulationFeature();
     public static AsperTree ASPER_TREE = new AsperTree();
     public static BalsamTree BALSAM_TREE = new BalsamTree();
@@ -51,6 +52,7 @@ public class TreeFeatures extends ModFeatureHelpers {
 
         registerConfiguredFeatureWithConfig(SWAMP_TREE_POPULATION, SWAMP_TREE_POPULATION_CONFIG);
         registerConfiguredFeatureWithConfig(ELYSIAN_FOREST_POPULATION, ELYSIAN_FOREST_POPULATION_CONFIG);
+        registerConfiguredFeatureWithConfig(GLOWROT_CANOPY, ELYSIAN_FOREST_POPULATION_CONFIG);
         registerConfiguredFeatureWithConfig(CYPRESS_POPULATION, CYPRESS_POPULATION_CONFIG);
         registerConfiguredTree(ASPER_TREE);
         registerConfiguredTree(BALSAM_TREE);
@@ -77,6 +79,7 @@ public class TreeFeatures extends ModFeatureHelpers {
 
         registerPlacedFeature(SWAMP_TREE_POPULATION);
         registerPlacedFeature(ELYSIAN_FOREST_POPULATION);
+        registerPlacedFeature(GLOWROT_CANOPY);
         registerPlacedFeature(CYPRESS_POPULATION);
         registerPlacedFeature(ASPER_TREE);
         registerPlacedFeature(BALSAM_TREE);

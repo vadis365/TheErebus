@@ -43,7 +43,7 @@ import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
-public class Scytodes extends Monster {
+public class Scytodes extends ClimbingMonster {
 
     private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(Scytodes.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Byte> CLIMBING = SynchedEntityData.defineId(Scytodes.class, EntityDataSerializers.BYTE);

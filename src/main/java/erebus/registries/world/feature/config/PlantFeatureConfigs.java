@@ -112,9 +112,9 @@ public class PlantFeatureConfigs {
         GIANT_FLOWER_POPULATION_CONFIG = CONFIGS.register("giant_flower_population", GiantFlowerPopulationFeatureConfiguration::new);
         GRASS_CONFIG = CONFIGS.register("grass", GrassPopulationFeatureConfiguration::new);
         WEEPING_BLUEBELL_CONFIG = CONFIGS.register("weeping_bluebell", () -> new TallFlowerPopulationFeatureConfiguration(ModBlocks.WEEPING_BLUEBELL, 5));
-        FIDDLE_HEAD_CONFIG = CONFIGS.register("fiddle_head", () -> new GroundPlantPopulationFeatureConfiguration(ModBlocks.FIDDLE_HEAD, Map.of(ModBiomes.SUBMERGED_SWAMP_KEY, 16, ModBiomes.UNDERGROUND_JUNGLE_KEY, 50)));
-        MIRE_CORAL_CONFIG = CONFIGS.register("mire_coral", () -> new GroundPlantPopulationFeatureConfiguration(ModBlocks.MIRE_CORAL, Map.of(ModBiomes.SUBMERGED_SWAMP_KEY, 4)));
-        SWAMP_PLANT_CONFIG = CONFIGS.register("swamp_plant", () -> new GroundPlantPopulationFeatureConfiguration(ModBlocks.SWAMP_PLANT, Map.of(ModBiomes.SUBMERGED_SWAMP_KEY, 40)));
+        FIDDLE_HEAD_CONFIG = CONFIGS.register("fiddle_head", () -> new GroundPlantPopulationFeatureConfiguration(ModBlocks.FIDDLE_HEAD, Map.of(ModBiomes.SUBMERGED_SWAMP_KEY, 16, ModBiomes.UNDERGROUND_JUNGLE_KEY, 50, ModBiomes.ROOTWATER_MARSH_KEY, 25)));
+        MIRE_CORAL_CONFIG = CONFIGS.register("mire_coral", () -> new GroundPlantPopulationFeatureConfiguration(ModBlocks.MIRE_CORAL, Map.of(ModBiomes.SUBMERGED_SWAMP_KEY, 4, ModBiomes.ROOTWATER_MARSH_KEY, 2)));
+        SWAMP_PLANT_CONFIG = CONFIGS.register("swamp_plant", () -> new GroundPlantPopulationFeatureConfiguration(ModBlocks.SWAMP_PLANT, Map.of(ModBiomes.SUBMERGED_SWAMP_KEY, 48)));
         SUNDEW_CONFIG = CONFIGS.register("sundew", () -> new TallFlowerPopulationFeatureConfiguration(ModBlocks.SUNDEW, 8, List.of(ModBiomes.SUBMERGED_SWAMP_KEY)));
         TALL_BLOOM_CONFIG = CONFIGS.register("tall_bloom", () -> new TallFlowerPopulationFeatureConfiguration(ModBlocks.TALL_BLOOM, 15));
         FALLEN_LOG_POPULATION_CONFIG = CONFIGS.register("fallen_log_population", FallenLogPopulationFeatureConfiguration::new);

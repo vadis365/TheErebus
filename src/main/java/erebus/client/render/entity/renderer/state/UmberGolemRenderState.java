@@ -1,7 +1,5 @@
 package erebus.client.render.entity.renderer.state;
 
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-
-public class UmberGolemRenderState extends LivingEntityRenderState {
+public class UmberGolemRenderState extends ClimbingRenderState {
     public int guardianVariant;
 }

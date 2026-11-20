@@ -41,10 +41,12 @@ public class JungleTreePopulationFeatureConfiguration extends Feature<NoneFeatur
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         var level = context.level();
-        if (!level.getBiome(context.origin()).is(ModBiomes.UNDERGROUND_JUNGLE_KEY)) return false;
+        var biome = level.getBiome(context.origin());
+        boolean marsh = biome.is(ModBiomes.ROOTWATER_MARSH_KEY);
+        if (!marsh && !biome.is(ModBiomes.UNDERGROUND_JUNGLE_KEY)) return false;
         var random = context.random();
         boolean placed = false;
-        for (int attempt = 0; attempt < 2200; attempt++) {
+        for (int attempt = 0; attempt < (marsh ? 260 : 2200); attempt++) {
             int x = context.origin().getX() + 8 + random.nextInt(16);
             int y = level.getMinY() + 15 + random.nextInt(90);
             int z = context.origin().getZ() + 8 + random.nextInt(16);

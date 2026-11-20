@@ -7,10 +7,9 @@ import erebus.client.render.entity.renderer.state.UmberGolemRenderState;
 import erebus.entity.UmberGolem;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 
-public class UmberGolemRenderer extends MobRenderer<UmberGolem, UmberGolemRenderState, UmberGolemModel> {
+public class UmberGolemRenderer extends ClimbingMobRenderer<UmberGolem, UmberGolemRenderState, UmberGolemModel> {
     private static final Identifier TEXTURE = Erebus.prefix("textures/entity/umber_golem.png");
 
     public UmberGolemRenderer(EntityRendererProvider.Context context) {

@@ -1,12 +1,17 @@
 package erebus.registries.world.feature.config;
 
 import erebus.registries.blocks.ModBlocks;
+import erebus.world.feature.misc.TransitionLandmark;
 import erebus.world.feature.misc.config.*;
+
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.neoforged.neoforge.registries.DeferredHolder;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 import static erebus.registries.world.feature.ModFeatures.CONFIGS;
 
@@ -122,6 +127,17 @@ public class DecorationFeatureConfigs {
         ROTTEN_ACACIA_CONFIG = CONFIGS.register("rotten_acacia", RottenAcaciaPopulationFeatureConfiguration::new);
         SAVANNAH_ROCK_CONFIG = CONFIGS.register("savannah_rock", SavannahRockPopulationFeatureConfiguration::new);
         SCORCHED_WOOD_CONFIG = CONFIGS.register("scorched_wood", ScorchedWoodFeatureConfiguration::new);
+    }
+
+    public static final Map<TransitionLandmark.Kind, DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>>> TRANSITION_LANDMARKS =
+            registerTransitionLandmarks();
+
+    private static Map<TransitionLandmark.Kind, DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>>> registerTransitionLandmarks() {
+        var registrations = new EnumMap<TransitionLandmark.Kind, DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>>>(TransitionLandmark.Kind.class);
+        for (var kind : TransitionLandmark.Kind.values()) {
+            registrations.put(kind, CONFIGS.register(kind.id, () -> new TransitionLandmark(kind)));
+        }
+        return Map.copyOf(registrations);
     }
 
     public static void init() {

@@ -22,6 +22,12 @@ public class ModBiomes {
     public static final ResourceKey<Biome> UNDERGROUND_JUNGLE_KEY = registerKey("underground_jungle");
     public static final ResourceKey<Biome> VOLCANIC_DESERT_KEY = registerKey("volcanic_desert");
 
+    public static final ResourceKey<Biome> ROOTWATER_MARSH_KEY = registerKey("rootwater_marsh");
+    public static final ResourceKey<Biome> CINDER_SCRUB_KEY = registerKey("cinder_scrub");
+    public static final ResourceKey<Biome> GLOWROT_GROVES_KEY = registerKey("glowrot_groves");
+    public static final ResourceKey<Biome> AMBER_THICKETS_KEY = registerKey("amber_thickets");
+    public static final ResourceKey<Biome> FOSSIL_BARRENS_KEY = registerKey("fossil_barrens");
+
     // Biomes
     public static final ElysianFieldsBiome ELYSIAN_FIELDS = new ElysianFieldsBiome(0xC6FF54, 0xD5E47F);
     public static final ElysianForestBiome ELYSIAN_FOREST = new ElysianForestBiome(0x74BF26, 0xD5E47F);
@@ -46,6 +52,7 @@ public class ModBiomes {
         context.register(ULTERIOR_OUTBACK.getResourceKey(), ULTERIOR_OUTBACK.getBiome(featureGetter, carverGetter));
         context.register(UNDERGROUND_JUNGLE.getResourceKey(), UNDERGROUND_JUNGLE.getBiome(featureGetter, carverGetter));
         context.register(VOLCANIC_DESERT.getResourceKey(), VOLCANIC_DESERT.getBiome(featureGetter, carverGetter));
+        TransitionBiomes.bootstrap(context, featureGetter, carverGetter);
     }
 
     private static ResourceKey<Biome> registerKey(String name) {

@@ -1,5 +1,6 @@
 package erebus.entity;
 
+import erebus.entity.helper.SurfaceClimbing;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -36,6 +37,11 @@ public class JumpingSpider extends Spider {
         return Spider.createAttributes()
                 .add(Attributes.MAX_HEALTH, 25)
                 .add(Attributes.ATTACK_DAMAGE, 1);
+    }
+
+    @Override
+    public void calculateEntityAnimation(boolean useY) {
+        super.calculateEntityAnimation(useY || SurfaceClimbing.isOnWall(this));
     }
 
     @Override

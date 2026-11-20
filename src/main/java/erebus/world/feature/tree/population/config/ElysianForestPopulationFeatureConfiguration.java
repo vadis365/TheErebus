@@ -1,6 +1,7 @@
 package erebus.world.feature.tree.population.config;
 
 import erebus.registries.world.ModBiomes;
+import erebus.world.biome.util.TerrainBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.TreeFeatures;
@@ -19,14 +20,18 @@ public class ElysianForestPopulationFeatureConfiguration extends Feature<NoneFea
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         var level = context.level();
-        if (!level.getBiome(context.origin()).is(ModBiomes.ELYSIAN_FOREST_KEY)) return false;
+        var biome = level.getBiome(context.origin());
+        boolean glowrot = biome.is(ModBiomes.GLOWROT_GROVES_KEY);
+        if (!glowrot && !biome.is(ModBiomes.ELYSIAN_FOREST_KEY)) return false;
         var random = context.random();
         boolean placed = false;
-        for (int attempt = 0; attempt < 400; attempt++) {
+        for (int attempt = 0; attempt < (glowrot ? 150 : 400); attempt++) {
             int x = context.origin().getX() + 8 + random.nextInt(16);
             int z = context.origin().getZ() + 8 + random.nextInt(16);
             var soil = new BlockPos(x, level.getMinY() + 20 + random.nextInt(80), z);
             if (level.isOutsideBuildHeight(soil) || level.isOutsideBuildHeight(soil.above())) continue;
+            if (glowrot && (soil.getY() < TerrainBuilder.GLOWROT_UPPER_START_Y
+                    || !level.getBiome(soil.above()).is(ModBiomes.GLOWROT_GROVES_KEY))) continue;
             var state = level.getBlockState(soil);
             if (state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.MYCELIUM)) {
                 boolean oak = random.nextBoolean();

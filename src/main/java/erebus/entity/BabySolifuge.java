@@ -36,7 +36,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
 
-public class BabySolifuge extends Monster {
+public class BabySolifuge extends ClimbingMonster {
 
     private static final EntityDataAccessor<Byte> CLIMBING = SynchedEntityData.defineId(BabySolifuge.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Byte> POTION_TYPE = SynchedEntityData.defineId(BabySolifuge.class, EntityDataSerializers.BYTE);

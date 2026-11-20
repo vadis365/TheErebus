@@ -1,0 +1,12 @@
+{
+  "feature": "erebus:amber_banks",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 5
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

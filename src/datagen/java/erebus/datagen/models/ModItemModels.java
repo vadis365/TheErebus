@@ -3,8 +3,14 @@ package erebus.datagen.models;
 import erebus.Erebus;
 import erebus.client.render.block.renderer.stack.BambooBridgeSpecialRenderer;
 import erebus.client.render.block.renderer.stack.BambooExtenderSpecialRenderer;
+import erebus.client.render.block.renderer.stack.BlockOfBonesSpecialRenderer;
+import erebus.client.render.block.renderer.stack.ExperienceAltarSpecialRenderer;
 import erebus.client.render.block.renderer.stack.GlowingJarSpecialRenderer;
+import erebus.client.render.block.renderer.stack.HealingAltarSpecialRenderer;
+import erebus.client.render.block.renderer.stack.LightningAltarSpecialRenderer;
 import erebus.client.render.block.renderer.stack.LiquifierSpecialRenderer;
+import erebus.client.render.block.renderer.stack.OfferingAltarSpecialRenderer;
+import erebus.client.render.block.renderer.stack.RepairAltarSpecialRenderer;
 import erebus.client.render.item.renderer.*;
 import erebus.item.MaxSpeedBowItem;
 import erebus.registries.ModFluids;
@@ -14,12 +20,14 @@ import net.minecraft.client.color.item.Constant;
 import net.minecraft.client.color.item.MapColor;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.SpecialModelWrapper;
 import net.minecraft.client.renderer.item.properties.numeric.CompassAngle;
 import net.minecraft.client.renderer.item.properties.numeric.CompassAngleState;
 import net.minecraft.client.renderer.item.properties.numeric.UseDuration;
+import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
@@ -45,6 +53,13 @@ public class ModItemModels {
         itemModels.itemModelOutput.accept(ModBlocks.LIQUIFIER.asItem(),
                 new SpecialModelWrapper.Unbaked(Erebus.prefix("item/liquifier"), Optional.empty(),
                         new LiquifierSpecialRenderer.Unbaked(Erebus.prefix("textures/block/liquifier.png"))));
+        registerSpecialItem(ModBlocks.OFFERING_ALTAR.asItem(), new OfferingAltarSpecialRenderer.Unbaked(Erebus.prefix("offering_altar")));
+        registerSpecialItem(ModBlocks.ALTAR_EXPERIENCE.asItem(), new ExperienceAltarSpecialRenderer.Unbaked(Erebus.prefix("")));
+        registerSpecialItem(ModBlocks.ALTAR_HEALING.asItem(), new HealingAltarSpecialRenderer.Unbaked(Erebus.prefix("")));
+        registerSpecialItem(ModBlocks.ALTAR_LIGHTNING.asItem(), new LightningAltarSpecialRenderer.Unbaked(Erebus.prefix("")));
+        registerSpecialItem(ModBlocks.ALTAR_REPAIR.asItem(), new RepairAltarSpecialRenderer.Unbaked(Erebus.prefix("")));
+        registerSpecialItem(ModBlocks.BLOCK_OF_BONES.asItem(),
+                new BlockOfBonesSpecialRenderer.Unbaked(Erebus.prefix("textures/block/bone_block.png")));
         itemModels.itemModelOutput.accept(ModBlocks.BAMBOO_BRIDGE.asItem(),
                 new SpecialModelWrapper.Unbaked(Erebus.prefix("item/bamboo_bridge"), Optional.empty(),
                         new BambooBridgeSpecialRenderer.Unbaked(Erebus.prefix("textures/block/bamboo_bridge.png"))));
@@ -396,6 +411,10 @@ public class ModItemModels {
         normalItem(ModItems.WORKER_BEE_SPAWN_EGG);
         normalItem(ModItems.ZOMBIE_ANT_SOLDIER_SPAWN_EGG);
         normalItem(ModItems.ZOMBIE_ANT_SPAWN_EGG);
+    }
+
+    private void registerSpecialItem(Item item, SpecialModelRenderer.Unbaked renderer) {
+        itemModels.itemModelOutput.accept(item, ItemModelUtils.specialModel(ModelLocationUtils.getModelLocation(item), renderer));
     }
 
     private void generateBow(Item item) {

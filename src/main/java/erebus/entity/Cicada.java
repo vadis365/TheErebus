@@ -1,11 +1,13 @@
 package erebus.entity;
 
 import erebus.client.particle.ClientParticles;
+import erebus.entity.helper.SurfaceClimbing;
 import erebus.registries.ModSounds;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.client.ModParticles;
 import erebus.utils.AnimationMathHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -34,7 +36,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import org.jspecify.annotations.Nullable;
 
-public class Cicada extends Monster {
+public class Cicada extends ClimbingMonster {
     private static final EntityDataAccessor<Boolean> FLIGHT_ACTIVE = SynchedEntityData.defineId(Cicada.class, EntityDataSerializers.BOOLEAN);
     private final AnimationMathHelper mathWings = new AnimationMathHelper();
     public float wingFloat;
@@ -72,7 +74,7 @@ public class Cicada extends Monster {
     }
 
     public boolean isFlying() {
-        return !onGround();
+        return !onGround() && SurfaceClimbing.surface(this) == Direction.DOWN;
     }
 
     public boolean isFlightActive() {

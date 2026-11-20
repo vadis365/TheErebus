@@ -19,11 +19,12 @@ public class ScorchedWoodPopulationFeature extends Feature<NoneFeatureConfigurat
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         var level = context.level();
         var biome = level.getBiome(context.origin());
-        boolean petrified = biome.is(ModBiomes.PETRIFIED_FOREST_KEY);
+        boolean barrens = biome.is(ModBiomes.FOSSIL_BARRENS_KEY);
+        boolean petrified = barrens || biome.is(ModBiomes.PETRIFIED_FOREST_KEY);
         if (!petrified && !biome.is(ModBiomes.VOLCANIC_DESERT_KEY)) return false;
         var random = context.random();
         boolean placed = false;
-        for (int attempt = 0; attempt < 22; attempt++) {
+        for (int attempt = 0; attempt < (barrens ? 8 : 22); attempt++) {
             int x = context.origin().getX() + 8 + random.nextInt(16);
             int y = level.getMinY() + random.nextInt(120);
             int z = context.origin().getZ() + 8 + random.nextInt(16);

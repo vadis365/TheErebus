@@ -6,11 +6,10 @@ import erebus.client.render.entity.renderer.state.TarantulaRenderState;
 import erebus.entity.Tarantula;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
-public class TarantulaRenderer extends MobRenderer<Tarantula, TarantulaRenderState, TarantulaModel<TarantulaRenderState>> {
+public class TarantulaRenderer extends ClimbingMobRenderer<Tarantula, TarantulaRenderState, TarantulaModel<TarantulaRenderState>> {
     private static final Identifier DEFAULT = Erebus.prefix("textures/entity/tarantula.png");
     private final Identifier TURQUOISE = Erebus.prefix("textures/entity/tarantula_turquoise.png");
     private final Identifier YELLOW = Erebus.prefix("textures/entity/tarantula_yellow.png");

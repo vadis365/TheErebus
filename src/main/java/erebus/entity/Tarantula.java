@@ -38,7 +38,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
-public class Tarantula extends Monster {
+public class Tarantula extends ClimbingMonster {
 
     private static final EntityDataAccessor<Integer> SKIN_TYPE = SynchedEntityData.defineId(Tarantula.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Byte> CLIMBING = SynchedEntityData.defineId(Tarantula.class, EntityDataSerializers.BYTE);

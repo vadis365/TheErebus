@@ -60,7 +60,7 @@ public class SmoothieRecipe implements Recipe<SmoothieRecipeInput> {
         this.info = info;
         this.bookInfo = bookInfo;
         this.result = result;
-        this.ingredients = ingredients;
+        this.ingredients = List.copyOf(ingredients);
         this.fluidIngredients = fluidIngredients;
     }
 
@@ -151,5 +151,17 @@ public class SmoothieRecipe implements Recipe<SmoothieRecipeInput> {
 
     public List<SizedFluidIngredient> getFluidIngredients() {
         return fluidIngredients;
+    }
+
+    public Ingredient getContainerIngredient() {
+        return ingredients.getFirst();
+    }
+
+    public List<Ingredient> getItemIngredients() {
+        return ingredients.subList(1, ingredients.size());
+    }
+
+    public ItemStackTemplate getResult() {
+        return result;
     }
 }

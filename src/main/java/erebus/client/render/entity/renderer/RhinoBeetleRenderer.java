@@ -7,10 +7,9 @@ import erebus.client.render.entity.renderer.state.RhinoBeetleRenderState;
 import erebus.entity.RhinoBeetle;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 
-public class RhinoBeetleRenderer extends MobRenderer<RhinoBeetle, RhinoBeetleRenderState, RhinoBeetleModel> {
+public class RhinoBeetleRenderer extends ClimbingMobRenderer<RhinoBeetle, RhinoBeetleRenderState, RhinoBeetleModel> {
     private static final Identifier TEXTURE = Erebus.prefix("textures/entity/rhino_beetle.png");
 
     public RhinoBeetleRenderer(EntityRendererProvider.Context context) {

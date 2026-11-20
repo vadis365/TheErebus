@@ -2,6 +2,24 @@
   "biome_landscape": [
     {
       "biome_layers": {
+        "0.0": "erebus:amber_thickets"
+      },
+      "depth": -0.75,
+      "key_biome": "erebus:amber_thickets",
+      "scale": 4.1,
+      "weight": 1.0
+    },
+    {
+      "biome_layers": {
+        "0.0": "erebus:cinder_scrub"
+      },
+      "depth": -0.7,
+      "key_biome": "erebus:cinder_scrub",
+      "scale": 4.1,
+      "weight": 1.0
+    },
+    {
+      "biome_layers": {
         "0.0": "erebus:elysian_fields"
       },
       "depth": -0.7,
@@ -20,6 +38,15 @@
     },
     {
       "biome_layers": {
+        "0.0": "erebus:fossil_barrens"
+      },
+      "depth": -0.7,
+      "key_biome": "erebus:fossil_barrens",
+      "scale": 4.05,
+      "weight": 1.0
+    },
+    {
+      "biome_layers": {
         "0.0": "erebus:fungal_forest"
       },
       "depth": -0.7,
@@ -29,11 +56,30 @@
     },
     {
       "biome_layers": {
+        "7.0": "erebus:fungal_forest",
+        "8.0": "erebus:glowrot_groves"
+      },
+      "depth": -0.7,
+      "key_biome": "erebus:glowrot_groves",
+      "scale": 4.2,
+      "weight": 0.75
+    },
+    {
+      "biome_layers": {
         "0.0": "erebus:petrified_forest"
       },
       "depth": -0.7,
       "key_biome": "erebus:petrified_forest",
       "scale": 4.2,
+      "weight": 1.0
+    },
+    {
+      "biome_layers": {
+        "0.0": "erebus:rootwater_marsh"
+      },
+      "depth": -0.8,
+      "key_biome": "erebus:rootwater_marsh",
+      "scale": 3.95,
       "weight": 1.0
     },
     {

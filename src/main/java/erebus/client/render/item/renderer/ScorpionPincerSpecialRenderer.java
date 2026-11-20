@@ -24,7 +24,7 @@ public class ScorpionPincerSpecialRenderer implements NoDataSpecialModelRenderer
     @Override
     public void submit(PoseStack pose, SubmitNodeCollector submit, int light, int overlay, boolean hasFoil, int outlineColor) {
         pose.pushPose();
-        pose.scale(1, 1, 1);
+        pose.scale(1, -1, 1);
         submit.submitModelPart(
                 model.root(),
                 pose,
@@ -44,7 +44,7 @@ public class ScorpionPincerSpecialRenderer implements NoDataSpecialModelRenderer
     @Override
     public void getExtents(@NonNull Consumer<Vector3fc> consumer) {
         PoseStack pose = new PoseStack();
-        pose.scale(1, 1, 1);
+        pose.scale(1, -1, 1);
         model.root().getExtentsForGui(pose, consumer);
     }
 

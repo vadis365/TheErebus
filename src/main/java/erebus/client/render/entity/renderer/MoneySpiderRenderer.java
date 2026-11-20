@@ -7,11 +7,10 @@ import erebus.client.render.entity.renderer.state.MoneySpiderRenderState;
 import erebus.entity.MoneySpider;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
-public class MoneySpiderRenderer extends MobRenderer<MoneySpider, MoneySpiderRenderState, MoneySpiderModel> {
+public class MoneySpiderRenderer extends ClimbingMobRenderer<MoneySpider, MoneySpiderRenderState, MoneySpiderModel> {
 
     private static final Identifier[] TEXTURES = new Identifier[]{
             Erebus.prefix("textures/entity/money_spider.png"),

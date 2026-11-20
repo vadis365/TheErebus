@@ -18,7 +18,9 @@ public class JungleBambooPopulationFeatureConfiguration extends Feature<NoneFeat
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         var level = context.level();
         var random = context.random();
-        if (!level.getBiome(context.origin()).is(ModBiomes.UNDERGROUND_JUNGLE_KEY) || random.nextInt(11) != 0) return false;
+        var biome = level.getBiome(context.origin());
+        boolean thickets = biome.is(ModBiomes.AMBER_THICKETS_KEY);
+        if ((!thickets && !biome.is(ModBiomes.UNDERGROUND_JUNGLE_KEY)) || random.nextInt(thickets ? 18 : 11) != 0) return false;
         int x = context.origin().getX() + 8 + random.nextInt(16), z = context.origin().getZ() + 8 + random.nextInt(16);
         for (int y = 90; y > 20; y--) {
             var soil = new BlockPos(x, level.getMinY() + y, z);

@@ -21,6 +21,26 @@ public class ModEntityTypeTagsData extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags(@NotNull Provider provider) {
+        tag(ModEntityTypeTags.SURFACE_CLIMBERS)
+                .add(ModEntities.ANIMATED_BAMBOO_CRATE.get())
+                .add(ModEntities.ANIMATED_BLOCK.get())
+                .add(ModEntities.ANIMATED_CHEST.get())
+                .add(ModEntities.BABY_SOLIFUGE.get())
+                .add(ModEntities.BABY_TARANTULA.get())
+                .add(ModEntities.BLACK_WIDOW.get())
+                .add(ModEntities.CICADA.get())
+                .add(ModEntities.FIRE_ANT.get())
+                .add(ModEntities.FIRE_ANT_SOLDIER.get())
+                .add(ModEntities.JUMPING_SPIDER.get())
+                .add(ModEntities.LAVA_WEB_SPIDER.get())
+                .add(ModEntities.MONEY_SPIDER.get())
+                .add(ModEntities.RHINO_BEETLE.get())
+                .add(ModEntities.SCORPION.get())
+                .add(ModEntities.SCYTODES.get())
+                .add(ModEntities.SOLIFUGE.get())
+                .add(ModEntities.TARANTULA.get())
+                .add(ModEntities.UMBER_GOLEM.get());
+
         tag(EntityTypeTags.ARTHROPOD)
                 .add(ModEntities.ANIMATED_BLOCK.get())
                 .add(ModEntities.ANIMATED_CHEST.get())

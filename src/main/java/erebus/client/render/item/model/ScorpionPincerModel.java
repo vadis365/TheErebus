@@ -13,7 +13,7 @@ public class ScorpionPincerModel extends Model<Unit> {
     public final ModelPart clawR5Bot;
 
     public ScorpionPincerModel(ModelPart root) {
-        super(root, RenderTypes::entitySolid);
+        super(root, RenderTypes::entityCutout);
         clawR4 = root.getChild("ClawR4");
         clawR5Top = root.getChild("ClawR5Top");
         clawR5Bot = root.getChild("ClawR5Bot");

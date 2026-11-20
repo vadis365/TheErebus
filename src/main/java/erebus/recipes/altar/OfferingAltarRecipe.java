@@ -59,7 +59,7 @@ public class OfferingAltarRecipe implements Recipe<MultiStackInput> {
         this.info = info;
         this.bookInfo = bookInfo;
         this.result = result;
-        this.ingredients = ingredients;
+        this.ingredients = List.copyOf(ingredients);
         this.isSimple = ingredients.stream().allMatch(Ingredient::isSimple);
     }
 
@@ -95,6 +95,14 @@ public class OfferingAltarRecipe implements Recipe<MultiStackInput> {
     @Override
     public @NonNull ItemStack assemble(@NonNull MultiStackInput multiStackInput) {
         return result.create();
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public ItemStackTemplate getResult() {
+        return result;
     }
 
     @Override

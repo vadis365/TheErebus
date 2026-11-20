@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "erebus:block/bone_block"
+  },
+  "display": {
+    "gui": {
+      "rotation": [30, 225, 0],
+      "scale": [1.1, 1.1, 1.1]
+    },
+    "ground": {
+      "translation": [0, 3, 0],
+      "scale": [0.44, 0.44, 0.44]
+    },
+    "fixed": {
+      "scale": [0.88, 0.88, 0.88]
+    },
+    "on_shelf": {
+      "rotation": [0, 180, 0],
+      "scale": [1.76, 1.76, 1.76]
+    },
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.66, 0.66, 0.66]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 45, 0],
+      "scale": [0.704, 0.704, 0.704]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 225, 0],
+      "scale": [0.704, 0.704, 0.704]
+    }
+  }
+}

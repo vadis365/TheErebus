@@ -18,9 +18,11 @@ public class PricklyPearPopulationFeatureConfiguration extends Feature<NoneFeatu
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         var level = context.level();
-        if (!level.getBiome(context.origin()).is(ModBiomes.VOLCANIC_DESERT_KEY)) return false;
+        var biome = level.getBiome(context.origin());
+        boolean scrub = biome.is(ModBiomes.CINDER_SCRUB_KEY);
+        if (!scrub && !biome.is(ModBiomes.VOLCANIC_DESERT_KEY)) return false;
         var random = context.random();
-        if (random.nextInt(20) != 0) return false;
+        if (random.nextInt(scrub ? 12 : 16) != 0) return false;
         boolean placed = false;
         for (int attempt = 0; attempt < random.nextInt(4); attempt++) {
             int x = context.origin().getX() + 8 + random.nextInt(16);

@@ -48,7 +48,7 @@ import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
-public class LavaWebSpider extends Monster {
+public class LavaWebSpider extends ClimbingMonster {
 
     private static final EntityDataAccessor<Byte> CLIMBING = SynchedEntityData.defineId(LavaWebSpider.class, EntityDataSerializers.BYTE);
 

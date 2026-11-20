@@ -12,14 +12,14 @@ import net.minecraft.util.Mth;
 
 public class ScorpionModel extends EntityModel<ScorpionRenderState> {
     private final ModelPart RMand, LMand, Head, EyeL, EyeR, Body1, Body2;
-    private final ModelPart RBL1, RBL2, RBL3, RBL4;
-    private final ModelPart RML1, RML2, RML3, RML4;
-    private final ModelPart RFL1, RFL2, RFL3, RFL4;
-    private final ModelPart RFFL1, RFFL2, RFFL3, RFFL4;
-    private final ModelPart LFFL1, LFFL2, LFFL3, LFFL4;
-    private final ModelPart LFL1, LFL2, LFL3, LFL4;
-    private final ModelPart LML1, LML2, LML3, LML4;
-    private final ModelPart LBL1, LBL2, LBL3, LBL4;
+    private final ModelPart RBL1;
+    private final ModelPart RML1;
+    private final ModelPart RFL1;
+    private final ModelPart RFFL1;
+    private final ModelPart LFFL1;
+    private final ModelPart LFL1;
+    private final ModelPart LML1;
+    private final ModelPart LBL1;
     private final ModelPart ClawR1, ClawR2, ClawR3, ClawR4, ClawR5Top, ClawR5Bot;
     private final ModelPart ClawL1, ClawL2, ClawL3, ClawL4, ClawL5Top, ClawL5Bot;
     private final ModelPart Tail1, Tail2, Tail3, Tail4, Tail5, Tail6, Sting1, Sting2;
@@ -37,44 +37,20 @@ public class ScorpionModel extends EntityModel<ScorpionRenderState> {
         this.Body2 = root.getChild("Body2");
 
         this.RBL1 = root.getChild("RBL1");
-        this.RBL2 = RBL1.getChild("RBL2");
-        this.RBL3 = RBL1.getChild("RBL3");
-        this.RBL4 = RBL1.getChild("RBL4");
 
         this.RML1 = root.getChild("RML1");
-        this.RML2 = RML1.getChild("RML2");
-        this.RML3 = RML1.getChild("RML3");
-        this.RML4 = RML1.getChild("RML4");
 
         this.RFL1 = root.getChild("RFL1");
-        this.RFL2 = RFL1.getChild("RFL2");
-        this.RFL3 = RFL1.getChild("RFL3");
-        this.RFL4 = RFL1.getChild("RFL4");
 
         this.RFFL1 = root.getChild("RFFL1");
-        this.RFFL2 = RFFL1.getChild("RFFL2");
-        this.RFFL3 = RFFL1.getChild("RFFL3");
-        this.RFFL4 = RFFL1.getChild("RFFL4");
 
         this.LFFL1 = root.getChild("LFFL1");
-        this.LFFL2 = LFFL1.getChild("LFFL2");
-        this.LFFL3 = LFFL1.getChild("LFFL3");
-        this.LFFL4 = LFFL1.getChild("LFFL4");
 
         this.LFL1 = root.getChild("LFL1");
-        this.LFL2 = LFL1.getChild("LFL2");
-        this.LFL3 = LFL1.getChild("LFL3");
-        this.LFL4 = LFL1.getChild("LFL4");
 
         this.LML1 = root.getChild("LML1");
-        this.LML2 = LML1.getChild("LML2");
-        this.LML3 = LML1.getChild("LML3");
-        this.LML4 = LML1.getChild("LML4");
 
         this.LBL1 = root.getChild("LBL1");
-        this.LBL2 = LBL1.getChild("LBL2");
-        this.LBL3 = LBL1.getChild("LBL3");
-        this.LBL4 = LBL1.getChild("LBL4");
 
         this.ClawR1 = root.getChild("ClawR1");
         this.ClawR2 = root.getChild("ClawR2");
@@ -112,47 +88,14 @@ public class ScorpionModel extends EntityModel<ScorpionRenderState> {
         root.addOrReplaceChild("Body1", CubeListBuilder.create().texOffs(7, 15).addBox(-5.5F, -1.5F, -4.5F, 11, 3, 14), PartPose.offset(0F, 17F, 4F));
         root.addOrReplaceChild("Body2", CubeListBuilder.create().texOffs(9, 33).addBox(-3.5F, -2F, -2F, 7, 4, 17), PartPose.offset(0F, 17F, 0F));
 
-        // Legs R
-        PartDefinition RBL1 = root.addOrReplaceChild("RBL1", CubeListBuilder.create().texOffs(0, 95).addBox(0F, -1F, -1F, 5, 2, 2), PartPose.offsetAndRotation(-5F, 17F, 11F, 0F, -2.443461F, -0.83490659F));
-        RBL1.addOrReplaceChild("RBL2", CubeListBuilder.create().texOffs(0, 88).addBox(1F, -5.5F, -1F, 4, 2, 2), PartPose.rotation(0F, 0F, 1.151917F + 0.83490659F));
-        RBL1.addOrReplaceChild("RBL3", CubeListBuilder.create().texOffs(0, 82).addBox(5F, -4F, -0.5F, 4, 2, 1), PartPose.rotation(0F, 0F, 0.8203047F + 0.83490659F));
-        RBL1.addOrReplaceChild("RBL4", CubeListBuilder.create().texOffs(0, 76).addBox(8F, -2.5F, -0.5F, 4, 1, 1), PartPose.rotation(0F, 0F, 0.6981317F + 0.83490659F));
-
-        PartDefinition RML1 = root.addOrReplaceChild("RML1", CubeListBuilder.create().texOffs(0, 95).addBox(0F, -1F, -1F, 5, 2, 2).mirror(), PartPose.offsetAndRotation(-5F, 17F, 8F, 0F, -2.879793F, -0.83490659F));
-        RML1.addOrReplaceChild("RML2", CubeListBuilder.create().texOffs(0, 88).addBox(1F, -5.5F, -1F, 4, 2, 2), PartPose.rotation(0F, 0F, 1.151917F + 0.83490659F));
-        RML1.addOrReplaceChild("RML3", CubeListBuilder.create().texOffs(0, 82).addBox(5F, -4F, -0.5F, 4, 2, 1), PartPose.rotation(0F, 0F, 0.8203047F + 0.83490659F));
-        RML1.addOrReplaceChild("RML4", CubeListBuilder.create().texOffs(0, 76).addBox(8F, -2.5F, -0.5F, 4, 1, 1), PartPose.rotation(0F, 0F, 0.6981317F + 0.83490659F));
-
-        PartDefinition RFL1 = root.addOrReplaceChild("RFL1", CubeListBuilder.create().texOffs(0, 95).addBox(0F, -1F, -1F, 5, 2, 2), PartPose.offsetAndRotation(-5F, 17F, 5F, 0F, 2.879793F, -0.83490659F));
-        RFL1.addOrReplaceChild("RFL2", CubeListBuilder.create().texOffs(0, 88).addBox(1F, -5.5F, -1F, 4, 2, 2), PartPose.rotation(0F, 0F, 1.151917F + 0.83490659F));
-        RFL1.addOrReplaceChild("RFL3", CubeListBuilder.create().texOffs(0, 82).addBox(5F, -4F, -0.5F, 4, 2, 1), PartPose.rotation(0F, 0F, 0.8203047F + 0.83490659F));
-        RFL1.addOrReplaceChild("RFL4", CubeListBuilder.create().texOffs(0, 76).addBox(8F, -2.5F, -0.5F, 4, 1, 1), PartPose.rotation(0F, 0F, 0.6981317F + 0.83490659F));
-
-        PartDefinition RFFL1 = root.addOrReplaceChild("RFFL1", CubeListBuilder.create().texOffs(0, 95).addBox(0F, -1F, -1F, 5, 2, 2), PartPose.offsetAndRotation(-5F, 17F, 2F, 0F, 2.443461F, -0.83490659F));
-        RFFL1.addOrReplaceChild("RFFL2", CubeListBuilder.create().texOffs(0, 88).addBox(1F, -5.5F, -1F, 4, 2, 2), PartPose.rotation(0F, 0F, 1.151917F + 0.83490659F));
-        RFFL1.addOrReplaceChild("RFFL3", CubeListBuilder.create().texOffs(0, 82).addBox(5F, -4F, -0.5F, 4, 2, 1), PartPose.rotation(0F, 0F, 0.8203047F + 0.83490659F));
-        RFFL1.addOrReplaceChild("RFFL4", CubeListBuilder.create().texOffs(0, 76).addBox(8F, -2.5F, -0.5F, 4, 1, 1), PartPose.rotation(0F, 0F, 0.6981317F + 0.83490659F));
-
-        // Legs L
-        PartDefinition LFFL1 = root.addOrReplaceChild("LFFL1", CubeListBuilder.create().texOffs(0, 95).addBox(0F, -1F, -1F, 5, 2, 2), PartPose.offsetAndRotation(5F, 17F, 2F, 0F, 0.6981317F, 0.3490659F));
-        LFFL1.addOrReplaceChild("LFFL2", CubeListBuilder.create().texOffs(0, 88).addBox(1F, -5.5F, -1F, 4, 2, 2), PartPose.rotation(0F, 0F, 1.151917F - 0.3490659F));
-        LFFL1.addOrReplaceChild("LFFL3", CubeListBuilder.create().texOffs(0, 82).addBox(5F, -4F, -0.5F, 4, 2, 1), PartPose.rotation(0F, 0F, 0.8203047F - 0.3490659F));
-        LFFL1.addOrReplaceChild("LFFL4", CubeListBuilder.create().texOffs(0, 76).addBox(8F, -2.5F, -0.5F, 4, 1, 1), PartPose.rotation(0F, 0F, 0.6981317F - 0.3490659F));
-
-        PartDefinition LFL1 = root.addOrReplaceChild("LFL1", CubeListBuilder.create().texOffs(0, 95).addBox(0F, -1F, -1F, 5, 2, 2), PartPose.offsetAndRotation(5F, 17F, 5F, 0F, 0.2617994F, 0.3490659F));
-        LFL1.addOrReplaceChild("LFL2", CubeListBuilder.create().texOffs(0, 88).addBox(1F, -5.5F, -1F, 4, 2, 2), PartPose.rotation(0F, 0F, 1.151917F - 0.3490659F));
-        LFL1.addOrReplaceChild("LFL3", CubeListBuilder.create().texOffs(0, 82).addBox(5F, -4F, -0.5F, 4, 2, 1), PartPose.rotation(0F, 0F, 0.8203047F - 0.3490659F));
-        LFL1.addOrReplaceChild("LFL4", CubeListBuilder.create().texOffs(0, 76).addBox(8F, -2.5F, -0.5F, 4, 1, 1), PartPose.rotation(0F, 0F, 0.6981317F - 0.3490659F));
-
-        PartDefinition LML1 = root.addOrReplaceChild("LML1", CubeListBuilder.create().texOffs(0, 95).addBox(0F, -1F, -1F, 5, 2, 2), PartPose.offsetAndRotation(5F, 17F, 8F, 0F, -0.2617994F, 0.3490659F));
-        LML1.addOrReplaceChild("LML2", CubeListBuilder.create().texOffs(0, 88).addBox(1F, -5.5F, -1F, 4, 2, 2), PartPose.rotation(0F, 0F, 1.151917F - 0.3490659F));
-        LML1.addOrReplaceChild("LML3", CubeListBuilder.create().texOffs(0, 82).addBox(5F, -4F, -0.5F, 4, 2, 1), PartPose.rotation(0F, 0F, 0.8203047F - 0.3490659F));
-        LML1.addOrReplaceChild("LML4", CubeListBuilder.create().texOffs(0, 76).addBox(8F, -2.5F, -0.5F, 4, 1, 1), PartPose.rotation(0F, 0F, 0.6981317F - 0.3490659F));
-
-        PartDefinition LBL1 = root.addOrReplaceChild("LBL1", CubeListBuilder.create().texOffs(0, 95).addBox(0F, -1F, -1F, 5, 2, 2), PartPose.offsetAndRotation(5F, 17F, 11F, 0F, -0.6981317F, 0.3490659F));
-        LBL1.addOrReplaceChild("LBL2", CubeListBuilder.create().texOffs(0, 88).addBox(1F, -5.5F, -1F, 4, 2, 2), PartPose.rotation(0F, 0F, 1.151917F - 0.3490659F));
-        LBL1.addOrReplaceChild("LBL3", CubeListBuilder.create().texOffs(0, 82).addBox(5F, -4F, -0.5F, 4, 2, 1), PartPose.rotation(0F, 0F, 0.8203047F - 0.3490659F));
-        LBL1.addOrReplaceChild("LBL4", CubeListBuilder.create().texOffs(0, 76).addBox(8F, -2.5F, -0.5F, 4, 1, 1), PartPose.rotation(0F, 0F, 0.6981317F - 0.3490659F));
+        addLeg(root, "RBL", -5F, 11F, -2.443461F);
+        addLeg(root, "RML", -5F, 8F, -2.879793F);
+        addLeg(root, "RFL", -5F, 5F, 2.879793F);
+        addLeg(root, "RFFL", -5F, 2F, 2.443461F);
+        addLeg(root, "LFFL", 5F, 2F, 0.6981317F);
+        addLeg(root, "LFL", 5F, 5F, 0.2617994F);
+        addLeg(root, "LML", 5F, 8F, -0.2617994F);
+        addLeg(root, "LBL", 5F, 11F, -0.6981317F);
 
         // Claws
         root.addOrReplaceChild("ClawR1", CubeListBuilder.create().texOffs(44, 24).addBox(-2F, -1F, -1F, 4, 2, 2), PartPose.offsetAndRotation(-3F, 18F, -5F, 0F, -1.047198F, 0F));
@@ -182,6 +125,24 @@ public class ScorpionModel extends EntityModel<ScorpionRenderState> {
         return LayerDefinition.create(mesh, 64, 128);
     }
 
+    private static void addLeg(PartDefinition root, String name, float x, float z, float yaw) {
+        float roll = x < 0F ? 0.3F : -0.3F;
+        PartDefinition hip = root.addOrReplaceChild(name + "1",
+                CubeListBuilder.create().texOffs(0, 95).addBox(0F, -1F, -1F, 5, 2, 2),
+                PartPose.offsetAndRotation(x, 17F, z, 0F, yaw, roll));
+        hip.addOrReplaceChild(name + "2", CubeListBuilder.create().texOffs(0, 88).addBox(1F, -5.5F, -1F, 4, 2, 2),
+                PartPose.rotation(0F, 0F, 1.151917F));
+        hip.addOrReplaceChild(name + "3", CubeListBuilder.create().texOffs(0, 82).addBox(5F, -4F, -0.5F, 4, 2, 1),
+                PartPose.rotation(0F, 0F, 0.8203047F));
+        hip.addOrReplaceChild(name + "4", CubeListBuilder.create().texOffs(0, 76).addBox(8F, -2.5F, -0.5F, 4, 1, 1),
+                PartPose.rotation(0F, 0F, 0.6981317F));
+    }
+
+    private static void swingLeg(ModelPart hip, float yaw, float roll) {
+        hip.yRot += yaw;
+        hip.zRot += roll;
+    }
+
     @Override
     public void setupAnim(ScorpionRenderState state) {
         super.setupAnim(state);
@@ -191,22 +152,14 @@ public class ScorpionModel extends EntityModel<ScorpionRenderState> {
         float cozy2 = Mth.cos(state.walkAnimationPos) * 0.4F * state.walkAnimationSpeed;
         float cosxnz1 = Mth.cos(state.walkAnimationPos / 3.0F + (float) Math.PI) * 0.1F * state.walkAnimationSpeed;
         float cosxnz2 = Mth.cos(state.walkAnimationPos / 3.0F + (float) Math.PI) * 0.05F * state.walkAnimationSpeed;
-        LBL1.zRot = cosz1 - 0.3F;
-        LML1.zRot = cosz2 - 0.3F;
-        LFL1.zRot = cosz1 - 0.3F;
-        LFFL1.zRot = cosz2 - 0.3F;
-        RBL1.zRot = -cosz2 + 0.3F;
-        RML1.zRot = -cosz1 + 0.3F;
-        RFL1.zRot = -cosz2 + 0.3F;
-        RFFL1.zRot = -cosz1 + 0.3F;
-        LBL1.yRot = cozy1 - 0.6981317F;
-        LML1.yRot = cozy2 - 0.2617994F;
-        LFL1.yRot = cozy1 + 0.2617994F;
-        LFFL1.yRot = cozy2 + 0.6981317F;
-        RBL1.yRot = -cozy2 - 2.443461F;
-        RML1.yRot = -cozy1 - 2.879793F;
-        RFL1.yRot = -cozy2 + 2.879793F;
-        RFFL1.yRot = -cozy1 + 2.443461F;
+        swingLeg(LBL1, cozy1, cosz1);
+        swingLeg(LML1, cozy2, cosz2);
+        swingLeg(LFL1, cozy1, cosz1);
+        swingLeg(LFFL1, cozy2, cosz2);
+        swingLeg(RBL1, -cozy2, -cosz2);
+        swingLeg(RML1, -cozy1, -cosz1);
+        swingLeg(RFL1, -cozy2, -cosz2);
+        swingLeg(RFFL1, -cozy1, -cosz1);
         ClawR1.xRot = -cosxnz1;
         ClawR1.zRot = cosxnz1;
         ClawR2.xRot = -cosxnz1;

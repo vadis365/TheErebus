@@ -5,7 +5,6 @@ import erebus.block.BarkLogBlock;
 import erebus.block.GaeanKeystoneBlock;
 import erebus.block.HoneyTreatBlock;
 import erebus.block.plants.ModBerryBushBlock;
-import erebus.client.render.block.renderer.stack.BlockOfBonesSpecialRenderer;
 import erebus.client.render.block.renderer.stack.ErebusChestSpecialRenderer;
 import erebus.registries.blocks.ModBlocks;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -15,7 +14,6 @@ import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
-import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
@@ -92,15 +90,6 @@ public class ModBlockStateHelpers {
         blockModels.createNonTemplateHorizontalBlock(block.get());
     }
 
-    protected void createSpecialItem(DeferredBlock<Block> block, SpecialModelRenderer.Unbaked renderer) {
-        var item = block.get().asItem();
-        var itemModelBase = ModelTemplates.create("block", TextureSlot.PARTICLE).create(item,
-                new TextureMapping().put(TextureSlot.PARTICLE, new Material(Erebus.prefix("block/" +
-                        (block == ModBlocks.OFFERING_ALTAR ? "offering_altar" : "altar_base")))), blockModels.modelOutput);
-        var plainModel = ItemModelUtils.specialModel(itemModelBase, renderer);
-        itemModels.itemModelOutput.accept(item, plainModel);
-    }
-
     protected void createGaeanKeystone() {
         blockModels.blockStateOutput.accept(
                 MultiVariantGenerator
@@ -170,17 +159,6 @@ public class ModBlockStateHelpers {
                         .dispatch(candleCakeBlock)
                         .with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.LIT, litCandleCake, candleCake))
         );
-    }
-
-    protected void createBlockOfBones() {
-        createCustomHorizontalBlock(ModBlocks.BLOCK_OF_BONES);
-        var boneBlockItem = ModBlocks.BLOCK_OF_BONES.get().asItem();
-        var base = ModelTemplates
-                .create("block", TextureSlot.PARTICLE)
-                .create(boneBlockItem, new TextureMapping().put(TextureSlot.PARTICLE, new Material(Erebus.prefix("block/bone_block"))), blockModels.modelOutput);
-        var plainModel = ItemModelUtils.specialModel(base, new BlockOfBonesSpecialRenderer.Unbaked(Erebus.prefix("textures/block/bone_block.png")));
-
-        itemModels.itemModelOutput.accept(boneBlockItem, plainModel);
     }
 
     protected void createHollowLog() {
@@ -356,7 +334,7 @@ public class ModBlockStateHelpers {
         var directionProperties = selectMultifaceProperties(ModBlocks.DARK_FRUIT_VINE.get().defaultBlockState(), MultifaceBlock::getFaceProperty);
 
         erebus.block.plants.DarkFruitVineBlock.AGE.getPossibleValues().forEach(age -> {
-            var stageModelId = blockModels.createSuffixedVariant(ModBlocks.DARK_FRUIT_VINE.get(), "_" + age, ModelTemplates.CUBE_ALL, TextureMapping::cube);
+            var stageModelId = blockModels.createSuffixedVariant(ModBlocks.DARK_FRUIT_VINE.get(), "_" + age, ModelTemplates.CROSS, TextureMapping::cross);
             var model = plainVariant(stageModelId);
 
             if (directionProperties.isEmpty()) {

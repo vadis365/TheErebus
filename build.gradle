@@ -16,6 +16,12 @@ repositories {
     mavenLocal()
 
     maven {
+        name = "JEI"
+        url = "https://maven.blamejared.com"
+        content { includeGroup "mezz.jei" }
+    }
+
+    maven {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
     }
@@ -101,7 +107,8 @@ configurations {
 }
 
 dependencies {
-
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

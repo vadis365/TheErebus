@@ -64,6 +64,14 @@ public class BiomeLayerStack {
         biomes = new ZoomLayer.Factory(1004L, false, Holder.direct(biomes));
         biomes = new ZoomLayer.Factory(1005L, false, Holder.direct(biomes));
 
+        biomes = new TransitionBiomeLayer(9047L, List.of(
+                new TransitionBiomeLayer.Border(ModBiomes.UNDERGROUND_JUNGLE_KEY, ModBiomes.SUBMERGED_SWAMP_KEY, ModBiomes.ROOTWATER_MARSH_KEY),
+                new TransitionBiomeLayer.Border(ModBiomes.ULTERIOR_OUTBACK_KEY, ModBiomes.VOLCANIC_DESERT_KEY, ModBiomes.CINDER_SCRUB_KEY),
+                new TransitionBiomeLayer.Border(ModBiomes.ELYSIAN_FOREST_KEY, ModBiomes.FUNGAL_FOREST_KEY, ModBiomes.GLOWROT_GROVES_KEY),
+                new TransitionBiomeLayer.Border(ModBiomes.SUBTERRANEAN_SAVANNAH_KEY, ModBiomes.UNDERGROUND_JUNGLE_KEY, ModBiomes.AMBER_THICKETS_KEY),
+                new TransitionBiomeLayer.Border(ModBiomes.PETRIFIED_FOREST_KEY, ModBiomes.VOLCANIC_DESERT_KEY, ModBiomes.FOSSIL_BARRENS_KEY)
+        ), Holder.direct(biomes));
+
         context.register(RANDOM_EREBUS_BIOMES, biomes);
     }
 

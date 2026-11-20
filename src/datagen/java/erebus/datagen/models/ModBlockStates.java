@@ -4,11 +4,11 @@ import erebus.Erebus;
 import erebus.block.TempleSealBlock;
 import erebus.block.TempleTeleporterBlock;
 import erebus.block.plants.ModCropBlock;
-import erebus.client.render.block.renderer.stack.*;
 import erebus.datagen.models.ModModelTemplates.FlowerType;
 import erebus.registries.blocks.ModBlockFamilies;
 import erebus.registries.blocks.ModBlocks;
 import erebus.registries.item.ModItems;
+import net.minecraft.client.color.item.GrassColorSource;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
@@ -93,7 +93,14 @@ public class ModBlockStates extends ModBlockStateHelpers {
         blockModels.registerSimpleItemModel(ModBlocks.BAMBOO_CRATE.get(), Erebus.prefix("block/bamboo_crate_default"));
         blockModels.registerSimpleItemModel(ModBlocks.GLOWSHROOM_STALK.get(), Erebus.prefix("block/glowshroom_stalk_main"));
         blockModels.registerSimpleItemModel(ModBlocks.BAMBOO_TORCH.get(), Erebus.prefix("block/bamboo_torch_lower"));
-        blockModels.registerSimpleItemModel(ModBlocks.TALL_FERN.get(), Erebus.prefix("block/tall_fern_lower"));
+        var algae = ModBlocks.ALGAE.get();
+        blockModels.registerSimpleTintedItemModel(algae,
+                blockModels.createFlatItemModelWithBlockTexture(algae.asItem(), algae), new GrassColorSource());
+        blockModels.registerSimpleTintedItemModel(ModBlocks.FERN.get(), Erebus.prefix("block/fern"), new GrassColorSource());
+        blockModels.registerSimpleTintedItemModel(ModBlocks.FIDDLE_HEAD.get(), Erebus.prefix("block/fiddle_head"), new GrassColorSource());
+        blockModels.registerSimpleTintedItemModel(ModBlocks.SWAMP_VENT.get(), Erebus.prefix("block/swamp_vent"), new GrassColorSource());
+        blockModels.registerSimpleTintedItemModel(ModBlocks.TALL_FERN.get(), Erebus.prefix("block/tall_fern_lower"), new GrassColorSource());
+        blockModels.registerSimpleTintedItemModel(ModBlocks.THORNS.get(), Erebus.prefix("block/thorns"), new GrassColorSource());
         blockModels.registerSimpleItemModel(ModBlocks.DROUGHTED_SHRUB.get(), Erebus.prefix("block/droughted_shrub_lower"));
         blockModels.registerSimpleItemModel(ModBlocks.INSECT_REPELLENT.get(), Erebus.prefix("block/blank"));
         createCustomHorizontalBlock(ModBlocks.UMBER_GOLEM_STATUE);
@@ -352,17 +359,13 @@ public class ModBlockStates extends ModBlockStateHelpers {
         createCustomBlock(ModBlocks.ANTLION_EGG);
         createCustomBlock(ModBlocks.TARANTULA_EGG);
         createCustomHorizontalBlock(ModBlocks.ALTAR_BASE);
+        blockModels.registerSimpleItemModel(ModBlocks.ALTAR_BASE.get(), Erebus.prefix("item/altar_base"));
         createCustomHorizontalBlock(ModBlocks.ALTAR_EXPERIENCE);
-        createSpecialItem(ModBlocks.ALTAR_EXPERIENCE, new ExperienceAltarSpecialRenderer.Unbaked(Erebus.prefix("")));
         createCustomHorizontalBlock(ModBlocks.ALTAR_HEALING);
-        createSpecialItem(ModBlocks.ALTAR_HEALING, new HealingAltarSpecialRenderer.Unbaked(Erebus.prefix("")));
         createCustomHorizontalBlock(ModBlocks.ALTAR_LIGHTNING);
-        createSpecialItem(ModBlocks.ALTAR_LIGHTNING, new LightningAltarSpecialRenderer.Unbaked(Erebus.prefix("")));
         createCustomHorizontalBlock(ModBlocks.ALTAR_REPAIR);
-        createSpecialItem(ModBlocks.ALTAR_REPAIR, new RepairAltarSpecialRenderer.Unbaked(Erebus.prefix("")));
         createCustomHorizontalBlock(ModBlocks.BAMBOO_BRIDGE);
         createCustomBlock(ModBlocks.OFFERING_ALTAR);
-        createSpecialItem(ModBlocks.OFFERING_ALTAR, new OfferingAltarSpecialRenderer.Unbaked(Erebus.prefix("offering_altar")));
         createCustomBlock(ModBlocks.FLUID_ANTI_VENOM_BLOCK);
         createCustomBlock(ModBlocks.FLUID_BEETLE_JUICE_BLOCK);
         createCustomBlock(ModBlocks.FLUID_FORMIC_ACID_BLOCK);
@@ -395,7 +398,7 @@ public class ModBlockStates extends ModBlockStateHelpers {
         createFlower(FlowerType.DROOP, ModBlocks.FLOWER_YELLOW, ModBlocks.PETAL_YELLOW);
         createFlower(FlowerType.THICK, ModBlocks.FLOWER_RAINBOW, ModBlocks.PETAL_RAINBOW_CHASE, ModBlocks.PETAL_RAINBOW);
 
-        createBlockOfBones();
+        createCustomHorizontalBlock(ModBlocks.BLOCK_OF_BONES);
         createHollowLog();
     }
 }

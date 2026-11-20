@@ -37,7 +37,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
 
-public class BlackWidow extends Monster {
+public class BlackWidow extends ClimbingMonster {
     private static final EntityDataAccessor<Integer> SIZE = SynchedEntityData.defineId(BlackWidow.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Byte> CLIMBING = SynchedEntityData.defineId(BlackWidow.class, EntityDataSerializers.BYTE);
 

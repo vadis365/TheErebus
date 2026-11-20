@@ -1,9 +1,11 @@
 package erebus.entity;
 
+import erebus.entity.helper.SurfaceClimbing;
 import erebus.registries.ModSounds;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -34,6 +36,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 import org.jspecify.annotations.Nullable;
 
 public class RhinoBeetle extends TamableAnimal implements PlayerRideable {
@@ -218,9 +221,32 @@ public class RhinoBeetle extends TamableAnimal implements PlayerRideable {
     }
 
     @Override
+    public void calculateEntityAnimation(boolean useY) {
+        super.calculateEntityAnimation(useY || SurfaceClimbing.isOnWall(this));
+    }
+
+    @Override
     protected Vec3 getPassengerAttachmentPoint(Entity passenger, EntityDimensions dimensions, float scale) {
+        return saddlePosition(passenger, SurfaceClimbing.surface(this));
+    }
+
+    public boolean hasRoomForCeilingRider() {
+        LivingEntity rider = getControllingPassenger();
+        if (rider == null) return false;
+        Vec3 riderPosition = position().add(saddlePosition(rider, Direction.UP)).subtract(rider.getVehicleAttachmentPoint(this));
+        return !level().getBlockCollisions(rider, rider.getBoundingBox().move(riderPosition.subtract(rider.position()))).iterator().hasNext();
+    }
+
+    private Vec3 saddlePosition(Entity passenger, Direction surface) {
         double yaw = Math.toRadians(yBodyRot);
-        return new Vec3(Math.sin(yaw) * 0.35, 1.3, -Math.cos(yaw) * 0.35);
+        Vec3 saddle = new Vec3(Math.sin(yaw) * 0.35, 1.3, -Math.cos(yaw) * 0.35);
+        if (surface == Direction.DOWN) return saddle;
+
+        Vector3f seat = SurfaceClimbing.rotation(surface, yBodyRot)
+                .transform((float) saddle.x, (float) saddle.y, (float) saddle.z, new Vector3f());
+        Vec3 contact = SurfaceClimbing.contactOffset(surface, getBbWidth(), getBbHeight());
+        double riderClearance = surface == Direction.UP ? passenger.getBbHeight() : 0;
+        return contact.add(seat.x, seat.y - riderClearance, seat.z);
     }
 
     @Override

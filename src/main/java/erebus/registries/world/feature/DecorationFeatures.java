@@ -62,6 +62,7 @@ public class DecorationFeatures extends ModFeatureHelpers {
         registerConfiguredFeatureWithConfig(ROTTEN_ACACIA, ROTTEN_ACACIA_CONFIG);
         registerConfiguredFeatureWithConfig(SAVANNAH_ROCK, SAVANNAH_ROCK_CONFIG);
         registerConfiguredFeatureWithConfig(SCORCHED_WOOD, SCORCHED_WOOD_POPULATION_CONFIG);
+        TRANSITION_LANDMARKS.forEach((kind, config) -> registerConfiguredFeatureWithConfig(kind.feature, config));
     }
 
     public static void initPlacedFeatures(BootstrapContext<PlacedFeature> context) {
@@ -91,5 +92,6 @@ public class DecorationFeatures extends ModFeatureHelpers {
         registerPlacedFeature(ROTTEN_ACACIA);
         registerPlacedFeature(SAVANNAH_ROCK);
         registerPlacedFeature(SCORCHED_WOOD);
+        TRANSITION_LANDMARKS.keySet().forEach(kind -> registerPlacedFeature(kind.feature));
     }
 }

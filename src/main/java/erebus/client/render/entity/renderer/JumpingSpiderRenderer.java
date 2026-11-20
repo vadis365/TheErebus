@@ -8,10 +8,9 @@ import erebus.client.render.entity.renderer.state.JumpingSpiderRenderState;
 import erebus.entity.JumpingSpider;
 import erebus.registries.entity.ModEntityRendering;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 
-public class JumpingSpiderRenderer extends MobRenderer<JumpingSpider, JumpingSpiderRenderState, JumpingSpiderModel> {
+public class JumpingSpiderRenderer extends ClimbingMobRenderer<JumpingSpider, JumpingSpiderRenderState, JumpingSpiderModel> {
     private static final Identifier[] TEXTURES = {Erebus.prefix("textures/entity/jumping_spider.png"), Erebus.prefix("textures/entity/jumping_spider_green.png"), Erebus.prefix("textures/entity/jumping_spider_red.png")};
 
     public JumpingSpiderRenderer(EntityRendererProvider.Context context) {

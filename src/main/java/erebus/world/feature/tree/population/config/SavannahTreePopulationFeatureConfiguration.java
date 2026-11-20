@@ -32,7 +32,11 @@ public class SavannahTreePopulationFeatureConfiguration extends Feature<NoneFeat
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         var level = context.level();
-        if (!level.getBiome(context.origin()).is(ModBiomes.SUBTERRANEAN_SAVANNAH_KEY)) return false;
+        var biome = level.getBiome(context.origin());
+        if (biome.is(ModBiomes.AMBER_THICKETS_KEY) && kind == Kind.ACACIA) {
+            return placePondsideAcacias(context);
+        }
+        if (!biome.is(ModBiomes.SUBTERRANEAN_SAVANNAH_KEY)) return false;
         var random = context.random();
         int attempts = switch (kind) {
             case ACACIA -> 65;
@@ -51,6 +55,28 @@ public class SavannahTreePopulationFeatureConfiguration extends Feature<NoneFeat
             placed |= placeTree(context, soil.above());
         }
         return placed;
+    }
+
+    private boolean placePondsideAcacias(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+        var level = context.level();
+        var random = context.random();
+        int trees = 0;
+        for (int attempt = 0; attempt < 24 && trees < 3; attempt++) {
+            int x = context.origin().getX() + 2 + random.nextInt(12);
+            int z = context.origin().getZ() + 2 + random.nextInt(12);
+            for (int y = level.getMinY() + 22; y < level.getMinY() + 100; y++) {
+                var soil = new BlockPos(x, y, z);
+                if (!level.getBlockState(soil).is(Blocks.GRASS_BLOCK) || !level.isEmptyBlock(soil.above())
+                        || !level.getBiome(soil).is(ModBiomes.AMBER_THICKETS_KEY)) continue;
+                if (BlockPos.findClosestMatch(soil, 4, 0,
+                        pos -> level.getBlockState(pos).is(Blocks.WATER)).isPresent()
+                        && placeTree(context, soil.above())) {
+                    trees++;
+                    break;
+                }
+            }
+        }
+        return trees > 0;
     }
 
     protected boolean placeTree(FeaturePlaceContext<NoneFeatureConfiguration> context, BlockPos pos) {

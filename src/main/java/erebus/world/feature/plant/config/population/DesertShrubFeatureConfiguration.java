@@ -17,9 +17,11 @@ public class DesertShrubFeatureConfiguration extends Feature<NoneFeatureConfigur
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         var level = context.level();
-        if (!level.getBiome(context.origin()).is(ModBiomes.ULTERIOR_OUTBACK_KEY)) return false;
+        var biome = level.getBiome(context.origin());
+        boolean scrub = biome.is(ModBiomes.CINDER_SCRUB_KEY);
+        if (!scrub && !biome.is(ModBiomes.ULTERIOR_OUTBACK_KEY)) return false;
         var random = context.random();
-        for (int attempt = 0; attempt < 16; attempt++) {
+        for (int attempt = 0; attempt < (scrub ? 8 : 16); attempt++) {
             int x = context.origin().getX() + 8 + random.nextInt(16);
             int y = level.getMinY() + 20 + random.nextInt(80);
             int z = context.origin().getZ() + 8 + random.nextInt(16);
@@ -31,7 +33,9 @@ public class DesertShrubFeatureConfiguration extends Feature<NoneFeatureConfigur
     public boolean placeFlower(WorldGenLevel level, BlockPos pos) {
         if (level.isOutsideBuildHeight(pos) || level.isOutsideBuildHeight(pos.below())) return false;
         var soil = level.getBlockState(pos.below());
-        if (soil != Blocks.GRASS_BLOCK.defaultBlockState() && soil != Blocks.MYCELIUM.defaultBlockState()) return false;
+        if (!soil.is(Blocks.GRASS_BLOCK) && !soil.is(Blocks.MYCELIUM)
+                && !(level.getBiome(pos).is(ModBiomes.CINDER_SCRUB_KEY) && soil.is(Blocks.COARSE_DIRT))) return false;
+        if (!ModBlocks.DESERT_SHRUB.get().defaultBlockState().canSurvive(level, pos)) return false;
         return level.isEmptyBlock(pos) && level.setBlock(pos, ModBlocks.DESERT_SHRUB.get().defaultBlockState(), 2);
     }
 }

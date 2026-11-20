@@ -1,0 +1,64 @@
+{
+  "attributes": {
+    "minecraft:visual/fog_color": "#a18366"
+  },
+  "carvers": [
+    "erebus:cave",
+    "erebus:canyon"
+  ],
+  "downfall": 0.05,
+  "effects": {
+    "foliage_color": "#a3a057",
+    "grass_color": "#a3a057",
+    "water_color": "#847350"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "erebus:scorched_outcrops"
+    ],
+    [],
+    [
+      "erebus:iron_ore",
+      "erebus:copper_ore",
+      "erebus:quartz_ore",
+      "erebus:gneiss_ore",
+      "erebus:temple_ore"
+    ],
+    [],
+    [],
+    [
+      "erebus:desert_shrub",
+      "erebus:prickly_pear"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "erebus:fire_ant",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 6
+      },
+      {
+        "type": "erebus:scorpion",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 18
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 1.7
+}

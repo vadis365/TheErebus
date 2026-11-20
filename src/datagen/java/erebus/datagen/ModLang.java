@@ -5,6 +5,7 @@ import erebus.registries.blocks.ModBlocks;
 import erebus.registries.data.tags.ModItemTags;
 import erebus.registries.entity.ModEntities;
 import erebus.registries.item.ModItems;
+import erebus.registries.world.ModBiomes;
 import net.minecraft.data.PackOutput;
 
 public class ModLang extends ModLangProvider {
@@ -16,10 +17,12 @@ public class ModLang extends ModLangProvider {
     protected void addTranslations() {
         add("message.erebus.map.dimension", "Papyrus Maps can only be used in the Erebus.");
         add("block.erebus.bed.respawn_only", "You cannot sleep in the Erebus.");
+        add("fakeplayer.erebus", "Erebus");
         addItemTranslations();
         addBlockTranslations();
         addEntityTranslations();
         addFluidTranslations();
+        addSoundSubtitles();
         addCreativeTabTranslations();
         addToolTipTranslations();
         addBookTranslations();
@@ -27,7 +30,7 @@ public class ModLang extends ModLangProvider {
         addBiomeTranslations();
         addContainerTranslations();
         addTagTranslations();
-        addEMITranslations();
+        addJeiTranslations();
     }
 
     private void addItemTranslations() {
@@ -40,8 +43,8 @@ public class ModLang extends ModLangProvider {
         addItem(ModItems.COMPOUND_LENS, "Compound Goggle Lens");
         addItem(ModItems.FLY_WING, "Fly Wing");
         addItem(ModItems.PETRIFIED_WOOD, "Petrified Wood");
-        addItem(ModItems.BIO_VELOCITY, "Bio Velocity");
-        addItem(ModItems.ELASTIC_FIBER, "Elastic Fiber");
+        addItem(ModItems.BIO_VELOCITY, "Bio-Velocity");
+        addItem(ModItems.ELASTIC_FIBER, "Elastic Fibre");
         addItem(ModItems.WASP_STING, "Wasp Sting");
         addItem(ModItems.BAMBOO_SHOOT, "Colossal Bamboo Shoot");
         addItem(ModItems.RED_GEM, "Redgem");
@@ -75,7 +78,7 @@ public class ModLang extends ModLangProvider {
         addItem(ModItems.CRIMSON_HEART, "Crimson Heart");
         addItem(ModItems.RESIN, "Tree Resin");
         addItem(ModItems.AMBER_STAR, "Amber Star");
-        addItem(ModItems.INGOT_ALUMINUM, "Aluminum Ingot");
+        addItem(ModItems.INGOT_ALUMINUM, "Aluminium Ingot");
         addItem(ModItems.INGOT_LEAD, "Lead Ingot");
         addItem(ModItems.INGOT_SILVER, "Silver Ingot");
         addItem(ModItems.INGOT_TIN, "Tin Ingot");
@@ -199,6 +202,10 @@ public class ModLang extends ModLangProvider {
         addItem(ModItems.ROLLED_NEWSPAPER, "Rolled-up Newspaper");
         addItem(ModItems.BAMBUCKET, "Bambucket");
         addItem(ModItems.ANTI_VENOM_BAMBUCKET, "Anti-venom Bambucket");
+        addItem(ModItems.ANTI_VENOM_BUCKET, "Anti-venom Bucket");
+        addItem(ModItems.BEETLE_JUICE_BUCKET, "Beetle Juice Bucket");
+        addItem(ModItems.FORMIC_ACID_BUCKET, "Formic Acid Bucket");
+        addItem(ModItems.HONEY_BUCKET, "Honey Bucket");
         addItem(ModItems.HOMING_BEECON, "Homing Beecon");
         addItem(ModItems.HOMING_BEECON_ADVANCED, "Advanced Homing Beecon");
         addItem(ModItems.SPRAY_CAN, "Insect Repellent");
@@ -239,7 +246,7 @@ public class ModLang extends ModLangProvider {
         addItem(ModItems.SEED_WHITE, "White Flower Seeds");
         addItem(ModItems.SEED_RAINBOW, "Rainbow Flower Seeds");
         addItem(ModItems.LIFE_BLOOD, "Life Blood");
-        addItem(ModItems.HEART_BERRIES, "Heart Berries");
+        addItem(ModItems.HEART_BERRIES, "Heartberries");
         addItem(ModItems.STAG_HEART_RAW, "Heart of the Stag");
         addItem(ModItems.STAG_HEART_COOKED, "Roasted Heart of the Stag");
     }
@@ -257,7 +264,7 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.UMBERPAVER, "Umberpaver");
         addBlock(ModBlocks.UMBERPAVER_MOSSY, "Mossy Umberpaver");
         addBlock(ModBlocks.UMBERPAVER_WEBBED, "Webbed Umberpaver");
-        addBlock(ModBlocks.UMBERSTONE_PILLAR, "Umberstone Pillar");
+        addBlock(ModBlocks.UMBERSTONE_PILLAR, "Umberpillar");
         addBlock(ModBlocks.VOLCANIC_ROCK, "Volcanic Rock");
         addBlock(ModBlocks.DUST, "Dust");
         addBlock(ModBlocks.DUST_LAYER, "Dust Layer");
@@ -269,6 +276,7 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.PETRIFIED_WOOD_ROCK_6, "Petrified Wood Rock");
         addBlock(ModBlocks.PETRIFIED_BARK_RED, "Red Petrified Bark");
         addBlock(ModBlocks.PETRIFIED_BARK_BROWN, "Brown Petrified Bark");
+        addBlock(ModBlocks.PETRIFIED_LOG_INNER, "Petrified Heartwood");
         addBlock(ModBlocks.DUNG, "Dung");
         addBlock(ModBlocks.MIR_BRICKS, "Mirbrick");
         addBlock(ModBlocks.MUD_BRICKS, "Mud Brick");
@@ -327,7 +335,7 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.SAPLING_BAOBAB, "Baobab Sapling");
         addBlock(ModBlocks.SAPLING_MARSHWOOD, "Marshwood Sapling");
         addBlock(ModBlocks.SAPLING_CYPRESS, "Cypress Sapling");
-        addBlock(ModBlocks.SAPLING_BAMBOO, "Bamboo Sapling");
+        addBlock(ModBlocks.SAPLING_BAMBOO, "Colossal Bamboo Shoot");
 
         // MARK: Leaves
         addBlock(ModBlocks.LEAVES_MOSSBARK, "Mossbark Leaves");
@@ -378,7 +386,7 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.SLAB_UMBERCOBBLE_WEBBED, "Webbed Umbercobble Slab");
         addBlock(ModBlocks.SLAB_UMBERSTONE_BRICKS, "Umberbrick Slab");
         addBlock(ModBlocks.SLAB_UMBERTILE_SMOOTH, "Smooth Umbertile Slab");
-        addBlock(ModBlocks.SLAB_UMBERTILE_SMOOTH_SMALL, "Small Umbertile Slab");
+        addBlock(ModBlocks.SLAB_UMBERTILE_SMOOTH_SMALL, "Small Umbertiles Slab");
         addBlock(ModBlocks.SLAB_UMBERPAVER, "Umberpaver Slab");
         addBlock(ModBlocks.SLAB_UMBERPAVER_MOSSY, "Mossy Umberpaver Slab");
         addBlock(ModBlocks.SLAB_UMBERPAVER_WEBBED, "Webbed Umberpaver Slab");
@@ -410,14 +418,14 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.STAIRS_UMBERCOBBLE_WEBBED, "Webbed Umbercobble Stairs");
         addBlock(ModBlocks.STAIRS_UMBERSTONE_BRICKS, "Umberbrick Stairs");
         addBlock(ModBlocks.STAIRS_UMBERTILE_SMOOTH, "Smooth Umbertile Stairs");
-        addBlock(ModBlocks.STAIRS_UMBERTILE_SMOOTH_SMALL, "Small Umbertile Stairs");
+        addBlock(ModBlocks.STAIRS_UMBERTILE_SMOOTH_SMALL, "Small Umbertiles Stairs");
         addBlock(ModBlocks.STAIRS_UMBERPAVER, "Umberpaver Stairs");
         addBlock(ModBlocks.STAIRS_UMBERPAVER_MOSSY, "Mossy Umberpaver Stairs");
         addBlock(ModBlocks.STAIRS_UMBERPAVER_WEBBED, "Webbed Umberpaver Stairs");
         addBlock(ModBlocks.STAIRS_AMBER, "Amber Stairs");
         addBlock(ModBlocks.STAIRS_AMBER_BRICKS, "Amber Brick Stairs");
         addBlock(ModBlocks.STAIRS_MUD_BRICKS, "Mud Brick Stairs");
-        addBlock(ModBlocks.STAIRS_MIR_BRICKS, "Mir Brick Stairs");
+        addBlock(ModBlocks.STAIRS_MIR_BRICKS, "Mirbrick Stairs");
 
         // MARK: Doors
         addBlock(ModBlocks.DOOR_BAOBAB, "Baobab Door");
@@ -442,6 +450,7 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.FENCE_CYPRESS, "Cypress Fence");
         addBlock(ModBlocks.FENCE_BALSAM, "Balsam Fence");
         addBlock(ModBlocks.FENCE_WHITE, "White Fence");
+        addBlock(ModBlocks.FENCE_BAMBOO, "Bamboo Fence");
         addBlock(ModBlocks.FENCE_ROTTEN, "Rotten Fence");
         addBlock(ModBlocks.FENCE_MARSHWOOD, "Marshwood Fence");
         addBlock(ModBlocks.FENCE_SCORCHED, "Scorched Fence");
@@ -456,6 +465,7 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.FENCE_GATE_CYPRESS, "Cypress Fence Gate");
         addBlock(ModBlocks.FENCE_GATE_BALSAM, "Balsam Fence Gate");
         addBlock(ModBlocks.FENCE_GATE_WHITE, "White Fence Gate");
+        addBlock(ModBlocks.FENCE_GATE_BAMBOO, "Bamboo Fence Gate");
         addBlock(ModBlocks.FENCE_GATE_ROTTEN, "Rotten Fence Gate");
         addBlock(ModBlocks.FENCE_GATE_MARSHWOOD, "Marshwood Fence Gate");
         addBlock(ModBlocks.FENCE_GATE_SCORCHED, "Scorched Fence Gate");
@@ -466,8 +476,8 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.WALL_UMBERCOBBLE, "Umbercobble Wall");
         addBlock(ModBlocks.WALL_UMBERCOBBLE_MOSSY, "Mossy Umbercobble Wall");
         addBlock(ModBlocks.WALL_UMBERCOBBLE_WEBBED, "Webbed Umbercobble Wall");
-        addBlock(ModBlocks.WALL_UMBERSTONE_BRICKS, "Umberbrick Wall");
-        addBlock(ModBlocks.WALL_UMBERTILE_SMOOTH, "Smooth Umbertile Wall");
+        addBlock(ModBlocks.WALL_UMBERSTONE_BRICKS, "Umbrick Wall");
+        addBlock(ModBlocks.WALL_UMBERTILE_SMOOTH, "Umbertile Wall");
         addBlock(ModBlocks.WALL_UMBERTILE_SMOOTH_SMALL, "Small Umbertile Wall");
         addBlock(ModBlocks.WALL_UMBERPAVER, "Umberpaver Wall");
         addBlock(ModBlocks.WALL_UMBERPAVER_MOSSY, "Mossy Umberpaver Wall");
@@ -481,20 +491,25 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.CROP_MANDRAKE, "Mandrake");
         addBlock(ModBlocks.HEART_BERRY_BUSH, "Heartberry Bush");
         addBlock(ModBlocks.JADE_BERRY_BUSH, "Jadeberry Bush");
-        addBlock(ModBlocks.SWAMP_BERRY_BUSH, "Swamp Berry Bush");
+        addBlock(ModBlocks.SWAMP_BERRY_BUSH, "Swampberry Bush");
         addBlock(ModBlocks.DARK_FRUIT_VINE, "Dark Fruit Vine");
         addBlock(ModBlocks.PRICKLY_PEAR, "Prickly Pear Cactus");
         addBlock(ModBlocks.COLOSSAL_BAMBOO, "Colossal Bamboo");
         addBlock(ModBlocks.DARK_CAPPED_MUSHROOM, "Dark Capped Mushroom");
-        addBlock(ModBlocks.DUTCH_CAP_MUSHROOM, "Dutch Capped Mushroom");
+        addBlock(ModBlocks.DUTCH_CAP_MUSHROOM, "Dutch Cap Mushroom");
         addBlock(ModBlocks.GRANDMAS_SHOES_MUSHROOM, "Grandma's Shoes Mushroom");
         addBlock(ModBlocks.KAIZERS_FINGERS_MUSHROOM, "Kaizer's Fingers Mushroom");
         addBlock(ModBlocks.SARCASTIC_CZECH_MUSHROOM, "Sarcastic Czech Mushroom");
         addBlock(ModBlocks.DARK_CAPPED_MUSHROOM_BLOCK, "Dark Capped Mushroom Block");
-        addBlock(ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK, "Dutch Capped Mushroom Block");
+        addBlock(ModBlocks.DUTCH_CAP_MUSHROOM_BLOCK, "Dutch Cap Mushroom Block");
         addBlock(ModBlocks.GRANDMAS_SHOES_MUSHROOM_BLOCK, "Grandma's Shoes Mushroom Block");
         addBlock(ModBlocks.KAIZERS_FINGERS_MUSHROOM_BLOCK, "Kaizer's Fingers Mushroom Block");
         addBlock(ModBlocks.SARCASTIC_CZECH_MUSHROOM_BLOCK, "Sarcastic Czech Mushroom Block");
+        addBlock(ModBlocks.DARK_CAPPED_MUSHROOM_STEM, "Dark Capped Mushroom Stem");
+        addBlock(ModBlocks.DUTCH_CAP_MUSHROOM_STEM, "Dutch Cap Mushroom Stem");
+        addBlock(ModBlocks.GRANDMAS_SHOES_MUSHROOM_STEM, "Grandma's Shoes Mushroom Stem");
+        addBlock(ModBlocks.KAIZERS_FINGERS_MUSHROOM_STEM, "Kaizer's Fingers Mushroom Stem");
+        addBlock(ModBlocks.SARCASTIC_CZECH_MUSHROOM_STEM, "Sarcastic Czech Mushroom Stem");
         addBlock(ModBlocks.DESERT_SHRUB, "Desert Shrub");
         addBlock(ModBlocks.MIRE_CORAL, "Glowing Swamp Weed");
         addBlock(ModBlocks.NETTLE, "Nettle");
@@ -529,6 +544,8 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.PETAL_MAGENTA, "Magenta Petal Block");
         addBlock(ModBlocks.PETAL_ORANGE, "Orange Petal Block");
         addBlock(ModBlocks.PETAL_WHITE, "White Petal Block");
+        addBlock(ModBlocks.PETAL_RAINBOW, "Rainbow Petal Block");
+        addBlock(ModBlocks.PETAL_RAINBOW_CHASE, "Chasing Rainbow Petal Block");
         addBlock(ModBlocks.STIGMA_BLACK, "Black Stigma");
         addBlock(ModBlocks.STIGMA_RED, "Red Stigma");
         addBlock(ModBlocks.STIGMA_BROWN, "Brown Stigma");
@@ -578,12 +595,13 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.JADE_BLOCK, "Block of Jade");
         addBlock(ModBlocks.MUD, "Mud");
         addBlock(ModBlocks.QUICK_SAND, "Quicksand");
-        addBlock(ModBlocks.GHOST_SAND, "Ghost Sand");
+        addBlock(ModBlocks.GHOST_SAND, "Ghost sand");
         addBlock(ModBlocks.SWAMP_VENT, "Swamp Vent");
         addBlock(ModBlocks.GNEISS_VENT, "Gneiss Vent");
         addBlock(ModBlocks.RED_GEM_BLOCK, "Red Gem");
         addBlock(ModBlocks.RED_GEM_LAMP, "Red Gem Lamp");
         addBlock(ModBlocks.WITHER_WEB, "Wither Web");
+        addBlock(ModBlocks.LAVA_WEB, "Lava Web");
         addBlock(ModBlocks.GNEISS, "Gneiss");
         addBlock(ModBlocks.GNEISS_CARVED, "Carved Gneiss");
         addBlock(ModBlocks.GNEISS_RELIEF, "Layered Gneiss");
@@ -597,26 +615,44 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.SILK, "Silk");
         addBlock(ModBlocks.REIN_EXO, "Reinforced Exo Blocks");
         addBlock(ModBlocks.VELOCITY_BLOCK, "Velocity Block");
-        addBlock(ModBlocks.VELOCITY_BLOCK_LIGHTNING_SPEED, "Lightning Speed Velocity Block");
+        addBlock(ModBlocks.VELOCITY_BLOCK_LIGHTNING_SPEED, "Lightning Velocity Block");
         addBlock(ModBlocks.BLOCK_OF_BONES, "Block O' Bones");
         addBlock(ModBlocks.ANTLION_EGG, "Antlion Egg");
         addBlock(ModBlocks.TARANTULA_EGG, "Tarantula Egg");
         addBlock(ModBlocks.HONEY_TREAT, "Honey Treat");
+        addBlock(ModBlocks.CANDLE_HONEY_TREAT, "Honey Treat with Candle");
+        addBlock(ModBlocks.WHITE_CANDLE_HONEY_TREAT, "Honey Treat with White Candle");
+        addBlock(ModBlocks.ORANGE_CANDLE_HONEY_TREAT, "Honey Treat with Orange Candle");
+        addBlock(ModBlocks.MAGENTA_CANDLE_HONEY_TREAT, "Honey Treat with Magenta Candle");
+        addBlock(ModBlocks.LIGHT_BLUE_CANDLE_HONEY_TREAT, "Honey Treat with Light Blue Candle");
+        addBlock(ModBlocks.YELLOW_CANDLE_HONEY_TREAT, "Honey Treat with Yellow Candle");
+        addBlock(ModBlocks.LIME_CANDLE_HONEY_TREAT, "Honey Treat with Lime Candle");
+        addBlock(ModBlocks.PINK_CANDLE_HONEY_TREAT, "Honey Treat with Pink Candle");
+        addBlock(ModBlocks.GRAY_CANDLE_HONEY_TREAT, "Honey Treat with Gray Candle");
+        addBlock(ModBlocks.LIGHT_GRAY_CANDLE_HONEY_TREAT, "Honey Treat with Light Gray Candle");
+        addBlock(ModBlocks.CYAN_CANDLE_HONEY_TREAT, "Honey Treat with Cyan Candle");
+        addBlock(ModBlocks.PURPLE_CANDLE_HONEY_TREAT, "Honey Treat with Purple Candle");
+        addBlock(ModBlocks.BLUE_CANDLE_HONEY_TREAT, "Honey Treat with Blue Candle");
+        addBlock(ModBlocks.BROWN_CANDLE_HONEY_TREAT, "Honey Treat with Brown Candle");
+        addBlock(ModBlocks.GREEN_CANDLE_HONEY_TREAT, "Honey Treat with Green Candle");
+        addBlock(ModBlocks.RED_CANDLE_HONEY_TREAT, "Honey Treat with Red Candle");
+        addBlock(ModBlocks.BLACK_CANDLE_HONEY_TREAT, "Honey Treat with Black Candle");
         addBlock(ModBlocks.WASP_NEST, "Wasp Nest");
         addBlock(ModBlocks.STAIRS_WASP_NEST, "Wasp Nest Stairs");
         addBlock(ModBlocks.INSECT_REPELLENT, "Insect Repellent");
 
         // MARK: Spawners
         addBlock(ModBlocks.ANTLION_SPAWNER, "Antlion Spawner");
-        addBlock(ModBlocks.DRAGON_FLY_SPAWNER, "Dragon Fly Spawner");
+        addBlock(ModBlocks.DRAGON_FLY_SPAWNER, "Dragonfly Spawner");
         addBlock(ModBlocks.JUMPING_SPIDER_SPAWNER, "Jumping Spider Spawner");
+        addBlock(ModBlocks.SPIDER_SPAWNER, "Scytodes Spawner");
         addBlock(ModBlocks.TARANTULA_SPAWNER, "Tarantula Spawner");
         addBlock(ModBlocks.WASP_SPAWNER, "Wasp Spawner");
         addBlock(ModBlocks.ZOMBIE_ANT_SPAWNER, "Zombie Ant Spawner");
         addBlock(ModBlocks.ZOMBIE_ANT_SOLDIER_SPAWNER, "Zombie Ant Soldier Spawner");
         addBlock(ModBlocks.MAGMA_CRAWLER_SPAWNER, "Magma Crawler Spawner");
         addBlock(ModBlocks.DUNG_SPAWNER_FLY, "Fly Spawner");
-        addBlock(ModBlocks.DUNG_SPAWNER_BOT_FLY, "Bot Fly Spawner");
+        addBlock(ModBlocks.DUNG_SPAWNER_BOT_FLY, "Botfly Spawner");
         addBlock(ModBlocks.LOCUST_SPAWNER, "Locust Spawner");
 
         // MARK: Utility Blocks
@@ -632,7 +668,7 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.SILO_ROOF, "Silo Roof");
         addBlock(ModBlocks.SILO_TANK, "Silo Tank");
         addBlock(ModBlocks.SILO_SUPPORTS, "Silo Supports");
-        addBlock(ModBlocks.HONEY_COMB, "Honeycomb Cell");
+        addBlock(ModBlocks.HONEY_COMB, "Honeycomb");
         addBlock(ModBlocks.COMPOSTER, "Organic Composter");
         addBlock(ModBlocks.BLENDER, "ErebusCo. Smoothie-matic 2000");
         addBlock(ModBlocks.UMBER_FURNACE, "Umber Furnace");
@@ -674,7 +710,7 @@ public class ModLang extends ModLangProvider {
         addBlock(ModBlocks.TEMPLE_BRICK_UNBREAKING, "Temple Brick");
         addBlock(ModBlocks.TEMPLE_BRICK_UNBREAKING_CREAM, "Jade Slot");
         addBlock(ModBlocks.TEMPLE_BRICK_UNBREAKING_EXO, "Exoskeleton Slot");
-        addBlock(ModBlocks.TEMPLE_BRICK_UNBREAKING_EYE, "Eye Slot");
+        addBlock(ModBlocks.TEMPLE_BRICK_UNBREAKING_EYE, "Magma Crawler Eye Slot");
         addBlock(ModBlocks.TEMPLE_BRICK_UNBREAKING_JADE, "Jade Slot");
         addBlock(ModBlocks.TEMPLE_BRICK_UNBREAKING_STRING, "String Slot");
         addBlock(ModBlocks.TEMPLE_TELEPORTER, "Temple Teleporter");
@@ -690,13 +726,13 @@ public class ModLang extends ModLangProvider {
         add("key.erebus.beetleram", "Beetle Ram Attack");
         add("key.erebus.beetlemine", "Stag Beetle Dig");
         addEntity(ModEntities.ANIMATED_BLOCK, "Animated Block");
-        addEntity(ModEntities.ANIMATED_BAMBOO_CRATE, "Animated Bamboo Crate");
-        addEntity(ModEntities.ANIMATED_CHEST, "Animated Chest");
+        addEntity(ModEntities.ANIMATED_BAMBOO_CRATE, "Bamber");
+        addEntity(ModEntities.ANIMATED_CHEST, "Chester");
         addEntity(ModEntities.ANTLION, "Antlion");
         addEntity(ModEntities.ANTLION_BOSS, "Antlion Overlord");
-        addEntity(ModEntities.ANTLION_MINI_BOSS, "Antlion Warden");
-        addEntityNoEgg(ModEntities.BABY_SOLIFUGE, "Baby Solifuge");
-        addEntity(ModEntities.BABY_TARANTULA, "Baby Tarantula");
+        addEntity(ModEntities.ANTLION_MINI_BOSS, "Antlion Trove Guardian");
+        addEntityNoEgg(ModEntities.BABY_SOLIFUGE, "Solifuge Small");
+        addEntity(ModEntities.BABY_TARANTULA, "Tarantula Baby");
         addEntity(ModEntities.BED_BUG, "Bed Bug");
         addEntity(ModEntities.BEETLE, "Beetle");
         addEntity(ModEntities.BEETLE_LARVA, "Beetle Larva");
@@ -718,7 +754,7 @@ public class ModLang extends ModLangProvider {
         addEntity(ModEntities.FIRE_ANT_SOLDIER, "Fire Ant Soldier");
         addEntity(ModEntities.FLY, "Fly");
         addEntity(ModEntities.FUNGAL_WEEVIL, "Fungal Weevil");
-        addEntity(ModEntities.GLOW_WORM, "Glow Worm");
+        addEntity(ModEntities.GLOW_WORM, "Glowworm");
         addEntity(ModEntities.GRASSHOPPER, "Grasshopper");
         addEntity(ModEntities.HONEY_POT_ANT, "Honey Pot Ant");
         addEntity(ModEntities.JUMPING_SPIDER, "Jumping Spider");
@@ -733,7 +769,7 @@ public class ModLang extends ModLangProvider {
         addEntity(ModEntities.POND_SKATER, "Pond Skater");
         addEntity(ModEntities.PRAYING_MANTIS, "Praying Mantis");
         addEntity(ModEntities.PUNCHROOM, "Punchroom");
-        addEntity(ModEntities.RHINO_BEETLE, "Rhino Beetle");
+        addEntity(ModEntities.RHINO_BEETLE, "Rhinoceros Beetle");
         addEntity(ModEntities.SCORPION, "Scorpion");
         addEntity(ModEntities.SCYTODES, "Scytodes");
         addEntity(ModEntities.SOLIFUGE, "Solifuge");
@@ -742,7 +778,7 @@ public class ModLang extends ModLangProvider {
         addEntity(ModEntities.TARANTULA_MINI_BOSS, "Tarantula Brood Mother");
         addEntity(ModEntities.TITAN_BEETLE, "Titan Beetle");
         addEntity(ModEntities.DUNGEON_UMBER_GOLEM, "Umber Golem Idol Guardian");
-        addEntity(ModEntities.UMBER_GOLEM, "Umber Golem");
+        addEntity(ModEntities.UMBER_GOLEM, "Umbergolem");
         addEntity(ModEntities.VELVET_WORM, "Velvet Worm");
         addEntity(ModEntities.WASP, "Wasp");
         addEntity(ModEntities.WOODLOUSE, "Woodlouse");
@@ -753,6 +789,9 @@ public class ModLang extends ModLangProvider {
         addEntityNoEgg(ModEntities.AMBER_STAR, "Amber Star");
         addEntityNoEgg(ModEntities.GOO_BALL, "Goo Ball");
         addEntityNoEgg(ModEntities.MUCUS_BOMB_PRIMED, "Primed Mucus Bomb");
+        addEntityNoEgg(ModEntities.POISON_JET, "Poison Jet");
+        addEntityNoEgg(ModEntities.TARANTULA_EGG, "Tarantula Egg");
+        addEntityNoEgg(ModEntities.THROWN_SAND, "Thrown Sand");
         addEntityNoEgg(ModEntities.WASP_DAGGER, "Wasp Dagger");
         addEntityNoEgg(ModEntities.WOODLOUSE_BALL, "Woodlouse Ball");
         addEntityNoEgg(ModEntities.THROWN_BLOCK_AS_ITEM, "Mob Projectile"); // needs a better name
@@ -763,6 +802,73 @@ public class ModLang extends ModLangProvider {
         add("erebus.formic_acid", "Formic Acid");
         add("erebus.honey", "Honey");
         add("erebus.anti_venom", "Anti-venom");
+        addBlock(ModBlocks.FLUID_BEETLE_JUICE_BLOCK, "Beetle Juice");
+        addBlock(ModBlocks.FLUID_FORMIC_ACID_BLOCK, "Formic Acid");
+        addBlock(ModBlocks.FLUID_HONEY_BLOCK, "Honey");
+        addBlock(ModBlocks.FLUID_ANTI_VENOM_BLOCK, "Anti-venom");
+    }
+
+    private void addSoundSubtitles() {
+        addSubtitle("erebus", "altar_change_state", "Magic surges");
+        addSubtitle("erebus", "altar_offering", "Magic chimes");
+        addSubtitle("erebus", "ant_hurt", "Ant hurts");
+        addSubtitle("erebus", "ant_sound", "Ant chitters");
+        addSubtitle("erebus", "antlion_explode", "Sand erupts");
+        addSubtitle("erebus", "antlion_growl", "Antlion growls");
+        addSubtitle("erebus", "antlion_slam", "Antlion slams");
+        addSubtitle("erebus", "beetle_hurt", "Beetle hurts");
+        addSubtitle("erebus", "beetle_sound", "Beetle chitters");
+        addSubtitle("erebus", "beetle_larva_hurt", "Beetle Larva hurts");
+        addSubtitle("erebus", "beetle_larva_munch", "Beetle Larva munches");
+        addSubtitle("erebus", "beetle_larva_sound", "Beetle Larva wriggles");
+        addSubtitle("erebus", "beetle_larva_splat", "Splat");
+        addSubtitle("erebus", "black_widow_hurt", "Black Widow hurts");
+        addSubtitle("erebus", "black_widow_sound", "Black Widow hisses");
+        addSubtitle("erebus", "blam_sound", "Heavy impact");
+        addSubtitle("erebus", "bombardier_beetle_hurt", "Bombardier Beetle hurts");
+        addSubtitle("erebus", "bombardier_beetle_sound", "Bombardier Beetle chitters");
+        addSubtitle("erebus", "cabbage_fart", "Flatulence");
+        addSubtitle("erebus", "centipede_hurt", "Centipede hurts");
+        addSubtitle("erebus", "centipede_sound", "Centipede chitters");
+        addSubtitle("erebus", "centipede_walk", "Centipede scuttles");
+        addSubtitle("erebus", "crushling_death", "Crushroom dies");
+        addSubtitle("erebus", "crushling_hurt", "Crushroom hurts");
+        addSubtitle("erebus", "crushling_living", "Crushroom grunts");
+        addSubtitle("erebus", "fire_ant_hurt", "Ant hurts");
+        addSubtitle("erebus", "fire_ant_sound", "Ant chitters");
+        addSubtitle("erebus", "fly_hurt", "Fly hurts");
+        addSubtitle("erebus", "fly_sound", "Fly buzzes");
+        addSubtitle("erebus", "glow_worm_hurt", "Glowworm hurts");
+        addSubtitle("erebus", "glow_worm_sound", "Glowworm calls");
+        addSubtitle("erebus", "grasshopper_hurt", "Grasshopper hurts");
+        addSubtitle("erebus", "grasshopper_sound", "Grasshopper chirps");
+        addSubtitle("erebus", "horn_blow", "Horn blows");
+        addSubtitle("erebus", "locust_hurt", "Locust hurts");
+        addSubtitle("erebus", "locust_sound", "Locust chirps");
+        addSubtitle("erebus", "locust_spawn", "Insect chirps");
+        addSubtitle("erebus", "magmacrawler", "Magma Crawler calls");
+        addSubtitle("erebus", "magmacrawler_death", "Magma Crawler dies");
+        addSubtitle("erebus", "magmacrawler_hurt", "Magma Crawler hurts");
+        addSubtitle("erebus", "mantis_hurt", "Praying Mantis hurts");
+        addSubtitle("erebus", "mantis_sound", "Praying Mantis chitters");
+        addSubtitle("erebus", "mosquito_death", "Mosquito dies");
+        addSubtitle("erebus", "mosquito_flying", "Mosquito buzzes");
+        addSubtitle("erebus", "mosquito_hit", "Mosquito hurts");
+        addSubtitle("erebus", "mosquito_sucking", "Mosquito feeds");
+        addSubtitle("erebus", "rhino_beetle_hurt", "Rhinoceros Beetle hurts");
+        addSubtitle("erebus", "rhino_beetle_sound", "Rhinoceros Beetle chitters");
+        addSubtitle("erebus", "slime_charge", "Slime charge fires");
+        addSubtitle("erebus", "snail_death", "Snail dies");
+        addSubtitle("erebus", "snail_hurt", "Snail hurts");
+        addSubtitle("erebus", "snail_living", "Snail slithers");
+        addSubtitle("erebus", "spider_screech", "Spider screeches");
+        addSubtitle("erebus", "spray_can_sound", "Spray can hisses");
+        addSubtitle("erebus", "squish", "Squish");
+        addSubtitle("erebus", "tunneling_sound", "Something burrows");
+        addSubtitle("erebus", "wasp_hurt", "Wasp hurts");
+        addSubtitle("erebus", "wasp_sound", "Wasp buzzes");
+        addSubtitle("erebus", "websling_splat", "Web splats");
+        addSubtitle("erebus", "websling_throw", "Projectile launches");
     }
 
     private void addCreativeTabTranslations() {
@@ -784,10 +890,10 @@ public class ModLang extends ModLangProvider {
         add("tooltip.erebus.bamboo_pipe", "A very basic directional fluid pipe.");
         add("tooltip.erebus.bamboo_pipe_extract", "Extracts fluids from fluid containers and pushes them in to pipes and fluid containers.");
         add("tooltip.erebus.bamboo_pipe_wrench", "Use on any Bamboo Pipe to rotate them or Use + Sneak to insta-break them.");
-        add("tooltip.erebus.honeycomb_x", "Honeycomb Cell X: %s");
-        add("tooltip.erebus.honeycomb_y", "Honeycomb Cell Y: %s");
-        add("tooltip.erebus.honeycomb_z", "Honeycomb Cell Z: %s");
-        add("tooltip.erebus.bee_taming_amulet_1", "Click on a Honeycomb Cell to set as target for Bee drops.");
+        add("tooltip.erebus.honeycomb_x", "Honeycomb X: %s");
+        add("tooltip.erebus.honeycomb_y", "Honeycomb Y: %s");
+        add("tooltip.erebus.honeycomb_z", "Honeycomb Z: %s");
+        add("tooltip.erebus.bee_taming_amulet_1", "Click on a Honeycomb to set as target for Bee drops.");
         add("tooltip.erebus.bee_taming_amulet_2", "Then click on Bee to tame.");
         add("tooltip.erebus.sprint_leggings_tier", "Tier %s");
         add("tooltip.erebus.jump_boots", "Enables you to Jump 4 blocks high.");
@@ -822,8 +928,8 @@ public class ModLang extends ModLangProvider {
         add("tooltip.erebus.heals", "Heals 10 Hearts when consumed. Always Edible.");
         add("tooltip.erebus.feeds", "Fills Hunger Bar when consumed. Always Edible.");
         add("tooltip.erebus.powered_glider", "Consumes one Redgem Block or Lamp every 4 seconds of powered flight.");
-        add("key.erebus.glide", "Hold to Glide");
-        add("key.erebus.poweredglide", "Hold for Powered Flight");
+        add("key.erebus.glide", "Glide");
+        add("key.erebus.poweredglide", "Glider Lift");
         add("tooltip.erebus.glider_glide_key", "Gliding Key");
         add("tooltip.erebus.glider_powered_key", "Flying Key");
         add("tooltip.erebus.mush_helm", "Keeps you fed whilst worn at the cost of durability. Repaired in Anvil with Big Mushroom Blocks.");
@@ -846,8 +952,8 @@ public class ModLang extends ModLangProvider {
         addPage(7, "§9Givin' Me The Blues\n\n§0Blue Bell Petal x2\nLapis Lazuli x2\n\n§dMilk\n\n§4Effects:\nExtinguish");
         addPage(8, "§9Hot Hot Baby\n\n§0Fire Bloom x2\nWasp Sting\nBog Maw Root\n\n§dAnti-Venom\n\n§4Effects:\nStrength");
         addPage(9, "§9Don't Meddle With The Nettle\n\n§0Nettle Leaf\nNettle Flower\nJade Berries\nExo Skeleton\n\n§dHoney\n\n§4Effects:\nResistance");
-        addPage(10, "§9Liquid Gold\n\n§0Life Blood x2\nBamboo Sapling\nGlistering Melon\n\n§dMilk\n\n§4Effects:\nRegeneration and healing");
-        addPage(11, "§9Bryuf's Brew\n\n§0Terpsishroom\nTurnip\nCompound Eyes\nHeart Berries\n\n§dHoney\n§dBeetle Juice\n§dAnti-Venom\n§dMilk\n\n§4Effects:\nMighty Buffs");
+        addPage(10, "§9Liquid Gold\n\n§0Life Blood x2\nColossal Bamboo Shoot\nGlistering Melon\n\n§dMilk\n\n§4Effects:\nRegeneration and healing");
+        addPage(11, "§9Bryuf's Brew\n\n§0Terpsishroom\nTurnip\nCompound Eyes\nHeartberries\n\n§dHoney\n§dBeetle Juice\n§dAnti-Venom\n§dMilk\n\n§4Effects:\nMighty Buffs");
         addPage(12, "§9Melonade\n\n§0Melon Slice\n\n§dWater\n\n§4Effects:\nRefreshing");
         addPage(13, "§9Sparkling Melonade\n\n§0Glistering Melon Slice\n\n§dWater\n\n§4Effects:\nSmall Regen");
         addPage(14, "§9Anti-venom\n\n§0Bambucket or Bucket\n2 Poison Glands\n2 Nettle Leaves\nBeetle Juice\n\nDrink for 180 seconds of protection. Bottles grant 60 seconds, stacking to 180.");
@@ -929,7 +1035,20 @@ public class ModLang extends ModLangProvider {
     }
 
     private void addBiomeTranslations() {
-
+        addBiome(ModBiomes.ELYSIAN_FIELDS_KEY, "Elysian Fields");
+        addBiome(ModBiomes.ELYSIAN_FOREST_KEY, "Elysian Forest");
+        addBiome(ModBiomes.FUNGAL_FOREST_KEY, "Fungal Forest");
+        addBiome(ModBiomes.PETRIFIED_FOREST_KEY, "Petrified Forest");
+        addBiome(ModBiomes.SUBMERGED_SWAMP_KEY, "Submerged Swamp");
+        addBiome(ModBiomes.SUBTERRANEAN_SAVANNAH_KEY, "Subterranean Savannah");
+        addBiome(ModBiomes.ULTERIOR_OUTBACK_KEY, "Ulterior Outback");
+        addBiome(ModBiomes.UNDERGROUND_JUNGLE_KEY, "Underground Jungle");
+        addBiome(ModBiomes.VOLCANIC_DESERT_KEY, "Volcanic Desert");
+        add("biome.erebus.rootwater_marsh", "Rootwater Marsh");
+        add("biome.erebus.cinder_scrub", "Cinder Scrub");
+        add("biome.erebus.glowrot_groves", "Glowrot Groves");
+        add("biome.erebus.amber_thickets", "Amber Thickets");
+        add("biome.erebus.fossil_barrens", "Fossil Barrens");
     }
 
     private void addContainerTranslations() {
@@ -950,10 +1069,10 @@ public class ModLang extends ModLangProvider {
         addChest("chest_white", "White Chest", "Large White Chest");
         addContainer("umberfurnace", "Umber Furnace");
         addContainer("liquifier", "Honey Liquifier");
-        addContainer("honeycomb_cell", "Honeycomb Cell");
+        addContainer("honeycomb_cell", "Honeycomb");
         addContainer("bamboo_extender", "Bamboo Extender");
         addContainer("bamboo_crate", "Bamboo Crate");
-        addContainer("colossal_crate", "Colossal Crate");
+        addContainer("colossal_crate", "Bamboo Crate");
         addContainer("composter", "Organic Composter");
         addContainer("silo", "Silo Location");
         addContainer("blender", "ErebusCo. Smoothie-matic 2000");
@@ -964,8 +1083,7 @@ public class ModLang extends ModLangProvider {
         add(ModItemTags.COMPOSTABLE, "Compostable");
     }
 
-    private void addEMITranslations() {
-        add("emi.category.erebus.blender", "Blending");
-        add("emi.category.erebus.offering_altar", "Offering Altar");
+    private void addJeiTranslations() {
+        add("jei.category.erebus.blender", "Blending");
     }
 }

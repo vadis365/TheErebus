@@ -1,6 +1,8 @@
 package erebus.world.feature.mushroom.config.population;
 
 import erebus.registries.world.ModBiomes;
+import erebus.world.biome.util.ErebusBiomeProvider;
+import erebus.world.biome.util.TerrainBuilder;
 import erebus.registries.world.feature.PlantFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -17,17 +19,22 @@ public class GiantMushroomPopulationFeatureConfiguration extends Feature<NoneFea
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         var level = context.level();
-        if (!level.getBiome(context.origin()).is(ModBiomes.FUNGAL_FOREST_KEY)) return false;
+        var biome = level.getBiome(context.origin());
+        boolean grove = biome.is(ModBiomes.GLOWROT_GROVES_KEY);
+        if (!grove && !biome.is(ModBiomes.FUNGAL_FOREST_KEY)) return false;
+        boolean layeredGrove = ErebusBiomeProvider.isColumn(context.chunkGenerator(), context.origin(), ModBiomes.GLOWROT_GROVES_KEY);
         var random = context.random();
-        for (int attempt = 0; attempt < 400; attempt++) {
+        for (int attempt = 0; attempt < (grove ? 45 : 400); attempt++) {
             int roll = random.nextInt(100);
             int species = roll < 16 ? 0 : roll < 25 ? 1 : roll < 80 ? 2 : roll < 96 ? 3 : 4;
             int x = context.origin().getX() + random.nextInt(16) + 8;
-            int y = level.getMinY() + 25 + random.nextInt(50 + random.nextInt(40));
+            int y = layeredGrove && !grove ? 8 + random.nextInt(TerrainBuilder.GLOWROT_UPPER_START_Y - 9)
+                    : level.getMinY() + 25 + random.nextInt(50 + random.nextInt(40));
             int z = context.origin().getZ() + random.nextInt(16) + 8;
             var soil = new BlockPos(x, y, z);
 
             if (level.isOutsideBuildHeight(soil) || level.isOutsideBuildHeight(soil.above())) continue;
+            if (layeredGrove && !level.getBiome(soil.above()).is(biome.unwrapKey().orElseThrow())) continue;
             var state = level.getBlockState(soil);
             if ((state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.MYCELIUM))
                     && placeMushroom(context, species, soil.above())) return true;
