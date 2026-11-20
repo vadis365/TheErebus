@@ -57,6 +57,10 @@ public class MarshwoodTrunkPlacer extends TrunkPlacer {
         return new Placement(level, trunkSetter, random, config).generate(origin);
     }
 
+    private int sampleSpread(RandomSource random) {
+        return random.nextInt(heightRandA) + heightRandB;
+    }
+
     private final class Placement {
         private final List<FoliagePlacer.FoliageAttachment> list = Lists.newArrayList();
         private final WorldGenLevel level;
@@ -76,8 +80,8 @@ public class MarshwoodTrunkPlacer extends TrunkPlacer {
         }
 
         private List<FoliagePlacer.FoliageAttachment> generate(BlockPos origin) {
-            int radius = random.nextInt(heightRandA) + heightRandB;
-            int height = random.nextInt(radius) + baseHeight;
+            int radius = sampleSpread(random);
+            int height = random.nextInt(radius) + getBaseHeight();
             int x = origin.getX();
             int y = origin.getY();
             int z = origin.getZ();
@@ -137,7 +141,7 @@ public class MarshwoodTrunkPlacer extends TrunkPlacer {
         }
 
         private void createBranch(BlockPos pos, int direction, boolean root) {
-            int branchLength = random.nextInt(heightRandA) + heightRandB;
+            int branchLength = sampleSpread(random);
             List<BlockPos> hangers = new ArrayList<>();
 
             int x = pos.getX();
